@@ -7,17 +7,18 @@ Description: The goal of {provider} is to provide performant and reliable
     open-source tools to facilitate easy access to publicly available
     healthcare provider data.
 License: MIT + file LICENSE
+URL: https://andrewallenbruce.github.io/provider/
 Imports: 
     attempt,
     curl,
+    datawizard,
+    defogger,
     dplyr,
     httr2,
+    insight,
     polite,
     tibble,
-    tidyr,
-    insight,
-    datawizard,
-    defogger
+    tidyr
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
