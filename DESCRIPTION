@@ -1,6 +1,6 @@
 Package: provider
 Title: Access Public Healthcare Provider Data
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: 
     person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre"))
 Description: The goal of {provider} is to provide performant and reliable
