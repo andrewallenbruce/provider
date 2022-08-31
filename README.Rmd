@@ -24,6 +24,8 @@ knitr::opts_chunk$set(
 
 The goal of {provider} is to provide performant and reliable open-source tools to facilitate easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources.
 
+<br>
+
 ## Installation
 
 You can install the development version of `provider` from [GitHub](https://github.com/) with:
@@ -32,16 +34,88 @@ You can install the development version of `provider` from [GitHub](https://gith
 # install.packages("devtools")
 devtools::install_github("andrewallenbruce/provider")
 ```
+<br>
 
-## Example
+## Search the NPPES by A Provider's NPI
 
-This is a basic example which shows you how to solve a common problem:
+Input the 10-digit NPI you wish to search for into `prov_npi_nppes()`:
 
-```{r example}
+```{r warning=FALSE}
+# Load library
 library(provider)
-## basic example code
+
+# Query the NPPES API
+nppes_npi_response <- prov_npi_nppes(1528060837)
+```
+<br>
+
+This returns a response in the form of a data frame with the NPI searched for, the date & time that the search was performed, the outcome (*results* means the search was successful, *errors*, that something went wrong) and a column called `data_lists`:
+
+<br>
+
+```{r echo=FALSE}
+nppes_npi_response
 ```
 
+<br>
+
+`data_lists` is a nested list-column. You can access the inner lists using the `$` operator, but we can get a better sense of the hierarchical structure of these list columns using lobstr's `tree()` function:
+
+<br>
+
+```{r}
+lobstr::tree(nppes_npi_response$data_lists, 
+             max_depth = 2)
+```
+
+<br>
+
+This exposes seven more nested list-columns, but using the `prov_nppes_unpack()` function, we can untangle this mess:
+
+<br>
+
+```{r message=FALSE}
+# Unpack NPPES response
+nppes_npi_unpacked <- prov_nppes_unpack(nppes_npi_response)
+```
+
+<br>
+
+And the final tidied results:
+
+<br>
+
+```{r echo=FALSE}
+nppes_npi_unpacked |> 
+  dplyr::select(!c(
+    id, 
+    middle_name, 
+    sole_proprietor, 
+    enumeration_date, 
+    last_updated, 
+    status, 
+    name_prefix, 
+    name_suffix, 
+    country_abb, 
+    country_name, 
+    address_type, 
+    taxon_primary,
+    taxon_state,
+    ident_code, 
+    ident_state,
+    state_name,
+    state_region,
+    state_division)) |> 
+  knitr::kable(align = "l")
+```
+
+<br>
+
+## Usage
+
+Read the Overview vignette for a more thorough introduction to the package's functionality.
+
+<br>
 
 ## Code of Conduct
 
