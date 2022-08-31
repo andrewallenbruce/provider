@@ -166,7 +166,7 @@ prov_nppes_unpack <- function(df) {
     }
 
     # NPPES LOCATION TABLE JOIN
-    results <- dplyr::inner_join(results, defogger::nppes_location_reference)
+    results <- dplyr::inner_join(results, provider::nppes_location_reference)
 
   }
   return(results)
