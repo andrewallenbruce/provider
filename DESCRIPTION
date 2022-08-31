@@ -13,7 +13,11 @@ Imports:
     dplyr,
     httr2,
     polite,
-    tibble
+    tibble,
+    tidyr,
+    insight,
+    datawizard,
+    defogger
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
