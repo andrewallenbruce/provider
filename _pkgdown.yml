@@ -2,10 +2,8 @@ url: https://andrewallenbruce.github.io/provider/
 
 template:
   bootstrap: 5
-  bootswatch: sandstone
+  bootswatch: lux
   bslib:
-    fg: "#440d0d"
-    bg: "#ffffff"
     base_font: {google: "Roboto"}
     heading_font: {google: "Roboto"}
     code_font: {google: "Fira Code"}
@@ -16,8 +14,6 @@ home:
     structure: [links, license, community, citation, authors, dev]
 
 navbar:
-  bg: dark
-  type: dark
   structure:
     left:
     - intro

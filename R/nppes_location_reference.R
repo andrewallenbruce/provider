@@ -4,6 +4,7 @@
 #' per the NPPES API documentation. In addition, features region
 #' and division observations for US states.
 #'
+#'
 #' @format A data frame with 295 rows and 6 variables:
 #' \describe{
 #'   \item{country_abb}{NPPES-approved valid abbreviation value for country}
