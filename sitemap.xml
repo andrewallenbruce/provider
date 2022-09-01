@@ -13,6 +13,15 @@
     <loc>https://andrewallenbruce.github.io/provider/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/Searching-the-NPPES.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/provider.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/authors.html</loc>
   </url>
   <url>
@@ -23,6 +32,12 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_api_input.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_api_output.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes_location_reference.html</loc>
