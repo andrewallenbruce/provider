@@ -17,3 +17,99 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(provider)
 ```
+
+<br>
+
+There are three methods of entering search terms into the functions:
+
+ - single 10-digit number
+ - list of multiple 10-digit numbers
+ - data frame of 10-digit numbers
+
+I'll create the example list and data frame I'll be using in the examples for each API.
+
+<br>
+
+```{r}
+npi_list <- c(1003026055, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
+```
+
+```{r echo=FALSE}
+npi_list
+```
+
+<br>
+
+```{r}
+npi_data.frame <- data.frame(npi = c(1003026055, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860))
+```
+
+```{r echo=FALSE}
+npi_data.frame
+```
+
+<br><br>
+
+# NPPES NPI Public Registry API
+
+```{r message=FALSE, warning=FALSE}
+prov_npi_nppes(1003026055) |> prov_nppes_unpack()
+```
+
+
+# Medicare Fee-For-Service Public Provider Enrollment API
+
+The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the Provider Enrollment and Chain Ownership System (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
+
+[Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+
+<br>
+
+```{r}
+prov_mcr_ffs(1003026055)
+```
+
+<br>
+
+```{r}
+npi_list |> purrr::map_dfr(prov_mcr_ffs)
+```
+
+<br>
+
+```{r}
+npi_data.frame |> dplyr::group_split(npi) |> 
+                  purrr::map_dfr(prov_mcr_ffs)
+```
+
+## Data Dictionary
+
+-   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
+-   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
+
+<br><br>
+
+# Medicare Order and Referring API
+
+The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+
+[Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+
+```{r}
+prov_mcr_ordref(1003026055)
+```
+
+<br>
+
+```{r}
+npi_list |> purrr::map_dfr(prov_mcr_ordref)
+```
+
+<br>
+
+```{r}
+npi_data.frame |> dplyr::group_split(npi) |> 
+                  purrr::map_dfr(prov_mcr_ordref)
+```
+
+<br><br>

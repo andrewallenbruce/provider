@@ -23,6 +23,16 @@ knitr::opts_chunk$set(
 
 The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider's name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 
+
+```{r}
+mcr_ffs_prov_type
+```
+
+```{r}
+prov_mcr_ffs(1003026055)
+```
+
+
 <br>
 
 ## The NPPES API
