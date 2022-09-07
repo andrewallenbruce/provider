@@ -117,7 +117,150 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-  </main>
+<p><br></p>
+<p>There are three methods of entering search terms into the functions:</p>
+<ul>
+<li>single 10-digit number</li>
+<li>list of multiple 10-digit numbers</li>
+<li>data frame of 10-digit numbers</li>
+</ul>
+<p>I’ll create the example list and data frame I’ll be using in the examples for each API.</p>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>, <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; [1] 1003026055 1316405939 1720392988 1518184605 1922056829 1083879860</span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_data.frame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>, <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt;          npi</span></span>
+<span><span class="co">#&gt; 1 1003026055</span></span>
+<span><span class="co">#&gt; 2 1316405939</span></span>
+<span><span class="co">#&gt; 3 1720392988</span></span>
+<span><span class="co">#&gt; 4 1518184605</span></span>
+<span><span class="co">#&gt; 5 1922056829</span></span>
+<span><span class="co">#&gt; 6 1083879860</span></span></code></pre>
+<p><br><br></p>
+<div class="section level2">
+<h2 id="nppes-npi-public-registry-api">NPPES NPI Public Registry API<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry-api"></a>
+</h2>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 38</span></span></span>
+<span><span class="co">#&gt;   prov_type npi     id    first…¹ last_…² middl…³ crede…⁴ sole_…⁵ gender enume…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> NPI-1     100302… 1003… RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> NPI-1     100302… 1003… RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> NPI-1     100302… 1003… RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> NPI-1     100302… 1003… RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 28 more variables: last_updated &lt;chr&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_abb &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country_name &lt;chr&gt;, address_purpose &lt;chr&gt;, address_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, state_abb &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, fax_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_code &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_primary &lt;lgl&gt;, ident_code &lt;chr&gt;, ident_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
+</h2>
+<p>The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the Provider Enrollment and Chain Ownership System (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.</p>
+<p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Fee-For-Service Public Provider Enrollment API</a></p>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_ffs.html">prov_mcr_ffs</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI PECOS_ASCT_CNTL_ID       ENRLMT_ID PROVIDER_TYPE_CD</span></span>
+<span><span class="co">#&gt; 1 1003026055         4486827367 I20170403002190            14-46</span></span>
+<span><span class="co">#&gt;             PROVIDER_TYPE_DESC STATE_CD FIRST_NAME MDL_NAME LAST_NAME ORG_NAME</span></span>
+<span><span class="co">#&gt; 1 PRACTITIONER - ENDOCRINOLOGY       FL    RADHIKA  PUSHKAR    PHADKE         </span></span>
+<span><span class="co">#&gt;   GNDR_SW</span></span>
+<span><span class="co">#&gt; 1       F</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_mcr_ffs</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI PECOS_ASCT_CNTL_ID       ENRLMT_ID PROVIDER_TYPE_CD</span></span>
+<span><span class="co">#&gt; 1 1003026055         4486827367 I20170403002190            14-46</span></span>
+<span><span class="co">#&gt; 2 1720392988         9537453808 I20160809001931            14-29</span></span>
+<span><span class="co">#&gt; 3 1518184605         3971634056 I20121210000081            14-20</span></span>
+<span><span class="co">#&gt; 4 1922056829         7416934294 I20041201001052            14-93</span></span>
+<span><span class="co">#&gt; 5 1083879860         8426328519 I20200617001010            14-08</span></span>
+<span><span class="co">#&gt;                  PROVIDER_TYPE_DESC STATE_CD  FIRST_NAME MDL_NAME LAST_NAME</span></span>
+<span><span class="co">#&gt; 1      PRACTITIONER - ENDOCRINOLOGY       FL     RADHIKA  PUSHKAR    PHADKE</span></span>
+<span><span class="co">#&gt; 2  PRACTITIONER - PULMONARY DISEASE       OH     MUSTAFA               ABAS</span></span>
+<span><span class="co">#&gt; 3 PRACTITIONER - ORTHOPEDIC SURGERY       MA      DANIEL        L     AARON</span></span>
+<span><span class="co">#&gt; 4 PRACTITIONER - EMERGENCY MEDICINE       MI     CYNTHIA        K     AARON</span></span>
+<span><span class="co">#&gt; 5    PRACTITIONER - FAMILY PRACTICE       PA CHRISTOPHER        L     AARON</span></span>
+<span><span class="co">#&gt;   ORG_NAME GNDR_SW</span></span>
+<span><span class="co">#&gt; 1                F</span></span>
+<span><span class="co">#&gt; 2                M</span></span>
+<span><span class="co">#&gt; 3                M</span></span>
+<span><span class="co">#&gt; 4                F</span></span>
+<span><span class="co">#&gt; 5                M</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_data.frame</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_mcr_ffs</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI PECOS_ASCT_CNTL_ID       ENRLMT_ID PROVIDER_TYPE_CD</span></span>
+<span><span class="co">#&gt; 1 1003026055         4486827367 I20170403002190            14-46</span></span>
+<span><span class="co">#&gt; 2 1083879860         8426328519 I20200617001010            14-08</span></span>
+<span><span class="co">#&gt; 3 1518184605         3971634056 I20121210000081            14-20</span></span>
+<span><span class="co">#&gt; 4 1720392988         9537453808 I20160809001931            14-29</span></span>
+<span><span class="co">#&gt; 5 1922056829         7416934294 I20041201001052            14-93</span></span>
+<span><span class="co">#&gt;                  PROVIDER_TYPE_DESC STATE_CD  FIRST_NAME MDL_NAME LAST_NAME</span></span>
+<span><span class="co">#&gt; 1      PRACTITIONER - ENDOCRINOLOGY       FL     RADHIKA  PUSHKAR    PHADKE</span></span>
+<span><span class="co">#&gt; 2    PRACTITIONER - FAMILY PRACTICE       PA CHRISTOPHER        L     AARON</span></span>
+<span><span class="co">#&gt; 3 PRACTITIONER - ORTHOPEDIC SURGERY       MA      DANIEL        L     AARON</span></span>
+<span><span class="co">#&gt; 4  PRACTITIONER - PULMONARY DISEASE       OH     MUSTAFA               ABAS</span></span>
+<span><span class="co">#&gt; 5 PRACTITIONER - EMERGENCY MEDICINE       MI     CYNTHIA        K     AARON</span></span>
+<span><span class="co">#&gt;   ORG_NAME GNDR_SW</span></span>
+<span><span class="co">#&gt; 1                F</span></span>
+<span><span class="co">#&gt; 2                M</span></span>
+<span><span class="co">#&gt; 3                M</span></span>
+<span><span class="co">#&gt; 4                M</span></span>
+<span><span class="co">#&gt; 5                F</span></span></code></pre></div>
+<div class="section level3">
+<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h3>
+<ul>
+<li><a href="https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf" class="external-link">Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary</a></li>
+<li><a href="https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv" class="external-link">Reassignment Sub-File</a></li>
+</ul>
+<p><br><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
+</h2>
+<p>The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
+<p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Order and Referring API</a></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_ordref.html">prov_mcr_ordref</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD</span></span>
+<span><span class="co">#&gt; 1 1003026055    PHADKE    RADHIKA     Y   Y   Y   Y</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_mcr_ordref</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI LAST_NAME  FIRST_NAME PARTB DME HHA PMD</span></span>
+<span><span class="co">#&gt; 1 1003026055    PHADKE     RADHIKA     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 2 1316405939   ABARZUA       JAENA     N   Y   N   N</span></span>
+<span><span class="co">#&gt; 3 1720392988      ABAS     MUSTAFA     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 4 1518184605     AARON      DANIEL     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 5 1922056829     AARON     CYNTHIA     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 6 1083879860     AARON CHRISTOPHER     Y   Y   Y   Y</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">npi_data.frame</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_mcr_ordref</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI LAST_NAME  FIRST_NAME PARTB DME HHA PMD</span></span>
+<span><span class="co">#&gt; 1 1003026055    PHADKE     RADHIKA     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 2 1083879860     AARON CHRISTOPHER     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 3 1316405939   ABARZUA       JAENA     N   Y   N   N</span></span>
+<span><span class="co">#&gt; 4 1518184605     AARON      DANIEL     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 5 1720392988      ABAS     MUSTAFA     Y   Y   Y   Y</span></span>
+<span><span class="co">#&gt; 6 1922056829     AARON     CYNTHIA     Y   Y   Y   Y</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

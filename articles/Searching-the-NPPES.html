@@ -119,6 +119,12 @@
 <h2 id="the-nppes-npi-registry">The NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#the-nppes-npi-registry"></a>
 </h2>
 <p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry Public Search</a> is a free directory of all active <strong>National Provider Identifier</strong> (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mcr_ffs_prov_type</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'mcr_ffs_prov_type' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_ffs.html">prov_mcr_ffs</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in prov_mcr_ffs(1003026055): could not find function "prov_mcr_ffs"</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="the-nppes-api">The NPPES API<a class="anchor" aria-label="anchor" href="#the-nppes-api"></a>
@@ -132,7 +138,7 @@
 </h2>
 <p>The following is a basic example of searching for an NPI using the using <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code>. The only argument is the provider’s 10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National Provider Identifier</a>:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
@@ -148,10 +154,10 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-01 <span style="color: #949494;">09:52:40</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-07 <span style="color: #949494;">09:55:45</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The hierarchical "tree" of the response</span></span>
 <span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span>, max_depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">&lt;list&gt;</span></span></span>
@@ -175,7 +181,7 @@
 <span><span class="co">#&gt;     └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>The <strong>variables</strong> returned are as follows:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; ├─created_epoch: <span style="color: #0000BB;">"1546027807000"</span></span></span>
@@ -199,7 +205,7 @@
 </blockquote>
 <p><br><br></p>
 <p>The <strong>list-columns</strong> returned are as follows:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; ├─addresses: <span style="color: #555555;">&lt;list&gt;</span></span></span>
@@ -273,7 +279,7 @@
 <h3 id="unpack-the-response">Unpack the Response<a class="anchor" aria-label="anchor" href="#unpack-the-response"></a>
 </h3>
 <p>Flatten the response tibble into a tidy data format with <code><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack()</a></code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 38</span></span></span>
 <span><span class="co">#&gt;   prov_type npi     id    first…¹ last_…² crede…³ sole_…⁴ gender enume…⁵ last_…⁶</span></span>
@@ -294,23 +300,23 @@
 <h2 id="search-for-multiple-npis">Search for Multiple NPIs<a class="anchor" aria-label="anchor" href="#search-for-multiple-npis"></a>
 </h2>
 <p>To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <p>Then pipe the list into <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code> function to loop over the list:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_npi_nppes</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-01 <span style="color: #949494;">09:52:43</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-01 <span style="color: #949494;">09:52:45</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-01 <span style="color: #949494;">09:52:47</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-01 <span style="color: #949494;">09:52:49</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-07 <span style="color: #949494;">09:55:48</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-07 <span style="color: #949494;">09:55:50</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-07 <span style="color: #949494;">09:55:52</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-07 <span style="color: #949494;">09:55:55</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_nppes_unpack</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Joining, by = c("country_abb", "country_name", "state_abb")</span></span>
@@ -339,7 +345,7 @@
 <p><br><br></p>
 <p>Searching for a column of NPIs in a data frame is only slightly different. I’ll create a data frame with the same NPIs in the list example:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;          npi</span></span>
 <span><span class="co">#&gt; 1 1336413418</span></span>
@@ -349,7 +355,7 @@
 <p><br><br></p>
 <p>We can even chain the search and unpack function chains together using <code>|&gt;</code>, R’s lovely pipe. Again, the <code>group_split()</code> input should be the column containing the NPIs.</p>
 <p>Split and purrr, then split and purrr:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df_resp</span> <span class="op">&lt;-</span> <span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_npi_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -376,7 +382,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, state_abb &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br><br></p>
 <p>At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df_resp</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span></span>
 <span>    <span class="co"># col.names = c(</span></span>
@@ -5159,31 +5165,31 @@ NA
 </h4>
 <p>Several constraints have been implemented so as to not batter the NPPES API with invalid searches. The input must be 10 digits or the function will throw an error:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: NPIs must have 10 digits. Provided NPI has 9 digits.</span></span></code></pre></div>
 <p><br><br></p>
 <p>It also must be a valid NPI. The <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code> function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>, as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a> (documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1234567891</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: Luhn Check: NPI may be invalid.</span></span></code></pre></div>
 <p><br><br></p>
 <p>Inputting letters will throw an error:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="va">abcdefghij</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in is.factor(x): object 'abcdefghij' not found</span></span></code></pre></div>
 <p><br><br></p>
 <p>The Luhn check will catch any letters wrapped in quotes:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="st">"abcdefghij"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: Luhn Check: NPI may be invalid.</span></span></code></pre></div>
 <p><br><br></p>
 <p>But will let quoted numbers through:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="st">"123456789"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: NPIs must have 10 digits. Provided NPI has 9 digits.</span></span></code></pre></div>
 <p>As long as they’re 10 digits long.</p>
@@ -5195,14 +5201,14 @@ NA
 </h2>
 <p>This section outlines the NPPES API’s documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.</p>
 <p><br><br></p>
-<div id="llqdxhchtp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qqihfakgmv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#llqdxhchtp .gt_table {
+#qqihfakgmv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5227,7 +5233,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#llqdxhchtp .gt_heading {
+#qqihfakgmv .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5239,7 +5245,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#llqdxhchtp .gt_title {
+#qqihfakgmv .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -5251,7 +5257,7 @@ html {
   border-bottom-width: 0;
 }
 
-#llqdxhchtp .gt_subtitle {
+#qqihfakgmv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5263,13 +5269,13 @@ html {
   border-top-width: 0;
 }
 
-#llqdxhchtp .gt_bottom_border {
+#qqihfakgmv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#llqdxhchtp .gt_col_headings {
+#qqihfakgmv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5284,7 +5290,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#llqdxhchtp .gt_col_heading {
+#qqihfakgmv .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5304,7 +5310,7 @@ html {
   overflow-x: hidden;
 }
 
-#llqdxhchtp .gt_column_spanner_outer {
+#qqihfakgmv .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5316,15 +5322,15 @@ html {
   padding-right: 4px;
 }
 
-#llqdxhchtp .gt_column_spanner_outer:first-child {
+#qqihfakgmv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#llqdxhchtp .gt_column_spanner_outer:last-child {
+#qqihfakgmv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#llqdxhchtp .gt_column_spanner {
+#qqihfakgmv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -5336,7 +5342,7 @@ html {
   width: 100%;
 }
 
-#llqdxhchtp .gt_group_heading {
+#qqihfakgmv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5361,7 +5367,7 @@ html {
   vertical-align: middle;
 }
 
-#llqdxhchtp .gt_empty_group_heading {
+#qqihfakgmv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5376,15 +5382,15 @@ html {
   vertical-align: middle;
 }
 
-#llqdxhchtp .gt_from_md > :first-child {
+#qqihfakgmv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#llqdxhchtp .gt_from_md > :last-child {
+#qqihfakgmv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#llqdxhchtp .gt_row {
+#qqihfakgmv .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -5403,7 +5409,7 @@ html {
   overflow-x: hidden;
 }
 
-#llqdxhchtp .gt_stub {
+#qqihfakgmv .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -5416,7 +5422,7 @@ html {
   padding-right: 5px;
 }
 
-#llqdxhchtp .gt_stub_row_group {
+#qqihfakgmv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5430,11 +5436,11 @@ html {
   vertical-align: top;
 }
 
-#llqdxhchtp .gt_row_group_first td {
+#qqihfakgmv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#llqdxhchtp .gt_summary_row {
+#qqihfakgmv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5444,16 +5450,16 @@ html {
   padding-right: 5px;
 }
 
-#llqdxhchtp .gt_first_summary_row {
+#qqihfakgmv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#llqdxhchtp .gt_first_summary_row.thick {
+#qqihfakgmv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#llqdxhchtp .gt_last_summary_row {
+#qqihfakgmv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5463,7 +5469,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#llqdxhchtp .gt_grand_summary_row {
+#qqihfakgmv .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -5473,7 +5479,7 @@ html {
   padding-right: 5px;
 }
 
-#llqdxhchtp .gt_first_grand_summary_row {
+#qqihfakgmv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5483,11 +5489,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#llqdxhchtp .gt_striped {
+#qqihfakgmv .gt_striped {
   background-color: #FEEDEC;
 }
 
-#llqdxhchtp .gt_table_body {
+#qqihfakgmv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5496,7 +5502,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#llqdxhchtp .gt_footnotes {
+#qqihfakgmv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5510,7 +5516,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#llqdxhchtp .gt_footnote {
+#qqihfakgmv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5519,7 +5525,7 @@ html {
   padding-right: 5px;
 }
 
-#llqdxhchtp .gt_sourcenotes {
+#qqihfakgmv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5533,7 +5539,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#llqdxhchtp .gt_sourcenote {
+#qqihfakgmv .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5541,64 +5547,64 @@ html {
   padding-right: 5px;
 }
 
-#llqdxhchtp .gt_left {
+#qqihfakgmv .gt_left {
   text-align: left;
 }
 
-#llqdxhchtp .gt_center {
+#qqihfakgmv .gt_center {
   text-align: center;
 }
 
-#llqdxhchtp .gt_right {
+#qqihfakgmv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#llqdxhchtp .gt_font_normal {
+#qqihfakgmv .gt_font_normal {
   font-weight: normal;
 }
 
-#llqdxhchtp .gt_font_bold {
+#qqihfakgmv .gt_font_bold {
   font-weight: bold;
 }
 
-#llqdxhchtp .gt_font_italic {
+#qqihfakgmv .gt_font_italic {
   font-style: italic;
 }
 
-#llqdxhchtp .gt_super {
+#qqihfakgmv .gt_super {
   font-size: 65%;
 }
 
-#llqdxhchtp .gt_footnote_marks {
+#qqihfakgmv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#llqdxhchtp .gt_asterisk {
+#qqihfakgmv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#llqdxhchtp .gt_indent_1 {
+#qqihfakgmv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#llqdxhchtp .gt_indent_2 {
+#qqihfakgmv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#llqdxhchtp .gt_indent_3 {
+#qqihfakgmv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#llqdxhchtp .gt_indent_4 {
+#qqihfakgmv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#llqdxhchtp .gt_indent_5 {
+#qqihfakgmv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -5803,14 +5809,14 @@ html {
 </table>
 </div>
 <p><br><br></p>
-<div id="ymqfblluii" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ltwhvekqub" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ymqfblluii .gt_table {
+#ltwhvekqub .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5835,7 +5841,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#ymqfblluii .gt_heading {
+#ltwhvekqub .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5847,7 +5853,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ymqfblluii .gt_title {
+#ltwhvekqub .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -5859,7 +5865,7 @@ html {
   border-bottom-width: 0;
 }
 
-#ymqfblluii .gt_subtitle {
+#ltwhvekqub .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5871,13 +5877,13 @@ html {
   border-top-width: 0;
 }
 
-#ymqfblluii .gt_bottom_border {
+#ltwhvekqub .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#ymqfblluii .gt_col_headings {
+#ltwhvekqub .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5892,7 +5898,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ymqfblluii .gt_col_heading {
+#ltwhvekqub .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5912,7 +5918,7 @@ html {
   overflow-x: hidden;
 }
 
-#ymqfblluii .gt_column_spanner_outer {
+#ltwhvekqub .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5924,15 +5930,15 @@ html {
   padding-right: 4px;
 }
 
-#ymqfblluii .gt_column_spanner_outer:first-child {
+#ltwhvekqub .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ymqfblluii .gt_column_spanner_outer:last-child {
+#ltwhvekqub .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ymqfblluii .gt_column_spanner {
+#ltwhvekqub .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -5944,7 +5950,7 @@ html {
   width: 100%;
 }
 
-#ymqfblluii .gt_group_heading {
+#ltwhvekqub .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5969,7 +5975,7 @@ html {
   vertical-align: middle;
 }
 
-#ymqfblluii .gt_empty_group_heading {
+#ltwhvekqub .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #FF0000;
@@ -5984,15 +5990,15 @@ html {
   vertical-align: middle;
 }
 
-#ymqfblluii .gt_from_md > :first-child {
+#ltwhvekqub .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ymqfblluii .gt_from_md > :last-child {
+#ltwhvekqub .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ymqfblluii .gt_row {
+#ltwhvekqub .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -6011,7 +6017,7 @@ html {
   overflow-x: hidden;
 }
 
-#ymqfblluii .gt_stub {
+#ltwhvekqub .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -6024,7 +6030,7 @@ html {
   padding-right: 5px;
 }
 
-#ymqfblluii .gt_stub_row_group {
+#ltwhvekqub .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6038,11 +6044,11 @@ html {
   vertical-align: top;
 }
 
-#ymqfblluii .gt_row_group_first td {
+#ltwhvekqub .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ymqfblluii .gt_summary_row {
+#ltwhvekqub .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6052,16 +6058,16 @@ html {
   padding-right: 5px;
 }
 
-#ymqfblluii .gt_first_summary_row {
+#ltwhvekqub .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#ymqfblluii .gt_first_summary_row.thick {
+#ltwhvekqub .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ymqfblluii .gt_last_summary_row {
+#ltwhvekqub .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6071,7 +6077,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#ymqfblluii .gt_grand_summary_row {
+#ltwhvekqub .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -6081,7 +6087,7 @@ html {
   padding-right: 5px;
 }
 
-#ymqfblluii .gt_first_grand_summary_row {
+#ltwhvekqub .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6091,11 +6097,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#ymqfblluii .gt_striped {
+#ltwhvekqub .gt_striped {
   background-color: #FEEDEC;
 }
 
-#ymqfblluii .gt_table_body {
+#ltwhvekqub .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -6104,7 +6110,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#ymqfblluii .gt_footnotes {
+#ltwhvekqub .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6118,7 +6124,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ymqfblluii .gt_footnote {
+#ltwhvekqub .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -6127,7 +6133,7 @@ html {
   padding-right: 5px;
 }
 
-#ymqfblluii .gt_sourcenotes {
+#ltwhvekqub .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6141,7 +6147,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ymqfblluii .gt_sourcenote {
+#ltwhvekqub .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6149,64 +6155,64 @@ html {
   padding-right: 5px;
 }
 
-#ymqfblluii .gt_left {
+#ltwhvekqub .gt_left {
   text-align: left;
 }
 
-#ymqfblluii .gt_center {
+#ltwhvekqub .gt_center {
   text-align: center;
 }
 
-#ymqfblluii .gt_right {
+#ltwhvekqub .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ymqfblluii .gt_font_normal {
+#ltwhvekqub .gt_font_normal {
   font-weight: normal;
 }
 
-#ymqfblluii .gt_font_bold {
+#ltwhvekqub .gt_font_bold {
   font-weight: bold;
 }
 
-#ymqfblluii .gt_font_italic {
+#ltwhvekqub .gt_font_italic {
   font-style: italic;
 }
 
-#ymqfblluii .gt_super {
+#ltwhvekqub .gt_super {
   font-size: 65%;
 }
 
-#ymqfblluii .gt_footnote_marks {
+#ltwhvekqub .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ymqfblluii .gt_asterisk {
+#ltwhvekqub .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ymqfblluii .gt_indent_1 {
+#ltwhvekqub .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ymqfblluii .gt_indent_2 {
+#ltwhvekqub .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ymqfblluii .gt_indent_3 {
+#ltwhvekqub .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ymqfblluii .gt_indent_4 {
+#ltwhvekqub .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ymqfblluii .gt_indent_5 {
+#ltwhvekqub .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
