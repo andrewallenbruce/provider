@@ -2,7 +2,7 @@
 % Please edit documentation in R/prov_npi_nppes.R
 \name{prov_npi_nppes}
 \alias{prov_npi_nppes}
-\title{Search the NPPES by NPI}
+\title{Search the NPPES NPI Public Registry}
 \usage{
 prov_npi_nppes(npi)
 }
@@ -15,7 +15,18 @@ the date-time the search was performed, and
 a list-column of the results.
 }
 \description{
-Search the NPPES by NPI
+The NPPES NPI Registry Public Search is a
+free directory of all active National Provider Identifier
+(NPI) records. Healthcare providers acquire their unique
+10-digit NPIs to identify themselves in a standard way
+throughout their industry. After CMS supplies an NPI,
+they publish the parts of the NPI record that have public
+relevance, including the provider’s name, taxonomy and
+practice address. It enables you to search for providers
+in the NPPES (National Plan and Provider Enumeration System.)
+All information produced by the NPI Registry is provided in
+accordance with the NPPES Data Dissemination Notice.
+There is no charge to use the NPI Registry.
 }
 \examples{
 prov_npi_nppes(1528060837)

@@ -18,10 +18,30 @@ size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provide
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
 <!-- badges: end -->
 
-The goal of {provider} is to provide performant and reliable open-source
+The goal of `provider` is to provide performant and reliable open-source
 tools to facilitate easy access to [healthcare
 provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-through publicly available APIs & sources.
+through publicly available APIs & sources. The current list of supported
+APIs are:
+
+-   [NPPES National Provider Identifier (NPI) Registry
+    API](https://npiregistry.cms.hhs.gov/search)
+-   [Medicare Fee-For-Service Public Provider Enrollment
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+-   [Medicare Order and Referring
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+-   [Medicare Provider and Supplier Taxonomy
+    Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+-   [Medicare Physician & Other Practitioners - by Provider and Service
+    API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+-   [Medicare Revalidation Due Date
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
+-   [Medicare Revalidation Clinic Group Practice Reassignment
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
+-   [Medicare Opt Out Affidavits
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+-   [CMS Public Reporting of Missing Digital Contact Information
+    API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
 
 <br>
 
@@ -39,6 +59,13 @@ remotes::install_github("andrewallenbruce/provider")
 ```
 
 <br>
+
+<br>
+
+## Usage
+
+Read the Overview vignette for a more thorough introduction to the
+package’s functionality.
 
 ## Search the NPPES by A Provider’s NPI
 
@@ -64,7 +91,7 @@ went wrong) and a column called `data_lists`:
     #> # A tibble: 1 × 4
     #>   search     datetime            outcome data_lists   
     #>   <chr>      <dttm>              <chr>   <list>       
-    #> 1 1528060837 2022-09-08 02:52:15 results <df [1 × 11]>
+    #> 1 1528060837 2022-09-08 08:14:36 results <df [1 × 11]>
 
 <br>
 
@@ -129,13 +156,6 @@ And the final tidied results:
 | NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | MCR Railroad retiremnt | 650003825  |
 | NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | MEDICARE UPIN                | NA                     | R23823     |
 | NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | BC/BS Non Provider#    | k366       |
-
-<br>
-
-## Usage
-
-Read the Overview vignette for a more thorough introduction to the
-package’s functionality.
 
 <br>
 

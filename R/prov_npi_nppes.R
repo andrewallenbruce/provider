@@ -1,4 +1,17 @@
-#' Search the NPPES by NPI
+#' Search the NPPES NPI Public Registry
+#'
+#' @description The NPPES NPI Registry Public Search is a
+#' free directory of all active National Provider Identifier
+#' (NPI) records. Healthcare providers acquire their unique
+#' 10-digit NPIs to identify themselves in a standard way
+#' throughout their industry. After CMS supplies an NPI,
+#' they publish the parts of the NPI record that have public
+#' relevance, including the provider’s name, taxonomy and
+#' practice address. It enables you to search for providers
+#' in the NPPES (National Plan and Provider Enumeration System.)
+#' All information produced by the NPI Registry is provided in
+#' accordance with the NPPES Data Dissemination Notice.
+#' There is no charge to use the NPI Registry.
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #'
