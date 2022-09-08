@@ -19,19 +19,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+<br><br>
+
 # The NPPES NPI Registry
 
+<br>
+
 The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider's name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
-
-
-```{r}
-mcr_ffs_prov_type
-```
-
-```{r}
-prov_mcr_ffs(1003026055)
-```
-
 
 <br>
 
@@ -45,9 +39,9 @@ The NPPES *Application Programming Interface* (API) is a faster alternative to t
 
 The following is a basic example of searching for an NPI using the using `prov_npi_nppes()`. The only argument is the provider's 10-digit [National Provider Identifier](https://en.wikipedia.org/wiki/National_Provider_Identifier):
 
-<br><br>
+<br>
 
-```{r message=TRUE, warning=TRUE}
+```{r message=FALSE, warning=FALSE}
 # Load package
 library(provider)
 
@@ -63,7 +57,9 @@ nppes_npi_resp
 
 This returns a `tibble` containing the NPI that was searched for (`search`), the `datetime` of the query, an `outcome` status column and `data_lists`, a list-column containing a collection of variables and nested data frames:
 
-```{r}
+<br>
+
+```{r echo=FALSE}
 # The hierarchical "tree" of the response
 lobstr::tree(nppes_npi_resp$data_lists, max_depth = 2)
 ```
@@ -72,7 +68,7 @@ lobstr::tree(nppes_npi_resp$data_lists, max_depth = 2)
 
 The **variables** returned are as follows:
 
-```{r}
+```{r echo=FALSE}
 lobstr::tree(nppes_npi_resp$data_lists[[1]][1:4])
 ```
 
@@ -83,15 +79,17 @@ lobstr::tree(nppes_npi_resp$data_lists[[1]][1:4])
  * `last_updated_epoch`: date when the information was last updated by the provider
  * `number`: provider's NPI, as listed in the NPPES
 
-<br><br>
+<br>
 
 > Note: `last_updated_epoch` / `created_epoch` are dates in [Unix time](https://www.epochconverter.com/). They are repeated in the `basic` list as `last_updated` and `enumeration_date`, respectively.
 
-<br><br>
+<br>
 
 The **list-columns** returned are as follows:
 
-```{r}
+<br>
+
+```{r echo=FALSE}
 lobstr::tree(nppes_npi_resp$data_lists[[1]][5:11])
 ```
 
@@ -113,7 +111,11 @@ lobstr::tree(nppes_npi_resp$data_lists[[1]][5:11])
 
 ## Unpack the Response
 
+<br>
+
 Flatten the response tibble into a tidy data format with `prov_nppes_unpack()`:
+
+<br>
 
 ```{r}
 prov_nppes_unpack(nppes_npi_resp)
@@ -124,16 +126,21 @@ prov_nppes_unpack(nppes_npi_resp)
 
 # Search for Multiple NPIs
 
+<br>
+
 To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using `c()` as opposed to `list()`) of said NPIs:
+
+<br>
 
 ```{r message=TRUE, warning=FALSE}
 npi_list <- c(1336413418, 1710975040, 1659781227, 1528060837)
 ```
 
-
 <br>
 
 Then pipe the list into `prov_npi_nppes()` using [purrr's](https://purrr.tidyverse.org/) `map_dfr()` function to loop over the list:
+
+<br>
 
 ```{r message=TRUE, warning=FALSE}
 npi_list_resp <- npi_list |> purrr::map_dfr(prov_npi_nppes)
@@ -144,12 +151,12 @@ npi_list_resp <- npi_list |> purrr::map_dfr(prov_npi_nppes)
 npi_list_resp
 ```
 
-<br><br>
+<br>
 
 
 Unpacking the response is similar, adding only dplyr's `group_split()` function to the chain. The parameter entered into `group_split()` must be `search`.
 
-<br><br>
+<br>
 
 ```{r message=TRUE, warning=FALSE}
 npi_list_resp |> dplyr::group_split(search) |> 
@@ -157,11 +164,11 @@ npi_list_resp |> dplyr::group_split(search) |>
 ```
 
 
-<br><br>
+<br>
 
 Searching for a column of NPIs in a data frame is only slightly different. I'll create a data frame with the same NPIs in the list example:
 
-<br><br>
+<br>
 
 ```{r}
 npi_df <- data.frame(npi = c(1336413418, 1710975040, 1659781227, 1528060837))
@@ -172,7 +179,7 @@ npi_df
 ```
 
 
-<br><br>
+<br>
 
 We can even chain the search and unpack function chains together using `|>`, R's lovely pipe. Again, the `group_split()` input should be the column containing the NPIs. 
 
@@ -195,7 +202,7 @@ npi_df_resp
 At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.
 
 
-```{r}
+```{r echo=FALSE}
 npi_df_resp |> 
   knitr::kable(
     # col.names = c(
@@ -327,10 +334,13 @@ provider::nppes_api_output |>
 
 ## Terminology Notes
 
+<br><br>
+
 ### Enumeration Type
 
+<br>
 Two categories of health care providers exist for NPI enumeration purposes: Entity *Type 1* (Individual) and Entity *Type 2* (Organizational).
-
+<br>
 #### NPI-1: Individual
 
 Individual health care providers (including sole proprietors) may get an NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.
@@ -341,17 +351,19 @@ The following factors **do not** affect whether a sole proprietor is an Entity T
 -   Whether they have employees
 -   Whether the IRS issued them an EIN.
 
-<br>
 
 > An **incorporated individual** is a single health care provider who forms and conducts business under a corporation. A sole proprietor **is not** an incorporated individual because the sole proprietor didn't form a corporation. If you're a sole/solo practitioner, it doesn't necessarily mean you're a sole proprietor, and vice versa. If you're an individual health care provider who's incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+
+<br>
+
 #### NPI-2: Organizational
+
+<br>
 
 Organization health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization's only employee.
 
 Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren't themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.
 
 An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.
-
-<br>
 
 > Subpart delegation doesn't affect Entity Type 1 health care providers. As individuals, these health care providers can't choose subparts and are not subparts.

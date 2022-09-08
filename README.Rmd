@@ -7,13 +7,15 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  message = FALSE,
+  warning = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
 ```
 
-# `provider` <img src="man/figures/logo.svg" align="right" height="500" />
+# `provider` <img src="man/figures/logo.svg" align="right" height="300" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
@@ -35,6 +37,9 @@ You can install the development version of `provider` from [GitHub](https://gith
 ``` r
 # install.packages("devtools")
 devtools::install_github("andrewallenbruce/provider")
+
+# install.packages("remotes")
+remotes::install_github("andrewallenbruce/provider")
 ```
 <br>
 
@@ -49,6 +54,7 @@ library(provider)
 # Query the NPPES API
 nppes_npi_response <- prov_npi_nppes(1528060837)
 ```
+
 <br>
 
 This returns a response in the form of a data frame with the NPI searched for, the date & time that the search was performed, the outcome (*results* means the search was successful, *errors*, that something went wrong) and a column called `data_lists`:
@@ -88,7 +94,7 @@ And the final tidied results:
 <br>
 
 ```{r echo=FALSE}
-nppes_npi_unpacked[1:10, ] |> 
+nppes_npi_unpacked |> 
   dplyr::select(!c(
     id, 
     middle_name, 
@@ -97,18 +103,19 @@ nppes_npi_unpacked[1:10, ] |>
     last_updated, 
     status, 
     name_prefix, 
-    name_suffix, 
-    country_abb, 
-    country_name, 
-    address_type, 
+    name_suffix,
+    #location_address_2,
+    #mailing_address_2,
+    # mailing_state,
+    # mailing_zip,
+    # mailing_phone,
+    # mailing_fax,
     taxon_primary,
     taxon_state,
     ident_code, 
-    ident_state,
-    state_name,
-    state_region,
-    state_division)) |> 
+    ident_state)) |> 
   knitr::kable(align = "l")
+  #kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
 ```
 
 <br>

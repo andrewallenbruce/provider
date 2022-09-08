@@ -64,7 +64,7 @@ prov_nppes_unpack <- function(df) {
     lists <- start |>
       dplyr::select(!(basic)) |>
       dplyr::select(where(~ is.list(.x) &&
-                            (insight::is_empty_object(.x) == FALSE))) |>
+      (insight::is_empty_object(.x) == FALSE))) |>
       dplyr::mutate(id = key)
 
     # Replace Empty Lists with NA
@@ -79,8 +79,31 @@ prov_nppes_unpack <- function(df) {
       addresses <- lists |>
         dplyr::select(id, addresses) |>
         tidyr::unnest(cols = c(addresses)) |>
-        dplyr::rename(country_abb = country_code,
-                      state_abb = state)
+        dplyr::mutate(
+          address_purpose = stringr::str_to_lower(
+          address_purpose)) |>
+        dplyr::select(-c(country_name, address_type)) |>
+        tidyr::pivot_wider(
+          names_from = address_purpose,
+          names_glue = "{address_purpose}_{.value}",
+          values_from = dplyr::everything()) |>
+        dplyr::select(id = location_id
+                      # country_abb = location_country_code,
+                      # location_address_1,
+                      # location_address_2,
+                      # location_city,
+                      # state_abb = location_state,
+                      # location_zip = location_postal_code,
+                      # location_phone = location_telephone_number,
+                      # location_fax = location_fax_number,
+                      # mailing_address_1,
+                      # mailing_address_2,
+                      # mailing_city,
+                      # mailing_state,
+                      # mailing_zip = location_postal_code,
+                      # mailing_phone = location_telephone_number,
+                      # mailing_fax = location_fax_number
+        )
 
       #--Join Columns--#
       results <- dplyr::full_join(results, addresses, by = "id")
@@ -166,7 +189,7 @@ prov_nppes_unpack <- function(df) {
     }
 
     # NPPES LOCATION TABLE JOIN
-    results <- dplyr::inner_join(results, provider::nppes_location_reference)
+    #results <- dplyr::inner_join(results, provider::nppes_location_reference, by = c("state_abb", "country_abb"))
 
   }
   return(results)

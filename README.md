@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `provider` <img src="man/figures/logo.svg" align="right" height="500" />
+# `provider` <img src="man/figures/logo.svg" align="right" height="300" />
 
 <!-- badges: start -->
 
@@ -33,6 +33,9 @@ You can install the development version of `provider` from
 ``` r
 # install.packages("devtools")
 devtools::install_github("andrewallenbruce/provider")
+
+# install.packages("remotes")
+remotes::install_github("andrewallenbruce/provider")
 ```
 
 <br>
@@ -61,7 +64,7 @@ went wrong) and a column called `data_lists`:
     #> # A tibble: 1 × 4
     #>   search     datetime            outcome data_lists   
     #>   <chr>      <dttm>              <chr>   <list>       
-    #> 1 1528060837 2022-09-01 05:44:35 results <df [1 × 11]>
+    #> 1 1528060837 2022-09-08 02:52:15 results <df [1 × 11]>
 
 <br>
 
@@ -114,18 +117,18 @@ And the final tidied results:
 
 <br>
 
-| prov_type | npi        | first_name | last_name | credential | gender | address_purpose | address_1             | city     | state_abb | postal_code | telephone_number | address_2 | fax_number | taxon_code | taxon_desc         | taxon_license | ident_desc                   | ident_issuer           | identifier |
-|:----------|:-----------|:-----------|:----------|:-----------|:-------|:----------------|:----------------------|:---------|:----------|:------------|:-----------------|:----------|:-----------|:-----------|:-------------------|:--------------|:-----------------------------|:-----------------------|:-----------|
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | Aetna HMO              | 0129008    |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | DOL/OWCP               | 146574500  |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | United Healthcare      | 230033     |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | MDIPA/Alliance/MLH/OC  | 38311      |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | Cigna                  | 4074069    |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | Aetna PPO              | 4296824    |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | MEDICARE ID-Type Unspecified | MCR Provider#          | 575182E20  |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | MCR Railroad retiremnt | 650003825  |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | MEDICARE UPIN                | NA                     | R23823     |
-| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | MAILING         | 1939 OLD ANNAPOLIS RD | WOODBINE | MD        | 217978201   | 301-854-6748     | NA        | NA         | 225100000X | Physical Therapist | 14262         | Other (non-Medicare)         | BC/BS Non Provider#    | k366       |
+| prov_type | npi        | first_name | last_name | credential | gender | taxon_code | taxon_taxonomy_group | taxon_desc         | taxon_license | ident_desc                   | ident_issuer           | identifier |
+|:----------|:-----------|:-----------|:----------|:-----------|:-------|:-----------|:---------------------|:-------------------|:--------------|:-----------------------------|:-----------------------|:-----------|
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | Aetna HMO              | 0129008    |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | DOL/OWCP               | 146574500  |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | United Healthcare      | 230033     |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | MDIPA/Alliance/MLH/OC  | 38311      |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | Cigna                  | 4074069    |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | Aetna PPO              | 4296824    |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | MEDICARE ID-Type Unspecified | MCR Provider#          | 575182E20  |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | MCR Railroad retiremnt | 650003825  |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | MEDICARE UPIN                | NA                     | R23823     |
+| NPI-1     | 1528060837 | JOHN       | SARGEANT  | PT         | M      | 225100000X |                      | Physical Therapist | 14262         | Other (non-Medicare)         | BC/BS Non Provider#    | k366       |
 
 <br>
 

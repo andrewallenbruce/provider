@@ -10,7 +10,9 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  message = FALSE, 
+  warning = FALSE
 )
 ```
 
@@ -32,84 +34,213 @@ I'll create the example list and data frame I'll be using in the examples for ea
 
 ```{r}
 npi_list <- c(1003026055, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
+
+
+npi_data.frame <- data.frame(
+  npi = c(1003026055, 
+          1316405939, 
+          1720392988, 
+          1518184605, 
+          1922056829, 
+          1083879860))
 ```
 
-```{r echo=FALSE}
-npi_list
-```
-
-<br>
-
-```{r}
-npi_data.frame <- data.frame(npi = c(1003026055, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860))
-```
-
-```{r echo=FALSE}
-npi_data.frame
-```
 
 <br><br>
 
 # NPPES NPI Public Registry API
 
+<br>
+
 ```{r message=FALSE, warning=FALSE}
-prov_npi_nppes(1003026055) |> prov_nppes_unpack()
+prov_npi_nppes(1003026055) |> 
+  prov_nppes_unpack() |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(fixed_thead = TRUE)
 ```
 
+<br>
+
+```{r warning=FALSE}
+npi_list |> purrr::map_dfr(prov_npi_nppes) |> 
+            dplyr::group_split(search) |>
+            purrr::map_dfr(prov_nppes_unpack) |> 
+            knitr::kable() |> 
+            kableExtra::scroll_box(
+              height = "500px", 
+              fixed_thead = TRUE)
+```
+
+<br><br>
 
 # Medicare Fee-For-Service Public Provider Enrollment API
 
+<br>
+
 The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the Provider Enrollment and Chain Ownership System (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
 
-[Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+<br>
+
+ -   [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+ -   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
+ -   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
 
 <br>
 
 ```{r}
-prov_mcr_ffs(1003026055)
+prov_mcr_ffs(1003026055) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(fixed_thead = TRUE)
 ```
 
 <br>
 
 ```{r}
-npi_list |> purrr::map_dfr(prov_mcr_ffs)
+npi_list |> purrr::map_dfr(prov_mcr_ffs) |> 
+            knitr::kable() |> 
+            kableExtra::scroll_box(fixed_thead = TRUE)
 ```
 
 <br>
 
 ```{r}
-npi_data.frame |> dplyr::group_split(npi) |> 
-                  purrr::map_dfr(prov_mcr_ffs)
+npi_data.frame |> 
+  dplyr::group_split(npi) |> 
+  purrr::map_dfr(prov_mcr_ffs) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(fixed_thead = TRUE)
 ```
 
-## Data Dictionary
-
--   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
--   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
 
 <br><br>
 
 # Medicare Order and Referring API
 
+<br>
+
 The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 
-[Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+<br>
+
+ - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 
 ```{r}
-prov_mcr_ordref(1003026055)
+prov_mcr_ordref(1003026055) |> knitr::kable()
 ```
 
 <br>
 
 ```{r}
-npi_list |> purrr::map_dfr(prov_mcr_ordref)
+npi_list |> purrr::map_dfr(prov_mcr_ordref) |> 
+            knitr::kable()
 ```
 
 <br>
 
 ```{r}
 npi_data.frame |> dplyr::group_split(npi) |> 
-                  purrr::map_dfr(prov_mcr_ordref)
+                  purrr::map_dfr(prov_mcr_ordref) |> 
+                  knitr::kable()
 ```
 
 <br><br>
+
+# Medicare Provider and Supplier Taxonomy Crosswalk API
+
+<br>
+
+- [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+
+<br>
+The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS).
+<br>
+
+```{r}
+prov_mcr_taxcross("2086S0102X") |> knitr::kable()
+```
+<br>
+
+```{r}
+nppes_ex <- npi_list |> purrr::map_dfr(prov_npi_nppes) |> 
+            dplyr::group_split(search) |>
+            purrr::map_dfr(prov_nppes_unpack)
+
+nppes_ex |> dplyr::distinct(taxon_code) |> 
+            dplyr::group_split(taxon_code) |> 
+            purrr::map_dfr(prov_mcr_taxcross) |> 
+            knitr::kable() |> 
+            kableExtra::scroll_box(
+              height = "500px", 
+              fixed_thead = TRUE)
+```
+
+<br><br>
+
+# CMS Open Data Catalog
+
+<br>
+
+```{r}
+cms_open_data_catalog <- "https://data.cms.gov/data.json"
+
+# Create polite version
+polite_req <- polite::politely(
+  httr2::request,
+  verbose = FALSE,
+  delay = 2)
+
+# Create request
+req <- polite_req(cms_open_data_catalog)
+
+# Send and save response
+resp <- req |>
+  httr2::req_url_query() |>
+  httr2::req_throttle(50 / 60) |>
+  httr2::req_perform()
+
+# Parse JSON response and save results
+results <- resp |> httr2::resp_body_json(
+  check_type = FALSE,
+  simplifyVector = TRUE)
+
+results_dataset <- results$dataset |> 
+  tidyr::unnest(bureauCode) |> 
+  tidyr::unnest(language) |> 
+  tidyr::unnest(programCode) |> 
+  tidyr::unnest(references) |> 
+  tidyr::unnest(theme)
+```
+
+<br>
+
+```{r}
+results_dataset |> 
+  dplyr::select(title, description) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(
+    height = "500px", 
+    fixed_thead = TRUE)
+```
+<br>
+
+```{r}
+results_dataset |> 
+  dplyr::select(dataset = title, 
+                time_period = temporal, 
+                distribution, 
+                identifier) |> 
+  tidyr::unnest(distribution) |> 
+  dplyr::filter(dataset == "Medicare Physician & Other Practitioners - by Provider and Service") |> 
+  dplyr::filter(format == "API") |> 
+  dplyr::select(title, 
+                accessURL, 
+                temporal, 
+                modified) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(
+    height = "500px", 
+    fixed_thead = TRUE)
+```
+
+<br><br>
+

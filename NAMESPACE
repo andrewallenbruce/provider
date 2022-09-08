@@ -2,6 +2,7 @@
 
 export(prov_mcr_ffs)
 export(prov_mcr_ordref)
+export(prov_mcr_taxcross)
 export(prov_npi_luhn)
 export(prov_npi_nppes)
 export(prov_nppes_unpack)
