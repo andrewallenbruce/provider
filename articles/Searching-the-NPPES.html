@@ -115,16 +115,12 @@
 
     
     
+<p><br><br></p>
 <div class="section level2">
 <h2 id="the-nppes-npi-registry">The NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#the-nppes-npi-registry"></a>
 </h2>
+<p><br></p>
 <p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry Public Search</a> is a free directory of all active <strong>National Provider Identifier</strong> (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mcr_ffs_prov_type</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'mcr_ffs_prov_type' not found</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_ffs.html">prov_mcr_ffs</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in prov_mcr_ffs(1003026055): could not find function "prov_mcr_ffs"</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="the-nppes-api">The NPPES API<a class="anchor" aria-label="anchor" href="#the-nppes-api"></a>
@@ -137,30 +133,24 @@
 <h2 id="searching-the-nppes-by-npi">Searching the NPPES by NPI<a class="anchor" aria-label="anchor" href="#searching-the-nppes-by-npi"></a>
 </h2>
 <p>The following is a basic example of searching for an NPI using the using <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code>. The only argument is the provider’s 10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National Provider Identifier</a>:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Query the NPPES API</span></span>
 <span><span class="va">nppes_npi_resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in request_handler_handler(request = request, handler =</span></span>
-<span><span class="co">#&gt; on_file_type_mismatch, : Event: on_file_type_mismatch</span></span>
-<span><span class="co">#&gt; Warning in request_handler_handler(request = request, handler =</span></span>
-<span><span class="co">#&gt; on_suspect_content, : Event: on_suspect_content</span></span>
 <span></span>
 <span><span class="co"># View the results</span></span>
 <span><span class="va">nppes_npi_resp</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-07 <span style="color: #949494;">09:55:45</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-08 <span style="color: #949494;">07:32:34</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># The hierarchical "tree" of the response</span></span>
-<span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span>, max_depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<p><br></p>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt;   ├─created_epoch: <span style="color: #0000BB;">"1546027807000"</span></span></span>
 <span><span class="co">#&gt;   ├─enumeration_type: <span style="color: #0000BB;">"NPI-1"</span></span></span>
@@ -178,16 +168,14 @@
 <span><span class="co">#&gt;   ├─endpoints: <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt;   │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt;   └─other_names: <span style="color: #555555;">&lt;list&gt;</span></span></span>
-<span><span class="co">#&gt;     └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;     └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre>
 <p><br><br></p>
 <p>The <strong>variables</strong> returned are as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; ├─created_epoch: <span style="color: #0000BB;">"1546027807000"</span></span></span>
 <span><span class="co">#&gt; ├─enumeration_type: <span style="color: #0000BB;">"NPI-1"</span></span></span>
 <span><span class="co">#&gt; ├─last_updated_epoch: <span style="color: #0000BB;">"1592271738000"</span></span></span>
-<span><span class="co">#&gt; └─number: <span style="color: #0000BB;">"1114499340"</span></span></span></code></pre></div>
+<span><span class="co">#&gt; └─number: <span style="color: #0000BB;">"1114499340"</span></span></span></code></pre>
 <p><br><br></p>
 <ul>
 <li>
@@ -199,15 +187,14 @@
 <li>
 <code>number</code>: provider’s NPI, as listed in the NPPES</li>
 </ul>
-<p><br><br></p>
+<p><br></p>
 <blockquote>
 <p>Note: <code>last_updated_epoch</code> / <code>created_epoch</code> are dates in <a href="https://www.epochconverter.com/" class="external-link">Unix time</a>. They are repeated in the <code>basic</code> list as <code>last_updated</code> and <code>enumeration_date</code>, respectively.</p>
 </blockquote>
-<p><br><br></p>
+<p><br></p>
 <p>The <strong>list-columns</strong> returned are as follows:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">$</span><span class="va">data_lists</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">11</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<p><br></p>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; ├─addresses: <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; │   ├─country_code&lt;chr [2]&gt;: <span style="color: #0000BB;">"US", "US"</span></span></span>
@@ -243,6 +230,7 @@
 <span><span class="co">#&gt; ├─taxonomies: <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
 <span><span class="co">#&gt; │   ├─code: <span style="color: #0000BB;">"225100000X"</span></span></span>
+<span><span class="co">#&gt; │   ├─taxonomy_group: <span style="color: #0000BB;">""</span></span></span>
 <span><span class="co">#&gt; │   ├─desc: <span style="color: #0000BB;">"Physical Therapist"</span></span></span>
 <span><span class="co">#&gt; │   ├─state: <span style="color: #0000BB;">"CA"</span></span></span>
 <span><span class="co">#&gt; │   ├─license: <span style="color: #0000BB;">"295997"</span></span></span>
@@ -252,7 +240,7 @@
 <span><span class="co">#&gt; ├─endpoints: <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; └─other_names: <span style="color: #555555;">&lt;list&gt;</span></span></span>
-<span><span class="co">#&gt;   └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre>
 <p><br><br></p>
 <ul>
 <li>
@@ -278,121 +266,125 @@
 <div class="section level3">
 <h3 id="unpack-the-response">Unpack the Response<a class="anchor" aria-label="anchor" href="#unpack-the-response"></a>
 </h3>
+<p><br></p>
 <p>Flatten the response tibble into a tidy data format with <code><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack()</a></code>:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 38</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 27</span></span></span>
 <span><span class="co">#&gt;   prov_type npi     id    first…¹ last_…² crede…³ sole_…⁴ gender enume…⁵ last_…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> NPI-1     111449… 1114… DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> NPI-1     111449… 1114… DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 28 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, country_abb &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country_name &lt;chr&gt;, address_purpose &lt;chr&gt;, address_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, city &lt;chr&gt;, state_abb &lt;chr&gt;, postal_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;, taxon_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_country_abb &lt;chr&gt;, pract_country_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_address_purpose &lt;chr&gt;, pract_address_type &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 17 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, pract_country_abb &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_country_name &lt;chr&gt;, pract_address_purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_address_type &lt;chr&gt;, pract_address_1 &lt;chr&gt;, pract_city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_state_abb &lt;chr&gt;, pract_postal_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_telephone_number &lt;chr&gt;, and abbreviated variable names ¹​first_name, …</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="search-for-multiple-npis">Search for Multiple NPIs<a class="anchor" aria-label="anchor" href="#search-for-multiple-npis"></a>
 </h2>
+<p><br></p>
 <p>To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <p>Then pipe the list into <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code> function to loop over the list:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_npi_nppes</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-07 <span style="color: #949494;">09:55:48</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-07 <span style="color: #949494;">09:55:50</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-07 <span style="color: #949494;">09:55:52</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-07 <span style="color: #949494;">09:55:55</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
-<p><br><br></p>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-08 <span style="color: #949494;">07:32:36</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-08 <span style="color: #949494;">07:32:38</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-08 <span style="color: #949494;">07:32:40</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-08 <span style="color: #949494;">07:32:42</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_nppes_unpack</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Joining, by = c("country_abb", "country_name", "state_abb")</span></span>
-<span><span class="co">#&gt; Joining, by = c("country_abb", "country_name", "state_abb")</span></span>
-<span><span class="co">#&gt; Joining, by = c("country_abb", "country_name", "state_abb")</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 46</span></span></span>
-<span><span class="co">#&gt;    prov_type npi    id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2     13364… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NPI-2     13364… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 36 more variables:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 33</span></span></span>
+<span><span class="co">#&gt;    prov_type  npi   id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2      1336… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Deactivat… 1659… 1659… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, country_abb &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country_name &lt;chr&gt;, address_purpose &lt;chr&gt;, address_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, state_abb &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, middle_name &lt;chr&gt;, credential &lt;chr&gt;, …</span></span></span></code></pre></div>
+<p><br></p>
 <p>Searching for a column of NPIs in a data frame is only slightly different. I’ll create a data frame with the same NPIs in the list example:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;          npi</span></span>
 <span><span class="co">#&gt; 1 1336413418</span></span>
 <span><span class="co">#&gt; 2 1710975040</span></span>
 <span><span class="co">#&gt; 3 1659781227</span></span>
 <span><span class="co">#&gt; 4 1528060837</span></span></code></pre>
-<p><br><br></p>
+<p><br></p>
 <p>We can even chain the search and unpack function chains together using <code>|&gt;</code>, R’s lovely pipe. Again, the <code>group_split()</code> input should be the column containing the NPIs.</p>
 <p>Split and purrr, then split and purrr:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df_resp</span> <span class="op">&lt;-</span> <span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_npi_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_nppes_unpack</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 46</span></span></span>
-<span><span class="co">#&gt;    prov_type npi    id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2     13364… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NPI-2     13364… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NPI-1     15280… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 36 more variables:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 33</span></span></span>
+<span><span class="co">#&gt;    prov_type  npi   id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2      1336… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> NPI-1      1528… 1528… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-0… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> Deactivat… 1659… 1659… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, country_abb &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country_name &lt;chr&gt;, address_purpose &lt;chr&gt;, address_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, state_abb &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, middle_name &lt;chr&gt;, credential &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br><br></p>
 <p>At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_df_resp</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span></span>
-<span>    <span class="co"># col.names = c(</span></span>
-<span>    <span class="co"># "ID", </span></span>
-<span>    <span class="co"># "Datetime", </span></span>
-<span>    <span class="co"># "Group", </span></span>
-<span>    <span class="co"># "Description", </span></span>
-<span>    <span class="co"># "Field"), </span></span>
-<span>    align <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'l'</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span><span class="op">)</span></span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
 <table class="table">
 <thead><tr>
@@ -439,40 +431,10 @@ authorized_official_title_or_position
 authorized_official_name_prefix
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-country_abb
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-country_name
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-address_purpose
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-address_type
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-address_1
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-address_2
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-city
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-state_abb
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-postal_code
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-telephone_number
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-fax_number
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 taxon_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+taxon_taxonomy_group
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 taxon_desc
@@ -485,15 +447,6 @@ taxon_license
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 taxon_primary
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-state_name
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-state_region
-</th>
-<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
-state_division
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 first_name
@@ -580,40 +533,9 @@ Manager
 Mrs. 
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-2773 MARSHALL DR
-</td>
-<td style="text-align:left;">
-SUITE D
-</td>
-<td style="text-align:left;">
-TIFTON
-</td>
-<td style="text-align:left;">
-GA
-</td>
-<td style="text-align:left;">
-317938101
-</td>
-<td style="text-align:left;">
-229-238-0790
-</td>
-<td style="text-align:left;">
-229-238-0791
-</td>
-<td style="text-align:left;">
 291U00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Clinical Medical Laboratory
@@ -626,155 +548,6 @@ NA
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Georgia
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-2
-</td>
-<td style="text-align:left;">
-1336413418
-</td>
-<td style="text-align:left;">
-1336413418
-</td>
-<td style="text-align:left;">
-LUMINUS DIAGNOSTICS, LLC
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-2012-03-07
-</td>
-<td style="text-align:left;">
-2020-01-07
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-Laurel
-</td>
-<td style="text-align:left;">
-Gamage
-</td>
-<td style="text-align:left;">
-Smith
-</td>
-<td style="text-align:left;">
-2292380790
-</td>
-<td style="text-align:left;">
-Manager
-</td>
-<td style="text-align:left;">
-Mrs. 
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-2773 MARSHALL DR
-</td>
-<td style="text-align:left;">
-SUITE D
-</td>
-<td style="text-align:left;">
-TIFTON
-</td>
-<td style="text-align:left;">
-GA
-</td>
-<td style="text-align:left;">
-317938101
-</td>
-<td style="text-align:left;">
-229-238-0790
-</td>
-<td style="text-align:left;">
-229-238-0791
-</td>
-<td style="text-align:left;">
-291U00000X
-</td>
-<td style="text-align:left;">
-Clinical Medical Laboratory
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Georgia
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 NA
@@ -860,40 +633,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -906,15 +648,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1000,40 +733,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1046,15 +748,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1140,40 +833,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1186,15 +848,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1280,40 +933,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1326,15 +948,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1420,40 +1033,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1466,15 +1048,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1560,40 +1133,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1606,15 +1148,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1700,40 +1233,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1746,15 +1248,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1840,40 +1333,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -1886,15 +1348,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -1980,40 +1433,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -2026,15 +1448,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -2120,40 +1533,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1939 OLD ANNAPOLIS RD
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-WOODBINE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-217978201
-</td>
-<td style="text-align:left;">
-301-854-6748
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
 225100000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Physical Therapist
@@ -2166,1415 +1548,6 @@ MD
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-BC/BS Non Provider#
-</td>
-<td style="text-align:left;">
-k366
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-Aetna HMO
-</td>
-<td style="text-align:left;">
-0129008
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-DOL/OWCP
-</td>
-<td style="text-align:left;">
-146574500
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-United Healthcare
-</td>
-<td style="text-align:left;">
-230033
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-MDIPA/Alliance/MLH/OC
-</td>
-<td style="text-align:left;">
-38311
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-Cigna
-</td>
-<td style="text-align:left;">
-4074069
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-Aetna PPO
-</td>
-<td style="text-align:left;">
-4296824
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-04
-</td>
-<td style="text-align:left;">
-MEDICARE ID-Type Unspecified
-</td>
-<td style="text-align:left;">
-MCR Provider#
-</td>
-<td style="text-align:left;">
-575182E20
-</td>
-<td style="text-align:left;">
-DC
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-MCR Railroad retiremnt
-</td>
-<td style="text-align:left;">
-650003825
-</td>
-<td style="text-align:left;">
-DC
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-SARGEANT
-</td>
-<td style="text-align:left;">
-B
-</td>
-<td style="text-align:left;">
-PT
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-Mr. 
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-02
-</td>
-<td style="text-align:left;">
-MEDICARE UPIN
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-R23823
-</td>
-<td style="text-align:left;">
-DC
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-1528060837
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-06-01
-</td>
-<td style="text-align:left;">
-2007-07-09
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-6000 EXECUTIVE BLVD
-</td>
-<td style="text-align:left;">
-STE 201
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208523803
-</td>
-<td style="text-align:left;">
-301-816-0020
-</td>
-<td style="text-align:left;">
-301-816-0334
-</td>
-<td style="text-align:left;">
-225100000X
-</td>
-<td style="text-align:left;">
-Physical Therapist
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-14262
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -3716,45 +1689,6 @@ NA
 <td style="text-align:left;">
 NA
 </td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -3800,40 +1734,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1300 PICCARD DR
-</td>
-<td style="text-align:left;">
-SUITE 202
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208504303
-</td>
-<td style="text-align:left;">
-310-921-7900
-</td>
-<td style="text-align:left;">
-301-921-7915
-</td>
-<td style="text-align:left;">
 207R00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Internal Medicine
@@ -3846,15 +1749,6 @@ D0030414
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -3940,40 +1834,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1300 PICCARD DR
-</td>
-<td style="text-align:left;">
-SUITE 202
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208504303
-</td>
-<td style="text-align:left;">
-310-921-7900
-</td>
-<td style="text-align:left;">
-301-921-7915
-</td>
-<td style="text-align:left;">
 207R00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Internal Medicine
@@ -3986,15 +1849,6 @@ D0030414
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -4080,40 +1934,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1300 PICCARD DR
-</td>
-<td style="text-align:left;">
-SUITE 202
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208504303
-</td>
-<td style="text-align:left;">
-310-921-7900
-</td>
-<td style="text-align:left;">
-301-921-7915
-</td>
-<td style="text-align:left;">
 207R00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Internal Medicine
@@ -4126,15 +1949,6 @@ D0030414
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -4220,40 +2034,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1300 PICCARD DR
-</td>
-<td style="text-align:left;">
-SUITE 202
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208504303
-</td>
-<td style="text-align:left;">
-310-921-7900
-</td>
-<td style="text-align:left;">
-301-921-7915
-</td>
-<td style="text-align:left;">
 207R00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Internal Medicine
@@ -4266,15 +2049,6 @@ D0030414
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -4360,40 +2134,9 @@ NA
 NA
 </td>
 <td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-MAILING
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-1300 PICCARD DR
-</td>
-<td style="text-align:left;">
-SUITE 202
-</td>
-<td style="text-align:left;">
-ROCKVILLE
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208504303
-</td>
-<td style="text-align:left;">
-310-921-7900
-</td>
-<td style="text-align:left;">
-301-921-7915
-</td>
-<td style="text-align:left;">
 207R00000X
+</td>
+<td style="text-align:left;">
 </td>
 <td style="text-align:left;">
 Internal Medicine
@@ -4406,715 +2149,6 @@ D0030414
 </td>
 <td style="text-align:left;">
 TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-HERRING
-</td>
-<td style="text-align:left;">
-E
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-02
-</td>
-<td style="text-align:left;">
-MEDICARE UPIN
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-C59183
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-10-11
-</td>
-<td style="text-align:left;">
-2007-07-08
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-18101 PRINCE PHILIP DR
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-OLNEY
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208321514
-</td>
-<td style="text-align:left;">
-301-774-8900
-</td>
-<td style="text-align:left;">
-301-570-8574
-</td>
-<td style="text-align:left;">
-207R00000X
-</td>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-D0030414
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-HERRING
-</td>
-<td style="text-align:left;">
-E
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-05
-</td>
-<td style="text-align:left;">
-MEDICAID
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-367151800
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-10-11
-</td>
-<td style="text-align:left;">
-2007-07-08
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-18101 PRINCE PHILIP DR
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-OLNEY
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208321514
-</td>
-<td style="text-align:left;">
-301-774-8900
-</td>
-<td style="text-align:left;">
-301-570-8574
-</td>
-<td style="text-align:left;">
-207R00000X
-</td>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-D0030414
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-HERRING
-</td>
-<td style="text-align:left;">
-E
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-01
-</td>
-<td style="text-align:left;">
-Other (non-Medicare)
-</td>
-<td style="text-align:left;">
-Carefirst
-</td>
-<td style="text-align:left;">
-367151810
-</td>
-<td style="text-align:left;">
-NA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-10-11
-</td>
-<td style="text-align:left;">
-2007-07-08
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-18101 PRINCE PHILIP DR
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-OLNEY
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208321514
-</td>
-<td style="text-align:left;">
-301-774-8900
-</td>
-<td style="text-align:left;">
-301-570-8574
-</td>
-<td style="text-align:left;">
-207R00000X
-</td>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-D0030414
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-HERRING
-</td>
-<td style="text-align:left;">
-E
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-04
-</td>
-<td style="text-align:left;">
-MEDICARE ID-Type Unspecified
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-647145E14
-</td>
-<td style="text-align:left;">
-MD
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-10-11
-</td>
-<td style="text-align:left;">
-2007-07-08
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-18101 PRINCE PHILIP DR
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-OLNEY
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208321514
-</td>
-<td style="text-align:left;">
-301-774-8900
-</td>
-<td style="text-align:left;">
-301-570-8574
-</td>
-<td style="text-align:left;">
-207R00000X
-</td>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-D0030414
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
-</td>
-<td style="text-align:left;">
-JOHN
-</td>
-<td style="text-align:left;">
-HERRING
-</td>
-<td style="text-align:left;">
-E
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-NO
-</td>
-<td style="text-align:left;">
-M
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-–
-</td>
-<td style="text-align:left;">
-04
-</td>
-<td style="text-align:left;">
-MEDICARE ID-Type Unspecified
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-647145E14
-</td>
-<td style="text-align:left;">
-VA
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-NPI-1
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-1710975040
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-2005-10-11
-</td>
-<td style="text-align:left;">
-2007-07-08
-</td>
-<td style="text-align:left;">
-A
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-US
-</td>
-<td style="text-align:left;">
-United States
-</td>
-<td style="text-align:left;">
-LOCATION
-</td>
-<td style="text-align:left;">
-DOM
-</td>
-<td style="text-align:left;">
-18101 PRINCE PHILIP DR
-</td>
-<td style="text-align:left;">
-NA
-</td>
-<td style="text-align:left;">
-OLNEY
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-208321514
-</td>
-<td style="text-align:left;">
-301-774-8900
-</td>
-<td style="text-align:left;">
-301-570-8574
-</td>
-<td style="text-align:left;">
-207R00000X
-</td>
-<td style="text-align:left;">
-Internal Medicine
-</td>
-<td style="text-align:left;">
-MD
-</td>
-<td style="text-align:left;">
-D0030414
-</td>
-<td style="text-align:left;">
-TRUE
-</td>
-<td style="text-align:left;">
-Maryland
-</td>
-<td style="text-align:left;">
-South
-</td>
-<td style="text-align:left;">
-South Atlantic
 </td>
 <td style="text-align:left;">
 JOHN
@@ -5165,31 +2199,31 @@ NA
 </h4>
 <p>Several constraints have been implemented so as to not batter the NPPES API with invalid searches. The input must be 10 digits or the function will throw an error:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: NPIs must have 10 digits. Provided NPI has 9 digits.</span></span></code></pre></div>
 <p><br><br></p>
 <p>It also must be a valid NPI. The <code><a href="../reference/prov_npi_nppes.html">prov_npi_nppes()</a></code> function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>, as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a> (documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1234567891</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: Luhn Check: NPI may be invalid.</span></span></code></pre></div>
 <p><br><br></p>
 <p>Inputting letters will throw an error:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="va">abcdefghij</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in is.factor(x): object 'abcdefghij' not found</span></span></code></pre></div>
 <p><br><br></p>
 <p>The Luhn check will catch any letters wrapped in quotes:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="st">"abcdefghij"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: Luhn Check: NPI may be invalid.</span></span></code></pre></div>
 <p><br><br></p>
 <p>But will let quoted numbers through:</p>
 <p><br><br></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="st">"123456789"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: NPIs must have 10 digits. Provided NPI has 9 digits.</span></span></code></pre></div>
 <p>As long as they’re 10 digits long.</p>
@@ -5201,14 +2235,14 @@ NA
 </h2>
 <p>This section outlines the NPPES API’s documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.</p>
 <p><br><br></p>
-<div id="qqihfakgmv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lybphxxwif" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qqihfakgmv .gt_table {
+#lybphxxwif .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5233,7 +2267,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#qqihfakgmv .gt_heading {
+#lybphxxwif .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5245,7 +2279,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qqihfakgmv .gt_title {
+#lybphxxwif .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -5257,7 +2291,7 @@ html {
   border-bottom-width: 0;
 }
 
-#qqihfakgmv .gt_subtitle {
+#lybphxxwif .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5269,13 +2303,13 @@ html {
   border-top-width: 0;
 }
 
-#qqihfakgmv .gt_bottom_border {
+#lybphxxwif .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#qqihfakgmv .gt_col_headings {
+#lybphxxwif .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5290,7 +2324,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qqihfakgmv .gt_col_heading {
+#lybphxxwif .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5310,7 +2344,7 @@ html {
   overflow-x: hidden;
 }
 
-#qqihfakgmv .gt_column_spanner_outer {
+#lybphxxwif .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5322,15 +2356,15 @@ html {
   padding-right: 4px;
 }
 
-#qqihfakgmv .gt_column_spanner_outer:first-child {
+#lybphxxwif .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qqihfakgmv .gt_column_spanner_outer:last-child {
+#lybphxxwif .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qqihfakgmv .gt_column_spanner {
+#lybphxxwif .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -5342,7 +2376,7 @@ html {
   width: 100%;
 }
 
-#qqihfakgmv .gt_group_heading {
+#lybphxxwif .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5367,7 +2401,7 @@ html {
   vertical-align: middle;
 }
 
-#qqihfakgmv .gt_empty_group_heading {
+#lybphxxwif .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -5382,15 +2416,15 @@ html {
   vertical-align: middle;
 }
 
-#qqihfakgmv .gt_from_md > :first-child {
+#lybphxxwif .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qqihfakgmv .gt_from_md > :last-child {
+#lybphxxwif .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qqihfakgmv .gt_row {
+#lybphxxwif .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -5409,7 +2443,7 @@ html {
   overflow-x: hidden;
 }
 
-#qqihfakgmv .gt_stub {
+#lybphxxwif .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -5422,7 +2456,7 @@ html {
   padding-right: 5px;
 }
 
-#qqihfakgmv .gt_stub_row_group {
+#lybphxxwif .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -5436,11 +2470,11 @@ html {
   vertical-align: top;
 }
 
-#qqihfakgmv .gt_row_group_first td {
+#lybphxxwif .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qqihfakgmv .gt_summary_row {
+#lybphxxwif .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -5450,16 +2484,16 @@ html {
   padding-right: 5px;
 }
 
-#qqihfakgmv .gt_first_summary_row {
+#lybphxxwif .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#qqihfakgmv .gt_first_summary_row.thick {
+#lybphxxwif .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qqihfakgmv .gt_last_summary_row {
+#lybphxxwif .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5469,7 +2503,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#qqihfakgmv .gt_grand_summary_row {
+#lybphxxwif .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -5479,7 +2513,7 @@ html {
   padding-right: 5px;
 }
 
-#qqihfakgmv .gt_first_grand_summary_row {
+#lybphxxwif .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5489,11 +2523,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#qqihfakgmv .gt_striped {
+#lybphxxwif .gt_striped {
   background-color: #FEEDEC;
 }
 
-#qqihfakgmv .gt_table_body {
+#lybphxxwif .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5502,7 +2536,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#qqihfakgmv .gt_footnotes {
+#lybphxxwif .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5516,7 +2550,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qqihfakgmv .gt_footnote {
+#lybphxxwif .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5525,7 +2559,7 @@ html {
   padding-right: 5px;
 }
 
-#qqihfakgmv .gt_sourcenotes {
+#lybphxxwif .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5539,7 +2573,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qqihfakgmv .gt_sourcenote {
+#lybphxxwif .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5547,64 +2581,64 @@ html {
   padding-right: 5px;
 }
 
-#qqihfakgmv .gt_left {
+#lybphxxwif .gt_left {
   text-align: left;
 }
 
-#qqihfakgmv .gt_center {
+#lybphxxwif .gt_center {
   text-align: center;
 }
 
-#qqihfakgmv .gt_right {
+#lybphxxwif .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qqihfakgmv .gt_font_normal {
+#lybphxxwif .gt_font_normal {
   font-weight: normal;
 }
 
-#qqihfakgmv .gt_font_bold {
+#lybphxxwif .gt_font_bold {
   font-weight: bold;
 }
 
-#qqihfakgmv .gt_font_italic {
+#lybphxxwif .gt_font_italic {
   font-style: italic;
 }
 
-#qqihfakgmv .gt_super {
+#lybphxxwif .gt_super {
   font-size: 65%;
 }
 
-#qqihfakgmv .gt_footnote_marks {
+#lybphxxwif .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#qqihfakgmv .gt_asterisk {
+#lybphxxwif .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qqihfakgmv .gt_indent_1 {
+#lybphxxwif .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qqihfakgmv .gt_indent_2 {
+#lybphxxwif .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qqihfakgmv .gt_indent_3 {
+#lybphxxwif .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qqihfakgmv .gt_indent_4 {
+#lybphxxwif .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qqihfakgmv .gt_indent_5 {
+#lybphxxwif .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -5809,14 +2843,14 @@ html {
 </table>
 </div>
 <p><br><br></p>
-<div id="ltwhvekqub" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pynzalrqqa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ltwhvekqub .gt_table {
+#pynzalrqqa .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -5841,7 +2875,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#ltwhvekqub .gt_heading {
+#pynzalrqqa .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -5853,7 +2887,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ltwhvekqub .gt_title {
+#pynzalrqqa .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -5865,7 +2899,7 @@ html {
   border-bottom-width: 0;
 }
 
-#ltwhvekqub .gt_subtitle {
+#pynzalrqqa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -5877,13 +2911,13 @@ html {
   border-top-width: 0;
 }
 
-#ltwhvekqub .gt_bottom_border {
+#pynzalrqqa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#ltwhvekqub .gt_col_headings {
+#pynzalrqqa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -5898,7 +2932,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ltwhvekqub .gt_col_heading {
+#pynzalrqqa .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5918,7 +2952,7 @@ html {
   overflow-x: hidden;
 }
 
-#ltwhvekqub .gt_column_spanner_outer {
+#pynzalrqqa .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -5930,15 +2964,15 @@ html {
   padding-right: 4px;
 }
 
-#ltwhvekqub .gt_column_spanner_outer:first-child {
+#pynzalrqqa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ltwhvekqub .gt_column_spanner_outer:last-child {
+#pynzalrqqa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ltwhvekqub .gt_column_spanner {
+#pynzalrqqa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -5950,7 +2984,7 @@ html {
   width: 100%;
 }
 
-#ltwhvekqub .gt_group_heading {
+#pynzalrqqa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -5975,7 +3009,7 @@ html {
   vertical-align: middle;
 }
 
-#ltwhvekqub .gt_empty_group_heading {
+#pynzalrqqa .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #FF0000;
@@ -5990,15 +3024,15 @@ html {
   vertical-align: middle;
 }
 
-#ltwhvekqub .gt_from_md > :first-child {
+#pynzalrqqa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ltwhvekqub .gt_from_md > :last-child {
+#pynzalrqqa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ltwhvekqub .gt_row {
+#pynzalrqqa .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -6017,7 +3051,7 @@ html {
   overflow-x: hidden;
 }
 
-#ltwhvekqub .gt_stub {
+#pynzalrqqa .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -6030,7 +3064,7 @@ html {
   padding-right: 5px;
 }
 
-#ltwhvekqub .gt_stub_row_group {
+#pynzalrqqa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -6044,11 +3078,11 @@ html {
   vertical-align: top;
 }
 
-#ltwhvekqub .gt_row_group_first td {
+#pynzalrqqa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ltwhvekqub .gt_summary_row {
+#pynzalrqqa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -6058,16 +3092,16 @@ html {
   padding-right: 5px;
 }
 
-#ltwhvekqub .gt_first_summary_row {
+#pynzalrqqa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#ltwhvekqub .gt_first_summary_row.thick {
+#pynzalrqqa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ltwhvekqub .gt_last_summary_row {
+#pynzalrqqa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6077,7 +3111,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#ltwhvekqub .gt_grand_summary_row {
+#pynzalrqqa .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -6087,7 +3121,7 @@ html {
   padding-right: 5px;
 }
 
-#ltwhvekqub .gt_first_grand_summary_row {
+#pynzalrqqa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -6097,11 +3131,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#ltwhvekqub .gt_striped {
+#pynzalrqqa .gt_striped {
   background-color: #FEEDEC;
 }
 
-#ltwhvekqub .gt_table_body {
+#pynzalrqqa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -6110,7 +3144,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#ltwhvekqub .gt_footnotes {
+#pynzalrqqa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6124,7 +3158,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ltwhvekqub .gt_footnote {
+#pynzalrqqa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -6133,7 +3167,7 @@ html {
   padding-right: 5px;
 }
 
-#ltwhvekqub .gt_sourcenotes {
+#pynzalrqqa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -6147,7 +3181,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ltwhvekqub .gt_sourcenote {
+#pynzalrqqa .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -6155,64 +3189,64 @@ html {
   padding-right: 5px;
 }
 
-#ltwhvekqub .gt_left {
+#pynzalrqqa .gt_left {
   text-align: left;
 }
 
-#ltwhvekqub .gt_center {
+#pynzalrqqa .gt_center {
   text-align: center;
 }
 
-#ltwhvekqub .gt_right {
+#pynzalrqqa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ltwhvekqub .gt_font_normal {
+#pynzalrqqa .gt_font_normal {
   font-weight: normal;
 }
 
-#ltwhvekqub .gt_font_bold {
+#pynzalrqqa .gt_font_bold {
   font-weight: bold;
 }
 
-#ltwhvekqub .gt_font_italic {
+#pynzalrqqa .gt_font_italic {
   font-style: italic;
 }
 
-#ltwhvekqub .gt_super {
+#pynzalrqqa .gt_super {
   font-size: 65%;
 }
 
-#ltwhvekqub .gt_footnote_marks {
+#pynzalrqqa .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ltwhvekqub .gt_asterisk {
+#pynzalrqqa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ltwhvekqub .gt_indent_1 {
+#pynzalrqqa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ltwhvekqub .gt_indent_2 {
+#pynzalrqqa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ltwhvekqub .gt_indent_3 {
+#pynzalrqqa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ltwhvekqub .gt_indent_4 {
+#pynzalrqqa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ltwhvekqub .gt_indent_5 {
+#pynzalrqqa .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -6611,13 +3645,11 @@ html {
 <div class="section level3">
 <h3 id="terminology-notes">Terminology Notes<a class="anchor" aria-label="anchor" href="#terminology-notes"></a>
 </h3>
+<p><br><br></p>
 <div class="section level4">
 <h4 id="enumeration-type">Enumeration Type<a class="anchor" aria-label="anchor" href="#enumeration-type"></a>
 </h4>
-<p>Two categories of health care providers exist for NPI enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity <em>Type 2</em> (Organizational).</p>
-<div class="section level5">
-<h5 id="npi-1-individual">NPI-1: Individual<a class="anchor" aria-label="anchor" href="#npi-1-individual"></a>
-</h5>
+<p><br> Two categories of health care providers exist for NPI enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity <em>Type 2</em> (Organizational). <br> #### NPI-1: Individual</p>
 <p>Individual health care providers (including sole proprietors) may get an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.</p>
 <p>The following factors <strong>do not</strong> affect whether a sole proprietor is an Entity Type 1:</p>
 <ul>
@@ -6625,14 +3657,17 @@ html {
 <li>Whether they have employees</li>
 <li>Whether the IRS issued them an EIN.</li>
 </ul>
-<p><br></p>
 <blockquote>
-<p>An <strong>incorporated individual</strong> is a single health care provider who forms and conducts business under a corporation. A sole proprietor <strong>is not</strong> an incorporated individual because the sole proprietor didn’t form a corporation. If you’re a sole/solo practitioner, it doesn’t necessarily mean you’re a sole proprietor, and vice versa. If you’re an individual health care provider who’s incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2). #### NPI-2: Organizational</p>
+<p>An <strong>incorporated individual</strong> is a single health care provider who forms and conducts business under a corporation. A sole proprietor <strong>is not</strong> an incorporated individual because the sole proprietor didn’t form a corporation. If you’re a sole/solo practitioner, it doesn’t necessarily mean you’re a sole proprietor, and vice versa. If you’re an individual health care provider who’s incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).</p>
 </blockquote>
+<p><br></p>
+<div class="section level5">
+<h5 id="npi-2-organizational">NPI-2: Organizational<a class="anchor" aria-label="anchor" href="#npi-2-organizational"></a>
+</h5>
+<p><br></p>
 <p>Organization health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization’s only employee.</p>
 <p>Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren’t themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.</p>
 <p>An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.</p>
-<p><br></p>
 <blockquote>
 <p>Subpart delegation doesn’t affect Entity Type 1 health care providers. As individuals, these health care providers can’t choose subparts and are not subparts.</p>
 </blockquote>

@@ -120,7 +120,10 @@
 <p>You can install the development version of <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -139,7 +142,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 4</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1528060837 2022-09-01 05:44:35 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1528060837 2022-09-08 02:52:15 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
 <p><br></p>
 <p><code>data_lists</code> is a nested list-column. You can access the inner lists using the <code>$</code> operator, but we can get a better sense of the hierarchical structure of these list columns using lobstr’s <code>tree()</code> function:</p>
 <p><br></p>
@@ -176,26 +179,19 @@
 <p><br></p>
 <table class="table">
 <colgroup>
-<col width="3%">
-<col width="4%">
-<col width="4%">
-<col width="3%">
-<col width="4%">
-<col width="2%">
 <col width="5%">
-<col width="7%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
 <col width="3%">
-<col width="3%">
-<col width="4%">
-<col width="6%">
-<col width="3%">
-<col width="4%">
-<col width="4%">
-<col width="6%">
 <col width="5%">
 <col width="10%">
-<col width="8%">
-<col width="4%">
+<col width="9%">
+<col width="7%">
+<col width="14%">
+<col width="11%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">prov_type</th>
@@ -204,15 +200,8 @@
 <th align="left">last_name</th>
 <th align="left">credential</th>
 <th align="left">gender</th>
-<th align="left">address_purpose</th>
-<th align="left">address_1</th>
-<th align="left">city</th>
-<th align="left">state_abb</th>
-<th align="left">postal_code</th>
-<th align="left">telephone_number</th>
-<th align="left">address_2</th>
-<th align="left">fax_number</th>
 <th align="left">taxon_code</th>
+<th align="left">taxon_taxonomy_group</th>
 <th align="left">taxon_desc</th>
 <th align="left">taxon_license</th>
 <th align="left">ident_desc</th>
@@ -227,15 +216,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -249,15 +231,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -271,15 +246,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -293,15 +261,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -315,15 +276,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -337,15 +291,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -359,15 +306,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">MEDICARE ID-Type Unspecified</td>
@@ -381,15 +321,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
@@ -403,15 +336,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">MEDICARE UPIN</td>
@@ -425,15 +351,8 @@
 <td align="left">SARGEANT</td>
 <td align="left">PT</td>
 <td align="left">M</td>
-<td align="left">MAILING</td>
-<td align="left">1939 OLD ANNAPOLIS RD</td>
-<td align="left">WOODBINE</td>
-<td align="left">MD</td>
-<td align="left">217978201</td>
-<td align="left">301-854-6748</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
 <td align="left">225100000X</td>
+<td align="left"></td>
 <td align="left">Physical Therapist</td>
 <td align="left">14262</td>
 <td align="left">Other (non-Medicare)</td>
