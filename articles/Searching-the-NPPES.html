@@ -146,7 +146,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-08 <span style="color: #949494;">07:32:34</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-08 <span style="color: #949494;">12:48:24</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
 <p><br></p>
@@ -301,10 +301,10 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-08 <span style="color: #949494;">07:32:36</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-08 <span style="color: #949494;">07:32:38</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-08 <span style="color: #949494;">07:32:40</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-08 <span style="color: #949494;">07:32:42</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-08 <span style="color: #949494;">12:48:27</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-08 <span style="color: #949494;">12:48:30</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-08 <span style="color: #949494;">12:48:32</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-08 <span style="color: #949494;">12:48:34</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
@@ -2233,16 +2233,17 @@ NA
 <div class="section level2">
 <h2 id="api-documentation-overview">API Documentation Overview<a class="anchor" aria-label="anchor" href="#api-documentation-overview"></a>
 </h2>
+<p><br></p>
 <p>This section outlines the NPPES API’s documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.</p>
-<p><br><br></p>
-<div id="lybphxxwif" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<p><br></p>
+<div id="sjdznyktuj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lybphxxwif .gt_table {
+#sjdznyktuj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2267,7 +2268,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#lybphxxwif .gt_heading {
+#sjdznyktuj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2279,7 +2280,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lybphxxwif .gt_title {
+#sjdznyktuj .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -2291,7 +2292,7 @@ html {
   border-bottom-width: 0;
 }
 
-#lybphxxwif .gt_subtitle {
+#sjdznyktuj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2303,13 +2304,13 @@ html {
   border-top-width: 0;
 }
 
-#lybphxxwif .gt_bottom_border {
+#sjdznyktuj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#lybphxxwif .gt_col_headings {
+#sjdznyktuj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2324,7 +2325,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lybphxxwif .gt_col_heading {
+#sjdznyktuj .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2344,7 +2345,7 @@ html {
   overflow-x: hidden;
 }
 
-#lybphxxwif .gt_column_spanner_outer {
+#sjdznyktuj .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2356,15 +2357,15 @@ html {
   padding-right: 4px;
 }
 
-#lybphxxwif .gt_column_spanner_outer:first-child {
+#sjdznyktuj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lybphxxwif .gt_column_spanner_outer:last-child {
+#sjdznyktuj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lybphxxwif .gt_column_spanner {
+#sjdznyktuj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2376,7 +2377,7 @@ html {
   width: 100%;
 }
 
-#lybphxxwif .gt_group_heading {
+#sjdznyktuj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2401,7 +2402,7 @@ html {
   vertical-align: middle;
 }
 
-#lybphxxwif .gt_empty_group_heading {
+#sjdznyktuj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2416,15 +2417,15 @@ html {
   vertical-align: middle;
 }
 
-#lybphxxwif .gt_from_md > :first-child {
+#sjdznyktuj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lybphxxwif .gt_from_md > :last-child {
+#sjdznyktuj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lybphxxwif .gt_row {
+#sjdznyktuj .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2443,7 +2444,7 @@ html {
   overflow-x: hidden;
 }
 
-#lybphxxwif .gt_stub {
+#sjdznyktuj .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -2456,7 +2457,7 @@ html {
   padding-right: 5px;
 }
 
-#lybphxxwif .gt_stub_row_group {
+#sjdznyktuj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2470,11 +2471,11 @@ html {
   vertical-align: top;
 }
 
-#lybphxxwif .gt_row_group_first td {
+#sjdznyktuj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lybphxxwif .gt_summary_row {
+#sjdznyktuj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2484,16 +2485,16 @@ html {
   padding-right: 5px;
 }
 
-#lybphxxwif .gt_first_summary_row {
+#sjdznyktuj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#lybphxxwif .gt_first_summary_row.thick {
+#sjdznyktuj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lybphxxwif .gt_last_summary_row {
+#sjdznyktuj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2503,7 +2504,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#lybphxxwif .gt_grand_summary_row {
+#sjdznyktuj .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -2513,7 +2514,7 @@ html {
   padding-right: 5px;
 }
 
-#lybphxxwif .gt_first_grand_summary_row {
+#sjdznyktuj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2523,11 +2524,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#lybphxxwif .gt_striped {
+#sjdznyktuj .gt_striped {
   background-color: #FEEDEC;
 }
 
-#lybphxxwif .gt_table_body {
+#sjdznyktuj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2536,7 +2537,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#lybphxxwif .gt_footnotes {
+#sjdznyktuj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2550,7 +2551,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lybphxxwif .gt_footnote {
+#sjdznyktuj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2559,7 +2560,7 @@ html {
   padding-right: 5px;
 }
 
-#lybphxxwif .gt_sourcenotes {
+#sjdznyktuj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2573,7 +2574,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lybphxxwif .gt_sourcenote {
+#sjdznyktuj .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2581,64 +2582,64 @@ html {
   padding-right: 5px;
 }
 
-#lybphxxwif .gt_left {
+#sjdznyktuj .gt_left {
   text-align: left;
 }
 
-#lybphxxwif .gt_center {
+#sjdznyktuj .gt_center {
   text-align: center;
 }
 
-#lybphxxwif .gt_right {
+#sjdznyktuj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lybphxxwif .gt_font_normal {
+#sjdznyktuj .gt_font_normal {
   font-weight: normal;
 }
 
-#lybphxxwif .gt_font_bold {
+#sjdznyktuj .gt_font_bold {
   font-weight: bold;
 }
 
-#lybphxxwif .gt_font_italic {
+#sjdznyktuj .gt_font_italic {
   font-style: italic;
 }
 
-#lybphxxwif .gt_super {
+#sjdznyktuj .gt_super {
   font-size: 65%;
 }
 
-#lybphxxwif .gt_footnote_marks {
+#sjdznyktuj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lybphxxwif .gt_asterisk {
+#sjdznyktuj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lybphxxwif .gt_indent_1 {
+#sjdznyktuj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lybphxxwif .gt_indent_2 {
+#sjdznyktuj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lybphxxwif .gt_indent_3 {
+#sjdznyktuj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lybphxxwif .gt_indent_4 {
+#sjdznyktuj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lybphxxwif .gt_indent_5 {
+#sjdznyktuj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2843,14 +2844,14 @@ html {
 </table>
 </div>
 <p><br><br></p>
-<div id="pynzalrqqa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zjmzzkmjoj" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#pynzalrqqa .gt_table {
+#zjmzzkmjoj .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2875,7 +2876,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#pynzalrqqa .gt_heading {
+#zjmzzkmjoj .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2887,7 +2888,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pynzalrqqa .gt_title {
+#zjmzzkmjoj .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -2899,7 +2900,7 @@ html {
   border-bottom-width: 0;
 }
 
-#pynzalrqqa .gt_subtitle {
+#zjmzzkmjoj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2911,13 +2912,13 @@ html {
   border-top-width: 0;
 }
 
-#pynzalrqqa .gt_bottom_border {
+#zjmzzkmjoj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#pynzalrqqa .gt_col_headings {
+#zjmzzkmjoj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2932,7 +2933,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pynzalrqqa .gt_col_heading {
+#zjmzzkmjoj .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2952,7 +2953,7 @@ html {
   overflow-x: hidden;
 }
 
-#pynzalrqqa .gt_column_spanner_outer {
+#zjmzzkmjoj .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2964,15 +2965,15 @@ html {
   padding-right: 4px;
 }
 
-#pynzalrqqa .gt_column_spanner_outer:first-child {
+#zjmzzkmjoj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pynzalrqqa .gt_column_spanner_outer:last-child {
+#zjmzzkmjoj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pynzalrqqa .gt_column_spanner {
+#zjmzzkmjoj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2984,7 +2985,7 @@ html {
   width: 100%;
 }
 
-#pynzalrqqa .gt_group_heading {
+#zjmzzkmjoj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3009,7 +3010,7 @@ html {
   vertical-align: middle;
 }
 
-#pynzalrqqa .gt_empty_group_heading {
+#zjmzzkmjoj .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #FF0000;
@@ -3024,15 +3025,15 @@ html {
   vertical-align: middle;
 }
 
-#pynzalrqqa .gt_from_md > :first-child {
+#zjmzzkmjoj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pynzalrqqa .gt_from_md > :last-child {
+#zjmzzkmjoj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pynzalrqqa .gt_row {
+#zjmzzkmjoj .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -3051,7 +3052,7 @@ html {
   overflow-x: hidden;
 }
 
-#pynzalrqqa .gt_stub {
+#zjmzzkmjoj .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -3064,7 +3065,7 @@ html {
   padding-right: 5px;
 }
 
-#pynzalrqqa .gt_stub_row_group {
+#zjmzzkmjoj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3078,11 +3079,11 @@ html {
   vertical-align: top;
 }
 
-#pynzalrqqa .gt_row_group_first td {
+#zjmzzkmjoj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pynzalrqqa .gt_summary_row {
+#zjmzzkmjoj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3092,16 +3093,16 @@ html {
   padding-right: 5px;
 }
 
-#pynzalrqqa .gt_first_summary_row {
+#zjmzzkmjoj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#pynzalrqqa .gt_first_summary_row.thick {
+#zjmzzkmjoj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pynzalrqqa .gt_last_summary_row {
+#zjmzzkmjoj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3111,7 +3112,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#pynzalrqqa .gt_grand_summary_row {
+#zjmzzkmjoj .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -3121,7 +3122,7 @@ html {
   padding-right: 5px;
 }
 
-#pynzalrqqa .gt_first_grand_summary_row {
+#zjmzzkmjoj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3131,11 +3132,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#pynzalrqqa .gt_striped {
+#zjmzzkmjoj .gt_striped {
   background-color: #FEEDEC;
 }
 
-#pynzalrqqa .gt_table_body {
+#zjmzzkmjoj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -3144,7 +3145,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#pynzalrqqa .gt_footnotes {
+#zjmzzkmjoj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3158,7 +3159,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pynzalrqqa .gt_footnote {
+#zjmzzkmjoj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3167,7 +3168,7 @@ html {
   padding-right: 5px;
 }
 
-#pynzalrqqa .gt_sourcenotes {
+#zjmzzkmjoj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3181,7 +3182,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pynzalrqqa .gt_sourcenote {
+#zjmzzkmjoj .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3189,64 +3190,64 @@ html {
   padding-right: 5px;
 }
 
-#pynzalrqqa .gt_left {
+#zjmzzkmjoj .gt_left {
   text-align: left;
 }
 
-#pynzalrqqa .gt_center {
+#zjmzzkmjoj .gt_center {
   text-align: center;
 }
 
-#pynzalrqqa .gt_right {
+#zjmzzkmjoj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pynzalrqqa .gt_font_normal {
+#zjmzzkmjoj .gt_font_normal {
   font-weight: normal;
 }
 
-#pynzalrqqa .gt_font_bold {
+#zjmzzkmjoj .gt_font_bold {
   font-weight: bold;
 }
 
-#pynzalrqqa .gt_font_italic {
+#zjmzzkmjoj .gt_font_italic {
   font-style: italic;
 }
 
-#pynzalrqqa .gt_super {
+#zjmzzkmjoj .gt_super {
   font-size: 65%;
 }
 
-#pynzalrqqa .gt_footnote_marks {
+#zjmzzkmjoj .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#pynzalrqqa .gt_asterisk {
+#zjmzzkmjoj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pynzalrqqa .gt_indent_1 {
+#zjmzzkmjoj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pynzalrqqa .gt_indent_2 {
+#zjmzzkmjoj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pynzalrqqa .gt_indent_3 {
+#zjmzzkmjoj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pynzalrqqa .gt_indent_4 {
+#zjmzzkmjoj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pynzalrqqa .gt_indent_5 {
+#zjmzzkmjoj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3649,7 +3650,10 @@ html {
 <div class="section level4">
 <h4 id="enumeration-type">Enumeration Type<a class="anchor" aria-label="anchor" href="#enumeration-type"></a>
 </h4>
-<p><br> Two categories of health care providers exist for NPI enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity <em>Type 2</em> (Organizational). <br> #### NPI-1: Individual</p>
+<p><br> Two categories of health care providers exist for NPI enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity <em>Type 2</em> (Organizational). <br></p>
+<div class="section level5">
+<h5 id="npi-1-individual">NPI-1: Individual<a class="anchor" aria-label="anchor" href="#npi-1-individual"></a>
+</h5>
 <p>Individual health care providers (including sole proprietors) may get an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.</p>
 <p>The following factors <strong>do not</strong> affect whether a sole proprietor is an Entity Type 1:</p>
 <ul>
@@ -3661,16 +3665,25 @@ html {
 <p>An <strong>incorporated individual</strong> is a single health care provider who forms and conducts business under a corporation. A sole proprietor <strong>is not</strong> an incorporated individual because the sole proprietor didn’t form a corporation. If you’re a sole/solo practitioner, it doesn’t necessarily mean you’re a sole proprietor, and vice versa. If you’re an individual health care provider who’s incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).</p>
 </blockquote>
 <p><br></p>
+</div>
 <div class="section level5">
 <h5 id="npi-2-organizational">NPI-2: Organizational<a class="anchor" aria-label="anchor" href="#npi-2-organizational"></a>
 </h5>
 <p><br></p>
-<p>Organization health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization’s only employee.</p>
+<p>Organizational health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization’s only employee.</p>
 <p>Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren’t themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.</p>
 <p>An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.</p>
 <blockquote>
 <p>Subpart delegation doesn’t affect Entity Type 1 health care providers. As individuals, these health care providers can’t choose subparts and are not subparts.</p>
 </blockquote>
+<p><br></p>
+</div>
+<div class="section level5">
+<h5 id="authorized-official">Authorized Official<a class="anchor" aria-label="anchor" href="#authorized-official"></a>
+</h5>
+<p><br></p>
+<p>An appointed official (e.g., chief executive officer, chief financial officer, general partner, chairman of the board, or direct owner) to whom the organization has granted the legal authority to enroll it in the Medicare program, to make changes or updates to the organization’s status in the Medicare program, and to commit the organization to fully abide by the statutes, regulations, and program instructions of the Medicare program. See 42 CFR 424.502 for additional information.</p>
+<p><br></p>
 </div>
 </div>
 </div>

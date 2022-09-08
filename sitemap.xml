@@ -49,6 +49,12 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_ordref.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_phys_pract.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_reval_date.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_taxcross.html</loc>
   </url>
   <url>
@@ -56,6 +62,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_npi_nppes.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_missing.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_unpack.html</loc>

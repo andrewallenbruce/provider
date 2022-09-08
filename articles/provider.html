@@ -127,9 +127,10 @@
 <p>I’ll create the example list and data frame I’ll be using in the examples for each API.</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>, <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Example list</span></span>
+<span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>, <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span></span>
 <span></span>
-<span></span>
+<span><span class="co"># Example data frame</span></span>
 <span><span class="va">npi_data.frame</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, </span>
 <span>          <span class="fl">1316405939</span>, </span>
@@ -141,6 +142,10 @@
 <div class="section level2">
 <h2 id="nppes-npi-public-registry-api">NPPES NPI Public Registry API<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry-api"></a>
 </h2>
+<p>The NPPES NPI Registry Public Search is a free directory of all active National Provider Identifier (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry. The NPPES Application Programming Interface (API) is a faster alternative to the downloadable NPPES data files. It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The Skip field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.</p>
+<ul>
+<li><a href="https://npiregistry.cms.hhs.gov/search" class="external-link">U.S. NPPES National Provider Identifier (NPI) Registry API</a></li>
+</ul>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3707,10 +3712,10 @@ NA
 <p><br><br></p>
 </div>
 <div class="section level2">
-<h2 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
+<h2 id="medicare-fee-for-service-ffs-provider-enrollment-api">Medicare Fee-For-Service (FFS) Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-ffs-provider-enrollment-api"></a>
 </h2>
 <p><br></p>
-<p>The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the Provider Enrollment and Chain Ownership System (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.</p>
+<p>The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the <a href="https://pecos.cms.hhs.gov" class="external-link">Provider Enrollment and Chain Ownership System</a> (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.</p>
 <p><br></p>
 <ul>
 <li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Fee-For-Service Public Provider Enrollment API</a></li>
@@ -4632,11 +4637,11 @@ Y
 <div class="section level2">
 <h2 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
 </h2>
-<p><br></p>
+<p><br> The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS). <br></p>
 <ul>
 <li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare Provider and Supplier Taxonomy Crosswalk</a></li>
 </ul>
-<p><br> The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS). <br></p>
+<p><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_taxcross.html">prov_mcr_taxcross</a></span><span class="op">(</span><span class="st">"2086S0102X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -4845,10 +4850,7758 @@ Allopathic &amp; Osteopathic Physicians/Orthopedic Surgery
 <p><br><br></p>
 </div>
 <div class="section level2">
+<h2 id="medicare-revalidation-due-date-list-api">Medicare Revalidation Due Date List API<a class="anchor" aria-label="anchor" href="#medicare-revalidation-due-date-list-api"></a>
+</h2>
+<p><br></p>
+<p>Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet. These lists are refreshed every two months and two months’ worth of due dates are appended to the list.</p>
+<p><br></p>
+<p>The Revalidation Due Date List dataset contains revalidation due dates for Medicare providers who are due to revalidate in the following six months. If a provider’s due date does not fall within the ensuing six months, the due date is marked ‘TBD’. In addition the dataset also includes subfiles with reassignment information for a given provider as well as due date listings for clinics and group practices and their providers. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).</p>
+<p><br></p>
+<ul>
+<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date API</a></li>
+<li><a href="https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary" class="external-link">Medicare Revalidation Due Date - Data Dictionary</a></li>
+</ul>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_reval_date.html">prov_mcr_reval_date</a></span><span class="op">(</span><span class="fl">1184699621</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+Enrollment ID
+</th>
+<th style="text-align:left;">
+National Provider Identifier
+</th>
+<th style="text-align:left;">
+First Name
+</th>
+<th style="text-align:left;">
+Last Name
+</th>
+<th style="text-align:left;">
+Organization Name
+</th>
+<th style="text-align:left;">
+Enrollment State Code
+</th>
+<th style="text-align:left;">
+Enrollment Type
+</th>
+<th style="text-align:left;">
+Provider Type Text
+</th>
+<th style="text-align:left;">
+Enrollment Specialty
+</th>
+<th style="text-align:left;">
+Revalidation Due Date
+</th>
+<th style="text-align:left;">
+Adjusted Due Date
+</th>
+<th style="text-align:left;">
+Individual Total Reassign To
+</th>
+<th style="text-align:left;">
+Receiving Benefits Reassignment
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+I20031110000070
+</td>
+<td style="text-align:left;">
+1184699621
+</td>
+<td style="text-align:left;">
+Eric
+</td>
+<td style="text-align:left;">
+Byrd
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+NC
+</td>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:left;">
+Non-DME Part B
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2022-11-30
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+2
+</td>
+</tr></tbody>
+</table>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="cms-public-reporting-of-missing-digital-contact-information-api">CMS Public Reporting of Missing Digital Contact Information API<a class="anchor" aria-label="anchor" href="#cms-public-reporting-of-missing-digital-contact-information-api"></a>
+</h2>
+<p><br></p>
+<p>In the May 2020 CMS Interoperability and Patient Access final rule, CMS finalized the policy to publicly report the names and NPIs of those providers who do not have digital contact information included in the NPPES system (85 FR 25584). This data includes the NPI and provider name of providers and clinicians without digital contact information in NPPES. This data is gathered from NPPES for providers who are missing digital contact information.</p>
+<p><br></p>
+<ul>
+<li><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS Public Reporting of Missing Digital Contact Information API</a></li>
+</ul>
+<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_nppes_missing.html">prov_nppes_missing</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr>
+<th style="text-align:left;">
+NPI
+</th>
+<th style="text-align:left;">
+Provider Name
+</th>
+</tr></thead>
+<tbody><tr>
+<td style="text-align:left;">
+1760485387
+</td>
+<td style="text-align:left;">
+Dewey,Paul
+</td>
+</tr></tbody>
+</table>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="medicare-physician-other-practitioners---by-provider-and-service-api">Medicare Physician &amp; Other Practitioners - by Provider and Service API<a class="anchor" aria-label="anchor" href="#medicare-physician-other-practitioners---by-provider-and-service-api"></a>
+</h2>
+<p><br></p>
+<ul>
+<li><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners - by Provider and Service API</a></li>
+</ul>
+<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care on day of discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+406.17391304
+</td>
+<td style="text-align:left;">
+76.803913043
+</td>
+<td style="text-align:left;">
+61.40173913
+</td>
+<td style="text-align:left;">
+58.003913043
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99218
+</td>
+<td style="text-align:left;">
+Hospital observation care, typically 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+811.8125
+</td>
+<td style="text-align:left;">
+108.249375
+</td>
+<td style="text-align:left;">
+85.08125
+</td>
+<td style="text-align:left;">
+78.315
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99220
+</td>
+<td style="text-align:left;">
+Hospital observation care, typically 70 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+1150.9375
+</td>
+<td style="text-align:left;">
+191.960625
+</td>
+<td style="text-align:left;">
+152.376875
+</td>
+<td style="text-align:left;">
+146.60875
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:left;">
+681.66666667
+</td>
+<td style="text-align:left;">
+110.0475
+</td>
+<td style="text-align:left;">
+82.2375
+</td>
+<td style="text-align:left;">
+76.396666667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+52
+</td>
+<td style="text-align:left;">
+52
+</td>
+<td style="text-align:left;">
+52
+</td>
+<td style="text-align:left;">
+1108.3846154
+</td>
+<td style="text-align:left;">
+209.42384615
+</td>
+<td style="text-align:left;">
+170.83461538
+</td>
+<td style="text-align:left;">
+164.65942308
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+57
+</td>
+<td style="text-align:left;">
+134
+</td>
+<td style="text-align:left;">
+134
+</td>
+<td style="text-align:left;">
+251.32835821
+</td>
+<td style="text-align:left;">
+73.454701493
+</td>
+<td style="text-align:left;">
+57.955820896
+</td>
+<td style="text-align:left;">
+56.980671642
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+154
+</td>
+<td style="text-align:left;">
+326
+</td>
+<td style="text-align:left;">
+326
+</td>
+<td style="text-align:left;">
+513.21165644
+</td>
+<td style="text-align:left;">
+108.84687117
+</td>
+<td style="text-align:left;">
+88.945889571
+</td>
+<td style="text-align:left;">
+84.911871166
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+268.46153846
+</td>
+<td style="text-align:left;">
+74.157692308
+</td>
+<td style="text-align:left;">
+60.533076923
+</td>
+<td style="text-align:left;">
+59.410769231
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+6410 Rockledge Dr Ste 304
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Bethesda
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+20817
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+145
+</td>
+<td style="text-align:left;">
+146
+</td>
+<td style="text-align:left;">
+146
+</td>
+<td style="text-align:left;">
+491.86986301
+</td>
+<td style="text-align:left;">
+111.25979452
+</td>
+<td style="text-align:left;">
+90.923835616
+</td>
+<td style="text-align:left;">
+87.205684932
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care on day of discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+232.275
+</td>
+<td style="text-align:left;">
+72.59
+</td>
+<td style="text-align:left;">
+57.87
+</td>
+<td style="text-align:left;">
+58.19175
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99220
+</td>
+<td style="text-align:left;">
+Hospital observation care, typically 70 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+712.8
+</td>
+<td style="text-align:left;">
+186.7252
+</td>
+<td style="text-align:left;">
+148.8516
+</td>
+<td style="text-align:left;">
+147.77
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+320.16666667
+</td>
+<td style="text-align:left;">
+101.12125
+</td>
+<td style="text-align:left;">
+80.615833333
+</td>
+<td style="text-align:left;">
+80.81
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+157
+</td>
+<td style="text-align:left;">
+158
+</td>
+<td style="text-align:left;">
+158
+</td>
+<td style="text-align:left;">
+651.41772152
+</td>
+<td style="text-align:left;">
+200.93
+</td>
+<td style="text-align:left;">
+160.19
+</td>
+<td style="text-align:left;">
+161.06
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+117
+</td>
+<td style="text-align:left;">
+205
+</td>
+<td style="text-align:left;">
+205
+</td>
+<td style="text-align:left;">
+245.61463415
+</td>
+<td style="text-align:left;">
+72.756390244
+</td>
+<td style="text-align:left;">
+58.005560976
+</td>
+<td style="text-align:left;">
+57.93
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+306
+</td>
+<td style="text-align:left;">
+605
+</td>
+<td style="text-align:left;">
+605
+</td>
+<td style="text-align:left;">
+345.23636364
+</td>
+<td style="text-align:left;">
+103.58819835
+</td>
+<td style="text-align:left;">
+82.588165289
+</td>
+<td style="text-align:left;">
+82.81922314
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+39
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+40
+</td>
+<td style="text-align:left;">
+229.475
+</td>
+<td style="text-align:left;">
+72.59
+</td>
+<td style="text-align:left;">
+57.87
+</td>
+<td style="text-align:left;">
+58.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+240
+</td>
+<td style="text-align:left;">
+243
+</td>
+<td style="text-align:left;">
+243
+</td>
+<td style="text-align:left;">
+349.25925926
+</td>
+<td style="text-align:left;">
+106.54308642
+</td>
+<td style="text-align:left;">
+84.969917695
+</td>
+<td style="text-align:left;">
+85.415925926
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+27
+</td>
+<td style="text-align:left;">
+701.44444444
+</td>
+<td style="text-align:left;">
+221.27
+</td>
+<td style="text-align:left;">
+176.4
+</td>
+<td style="text-align:left;">
+177.43
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2018"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care on day of discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+67
+</td>
+<td style="text-align:left;">
+68
+</td>
+<td style="text-align:left;">
+68
+</td>
+<td style="text-align:left;">
+381.30882353
+</td>
+<td style="text-align:left;">
+72.641029412
+</td>
+<td style="text-align:left;">
+57.880294118
+</td>
+<td style="text-align:left;">
+58.2125
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99218
+</td>
+<td style="text-align:left;">
+Hospital observation care, typically 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:left;">
+476.94736842
+</td>
+<td style="text-align:left;">
+99.311578947
+</td>
+<td style="text-align:left;">
+76.795263158
+</td>
+<td style="text-align:left;">
+77.469473684
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99220
+</td>
+<td style="text-align:left;">
+Hospital observation care, typically 70 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+1086.9230769
+</td>
+<td style="text-align:left;">
+185.10153846
+</td>
+<td style="text-align:left;">
+147.47923077
+</td>
+<td style="text-align:left;">
+147.79346154
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+474.58333333
+</td>
+<td style="text-align:left;">
+100.60125
+</td>
+<td style="text-align:left;">
+80.155
+</td>
+<td style="text-align:left;">
+80.943333333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:left;">
+625
+</td>
+<td style="text-align:left;">
+135.83647059
+</td>
+<td style="text-align:left;">
+108.22529412
+</td>
+<td style="text-align:left;">
+109.22
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+82
+</td>
+<td style="text-align:left;">
+86
+</td>
+<td style="text-align:left;">
+86
+</td>
+<td style="text-align:left;">
+1093.5
+</td>
+<td style="text-align:left;">
+199.7572093
+</td>
+<td style="text-align:left;">
+159.25906977
+</td>
+<td style="text-align:left;">
+161.78093023
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+206
+</td>
+<td style="text-align:left;">
+360
+</td>
+<td style="text-align:left;">
+360
+</td>
+<td style="text-align:left;">
+360.57222222
+</td>
+<td style="text-align:left;">
+72.385416667
+</td>
+<td style="text-align:left;">
+57.670305556
+</td>
+<td style="text-align:left;">
+58.038833333
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+148
+</td>
+<td style="text-align:left;">
+284
+</td>
+<td style="text-align:left;">
+284
+</td>
+<td style="text-align:left;">
+576.98943662
+</td>
+<td style="text-align:left;">
+103.6609507
+</td>
+<td style="text-align:left;">
+82.512992958
+</td>
+<td style="text-align:left;">
+82.805774648
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+415.3125
+</td>
+<td style="text-align:left;">
+72.666875
+</td>
+<td style="text-align:left;">
+57.90125
+</td>
+<td style="text-align:left;">
+58.079375
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+217
+</td>
+<td style="text-align:left;">
+250
+</td>
+<td style="text-align:left;">
+250
+</td>
+<td style="text-align:left;">
+555.64
+</td>
+<td style="text-align:left;">
+106.73396
+</td>
+<td style="text-align:left;">
+85.03664
+</td>
+<td style="text-align:left;">
+85.92664
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+30
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:left;">
+42
+</td>
+<td style="text-align:left;">
+1400
+</td>
+<td style="text-align:left;">
+215.74119048
+</td>
+<td style="text-align:left;">
+171.89333333
+</td>
+<td style="text-align:left;">
+178.42547619
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2017"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+100
+</td>
+<td style="text-align:left;">
+100
+</td>
+<td style="text-align:left;">
+325.78
+</td>
+<td style="text-align:left;">
+71.9639
+</td>
+<td style="text-align:left;">
+56.8272
+</td>
+<td style="text-align:left;">
+57.4924
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99218
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+449
+</td>
+<td style="text-align:left;">
+98.48
+</td>
+<td style="text-align:left;">
+78.46
+</td>
+<td style="text-align:left;">
+79.306153846
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99219
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 50 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+51
+</td>
+<td style="text-align:left;">
+52
+</td>
+<td style="text-align:left;">
+52
+</td>
+<td style="text-align:left;">
+614
+</td>
+<td style="text-align:left;">
+134.28384615
+</td>
+<td style="text-align:left;">
+102.80769231
+</td>
+<td style="text-align:left;">
+103.89538462
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99220
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+755.93220339
+</td>
+<td style="text-align:left;">
+184.3220339
+</td>
+<td style="text-align:left;">
+141.29355932
+</td>
+<td style="text-align:left;">
+142.86576271
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:left;">
+462.8125
+</td>
+<td style="text-align:left;">
+100.05
+</td>
+<td style="text-align:left;">
+79.71
+</td>
+<td style="text-align:left;">
+80.75
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+57
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+625
+</td>
+<td style="text-align:left;">
+135.14728814
+</td>
+<td style="text-align:left;">
+105.82542373
+</td>
+<td style="text-align:left;">
+107.07067797
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+110
+</td>
+<td style="text-align:left;">
+114
+</td>
+<td style="text-align:left;">
+114
+</td>
+<td style="text-align:left;">
+923.99122807
+</td>
+<td style="text-align:left;">
+202.79219298
+</td>
+<td style="text-align:left;">
+160.37719298
+</td>
+<td style="text-align:left;">
+160.02631579
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+233
+</td>
+<td style="text-align:left;">
+627
+</td>
+<td style="text-align:left;">
+627
+</td>
+<td style="text-align:left;">
+326.24561404
+</td>
+<td style="text-align:left;">
+71.240510367
+</td>
+<td style="text-align:left;">
+56.366730463
+</td>
+<td style="text-align:left;">
+57.047894737
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+127
+</td>
+<td style="text-align:left;">
+207
+</td>
+<td style="text-align:left;">
+207
+</td>
+<td style="text-align:left;">
+461.07246377
+</td>
+<td style="text-align:left;">
+103.94768116
+</td>
+<td style="text-align:left;">
+82.820676329
+</td>
+<td style="text-align:left;">
+83.196038647
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+291
+</td>
+<td style="text-align:left;">
+341
+</td>
+<td style="text-align:left;">
+341
+</td>
+<td style="text-align:left;">
+481.68621701
+</td>
+<td style="text-align:left;">
+106.328739
+</td>
+<td style="text-align:left;">
+84.056158358
+</td>
+<td style="text-align:left;">
+84.955131965
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:left;">
+36
+</td>
+<td style="text-align:left;">
+1400
+</td>
+<td style="text-align:left;">
+220.58
+</td>
+<td style="text-align:left;">
+175.75
+</td>
+<td style="text-align:left;">
+177.65666667
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2016"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+55
+</td>
+<td style="text-align:left;">
+57
+</td>
+<td style="text-align:left;">
+57
+</td>
+<td style="text-align:left;">
+325.15789474
+</td>
+<td style="text-align:left;">
+70.798245614
+</td>
+<td style="text-align:left;">
+54.474385965
+</td>
+<td style="text-align:left;">
+55.807192982
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99219
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 50 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+614
+</td>
+<td style="text-align:left;">
+132.85
+</td>
+<td style="text-align:left;">
+105.85
+</td>
+<td style="text-align:left;">
+107.23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99220
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+769.34782609
+</td>
+<td style="text-align:left;">
+186.25913043
+</td>
+<td style="text-align:left;">
+146.11652174
+</td>
+<td style="text-align:left;">
+144.27869565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+460
+</td>
+<td style="text-align:left;">
+99.14
+</td>
+<td style="text-align:left;">
+78.99
+</td>
+<td style="text-align:left;">
+80.28
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+87
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+625
+</td>
+<td style="text-align:left;">
+134.09739583
+</td>
+<td style="text-align:left;">
+105.47760417
+</td>
+<td style="text-align:left;">
+107.00770833
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+141
+</td>
+<td style="text-align:left;">
+148
+</td>
+<td style="text-align:left;">
+148
+</td>
+<td style="text-align:left;">
+920.61486486
+</td>
+<td style="text-align:left;">
+200.54466216
+</td>
+<td style="text-align:left;">
+159.08344595
+</td>
+<td style="text-align:left;">
+159.59716216
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99225
+</td>
+<td style="text-align:left;">
+Subsequent observation care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:left;">
+328
+</td>
+<td style="text-align:left;">
+71.32
+</td>
+<td style="text-align:left;">
+56.82
+</td>
+<td style="text-align:left;">
+57.54
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+270
+</td>
+<td style="text-align:left;">
+596
+</td>
+<td style="text-align:left;">
+596
+</td>
+<td style="text-align:left;">
+326.48657718
+</td>
+<td style="text-align:left;">
+70.715620805
+</td>
+<td style="text-align:left;">
+56.210989933
+</td>
+<td style="text-align:left;">
+56.855134228
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+85
+</td>
+<td style="text-align:left;">
+117
+</td>
+<td style="text-align:left;">
+117
+</td>
+<td style="text-align:left;">
+470
+</td>
+<td style="text-align:left;">
+101.88538462
+</td>
+<td style="text-align:left;">
+80.909316239
+</td>
+<td style="text-align:left;">
+81.989230769
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+328
+</td>
+<td style="text-align:left;">
+71.0455
+</td>
+<td style="text-align:left;">
+52.8315
+</td>
+<td style="text-align:left;">
+53.561
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+231
+</td>
+<td style="text-align:left;">
+271
+</td>
+<td style="text-align:left;">
+271
+</td>
+<td style="text-align:left;">
+485
+</td>
+<td style="text-align:left;">
+105.05
+</td>
+<td style="text-align:left;">
+83.7
+</td>
+<td style="text-align:left;">
+84.78
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:left;">
+53
+</td>
+<td style="text-align:left;">
+53
+</td>
+<td style="text-align:left;">
+1400
+</td>
+<td style="text-align:left;">
+219.04
+</td>
+<td style="text-align:left;">
+174.52
+</td>
+<td style="text-align:left;">
+177.12
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2015"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99217
+</td>
+<td style="text-align:left;">
+Hospital observation care discharge
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+328
+</td>
+<td style="text-align:left;">
+71.570434783
+</td>
+<td style="text-align:left;">
+54.502608696
+</td>
+<td style="text-align:left;">
+55.280869565
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99219
+</td>
+<td style="text-align:left;">
+Hospital observation care typically 50 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+614
+</td>
+<td style="text-align:left;">
+133.79333333
+</td>
+<td style="text-align:left;">
+100.95888889
+</td>
+<td style="text-align:left;">
+102.34888889
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99221
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 30 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+58
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+59
+</td>
+<td style="text-align:left;">
+333.28813559
+</td>
+<td style="text-align:left;">
+99.740847458
+</td>
+<td style="text-align:left;">
+79.469661017
+</td>
+<td style="text-align:left;">
+80.859830508
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+130
+</td>
+<td style="text-align:left;">
+132
+</td>
+<td style="text-align:left;">
+132
+</td>
+<td style="text-align:left;">
+356.49242424
+</td>
+<td style="text-align:left;">
+136.80969697
+</td>
+<td style="text-align:left;">
+107.93340909
+</td>
+<td style="text-align:left;">
+107.96962121
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+215
+</td>
+<td style="text-align:left;">
+220
+</td>
+<td style="text-align:left;">
+220
+</td>
+<td style="text-align:left;">
+631.18636364
+</td>
+<td style="text-align:left;">
+199.45268182
+</td>
+<td style="text-align:left;">
+157.90895455
+</td>
+<td style="text-align:left;">
+160.93040909
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99231
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 15 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+38
+</td>
+<td style="text-align:left;">
+100.84210526
+</td>
+<td style="text-align:left;">
+38.924736842
+</td>
+<td style="text-align:left;">
+31.015789474
+</td>
+<td style="text-align:left;">
+30.99
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+481
+</td>
+<td style="text-align:left;">
+1117
+</td>
+<td style="text-align:left;">
+1117
+</td>
+<td style="text-align:left;">
+200.93196061
+</td>
+<td style="text-align:left;">
+71.870125336
+</td>
+<td style="text-align:left;">
+56.31385855
+</td>
+<td style="text-align:left;">
+56.581826321
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+286
+</td>
+<td style="text-align:left;">
+580
+</td>
+<td style="text-align:left;">
+580
+</td>
+<td style="text-align:left;">
+301.98103448
+</td>
+<td style="text-align:left;">
+101.51336207
+</td>
+<td style="text-align:left;">
+80.92937931
+</td>
+<td style="text-align:left;">
+83.327948276
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+172
+</td>
+<td style="text-align:left;">
+175
+</td>
+<td style="text-align:left;">
+175
+</td>
+<td style="text-align:left;">
+210.88
+</td>
+<td style="text-align:left;">
+72.468342857
+</td>
+<td style="text-align:left;">
+57.079485714
+</td>
+<td style="text-align:left;">
+57.451657143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+353
+</td>
+<td style="text-align:left;">
+368
+</td>
+<td style="text-align:left;">
+368
+</td>
+<td style="text-align:left;">
+308.30163043
+</td>
+<td style="text-align:left;">
+106.55684783
+</td>
+<td style="text-align:left;">
+83.947201087
+</td>
+<td style="text-align:left;">
+84.541630435
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:left;">
+633.80952381
+</td>
+<td style="text-align:left;">
+223.42190476
+</td>
+<td style="text-align:left;">
+178.01190476
+</td>
+<td style="text-align:left;">
+178.33
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2014"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+341
+</td>
+<td style="text-align:left;">
+357
+</td>
+<td style="text-align:left;">
+357
+</td>
+<td style="text-align:left;">
+416.54621849
+</td>
+<td style="text-align:left;">
+137.74918768
+</td>
+<td style="text-align:left;">
+107.51787115
+</td>
+<td style="text-align:left;">
+106.71529412
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+98
+</td>
+<td style="text-align:left;">
+98
+</td>
+<td style="text-align:left;">
+98
+</td>
+<td style="text-align:left;">
+611
+</td>
+<td style="text-align:left;">
+201.09683673
+</td>
+<td style="text-align:left;">
+152.55122449
+</td>
+<td style="text-align:left;">
+153.22020408
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99231
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 15 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+65
+</td>
+<td style="text-align:left;">
+104
+</td>
+<td style="text-align:left;">
+104
+</td>
+<td style="text-align:left;">
+119
+</td>
+<td style="text-align:left;">
+39.086730769
+</td>
+<td style="text-align:left;">
+30.835384615
+</td>
+<td style="text-align:left;">
+30.677115385
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+596
+</td>
+<td style="text-align:left;">
+1418
+</td>
+<td style="text-align:left;">
+1418
+</td>
+<td style="text-align:left;">
+217
+</td>
+<td style="text-align:left;">
+71.698610719
+</td>
+<td style="text-align:left;">
+56.297757405
+</td>
+<td style="text-align:left;">
+56.08022567
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+104
+</td>
+<td style="text-align:left;">
+175
+</td>
+<td style="text-align:left;">
+175
+</td>
+<td style="text-align:left;">
+312
+</td>
+<td style="text-align:left;">
+103.83
+</td>
+<td style="text-align:left;">
+82.398171429
+</td>
+<td style="text-align:left;">
+81.520342857
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+316
+</td>
+<td style="text-align:left;">
+330
+</td>
+<td style="text-align:left;">
+330
+</td>
+<td style="text-align:left;">
+217
+</td>
+<td style="text-align:left;">
+72.379545455
+</td>
+<td style="text-align:left;">
+55.681242424
+</td>
+<td style="text-align:left;">
+55.199757576
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+215
+</td>
+<td style="text-align:left;">
+223
+</td>
+<td style="text-align:left;">
+223
+</td>
+<td style="text-align:left;">
+322
+</td>
+<td style="text-align:left;">
+106.37071749
+</td>
+<td style="text-align:left;">
+83.706367713
+</td>
+<td style="text-align:left;">
+83.529775785
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99291
+</td>
+<td style="text-align:left;">
+Critical care delivery critically ill or injured patient, first 30-74 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:left;">
+674
+</td>
+<td style="text-align:left;">
+224.66
+</td>
+<td style="text-align:left;">
+179
+</td>
+<td style="text-align:left;">
+176.1
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, </span>
+<span>                    year <span class="op">=</span> <span class="st">"2013"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                    <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
+<span>                    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
+<span>                    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
+<table class="table">
+<thead><tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_NPI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Last_Org_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_First_Name
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_MI
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Crdntls
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Gndr
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Ent_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_St2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_City
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_Abrvtn
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_State_FIPS
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Zip5
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_RUCA_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Cntry
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Type
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Rndrng_Prvdr_Mdcr_Prtcptg_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Cd
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Desc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+HCPCS_Drug_Ind
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Place_Of_Srvc
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Benes
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Tot_Bene_Day_Srvcs
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Sbmtd_Chrg
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Alowd_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Pymt_Amt
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+Avg_Mdcr_Stdzd_Amt
+</th>
+</tr></thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99222
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 50 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+138
+</td>
+<td style="text-align:left;">
+142
+</td>
+<td style="text-align:left;">
+142
+</td>
+<td style="text-align:left;">
+368.62676056
+</td>
+<td style="text-align:left;">
+132.17007042
+</td>
+<td style="text-align:left;">
+104.29971831
+</td>
+<td style="text-align:left;">
+107.21112676
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99223
+</td>
+<td style="text-align:left;">
+Initial hospital inpatient care, typically 70 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+95
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+96
+</td>
+<td style="text-align:left;">
+524.60416667
+</td>
+<td style="text-align:left;">
+196.93239583
+</td>
+<td style="text-align:left;">
+155.90114583
+</td>
+<td style="text-align:left;">
+157.59885417
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99231
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 15 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+47
+</td>
+<td style="text-align:left;">
+61
+</td>
+<td style="text-align:left;">
+61
+</td>
+<td style="text-align:left;">
+97
+</td>
+<td style="text-align:left;">
+37.688196721
+</td>
+<td style="text-align:left;">
+30.065245902
+</td>
+<td style="text-align:left;">
+30.584918033
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99232
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 25 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+381
+</td>
+<td style="text-align:left;">
+777
+</td>
+<td style="text-align:left;">
+777
+</td>
+<td style="text-align:left;">
+187.59459459
+</td>
+<td style="text-align:left;">
+69.433539254
+</td>
+<td style="text-align:left;">
+55.091351351
+</td>
+<td style="text-align:left;">
+55.957773488
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99233
+</td>
+<td style="text-align:left;">
+Subsequent hospital inpatient care, typically 35 minutes per day
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+106
+</td>
+<td style="text-align:left;">
+170
+</td>
+<td style="text-align:left;">
+170
+</td>
+<td style="text-align:left;">
+271.97647059
+</td>
+<td style="text-align:left;">
+101.07035294
+</td>
+<td style="text-align:left;">
+80.641235294
+</td>
+<td style="text-align:left;">
+80.939823529
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99238
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, 30 minutes or less
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+208
+</td>
+<td style="text-align:left;">
+219
+</td>
+<td style="text-align:left;">
+219
+</td>
+<td style="text-align:left;">
+201.00456621
+</td>
+<td style="text-align:left;">
+69.807077626
+</td>
+<td style="text-align:left;">
+55.650456621
+</td>
+<td style="text-align:left;">
+56.868630137
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1003000126
+</td>
+<td style="text-align:left;">
+Enkeshafi
+</td>
+<td style="text-align:left;">
+Ardalan
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+M.D. 
+</td>
+<td style="text-align:left;">
+M
+</td>
+<td style="text-align:left;">
+I
+</td>
+<td style="text-align:left;">
+900 Seton Dr
+</td>
+<td style="text-align:left;">
+</td>
+<td style="text-align:left;">
+Cumberland
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+21502
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Metropolitan area core: primary flow within an urbanized area of 50,000 and greater
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+Internal Medicine
+</td>
+<td style="text-align:left;">
+Y
+</td>
+<td style="text-align:left;">
+99239
+</td>
+<td style="text-align:left;">
+Hospital discharge day management, more than 30 minutes
+</td>
+<td style="text-align:left;">
+N
+</td>
+<td style="text-align:left;">
+F
+</td>
+<td style="text-align:left;">
+137
+</td>
+<td style="text-align:left;">
+142
+</td>
+<td style="text-align:left;">
+142
+</td>
+<td style="text-align:left;">
+245.83098592
+</td>
+<td style="text-align:left;">
+103.48056338
+</td>
+<td style="text-align:left;">
+82.632112676
+</td>
+<td style="text-align:left;">
+84.125352113
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br><br></p>
+</div>
+<div class="section level2">
 <h2 id="cms-open-data-catalog">CMS Open Data Catalog<a class="anchor" aria-label="anchor" href="#cms-open-data-catalog"></a>
 </h2>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cms_open_data_catalog</span> <span class="op">&lt;-</span> <span class="st">"https://data.cms.gov/data.json"</span></span>
 <span></span>
 <span><span class="co"># Create polite version</span></span>
@@ -4876,10 +12629,9 @@ Allopathic &amp; Osteopathic Physicians/Orthopedic Surgery
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">language</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">programCode</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">references</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">theme</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results_dataset</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">theme</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">results_dataset</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">title</span>, <span class="va">description</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/kableExtra/man/scroll_box.html" class="external-link">scroll_box</a></span><span class="op">(</span></span>
@@ -5950,14 +13702,14 @@ The Multiple Chronic Conditions dataset provides information on the number of ch
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results_dataset</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">title</span>, </span>
 <span>                time_period <span class="op">=</span> <span class="va">temporal</span>, </span>
 <span>                <span class="va">distribution</span>, </span>
 <span>                <span class="va">identifier</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">distribution</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dataset</span> <span class="op">==</span> <span class="st">"Medicare Physician &amp; Other Practitioners - by Provider and Service"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">distribution</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">format</span> <span class="op">==</span> <span class="st">"API"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">title</span>, </span>
 <span>                <span class="va">accessURL</span>, </span>
