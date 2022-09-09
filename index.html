@@ -113,6 +113,7 @@
 </div>
 <!-- badges: start -->
 <p>The goal of <code>provider</code> is to provide performant and reliable open-source tools to facilitate easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources. The current list of supported APIs are:</p>
+<p><br></p>
 <ul>
 <li><a href="https://npiregistry.cms.hhs.gov/search" class="external-link">NPPES National Provider Identifier (NPI) Registry API</a></li>
 <li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Fee-For-Service Public Provider Enrollment API</a></li>
@@ -139,246 +140,714 @@
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+<h2 id="motivating-example">Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example"></a>
 </h2>
-<p>Read the Overview vignette for a more thorough introduction to the package’s functionality.</p>
-</div>
-<div class="section level2">
-<h2 id="search-the-nppes-by-a-providers-npi">Search the NPPES by A Provider’s NPI<a class="anchor" aria-label="anchor" href="#search-the-nppes-by-a-providers-npi"></a>
-</h2>
-<p>Enter the 10-digit NPI you wish to search for into <code><a href="reference/prov_npi_nppes.html">prov_npi_nppes()</a></code>:</p>
+<p>Let’s say that you’re billing claims for a healthcare provider and you get a denial for incorrect primary taxonomy code. Armed with the provider’s NPI, you can search the <strong>NPPES NPI Registry API</strong> with the <code><a href="reference/prov_npi_nppes.html">prov_npi_nppes()</a></code> function &amp; unpack the results with the <code><a href="reference/prov_nppes_unpack.html">prov_nppes_unpack()</a></code> function:</p>
+<p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Query the NPPES API</span></span>
-<span><span class="va">nppes_npi_response</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1528060837</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">provider_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_npi_nppes.html">prov_npi_nppes</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                  <span class="fu"><a href="reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<p>This returns a response in the form of a data frame with the NPI searched for, the date &amp; time that the search was performed, the outcome (<em>results</em> means the search was successful, <em>errors</em>, that something went wrong) and a column called <code>data_lists</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 4</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1528060837 2022-09-08 08:14:36 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
-<p><br></p>
-<p><code>data_lists</code> is a nested list-column. You can access the inner lists using the <code>$</code> operator, but we can get a better sense of the hierarchical structure of these list columns using lobstr’s <code>tree()</code> function:</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">lobstr</span><span class="fu">::</span><span class="fu"><a href="https://lobstr.r-lib.org/reference/tree.html" class="external-link">tree</a></span><span class="op">(</span><span class="va">nppes_npi_response</span><span class="op">$</span><span class="va">data_lists</span>, </span>
-<span>             max_depth <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; &lt;list&gt;</span></span>
-<span><span class="co">#&gt; └─S3&lt;data.frame&gt;</span></span>
-<span><span class="co">#&gt;   ├─created_epoch: "1117631856000"</span></span>
-<span><span class="co">#&gt;   ├─enumeration_type: "NPI-1"</span></span>
-<span><span class="co">#&gt;   ├─last_updated_epoch: "1183957886000"</span></span>
-<span><span class="co">#&gt;   ├─number: "1528060837"</span></span>
-<span><span class="co">#&gt;   ├─addresses: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;   │ └─S3&lt;data.frame&gt;...</span></span>
-<span><span class="co">#&gt;   ├─practiceLocations: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;   │ └─&lt;list&gt;</span></span>
-<span><span class="co">#&gt;   ├─basic: S3&lt;data.frame&gt;...</span></span>
-<span><span class="co">#&gt;   ├─taxonomies: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;   │ └─S3&lt;data.frame&gt;...</span></span>
-<span><span class="co">#&gt;   ├─identifiers: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;   │ └─S3&lt;data.frame&gt;...</span></span>
-<span><span class="co">#&gt;   ├─endpoints: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;   │ └─&lt;list&gt;</span></span>
-<span><span class="co">#&gt;   └─other_names: &lt;list&gt;</span></span>
-<span><span class="co">#&gt;     └─&lt;list&gt;</span></span></code></pre></div>
-<p><br></p>
-<p>This exposes seven more nested list-columns, but using the <code><a href="reference/prov_nppes_unpack.html">prov_nppes_unpack()</a></code> function, we can untangle this mess:</p>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Unpack NPPES response</span></span>
-<span><span class="va">nppes_npi_unpacked</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_response</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<p>And the final tidied results:</p>
+<p>As it turns out, <code>207R00000X</code> is her secondary taxonomy and <code>207RE0101X</code> should be entered on the claim:</p>
 <p><br></p>
 <table class="table">
 <colgroup>
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="5%">
-<col width="3%">
-<col width="5%">
-<col width="10%">
-<col width="9%">
-<col width="7%">
-<col width="14%">
+<col width="8%">
+<col width="8%">
 <col width="11%">
+<col width="8%">
+<col width="6%">
+<col width="42%">
 <col width="5%">
+<col width="8%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">prov_type</th>
-<th align="left">npi</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">credential</th>
-<th align="left">gender</th>
-<th align="left">taxon_code</th>
-<th align="left">taxon_taxonomy_group</th>
-<th align="left">taxon_desc</th>
-<th align="left">taxon_license</th>
-<th align="left">ident_desc</th>
-<th align="left">ident_issuer</th>
-<th align="left">identifier</th>
+<th align="left">NPI</th>
+<th align="left">Last Name</th>
+<th align="left">Provider Type</th>
+<th align="left">Code</th>
+<th align="left">Primary</th>
+<th align="left">Description</th>
+<th align="left">State</th>
+<th align="left">License</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
+<td align="left">1003026055</td>
+<td align="left">PHADKE</td>
 <td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">Aetna HMO</td>
-<td align="left">0129008</td>
+<td align="left">207R00000X</td>
+<td align="left">FALSE</td>
+<td align="left">Internal Medicine</td>
+<td align="left">NC</td>
+<td align="left">201100885</td>
 </tr>
 <tr class="even">
+<td align="left">1003026055</td>
+<td align="left">PHADKE</td>
 <td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">DOL/OWCP</td>
-<td align="left">146574500</td>
-</tr>
-<tr class="odd">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">United Healthcare</td>
-<td align="left">230033</td>
-</tr>
-<tr class="even">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">MDIPA/Alliance/MLH/OC</td>
-<td align="left">38311</td>
-</tr>
-<tr class="odd">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">Cigna</td>
-<td align="left">4074069</td>
-</tr>
-<tr class="even">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">Aetna PPO</td>
-<td align="left">4296824</td>
-</tr>
-<tr class="odd">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">MEDICARE ID-Type Unspecified</td>
-<td align="left">MCR Provider#</td>
-<td align="left">575182E20</td>
-</tr>
-<tr class="even">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">MCR Railroad retiremnt</td>
-<td align="left">650003825</td>
-</tr>
-<tr class="odd">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">MEDICARE UPIN</td>
-<td align="left">NA</td>
-<td align="left">R23823</td>
-</tr>
-<tr class="even">
-<td align="left">NPI-1</td>
-<td align="left">1528060837</td>
-<td align="left">JOHN</td>
-<td align="left">SARGEANT</td>
-<td align="left">PT</td>
-<td align="left">M</td>
-<td align="left">225100000X</td>
-<td align="left"></td>
-<td align="left">Physical Therapist</td>
-<td align="left">14262</td>
-<td align="left">Other (non-Medicare)</td>
-<td align="left">BC/BS Non Provider#</td>
-<td align="left">k366</td>
+<td align="left">207RE0101X</td>
+<td align="left">TRUE</td>
+<td align="left">Internal Medicine, Endocrinology, Diabetes &amp; Metabolism</td>
+<td align="left">NC</td>
+<td align="left">2011-00885</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
+<p>What if you need the provider’s PECOS PAC ID or their Enrollment ID? Using the <code><a href="reference/prov_mcr_ffs.html">prov_mcr_ffs()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_ffs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_ffs.html">prov_mcr_ffs</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Last Name</th>
+<th align="left">PECOS PAC ID</th>
+<th align="left">PECOS Enrollment ID</th>
+<th align="left">Provider Type</th>
+<th align="left">State</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1003026055</td>
+<td align="left">PHADKE</td>
+<td align="left">4486827367</td>
+<td align="left">I20170403002190</td>
+<td align="left">PRACTITIONER - ENDOCRINOLOGY</td>
+<td align="left">FL</td>
+</tr></tbody>
+</table>
+<p><br></p>
+<p>Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="reference/prov_mcr_ordref.html">prov_mcr_ordref()</a></code>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_oar</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_ordref.html">prov_mcr_ordref</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Last Name</th>
+<th align="left">First Name</th>
+<th align="left">Part B</th>
+<th align="left">DME</th>
+<th align="left">HHA</th>
+<th align="left">PMD</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1003026055</td>
+<td align="left">PHADKE</td>
+<td align="left">RADHIKA</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+</tr></tbody>
+</table>
+<p><br></p>
+<p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. Using the output from the NPPES search in the first example, you can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="reference/prov_mcr_taxcross.html">prov_mcr_taxcross()</a></code>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_cross</span> <span class="op">&lt;-</span> <span class="va">provider_nppes</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_mcr_taxcross</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="15%">
+<col width="18%">
+<col width="56%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Taxonomy Code</th>
+<th align="left">Medicare Specialty Code</th>
+<th align="left">Provider Type</th>
+<th align="left">Taxonomy Class</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">207R00000X</td>
+<td align="left">11</td>
+<td align="left">Physician/Internal Medicine</td>
+<td align="left">Allopathic &amp; Osteopathic Physicians/Internal Medicine</td>
+</tr>
+<tr class="even">
+<td align="left">207RE0101X</td>
+<td align="left">11</td>
+<td align="left">Physician/Internal Medicine</td>
+<td align="left">Allopathic &amp; Osteopathic Physicians/Internal Medicine Endocrinology Diabetes &amp; Metabolism</td>
+</tr>
+<tr class="odd">
+<td align="left">207RE0101X</td>
+<td align="left">46</td>
+<td align="left">Physician/Endocrinology</td>
+<td align="left">Allopathic &amp; Osteopathic Physicians/Internal Medicine Endocrinology Diabetes &amp; Metabolism</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="reference/prov_mcr_reval_date.html">prov_mcr_reval_date()</a></code>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_due</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_reval_date.html">prov_mcr_reval_date</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="9%">
+<col width="13%">
+<col width="13%">
+<col width="9%">
+<col width="5%">
+<col width="13%">
+<col width="15%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Enrollment ID</th>
+<th align="left">Enrollment Type</th>
+<th align="left">Last Name</th>
+<th align="left">State</th>
+<th align="left">Provider Type</th>
+<th align="left">Specialty</th>
+<th align="left">Revalidation Due Date</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1760485387</td>
+<td align="left">I20100505000906</td>
+<td align="left">3</td>
+<td align="left">Dewey</td>
+<td align="left">MN</td>
+<td align="left">Non-DME Part B</td>
+<td align="left">Internal Medicine</td>
+<td align="left">2018-09-30</td>
+</tr></tbody>
+</table>
+<p><br></p>
+<p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="reference/prov_nppes_missing.html">prov_nppes_missing()</a></code>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_miss</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_nppes_missing.html">prov_nppes_missing</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Provider Name</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1760485387</td>
+<td align="left">Dewey,Paul</td>
+</tr></tbody>
+</table>
+<p><br></p>
+<p>Using <code><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span>, </span>
+<span>                                     year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="9%">
+<col width="9%">
+<col width="12%">
+<col width="5%">
+<col width="4%">
+<col width="5%">
+<col width="8%">
+<col width="8%">
+<col width="9%">
+<col width="10%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Year</th>
+<th align="left">NPI</th>
+<th align="left">Last Name</th>
+<th align="left">City</th>
+<th align="left">State</th>
+<th align="left">PAR</th>
+<th align="left">HCPCS</th>
+<th align="right">Benefits</th>
+<th align="right">Services</th>
+<th align="right">Avg Billed</th>
+<th align="right">Avg Allowed</th>
+<th align="right">Avg Payment</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">36415</td>
+<td align="right">69</td>
+<td align="right">108</td>
+<td align="right">24.00</td>
+<td align="right">2.92</td>
+<td align="right">2.92</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">83036</td>
+<td align="right">24</td>
+<td align="right">25</td>
+<td align="right">15.00</td>
+<td align="right">9.71</td>
+<td align="right">9.71</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">83037</td>
+<td align="right">18</td>
+<td align="right">22</td>
+<td align="right">15.00</td>
+<td align="right">9.30</td>
+<td align="right">9.30</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">95251</td>
+<td align="right">13</td>
+<td align="right">27</td>
+<td align="right">100.00</td>
+<td align="right">38.34</td>
+<td align="right">30.67</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">99203</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">220.00</td>
+<td align="right">111.19</td>
+<td align="right">84.78</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">99204</td>
+<td align="right">57</td>
+<td align="right">57</td>
+<td align="right">284.00</td>
+<td align="right">173.41</td>
+<td align="right">130.99</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">99213</td>
+<td align="right">44</td>
+<td align="right">63</td>
+<td align="right">134.00</td>
+<td align="right">75.34</td>
+<td align="right">60.18</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">1003026055</td>
+<td align="left">Phadke</td>
+<td align="left">Coconut Creek</td>
+<td align="left">FL</td>
+<td align="left">Y</td>
+<td align="left">99214</td>
+<td align="right">61</td>
+<td align="right">120</td>
+<td align="right">169.97</td>
+<td align="right">113.18</td>
+<td align="right">86.63</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>This API contains data going back to 2013, so you can perform a long-term analysis of a provider’s Medicare data:</p>
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
+<span><span class="va">pr2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2020"</span><span class="op">)</span></span>
+<span><span class="va">pr2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2019"</span><span class="op">)</span></span>
+<span><span class="va">pr2018</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2018"</span><span class="op">)</span></span>
+<span><span class="va">pr2017</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2017"</span><span class="op">)</span></span>
+<span><span class="va">pr2016</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2016"</span><span class="op">)</span></span>
+<span><span class="va">pr2015</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2015"</span><span class="op">)</span></span>
+<span><span class="va">pr2014</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2014"</span><span class="op">)</span></span>
+<span><span class="va">pr2013</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2013"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Bind the data frames together by row</span></span>
+<span><span class="va">prov_2013_2020</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">pr2020</span>, </span>
+<span>                                   <span class="va">pr2019</span>, </span>
+<span>                                   <span class="va">pr2018</span>, </span>
+<span>                                   <span class="va">pr2017</span>, </span>
+<span>                                   <span class="va">pr2016</span>, </span>
+<span>                                   <span class="va">pr2015</span>, </span>
+<span>                                   <span class="va">pr2014</span>, </span>
+<span>                                   <span class="va">pr2013</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="4%">
+<col width="60%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">HCPCS</th>
+<th align="left">HCPCS Description</th>
+<th align="right">Benefits</th>
+<th align="right">Services</th>
+<th align="right">Avg Charge</th>
+<th align="right">Avg Allowed</th>
+<th align="right">Avg Payment</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">36415</td>
+<td align="left">Insertion of needle into vein for collection of blood sample</td>
+<td align="right">316</td>
+<td align="right">500</td>
+<td align="right">15.55</td>
+<td align="right">2.94</td>
+<td align="right">2.94</td>
+</tr>
+<tr class="even">
+<td align="left">80048</td>
+<td align="left">Blood test, basic group of blood chemicals</td>
+<td align="right">40</td>
+<td align="right">58</td>
+<td align="right">45.00</td>
+<td align="right">10.33</td>
+<td align="right">10.33</td>
+</tr>
+<tr class="odd">
+<td align="left">80053</td>
+<td align="left">Blood test, comprehensive group of blood chemicals</td>
+<td align="right">103</td>
+<td align="right">116</td>
+<td align="right">50.04</td>
+<td align="right">9.50</td>
+<td align="right">9.50</td>
+</tr>
+<tr class="even">
+<td align="left">80061</td>
+<td align="left">Blood test, lipids (cholesterol and triglycerides)</td>
+<td align="right">53</td>
+<td align="right">61</td>
+<td align="right">83.08</td>
+<td align="right">13.04</td>
+<td align="right">13.04</td>
+</tr>
+<tr class="odd">
+<td align="left">82043</td>
+<td align="left">Urine microalbumin (protein) level</td>
+<td align="right">44</td>
+<td align="right">44</td>
+<td align="right">37.46</td>
+<td align="right">7.72</td>
+<td align="right">7.72</td>
+</tr>
+<tr class="even">
+<td align="left">82044</td>
+<td align="left">Urine microalbumin (protein) analysis, (microalbumin)</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">30.00</td>
+<td align="right">3.91</td>
+<td align="right">3.91</td>
+</tr>
+<tr class="odd">
+<td align="left">82570</td>
+<td align="left">Creatinine level to test for kidney function or muscle injury</td>
+<td align="right">55</td>
+<td align="right">55</td>
+<td align="right">21.00</td>
+<td align="right">6.95</td>
+<td align="right">6.95</td>
+</tr>
+<tr class="even">
+<td align="left">82947</td>
+<td align="left">Blood glucose (sugar) level</td>
+<td align="right">30</td>
+<td align="right">34</td>
+<td align="right">32.00</td>
+<td align="right">4.76</td>
+<td align="right">4.76</td>
+</tr>
+<tr class="odd">
+<td align="left">82962</td>
+<td align="left">Blood glucose (sugar) test performed by hand-held instrument</td>
+<td align="right">103</td>
+<td align="right">117</td>
+<td align="right">24.00</td>
+<td align="right">3.02</td>
+<td align="right">3.02</td>
+</tr>
+<tr class="even">
+<td align="left">83036</td>
+<td align="left">Hemoglobin a1c level</td>
+<td align="right">24</td>
+<td align="right">25</td>
+<td align="right">15.00</td>
+<td align="right">9.71</td>
+<td align="right">9.71</td>
+</tr>
+<tr class="odd">
+<td align="left">83036</td>
+<td align="left">Hemoglobin A1C level</td>
+<td align="right">240</td>
+<td align="right">392</td>
+<td align="right">47.37</td>
+<td align="right">11.97</td>
+<td align="right">11.97</td>
+</tr>
+<tr class="even">
+<td align="left">83037</td>
+<td align="left">Hemoglobin a1c level</td>
+<td align="right">18</td>
+<td align="right">22</td>
+<td align="right">15.00</td>
+<td align="right">9.30</td>
+<td align="right">9.30</td>
+</tr>
+<tr class="odd">
+<td align="left">83970</td>
+<td align="left">Parathormone (parathyroid hormone) level</td>
+<td align="right">12</td>
+<td align="right">19</td>
+<td align="right">150.00</td>
+<td align="right">55.18</td>
+<td align="right">55.18</td>
+</tr>
+<tr class="even">
+<td align="left">84100</td>
+<td align="left">Phosphate level</td>
+<td align="right">15</td>
+<td align="right">22</td>
+<td align="right">33.00</td>
+<td align="right">4.68</td>
+<td align="right">4.68</td>
+</tr>
+<tr class="odd">
+<td align="left">84439</td>
+<td align="left">Thyroxine (thyroid chemical) measurement</td>
+<td align="right">135</td>
+<td align="right">186</td>
+<td align="right">61.82</td>
+<td align="right">12.08</td>
+<td align="right">12.08</td>
+</tr>
+<tr class="even">
+<td align="left">84443</td>
+<td align="left">Blood test, thyroid stimulating hormone (TSH)</td>
+<td align="right">127</td>
+<td align="right">178</td>
+<td align="right">105.66</td>
+<td align="right">21.87</td>
+<td align="right">21.87</td>
+</tr>
+<tr class="odd">
+<td align="left">84481</td>
+<td align="left">Thyroid hormone, T3 measurement</td>
+<td align="right">50</td>
+<td align="right">73</td>
+<td align="right">49.47</td>
+<td align="right">22.73</td>
+<td align="right">22.73</td>
+</tr>
+<tr class="even">
+<td align="left">95251</td>
+<td align="left">Ambulatory continuous glucose (sugar) including interpretation and report for a minimum of 72 hours</td>
+<td align="right">13</td>
+<td align="right">27</td>
+<td align="right">100.00</td>
+<td align="right">38.34</td>
+<td align="right">30.67</td>
+</tr>
+<tr class="odd">
+<td align="left">99203</td>
+<td align="left">New patient office or other outpatient visit, typically 30 minutes</td>
+<td align="right">32</td>
+<td align="right">32</td>
+<td align="right">220.00</td>
+<td align="right">111.19</td>
+<td align="right">84.78</td>
+</tr>
+<tr class="even">
+<td align="left">99204</td>
+<td align="left">New patient office or other outpatient visit, typically 45 minutes</td>
+<td align="right">285</td>
+<td align="right">285</td>
+<td align="right">309.19</td>
+<td align="right">161.54</td>
+<td align="right">114.75</td>
+</tr>
+<tr class="odd">
+<td align="left">99213</td>
+<td align="left">Established patient office or other outpatient visit, typically 15 minutes</td>
+<td align="right">235</td>
+<td align="right">319</td>
+<td align="right">138.43</td>
+<td align="right">71.49</td>
+<td align="right">52.55</td>
+</tr>
+<tr class="even">
+<td align="left">99214</td>
+<td align="left">Established patient office or other outpatient, visit typically 25 minutes</td>
+<td align="right">436</td>
+<td align="right">813</td>
+<td align="right">203.13</td>
+<td align="right">104.44</td>
+<td align="right">73.61</td>
+</tr>
+<tr class="odd">
+<td align="left">99222</td>
+<td align="left">Initial hospital inpatient care, typically 50 minutes per day</td>
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="right">292.00</td>
+<td align="right">143.46</td>
+<td align="right">114.34</td>
+</tr>
+<tr class="even">
+<td align="left">99223</td>
+<td align="left">Initial hospital inpatient care, typically 70 minutes per day</td>
+<td align="right">146</td>
+<td align="right">154</td>
+<td align="right">427.69</td>
+<td align="right">209.31</td>
+<td align="right">165.28</td>
+</tr>
+<tr class="odd">
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25 minutes per day</td>
+<td align="right">159</td>
+<td align="right">335</td>
+<td align="right">152.67</td>
+<td align="right">74.79</td>
+<td align="right">59.38</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<details><summary>Click for Table Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">prov_2013_2020</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
+<span>                hcpcs <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
+<span>                benefits <span class="op">=</span> <span class="va">tot_benes</span>,</span>
+<span>                services <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
+<span>                avg_bill <span class="op">=</span> <span class="va">avg_sbmtd_chrg</span>,</span>
+<span>                avg_allow <span class="op">=</span> <span class="va">avg_mdcr_alowd_amt</span>,</span>
+<span>                avg_pay <span class="op">=</span> <span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"82044"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"82947"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"83037"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"83970"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"84100"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"95251"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"99203"</span>,</span>
+<span>                <span class="va">hcpcs</span> <span class="op">!=</span> <span class="st">"99222"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
+<span>    ben_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    ben_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    ben_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    ben_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    serv_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    serv_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    serv_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    serv_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    char_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
+<span>    char_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
+<span>    char_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
+<span>    all_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    all_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    all_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    pay_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    pay_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    pay_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">gt_table</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"hcpcs"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Provider's Medicare Data Summary**: 2013 - 2020"</span><span class="op">)</span>, </span>
+<span>                 subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Codes with a Beneficiary count *less than 40* have been excluded."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_nytimes.html" class="external-link">gt_theme_nytimes</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span>, footnotes.multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">ben_spark</span>, type <span class="op">=</span> <span class="st">"ref_iqr"</span>, fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, same_limit <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">serv_spark</span>, type <span class="op">=</span> <span class="st">"ref_iqr"</span>, fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, same_limit <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">char_spark</span>, type <span class="op">=</span> <span class="st">"ref_iqr"</span>, fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, same_limit <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">all_spark</span>, type <span class="op">=</span> <span class="st">"ref_iqr"</span>, fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, same_limit <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">pay_spark</span>, type <span class="op">=</span> <span class="st">"ref_iqr"</span>, fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, same_limit <span class="op">=</span> <span class="cn">FALSE</span>, palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"black"</span>, <span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hcpcs"</span>, <span class="st">"ben_spark"</span>, <span class="st">"serv_spark"</span>, </span>
+<span>                                       <span class="st">"char_spark"</span>, <span class="st">"all_spark"</span>, <span class="st">"pay_spark"</span><span class="op">)</span>, </span>
+<span>                           style <span class="op">=</span> <span class="st">"dotted"</span>, color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ben_mean</span><span class="op">:</span><span class="va">ben_med</span>, <span class="va">serv_mean</span><span class="op">:</span><span class="va">serv_med</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_mean</span><span class="op">:</span><span class="va">char_med</span>, <span class="va">all_mean</span><span class="op">:</span><span class="va">all_med</span>, <span class="va">pay_mean</span><span class="op">:</span><span class="va">pay_med</span><span class="op">)</span>, currency <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Beneficiaries"</span>, id <span class="op">=</span> <span class="st">"ben"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ben_sum</span>, <span class="va">ben_mean</span>, <span class="va">ben_med</span>, <span class="va">ben_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Services"</span>, id <span class="op">=</span> <span class="st">"serv"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">serv_sum</span>, <span class="va">serv_mean</span>, <span class="va">serv_med</span>, <span class="va">serv_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Submitted Charge"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_mean</span>, <span class="va">char_med</span>, <span class="va">char_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Allowed Amount"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">all_mean</span>, <span class="va">all_med</span>, <span class="va">all_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Payment"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">pay_mean</span>, <span class="va">pay_med</span>, <span class="va">pay_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>ben_sum <span class="op">=</span> <span class="st">"Count"</span>, ben_mean <span class="op">=</span> <span class="st">"Mean"</span>, ben_med <span class="op">=</span> <span class="st">"Median"</span>, ben_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>serv_sum <span class="op">=</span> <span class="st">"Count"</span>, serv_mean <span class="op">=</span> <span class="st">"Mean"</span>, serv_med <span class="op">=</span> <span class="st">"Median"</span>, serv_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>char_mean <span class="op">=</span> <span class="st">"Mean"</span>, char_med <span class="op">=</span> <span class="st">"Median"</span>, char_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>all_mean <span class="op">=</span> <span class="st">"Mean"</span>, all_med <span class="op">=</span> <span class="st">"Median"</span>, all_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>pay_mean <span class="op">=</span> <span class="st">"Mean"</span>, pay_med <span class="op">=</span> <span class="st">"Median"</span>, pay_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Data Source: *Physician &amp; Other Practitioners: by Provider and Service* (2013 - 2020). **Medicare.**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Number of *distinct* Medicare beneficiaries receiving the service for each HCPCS code."</span><span class="op">)</span>, </span>
+<span>                   locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_spanners.html" class="external-link">cells_column_spanners</a></span><span class="op">(</span>spanners <span class="op">=</span> <span class="st">"ben"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span>footnote <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"</span><span class="op">)</span>, </span>
+<span>                   locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_spanners.html" class="external-link">cells_column_spanners</a></span><span class="op">(</span>spanners <span class="op">=</span> <span class="st">"serv"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_outline.html" class="external-link">opt_table_outline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fl">1</span>, color <span class="op">=</span> <span class="st">"red"</span>, add_row_striping <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">serv_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">char_mean</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">all_mean</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">pay_mean</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">gt_table</span> <span class="op">|&gt;</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></span><span class="op">(</span><span class="st">"gt_provider.png"</span>, expand <span class="op">=</span> <span class="fl">50</span>, zoom <span class="op">=</span> <span class="fl">1</span>, vwidth <span class="op">=</span> <span class="fl">1500</span><span class="op">)</span></span></code></pre></div></details><p><br></p>
+<p><img src="reference/figures/gt_provider.png" style="width:75.0%"></p>
+<p><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
