@@ -127,7 +127,7 @@ The Order and Referring dataset provides information on all physicians and non-p
 
 <br>
 
- - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+ - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 
 ```{r}
 prov_mcr_ordref(1003026055) |> knitr::kable()
@@ -194,7 +194,7 @@ The Revalidation Due Date List dataset contains revalidation due dates for Medic
 <br>
 
 -  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
-- [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
+-  [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
 
 
 ```{r}

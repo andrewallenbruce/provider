@@ -25,6 +25,7 @@ Imports:
 Suggests: 
     gt,
     gtExtras,
+    janitor,
     stringr,
     purrr,
     kableExtra,

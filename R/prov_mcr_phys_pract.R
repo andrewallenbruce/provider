@@ -85,5 +85,25 @@ prov_mcr_phys_pract <- function(npi, year = "2020") {
     check_type = FALSE,
     simplifyVector = TRUE)
 
+  # Convert to numeric
+  results <- results |>
+    dplyr::mutate(
+      Tot_Benes = as.numeric(Tot_Benes),
+      Tot_Srvcs = as.numeric(Tot_Srvcs),
+      Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
+      Avg_Sbmtd_Chrg = janitor::round_half_up(
+        as.numeric(Avg_Sbmtd_Chrg), digits = 2),
+      Avg_Mdcr_Alowd_Amt = janitor::round_half_up(
+        as.numeric(Avg_Mdcr_Alowd_Amt), digits = 2),
+      Avg_Mdcr_Pymt_Amt = janitor::round_half_up(
+        as.numeric(Avg_Mdcr_Pymt_Amt), digits = 2),
+      Avg_Mdcr_Stdzd_Amt = janitor::round_half_up(
+        as.numeric(Avg_Mdcr_Stdzd_Amt), digits = 2))
+
+  # Add year to data frame
+  results <- results |>
+    dplyr::mutate(year = year) |>
+    dplyr::relocate(year)
+
   return(results)
 }
