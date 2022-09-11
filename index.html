@@ -345,9 +345,56 @@
 </tr></tbody>
 </table>
 <p><br></p>
-<p>Using <code><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
+<p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="reference/prov_opt_out.html">prov_opt_out()</a></code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider_opt_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_opt_out.html">prov_opt_out</a></span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col width="7%">
+<col width="11%">
+<col width="7%">
+<col width="7%">
+<col width="5%">
+<col width="4%">
+<col width="13%">
+<col width="11%">
+<col width="6%">
+<col width="4%">
+<col width="17%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Optout Effective</th>
+<th align="left">Optout End</th>
+<th align="left">Updated</th>
+<th align="left">Last</th>
+<th align="left">First</th>
+<th align="left">Specialty</th>
+<th align="left">Address</th>
+<th align="left">City</th>
+<th align="left">State</th>
+<th align="left">Eligible to Order &amp; Refer</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1114974490</td>
+<td align="left">2012-07-01</td>
+<td align="left">2024-07-01</td>
+<td align="left">2022-08-15</td>
+<td align="left">Altchek</td>
+<td align="left">David</td>
+<td align="left">Orthopedic Surgery</td>
+<td align="left">535 EAST 70TH ST</td>
+<td align="left">NEW YORK</td>
+<td align="left">NY</td>
+<td align="left">Y</td>
+</tr></tbody>
+</table>
+<p><br></p>
+<p>Using <code><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">provider_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span>, </span>
 <span>                                     year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
@@ -498,7 +545,7 @@
 <p><br></p>
 <p>This API contains data going back to 2013, so you can perform a long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
 <span><span class="va">pr2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2020"</span><span class="op">)</span></span>
 <span><span class="va">pr2019</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/prov_mcr_phys_pract.html">prov_mcr_phys_pract</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="st">"2019"</span><span class="op">)</span></span>
@@ -767,7 +814,7 @@
 </tbody>
 </table>
 <p><br></p>
-<details><summary>Click for Table Code</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<details><summary>Click for Table Code</summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">prov_2013_2020</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/janitor/man/clean_names.html" class="external-link">clean_names</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
@@ -845,8 +892,8 @@
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">all_mean</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">pay_mean</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">gt_table</span> <span class="op">|&gt;</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></span><span class="op">(</span><span class="st">"gt_provider.png"</span>, expand <span class="op">=</span> <span class="fl">50</span>, zoom <span class="op">=</span> <span class="fl">1</span>, vwidth <span class="op">=</span> <span class="fl">1500</span><span class="op">)</span></span></code></pre></div></details><p><br></p>
-<p><img src="reference/figures/gt_provider.png" style="width:75.0%"></p>
+<span><span class="va">gt_table</span> <span class="op">|&gt;</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gtsave.html" class="external-link">gtsave</a></span><span class="op">(</span><span class="st">"gt_provider.png"</span>, expand <span class="op">=</span> <span class="fl">20</span>, zoom <span class="op">=</span> <span class="fl">2</span>, vwidth <span class="op">=</span> <span class="fl">1500</span><span class="op">)</span></span></code></pre></div></details><p><br></p>
+<p><img src="reference/figures/gt_provider.png" style="width:100.0%"></p>
 <p><br><br></p>
 </div>
 <div class="section level2">
