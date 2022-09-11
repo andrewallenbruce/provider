@@ -193,6 +193,23 @@ provider_miss <- prov_nppes_missing(1760485387)
 
 <br>
 
+You can find out if a provider has opted out of Medicare by searching
+the **Medicare Opt Out Affidavits API** with `prov_opt_out()`:
+
+<br>
+
+``` r
+provider_opt_out <- prov_opt_out(1114974490)
+```
+
+<br>
+
+| NPI        | Optout Effective | Optout End | Updated    | Last    | First | Specialty          | Address          | City     | State | Eligible to Order & Refer |
+|:-----------|:-----------------|:-----------|:-----------|:--------|:------|:-------------------|:-----------------|:---------|:------|:--------------------------|
+| 1114974490 | 2012-07-01       | 2024-07-01 | 2022-08-15 | Altchek | David | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    | Y                         |
+
+<br>
+
 Using `prov_mcr_phys_pract()`, you can access **Medicare’s Physician &
 Other Practitioners - by Provider and Service API**:
 
@@ -360,14 +377,14 @@ gt_table <- gt_table |>
   gtExtras::gt_color_rows(all_mean) |> 
   gtExtras::gt_color_rows(pay_mean)
 
-gt_table |> gt::gtsave("gt_provider.png", expand = 50, zoom = 1, vwidth = 1500)
+gt_table |> gt::gtsave("gt_provider.png", expand = 20, zoom = 2, vwidth = 1500)
 ```
 
 </details>
 
 <br>
 
-<img src="man/figures/gt_provider.png" style="width:75.0%" />
+<img src="man/figures/gt_provider.png" style="width:100.0%" />
 
 <br> <br>
 

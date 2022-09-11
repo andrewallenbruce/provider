@@ -203,6 +203,42 @@ provider_miss |> knitr::kable()
 ```
 <br>
 
+You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `prov_opt_out()`:
+
+<br>
+
+```{r}
+provider_opt_out <- prov_opt_out(1114974490)
+```
+
+<br>
+
+```{r echo=FALSE}
+provider_opt_out |> 
+  janitor::clean_names() |> 
+  dplyr::select(
+    NPI = npi,
+    optout_effective_date,
+    optout_end_date,
+    Updated = last_updated,
+    Last = last_name,
+    First = first_name,
+    Specialty = specialty,
+    Address = first_line_street_address,
+    City = city_name,
+    State = state_code,
+    "Eligible to Order & Refer" = eligible_to_order_and_refer) |>
+  dplyr::mutate(optout_effective_date = datefixR::fix_date_char(optout_effective_date, format = "mdy"),
+                optout_end_date = datefixR::fix_date_char(optout_end_date, format = "mdy"),
+                Updated = datefixR::fix_date_char(Updated, format = "mdy")) |> 
+  dplyr::rename("Optout Effective" = optout_effective_date, "Optout End" = optout_end_date) |> 
+  knitr::kable()
+```
+
+
+
+<br>
+
 Using `prov_mcr_phys_pract()`, you can access **Medicare's Physician & Other Practitioners - by Provider and Service API**:
 
 <br>
@@ -366,13 +402,13 @@ gt_table <- gt_table |>
   gtExtras::gt_color_rows(all_mean) |> 
   gtExtras::gt_color_rows(pay_mean)
 
-gt_table |> gt::gtsave("gt_provider.png", expand = 50, zoom = 1, vwidth = 1500)
+gt_table |> gt::gtsave("gt_provider.png", expand = 20, zoom = 2, vwidth = 1500)
 ```
 </details>
 
 <br>
 
-![](man/figures/gt_provider.png){width="75%"}
+![](man/figures/gt_provider.png){width="100%"}
 
 <br>
 <br>

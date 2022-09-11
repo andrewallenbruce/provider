@@ -25,6 +25,7 @@ Imports:
 Suggests: 
     gt,
     gtExtras,
+    datefixR,
     janitor,
     stringr,
     purrr,
