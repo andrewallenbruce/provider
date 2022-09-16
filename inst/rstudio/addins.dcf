@@ -1,0 +1,5 @@
+Name: Search NPPES by NPI
+Description: Searches the NPPES by NPI
+Binding: prov_npi_nppes
+Interactive: true
+

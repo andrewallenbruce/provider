@@ -77,7 +77,7 @@ prov_nppes_unpack <- function(df) {
     if (nrow(ls_names |> dplyr::filter(value == "addresses")) >= 1) {
 
       addresses <- lists |>
-        dplyr::select(id, addresses) |>
+        dplyr::select(addresses) |>
         tidyr::unnest(cols = c(addresses)) |>
         dplyr::mutate(
           address_purpose = stringr::str_to_lower(
@@ -87,23 +87,8 @@ prov_nppes_unpack <- function(df) {
           names_from = address_purpose,
           names_glue = "{address_purpose}_{.value}",
           values_from = dplyr::everything()) |>
-        dplyr::select(id = location_id
-                      # country_abb = location_country_code,
-                      # location_address_1,
-                      # location_address_2,
-                      # location_city,
-                      # state_abb = location_state,
-                      # location_zip = location_postal_code,
-                      # location_phone = location_telephone_number,
-                      # location_fax = location_fax_number,
-                      # mailing_address_1,
-                      # mailing_address_2,
-                      # mailing_city,
-                      # mailing_state,
-                      # mailing_zip = location_postal_code,
-                      # mailing_phone = location_telephone_number,
-                      # mailing_fax = location_fax_number
-        )
+        dplyr::select(-mailing_address_purpose, -location_address_purpose) |>
+        dplyr::mutate(id = key)
 
       #--Join Columns--#
       results <- dplyr::full_join(results, addresses, by = "id")

@@ -13,7 +13,11 @@
 #' accordance with the NPPES Data Dissemination Notice.
 #' There is no charge to use the NPI Registry.
 #'
-#' @param npi 10-digit National Provider Identifier (NPI)
+#' @param city city in which provider practices
+#' @param state abbreviation of state in which provider practices
+#' @param limit maximum number of results expected back
+#' @param skip number of results to skip after searching the previous,
+#' say, 200 examples
 #'
 #' @return A tibble containing the NPI(s) searched for,
 #' the date-time the search was performed, and
@@ -22,11 +26,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' prov_npi_nppes(1528060837)
-#' }
+#' prov_city_nppes(city = "Atlanta", state = "GA", limit = "1")
 
-prov_npi_nppes <- function(npi) {
+prov_city_nppes <- function(city,
+                            state,
+                            limit = 200,
+                            skip = NULL) {
 
   # Check internet connection
   attempt::stop_if_not(
@@ -34,19 +39,8 @@ prov_npi_nppes <- function(npi) {
     msg = "Please check your internet connection.")
 
   # strip spaces
-  npi <- gsub(pattern = " ", replacement = "", npi)
-
-  # Number of characters should be 10
-  attempt::stop_if_not(
-    nchar(npi) == 10,
-    msg = c("NPIs must have 10 digits. Provided NPI has ",
-            nchar(npi),
-            " digits."))
-
-  # Luhn check
-  attempt::stop_if_not(
-    provider::prov_npi_luhn(npi) == TRUE,
-    msg = "Luhn Check: NPI may be invalid.")
+  city <- gsub(pattern = " ", replacement = "", city)
+  state <- gsub(pattern = " ", replacement = "", state)
 
   # NPPES Base URL
   nppes_base_url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
@@ -61,7 +55,11 @@ prov_npi_nppes <- function(npi) {
 
   # Send and save response
   resp <- req |>
-    httr2::req_url_query(number = npi) |>
+    httr2::req_url_query(city = city,
+                         state = state,
+                         limit = limit,
+                         skip = skip
+    ) |>
     httr2::req_throttle(50 / 60) |>
     httr2::req_perform()
 
@@ -82,15 +80,12 @@ prov_npi_nppes <- function(npi) {
       name = "outcome",
       value = "data_lists")
 
-  # Append NPIs searched for to tibble
-  results$search <- npi
-
   # Append time of API query to tibble
   results$datetime <- datetime
 
   # Move columns to beginning
   results <- results |>
-    dplyr::relocate(c(search, datetime))
+    dplyr::relocate(datetime)
 
   # Filter out resultCount rows
   results <- results |>
