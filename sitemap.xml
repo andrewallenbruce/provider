@@ -31,6 +31,9 @@
     <loc>https://andrewallenbruce.github.io/provider/news/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/age_days.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/index.html</loc>
   </url>
   <url>
@@ -41,6 +44,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes_location_reference.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/prov_city_nppes.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_ffs.html</loc>
@@ -70,6 +76,15 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_unpack.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_unpack_city.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/prov_opt_out.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_nppes.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_unpack.html</loc>
   </url>
 </urlset>

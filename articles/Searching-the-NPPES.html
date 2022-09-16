@@ -146,7 +146,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-11 <span style="color: #949494;">00:06:25</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 2022-09-16 <span style="color: #949494;">10:09:58</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
 <p><br></p>
@@ -271,17 +271,17 @@
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/prov_nppes_unpack.html">prov_nppes_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 27</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 39</span></span></span>
 <span><span class="co">#&gt;   prov_type npi     id    first…¹ last_…² crede…³ sole_…⁴ gender enume…⁵ last_…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> NPI-1     111449… 1114… DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 17 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, pract_country_abb &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_country_name &lt;chr&gt;, pract_address_purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_address_type &lt;chr&gt;, pract_address_1 &lt;chr&gt;, pract_city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_state_abb &lt;chr&gt;, pract_postal_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pract_telephone_number &lt;chr&gt;, and abbreviated variable names ¹​first_name, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 29 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_country_code &lt;chr&gt;, mailing_country_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_address_1 &lt;chr&gt;, mailing_address_1 &lt;chr&gt;, location_city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   mailing_city &lt;chr&gt;, location_state &lt;chr&gt;, mailing_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_postal_code &lt;chr&gt;, mailing_postal_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_telephone_number &lt;chr&gt;, mailing_telephone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_code &lt;chr&gt;, taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 </div>
@@ -301,17 +301,17 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
 <span><span class="co">#&gt;   search     datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-11 <span style="color: #949494;">00:06:28</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-11 <span style="color: #949494;">00:06:30</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-11 <span style="color: #949494;">00:06:33</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-11 <span style="color: #949494;">00:06:35</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 2022-09-16 <span style="color: #949494;">10:10:01</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 2022-09-16 <span style="color: #949494;">10:10:03</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1659781227 2022-09-16 <span style="color: #949494;">10:10:05</span> Errors  <span style="color: #949494;">&lt;df [1 × 3]&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1528060837 2022-09-16 <span style="color: #949494;">10:10:07</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_nppes_unpack</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 33</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 49</span></span></span>
 <span><span class="co">#&gt;    prov_type  npi   id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2      1336… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
@@ -331,13 +331,13 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, middle_name &lt;chr&gt;, credential &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, mailing_country_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_country_code &lt;chr&gt;, mailing_address_1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_address_1 &lt;chr&gt;, mailing_address_2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_address_2 &lt;chr&gt;, mailing_city &lt;chr&gt;, location_city &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <p>Searching for a column of NPIs in a data frame is only slightly different. I’ll create a data frame with the same NPIs in the list example:</p>
 <p><br></p>
@@ -356,7 +356,7 @@
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_npi_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">search</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">prov_nppes_unpack</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 33</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 49</span></span></span>
 <span><span class="co">#&gt;    prov_type  npi   id    organ…¹ organ…² enume…³ last_…⁴ status autho…⁵ autho…⁶</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> NPI-2      1336… 1336… LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage </span></span>
@@ -376,13 +376,13 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> NPI-1      1710… 1710… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 39 more variables: authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, middle_name &lt;chr&gt;, credential &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, mailing_country_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_country_code &lt;chr&gt;, mailing_address_1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_address_1 &lt;chr&gt;, mailing_address_2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_address_2 &lt;chr&gt;, mailing_city &lt;chr&gt;, location_city &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br><br></p>
 <p>At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
@@ -429,6 +429,54 @@ authorized_official_title_or_position
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 authorized_official_name_prefix
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_country_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_country_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_address_1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_address_1
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_address_2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_address_2
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_city
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_city
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_state
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_state
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_postal_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_postal_code
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_telephone_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_telephone_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+mailing_fax_number
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+location_fax_number
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 taxon_code
@@ -533,6 +581,54 @@ Manager
 Mrs. 
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+2773 MARSHALL DR
+</td>
+<td style="text-align:left;">
+2773 MARSHALL DR
+</td>
+<td style="text-align:left;">
+SUITE D
+</td>
+<td style="text-align:left;">
+SUITE D
+</td>
+<td style="text-align:left;">
+TIFTON
+</td>
+<td style="text-align:left;">
+TIFTON
+</td>
+<td style="text-align:left;">
+GA
+</td>
+<td style="text-align:left;">
+GA
+</td>
+<td style="text-align:left;">
+317938101
+</td>
+<td style="text-align:left;">
+317938101
+</td>
+<td style="text-align:left;">
+229-238-0790
+</td>
+<td style="text-align:left;">
+229-238-0790
+</td>
+<td style="text-align:left;">
+229-238-0791
+</td>
+<td style="text-align:left;">
+229-238-0791
+</td>
+<td style="text-align:left;">
 291U00000X
 </td>
 <td style="text-align:left;">
@@ -631,6 +727,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
 </td>
 <td style="text-align:left;">
 225100000X
@@ -733,6 +877,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
+</td>
+<td style="text-align:left;">
 225100000X
 </td>
 <td style="text-align:left;">
@@ -831,6 +1023,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
 </td>
 <td style="text-align:left;">
 225100000X
@@ -933,6 +1173,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
+</td>
+<td style="text-align:left;">
 225100000X
 </td>
 <td style="text-align:left;">
@@ -1031,6 +1319,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
 </td>
 <td style="text-align:left;">
 225100000X
@@ -1133,6 +1469,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
+</td>
+<td style="text-align:left;">
 225100000X
 </td>
 <td style="text-align:left;">
@@ -1231,6 +1615,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
 </td>
 <td style="text-align:left;">
 225100000X
@@ -1333,6 +1765,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
+</td>
+<td style="text-align:left;">
 225100000X
 </td>
 <td style="text-align:left;">
@@ -1433,6 +1913,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
+</td>
+<td style="text-align:left;">
 225100000X
 </td>
 <td style="text-align:left;">
@@ -1531,6 +2059,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1939 OLD ANNAPOLIS RD
+</td>
+<td style="text-align:left;">
+6000 EXECUTIVE BLVD
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+STE 201
+</td>
+<td style="text-align:left;">
+WOODBINE
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+217978201
+</td>
+<td style="text-align:left;">
+208523803
+</td>
+<td style="text-align:left;">
+301-854-6748
+</td>
+<td style="text-align:left;">
+301-816-0020
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+301-816-0334
 </td>
 <td style="text-align:left;">
 225100000X
@@ -1689,6 +2265,54 @@ NA
 <td style="text-align:left;">
 NA
 </td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -1732,6 +2356,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1300 PICCARD DR
+</td>
+<td style="text-align:left;">
+18101 PRINCE PHILIP DR
+</td>
+<td style="text-align:left;">
+SUITE 202
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+OLNEY
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+208504303
+</td>
+<td style="text-align:left;">
+208321514
+</td>
+<td style="text-align:left;">
+310-921-7900
+</td>
+<td style="text-align:left;">
+301-774-8900
+</td>
+<td style="text-align:left;">
+301-921-7915
+</td>
+<td style="text-align:left;">
+301-570-8574
 </td>
 <td style="text-align:left;">
 207R00000X
@@ -1834,6 +2506,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1300 PICCARD DR
+</td>
+<td style="text-align:left;">
+18101 PRINCE PHILIP DR
+</td>
+<td style="text-align:left;">
+SUITE 202
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+OLNEY
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+208504303
+</td>
+<td style="text-align:left;">
+208321514
+</td>
+<td style="text-align:left;">
+310-921-7900
+</td>
+<td style="text-align:left;">
+301-774-8900
+</td>
+<td style="text-align:left;">
+301-921-7915
+</td>
+<td style="text-align:left;">
+301-570-8574
+</td>
+<td style="text-align:left;">
 207R00000X
 </td>
 <td style="text-align:left;">
@@ -1934,6 +2654,54 @@ NA
 NA
 </td>
 <td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1300 PICCARD DR
+</td>
+<td style="text-align:left;">
+18101 PRINCE PHILIP DR
+</td>
+<td style="text-align:left;">
+SUITE 202
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+OLNEY
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+208504303
+</td>
+<td style="text-align:left;">
+208321514
+</td>
+<td style="text-align:left;">
+310-921-7900
+</td>
+<td style="text-align:left;">
+301-774-8900
+</td>
+<td style="text-align:left;">
+301-921-7915
+</td>
+<td style="text-align:left;">
+301-570-8574
+</td>
+<td style="text-align:left;">
 207R00000X
 </td>
 <td style="text-align:left;">
@@ -2032,6 +2800,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1300 PICCARD DR
+</td>
+<td style="text-align:left;">
+18101 PRINCE PHILIP DR
+</td>
+<td style="text-align:left;">
+SUITE 202
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+OLNEY
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+208504303
+</td>
+<td style="text-align:left;">
+208321514
+</td>
+<td style="text-align:left;">
+310-921-7900
+</td>
+<td style="text-align:left;">
+301-774-8900
+</td>
+<td style="text-align:left;">
+301-921-7915
+</td>
+<td style="text-align:left;">
+301-570-8574
 </td>
 <td style="text-align:left;">
 207R00000X
@@ -2132,6 +2948,54 @@ NA
 </td>
 <td style="text-align:left;">
 NA
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+US
+</td>
+<td style="text-align:left;">
+1300 PICCARD DR
+</td>
+<td style="text-align:left;">
+18101 PRINCE PHILIP DR
+</td>
+<td style="text-align:left;">
+SUITE 202
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+ROCKVILLE
+</td>
+<td style="text-align:left;">
+OLNEY
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+MD
+</td>
+<td style="text-align:left;">
+208504303
+</td>
+<td style="text-align:left;">
+208321514
+</td>
+<td style="text-align:left;">
+310-921-7900
+</td>
+<td style="text-align:left;">
+301-774-8900
+</td>
+<td style="text-align:left;">
+301-921-7915
+</td>
+<td style="text-align:left;">
+301-570-8574
 </td>
 <td style="text-align:left;">
 207R00000X
@@ -2236,14 +3100,14 @@ NA
 <p><br></p>
 <p>This section outlines the NPPES API’s documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.</p>
 <p><br></p>
-<div id="fcmtxizmav" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eldxjlxpvm" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#fcmtxizmav .gt_table {
+#eldxjlxpvm .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2268,7 +3132,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#fcmtxizmav .gt_heading {
+#eldxjlxpvm .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2280,7 +3144,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#fcmtxizmav .gt_title {
+#eldxjlxpvm .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -2292,7 +3156,7 @@ html {
   border-bottom-width: 0;
 }
 
-#fcmtxizmav .gt_subtitle {
+#eldxjlxpvm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2304,13 +3168,13 @@ html {
   border-top-width: 0;
 }
 
-#fcmtxizmav .gt_bottom_border {
+#eldxjlxpvm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#fcmtxizmav .gt_col_headings {
+#eldxjlxpvm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2325,7 +3189,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#fcmtxizmav .gt_col_heading {
+#eldxjlxpvm .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2345,7 +3209,7 @@ html {
   overflow-x: hidden;
 }
 
-#fcmtxizmav .gt_column_spanner_outer {
+#eldxjlxpvm .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2357,15 +3221,15 @@ html {
   padding-right: 4px;
 }
 
-#fcmtxizmav .gt_column_spanner_outer:first-child {
+#eldxjlxpvm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fcmtxizmav .gt_column_spanner_outer:last-child {
+#eldxjlxpvm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fcmtxizmav .gt_column_spanner {
+#eldxjlxpvm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2377,7 +3241,7 @@ html {
   width: 100%;
 }
 
-#fcmtxizmav .gt_group_heading {
+#eldxjlxpvm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2402,7 +3266,7 @@ html {
   vertical-align: middle;
 }
 
-#fcmtxizmav .gt_empty_group_heading {
+#eldxjlxpvm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2417,15 +3281,15 @@ html {
   vertical-align: middle;
 }
 
-#fcmtxizmav .gt_from_md > :first-child {
+#eldxjlxpvm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fcmtxizmav .gt_from_md > :last-child {
+#eldxjlxpvm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fcmtxizmav .gt_row {
+#eldxjlxpvm .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2444,7 +3308,7 @@ html {
   overflow-x: hidden;
 }
 
-#fcmtxizmav .gt_stub {
+#eldxjlxpvm .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -2457,7 +3321,7 @@ html {
   padding-right: 5px;
 }
 
-#fcmtxizmav .gt_stub_row_group {
+#eldxjlxpvm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2471,11 +3335,11 @@ html {
   vertical-align: top;
 }
 
-#fcmtxizmav .gt_row_group_first td {
+#eldxjlxpvm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fcmtxizmav .gt_summary_row {
+#eldxjlxpvm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2485,16 +3349,16 @@ html {
   padding-right: 5px;
 }
 
-#fcmtxizmav .gt_first_summary_row {
+#eldxjlxpvm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#fcmtxizmav .gt_first_summary_row.thick {
+#eldxjlxpvm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fcmtxizmav .gt_last_summary_row {
+#eldxjlxpvm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2504,7 +3368,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#fcmtxizmav .gt_grand_summary_row {
+#eldxjlxpvm .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -2514,7 +3378,7 @@ html {
   padding-right: 5px;
 }
 
-#fcmtxizmav .gt_first_grand_summary_row {
+#eldxjlxpvm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2524,11 +3388,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#fcmtxizmav .gt_striped {
+#eldxjlxpvm .gt_striped {
   background-color: #FEEDEC;
 }
 
-#fcmtxizmav .gt_table_body {
+#eldxjlxpvm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2537,7 +3401,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#fcmtxizmav .gt_footnotes {
+#eldxjlxpvm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2551,7 +3415,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#fcmtxizmav .gt_footnote {
+#eldxjlxpvm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2560,7 +3424,7 @@ html {
   padding-right: 5px;
 }
 
-#fcmtxizmav .gt_sourcenotes {
+#eldxjlxpvm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2574,7 +3438,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#fcmtxizmav .gt_sourcenote {
+#eldxjlxpvm .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2582,64 +3446,64 @@ html {
   padding-right: 5px;
 }
 
-#fcmtxizmav .gt_left {
+#eldxjlxpvm .gt_left {
   text-align: left;
 }
 
-#fcmtxizmav .gt_center {
+#eldxjlxpvm .gt_center {
   text-align: center;
 }
 
-#fcmtxizmav .gt_right {
+#eldxjlxpvm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fcmtxizmav .gt_font_normal {
+#eldxjlxpvm .gt_font_normal {
   font-weight: normal;
 }
 
-#fcmtxizmav .gt_font_bold {
+#eldxjlxpvm .gt_font_bold {
   font-weight: bold;
 }
 
-#fcmtxizmav .gt_font_italic {
+#eldxjlxpvm .gt_font_italic {
   font-style: italic;
 }
 
-#fcmtxizmav .gt_super {
+#eldxjlxpvm .gt_super {
   font-size: 65%;
 }
 
-#fcmtxizmav .gt_footnote_marks {
+#eldxjlxpvm .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#fcmtxizmav .gt_asterisk {
+#eldxjlxpvm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fcmtxizmav .gt_indent_1 {
+#eldxjlxpvm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fcmtxizmav .gt_indent_2 {
+#eldxjlxpvm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fcmtxizmav .gt_indent_3 {
+#eldxjlxpvm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fcmtxizmav .gt_indent_4 {
+#eldxjlxpvm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fcmtxizmav .gt_indent_5 {
+#eldxjlxpvm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2844,14 +3708,14 @@ html {
 </table>
 </div>
 <p><br><br></p>
-<div id="vjjxukdfaf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vgmqmwpxnc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Karla, Lato, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vjjxukdfaf .gt_table {
+#vgmqmwpxnc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2876,7 +3740,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#vjjxukdfaf .gt_heading {
+#vgmqmwpxnc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2888,7 +3752,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vjjxukdfaf .gt_title {
+#vgmqmwpxnc .gt_title {
   color: #333333;
   font-size: 24px;
   font-weight: initial;
@@ -2900,7 +3764,7 @@ html {
   border-bottom-width: 0;
 }
 
-#vjjxukdfaf .gt_subtitle {
+#vgmqmwpxnc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2912,13 +3776,13 @@ html {
   border-top-width: 0;
 }
 
-#vjjxukdfaf .gt_bottom_border {
+#vgmqmwpxnc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#vjjxukdfaf .gt_col_headings {
+#vgmqmwpxnc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2933,7 +3797,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vjjxukdfaf .gt_col_heading {
+#vgmqmwpxnc .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2953,7 +3817,7 @@ html {
   overflow-x: hidden;
 }
 
-#vjjxukdfaf .gt_column_spanner_outer {
+#vgmqmwpxnc .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 80%;
@@ -2965,15 +3829,15 @@ html {
   padding-right: 4px;
 }
 
-#vjjxukdfaf .gt_column_spanner_outer:first-child {
+#vgmqmwpxnc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vjjxukdfaf .gt_column_spanner_outer:last-child {
+#vgmqmwpxnc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vjjxukdfaf .gt_column_spanner {
+#vgmqmwpxnc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2985,7 +3849,7 @@ html {
   width: 100%;
 }
 
-#vjjxukdfaf .gt_group_heading {
+#vgmqmwpxnc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3010,7 +3874,7 @@ html {
   vertical-align: middle;
 }
 
-#vjjxukdfaf .gt_empty_group_heading {
+#vgmqmwpxnc .gt_empty_group_heading {
   padding: 0.5px;
   color: #FFFFFF;
   background-color: #FF0000;
@@ -3025,15 +3889,15 @@ html {
   vertical-align: middle;
 }
 
-#vjjxukdfaf .gt_from_md > :first-child {
+#vgmqmwpxnc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vjjxukdfaf .gt_from_md > :last-child {
+#vgmqmwpxnc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vjjxukdfaf .gt_row {
+#vgmqmwpxnc .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -3052,7 +3916,7 @@ html {
   overflow-x: hidden;
 }
 
-#vjjxukdfaf .gt_stub {
+#vgmqmwpxnc .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 80%;
@@ -3065,7 +3929,7 @@ html {
   padding-right: 5px;
 }
 
-#vjjxukdfaf .gt_stub_row_group {
+#vgmqmwpxnc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3079,11 +3943,11 @@ html {
   vertical-align: top;
 }
 
-#vjjxukdfaf .gt_row_group_first td {
+#vgmqmwpxnc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vjjxukdfaf .gt_summary_row {
+#vgmqmwpxnc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3093,16 +3957,16 @@ html {
   padding-right: 5px;
 }
 
-#vjjxukdfaf .gt_first_summary_row {
+#vgmqmwpxnc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#vjjxukdfaf .gt_first_summary_row.thick {
+#vgmqmwpxnc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vjjxukdfaf .gt_last_summary_row {
+#vgmqmwpxnc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3112,7 +3976,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#vjjxukdfaf .gt_grand_summary_row {
+#vgmqmwpxnc .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -3122,7 +3986,7 @@ html {
   padding-right: 5px;
 }
 
-#vjjxukdfaf .gt_first_grand_summary_row {
+#vgmqmwpxnc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3132,11 +3996,11 @@ html {
   border-top-color: #5F5F5F;
 }
 
-#vjjxukdfaf .gt_striped {
+#vgmqmwpxnc .gt_striped {
   background-color: #FEEDEC;
 }
 
-#vjjxukdfaf .gt_table_body {
+#vgmqmwpxnc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -3145,7 +4009,7 @@ html {
   border-bottom-color: #5F5F5F;
 }
 
-#vjjxukdfaf .gt_footnotes {
+#vgmqmwpxnc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3159,7 +4023,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vjjxukdfaf .gt_footnote {
+#vgmqmwpxnc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3168,7 +4032,7 @@ html {
   padding-right: 5px;
 }
 
-#vjjxukdfaf .gt_sourcenotes {
+#vgmqmwpxnc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3182,7 +4046,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#vjjxukdfaf .gt_sourcenote {
+#vgmqmwpxnc .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3190,64 +4054,64 @@ html {
   padding-right: 5px;
 }
 
-#vjjxukdfaf .gt_left {
+#vgmqmwpxnc .gt_left {
   text-align: left;
 }
 
-#vjjxukdfaf .gt_center {
+#vgmqmwpxnc .gt_center {
   text-align: center;
 }
 
-#vjjxukdfaf .gt_right {
+#vgmqmwpxnc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vjjxukdfaf .gt_font_normal {
+#vgmqmwpxnc .gt_font_normal {
   font-weight: normal;
 }
 
-#vjjxukdfaf .gt_font_bold {
+#vgmqmwpxnc .gt_font_bold {
   font-weight: bold;
 }
 
-#vjjxukdfaf .gt_font_italic {
+#vgmqmwpxnc .gt_font_italic {
   font-style: italic;
 }
 
-#vjjxukdfaf .gt_super {
+#vgmqmwpxnc .gt_super {
   font-size: 65%;
 }
 
-#vjjxukdfaf .gt_footnote_marks {
+#vgmqmwpxnc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#vjjxukdfaf .gt_asterisk {
+#vgmqmwpxnc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vjjxukdfaf .gt_indent_1 {
+#vgmqmwpxnc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vjjxukdfaf .gt_indent_2 {
+#vgmqmwpxnc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vjjxukdfaf .gt_indent_3 {
+#vgmqmwpxnc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vjjxukdfaf .gt_indent_4 {
+#vgmqmwpxnc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vjjxukdfaf .gt_indent_5 {
+#vgmqmwpxnc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
