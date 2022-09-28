@@ -16,7 +16,13 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/Searching-the-NPPES.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/geocoding.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/provider.html</loc>
@@ -37,52 +43,31 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_api_input.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_luhn.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_api_output.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_moar.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_location_reference.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_mooa.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_city_nppes.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_mpop.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_ffs.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_mppe.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_ordref.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_mpstc.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_phys_pract.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_reval_date.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_mcr_taxcross.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_npi_luhn.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_npi_nppes.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_missing.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_unpack.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_nppes_unpack_city.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/prov_opt_out.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_mrdd.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_nppes.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_promdci.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_unpack.html</loc>
