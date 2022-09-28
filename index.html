@@ -159,7 +159,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-09-28 12:27:39 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-09-28 16:28:57 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
 <p><br></p>
 <p>Unpack the API response with the <code><a href="reference/provider_unpack.html">provider_unpack()</a></code> function:</p>
 <p><br></p>
@@ -194,6 +194,9 @@
 <span><span class="co">#&gt; #   taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;,</span></span>
 <span><span class="co">#&gt; #   ident_code &lt;chr&gt;, ident_desc &lt;chr&gt;, ident_issuer &lt;lgl&gt;, identifier &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   ident_state &lt;chr&gt;, and abbreviated variable names ¹​prov_type, …</span></span></code></pre></div>
+<p><br></p>
+<p>Filter and wrangle the data for presentation:</p>
+<p><br></p>
 <table class="table">
 <thead><tr class="header">
 <th align="left">NPI</th>
@@ -428,43 +431,40 @@
 <p><br></p>
 <table class="table">
 <colgroup>
-<col width="7%">
-<col width="12%">
 <col width="8%">
+<col width="6%">
+<col width="5%">
+<col width="11%">
+<col width="10%">
+<col width="17%">
+<col width="14%">
+<col width="13%">
 <col width="7%">
 <col width="5%">
-<col width="4%">
-<col width="12%">
-<col width="11%">
-<col width="6%">
-<col width="4%">
-<col width="17%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
-<th align="left">Opt Out Effective</th>
-<th align="left">Opt Out End</th>
-<th align="left">Updated</th>
 <th align="left">Last</th>
 <th align="left">First</th>
+<th align="left">Opt-Out Begins</th>
+<th align="left">Opt-Out Ends</th>
+<th align="left">Order &amp; Refer Eligible</th>
 <th align="left">Specialty</th>
 <th align="left">Address</th>
 <th align="left">City</th>
 <th align="left">State</th>
-<th align="left">Eligible to Order &amp; Refer</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">1114974490</td>
-<td align="left">2012-07-01</td>
-<td align="left">2024-07-01</td>
-<td align="left">2022-08-15</td>
 <td align="left">Altchek</td>
 <td align="left">David</td>
+<td align="left">2012-07-01</td>
+<td align="left">2024-07-01</td>
+<td align="left">Y</td>
 <td align="left">Orthopedic Surgery</td>
 <td align="left">535 EAST 70TH ST</td>
 <td align="left">NEW YORK</td>
 <td align="left">NY</td>
-<td align="left">Y</td>
 </tr></tbody>
 </table>
 <p><br></p>
