@@ -13,6 +13,26 @@ home:
   sidebar:
     structure: [links, license, community, citation, authors, dev]
 
+reference:
+- title: API Wrappers
+  desc: >
+    Access Data from Web API Sources
+  contents:
+  - provider_mooa
+  - provider_moar
+  - provider_mpop
+  - provider_mppe
+  - provider_mpstc
+  - provider_mrdd
+  - provider_nppes
+  - provider_promdci
+
+- title: Helper Functions
+  contents:
+  - provider_unpack
+  - provider_luhn
+  - age_days
+
 navbar:
   structure:
     left:

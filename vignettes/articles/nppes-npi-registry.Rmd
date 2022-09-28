@@ -236,7 +236,10 @@ In the May 2020 CMS Interoperability and Patient Access final rule, CMS finalize
 <br>
 
 ```{r}
-provider_promdci(npi = 1760485387) |> knitr::kable()
+provider_promdci(npi = 1760485387) |> 
+  knitr::kable() |> 
+  kableExtra::kable_styling(full_width = F, 
+  position = "float_right")
 ```
 
 <br>
@@ -248,7 +251,7 @@ npi_list |> purrr::map_dfr(provider_promdci)
 <br>
 
 ```{r}
-provider_promdci(full = TRUE)
+#provider_promdci(full = TRUE)
 ```
 
 
@@ -270,7 +273,8 @@ npi_list |> purrr::map_dfr(provider_mpop)
 ```{r}
 provider_mpop(npi = 1003000126, year = "2020") |> 
               knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+              kableExtra::scroll_box(height = "500px", fixed_thead = T) |> 
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
 ```
 
 <br>

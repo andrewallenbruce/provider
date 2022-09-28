@@ -88,7 +88,7 @@ nppes_ex <- provider_nppes(npi = 1760485387)
     #> # A tibble: 1 × 3
     #>   datetime            outcome data_lists   
     #>   <dttm>              <chr>   <list>       
-    #> 1 2022-09-28 12:27:39 results <df [1 × 11]>
+    #> 1 2022-09-28 16:28:57 results <df [1 × 11]>
 
 <br>
 
@@ -131,6 +131,12 @@ nppes_ex
 #> #   ident_code <chr>, ident_desc <chr>, ident_issuer <lgl>, identifier <chr>,
 #> #   ident_state <chr>, and abbreviated variable names ¹​prov_type, …
 ```
+
+<br>
+
+Filter and wrangle the data for presentation:
+
+<br>
 
 | NPI        | Last Name | Provider Type | Code       | Primary | Description       | State | License |
 |:-----------|:----------|:--------------|:-----------|:--------|:------------------|:------|:--------|
@@ -269,9 +275,9 @@ mooa_ex <- provider_mooa(1114974490)
 
 <br>
 
-| NPI        | Opt Out Effective | Opt Out End | Updated    | Last    | First | Specialty          | Address          | City     | State | Eligible to Order & Refer |
-|:-----------|:------------------|:------------|:-----------|:--------|:------|:-------------------|:-----------------|:---------|:------|:--------------------------|
-| 1114974490 | 2012-07-01        | 2024-07-01  | 2022-08-15 | Altchek | David | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    | Y                         |
+| NPI        | Last    | First | Opt-Out Begins | Opt-Out Ends | Order & Refer Eligible | Specialty          | Address          | City     | State |
+|:-----------|:--------|:------|:---------------|:-------------|:-----------------------|:-------------------|:-----------------|:---------|:------|
+| 1114974490 | Altchek | David | 2012-07-01     | 2024-07-01   | Y                      | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |
 
 <br>
 

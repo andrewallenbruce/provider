@@ -97,7 +97,11 @@ nppes_ex <- provider_unpack(nppes_ex)
 ```{r}
 nppes_ex
 ```
+<br>
 
+Filter and wrangle the data for presentation:
+
+<br>
 
 ```{r echo=FALSE}
 nppes_ex |> 
@@ -268,20 +272,21 @@ mooa_ex <- provider_mooa(1114974490)
 mooa_ex |> 
   dplyr::select(
     NPI = npi,
-    optout_effective_date,
-    optout_end_date,
-    Updated = last_updated,
     Last = last_name,
     First = first_name,
+    optout_effective_date,
+    optout_end_date,
+    "Order & Refer Eligible" = eligible_to_order_and_refer,
+    #Updated = last_updated,
     Specialty = specialty,
     Address = first_line_street_address,
     City = city_name,
-    State = state_code,
-    "Eligible to Order & Refer" = eligible_to_order_and_refer) |>
-  dplyr::mutate(optout_effective_date = datefixR::fix_date_char(optout_effective_date, format = "mdy"),
-                optout_end_date = datefixR::fix_date_char(optout_end_date, format = "mdy"),
-                Updated = datefixR::fix_date_char(Updated, format = "mdy")) |> 
-  dplyr::rename("Opt Out Effective" = optout_effective_date, "Opt Out End" = optout_end_date) |> 
+    State = state_code) |>
+  dplyr::mutate(
+    optout_effective_date = datefixR::fix_date_char(
+    optout_effective_date, format = "mdy"),
+    optout_end_date = datefixR::fix_date_char(optout_end_date, format = "mdy")) |> 
+  dplyr::rename("Opt-Out Begins" = optout_effective_date, "Opt-Out Ends" = optout_end_date) |> 
   knitr::kable()
 ```
 
