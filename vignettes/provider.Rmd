@@ -9,10 +9,15 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  message = FALSE, 
-  warning = FALSE
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 150, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
 ```
 
@@ -22,130 +27,147 @@ library(provider)
 
 <br>
 
-There are three methods of entering search terms into the functions:
-
- - single 10-digit number
- - list of multiple 10-digit numbers
- - data frame of 10-digit numbers
-
-I'll create the example list and data frame I'll be using in the examples for each API.
-
-<br>
-
-```{r}
-# Example list
-npi_list <- c(1003026055, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
-
-# Example data frame
-npi_data.frame <- data.frame(
-  npi = c(1003026055, 
-          1316405939, 
-          1720392988, 
-          1518184605, 
-          1922056829, 
-          1083879860))
-```
-
-
-<br><br>
-
 ## NPPES NPI Public Registry API
 
-The NPPES NPI Registry Public Search is a free directory of all active National Provider Identifier (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry. The NPPES Application Programming Interface (API) is a faster alternative to the downloadable NPPES data files. It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The Skip field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
-
--  [U.S. NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
-
 <br>
 
-```{r message=FALSE, warning=FALSE}
-prov_npi_nppes(1003026055) |> 
-  prov_nppes_unpack() |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(fixed_thead = TRUE)
-```
+You're billing for a healthcare provider and receive a `CO-8` denial on a claim and you need to confirm whether or not the correct taxonomy code was entered on the claim. Armed with the provider's NPI, you can search the **NPPES NPI Registry API** with the `provider_nppes()` function:
 
 <br>
 
 ```{r warning=FALSE}
-npi_list |> purrr::map_dfr(prov_npi_nppes) |> 
-            dplyr::group_split(search) |>
-            purrr::map_dfr(prov_nppes_unpack) |> 
-            knitr::kable() |> 
-            kableExtra::scroll_box(
-              height = "500px", 
-              fixed_thead = TRUE)
+# Load library
+library(provider)
+
+# Query the NPPES API
+nppes_ex <- provider_nppes(npi = 1760485387)
 ```
 
-<br><br>
+<br>
 
-## Medicare Fee-For-Service (FFS) Provider Enrollment API
+```{r echo=FALSE}
+nppes_ex
+```
 
 <br>
 
-The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
-
-<br>
-
- -   [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
- -   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
- -   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
+Unpack the API response with the `provider_unpack()` function:
 
 <br>
 
 ```{r}
-prov_mcr_ffs(1003026055) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(fixed_thead = TRUE)
+nppes_ex <- provider_unpack(nppes_ex)
 ```
 
 <br>
 
-```{r}
-npi_list |> purrr::map_dfr(prov_mcr_ffs) |> 
-            knitr::kable() |> 
-            kableExtra::scroll_box(fixed_thead = TRUE)
-```
+Giving you the results in tibble form:
 
 <br>
 
 ```{r}
-npi_data.frame |> 
-  dplyr::group_split(npi) |> 
-  purrr::map_dfr(prov_mcr_ffs) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(fixed_thead = TRUE)
+nppes_ex
 ```
 
+<br>
 
-<br><br>
+<br>
+
+```{r echo=FALSE}
+nppes_ex |> 
+  dplyr::select("NPI" = npi, 
+                "Last Name" = last_name,
+                "Provider Type" = prov_type, 
+                "Code" = taxon_code, 
+                "Primary" = taxon_primary, 
+                "Description" = taxon_desc, 
+                "State" = taxon_state, 
+                "License" = taxon_license) |> 
+  dplyr::distinct(Primary, .keep_all = TRUE) |> 
+  knitr::kable()
+```
+
+<br>
+
+What if you don't have the provider's NPI? You can search by first and/or last name, city, state:
+
+<br>
+
+```{r warning=FALSE}
+nppes_ex2 <- provider_nppes(first = "Paul", 
+                            last = "Dewey",
+                            state_abbr = "MN") |> 
+                            provider_unpack()
+```
+
+<br>
+
+```{r echo=FALSE}
+nppes_ex2 |> 
+  dplyr::select("NPI" = npi, 
+                "Last Name" = last_name,
+                "Provider Type" = prov_type, 
+                "Code" = taxon_code, 
+                "Primary" = taxon_primary, 
+                "Description" = taxon_desc, 
+                "State" = taxon_state, 
+                "License" = taxon_license) |> 
+  dplyr::distinct(Primary, .keep_all = TRUE) |> 
+  knitr::kable()
+```
+
+<br>
+
+## Medicare Fee-For-Service Public Provider Enrollment API
+
+<br> 
+
+What if you need the provider's PECOS PAC ID or Enrollment ID? Using the `provider_mppe()` function, you can search Medicare's **Fee-For-Service Public Provider Enrollment API**:
+
+<br>
+
+```{r}
+mppe_ex <- provider_mppe(1760485387)
+```
+
+<br>
+
+```{r echo=FALSE}
+mppe_ex |> dplyr::select(
+                "NPI" = npi, 
+                "Last Name" = last_name,
+                "PECOS PAC ID" = pecos_asct_cntl_id, 
+                "PECOS Enrollment ID" = enrlmt_id, 
+                "Specialty" = provider_type_desc, 
+                "State" = state_cd) |> 
+                knitr::kable()
+```
+
+<br>
 
 ## Medicare Order and Referring API
 
 <br>
 
-The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare's **Order and Referring API** with `provider_moar()`:
 
 <br>
 
- - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-
 ```{r}
-prov_mcr_ordref(1003026055) |> knitr::kable()
+moar_ex <- provider_moar(1760485387)
 ```
 
 <br>
 
-```{r}
-npi_list |> purrr::map_dfr(prov_mcr_ordref) |> 
-            knitr::kable()
-```
-
-<br>
-
-```{r}
-npi_data.frame |> dplyr::group_split(npi) |> 
-                  purrr::map_dfr(prov_mcr_ordref) |> 
-                  knitr::kable()
+```{r echo=FALSE}
+moar_ex |> dplyr::select(
+                "NPI" = npi, 
+                "Last Name" = last_name,
+                "First Name" = first_name, 
+                "Part B" = partb, 
+                "DME" = dme,
+                "HHA" = hha, 
+                "PMD" = pmd) |> knitr::kable()
 ```
 
 <br><br>
@@ -153,233 +175,520 @@ npi_data.frame |> dplyr::group_split(npi) |>
 ## Medicare Provider and Supplier Taxonomy Crosswalk API
 
 <br>
-The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS).
-<br>
 
-- [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+You may need to find Medicare's specialty codes for this provider's taxonomies. Using the output from the NPPES search in the first example, you can search Medicare's **Provider and Supplier Taxonomy Crosswalk API** with `provider_mpstc()`:
 
 <br>
 
 ```{r}
-prov_mcr_taxcross("2086S0102X") |> knitr::kable()
-```
-<br>
-
-```{r}
-nppes_ex <- npi_list |> purrr::map_dfr(prov_npi_nppes) |> 
-            dplyr::group_split(search) |>
-            purrr::map_dfr(prov_nppes_unpack)
-
-nppes_ex |> dplyr::distinct(taxon_code) |> 
+mpstc_ex <- nppes_ex |> 
+            dplyr::distinct(taxon_code) |> 
             dplyr::group_split(taxon_code) |> 
-            purrr::map_dfr(prov_mcr_taxcross) |> 
-            knitr::kable() |> 
-            kableExtra::scroll_box(
-              height = "500px", 
-              fixed_thead = TRUE)
+            purrr::map_dfr(provider_mpstc)
 ```
 
-<br><br>
-
-## Medicare Revalidation Due Date List API
-
 <br>
 
-Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet. These lists are refreshed every two months and two months’ worth of due dates are appended to the list.
-
-<br>
-
-The Revalidation Due Date List dataset contains revalidation due dates for Medicare providers who are due to revalidate in the following six months. If a provider's due date does not fall within the ensuing six months, the due date is marked 'TBD'. In addition the dataset also includes subfiles with reassignment information for a given provider as well as due date listings for clinics and group practices and their providers. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
-
-<br>
-
--  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
--  [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
-
-
-```{r}
-prov_mcr_reval_date(1184699621) |> knitr::kable()
+```{r echo=FALSE}
+mpstc_ex |> 
+  dplyr::select("Taxonomy Code" = provider_taxonomy_code, 
+                "Medicare Specialty Code" = medicare_specialty_code,
+                "Specialty" = medicare_provider_supplier_type_description, 
+                "Classification" = provider_taxonomy_description_type_classification_specialization) |> 
+                knitr::kable()
 ```
 
-
-<br><br>
-
-## CMS Public Reporting of Missing Digital Contact Information API
-
 <br>
 
-In the May 2020 CMS Interoperability and Patient Access final rule, CMS finalized the policy to publicly report the names and NPIs of those providers who do not have digital contact information included in the NPPES system (85 FR 25584). This data includes the NPI and provider name of providers and clinicians without digital contact information in NPPES. This data is gathered from NPPES for providers who are missing digital contact information.
-
-<br>
-
--  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare's **Revalidation Due Date API** with `provider_mrdd()`:
 
 <br>
 
 ```{r}
-prov_nppes_missing(1760485387) |> knitr::kable()
-```
-<br><br>
-
-## Medicare Physician & Other Practitioners - by Provider and Service API
-
-<br>
-
--  [Medicare Physician & Other Practitioners - by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
-
-<br>
-
-```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2020") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+mrdd_ex <- provider_mrdd(1760485387)
 ```
 
 <br>
 
-```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2019") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+```{r echo=FALSE}
+mrdd_ex |> dplyr::select("NPI" = national_provider_identifier, 
+                "Enrollment ID" = enrollment_id,
+                "Enrollment Type" = enrollment_type,
+                "Last Name" = last_name,
+                "State" = enrollment_state_code,
+                "Provider Type" = provider_type_text, 
+                "Specialty" = enrollment_specialty,
+                "Revalidation Due Date" = revalidation_due_date) |> 
+                knitr::kable()
 ```
+
+<br>
+
+Providers may need to update their digital contact information in the NPPES system. To check, you can access the **CMS Public Reporting of Missing Digital Contact Information API** with `provider_promdci()`. If they appear in the search results, it's time to update their NPPES contact information:
 
 <br>
 
 ```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2018") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+promdci_ex <- provider_promdci(1760485387)
 ```
 
 <br>
 
-```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2017") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+```{r echo=FALSE}
+promdci_ex |> 
+  dplyr::select("NPI" = npi, "Provider Name" = provider_name) |> 
+  knitr::kable()
 ```
+<br>
+
+You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `provider_mooa()`:
 
 <br>
 
 ```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2016") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+mooa_ex <- provider_mooa(1114974490)
 ```
 
 <br>
 
-```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2015") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
+```{r echo=FALSE}
+mooa_ex |> 
+  dplyr::select(
+    NPI = npi,
+    optout_effective_date,
+    optout_end_date,
+    Updated = last_updated,
+    Last = last_name,
+    First = first_name,
+    Specialty = specialty,
+    Address = first_line_street_address,
+    City = city_name,
+    State = state_code,
+    "Eligible to Order & Refer" = eligible_to_order_and_refer) |>
+  dplyr::mutate(optout_effective_date = datefixR::fix_date_char(optout_effective_date, format = "mdy"),
+                optout_end_date = datefixR::fix_date_char(optout_end_date, format = "mdy"),
+                Updated = datefixR::fix_date_char(Updated, format = "mdy")) |> 
+  dplyr::rename("Opt Out Effective" = optout_effective_date, "Opt Out End" = optout_end_date) |> 
+  knitr::kable()
 ```
 
 <br>
 
-```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2014") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
-```
+Using `provider_mpop()`, you can access **Medicare's Physician & Other Practitioners - by Provider and Service API**:
 
 <br>
 
 ```{r}
-prov_mcr_phys_pract(npi = 1003000126, 
-                    year = "2013") |> 
-                    knitr::kable() |> 
-                    kableExtra::scroll_box(
-                    height = "500px", 
-                    fixed_thead = TRUE)
-```
-
-<br><br>
-
-## CMS Open Data Catalog
-
-<br>
-
-```{r}
-cms_open_data_catalog <- "https://data.cms.gov/data.json"
-
-# Create polite version
-polite_req <- polite::politely(
-  httr2::request,
-  verbose = FALSE,
-  delay = 2)
-
-# Create request
-req <- polite_req(cms_open_data_catalog)
-
-# Send and save response
-resp <- req |>
-  httr2::req_url_query() |>
-  httr2::req_throttle(50 / 60) |>
-  httr2::req_perform()
-
-# Parse JSON response and save results
-results <- resp |> httr2::resp_body_json(
-  check_type = FALSE,
-  simplifyVector = TRUE)
-
-results_dataset <- results$dataset |> 
-  tidyr::unnest(bureauCode) |> 
-  tidyr::unnest(language) |> 
-  tidyr::unnest(programCode) |> 
-  tidyr::unnest(references) |> 
-  tidyr::unnest(theme)
-
-results_dataset |> 
-  dplyr::select(title, description) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(
-    height = "500px", 
-    fixed_thead = TRUE)
+mpop_ex_2020 <- provider_mpop(npi = 1760485387, 
+                              year = "2020")
 ```
 
 <br>
 
+```{r echo=FALSE}
+mpop_ex_2020 |> dplyr::select(NPI = rndrng_npi,
+                              "Last" = rndrng_prvdr_last_org_name,
+                              City = rndrng_prvdr_city,
+                              State = rndrng_prvdr_state_abrvtn,
+                              PAR = rndrng_prvdr_mdcr_prtcptg_ind,
+                              HCPCS = hcpcs_cd,
+                              "Beneficiaries" = tot_benes,
+                              "Services" = tot_srvcs,
+                              "Avg Billed" = avg_sbmtd_chrg,
+                              "Avg Allowed" = avg_mdcr_alowd_amt,
+                              "Avg Payment" = avg_mdcr_pymt_amt) |>
+                              knitr::kable()
+```
+
+<br>
+
+This API contains data going back to 2013, so you can perform a long-term analysis of a provider's Medicare data:
+
+<br>
+
 ```{r}
-results_dataset |> 
-  dplyr::select(dataset = title, 
-                time_period = temporal, 
-                distribution, 
-                identifier) |> 
-  dplyr::filter(dataset == "Medicare Physician & Other Practitioners - by Provider and Service") |> 
-  tidyr::unnest(distribution) |> 
-  dplyr::filter(format == "API") |> 
-  dplyr::select(title, 
-                accessURL, 
-                temporal, 
-                modified) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(
-    height = "500px", 
-    fixed_thead = TRUE)
+# Declare NPI
+mpop_npi <- "1760485387"
+
+# Retrieve the data from each year
+mpop20 <- provider_mpop(1760485387, "2020")
+mpop19 <- provider_mpop(1760485387, "2019")
+mpop18 <- provider_mpop(1760485387, "2018")
+mpop17 <- provider_mpop(1760485387, "2017")
+mpop16 <- provider_mpop(1760485387, "2016")
+mpop15 <- provider_mpop(1760485387, "2015")
+mpop14 <- provider_mpop(1760485387, "2014")
+mpop13 <- provider_mpop(1760485387, "2013")
+
+# Bind the data frames together by row
+mpop_13_20 <- dplyr::bind_rows(mpop20, mpop19, mpop18, mpop17, mpop16, mpop15, mpop14, mpop13)
+```
+
+<br>
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+mpop_13_20 |> 
+  dplyr::group_by(hcpcs_cd, hcpcs_desc) |> 
+  dplyr::summarise(
+    Benefits = sum(tot_benes),
+    Services = sum(tot_srvcs),
+    Avg_Billed = janitor::round_half_up(mean(avg_sbmtd_chrg), digits = 2),
+    Avg_Allowed = janitor::round_half_up(mean(avg_mdcr_alowd_amt), digits = 2),
+    Avg_Payment = janitor::round_half_up(mean(avg_mdcr_pymt_amt), digits = 2)) |> 
+  dplyr::ungroup() |> 
+  dplyr::rename(HCPCS = hcpcs_cd, 
+                "HCPCS Description" = hcpcs_desc,
+                "Avg Charge" = Avg_Billed,
+                "Avg Allowed" = Avg_Allowed,
+                "Avg Payment" = Avg_Payment) |> 
+  dplyr::arrange(Services) |> 
+  knitr::kable()
+```
+
+<br>
+
+Using packages like {gt} & {ggplot2}, you can create tables and graphs for reporting purposes:
+
+<br>
+
+<details>
+
+<summary>Click for Table Code</summary>
+
+``` {r}
+gt_table <- mpop_13_20 |>
+  dplyr::select(year,
+                hcpcs = hcpcs_cd,
+                benefits = tot_benes,
+                services = tot_srvcs,
+                avg_bill = avg_sbmtd_chrg,
+                avg_allow = avg_mdcr_alowd_amt,
+                avg_pay = avg_mdcr_pymt_amt) |> 
+  dplyr::group_by(hcpcs) |> 
+  dplyr::summarize(
+    ben_sum = sum(benefits),
+    ben_mean = mean(benefits),
+    ben_med = median(benefits),
+    ben_spark = list(benefits),
+    serv_sum = sum(services),
+    serv_mean = mean(services),
+    serv_med = median(services),
+    serv_spark = list(services),
+    char_mean = mean(avg_bill),
+    char_med = median(avg_bill),
+    char_spark = list(avg_bill),
+    all_mean = mean(avg_allow),
+    all_med = median(avg_allow),
+    all_spark = list(avg_allow),
+    pay_mean = mean(avg_pay),
+    pay_med = median(avg_pay),
+    pay_spark = list(avg_pay),
+    .groups = "drop") |> 
+  dplyr::filter(ben_sum >= 30)
+
+gt_table |> 
+  gt::gt(groupname_col = "hcpcs") |> 
+  gt::tab_header(
+  title = gt::md("**{provider} Example Medicare Data Report**: 2013 - 2020."), 
+  subtitle = gt::md(
+  "NPI: 1760485387. HCPCS Codes with a beneficiary count *less than 30* have been excluded.")) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::tab_options(row_group.as_column = TRUE, 
+                  footnotes.multiline = TRUE) |> 
+  gtExtras::gt_plt_sparkline(ben_spark, 
+                             type = "ref_iqr", 
+                             fig_dim = c(5, 30), 
+                             same_limit = FALSE, 
+                             palette = c("black", 
+                                         "black", 
+                                         "blue", 
+                                         "green", 
+                                         "red")) |> 
+  gtExtras::gt_plt_sparkline(serv_spark, 
+                             type = "ref_iqr", 
+                             fig_dim = c(5, 30), 
+                             same_limit = FALSE, 
+                             palette = c("black", 
+                                         "black", 
+                                         "blue", 
+                                         "green", 
+                                         "red")) |> 
+  gtExtras::gt_plt_sparkline(char_spark, 
+                             type = "ref_iqr", 
+                             fig_dim = c(5, 30), 
+                             same_limit = FALSE, 
+                             palette = c("black", 
+                                         "black", 
+                                         "blue", 
+                                         "green", 
+                                         "red")) |> 
+  gtExtras::gt_plt_sparkline(all_spark, 
+                             type = "ref_iqr", 
+                             fig_dim = c(5, 30), 
+                             same_limit = FALSE, 
+                             palette = c("black", 
+                                         "black", 
+                                         "blue", 
+                                         "green", 
+                                         "red")) |> 
+  gtExtras::gt_plt_sparkline(pay_spark, 
+                             type = "ref_iqr", 
+                             fig_dim = c(5, 30), 
+                             same_limit = FALSE, 
+                             palette = c("black", 
+                                         "black", 
+                                         "blue", 
+                                         "green", 
+                                         "red")) |> 
+  gtExtras::gt_add_divider(columns = c("hcpcs", 
+                                       "ben_spark", 
+                                       "serv_spark", 
+                                       "char_spark", 
+                                       "all_spark", 
+                                       "pay_spark"), 
+                           style = "dotted", 
+                           color = "gray") |> 
+  gt::fmt_number(columns = c(ben_mean:ben_med, 
+                             serv_mean:serv_med), 
+                 decimals = 0) |> 
+  gt::fmt_currency(columns = c(char_mean:char_med, 
+                               all_mean:all_med, 
+                               pay_mean:pay_med), 
+                   currency = "USD") |> 
+  gt::tab_spanner(label = "Beneficiaries", 
+                  id = "ben", 
+                  columns = c(ben_sum, 
+                              ben_mean, 
+                              ben_med, 
+                              ben_spark)) |> 
+  gt::tab_spanner(label = "Services", 
+                  id = "serv", 
+                  columns = c(serv_sum, 
+                              serv_mean, 
+                              serv_med, 
+                              serv_spark)) |> 
+  gt::tab_spanner(label = "Submitted Charge", 
+                  columns = c(char_mean, 
+                              char_med, 
+                              char_spark)) |> 
+  gt::tab_spanner(label = "Allowed Amount", 
+                  columns = c(all_mean, 
+                              all_med, 
+                              all_spark)) |> 
+  gt::tab_spanner(label = "Payment", 
+                  columns = c(pay_mean, 
+                              pay_med, 
+                              pay_spark)) |> 
+  gt::cols_label(ben_sum = "Count", 
+                 ben_mean = "Mean", 
+                 ben_med = "Median", 
+                 ben_spark = "Trend") |> 
+  gt::cols_label(serv_sum = "Count", 
+                 serv_mean = "Mean", 
+                 serv_med = "Median", 
+                 serv_spark = "Trend") |> 
+  gt::cols_label(char_mean = "Mean", 
+                 char_med = "Median", 
+                 char_spark = "Trend") |> 
+  gt::cols_label(all_mean = "Mean", 
+                 all_med = "Median", 
+                 all_spark = "Trend") |> 
+  gt::cols_label(pay_mean = "Mean", 
+                 pay_med = "Median", 
+                 pay_spark = "Trend") |> 
+  gt::tab_source_note(
+    source_note = gt::md("Data Source: *Physician & Other Practitioners: by Provider and Service* (2013 - 2020). **Medicare.**")) |> 
+  gt::tab_footnote(
+    footnote = gt::md("Number of *distinct* Medicare beneficiaries receiving the service for each HCPCS code."), 
+    locations = gt::cells_column_spanners(spanners = "ben")) |> 
+  gt::tab_footnote(
+    footnote = gt::md("Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"), 
+    locations = gt::cells_column_spanners(spanners = "serv")) |> 
+  gt::opt_table_outline() |> 
+  gt::opt_stylize(style = 1, 
+                  color = "red", 
+                  add_row_striping = TRUE) |> 
+  gtExtras::gt_color_rows(ben_sum) |> 
+  gtExtras::gt_color_rows(serv_sum) |> 
+  gtExtras::gt_color_rows(char_mean) |> 
+  gtExtras::gt_color_rows(all_mean) |> 
+  gtExtras::gt_color_rows(pay_mean)
+
+#gt_table |> gt::gtsave("gt_provider2.png", expand = 20, zoom = 2, vwidth = 1500)
+```
+
+</details>
+
+<br>
+<br>
+
+```{r eval=FALSE, include=FALSE}
+valdosta_nppes_1 <- prov_city_nppes(city = "Valdosta", state = "GA")
+valdosta_nppes_2 <- prov_city_nppes(city = "Valdosta", state = "GA", skip = 200)
+valdosta_nppes_3 <- prov_city_nppes(city = "Valdosta", state = "GA", skip = 400)
+valdosta_nppes_4 <- prov_city_nppes(city = "Valdosta", state = "GA", skip = 600)
+valdosta_nppes_5 <- prov_city_nppes(city = "Valdosta", state = "GA", skip = 800)
+valdosta_nppes_6 <- prov_city_nppes(city = "Valdosta", state = "GA", skip = 1000)
 ```
 
 
-<br><br>
+```{r eval=FALSE, include=FALSE}
+prov_nppes_unpack_city(valdosta_nppes_1)
+```
+
+```{r eval=FALSE, include=FALSE}
+prov_nppes_unpack_city(valdosta_nppes_2)
+```
+
+```{r eval=FALSE, include=FALSE}
+prov_nppes_unpack_city(valdosta_nppes_3)
+```
+
+```{r eval=FALSE, include=FALSE}
+prov_nppes_unpack_city(valdosta_nppes_4)
+```
+
+```{r eval=FALSE, include=FALSE}
+prov_nppes_unpack_city(valdosta_nppes_5)
+```
+
+```{r eval=FALSE, include=FALSE}
+val_6 <- prov_nppes_unpack_city(valdosta_nppes_6)
+
+val_6_ind <- val_6 |> 
+  dplyr::filter(prov_type == "NPI-1") |> 
+  janitor::remove_empty() |> 
+  dplyr::mutate(name_prefix = dplyr::na_if(name_prefix, "--")) |> 
+  dplyr::mutate(name_suffix = dplyr::na_if(name_suffix, "--")) |> 
+  dplyr::mutate(taxonomy_group = NULL) |> 
+  dplyr::mutate(enumeration_date = as.Date(enumeration_date)) |> 
+  dplyr::mutate(last_updated = as.Date(last_updated))
+
+val_6_ind_basic <- val_6_ind |> dplyr::select(npi:country_code) |> dplyr::distinct()
+
+val_6_ind |> dplyr::count(other_names_type, other_names_code, other_names_first_name, other_names_last_name, other_names_middle_name, other_names_credential)
+val_6_ind |> dplyr::count(name_prefix, name_suffix)
+val_6_ind |> dplyr::count(pract_country_abb, pract_country_name, pract_address_purpose, pract_address_type, pract_address_1, pract_city, pract_state_abb, pract_postal_code, pract_telephone_number, pract_fax_number)
+```
+
+
+```{r eval=FALSE, include=FALSE}
+npi_1 <- prov_nppes_unpack_city(valdosta_nppes_1) |> dplyr::distinct(npi)
+npi_2 <- prov_nppes_unpack_city(valdosta_nppes_2) |> dplyr::distinct(npi)
+npi_3 <- prov_nppes_unpack_city(valdosta_nppes_3) |> dplyr::distinct(npi)
+npi_4 <- prov_nppes_unpack_city(valdosta_nppes_4) |> dplyr::distinct(npi)
+npi_5 <- prov_nppes_unpack_city(valdosta_nppes_5) |> dplyr::distinct(npi)
+npi_6 <- prov_nppes_unpack_city(valdosta_nppes_6) |> dplyr::distinct(npi)
+
+npi_valdosta <- dplyr::bind_rows(npi_1, npi_2, npi_3, npi_4, npi_5, npi_6)
+
+npi_valdosta
+```
+
+
+```{r eval=FALSE, include=FALSE}
+library(gt)
+library(gtExtras)
+library(mmtable2)
+library(dplyr)
+library(tidyr)
+library(purrr)
+
+val_6_ind_1447367453 <- val_6_ind |> filter(npi == "1447367453")
+
+val_chiang_basic <- val_6_ind_1447367453 |> 
+  dplyr::select(npi:name_suffix) |> 
+  dplyr::distinct() |> 
+  janitor::remove_empty() |> 
+  dplyr::select(npi, 
+                first = first_name,
+                middle = middle_name,
+                last = last_name,
+                credential,
+                provider_type = prov_type,
+                status,
+                sole_proprietor,
+                gender,
+                enumeration_date,
+                last_updated
+                )
+
+val_chiang_basic |> gt()
+```
+
+
+```{r eval=FALSE, include=FALSE}
+val_chiang_address <- val_6_ind_1447367453 |> 
+  dplyr::select(country_code:fax_number) |> 
+  dplyr::distinct() |> 
+  janitor::remove_empty() |> 
+  dplyr::mutate(
+    address_purpose = stringr::str_to_title(address_purpose),
+    city = stringr::str_to_title(city)) |> 
+  dplyr::select(
+    purpose = address_purpose,
+    address = address_1,
+    city,
+    state,
+    zip = postal_code,
+    country = country_code,
+    phone = telephone_number,
+    fax = fax_number
+    )
+
+val_chiang_address |> 
+  gt(rowname_col = "purpose")
+  mmtable2::mmtable(cells = address, use_default_formats = TRUE) |> 
+  mmtable2::add_header_left(postal) |> 
+  mmtable2::add_header_left(state) |> 
+  mmtable2::add_header_left(city) |> 
+  mmtable2::add_header_top(purpose) |> 
+  mmtable2::knit_print.mmtable() |> 
+  gt_theme_nytimes()
+```
+
+
+```{r eval=FALSE, include=FALSE}
+val_chiang_taxonomy <- val_6_ind_1447367453 |> 
+  dplyr::select(taxon_code:taxon_primary) |> 
+  dplyr::distinct() |> 
+  janitor::remove_empty() |> 
+  dplyr::select(code = taxon_code,
+                description = taxon_desc,
+                state = taxon_state,
+                license = taxon_license,
+                primary = taxon_primary
+                )
+
+
+val_chiang_taxonomy |> gt()
+```
+
+```{r eval=FALSE, include=FALSE}
+val_chiang_identifier <- val_6_ind_1447367453 |> 
+  dplyr::select(ident_code:ident_state) |> 
+  dplyr::distinct() |> 
+  janitor::remove_empty() |> 
+  dplyr::select(identifier,
+                code = ident_code,
+                type = ident_desc,
+                state = ident_state)
+
+
+val_chiang_identifier |> gt()
+```
+
+```{r eval=FALSE, include=FALSE}
+val_chiang_identifier <- val_6_ind_1447367453 |> 
+  dplyr::select(ident_code:ident_state) |> 
+  dplyr::distinct() |> 
+  janitor::remove_empty() |> 
+  dplyr::select(identifier,
+                code = ident_code,
+                type = ident_desc,
+                state = ident_state)
+
+
+val_chiang_identifier |> gt()
+```
 

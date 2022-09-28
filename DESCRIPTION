@@ -1,15 +1,17 @@
-Package: provider
 Type: Package
+Package: provider
 Title: Access Public Healthcare Provider Data
 Version: 0.0.0.9001
 Authors@R: 
-    person("Andrew", "Bruce", role = c("aut", "cre", "cph"), email = "andrewbruce.himni@gmail.com")
+    person("Andrew", "Bruce", , "andrewbruce.himni@gmail.com", role = c("aut", "cre", "cph"))
 Maintainer: Andrew Bruce <andrewbruce.himni@gmail.com>
-Description: Provides various features to facilitate easy access to publicly available
-    healthcare provider data. Includes functions to tidy the data being accessed, whether for
-    reporting purposes or updating internal records.
+Description: Provides various features to facilitate easy access to
+    publicly available healthcare provider data. Includes functions to
+    tidy the data being accessed, whether for reporting purposes or
+    updating internal records.
 License: MIT + file LICENSE
-URL: https://andrewallenbruce.github.io/provider/, https://github.com/andrewallenbruce/provider
+URL: https://andrewallenbruce.github.io/provider/,
+    https://github.com/andrewallenbruce/provider
 BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 2.10)
@@ -25,23 +27,23 @@ Imports:
     tibble,
     tidyr
 Suggests: 
+    datefixR,
     gt,
     gtExtras,
-    datefixR,
     janitor,
-    stringr,
-    purrr,
     kableExtra,
     knitr,
     lobstr,
+    purrr,
     rmarkdown,
-    testthat (>= 3.0.0),
-    spelling
+    spelling,
+    stringr,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
-Language: en-US

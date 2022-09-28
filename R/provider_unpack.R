@@ -1,25 +1,38 @@
-#' Unpack NPI NPPES Search Results
+#' Unpack NPPES NPI Registry Search Results
 #'
-#' @param df data.frame or tbl_df, response from provider_nppes()
+#' @param df [tibble()] response from [provider_nppes()]
+#' @param clean_names Clean column names with {janitor}'s
+#'    `clean_names()` function; default is `TRUE`.
 #'
-#' @return A tibble containing the unpacked list-columns of a search
-#' performed with the provider_nppes() function.
+#' @return A [tibble()] containing the unpacked list-columns of a search
+#' performed with the [provider_nppes()] function.
+#'
+#' @references
+#'    \url{https://npiregistry.cms.hhs.gov/api-page}
+#'
+#' @seealso [provider_nppes()]
 #'
 #' @examples
 #' \dontrun{
-#' provider_nppes(1528060837) |>
+#' # Single NPI ==============================================================
+#' provider_nppes(npi = 1528060837) |>
 #' provider_unpack()
 #'
-#' provider_nppes(city = "Atlanta", state = "GA") |>
+#' # City, state, country ====================================================
+#' provider_nppes(city = "Atlanta",
+#'                state_abbr = "GA",
+#'                country_abbr = "US") |>
 #' provider_unpack()
 #'
-#' provider_nppes(first = "John", city = "Baltimore", state = "MD") |>
+#' # First name, city, state  ================================================
+#' provider_nppes(first = "John",
+#'                city = "Baltimore",
+#'                state_abbr = "MD") |>
 #' provider_unpack()
 #' }
-#'
 #' @export
 
-provider_unpack <- function(df) {
+provider_unpack <- function(df, clean_names = TRUE) {
 
   # Check for data input
   if (missing(df)) stop("You haven't input a data frame.")
@@ -168,5 +181,17 @@ provider_unpack <- function(df) {
     }
 
   }
-  return(results)
+
+  # Clean names with janitor
+  if (clean_names == TRUE) {
+
+    results <- results |>
+      janitor::clean_names()
+
+    return(results)
+
+  } else {
+
+    return(results)
+  }
 }

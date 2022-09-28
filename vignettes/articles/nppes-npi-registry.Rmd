@@ -1,0 +1,398 @@
+---
+title: "NPPES NPI Public Registry API"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 150, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+<br>
+
+There are three methods of entering search terms into the functions:
+
+ - single 10-digit number
+ - list of multiple 10-digit numbers
+ - data frame of 10-digit numbers
+
+I'll create the example list and data frame I'll be using in the examples for each API.
+
+<br>
+
+```{r}
+# Example list
+npi_list <- c(1003026055, 
+              1316405939, 
+              1720392988, 
+              1518184605, 
+              1922056829, 
+              1083879860)
+
+# Example data frame
+npi_df <- data.frame(npi = c(1003026055,  
+                             1316405939, 
+                             1720392988, 
+                             1518184605, 
+                             1922056829, 
+                             1083879860))
+```
+
+
+<br><br>
+
+## NPPES NPI Public Registry API
+
+The NPPES NPI Registry Public Search is a free directory of all active National Provider Identifier (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry. The NPPES Application Programming Interface (API) is a faster alternative to the downloadable NPPES data files. It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The Skip field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
+
+-  [U.S. NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
+
+<br>
+
+```{r message=FALSE, warning=FALSE}
+provider_nppes(1003026055) |> 
+  provider_unpack() |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(fixed_thead = TRUE)
+```
+
+<br>
+
+```{r warning=FALSE}
+npi_list |> purrr::map_dfr(provider_nppes) |> 
+            dplyr::group_split(outcome) |>
+            purrr::map_dfr(provider_unpack) |> 
+            knitr::kable() |> 
+            kableExtra::scroll_box(
+              height = "500px", 
+              fixed_thead = TRUE)
+```
+
+<br>
+
+```{r message=FALSE, warning=FALSE}
+npi_df |> tibble::deframe() |> 
+          purrr::map_dfr(provider_nppes)
+```
+
+<br><br>
+
+## Medicare Fee-For-Service (FFS) Provider Enrollment API
+
+<br>
+
+The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
+
+<br>
+
+ -   [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+ -   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
+ -   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
+
+<br>
+
+```{r}
+provider_mppe(1003026055) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(fixed_thead = TRUE)
+```
+
+<br>
+
+
+```{r}
+npi_list |> purrr::map_dfr(provider_mppe) |> 
+            knitr::kable() |> 
+            kableExtra::scroll_box(fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+npi_df |> tibble::deframe() |> 
+          purrr::map_dfr(provider_mppe) |> 
+          knitr::kable() |> 
+          kableExtra::scroll_box(fixed_thead = TRUE)
+```
+
+
+<br><br>
+
+## Medicare Order and Referring API
+
+<br>
+
+The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+
+<br>
+
+ - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+
+```{r}
+provider_moar(1003026055) |> knitr::kable()
+```
+
+<br>
+
+```{r}
+npi_list |> purrr::map_dfr(provider_moar) |> 
+            knitr::kable()
+```
+
+<br>
+
+```{r}
+npi_df |> tibble::deframe() |> 
+          purrr::map_dfr(provider_moar) |> 
+          knitr::kable()
+```
+
+<br><br>
+
+## Medicare Provider and Supplier Taxonomy Crosswalk API
+
+<br>
+The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS).
+<br>
+
+- [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+
+<br>
+
+```{r}
+provider_mpstc("2086S0102X") |> knitr::kable()
+```
+<br>
+
+```{r}
+npi_mpstc <- npi_list |> purrr::map_dfr(provider_nppes) |> 
+                         dplyr::group_split(outcome) |>
+                         purrr::map_dfr(provider_unpack)
+
+npi_mpstc |> dplyr::distinct(taxon_code) |> 
+             tibble::deframe() |> 
+             purrr::map_dfr(provider_mpstc) |> 
+             knitr::kable() |> 
+             kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+
+```{r}
+provider_mpstc(full = TRUE)
+```
+
+
+<br><br>
+
+## Medicare Revalidation Due Date List API
+
+<br>
+
+Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet. These lists are refreshed every two months and two months’ worth of due dates are appended to the list.
+
+<br>
+
+The Revalidation Due Date List dataset contains revalidation due dates for Medicare providers who are due to revalidate in the following six months. If a provider's due date does not fall within the ensuing six months, the due date is marked 'TBD'. In addition the dataset also includes subfiles with reassignment information for a given provider as well as due date listings for clinics and group practices and their providers. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+
+<br>
+
+-  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
+-  [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
+
+
+```{r}
+provider_mrdd(1184699621) |> knitr::kable()
+```
+
+```{r}
+npi_list |> purrr::map_dfr(provider_mrdd)
+```
+
+
+<br><br>
+
+## CMS Public Reporting of Missing Digital Contact Information API
+
+<br>
+
+In the May 2020 CMS Interoperability and Patient Access final rule, CMS finalized the policy to publicly report the names and NPIs of those providers who do not have digital contact information included in the NPPES system (85 FR 25584). This data includes the NPI and provider name of providers and clinicians without digital contact information in NPPES. This data is gathered from NPPES for providers who are missing digital contact information.
+
+<br>
+
+-  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+
+<br>
+
+```{r}
+provider_promdci(npi = 1760485387) |> knitr::kable()
+```
+
+<br>
+
+```{r}
+npi_list |> purrr::map_dfr(provider_promdci)
+```
+
+<br>
+
+```{r}
+provider_promdci(full = TRUE)
+```
+
+
+<br><br>
+
+## Medicare Physician & Other Practitioners - by Provider and Service API
+
+<br>
+
+-  [Medicare Physician & Other Practitioners - by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+
+
+```{r}
+npi_list |> purrr::map_dfr(provider_mpop)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2020") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2019") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2018") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2017") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2016") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2015") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2014") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+provider_mpop(npi = 1003000126, year = "2013") |> 
+              knitr::kable() |> 
+              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
+```
+
+<br><br>
+
+## CMS Open Data Catalog
+
+<br>
+
+```{r}
+cms_open_data_catalog <- "https://data.cms.gov/data.json"
+
+# Create polite version
+polite_req <- polite::politely(
+  httr2::request,
+  verbose = FALSE,
+  delay = 2)
+
+# Create request
+req <- polite_req(cms_open_data_catalog)
+
+# Send and save response
+resp <- req |>
+  httr2::req_url_query() |>
+  httr2::req_throttle(50 / 60) |>
+  httr2::req_perform()
+
+# Parse JSON response and save results
+results <- resp |> httr2::resp_body_json(
+  check_type = FALSE,
+  simplifyVector = TRUE)
+
+results_dataset <- results$dataset |> 
+  tidyr::unnest(bureauCode) |> 
+  tidyr::unnest(language) |> 
+  tidyr::unnest(programCode) |> 
+  tidyr::unnest(references) |> 
+  tidyr::unnest(theme)
+
+results_dataset |> 
+  dplyr::select(title, description) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(
+    height = "500px", 
+    fixed_thead = TRUE)
+```
+
+<br>
+
+```{r}
+results_dataset |> 
+  dplyr::select(dataset = title, 
+                time_period = temporal, 
+                distribution, 
+                identifier) |> 
+  dplyr::filter(dataset == "Medicare Physician & Other Practitioners - by Provider and Service") |> 
+  tidyr::unnest(distribution) |> 
+  dplyr::filter(format == "API") |> 
+  dplyr::select(title, 
+                accessURL, 
+                temporal, 
+                modified) |> 
+  knitr::kable() |> 
+  kableExtra::scroll_box(
+    height = "500px", 
+    fixed_thead = TRUE)
+```
+
+
+<br><br>

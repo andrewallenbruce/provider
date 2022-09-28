@@ -2,30 +2,45 @@
 % Please edit documentation in R/provider_unpack.R
 \name{provider_unpack}
 \alias{provider_unpack}
-\title{Unpack NPI NPPES Search Results}
+\title{Unpack NPPES NPI Registry Search Results}
 \usage{
-provider_unpack(df)
+provider_unpack(df, clean_names = TRUE)
 }
 \arguments{
-\item{df}{data.frame or tbl_df, response from provider_nppes()}
+\item{df}{\code{\link[=tibble]{tibble()}} response from \code{\link[=provider_nppes]{provider_nppes()}}}
+
+\item{clean_names}{Clean column names with {janitor}'s
+\code{clean_names()} function; default is \code{TRUE}.}
 }
 \value{
-A tibble containing the unpacked list-columns of a search
-performed with the provider_nppes() function.
+A \code{\link[=tibble]{tibble()}} containing the unpacked list-columns of a search
+performed with the \code{\link[=provider_nppes]{provider_nppes()}} function.
 }
 \description{
-Unpack NPI NPPES Search Results
+Unpack NPPES NPI Registry Search Results
 }
 \examples{
 \dontrun{
-provider_nppes(1528060837) |>
+# Single NPI ==============================================================
+provider_nppes(npi = 1528060837) |>
 provider_unpack()
 
-provider_nppes(city = "Atlanta", state = "GA") |>
+# City, state, country ====================================================
+provider_nppes(city = "Atlanta",
+               state_abbr = "GA",
+               country_abbr = "US") |>
 provider_unpack()
 
-provider_nppes(first = "John", city = "Baltimore", state = "MD") |>
+# First name, city, state  ================================================
+provider_nppes(first = "John",
+               city = "Baltimore",
+               state_abbr = "MD") |>
 provider_unpack()
 }
-
+}
+\references{
+\url{https://npiregistry.cms.hhs.gov/api-page}
+}
+\seealso{
+\code{\link[=provider_nppes]{provider_nppes()}}
 }

@@ -2,61 +2,139 @@
 % Please edit documentation in R/provider_nppes.R
 \name{provider_nppes}
 \alias{provider_nppes}
-\title{Search the NPPES NPI Public Registry}
+\title{Search the NPPES National Provider Identifier (NPI) Registry API}
 \usage{
 provider_nppes(
   npi = NULL,
   first = NULL,
   last = NULL,
+  org = NULL,
   city = NULL,
   state_abbr = NULL,
+  country_abbr = NULL,
   limit = 10,
   skip = NULL
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI)}
+\item{npi}{10-digit National Provider Identifier (NPI).}
 
-\item{first}{Provider's first name}
+\item{first}{Provider's first name. Applies to
+\strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered (e.g. "jo*" ).
+This field allows the following special characters: ampersand(\code{&}),
+apostrophe(\verb{,}), colon(\code{:}), comma(\verb{,}), forward slash(\code{/}),
+hyphen(\code{-}), left and right parentheses(\verb{()}), period(\code{.}),
+pound sign(\verb{#}), quotation mark(\verb{"}), and semi-colon(\verb{;}).}
 
-\item{last}{Provider's last name}
+\item{last}{Provider's last name. Applies to
+\strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered (e.g. "jo*" ).
+This field allows the following special characters: ampersand(\code{&}),
+apostrophe(\verb{,}), colon(\code{:}), comma(\verb{,}), forward slash(\code{/}),
+hyphen(\code{-}), left and right parentheses(\verb{()}), period(\code{.}),
+pound sign(\verb{#}), quotation mark(\verb{"}), and semi-colon(\verb{;}).}
 
-\item{city}{City in which provider practices}
+\item{org}{Healthcare organization's name. Applies to
+\strong{Organizational Providers (NPI-2)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered. All types of
+Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
+NPI are examined for matching contents, therefore, the results might
+contain an organization name different from the one entered in the
+Organization Name criterion. This field allows the following special
+characters: ampersand, apostrophe, "at" sign, colon, comma, forward
+slash, hyphen, left and right parentheses, period, pound sign, quotation
+mark, and semi-colon.}
 
-\item{state_abbr}{Abbreviation of state in which provider practices}
+\item{city}{City associated with the provider's address. To search for a
+Military Address, enter either \code{APO} or \code{FPO} into the City field.
+This field allows the following special characters: ampersand,
+apostrophe, colon, comma, forward slash, hyphen, left and right
+parentheses, period, pound sign, quotation mark, and semi-colon.}
 
-\item{limit}{Maximum number of results to return, default is 10}
+\item{state_abbr}{State abbreviation associated with the provider's address.
+This field \strong{cannot} be used as the only input criterion. If this
+field is used, at least one other field, besides the \code{prov_type} and
+\code{country_abbr}, must be populated. Valid values for state abbreviations:
+\url{https://npiregistry.cms.hhs.gov/help-api/state}.}
 
-\item{skip}{Number of results to skip after searching the previous,
-say, 200 examples}
+\item{country_abbr}{Country abbreviation associated with the provider's
+address. This field \strong{can} be used as the only input criterion, as long
+as the value selected \emph{is not} \strong{US} (United States). Valid values for
+country abbreviations:
+\url{https://npiregistry.cms.hhs.gov/help-api/country}.}
+
+\item{limit}{Maximum number of results to return;
+default is 10, maximum is 1200.}
+
+\item{skip}{Number of results to skip after searching
+the previous number; set in \code{limit}.}
 }
 \value{
-A tibble containing the date-time the search was performed
+A \code{\link[=tibble]{tibble()}} containing the date-time the search was performed
 and a list-column of the results.
 }
 \description{
-The NPPES NPI Registry Public Search is a
-free directory of all active National Provider Identifier
-(NPI) records. Healthcare providers acquire their unique
-10-digit NPIs to identify themselves in a standard way
-throughout their industry. After CMS supplies an NPI,
-they publish the parts of the NPI record that have public
-relevance, including the provider’s name, taxonomy and
-practice address. It enables you to search for providers
-in the NPPES (National Plan and Provider Enumeration System.)
-All information produced by the NPI Registry is provided in
-accordance with the NPPES Data Dissemination Notice.
-There is no charge to use the NPI Registry.
+\code{provider_nppes()} allows you to search the NPPES NPI
+Registry's public API by many of the parameters defined in the
+API's documentation.
 }
+\section{The NPPES NPI Public Registry}{
+The NPPES NPI Registry Public Search is a free directory of all
+active National Provider Identifier (NPI) records. Healthcare providers
+acquire their unique 10-digit NPIs to identify themselves in a standard
+way throughout their industry. After CMS supplies an NPI, they publish
+the parts of the NPI record that have public relevance, including the
+provider’s name, taxonomy and practice address. It enables you to search
+for providers in the NPPES (National Plan and Provider Enumeration System.)
+All information produced by the NPI Registry is provided in accordance with
+the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+}
+
 \examples{
 \dontrun{
-provider_nppes(1528060837)
+# Single NPI ==============================================================
+provider_nppes(npi = 1528060837)
 
-provider_nppes(city = "Atlanta", state_abbr = "GA")
+# City, state, country ====================================================
+provider_nppes(city = "Atlanta",
+               state_abbr = "GA",
+               country_abbr = "US")
 
-provider_nppes(first = "John", city = "Baltimore", state_abbr = "MD")
+# First name, city, state  ================================================
+provider_nppes(first = "John",
+               city = "Baltimore",
+               state_abbr = "MD")
+
+# List of NPIs
+npi_list <- c(1003026055,
+              1316405939,
+              1720392988,
+              1518184605,
+              1922056829,
+              1083879860)
+
+npi_list |>
+purrr::map_dfr(provider_nppes) |>
+dplyr::group_split(outcome) |>
+purrr::map_dfr(provider_unpack)
+
+# Data frame of NPIs
+npi_df <- data.frame(npi = c(1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860))
+npi_df |>
+tibble::deframe() |>
+purrr::map_dfr(provider_nppes)
 }
 }
 \references{
 \url{https://npiregistry.cms.hhs.gov/api-page}
+\url{https://npiregistry.cms.hhs.gov/search}
+}
+\seealso{
+\code{\link[=provider_unpack]{provider_unpack()}}, \code{\link[=provider_luhn]{provider_luhn()}}
 }

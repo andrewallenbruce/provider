@@ -1,0 +1,62 @@
+---
+title: "Healthcare Providers: Why Geocode?"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+
+<br>
+
+```{r}
+# Retrieve the provider data
+mpop20 <- provider_mpop(1760485387, "2020")
+```
+
+<br>
+
+```{r}
+# prov_address <- prov_2013_2020 |> 
+#   dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |> 
+#   dplyr::filter(dplyr::row_number() %in% 1) |> 
+#   dplyr::mutate(rndrng_prvdr_st1 = gsub("[.]", "", as.character(rndrng_prvdr_st1))) |> 
+#   tidyr::unite("addr", rndrng_prvdr_st1:rndrng_prvdr_state_abrvtn, sep = ", ", remove = TRUE) |> 
+#   tidyr::unite("prov_addr", addr:rndrng_prvdr_zip5, sep = " ", remove = TRUE)
+
+prov_address <- mpop20 |> 
+  dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |> 
+  dplyr::filter(dplyr::row_number() %in% 1) |> 
+  dplyr::mutate(rndrng_prvdr_st1 = "4570 County Hwy 61") |> 
+  tidyr::unite("addr", rndrng_prvdr_st1:rndrng_prvdr_state_abrvtn, sep = ", ", remove = TRUE) |> 
+  tidyr::unite("prov_addr", addr:rndrng_prvdr_zip5, sep = " ", remove = TRUE)
+  
+
+prov_geocode <- prov_address |> 
+  tidygeocoder::geocode(prov_addr, 
+                        method = "osm", 
+                        lat = latitude, 
+                        long = longitude, 
+                        full_results = TRUE)
+
+prov_geocode
+```
+
+<br><br>
+
+```{r}
+map <- leaflet::leaflet() |> 
+       leaflet::addTiles() |> 
+       leaflet::addMarkers(lng = prov_geocode$longitude, lat = prov_geocode$latitude, popup = prov_geocode$display_name)
+
+map
+```
+
+<br><br>
