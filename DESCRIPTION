@@ -29,6 +29,7 @@ Imports:
 Suggests: 
     datefixR,
     tidygeocoder,
+    leaflet,
     gt,
     gtExtras,
     janitor,
