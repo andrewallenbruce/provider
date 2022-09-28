@@ -28,6 +28,7 @@ Imports:
     tidyr
 Suggests: 
     datefixR,
+    tidygeocoder,
     gt,
     gtExtras,
     janitor,
