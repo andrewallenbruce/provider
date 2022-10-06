@@ -34,6 +34,7 @@ reference:
   - provider_unpack
   - provider_luhn
   - age_days
+  - days_today
   - format_zipcode
 
 navbar:
