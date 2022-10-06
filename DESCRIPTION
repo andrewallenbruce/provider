@@ -42,7 +42,8 @@ Suggests:
     spelling,
     stringr,
     testthat (>= 3.0.0),
-    tidygeocoder
+    tidygeocoder,
+    tidyselect
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

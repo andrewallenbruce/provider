@@ -16,8 +16,6 @@
 #'                     by = "month", length.out = 3))
 #'
 #' date_ex |> age_days(x, y)
-#'
-#' date_ex |> age_days(start_date = x, end_date = lubridate::today())
 #' @export
 
 age_days <- function(df, start_date = start_date, end_date = end_date){
@@ -25,8 +23,8 @@ age_days <- function(df, start_date = start_date, end_date = end_date){
   stopifnot(inherits(df, "data.frame"))
 
   dates <- dplyr::mutate(df,
-      end_date = as.Date({{ end_date }}, "%yyyy-%mm-%dd", tz = "EST"),
-      start_date = as.Date({{ start_date }}, "%yyyy-%mm-%dd", tz = "EST"))
+                         end_date = as.Date({{ end_date }}, "%yyyy-%mm-%dd", tz = "EST"),
+                         start_date = as.Date({{ start_date }}, "%yyyy-%mm-%dd", tz = "EST"))
 
   results <- dates |>
     dplyr::mutate(age = ((

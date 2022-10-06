@@ -27,6 +27,4 @@ date_ex <- data.frame(x = seq.Date(as.Date("2021-01-01"),
                     by = "month", length.out = 3))
 
 date_ex |> age_days(x, y)
-
-date_ex |> age_days(start_date = x, end_date = lubridate::today())
 }

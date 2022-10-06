@@ -34,7 +34,7 @@ reference:
   - provider_unpack
   - provider_luhn
   - age_days
-  - format_zip
+  - format_zipcode
 
 navbar:
   structure:
