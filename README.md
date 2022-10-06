@@ -88,7 +88,7 @@ nppes_ex <- provider_nppes(npi = 1760485387)
     #> # A tibble: 1 × 3
     #>   datetime            outcome data_lists   
     #>   <dttm>              <chr>   <list>       
-    #> 1 2022-09-28 16:28:57 results <df [1 × 11]>
+    #> 1 2022-10-05 22:50:30 results <df [1 × 11]>
 
 <br>
 
@@ -155,14 +155,12 @@ nppes_ex2 <- provider_nppes(first = "Paul",
                             last = "Dewey",
                             state_abbr = "MN") |> 
                             provider_unpack()
+#> Error in provider_nppes(first = "Paul", last = "Dewey", state_abbr = "MN"): unused argument (state_abbr = "MN")
 ```
 
 <br>
 
-| NPI        | Last Name | Provider Type | Code       | Primary | Description       | State | License |
-|:-----------|:----------|:--------------|:-----------|:--------|:------------------|:------|:--------|
-| 1760485387 | DEWEY     | NPI-1         | 207R00000X | TRUE    | Internal Medicine | MN    | 43634   |
-| 1760485387 | DEWEY     | NPI-1         | 208000000X | FALSE   | Pediatrics        | MN    | 43634   |
+    #> Error in dplyr::select(nppes_ex2, NPI = npi, `Last Name` = last_name, : object 'nppes_ex2' not found
 
 <br>
 
@@ -275,9 +273,30 @@ mooa_ex <- provider_mooa(1114974490)
 
 <br>
 
-| NPI        | Last    | First | Opt-Out Begins | Opt-Out Ends | Order & Refer Eligible | Specialty          | Address          | City     | State |
-|:-----------|:--------|:------|:---------------|:-------------|:-----------------------|:-------------------|:-----------------|:---------|:------|
-| 1114974490 | Altchek | David | 2012-07-01     | 2024-07-01   | Y                      | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |
+    #> Error in `dplyr::mutate()`:
+    #> ! Problem while computing `days_to_end = age_days(start_date =
+    #>   optout_end_date, end_date = lubridate::today())`.
+    #> Caused by error in `inherits()`:
+    #> ! argument "df" is missing, with no default
+    #> Error in dplyr::select(NPI = npi, Last = last_name, First = first_name, : object 'optout_effective_date' not found
+
+<br>
+
+`provider_rcgpr()` accesses **Medicare’s Revalidation Clinic Group
+Practice Reassignment API**:
+
+<br>
+
+``` r
+rcgpr_ex <- provider_rcgpr(npi = 1760485387)
+```
+
+<br>
+
+| NPI        | Last  | Type         | PAC ID Group | Enroll ID Group | Business Name                      | Due Date Group | PAC ID Ind | Enroll ID Ind   | Due Date Ind | Reassignments & Phys Assts | Employer Associations |
+|:-----------|:------|:-------------|:-------------|:----------------|:-----------------------------------|:---------------|:-----------|:----------------|:-------------|:---------------------------|:----------------------|
+| 1760485387 | Dewey | Reassignment | 6305758657   | O20031104000556 | Gateway Family Health Clinic, Ltd. | 07/31/2022     | 8729990007 | I20100505000906 | 09/30/2018   | 33                         | 2                     |
+| 1760485387 | Dewey | Reassignment | 3870406945   | O20031106000272 | Pine Medical Center                | 01/31/2018     | 8729990007 | I20100505000906 | 09/30/2018   | 136                        | 2                     |
 
 <br>
 
@@ -293,29 +312,29 @@ mpop_ex_2020 <- provider_mpop(npi = 1760485387,
 
 <br>
 
-| NPI        | Last  | City       | State | PAR | HCPCS | Beneficiaries | Services | Avg Billed | Avg Allowed | Avg Payment |
-|:-----------|:------|:-----------|:------|:----|:------|--------------:|---------:|-----------:|------------:|------------:|
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 36415 |           122 |      196 |      29.00 |        2.98 |        2.98 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 71046 |            16 |       17 |     141.00 |       20.48 |       10.59 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80048 |            71 |      100 |      63.00 |        8.40 |        8.40 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80053 |            36 |       39 |      85.00 |       10.51 |       10.51 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80061 |            53 |       54 |     116.00 |       13.32 |       13.32 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 81001 |            19 |       24 |      48.00 |        3.15 |        3.15 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 83036 |            26 |       37 |      74.00 |        9.66 |        9.66 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84153 |            13 |       14 |     111.00 |       18.28 |       18.28 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84443 |            26 |       35 |      97.00 |       16.73 |       16.73 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84450 |            14 |       14 |      43.00 |        5.14 |        5.14 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85025 |            11 |       12 |      69.00 |        7.76 |        7.76 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85027 |            48 |       52 |      69.00 |        6.43 |        6.43 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85610 |            17 |       35 |      43.00 |        4.25 |        4.25 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 90662 |            25 |       25 |      68.00 |       60.74 |       60.74 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 90686 |            13 |       13 |      27.00 |       19.51 |       19.51 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 93000 |            25 |       25 |     113.00 |       16.97 |       10.85 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 99213 |            91 |      252 |     226.00 |       74.43 |       48.89 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | 99214 |            81 |      136 |     334.00 |      107.93 |       66.88 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0008 |            38 |       38 |      78.00 |       16.80 |       16.80 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0103 |            17 |       17 |     111.00 |       19.17 |       19.17 |
-| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0438 |            18 |       18 |     508.11 |      170.25 |      170.25 |
+| NPI        | Last  | City       | State | PAR | HCPCS | Beneficiaries | Services | Avg Billed   | Avg Allowed  | Avg Payment  |
+|:-----------|:------|:-----------|:------|:----|:------|:--------------|:---------|:-------------|:-------------|:-------------|
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 36415 | 122           | 196      | 29           | 2.9834693878 | 2.9834693878 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 71046 | 16            | 17       | 141          | 20.480588235 | 10.592352941 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80048 | 71            | 100      | 63           | 8.4022       | 8.4022       |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80053 | 36            | 39       | 85           | 10.511538462 | 10.511538462 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 80061 | 53            | 54       | 116          | 13.315       | 13.315       |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 81001 | 19            | 24       | 48           | 3.1475       | 3.1475       |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 83036 | 26            | 37       | 74           | 9.6586486486 | 9.6586486486 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84153 | 13            | 14       | 111          | 18.284285714 | 18.284285714 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84443 | 26            | 35       | 97           | 16.732       | 16.732       |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 84450 | 14            | 14       | 43           | 5.1371428571 | 5.1371428571 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85025 | 11            | 12       | 69           | 7.7566666667 | 7.7566666667 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85027 | 48            | 52       | 69           | 6.43         | 6.43         |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 85610 | 17            | 35       | 43           | 4.2462857143 | 4.2462857143 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 90662 | 25            | 25       | 68           | 60.7364      | 60.7364      |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 90686 | 13            | 13       | 27           | 19.508461538 | 19.508461538 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 93000 | 25            | 25       | 113          | 16.9692      | 10.8532      |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 99213 | 91            | 252      | 226          | 74.433253968 | 48.886825397 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | 99214 | 81            | 136      | 334          | 107.93426471 | 66.875955882 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0008 | 38            | 38       | 78           | 16.802105263 | 16.802105263 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0103 | 17            | 17       | 111          | 19.172352941 | 19.172352941 |
+| 1760485387 | Dewey | Moose Lake | MN    | Y   | G0438 | 18            | 18       | 508.11111111 | 170.25       | 170.25       |
 
 <br>
 

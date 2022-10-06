@@ -11,19 +11,22 @@ age_days(df, start_date = start_date, end_date = end_date)
 
 \item{start_date}{column containing date(s) prior to end_date column}
 
-\item{end_date}{column containing date(s) after end_date column}
+\item{end_date}{column containing date(s) after start_date column}
 }
 \value{
-data frame
+data frame with an age column containing the number of days
+calculated.
 }
 \description{
 Note: This calculation includes the end date in the sum (see example)
 }
 \examples{
-dates <- data.frame(x = seq.Date(as.Date("2021-01-01"),
+date_ex <- data.frame(x = seq.Date(as.Date("2021-01-01"),
                     by = "month", length.out = 3),
                     y = seq.Date(as.Date("2022-01-01"),
                     by = "month", length.out = 3))
 
-age_days(dates, x, y)
+date_ex |> age_days(x, y)
+
+date_ex |> age_days(start_date = x, end_date = lubridate::today())
 }

@@ -1,5 +1,8 @@
 #' Unpack NPPES NPI Registry Search Results
 #'
+#' @description `provider_unpack()` allows you to unpack the list-columns
+#'    within the response from `provider_nppes()`.
+#'
 #' @param df [tibble()] response from [provider_nppes()]
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
@@ -20,14 +23,14 @@
 #'
 #' # City, state, country ====================================================
 #' provider_nppes(city = "Atlanta",
-#'                state_abbr = "GA",
-#'                country_abbr = "US") |>
+#'                state = "GA",
+#'                country = "US") |>
 #' provider_unpack()
 #'
 #' # First name, city, state  ================================================
 #' provider_nppes(first = "John",
 #'                city = "Baltimore",
-#'                state_abbr = "MD") |>
+#'                state = "MD") |>
 #' provider_unpack()
 #' }
 #' @export
@@ -40,14 +43,10 @@ provider_unpack <- function(df, clean_names = TRUE) {
   # Handle any ERROR returns
   if (nrow(df |> dplyr::filter(outcome == "Errors")) >= 1) {
 
-    errors <- df |>
+    results <- df |>
       dplyr::filter(outcome == "Errors") |>
       tidyr::unnest(data_lists) |>
-      dplyr::mutate(prov_type = "Deactivated") |>
-      dplyr::select(prov_type)
-
-    # Bind rows
-    results <- errors
+      dplyr::select(!c(datetime, outcome))
 
   } else {
 

@@ -46,7 +46,7 @@ The following is a basic example of searching for an NPI using the using `prov_n
 library(provider)
 
 # Query the NPPES API
-nppes_npi_resp <- prov_npi_nppes(1114499340)
+nppes_npi_resp <- provider_nppes(1114499340)
 
 # View the results
 nppes_npi_resp
@@ -118,7 +118,7 @@ Flatten the response tibble into a tidy data format with `prov_nppes_unpack()`:
 <br>
 
 ```{r}
-prov_nppes_unpack(nppes_npi_resp)
+provider_unpack(nppes_npi_resp)
 ```
 
 
@@ -143,7 +143,7 @@ Then pipe the list into `prov_npi_nppes()` using [purrr's](https://purrr.tidyver
 <br>
 
 ```{r message=TRUE, warning=FALSE}
-npi_list_resp <- npi_list |> purrr::map_dfr(prov_npi_nppes)
+npi_list_resp <- npi_list |> purrr::map_dfr(provider_nppes)
 ```
 
 
@@ -159,8 +159,8 @@ Unpacking the response is similar, adding only dplyr's `group_split()` function 
 <br>
 
 ```{r message=TRUE, warning=FALSE}
-npi_list_resp |> dplyr::group_split(search) |> 
-                 purrr::map_dfr(prov_nppes_unpack)
+npi_list_resp |> dplyr::group_split(outcome) |> 
+                 purrr::map_dfr(provider_unpack)
 ```
 
 
@@ -186,10 +186,10 @@ We can even chain the search and unpack function chains together using `|>`, R's
 Split and purrr, then split and purrr:
 
 ```{r}
-npi_df_resp <- npi_df |> dplyr::group_split(npi) |> 
-                         purrr::map_dfr(prov_npi_nppes) |> 
-                         dplyr::group_split(search) |> 
-                         purrr::map_dfr(prov_nppes_unpack)
+npi_df_resp <- npi_df |> tibble::deframe() |> 
+                         purrr::map_dfr(provider_nppes) |> 
+                         dplyr::group_split(outcome) |> 
+                         purrr::map_dfr(provider_unpack)
 ```
 
 
@@ -224,7 +224,7 @@ Several constraints have been implemented so as to not batter the NPPES API with
 <br><br>
 
 ```{r, error=TRUE}
-prov_npi_nppes(123456789)
+provider_nppes(123456789)
 ```
 
 <br><br>
@@ -234,7 +234,7 @@ It also must be a valid NPI. The `prov_npi_nppes()` function checks for validity
 <br><br>
 
 ```{r, error=TRUE}
-prov_npi_nppes(1234567891)
+provider_nppes(1234567891)
 ```
 
 <br><br>
@@ -244,7 +244,7 @@ Inputting letters will throw an error:
 <br><br>
 
 ```{r, error=TRUE}
-prov_npi_nppes(abcdefghij)
+provider_nppes(abcdefghij)
 ```
 
 <br><br>
@@ -254,7 +254,7 @@ The Luhn check will catch any letters wrapped in quotes:
 <br><br>
 
 ```{r, error=TRUE}
-prov_npi_nppes("abcdefghij")
+provider_nppes("abcdefghij")
 ```
 
 <br><br>
@@ -264,7 +264,7 @@ But will let quoted numbers through:
 <br><br>
 
 ```{r, error=TRUE}
-prov_npi_nppes("123456789")
+provider_nppes("123456789")
 ```
 
 As long as they're 10 digits long.
@@ -280,7 +280,7 @@ This section outlines the NPPES API's documentation, going over valid search inp
 
 <br>
 
-```{r echo=FALSE}
+```{r eval=FALSE, include=FALSE}
 provider::nppes_api_input |> 
   gt::gt() |> 
   gt::tab_options(
@@ -298,11 +298,7 @@ provider::nppes_api_input |>
   gt::opt_stylize(style = 6, color = "red")
 ```
 
-
-<br><br>
-
-
-```{r echo=FALSE}
+```{r eval=FALSE, include=FALSE}
 provider::nppes_api_output |> 
   gt::gt(rowname_col = "field", groupname_col = "group") |>
   gt::tab_options(

@@ -270,6 +270,7 @@ mooa_ex <- provider_mooa(1114974490)
 
 ```{r echo=FALSE}
 mooa_ex |> 
+  dplyr::mutate(days_to_end = age_days(start_date = optout_end_date, end_date = lubridate::today()))
   dplyr::select(
     NPI = npi,
     Last = last_name,
@@ -290,7 +291,33 @@ mooa_ex |>
   knitr::kable()
 ```
 
+<br>
 
+`provider_rcgpr()` accesses **Medicare's Revalidation Clinic Group Practice Reassignment API**:
+
+<br>
+
+```{r}
+rcgpr_ex <- provider_rcgpr(npi = 1760485387)
+```
+
+<br>
+
+```{r echo=FALSE}
+rcgpr_ex |> dplyr::select("NPI"                                  = individual_npi,
+                          "Last"                                 = individual_last_name,
+                          "Type"                                 = record_type,
+                          "PAC ID Group "                        = group_pac_id,
+                          "Enroll ID Group"                      = group_enrollment_id,
+                          "Business Name"                        = group_legal_business_name,
+                          "Due Date Group"                       = group_due_date,
+                          "PAC ID Ind"                           = individual_pac_id,
+                          "Enroll ID Ind"                        = individual_enrollment_id,
+                          "Due Date Ind"                         = individual_due_date,
+                          "Reassignments & Phys Assts"           = group_reassignments_and_physician_assistants,
+                          "Employer Associations"                = individual_total_employer_associations) |> 
+  knitr::kable()
+```
 
 <br>
 

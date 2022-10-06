@@ -17,7 +17,8 @@ A \code{\link[=tibble]{tibble()}} containing the unpacked list-columns of a sear
 performed with the \code{\link[=provider_nppes]{provider_nppes()}} function.
 }
 \description{
-Unpack NPPES NPI Registry Search Results
+\code{provider_unpack()} allows you to unpack the list-columns
+within the response from \code{provider_nppes()}.
 }
 \examples{
 \dontrun{
@@ -27,14 +28,14 @@ provider_unpack()
 
 # City, state, country ====================================================
 provider_nppes(city = "Atlanta",
-               state_abbr = "GA",
-               country_abbr = "US") |>
+               state = "GA",
+               country = "US") |>
 provider_unpack()
 
 # First name, city, state  ================================================
 provider_nppes(first = "John",
                city = "Baltimore",
-               state_abbr = "MD") |>
+               state = "MD") |>
 provider_unpack()
 }
 }

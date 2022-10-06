@@ -28,19 +28,21 @@ Imports:
     tidyr
 Suggests: 
     datefixR,
-    tidygeocoder,
-    leaflet,
+    glue,
     gt,
     gtExtras,
     janitor,
     kableExtra,
     knitr,
+    leaflet,
     lobstr,
     purrr,
+    rlang,
     rmarkdown,
     spelling,
     stringr,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tidygeocoder
 VignetteBuilder: 
     knitr
 Config/testthat/edition: 3

@@ -18,6 +18,7 @@ reference:
   desc: >
     Access Data from Web API Sources
   contents:
+  - provider_clia
   - provider_mooa
   - provider_moar
   - provider_mpop
@@ -26,12 +27,14 @@ reference:
   - provider_mrdd
   - provider_nppes
   - provider_promdci
+  - provider_rcgpr
 
 - title: Helper Functions
   contents:
   - provider_unpack
   - provider_luhn
   - age_days
+  - format_zip
 
 navbar:
   structure:

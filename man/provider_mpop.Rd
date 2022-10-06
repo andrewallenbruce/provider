@@ -2,13 +2,14 @@
 % Please edit documentation in R/provider_mpop.R
 \name{provider_mpop}
 \alias{provider_mpop}
-\title{Search the Medicare Physician & Other Practitioners
-(by Provider and Service) API}
+\title{Search the Medicare Physician & Other Practitioners API}
 \usage{
 provider_mpop(
   npi = NULL,
   last = NULL,
   first = NULL,
+  hcpcs = NULL,
+  set = "serv",
   year = "2020",
   clean_names = TRUE,
   full = FALSE
@@ -20,6 +21,11 @@ provider_mpop(
 \item{last}{Provider's last name}
 
 \item{first}{Provider's first name}
+
+\item{hcpcs}{HCPCS code used to identify the specific medical service
+furnished by the provider.}
+
+\item{set}{API to access, options are "serv", "geo", and "prov"}
 
 \item{year}{Year between 2013-2020, in YYYY format}
 
@@ -35,24 +41,60 @@ A \code{\link[=tibble]{tibble()}} containing the search results.
 \description{
 Information on services and procedures provided to
 Original Medicare (fee-for-service) Part B (Medical Insurance)
-beneficiaries by physicians and other healthcare professionals;
-aggregated by provider and service.
+beneficiaries by physicians and other healthcare professionals.
 }
-\section{Medicare Physician & Other Practitioners Dataset}{
-The Medicare Physician & Other Practitioners by
-Provider and Service dataset provides information on use,
-payments, and submitted charges organized by National Provider
-Identifier (NPI), Healthcare Common Procedure Coding System
-(HCPCS) code, and place of service.
+\section{Medicare Physician & Other Practitioners APIs}{
+\code{provider_mpop} allows you to access data from three different APIs.
+These APIs contain three interrelated sets of data:
+\subsection{by Provider and Service}{
+
+The \strong{Provider and Service} dataset provides information on use,
+payments, and submitted charges organized by National Provider Identifier
+(NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place
+of service. This dataset is based on information gathered from CMS
+administrative claims data for Original Medicare Part B beneficiaries
+available from the CMS Chronic Conditions Data Warehouse.
+}
+
+\subsection{by Geography and Service}{
+
+The \strong{Geography and Service} dataset contains information on use,
+payments, submitted charges, and beneficiary demographic and health
+characteristics organized by geography, Healthcare Common Procedure
+Coding System (HCPCS) code, and place of service. This dataset is based on
+information gathered from CMS administrative claims data for Original
+Medicare Part B beneficiaries available from the CMS Chronic Conditions
+Data Warehouse.
+}
+
+\subsection{by Provider}{
+
+The \strong{Provider} dataset provides information on use, payments,
+submitted charges and beneficiary demographic and health characteristics
+organized by National Provider Identifier (NPI). This dataset is based on
+information gathered from CMS administrative claims data for Original
+Medicare Part B beneficiaries available from the CMS Chronic Conditions
+Data Warehouse.
+}
+
+\subsection{Data Update Frequency}{
+
+Annually
+}
+
+\subsection{Data Source}{
+
+Centers for Medicare & Medicaid Services
+}
 }
 
 \examples{
 \dontrun{
 # Search by NPI ===========================================================
-provider_mpop(npi = 1003000126, year = "2020")
+provider_mpop(npi = 1003000126, set = "serv", year = "2020")
 
 # Search by First Name ====================================================
-provider_mpop(first = "Enkeshafi", year = "2019")
+provider_mpop(first = "Enkeshafi", set = "serv", year = "2019")
 
 # Unnamed List of NPIs
 npi_list <- c(1003026055,
@@ -64,11 +106,22 @@ npi_list <- c(1003026055,
 
 npi_list |> purrr::map_dfr(provider_mpop)
 
+
+# by Provider
+provider_mpop(npi = 1003000134, set = "prov")
+
+# by Geography
+provider_mpop(hcpcs = "0002A", set = "geo")
+
 # Returns the First 1,000 Rows in the Dataset =============================
-provider_mpop(full = TRUE)
+provider_mpop(full = TRUE, set = "serv")
+provider_mpop(full = TRUE, set = "geo")
+provider_mpop(full = TRUE, set = "prov")
 }
 
 }
 \references{
 \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}
+\url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service}
+\url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}
 }

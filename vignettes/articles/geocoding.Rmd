@@ -10,20 +10,64 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library(provider)
+library(provider)     # Access Public Healthcare Provider Data
+library(zipcodeR)     # Data & Functions for Working with US ZIP Codes
+library(fipio)        # Lightweight FIPS Code Information Retrieval
+library(tidygeocoder) # Geocoding Made Easy
+library(leaflet)      # Create Interactive Web Maps
 ```
 
 
 <br>
 
+## Provider's Current Practice Address
+
+<br>
+
 ```{r}
-# Retrieve the provider data
-mpop20 <- provider_mpop(1760485387, "2020")
+geo_nppes <- provider_nppes(npi = 1760485387) |> 
+             provider_unpack()
+
+geo_nppes
 ```
 
 <br>
 
 ```{r}
+geo_add <- geo_nppes |> 
+  dplyr::select(address_1, city, state, postal_code) |>
+  dplyr::filter(dplyr::row_number() %in% 1) |> 
+  dplyr::mutate(address_1 = stringr::str_remove_all(address_1, "\\."))
+
+geo_add
+```
+
+<br>
+
+```{r}
+geo_ltlg <- geo_add |> tidygeocoder::geocode(street = address_1,
+                                             city = city,
+                                             state = state,
+                                             postalcode = postal_code,
+                                             method = "census",
+                                             lat = latitude, 
+                                             long = longitude, 
+                                             full_results = TRUE)
+geo_ltlg
+```
+
+<br>
+
+```{r}
+leaflet::leaflet() |> 
+  leaflet::addTiles() |> 
+  leaflet::addMarkers(lng = geo_ltlg$longitude, 
+                      lat = geo_ltlg$latitude)
+```
+
+<br><br>
+
+```{r eval=FALSE, include=FALSE}
 # prov_address <- prov_2013_2020 |> 
 #   dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |> 
 #   dplyr::filter(dplyr::row_number() %in% 1) |> 
@@ -49,9 +93,7 @@ prov_geocode <- prov_address |>
 prov_geocode
 ```
 
-<br><br>
-
-```{r}
+```{r eval=FALSE, include=FALSE}
 map <- leaflet::leaflet() |> 
        leaflet::addTiles() |> 
        leaflet::addMarkers(lng = prov_geocode$longitude, lat = prov_geocode$latitude, popup = prov_geocode$display_name)
@@ -59,4 +101,3 @@ map <- leaflet::leaflet() |>
 map
 ```
 
-<br><br>

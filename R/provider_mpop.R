@@ -1,22 +1,54 @@
-#' Search the Medicare Physician & Other Practitioners
-#' (by Provider and Service) API
+#' Search the Medicare Physician & Other Practitioners API
 #'
 #' @description Information on services and procedures provided to
-#' Original Medicare (fee-for-service) Part B (Medical Insurance)
-#' beneficiaries by physicians and other healthcare professionals;
-#' aggregated by provider and service.
+#'    Original Medicare (fee-for-service) Part B (Medical Insurance)
+#'    beneficiaries by physicians and other healthcare professionals.
 #'
-#' # Medicare Physician & Other Practitioners Dataset
+#' # Medicare Physician & Other Practitioners APIs
 #'
-#' The Medicare Physician & Other Practitioners by
-#' Provider and Service dataset provides information on use,
-#' payments, and submitted charges organized by National Provider
-#' Identifier (NPI), Healthcare Common Procedure Coding System
-#' (HCPCS) code, and place of service.
+#' `provider_mpop` allows you to access data from three different APIs.
+#' These APIs contain three interrelated sets of data:
+#'
+#' ## by Provider and Service
+#'
+#' The **Provider and Service** dataset provides information on use,
+#' payments, and submitted charges organized by National Provider Identifier
+#' (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place
+#' of service. This dataset is based on information gathered from CMS
+#' administrative claims data for Original Medicare Part B beneficiaries
+#' available from the CMS Chronic Conditions Data Warehouse.
+#'
+#' ## by Geography and Service
+#'
+#' The **Geography and Service** dataset contains information on use,
+#' payments, submitted charges, and beneficiary demographic and health
+#' characteristics organized by geography, Healthcare Common Procedure
+#' Coding System (HCPCS) code, and place of service. This dataset is based on
+#' information gathered from CMS administrative claims data for Original
+#' Medicare Part B beneficiaries available from the CMS Chronic Conditions
+#' Data Warehouse.
+#'
+#' ## by Provider
+#'
+#' The **Provider** dataset provides information on use, payments,
+#' submitted charges and beneficiary demographic and health characteristics
+#' organized by National Provider Identifier (NPI). This dataset is based on
+#' information gathered from CMS administrative claims data for Original
+#' Medicare Part B beneficiaries available from the CMS Chronic Conditions
+#' Data Warehouse.
+#'
+#' ## Data Update Frequency
+#' Annually
+#'
+#' ## Data Source
+#' Centers for Medicare & Medicaid Services
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name
 #' @param first Provider's first name
+#' @param hcpcs HCPCS code used to identify the specific medical service
+#'    furnished by the provider.
+#' @param set API to access, options are "serv", "geo", and "prov"
 #' @param year Year between 2013-2020, in YYYY format
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
@@ -27,14 +59,16 @@
 #'
 #' @references
 #'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}
+#'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service}
+#'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}
 #'
 #' @examples
 #' \dontrun{
 #' # Search by NPI ===========================================================
-#' provider_mpop(npi = 1003000126, year = "2020")
+#' provider_mpop(npi = 1003000126, set = "serv", year = "2020")
 #'
 #' # Search by First Name ====================================================
-#' provider_mpop(first = "Enkeshafi", year = "2019")
+#' provider_mpop(first = "Enkeshafi", set = "serv", year = "2019")
 #'
 #' # Unnamed List of NPIs
 #' npi_list <- c(1003026055,
@@ -46,8 +80,17 @@
 #'
 #' npi_list |> purrr::map_dfr(provider_mpop)
 #'
+#'
+#' # by Provider
+#' provider_mpop(npi = 1003000134, set = "prov")
+#'
+#' # by Geography
+#' provider_mpop(hcpcs = "0002A", set = "geo")
+#'
 #' # Returns the First 1,000 Rows in the Dataset =============================
-#' provider_mpop(full = TRUE)
+#' provider_mpop(full = TRUE, set = "serv")
+#' provider_mpop(full = TRUE, set = "geo")
+#' provider_mpop(full = TRUE, set = "prov")
 #'}
 #'
 #' @export
@@ -55,6 +98,8 @@
 provider_mpop <- function(npi = NULL,
                           last = NULL,
                           first = NULL,
+                          hcpcs = NULL,
+                          set = "serv",
                           year = "2020",
                           clean_names = TRUE,
                           full = FALSE
@@ -66,17 +111,51 @@ provider_mpop <- function(npi = NULL,
     curl::has_internet() == TRUE,
     msg = "Please check your internet connection.")
 
-  # Medicare Physician & Practitioners Provider and Service URLs by Year
+  if (set == "serv") {
+
+  # Provider and Service URLs by Year
   switch(year,
-  "2020" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/92396110-2aed-4d63-a6a2-5d6207d46a29/data",
-  "2019" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/5fccd951-9538-48a7-9075-6f02b9867868/data",
-  "2018" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/02c0692d-e2d9-4714-80c7-a1d16d72ec66/data",
-  "2017" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/7ebc578d-c2c7-46fd-8cc8-1b035eba7218/data",
-  "2016" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/5055d307-4fb3-4474-adbb-a11f4182ee35/data",
-  "2015" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/0ccba18d-b821-47c6-bb55-269b78921637/data",
-  "2014" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/e6aacd22-1b89-4914-855c-f8dacbd2ec60/data",
-  "2013" = mpop_url <- "https://data.cms.gov/data-api/v1/dataset/ebaf67d7-1572-4419-a053-c8631cc1cc9b/data"
-  )
+  "2020" = id <- "92396110-2aed-4d63-a6a2-5d6207d46a29",
+  "2019" = id <- "5fccd951-9538-48a7-9075-6f02b9867868",
+  "2018" = id <- "02c0692d-e2d9-4714-80c7-a1d16d72ec66",
+  "2017" = id <- "7ebc578d-c2c7-46fd-8cc8-1b035eba7218",
+  "2016" = id <- "5055d307-4fb3-4474-adbb-a11f4182ee35",
+  "2015" = id <- "0ccba18d-b821-47c6-bb55-269b78921637",
+  "2014" = id <- "e6aacd22-1b89-4914-855c-f8dacbd2ec60",
+  "2013" = id <- "ebaf67d7-1572-4419-a053-c8631cc1cc9b"
+  )}
+
+  if (set == "geo") {
+
+  # Geography and Service URLs by Year
+  switch(year,
+  "2020" = id <- "6fea9d79-0129-4e4c-b1b8-23cd86a4f435",
+  "2019" = id <- "673030ae-ceed-4561-8fca-b1275395a86a",
+  "2018" = id <- "05a85700-052f-4509-af43-7042b9b35868",
+  "2017" = id <- "8e96a9f2-ce6e-46fd-b30d-8c695c756bfd",
+  "2016" = id <- "c7d3f18c-2f00-4553-8cd1-871b727d5cdd",
+  "2015" = id <- "dbee9609-2c90-43ca-b1b8-161bd9cfcdb2",
+  "2014" = id <- "28181bd2-b377-4003-b73a-4bd92d1db4a9",
+  "2013" = id <- "3c2a4756-0a8c-4e4d-845a-6ad169cb13d3"
+  )}
+
+  if (set == "prov") {
+
+  # Provider URLs by Year
+  switch(year,
+  "2020" = id <- "8889d81e-2ee7-448f-8713-f071038289b5",
+  "2019" = id <- "a399e5c1-1cd1-4cbe-957f-d2cc8fe5d897",
+  "2018" = id <- "a5cfcc24-eaf7-472c-8831-7f396c77a890",
+  "2017" = id <- "bed1a455-2dad-4359-9cec-ec59cf251a14",
+  "2016" = id <- "9301285e-f2ff-4035-9b59-48eaa09a0572",
+  "2015" = id <- "acba6dc6-3e76-4176-9564-84ab5ea4c8aa",
+  "2014" = id <- "d3d74823-9909-4177-946d-cdaa268b90ab",
+  "2013" = id <- "bbec6d8a-3b0d-49bb-98be-3170639d3ab5"
+  )}
+
+  # Paste URL together
+  http <- "https://data.cms.gov/data-api/v1/dataset/"
+  mpop_url <- paste0(http, id, "/data")
 
   # Create polite version
   polite_req <- polite::politely(
@@ -111,7 +190,8 @@ provider_mpop <- function(npi = NULL,
     # Create list of arguments
     arg <- stringr::str_c(c(
       last = last,
-      first = first), collapse = ",")
+      first = first,
+      hcpcs = hcpcs), collapse = ",")
 
     # Check that at least one argument is not null
     attempt::stop_if_all(
@@ -141,19 +221,19 @@ provider_mpop <- function(npi = NULL,
   } else {
 
   # Convert to numeric & round averages up
-  results <- results |>
-    dplyr::mutate(
-      Tot_Benes = as.numeric(Tot_Benes),
-      Tot_Srvcs = as.numeric(Tot_Srvcs),
-      Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
-      Avg_Sbmtd_Chrg = janitor::round_half_up(
-        as.numeric(Avg_Sbmtd_Chrg), digits = 2),
-      Avg_Mdcr_Alowd_Amt = janitor::round_half_up(
-        as.numeric(Avg_Mdcr_Alowd_Amt), digits = 2),
-      Avg_Mdcr_Pymt_Amt = janitor::round_half_up(
-        as.numeric(Avg_Mdcr_Pymt_Amt), digits = 2),
-      Avg_Mdcr_Stdzd_Amt = janitor::round_half_up(
-        as.numeric(Avg_Mdcr_Stdzd_Amt), digits = 2))
+  # results <- results |>
+  #   dplyr::mutate(
+  #     Tot_Benes = as.numeric(Tot_Benes),
+  #     Tot_Srvcs = as.numeric(Tot_Srvcs),
+  #     Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
+  #     Avg_Sbmtd_Chrg = janitor::round_half_up(
+  #       as.numeric(Avg_Sbmtd_Chrg), digits = 2),
+  #     Avg_Mdcr_Alowd_Amt = janitor::round_half_up(
+  #       as.numeric(Avg_Mdcr_Alowd_Amt), digits = 2),
+  #     Avg_Mdcr_Pymt_Amt = janitor::round_half_up(
+  #       as.numeric(Avg_Mdcr_Pymt_Amt), digits = 2),
+  #     Avg_Mdcr_Stdzd_Amt = janitor::round_half_up(
+  #       as.numeric(Avg_Mdcr_Stdzd_Amt), digits = 2))
 
   # Add year to data frame & relocate to beginning
   results <- results |>
@@ -168,5 +248,6 @@ provider_mpop <- function(npi = NULL,
   }
 
   return(results)
+
   }
 }

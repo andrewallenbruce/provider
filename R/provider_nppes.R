@@ -46,12 +46,12 @@
 #'    This field allows the following special characters: ampersand,
 #'    apostrophe, colon, comma, forward slash, hyphen, left and right
 #'    parentheses, period, pound sign, quotation mark, and semi-colon.
-#' @param state_abbr State abbreviation associated with the provider's address.
+#' @param state State abbreviation associated with the provider's address.
 #'    This field **cannot** be used as the only input criterion. If this
 #'    field is used, at least one other field, besides the `prov_type` and
-#'    `country_abbr`, must be populated. Valid values for state abbreviations:
+#'    `country`, must be populated. Valid values for state abbreviations:
 #'    \url{https://npiregistry.cms.hhs.gov/help-api/state}.
-#' @param country_abbr Country abbreviation associated with the provider's
+#' @param country Country abbreviation associated with the provider's
 #'    address. This field **can** be used as the only input criterion, as long
 #'    as the value selected *is not* **US** (United States). Valid values for
 #'    country abbreviations:
@@ -77,16 +77,17 @@
 #'
 #' # City, state, country ====================================================
 #' provider_nppes(city = "Atlanta",
-#'                state_abbr = "GA",
-#'                country_abbr = "US")
+#'                state = "GA",
+#'                country = "US")
 #'
 #' # First name, city, state  ================================================
 #' provider_nppes(first = "John",
 #'                city = "Baltimore",
-#'                state_abbr = "MD")
+#'                state = "MD")
 #'
 #' # List of NPIs
 #' npi_list <- c(1003026055,
+#'               1710983663,
 #'               1316405939,
 #'               1720392988,
 #'               1518184605,
@@ -99,7 +100,8 @@
 #' purrr::map_dfr(provider_unpack)
 #'
 #' # Data frame of NPIs
-#' npi_df <- data.frame(npi = c(1003026055,
+#' npi_df <- data.frame(npi = c(1710983663,
+#'                              1003026055,
 #'                              1316405939,
 #'                              1720392988,
 #'                              1518184605,
@@ -116,8 +118,8 @@ provider_nppes <- function(npi = NULL,
                            last = NULL,
                            org = NULL,
                            city = NULL,
-                           state_abbr = NULL,
-                           country_abbr = NULL,
+                           state = NULL,
+                           country = NULL,
                            limit = 10,
                            skip = NULL) {
 
@@ -142,8 +144,12 @@ provider_nppes <- function(npi = NULL,
   first <- gsub(pattern = " ", replacement = "", first)
   last <- gsub(pattern = " ", replacement = "", last)
   city <- gsub(pattern = " ", replacement = "", city)
-  state_abbr <- gsub(pattern = " ", replacement = "", state_abbr)
-  country_abbr <- gsub(pattern = " ", replacement = "", country_abbr)
+  state <- gsub(pattern = " ", replacement = "", state)
+  country <- gsub(pattern = " ", replacement = "", country)
+
+  # Uppercase
+  state <- stringr::str_to_upper(state)
+  country <- stringr::str_to_upper(country)
 
   # NPPES Base URL
   nppes_base_url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
@@ -166,8 +172,8 @@ provider_nppes <- function(npi = NULL,
                          last_name = last,
                          organization_name = org,
                          city = city,
-                         state = state_abbr,
-                         country_code = country_abbr,
+                         state = state,
+                         country_code = country,
                          limit = limit,
                          skip = skip) |>
     httr2::req_throttle(50 / 60) |>
@@ -201,5 +207,21 @@ provider_nppes <- function(npi = NULL,
   results <- results |>
     dplyr::filter(outcome != "resultCount")
 
+   if (nrow(results |> dplyr::filter(outcome == "Errors")) >= 1 & !is.null(npi)) {
+
+     npi_for_errors <- as.character(npi)
+
+     results <- results |>
+       tidyr::unnest(cols = c(data_lists)) |>
+       dplyr::mutate(npi = npi_for_errors, prov_type = "Deactivated") |>
+       dplyr::select(-description, -field, -number) |>
+       tidyr::nest(data_lists = c(npi, prov_type))
+
+     return(results)
+
+   } else {
+
   return(results)
+
+  }
 }

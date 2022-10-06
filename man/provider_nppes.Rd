@@ -10,8 +10,8 @@ provider_nppes(
   last = NULL,
   org = NULL,
   city = NULL,
-  state_abbr = NULL,
-  country_abbr = NULL,
+  state = NULL,
+  country = NULL,
   limit = 10,
   skip = NULL
 )
@@ -52,13 +52,13 @@ This field allows the following special characters: ampersand,
 apostrophe, colon, comma, forward slash, hyphen, left and right
 parentheses, period, pound sign, quotation mark, and semi-colon.}
 
-\item{state_abbr}{State abbreviation associated with the provider's address.
+\item{state}{State abbreviation associated with the provider's address.
 This field \strong{cannot} be used as the only input criterion. If this
 field is used, at least one other field, besides the \code{prov_type} and
-\code{country_abbr}, must be populated. Valid values for state abbreviations:
+\code{country}, must be populated. Valid values for state abbreviations:
 \url{https://npiregistry.cms.hhs.gov/help-api/state}.}
 
-\item{country_abbr}{Country abbreviation associated with the provider's
+\item{country}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
 as the value selected \emph{is not} \strong{US} (United States). Valid values for
 country abbreviations:
@@ -98,16 +98,17 @@ provider_nppes(npi = 1528060837)
 
 # City, state, country ====================================================
 provider_nppes(city = "Atlanta",
-               state_abbr = "GA",
-               country_abbr = "US")
+               state = "GA",
+               country = "US")
 
 # First name, city, state  ================================================
 provider_nppes(first = "John",
                city = "Baltimore",
-               state_abbr = "MD")
+               state = "MD")
 
 # List of NPIs
 npi_list <- c(1003026055,
+              1710983663,
               1316405939,
               1720392988,
               1518184605,
@@ -120,7 +121,8 @@ dplyr::group_split(outcome) |>
 purrr::map_dfr(provider_unpack)
 
 # Data frame of NPIs
-npi_df <- data.frame(npi = c(1003026055,
+npi_df <- data.frame(npi = c(1710983663,
+                             1003026055,
                              1316405939,
                              1720392988,
                              1518184605,
