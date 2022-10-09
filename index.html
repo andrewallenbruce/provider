@@ -159,7 +159,7 @@
 <div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-09-28 16:28:57 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-10-06 19:21:17 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
 <p><br></p>
 <p>Unpack the API response with the <code><a href="reference/provider_unpack.html">provider_unpack()</a></code> function:</p>
 <p><br></p>
@@ -238,46 +238,14 @@
 <code class="sourceCode R"><span><span class="va">nppes_ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Paul"</span>, </span>
 <span>                            last <span class="op">=</span> <span class="st">"Dewey"</span>,</span>
 <span>                            state_abbr <span class="op">=</span> <span class="st">"MN"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>                            <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>                            <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_nppes(first = "Paul", last = "Dewey", state_abbr = "MN"): unused argument (state_abbr = "MN")</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Last Name</th>
-<th align="left">Provider Type</th>
-<th align="left">Code</th>
-<th align="left">Primary</th>
-<th align="left">Description</th>
-<th align="left">State</th>
-<th align="left">License</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
-<td align="left">207R00000X</td>
-<td align="left">TRUE</td>
-<td align="left">Internal Medicine</td>
-<td align="left">MN</td>
-<td align="left">43634</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
-<td align="left">208000000X</td>
-<td align="left">FALSE</td>
-<td align="left">Pediatrics</td>
-<td align="left">MN</td>
-<td align="left">43634</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in dplyr::select(nppes_ex2, NPI = npi, `Last Name` = last_name, : object 'nppes_ex2' not found</span></span></code></pre></div>
 <p><br></p>
 <p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -309,7 +277,7 @@
 <p><br></p>
 <p>Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="reference/provider_moar.html">provider_moar()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_moar.html">provider_moar</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -335,7 +303,7 @@
 <p><br></p>
 <p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. Using the output from the NPPES search in the first example, you can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -372,7 +340,7 @@
 <p><br></p>
 <p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table style="width:100%;" class="table">
@@ -410,7 +378,7 @@
 <p><br></p>
 <p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -426,21 +394,23 @@
 <p><br></p>
 <p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="reference/provider_mooa.html">provider_mooa()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mooa.html">provider_mooa</a></span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="8%">
-<col width="6%">
-<col width="5%">
-<col width="11%">
-<col width="10%">
-<col width="17%">
-<col width="14%">
-<col width="13%">
 <col width="7%">
 <col width="5%">
+<col width="4%">
+<col width="10%">
+<col width="9%">
+<col width="15%">
+<col width="7%">
+<col width="12%">
+<col width="11%">
+<col width="6%">
+<col width="4%">
+<col width="3%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
@@ -449,10 +419,12 @@
 <th align="left">Opt-Out Begins</th>
 <th align="left">Opt-Out Ends</th>
 <th align="left">Order &amp; Refer Eligible</th>
+<th align="left">Updated</th>
 <th align="left">Specialty</th>
 <th align="left">Address</th>
 <th align="left">City</th>
 <th align="left">State</th>
+<th align="right">age</th>
 </tr></thead>
 <tbody><tr class="odd">
 <td align="left">1114974490</td>
@@ -461,30 +433,100 @@
 <td align="left">2012-07-01</td>
 <td align="left">2024-07-01</td>
 <td align="left">Y</td>
+<td align="left">08/15/2022</td>
 <td align="left">Orthopedic Surgery</td>
 <td align="left">535 EAST 70TH ST</td>
 <td align="left">NEW YORK</td>
 <td align="left">NY</td>
+<td align="right">-633</td>
 </tr></tbody>
 </table>
 <p><br></p>
-<p>Using <code><a href="reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
+<p><code><a href="reference/provider_rcgpr.html">provider_rcgpr()</a></code> accesses <strong>Medicare’s Revalidation Clinic Group Practice Reassignment API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rcgpr_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_rcgpr.html">provider_rcgpr</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col width="5%">
+<col width="3%">
+<col width="6%">
+<col width="6%">
+<col width="8%">
+<col width="17%">
+<col width="7%">
+<col width="5%">
+<col width="8%">
+<col width="6%">
+<col width="13%">
+<col width="10%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Last</th>
+<th align="left">Type</th>
+<th align="left">PAC ID Group</th>
+<th align="left">Enroll ID Group</th>
+<th align="left">Business Name</th>
+<th align="left">Due Date Group</th>
+<th align="left">PAC ID Ind</th>
+<th align="left">Enroll ID Ind</th>
+<th align="left">Due Date Ind</th>
+<th align="left">Reassignments &amp; Phys Assts</th>
+<th align="left">Employer Associations</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1760485387</td>
+<td align="left">Dewey</td>
+<td align="left">Reassignment</td>
+<td align="left">6305758657</td>
+<td align="left">O20031104000556</td>
+<td align="left">Gateway Family Health Clinic, Ltd.</td>
+<td align="left">07/31/2022</td>
+<td align="left">8729990007</td>
+<td align="left">I20100505000906</td>
+<td align="left">09/30/2018</td>
+<td align="left">33</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">1760485387</td>
+<td align="left">Dewey</td>
+<td align="left">Reassignment</td>
+<td align="left">3870406945</td>
+<td align="left">O20031106000272</td>
+<td align="left">Pine Medical Center</td>
+<td align="left">01/31/2018</td>
+<td align="left">8729990007</td>
+<td align="left">I20100505000906</td>
+<td align="left">09/30/2018</td>
+<td align="left">136</td>
+<td align="left">2</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>Using <code><a href="reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners API</strong>, enabling you to choose between three related datasets:</p>
+<ol style="list-style-type: decimal"><li>by Provider and Service API:</li></ol>
+<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpop_serv_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
+<span>                              set <span class="op">=</span> <span class="st">"serv"</span>,</span>
 <span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
 <colgroup>
 <col width="10%">
-<col width="6%">
+<col width="5%">
 <col width="10%">
-<col width="6%">
+<col width="5%">
 <col width="4%">
-<col width="6%">
-<col width="13%">
+<col width="5%">
+<col width="12%">
 <col width="8%">
-<col width="10%">
+<col width="11%">
 <col width="11%">
 <col width="11%">
 </colgroup>
@@ -495,11 +537,11 @@
 <th align="left">State</th>
 <th align="left">PAR</th>
 <th align="left">HCPCS</th>
-<th align="right">Beneficiaries</th>
-<th align="right">Services</th>
-<th align="right">Avg Billed</th>
-<th align="right">Avg Allowed</th>
-<th align="right">Avg Payment</th>
+<th align="left">Beneficiaries</th>
+<th align="left">Services</th>
+<th align="left">Avg Billed</th>
+<th align="left">Avg Allowed</th>
+<th align="left">Avg Payment</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -509,11 +551,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">36415</td>
-<td align="right">122</td>
-<td align="right">196</td>
-<td align="right">29.00</td>
-<td align="right">2.98</td>
-<td align="right">2.98</td>
+<td align="left">122</td>
+<td align="left">196</td>
+<td align="left">29</td>
+<td align="left">2.9834693878</td>
+<td align="left">2.9834693878</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -522,11 +564,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">71046</td>
-<td align="right">16</td>
-<td align="right">17</td>
-<td align="right">141.00</td>
-<td align="right">20.48</td>
-<td align="right">10.59</td>
+<td align="left">16</td>
+<td align="left">17</td>
+<td align="left">141</td>
+<td align="left">20.480588235</td>
+<td align="left">10.592352941</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -535,11 +577,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80048</td>
-<td align="right">71</td>
-<td align="right">100</td>
-<td align="right">63.00</td>
-<td align="right">8.40</td>
-<td align="right">8.40</td>
+<td align="left">71</td>
+<td align="left">100</td>
+<td align="left">63</td>
+<td align="left">8.4022</td>
+<td align="left">8.4022</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -548,11 +590,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80053</td>
-<td align="right">36</td>
-<td align="right">39</td>
-<td align="right">85.00</td>
-<td align="right">10.51</td>
-<td align="right">10.51</td>
+<td align="left">36</td>
+<td align="left">39</td>
+<td align="left">85</td>
+<td align="left">10.511538462</td>
+<td align="left">10.511538462</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -561,11 +603,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80061</td>
-<td align="right">53</td>
-<td align="right">54</td>
-<td align="right">116.00</td>
-<td align="right">13.32</td>
-<td align="right">13.32</td>
+<td align="left">53</td>
+<td align="left">54</td>
+<td align="left">116</td>
+<td align="left">13.315</td>
+<td align="left">13.315</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -574,11 +616,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">81001</td>
-<td align="right">19</td>
-<td align="right">24</td>
-<td align="right">48.00</td>
-<td align="right">3.15</td>
-<td align="right">3.15</td>
+<td align="left">19</td>
+<td align="left">24</td>
+<td align="left">48</td>
+<td align="left">3.1475</td>
+<td align="left">3.1475</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -587,11 +629,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">83036</td>
-<td align="right">26</td>
-<td align="right">37</td>
-<td align="right">74.00</td>
-<td align="right">9.66</td>
-<td align="right">9.66</td>
+<td align="left">26</td>
+<td align="left">37</td>
+<td align="left">74</td>
+<td align="left">9.6586486486</td>
+<td align="left">9.6586486486</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -600,11 +642,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84153</td>
-<td align="right">13</td>
-<td align="right">14</td>
-<td align="right">111.00</td>
-<td align="right">18.28</td>
-<td align="right">18.28</td>
+<td align="left">13</td>
+<td align="left">14</td>
+<td align="left">111</td>
+<td align="left">18.284285714</td>
+<td align="left">18.284285714</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -613,11 +655,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84443</td>
-<td align="right">26</td>
-<td align="right">35</td>
-<td align="right">97.00</td>
-<td align="right">16.73</td>
-<td align="right">16.73</td>
+<td align="left">26</td>
+<td align="left">35</td>
+<td align="left">97</td>
+<td align="left">16.732</td>
+<td align="left">16.732</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -626,11 +668,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84450</td>
-<td align="right">14</td>
-<td align="right">14</td>
-<td align="right">43.00</td>
-<td align="right">5.14</td>
-<td align="right">5.14</td>
+<td align="left">14</td>
+<td align="left">14</td>
+<td align="left">43</td>
+<td align="left">5.1371428571</td>
+<td align="left">5.1371428571</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -639,11 +681,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85025</td>
-<td align="right">11</td>
-<td align="right">12</td>
-<td align="right">69.00</td>
-<td align="right">7.76</td>
-<td align="right">7.76</td>
+<td align="left">11</td>
+<td align="left">12</td>
+<td align="left">69</td>
+<td align="left">7.7566666667</td>
+<td align="left">7.7566666667</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -652,11 +694,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85027</td>
-<td align="right">48</td>
-<td align="right">52</td>
-<td align="right">69.00</td>
-<td align="right">6.43</td>
-<td align="right">6.43</td>
+<td align="left">48</td>
+<td align="left">52</td>
+<td align="left">69</td>
+<td align="left">6.43</td>
+<td align="left">6.43</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -665,11 +707,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85610</td>
-<td align="right">17</td>
-<td align="right">35</td>
-<td align="right">43.00</td>
-<td align="right">4.25</td>
-<td align="right">4.25</td>
+<td align="left">17</td>
+<td align="left">35</td>
+<td align="left">43</td>
+<td align="left">4.2462857143</td>
+<td align="left">4.2462857143</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -678,11 +720,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">90662</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">68.00</td>
-<td align="right">60.74</td>
-<td align="right">60.74</td>
+<td align="left">25</td>
+<td align="left">25</td>
+<td align="left">68</td>
+<td align="left">60.7364</td>
+<td align="left">60.7364</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -691,11 +733,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">90686</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">27.00</td>
-<td align="right">19.51</td>
-<td align="right">19.51</td>
+<td align="left">13</td>
+<td align="left">13</td>
+<td align="left">27</td>
+<td align="left">19.508461538</td>
+<td align="left">19.508461538</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -704,11 +746,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">93000</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">113.00</td>
-<td align="right">16.97</td>
-<td align="right">10.85</td>
+<td align="left">25</td>
+<td align="left">25</td>
+<td align="left">113</td>
+<td align="left">16.9692</td>
+<td align="left">10.8532</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -717,11 +759,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">99213</td>
-<td align="right">91</td>
-<td align="right">252</td>
-<td align="right">226.00</td>
-<td align="right">74.43</td>
-<td align="right">48.89</td>
+<td align="left">91</td>
+<td align="left">252</td>
+<td align="left">226</td>
+<td align="left">74.433253968</td>
+<td align="left">48.886825397</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -730,11 +772,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">99214</td>
-<td align="right">81</td>
-<td align="right">136</td>
-<td align="right">334.00</td>
-<td align="right">107.93</td>
-<td align="right">66.88</td>
+<td align="left">81</td>
+<td align="left">136</td>
+<td align="left">334</td>
+<td align="left">107.93426471</td>
+<td align="left">66.875955882</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -743,11 +785,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0008</td>
-<td align="right">38</td>
-<td align="right">38</td>
-<td align="right">78.00</td>
-<td align="right">16.80</td>
-<td align="right">16.80</td>
+<td align="left">38</td>
+<td align="left">38</td>
+<td align="left">78</td>
+<td align="left">16.802105263</td>
+<td align="left">16.802105263</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -756,11 +798,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0103</td>
-<td align="right">17</td>
-<td align="right">17</td>
-<td align="right">111.00</td>
-<td align="right">19.17</td>
-<td align="right">19.17</td>
+<td align="left">17</td>
+<td align="left">17</td>
+<td align="left">111</td>
+<td align="left">19.172352941</td>
+<td align="left">19.172352941</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -769,21 +811,4135 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0438</td>
-<td align="right">18</td>
-<td align="right">18</td>
-<td align="right">508.11</td>
-<td align="right">170.25</td>
-<td align="right">170.25</td>
+<td align="left">18</td>
+<td align="left">18</td>
+<td align="left">508.11111111</td>
+<td align="left">170.25</td>
+<td align="left">170.25</td>
+</tr>
+</tbody>
+</table>
+<ol start="2" style="list-style-type: decimal"><li>by Geography and Service API:</li></ol>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpop_geo_ex1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"99214"</span>, </span>
+<span>                              set <span class="op">=</span> <span class="st">"geo"</span>,</span>
+<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mpop_geo_ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"99214"</span>, </span>
+<span>                              set <span class="op">=</span> <span class="st">"geo"</span>,</span>
+<span>                              year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">mpop_geo_99214</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">mpop_geo_ex1</span>, <span class="va">mpop_geo_ex2</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<colgroup>
+<col width="2%">
+<col width="3%">
+<col width="4%">
+<col width="17%">
+<col width="2%">
+<col width="2%">
+<col width="5%">
+<col width="7%">
+<col width="5%">
+<col width="19%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">Year</th>
+<th align="left">HCPCS</th>
+<th align="left">Level</th>
+<th align="left">Region</th>
+<th align="left">FIPS</th>
+<th align="left">POS</th>
+<th align="left">Providers</th>
+<th align="left">Beneficiaries</th>
+<th align="left">Services</th>
+<th align="left">Distinct Beneficiaries Per Day Services</th>
+<th align="left">Avg Charge</th>
+<th align="left">Avg Allowed</th>
+<th align="left">Avg Payment</th>
+<th align="left">Avg Standard Pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">National</td>
+<td align="left">National</td>
+<td align="left"></td>
+<td align="left">F</td>
+<td align="left">159324</td>
+<td align="left">3183652</td>
+<td align="left">7008865</td>
+<td align="left">7007708</td>
+<td align="left">210.09590176</td>
+<td align="left">77.348125868</td>
+<td align="left">55.276294601</td>
+<td align="left">54.775983048</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">National</td>
+<td align="left">National</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">551728</td>
+<td align="left">21794074</td>
+<td align="left">81741450.8</td>
+<td align="left">81710520</td>
+<td align="left">222.24271159</td>
+<td align="left">104.99486506</td>
+<td align="left">72.227897324</td>
+<td align="left">72.377731393</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">1</td>
+<td align="left">23</td>
+<td align="left">23</td>
+<td align="left">23</td>
+<td align="left">115</td>
+<td align="left">90.884347826</td>
+<td align="left">66.369130435</td>
+<td align="left">67.441304348</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alabama</td>
+<td align="left">01</td>
+<td align="left">F</td>
+<td align="left">1520</td>
+<td align="left">36142</td>
+<td align="left">79848</td>
+<td align="left">79844</td>
+<td align="left">205.1435654</td>
+<td align="left">72.510556683</td>
+<td align="left">51.435830703</td>
+<td align="left">53.514837065</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alabama</td>
+<td align="left">01</td>
+<td align="left">O</td>
+<td align="left">7833</td>
+<td align="left">392296</td>
+<td align="left">1415952</td>
+<td align="left">1415921</td>
+<td align="left">160.94829157</td>
+<td align="left">99.083887787</td>
+<td align="left">67.106584813</td>
+<td align="left">73.015723203</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alaska</td>
+<td align="left">02</td>
+<td align="left">F</td>
+<td align="left">391</td>
+<td align="left">5906</td>
+<td align="left">11405</td>
+<td align="left">11405</td>
+<td align="left">298.90256642</td>
+<td align="left">101.30883209</td>
+<td align="left">73.257391495</td>
+<td align="left">54.519937747</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alaska</td>
+<td align="left">02</td>
+<td align="left">O</td>
+<td align="left">1362</td>
+<td align="left">47371</td>
+<td align="left">130619</td>
+<td align="left">130607</td>
+<td align="left">335.45108062</td>
+<td align="left">130.17461556</td>
+<td align="left">89.189372756</td>
+<td align="left">69.569780124</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arizona</td>
+<td align="left">04</td>
+<td align="left">F</td>
+<td align="left">2974</td>
+<td align="left">37818</td>
+<td align="left">65739</td>
+<td align="left">65728</td>
+<td align="left">188.67394636</td>
+<td align="left">75.715326366</td>
+<td align="left">54.911745691</td>
+<td align="left">55.152802142</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arizona</td>
+<td align="left">04</td>
+<td align="left">O</td>
+<td align="left">12020</td>
+<td align="left">571554</td>
+<td align="left">2345308.8</td>
+<td align="left">2343781</td>
+<td align="left">210.69222189</td>
+<td align="left">102.4568124</td>
+<td align="left">71.44178651</td>
+<td align="left">73.440767719</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arkansas</td>
+<td align="left">05</td>
+<td align="left">F</td>
+<td align="left">1176</td>
+<td align="left">45101</td>
+<td align="left">92284</td>
+<td align="left">92278</td>
+<td align="left">183.79388453</td>
+<td align="left">71.259373456</td>
+<td align="left">50.815368103</td>
+<td align="left">55.390971674</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arkansas</td>
+<td align="left">05</td>
+<td align="left">O</td>
+<td align="left">4606</td>
+<td align="left">300050</td>
+<td align="left">1015440</td>
+<td align="left">1015384</td>
+<td align="left">174.47400728</td>
+<td align="left">92.713082506</td>
+<td align="left">61.459495224</td>
+<td align="left">71.29237631</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">California</td>
+<td align="left">06</td>
+<td align="left">F</td>
+<td align="left">10349</td>
+<td align="left">215658</td>
+<td align="left">504645</td>
+<td align="left">504578</td>
+<td align="left">310.41868371</td>
+<td align="left">83.028589147</td>
+<td align="left">60.062330232</td>
+<td align="left">55.843487699</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">California</td>
+<td align="left">06</td>
+<td align="left">O</td>
+<td align="left">47031</td>
+<td align="left">1862063</td>
+<td align="left">7414408.8</td>
+<td align="left">7397050</td>
+<td align="left">246.13483514</td>
+<td align="left">115.17086162</td>
+<td align="left">81.41191161</td>
+<td align="left">75.11971651</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Colorado</td>
+<td align="left">08</td>
+<td align="left">F</td>
+<td align="left">2761</td>
+<td align="left">46427</td>
+<td align="left">94926</td>
+<td align="left">94897</td>
+<td align="left">240.32386048</td>
+<td align="left">77.038145503</td>
+<td align="left">55.781380022</td>
+<td align="left">54.926256874</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Colorado</td>
+<td align="left">08</td>
+<td align="left">O</td>
+<td align="left">9708</td>
+<td align="left">317370</td>
+<td align="left">987970</td>
+<td align="left">987707</td>
+<td align="left">228.03931578</td>
+<td align="left">103.50585794</td>
+<td align="left">70.442143193</td>
+<td align="left">71.714595008</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Connecticut</td>
+<td align="left">09</td>
+<td align="left">F</td>
+<td align="left">1992</td>
+<td align="left">27912</td>
+<td align="left">56522</td>
+<td align="left">56472</td>
+<td align="left">259.23726797</td>
+<td align="left">81.31414635</td>
+<td align="left">59.15523106</td>
+<td align="left">55.323602137</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Connecticut</td>
+<td align="left">09</td>
+<td align="left">O</td>
+<td align="left">7792</td>
+<td align="left">259175</td>
+<td align="left">865599</td>
+<td align="left">865443</td>
+<td align="left">233.2622691</td>
+<td align="left">112.11484367</td>
+<td align="left">78.369415757</td>
+<td align="left">72.61909696</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Delaware</td>
+<td align="left">10</td>
+<td align="left">F</td>
+<td align="left">693</td>
+<td align="left">16034</td>
+<td align="left">26394</td>
+<td align="left">26394</td>
+<td align="left">187.78940403</td>
+<td align="left">78.517715011</td>
+<td align="left">56.469921952</td>
+<td align="left">54.785387588</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Delaware</td>
+<td align="left">10</td>
+<td align="left">O</td>
+<td align="left">1760</td>
+<td align="left">134246</td>
+<td align="left">445720</td>
+<td align="left">445688</td>
+<td align="left">193.61631111</td>
+<td align="left">107.68341912</td>
+<td align="left">74.705530984</td>
+<td align="left">73.132837858</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">District of Columbia</td>
+<td align="left">11</td>
+<td align="left">F</td>
+<td align="left">614</td>
+<td align="left">11981</td>
+<td align="left">22286</td>
+<td align="left">22262</td>
+<td align="left">244.43772009</td>
+<td align="left">85.859495199</td>
+<td align="left">61.547210356</td>
+<td align="left">55.599667056</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">District of Columbia</td>
+<td align="left">11</td>
+<td align="left">O</td>
+<td align="left">1800</td>
+<td align="left">70729</td>
+<td align="left">154824</td>
+<td align="left">154809</td>
+<td align="left">238.40224313</td>
+<td align="left">119.01529627</td>
+<td align="left">83.084944065</td>
+<td align="left">74.584647923</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Florida</td>
+<td align="left">12</td>
+<td align="left">F</td>
+<td align="left">7200</td>
+<td align="left">125625</td>
+<td align="left">267789</td>
+<td align="left">267715</td>
+<td align="left">211.89968744</td>
+<td align="left">80.110269802</td>
+<td align="left">59.623711691</td>
+<td align="left">57.125636639</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Florida</td>
+<td align="left">12</td>
+<td align="left">O</td>
+<td align="left">36723</td>
+<td align="left">1835558</td>
+<td align="left">8075137</td>
+<td align="left">8074852</td>
+<td align="left">225.85020218</td>
+<td align="left">107.5026197</td>
+<td align="left">76.270341913</td>
+<td align="left">75.369828804</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Georgia</td>
+<td align="left">13</td>
+<td align="left">F</td>
+<td align="left">3296</td>
+<td align="left">52559</td>
+<td align="left">113411</td>
+<td align="left">113404</td>
+<td align="left">246.44701484</td>
+<td align="left">75.272152437</td>
+<td align="left">54.577959281</td>
+<td align="left">55.22478331</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Georgia</td>
+<td align="left">13</td>
+<td align="left">O</td>
+<td align="left">15582</td>
+<td align="left">731013</td>
+<td align="left">2680310</td>
+<td align="left">2680232</td>
+<td align="left">230.62550305</td>
+<td align="left">102.58046417</td>
+<td align="left">70.135654055</td>
+<td align="left">72.735362869</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Hawaii</td>
+<td align="left">15</td>
+<td align="left">F</td>
+<td align="left">340</td>
+<td align="left">7579</td>
+<td align="left">15257</td>
+<td align="left">15257</td>
+<td align="left">172.97984859</td>
+<td align="left">74.175368683</td>
+<td align="left">49.853446287</td>
+<td align="left">54.866903061</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Hawaii</td>
+<td align="left">15</td>
+<td align="left">O</td>
+<td align="left">1896</td>
+<td align="left">71853</td>
+<td align="left">226053</td>
+<td align="left">226013</td>
+<td align="left">191.12989489</td>
+<td align="left">105.50103918</td>
+<td align="left">70.334802591</td>
+<td align="left">72.434938665</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Idaho</td>
+<td align="left">16</td>
+<td align="left">F</td>
+<td align="left">1007</td>
+<td align="left">37567</td>
+<td align="left">78838</td>
+<td align="left">78835</td>
+<td align="left">147.20396649</td>
+<td align="left">72.129012405</td>
+<td align="left">50.599269515</td>
+<td align="left">53.059054897</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Idaho</td>
+<td align="left">16</td>
+<td align="left">O</td>
+<td align="left">2922</td>
+<td align="left">110058</td>
+<td align="left">281489</td>
+<td align="left">281479</td>
+<td align="left">191.46620152</td>
+<td align="left">90.946234276</td>
+<td align="left">60.848612024</td>
+<td align="left">66.144896852</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Illinois</td>
+<td align="left">17</td>
+<td align="left">F</td>
+<td align="left">7363</td>
+<td align="left">161326</td>
+<td align="left">342798</td>
+<td align="left">342754</td>
+<td align="left">211.38865002</td>
+<td align="left">81.203670646</td>
+<td align="left">57.979187131</td>
+<td align="left">55.049977654</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Illinois</td>
+<td align="left">17</td>
+<td align="left">O</td>
+<td align="left">21399</td>
+<td align="left">963991</td>
+<td align="left">3039737.4</td>
+<td align="left">3039271</td>
+<td align="left">220.02822146</td>
+<td align="left">107.3717184</td>
+<td align="left">73.373017597</td>
+<td align="left">71.467745748</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Indiana</td>
+<td align="left">18</td>
+<td align="left">F</td>
+<td align="left">3319</td>
+<td align="left">59386</td>
+<td align="left">116154</td>
+<td align="left">116152</td>
+<td align="left">185.60503831</td>
+<td align="left">73.899383577</td>
+<td align="left">53.657553851</td>
+<td align="left">55.996130051</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Indiana</td>
+<td align="left">18</td>
+<td align="left">O</td>
+<td align="left">12239</td>
+<td align="left">570825</td>
+<td align="left">1745990</td>
+<td align="left">1745943</td>
+<td align="left">181.88700161</td>
+<td align="left">99.012284423</td>
+<td align="left">65.995770818</td>
+<td align="left">71.039360855</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Iowa</td>
+<td align="left">19</td>
+<td align="left">F</td>
+<td align="left">2268</td>
+<td align="left">65456</td>
+<td align="left">136324</td>
+<td align="left">136321</td>
+<td align="left">218.79264157</td>
+<td align="left">73.535505927</td>
+<td align="left">52.01279892</td>
+<td align="left">54.497457161</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Iowa</td>
+<td align="left">19</td>
+<td align="left">O</td>
+<td align="left">5114</td>
+<td align="left">261257</td>
+<td align="left">680174</td>
+<td align="left">680161</td>
+<td align="left">211.36738685</td>
+<td align="left">96.830092521</td>
+<td align="left">64.706770047</td>
+<td align="left">69.590372625</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kansas</td>
+<td align="left">20</td>
+<td align="left">F</td>
+<td align="left">1640</td>
+<td align="left">45385</td>
+<td align="left">94969</td>
+<td align="left">94963</td>
+<td align="left">176.42252567</td>
+<td align="left">73.411358654</td>
+<td align="left">52.921658331</td>
+<td align="left">55.015447251</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kansas</td>
+<td align="left">20</td>
+<td align="left">O</td>
+<td align="left">4820</td>
+<td align="left">265076</td>
+<td align="left">727890</td>
+<td align="left">727869</td>
+<td align="left">185.41351519</td>
+<td align="left">98.212117435</td>
+<td align="left">66.197808886</td>
+<td align="left">70.985012969</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kentucky</td>
+<td align="left">21</td>
+<td align="left">F</td>
+<td align="left">2429</td>
+<td align="left">52516</td>
+<td align="left">110038</td>
+<td align="left">110024</td>
+<td align="left">175.16416801</td>
+<td align="left">74.163287228</td>
+<td align="left">53.769579691</td>
+<td align="left">55.610856159</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kentucky</td>
+<td align="left">21</td>
+<td align="left">O</td>
+<td align="left">8442</td>
+<td align="left">374239</td>
+<td align="left">1124984</td>
+<td align="left">1124918</td>
+<td align="left">192.00521966</td>
+<td align="left">96.441784994</td>
+<td align="left">64.210425873</td>
+<td align="left">70.074797668</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Louisiana</td>
+<td align="left">22</td>
+<td align="left">F</td>
+<td align="left">3090</td>
+<td align="left">74527</td>
+<td align="left">189085</td>
+<td align="left">189060</td>
+<td align="left">211.14602644</td>
+<td align="left">76.624087685</td>
+<td align="left">54.343913954</td>
+<td align="left">54.455219557</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Louisiana</td>
+<td align="left">22</td>
+<td align="left">O</td>
+<td align="left">7453</td>
+<td align="left">327020</td>
+<td align="left">1169997</td>
+<td align="left">1168588</td>
+<td align="left">201.02632825</td>
+<td align="left">100.77465224</td>
+<td align="left">69.300953028</td>
+<td align="left">73.540544156</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maine</td>
+<td align="left">23</td>
+<td align="left">F</td>
+<td align="left">1334</td>
+<td align="left">31973</td>
+<td align="left">61381</td>
+<td align="left">61366</td>
+<td align="left">171.17372982</td>
+<td align="left">74.170882358</td>
+<td align="left">52.249566478</td>
+<td align="left">52.802834265</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maine</td>
+<td align="left">23</td>
+<td align="left">O</td>
+<td align="left">2842</td>
+<td align="left">93148</td>
+<td align="left">239293</td>
+<td align="left">239271</td>
+<td align="left">186.71529359</td>
+<td align="left">88.597069158</td>
+<td align="left">60.282775342</td>
+<td align="left">61.635517211</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maryland</td>
+<td align="left">24</td>
+<td align="left">F</td>
+<td align="left">3454</td>
+<td align="left">55604</td>
+<td align="left">103115</td>
+<td align="left">103109</td>
+<td align="left">224.25884963</td>
+<td align="left">81.80582728</td>
+<td align="left">59.235088106</td>
+<td align="left">55.737853077</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maryland</td>
+<td align="left">24</td>
+<td align="left">O</td>
+<td align="left">11949</td>
+<td align="left">637179</td>
+<td align="left">2270876.5</td>
+<td align="left">2270313</td>
+<td align="left">224.98333197</td>
+<td align="left">113.08057524</td>
+<td align="left">78.314033432</td>
+<td align="left">73.747577766</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Massachusetts</td>
+<td align="left">25</td>
+<td align="left">F</td>
+<td align="left">7354</td>
+<td align="left">186158</td>
+<td align="left">410356</td>
+<td align="left">410315</td>
+<td align="left">270.53208824</td>
+<td align="left">82.524863679</td>
+<td align="left">57.991519827</td>
+<td align="left">53.806579701</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Massachusetts</td>
+<td align="left">25</td>
+<td align="left">O</td>
+<td align="left">15760</td>
+<td align="left">633167</td>
+<td align="left">1974920.4</td>
+<td align="left">1974192</td>
+<td align="left">297.93788582</td>
+<td align="left">110.02902078</td>
+<td align="left">75.541291411</td>
+<td align="left">71.299052235</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Michigan</td>
+<td align="left">26</td>
+<td align="left">F</td>
+<td align="left">7737</td>
+<td align="left">138918</td>
+<td align="left">261407</td>
+<td align="left">261397</td>
+<td align="left">159.59701431</td>
+<td align="left">77.421972786</td>
+<td align="left">55.903044333</td>
+<td align="left">55.437830815</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Michigan</td>
+<td align="left">26</td>
+<td align="left">O</td>
+<td align="left">18757</td>
+<td align="left">638966</td>
+<td align="left">1961164.5</td>
+<td align="left">1961076</td>
+<td align="left">172.76981897</td>
+<td align="left">100.05393603</td>
+<td align="left">68.076350567</td>
+<td align="left">70.502408181</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Minnesota</td>
+<td align="left">27</td>
+<td align="left">F</td>
+<td align="left">4499</td>
+<td align="left">80782</td>
+<td align="left">177355</td>
+<td align="left">177351</td>
+<td align="left">205.787981</td>
+<td align="left">74.634189676</td>
+<td align="left">52.396218263</td>
+<td align="left">53.175491077</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Minnesota</td>
+<td align="left">27</td>
+<td align="left">O</td>
+<td align="left">12253</td>
+<td align="left">309339</td>
+<td align="left">837752</td>
+<td align="left">837712</td>
+<td align="left">270.17793253</td>
+<td align="left">100.33935511</td>
+<td align="left">67.971589779</td>
+<td align="left">69.38939395</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Mississippi</td>
+<td align="left">28</td>
+<td align="left">F</td>
+<td align="left">1291</td>
+<td align="left">52608</td>
+<td align="left">114595</td>
+<td align="left">114573</td>
+<td align="left">159.9295231</td>
+<td align="left">72.47030202</td>
+<td align="left">51.857801824</td>
+<td align="left">54.901542825</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Mississippi</td>
+<td align="left">28</td>
+<td align="left">O</td>
+<td align="left">4560</td>
+<td align="left">302662</td>
+<td align="left">1004848</td>
+<td align="left">1004703</td>
+<td align="left">164.66484569</td>
+<td align="left">94.633746776</td>
+<td align="left">63.620419964</td>
+<td align="left">70.563961952</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Missouri</td>
+<td align="left">29</td>
+<td align="left">F</td>
+<td align="left">3571</td>
+<td align="left">93655</td>
+<td align="left">200290</td>
+<td align="left">200284</td>
+<td align="left">167.59055</td>
+<td align="left">75.675727046</td>
+<td align="left">54.582908333</td>
+<td align="left">55.554886714</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Missouri</td>
+<td align="left">29</td>
+<td align="left">O</td>
+<td align="left">10170</td>
+<td align="left">469160</td>
+<td align="left">1343728</td>
+<td align="left">1343662</td>
+<td align="left">187.66035684</td>
+<td align="left">99.474534422</td>
+<td align="left">67.459365392</td>
+<td align="left">70.927714835</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Montana</td>
+<td align="left">30</td>
+<td align="left">F</td>
+<td align="left">975</td>
+<td align="left">43071</td>
+<td align="left">100697</td>
+<td align="left">100695</td>
+<td align="left">145.10776061</td>
+<td align="left">76.127983555</td>
+<td align="left">52.419978847</td>
+<td align="left">52.743285897</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Montana</td>
+<td align="left">30</td>
+<td align="left">O</td>
+<td align="left">1831</td>
+<td align="left">77126</td>
+<td align="left">174590</td>
+<td align="left">174588</td>
+<td align="left">215.32122802</td>
+<td align="left">96.403420757</td>
+<td align="left">63.708121026</td>
+<td align="left">67.632932069</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nebraska</td>
+<td align="left">31</td>
+<td align="left">F</td>
+<td align="left">1570</td>
+<td align="left">39048</td>
+<td align="left">76906</td>
+<td align="left">76906</td>
+<td align="left">226.97568343</td>
+<td align="left">73.721426937</td>
+<td align="left">53.875004941</td>
+<td align="left">56.424432424</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nebraska</td>
+<td align="left">31</td>
+<td align="left">O</td>
+<td align="left">3722</td>
+<td align="left">175114</td>
+<td align="left">514615</td>
+<td align="left">514598</td>
+<td align="left">222.87379194</td>
+<td align="left">96.802549887</td>
+<td align="left">65.440705032</td>
+<td align="left">71.93241804</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nevada</td>
+<td align="left">32</td>
+<td align="left">F</td>
+<td align="left">457</td>
+<td align="left">6182</td>
+<td align="left">11283</td>
+<td align="left">11283</td>
+<td align="left">207.59090313</td>
+<td align="left">77.822178499</td>
+<td align="left">54.493256226</td>
+<td align="left">53.754315342</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nevada</td>
+<td align="left">32</td>
+<td align="left">O</td>
+<td align="left">4313</td>
+<td align="left">197952</td>
+<td align="left">748825</td>
+<td align="left">748027</td>
+<td align="left">235.19920439</td>
+<td align="left">104.41996647</td>
+<td align="left">72.893990331</td>
+<td align="left">73.356487898</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Hampshire</td>
+<td align="left">33</td>
+<td align="left">F</td>
+<td align="left">1384</td>
+<td align="left">40397</td>
+<td align="left">78443</td>
+<td align="left">78384</td>
+<td align="left">170.87329908</td>
+<td align="left">77.563916729</td>
+<td align="left">54.795118749</td>
+<td align="left">53.417591882</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Hampshire</td>
+<td align="left">33</td>
+<td align="left">O</td>
+<td align="left">3258</td>
+<td align="left">141129</td>
+<td align="left">387727</td>
+<td align="left">387609</td>
+<td align="left">237.03113817</td>
+<td align="left">100.52269465</td>
+<td align="left">68.471913898</td>
+<td align="left">66.918092008</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Jersey</td>
+<td align="left">34</td>
+<td align="left">F</td>
+<td align="left">3576</td>
+<td align="left">40464</td>
+<td align="left">74321</td>
+<td align="left">74279</td>
+<td align="left">260.41683104</td>
+<td align="left">83.351365832</td>
+<td align="left">61.307834663</td>
+<td align="left">56.551905518</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Jersey</td>
+<td align="left">34</td>
+<td align="left">O</td>
+<td align="left">15886</td>
+<td align="left">732766</td>
+<td align="left">2783371</td>
+<td align="left">2781837</td>
+<td align="left">242.39193432</td>
+<td align="left">116.62831681</td>
+<td align="left">82.275001224</td>
+<td align="left">75.833846172</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Mexico</td>
+<td align="left">35</td>
+<td align="left">F</td>
+<td align="left">1120</td>
+<td align="left">26551</td>
+<td align="left">47082</td>
+<td align="left">47080</td>
+<td align="left">154.00234676</td>
+<td align="left">75.186712119</td>
+<td align="left">50.971591691</td>
+<td align="left">51.22546281</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Mexico</td>
+<td align="left">35</td>
+<td align="left">O</td>
+<td align="left">2999</td>
+<td align="left">129649</td>
+<td align="left">366134.5</td>
+<td align="left">365603</td>
+<td align="left">209.07645649</td>
+<td align="left">98.254699052</td>
+<td align="left">65.680693051</td>
+<td align="left">68.801317876</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New York</td>
+<td align="left">36</td>
+<td align="left">F</td>
+<td align="left">8748</td>
+<td align="left">142073</td>
+<td align="left">283533</td>
+<td align="left">283505</td>
+<td align="left">233.61506735</td>
+<td align="left">80.983195184</td>
+<td align="left">57.739476428</td>
+<td align="left">54.86768743</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New York</td>
+<td align="left">36</td>
+<td align="left">O</td>
+<td align="left">37056</td>
+<td align="left">1296065</td>
+<td align="left">4602104</td>
+<td align="left">4601076</td>
+<td align="left">283.39536849</td>
+<td align="left">116.39076677</td>
+<td align="left">82.869412469</td>
+<td align="left">74.364372289</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Carolina</td>
+<td align="left">37</td>
+<td align="left">F</td>
+<td align="left">4895</td>
+<td align="left">104742</td>
+<td align="left">214197</td>
+<td align="left">214195</td>
+<td align="left">205.43656013</td>
+<td align="left">74.589476136</td>
+<td align="left">53.746011289</td>
+<td align="left">54.853143835</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Carolina</td>
+<td align="left">37</td>
+<td align="left">O</td>
+<td align="left">19868</td>
+<td align="left">928038</td>
+<td align="left">3370272.5</td>
+<td align="left">3370192</td>
+<td align="left">210.56305146</td>
+<td align="left">99.479955318</td>
+<td align="left">67.093697889</td>
+<td align="left">69.978832051</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Dakota</td>
+<td align="left">38</td>
+<td align="left">F</td>
+<td align="left">999</td>
+<td align="left">37870</td>
+<td align="left">85096</td>
+<td align="left">85095</td>
+<td align="left">148.61659267</td>
+<td align="left">72.523610981</td>
+<td align="left">51.028977155</td>
+<td align="left">52.704553328</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Dakota</td>
+<td align="left">38</td>
+<td align="left">O</td>
+<td align="left">1505</td>
+<td align="left">60365</td>
+<td align="left">137963</td>
+<td align="left">137961</td>
+<td align="left">220.70487007</td>
+<td align="left">85.983504998</td>
+<td align="left">56.637638207</td>
+<td align="left">61.535324544</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Ohio</td>
+<td align="left">39</td>
+<td align="left">F</td>
+<td align="left">8509</td>
+<td align="left">151443</td>
+<td align="left">312876</td>
+<td align="left">312860</td>
+<td align="left">195.16972769</td>
+<td align="left">74.761235825</td>
+<td align="left">53.071835647</td>
+<td align="left">54.402501119</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Ohio</td>
+<td align="left">39</td>
+<td align="left">O</td>
+<td align="left">22540</td>
+<td align="left">836719</td>
+<td align="left">2559955.5</td>
+<td align="left">2559705</td>
+<td align="left">190.04995421</td>
+<td align="left">96.339609936</td>
+<td align="left">63.160998783</td>
+<td align="left">68.937073597</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oklahoma</td>
+<td align="left">40</td>
+<td align="left">F</td>
+<td align="left">1400</td>
+<td align="left">64471</td>
+<td align="left">139174</td>
+<td align="left">139168</td>
+<td align="left">161.9307237</td>
+<td align="left">73.42220501</td>
+<td align="left">52.445030825</td>
+<td align="left">55.631847759</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oklahoma</td>
+<td align="left">40</td>
+<td align="left">O</td>
+<td align="left">6299</td>
+<td align="left">340808</td>
+<td align="left">1173165</td>
+<td align="left">1172883</td>
+<td align="left">190.07422913</td>
+<td align="left">96.223074444</td>
+<td align="left">64.337655436</td>
+<td align="left">71.59497127</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oregon</td>
+<td align="left">41</td>
+<td align="left">F</td>
+<td align="left">1813</td>
+<td align="left">31206</td>
+<td align="left">59992</td>
+<td align="left">59990</td>
+<td align="left">212.95843629</td>
+<td align="left">74.174419256</td>
+<td align="left">51.347289639</td>
+<td align="left">53.430671256</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oregon</td>
+<td align="left">41</td>
+<td align="left">O</td>
+<td align="left">7541</td>
+<td align="left">249109</td>
+<td align="left">718708</td>
+<td align="left">718681</td>
+<td align="left">275.27961161</td>
+<td align="left">97.836804627</td>
+<td align="left">64.591001102</td>
+<td align="left">69.328892679</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Pennsylvania</td>
+<td align="left">42</td>
+<td align="left">F</td>
+<td align="left">9393</td>
+<td align="left">153567</td>
+<td align="left">297661</td>
+<td align="left">297628</td>
+<td align="left">193.61243808</td>
+<td align="left">78.673685837</td>
+<td align="left">57.011625809</td>
+<td align="left">55.594610379</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Pennsylvania</td>
+<td align="left">42</td>
+<td align="left">O</td>
+<td align="left">27048</td>
+<td align="left">1065959</td>
+<td align="left">3274192.5</td>
+<td align="left">3273850</td>
+<td align="left">197.23298606</td>
+<td align="left">105.33099233</td>
+<td align="left">71.012891365</td>
+<td align="left">71.502111661</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Rhode Island</td>
+<td align="left">44</td>
+<td align="left">F</td>
+<td align="left">514</td>
+<td align="left">10190</td>
+<td align="left">17774</td>
+<td align="left">17771</td>
+<td align="left">240.47861764</td>
+<td align="left">80.707722516</td>
+<td align="left">59.793630584</td>
+<td align="left">57.466036345</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Rhode Island</td>
+<td align="left">44</td>
+<td align="left">O</td>
+<td align="left">2349</td>
+<td align="left">85494</td>
+<td align="left">239300</td>
+<td align="left">239278</td>
+<td align="left">223.4746471</td>
+<td align="left">103.17027522</td>
+<td align="left">69.670009068</td>
+<td align="left">71.520000418</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Carolina</td>
+<td align="left">45</td>
+<td align="left">F</td>
+<td align="left">2017</td>
+<td align="left">40063</td>
+<td align="left">84690</td>
+<td align="left">84685</td>
+<td align="left">175.8427779</td>
+<td align="left">74.246869642</td>
+<td align="left">54.052788759</td>
+<td align="left">55.995111347</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Carolina</td>
+<td align="left">45</td>
+<td align="left">O</td>
+<td align="left">8469</td>
+<td align="left">540638</td>
+<td align="left">1957098</td>
+<td align="left">1957059</td>
+<td align="left">197.47521927</td>
+<td align="left">100.45660662</td>
+<td align="left">68.248547574</td>
+<td align="left">72.70845203</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Dakota</td>
+<td align="left">46</td>
+<td align="left">F</td>
+<td align="left">965</td>
+<td align="left">41357</td>
+<td align="left">84471</td>
+<td align="left">84469</td>
+<td align="left">123.8410664</td>
+<td align="left">75.113403298</td>
+<td align="left">51.800475548</td>
+<td align="left">52.565231736</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Dakota</td>
+<td align="left">46</td>
+<td align="left">O</td>
+<td align="left">1544</td>
+<td align="left">66440</td>
+<td align="left">137921.9</td>
+<td align="left">137889</td>
+<td align="left">178.84161167</td>
+<td align="left">94.331157778</td>
+<td align="left">63.529701302</td>
+<td align="left">65.522530577</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Tennessee</td>
+<td align="left">47</td>
+<td align="left">F</td>
+<td align="left">2781</td>
+<td align="left">58713</td>
+<td align="left">122135</td>
+<td align="left">122132</td>
+<td align="left">250.09284022</td>
+<td align="left">72.822589675</td>
+<td align="left">52.2674398</td>
+<td align="left">55.214030949</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Tennessee</td>
+<td align="left">47</td>
+<td align="left">O</td>
+<td align="left">12813</td>
+<td align="left">622864</td>
+<td align="left">2206367</td>
+<td align="left">2206183</td>
+<td align="left">211.55497102</td>
+<td align="left">96.877030485</td>
+<td align="left">65.484275272</td>
+<td align="left">71.476194278</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Texas</td>
+<td align="left">48</td>
+<td align="left">F</td>
+<td align="left">8613</td>
+<td align="left">168573</td>
+<td align="left">370165</td>
+<td align="left">370104</td>
+<td align="left">220.6652019</td>
+<td align="left">76.514533762</td>
+<td align="left">55.060893656</td>
+<td align="left">55.29101525</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Texas</td>
+<td align="left">48</td>
+<td align="left">O</td>
+<td align="left">35559</td>
+<td align="left">1533940</td>
+<td align="left">5831944.4</td>
+<td align="left">5830416</td>
+<td align="left">228.67059604</td>
+<td align="left">103.35461487</td>
+<td align="left">71.323253323</td>
+<td align="left">73.237808243</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Utah</td>
+<td align="left">49</td>
+<td align="left">F</td>
+<td align="left">985</td>
+<td align="left">13270</td>
+<td align="left">21206</td>
+<td align="left">21206</td>
+<td align="left">200.69927945</td>
+<td align="left">75.528274545</td>
+<td align="left">53.081242573</td>
+<td align="left">53.766837216</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Utah</td>
+<td align="left">49</td>
+<td align="left">O</td>
+<td align="left">4758</td>
+<td align="left">167300</td>
+<td align="left">536303</td>
+<td align="left">536236</td>
+<td align="left">189.65558065</td>
+<td align="left">99.285654714</td>
+<td align="left">67.192795584</td>
+<td align="left">71.030764232</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Vermont</td>
+<td align="left">50</td>
+<td align="left">F</td>
+<td align="left">581</td>
+<td align="left">23896</td>
+<td align="left">42279</td>
+<td align="left">42274</td>
+<td align="left">118.08173869</td>
+<td align="left">75.784508858</td>
+<td align="left">51.969480357</td>
+<td align="left">52.308216845</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Vermont</td>
+<td align="left">50</td>
+<td align="left">O</td>
+<td align="left">1175</td>
+<td align="left">48355</td>
+<td align="left">113250</td>
+<td align="left">113237</td>
+<td align="left">158.28948618</td>
+<td align="left">92.660874525</td>
+<td align="left">60.800794084</td>
+<td align="left">62.337313731</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virginia</td>
+<td align="left">51</td>
+<td align="left">F</td>
+<td align="left">3657</td>
+<td align="left">95907</td>
+<td align="left">189510</td>
+<td align="left">189506</td>
+<td align="left">190.61620928</td>
+<td align="left">77.599657643</td>
+<td align="left">54.595257137</td>
+<td align="left">53.735305314</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virginia</td>
+<td align="left">51</td>
+<td align="left">O</td>
+<td align="left">14044</td>
+<td align="left">805356</td>
+<td align="left">2681633</td>
+<td align="left">2681487</td>
+<td align="left">204.99953833</td>
+<td align="left">105.93819925</td>
+<td align="left">71.866718954</td>
+<td align="left">70.452226853</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Washington</td>
+<td align="left">53</td>
+<td align="left">F</td>
+<td align="left">3721</td>
+<td align="left">102236</td>
+<td align="left">220527</td>
+<td align="left">220258</td>
+<td align="left">169.28406993</td>
+<td align="left">79.624110971</td>
+<td align="left">55.840488648</td>
+<td align="left">53.676841294</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Washington</td>
+<td align="left">53</td>
+<td align="left">O</td>
+<td align="left">13567</td>
+<td align="left">485442</td>
+<td align="left">1508067</td>
+<td align="left">1507829</td>
+<td align="left">243.79604516</td>
+<td align="left">104.57676532</td>
+<td align="left">70.80639955</td>
+<td align="left">69.250291207</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">West Virginia</td>
+<td align="left">54</td>
+<td align="left">F</td>
+<td align="left">1577</td>
+<td align="left">41961</td>
+<td align="left">83893</td>
+<td align="left">83893</td>
+<td align="left">169.61415625</td>
+<td align="left">75.045466725</td>
+<td align="left">52.503531045</td>
+<td align="left">53.571188657</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">West Virginia</td>
+<td align="left">54</td>
+<td align="left">O</td>
+<td align="left">3063</td>
+<td align="left">151552</td>
+<td align="left">397713.1</td>
+<td align="left">397704</td>
+<td align="left">190.62322667</td>
+<td align="left">96.45296255</td>
+<td align="left">63.704986006</td>
+<td align="left">68.901040499</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wisconsin</td>
+<td align="left">55</td>
+<td align="left">F</td>
+<td align="left">5130</td>
+<td align="left">110076</td>
+<td align="left">234329</td>
+<td align="left">234191</td>
+<td align="left">227.05510155</td>
+<td align="left">73.282948461</td>
+<td align="left">51.161874928</td>
+<td align="left">53.211402729</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wisconsin</td>
+<td align="left">55</td>
+<td align="left">O</td>
+<td align="left">11090</td>
+<td align="left">366178</td>
+<td align="left">953363</td>
+<td align="left">953286</td>
+<td align="left">291.68981092</td>
+<td align="left">97.539644028</td>
+<td align="left">63.843308645</td>
+<td align="left">67.267376802</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wyoming</td>
+<td align="left">56</td>
+<td align="left">F</td>
+<td align="left">153</td>
+<td align="left">2936</td>
+<td align="left">5880</td>
+<td align="left">5879</td>
+<td align="left">250.03065816</td>
+<td align="left">75.710772109</td>
+<td align="left">54.888858844</td>
+<td align="left">54.612243197</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wyoming</td>
+<td align="left">56</td>
+<td align="left">O</td>
+<td align="left">972</td>
+<td align="left">49550</td>
+<td align="left">121035</td>
+<td align="left">121022</td>
+<td align="left">234.62237568</td>
+<td align="left">103.07802619</td>
+<td align="left">70.275353658</td>
+<td align="left">70.538635849</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Guam</td>
+<td align="left">66</td>
+<td align="left">F</td>
+<td align="left">13</td>
+<td align="left">234</td>
+<td align="left">479</td>
+<td align="left">479</td>
+<td align="left">334.28206681</td>
+<td align="left">81.441837161</td>
+<td align="left">61.216805846</td>
+<td align="left">58.240793319</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Guam</td>
+<td align="left">66</td>
+<td align="left">O</td>
+<td align="left">106</td>
+<td align="left">5652</td>
+<td align="left">16557</td>
+<td align="left">16556</td>
+<td align="left">137.64835236</td>
+<td align="left">112.30173884</td>
+<td align="left">73.445336716</td>
+<td align="left">71.29760645</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Northern Mariana Islands</td>
+<td align="left">69</td>
+<td align="left">F</td>
+<td align="left">6</td>
+<td align="left">62</td>
+<td align="left">293</td>
+<td align="left">293</td>
+<td align="left">261.67696246</td>
+<td align="left">77.826109215</td>
+<td align="left">58.466962457</td>
+<td align="left">56.240409556</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Northern Mariana Islands</td>
+<td align="left">69</td>
+<td align="left">O</td>
+<td align="left">8</td>
+<td align="left">437</td>
+<td align="left">1230</td>
+<td align="left">1230</td>
+<td align="left">128.8585122</td>
+<td align="left">109.95365041</td>
+<td align="left">59.358260163</td>
+<td align="left">58.758097561</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Puerto Rico</td>
+<td align="left">72</td>
+<td align="left">F</td>
+<td align="left">84</td>
+<td align="left">931</td>
+<td align="left">2232</td>
+<td align="left">2232</td>
+<td align="left">118.90268369</td>
+<td align="left">79.080197133</td>
+<td align="left">58.096742832</td>
+<td align="left">58.100882616</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Puerto Rico</td>
+<td align="left">72</td>
+<td align="left">O</td>
+<td align="left">1392</td>
+<td align="left">17829</td>
+<td align="left">42291</td>
+<td align="left">42284</td>
+<td align="left">127.96648199</td>
+<td align="left">104.78114492</td>
+<td align="left">70.737664515</td>
+<td align="left">74.063132345</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virgin Islands</td>
+<td align="left">78</td>
+<td align="left">O</td>
+<td align="left">90</td>
+<td align="left">7552</td>
+<td align="left">18225</td>
+<td align="left">18225</td>
+<td align="left">180.58116818</td>
+<td align="left">107.06860686</td>
+<td align="left">67.460698491</td>
+<td align="left">68.109063374</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Central/South America</td>
+<td align="left">9A</td>
+<td align="left">O</td>
+<td align="left">2</td>
+<td align="left">39</td>
+<td align="left">49</td>
+<td align="left">49</td>
+<td align="left">132.85714286</td>
+<td align="left">95.223265306</td>
+<td align="left">61.574489796</td>
+<td align="left">71.953673469</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Europe</td>
+<td align="left">9B</td>
+<td align="left">F</td>
+<td align="left">6</td>
+<td align="left">233</td>
+<td align="left">291</td>
+<td align="left">291</td>
+<td align="left">142.78006873</td>
+<td align="left">75.629278351</td>
+<td align="left">51.869003436</td>
+<td align="left">52.134707904</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Europe</td>
+<td align="left">9B</td>
+<td align="left">O</td>
+<td align="left">23</td>
+<td align="left">1373</td>
+<td align="left">1973</td>
+<td align="left">1973</td>
+<td align="left">236.48953371</td>
+<td align="left">101.53946782</td>
+<td align="left">67.864820071</td>
+<td align="left">67.650466295</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Pacific</td>
+<td align="left">9C</td>
+<td align="left">F</td>
+<td align="left">3</td>
+<td align="left">45</td>
+<td align="left">48</td>
+<td align="left">48</td>
+<td align="left">92.5625</td>
+<td align="left">67.994583333</td>
+<td align="left">50.025833333</td>
+<td align="left">50.096041667</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Pacific</td>
+<td align="left">9C</td>
+<td align="left">O</td>
+<td align="left">9</td>
+<td align="left">645</td>
+<td align="left">779</td>
+<td align="left">779</td>
+<td align="left">231.60875481</td>
+<td align="left">105.79838254</td>
+<td align="left">74.947984596</td>
+<td align="left">74.968716303</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Unknown</td>
+<td align="left">9D</td>
+<td align="left">F</td>
+<td align="left">6</td>
+<td align="left">85</td>
+<td align="left">113</td>
+<td align="left">113</td>
+<td align="left">177.12548673</td>
+<td align="left">67.229911504</td>
+<td align="left">40.354867257</td>
+<td align="left">40.760619469</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Unknown</td>
+<td align="left">9D</td>
+<td align="left">O</td>
+<td align="left">8</td>
+<td align="left">923</td>
+<td align="left">2093</td>
+<td align="left">2093</td>
+<td align="left">172.14381271</td>
+<td align="left">107.06891543</td>
+<td align="left">76.065441949</td>
+<td align="left">76.603956044</td>
+</tr>
+<tr class="even">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Foreign Country</td>
+<td align="left">9E</td>
+<td align="left">F</td>
+<td align="left">9</td>
+<td align="left">60</td>
+<td align="left">71</td>
+<td align="left">71</td>
+<td align="left">184.33352113</td>
+<td align="left">77.205492958</td>
+<td align="left">58.671830986</td>
+<td align="left">59.53</td>
+</tr>
+<tr class="odd">
+<td align="left">2020</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Foreign Country</td>
+<td align="left">9E</td>
+<td align="left">O</td>
+<td align="left">27</td>
+<td align="left">1605</td>
+<td align="left">2427</td>
+<td align="left">2427</td>
+<td align="left">192.09091059</td>
+<td align="left">104.6926164</td>
+<td align="left">71.194845488</td>
+<td align="left">73.87223321</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">National</td>
+<td align="left">National</td>
+<td align="left"></td>
+<td align="left">F</td>
+<td align="left">159538</td>
+<td align="left">3613079</td>
+<td align="left">8691066</td>
+<td align="left">8690167</td>
+<td align="left">203.21581329</td>
+<td align="left">76.361859284</td>
+<td align="left">55.602596277</td>
+<td align="left">55.654806894</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">National</td>
+<td align="left">National</td>
+<td align="left"></td>
+<td align="left">O</td>
+<td align="left">540168</td>
+<td align="left">23594693</td>
+<td align="left">98005405.5</td>
+<td align="left">97997891</td>
+<td align="left">215.61252223</td>
+<td align="left">104.2276743</td>
+<td align="left">73.187599059</td>
+<td align="left">73.99365968</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alabama</td>
+<td align="left">01</td>
+<td align="left">F</td>
+<td align="left">1601</td>
+<td align="left">43485</td>
+<td align="left">103176</td>
+<td align="left">103168</td>
+<td align="left">188.9911932</td>
+<td align="left">70.878119427</td>
+<td align="left">51.654438435</td>
+<td align="left">54.852405792</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alabama</td>
+<td align="left">01</td>
+<td align="left">O</td>
+<td align="left">7568</td>
+<td align="left">431466</td>
+<td align="left">1714452</td>
+<td align="left">1714418</td>
+<td align="left">156.3167449</td>
+<td align="left">97.861253304</td>
+<td align="left">67.642627749</td>
+<td align="left">74.834937595</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alaska</td>
+<td align="left">02</td>
+<td align="left">F</td>
+<td align="left">395</td>
+<td align="left">6274</td>
+<td align="left">13963</td>
+<td align="left">13963</td>
+<td align="left">291.89440736</td>
+<td align="left">100.07784502</td>
+<td align="left">73.853561556</td>
+<td align="left">55.33122753</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Alaska</td>
+<td align="left">02</td>
+<td align="left">O</td>
+<td align="left">1375</td>
+<td align="left">50110</td>
+<td align="left">151206</td>
+<td align="left">151201</td>
+<td align="left">325.06214383</td>
+<td align="left">128.88493889</td>
+<td align="left">90.199974141</td>
+<td align="left">71.313604685</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arizona</td>
+<td align="left">04</td>
+<td align="left">F</td>
+<td align="left">2932</td>
+<td align="left">44299</td>
+<td align="left">85348</td>
+<td align="left">85332</td>
+<td align="left">181.83657051</td>
+<td align="left">75.049917163</td>
+<td align="left">55.408740568</td>
+<td align="left">56.265501125</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arizona</td>
+<td align="left">04</td>
+<td align="left">O</td>
+<td align="left">11619</td>
+<td align="left">599406</td>
+<td align="left">2662799</td>
+<td align="left">2661636</td>
+<td align="left">206.87446822</td>
+<td align="left">102.64353063</td>
+<td align="left">72.863777334</td>
+<td align="left">74.947475941</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arkansas</td>
+<td align="left">05</td>
+<td align="left">F</td>
+<td align="left">1179</td>
+<td align="left">47732</td>
+<td align="left">102236</td>
+<td align="left">102180</td>
+<td align="left">184.56292813</td>
+<td align="left">70.385331586</td>
+<td align="left">51.587664717</td>
+<td align="left">56.456422982</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Arkansas</td>
+<td align="left">05</td>
+<td align="left">O</td>
+<td align="left">4574</td>
+<td align="left">326567</td>
+<td align="left">1197418</td>
+<td align="left">1197244</td>
+<td align="left">172.54185726</td>
+<td align="left">93.159260191</td>
+<td align="left">63.386881047</td>
+<td align="left">73.129370094</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">California</td>
+<td align="left">06</td>
+<td align="left">F</td>
+<td align="left">10229</td>
+<td align="left">238413</td>
+<td align="left">595705</td>
+<td align="left">595652</td>
+<td align="left">283.42307659</td>
+<td align="left">81.686113345</td>
+<td align="left">60.101381103</td>
+<td align="left">56.775126094</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">California</td>
+<td align="left">06</td>
+<td align="left">O</td>
+<td align="left">46943</td>
+<td align="left">2021474</td>
+<td align="left">8683284</td>
+<td align="left">8681018</td>
+<td align="left">238.5080719</td>
+<td align="left">114.89737901</td>
+<td align="left">82.423200354</td>
+<td align="left">76.598235873</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Colorado</td>
+<td align="left">08</td>
+<td align="left">F</td>
+<td align="left">2721</td>
+<td align="left">49441</td>
+<td align="left">109140</td>
+<td align="left">109130</td>
+<td align="left">239.55839692</td>
+<td align="left">75.856273135</td>
+<td align="left">55.714042514</td>
+<td align="left">55.564987081</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Colorado</td>
+<td align="left">08</td>
+<td align="left">O</td>
+<td align="left">9466</td>
+<td align="left">342145</td>
+<td align="left">1143302</td>
+<td align="left">1143207</td>
+<td align="left">220.36022016</td>
+<td align="left">102.54757295</td>
+<td align="left">70.920646513</td>
+<td align="left">73.180813311</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Connecticut</td>
+<td align="left">09</td>
+<td align="left">F</td>
+<td align="left">2150</td>
+<td align="left">36055</td>
+<td align="left">82437</td>
+<td align="left">82388</td>
+<td align="left">263.59374431</td>
+<td align="left">80.115368706</td>
+<td align="left">59.78679064</td>
+<td align="left">56.584655191</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Connecticut</td>
+<td align="left">09</td>
+<td align="left">O</td>
+<td align="left">7631</td>
+<td align="left">290340</td>
+<td align="left">1102620</td>
+<td align="left">1102551</td>
+<td align="left">225.47486741</td>
+<td align="left">111.59760745</td>
+<td align="left">79.830050897</td>
+<td align="left">74.599636575</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Delaware</td>
+<td align="left">10</td>
+<td align="left">F</td>
+<td align="left">718</td>
+<td align="left">20159</td>
+<td align="left">38621</td>
+<td align="left">38621</td>
+<td align="left">184.8456055</td>
+<td align="left">77.802361668</td>
+<td align="left">57.434714016</td>
+<td align="left">56.419144507</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Delaware</td>
+<td align="left">10</td>
+<td align="left">O</td>
+<td align="left">1780</td>
+<td align="left">146142</td>
+<td align="left">545495</td>
+<td align="left">545477</td>
+<td align="left">191.20291609</td>
+<td align="left">106.77620843</td>
+<td align="left">75.818722225</td>
+<td align="left">74.716734232</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">District of Columbia</td>
+<td align="left">11</td>
+<td align="left">F</td>
+<td align="left">612</td>
+<td align="left">15965</td>
+<td align="left">32840</td>
+<td align="left">32839</td>
+<td align="left">231.42452436</td>
+<td align="left">84.33629324</td>
+<td align="left">61.276047503</td>
+<td align="left">56.401621498</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">District of Columbia</td>
+<td align="left">11</td>
+<td align="left">O</td>
+<td align="left">1744</td>
+<td align="left">82053</td>
+<td align="left">198555.8</td>
+<td align="left">198525</td>
+<td align="left">230.87512367</td>
+<td align="left">118.44245749</td>
+<td align="left">84.765580154</td>
+<td align="left">76.78569027</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Florida</td>
+<td align="left">12</td>
+<td align="left">F</td>
+<td align="left">7091</td>
+<td align="left">134100</td>
+<td align="left">290184</td>
+<td align="left">290157</td>
+<td align="left">206.70942661</td>
+<td align="left">79.180787914</td>
+<td align="left">59.175471839</td>
+<td align="left">57.480202286</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Florida</td>
+<td align="left">12</td>
+<td align="left">O</td>
+<td align="left">35688</td>
+<td align="left">1941827</td>
+<td align="left">9081199</td>
+<td align="left">9080861</td>
+<td align="left">220.46248837</td>
+<td align="left">106.95273735</td>
+<td align="left">76.855090106</td>
+<td align="left">76.526494869</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Georgia</td>
+<td align="left">13</td>
+<td align="left">F</td>
+<td align="left">3498</td>
+<td align="left">63852</td>
+<td align="left">144443</td>
+<td align="left">144433</td>
+<td align="left">232.79550203</td>
+<td align="left">74.663089869</td>
+<td align="left">54.688625409</td>
+<td align="left">55.628321968</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Georgia</td>
+<td align="left">13</td>
+<td align="left">O</td>
+<td align="left">15149</td>
+<td align="left">782797</td>
+<td align="left">3123186.2</td>
+<td align="left">3123063</td>
+<td align="left">221.87506388</td>
+<td align="left">102.57803854</td>
+<td align="left">71.655104873</td>
+<td align="left">74.538912509</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Hawaii</td>
+<td align="left">15</td>
+<td align="left">F</td>
+<td align="left">319</td>
+<td align="left">8450</td>
+<td align="left">19340</td>
+<td align="left">19340</td>
+<td align="left">165.63131282</td>
+<td align="left">70.990562565</td>
+<td align="left">48.690892968</td>
+<td align="left">56.235220269</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Hawaii</td>
+<td align="left">15</td>
+<td align="left">O</td>
+<td align="left">1748</td>
+<td align="left">78995</td>
+<td align="left">270403</td>
+<td align="left">270388</td>
+<td align="left">187.87935285</td>
+<td align="left">103.86573211</td>
+<td align="left">70.854720436</td>
+<td align="left">74.318619912</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Idaho</td>
+<td align="left">16</td>
+<td align="left">F</td>
+<td align="left">964</td>
+<td align="left">40652</td>
+<td align="left">93360</td>
+<td align="left">93353</td>
+<td align="left">149.4635</td>
+<td align="left">71.781916774</td>
+<td align="left">51.398575086</td>
+<td align="left">53.896197301</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Idaho</td>
+<td align="left">16</td>
+<td align="left">O</td>
+<td align="left">2883</td>
+<td align="left">117908</td>
+<td align="left">323454</td>
+<td align="left">323448</td>
+<td align="left">184.88777693</td>
+<td align="left">90.236702993</td>
+<td align="left">61.918590897</td>
+<td align="left">67.186330576</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Illinois</td>
+<td align="left">17</td>
+<td align="left">F</td>
+<td align="left">7638</td>
+<td align="left">189615</td>
+<td align="left">440074</td>
+<td align="left">439934</td>
+<td align="left">207.33772552</td>
+<td align="left">79.85217552</td>
+<td align="left">58.414116717</td>
+<td align="left">56.26804392</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Illinois</td>
+<td align="left">17</td>
+<td align="left">O</td>
+<td align="left">20860</td>
+<td align="left">1059415</td>
+<td align="left">3725928</td>
+<td align="left">3725685</td>
+<td align="left">210.82484623</td>
+<td align="left">106.34892847</td>
+<td align="left">74.467291724</td>
+<td align="left">73.262088081</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Indiana</td>
+<td align="left">18</td>
+<td align="left">F</td>
+<td align="left">3363</td>
+<td align="left">67441</td>
+<td align="left">139969</td>
+<td align="left">139960</td>
+<td align="left">181.16684559</td>
+<td align="left">72.960564768</td>
+<td align="left">53.466517729</td>
+<td align="left">56.293245933</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Indiana</td>
+<td align="left">18</td>
+<td align="left">O</td>
+<td align="left">12000</td>
+<td align="left">632369</td>
+<td align="left">2185319</td>
+<td align="left">2185237</td>
+<td align="left">179.81082166</td>
+<td align="left">98.540094371</td>
+<td align="left">67.58547677</td>
+<td align="left">73.013173472</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Iowa</td>
+<td align="left">19</td>
+<td align="left">F</td>
+<td align="left">2139</td>
+<td align="left">69280</td>
+<td align="left">157760</td>
+<td align="left">157746</td>
+<td align="left">214.73429913</td>
+<td align="left">73.006857568</td>
+<td align="left">52.733580312</td>
+<td align="left">55.496337348</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Iowa</td>
+<td align="left">19</td>
+<td align="left">O</td>
+<td align="left">5154</td>
+<td align="left">289634</td>
+<td align="left">828465</td>
+<td align="left">828421</td>
+<td align="left">206.70963978</td>
+<td align="left">96.478901438</td>
+<td align="left">66.1943232</td>
+<td align="left">71.559192205</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kansas</td>
+<td align="left">20</td>
+<td align="left">F</td>
+<td align="left">1581</td>
+<td align="left">45834</td>
+<td align="left">99130</td>
+<td align="left">99129</td>
+<td align="left">174.62197327</td>
+<td align="left">71.816859881</td>
+<td align="left">52.639180773</td>
+<td align="left">55.373657218</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kansas</td>
+<td align="left">20</td>
+<td align="left">O</td>
+<td align="left">4944</td>
+<td align="left">280795</td>
+<td align="left">831827</td>
+<td align="left">831808</td>
+<td align="left">182.40863745</td>
+<td align="left">97.980837301</td>
+<td align="left">67.469923939</td>
+<td align="left">72.789450487</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kentucky</td>
+<td align="left">21</td>
+<td align="left">F</td>
+<td align="left">2396</td>
+<td align="left">62488</td>
+<td align="left">134739</td>
+<td align="left">134735</td>
+<td align="left">170.3202202</td>
+<td align="left">72.730619049</td>
+<td align="left">53.475684546</td>
+<td align="left">55.885077817</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Kentucky</td>
+<td align="left">21</td>
+<td align="left">O</td>
+<td align="left">8363</td>
+<td align="left">425675</td>
+<td align="left">1429166</td>
+<td align="left">1429127</td>
+<td align="left">187.71183469</td>
+<td align="left">95.988941215</td>
+<td align="left">65.707670439</td>
+<td align="left">72.041064145</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Louisiana</td>
+<td align="left">22</td>
+<td align="left">F</td>
+<td align="left">3097</td>
+<td align="left">82568</td>
+<td align="left">225503</td>
+<td align="left">225489</td>
+<td align="left">187.44907482</td>
+<td align="left">75.592775573</td>
+<td align="left">54.782885106</td>
+<td align="left">55.462710518</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Louisiana</td>
+<td align="left">22</td>
+<td align="left">O</td>
+<td align="left">6986</td>
+<td align="left">356783</td>
+<td align="left">1405685.8</td>
+<td align="left">1405624</td>
+<td align="left">196.26859829</td>
+<td align="left">100.49178407</td>
+<td align="left">70.381574275</td>
+<td align="left">74.982360048</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maine</td>
+<td align="left">23</td>
+<td align="left">F</td>
+<td align="left">1378</td>
+<td align="left">38294</td>
+<td align="left">82821</td>
+<td align="left">82797</td>
+<td align="left">141.98092984</td>
+<td align="left">73.288136825</td>
+<td align="left">53.62124437</td>
+<td align="left">54.784910349</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maine</td>
+<td align="left">23</td>
+<td align="left">O</td>
+<td align="left">2820</td>
+<td align="left">112741</td>
+<td align="left">332790</td>
+<td align="left">332750</td>
+<td align="left">174.58275759</td>
+<td align="left">86.973259022</td>
+<td align="left">61.397914571</td>
+<td align="left">62.97685853</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maryland</td>
+<td align="left">24</td>
+<td align="left">F</td>
+<td align="left">3491</td>
+<td align="left">69545</td>
+<td align="left">142796</td>
+<td align="left">142775</td>
+<td align="left">219.48883708</td>
+<td align="left">80.934495504</td>
+<td align="left">59.962164556</td>
+<td align="left">56.867474719</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Maryland</td>
+<td align="left">24</td>
+<td align="left">O</td>
+<td align="left">11248</td>
+<td align="left">675616</td>
+<td align="left">2679389</td>
+<td align="left">2679095</td>
+<td align="left">220.4370141</td>
+<td align="left">113.0135329</td>
+<td align="left">80.162723293</td>
+<td align="left">75.67938845</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Massachusetts</td>
+<td align="left">25</td>
+<td align="left">F</td>
+<td align="left">7471</td>
+<td align="left">233474</td>
+<td align="left">628898</td>
+<td align="left">628880</td>
+<td align="left">253.06749581</td>
+<td align="left">81.180545239</td>
+<td align="left">59.264418936</td>
+<td align="left">55.826013487</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Massachusetts</td>
+<td align="left">25</td>
+<td align="left">O</td>
+<td align="left">14917</td>
+<td align="left">709610</td>
+<td align="left">2629332</td>
+<td align="left">2629232</td>
+<td align="left">294.71694466</td>
+<td align="left">110.4597986</td>
+<td align="left">78.444796229</td>
+<td align="left">73.896170776</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Michigan</td>
+<td align="left">26</td>
+<td align="left">F</td>
+<td align="left">7280</td>
+<td align="left">157818</td>
+<td align="left">320658</td>
+<td align="left">320654</td>
+<td align="left">147.14527082</td>
+<td align="left">75.50389443</td>
+<td align="left">55.193995846</td>
+<td align="left">56.003408523</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Michigan</td>
+<td align="left">26</td>
+<td align="left">O</td>
+<td align="left">18691</td>
+<td align="left">764450</td>
+<td align="left">2666153</td>
+<td align="left">2666063</td>
+<td align="left">165.16185262</td>
+<td align="left">98.766904356</td>
+<td align="left">68.750732617</td>
+<td align="left">72.157994245</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Minnesota</td>
+<td align="left">27</td>
+<td align="left">F</td>
+<td align="left">4593</td>
+<td align="left">93582</td>
+<td align="left">223141</td>
+<td align="left">223133</td>
+<td align="left">198.77159258</td>
+<td align="left">73.745162207</td>
+<td align="left">53.345249282</td>
+<td align="left">54.562125248</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Minnesota</td>
+<td align="left">27</td>
+<td align="left">O</td>
+<td align="left">12307</td>
+<td align="left">356434</td>
+<td align="left">1147568</td>
+<td align="left">1147541</td>
+<td align="left">264.45568765</td>
+<td align="left">100.37145901</td>
+<td align="left">70.274042924</td>
+<td align="left">71.929103652</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Mississippi</td>
+<td align="left">28</td>
+<td align="left">F</td>
+<td align="left">1327</td>
+<td align="left">55498</td>
+<td align="left">130436</td>
+<td align="left">130410</td>
+<td align="left">158.76271259</td>
+<td align="left">71.051070793</td>
+<td align="left">51.771379604</td>
+<td align="left">55.594362446</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Mississippi</td>
+<td align="left">28</td>
+<td align="left">O</td>
+<td align="left">4509</td>
+<td align="left">328206</td>
+<td align="left">1223094</td>
+<td align="left">1223038</td>
+<td align="left">162.71462517</td>
+<td align="left">94.070475875</td>
+<td align="left">65.012257284</td>
+<td align="left">72.543280173</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Missouri</td>
+<td align="left">29</td>
+<td align="left">F</td>
+<td align="left">3588</td>
+<td align="left">98595</td>
+<td align="left">222575</td>
+<td align="left">222571</td>
+<td align="left">161.50838998</td>
+<td align="left">74.984932629</td>
+<td align="left">54.818946872</td>
+<td align="left">56.199358149</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Missouri</td>
+<td align="left">29</td>
+<td align="left">O</td>
+<td align="left">10080</td>
+<td align="left">514025</td>
+<td align="left">1594002</td>
+<td align="left">1593964</td>
+<td align="left">186.21918951</td>
+<td align="left">98.784738595</td>
+<td align="left">68.398570686</td>
+<td align="left">72.461894796</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Montana</td>
+<td align="left">30</td>
+<td align="left">F</td>
+<td align="left">968</td>
+<td align="left">47595</td>
+<td align="left">126278</td>
+<td align="left">126277</td>
+<td align="left">132.74946705</td>
+<td align="left">75.007009218</td>
+<td align="left">52.561921396</td>
+<td align="left">53.873515498</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Montana</td>
+<td align="left">30</td>
+<td align="left">O</td>
+<td align="left">1693</td>
+<td align="left">77191</td>
+<td align="left">191162</td>
+<td align="left">191153</td>
+<td align="left">218.13464297</td>
+<td align="left">98.567837593</td>
+<td align="left">66.733113642</td>
+<td align="left">69.390454222</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nebraska</td>
+<td align="left">31</td>
+<td align="left">F</td>
+<td align="left">1583</td>
+<td align="left">44781</td>
+<td align="left">94883</td>
+<td align="left">94882</td>
+<td align="left">224.53123889</td>
+<td align="left">73.248525869</td>
+<td align="left">53.563275086</td>
+<td align="left">56.589621955</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nebraska</td>
+<td align="left">31</td>
+<td align="left">O</td>
+<td align="left">3627</td>
+<td align="left">186082</td>
+<td align="left">582368</td>
+<td align="left">582359</td>
+<td align="left">214.21588806</td>
+<td align="left">96.523629698</td>
+<td align="left">66.912544113</td>
+<td align="left">73.475910507</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nevada</td>
+<td align="left">32</td>
+<td align="left">F</td>
+<td align="left">437</td>
+<td align="left">9418</td>
+<td align="left">18153</td>
+<td align="left">18153</td>
+<td align="left">207.27393103</td>
+<td align="left">75.696085496</td>
+<td align="left">55.012367653</td>
+<td align="left">55.481859197</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Nevada</td>
+<td align="left">32</td>
+<td align="left">O</td>
+<td align="left">4149</td>
+<td align="left">210573</td>
+<td align="left">854399</td>
+<td align="left">854326</td>
+<td align="left">230.87491445</td>
+<td align="left">104.50418708</td>
+<td align="left">73.968857946</td>
+<td align="left">74.838622763</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Hampshire</td>
+<td align="left">33</td>
+<td align="left">F</td>
+<td align="left">1385</td>
+<td align="left">51326</td>
+<td align="left">114122</td>
+<td align="left">114114</td>
+<td align="left">166.96708558</td>
+<td align="left">76.898094232</td>
+<td align="left">56.40128941</td>
+<td align="left">55.325191637</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Hampshire</td>
+<td align="left">33</td>
+<td align="left">O</td>
+<td align="left">3220</td>
+<td align="left">156680</td>
+<td align="left">491634</td>
+<td align="left">491615</td>
+<td align="left">225.84078742</td>
+<td align="left">99.008735604</td>
+<td align="left">69.484413059</td>
+<td align="left">68.420550186</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Jersey</td>
+<td align="left">34</td>
+<td align="left">F</td>
+<td align="left">3830</td>
+<td align="left">53050</td>
+<td align="left">106505</td>
+<td align="left">106396</td>
+<td align="left">242.33328201</td>
+<td align="left">81.041770715</td>
+<td align="left">60.038297639</td>
+<td align="left">56.968058307</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Jersey</td>
+<td align="left">34</td>
+<td align="left">O</td>
+<td align="left">15612</td>
+<td align="left">802529</td>
+<td align="left">3425722.5</td>
+<td align="left">3425474</td>
+<td align="left">231.72977164</td>
+<td align="left">114.97391728</td>
+<td align="left">82.447285193</td>
+<td align="left">77.339674889</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Mexico</td>
+<td align="left">35</td>
+<td align="left">F</td>
+<td align="left">1104</td>
+<td align="left">34033</td>
+<td align="left">74840</td>
+<td align="left">74838</td>
+<td align="left">153.46819148</td>
+<td align="left">74.94013108</td>
+<td align="left">52.957601951</td>
+<td align="left">53.602432523</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New Mexico</td>
+<td align="left">35</td>
+<td align="left">O</td>
+<td align="left">3038</td>
+<td align="left">149760</td>
+<td align="left">470007</td>
+<td align="left">469983</td>
+<td align="left">203.39246239</td>
+<td align="left">97.987107958</td>
+<td align="left">67.703080678</td>
+<td align="left">70.580282421</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New York</td>
+<td align="left">36</td>
+<td align="left">F</td>
+<td align="left">8836</td>
+<td align="left">167225</td>
+<td align="left">373935</td>
+<td align="left">373909</td>
+<td align="left">241.97947336</td>
+<td align="left">79.857244842</td>
+<td align="left">58.257590062</td>
+<td align="left">56.131947638</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">New York</td>
+<td align="left">36</td>
+<td align="left">O</td>
+<td align="left">36150</td>
+<td align="left">1423531</td>
+<td align="left">5569604</td>
+<td align="left">5569152</td>
+<td align="left">263.86400003</td>
+<td align="left">113.36391903</td>
+<td align="left">81.842093024</td>
+<td align="left">75.548476675</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Carolina</td>
+<td align="left">37</td>
+<td align="left">F</td>
+<td align="left">4734</td>
+<td align="left">119410</td>
+<td align="left">253355</td>
+<td align="left">253353</td>
+<td align="left">190.72626027</td>
+<td align="left">73.309899666</td>
+<td align="left">53.620951392</td>
+<td align="left">55.401967832</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Carolina</td>
+<td align="left">37</td>
+<td align="left">O</td>
+<td align="left">19216</td>
+<td align="left">1001080</td>
+<td align="left">4046909</td>
+<td align="left">4046836</td>
+<td align="left">201.56573052</td>
+<td align="left">98.465680067</td>
+<td align="left">68.105824349</td>
+<td align="left">71.847062585</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Dakota</td>
+<td align="left">38</td>
+<td align="left">F</td>
+<td align="left">1002</td>
+<td align="left">41037</td>
+<td align="left">94029</td>
+<td align="left">94028</td>
+<td align="left">148.07184571</td>
+<td align="left">71.67214285</td>
+<td align="left">50.782669283</td>
+<td align="left">53.033204224</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">North Dakota</td>
+<td align="left">38</td>
+<td align="left">O</td>
+<td align="left">1425</td>
+<td align="left">65212</td>
+<td align="left">156189</td>
+<td align="left">156186</td>
+<td align="left">206.28048461</td>
+<td align="left">85.518483376</td>
+<td align="left">58.142600759</td>
+<td align="left">62.786323749</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Ohio</td>
+<td align="left">39</td>
+<td align="left">F</td>
+<td align="left">8354</td>
+<td align="left">167080</td>
+<td align="left">366875</td>
+<td align="left">366873</td>
+<td align="left">200.15479847</td>
+<td align="left">73.90169491</td>
+<td align="left">53.706213642</td>
+<td align="left">55.418886542</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Ohio</td>
+<td align="left">39</td>
+<td align="left">O</td>
+<td align="left">22012</td>
+<td align="left">934610</td>
+<td align="left">3215391.1</td>
+<td align="left">3215317</td>
+<td align="left">186.56269649</td>
+<td align="left">95.063522463</td>
+<td align="left">64.128037348</td>
+<td align="left">71.041069993</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oklahoma</td>
+<td align="left">40</td>
+<td align="left">F</td>
+<td align="left">1401</td>
+<td align="left">63199</td>
+<td align="left">149161</td>
+<td align="left">149143</td>
+<td align="left">157.10937021</td>
+<td align="left">71.921121339</td>
+<td align="left">51.43020146</td>
+<td align="left">55.298704554</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oklahoma</td>
+<td align="left">40</td>
+<td align="left">O</td>
+<td align="left">6188</td>
+<td align="left">370642</td>
+<td align="left">1371782.2</td>
+<td align="left">1371696</td>
+<td align="left">189.47706925</td>
+<td align="left">95.612110778</td>
+<td align="left">65.127482439</td>
+<td align="left">72.801907074</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oregon</td>
+<td align="left">41</td>
+<td align="left">F</td>
+<td align="left">1904</td>
+<td align="left">37739</td>
+<td align="left">78716</td>
+<td align="left">78716</td>
+<td align="left">202.37311233</td>
+<td align="left">73.114897225</td>
+<td align="left">51.169515346</td>
+<td align="left">54.111635246</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Oregon</td>
+<td align="left">41</td>
+<td align="left">O</td>
+<td align="left">7418</td>
+<td align="left">274931</td>
+<td align="left">866284</td>
+<td align="left">866265</td>
+<td align="left">271.54955204</td>
+<td align="left">97.934806114</td>
+<td align="left">66.455038278</td>
+<td align="left">71.364770664</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Pennsylvania</td>
+<td align="left">42</td>
+<td align="left">F</td>
+<td align="left">9305</td>
+<td align="left">168125</td>
+<td align="left">358149</td>
+<td align="left">358132</td>
+<td align="left">186.61006</td>
+<td align="left">77.488142337</td>
+<td align="left">56.707349846</td>
+<td align="left">56.011045431</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Pennsylvania</td>
+<td align="left">42</td>
+<td align="left">O</td>
+<td align="left">26585</td>
+<td align="left">1161773</td>
+<td align="left">4099460.6</td>
+<td align="left">4099279</td>
+<td align="left">191.5822807</td>
+<td align="left">104.42116856</td>
+<td align="left">72.384457301</td>
+<td align="left">73.611681088</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Rhode Island</td>
+<td align="left">44</td>
+<td align="left">F</td>
+<td align="left">483</td>
+<td align="left">10551</td>
+<td align="left">19453</td>
+<td align="left">19451</td>
+<td align="left">214.09073305</td>
+<td align="left">79.388788362</td>
+<td align="left">58.646129132</td>
+<td align="left">57.282071146</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Rhode Island</td>
+<td align="left">44</td>
+<td align="left">O</td>
+<td align="left">2281</td>
+<td align="left">99711</td>
+<td align="left">319582</td>
+<td align="left">319576</td>
+<td align="left">211.91773661</td>
+<td align="left">103.01601648</td>
+<td align="left">71.936882584</td>
+<td align="left">74.241468919</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Carolina</td>
+<td align="left">45</td>
+<td align="left">F</td>
+<td align="left">2007</td>
+<td align="left">40525</td>
+<td align="left">86765</td>
+<td align="left">86765</td>
+<td align="left">179.47043036</td>
+<td align="left">72.930319829</td>
+<td align="left">53.529792313</td>
+<td align="left">56.320637239</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Carolina</td>
+<td align="left">45</td>
+<td align="left">O</td>
+<td align="left">8176</td>
+<td align="left">574981</td>
+<td align="left">2246673</td>
+<td align="left">2246625</td>
+<td align="left">192.43077134</td>
+<td align="left">99.696769579</td>
+<td align="left">69.333602741</td>
+<td align="left">74.542813622</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Dakota</td>
+<td align="left">46</td>
+<td align="left">F</td>
+<td align="left">1004</td>
+<td align="left">46079</td>
+<td align="left">105122</td>
+<td align="left">105119</td>
+<td align="left">116.03160071</td>
+<td align="left">74.013137117</td>
+<td align="left">52.289581629</td>
+<td align="left">53.509519796</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">South Dakota</td>
+<td align="left">46</td>
+<td align="left">O</td>
+<td align="left">1548</td>
+<td align="left">71881</td>
+<td align="left">161773</td>
+<td align="left">161772</td>
+<td align="left">173.89176333</td>
+<td align="left">93.473689862</td>
+<td align="left">64.567836042</td>
+<td align="left">66.962774752</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Tennessee</td>
+<td align="left">47</td>
+<td align="left">F</td>
+<td align="left">2819</td>
+<td align="left">63028</td>
+<td align="left">130933</td>
+<td align="left">130928</td>
+<td align="left">235.90581076</td>
+<td align="left">71.716449864</td>
+<td align="left">51.613435268</td>
+<td align="left">55.089256337</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Tennessee</td>
+<td align="left">47</td>
+<td align="left">O</td>
+<td align="left">12603</td>
+<td align="left">667351</td>
+<td align="left">2538796</td>
+<td align="left">2538717</td>
+<td align="left">206.97713413</td>
+<td align="left">96.452149783</td>
+<td align="left">66.592319474</td>
+<td align="left">73.00099078</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Texas</td>
+<td align="left">48</td>
+<td align="left">F</td>
+<td align="left">8594</td>
+<td align="left">190606</td>
+<td align="left">436312</td>
+<td align="left">436254</td>
+<td align="left">217.69015833</td>
+<td align="left">75.507065403</td>
+<td align="left">54.829383835</td>
+<td align="left">55.599236739</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Texas</td>
+<td align="left">48</td>
+<td align="left">O</td>
+<td align="left">34882</td>
+<td align="left">1649664</td>
+<td align="left">6749141.3</td>
+<td align="left">6748777</td>
+<td align="left">222.36860338</td>
+<td align="left">102.60877666</td>
+<td align="left">72.033994103</td>
+<td align="left">74.554535566</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Utah</td>
+<td align="left">49</td>
+<td align="left">F</td>
+<td align="left">1088</td>
+<td align="left">17921</td>
+<td align="left">31640</td>
+<td align="left">31632</td>
+<td align="left">198.93628413</td>
+<td align="left">75.146078382</td>
+<td align="left">54.269623262</td>
+<td align="left">54.857270228</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Utah</td>
+<td align="left">49</td>
+<td align="left">O</td>
+<td align="left">4326</td>
+<td align="left">177336</td>
+<td align="left">612945</td>
+<td align="left">612897</td>
+<td align="left">186.04819906</td>
+<td align="left">100.15602968</td>
+<td align="left">69.378502786</td>
+<td align="left">72.306845884</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Vermont</td>
+<td align="left">50</td>
+<td align="left">F</td>
+<td align="left">565</td>
+<td align="left">27519</td>
+<td align="left">54845</td>
+<td align="left">54843</td>
+<td align="left">108.47811195</td>
+<td align="left">75.130216063</td>
+<td align="left">53.50639329</td>
+<td align="left">54.075486735</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Vermont</td>
+<td align="left">50</td>
+<td align="left">O</td>
+<td align="left">1114</td>
+<td align="left">55528</td>
+<td align="left">147587</td>
+<td align="left">147573</td>
+<td align="left">150.82919857</td>
+<td align="left">91.813973521</td>
+<td align="left">62.956460528</td>
+<td align="left">63.756123575</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virginia</td>
+<td align="left">51</td>
+<td align="left">F</td>
+<td align="left">3754</td>
+<td align="left">114077</td>
+<td align="left">251198</td>
+<td align="left">251195</td>
+<td align="left">198.58419573</td>
+<td align="left">76.290395186</td>
+<td align="left">54.911977364</td>
+<td align="left">54.979509909</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virginia</td>
+<td align="left">51</td>
+<td align="left">O</td>
+<td align="left">13646</td>
+<td align="left">868112</td>
+<td align="left">3199081</td>
+<td align="left">3199006</td>
+<td align="left">201.2528933</td>
+<td align="left">104.58033037</td>
+<td align="left">72.699455912</td>
+<td align="left">72.485152398</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Washington</td>
+<td align="left">53</td>
+<td align="left">F</td>
+<td align="left">3638</td>
+<td align="left">118341</td>
+<td align="left">280197</td>
+<td align="left">280164</td>
+<td align="left">158.23846861</td>
+<td align="left">78.245383712</td>
+<td align="left">56.187223882</td>
+<td align="left">54.743674379</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Washington</td>
+<td align="left">53</td>
+<td align="left">O</td>
+<td align="left">13358</td>
+<td align="left">536108</td>
+<td align="left">1843214</td>
+<td align="left">1843154</td>
+<td align="left">237.3762152</td>
+<td align="left">104.03893898</td>
+<td align="left">72.078068624</td>
+<td align="left">71.138449507</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">West Virginia</td>
+<td align="left">54</td>
+<td align="left">F</td>
+<td align="left">1575</td>
+<td align="left">49836</td>
+<td align="left">111087</td>
+<td align="left">111084</td>
+<td align="left">162.65312701</td>
+<td align="left">73.810377542</td>
+<td align="left">52.718879617</td>
+<td align="left">54.539884775</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">West Virginia</td>
+<td align="left">54</td>
+<td align="left">O</td>
+<td align="left">2937</td>
+<td align="left">171389</td>
+<td align="left">499346</td>
+<td align="left">499333</td>
+<td align="left">188.98746565</td>
+<td align="left">96.536198868</td>
+<td align="left">65.613590917</td>
+<td align="left">71.625744634</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wisconsin</td>
+<td align="left">55</td>
+<td align="left">F</td>
+<td align="left">5144</td>
+<td align="left">129860</td>
+<td align="left">304861</td>
+<td align="left">304794</td>
+<td align="left">221.41929135</td>
+<td align="left">72.697071649</td>
+<td align="left">52.31136413</td>
+<td align="left">54.497144994</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wisconsin</td>
+<td align="left">55</td>
+<td align="left">O</td>
+<td align="left">11094</td>
+<td align="left">415273</td>
+<td align="left">1229350</td>
+<td align="left">1229297</td>
+<td align="left">281.58478463</td>
+<td align="left">97.29539538</td>
+<td align="left">65.970805564</td>
+<td align="left">69.484688144</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wyoming</td>
+<td align="left">56</td>
+<td align="left">F</td>
+<td align="left">136</td>
+<td align="left">2714</td>
+<td align="left">5874</td>
+<td align="left">5874</td>
+<td align="left">264.62789751</td>
+<td align="left">75.172538304</td>
+<td align="left">55.358699353</td>
+<td align="left">55.488028601</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Wyoming</td>
+<td align="left">56</td>
+<td align="left">O</td>
+<td align="left">950</td>
+<td align="left">50207</td>
+<td align="left">132117</td>
+<td align="left">132106</td>
+<td align="left">233.2643217</td>
+<td align="left">102.5794492</td>
+<td align="left">70.872287518</td>
+<td align="left">71.84889121</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Guam</td>
+<td align="left">66</td>
+<td align="left">F</td>
+<td align="left">16</td>
+<td align="left">153</td>
+<td align="left">207</td>
+<td align="left">207</td>
+<td align="left">299.65574879</td>
+<td align="left">77.896570048</td>
+<td align="left">57.873671498</td>
+<td align="left">57.794879227</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Guam</td>
+<td align="left">66</td>
+<td align="left">O</td>
+<td align="left">99</td>
+<td align="left">5560</td>
+<td align="left">16707</td>
+<td align="left">16707</td>
+<td align="left">137.39565571</td>
+<td align="left">111.1369839</td>
+<td align="left">73.634271862</td>
+<td align="left">72.279883881</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Northern Mariana Islands</td>
+<td align="left">69</td>
+<td align="left">F</td>
+<td align="left">3</td>
+<td align="left">24</td>
+<td align="left">44</td>
+<td align="left">44</td>
+<td align="left">278.62613636</td>
+<td align="left">79.368409091</td>
+<td align="left">57.975681818</td>
+<td align="left">56.671818182</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Northern Mariana Islands</td>
+<td align="left">69</td>
+<td align="left">O</td>
+<td align="left">10</td>
+<td align="left">612</td>
+<td align="left">1588</td>
+<td align="left">1588</td>
+<td align="left">134.87134131</td>
+<td align="left">105.85116499</td>
+<td align="left">61.506026448</td>
+<td align="left">63.570573048</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Puerto Rico</td>
+<td align="left">72</td>
+<td align="left">F</td>
+<td align="left">94</td>
+<td align="left">1370</td>
+<td align="left">3702</td>
+<td align="left">3698</td>
+<td align="left">115.04119395</td>
+<td align="left">78.149051864</td>
+<td align="left">58.573422474</td>
+<td align="left">59.213287412</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Puerto Rico</td>
+<td align="left">72</td>
+<td align="left">O</td>
+<td align="left">1612</td>
+<td align="left">24820</td>
+<td align="left">65038</td>
+<td align="left">65038</td>
+<td align="left">120.87880009</td>
+<td align="left">103.64276116</td>
+<td align="left">72.403399397</td>
+<td align="left">76.632439343</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virgin Islands</td>
+<td align="left">78</td>
+<td align="left">F</td>
+<td align="left">4</td>
+<td align="left">26</td>
+<td align="left">26</td>
+<td align="left">26</td>
+<td align="left">112.47</td>
+<td align="left">68.442307692</td>
+<td align="left">52.615384615</td>
+<td align="left">52.354230769</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Virgin Islands</td>
+<td align="left">78</td>
+<td align="left">O</td>
+<td align="left">83</td>
+<td align="left">7367</td>
+<td align="left">17646</td>
+<td align="left">17646</td>
+<td align="left">154.14354811</td>
+<td align="left">105.68766349</td>
+<td align="left">66.539990366</td>
+<td align="left">68.419408931</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Central/South America</td>
+<td align="left">9A</td>
+<td align="left">O</td>
+<td align="left">2</td>
+<td align="left">42</td>
+<td align="left">57</td>
+<td align="left">57</td>
+<td align="left">129.8245614</td>
+<td align="left">93.675964912</td>
+<td align="left">65.776315789</td>
+<td align="left">78.258245614</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Europe</td>
+<td align="left">9B</td>
+<td align="left">F</td>
+<td align="left">4</td>
+<td align="left">244</td>
+<td align="left">324</td>
+<td align="left">324</td>
+<td align="left">184.90123457</td>
+<td align="left">74.117037037</td>
+<td align="left">57.940339506</td>
+<td align="left">58.757283951</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Europe</td>
+<td align="left">9B</td>
+<td align="left">O</td>
+<td align="left">23</td>
+<td align="left">1953</td>
+<td align="left">2955</td>
+<td align="left">2955</td>
+<td align="left">230.81275465</td>
+<td align="left">102.12570897</td>
+<td align="left">72.911001692</td>
+<td align="left">72.837299492</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Pacific</td>
+<td align="left">9C</td>
+<td align="left">F</td>
+<td align="left">3</td>
+<td align="left">72</td>
+<td align="left">72</td>
+<td align="left">72</td>
+<td align="left">93.888888889</td>
+<td align="left">67.003055556</td>
+<td align="left">43.274027778</td>
+<td align="left">43.937777778</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Armed Forces Pacific</td>
+<td align="left">9C</td>
+<td align="left">O</td>
+<td align="left">11</td>
+<td align="left">346</td>
+<td align="left">432</td>
+<td align="left">432</td>
+<td align="left">231.05113426</td>
+<td align="left">110.3525463</td>
+<td align="left">76.881342593</td>
+<td align="left">75.337824074</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Unknown</td>
+<td align="left">9D</td>
+<td align="left">F</td>
+<td align="left">2</td>
+<td align="left">26</td>
+<td align="left">26</td>
+<td align="left">26</td>
+<td align="left">248.38461538</td>
+<td align="left">74.11</td>
+<td align="left">50.555384615</td>
+<td align="left">50.180769231</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Unknown</td>
+<td align="left">9D</td>
+<td align="left">O</td>
+<td align="left">4</td>
+<td align="left">500</td>
+<td align="left">1115</td>
+<td align="left">1115</td>
+<td align="left">163.7103139</td>
+<td align="left">101.72235874</td>
+<td align="left">72.996071749</td>
+<td align="left">78.016914798</td>
+</tr>
+<tr class="odd">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Foreign Country</td>
+<td align="left">9E</td>
+<td align="left">F</td>
+<td align="left">9</td>
+<td align="left">67</td>
+<td align="left">82</td>
+<td align="left">82</td>
+<td align="left">188.19719512</td>
+<td align="left">77.266463415</td>
+<td align="left">50.277317073</td>
+<td align="left">51.354756098</td>
+</tr>
+<tr class="even">
+<td align="left">2019</td>
+<td align="left">99214</td>
+<td align="left">State</td>
+<td align="left">Foreign Country</td>
+<td align="left">9E</td>
+<td align="left">O</td>
+<td align="left">29</td>
+<td align="left">2244</td>
+<td align="left">3257</td>
+<td align="left">3257</td>
+<td align="left">186.95892539</td>
+<td align="left">105.8982315</td>
+<td align="left">72.934221676</td>
+<td align="left">73.720187289</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
+<ol start="3" style="list-style-type: decimal"><li>by Provider API:</li></ol>
+<p><br></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpop_prov_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000134</span>, </span>
+<span>                              set <span class="op">=</span> <span class="st">"prov"</span>,</span>
+<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; S3&lt;data.frame&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─year: "2020"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_npi: "1003000134"</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_last_org_name: "Cibull"</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_first_name: "Thomas"</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_mi: "L"</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_crdntls: "M.D."</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_gndr: "M"</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_ent_cd: "I"</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_st1: "2650 Ridge Ave"</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_st2: "Evanston Hospital"</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_city: "Evanston"</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_state_abrvtn: "IL"</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_state_fips: "17"</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_zip5: "60201"</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_ruca: "1"</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_ruca_desc: "Metropolitan area core: primary..."</span></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_cntry: "US"</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_type: "Pathology"</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rndrng_prvdr_mdcr_prtcptg_ind: "Y"</span></span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_hcpcs_cds: "18"</span></span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_benes: "2633"</span></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_srvcs: "5930"</span></span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_sbmtd_chrg: "915291"</span></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_mdcr_alowd_amt: "227372.53"</span></span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_mdcr_pymt_amt: "176497.74"</span></span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─tot_mdcr_stdzd_amt: "167363.18"</span></span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_sprsn_ind: ""</span></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_tot_hcpcs_cds: "0"</span></span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_tot_benes: "0"</span></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_tot_srvcs: "0"</span></span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_sbmtd_chrg: "0"</span></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_mdcr_alowd_amt: "0"</span></span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_mdcr_pymt_amt: "0"</span></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drug_mdcr_stdzd_amt: "0"</span></span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_sprsn_ind: ""</span></span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_tot_hcpcs_cds: "18"</span></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_tot_benes: "2633"</span></span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_tot_srvcs: "5930"</span></span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_sbmtd_chrg: "915291"</span></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_mdcr_alowd_amt: "227372.53"</span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_mdcr_pymt_amt: "176497.74"</span></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─med_mdcr_stdzd_amt: "167363.18"</span></span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_avg_age: "76"</span></span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_age_lt_65_cnt: "69"</span></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_age_65_74_cnt: "1189"</span></span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_age_75_84_cnt: "963"</span></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_age_gt_84_cnt: "412"</span></span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_feml_cnt: "1310"</span></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_male_cnt: "1323"</span></span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_wht_cnt: "2385"</span></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_black_cnt: ""</span></span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_api_cnt: "45"</span></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_hspnc_cnt: "49"</span></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_nat_ind_cnt: ""</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_race_othr_cnt: "128"</span></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_dual_cnt: "125"</span></span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_ndual_cnt: "2508"</span></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_af_pct: "0.1"</span></span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_alzhmr_pct: "0.06"</span></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_asthma_pct: "0.04"</span></span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_cncr_pct: "0.14"</span></span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_chf_pct: "0.12"</span></span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_ckd_pct: "0.22"</span></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_copd_pct: "0.06"</span></span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_dprssn_pct: "0.15"</span></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_dbts_pct: "0.2"</span></span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_hyplpdma_pct: "0.48"</span></span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_hyprtnsn_pct: "0.48"</span></span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_ihd_pct: "0.24"</span></span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_opo_pct: "0.1"</span></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_raoa_pct: "0.38"</span></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_sz_pct: "0.01"</span></span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─bene_cc_strok_pct: "0.03"</span></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─bene_avg_risk_scre: "1.1124"</span></span></code></pre></div>
+<p><br></p>
+<p><code><a href="reference/provider_clia.html">provider_clia()</a></code> accesses <strong>Medicare’s Provider of Services File for Clinical Laboratories API</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clia_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_clia.html">provider_clia</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"carbon hill"</span>, year <span class="op">=</span> <span class="st">"2022"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; S3&lt;data.frame&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─prvdr_ctgry_sbtyp_cd&lt;chr [7]&gt;: "01", "01", "01", "01", "01", "01", "01"</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─prvdr_ctgry_cd&lt;chr [7]&gt;: "22", "22", "22", "22", "22", "22", "22"</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─chow_cnt&lt;chr [7]&gt;: "00", "00", "00", "00", "00", "00", "00"</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─chow_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─city_name&lt;chr [7]&gt;: "CARBON HILL", "CARBON HILL", "CARBON HILL", "CARBON HILL", "CARBON HILL", "CARBON HILL", "CARBON HILL"</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─acptbl_poc_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cmplnc_stus_cd&lt;chr [7]&gt;: "A", "", "B", "", "", "", ""</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ssa_cnty_cd&lt;chr [7]&gt;: "630", "630", "630", "630", "630", "400", "380"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cross_ref_provider_number&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─crtfctn_dt&lt;chr [7]&gt;: "20041213", "19950619", "20101213", "20091216", "20210225", "20210923", "19940922"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─elgblty_sw&lt;chr [7]&gt;: "Y", "N", "Y", "N", "N", "N", "N"</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─fac_name&lt;chr [7]&gt;: "CARBON HILL...", "WALKER REHAB...", "QUEST DIAGNO...", "CARBON HILL...", "CARBON HILL...", "COAL CITY SC...", "HOCKING VALL..."</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─intrmdry_carr_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─mdcd_vndr_num&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─orgnl_prtcptn_dt&lt;chr [7]&gt;: "19920901", "19950619", "20061220", "20091216", "20210225", "20210923", "19940922"</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─chow_prior_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─intrmdry_carr_prior_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─prvdr_num&lt;chr [7]&gt;: "01D0302047", "01D0902331", "01D1062626", "01D2001338", "01D2214879", "14D2237280", "36D0892007"</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─rgn_cd&lt;chr [7]&gt;: "04", "04", "04", "04", "04", "05", "05"</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─skltn_rec_sw&lt;chr [7]&gt;: "N", "Y", "N", "Y", "Y", "Y", "Y"</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─state_cd&lt;chr [7]&gt;: "AL", "AL", "AL", "AL", "AL", "IL", "OH"</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ssa_state_cd&lt;chr [7]&gt;: "01", "01", "01", "01", "01", "14", "36"</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─state_rgn_cd&lt;chr [7]&gt;: "001", "LAB", "001", "001", "001", "001", "LAB"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─st_adr&lt;chr [7]&gt;: "317 NW SECON...", "516 EAST 4TH...", "31040 NORTH...", "31040 NORTHE...", "31040 1ST AV...", "550 S CARBON...", "15047 FIRST..."</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─phne_num&lt;chr [7]&gt;: "2059244441", "2059244404", "2053131240", "2059242224", "2059249616", "8156345031", "7407539357"</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─pgm_trmntn_cd&lt;chr [7]&gt;: "01", "00", "00", "01", "00", "00", "08"</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─trmntn_exprtn_dt&lt;chr [7]&gt;: "20061201", "20230618", "20230831", "20130802", "20230224", "20230922", "20100921"</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─crtfctn_actn_type_cd&lt;chr [7]&gt;: "2", "", "2", "", "", "", ""</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─gnrl_cntl_type_cd&lt;chr [7]&gt;: "04", "04", "04", "04", "04", "09", "04"</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─zip_cd&lt;chr [7]&gt;: "35549", "35549", "35549", "35549", "35549", "60416", "43111"</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─fips_state_cd&lt;chr [7]&gt;: "01", "01", "01", "01", "01", "17", "39"</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─fips_cnty_cd&lt;chr [7]&gt;: "127", "127", "127", "127", "127", "063", "073"</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cbsa_urbn_rrl_ind&lt;chr [7]&gt;: "R", "R", "R", "R", "R", "U", "U"</span></span>
+<span id="cb20-35"><a href="#cb20-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cbsa_cd&lt;chr [7]&gt;: "13820", "13820", "13820", "13820", "13820", "16974", "18140"</span></span>
+<span id="cb20-36"><a href="#cb20-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─addtnl_st_adr&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-37"><a href="#cb20-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_1&lt;chr [7]&gt;: "", "", "01D1062628", "", "", "", ""</span></span>
+<span id="cb20-38"><a href="#cb20-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_2&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-39"><a href="#cb20-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_3&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-40"><a href="#cb20-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_4&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-41"><a href="#cb20-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_5&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-42"><a href="#cb20-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_6&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-43"><a href="#cb20-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_7&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-44"><a href="#cb20-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─affiliated_provider_number_8&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-45"><a href="#cb20-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─a2la_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-46"><a href="#cb20-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─a2la_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-47"><a href="#cb20-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─a2la_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-48"><a href="#cb20-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aabb_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-49"><a href="#cb20-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aabb_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-50"><a href="#cb20-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aabb_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-51"><a href="#cb20-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aoa_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-52"><a href="#cb20-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aoa_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-53"><a href="#cb20-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aoa_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-54"><a href="#cb20-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ashi_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-55"><a href="#cb20-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ashi_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-56"><a href="#cb20-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ashi_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-57"><a href="#cb20-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cap_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-58"><a href="#cb20-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cap_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-59"><a href="#cb20-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cap_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-60"><a href="#cb20-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cola_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-61"><a href="#cb20-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cola_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-62"><a href="#cb20-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─cola_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-63"><a href="#cb20-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─jcaho_acrdtd_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-64"><a href="#cb20-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─jcaho_acrdtd_y_match_dt&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-65"><a href="#cb20-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─jcaho_acrdtd_y_match_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-66"><a href="#cb20-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aplctn_rcvd_dt&lt;chr [7]&gt;: "19930115", "19950619", "20061220", "20091216", "20210225", "20210923", "19940922"</span></span>
+<span id="cb20-67"><a href="#cb20-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─aplctn_type_cd&lt;chr [7]&gt;: "1", "2", "2", "4", "2", "2", "2"</span></span>
+<span id="cb20-68"><a href="#cb20-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─gnrl_fac_type_cd&lt;chr [7]&gt;: "21", "27", "15", "21", "20", "26", "19"</span></span>
+<span id="cb20-69"><a href="#cb20-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─crtfct_efctv_dt&lt;chr [7]&gt;: "20050623", "20210619", "20210901", "20111216", "20210225", "20210923", "20080922"</span></span>
+<span id="cb20-70"><a href="#cb20-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─crtfct_mail_dt&lt;chr [7]&gt;: "20050524", "20210921", "20210803", "20111119", "20210316", "20211005", "20080823"</span></span>
+<span id="cb20-71"><a href="#cb20-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─crtfct_type_cd&lt;chr [7]&gt;: "1", "2", "2", "4", "2", "2", "2"</span></span>
+<span id="cb20-72"><a href="#cb20-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─current_clia_lab_clsfctn_cd&lt;chr [7]&gt;: "00", "00", "00", "00", "00", "00", "00"</span></span>
+<span id="cb20-73"><a href="#cb20-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_1&lt;chr [7]&gt;: "00", "00", "00", "00", "00", "00", "00"</span></span>
+<span id="cb20-74"><a href="#cb20-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_10&lt;chr [7]&gt;: "", "00", "00", "", "", "", ""</span></span>
+<span id="cb20-75"><a href="#cb20-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_2&lt;chr [7]&gt;: "00", "00", "00", "00", "", "", "00"</span></span>
+<span id="cb20-76"><a href="#cb20-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_3&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-77"><a href="#cb20-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_4&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-78"><a href="#cb20-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_5&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-79"><a href="#cb20-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_6&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-80"><a href="#cb20-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_7&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-81"><a href="#cb20-81" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_8&lt;chr [7]&gt;: "00", "00", "00", "", "", "", "00"</span></span>
+<span id="cb20-82"><a href="#cb20-82" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_lab_classification_cd_9&lt;chr [7]&gt;: "", "00", "00", "", "", "", ""</span></span>
+<span id="cb20-83"><a href="#cb20-83" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_mdcr_num&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-84"><a href="#cb20-84" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─clia_trmntn_cd&lt;chr [7]&gt;: "01", "00", "00", "01", "00", "00", "08"</span></span>
+<span id="cb20-85"><a href="#cb20-85" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─acrdtn_schdl_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-86"><a href="#cb20-86" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─form_116_acrdtd_test_vol_cnt&lt;chr [7]&gt;: "0", "0", "0", "0", "0", "0", "0"</span></span>
+<span id="cb20-87"><a href="#cb20-87" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─form_116_test_vol_cnt&lt;chr [7]&gt;: "0", "0", "0", "0", "0", "0", "0"</span></span>
+<span id="cb20-88"><a href="#cb20-88" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─drctly_afltd_lab_cnt&lt;chr [7]&gt;: "0", "0", "1", "0", "0", "0", "0"</span></span>
+<span id="cb20-89"><a href="#cb20-89" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─fax_phne_num&lt;chr [7]&gt;: "2059244463", "", "", "2059244077", "2059249767", "8156348775", "7404748172"</span></span>
+<span id="cb20-90"><a href="#cb20-90" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─fy_end_mo_day_cd&lt;chr [7]&gt;: "1231", "", "1231", "", "", "", ""</span></span>
+<span id="cb20-91"><a href="#cb20-91" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─mlt_site_excptn_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "Y", "N"</span></span>
+<span id="cb20-92"><a href="#cb20-92" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─hosp_lab_excptn_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-93"><a href="#cb20-93" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─non_prft_excptn_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "Y", "N"</span></span>
+<span id="cb20-94"><a href="#cb20-94" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─lab_temp_tstg_site_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-95"><a href="#cb20-95" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─lab_site_cnt&lt;chr [7]&gt;: "0", "0", "0", "0", "0", "6", "0"</span></span>
+<span id="cb20-96"><a href="#cb20-96" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─ppmp_test_vol_cnt&lt;chr [7]&gt;: "0", "0", "0", "600", "0", "0", "0"</span></span>
+<span id="cb20-97"><a href="#cb20-97" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─addtnl_fac_name&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-98"><a href="#cb20-98" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─related_provider_number&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-99"><a href="#cb20-99" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─shr_lab_sw&lt;chr [7]&gt;: "N", "N", "N", "N", "N", "N", "N"</span></span>
+<span id="cb20-100"><a href="#cb20-100" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─shared_lab_xref_number&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-101"><a href="#cb20-101" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─form_1557_crtfct_schdl_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-102"><a href="#cb20-102" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─form_1557_cmplnc_schdl_cd&lt;chr [7]&gt;: "", "", "", "", "", "", ""</span></span>
+<span id="cb20-103"><a href="#cb20-103" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ├─form_1557_test_vol_cnt&lt;chr [7]&gt;: "0", "0", "0", "0", "0", "0", "0"</span></span>
+<span id="cb20-104"><a href="#cb20-104" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; └─wvd_test_vol_cnt&lt;chr [7]&gt;: "0", "1300", "200", "1200", "50", "400", "10"</span></span></code></pre></div>
 <p>Using packages like {gt} &amp; {ggplot2}, you can create tables and graphs for reporting purposes:</p>
 <p><br></p>
 <p><br></p>
 <p><img src="reference/figures/gt_provider.png" style="width:100.0%"></p>
 <p><img src="reference/figures/gt_provider2.png" style="width:100.0%"></p>
 <p><br><br></p>
+<hr>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>

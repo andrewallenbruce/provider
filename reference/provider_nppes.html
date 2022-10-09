@@ -97,8 +97,8 @@ API's documentation.</p>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state_abbr <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  country_abbr <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -151,15 +151,15 @@ apostrophe, colon, comma, forward slash, hyphen, left and right
 parentheses, period, pound sign, quotation mark, and semi-colon.</p></dd>
 
 
-<dt>state_abbr</dt>
+<dt>state</dt>
 <dd><p>State abbreviation associated with the provider's address.
 This field <strong>cannot</strong> be used as the only input criterion. If this
 field is used, at least one other field, besides the <code>prov_type</code> and
-<code>country_abbr</code>, must be populated. Valid values for state abbreviations:
+<code>country</code>, must be populated. Valid values for state abbreviations:
 <a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">https://npiregistry.cms.hhs.gov/help-api/state</a>.</p></dd>
 
 
-<dt>country_abbr</dt>
+<dt>country</dt>
 <dd><p>Country abbreviation associated with the provider's
 address. This field <strong>can</strong> be used as the only input criterion, as long
 as the value selected <em>is not</em> <strong>US</strong> (United States). Valid values for
@@ -214,16 +214,17 @@ the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># City, state, country ====================================================</span></span></span>
 <span class="r-in"><span><span class="fu">provider_nppes</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
-<span class="r-in"><span>               state_abbr <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
-<span class="r-in"><span>               country_abbr <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>               state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
+<span class="r-in"><span>               country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># First name, city, state  ================================================</span></span></span>
 <span class="r-in"><span><span class="fu">provider_nppes</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span></span>
 <span class="r-in"><span>               city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span></span>
-<span class="r-in"><span>               state_abbr <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>               state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
+<span class="r-in"><span>              <span class="fl">1710983663</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1316405939</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1720392988</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1518184605</span>,</span></span>
@@ -236,7 +237,8 @@ the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data frame of NPIs</span></span></span>
-<span class="r-in"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
+<span class="r-in"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1710983663</span>,</span></span>
+<span class="r-in"><span>                             <span class="fl">1003026055</span>,</span></span>
 <span class="r-in"><span>                             <span class="fl">1316405939</span>,</span></span>
 <span class="r-in"><span>                             <span class="fl">1720392988</span>,</span></span>
 <span class="r-in"><span>                             <span class="fl">1518184605</span>,</span></span>

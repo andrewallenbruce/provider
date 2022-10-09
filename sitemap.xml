@@ -40,7 +40,16 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/age_days.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/days_today.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/format_zipcode.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/index.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_clia.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_luhn.html</loc>
@@ -68,6 +77,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_promdci.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_rcgpr.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_unpack.html</loc>

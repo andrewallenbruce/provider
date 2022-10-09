@@ -120,54 +120,96 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span>     <span class="co"># Access Public Healthcare Provider Data</span></span>
+<span><span class="co">#library(zipcodeR)     # Data &amp; Functions for Working with US ZIP Codes</span></span>
+<span><span class="co">#library(fipio)        # Lightweight FIPS Code Information Retrieval</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jessecambon.github.io/tidygeocoder/" class="external-link">tidygeocoder</a></span><span class="op">)</span> <span class="co"># Geocoding Made Easy</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span>      <span class="co"># Create Interactive Web Maps</span></span></code></pre></div>
+<p><br></p>
+<div class="section level2">
+<h2 id="providers-current-practice-address">Provider’s Current Practice Address<a class="anchor" aria-label="anchor" href="#providers-current-practice-address"></a>
+</h2>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Retrieve the provider data</span></span>
-<span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">geo_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>             <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in request_handler_handler(request = request, handler =</span></span>
+<span><span class="co">#&gt; on_file_type_mismatch, : Event: on_file_type_mismatch</span></span>
+<span><span class="co">#&gt; Warning in request_handler_handler(request = request, handler =</span></span>
+<span><span class="co">#&gt; on_suspect_content, : Event: on_suspect_content</span></span>
+<span></span>
+<span><span class="va">geo_nppes</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 32</span></span></span>
+<span><span class="co">#&gt;    npi    prov_…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enume…⁷ last_…⁸</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 22 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, fax_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_code &lt;chr&gt;, taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ident_code &lt;chr&gt;, ident_desc &lt;chr&gt;, ident_issuer &lt;lgl&gt;, identifier &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ident_state &lt;chr&gt;, and abbreviated variable names ¹​prov_type, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># prov_address &lt;- prov_2013_2020 |&gt; </span></span>
-<span><span class="co">#   dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |&gt; </span></span>
-<span><span class="co">#   dplyr::filter(dplyr::row_number() %in% 1) |&gt; </span></span>
-<span><span class="co">#   dplyr::mutate(rndrng_prvdr_st1 = gsub("[.]", "", as.character(rndrng_prvdr_st1))) |&gt; </span></span>
-<span><span class="co">#   tidyr::unite("addr", rndrng_prvdr_st1:rndrng_prvdr_state_abrvtn, sep = ", ", remove = TRUE) |&gt; </span></span>
-<span><span class="co">#   tidyr::unite("prov_addr", addr:rndrng_prvdr_zip5, sep = " ", remove = TRUE)</span></span>
-<span></span>
-<span><span class="va">prov_address</span> <span class="op">&lt;-</span> <span class="va">mpop20</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rndrng_prvdr_st1</span>, <span class="va">rndrng_prvdr_city</span><span class="op">:</span><span class="va">rndrng_prvdr_state_abrvtn</span>, <span class="va">rndrng_prvdr_zip5</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">geo_add</span> <span class="op">&lt;-</span> <span class="va">geo_nppes</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="va">city</span>, <span class="va">state</span>, <span class="va">postal_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>rndrng_prvdr_st1 <span class="op">=</span> <span class="st">"4570 County Hwy 61"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"addr"</span>, <span class="va">rndrng_prvdr_st1</span><span class="op">:</span><span class="va">rndrng_prvdr_state_abrvtn</span>, sep <span class="op">=</span> <span class="st">", "</span>, remove <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"prov_addr"</span>, <span class="va">addr</span><span class="op">:</span><span class="va">rndrng_prvdr_zip5</span>, sep <span class="op">=</span> <span class="st">" "</span>, remove <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>  </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>address_1 <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove_all</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">prov_geocode</span> <span class="op">&lt;-</span> <span class="va">prov_address</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span><span class="va">prov_addr</span>, </span>
-<span>                        method <span class="op">=</span> <span class="st">"osm"</span>, </span>
-<span>                        lat <span class="op">=</span> <span class="va">latitude</span>, </span>
-<span>                        long <span class="op">=</span> <span class="va">longitude</span>, </span>
-<span>                        full_results <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Passing 1 address to the Nominatim single address geocoder</span></span>
-<span><span class="co">#&gt; Query completed in: 1 seconds</span></span>
-<span></span>
-<span><span class="va">prov_geocode</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 12</span></span></span>
-<span><span class="co">#&gt;   prov_addr latit…¹ longi…² place…³ licence osm_t…⁴ osm_id bound…⁵ displ…⁶ class</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 4570 Cou…    46.4   -<span style="color: #BB0000;">92.8</span>  6.87<span style="color: #949494;">e</span>7 Data ©… node    6.39<span style="color: #949494;">e</span>9 &lt;chr&gt;   Gatewa… amen…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: type &lt;chr&gt;, importance &lt;dbl&gt;, and abbreviated</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​latitude, ²​longitude, ³​place_id, ⁴​osm_type, ⁵​boundingbox,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​display_name</span></span></span></code></pre></div>
-<p><br><br></p>
+<span><span class="va">geo_add</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   address_1       city       state postal_code</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 4570 CTY HWY 61 MOOSE LAKE MN    55767</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">map</span> <span class="op">&lt;-</span> <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>       <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>       <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addMarkers</a></span><span class="op">(</span>lng <span class="op">=</span> <span class="va">prov_geocode</span><span class="op">$</span><span class="va">longitude</span>, lat <span class="op">=</span> <span class="va">prov_geocode</span><span class="op">$</span><span class="va">latitude</span>, popup <span class="op">=</span> <span class="va">prov_geocode</span><span class="op">$</span><span class="va">display_name</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">map</span></span></code></pre></div>
-<div id="htmlwidget-36b90c1271b9dcaeb06e" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-36b90c1271b9dcaeb06e">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[46.4417462,-92.7762112,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},"Gateway Family Health Clinic, 4570, County Highway 61 (Old US Hwy 61), Moose Lake, Carlton County, Minnesota, 55767, United States",null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.4417462,46.4417462],"lng":[-92.7762112,-92.7762112]}},"evals":[],"jsHooks":[]}</script><p><br><br></p>
+<code class="sourceCode R"><span><span class="va">geo_ltlg</span> <span class="op">&lt;-</span> <span class="va">geo_add</span> <span class="op">|&gt;</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span>street <span class="op">=</span> <span class="va">address_1</span>,</span>
+<span>                                             city <span class="op">=</span> <span class="va">city</span>,</span>
+<span>                                             state <span class="op">=</span> <span class="va">state</span>,</span>
+<span>                                             postalcode <span class="op">=</span> <span class="va">postal_code</span>,</span>
+<span>                                             method <span class="op">=</span> <span class="st">"census"</span>,</span>
+<span>                                             lat <span class="op">=</span> <span class="va">latitude</span>, </span>
+<span>                                             long <span class="op">=</span> <span class="va">longitude</span>, </span>
+<span>                                             full_results <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Passing 1 address to the US Census single address geocoder</span></span>
+<span><span class="co">#&gt; Query completed in: 0.4 seconds</span></span>
+<span><span class="va">geo_ltlg</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
+<span><span class="co">#&gt;   address_1  city  state posta…¹ latit…² longi…³ match…⁴ tiger…⁵ tiger…⁶ addre…⁷</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 4570 CTY … MOOS… MN    55767      46.4   -<span style="color: #BB0000;">92.8</span> 4570 C… R       162668… 55767  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: addressComponents.streetName &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.preType &lt;chr&gt;, addressComponents.city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.preDirection &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixDirection &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.fromAddress &lt;chr&gt;, addressComponents.state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixType &lt;chr&gt;, addressComponents.toAddress &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixQualifier &lt;chr&gt;, …</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addMarkers</a></span><span class="op">(</span>lng <span class="op">=</span> <span class="va">geo_ltlg</span><span class="op">$</span><span class="va">longitude</span>, </span>
+<span>                      lat <span class="op">=</span> <span class="va">geo_ltlg</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-4c2f8fb722f4b3e3bfd4" style="width:700px;height:432.632880098888px;" class="leaflet html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4c2f8fb722f4b3e3bfd4">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[46.4420123582375,-92.7769899879775,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.4420123582375,46.4420123582375],"lng":[-92.7769899879775,-92.7769899879775]}},"evals":[],"jsHooks":[]}</script><p><br><br></p>
+</div>
   </main>
 </div>
 
