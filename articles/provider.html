@@ -136,7 +136,7 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-09 <span style="color: #949494;">01:37:43</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-10 <span style="color: #949494;">01:30:14</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code> function:</p>
 <p><br></p>
@@ -215,11 +215,43 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nppes_ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Paul"</span>, </span>
 <span>                            last <span class="op">=</span> <span class="st">"Dewey"</span>,</span>
-<span>                            state_abbr <span class="op">=</span> <span class="st">"MN"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>                            <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_nppes(first = "Paul", last = "Dewey", state_abbr = "MN"): unused argument (state_abbr = "MN")</span></span></code></pre></div>
+<span>                            state <span class="op">=</span> <span class="st">"MN"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                            <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; Error in dplyr::select(nppes_ex2, NPI = npi, `Last Name` = last_name, : object 'nppes_ex2' not found</span></span></code></pre>
+<table class="table">
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">Last Name</th>
+<th align="left">Provider Type</th>
+<th align="left">Code</th>
+<th align="left">Primary</th>
+<th align="left">Description</th>
+<th align="left">State</th>
+<th align="left">License</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1760485387</td>
+<td align="left">DEWEY</td>
+<td align="left">NPI-1</td>
+<td align="left">207R00000X</td>
+<td align="left">TRUE</td>
+<td align="left">Internal Medicine</td>
+<td align="left">MN</td>
+<td align="left">43634</td>
+</tr>
+<tr class="even">
+<td align="left">1760485387</td>
+<td align="left">DEWEY</td>
+<td align="left">NPI-1</td>
+<td align="left">208000000X</td>
+<td align="left">FALSE</td>
+<td align="left">Pediatrics</td>
+<td align="left">MN</td>
+<td align="left">43634</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -228,7 +260,7 @@
 <p><br></p>
 <p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="../reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -265,7 +297,7 @@
 <p><br></p>
 <p>Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="../reference/provider_moar.html">provider_moar()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_moar.html">provider_moar</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -296,7 +328,7 @@
 <p><br></p>
 <p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. Using the output from the NPPES search in the first example, you can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="../reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -333,7 +365,7 @@
 <p><br></p>
 <p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="../reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table style="width:100%;" class="table">
@@ -371,7 +403,7 @@
 <p><br></p>
 <p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="../reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -387,7 +419,7 @@
 <p><br></p>
 <p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="../reference/provider_mooa.html">provider_mooa()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mooa.html">provider_mooa</a></span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -434,11 +466,11 @@
 <p><br></p>
 <p>Using <code><a href="../reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
 <span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<table style="width:100%;" class="table">
+<table class="table">
 <colgroup>
 <col width="10%">
 <col width="5%">
@@ -448,9 +480,9 @@
 <col width="5%">
 <col width="13%">
 <col width="8%">
-<col width="12%">
-<col width="12%">
-<col width="12%">
+<col width="10%">
+<col width="11%">
+<col width="11%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
@@ -459,11 +491,11 @@
 <th align="left">State</th>
 <th align="left">PAR</th>
 <th align="left">HCPCS</th>
-<th align="left">Beneficiaries</th>
-<th align="left">Services</th>
-<th align="left">Avg Billed</th>
-<th align="left">Avg Allowed</th>
-<th align="left">Avg Payment</th>
+<th align="right">Beneficiaries</th>
+<th align="right">Services</th>
+<th align="right">Avg Billed</th>
+<th align="right">Avg Allowed</th>
+<th align="right">Avg Payment</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -473,11 +505,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">36415</td>
-<td align="left">122</td>
-<td align="left">196</td>
-<td align="left">29</td>
-<td align="left">2.9834693878</td>
-<td align="left">2.9834693878</td>
+<td align="right">122</td>
+<td align="right">196</td>
+<td align="right">29.0000</td>
+<td align="right">2.983469</td>
+<td align="right">2.983469</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -486,11 +518,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">71046</td>
-<td align="left">16</td>
-<td align="left">17</td>
-<td align="left">141</td>
-<td align="left">20.480588235</td>
-<td align="left">10.592352941</td>
+<td align="right">16</td>
+<td align="right">17</td>
+<td align="right">141.0000</td>
+<td align="right">20.480588</td>
+<td align="right">10.592353</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -499,11 +531,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80048</td>
-<td align="left">71</td>
-<td align="left">100</td>
-<td align="left">63</td>
-<td align="left">8.4022</td>
-<td align="left">8.4022</td>
+<td align="right">71</td>
+<td align="right">100</td>
+<td align="right">63.0000</td>
+<td align="right">8.402200</td>
+<td align="right">8.402200</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -512,11 +544,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80053</td>
-<td align="left">36</td>
-<td align="left">39</td>
-<td align="left">85</td>
-<td align="left">10.511538462</td>
-<td align="left">10.511538462</td>
+<td align="right">36</td>
+<td align="right">39</td>
+<td align="right">85.0000</td>
+<td align="right">10.511539</td>
+<td align="right">10.511539</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -525,11 +557,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">80061</td>
-<td align="left">53</td>
-<td align="left">54</td>
-<td align="left">116</td>
-<td align="left">13.315</td>
-<td align="left">13.315</td>
+<td align="right">53</td>
+<td align="right">54</td>
+<td align="right">116.0000</td>
+<td align="right">13.315000</td>
+<td align="right">13.315000</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -538,11 +570,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">81001</td>
-<td align="left">19</td>
-<td align="left">24</td>
-<td align="left">48</td>
-<td align="left">3.1475</td>
-<td align="left">3.1475</td>
+<td align="right">19</td>
+<td align="right">24</td>
+<td align="right">48.0000</td>
+<td align="right">3.147500</td>
+<td align="right">3.147500</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -551,11 +583,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">83036</td>
-<td align="left">26</td>
-<td align="left">37</td>
-<td align="left">74</td>
-<td align="left">9.6586486486</td>
-<td align="left">9.6586486486</td>
+<td align="right">26</td>
+<td align="right">37</td>
+<td align="right">74.0000</td>
+<td align="right">9.658649</td>
+<td align="right">9.658649</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -564,11 +596,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84153</td>
-<td align="left">13</td>
-<td align="left">14</td>
-<td align="left">111</td>
-<td align="left">18.284285714</td>
-<td align="left">18.284285714</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">111.0000</td>
+<td align="right">18.284286</td>
+<td align="right">18.284286</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -577,11 +609,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84443</td>
-<td align="left">26</td>
-<td align="left">35</td>
-<td align="left">97</td>
-<td align="left">16.732</td>
-<td align="left">16.732</td>
+<td align="right">26</td>
+<td align="right">35</td>
+<td align="right">97.0000</td>
+<td align="right">16.732000</td>
+<td align="right">16.732000</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -590,11 +622,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">84450</td>
-<td align="left">14</td>
-<td align="left">14</td>
-<td align="left">43</td>
-<td align="left">5.1371428571</td>
-<td align="left">5.1371428571</td>
+<td align="right">14</td>
+<td align="right">14</td>
+<td align="right">43.0000</td>
+<td align="right">5.137143</td>
+<td align="right">5.137143</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -603,11 +635,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85025</td>
-<td align="left">11</td>
-<td align="left">12</td>
-<td align="left">69</td>
-<td align="left">7.7566666667</td>
-<td align="left">7.7566666667</td>
+<td align="right">11</td>
+<td align="right">12</td>
+<td align="right">69.0000</td>
+<td align="right">7.756667</td>
+<td align="right">7.756667</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -616,11 +648,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85027</td>
-<td align="left">48</td>
-<td align="left">52</td>
-<td align="left">69</td>
-<td align="left">6.43</td>
-<td align="left">6.43</td>
+<td align="right">48</td>
+<td align="right">52</td>
+<td align="right">69.0000</td>
+<td align="right">6.430000</td>
+<td align="right">6.430000</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -629,11 +661,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">85610</td>
-<td align="left">17</td>
-<td align="left">35</td>
-<td align="left">43</td>
-<td align="left">4.2462857143</td>
-<td align="left">4.2462857143</td>
+<td align="right">17</td>
+<td align="right">35</td>
+<td align="right">43.0000</td>
+<td align="right">4.246286</td>
+<td align="right">4.246286</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -642,11 +674,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">90662</td>
-<td align="left">25</td>
-<td align="left">25</td>
-<td align="left">68</td>
-<td align="left">60.7364</td>
-<td align="left">60.7364</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="right">68.0000</td>
+<td align="right">60.736400</td>
+<td align="right">60.736400</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -655,11 +687,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">90686</td>
-<td align="left">13</td>
-<td align="left">13</td>
-<td align="left">27</td>
-<td align="left">19.508461538</td>
-<td align="left">19.508461538</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">27.0000</td>
+<td align="right">19.508461</td>
+<td align="right">19.508461</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -668,11 +700,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">93000</td>
-<td align="left">25</td>
-<td align="left">25</td>
-<td align="left">113</td>
-<td align="left">16.9692</td>
-<td align="left">10.8532</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="right">113.0000</td>
+<td align="right">16.969200</td>
+<td align="right">10.853200</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -681,11 +713,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">99213</td>
-<td align="left">91</td>
-<td align="left">252</td>
-<td align="left">226</td>
-<td align="left">74.433253968</td>
-<td align="left">48.886825397</td>
+<td align="right">91</td>
+<td align="right">252</td>
+<td align="right">226.0000</td>
+<td align="right">74.433254</td>
+<td align="right">48.886825</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -694,11 +726,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">99214</td>
-<td align="left">81</td>
-<td align="left">136</td>
-<td align="left">334</td>
-<td align="left">107.93426471</td>
-<td align="left">66.875955882</td>
+<td align="right">81</td>
+<td align="right">136</td>
+<td align="right">334.0000</td>
+<td align="right">107.934265</td>
+<td align="right">66.875956</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -707,11 +739,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0008</td>
-<td align="left">38</td>
-<td align="left">38</td>
-<td align="left">78</td>
-<td align="left">16.802105263</td>
-<td align="left">16.802105263</td>
+<td align="right">38</td>
+<td align="right">38</td>
+<td align="right">78.0000</td>
+<td align="right">16.802105</td>
+<td align="right">16.802105</td>
 </tr>
 <tr class="even">
 <td align="left">1760485387</td>
@@ -720,11 +752,11 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0103</td>
-<td align="left">17</td>
-<td align="left">17</td>
-<td align="left">111</td>
-<td align="left">19.172352941</td>
-<td align="left">19.172352941</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="right">111.0000</td>
+<td align="right">19.172353</td>
+<td align="right">19.172353</td>
 </tr>
 <tr class="odd">
 <td align="left">1760485387</td>
@@ -733,211 +765,651 @@
 <td align="left">MN</td>
 <td align="left">Y</td>
 <td align="left">G0438</td>
-<td align="left">18</td>
-<td align="left">18</td>
-<td align="left">508.11111111</td>
-<td align="left">170.25</td>
-<td align="left">170.25</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="right">508.1111</td>
+<td align="right">170.250000</td>
+<td align="right">170.250000</td>
 </tr>
 </tbody>
 </table>
 <p><br></p>
 <p>This API contains data going back to 2013, so you can perform a long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Declare NPI</span></span>
-<span><span class="va">mpop_npi</span> <span class="op">&lt;-</span> <span class="st">"1760485387"</span></span>
-<span></span>
-<span><span class="co"># Retrieve the data from each year</span></span>
-<span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2020"</span><span class="op">)</span></span>
-<span><span class="va">mpop19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2019"</span><span class="op">)</span></span>
-<span><span class="va">mpop18</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2018"</span><span class="op">)</span></span>
-<span><span class="va">mpop17</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2017"</span><span class="op">)</span></span>
-<span><span class="va">mpop16</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2016"</span><span class="op">)</span></span>
-<span><span class="va">mpop15</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2015"</span><span class="op">)</span></span>
-<span><span class="va">mpop14</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2014"</span><span class="op">)</span></span>
-<span><span class="va">mpop13</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span><span class="fl">1760485387</span>, <span class="st">"2013"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
+<span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
+<span><span class="va">mpop19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span>
+<span><span class="va">mpop18</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2018"</span><span class="op">)</span></span>
+<span><span class="va">mpop17</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2017"</span><span class="op">)</span></span>
+<span><span class="va">mpop16</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2016"</span><span class="op">)</span></span>
+<span><span class="va">mpop15</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2015"</span><span class="op">)</span></span>
+<span><span class="va">mpop14</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2014"</span><span class="op">)</span></span>
+<span><span class="va">mpop13</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2013"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Bind the data frames together by row</span></span>
-<span><span class="va">mpop_13_20</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">mpop20</span>, <span class="va">mpop19</span>, <span class="va">mpop18</span>, <span class="va">mpop17</span>, <span class="va">mpop16</span>, <span class="va">mpop15</span>, <span class="va">mpop14</span>, <span class="va">mpop13</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">mpop_13_20</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">mpop20</span>, </span>
+<span>                               <span class="va">mpop19</span>, </span>
+<span>                               <span class="va">mpop18</span>, </span>
+<span>                               <span class="va">mpop17</span>, </span>
+<span>                               <span class="va">mpop16</span>, </span>
+<span>                               <span class="va">mpop15</span>, </span>
+<span>                               <span class="va">mpop14</span>, </span>
+<span>                               <span class="va">mpop13</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::summarise()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Problem while computing `Benefits = sum(tot_benes)`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The error occurred in group 1: hcpcs_cd = "36415", hcpcs_desc = "Insertion of</span></span>
-<span><span class="co">#&gt;   needle into vein for collection of blood sample".</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `sum()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid 'type' (character) of argument</span></span></code></pre>
+<table class="table">
+<colgroup>
+<col width="3%">
+<col width="70%">
+<col width="4%">
+<col width="4%">
+<col width="5%">
+<col width="6%">
+<col width="6%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">HCPCS</th>
+<th align="left">HCPCS Description</th>
+<th align="right">Benefits</th>
+<th align="right">Services</th>
+<th align="right">Avg Charge</th>
+<th align="right">Avg Allowed</th>
+<th align="right">Avg Payment</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">83690</td>
+<td align="left">Lipase (fat enzyme) level</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">67.00</td>
+<td align="right">7.50</td>
+<td align="right">7.50</td>
+</tr>
+<tr class="even">
+<td align="left">93017</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress test with EKG tracing and monitoring</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">220.00</td>
+<td align="right">41.61</td>
+<td align="right">33.18</td>
+</tr>
+<tr class="odd">
+<td align="left">90686</td>
+<td align="left">Vaccine for influenza for administration into muscle, 0.5 ml dosage</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">27.00</td>
+<td align="right">19.51</td>
+<td align="right">19.51</td>
+</tr>
+<tr class="even">
+<td align="left">80069</td>
+<td align="left">Kidney function blood test panel</td>
+<td align="right">11</td>
+<td align="right">14</td>
+<td align="right">46.00</td>
+<td align="right">10.51</td>
+<td align="right">10.51</td>
+</tr>
+<tr class="odd">
+<td align="left">84153</td>
+<td align="left">Psa (prostate specific antigen) measurement</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">111.00</td>
+<td align="right">18.28</td>
+<td align="right">18.28</td>
+</tr>
+<tr class="even">
+<td align="left">84450</td>
+<td align="left">Liver enzyme (sgot), level</td>
+<td align="right">14</td>
+<td align="right">14</td>
+<td align="right">43.00</td>
+<td align="right">5.14</td>
+<td align="right">5.14</td>
+</tr>
+<tr class="odd">
+<td align="left">99223</td>
+<td align="left">Initial hospital inpatient care, typically 70 minutes per day</td>
+<td align="right">13</td>
+<td align="right">14</td>
+<td align="right">514.00</td>
+<td align="right">189.07</td>
+<td align="right">146.33</td>
+</tr>
+<tr class="even">
+<td align="left">20610</td>
+<td align="left">Aspiration and/or injection of large joint or joint capsule</td>
+<td align="right">12</td>
+<td align="right">16</td>
+<td align="right">239.00</td>
+<td align="right">56.77</td>
+<td align="right">41.90</td>
+</tr>
+<tr class="odd">
+<td align="left">99235</td>
+<td align="left">Hospital observation or inpatient care moderate severity, 50 minutes per day’</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">508.00</td>
+<td align="right">155.69</td>
+<td align="right">123.51</td>
+</tr>
+<tr class="even">
+<td align="left">82306</td>
+<td align="left">Vitamin D-3 level</td>
+<td align="right">16</td>
+<td align="right">18</td>
+<td align="right">185.00</td>
+<td align="right">35.82</td>
+<td align="right">35.82</td>
+</tr>
+<tr class="odd">
+<td align="left">G0431</td>
+<td align="left">Drug screen, qualitative; multiple drug classes by high complexity test method (e. g. , immunoassay, enzyme assay), per patient encounter</td>
+<td align="right">12</td>
+<td align="right">20</td>
+<td align="right">140.00</td>
+<td align="right">98.25</td>
+<td align="right">98.25</td>
+</tr>
+<tr class="even">
+<td align="left">93016</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress test with EKG monitoring and physician supervision</td>
+<td align="right">22</td>
+<td align="right">22</td>
+<td align="right">103.00</td>
+<td align="right">21.26</td>
+<td align="right">16.16</td>
+</tr>
+<tr class="odd">
+<td align="left">81003</td>
+<td align="left">Automated urinalysis test</td>
+<td align="right">21</td>
+<td align="right">23</td>
+<td align="right">38.00</td>
+<td align="right">3.00</td>
+<td align="right">3.00</td>
+</tr>
+<tr class="even">
+<td align="left">93000</td>
+<td align="left">Routine ekg using at least 12 leads including interpretation and report</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="right">113.00</td>
+<td align="right">16.97</td>
+<td align="right">10.85</td>
+</tr>
+<tr class="odd">
+<td align="left">G0438</td>
+<td align="left">Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit</td>
+<td align="right">29</td>
+<td align="right">29</td>
+<td align="right">444.06</td>
+<td align="right">169.23</td>
+<td align="right">169.23</td>
+</tr>
+<tr class="even">
+<td align="left">85018</td>
+<td align="left">Hemoglobin measurement</td>
+<td align="right">27</td>
+<td align="right">32</td>
+<td align="right">30.50</td>
+<td align="right">3.18</td>
+<td align="right">3.18</td>
+</tr>
+<tr class="odd">
+<td align="left">84443</td>
+<td align="left">Blood test, thyroid stimulating hormone (tsh)</td>
+<td align="right">26</td>
+<td align="right">35</td>
+<td align="right">97.00</td>
+<td align="right">16.73</td>
+<td align="right">16.73</td>
+</tr>
+<tr class="even">
+<td align="left">83036</td>
+<td align="left">Hemoglobin a1c level</td>
+<td align="right">26</td>
+<td align="right">37</td>
+<td align="right">74.00</td>
+<td align="right">9.66</td>
+<td align="right">9.66</td>
+</tr>
+<tr class="odd">
+<td align="left">85652</td>
+<td align="left">Red blood cell sedimentation rate, to detect inflammation</td>
+<td align="right">46</td>
+<td align="right">49</td>
+<td align="right">41.00</td>
+<td align="right">3.37</td>
+<td align="right">3.37</td>
+</tr>
+<tr class="even">
+<td align="left">93000</td>
+<td align="left">Routine EKG using at least 12 leads including interpretation and report</td>
+<td align="right">54</td>
+<td align="right">59</td>
+<td align="right">106.00</td>
+<td align="right">16.40</td>
+<td align="right">12.69</td>
+</tr>
+<tr class="odd">
+<td align="left">93306</td>
+<td align="left">Ultrasound examination of heart including color-depicted blood flow rate, direction, and valve function</td>
+<td align="right">61</td>
+<td align="right">63</td>
+<td align="right">823.25</td>
+<td align="right">167.68</td>
+<td align="right">127.70</td>
+</tr>
+<tr class="even">
+<td align="left">99238</td>
+<td align="left">Hospital discharge day management, 30 minutes or less</td>
+<td align="right">55</td>
+<td align="right">65</td>
+<td align="right">210.75</td>
+<td align="right">69.70</td>
+<td align="right">54.44</td>
+</tr>
+<tr class="odd">
+<td align="left">71046</td>
+<td align="left">X-ray of chest, 2 views</td>
+<td align="right">60</td>
+<td align="right">69</td>
+<td align="right">137.00</td>
+<td align="right">19.87</td>
+<td align="right">12.40</td>
+</tr>
+<tr class="even">
+<td align="left">J3301</td>
+<td align="left">Injection, triamcinolone acetonide, not otherwise specified, 10 mg</td>
+<td align="right">14</td>
+<td align="right">72</td>
+<td align="right">25.00</td>
+<td align="right">1.79</td>
+<td align="right">1.34</td>
+</tr>
+<tr class="odd">
+<td align="left">71020</td>
+<td align="left">X-ray of chest, 2 views, front and side</td>
+<td align="right">82</td>
+<td align="right">89</td>
+<td align="right">121.00</td>
+<td align="right">17.80</td>
+<td align="right">11.16</td>
+</tr>
+<tr class="even">
+<td align="left">90662</td>
+<td align="left">Vaccine for influenza for injection into muscle</td>
+<td align="right">96</td>
+<td align="right">96</td>
+<td align="right">64.00</td>
+<td align="right">51.04</td>
+<td align="right">51.04</td>
+</tr>
+<tr class="odd">
+<td align="left">84153</td>
+<td align="left">PSA (prostate specific antigen) measurement</td>
+<td align="right">90</td>
+<td align="right">98</td>
+<td align="right">98.00</td>
+<td align="right">23.63</td>
+<td align="right">23.63</td>
+</tr>
+<tr class="even">
+<td align="left">84450</td>
+<td align="left">Liver enzyme (SGOT), level</td>
+<td align="right">93</td>
+<td align="right">100</td>
+<td align="right">39.40</td>
+<td align="right">4.82</td>
+<td align="right">4.82</td>
+</tr>
+<tr class="odd">
+<td align="left">93005</td>
+<td align="left">Routine electrocardiogram (EKG) with tracing using at least 12 leads</td>
+<td align="right">98</td>
+<td align="right">101</td>
+<td align="right">52.50</td>
+<td align="right">8.54</td>
+<td align="right">6.23</td>
+</tr>
+<tr class="even">
+<td align="left">G0008</td>
+<td align="left">Administration of influenza virus vaccine</td>
+<td align="right">132</td>
+<td align="right">132</td>
+<td align="right">73.97</td>
+<td align="right">20.82</td>
+<td align="right">20.82</td>
+</tr>
+<tr class="odd">
+<td align="left">G0103</td>
+<td align="left">Prostate cancer screening; prostate specific antigen test (psa)</td>
+<td align="right">134</td>
+<td align="right">134</td>
+<td align="right">102.00</td>
+<td align="right">22.84</td>
+<td align="right">22.84</td>
+</tr>
+<tr class="even">
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25 minutes per day</td>
+<td align="right">87</td>
+<td align="right">192</td>
+<td align="right">203.12</td>
+<td align="right">68.45</td>
+<td align="right">53.31</td>
+</tr>
+<tr class="odd">
+<td align="left">81001</td>
+<td align="left">Manual urinalysis test with examination using microscope</td>
+<td align="right">179</td>
+<td align="right">214</td>
+<td align="right">44.38</td>
+<td align="right">3.96</td>
+<td align="right">3.96</td>
+</tr>
+<tr class="even">
+<td align="left">83036</td>
+<td align="left">Hemoglobin A1C level</td>
+<td align="right">198</td>
+<td align="right">273</td>
+<td align="right">66.00</td>
+<td align="right">12.44</td>
+<td align="right">12.44</td>
+</tr>
+<tr class="odd">
+<td align="left">84443</td>
+<td align="left">Blood test, thyroid stimulating hormone (TSH)</td>
+<td align="right">244</td>
+<td align="right">288</td>
+<td align="right">85.71</td>
+<td align="right">21.61</td>
+<td align="right">21.61</td>
+</tr>
+<tr class="even">
+<td align="left">85025</td>
+<td align="left">Complete blood cell count (red cells, white blood cell, platelets), automated test</td>
+<td align="right">270</td>
+<td align="right">334</td>
+<td align="right">62.00</td>
+<td align="right">9.62</td>
+<td align="right">9.62</td>
+</tr>
+<tr class="odd">
+<td align="left">85027</td>
+<td align="left">Complete blood cell count (red cells, white blood cell, platelets), automated test</td>
+<td align="right">296</td>
+<td align="right">341</td>
+<td align="right">62.00</td>
+<td align="right">8.06</td>
+<td align="right">8.06</td>
+</tr>
+<tr class="even">
+<td align="left">85610</td>
+<td align="left">Blood test, clotting time</td>
+<td align="right">180</td>
+<td align="right">458</td>
+<td align="right">39.38</td>
+<td align="right">4.95</td>
+<td align="right">4.95</td>
+</tr>
+<tr class="odd">
+<td align="left">80061</td>
+<td align="left">Blood test, lipids (cholesterol and triglycerides)</td>
+<td align="right">534</td>
+<td align="right">586</td>
+<td align="right">105.50</td>
+<td align="right">14.53</td>
+<td align="right">14.53</td>
+</tr>
+<tr class="even">
+<td align="left">80053</td>
+<td align="left">Blood test, comprehensive group of blood chemicals</td>
+<td align="right">511</td>
+<td align="right">592</td>
+<td align="right">77.88</td>
+<td align="right">12.04</td>
+<td align="right">12.04</td>
+</tr>
+<tr class="odd">
+<td align="left">80048</td>
+<td align="left">Blood test, basic group of blood chemicals</td>
+<td align="right">547</td>
+<td align="right">742</td>
+<td align="right">56.00</td>
+<td align="right">9.74</td>
+<td align="right">9.74</td>
+</tr>
+<tr class="even">
+<td align="left">99214</td>
+<td align="left">Established patient office or other outpatient, visit typically 25 minutes</td>
+<td align="right">455</td>
+<td align="right">768</td>
+<td align="right">315.43</td>
+<td align="right">104.76</td>
+<td align="right">66.37</td>
+</tr>
+<tr class="odd">
+<td align="left">99213</td>
+<td align="left">Established patient office or other outpatient visit, typically 15 minutes</td>
+<td align="right">457</td>
+<td align="right">951</td>
+<td align="right">213.20</td>
+<td align="right">71.45</td>
+<td align="right">46.25</td>
+</tr>
+<tr class="even">
+<td align="left">36415</td>
+<td align="left">Insertion of needle into vein for collection of blood sample</td>
+<td align="right">782</td>
+<td align="right">1162</td>
+<td align="right">25.50</td>
+<td align="right">2.92</td>
+<td align="right">2.92</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <p>Using packages like {gt} &amp; {ggplot2}, you can create tables and graphs for reporting purposes:</p>
 <p><br></p>
 <details><summary>
 Click for Table Code
-</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># First row of data</span></span>
+<span><span class="va">mpop_ex_2020_row1</span> <span class="op">&lt;-</span> <span class="va">mpop_ex_2020</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># First, last, credentials</span></span>
+<span><span class="va">mpop_ex_name_cred</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span></span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_first_name</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_last_org_name</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">", "</span>,</span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_crdntls</span>, <span class="st">"both"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># NPI</span></span>
+<span><span class="va">mpop_ex_npi</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_npi</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">""</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Address</span></span>
+<span><span class="va">mpop_ex_address</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span></span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_st1</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_city</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">", "</span>,</span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_state_abrvtn</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
+<span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_zip5</span>, <span class="st">"both"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">mpop_13_20</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
-<span>                hcpcs <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
-<span>                benefits <span class="op">=</span> <span class="va">tot_benes</span>,</span>
-<span>                services <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
-<span>                avg_bill <span class="op">=</span> <span class="va">avg_sbmtd_chrg</span>,</span>
+<span>                hcpcs     <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
+<span>                benefits  <span class="op">=</span> <span class="va">tot_benes</span>,</span>
+<span>                services  <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
+<span>                avg_bill  <span class="op">=</span> <span class="va">avg_sbmtd_chrg</span>,</span>
 <span>                avg_allow <span class="op">=</span> <span class="va">avg_mdcr_alowd_amt</span>,</span>
-<span>                avg_pay <span class="op">=</span> <span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                avg_pay   <span class="op">=</span> <span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
-<span>    ben_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
-<span>    ben_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
-<span>    ben_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
-<span>    ben_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
-<span>    serv_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
-<span>    serv_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
-<span>    serv_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    ben_sum    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    ben_mean   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    ben_spark  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">benefits</span><span class="op">)</span>,</span>
+<span>    serv_sum   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
+<span>    serv_mean  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
 <span>    serv_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">services</span><span class="op">)</span>,</span>
-<span>    char_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
-<span>    char_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
+<span>    char_sum   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
+<span>    char_mean  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
 <span>    char_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_bill</span><span class="op">)</span>,</span>
-<span>    all_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
-<span>    all_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
-<span>    all_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
-<span>    pay_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
-<span>    pay_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
-<span>    pay_spark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    all_sum    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    all_mean   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    all_spark  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_allow</span><span class="op">)</span>,</span>
+<span>    pay_sum    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    pay_mean   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
+<span>    pay_spark  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
 <span>    .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ben_sum</span> <span class="op">&gt;=</span> <span class="fl">30</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::summarize()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Problem while computing `ben_sum = sum(benefits)`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> The error occurred in group 1: hcpcs = "36415".</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `sum()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid 'type' (character) of argument</span></span>
-<span></span>
-<span><span class="va">gt_table</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"hcpcs"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ben_sum</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gt_output</span> <span class="op">&lt;-</span> <span class="va">gt_table</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
-<span>  title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**{provider} Example Medicare Data Report**: 2013 - 2020."</span><span class="op">)</span>, </span>
+<span>  title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">mpop_ex_name_cred</span>, <span class="st">"**Medicare Data Report**: 2013 - 2020."</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>  subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span></span>
 <span>  <span class="st">"NPI: 1760485387. HCPCS Codes with a beneficiary count *less than 30* have been excluded."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_nytimes.html" class="external-link">gt_theme_nytimes</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>row_group.as_column <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                  footnotes.multiline <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>footnotes.multiline <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                  table.font.size <span class="op">=</span> <span class="st">"16px"</span>,</span>
+<span>                  heading.title.font.size <span class="op">=</span> <span class="st">"22px"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">ben_spark</span>, </span>
 <span>                             type <span class="op">=</span> <span class="st">"ref_iqr"</span>, </span>
 <span>                             fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, </span>
 <span>                             same_limit <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                             label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"blue"</span>, </span>
 <span>                                         <span class="st">"green"</span>, </span>
-<span>                                         <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                                         <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">serv_spark</span>, </span>
 <span>                             type <span class="op">=</span> <span class="st">"ref_iqr"</span>, </span>
 <span>                             fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, </span>
 <span>                             same_limit <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                             label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"blue"</span>, </span>
 <span>                                         <span class="st">"green"</span>, </span>
-<span>                                         <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                                         <span class="st">"blue"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">char_spark</span>, </span>
 <span>                             type <span class="op">=</span> <span class="st">"ref_iqr"</span>, </span>
 <span>                             fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, </span>
 <span>                             same_limit <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                             label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"blue"</span>, </span>
 <span>                                         <span class="st">"green"</span>, </span>
-<span>                                         <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                                         <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">all_spark</span>, </span>
 <span>                             type <span class="op">=</span> <span class="st">"ref_iqr"</span>, </span>
 <span>                             fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, </span>
 <span>                             same_limit <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                             label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"blue"</span>, </span>
 <span>                                         <span class="st">"green"</span>, </span>
-<span>                                         <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                                         <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_sparkline.html" class="external-link">gt_plt_sparkline</a></span><span class="op">(</span><span class="va">pay_spark</span>, </span>
 <span>                             type <span class="op">=</span> <span class="st">"ref_iqr"</span>, </span>
 <span>                             fig_dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">30</span><span class="op">)</span>, </span>
 <span>                             same_limit <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>                             label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"black"</span>, </span>
 <span>                                         <span class="st">"blue"</span>, </span>
 <span>                                         <span class="st">"green"</span>, </span>
-<span>                                         <span class="st">"red"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hcpcs"</span>, </span>
-<span>                                       <span class="st">"ben_spark"</span>, </span>
-<span>                                       <span class="st">"serv_spark"</span>, </span>
-<span>                                       <span class="st">"char_spark"</span>, </span>
-<span>                                       <span class="st">"all_spark"</span>, </span>
-<span>                                       <span class="st">"pay_spark"</span><span class="op">)</span>, </span>
-<span>                           style <span class="op">=</span> <span class="st">"dotted"</span>, </span>
-<span>                           color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ben_mean</span><span class="op">:</span><span class="va">ben_med</span>, </span>
-<span>                             <span class="va">serv_mean</span><span class="op">:</span><span class="va">serv_med</span><span class="op">)</span>, </span>
-<span>                 decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_mean</span><span class="op">:</span><span class="va">char_med</span>, </span>
-<span>                               <span class="va">all_mean</span><span class="op">:</span><span class="va">all_med</span>, </span>
-<span>                               <span class="va">pay_mean</span><span class="op">:</span><span class="va">pay_med</span><span class="op">)</span>, </span>
-<span>                   currency <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>                                         <span class="st">"orange"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"hcpcs"</span>, </span>
+<span>                           style <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>                           include_labels <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>                           weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>                           color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ben_sum</span><span class="op">:</span><span class="va">ben_mean</span>, </span>
+<span>                             <span class="va">serv_sum</span><span class="op">:</span><span class="va">serv_mean</span><span class="op">)</span>, </span>
+<span>                             decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_sum</span><span class="op">:</span><span class="va">char_mean</span>, </span>
+<span>                               <span class="va">all_sum</span><span class="op">:</span><span class="va">all_mean</span>, </span>
+<span>                               <span class="va">pay_sum</span><span class="op">:</span><span class="va">pay_mean</span><span class="op">)</span>, </span>
+<span>                               currency <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Beneficiaries"</span>, </span>
 <span>                  id <span class="op">=</span> <span class="st">"ben"</span>, </span>
 <span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ben_sum</span>, </span>
 <span>                              <span class="va">ben_mean</span>, </span>
-<span>                              <span class="va">ben_med</span>, </span>
 <span>                              <span class="va">ben_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Services"</span>, </span>
 <span>                  id <span class="op">=</span> <span class="st">"serv"</span>, </span>
 <span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">serv_sum</span>, </span>
 <span>                              <span class="va">serv_mean</span>, </span>
-<span>                              <span class="va">serv_med</span>, </span>
 <span>                              <span class="va">serv_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Submitted Charge"</span>, </span>
-<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_mean</span>, </span>
-<span>                              <span class="va">char_med</span>, </span>
+<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">char_sum</span>,</span>
+<span>                              <span class="va">char_mean</span>, </span>
 <span>                              <span class="va">char_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Allowed Amount"</span>, </span>
-<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">all_mean</span>, </span>
-<span>                              <span class="va">all_med</span>, </span>
+<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">all_sum</span>,</span>
+<span>                              <span class="va">all_mean</span>, </span>
 <span>                              <span class="va">all_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"Payment"</span>, </span>
-<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">pay_mean</span>, </span>
-<span>                              <span class="va">pay_med</span>, </span>
+<span>                  columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">pay_sum</span>,</span>
+<span>                              <span class="va">pay_mean</span>, </span>
 <span>                              <span class="va">pay_spark</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>ben_sum <span class="op">=</span> <span class="st">"Count"</span>, </span>
-<span>                 ben_mean <span class="op">=</span> <span class="st">"Mean"</span>, </span>
-<span>                 ben_med <span class="op">=</span> <span class="st">"Median"</span>, </span>
+<span>                 ben_mean <span class="op">=</span> <span class="st">"Average"</span>, </span>
 <span>                 ben_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>serv_sum <span class="op">=</span> <span class="st">"Count"</span>, </span>
-<span>                 serv_mean <span class="op">=</span> <span class="st">"Mean"</span>, </span>
-<span>                 serv_med <span class="op">=</span> <span class="st">"Median"</span>, </span>
+<span>                 serv_mean <span class="op">=</span> <span class="st">"Average"</span>, </span>
 <span>                 serv_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>char_mean <span class="op">=</span> <span class="st">"Mean"</span>, </span>
-<span>                 char_med <span class="op">=</span> <span class="st">"Median"</span>, </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>char_sum <span class="op">=</span> <span class="st">"Sum"</span>,</span>
+<span>                 char_mean <span class="op">=</span> <span class="st">"Average"</span>, </span>
 <span>                 char_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>all_mean <span class="op">=</span> <span class="st">"Mean"</span>, </span>
-<span>                 all_med <span class="op">=</span> <span class="st">"Median"</span>, </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>all_sum <span class="op">=</span> <span class="st">"Sum"</span>,</span>
+<span>                 all_mean <span class="op">=</span> <span class="st">"Average"</span>, </span>
 <span>                 all_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>pay_mean <span class="op">=</span> <span class="st">"Mean"</span>, </span>
-<span>                 pay_med <span class="op">=</span> <span class="st">"Median"</span>, </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>pay_sum <span class="op">=</span> <span class="st">"Sum"</span>, </span>
+<span>                 pay_mean <span class="op">=</span> <span class="st">"Average"</span>, </span>
 <span>                 pay_spark <span class="op">=</span> <span class="st">"Trend"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span></span>
-<span>    source_note <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Data Source: *Physician &amp; Other Practitioners: by Provider and Service* (2013 - 2020). **Medicare.**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    source_note <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Data Source: **Medicare** Physician &amp; Other Practitioners by Provider and Service, 2013 - 2020."</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
 <span>    footnote <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Number of *distinct* Medicare beneficiaries receiving the service for each HCPCS code."</span><span class="op">)</span>, </span>
 <span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_spanners.html" class="external-link">cells_column_spanners</a></span><span class="op">(</span>spanners <span class="op">=</span> <span class="st">"ben"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_footnote.html" class="external-link">tab_footnote</a></span><span class="op">(</span></span>
-<span>    footnote <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"</span><span class="op">)</span>, </span>
+<span>    footnote <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"</span><span class="op">)</span>,</span>
 <span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_column_spanners.html" class="external-link">cells_column_spanners</a></span><span class="op">(</span>spanners <span class="op">=</span> <span class="st">"serv"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_outline.html" class="external-link">opt_table_outline</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                  color <span class="op">=</span> <span class="st">"red"</span>, </span>
-<span>                  add_row_striping <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">serv_sum</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">char_mean</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">all_mean</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span><span class="va">pay_mean</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in dplyr::as_tibble(data_tbl): object 'gt_table' not found</span></span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">ben_sum</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Blues"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">ben_sum</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">ben_mean</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Blues"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">ben_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">serv_sum</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Blues"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">serv_sum</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">serv_mean</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Blues"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">serv_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">char_sum</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">char_sum</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">char_mean</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">char_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">all_sum</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">all_sum</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">all_mean</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">all_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">pay_sum</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">pay_sum</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">pay_mean</span>, </span>
+<span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">pay_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_vertical_padding.html" class="external-link">opt_vertical_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co">#gt_table |&gt; gt::gtsave("gt_provider2.png", expand = 20, zoom = 2, vwidth = 1500)</span></span></code></pre></div>
+<span><span class="co">#gt::gtsave(gt_output, filename = "gt_provider3.png", expand = 20, zoom = 2, vwidth = 1500)</span></span></code></pre></div>
 </details><p><br><br></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
