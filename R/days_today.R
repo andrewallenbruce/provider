@@ -27,7 +27,7 @@ days_today <- function(df, date, name = days) {
                   secs = lubridate::int_length(int),
                   mins = secs/60,
                   hrs = mins/60,
-                  "{{name}}" := hrs/24) |>
+                  "{{name}}" := abs(hrs/24)) |>
     dplyr::select(!c(date, int, secs, mins, hrs))
 
   return(results)

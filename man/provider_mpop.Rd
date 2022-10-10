@@ -32,7 +32,7 @@ furnished by the provider.}
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
 
-\item{full}{If true, downloads the first 1000 rows of data;
+\item{full}{If \code{TRUE}, downloads the first 1000 rows of data;
 default is \code{FALSE}.}
 }
 \value{
@@ -44,7 +44,7 @@ Original Medicare (fee-for-service) Part B (Medical Insurance)
 beneficiaries by physicians and other healthcare professionals.
 }
 \section{Medicare Physician & Other Practitioners APIs}{
-\code{provider_mpop} allows you to access data from three different APIs.
+\code{\link[=provider_mpop]{provider_mpop()}} allows you to access data from three different APIs.
 These APIs contain three interrelated sets of data:
 \subsection{by Provider and Service}{
 
@@ -86,6 +86,14 @@ Annually
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}{Medicare Physician & Other Practitioners: by Provider and Service API}
+\item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service}{Medicare Physician & Other Practitioners: by Geography and Service API}
+\item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}{Medicare Physician & Other Practitioners: by Provider API}
+}
+}
 }
 
 \examples{
@@ -119,9 +127,4 @@ provider_mpop(full = TRUE, set = "geo")
 provider_mpop(full = TRUE, set = "prov")
 }
 
-}
-\references{
-\url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}
-\url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service}
-\url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}
 }

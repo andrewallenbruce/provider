@@ -96,7 +96,7 @@ What if you don't have the provider's NPI? You can search by first and/or last n
 ```{r warning=FALSE}
 nppes_ex2 <- provider_nppes(first = "Paul", 
                             last = "Dewey",
-                            state_abbr = "MN") |> 
+                            state = "MN") |> 
                             provider_unpack()
 ```
 
@@ -307,21 +307,25 @@ This API contains data going back to 2013, so you can perform a long-term analys
 <br>
 
 ```{r}
-# Declare NPI
-mpop_npi <- "1760485387"
-
 # Retrieve the data from each year
-mpop20 <- provider_mpop(1760485387, "2020")
-mpop19 <- provider_mpop(1760485387, "2019")
-mpop18 <- provider_mpop(1760485387, "2018")
-mpop17 <- provider_mpop(1760485387, "2017")
-mpop16 <- provider_mpop(1760485387, "2016")
-mpop15 <- provider_mpop(1760485387, "2015")
-mpop14 <- provider_mpop(1760485387, "2014")
-mpop13 <- provider_mpop(1760485387, "2013")
+mpop20 <- provider_mpop(npi = 1760485387, year = "2020")
+mpop19 <- provider_mpop(npi = 1760485387, year = "2019")
+mpop18 <- provider_mpop(npi = 1760485387, year = "2018")
+mpop17 <- provider_mpop(npi = 1760485387, year = "2017")
+mpop16 <- provider_mpop(npi = 1760485387, year = "2016")
+mpop15 <- provider_mpop(npi = 1760485387, year = "2015")
+mpop14 <- provider_mpop(npi = 1760485387, year = "2014")
+mpop13 <- provider_mpop(npi = 1760485387, year = "2013")
 
 # Bind the data frames together by row
-mpop_13_20 <- dplyr::bind_rows(mpop20, mpop19, mpop18, mpop17, mpop16, mpop15, mpop14, mpop13)
+mpop_13_20 <- dplyr::bind_rows(mpop20, 
+                               mpop19, 
+                               mpop18, 
+                               mpop17, 
+                               mpop16, 
+                               mpop15, 
+                               mpop14, 
+                               mpop13)
 ```
 
 <br>
@@ -355,166 +359,202 @@ Using packages like {gt} & {ggplot2}, you can create tables and graphs for repor
 
 <summary>Click for Table Code</summary>
 
+
+```{r}
+# First row of data
+mpop_ex_2020_row1 <- mpop_ex_2020 |> dplyr::filter(dplyr::row_number() %in% 1)
+
+# First, last, credentials
+mpop_ex_name_cred <- stringr::str_c(
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_first_name, "both"), " ",
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_last_org_name, "both"), ", ",
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_crdntls, "both"))
+
+# NPI
+mpop_ex_npi <- stringr::str_c(stringr::str_trim(mpop_ex_2020_row1$rndrng_npi, "both"), "")
+
+# Address
+mpop_ex_address <- stringr::str_c(
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_st1, "both"), " ",
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_city, "both"), ", ",
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_state_abrvtn, "both"), " ",
+  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_zip5, "both")
+  )
+```
+
 ``` {r}
 gt_table <- mpop_13_20 |>
   dplyr::select(year,
-                hcpcs = hcpcs_cd,
-                benefits = tot_benes,
-                services = tot_srvcs,
-                avg_bill = avg_sbmtd_chrg,
+                hcpcs     = hcpcs_cd,
+                benefits  = tot_benes,
+                services  = tot_srvcs,
+                avg_bill  = avg_sbmtd_chrg,
                 avg_allow = avg_mdcr_alowd_amt,
-                avg_pay = avg_mdcr_pymt_amt) |> 
+                avg_pay   = avg_mdcr_pymt_amt) |> 
   dplyr::group_by(hcpcs) |> 
   dplyr::summarize(
-    ben_sum = sum(benefits),
-    ben_mean = mean(benefits),
-    ben_med = median(benefits),
-    ben_spark = list(benefits),
-    serv_sum = sum(services),
-    serv_mean = mean(services),
-    serv_med = median(services),
+    ben_sum    = sum(benefits),
+    ben_mean   = mean(benefits),
+    ben_spark  = list(benefits),
+    serv_sum   = sum(services),
+    serv_mean  = mean(services),
     serv_spark = list(services),
-    char_mean = mean(avg_bill),
-    char_med = median(avg_bill),
+    char_sum   = sum(avg_bill),
+    char_mean  = mean(avg_bill),
     char_spark = list(avg_bill),
-    all_mean = mean(avg_allow),
-    all_med = median(avg_allow),
-    all_spark = list(avg_allow),
-    pay_mean = mean(avg_pay),
-    pay_med = median(avg_pay),
-    pay_spark = list(avg_pay),
+    all_sum    = sum(avg_allow),
+    all_mean   = mean(avg_allow),
+    all_spark  = list(avg_allow),
+    pay_sum    = sum(avg_pay),
+    pay_mean   = mean(avg_pay),
+    pay_spark  = list(avg_pay),
     .groups = "drop") |> 
-  dplyr::filter(ben_sum >= 30)
+  dplyr::filter(ben_sum > 22) |> 
+  dplyr::arrange(desc(ben_sum))
+```
 
-gt_table |> 
-  gt::gt(groupname_col = "hcpcs") |> 
+
+``` {r}
+gt_output <- gt_table |> 
+  gt::gt() |> 
   gt::tab_header(
-  title = gt::md("**{provider} Example Medicare Data Report**: 2013 - 2020."), 
+  title = gt::md(paste0(mpop_ex_name_cred, "**Medicare Data Report**: 2013 - 2020.")), 
   subtitle = gt::md(
   "NPI: 1760485387. HCPCS Codes with a beneficiary count *less than 30* have been excluded.")) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gt::tab_options(row_group.as_column = TRUE, 
-                  footnotes.multiline = TRUE) |> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_options(footnotes.multiline = TRUE, 
+                  table.font.size = "16px",
+                  heading.title.font.size = "22px") |> 
   gtExtras::gt_plt_sparkline(ben_spark, 
                              type = "ref_iqr", 
                              fig_dim = c(5, 30), 
                              same_limit = FALSE, 
+                             label = FALSE,
                              palette = c("black", 
                                          "black", 
                                          "blue", 
                                          "green", 
-                                         "red")) |> 
+                                         "blue")) |> 
   gtExtras::gt_plt_sparkline(serv_spark, 
                              type = "ref_iqr", 
                              fig_dim = c(5, 30), 
                              same_limit = FALSE, 
+                             label = FALSE,
                              palette = c("black", 
                                          "black", 
                                          "blue", 
                                          "green", 
-                                         "red")) |> 
+                                         "blue")) |> 
   gtExtras::gt_plt_sparkline(char_spark, 
                              type = "ref_iqr", 
                              fig_dim = c(5, 30), 
                              same_limit = FALSE, 
+                             label = FALSE,
                              palette = c("black", 
                                          "black", 
                                          "blue", 
                                          "green", 
-                                         "red")) |> 
+                                         "orange")) |> 
   gtExtras::gt_plt_sparkline(all_spark, 
                              type = "ref_iqr", 
                              fig_dim = c(5, 30), 
                              same_limit = FALSE, 
+                             label = FALSE,
                              palette = c("black", 
                                          "black", 
                                          "blue", 
                                          "green", 
-                                         "red")) |> 
+                                         "orange")) |> 
   gtExtras::gt_plt_sparkline(pay_spark, 
                              type = "ref_iqr", 
                              fig_dim = c(5, 30), 
                              same_limit = FALSE, 
+                             label = FALSE,
                              palette = c("black", 
                                          "black", 
                                          "blue", 
                                          "green", 
-                                         "red")) |> 
-  gtExtras::gt_add_divider(columns = c("hcpcs", 
-                                       "ben_spark", 
-                                       "serv_spark", 
-                                       "char_spark", 
-                                       "all_spark", 
-                                       "pay_spark"), 
-                           style = "dotted", 
-                           color = "gray") |> 
-  gt::fmt_number(columns = c(ben_mean:ben_med, 
-                             serv_mean:serv_med), 
-                 decimals = 0) |> 
-  gt::fmt_currency(columns = c(char_mean:char_med, 
-                               all_mean:all_med, 
-                               pay_mean:pay_med), 
-                   currency = "USD") |> 
+                                         "orange")) |> 
+  gtExtras::gt_add_divider(columns = "hcpcs", 
+                           style = "solid", 
+                           include_labels = FALSE,
+                           weight = gt::px(3),
+                           color = "gray") |>
+  gt::fmt_number(columns = c(ben_sum:ben_mean, 
+                             serv_sum:serv_mean), 
+                             decimals = 0) |> 
+  gt::fmt_currency(columns = c(char_sum:char_mean, 
+                               all_sum:all_mean, 
+                               pay_sum:pay_mean), 
+                               currency = "USD") |> 
   gt::tab_spanner(label = "Beneficiaries", 
                   id = "ben", 
                   columns = c(ben_sum, 
                               ben_mean, 
-                              ben_med, 
                               ben_spark)) |> 
   gt::tab_spanner(label = "Services", 
                   id = "serv", 
                   columns = c(serv_sum, 
                               serv_mean, 
-                              serv_med, 
                               serv_spark)) |> 
   gt::tab_spanner(label = "Submitted Charge", 
-                  columns = c(char_mean, 
-                              char_med, 
+                  columns = c(char_sum,
+                              char_mean, 
                               char_spark)) |> 
   gt::tab_spanner(label = "Allowed Amount", 
-                  columns = c(all_mean, 
-                              all_med, 
+                  columns = c(all_sum,
+                              all_mean, 
                               all_spark)) |> 
   gt::tab_spanner(label = "Payment", 
-                  columns = c(pay_mean, 
-                              pay_med, 
+                  columns = c(pay_sum,
+                              pay_mean, 
                               pay_spark)) |> 
   gt::cols_label(ben_sum = "Count", 
-                 ben_mean = "Mean", 
-                 ben_med = "Median", 
+                 ben_mean = "Average", 
                  ben_spark = "Trend") |> 
   gt::cols_label(serv_sum = "Count", 
-                 serv_mean = "Mean", 
-                 serv_med = "Median", 
+                 serv_mean = "Average", 
                  serv_spark = "Trend") |> 
-  gt::cols_label(char_mean = "Mean", 
-                 char_med = "Median", 
+  gt::cols_label(char_sum = "Sum",
+                 char_mean = "Average", 
                  char_spark = "Trend") |> 
-  gt::cols_label(all_mean = "Mean", 
-                 all_med = "Median", 
+  gt::cols_label(all_sum = "Sum",
+                 all_mean = "Average", 
                  all_spark = "Trend") |> 
-  gt::cols_label(pay_mean = "Mean", 
-                 pay_med = "Median", 
+  gt::cols_label(pay_sum = "Sum", 
+                 pay_mean = "Average", 
                  pay_spark = "Trend") |> 
   gt::tab_source_note(
-    source_note = gt::md("Data Source: *Physician & Other Practitioners: by Provider and Service* (2013 - 2020). **Medicare.**")) |> 
+    source_note = gt::md("Data Source: **Medicare** Physician & Other Practitioners by Provider and Service, 2013 - 2020.")) |> 
   gt::tab_footnote(
     footnote = gt::md("Number of *distinct* Medicare beneficiaries receiving the service for each HCPCS code."), 
     locations = gt::cells_column_spanners(spanners = "ben")) |> 
   gt::tab_footnote(
-    footnote = gt::md("Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"), 
+    footnote = gt::md("Number of services provided. *Note: The metrics used to count the number provided can vary from service to service.*"),
     locations = gt::cells_column_spanners(spanners = "serv")) |> 
-  gt::opt_table_outline() |> 
-  gt::opt_stylize(style = 1, 
-                  color = "red", 
-                  add_row_striping = TRUE) |> 
-  gtExtras::gt_color_rows(ben_sum) |> 
-  gtExtras::gt_color_rows(serv_sum) |> 
-  gtExtras::gt_color_rows(char_mean) |> 
-  gtExtras::gt_color_rows(all_mean) |> 
-  gtExtras::gt_color_rows(pay_mean)
+  gtExtras::gt_color_rows(columns = ben_sum, 
+                          palette = "RColorBrewer::Blues", pal_type = "continuous", domain = range(gt_table$ben_sum)) |> 
+  gtExtras::gt_color_rows(columns = ben_mean, 
+                          palette = "RColorBrewer::Blues", pal_type = "continuous", domain = range(gt_table$ben_mean)) |> 
+  gtExtras::gt_color_rows(columns = serv_sum, 
+                          palette = "RColorBrewer::Blues", pal_type = "continuous", domain = range(gt_table$serv_sum)) |> 
+  gtExtras::gt_color_rows(columns = serv_mean, 
+                          palette = "RColorBrewer::Blues", pal_type = "continuous", domain = range(gt_table$serv_mean)) |> 
+  gtExtras::gt_color_rows(columns = char_sum, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$char_sum)) |> 
+  gtExtras::gt_color_rows(columns = char_mean, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$char_mean)) |> 
+  gtExtras::gt_color_rows(columns = all_sum, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$all_sum)) |> 
+  gtExtras::gt_color_rows(columns = all_mean, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$all_mean)) |> 
+  gtExtras::gt_color_rows(columns = pay_sum, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$pay_sum)) |> 
+  gtExtras::gt_color_rows(columns = pay_mean, 
+                          palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$pay_mean)) |> 
+  gt::opt_vertical_padding(scale = 1.5)
 
-#gt_table |> gt::gtsave("gt_provider2.png", expand = 20, zoom = 2, vwidth = 1500)
+#gt::gtsave(gt_output, filename = "gt_provider3.png", expand = 20, zoom = 2, vwidth = 1500)
 ```
 
 </details>

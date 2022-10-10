@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `provider` <img src="man/figures/logo.svg" align="right" height="300" />
+# `provider` <img src="man/figures/logo.svg" align="right" height="150" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
@@ -105,14 +105,14 @@ Filter and wrangle the data for presentation:
 
 ```{r echo=FALSE}
 nppes_ex |> 
-  dplyr::select("NPI" = npi, 
-                "Last Name" = last_name,
+  dplyr::select("NPI"           = npi, 
+                "Last Name"     = last_name,
                 "Provider Type" = prov_type, 
-                "Code" = taxon_code, 
-                "Primary" = taxon_primary, 
-                "Description" = taxon_desc, 
-                "State" = taxon_state, 
-                "License" = taxon_license) |> 
+                "Code"          = taxon_code, 
+                "Primary"       = taxon_primary, 
+                "Description"   = taxon_desc, 
+                "State"         = taxon_state, 
+                "License"       = taxon_license) |> 
   dplyr::distinct(Primary, .keep_all = TRUE) |> 
   knitr::kable()
 ```
@@ -125,8 +125,8 @@ What if you don't have the provider's NPI? You can search by first and/or last n
 
 ```{r warning=FALSE}
 nppes_ex2 <- provider_nppes(first = "Paul", 
-                            last = "Dewey",
-                            state_abbr = "MN") |> 
+                            last  = "Dewey",
+                            state = "MN") |> 
                             provider_unpack()
 ```
 
@@ -134,14 +134,14 @@ nppes_ex2 <- provider_nppes(first = "Paul",
 
 ```{r echo=FALSE}
 nppes_ex2 |> 
-  dplyr::select("NPI" = npi, 
-                "Last Name" = last_name,
+  dplyr::select("NPI"           = npi, 
+                "Last Name"     = last_name,
                 "Provider Type" = prov_type, 
-                "Code" = taxon_code, 
-                "Primary" = taxon_primary, 
-                "Description" = taxon_desc, 
-                "State" = taxon_state, 
-                "License" = taxon_license) |> 
+                "Code"          = taxon_code, 
+                "Primary"       = taxon_primary, 
+                "Description"   = taxon_desc, 
+                "State"         = taxon_state, 
+                "License"       = taxon_license) |> 
   dplyr::distinct(Primary, .keep_all = TRUE) |> 
   knitr::kable()
 ```
@@ -159,12 +159,12 @@ mppe_ex <- provider_mppe(1760485387)
 
 ```{r echo=FALSE}
 mppe_ex |> dplyr::select(
-                "NPI" = npi, 
-                "Last Name" = last_name,
-                "PECOS PAC ID" = pecos_asct_cntl_id, 
-                "PECOS Enrollment ID" = enrlmt_id, 
-                "Specialty" = provider_type_desc, 
-                "State" = state_cd) |> 
+                "NPI"             = npi, 
+                "Last Name"       = last_name,
+                "PECOS PAC ID"    = pecos_asct_cntl_id, 
+                "PECOS Enroll ID" = enrlmt_id, 
+                "Specialty"       = provider_type_desc, 
+                "State"           = state_cd) |> 
                 knitr::kable()
 ```
 
@@ -182,13 +182,14 @@ moar_ex <- provider_moar(1760485387)
 
 ```{r echo=FALSE}
 moar_ex |> dplyr::select(
-                "NPI" = npi, 
-                "Last Name" = last_name,
+                "NPI"        = npi, 
+                "Last Name"  = last_name,
                 "First Name" = first_name, 
-                "Part B" = partb, 
-                "DME" = dme,
-                "HHA" = hha, 
-                "PMD" = pmd) |> knitr::kable()
+                "Part B"     = partb, 
+                "DME"        = dme,
+                "HHA"        = hha, 
+                "PMD"        = pmd) |> 
+                knitr::kable()
 ```
 
 <br>
@@ -208,10 +209,10 @@ mpstc_ex <- nppes_ex |>
 
 ```{r echo=FALSE}
 mpstc_ex |> 
-  dplyr::select("Taxonomy Code" = provider_taxonomy_code, 
+  dplyr::select("Taxonomy Code"           = provider_taxonomy_code, 
                 "Medicare Specialty Code" = medicare_specialty_code,
-                "Specialty" = medicare_provider_supplier_type_description, 
-                "Classification" = provider_taxonomy_description_type_classification_specialization) |> 
+                "Specialty"               = medicare_provider_supplier_type_description, 
+                "Classification"          = provider_taxonomy_description_type_classification_specialization) |> 
                 knitr::kable()
 ```
 
@@ -228,15 +229,15 @@ mrdd_ex <- provider_mrdd(1760485387)
 <br>
 
 ```{r echo=FALSE}
-mrdd_ex |> dplyr::select("NPI" = national_provider_identifier, 
-                "Enrollment ID" = enrollment_id,
-                "Enrollment Type" = enrollment_type,
-                "Last Name" = last_name,
-                "State" = enrollment_state_code,
-                "Provider Type" = provider_type_text, 
-                "Specialty" = enrollment_specialty,
-                "Revalidation Due Date" = revalidation_due_date) |> 
-                knitr::kable()
+mrdd_ex |> dplyr::select("NPI"                   = national_provider_identifier, 
+                         "Enrollment ID"         = enrollment_id,
+                         "Enrollment Type"       = enrollment_type,
+                         "Last Name"             = last_name,
+                         "State"                 = enrollment_state_code,
+                         "Provider Type"         = provider_type_text, 
+                         "Specialty"             = enrollment_specialty,
+                         "Revalidation Due Date" = revalidation_due_date) |> 
+                         knitr::kable()
 ```
 
 <br>
@@ -253,8 +254,9 @@ promdci_ex <- provider_promdci(1760485387)
 
 ```{r echo=FALSE}
 promdci_ex |> 
-  dplyr::select("NPI" = npi, "Provider Name" = provider_name) |> 
-  knitr::kable()
+  dplyr::select("NPI"           = npi, 
+                "Provider Name" = provider_name) |> 
+                knitr::kable()
 ```
 <br>
 
@@ -270,22 +272,21 @@ mooa_ex <- provider_mooa(1114974490)
 
 ```{r echo=FALSE}
 mooa_ex |> dplyr::select(
-    NPI = npi,
-    Last = last_name,
-    First = first_name,
-    optout_effective_date,
-    optout_end_date,
-    "Order & Refer Eligible" = eligible_to_order_and_refer,
-    Updated = last_updated,
-    Specialty = specialty,
-    Address = first_line_street_address,
-    City = city_name,
-    State = state_code) |>
-  dplyr::mutate(optout_effective_date = datefixR::fix_date_char(optout_effective_date, format = "mdy"),
-    optout_end_date = datefixR::fix_date_char(optout_end_date, format = "mdy")) |> 
-  provider::age_days(start_date = optout_end_date, end_date = lubridate::today()) |> 
-  dplyr::rename("Opt-Out Begins" = optout_effective_date, "Opt-Out Ends" = optout_end_date) |> 
-  knitr::kable()
+           NPI                            = npi,
+           Last                           = last_name,
+           First                          = first_name,
+           optout_effective_date,
+           optout_end_date,
+           "Order & Refer Eligible"       = eligible_to_order_and_refer,
+           Updated                        = last_updated,
+           Specialty                      = specialty,
+           Address                        = first_line_street_address,
+           City                           = city_name,
+           State                          = state_code) |>
+           provider::days_today(optout_end_date) |> 
+           dplyr::rename("Opt-Out Begins" = optout_effective_date, 
+                         "Opt-Out Ends"   = optout_end_date) |> 
+           knitr::kable()
 ```
 
 <br>
@@ -313,14 +314,14 @@ rcgpr_ex |> dplyr::select("NPI"                                  = individual_np
                           "Due Date Ind"                         = individual_due_date,
                           "Reassignments & Phys Assts"           = group_reassignments_and_physician_assistants,
                           "Employer Associations"                = individual_total_employer_associations) |> 
-  knitr::kable()
+            knitr::kable()
 ```
 
 <br>
 
 Using `provider_mpop()`, you can access **Medicare's Physician & Other Practitioners API**, enabling you to choose between three related datasets: 
 
-   1. by Provider and Service API:
+> 1. by Provider and Service API:
 
 <br>
 
@@ -333,64 +334,60 @@ mpop_serv_ex <- provider_mpop(npi = 1760485387,
 <br>
 
 ```{r echo=FALSE}
-mpop_serv_ex |> dplyr::select(NPI = rndrng_npi,
-                              "Last" = rndrng_prvdr_last_org_name,
-                              City = rndrng_prvdr_city,
-                              State = rndrng_prvdr_state_abrvtn,
-                              PAR = rndrng_prvdr_mdcr_prtcptg_ind,
-                              HCPCS = hcpcs_cd,
-                              "Beneficiaries" = tot_benes,
-                              "Services" = tot_srvcs,
-                              "Avg Billed" = avg_sbmtd_chrg,
-                              "Avg Allowed" = avg_mdcr_alowd_amt,
-                              "Avg Payment" = avg_mdcr_pymt_amt) |>
+mpop_serv_ex |> dplyr::select(NPI             = rndrng_npi,
+                              Last            = rndrng_prvdr_last_org_name,
+                              City            = rndrng_prvdr_city,
+                              State           = rndrng_prvdr_state_abrvtn,
+                              PAR             = rndrng_prvdr_mdcr_prtcptg_ind,
+                              HCPCS           = hcpcs_cd,
+                              Beneficiaries   = tot_benes,
+                              "Services"      = tot_srvcs,
+                              "Avg Billed"    = avg_sbmtd_chrg,
+                              "Avg Allowed"   = avg_mdcr_alowd_amt,
+                              "Avg Payment"   = avg_mdcr_pymt_amt) |>
                               knitr::kable()
 ```
+<br>
 
-   2. by Geography and Service API:
+> 2. by Geography and Service API:
 
 <br>
 
 ```{r}
-mpop_geo_ex1 <- provider_mpop(hcpcs = "99214", 
-                              set = "geo",
-                              year = "2020")
-
-mpop_geo_ex2 <- provider_mpop(hcpcs = "99214", 
-                              set = "geo",
-                              year = "2019")
-
-mpop_geo_99214 <- dplyr::bind_rows(mpop_geo_ex1, mpop_geo_ex2)
+mpop_geo_ex <- provider_mpop(hcpcs = "99214", 
+                             set   = "geo",
+                             year  = "2020")
 ```
 
 <br>
 
 ```{r echo=FALSE}
-mpop_geo_99214 |> dplyr::select(Year = year,
-                             HCPCS = hcpcs_cd,
-                             Level = rndrng_prvdr_geo_lvl,
-                             Region = rndrng_prvdr_geo_desc,
-                             FIPS = rndrng_prvdr_geo_cd,
-                             POS = place_of_srvc,
-                             Providers = tot_rndrng_prvdrs,
-                             Beneficiaries = tot_benes, 
-                             Services = tot_srvcs, 
+mpop_geo_ex |> dplyr::select(Year                                      = year,
+                             HCPCS                                     = hcpcs_cd,
+                             Level                                     = rndrng_prvdr_geo_lvl,
+                             Region                                    = rndrng_prvdr_geo_desc,
+                             FIPS                                      = rndrng_prvdr_geo_cd,
+                             POS                                       = place_of_srvc,
+                             Providers                                 = tot_rndrng_prvdrs,
+                             Beneficiaries                             = tot_benes, 
+                             Services                                  = tot_srvcs, 
                              "Distinct Beneficiaries Per Day Services" = tot_bene_day_srvcs,
-                             "Avg Charge" = avg_sbmtd_chrg, 
-                             "Avg Allowed" = avg_mdcr_alowd_amt, 
-                             "Avg Payment" = avg_mdcr_pymt_amt, 
-                             "Avg Standard Pymt" = avg_mdcr_stdzd_amt) |> knitr::kable()
+                             "Avg Charge"                              = avg_sbmtd_chrg, 
+                             "Avg Allowed"                             = avg_mdcr_alowd_amt, 
+                             "Avg Payment"                             = avg_mdcr_pymt_amt, 
+                             "Avg Standard Pymt"                       = avg_mdcr_stdzd_amt) |> 
+                knitr::kable()
 ```
 
 <br>
 
-   3. by Provider API:
+> 3. by Provider API:
 
 <br>
 
 ```{r}
-mpop_prov_ex <- provider_mpop(npi = 1003000134, 
-                              set = "prov",
+mpop_prov_ex <- provider_mpop(npi  = 1003000134, 
+                              set  = "prov",
                               year = "2020")
 ```
 
@@ -407,7 +404,8 @@ mpop_prov_ex |> lobstr::tree()
 <br>
 
 ```{r}
-clia_ex <- provider_clia(name = "carbon hill", year = "2022")
+clia_ex <- provider_clia(name = "carbon hill", 
+                         year = "2022")
 ```
 
 <br>
@@ -427,6 +425,8 @@ Using packages like {gt} & {ggplot2}, you can create tables and graphs for repor
 ![](man/figures/gt_provider.png){width="100%"}
 
 ![](man/figures/gt_provider2.png){width="100%"}
+
+![](man/figures/gt_provider3.png){width="100%"}
 
 <br>
 <br>

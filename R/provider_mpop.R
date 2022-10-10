@@ -6,7 +6,7 @@
 #'
 #' # Medicare Physician & Other Practitioners APIs
 #'
-#' `provider_mpop` allows you to access data from three different APIs.
+#' [provider_mpop()] allows you to access data from three different APIs.
 #' These APIs contain three interrelated sets of data:
 #'
 #' ## by Provider and Service
@@ -43,6 +43,11 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#'  * [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+#'  * [Medicare Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
+#'  * [Medicare Physician & Other Practitioners: by Provider API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name
 #' @param first Provider's first name
@@ -52,15 +57,10 @@
 #' @param year Year between 2013-2020, in YYYY format
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
-#' @param full If true, downloads the first 1000 rows of data;
+#' @param full If `TRUE`, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}
-#'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service}
-#'    \url{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}
 #'
 #' @examples
 #' \dontrun{
@@ -216,24 +216,104 @@ provider_mpop <- function(npi = NULL,
   # Empty List - NPI is not in the database
   if (isTRUE(insight::is_empty_object(results))) {
 
-    message("NPI is not in database")
+    if (!is.null(npi)) {message(paste(npi, "is not in database"))}
 
   } else {
 
-  # Convert to numeric & round averages up
-  # results <- results |>
-  #   dplyr::mutate(
-  #     Tot_Benes = as.numeric(Tot_Benes),
-  #     Tot_Srvcs = as.numeric(Tot_Srvcs),
-  #     Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
-  #     Avg_Sbmtd_Chrg = janitor::round_half_up(
-  #       as.numeric(Avg_Sbmtd_Chrg), digits = 2),
-  #     Avg_Mdcr_Alowd_Amt = janitor::round_half_up(
-  #       as.numeric(Avg_Mdcr_Alowd_Amt), digits = 2),
-  #     Avg_Mdcr_Pymt_Amt = janitor::round_half_up(
-  #       as.numeric(Avg_Mdcr_Pymt_Amt), digits = 2),
-  #     Avg_Mdcr_Stdzd_Amt = janitor::round_half_up(
-  #       as.numeric(Avg_Mdcr_Stdzd_Amt), digits = 2))
+  # Convert to numeric
+
+    if (set == "serv") {
+
+      results <- results |>
+        dplyr::mutate(
+          Tot_Benes          = as.numeric(Tot_Benes),
+          Tot_Srvcs          = as.numeric(Tot_Srvcs),
+          Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
+          Avg_Sbmtd_Chrg     = as.numeric(Avg_Sbmtd_Chrg),
+          Avg_Mdcr_Alowd_Amt = as.numeric(Avg_Mdcr_Alowd_Amt),
+          Avg_Mdcr_Pymt_Amt  = as.numeric(Avg_Mdcr_Pymt_Amt),
+          Avg_Mdcr_Stdzd_Amt = as.numeric(Avg_Mdcr_Stdzd_Amt))
+
+    }
+
+    if (set == "geo") {
+
+      results <- results |>
+        dplyr::mutate(
+          Tot_Rndrng_Prvdrs  = as.numeric(Tot_Rndrng_Prvdrs),
+          Tot_Benes          = as.numeric(Tot_Benes),
+          Tot_Srvcs          = as.numeric(Tot_Srvcs),
+          Tot_Bene_Day_Srvcs = as.numeric(Tot_Bene_Day_Srvcs),
+          Avg_Sbmtd_Chrg     = as.numeric(Avg_Sbmtd_Chrg),
+          Avg_Mdcr_Alowd_Amt = as.numeric(Avg_Mdcr_Alowd_Amt),
+          Avg_Mdcr_Pymt_Amt  = as.numeric(Avg_Mdcr_Pymt_Amt),
+          Avg_Mdcr_Stdzd_Amt = as.numeric(Avg_Mdcr_Stdzd_Amt))
+
+    }
+
+    if (set == "prov") {
+
+      results <- results |>
+        dplyr::mutate(
+          Tot_HCPCS_Cds           = as.numeric(Tot_HCPCS_Cds),
+          Tot_Benes               = as.numeric(Tot_Benes),
+          Tot_Srvcs               = as.numeric(Tot_Srvcs),
+          Tot_Sbmtd_Chrg          = as.numeric(Tot_Sbmtd_Chrg),
+          Tot_Mdcr_Alowd_Amt      = as.numeric(Tot_Mdcr_Alowd_Amt),
+          Tot_Mdcr_Pymt_Amt       = as.numeric(Tot_Mdcr_Pymt_Amt),
+          Tot_Mdcr_Stdzd_Amt      = as.numeric(Tot_Mdcr_Stdzd_Amt),
+
+          Drug_Tot_HCPCS_Cds      = as.numeric(Drug_Tot_HCPCS_Cds),
+          Drug_Tot_Benes          = as.numeric(Drug_Tot_Benes),
+          Drug_Tot_Srvcs          = as.numeric(Drug_Tot_Srvcs),
+          Drug_Sbmtd_Chrg         = as.numeric(Drug_Sbmtd_Chrg),
+          Drug_Mdcr_Alowd_Amt     = as.numeric(Drug_Mdcr_Alowd_Amt),
+          Drug_Mdcr_Pymt_Amt      = as.numeric(Drug_Mdcr_Pymt_Amt),
+          Drug_Mdcr_Stdzd_Amt     = as.numeric(Drug_Mdcr_Stdzd_Amt),
+
+          Med_Tot_HCPCS_Cds       = as.numeric(Med_Tot_HCPCS_Cds),
+          Med_Tot_Benes           = as.numeric(Med_Tot_Benes),
+          Med_Tot_Srvcs           = as.numeric(Med_Tot_Srvcs),
+          Med_Sbmtd_Chrg          = as.numeric(Med_Sbmtd_Chrg),
+          Med_Mdcr_Alowd_Amt      = as.numeric(Med_Mdcr_Alowd_Amt),
+          Med_Mdcr_Pymt_Amt       = as.numeric(Med_Mdcr_Pymt_Amt),
+          Med_Mdcr_Stdzd_Amt      = as.numeric(Med_Mdcr_Stdzd_Amt),
+
+          Bene_Avg_Age            = as.numeric(Bene_Avg_Age),
+          Bene_Age_LT_65_Cnt      = as.numeric(Bene_Age_LT_65_Cnt),
+          Bene_Age_65_74_Cnt      = as.numeric(Bene_Age_65_74_Cnt),
+          Bene_Age_75_84_Cnt      = as.numeric(Bene_Age_75_84_Cnt),
+          Bene_Age_GT_84_Cnt      = as.numeric(Bene_Age_GT_84_Cnt),
+          Bene_Feml_Cnt           = as.numeric(Bene_Feml_Cnt),
+          Bene_Male_Cnt           = as.numeric(Bene_Male_Cnt),
+          Bene_Race_Wht_Cnt       = as.numeric(Bene_Race_Wht_Cnt),
+          Bene_Race_Black_Cnt     = as.numeric(Bene_Race_Black_Cnt),
+          Bene_Race_API_Cnt       = as.numeric(Bene_Race_API_Cnt),
+          Bene_Race_Hspnc_Cnt     = as.numeric(Bene_Race_Hspnc_Cnt),
+          Bene_Race_NatInd_Cnt    = as.numeric(Bene_Race_NatInd_Cnt),
+          Bene_Race_Othr_Cnt      = as.numeric(Bene_Race_Othr_Cnt),
+          Bene_Dual_Cnt           = as.numeric(Bene_Dual_Cnt),
+          Bene_Ndual_Cnt          = as.numeric(Bene_Ndual_Cnt),
+
+          Bene_CC_AF_Pct          = as.numeric(Bene_CC_AF_Pct),
+          Bene_CC_Alzhmr_Pct      = as.numeric(Bene_CC_Alzhmr_Pct),
+          Bene_CC_Asthma_Pct      = as.numeric(Bene_CC_Asthma_Pct),
+          Bene_CC_Cncr_Pct        = as.numeric(Bene_CC_Cncr_Pct),
+          Bene_CC_CHF_Pct         = as.numeric(Bene_CC_CHF_Pct),
+          Bene_CC_CKD_Pct         = as.numeric(Bene_CC_CKD_Pct),
+          Bene_CC_COPD_Pct        = as.numeric(Bene_CC_COPD_Pct),
+          Bene_CC_Dprssn_Pct      = as.numeric(Bene_CC_Dprssn_Pct),
+          Bene_CC_Dbts_Pct        = as.numeric(Bene_CC_Dbts_Pct),
+          Bene_CC_Hyplpdma_Pct    = as.numeric(Bene_CC_Hyplpdma_Pct),
+          Bene_CC_Hyprtnsn_Pct    = as.numeric(Bene_CC_Hyprtnsn_Pct),
+          Bene_CC_IHD_Pct         = as.numeric(Bene_CC_IHD_Pct),
+          Bene_CC_Opo_Pct         = as.numeric(Bene_CC_Opo_Pct),
+          Bene_CC_RAOA_Pct        = as.numeric(Bene_CC_RAOA_Pct),
+          Bene_CC_Sz_Pct          = as.numeric(Bene_CC_Sz_Pct),
+          Bene_CC_Strok_Pct       = as.numeric(Bene_CC_Strok_Pct),
+          Bene_Avg_Risk_Scre      = as.numeric(Bene_Avg_Risk_Scre)
+          )
+    }
 
   # Add year to data frame & relocate to beginning
   results <- results |>
