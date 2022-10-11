@@ -8289,12 +8289,12 @@ UPMC
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">07:43:51</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-11 <span style="color: #949494;">07:43:54</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-11 <span style="color: #949494;">07:43:56</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-11 <span style="color: #949494;">07:43:58</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2022-10-11 <span style="color: #949494;">07:44:01</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2022-10-11 <span style="color: #949494;">07:44:03</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">17:58:35</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-11 <span style="color: #949494;">17:58:36</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-11 <span style="color: #949494;">17:58:38</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-11 <span style="color: #949494;">17:58:38</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2022-10-11 <span style="color: #949494;">17:58:39</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2022-10-11 <span style="color: #949494;">17:58:40</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -11755,30 +11755,20 @@ Internal Medicine
 </table>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mrdd</span><span class="op">)</span></span>
-<span><span class="co">#&gt;     enrollment_id national_provider_identifier  first_name last_name</span></span>
-<span><span class="co">#&gt; 1 I20170403002190                   1003026055     Radhika    Phadke</span></span>
-<span><span class="co">#&gt; 2 I20160809001931                   1720392988     Mustafa      Abas</span></span>
-<span><span class="co">#&gt; 3 I20121210000081                   1518184605      Daniel     Aaron</span></span>
-<span><span class="co">#&gt; 4 I20041201001052                   1922056829     Cynthia     Aaron</span></span>
-<span><span class="co">#&gt; 5 I20200617001010                   1083879860 Christopher     Aaron</span></span>
-<span><span class="co">#&gt;   organization_name enrollment_state_code enrollment_type provider_type_text</span></span>
-<span><span class="co">#&gt; 1                                      FL               3     Non-DME Part B</span></span>
-<span><span class="co">#&gt; 2                                      OH               3     Non-DME Part B</span></span>
-<span><span class="co">#&gt; 3                                      MA               3     Non-DME Part B</span></span>
-<span><span class="co">#&gt; 4                                      MI               3     Non-DME Part B</span></span>
-<span><span class="co">#&gt; 5                                      PA               3     Non-DME Part B</span></span>
-<span><span class="co">#&gt;   enrollment_specialty revalidation_due_date adjusted_due_date</span></span>
-<span><span class="co">#&gt; 1        Endocrinology                                        </span></span>
-<span><span class="co">#&gt; 2    Pulmonary Disease                                        </span></span>
-<span><span class="co">#&gt; 3   Orthopedic Surgery                                        </span></span>
-<span><span class="co">#&gt; 4   Emergency Medicine                                        </span></span>
-<span><span class="co">#&gt; 5      Family Practice                                        </span></span>
-<span><span class="co">#&gt;   individual_total_reassign_to receiving_benefits_reassignment</span></span>
-<span><span class="co">#&gt; 1                                                            1</span></span>
-<span><span class="co">#&gt; 2                                                            1</span></span>
-<span><span class="co">#&gt; 3                                                            3</span></span>
-<span><span class="co">#&gt; 4                                                            2</span></span>
-<span><span class="co">#&gt; 5                                                            1</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 13</span></span></span>
+<span><span class="co">#&gt;   enrollment_id  natio…¹ first…² last_…³ organ…⁴ enrol…⁵ enrol…⁶ provi…⁷ enrol…⁸</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> I201704030021… 100302… Radhika Phadke  <span style="color: #949494;">""</span>      FL      3       Non-DM… Endocr…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> I201608090019… 172039… Mustafa Abas    <span style="color: #949494;">""</span>      OH      3       Non-DM… Pulmon…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> I201212100000… 151818… Daniel  Aaron   <span style="color: #949494;">""</span>      MA      3       Non-DM… Orthop…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> I200412010010… 192205… Cynthia Aaron   <span style="color: #949494;">""</span>      MI      3       Non-DM… Emerge…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> I202006170010… 108387… Christ… Aaron   <span style="color: #949494;">""</span>      PA      3       Non-DM… Family…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: revalidation_due_date &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   adjusted_due_date &lt;chr&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   receiving_benefits_reassignment &lt;chr&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​national_provider_identifier, ²​first_name, ³​last_name, ⁴​organization_name,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​enrollment_state_code, ⁶​enrollment_type, ⁷​provider_type_text,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁸​enrollment_specialty</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
