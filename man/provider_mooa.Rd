@@ -37,6 +37,12 @@ Quarterly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}{Medicare Opt Out Affidavits API}
+}
+}
 }
 
 \examples{
@@ -48,7 +54,4 @@ provider_mooa(npi = 1114974490)
 provider_mooa(last = "Altchek")
 }
 
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}
 }

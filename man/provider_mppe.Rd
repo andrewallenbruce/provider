@@ -61,6 +61,14 @@ Quarterly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Medicare Fee-For-Service Public Provider Enrollment API}
+\item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Medicare Fee-For-Service Public Provider Enrollment Data Dictionary}
+\item \href{https://pecos.cms.hhs.gov/pecos}{Provider Enrollment and Chain Ownership System Site}
+}
+}
 }
 
 \examples{
@@ -95,9 +103,4 @@ purrr::map_dfr(provider_mppe)
 # Download First 1,000 Rows of Dataset =====================================
 provider_mppe(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}
-\url{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}
-\url{https://pecos.cms.hhs.gov/pecos}
 }

@@ -19,6 +19,9 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#'  * [Medicare Revalidation Clinic Group Practice Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Last name of provider who is reassigning their
 #'    benefits or is an employee
@@ -30,9 +33,6 @@
 #'    default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment}
 #'
 #' @examples
 #' \dontrun{

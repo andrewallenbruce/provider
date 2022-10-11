@@ -16,6 +16,16 @@
 #' All information produced by the NPI Registry is provided in accordance with
 #' the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 #'
+#' ## Data Update Frequency
+#' Weekly
+#'
+#' ## Data Source
+#' Centers for Medicare & Medicaid Services
+#'
+#' ## Links
+#' * [NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/api-page)
+#' * [NPPES NPI Registry Search](https://npiregistry.cms.hhs.gov/search)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI).
 #' @param first Provider's first name. Applies to
 #'    **Individual Providers (NPI-1)** only. Trailing wildcard entries are
@@ -63,10 +73,6 @@
 #'
 #' @return A [tibble()] containing the date-time the search was performed
 #'    and a list-column of the results.
-#'
-#' @references
-#'    \url{https://npiregistry.cms.hhs.gov/api-page}
-#'    \url{https://npiregistry.cms.hhs.gov/search}
 #'
 #' @seealso [provider_unpack()], [provider_luhn()]
 #'

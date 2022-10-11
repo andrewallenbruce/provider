@@ -41,9 +41,10 @@ following columns:
 }
 }
 \description{
-A dataset that provides information on clinical
-laboratories including demographics and the type of testing
-services the facility provides.
+\code{\link[=provider_clia]{provider_clia()}} allows access to a dataset that
+provides information on clinical laboratories including
+demographics and the type of testing services the facility
+provides.
 }
 \section{Medicare Provider of Services File - Clinical Laboratories API}{
 The Provider of Services (POS) Clinical Laboratories (CLIA) data
@@ -62,6 +63,13 @@ Quarterly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Medicare Provider of Services File - Clinical Laboratories API}
+\item \href{https://data.cms.gov/sites/default/files/2020-12/POS_CLIA_LAYOUT_SEP20.pdf}{Data Dictionary}
+}
+}
 }
 
 \examples{
@@ -73,8 +81,4 @@ provider_clia(city = "alabaster")
 # Download First 1,000 Rows of Dataset =====================================
 provider_clia(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}
-\url{https://data.cms.gov/sites/default/files/2020-12/POS_CLIA_LAYOUT_SEP20.pdf}
 }

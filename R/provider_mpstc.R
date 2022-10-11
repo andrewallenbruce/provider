@@ -20,6 +20,11 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#' * [Medicare Provider and Supplier Taxonomy Crosswalk API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+#' * [Medicare Find Your Taxonomy Code](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code)
+#' * [National Uniform Claim Committee: Taxonomies](https://taxonomy.nucc.org/)
+#'
 #' # NUCC Taxonomy Codes
 #'
 #' The Healthcare Provider Taxonomy codes are a HIPAA standard code
@@ -46,12 +51,6 @@
 #'    default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}
-#'    \url{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}
-#'    \url{https://taxonomy.nucc.org/}
-#'
 #'
 #' @examples
 #' \dontrun{

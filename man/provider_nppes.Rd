@@ -89,6 +89,22 @@ provider’s name, taxonomy and practice address. It enables you to search
 for providers in the NPPES (National Plan and Provider Enumeration System.)
 All information produced by the NPI Registry is provided in accordance with
 the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+\subsection{Data Update Frequency}{
+
+Weekly
+}
+
+\subsection{Data Source}{
+
+Centers for Medicare & Medicaid Services
+}
+
+\subsection{Links}{
+\itemize{
+\item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES National Provider Identifier (NPI) Registry API}
+\item \href{https://npiregistry.cms.hhs.gov/search}{NPPES NPI Registry Search}
+}
+}
 }
 
 \examples{
@@ -132,10 +148,6 @@ npi_df |>
 tibble::deframe() |>
 purrr::map_dfr(provider_nppes)
 }
-}
-\references{
-\url{https://npiregistry.cms.hhs.gov/api-page}
-\url{https://npiregistry.cms.hhs.gov/search}
 }
 \seealso{
 \code{\link[=provider_unpack]{provider_unpack()}}, \code{\link[=provider_luhn]{provider_luhn()}}

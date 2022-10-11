@@ -39,9 +39,6 @@ provider_nppes(first = "John",
 provider_unpack()
 }
 }
-\references{
-\url{https://npiregistry.cms.hhs.gov/api-page}
-}
 \seealso{
 \code{\link[=provider_nppes]{provider_nppes()}}
 }

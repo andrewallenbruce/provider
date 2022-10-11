@@ -10,9 +10,6 @@
 #' @return A [tibble()] containing the unpacked list-columns of a search
 #' performed with the [provider_nppes()] function.
 #'
-#' @references
-#'    \url{https://npiregistry.cms.hhs.gov/api-page}
-#'
 #' @seealso [provider_nppes()]
 #'
 #' @examples

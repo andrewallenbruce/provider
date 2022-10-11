@@ -43,6 +43,14 @@ Weekly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Medicare Provider and Supplier Taxonomy Crosswalk API}
+\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}{Medicare Find Your Taxonomy Code}
+\item \href{https://taxonomy.nucc.org/}{National Uniform Claim Committee: Taxonomies}
+}
+}
 }
 
 \section{NUCC Taxonomy Codes}{
@@ -86,9 +94,4 @@ npi_list |> purrr::map_dfr(provider_nppes) |>
 # Download First 1,000 Rows of Dataset =====================================
 provider_mpstc(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}
-\url{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}
-\url{https://taxonomy.nucc.org/}
 }

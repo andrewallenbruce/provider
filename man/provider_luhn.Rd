@@ -88,6 +88,13 @@ plus unaffected digits:
 
 The check digit equals \strong{3}, thus the NPI with check digit is 123456789\strong{3}.
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://en.wikipedia.org/wiki/Luhn_algorithm}{The Luhn Algorithm}
+\item \href{https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf}{CMS NPI Standard}
+}
+}
 }
 
 \examples{
@@ -108,9 +115,4 @@ provider_luhn(npi = 123456789)
 provider_luhn(npi = abcdefghij)
 provider_luhn(npi = "abcdefghij")
 }
-}
-\references{
-\url{https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf}
-\url{https://en.wikipedia.org/wiki/Luhn_algorithm}
-\url{https://npiregistry.cms.hhs.gov/api-page}
 }

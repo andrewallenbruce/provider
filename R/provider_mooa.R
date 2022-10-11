@@ -16,6 +16,9 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#' * [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name
 #' @param first Provider's first name
@@ -23,10 +26,6 @@
 #'    `clean_names()` function; default is `TRUE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#'
-#'@references
-#'    \url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}
 #'
 #' @examples
 #' \dontrun{

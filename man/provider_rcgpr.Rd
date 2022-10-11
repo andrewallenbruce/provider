@@ -51,6 +51,12 @@ Monthly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment}{Medicare Revalidation Clinic Group Practice Reassignment API}
+}
+}
 }
 
 \examples{
@@ -83,7 +89,4 @@ purrr::map_dfr(provider_rcgpr)
 # Download First 1,000 Rows of Dataset =====================================
 provider_rcgpr(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment}
 }

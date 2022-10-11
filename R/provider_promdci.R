@@ -20,6 +20,9 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#' * [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name
 #' @param first Provider's first name
@@ -29,9 +32,6 @@
 #'    default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information}
 #'
 #' @examples
 #' \dontrun{

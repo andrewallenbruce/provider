@@ -34,10 +34,9 @@ eligible to order and refer in the Medicare program and who have current
 enrollment records in Medicare.
 }
 \section{Medicare Order and Referring API}{
-The Order and Referring dataset provides
-information on all physicians and non-physician practitioners,
-by their National Provider Identifier (NPI), who are of a
-type/specialty that is legally eligible to order and refer in
+The Order and Referring dataset provides information on all physicians and
+non-physician practitioners, by their National Provider Identifier (NPI),
+who are of a type/specialty that is legally eligible to order and refer in
 the Medicare program and who have current enrollment records in Medicare.
 \subsection{Data Update Frequency}{
 
@@ -47,6 +46,12 @@ Weekly
 \subsection{Data Source}{
 
 Centers for Medicare & Medicaid Services
+}
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
+}
 }
 }
 
@@ -80,7 +85,4 @@ purrr::map_dfr(provider_moar)
 # Download First 1,000 Rows of Dataset =====================================
 provider_moar(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}
 }

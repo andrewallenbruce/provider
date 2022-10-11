@@ -48,6 +48,12 @@ Monthly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}{Medicare Revalidation Due Date API}
+}
+}
 }
 
 \examples{
@@ -69,7 +75,4 @@ npi_list |> purrr::map_dfr(provider_mrdd)
 # Download Entire Dataset =================================================
 provider_mrdd(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}
 }

@@ -32,9 +32,9 @@ APIs are:
     API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 -   [Medicare Order and Referring
     API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
--   [Medicare Provider and Supplier Taxonomy
-    Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
--   [Medicare Physician & Other Practitioners - by Provider and Service
+-   [Medicare Provider and Supplier Taxonomy Crosswalk
+    API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+-   [Medicare Physician & Other Practitioners
     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
 -   [Medicare Revalidation Due Date
     API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
@@ -42,10 +42,14 @@ APIs are:
     API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
 -   [Medicare Opt Out Affidavits
     API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
--   [Medicare Market Saturation & Utilization
-    State-County](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
+-   [Medicare Market Saturation & Utilization State-County
+    API](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
+-   [Medicare Provider of Services File - Clinical Laboratories
+    API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 -   [CMS Public Reporting of Missing Digital Contact Information
     API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+-   [NIH NLM Clinical Table Service ICD-10-CM
+    API](https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html)
 
 <br>
 
@@ -88,7 +92,7 @@ nppes_ex <- provider_nppes(npi = 1760485387)
     #> # A tibble: 1 × 3
     #>   datetime            outcome data_lists   
     #>   <dttm>              <chr>   <list>       
-    #> 1 2022-10-09 20:35:28 results <df [1 × 11]>
+    #> 1 2022-10-11 03:25:58 results <df [1 × 11]>
 
 <br>
 
@@ -277,7 +281,7 @@ mooa_ex <- provider_mooa(1114974490)
 
 | NPI        | Last    | First | Opt-Out Begins | Opt-Out Ends | Order & Refer Eligible | Updated    | Specialty          | Address          | City     | State | days |
 |:-----------|:--------|:------|:---------------|:-------------|:-----------------------|:-----------|:-------------------|:-----------------|:---------|:------|-----:|
-| 1114974490 | Altchek | David | 07/01/2012     | 07/01/2024   | Y                      | 08/15/2022 | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |  631 |
+| 1114974490 | Altchek | David | 07/01/2012     | 07/01/2024   | Y                      | 08/15/2022 | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |  629 |
 
 <br>
 

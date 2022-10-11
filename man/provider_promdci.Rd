@@ -50,6 +50,12 @@ Quarterly
 
 Centers for Medicare & Medicaid Services
 }
+
+\subsection{Links}{
+\itemize{
+\item \href{https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information}{CMS Public Reporting of Missing Digital Contact Information API}
+}
+}
 }
 
 \examples{
@@ -71,7 +77,4 @@ npi_list |> purrr::map_dfr(provider_promdci)
 # Returns the First 1,000 Rows in the Dataset ============================
 provider_promdci(full = TRUE)
 }
-}
-\references{
-\url{https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information}
 }

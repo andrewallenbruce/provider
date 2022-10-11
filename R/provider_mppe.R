@@ -28,6 +28,11 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#' * [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+#' * [Medicare Fee-For-Service Public Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
+#' * [Provider Enrollment and Chain Ownership System Site](https://pecos.cms.hhs.gov/pecos)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI).
 #' @param last Provider's last name
 #' @param first Provider's first name
@@ -38,12 +43,6 @@
 #'    default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#'
-#' @references
-#'   \url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}
-#'   \url{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}
-#'   \url{https://pecos.cms.hhs.gov/pecos}
 #'
 #' @examples
 #' \dontrun{

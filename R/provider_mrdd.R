@@ -19,6 +19,9 @@
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
 #'
+#' ## Links
+#' * [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name
 #' @param first Provider's first name
@@ -27,9 +30,6 @@
 #' @param full If `TRUE`, downloads the entire dataset; default is `FALSE`.
 #'
 #' @return A [tibble()] containing the search results.
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}
 #'
 #' @examples
 #' \dontrun{

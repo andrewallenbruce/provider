@@ -1,8 +1,9 @@
 #' Search the Medicare Provider of Services File - Clinical Laboratories API
 #'
-#' @description A dataset that provides information on clinical
-#'    laboratories including demographics and the type of testing
-#'    services the facility provides.
+#' @description [provider_clia()] allows access to a dataset that
+#'    provides information on clinical laboratories including
+#'    demographics and the type of testing services the facility
+#'    provides.
 #'
 #' # Medicare Provider of Services File - Clinical Laboratories API
 #'
@@ -19,6 +20,10 @@
 #'
 #' ## Data Source
 #' Centers for Medicare & Medicaid Services
+#'
+#' ## Links
+#'  * [Medicare Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+#'  * [Data Dictionary](https://data.cms.gov/sites/default/files/2020-12/POS_CLIA_LAYOUT_SEP20.pdf)
 #'
 #' @param name Name of the provider certified to participate in the Medicare
 #'    and/or Medicaid programs.
@@ -39,10 +44,6 @@
 #'    \item{chow_dt}{Effective date of the most recent change of ownership for this provider.}
 #'    \item{city_name}{City in which the provider is physically located.}
 #'    }
-#'
-#' @references
-#'    \url{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}
-#'    \url{https://data.cms.gov/sites/default/files/2020-12/POS_CLIA_LAYOUT_SEP20.pdf}
 #'
 #' @examples
 #' \dontrun{

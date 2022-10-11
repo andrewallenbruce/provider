@@ -76,14 +76,13 @@
 #'
 #' The check digit equals **3**, thus the NPI with check digit is 123456789**3**.
 #'
+#' ## Links
+#'  * [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+#'  * [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
+#'
 #' @param npi 10-digit National Provider Identifier (NPI).
 #'
 #' @return boolean, `TRUE` or `FALSE`
-#'
-#'@references
-#'    \url{https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf}
-#'    \url{https://en.wikipedia.org/wiki/Luhn_algorithm}
-#'    \url{https://npiregistry.cms.hhs.gov/api-page}
 #'
 #' @examples
 #' # Valid NPI:
