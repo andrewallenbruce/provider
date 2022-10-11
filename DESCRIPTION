@@ -27,6 +27,7 @@ Imports:
     tibble,
     tidyr
 Suggests: 
+    covr,
     datefixR,
     glue,
     gt,

@@ -4,7 +4,7 @@
 \alias{provider_icd10}
 \title{Search the National Library of Medicine's ICD-10-CM API}
 \usage{
-provider_icd10(code = NULL, term = NULL, field = "both", limit = 500)
+provider_icd10(code = NULL, term = NULL, field = "both", limit = 10)
 }
 \arguments{
 \item{code}{All or part of an ICD-10-CM code}
@@ -13,16 +13,16 @@ provider_icd10(code = NULL, term = NULL, field = "both", limit = 500)
 
 \item{field}{options are "code" or "both"; default is "both"}
 
-\item{limit}{default is 700}
+\item{limit}{API limit is 500; defaults to 10}
 }
 \value{
 A \code{\link[=tibble]{tibble()}} containing the search results.
 }
 \description{
-\link{provider_icd10} allows you to search the NLM's ICD-10-CM
+\code{\link[=provider_icd10]{provider_icd10()}} allows you to search the NLM's ICD-10-CM
 API by code or associated term.
 }
-\section{The NIH's Clinical Table Search Service API for ICD-10-CM}{
+\section{NLM's Clinical Table Search Service ICD-10-CM API}{
 ICD-10-CM (International Classification of Diseases, 10th Revision,
 Clinical Modification) is a medical coding system for classifying
 diagnoses and reasons for visits in U.S. health care settings.
@@ -45,22 +45,25 @@ National Institute of Health/National Library of Medicine
 }
 
 \examples{
-# Returns the seven ICD-10-CM codes beginning with "A15".
-provider_icd10(code = "A15", limit = 10)
+# Returns the seven codes beginning with "A15"
 
-# Returns the first 20 ICD-10-CM codes associated with tuberculosis.
+provider_icd10(code = "A15")
+
+# Returns the first 20 codes associated with tuberculosis
+
 provider_icd10(term = "tuber", limit = 20)
 
-# Returns the two ICD-10-CM codes associated with pleurisy.
+# Returns the two codes associated with pleurisy
+
 provider_icd10(term = "pleurisy")
 
-# Returns first 500 "Z" codes (Z00.00 - Z46.9)
+# If you're searching for codes beginning with a certain letter, you
+# must set the `field` param to "code" or it will search for terms as well:
+
+# Returns terms containing the letter "Z"
+
+provider_icd10(code = "z")
+
+# Returns codes beginning with "Z"
 provider_icd10(code = "z", field = "code")
-
-# Must specify `field` as "code" or it will search term, for example:
-# Returns codes with the letter "Z" in their associated term
-provider_icd10(code = "z", limit = 10)
-
-# Returns the 95 codes beginning with "Z5-"
-provider_icd10(code = "z5")
 }

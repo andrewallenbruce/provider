@@ -16,6 +16,8 @@ MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.
 size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last
 commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
+[![Codecov test
+coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 <!-- badges: end -->
 
 The goal of `provider` is to provide performant and reliable open-source
@@ -92,7 +94,7 @@ nppes_ex <- provider_nppes(npi = 1760485387)
     #> # A tibble: 1 × 3
     #>   datetime            outcome data_lists   
     #>   <dttm>              <chr>   <list>       
-    #> 1 2022-10-11 03:25:58 results <df [1 × 11]>
+    #> 1 2022-10-11 10:43:59 results <df [1 × 11]>
 
 <br>
 

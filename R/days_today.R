@@ -14,6 +14,8 @@
 #'                        "2020-05-01",
 #'                        "02-04-96"))
 #'
+#' days_today(df = ex, date = x, name = days)
+#'
 #' ex |> days_today(x)
 #' @export
 

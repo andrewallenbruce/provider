@@ -32,12 +32,13 @@
 #' @return A [tibble()] containing the search results.
 #'
 #' @examples
-#' \dontrun{
 #' provider_mrdd(npi = 1184699621)
 #'
 #' provider_mrdd(last = "Byrd", first = "Eric")
 #'
+#' \dontrun{
 #' # Unnamed List of NPIs
+#'
 #' npi_list <- c(1003026055,
 #'               1316405939,
 #'               1720392988,
@@ -47,7 +48,8 @@
 #'
 #' npi_list |> purrr::map_dfr(provider_mrdd)
 #'
-#' # Download Entire Dataset =================================================
+#' # Download First 1,000 Records
+#'
 #' provider_mrdd(full = TRUE)
 #' }
 #' @export
@@ -118,6 +120,9 @@ provider_mrdd <- function(npi = NULL,
   results <- resp |> httr2::resp_body_json(
     check_type = FALSE,
     simplifyVector = TRUE)
+
+  # Convert to tibble
+  results <- results |> tibble::tibble()
 
   # Empty List - NPI is not in the database
   if (isTRUE(insight::is_empty_object(results))) {

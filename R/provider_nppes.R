@@ -158,18 +158,10 @@ provider_nppes <- function(npi = NULL,
   country <- stringr::str_to_upper(country)
 
   # NPPES Base URL
-  nppes_base_url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
-
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
+  nppes_url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
 
   # Create request
-  req <- polite_req(nppes_base_url) |>
-    httr2::req_cache(tempdir())
-
+  req <- httr2::request(nppes_url)
 
   # Send and save response
   resp <- req |>

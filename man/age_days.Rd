@@ -4,14 +4,14 @@
 \alias{age_days}
 \title{Calculate Number of Days Between Two Dates}
 \usage{
-age_days(df, start_date = start_date, end_date = end_date)
+age_days(df, start, end)
 }
 \arguments{
 \item{df}{data frame containing two date columns}
 
-\item{start_date}{column containing date(s) prior to end_date column}
+\item{start}{column containing date(s) prior to end_date column}
 
-\item{end_date}{column containing date(s) after start_date column}
+\item{end}{column containing date(s) after start_date column}
 }
 \value{
 data frame with an age column containing the number of days
@@ -25,6 +25,8 @@ date_ex <- data.frame(x = seq.Date(as.Date("2021-01-01"),
                     by = "month", length.out = 3),
                     y = seq.Date(as.Date("2022-01-01"),
                     by = "month", length.out = 3))
+
+age_days(df = date_ex, start = x, end = y)
 
 date_ex |> age_days(x, y)
 }

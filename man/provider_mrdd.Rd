@@ -57,12 +57,13 @@ Centers for Medicare & Medicaid Services
 }
 
 \examples{
-\dontrun{
 provider_mrdd(npi = 1184699621)
 
 provider_mrdd(last = "Byrd", first = "Eric")
 
+\dontrun{
 # Unnamed List of NPIs
+
 npi_list <- c(1003026055,
               1316405939,
               1720392988,
@@ -72,7 +73,8 @@ npi_list <- c(1003026055,
 
 npi_list |> purrr::map_dfr(provider_mrdd)
 
-# Download Entire Dataset =================================================
+# Download First 1,000 Records
+
 provider_mrdd(full = TRUE)
 }
 }
