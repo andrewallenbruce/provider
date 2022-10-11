@@ -19,6 +19,7 @@ reference:
     Access Data from Web API Sources
   contents:
   - provider_clia
+  - provider_icd10
   - provider_mooa
   - provider_moar
   - provider_mpop
