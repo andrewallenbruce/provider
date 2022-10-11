@@ -148,7 +148,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-10 <span style="color: #949494;">01:26:22</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">07:43:00</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
 <p><br></p>
@@ -304,10 +304,10 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-10 <span style="color: #949494;">01:26:25</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-10 <span style="color: #949494;">01:26:27</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-10 <span style="color: #949494;">01:26:29</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-10 <span style="color: #949494;">01:26:31</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">07:43:04</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-11 <span style="color: #949494;">07:43:06</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-11 <span style="color: #949494;">07:43:08</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-11 <span style="color: #949494;">07:43:11</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
