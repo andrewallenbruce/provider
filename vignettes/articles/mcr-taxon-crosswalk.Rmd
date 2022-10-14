@@ -1,0 +1,19 @@
+---
+title: "Medicare Provider and Supplier Taxonomy Crosswalk"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+```{r}
+mpstc <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mpstc")
+```
+

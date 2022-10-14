@@ -72,8 +72,11 @@ provider_icd10 <- function(code = NULL,
 
     # "code" allows searching for all codes by a single letter
     # "code,name" does not
-    switch(field, "code" = field <- "code",
-                  "both" = field <- "code,name")
+    switch(field,
+           "code" = field <- "code",
+           "both" = field <- "code,name",
+           stop("field must be either `code` or `both`.")
+           )
     }
 
   # Create list of arguments

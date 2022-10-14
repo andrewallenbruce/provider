@@ -1,0 +1,20 @@
+---
+title: "Medicare Opt Out Affidavits"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+
+```{r}
+mooa <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mooa")
+```
+

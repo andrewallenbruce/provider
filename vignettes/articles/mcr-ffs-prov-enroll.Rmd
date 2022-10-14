@@ -1,0 +1,20 @@
+---
+title: "Medicare Fee-For-Service Public Provider Enrollment"
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+```{r}
+mppe_1 <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mppe_1")
+mppe_2 <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mppe_2")
+```
+

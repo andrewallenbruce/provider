@@ -32,6 +32,7 @@ Suggests:
     glue,
     gt,
     gtExtras,
+    httptest2,
     janitor,
     kableExtra,
     knitr,

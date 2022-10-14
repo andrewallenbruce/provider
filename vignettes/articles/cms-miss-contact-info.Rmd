@@ -1,0 +1,29 @@
+---
+title: "CMS Public Reporting of Missing Digital Contact Information API"
+output: html_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(flextable)
+library(ftExtra)
+use_df_printer()
+```
+
+<br>
+
+### Data Dictionary
+
+```{r echo=FALSE}
+promdci <- tibble::tibble(
+  Variable = c("`npi`", "`provider_name`"),
+  Term = c("NPI", "Provider Name"),
+  Definition = c("The provider's 10-digit National Provider Identifier.", "Name of the provider. It consists of the legal last name followed by the first name, separated by a comma."),
+)
+flextable(promdci) |> autofit() |> ftExtra::colformat_md() |> theme_vanilla()
+```
+
+<br><br>
