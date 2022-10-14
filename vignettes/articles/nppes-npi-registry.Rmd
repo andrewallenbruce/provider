@@ -1,5 +1,6 @@
 ---
 title: "NPPES NPI Public Registry API"
+output: html_document
 ---
 
 ```{r, include = FALSE}

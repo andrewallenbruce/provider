@@ -1,5 +1,6 @@
 ---
-title: "Medicare Provider and Supplier Taxonomy Crosswalk"
+title: "Medicare Provider and Supplier Taxonomy Crosswalk API"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -7,13 +8,35 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(flextable)
+library(ftExtra)
+use_df_printer()
 ```
 
-```{r setup}
-library(provider)
+<br>
+
+### Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+mpstc <- tibble::tibble(
+  Variable = c(
+    "`medicare_specialty_code`", "`medicare_provider_supplier_type_description`",
+    "`provider_taxonomy_code`", "`provider_taxonomy_description_type_classification_specialization`"
+  ),
+  Term = c(
+    "Medicare Specialty Code", "Medicare Provider/Supplier Type Description",
+    "Provider Taxonomy Code", "Provider Taxonomy Description"
+  ),
+  Definition = c(
+    "Specialty code that corresponds to the listed Medicare specialty",
+    "The description of the Medicare Provider/Supplier Type", "The taxonomy codes the Providers use",
+    "The description of the taxonomy that the Providers use"
+  ),
+)
+flextable::flextable(mpstc) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
 ```
 
-```{r}
-mpstc <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mpstc")
-```
 
+<br><br>

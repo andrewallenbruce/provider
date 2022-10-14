@@ -1,5 +1,6 @@
 ---
-title: "Medicare Revalidation Clinic Group Practice Reassignment"
+title: "Medicare Revalidation Clinic Group Practice Reassignment API"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -7,13 +8,73 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(flextable)
+library(ftExtra)
+use_df_printer()
 ```
 
-```{r setup}
-library(provider)
-```
+<br>
 
-```{r}
+### Data Dictionary
+
+<br>
+
+```{r eval=FALSE, include=FALSE}
+rcgpr_names <- provider_rcgpr(npi = 1427050418)
+rcgpr_names <- names(rcgpr_names) |> tibble::tibble() |> dplyr::rename(variable_name = "names(rcgpr_names)")
+
 rcgpr <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "rcgpr")
+
+rcgpr <- rcgpr |> 
+  dplyr::mutate(variable_name = rcgpr_names) |> 
+  tidyr::unnest(variable_name) |> 
+  dplyr::mutate(variable_name = formulaic::add.backtick(variable_name, include.backtick = "all")) |> 
+  dplyr::mutate(term_name = stringr::str_replace_all(term_name, "\r\n", " ")) |> 
+  dplyr::mutate(definition = stringr::str_replace_all(definition, "\r\n", " ")) |> 
+  dplyr::select(Variable = variable_name, Term = term_name, Definition = definition)
+
+constructive::construct(rcgpr)
 ```
 
+
+
+```{r echo=FALSE}
+rcgpr <- tibble::tibble(
+  Variable = c(
+    "`group_pac_id`", "`group_enrollment_id`", "`group_legal_business_name`",
+    "`group_state_code`", "`group_due_date`", "`group_reassignments_and_physician_assistants`",
+    "`record_type`", "`individual_enrollment_id`", "`individual_npi`",
+    "`individual_first_name`", "`individual_last_name`", "`individual_state_code`",
+    "`individual_specialty_description`", "`individual_due_date`",
+    "`individual_total_employer_associations`"
+  ),
+  Term = c(
+    "Group PAC ID", "Group Enrollment ID", "Group Legal Business Name",
+    "Group State Code", "Group Due Date", "Group Reassignments and Physician Assistants",
+    "Record Type", "Individual Enrollment ID", "Individual NPI",
+    "Individual First Name", "Individual Last Name", "Individual State Code",
+    "Individual Specialty Description", "Individual Due Date", "Individual Total Employer Associations"
+  ),
+  Definition = c(
+    "PAC ID of provider who is receiving reassignment or is the employer",
+    "Enrollment ID of provider who is receiving reassignment or is the employer",
+    "Legal business name of provider who is receiving reassignment or is the employer",
+    "Enrollment state of provider who is receiving reassignment or is the employer",
+    "Revalidation due date of provider who is receiving reassignment or is the employer (TBD if yet to be assigned)",
+    "Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider",
+    "Identifies whether the record is for a reassignment ('Reassignment') or employment ('Physician Assistant')",
+    "Enrollment ID of provider who is reassigning their benefits or is an employee",
+    "NPI of provider who is reassigning their benefits or is an employee",
+    "First name of provider who is reassigning their benefits or is an employee",
+    "Last name of provider who is reassigning their benefits or is an employee",
+    "Enrollment state of provider who is reassigning their benefits or is an employee",
+    "Enrollment specialty of the provider who is reassigning their benefits or is an employee",
+    "Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)",
+    "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"
+  ),
+)
+flextable::flextable(rcgpr) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+```
+
+
+<br><br>

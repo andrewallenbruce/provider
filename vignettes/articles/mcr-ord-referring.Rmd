@@ -1,5 +1,6 @@
 ---
-title: "Medicare Order and Referring"
+title: "Medicare Order and Referring API"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -7,13 +8,35 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(flextable)
+library(ftExtra)
+use_df_printer()
 ```
 
-```{r setup}
-library(provider)
+<br>
+
+### Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+moar <- tibble::tibble(
+  Variable = c(
+    "`npi`", "`last_name`", "`first_name`", "`partb`", "`dme`",
+    "`hha`", "`pmd`"
+  ),
+  Term = c("NPI", "Last Name", "First Name", "Part B", "DME", "HHA", "PMD"),
+  Definition = c(
+    "National Provider Identifier (NPI) of the Order and Referring Provider",
+    "Last Name of the Order and Referring Provider", 
+    "First Name of the Order and Referring Provider",
+    "Indicates if Provider can refer to Medicare Part B", 
+    "Indicates if Provider can order Durable Medical Equipment (DME)",
+    "Indicates if Provider can refer to a Home Health Agency (HHA)", 
+    "Indicates if Provider can order Power Mobility Devices (PMDs)"
+  ),
+)
+flextable::flextable(moar) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
 ```
 
-```{r}
-moar <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "moar")
-```
-
+<br><br>

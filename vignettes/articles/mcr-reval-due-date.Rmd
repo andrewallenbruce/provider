@@ -1,5 +1,6 @@
 ---
-title: "Medicare Revalidation Due Date"
+title: "Medicare Revalidation Due Date API"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -7,13 +8,42 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(flextable)
+library(ftExtra)
+use_df_printer()
 ```
 
-```{r setup}
-library(provider)
+<br>
+
+### Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+mrdd <- tibble::tibble(
+  Variable = c(
+    "`enrollment_id`", "`national_provider_identifier`", "`first_name`",
+    "`last_name`", "`organization_name`", "`enrollment_state_code`",
+    "`enrollment_type`", "`provider_type_text`", "`enrollment_specialty`",
+    "`revalidation_due_date`", "`adjusted_due_date`", "`individual_total_reassign_to`",
+    "`receiving_benefits_reassignment`"
+  ),
+  Term = c(
+    "Enrollment ID", "National Provider Identifier", "First Name",
+    "Last Name", "Organization Name", "Enrollment State Code", "Enrollment Type",
+    "Provider Type Text", "Enrollment Specialty", "Revalidation Due Date",
+    "Adjusted Due Date", "Individual Total Reassign To", "Receiving Benefits Reassignment"
+  ),
+  Definition = c(
+    "Enrollment ID", "National Provider Identifier (NPI)", "First name of individual provider",
+    "Last name of individual provider", "Legal business name of organizational provider",
+    "Enrollment state", "Provider type code (1 if Part A; 2 if DME; 3 if Non-DME Part B)",
+    "Provider type description", "Enrollment specialty", "Previously assigned revalidation due date (blank if not previously assigned a due date)",
+    "Next revalidation due date (blank if not yet assigned)", "Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider",
+    "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"
+  ),
+)
+flextable::flextable(mrdd) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
 ```
 
-```{r}
-mrdd <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mrdd")
-```
-
+<br><br>

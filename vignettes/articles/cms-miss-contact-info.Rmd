@@ -23,7 +23,7 @@ promdci <- tibble::tibble(
   Term = c("NPI", "Provider Name"),
   Definition = c("The provider's 10-digit National Provider Identifier.", "Name of the provider. It consists of the legal last name followed by the first name, separated by a comma."),
 )
-flextable(promdci) |> autofit() |> ftExtra::colformat_md() |> theme_vanilla()
+flextable::flextable(promdci) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
 ```
 
 <br><br>

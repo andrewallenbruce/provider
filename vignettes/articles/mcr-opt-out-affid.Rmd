@@ -1,5 +1,6 @@
 ---
-title: "Medicare Opt Out Affidavits"
+title: "Medicare Opt Out Affidavits API"
+output: html_document
 ---
 
 ```{r, include = FALSE}
@@ -7,14 +8,40 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(flextable)
+library(ftExtra)
+use_df_printer()
 ```
 
-```{r setup}
-library(provider)
+<br>
+
+### Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+mooa <- tibble::tibble(
+  Variable = c(
+    "`first_name`", "`last_name`", "`npi`", "`specialty`", "`optout_effective_date`",
+    "`optout_end_date`", "`first_line_street_address`", "`second_line_street_address`",
+    "`city_name`", "`state_code`", "`zip_code`", "`eligible_to_order_and_refer`"
+  ),
+  Term = c(
+    "First Name", "Last Name", "NPI", "Specialty", "Optout Effective Date",
+    "Optout End Date", "First Line Street Address", "Second Line Street Address",
+    "City Name", "State Code", "Zip Code", "Eligible to Order and Refer"
+  ),
+  Definition = c(
+    "First Name of the Opt Out Provider", "Last Name of the Opt Out Provider",
+    "National Provider Identifier (NPI) number of the Opt Out Provider",
+    "Specialty of the Opt Out Provider", "Date from which the Provider's Opt Out Status is effective",
+    "Date on which the Provider's Opt Out Status ends", "Provider's Street Address",
+    "Provider's Street Address", "Provider's City", "Provider's State Abbreviation",
+    "Provider's Zip Code", "Flag indicating whether the Provider is eligible to Order and Refer"
+  ),
+)
+flextable::flextable(mooa) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
 ```
 
-
-```{r}
-mooa <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mooa")
-```
+<br><br>
 
