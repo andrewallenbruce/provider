@@ -3,10 +3,18 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   Searching-the-NPPES: Searching-the-NPPES.html
+  cms-miss-contact-info: cms-miss-contact-info.html
   geocoding: geocoding.html
+  mcr-ffs-prov-enroll: mcr-ffs-prov-enroll.html
+  mcr-opt-out-affid: mcr-opt-out-affid.html
+  mcr-ord-referring: mcr-ord-referring.html
+  mcr-phys-other-pract: mcr-phys-other-pract.html
+  mcr-reval-due-date: mcr-reval-due-date.html
+  mcr-reval-practice-reassign: mcr-reval-practice-reassign.html
+  mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
   nppes-npi-registry: nppes-npi-registry.html
   provider: provider.html
-last_built: 2022-10-11T23:49Z
+last_built: 2022-10-14T21:32Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles

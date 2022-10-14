@@ -54,7 +54,15 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/Searching-the-NPPES.html">Searching the NPPES</a>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
     <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits API</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order and Referring API</a>
+    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physician &amp; Other Practitioners APIs</a>
+    <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
+    <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
     <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry API</a>
   </div>
 </li>
@@ -148,7 +156,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">23:49:30</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-14 <span style="color: #949494;">21:32:19</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
 <p><br></p>
@@ -227,6 +235,7 @@
 <span><span class="co">#&gt; │ ├─gender: <span style="color: #0000BB;">"M"</span></span></span>
 <span><span class="co">#&gt; │ ├─enumeration_date: <span style="color: #0000BB;">"2018-12-28"</span></span></span>
 <span><span class="co">#&gt; │ ├─last_updated: <span style="color: #0000BB;">"2020-06-15"</span></span></span>
+<span><span class="co">#&gt; │ ├─certification_date: <span style="color: #0000BB;">"2020-06-15"</span></span></span>
 <span><span class="co">#&gt; │ ├─status: <span style="color: #0000BB;">"A"</span></span></span>
 <span><span class="co">#&gt; │ └─name_prefix: <span style="color: #0000BB;">"Dr."</span></span></span>
 <span><span class="co">#&gt; ├─taxonomies: <span style="color: #555555;">&lt;list&gt;</span></span></span>
@@ -273,14 +282,14 @@
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 33</span></span></span>
-<span><span class="co">#&gt;   npi      prov_…¹ first…² last_…³ crede…⁴ sole_…⁵ gender enume…⁶ last_…⁷ status</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1114499… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more variables: name_prefix &lt;chr&gt;, country_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 34</span></span></span>
+<span><span class="co">#&gt;   npi     prov_…¹ first…² last_…³ crede…⁴ sole_…⁵ gender enume…⁶ last_…⁷ certi…⁸</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 111449… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 111449… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 24 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, pract_country_abb &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   pract_country_name &lt;chr&gt;, pract_address_purpose &lt;chr&gt;,</span></span></span>
@@ -304,36 +313,36 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-11 <span style="color: #949494;">23:49:31</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-11 <span style="color: #949494;">23:49:33</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-11 <span style="color: #949494;">23:49:34</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-11 <span style="color: #949494;">23:49:35</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-14 <span style="color: #949494;">21:32:20</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-14 <span style="color: #949494;">21:32:22</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-14 <span style="color: #949494;">21:32:23</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-14 <span style="color: #949494;">21:32:24</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                 <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 41</span></span></span>
-<span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ status autho…⁶ autho…⁷ autho…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage  Smith  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage  Smith  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 31 more variables:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 42</span></span></span>
+<span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ certi…⁶ status autho…⁷ autho…⁸</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 32 more variables:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <p>Searching for a column of NPIs in a data frame is only slightly different. I’ll create a data frame with the same NPIs in the list example:</p>
 <p><br></p>
@@ -352,26 +361,26 @@
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 41</span></span></span>
-<span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ status autho…⁶ autho…⁷ autho…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage  Smith  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… A      Laurel  Gamage  Smith  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 31 more variables:</span></span></span>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 33 × 42</span></span></span>
+<span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ certi…⁶ status autho…⁷ autho…⁸</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 32 more variables:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, address_2 &lt;chr&gt;, city &lt;chr&gt;, …</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br><br></p>
 <p>At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
@@ -394,6 +403,9 @@ enumeration_date
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 last_updated
+</th>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+certification_date
 </th>
 <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
 status
@@ -626,6 +638,9 @@ NA
 <td style="text-align:left;">
 NA
 </td>
+<td style="text-align:left;">
+NA
+</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -642,6 +657,9 @@ NO
 </td>
 <td style="text-align:left;">
 2012-03-07
+</td>
+<td style="text-align:left;">
+2020-01-07
 </td>
 <td style="text-align:left;">
 2020-01-07
@@ -766,6 +784,9 @@ NO
 </td>
 <td style="text-align:left;">
 2012-03-07
+</td>
+<td style="text-align:left;">
+2020-01-07
 </td>
 <td style="text-align:left;">
 2020-01-07
@@ -895,6 +916,9 @@ NA
 2007-07-08
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -1017,6 +1041,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -1143,6 +1170,9 @@ NA
 2007-07-08
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -1265,6 +1295,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -1389,6 +1422,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -1515,6 +1551,9 @@ NA
 2007-07-08
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -1637,6 +1676,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -1763,6 +1805,9 @@ NA
 2007-07-08
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -1885,6 +1930,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -2009,6 +2057,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-08
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -2133,6 +2184,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -2259,6 +2313,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -2381,6 +2438,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -2507,6 +2567,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -2629,6 +2692,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -2755,6 +2821,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -2877,6 +2946,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -3003,6 +3075,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -3127,6 +3202,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -3249,6 +3327,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -3375,6 +3456,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -3497,6 +3581,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -3623,6 +3710,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -3745,6 +3835,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -3871,6 +3964,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -3993,6 +4089,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -4119,6 +4218,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -4241,6 +4343,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
@@ -4367,6 +4472,9 @@ NA
 2007-07-09
 </td>
 <td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
 A
 </td>
 <td style="text-align:left;">
@@ -4489,6 +4597,9 @@ NA
 </td>
 <td style="text-align:left;">
 2007-07-09
+</td>
+<td style="text-align:left;">
+NA
 </td>
 <td style="text-align:left;">
 A
