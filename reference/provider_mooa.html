@@ -122,7 +122,7 @@ opted out of Medicare.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <code>tibble()</code> containing the search results.</p>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
     </div>
     <div class="section level2">
     <h2 id="medicare-opt-out-affidavits-dataset">Medicare Opt Out Affidavits Dataset<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits-dataset"></a></h2>
@@ -154,11 +154,14 @@ specialty, address, and effective dates.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Search by NPI ===========================================================</span></span></span>
+<span class="r-in"><span><span class="co"># Search by NPI</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mooa</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Search by Last Name =====================================================</span></span></span>
+<span class="r-in"><span><span class="co"># Search by Last Name</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mooa</span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Altchek"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Returns empty list i.e., provider is not in the database</span></span></span>
+<span class="r-in"><span><span class="fu">provider_mooa</span><span class="op">(</span><span class="fl">1326011057</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>

@@ -152,7 +152,7 @@ default is <code>FALSE</code>.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <code>tibble()</code> containing the search results.</p>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
     </div>
     <div class="section level2">
     <h2 id="medicare-physician-amp-other-practitioners-apis">Medicare Physician &amp; Other Practitioners APIs<a class="anchor" aria-label="anchor" href="#medicare-physician-amp-other-practitioners-apis"></a></h2>
@@ -221,10 +221,10 @@ Data Warehouse.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Search by NPI ===========================================================</span></span></span>
+<span class="r-in"><span><span class="co"># Search by NPI</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, set <span class="op">=</span> <span class="st">"serv"</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Search by First Name ====================================================</span></span></span>
+<span class="r-in"><span><span class="co"># Search by First Name</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Enkeshafi"</span>, set <span class="op">=</span> <span class="st">"serv"</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Unnamed List of NPIs</span></span></span>
@@ -244,7 +244,7 @@ Data Warehouse.</p>
 <span class="r-in"><span><span class="co"># by Geography</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"0002A"</span>, set <span class="op">=</span> <span class="st">"geo"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Returns the First 1,000 Rows in the Dataset =============================</span></span></span>
+<span class="r-in"><span><span class="co"># Returns the First 1,000 Rows in the Dataset</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"serv"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"geo"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"prov"</span><span class="op">)</span></span></span>
