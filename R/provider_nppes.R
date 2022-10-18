@@ -71,7 +71,7 @@
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
 #'
-#' @return A [tibble()] containing the date-time the search was performed
+#' @return A [tibble][tibble::tibble-package] containing the date-time the search was performed
 #'    and a list-column of the results.
 #'
 #' @seealso [provider_unpack()], [provider_luhn()]
@@ -205,22 +205,20 @@ provider_nppes <- function(npi     = NULL,
   results <- results |>
     dplyr::filter(outcome != "resultCount")
 
-   if (nrow(results |> dplyr::filter(outcome == "Errors")) >= 1 & !is.null(npi)) {
+   if (nrow(results |>
+    dplyr::filter(outcome == "Errors")) >= 1 & !is.null(npi)) {
 
      npi_for_errors <- as.character(npi)
 
      results <- results |>
-       tidyr::unnest(cols      = c(data_lists)) |>
-       dplyr::mutate(npi       = npi_for_errors,
+       tidyr::unnest(cols = c(data_lists)) |>
+       dplyr::mutate(npi  = npi_for_errors,
                      prov_type = "Deactivated") |>
        dplyr::select(-description, -field, -number) |>
        tidyr::nest(data_lists  = c(npi, prov_type))
 
-     return(results)
-
-   } else {
+   }
 
   return(results)
 
-  }
 }

@@ -32,7 +32,7 @@
 #' @param full If true, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
@@ -66,12 +66,11 @@
 #' }
 #' @export
 
-provider_rcgpr <- function(npi = NULL,
-                          last = NULL,
-                          first = NULL,
+provider_rcgpr <- function(npi        = NULL,
+                          last        = NULL,
+                          first       = NULL,
                           clean_names = TRUE,
-                          full = FALSE
-) {
+                          full        = FALSE) {
 
   # Check internet connection
   attempt::stop_if_not(

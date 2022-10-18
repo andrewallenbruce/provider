@@ -28,7 +28,7 @@ benefits or is an employee}
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Information on clinic group practice revalidation

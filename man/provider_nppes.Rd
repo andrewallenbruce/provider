@@ -71,7 +71,7 @@ default is 10, maximum is 1200.}
 the previous number; set in \code{limit}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the date-time the search was performed
+A \link[tibble:tibble-package]{tibble} containing the date-time the search was performed
 and a list-column of the results.
 }
 \description{

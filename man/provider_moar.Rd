@@ -26,7 +26,7 @@ provider_moar(
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 All physicians and non-physician practitioners who are legally

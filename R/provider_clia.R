@@ -35,7 +35,7 @@
 #' @param full If true, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results with the
+#' @return A [tibble][tibble::tibble-package] containing the search results with the
 #'    following columns:
 #'    \describe{
 #'    \item{prvdr_ctgry_sbtyp_cd}{Identifies the subtype of provider within the primary category. (01 = CLIA88 Lab)}

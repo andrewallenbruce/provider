@@ -25,7 +25,7 @@ provider_mrdd(
 \item{full}{If \code{TRUE}, downloads the entire dataset; default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Information on revalidation due dates for Medicare providers.

@@ -31,7 +31,7 @@
 #' @param full If true, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
@@ -49,7 +49,7 @@
 #'
 #' npi_list |> purrr::map_dfr(provider_promdci)
 #'
-#' # Returns the First 1,000 Rows in the Dataset ============================
+#' # Returns the First 1,000 Rows in the Dataset
 #' provider_promdci(full = TRUE)
 #' }
 #' @export

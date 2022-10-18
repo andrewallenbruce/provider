@@ -7,13 +7,13 @@
 provider_unpack(df, clean_names = TRUE)
 }
 \arguments{
-\item{df}{\code{\link[=tibble]{tibble()}} response from \code{\link[=provider_nppes]{provider_nppes()}}}
+\item{df}{\link[tibble:tibble-package]{tibble} response from \code{\link[=provider_nppes]{provider_nppes()}}}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the unpacked list-columns of a search
+A \link[tibble:tibble-package]{tibble} containing the unpacked list-columns of a search
 performed with the \code{\link[=provider_nppes]{provider_nppes()}} function.
 }
 \description{

@@ -28,7 +28,7 @@
 #' @param full If true, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
@@ -62,12 +62,11 @@
 #' }
 #' @export
 
-provider_moar <- function(npi = NULL,
-                          last = NULL,
-                          first = NULL,
+provider_moar <- function(npi         = NULL,
+                          last        = NULL,
+                          first       = NULL,
                           clean_names = TRUE,
-                          full = FALSE
-) {
+                          full        = FALSE) {
 
   # Check internet connection
   attempt::stop_if_not(
@@ -77,14 +76,8 @@ provider_moar <- function(npi = NULL,
   # Medicare Order and Referring Base URL
   moar_url <- "https://data.cms.gov/data-api/v1/dataset/c99b5865-1119-4436-bb80-c5af2773ea1f/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(moar_url)
+  req <- httr2::request(moar_url)
 
   if (isTRUE(full)) {
 
@@ -123,9 +116,6 @@ provider_moar <- function(npi = NULL,
     httr2::req_throttle(50 / 60) |>
     httr2::req_perform()
 
-  # Save time of API query
-  datetime <- resp |> httr2::resp_date()
-
   }
 
   # Parse JSON response and save results
@@ -133,20 +123,25 @@ provider_moar <- function(npi = NULL,
     check_type = FALSE,
     simplifyVector = TRUE)
 
+
   # Empty List - NPI is not in the database
-  if (isTRUE(insight::is_empty_object(results))) {
+  if (isTRUE(is.null(nrow(results))) & isTRUE(is.null(ncol(results)))) {
 
-    message("NPI not in database")
+    return(message(paste("Provider No.", npi, "is not in the database")))
 
-  } else {
+    } else {
 
-    # Clean names with janitor
-    if (isTRUE(clean_names)) {
+      results <- results |> tibble::tibble()
 
-      results <- results |>
-        janitor::clean_names()
+      # Clean names with janitor
+
+      if (isTRUE(clean_names)) {
+
+        results <- results |> janitor::clean_names()
+
+      }
+
     }
 
     return(results)
-  }
 }

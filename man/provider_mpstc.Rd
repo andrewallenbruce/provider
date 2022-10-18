@@ -19,7 +19,7 @@ designates a provider’s classification and specialization.}
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 A list of the type of providers and suppliers with the

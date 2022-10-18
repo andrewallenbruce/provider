@@ -26,7 +26,7 @@ provider_promdci(
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Information on providers that are missing digital contact
@@ -74,7 +74,7 @@ npi_list <- c(1003026055,
 
 npi_list |> purrr::map_dfr(provider_promdci)
 
-# Returns the First 1,000 Rows in the Dataset ============================
+# Returns the First 1,000 Rows in the Dataset
 provider_promdci(full = TRUE)
 }
 }

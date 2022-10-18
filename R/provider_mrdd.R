@@ -29,7 +29,7 @@
 #'    `clean_names()` function; default is `TRUE`.
 #' @param full If `TRUE`, downloads the entire dataset; default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' provider_mrdd(npi = 1184699621)
@@ -54,12 +54,11 @@
 #' }
 #' @export
 
-provider_mrdd <- function(npi = NULL,
-                          last = NULL,
-                          first = NULL,
+provider_mrdd <- function(npi         = NULL,
+                          last        = NULL,
+                          first       = NULL,
                           clean_names = TRUE,
-                          full = FALSE
-                          ) {
+                          full        = FALSE) {
 
   # Check internet connection
   attempt::stop_if_not(curl::has_internet() == TRUE,

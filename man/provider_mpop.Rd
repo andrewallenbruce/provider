@@ -36,7 +36,7 @@ furnished by the provider.}
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Information on services and procedures provided to
@@ -98,10 +98,10 @@ Centers for Medicare & Medicaid Services
 
 \examples{
 \dontrun{
-# Search by NPI ===========================================================
+# Search by NPI
 provider_mpop(npi = 1003000126, set = "serv", year = "2020")
 
-# Search by First Name ====================================================
+# Search by First Name
 provider_mpop(first = "Enkeshafi", set = "serv", year = "2019")
 
 # Unnamed List of NPIs
@@ -121,7 +121,7 @@ provider_mpop(npi = 1003000134, set = "prov")
 # by Geography
 provider_mpop(hcpcs = "0002A", set = "geo")
 
-# Returns the First 1,000 Rows in the Dataset =============================
+# Returns the First 1,000 Rows in the Dataset
 provider_mpop(full = TRUE, set = "serv")
 provider_mpop(full = TRUE, set = "geo")
 provider_mpop(full = TRUE, set = "prov")

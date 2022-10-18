@@ -17,7 +17,7 @@ provider_mooa(npi = NULL, last = NULL, first = NULL, clean_names = TRUE)
 \code{clean_names()} function; default is \code{TRUE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 A list of practitioners who are currently
@@ -47,11 +47,14 @@ Centers for Medicare & Medicaid Services
 
 \examples{
 \dontrun{
-# Search by NPI ===========================================================
+# Search by NPI
 provider_mooa(npi = 1114974490)
 
-# Search by Last Name =====================================================
+# Search by Last Name
 provider_mooa(last = "Altchek")
+
+# Returns empty list i.e., provider is not in the database
+provider_mooa(1326011057)
 }
 
 }

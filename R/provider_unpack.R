@@ -3,11 +3,11 @@
 #' @description `provider_unpack()` allows you to unpack the list-columns
 #'    within the response from `provider_nppes()`.
 #'
-#' @param df [tibble()] response from [provider_nppes()]
+#' @param df [tibble][tibble::tibble-package] response from [provider_nppes()]
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #'
-#' @return A [tibble()] containing the unpacked list-columns of a search
+#' @return A [tibble][tibble::tibble-package] containing the unpacked list-columns of a search
 #' performed with the [provider_nppes()] function.
 #'
 #' @seealso [provider_nppes()]
@@ -32,7 +32,8 @@
 #' }
 #' @export
 
-provider_unpack <- function(df, clean_names = TRUE) {
+provider_unpack <- function(df,
+                            clean_names = TRUE) {
 
   # Check for data input
   if (missing(df)) stop("You haven't input a data frame.")

@@ -60,14 +60,14 @@
 #' @param full If `TRUE`, downloads the first 1000 rows of data;
 #'    default is `FALSE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
-#' # Search by NPI ===========================================================
+#' # Search by NPI
 #' provider_mpop(npi = 1003000126, set = "serv", year = "2020")
 #'
-#' # Search by First Name ====================================================
+#' # Search by First Name
 #' provider_mpop(first = "Enkeshafi", set = "serv", year = "2019")
 #'
 #' # Unnamed List of NPIs
@@ -87,7 +87,7 @@
 #' # by Geography
 #' provider_mpop(hcpcs = "0002A", set = "geo")
 #'
-#' # Returns the First 1,000 Rows in the Dataset =============================
+#' # Returns the First 1,000 Rows in the Dataset
 #' provider_mpop(full = TRUE, set = "serv")
 #' provider_mpop(full = TRUE, set = "geo")
 #' provider_mpop(full = TRUE, set = "prov")
@@ -95,14 +95,14 @@
 #'
 #' @export
 
-provider_mpop <- function(npi = NULL,
-                          last = NULL,
-                          first = NULL,
-                          hcpcs = NULL,
-                          set = "serv",
-                          year = "2020",
+provider_mpop <- function(npi         = NULL,
+                          last        = NULL,
+                          first       = NULL,
+                          hcpcs       = NULL,
+                          set         = "serv",
+                          year        = "2020",
                           clean_names = TRUE,
-                          full = FALSE
+                          full        = FALSE
                           ) {
 
 
@@ -157,14 +157,8 @@ provider_mpop <- function(npi = NULL,
   http <- "https://data.cms.gov/data-api/v1/dataset/"
   mpop_url <- paste0(http, id, "/data")
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(mpop_url)
+  req <- httr2::request(mpop_url)
 
   if (isTRUE(full)) {
 
@@ -214,11 +208,13 @@ provider_mpop <- function(npi = NULL,
     simplifyVector = TRUE)
 
   # Empty List - NPI is not in the database
-  if (isTRUE(insight::is_empty_object(results))) {
+  if (isTRUE(is.null(nrow(results))) & isTRUE(is.null(ncol(results)))) {
 
-    if (!is.null(npi)) {message(paste(npi, "is not in database"))}
+    return(message(paste("Provider No.", npi, "is not in the database")))
 
   } else {
+
+    results <- results |> tibble::tibble()
 
   # Convert to numeric
 

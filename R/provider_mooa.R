@@ -25,24 +25,26 @@
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #'
-#' @return A [tibble()] containing the search results.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
-#' # Search by NPI ===========================================================
+#' # Search by NPI
 #' provider_mooa(npi = 1114974490)
 #'
-#' # Search by Last Name =====================================================
+#' # Search by Last Name
 #' provider_mooa(last = "Altchek")
+#'
+#' # Returns empty list i.e., provider is not in the database
+#' provider_mooa(1326011057)
 #' }
 #'
 #' @export
 
-provider_mooa <- function(npi = NULL,
-                          last = NULL,
-                          first = NULL,
-                          clean_names = TRUE
-                          ) {
+provider_mooa <- function(npi         = NULL,
+                          last        = NULL,
+                          first       = NULL,
+                          clean_names = TRUE) {
 
   # Check internet connection
   attempt::stop_if_not(
@@ -60,14 +62,8 @@ provider_mooa <- function(npi = NULL,
   # Medicare Opt Out Base URL
   mooa_url <- "https://data.cms.gov/data-api/v1/dataset/9887a515-7552-4693-bf58-735c77af46d7/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(mooa_url)
+  req <- httr2::request(mooa_url)
 
   # Create list of arguments
   arg <- stringr::str_c(c(
@@ -86,25 +82,30 @@ provider_mooa <- function(npi = NULL,
     httr2::req_throttle(50 / 60) |>
     httr2::req_perform()
 
-  # Save time of API query
-  datetime <- resp |> httr2::resp_date()
-
   # Parse JSON response and save results
   results <- resp |> httr2::resp_body_json(
     check_type = FALSE,
     simplifyVector = TRUE)
 
-  # Clean names with janitor
-  if (clean_names == TRUE) {
 
-    results <- results |>
-      janitor::clean_names()
+  # Empty List - NPI is not in the database
+  if (isTRUE(is.null(nrow(results))) & isTRUE(is.null(ncol(results)))) {
 
-    return(results)
+    return(message(paste("Provider No.", npi, "is not in the database")))
 
   } else {
 
-    return(results)
+    results <- results |> tibble::tibble()
+
+    # Clean names with janitor
+
+    if (isTRUE(clean_names)) {
+
+      results <- results |> janitor::clean_names()
+
+    }
 
   }
+
+  return(results)
 }

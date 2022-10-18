@@ -30,7 +30,7 @@ and/or Medicaid programs.}
 default is \code{FALSE}.}
 }
 \value{
-A \code{\link[=tibble]{tibble()}} containing the search results with the
+A \link[tibble:tibble-package]{tibble} containing the search results with the
 following columns:
 \describe{
 \item{prvdr_ctgry_sbtyp_cd}{Identifies the subtype of provider within the primary category. (01 = CLIA88 Lab)}
