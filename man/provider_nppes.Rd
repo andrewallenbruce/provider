@@ -109,15 +109,15 @@ Centers for Medicare & Medicaid Services
 
 \examples{
 \dontrun{
-# Single NPI ==============================================================
+# Single NPI
 provider_nppes(npi = 1528060837)
 
-# City, state, country ====================================================
+# City, state, country
 provider_nppes(city = "Atlanta",
                state = "GA",
                country = "US")
 
-# First name, city, state  ================================================
+# First name, city, state
 provider_nppes(first = "John",
                city = "Baltimore",
                state = "MD")

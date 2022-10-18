@@ -78,15 +78,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Single NPI ==============================================================
+#' # Single NPI
 #' provider_nppes(npi = 1528060837)
 #'
-#' # City, state, country ====================================================
+#' # City, state, country
 #' provider_nppes(city = "Atlanta",
 #'                state = "GA",
 #'                country = "US")
 #'
-#' # First name, city, state  ================================================
+#' # First name, city, state
 #' provider_nppes(first = "John",
 #'                city = "Baltimore",
 #'                state = "MD")
@@ -119,15 +119,15 @@
 #' }
 #' @export
 
-provider_nppes <- function(npi = NULL,
-                           first = NULL,
-                           last = NULL,
-                           org = NULL,
-                           city = NULL,
-                           state = NULL,
+provider_nppes <- function(npi     = NULL,
+                           first   = NULL,
+                           last    = NULL,
+                           org     = NULL,
+                           city    = NULL,
+                           state   = NULL,
                            country = NULL,
-                           limit = 10,
-                           skip = NULL) {
+                           limit   = 10,
+                           skip    = NULL) {
 
   # Check internet connection
   attempt::stop_if_not(curl::has_internet() == TRUE,
@@ -147,14 +147,14 @@ provider_nppes <- function(npi = NULL,
     msg = "Limit must be between 1 and 1200.")
 
   # Strip any spaces
-  first <- gsub(pattern = " ", replacement = "", first)
-  last <- gsub(pattern = " ", replacement = "", last)
-  city <- gsub(pattern = " ", replacement = "", city)
-  state <- gsub(pattern = " ", replacement = "", state)
+  first   <- gsub(pattern = " ", replacement = "", first)
+  last    <- gsub(pattern = " ", replacement = "", last)
+  city    <- gsub(pattern = " ", replacement = "", city)
+  state   <- gsub(pattern = " ", replacement = "", state)
   country <- gsub(pattern = " ", replacement = "", country)
 
   # Uppercase
-  state <- stringr::str_to_upper(state)
+  state   <- stringr::str_to_upper(state)
   country <- stringr::str_to_upper(country)
 
   # NPPES Base URL
@@ -165,15 +165,15 @@ provider_nppes <- function(npi = NULL,
 
   # Send and save response
   resp <- req |>
-    httr2::req_url_query(number = npi,
-                         first_name = first,
-                         last_name = last,
+    httr2::req_url_query(number            = npi,
+                         first_name        = first,
+                         last_name         = last,
                          organization_name = org,
-                         city = city,
-                         state = state,
-                         country_code = country,
-                         limit = limit,
-                         skip = skip) |>
+                         city              = city,
+                         state             = state,
+                         country_code      = country,
+                         limit             = limit,
+                         skip              = skip) |>
     httr2::req_throttle(50 / 60) |>
     httr2::req_perform()
 
@@ -210,10 +210,11 @@ provider_nppes <- function(npi = NULL,
      npi_for_errors <- as.character(npi)
 
      results <- results |>
-       tidyr::unnest(cols = c(data_lists)) |>
-       dplyr::mutate(npi = npi_for_errors, prov_type = "Deactivated") |>
+       tidyr::unnest(cols      = c(data_lists)) |>
+       dplyr::mutate(npi       = npi_for_errors,
+                     prov_type = "Deactivated") |>
        dplyr::select(-description, -field, -number) |>
-       tidyr::nest(data_lists = c(npi, prov_type))
+       tidyr::nest(data_lists  = c(npi, prov_type))
 
      return(results)
 

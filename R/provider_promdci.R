@@ -54,11 +54,11 @@
 #' }
 #' @export
 
-provider_promdci <- function(npi = NULL,
-                             last = NULL,
-                             first = NULL,
+provider_promdci <- function(npi         = NULL,
+                             last        = NULL,
+                             first       = NULL,
                              clean_names = TRUE,
-                             full = FALSE
+                             full        = FALSE
                              ) {
 
   # Check internet connection
@@ -69,14 +69,8 @@ provider_promdci <- function(npi = NULL,
   # CMS Missing Digital Contact Information Base URL
   promdci_url <- "https://data.cms.gov/data-api/v1/dataset/63a83bb1-4c02-43b3-8ef4-e3d3c6cf62fa/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(promdci_url)
+  req <- httr2::request(promdci_url)
 
   if (isTRUE(full)) {
 

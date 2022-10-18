@@ -50,8 +50,6 @@ APIs are:
     API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 -   [CMS Public Reporting of Missing Digital Contact Information
     API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
--   [NIH NLM Clinical Table Service ICD-10-CM
-    API](https://clinicaltables.nlm.nih.gov/apidoc/icd10cm/v3/doc.html)
 
 <br>
 
@@ -94,7 +92,7 @@ nppes_ex <- provider_nppes(npi = 1760485387)
     #> # A tibble: 1 × 3
     #>   datetime            outcome data_lists   
     #>   <dttm>              <chr>   <list>       
-    #> 1 2022-10-11 10:43:59 results <df [1 × 11]>
+    #> 1 2022-10-18 02:50:20 results <df [1 × 11]>
 
 <br>
 
@@ -283,7 +281,7 @@ mooa_ex <- provider_mooa(1114974490)
 
 | NPI        | Last    | First | Opt-Out Begins | Opt-Out Ends | Order & Refer Eligible | Updated    | Specialty          | Address          | City     | State | days |
 |:-----------|:--------|:------|:---------------|:-------------|:-----------------------|:-----------|:-------------------|:-----------------|:---------|:------|-----:|
-| 1114974490 | Altchek | David | 07/01/2012     | 07/01/2024   | Y                      | 08/15/2022 | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |  629 |
+| 1114974490 | Altchek | David | 07/01/2012     | 07/01/2024   | Y                      | 08/15/2022 | Orthopedic Surgery | 535 EAST 70TH ST | NEW YORK | NY    |  622 |
 
 <br>
 
