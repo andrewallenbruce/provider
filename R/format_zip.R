@@ -9,6 +9,7 @@
 #'
 #' format_zipcode(12345)
 #'
+#' @autoglobal
 #' @export
 format_zipcode <- function(zip) {
 

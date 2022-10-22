@@ -75,7 +75,8 @@
 #'
 #' # Download First 1,000 Rows of Dataset =====================================
 #' provider_mpstc(full = TRUE)
-#'}
+#' }
+#' @autoglobal
 #' @export
 
 provider_mpstc <- function(txn_code    = NULL,

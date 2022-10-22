@@ -91,8 +91,8 @@
 #' provider_mpop(full = TRUE, set = "serv")
 #' provider_mpop(full = TRUE, set = "geo")
 #' provider_mpop(full = TRUE, set = "prov")
-#'}
-#'
+#' }
+#' @autoglobal
 #' @export
 
 provider_mpop <- function(npi         = NULL,

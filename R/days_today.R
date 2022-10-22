@@ -17,6 +17,7 @@
 #' days_today(df = ex, date = x, name = days)
 #'
 #' ex |> days_today(x)
+#' @autoglobal
 #' @export
 
 days_today <- function(df, date, name = days) {

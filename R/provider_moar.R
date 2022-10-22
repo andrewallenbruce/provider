@@ -60,6 +60,7 @@
 #' # Download First 1,000 Rows of Dataset =====================================
 #' provider_moar(full = TRUE)
 #' }
+#' @autoglobal
 #' @export
 
 provider_moar <- function(npi         = NULL,

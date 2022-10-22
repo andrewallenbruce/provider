@@ -64,6 +64,7 @@
 #' # Download First 1,000 Rows of Dataset =====================================
 #' provider_rcgpr(full = TRUE)
 #' }
+#' @autoglobal
 #' @export
 
 provider_rcgpr <- function(npi        = NULL,

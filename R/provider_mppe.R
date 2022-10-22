@@ -75,7 +75,8 @@
 #'
 #' # Download First 1,000 Rows of Dataset =====================================
 #' provider_mppe(full = TRUE)
-#'}
+#' }
+#' @autoglobal
 #' @export
 
 provider_mppe <- function(npi = NULL,

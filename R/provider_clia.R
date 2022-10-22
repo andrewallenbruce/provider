@@ -54,6 +54,7 @@
 #' # Download First 1,000 Rows of Dataset =====================================
 #' provider_clia(full = TRUE)
 #' }
+#' @autoglobal
 #' @export
 
 provider_clia <- function(name = NULL,

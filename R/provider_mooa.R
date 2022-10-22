@@ -38,7 +38,7 @@
 #' # Returns empty list i.e., provider is not in the database
 #' provider_mooa(1326011057)
 #' }
-#'
+#' @autoglobal
 #' @export
 
 provider_mooa <- function(npi         = NULL,

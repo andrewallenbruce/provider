@@ -52,6 +52,7 @@
 #'
 #' provider_mrdd(full = TRUE)
 #' }
+#' @autoglobal
 #' @export
 
 provider_mrdd <- function(npi         = NULL,

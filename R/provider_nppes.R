@@ -117,6 +117,7 @@
 #' tibble::deframe() |>
 #' purrr::map_dfr(provider_nppes)
 #' }
+#' @autoglobal
 #' @export
 
 provider_nppes <- function(npi     = NULL,

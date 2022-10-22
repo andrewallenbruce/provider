@@ -101,7 +101,8 @@
 #' # Inputting letters will throw an error, quoted or not:
 #' provider_luhn(npi = abcdefghij)
 #' provider_luhn(npi = "abcdefghij")
-#'}
+#' }
+#' @autoglobal
 #' @export
 
 provider_luhn <- function(npi = NULL) {

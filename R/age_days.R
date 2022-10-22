@@ -18,6 +18,7 @@
 #' age_days(df = date_ex, start = x, end = y)
 #'
 #' date_ex |> age_days(x, y)
+#' @autoglobal
 #' @export
 
 age_days <- function(df, start, end){

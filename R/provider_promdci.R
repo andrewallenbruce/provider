@@ -52,6 +52,7 @@
 #' # Returns the First 1,000 Rows in the Dataset
 #' provider_promdci(full = TRUE)
 #' }
+#' @autoglobal
 #' @export
 
 provider_promdci <- function(npi         = NULL,

@@ -30,6 +30,7 @@
 #'                state = "MD") |>
 #' provider_unpack()
 #' }
+#' @autoglobal
 #' @export
 
 provider_unpack <- function(df,

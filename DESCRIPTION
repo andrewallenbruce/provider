@@ -44,6 +44,7 @@ Suggests:
     readxl,
     rlang,
     rmarkdown,
+    roxyglobals (>= 0.2.1),
     spelling,
     stringr,
     testthat (>= 3.0.0),
@@ -55,5 +56,9 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-Roxygen: list(markdown = TRUE)
+Roxygen: list(
+    markdown = TRUE,
+    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
 RoxygenNote: 7.2.1
+Remotes: 
+    anthonynorth/roxyglobals

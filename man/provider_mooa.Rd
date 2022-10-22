@@ -56,5 +56,4 @@ provider_mooa(last = "Altchek")
 # Returns empty list i.e., provider is not in the database
 provider_mooa(1326011057)
 }
-
 }
