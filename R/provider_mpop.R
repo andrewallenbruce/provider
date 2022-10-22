@@ -99,11 +99,10 @@ provider_mpop <- function(npi         = NULL,
                           last        = NULL,
                           first       = NULL,
                           hcpcs       = NULL,
+                          geo_lvl     = NULL,
                           set         = "serv",
                           year        = "2020",
-                          clean_names = TRUE,
-                          full        = FALSE
-                          ) {
+                          clean_names = TRUE) {
 
 
   # Check internet connection
@@ -160,14 +159,7 @@ provider_mpop <- function(npi         = NULL,
   # Create request
   req <- httr2::request(mpop_url)
 
-  if (isTRUE(full)) {
-
-    # Send and save response
-    resp <- req |>
-      httr2::req_url_query() |>
-      httr2::req_perform()
-
-  } else if (!is.null(npi)) {
+  if (!is.null(npi)) {
 
     # Luhn check
     attempt::stop_if_not(provider_luhn(npi) == TRUE,
@@ -185,7 +177,8 @@ provider_mpop <- function(npi         = NULL,
     arg <- stringr::str_c(c(
       last = last,
       first = first,
-      hcpcs = hcpcs), collapse = ",")
+      hcpcs = hcpcs,
+      geo_lvl = geo_lvl), collapse = ",")
 
     # Check that at least one argument is not null
     attempt::stop_if_all(

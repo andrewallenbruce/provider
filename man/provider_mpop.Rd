@@ -9,10 +9,10 @@ provider_mpop(
   last = NULL,
   first = NULL,
   hcpcs = NULL,
+  geo_lvl = NULL,
   set = "serv",
   year = "2020",
-  clean_names = TRUE,
-  full = FALSE
+  clean_names = TRUE
 )
 }
 \arguments{
