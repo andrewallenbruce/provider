@@ -91,7 +91,15 @@ provider_mooa <- function(npi         = NULL,
   # Empty List - NPI is not in the database
   if (isTRUE(is.null(nrow(results))) & isTRUE(is.null(ncol(results)))) {
 
-    return(message(paste("Provider No.", npi, "is not in the database")))
+    message(paste("Provider No.", npi, "is not in the database"))
+
+    # results <- results |>
+    #   tibble::tribble(~first_name, ~last_name, ~npi, ~specialty, ~optout_effective_date, ~optout_end_date,
+    #   ~first_line_street_address, ~second_line_street_address,
+    #   ~city_name, ~state_code, ~zip_code,
+    #   ~eligible_to_order_and_refer, ~last_updated,
+    #   "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA", "NA") |>
+    #   dplyr::mutate(dplyr::across(first_name:last_updated, as.character))
 
   } else {
 

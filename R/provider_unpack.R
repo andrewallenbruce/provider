@@ -7,8 +7,8 @@
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] containing the unpacked list-columns of a search
-#' performed with the [provider_nppes()] function.
+#' @return A [tibble][tibble::tibble-package] containing the unpacked
+#' list-columns of a search performed with the [provider_nppes()] function.
 #'
 #' @seealso [provider_nppes()]
 #'
@@ -63,7 +63,15 @@ provider_unpack <- function(df,
     # BASIC
     basic <- start |>
       dplyr::select(npi, prov_type, basic) |>
-      tidyr::unnest(basic)
+      tidyr::unnest(basic) |>
+      dplyr::mutate(prov_type = dplyr::case_when(
+        prov_type == "NPI-1" ~ as.character("Individual"),
+        prov_type == "NPI-2" ~ as.character("Organization"),
+        TRUE ~ as.character(prov_type)),
+                    sole_proprietor = dplyr::case_when(
+          sole_proprietor == "NO" ~ as.logical(FALSE),
+          sole_proprietor == "YES" ~ as.logical(TRUE),
+          TRUE ~ NA))
 
     # Isolate lists & remove if empty
     lists <- start |>

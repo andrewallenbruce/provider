@@ -128,11 +128,30 @@ provider_moar <- function(npi         = NULL,
   # Empty List - NPI is not in the database
   if (isTRUE(is.null(nrow(results))) & isTRUE(is.null(ncol(results)))) {
 
-    return(message(paste("Provider No.", npi, "is not in the database")))
+    return(message(paste("Provider", npi, arg, "is not in the database")))
 
     } else {
 
-      results <- results |> tibble::tibble()
+      results <- results |>
+        tibble::tibble() |>
+        dplyr::mutate(
+          PARTB = dplyr::case_when(
+            PARTB == as.character("Y") ~ as.logical(TRUE),
+            PARTB == as.character("N") ~ as.logical(FALSE),
+            TRUE ~ NA),
+          HHA = dplyr::case_when(
+            HHA == as.character("Y") ~ as.logical(TRUE),
+            HHA == as.character("N") ~ as.logical(FALSE),
+            TRUE ~ NA),
+          DME = dplyr::case_when(
+            DME == as.character("Y") ~ as.logical(TRUE),
+            DME == as.character("N") ~ as.logical(FALSE),
+            TRUE ~ NA),
+          PMD = dplyr::case_when(
+            PMD == as.character("Y") ~ as.logical(TRUE),
+            PMD == as.character("N") ~ as.logical(FALSE),
+            TRUE ~ NA)
+          )
 
       # Clean names with janitor
 

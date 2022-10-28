@@ -8,9 +8,10 @@ test_that("provider_unpack works", {
       "1528060837", "1528060837", "1528060837", "1528060837", "1528060837"
     ),
     prov_type = c(
-      "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1",
-      "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1",
-      "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1", "NPI-1"
+      "Individual", "Individual", "Individual", "Individual", "Individual",
+      "Individual", "Individual", "Individual", "Individual", "Individual",
+      "Individual", "Individual", "Individual", "Individual", "Individual",
+      "Individual", "Individual", "Individual", "Individual", "Individual"
     ),
     first_name = c(
       "JOHN", "JOHN", "JOHN", "JOHN", "JOHN", "JOHN", "JOHN", "JOHN",
@@ -32,8 +33,9 @@ test_that("provider_unpack works", {
       "PT", "PT", "PT", "PT", "PT", "PT", "PT", "PT", "PT", "PT"
     ),
     sole_proprietor = c(
-      "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO",
-      "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO", "NO"
+      FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+      FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE,
+      FALSE, FALSE
     ),
     gender = c(
       "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M",

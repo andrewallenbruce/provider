@@ -13,8 +13,8 @@ provider_unpack(df, clean_names = TRUE)
 \code{clean_names()} function; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the unpacked list-columns of a search
-performed with the \code{\link[=provider_nppes]{provider_nppes()}} function.
+A \link[tibble:tibble-package]{tibble} containing the unpacked
+list-columns of a search performed with the \code{\link[=provider_nppes]{provider_nppes()}} function.
 }
 \description{
 \code{provider_unpack()} allows you to unpack the list-columns

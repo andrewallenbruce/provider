@@ -53,24 +53,29 @@
 #' @param first Provider's first name
 #' @param hcpcs HCPCS code used to identify the specific medical service
 #'    furnished by the provider.
+#' @param geo_lvl Geographic level for "geo" API, options are "National" and
+#'    "State"
 #' @param set API to access, options are "serv", "geo", and "prov"
 #' @param year Year between 2013-2020, in YYYY format
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
-#' @param full If `TRUE`, downloads the first 1000 rows of data;
-#'    default is `FALSE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
-#' # Search by NPI
-#' provider_mpop(npi = 1003000126, set = "serv", year = "2020")
+#' # by Provider and Service API ------------------
+#' ## Search by NPI
+#' provider_mpop(npi = 1003000126,
+#'               set = "serv",
+#'               year = "2020")
 #'
-#' # Search by First Name
-#' provider_mpop(first = "Enkeshafi", set = "serv", year = "2019")
+#' ## Search by First Name
+#' provider_mpop(first = "Enkeshafi",
+#'               set = "serv",
+#'               year = "2019")
 #'
-#' # Unnamed List of NPIs
+#' ## Unnamed List of NPIs
 #' npi_list <- c(1003026055,
 #'               1316405939,
 #'               1720392988,
@@ -78,19 +83,53 @@
 #'               1922056829,
 #'               1083879860)
 #'
-#' npi_list |> purrr::map_dfr(provider_mpop)
+#' npi_list |>
+#' purrr::map_dfr(provider_mpop)
+#'
+#' ## Retrieve All Provider Data, 2013-2020
+#' dates <- as.character(seq(from = 2013, to = 2020))
+#' purrr::map_dfr(dates, ~provider_mpop(npi = 1003000126,
+#'                                      set = "serv",
+#'                                      year = .x))
 #'
 #'
-#' # by Provider
+#' # by Provider API ------------------
 #' provider_mpop(npi = 1003000134, set = "prov")
 #'
-#' # by Geography
+#' ## Retrieve All Provider Data, 2013-2020
+#' dates <- as.character(seq(from = 2013, to = 2020))
+#' purrr::map_dfr(dates, ~provider_mpop(npi = 1003000126,
+#'                                      set = "prov",
+#'                                      year = .x))
+#'
+#' # by Geography and Service API ------------------
 #' provider_mpop(hcpcs = "0002A", set = "geo")
 #'
-#' # Returns the First 1,000 Rows in the Dataset
-#' provider_mpop(full = TRUE, set = "serv")
-#' provider_mpop(full = TRUE, set = "geo")
-#' provider_mpop(full = TRUE, set = "prov")
+#' ## Retrieve All Procedures Data, 2013-2020
+#' dates <- as.character(seq(from = 2013, to = 2020))
+#' geo_ex <- purrr::map_dfr(dates, ~provider_mpop(npi = 1003000126,
+#'                                                set = "serv",
+#'                                                year = .x))
+#' procedures <- geo_ex |>
+#'               dplyr::distinct(hcpcs_cd) |>
+#'               tibble::deframe()
+#'
+#' arg_list <- list(x = dates, y = hcpcs_codes)
+#' arg_cross <- purrr::cross_df(arg_list2)
+#'
+#' ### National Level
+#' purrr::map2_dfr(arg_cross2$x,
+#'                 arg_cross2$y, ~provider_mpop(set = "geo",
+#'                                              geo_lvl = "National",
+#'                                              year = .x,
+#'                                              hcpcs = .y))
+#'
+#' ### State Level
+#' purrr::map2_dfr(arg_cross2$x,
+#'                 arg_cross2$y, ~provider_mpop(set = "geo",
+#'                                              geo_lvl = "Georgia",
+#'                                              year = .x,
+#'                                              hcpcs = .y))
 #' }
 #' @autoglobal
 #' @export
@@ -320,3 +359,4 @@ provider_mpop <- function(npi         = NULL,
 
   }
 }
+
