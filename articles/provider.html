@@ -132,7 +132,11 @@
 <h2 id="nppes-npi-public-registry-api">NPPES NPI Public Registry API<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry-api"></a>
 </h2>
 <p><br></p>
-<p>You’re billing for a healthcare provider and receive a <code>CO-8</code> denial on a claim and you need to confirm whether or not the correct taxonomy code was entered on the claim. Armed with the provider’s NPI, you can search the <strong>NPPES NPI Registry API</strong> with the <code><a href="../reference/provider_nppes.html">provider_nppes()</a></code> function:</p>
+<p>You’re billing for a healthcare provider and receive a
+<code>CO-8</code> denial on a claim and you need to confirm whether or
+not the correct taxonomy code was entered on the claim. Armed with the
+provider’s NPI, you can search the <strong>NPPES NPI Registry
+API</strong> with the <code><a href="../reference/provider_nppes.html">provider_nppes()</a></code> function:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
@@ -144,9 +148,10 @@
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-22 <span style="color: #949494;">17:40:05</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-28 <span style="color: #949494;">09:35:45</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
-<p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code> function:</p>
+<p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code>
+function:</p>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">)</span></span></code></pre></div>
@@ -157,23 +162,23 @@
 <code class="sourceCode R"><span><span class="va">nppes_ex</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 32</span></span></span>
 <span><span class="co">#&gt;    npi    prov_…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enume…⁷ last_…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 17604… NPI-1   PAUL    DEWEY   R.      M.D.    NO      M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 22 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, fax_number &lt;chr&gt;,</span></span></span>
@@ -184,6 +189,16 @@
 <p><br></p>
 <p><br></p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="11%">
+<col width="16%">
+<col width="12%">
+<col width="9%">
+<col width="20%">
+<col width="6%">
+<col width="9%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
 <th align="left">Last Name</th>
@@ -198,7 +213,7 @@
 <tr class="odd">
 <td align="left">1760485387</td>
 <td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
+<td align="left">Individual</td>
 <td align="left">207R00000X</td>
 <td align="left">TRUE</td>
 <td align="left">Internal Medicine</td>
@@ -208,7 +223,7 @@
 <tr class="even">
 <td align="left">1760485387</td>
 <td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
+<td align="left">Individual</td>
 <td align="left">208000000X</td>
 <td align="left">FALSE</td>
 <td align="left">Pediatrics</td>
@@ -218,7 +233,8 @@
 </tbody>
 </table>
 <p><br></p>
-<p>What if you don’t have the provider’s NPI? You can search by first and/or last name, city, state:</p>
+<p>What if you don’t have the provider’s NPI? You can search by first
+and/or last name, city, state:</p>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nppes_ex2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Paul"</span>, </span>
@@ -227,6 +243,16 @@
 <span>                            <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="11%">
+<col width="16%">
+<col width="12%">
+<col width="9%">
+<col width="20%">
+<col width="6%">
+<col width="9%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
 <th align="left">Last Name</th>
@@ -241,7 +267,7 @@
 <tr class="odd">
 <td align="left">1760485387</td>
 <td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
+<td align="left">Individual</td>
 <td align="left">207R00000X</td>
 <td align="left">TRUE</td>
 <td align="left">Internal Medicine</td>
@@ -251,7 +277,7 @@
 <tr class="even">
 <td align="left">1760485387</td>
 <td align="left">DEWEY</td>
-<td align="left">NPI-1</td>
+<td align="left">Individual</td>
 <td align="left">208000000X</td>
 <td align="left">FALSE</td>
 <td align="left">Pediatrics</td>
@@ -266,7 +292,9 @@
 <h2 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
 </h2>
 <p><br></p>
-<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="../reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
+<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using
+the <code><a href="../reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s
+<strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
@@ -303,7 +331,10 @@
 <h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
 </h2>
 <p><br></p>
-<p>Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="../reference/provider_moar.html">provider_moar()</a></code>:</p>
+<p>Is the provider currently eligible to make referrals to Medicare Part
+B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
+or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
+Referring API</strong> with <code><a href="../reference/provider_moar.html">provider_moar()</a></code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_moar.html">provider_moar</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
@@ -322,10 +353,10 @@
 <td align="left">1760485387</td>
 <td align="left">DEWEY</td>
 <td align="left">PAUL</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
+<td align="left">TRUE</td>
 </tr></tbody>
 </table>
 <p><br><br></p>
@@ -334,7 +365,10 @@
 <h2 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
 </h2>
 <p><br></p>
-<p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. Using the output from the NPPES search in the first example, you can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="../reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
+<p>You may need to find Medicare’s specialty codes for this provider’s
+taxonomies. Using the output from the NPPES search in the first example,
+you can search Medicare’s <strong>Provider and Supplier Taxonomy
+Crosswalk API</strong> with <code><a href="../reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
@@ -360,7 +394,8 @@
 <td align="left">207R00000X</td>
 <td align="left">11</td>
 <td align="left">Physician/Internal Medicine</td>
-<td align="left">Allopathic &amp; Osteopathic Physicians/Internal Medicine</td>
+<td align="left">Allopathic &amp; Osteopathic Physicians/Internal
+Medicine</td>
 </tr>
 <tr class="even">
 <td align="left">208000000X</td>
@@ -371,7 +406,9 @@
 </tbody>
 </table>
 <p><br></p>
-<p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="../reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
+<p>You can check to see if a provider is due to revalidate their
+Medicare enrollment by accessing Medicare’s <strong>Revalidation Due
+Date API</strong> with <code><a href="../reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
@@ -409,7 +446,11 @@
 </tr></tbody>
 </table>
 <p><br></p>
-<p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="../reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
+<p>Providers may need to update their digital contact information in the
+NPPES system. To check, you can access the <strong>CMS Public Reporting
+of Missing Digital Contact Information API</strong> with
+<code><a href="../reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results,
+it’s time to update their NPPES contact information:</p>
 <p><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
@@ -425,7 +466,9 @@
 </tr></tbody>
 </table>
 <p><br></p>
-<p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="../reference/provider_mooa.html">provider_mooa()</a></code>:</p>
+<p>You can find out if a provider has opted out of Medicare by searching
+the <strong>Medicare Opt Out Affidavits API</strong> with
+<code><a href="../reference/provider_mooa.html">provider_mooa()</a></code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mooa.html">provider_mooa</a></span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span></code></pre></div>
@@ -461,7 +504,7 @@
 <td align="left">1114974490</td>
 <td align="left">2012-07-01</td>
 <td align="left">2024-07-01</td>
-<td align="left">2022-08-15</td>
+<td align="left">2022-09-15</td>
 <td align="left">Altchek</td>
 <td align="left">David</td>
 <td align="left">Orthopedic Surgery</td>
@@ -472,7 +515,9 @@
 </tr></tbody>
 </table>
 <p><br></p>
-<p>Using <code><a href="../reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and Service API</strong>:</p>
+<p>Using <code><a href="../reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s
+Physician &amp; Other Practitioners - by Provider and Service
+API</strong>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
@@ -782,7 +827,8 @@
 </tbody>
 </table>
 <p><br></p>
-<p>This API contains data going back to 2013, so you can perform a long-term analysis of a provider’s Medicare data:</p>
+<p>This API contains data going back to 2013, so you can perform a
+long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
@@ -836,7 +882,8 @@
 </tr>
 <tr class="even">
 <td align="left">93017</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress test with EKG tracing and monitoring</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG tracing and monitoring</td>
 <td align="right">11</td>
 <td align="right">11</td>
 <td align="right">220.00</td>
@@ -845,7 +892,8 @@
 </tr>
 <tr class="odd">
 <td align="left">90686</td>
-<td align="left">Vaccine for influenza for administration into muscle, 0.5 ml dosage</td>
+<td align="left">Vaccine for influenza for administration into muscle,
+0.5 ml dosage</td>
 <td align="right">13</td>
 <td align="right">13</td>
 <td align="right">27.00</td>
@@ -881,7 +929,8 @@
 </tr>
 <tr class="odd">
 <td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes per day</td>
+<td align="left">Initial hospital inpatient care, typically 70 minutes
+per day</td>
 <td align="right">13</td>
 <td align="right">14</td>
 <td align="right">514.00</td>
@@ -890,7 +939,8 @@
 </tr>
 <tr class="even">
 <td align="left">20610</td>
-<td align="left">Aspiration and/or injection of large joint or joint capsule</td>
+<td align="left">Aspiration and/or injection of large joint or joint
+capsule</td>
 <td align="right">12</td>
 <td align="right">16</td>
 <td align="right">239.00</td>
@@ -899,7 +949,8 @@
 </tr>
 <tr class="odd">
 <td align="left">99235</td>
-<td align="left">Hospital observation or inpatient care moderate severity, 50 minutes per day’</td>
+<td align="left">Hospital observation or inpatient care moderate
+severity, 50 minutes per day’</td>
 <td align="right">16</td>
 <td align="right">16</td>
 <td align="right">508.00</td>
@@ -917,7 +968,9 @@
 </tr>
 <tr class="odd">
 <td align="left">G0431</td>
-<td align="left">Drug screen, qualitative; multiple drug classes by high complexity test method (e. g. , immunoassay, enzyme assay), per patient encounter</td>
+<td align="left">Drug screen, qualitative; multiple drug classes by high
+complexity test method (e. g. , immunoassay, enzyme assay), per patient
+encounter</td>
 <td align="right">12</td>
 <td align="right">20</td>
 <td align="right">140.00</td>
@@ -926,7 +979,8 @@
 </tr>
 <tr class="even">
 <td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress test with EKG monitoring and physician supervision</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG monitoring and physician supervision</td>
 <td align="right">22</td>
 <td align="right">22</td>
 <td align="right">103.00</td>
@@ -944,7 +998,8 @@
 </tr>
 <tr class="even">
 <td align="left">93000</td>
-<td align="left">Routine ekg using at least 12 leads including interpretation and report</td>
+<td align="left">Routine ekg using at least 12 leads including
+interpretation and report</td>
 <td align="right">25</td>
 <td align="right">25</td>
 <td align="right">113.00</td>
@@ -953,7 +1008,8 @@
 </tr>
 <tr class="odd">
 <td align="left">G0438</td>
-<td align="left">Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit</td>
+<td align="left">Annual wellness visit; includes a personalized
+prevention plan of service (pps), initial visit</td>
 <td align="right">29</td>
 <td align="right">29</td>
 <td align="right">444.06</td>
@@ -989,7 +1045,8 @@
 </tr>
 <tr class="odd">
 <td align="left">85652</td>
-<td align="left">Red blood cell sedimentation rate, to detect inflammation</td>
+<td align="left">Red blood cell sedimentation rate, to detect
+inflammation</td>
 <td align="right">46</td>
 <td align="right">49</td>
 <td align="right">41.00</td>
@@ -998,7 +1055,8 @@
 </tr>
 <tr class="even">
 <td align="left">93000</td>
-<td align="left">Routine EKG using at least 12 leads including interpretation and report</td>
+<td align="left">Routine EKG using at least 12 leads including
+interpretation and report</td>
 <td align="right">54</td>
 <td align="right">59</td>
 <td align="right">106.00</td>
@@ -1007,7 +1065,8 @@
 </tr>
 <tr class="odd">
 <td align="left">93306</td>
-<td align="left">Ultrasound examination of heart including color-depicted blood flow rate, direction, and valve function</td>
+<td align="left">Ultrasound examination of heart including
+color-depicted blood flow rate, direction, and valve function</td>
 <td align="right">61</td>
 <td align="right">63</td>
 <td align="right">823.25</td>
@@ -1016,7 +1075,8 @@
 </tr>
 <tr class="even">
 <td align="left">99238</td>
-<td align="left">Hospital discharge day management, 30 minutes or less</td>
+<td align="left">Hospital discharge day management, 30 minutes or
+less</td>
 <td align="right">55</td>
 <td align="right">65</td>
 <td align="right">210.75</td>
@@ -1034,7 +1094,8 @@
 </tr>
 <tr class="even">
 <td align="left">J3301</td>
-<td align="left">Injection, triamcinolone acetonide, not otherwise specified, 10 mg</td>
+<td align="left">Injection, triamcinolone acetonide, not otherwise
+specified, 10 mg</td>
 <td align="right">14</td>
 <td align="right">72</td>
 <td align="right">25.00</td>
@@ -1079,7 +1140,8 @@
 </tr>
 <tr class="odd">
 <td align="left">93005</td>
-<td align="left">Routine electrocardiogram (EKG) with tracing using at least 12 leads</td>
+<td align="left">Routine electrocardiogram (EKG) with tracing using at
+least 12 leads</td>
 <td align="right">98</td>
 <td align="right">101</td>
 <td align="right">52.50</td>
@@ -1097,7 +1159,8 @@
 </tr>
 <tr class="odd">
 <td align="left">G0103</td>
-<td align="left">Prostate cancer screening; prostate specific antigen test (psa)</td>
+<td align="left">Prostate cancer screening; prostate specific antigen
+test (psa)</td>
 <td align="right">134</td>
 <td align="right">134</td>
 <td align="right">102.00</td>
@@ -1106,7 +1169,8 @@
 </tr>
 <tr class="even">
 <td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25 minutes per day</td>
+<td align="left">Subsequent hospital inpatient care, typically 25
+minutes per day</td>
 <td align="right">87</td>
 <td align="right">192</td>
 <td align="right">203.12</td>
@@ -1115,7 +1179,8 @@
 </tr>
 <tr class="odd">
 <td align="left">81001</td>
-<td align="left">Manual urinalysis test with examination using microscope</td>
+<td align="left">Manual urinalysis test with examination using
+microscope</td>
 <td align="right">179</td>
 <td align="right">214</td>
 <td align="right">44.38</td>
@@ -1142,7 +1207,8 @@
 </tr>
 <tr class="even">
 <td align="left">85025</td>
-<td align="left">Complete blood cell count (red cells, white blood cell, platelets), automated test</td>
+<td align="left">Complete blood cell count (red cells, white blood cell,
+platelets), automated test</td>
 <td align="right">270</td>
 <td align="right">334</td>
 <td align="right">62.00</td>
@@ -1151,7 +1217,8 @@
 </tr>
 <tr class="odd">
 <td align="left">85027</td>
-<td align="left">Complete blood cell count (red cells, white blood cell, platelets), automated test</td>
+<td align="left">Complete blood cell count (red cells, white blood cell,
+platelets), automated test</td>
 <td align="right">296</td>
 <td align="right">341</td>
 <td align="right">62.00</td>
@@ -1196,7 +1263,8 @@
 </tr>
 <tr class="even">
 <td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit typically 25 minutes</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 25 minutes</td>
 <td align="right">455</td>
 <td align="right">768</td>
 <td align="right">315.43</td>
@@ -1205,7 +1273,8 @@
 </tr>
 <tr class="odd">
 <td align="left">99213</td>
-<td align="left">Established patient office or other outpatient visit, typically 15 minutes</td>
+<td align="left">Established patient office or other outpatient visit,
+typically 15 minutes</td>
 <td align="right">457</td>
 <td align="right">951</td>
 <td align="right">213.20</td>
@@ -1214,7 +1283,8 @@
 </tr>
 <tr class="even">
 <td align="left">36415</td>
-<td align="left">Insertion of needle into vein for collection of blood sample</td>
+<td align="left">Insertion of needle into vein for collection of blood
+sample</td>
 <td align="right">782</td>
 <td align="right">1162</td>
 <td align="right">25.50</td>
@@ -1224,7 +1294,8 @@
 </tbody>
 </table>
 <p><br></p>
-<p>Using packages like {gt} &amp; {ggplot2}, you can create tables and graphs for reporting purposes:</p>
+<p>Using packages like {gt} &amp; {ggplot2}, you can create tables and
+graphs for reporting purposes:</p>
 <p><br></p>
 <details><summary>
 Click for Table Code

@@ -130,19 +130,39 @@
 <h2 id="the-nppes-npi-registry">The NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#the-nppes-npi-registry"></a>
 </h2>
 <p><br></p>
-<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry Public Search</a> is a free directory of all active <strong>National Provider Identifier</strong> (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.</p>
+<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
+Public Search</a> is a free directory of all active <strong>National
+Provider Identifier</strong> (NPI) records. Healthcare providers acquire
+their unique 10-digit NPIs to identify themselves in a standard way
+throughout their industry. After CMS supplies an NPI, they publish the
+parts of the NPI record that have public relevance, including the
+provider’s name, specialty (taxonomy) and practice address. It enables
+you to search for providers in the NPPES (National Plan and Provider
+Enumeration System.) All information produced by the NPI Registry is
+provided in accordance with the NPPES Data Dissemination Notice. There
+is no charge to use the NPI Registry.</p>
 <p><br></p>
 <div class="section level3">
 <h3 id="the-nppes-api">The NPPES API<a class="anchor" aria-label="anchor" href="#the-nppes-api"></a>
 </h3>
-<p>The NPPES <em>Application Programming Interface</em> (API) is a faster alternative to the <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html" class="external-link">downloadable NPPES data files</a>. It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The <em>Skip</em> field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.</p>
+<p>The NPPES <em>Application Programming Interface</em> (API) is a
+faster alternative to the <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html" class="external-link">downloadable
+NPPES data files</a>. It allows systems to access NPPES public data in
+real-time, rather than through batched uploads. The API retrieves data
+from NPPES daily. An API query will return a maximum of 200 results per
+request. The <em>Skip</em> field in the API will let you skip up to 1000
+records. By using these two fields with your search criteria, you can
+get up to a maximum of 1,200 records over six requests.</p>
 <p><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="searching-the-nppes-by-npi">Searching the NPPES by NPI<a class="anchor" aria-label="anchor" href="#searching-the-nppes-by-npi"></a>
 </h2>
-<p>The following is a basic example of searching for an NPI using the using <code>prov_npi_nppes()</code>. The only argument is the provider’s 10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National Provider Identifier</a>:</p>
+<p>The following is a basic example of searching for an NPI using the
+using <code>prov_npi_nppes()</code>. The only argument is the provider’s
+10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National
+Provider Identifier</a>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load package</span></span>
@@ -156,9 +176,13 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-22 <span style="color: #949494;">17:36:27</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-28 <span style="color: #949494;">09:32:30</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
-<p>This returns a <code>tibble</code> containing the NPI that was searched for (<code>search</code>), the <code>datetime</code> of the query, an <code>outcome</code> status column and <code>data_lists</code>, a list-column containing a collection of variables and nested data frames:</p>
+<p>This returns a <code>tibble</code> containing the NPI that was
+searched for (<code>search</code>), the <code>datetime</code> of the
+query, an <code>outcome</code> status column and
+<code>data_lists</code>, a list-column containing a collection of
+variables and nested data frames:</p>
 <p><br></p>
 <pre><code><span><span class="co">#&gt; <span style="color: #555555;">&lt;list&gt;</span></span></span>
 <span><span class="co">#&gt; └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
@@ -191,15 +215,21 @@
 <li>
 <code>created_epoch</code>: date when the NPI was issued</li>
 <li>
-<code>enumeration_type</code>: NPI Entity Type, either NPI-1(individual) or NPI-2(organizational)</li>
+<code>enumeration_type</code>: NPI Entity Type, either
+NPI-1(individual) or NPI-2(organizational)</li>
 <li>
-<code>last_updated_epoch</code>: date when the information was last updated by the provider</li>
+<code>last_updated_epoch</code>: date when the information was last
+updated by the provider</li>
 <li>
 <code>number</code>: provider’s NPI, as listed in the NPPES</li>
 </ul>
 <p><br></p>
 <blockquote>
-<p>Note: <code>last_updated_epoch</code> / <code>created_epoch</code> are dates in <a href="https://www.epochconverter.com/" class="external-link">Unix time</a>. They are repeated in the <code>basic</code> list as <code>last_updated</code> and <code>enumeration_date</code>, respectively.</p>
+<p>Note: <code>last_updated_epoch</code> / <code>created_epoch</code>
+are dates in <a href="https://www.epochconverter.com/" class="external-link">Unix time</a>.
+They are repeated in the <code>basic</code> list as
+<code>last_updated</code> and <code>enumeration_date</code>,
+respectively.</p>
 </blockquote>
 <p><br></p>
 <p>The <strong>list-columns</strong> returned are as follows:</p>
@@ -261,32 +291,39 @@
 <li>
 <code>addresses</code>: Primary location and mailing addresses</li>
 <li>
-<code>taxonomies</code>: Specialty classification and related information</li>
+<code>taxonomies</code>: Specialty classification and related
+information</li>
 <li>
-<code>identifiers</code>: Various other identifiers such as payer-specific IDs, CLIA numbers, etc.</li>
+<code>identifiers</code>: Various other identifiers such as
+payer-specific IDs, CLIA numbers, etc.</li>
 <li>
 <code>practice_locations</code>: Provider’s practice locations</li>
 <li>
-<code>endpoints</code>: Information regarding the provider’s endpoints for Health Information Exchange (HIE)</li>
+<code>endpoints</code>: Information regarding the provider’s
+endpoints for Health Information Exchange (HIE)</li>
 </ul>
 <p><br><br></p>
 <blockquote>
-<p>Note: All list-columns may not be available for every provider. This depends on factors such as NPI type, incorporated individual status, subpart delegation, and, quite simply, the information provided to the NPPES by providers.</p>
+<p>Note: All list-columns may not be available for every provider. This
+depends on factors such as NPI type, incorporated individual status,
+subpart delegation, and, quite simply, the information provided to the
+NPPES by providers.</p>
 </blockquote>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="unpack-the-response">Unpack the Response<a class="anchor" aria-label="anchor" href="#unpack-the-response"></a>
 </h3>
 <p><br></p>
-<p>Flatten the response tibble into a tidy data format with <code>prov_nppes_unpack()</code>:</p>
+<p>Flatten the response tibble into a tidy data format with
+<code>prov_nppes_unpack()</code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 34</span></span></span>
 <span><span class="co">#&gt;   npi     prov_…¹ first…² last_…³ crede…⁴ sole_…⁵ gender enume…⁶ last_…⁷ certi…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 111449… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… 2020-0…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 111449… NPI-1   DOMINI… LOUDA   DPT     NO      M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 111449… Indivi… DOMINI… LOUDA   DPT     FALSE   M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 111449… Indivi… DOMINI… LOUDA   DPT     FALSE   M      2018-1… 2020-0… 2020-0…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 24 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
@@ -301,24 +338,29 @@
 <h2 id="search-for-multiple-npis">Search for Multiple NPIs<a class="anchor" aria-label="anchor" href="#search-for-multiple-npis"></a>
 </h2>
 <p><br></p>
-<p>To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
+<p>To search for more than one NPI at a time, there are two options, the
+first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as
+opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<p>Then pipe the list into <code>prov_npi_nppes()</code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code> function to loop over the list:</p>
+<p>Then pipe the list into <code>prov_npi_nppes()</code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code>
+function to loop over the list:</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-22 <span style="color: #949494;">17:36:29</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-22 <span style="color: #949494;">17:36:30</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-22 <span style="color: #949494;">17:36:32</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-22 <span style="color: #949494;">17:36:33</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-10-28 <span style="color: #949494;">09:32:31</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-10-28 <span style="color: #949494;">09:32:32</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-10-28 <span style="color: #949494;">09:32:33</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-10-28 <span style="color: #949494;">09:32:34</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
-<p>Unpacking the response is similar, adding only dplyr’s <code>group_split()</code> function to the chain. The parameter entered into <code>group_split()</code> must be <code>search</code>.</p>
+<p>Unpacking the response is similar, adding only dplyr’s
+<code>group_split()</code> function to the chain. The parameter entered
+into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_list_resp</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -327,24 +369,26 @@
 <span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ certi…⁶ status autho…⁷ autho…⁸</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… Organi… LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… Organi… LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 32 more variables:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, gender &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
-<p>Searching for a column of NPIs in a data frame is only slightly different. I’ll create a data frame with the same NPIs in the list example:</p>
+<p>Searching for a column of NPIs in a data frame is only slightly
+different. I’ll create a data frame with the same NPIs in the list
+example:</p>
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1336413418</span>, <span class="fl">1710975040</span>, <span class="fl">1659781227</span>, <span class="fl">1528060837</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -354,7 +398,10 @@
 <span><span class="co">#&gt; 3 1659781227</span></span>
 <span><span class="co">#&gt; 4 1528060837</span></span></code></pre>
 <p><br></p>
-<p>We can even chain the search and unpack function chains together using <code>|&gt;</code>, R’s lovely pipe. Again, the <code>group_split()</code> input should be the column containing the NPIs.</p>
+<p>We can even chain the search and unpack function chains together
+using <code>|&gt;</code>, R’s lovely pipe. Again, the
+<code>group_split()</code> input should be the column containing the
+NPIs.</p>
 <p>Split and purrr, then split and purrr:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_df_resp</span> <span class="op">&lt;-</span> <span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -365,24 +412,25 @@
 <span><span class="co">#&gt;    npi    prov_…¹ organ…² organ…³ enume…⁴ last_…⁵ certi…⁶ status autho…⁷ autho…⁸</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16597… Deacti… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… NPI-2   LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… NPI-1   <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 13364… Organi… LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 13364… Organi… LUMINU… NO      2012-0… 2020-0… 2020-0… A      Laurel  Gamage </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17109… Indivi… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      2005-1… 2007-0… <span style="color: #BB0000;">NA</span>      A      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 23 more rows, 32 more variables:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_name_prefix &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, credential &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, gender &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;, country_code &lt;chr&gt;, …</span></span></span></code></pre>
 <p><br><br></p>
-<p>At 46 columns wide, this output is fairly unwieldy, so it really depends on what you need to do with the data.</p>
+<p>At 46 columns wide, this output is fairly unwieldy, so it really
+depends on what you need to do with the data.</p>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; ">
 <table class="table">
 <thead><tr>
@@ -647,7 +695,7 @@ NA
 1336413418
 </td>
 <td style="text-align:left;">
-NPI-2
+Organization
 </td>
 <td style="text-align:left;">
 LUMINUS DIAGNOSTICS, LLC
@@ -774,7 +822,7 @@ NA
 1336413418
 </td>
 <td style="text-align:left;">
-NPI-2
+Organization
 </td>
 <td style="text-align:left;">
 LUMINUS DIAGNOSTICS, LLC
@@ -901,7 +949,7 @@ NA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -952,7 +1000,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1028,7 +1076,7 @@ MD
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1079,7 +1127,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1155,7 +1203,7 @@ NA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1206,7 +1254,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1282,7 +1330,7 @@ MD
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1333,7 +1381,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1409,7 +1457,7 @@ VA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1460,7 +1508,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1536,7 +1584,7 @@ NA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1587,7 +1635,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1663,7 +1711,7 @@ MD
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1714,7 +1762,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1790,7 +1838,7 @@ NA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1841,7 +1889,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -1917,7 +1965,7 @@ MD
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -1968,7 +2016,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2044,7 +2092,7 @@ VA
 1710975040
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2095,7 +2143,7 @@ E
 MD
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2171,7 +2219,7 @@ NA
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2222,7 +2270,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2298,7 +2346,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2349,7 +2397,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2425,7 +2473,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2476,7 +2524,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2552,7 +2600,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2603,7 +2651,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2679,7 +2727,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2730,7 +2778,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2806,7 +2854,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2857,7 +2905,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -2933,7 +2981,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -2984,7 +3032,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3060,7 +3108,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3111,7 +3159,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3187,7 +3235,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3238,7 +3286,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3314,7 +3362,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3365,7 +3413,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3441,7 +3489,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3492,7 +3540,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3568,7 +3616,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3619,7 +3667,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3695,7 +3743,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3746,7 +3794,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3822,7 +3870,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -3873,7 +3921,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -3949,7 +3997,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4000,7 +4048,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4076,7 +4124,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4127,7 +4175,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4203,7 +4251,7 @@ MD
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4254,7 +4302,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4330,7 +4378,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4381,7 +4429,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4457,7 +4505,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4508,7 +4556,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4584,7 +4632,7 @@ DC
 1528060837
 </td>
 <td style="text-align:left;">
-NPI-1
+Individual
 </td>
 <td style="text-align:left;">
 NA
@@ -4635,7 +4683,7 @@ B
 PT
 </td>
 <td style="text-align:left;">
-NO
+FALSE
 </td>
 <td style="text-align:left;">
 M
@@ -4713,14 +4761,19 @@ MD
 <div class="section level4">
 <h4 id="constraints-for-invalid-parameters">Constraints for Invalid Parameters<a class="anchor" aria-label="anchor" href="#constraints-for-invalid-parameters"></a>
 </h4>
-<p>Several constraints have been implemented so as to not batter the NPPES API with invalid searches. The input must be 10 digits or the function will throw an error:</p>
+<p>Several constraints have been implemented so as to not batter the
+NPPES API with invalid searches. The input must be 10 digits or the
+function will throw an error:</p>
 <p><br><br></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error: NPIs must have 10 digits.</span></span>
 <span><span class="co">#&gt;     Provided NPI has 9 digits.</span></span></code></pre></div>
 <p><br><br></p>
-<p>It also must be a valid NPI. The <code>prov_npi_nppes()</code> function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>, as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a> (documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
+<p>It also must be a valid NPI. The <code>prov_npi_nppes()</code>
+function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>,
+as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a>
+(documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
 <p><br><br></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">1234567891</span><span class="op">)</span></span>
@@ -4752,7 +4805,9 @@ MD
 <h2 id="api-documentation-overview">API Documentation Overview<a class="anchor" aria-label="anchor" href="#api-documentation-overview"></a>
 </h2>
 <p><br></p>
-<p>This section outlines the NPPES API’s documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.</p>
+<p>This section outlines the NPPES API’s documentation, going over valid
+search inputs, constraints to those inputs, and descriptions of the many
+possible outputs.</p>
 <p><br></p>
 <p><br><br></p>
 <div class="section level3">
@@ -4762,19 +4817,34 @@ MD
 <div class="section level4">
 <h4 id="enumeration-type">Enumeration Type<a class="anchor" aria-label="anchor" href="#enumeration-type"></a>
 </h4>
-<p><br> Two categories of health care providers exist for NPI enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity <em>Type 2</em> (Organizational). <br></p>
+<p><br> Two categories of health care providers exist for NPI
+enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity
+<em>Type 2</em> (Organizational). <br></p>
 <div class="section level5">
 <h5 id="npi-1-individual">NPI-1: Individual<a class="anchor" aria-label="anchor" href="#npi-1-individual"></a>
 </h5>
-<p>Individual health care providers (including sole proprietors) may get an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.</p>
-<p>The following factors <strong>do not</strong> affect whether a sole proprietor is an Entity Type 1:</p>
+<p>Individual health care providers (including sole proprietors) may get
+an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they
+must apply for the NPI using your own SSN, not an Employer
+Identification Number (EIN) even if they have an EIN. As a sole
+proprietor, they may get only one NPI, just like any other
+individual.</p>
+<p>The following factors <strong>do not</strong> affect whether a sole
+proprietor is an Entity Type 1:</p>
 <ul>
 <li>Number of different office locations</li>
 <li>Whether they have employees</li>
 <li>Whether the IRS issued them an EIN.</li>
 </ul>
 <blockquote>
-<p>An <strong>incorporated individual</strong> is a single health care provider who forms and conducts business under a corporation. A sole proprietor <strong>is not</strong> an incorporated individual because the sole proprietor didn’t form a corporation. If you’re a sole/solo practitioner, it doesn’t necessarily mean you’re a sole proprietor, and vice versa. If you’re an individual health care provider who’s incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).</p>
+<p>An <strong>incorporated individual</strong> is a single health care
+provider who forms and conducts business under a corporation. A sole
+proprietor <strong>is not</strong> an incorporated individual because
+the sole proprietor didn’t form a corporation. If you’re a sole/solo
+practitioner, it doesn’t necessarily mean you’re a sole proprietor, and
+vice versa. If you’re an individual health care provider who’s
+incorporated, you may need to get an NPI for yourself (Entity Type 1)
+and an NPI for your corporation or LLC (Entity Type 2).</p>
 </blockquote>
 <p><br></p>
 </div>
@@ -4782,11 +4852,30 @@ MD
 <h5 id="npi-2-organizational">NPI-2: Organizational<a class="anchor" aria-label="anchor" href="#npi-2-organizational"></a>
 </h5>
 <p><br></p>
-<p>Organizational health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization’s only employee.</p>
-<p>Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren’t themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.</p>
-<p>An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.</p>
+<p>Organizational health care providers are group health care providers
+eligible for NPIs as Entity Type 2. Organization health care providers
+may have a single employee or thousands of employees. An example is an
+incorporated individual who is an organization’s only employee.</p>
+<p>Some organization health care providers are made up of parts that
+work somewhat independently from their parent organization. These parts
+may offer different types of health care or offer health care in
+separate physical locations. These parts and their physical locations
+aren’t themselves legal entities but are part of the organization health
+care provider (which is a legal entity). The NPI Final Rule refers to
+the parts and locations as subparts.</p>
+<p>An organization health care provider can get its subparts their own
+NPIs. If a subpart conducts any HIPAA standard transactions on its own
+(separately from its parent), it must get its own NPI. Subpart
+determination makes sure that entities within a covered organization are
+uniquely identified in HIPAA standard transactions they conduct with
+Medicare and other covered entities. For example, a hospital offers
+acute care, laboratory, pharmacy, and rehabilitation services. Each of
+these subparts may need its own NPI because each sends its own standard
+transactions to one or more health plans.</p>
 <blockquote>
-<p>Subpart delegation doesn’t affect Entity Type 1 health care providers. As individuals, these health care providers can’t choose subparts and are not subparts.</p>
+<p>Subpart delegation doesn’t affect Entity Type 1 health care
+providers. As individuals, these health care providers can’t choose
+subparts and are not subparts.</p>
 </blockquote>
 <p><br></p>
 </div>
@@ -4794,7 +4883,13 @@ MD
 <h5 id="authorized-official">Authorized Official<a class="anchor" aria-label="anchor" href="#authorized-official"></a>
 </h5>
 <p><br></p>
-<p>An appointed official (e.g., chief executive officer, chief financial officer, general partner, chairman of the board, or direct owner) to whom the organization has granted the legal authority to enroll it in the Medicare program, to make changes or updates to the organization’s status in the Medicare program, and to commit the organization to fully abide by the statutes, regulations, and program instructions of the Medicare program. See 42 CFR 424.502 for additional information.</p>
+<p>An appointed official (e.g., chief executive officer, chief financial
+officer, general partner, chairman of the board, or direct owner) to
+whom the organization has granted the legal authority to enroll it in
+the Medicare program, to make changes or updates to the organization’s
+status in the Medicare program, and to commit the organization to fully
+abide by the statutes, regulations, and program instructions of the
+Medicare program. See 42 CFR 424.502 for additional information.</p>
 <p><br></p>
 </div>
 </div>

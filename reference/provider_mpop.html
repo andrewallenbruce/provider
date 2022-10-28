@@ -130,6 +130,11 @@ beneficiaries by physicians and other healthcare professionals.</p>
 furnished by the provider.</p></dd>
 
 
+<dt>geo_lvl</dt>
+<dd><p>Geographic level for "geo" API, options are "National" and
+"State"</p></dd>
+
+
 <dt>set</dt>
 <dd><p>API to access, options are "serv", "geo", and "prov"</p></dd>
 
@@ -141,11 +146,6 @@ furnished by the provider.</p></dd>
 <dt>clean_names</dt>
 <dd><p>Clean column names with janitor's
 <code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>full</dt>
-<dd><p>If <code>TRUE</code>, downloads the first 1000 rows of data;
-default is <code>FALSE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -221,13 +221,18 @@ Data Warehouse.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Search by NPI</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, set <span class="op">=</span> <span class="st">"serv"</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># by Provider and Service API ------------------</span></span></span>
+<span class="r-in"><span><span class="co">## Search by NPI</span></span></span>
+<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>,</span></span>
+<span class="r-in"><span>              set <span class="op">=</span> <span class="st">"serv"</span>,</span></span>
+<span class="r-in"><span>              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Search by First Name</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Enkeshafi"</span>, set <span class="op">=</span> <span class="st">"serv"</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Search by First Name</span></span></span>
+<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Enkeshafi"</span>,</span></span>
+<span class="r-in"><span>              set <span class="op">=</span> <span class="st">"serv"</span>,</span></span>
+<span class="r-in"><span>              year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Unnamed List of NPIs</span></span></span>
+<span class="r-in"><span><span class="co">## Unnamed List of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1316405939</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1720392988</span>,</span></span>
@@ -235,19 +240,53 @@ Data Warehouse.</p>
 <span class="r-in"><span>              <span class="fl">1922056829</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1083879860</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpop</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">npi_list</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpop</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Retrieve All Provider Data, 2013-2020</span></span></span>
+<span class="r-in"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">2013</span>, to <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">dates</span>, <span class="op">~</span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>,</span></span>
+<span class="r-in"><span>                                     set <span class="op">=</span> <span class="st">"serv"</span>,</span></span>
+<span class="r-in"><span>                                     year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># by Provider</span></span></span>
+<span class="r-in"><span><span class="co"># by Provider API ------------------</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000134</span>, set <span class="op">=</span> <span class="st">"prov"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># by Geography</span></span></span>
+<span class="r-in"><span><span class="co">## Retrieve All Provider Data, 2013-2020</span></span></span>
+<span class="r-in"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">2013</span>, to <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">dates</span>, <span class="op">~</span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>,</span></span>
+<span class="r-in"><span>                                     set <span class="op">=</span> <span class="st">"prov"</span>,</span></span>
+<span class="r-in"><span>                                     year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># by Geography and Service API ------------------</span></span></span>
 <span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"0002A"</span>, set <span class="op">=</span> <span class="st">"geo"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Returns the First 1,000 Rows in the Dataset</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"serv"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"geo"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mpop</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span>, set <span class="op">=</span> <span class="st">"prov"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## Retrieve All Procedures Data, 2013-2020</span></span></span>
+<span class="r-in"><span><span class="va">dates</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="fl">2013</span>, to <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">geo_ex</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">dates</span>, <span class="op">~</span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>,</span></span>
+<span class="r-in"><span>                                               set <span class="op">=</span> <span class="st">"serv"</span>,</span></span>
+<span class="r-in"><span>                                               year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">procedures</span> <span class="op">&lt;-</span> <span class="va">geo_ex</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>              <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">hcpcs_cd</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>              <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">arg_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">dates</span>, y <span class="op">=</span> <span class="va">hcpcs_codes</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">arg_cross</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/cross.html" class="external-link">cross_df</a></span><span class="op">(</span><span class="va">arg_list2</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### National Level</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">arg_cross2</span><span class="op">$</span><span class="va">x</span>,</span></span>
+<span class="r-in"><span>                <span class="va">arg_cross2</span><span class="op">$</span><span class="va">y</span>, <span class="op">~</span><span class="fu">provider_mpop</span><span class="op">(</span>set <span class="op">=</span> <span class="st">"geo"</span>,</span></span>
+<span class="r-in"><span>                                             geo_lvl <span class="op">=</span> <span class="st">"National"</span>,</span></span>
+<span class="r-in"><span>                                             year <span class="op">=</span> <span class="va">.x</span>,</span></span>
+<span class="r-in"><span>                                             hcpcs <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### State Level</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">arg_cross2</span><span class="op">$</span><span class="va">x</span>,</span></span>
+<span class="r-in"><span>                <span class="va">arg_cross2</span><span class="op">$</span><span class="va">y</span>, <span class="op">~</span><span class="fu">provider_mpop</span><span class="op">(</span>set <span class="op">=</span> <span class="st">"geo"</span>,</span></span>
+<span class="r-in"><span>                                             geo_lvl <span class="op">=</span> <span class="st">"Georgia"</span>,</span></span>
+<span class="r-in"><span>                                             year <span class="op">=</span> <span class="va">.x</span>,</span></span>
+<span class="r-in"><span>                                             hcpcs <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

@@ -124,6 +124,7 @@
 </h1>
 </div>
 <!-- badges: start -->
+
 <p>The goal of <code>provider</code> is to provide performant and reliable open-source tools to facilitate easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources. The current list of supported APIs are:</p>
 <p><br></p>
 <ul>
@@ -207,6 +208,16 @@
 <p>Filter and wrangle the data for presentation:</p>
 <p><br></p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="11%">
+<col width="15%">
+<col width="12%">
+<col width="9%">
+<col width="20%">
+<col width="7%">
+<col width="9%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
 <th align="left">Last Name</th>
@@ -250,6 +261,16 @@
 <span>                            <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
+<colgroup>
+<col width="12%">
+<col width="11%">
+<col width="15%">
+<col width="12%">
+<col width="9%">
+<col width="20%">
+<col width="7%">
+<col width="9%">
+</colgroup>
 <thead><tr class="header">
 <th align="left">NPI</th>
 <th align="left">Last Name</th>
@@ -550,7 +571,11 @@
 </table>
 <p><br></p>
 <p>Using <code><a href="reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners API</strong>, enabling you to choose between three related datasets:</p>
-<blockquote><ol style="list-style-type: decimal"><li>by Provider and Service API:</li></ol></blockquote>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>by Provider and Service API:</li>
+</ol>
+</blockquote>
 <p><br></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_serv_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
@@ -861,7 +886,11 @@
 </tbody>
 </table>
 <p><br></p>
-<blockquote><ol start="2" style="list-style-type: decimal"><li>by Geography and Service API:</li></ol></blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>by Geography and Service API:</li>
+</ol>
+</blockquote>
 <p><br></p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_geo_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>hcpcs <span class="op">=</span> <span class="st">"99214"</span>, </span>
@@ -2841,7 +2870,11 @@
 </tbody>
 </table>
 <p><br></p>
-<blockquote><ol start="3" style="list-style-type: decimal"><li>by Provider API:</li></ol></blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>by Provider API:</li>
+</ol>
+</blockquote>
 <p><br></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_prov_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi  <span class="op">=</span> <span class="fl">1003000134</span>, </span>
