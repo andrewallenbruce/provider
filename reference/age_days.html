@@ -93,13 +93,13 @@
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">age_days</span><span class="op">(</span><span class="va">df</span>, <span class="va">start</span>, <span class="va">end</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">age_days</span><span class="op">(</span><span class="va">df</span>, <span class="va">start</span>, <span class="va">end</span>, colname <span class="op">=</span> <span class="st">"age"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>df</dt>
-<dd><p>data frame containing two date columns</p></dd>
+<dd><p>data frame containing date columns</p></dd>
 
 
 <dt>start</dt>
@@ -109,33 +109,68 @@
 <dt>end</dt>
 <dd><p>column containing date(s) after start_date column</p></dd>
 
+
+<dt>colname</dt>
+<dd><p>desired column name of output; default is "age"</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>data frame with an age column containing the number of days
-calculated.</p>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with a named column
+containing the calculated number of days.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">date_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-01-01"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                    by <span class="op">=</span> <span class="st">"month"</span>, length.out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                    by <span class="op">=</span> <span class="st">"month"</span>, length.out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">date_ex</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2021-01-01"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                          by <span class="op">=</span> <span class="st">"month"</span>, length.out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                          y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.Date.html" class="external-link">seq.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="st">"2022-01-01"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>                          by <span class="op">=</span> <span class="st">"month"</span>, length.out <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span>df <span class="op">=</span> <span class="va">date_ex</span>, start <span class="op">=</span> <span class="va">x</span>, end <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            x          y age</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2021-01-01 2022-01-01 366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2021-02-01 2022-02-01 366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2021-03-01 2022-03-01 366</span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span>df <span class="op">=</span> <span class="va">date_ex</span>,</span></span>
+<span class="r-in"><span>         start <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>         end <span class="op">=</span> <span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x          y            age</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2021-01-01 2022-01-01   366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2021-02-01 2022-02-01   366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2021-03-01 2022-03-01   366</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">date_ex</span> <span class="op">|&gt;</span> <span class="fu">age_days</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>            x          y age</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1 2021-01-01 2022-01-01 366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2 2021-02-01 2022-02-01 366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3 2021-03-01 2022-03-01 366</span>
+<span class="r-in"><span><span class="va">date_ex</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">x</span>,</span></span>
+<span class="r-in"><span>         <span class="va">y</span>,</span></span>
+<span class="r-in"><span>         colname <span class="op">=</span> <span class="st">"days_between_x_y"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x          y          days_between_x_y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2021-01-01 2022-01-01              366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2021-02-01 2022-02-01              366</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2021-03-01 2022-03-01              366</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">date_ex</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span>start <span class="op">=</span> <span class="va">x</span>,</span></span>
+<span class="r-in"><span>end <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>colname <span class="op">=</span> <span class="st">"days_since_x"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x          y          days_since_x</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2021-01-01 2022-01-01          670</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2021-02-01 2022-02-01          639</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2021-03-01 2022-03-01          611</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">date_ex</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, <span class="st">"days_between_x_y"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">x</span>, <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"days_since_x"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">y</span>, <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span>, colname <span class="op">=</span> <span class="st">"days_since_y"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x          y          days_between_x_y days_since_x days_since_y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2021-01-01 2022-01-01              366          670          305</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2021-02-01 2022-02-01              366          639          274</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2021-03-01 2022-03-01              366          611          246</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
