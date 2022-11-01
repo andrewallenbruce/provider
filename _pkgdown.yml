@@ -22,6 +22,7 @@ reference:
   - provider_mooa
   - provider_moar
   - provider_mpop
+  - provider_mpop_serv
   - provider_mppe
   - provider_mpstc
   - provider_mrdd
@@ -31,7 +32,11 @@ reference:
 
 - title: Helper Functions
   contents:
+  - provider_luhn
   - provider_unpack
+  - age_days
+  - days_today
+  - format_zipcode
 
 navbar:
   structure:
