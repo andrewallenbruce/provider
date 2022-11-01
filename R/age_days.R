@@ -35,6 +35,7 @@
 #' age_days(x, lubridate::today(), "days_since_x") |>
 #' age_days(y, lubridate::today(), colname = "days_since_y")
 #' @autoglobal
+#' @keyword internal
 #' @export
 
 age_days <- function(df,

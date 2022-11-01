@@ -88,8 +88,6 @@ remotes::install_github("andrewallenbruce/provider")
 
 <br>
 
-<br>
-
 ## Motivating Example
 
 You’re billing for a healthcare provider and receive a `CO-8` denial on
@@ -105,7 +103,6 @@ library(provider)
 
 # Query the NPPES API by NPI
 nppes_ex <- provider_nppes(npi = 1083879860)
-#> Error: 'provider_luhn' is not an exported object from 'namespace:provider'
 
 # Or by Name, City, State, etc.
 # nppes_ex <- provider_nppes(first = "Chris", 
@@ -116,7 +113,10 @@ nppes_ex <- provider_nppes(npi = 1083879860)
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'nppes_ex' not found
+    #> # A tibble: 1 × 3
+    #>   datetime            outcome data_lists   
+    #>   <dttm>              <chr>   <list>       
+    #> 1 2022-11-01 05:18:15 results <df [1 × 11]>
 
 <br>
 
@@ -126,14 +126,24 @@ Unpack the API response with the `provider_unpack()` function:
 
 ``` r
 nppes_unpack <- provider_unpack(nppes_ex)
-#> Error in dplyr::filter(df, outcome == "Errors"): object 'nppes_ex' not found
 ```
 
 <br>
 
 ``` r
 nppes_unpack
-#> Error in eval(expr, envir, enclos): object 'nppes_unpack' not found
+#> # A tibble: 2 × 38
+#>   npi      prov_…¹ first…² last_…³ sole_…⁴ gender enume…⁵ last_…⁶ certi…⁷ status
+#>   <chr>    <chr>   <chr>   <chr>   <lgl>   <chr>  <chr>   <chr>   <chr>   <chr> 
+#> 1 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
+#> 2 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
+#> # … with 28 more variables: country_code <chr>, address_purpose <chr>,
+#> #   address_1 <chr>, city <chr>, state <chr>, postal_code <chr>,
+#> #   telephone_number <chr>, taxon_code <chr>, taxonomy_group <chr>,
+#> #   taxon_desc <chr>, taxon_state <chr>, taxon_license <chr>,
+#> #   taxon_primary <lgl>, endpts_endpoint_type <chr>,
+#> #   endpts_endpoint_type_description <chr>, endpts_endpoint <chr>,
+#> #   endpts_affiliation <chr>, endpts_affiliation_name <chr>, …
 ```
 
 <br>
@@ -167,14 +177,105 @@ nppes_table <- nppes_unpack |>
                                                  quiet = TRUE)(nppes_ex$datetime),
                         cgroup = c("", "Taxonomy Information"), 
                         n.cgroup = c(3,5))
-#> Error in dplyr::select(nppes_unpack, NPI = npi, `Last Name` = last_name, : object 'nppes_unpack' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'nppes_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="10" style="text-align: left;">
+NPPES NPI Registry Search Results
+</td>
+</tr>
+<tr>
+<th style="border-top: 2px solid grey;">
+</th>
+<th colspan="3" style="font-weight: 900; border-top: 2px solid grey; text-align: center;">
+</th>
+<th style="border-bottom: none; border-top: 2px solid grey;" colspan="1">
+ 
+</th>
+<th colspan="5" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+Taxonomy Information
+</th>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+Last Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+Provider Type
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;" colspan="1">
+ 
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+Description
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+Code
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+Primary
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+State
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
+License
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+AARON
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Individual
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;" colspan="1">
+ 
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Family Medicine
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+207Q00000X
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TRUE
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+PA
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+OS019703
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="10">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -186,7 +287,6 @@ Public Provider Enrollment API**:
 
 ``` r
 mppe_ex <- provider_mppe(nppes_unpack$npi[[1]])
-#> Error in provider_mppe(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -210,14 +310,75 @@ mppe_table <- mppe_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mppe_ex, NPI = npi, `Last Name` = last_name, `PAC ID` = pecos_asct_cntl_id, : object 'mppe_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mppe_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="7" style="text-align: left;">
+Medicare Fee-For-Service Public Provider Enrollment Search Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Last Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+PAC ID
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enrollment ID
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Specialty
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+State
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+AARON
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+8426328519
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+I20200617001010
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+PRACTITIONER - FAMILY PRACTICE
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+PA
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="7">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -233,7 +394,6 @@ Search Medicare’s **Order and Referring API** with `provider_moar()`:
 
 ``` r
 moar_ex <- provider_moar(nppes_unpack$npi[[1]])
-#> Error in provider_moar(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -258,14 +418,81 @@ moar_table <- moar_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(moar_ex, NPI = npi, `Last Name` = last_name, `First Name` = first_name, : object 'moar_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'moar_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="8" style="text-align: left;">
+Medicare Order and Referring Search Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Last Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+First Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Part B
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+DME
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+HHA
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+PMD
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+AARON
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+CHRISTOPHER
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TRUE
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TRUE
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TRUE
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TRUE
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="8">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 You may need to find Medicare’s specialty codes for this provider’s
 taxonomies. You can search Medicare’s **Provider and Supplier Taxonomy
@@ -275,7 +502,6 @@ Crosswalk API** with `provider_mpstc()`:
 
 ``` r
 mpstc_ex <- provider_mpstc(nppes_unpack$taxon_code[[1]])
-#> Error in provider_mpstc(nppes_unpack$taxon_code[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -298,14 +524,69 @@ mpstc_table <- mpstc_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpstc_ex, `Taxonomy Code` = provider_taxonomy_code, : object 'mpstc_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpstc_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="6" style="text-align: left;">
+Medicare Provider and Supplier Taxonomy Crosswalk Search Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Taxonomy Code
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Medicare Specialty Code
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Medicare Specialty Description
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Specialty
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Classification
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+207Q00000X
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+8
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Physician/Family Practice
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Physician/Family Practice
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Allopathic & Osteopathic Physicians/Family Medicine
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="6">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 You can check to see if a provider is due to revalidate their Medicare
 enrollment by accessing Medicare’s **Revalidation Due Date API** with
@@ -315,7 +596,6 @@ enrollment by accessing Medicare’s **Revalidation Due Date API** with
 
 ``` r
 mrdd_ex <- provider_mrdd(nppes_unpack$npi[[1]])
-#> Error in provider_mrdd(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -341,14 +621,86 @@ mrdd_table <- mrdd_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mrdd_ex, NPI = national_provider_identifier, `Last Name` = last_name, : object 'mrdd_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mrdd_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="9" style="text-align: left;">
+Medicare Revalidation Due Date Search Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Last Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enrollment ID
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enrollment Type
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enrollment Specialty
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+State
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Provider Type
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Revalidation Due Date
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Aaron
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+I20200617001010
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Non-DME Part B
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Family Practice
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+PA
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Non-DME Part B
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="9">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -362,7 +714,6 @@ contact information:
 
 ``` r
 provider_promdci(nppes_unpack$npi[[1]])
-#> Error in provider_promdci(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -374,7 +725,6 @@ the **Medicare Opt Out Affidavits API** with `provider_mooa()`:
 
 ``` r
 mooa_ex <- provider_mooa(nppes_unpack$npi[[1]])
-#> Error in provider_mooa(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -403,7 +753,8 @@ mooa_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mooa_ex, NPI = npi, Last = last_name, First = first_name, : object 'mooa_ex' not found
+#> Error in `dplyr::select()`:
+#> ! `select()` doesn't handle lists.
 ```
 
 </details>
@@ -421,7 +772,6 @@ Practice Reassignment API**:
 
 ``` r
 rcgpr_ex <- provider_rcgpr(nppes_unpack$npi[[1]])
-#> Error in provider_rcgpr(nppes_unpack$npi[[1]]): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -451,14 +801,111 @@ rcgpr_table <- rcgpr_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(rcgpr_ex, NPI = individual_npi, Last = individual_last_name, : object 'rcgpr_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'rcgpr_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="13" style="text-align: left;">
+Medicare Revalidation Clinic Group Practice Reassignment Search Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Last
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Type
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+PAC ID Group
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enroll ID Group
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Business Name
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Due Date Group
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+PAC ID Ind
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Enroll ID Ind
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Due Date Ind
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Reassignments & Phys Assts
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Employer Associations
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Aaron
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Reassignment
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+5395659312
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+O20040312000257
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Upmc Altoona Regional Health Services, Inc.
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TBD
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+8426328519
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+I20200617001010
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+TBD
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+434
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="13">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -474,7 +921,6 @@ datasets:
 mpop_serv_ex <- provider_mpop(npi = nppes_unpack$npi[[1]], 
                               set = "serv",
                               year = "2020")
-#> Error in provider_mpop(npi = nppes_unpack$npi[[1]], set = "serv", year = "2020"): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -504,14 +950,317 @@ mpop_serv_table <- mpop_serv_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpop_serv_ex, Year = year, NPI = rndrng_npi, Last = rndrng_prvdr_last_org_name, : object 'mpop_serv_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_serv_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="13" style="text-align: left;">
+Medicare Physician & Other Practitioners by Provider & Service Search
+Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+NPI
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Last
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+City
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+State
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+PAR
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+HCPCS
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Beneficiaries
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Services
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Billed
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Allowed
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Payment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+1
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+1083879860
+</td>
+<td style="text-align: left;">
+Aaron
+</td>
+<td style="text-align: left;">
+Cresson
+</td>
+<td style="text-align: left;">
+PA
+</td>
+<td style="text-align: left;">
+Y
+</td>
+<td style="text-align: left;">
+36415
+</td>
+<td style="text-align: left;">
+38
+</td>
+<td style="text-align: left;">
+53
+</td>
+<td style="text-align: left;">
+15
+</td>
+<td style="text-align: left;">
+3
+</td>
+<td style="text-align: left;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+2
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+1083879860
+</td>
+<td style="text-align: left;">
+Aaron
+</td>
+<td style="text-align: left;">
+Cresson
+</td>
+<td style="text-align: left;">
+PA
+</td>
+<td style="text-align: left;">
+Y
+</td>
+<td style="text-align: left;">
+85610
+</td>
+<td style="text-align: left;">
+12
+</td>
+<td style="text-align: left;">
+32
+</td>
+<td style="text-align: left;">
+17
+</td>
+<td style="text-align: left;">
+4.29
+</td>
+<td style="text-align: left;">
+4.29
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+3
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+1083879860
+</td>
+<td style="text-align: left;">
+Aaron
+</td>
+<td style="text-align: left;">
+Cresson
+</td>
+<td style="text-align: left;">
+PA
+</td>
+<td style="text-align: left;">
+Y
+</td>
+<td style="text-align: left;">
+90682
+</td>
+<td style="text-align: left;">
+15
+</td>
+<td style="text-align: left;">
+15
+</td>
+<td style="text-align: left;">
+34
+</td>
+<td style="text-align: left;">
+34
+</td>
+<td style="text-align: left;">
+34
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+4
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+1083879860
+</td>
+<td style="text-align: left;">
+Aaron
+</td>
+<td style="text-align: left;">
+Cresson
+</td>
+<td style="text-align: left;">
+PA
+</td>
+<td style="text-align: left;">
+Y
+</td>
+<td style="text-align: left;">
+93793
+</td>
+<td style="text-align: left;">
+13
+</td>
+<td style="text-align: left;">
+33
+</td>
+<td style="text-align: left;">
+49
+</td>
+<td style="text-align: left;">
+11.58
+</td>
+<td style="text-align: left;">
+8.6987878788
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+5
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+1083879860
+</td>
+<td style="text-align: left;">
+Aaron
+</td>
+<td style="text-align: left;">
+Cresson
+</td>
+<td style="text-align: left;">
+PA
+</td>
+<td style="text-align: left;">
+Y
+</td>
+<td style="text-align: left;">
+99214
+</td>
+<td style="text-align: left;">
+62
+</td>
+<td style="text-align: left;">
+101
+</td>
+<td style="text-align: left;">
+220
+</td>
+<td style="text-align: left;">
+105.40613861
+</td>
+<td style="text-align: left;">
+76.368019802
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+6
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1083879860
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Aaron
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Cresson
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+PA
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+Y
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+G0008
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+15
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+15
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+32
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+16.28
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+16.28
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="13">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -551,14 +1300,135 @@ mpop_geo_table <- mpop_geo_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in format(x, format = "Retrieved on %A, %B %d, %Y at %I:%M %p"): object 'nppes_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_geo_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="11" style="text-align: left;">
+Medicare Physician & Other Practitioners by Geography & Service Search
+Results
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+HCPCS
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Region
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+POS
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Providers
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Beneficiaries
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Services
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Charge
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Allowed
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg Payment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">
+1
+</td>
+<td style="text-align: left;">
+2020
+</td>
+<td style="text-align: left;">
+99214
+</td>
+<td style="text-align: left;">
+National
+</td>
+<td style="text-align: left;">
+F
+</td>
+<td style="text-align: left;">
+159324
+</td>
+<td style="text-align: left;">
+3183652
+</td>
+<td style="text-align: left;">
+7008865
+</td>
+<td style="text-align: left;">
+210.09590176
+</td>
+<td style="text-align: left;">
+77.348125868
+</td>
+<td style="text-align: left;">
+55.276294601
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+99214
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+National
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+O
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+551728
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+21794074
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+81741450.8
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+222.24271159
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+104.99486506
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+72.227897324
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="11">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -570,7 +1440,6 @@ mpop_geo_table <- mpop_geo_ex |>
 mpop_prov_ex <- provider_mpop(npi  = nppes_unpack$npi[[1]], 
                               set  = "prov",
                               year = "2020")
-#> Error in provider_mpop(npi = nppes_unpack$npi[[1]], set = "prov", year = "2020"): object 'nppes_unpack' not found
 ```
 
 <br>
@@ -595,14 +1464,81 @@ mpop_prov_totals_table <- mpop_prov_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpop_prov_ex, Year = year, `Unique HCPCS` = tot_hcpcs_cds, : object 'mpop_prov_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_prov_totals_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="8" style="text-align: left;">
+Medicare Physician & Other Practitioners by Provider: Yearly Totals
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Unique HCPCS
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Beneficiaries
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Services
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Charges Submitted
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Amount Allowed
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Payments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+37
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+93
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+333
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+35226
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+17076.15
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+13170.13
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="8">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -625,14 +1561,75 @@ mpop_prov_age_table <- mpop_prov_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpop_prov_ex, Year = year, `Average Age` = bene_avg_age, : object 'mpop_prov_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_prov_age_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="7" style="text-align: left;">
+Medicare Physician & Other Practitioners by Provider: Beneficiary Age
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Average Age
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Under 65
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+65 - 74
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+75 - 84
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Over 84
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+72
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+14
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+45
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+23
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+11
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="7">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -656,14 +1653,82 @@ mpop_prov_demo_table <- mpop_prov_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpop_prov_ex, Year = year, Female = bene_feml_cnt, : object 'mpop_prov_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_prov_demo_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="8" style="text-align: left;">
+Medicare Physician & Other Practitioners by Provider: Beneficiary
+Demographics
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Female
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Male
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+White
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Black
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Dual
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Non-Dual
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+48
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+45
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+93
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+12
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+81
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="8">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 <br>
 
@@ -690,14 +1755,88 @@ mpop_prov_ccw_table <- mpop_prov_ex |>
                         ctable = c("solid", "double"),
                         tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
                                                  quiet = TRUE)(nppes_ex$datetime))
-#> Error in dplyr::select(mpop_prov_ex, Year = year, Cancer = bene_cc_cncr_pct, : object 'mpop_prov_ex' not found
 ```
 
 </details>
 
 <br>
 
-    #> Error in eval(expr, envir, enclos): object 'mpop_prov_ccw_table' not found
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="9" style="text-align: left;">
+Medicare Physician & Other Practitioners by Provider: Beneficiary
+Chronic Disease Percentages
+</td>
+</tr>
+<tr>
+<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Year
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Cancer
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+CKD
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Diabetes
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Hyperlipidemia
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Hypertension
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Rheumatoid Arthritis / Osteoarthritis
+</th>
+<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
+Avg. HCC Risk Score
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+2020
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.12
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.3
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.34
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.6
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.7
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+0.42
+</td>
+<td style="border-bottom: 4px double grey; text-align: left;">
+1.1213
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td colspan="9">
+Retrieved on Tuesday, November 01, 2022 at 05:18 AM
+</td>
+</tr>
+</tfoot>
+</table>
 
 ------------------------------------------------------------------------
 

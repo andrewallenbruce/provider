@@ -103,6 +103,7 @@
 #' provider_luhn(npi = "abcdefghij")
 #' }
 #' @autoglobal
+#' @keyword internal
 #' @export
 
 provider_luhn <- function(npi = NULL) {

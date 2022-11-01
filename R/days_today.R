@@ -18,6 +18,7 @@
 #'
 #' ex |> days_today(x)
 #' @autoglobal
+#' @keyword internal
 #' @export
 
 days_today <- function(df, start, colname = "age") {

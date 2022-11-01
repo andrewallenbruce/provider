@@ -63,6 +63,7 @@
 #' purrr::map_dfr(dates, ~provider_mpop_serv(npi = 1003000126, year = .x))
 #' }
 #' @autoglobal
+#' @keyword internal
 #' @export
 
 provider_mpop_serv <- function(npi         = NULL,
