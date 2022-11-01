@@ -4,29 +4,46 @@
 \alias{age_days}
 \title{Calculate Number of Days Between Two Dates}
 \usage{
-age_days(df, start, end)
+age_days(df, start, end, colname = "age")
 }
 \arguments{
-\item{df}{data frame containing two date columns}
+\item{df}{data frame containing date columns}
 
 \item{start}{column containing date(s) prior to end_date column}
 
 \item{end}{column containing date(s) after start_date column}
+
+\item{colname}{desired column name of output; default is "age"}
 }
 \value{
-data frame with an age column containing the number of days
-calculated.
+A \link[tibble:tibble-package]{tibble} with a named column
+containing the calculated number of days.
 }
 \description{
 Note: This calculation includes the end date in the sum (see example)
 }
 \examples{
-date_ex <- data.frame(x = seq.Date(as.Date("2021-01-01"),
-                    by = "month", length.out = 3),
-                    y = seq.Date(as.Date("2022-01-01"),
-                    by = "month", length.out = 3))
+date_ex <- tibble::tibble(x = seq.Date(as.Date("2021-01-01"),
+                          by = "month", length.out = 3),
+                          y = seq.Date(as.Date("2022-01-01"),
+                          by = "month", length.out = 3))
 
-age_days(df = date_ex, start = x, end = y)
+age_days(df = date_ex,
+         start = x,
+         end = y)
 
-date_ex |> age_days(x, y)
+date_ex |>
+age_days(x,
+         y,
+         colname = "days_between_x_y")
+
+date_ex |>
+age_days(start = x,
+end = lubridate::today(),
+colname = "days_since_x")
+
+date_ex |>
+age_days(x, y, "days_between_x_y") |>
+age_days(x, lubridate::today(), "days_since_x") |>
+age_days(y, lubridate::today(), colname = "days_since_y")
 }

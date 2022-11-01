@@ -11,6 +11,7 @@
 #'
 #' @autoglobal
 #' @export
+
 format_zipcode <- function(zip) {
 
   zip <- as.character(zip)

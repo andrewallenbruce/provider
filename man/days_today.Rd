@@ -4,14 +4,14 @@
 \alias{days_today}
 \title{Calculate Number of Days Between a Date and Today}
 \usage{
-days_today(df, date, name = days)
+days_today(df, start, colname = "age")
 }
 \arguments{
 \item{df}{data frame containing date columns}
 
-\item{date}{date column}
+\item{start}{date column}
 
-\item{name}{desired column name of output}
+\item{colname}{desired column name of output}
 }
 \value{
 data frame with a column containing the number of days
@@ -27,7 +27,7 @@ ex <- data.frame(x = c("02/05/92",
                        "2020-05-01",
                        "02-04-96"))
 
-days_today(df = ex, date = x, name = days)
+days_today(df = ex, date = x)
 
 ex |> days_today(x)
 }

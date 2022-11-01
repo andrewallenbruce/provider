@@ -1,8 +1,8 @@
 #' Calculate Number of Days Between a Date and Today
 #'
 #' @param df data frame containing date columns
-#' @param date date column
-#' @param name desired column name of output
+#' @param start date column
+#' @param colname desired column name of output
 #'
 #' @return data frame with a column containing the number of days
 #'    calculated.
@@ -14,24 +14,24 @@
 #'                        "2020-05-01",
 #'                        "02-04-96"))
 #'
-#' days_today(df = ex, date = x, name = days)
+#' days_today(df = ex, start = x)
 #'
 #' ex |> days_today(x)
 #' @autoglobal
 #' @export
 
-days_today <- function(df, date, name = days) {
+days_today <- function(df, start, colname = "age") {
 
   stopifnot(inherits(df, "data.frame"))
 
   results <- df |>
-    dplyr::mutate(date = datefixR::fix_date_char({{date}}, format = "mdy"),
-                  int = lubridate::interval(date, lubridate::today()),
+    dplyr::mutate(int = lubridate::interval({{ start }},
+                        lubridate::today()),
                   secs = lubridate::int_length(int),
                   mins = secs/60,
                   hrs = mins/60,
-                  "{{name}}" := abs(hrs/24)) |>
-    dplyr::select(!c(date, int, secs, mins, hrs))
+                  "{colname}" := abs(hrs/24)) |>
+    dplyr::select(!c(int, secs, mins, hrs))
 
   return(results)
 

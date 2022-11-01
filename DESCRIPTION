@@ -34,6 +34,7 @@ Suggests:
     glue,
     gt,
     gtExtras,
+    htmlTable,
     httptest2,
     janitor,
     kableExtra,
@@ -52,13 +53,12 @@ Suggests:
     tidyselect
 VignetteBuilder: 
     knitr
+Remotes: 
+    anthonynorth/roxyglobals
 Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-Roxygen: list(
-    markdown = TRUE,
-    roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
+Roxygen: list( markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet"))
 RoxygenNote: 7.2.1
-Remotes: 
-    anthonynorth/roxyglobals

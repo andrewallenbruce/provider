@@ -10,11 +10,11 @@ knitr::opts_chunk$set(
   echo      = TRUE, 
   message   = FALSE, 
   warning   = FALSE,
-  error = TRUE,
-  comment = "#>",
-  dpi = 150, 
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 150, 
   out.width = "100%",
-  fig.path = "man/figures/README-"
+  fig.path  = "man/figures/README-"
 )
 ```
 
@@ -34,19 +34,33 @@ The goal of `provider` is to provide performant and reliable open-source tools t
 
 <br>
 
- *  [NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
- *  [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
- *  [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
- *  [Medicare Provider and Supplier Taxonomy Crosswalk API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
- *  [Medicare Physician & Other Practitioners API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
- *  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
- *  [Medicare Revalidation Clinic Group Practice Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
- *  [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
- *  [Medicare Market Saturation & Utilization State-County API](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
- *  [Medicare Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
- *  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+   *  [NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
+   *  [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+   *  [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+   *  [Medicare Provider and Supplier Taxonomy Crosswalk API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+   *  [Medicare Physician & Other Practitioners API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+   *  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
+   *  [Medicare Revalidation Clinic Group Practice Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
+   *  [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+   *  [Medicare Market Saturation & Utilization State-County API](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
+   *  [Medicare Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+   *  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
  
 <br>
+
+Search for Providers:
+
+   * `provider_nppes()`   : by NPI, name, location, organization, taxonomy, etc.
+   * `provider_mppe()`    : who are actively approved to bill Medicare.
+   * `provider_moar()`    : who are legally eligible to order and refer in the Medicare program.
+   * `provider_mooa()`    : that have opted out of Medicare, along with their effective dates.
+   * `provider_mpstc()`   : eligible to enroll in Medicare programs with the proper provider taxonomy code.
+   * `provider_mrdd()`    : who are due to revalidate in the following six months.
+   * `provider_mpop()`    : and their utilization data across three related datasets and eight years.
+   * `provider_promdci()` : who do not have adequate contact information in the NPPES system.
+   * `provider_rcgpr()`   : and the group practice they reassign their billing to.
+   
+   
 
 ## Installation
 
@@ -70,12 +84,18 @@ You're billing for a healthcare provider and receive a `CO-8` denial on a claim 
 
 <br>
 
-```{r warning=FALSE}
+```{r}
 # Load library
 library(provider)
 
-# Query the NPPES API
-nppes_ex <- provider_nppes(npi = 1760485387)
+# Query the NPPES API by NPI
+nppes_ex <- provider_nppes(npi = 1083879860)
+
+# Or by Name, City, State, etc.
+# nppes_ex <- provider_nppes(first = "Chris", 
+#                            last  = "Aaron",
+#                            city  = "Cresson",
+#                            state = "PA")
 ```
 
 <br>
@@ -91,155 +111,210 @@ Unpack the API response with the `provider_unpack()` function:
 <br>
 
 ```{r}
-nppes_ex <- provider_unpack(nppes_ex)
+nppes_unpack <- provider_unpack(nppes_ex)
 ```
 
 <br>
 
 ```{r}
-nppes_ex
+nppes_unpack
 ```
+
 <br>
 
 Filter and wrangle the data for presentation:
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+nppes_table <- nppes_unpack |> 
+   dplyr::select("NPI"           = npi, 
+                 "Last Name"     = last_name,
+                 "Provider Type" = prov_type, 
+                 "Description"   = taxon_desc, 
+                 "Code"          = taxon_code, 
+                 "Primary"       = taxon_primary, 
+                 "State"         = taxon_state, 
+                 "License"       = taxon_license) |> 
+   dplyr::distinct(Primary, 
+                   .keep_all = TRUE) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "NPPES NPI Registry Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime),
+                        cgroup = c("", "Taxonomy Information"), 
+                        n.cgroup = c(3,5))
+```
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-nppes_ex |> 
-  dplyr::select("NPI"           = npi, 
-                "Last Name"     = last_name,
-                "Provider Type" = prov_type, 
-                "Code"          = taxon_code, 
-                "Primary"       = taxon_primary, 
-                "Description"   = taxon_desc, 
-                "State"         = taxon_state, 
-                "License"       = taxon_license) |> 
-  dplyr::distinct(Primary, .keep_all = TRUE) |> 
-  knitr::kable()
+nppes_table
 ```
 
-<br>
-
-What if you don't have the provider's NPI? You can search by first and/or last name, city, state:
 
 <br>
-
-```{r warning=FALSE}
-nppes_ex2 <- provider_nppes(first = "Paul", 
-                            last  = "Dewey",
-                            state = "MN") |> 
-                            provider_unpack()
-```
-
-<br>
-
-```{r echo=FALSE}
-nppes_ex2 |> 
-  dplyr::select("NPI"           = npi, 
-                "Last Name"     = last_name,
-                "Provider Type" = prov_type, 
-                "Code"          = taxon_code, 
-                "Primary"       = taxon_primary, 
-                "Description"   = taxon_desc, 
-                "State"         = taxon_state, 
-                "License"       = taxon_license) |> 
-  dplyr::distinct(Primary, .keep_all = TRUE) |> 
-  knitr::kable()
-```
-<br> 
 
 What if you need the provider's PECOS PAC ID or Enrollment ID? Using the `provider_mppe()` function, you can search Medicare's **Fee-For-Service Public Provider Enrollment API**:
 
 <br>
 
 ```{r}
-mppe_ex <- provider_mppe(1760485387)
+mppe_ex <- provider_mppe(nppes_unpack$npi[[1]])
 ```
+
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+mppe_table <- mppe_ex |> 
+   dplyr::select("NPI"             = npi, 
+                 "Last Name"       = last_name, 
+                 "PAC ID"    = pecos_asct_cntl_id, 
+                 "Enrollment ID" = enrlmt_id, 
+                 "Specialty"       = provider_type_desc, 
+                 "State"           = state_cd) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Fee-For-Service Public Provider Enrollment Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
 
 <br>
 
 ```{r echo=FALSE}
-mppe_ex |> dplyr::select(
-                "NPI"             = npi, 
-                "Last Name"       = last_name,
-                "PECOS PAC ID"    = pecos_asct_cntl_id, 
-                "PECOS Enroll ID" = enrlmt_id, 
-                "Specialty"       = provider_type_desc, 
-                "State"           = state_cd) |> 
-                knitr::kable()
+mppe_table
 ```
 
 <br>
 
-Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare's **Order and Referring API** with `provider_moar()`:
+Is a Provider currently eligible to:
+    *  Make referrals to Medicare Part B or a Home Health Agency (HHA)? 
+    *  Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? 
+
+<br>
+
+Search Medicare's **Order and Referring API** with `provider_moar()`:
 
 <br>
 
 ```{r}
-moar_ex <- provider_moar(1760485387)
+moar_ex <- provider_moar(nppes_unpack$npi[[1]])
 ```
+
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+moar_table <- moar_ex |> 
+   dplyr::select("NPI"        = npi, 
+                 "Last Name"  = last_name,
+                 "First Name" = first_name, 
+                 "Part B"     = partb, 
+                 "DME"        = dme,
+                 "HHA"        = hha, 
+                 "PMD"        = pmd) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Order and Referring Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
 
 <br>
 
 ```{r echo=FALSE}
-moar_ex |> dplyr::select(
-                "NPI"        = npi, 
-                "Last Name"  = last_name,
-                "First Name" = first_name, 
-                "Part B"     = partb, 
-                "DME"        = dme,
-                "HHA"        = hha, 
-                "PMD"        = pmd) |> 
-                knitr::kable()
+moar_table
 ```
 
-<br>
-
-You may need to find Medicare's specialty codes for this provider's taxonomies. Using the output from the NPPES search in the first example, you can search Medicare's **Provider and Supplier Taxonomy Crosswalk API** with `provider_mpstc()`:
+You may need to find Medicare's specialty codes for this provider's taxonomies. You can search Medicare's **Provider and Supplier Taxonomy Crosswalk API** with `provider_mpstc()`:
 
 <br>
 
 ```{r}
-mpstc_ex <- nppes_ex |> 
-            dplyr::distinct(taxon_code) |> 
-            dplyr::group_split(taxon_code) |> 
-            purrr::map_dfr(provider_mpstc)
+mpstc_ex <- provider_mpstc(nppes_unpack$taxon_code[[1]])
 ```
+
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+mpstc_table <- mpstc_ex |> 
+   dplyr::select("Taxonomy Code"                  = provider_taxonomy_code, 
+                 "Medicare Specialty Code"        = medicare_specialty_code,
+                 "Medicare Specialty Description" = medicare_provider_supplier_type_description,
+                 "Specialty"                      = medicare_provider_supplier_type_description, 
+                 "Classification"                 = provider_taxonomy_description_type_classification_specialization) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Provider and Supplier Taxonomy Crosswalk Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
 
 <br>
 
 ```{r echo=FALSE}
-mpstc_ex |> 
-  dplyr::select("Taxonomy Code"           = provider_taxonomy_code, 
-                "Medicare Specialty Code" = medicare_specialty_code,
-                "Specialty"               = medicare_provider_supplier_type_description, 
-                "Classification"          = provider_taxonomy_description_type_classification_specialization) |> 
-                knitr::kable()
+mpstc_table
 ```
 
-<br>
 
 You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare's **Revalidation Due Date API** with `provider_mrdd()`:
 
 <br>
 
 ```{r}
-mrdd_ex <- provider_mrdd(1760485387)
+mrdd_ex <- provider_mrdd(nppes_unpack$npi[[1]])
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+mrdd_table <- mrdd_ex |> 
+   dplyr::select("NPI"                   = national_provider_identifier, 
+                 "Last Name"             = last_name,
+                 "Enrollment ID"         = enrollment_id,
+                 "Enrollment Type"       = provider_type_text,
+                 "Enrollment Specialty"  = enrollment_specialty,
+                 "State"                 = enrollment_state_code,
+                 "Provider Type"         = provider_type_text, 
+                 "Revalidation Due Date" = revalidation_due_date) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Revalidation Due Date Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-mrdd_ex |> dplyr::select("NPI"                   = national_provider_identifier, 
-                         "Enrollment ID"         = enrollment_id,
-                         "Enrollment Type"       = enrollment_type,
-                         "Last Name"             = last_name,
-                         "State"                 = enrollment_state_code,
-                         "Provider Type"         = provider_type_text, 
-                         "Specialty"             = enrollment_specialty,
-                         "Revalidation Due Date" = revalidation_due_date) |> 
-                         knitr::kable()
+mrdd_table
 ```
 
 <br>
@@ -249,17 +324,9 @@ Providers may need to update their digital contact information in the NPPES syst
 <br>
 
 ```{r}
-promdci_ex <- provider_promdci(1760485387)
+provider_promdci(nppes_unpack$npi[[1]])
 ```
 
-<br>
-
-```{r echo=FALSE}
-promdci_ex |> 
-  dplyr::select("NPI"           = npi, 
-                "Provider Name" = provider_name) |> 
-                knitr::kable()
-```
 <br>
 
 You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `provider_mooa()`:
@@ -267,28 +334,40 @@ You can find out if a provider has opted out of Medicare by searching the **Medi
 <br>
 
 ```{r}
-mooa_ex <- provider_mooa(1114974490)
+mooa_ex <- provider_mooa(nppes_unpack$npi[[1]])
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+mooa_ex |> 
+   dplyr::select(NPI                        = npi,
+                 Last                       = last_name,
+                 First                      = first_name,
+                 "Optout Effective Date"    = optout_effective_date,
+                 "Optout End Date"          = optout_end_date,
+                 "Order & Refer Eligible"   = eligible_to_order_and_refer,
+                 Updated                    = last_updated,
+                 Specialty                  = specialty,
+                 Address                    = first_line_street_address,
+                 City                       = city_name,
+                 State                      = state_code) |>
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Revalidation Due Date Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-mooa_ex |> dplyr::select(
-           NPI                            = npi,
-           Last                           = last_name,
-           First                          = first_name,
-           optout_effective_date,
-           optout_end_date,
-           "Order & Refer Eligible"       = eligible_to_order_and_refer,
-           Updated                        = last_updated,
-           Specialty                      = specialty,
-           Address                        = first_line_street_address,
-           City                           = city_name,
-           State                          = state_code) |>
-           provider::days_today(optout_end_date) |> 
-           dplyr::rename("Opt-Out Begins" = optout_effective_date, 
-                         "Opt-Out Ends"   = optout_end_date) |> 
-           knitr::kable()
+mooa_table
 ```
 
 <br>
@@ -298,25 +377,41 @@ mooa_ex |> dplyr::select(
 <br>
 
 ```{r}
-rcgpr_ex <- provider_rcgpr(npi = 1760485387)
+rcgpr_ex <- provider_rcgpr(nppes_unpack$npi[[1]])
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+rcgpr_table <- rcgpr_ex |> 
+   dplyr::select("NPI"                           = individual_npi,
+                 "Last"                          = individual_last_name,
+                 "Type"                          = record_type,
+                 "PAC ID Group "                 = group_pac_id,
+                 "Enroll ID Group"               = group_enrollment_id,
+                 "Business Name"                 = group_legal_business_name,
+                 "Due Date Group"                = group_due_date,
+                 "PAC ID Ind"                    = individual_pac_id,
+                 "Enroll ID Ind"                 = individual_enrollment_id,
+                 "Due Date Ind"                  = individual_due_date,
+                 "Reassignments & Phys Assts"    = group_reassignments_and_physician_assistants,
+                 "Employer Associations"         = individual_total_employer_associations) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Revalidation Clinic Group Practice Reassignment Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-rcgpr_ex |> dplyr::select("NPI"                                  = individual_npi,
-                          "Last"                                 = individual_last_name,
-                          "Type"                                 = record_type,
-                          "PAC ID Group "                        = group_pac_id,
-                          "Enroll ID Group"                      = group_enrollment_id,
-                          "Business Name"                        = group_legal_business_name,
-                          "Due Date Group"                       = group_due_date,
-                          "PAC ID Ind"                           = individual_pac_id,
-                          "Enroll ID Ind"                        = individual_enrollment_id,
-                          "Due Date Ind"                         = individual_due_date,
-                          "Reassignments & Phys Assts"           = group_reassignments_and_physician_assistants,
-                          "Employer Associations"                = individual_total_employer_associations) |> 
-            knitr::kable()
+rcgpr_table
 ```
 
 <br>
@@ -328,26 +423,43 @@ Using `provider_mpop()`, you can access **Medicare's Physician & Other Practitio
 <br>
 
 ```{r}
-mpop_serv_ex <- provider_mpop(npi = 1760485387, 
+mpop_serv_ex <- provider_mpop(npi = nppes_unpack$npi[[1]], 
                               set = "serv",
                               year = "2020")
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+mpop_serv_table <- mpop_serv_ex |> 
+   dplyr::select(Year            = year,
+                 NPI             = rndrng_npi,
+                 Last            = rndrng_prvdr_last_org_name,
+                 City            = rndrng_prvdr_city,
+                 State           = rndrng_prvdr_state_abrvtn,
+                 PAR             = rndrng_prvdr_mdcr_prtcptg_ind,
+                 HCPCS           = hcpcs_cd,
+                 Beneficiaries   = tot_benes,
+                 "Services"      = tot_srvcs,
+                 "Avg Billed"    = avg_sbmtd_chrg,
+                 "Avg Allowed"   = avg_mdcr_alowd_amt,
+                 "Avg Payment"   = avg_mdcr_pymt_amt) |>
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Provider & Service Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-mpop_serv_ex |> dplyr::select(NPI             = rndrng_npi,
-                              Last            = rndrng_prvdr_last_org_name,
-                              City            = rndrng_prvdr_city,
-                              State           = rndrng_prvdr_state_abrvtn,
-                              PAR             = rndrng_prvdr_mdcr_prtcptg_ind,
-                              HCPCS           = hcpcs_cd,
-                              Beneficiaries   = tot_benes,
-                              "Services"      = tot_srvcs,
-                              "Avg Billed"    = avg_sbmtd_chrg,
-                              "Avg Allowed"   = avg_mdcr_alowd_amt,
-                              "Avg Payment"   = avg_mdcr_pymt_amt) |>
-                              knitr::kable()
+mpop_serv_table
 ```
 <br>
 
@@ -356,29 +468,42 @@ mpop_serv_ex |> dplyr::select(NPI             = rndrng_npi,
 <br>
 
 ```{r}
-mpop_geo_ex <- provider_mpop(hcpcs = "99214", 
-                             set   = "geo",
-                             year  = "2020")
+mpop_geo_ex <- provider_mpop(hcpcs   = "99214", 
+                             set     = "geo",
+                             geo_lvl = "National",
+                             year    = "2020")
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
+```{r}
+mpop_geo_table <- mpop_geo_ex |> 
+   dplyr::select(Year                       = year, 
+                 HCPCS                      = hcpcs_cd,
+                 Region                     = rndrng_prvdr_geo_desc,
+                 POS                        = place_of_srvc,
+                 Providers                  = tot_rndrng_prvdrs,
+                 Beneficiaries              = tot_benes, 
+                 Services                   = tot_srvcs, 
+                 "Avg Charge"               = avg_sbmtd_chrg, 
+                 "Avg Allowed"              = avg_mdcr_alowd_amt, 
+                 "Avg Payment"              = avg_mdcr_pymt_amt) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Geography & Service Search Results", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
 ```{r echo=FALSE}
-mpop_geo_ex |> dplyr::select(Year                                      = year,
-                             HCPCS                                     = hcpcs_cd,
-                             Level                                     = rndrng_prvdr_geo_lvl,
-                             Region                                    = rndrng_prvdr_geo_desc,
-                             FIPS                                      = rndrng_prvdr_geo_cd,
-                             POS                                       = place_of_srvc,
-                             Providers                                 = tot_rndrng_prvdrs,
-                             Beneficiaries                             = tot_benes, 
-                             Services                                  = tot_srvcs, 
-                             "Distinct Beneficiaries Per Day Services" = tot_bene_day_srvcs,
-                             "Avg Charge"                              = avg_sbmtd_chrg, 
-                             "Avg Allowed"                             = avg_mdcr_alowd_amt, 
-                             "Avg Payment"                             = avg_mdcr_pymt_amt, 
-                             "Avg Standard Pymt"                       = avg_mdcr_stdzd_amt) |> 
-                knitr::kable()
+mpop_geo_table
 ```
 
 <br>
@@ -388,34 +513,131 @@ mpop_geo_ex |> dplyr::select(Year                                      = year,
 <br>
 
 ```{r}
-mpop_prov_ex <- provider_mpop(npi  = 1003000134, 
+mpop_prov_ex <- provider_mpop(npi  = nppes_unpack$npi[[1]], 
                               set  = "prov",
                               year = "2020")
 ```
 
 <br>
 
-```{r echo=FALSE}
-mpop_prov_ex |> lobstr::tree()
-```
-
-<br>
-
-`provider_clia()` accesses **Medicare's Provider of Services File for Clinical Laboratories API**:
-
-<br>
+<details><summary>Code</summary>
 
 ```{r}
-clia_ex <- provider_clia(name = "carbon hill", 
-                         year = "2022")
+mpop_prov_totals_table <- mpop_prov_ex |> 
+   dplyr::select("Year"              = year,
+                 "Unique HCPCS"      = tot_hcpcs_cds,
+                 "Beneficiaries"     = tot_benes, 
+                 "Services"          = tot_srvcs, 
+                 "Charges Submitted" = tot_sbmtd_chrg,
+                 "Amount Allowed"    = tot_mdcr_alowd_amt,
+                 "Payments"          = tot_mdcr_pymt_amt) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Provider: Yearly Totals", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
 ```
+
+</details>
 
 <br>
 
 ```{r echo=FALSE}
-clia_ex |> lobstr::tree()
+mpop_prov_totals_table
 ```
 
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+mpop_prov_age_table <- mpop_prov_ex |> 
+   dplyr::select("Year"     = year,
+                 "Average Age" = bene_avg_age,
+                 "Under 65" = bene_age_lt_65_cnt,
+                 "65 - 74" = bene_age_65_74_cnt,
+                 "75 - 84" = bene_age_75_84_cnt,
+                 "Over 84" = bene_age_gt_84_cnt) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Provider: Beneficiary Age", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
+```{r echo=FALSE}
+mpop_prov_age_table
+```
+
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+mpop_prov_demo_table <- mpop_prov_ex |> 
+   dplyr::select("Year" = year,
+                 "Female" = bene_feml_cnt,
+                 "Male" = bene_male_cnt,
+                 "White" = bene_race_wht_cnt,
+                 "Black" = bene_race_black_cnt,
+                 "Dual" = bene_dual_cnt,
+                 "Non-Dual" = bene_ndual_cnt) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Provider: Beneficiary Demographics", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
+```{r echo=FALSE}
+mpop_prov_demo_table
+```
+
+<br>
+
+<br>
+
+<details><summary>Code</summary>
+
+```{r}
+mpop_prov_ccw_table <- mpop_prov_ex |> 
+   dplyr::select("Year" = year,
+                 "Cancer" = bene_cc_cncr_pct,
+                 "CKD" = bene_cc_ckd_pct,
+                 "Diabetes" = bene_cc_dbts_pct,
+                 "Hyperlipidemia" = bene_cc_hyplpdma_pct,
+                 "Hypertension" = bene_cc_hyprtnsn_pct,
+                 "Rheumatoid Arthritis / Osteoarthritis" = bene_cc_raoa_pct,
+                 "Avg. HCC Risk Score" = bene_avg_risk_scre) |> 
+   htmlTable::addHtmlTableStyle(align        = "l", 
+                                align.header = "l") |> 
+   htmlTable::htmlTable(caption = "Medicare Physician & Other Practitioners by Provider: Beneficiary Chronic Disease Percentages", 
+                        ctable = c("solid", "double"),
+                        tfoot = lubridate::stamp("Retrieved on Sunday, January 1, 1999 at 3:34 pm", 
+                                                 quiet = TRUE)(nppes_ex$datetime))
+```
+
+</details>
+
+<br>
+
+```{r echo=FALSE}
+mpop_prov_ccw_table
+```
+
+
+------------------------------------------------------------------------------
 
 Using packages like {gt} & {ggplot2}, you can create tables and graphs for reporting purposes:
 
