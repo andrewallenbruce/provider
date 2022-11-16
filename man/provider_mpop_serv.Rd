@@ -12,7 +12,7 @@ provider_mpop_serv(
   npi = NULL,
   last = NULL,
   first = NULL,
-  year = "2020",
+  year = 2020,
   clean_names = TRUE
 )
 }

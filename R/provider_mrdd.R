@@ -66,14 +66,14 @@ provider_mrdd <- function(npi         = NULL,
     msg = "Please check your internet connection.")
 
   # Medicare Revalidation Due Date Base URL
-  mrdd_url <- "https://data.cms.gov/data-api/v1/dataset/3746498e-874d-45d8-9c69-68603cafea60/data"
-
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request, verbose = FALSE, delay = 2)
+  http <- "https://"
+  site <- "data.cms.gov/data-api/v1/dataset/"
+  id   <- "3746498e-874d-45d8-9c69-68603cafea60"
+  end  <- "/data"
+  url  <- paste0(http, site, id, end)
 
   # Create request
-  req <- polite_req(mrdd_url)
+  req <- httr2::request(url)
 
   if (isTRUE(full)) {
 

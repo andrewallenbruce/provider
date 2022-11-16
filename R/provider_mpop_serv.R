@@ -69,7 +69,7 @@
 provider_mpop_serv <- function(npi         = NULL,
                                last        = NULL,
                                first       = NULL,
-                               year        = "2020",
+                               year        = 2020,
                                clean_names = TRUE) {
 
 
@@ -77,24 +77,24 @@ provider_mpop_serv <- function(npi         = NULL,
   attempt::stop_if_not(curl::has_internet() == TRUE,
                        msg = "Please check your internet connection.")
 
-  # Provider and Service URLs by Year
-  switch(year,
-         "2020" = id <- "92396110-2aed-4d63-a6a2-5d6207d46a29",
-         "2019" = id <- "5fccd951-9538-48a7-9075-6f02b9867868",
-         "2018" = id <- "02c0692d-e2d9-4714-80c7-a1d16d72ec66",
-         "2017" = id <- "7ebc578d-c2c7-46fd-8cc8-1b035eba7218",
-         "2016" = id <- "5055d307-4fb3-4474-adbb-a11f4182ee35",
-         "2015" = id <- "0ccba18d-b821-47c6-bb55-269b78921637",
-         "2014" = id <- "e6aacd22-1b89-4914-855c-f8dacbd2ec60",
-         "2013" = id <- "ebaf67d7-1572-4419-a053-c8631cc1cc9b")
+  # Provider and Service URLs by Year ---------------------------------------
+  id <- dplyr::case_when(year == 2020 ~ "92396110-2aed-4d63-a6a2-5d6207d46a29",
+                         year == 2019 ~ "5fccd951-9538-48a7-9075-6f02b9867868",
+                         year == 2018 ~ "02c0692d-e2d9-4714-80c7-a1d16d72ec66",
+                         year == 2017 ~ "7ebc578d-c2c7-46fd-8cc8-1b035eba7218",
+                         year == 2016 ~ "5055d307-4fb3-4474-adbb-a11f4182ee35",
+                         year == 2015 ~ "0ccba18d-b821-47c6-bb55-269b78921637",
+                         year == 2014 ~ "e6aacd22-1b89-4914-855c-f8dacbd2ec60",
+                         year == 2013 ~ "ebaf67d7-1572-4419-a053-c8631cc1cc9b")
 
-
-  # Paste URL together
-  http <- "https://data.cms.gov/data-api/v1/dataset/"
-  mpop_url <- paste0(http, id, "/data")
+  # Provider and Service Base URL
+  http <- "https://"
+  site <- "data.cms.gov/data-api/v1/dataset/"
+  end  <- "/data"
+  url  <- paste0(http, site, id, end)
 
   # Create request
-  req <- httr2::request(mpop_url)
+  req <- httr2::request(url)
 
   # Search by NPI -----------------------------------------------------------
   if (!is.null(npi)) {
@@ -112,7 +112,10 @@ provider_mpop_serv <- function(npi         = NULL,
     } else {
 
       # Search by Other Parameters ------------------------------------------
-      args <- stringr::str_c(c(last = last, first = first), collapse = ",")
+      args <- stringr::str_c(c(npi = npi,
+                               last = last,
+                               first = first),
+                             collapse = ",")
 
       # Check that at least one argument is not null
       attempt::stop_if_all(args, is.null, "Specify at least one argument")

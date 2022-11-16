@@ -75,10 +75,14 @@ provider_moar <- function(npi         = NULL,
     msg = "Please check your internet connection.")
 
   # Medicare Order and Referring Base URL
-  moar_url <- "https://data.cms.gov/data-api/v1/dataset/c99b5865-1119-4436-bb80-c5af2773ea1f/data"
+  http <- "https://"
+  site <- "data.cms.gov/data-api/v1/dataset/"
+  id   <- "c99b5865-1119-4436-bb80-c5af2773ea1f"
+  end  <- "/data"
+  url  <- paste0(http, site, id, end)
 
   # Create request
-  req <- httr2::request(moar_url)
+  req <- httr2::request(url)
 
   if (isTRUE(full)) {
 
