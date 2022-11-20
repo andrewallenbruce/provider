@@ -170,12 +170,13 @@ Provider Identifier</a>:</p>
 <span></span>
 <span><span class="co"># Query the NPPES API</span></span>
 <span><span class="va">nppes_npi_resp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Timeout was reached: [npiregistry.cms.hhs.gov] Resolving timed out after 10000 milliseconds</span></span>
 <span></span>
 <span><span class="co"># View the results</span></span>
 <span><span class="va">nppes_npi_resp</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_npi_resp' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-11-20 <span style="color: #949494;">23:45:57</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was
 searched for (<code>search</code>), the <code>datetime</code> of the
@@ -183,10 +184,32 @@ query, an <code>outcome</code> status column and
 <code>data_lists</code>, a list-column containing a collection of
 variables and nested data frames:</p>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; Error in rlang::is_environment(x): object 'nppes_npi_resp' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt;   ├─created_epoch: <span style="color: #0000BB;">"1546027807000"</span></span></span>
+<span><span class="co">#&gt;   ├─enumeration_type: <span style="color: #0000BB;">"NPI-1"</span></span></span>
+<span><span class="co">#&gt;   ├─last_updated_epoch: <span style="color: #0000BB;">"1592271738000"</span></span></span>
+<span><span class="co">#&gt;   ├─number: <span style="color: #0000BB;">"1114499340"</span></span></span>
+<span><span class="co">#&gt;   ├─addresses: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span>...</span></span>
+<span><span class="co">#&gt;   ├─practiceLocations: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span>...</span></span>
+<span><span class="co">#&gt;   ├─basic: <span style="color: #555555;">S3&lt;data.frame&gt;</span>...</span></span>
+<span><span class="co">#&gt;   ├─taxonomies: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span>...</span></span>
+<span><span class="co">#&gt;   ├─identifiers: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   ├─endpoints: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   └─other_names: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;     └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre>
 <p><br><br></p>
 <p>The <strong>variables</strong> returned are as follows:</p>
-<pre><code><span><span class="co">#&gt; Error in rlang::is_environment(x): object 'nppes_npi_resp' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; ├─created_epoch: <span style="color: #0000BB;">"1546027807000"</span></span></span>
+<span><span class="co">#&gt; ├─enumeration_type: <span style="color: #0000BB;">"NPI-1"</span></span></span>
+<span><span class="co">#&gt; ├─last_updated_epoch: <span style="color: #0000BB;">"1592271738000"</span></span></span>
+<span><span class="co">#&gt; └─number: <span style="color: #0000BB;">"1114499340"</span></span></span></code></pre>
 <p><br><br></p>
 <ul>
 <li>
@@ -211,7 +234,54 @@ respectively.</p>
 <p><br></p>
 <p>The <strong>list-columns</strong> returned are as follows:</p>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; Error in rlang::is_environment(x): object 'nppes_npi_resp' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; ├─addresses: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; │   ├─country_code&lt;chr [2]&gt;: <span style="color: #0000BB;">"US", "US"</span></span></span>
+<span><span class="co">#&gt; │   ├─country_name&lt;chr [2]&gt;: <span style="color: #0000BB;">"United States", "United States"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_purpose&lt;chr [2]&gt;: <span style="color: #0000BB;">"LOCATION", "MAILING"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_type&lt;chr [2]&gt;: <span style="color: #0000BB;">"DOM", "DOM"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_1&lt;chr [2]&gt;: <span style="color: #0000BB;">"5353 MISSION...", "1830 MARKET..."</span></span></span>
+<span><span class="co">#&gt; │   ├─city&lt;chr [2]&gt;: <span style="color: #0000BB;">"SAN DIEGO", "SAN DIEGO"</span></span></span>
+<span><span class="co">#&gt; │   ├─state&lt;chr [2]&gt;: <span style="color: #0000BB;">"CA", "CA"</span></span></span>
+<span><span class="co">#&gt; │   ├─postal_code&lt;chr [2]&gt;: <span style="color: #0000BB;">"921081306", "921022851"</span></span></span>
+<span><span class="co">#&gt; │   └─telephone_number&lt;chr [2]&gt;: <span style="color: #0000BB;">"619-497-2836", "NA"</span></span></span>
+<span><span class="co">#&gt; ├─practiceLocations: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; │   ├─country_code: <span style="color: #0000BB;">"US"</span></span></span>
+<span><span class="co">#&gt; │   ├─country_name: <span style="color: #0000BB;">"United States"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_purpose: <span style="color: #0000BB;">"LOCATION"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_type: <span style="color: #0000BB;">"DOM"</span></span></span>
+<span><span class="co">#&gt; │   ├─address_1: <span style="color: #0000BB;">"7440 RONSON RD"</span></span></span>
+<span><span class="co">#&gt; │   ├─city: <span style="color: #0000BB;">"SAN DIEGO"</span></span></span>
+<span><span class="co">#&gt; │   ├─state: <span style="color: #0000BB;">"CA"</span></span></span>
+<span><span class="co">#&gt; │   ├─postal_code: <span style="color: #0000BB;">"921111508"</span></span></span>
+<span><span class="co">#&gt; │   └─telephone_number: <span style="color: #0000BB;">"347-840-3256"</span></span></span>
+<span><span class="co">#&gt; ├─basic: <span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; │ ├─first_name: <span style="color: #0000BB;">"DOMINICK"</span></span></span>
+<span><span class="co">#&gt; │ ├─last_name: <span style="color: #0000BB;">"LOUDA"</span></span></span>
+<span><span class="co">#&gt; │ ├─credential: <span style="color: #0000BB;">"DPT"</span></span></span>
+<span><span class="co">#&gt; │ ├─sole_proprietor: <span style="color: #0000BB;">"NO"</span></span></span>
+<span><span class="co">#&gt; │ ├─gender: <span style="color: #0000BB;">"M"</span></span></span>
+<span><span class="co">#&gt; │ ├─enumeration_date: <span style="color: #0000BB;">"2018-12-28"</span></span></span>
+<span><span class="co">#&gt; │ ├─last_updated: <span style="color: #0000BB;">"2020-06-15"</span></span></span>
+<span><span class="co">#&gt; │ ├─certification_date: <span style="color: #0000BB;">"2020-06-15"</span></span></span>
+<span><span class="co">#&gt; │ ├─status: <span style="color: #0000BB;">"A"</span></span></span>
+<span><span class="co">#&gt; │ └─name_prefix: <span style="color: #0000BB;">"Dr."</span></span></span>
+<span><span class="co">#&gt; ├─taxonomies: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; │ └─<span style="color: #555555;">S3&lt;data.frame&gt;</span></span></span>
+<span><span class="co">#&gt; │   ├─code: <span style="color: #0000BB;">"225100000X"</span></span></span>
+<span><span class="co">#&gt; │   ├─taxonomy_group: <span style="color: #0000BB;">""</span></span></span>
+<span><span class="co">#&gt; │   ├─desc: <span style="color: #0000BB;">"Physical Therapist"</span></span></span>
+<span><span class="co">#&gt; │   ├─state: <span style="color: #0000BB;">"CA"</span></span></span>
+<span><span class="co">#&gt; │   ├─license: <span style="color: #0000BB;">"295997"</span></span></span>
+<span><span class="co">#&gt; │   └─primary: <span style="color: #0000BB;">TRUE</span></span></span>
+<span><span class="co">#&gt; ├─identifiers: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; ├─endpoints: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; │ └─<span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; └─other_names: <span style="color: #555555;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt;   └─<span style="color: #555555;">&lt;list&gt;</span></span></span></code></pre>
 <p><br><br></p>
 <ul>
 <li>
@@ -249,7 +319,18 @@ NPPES by providers.</p>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_npi_resp</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in dplyr::filter(df, outcome == "Errors"): object 'nppes_npi_resp' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 34</span></span></span>
+<span><span class="co">#&gt;   npi     prov_…¹ first…² last_…³ crede…⁴ sole_…⁵ gender enume…⁶ last_…⁷ certi…⁸</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 111449… Indivi… DOMINI… LOUDA   DPT     FALSE   M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 111449… Indivi… DOMINI… LOUDA   DPT     FALSE   M      2018-1… 2020-0… 2020-0…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 24 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;, pract_country_abb &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_country_name &lt;chr&gt;, pract_address_purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pract_address_type &lt;chr&gt;, pract_address_1 &lt;chr&gt;, pract_city &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 </div>
@@ -272,10 +353,10 @@ function to loop over the list:</p>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-11-16 <span style="color: #949494;">20:39:50</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-11-16 <span style="color: #949494;">20:39:50</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-11-16 <span style="color: #949494;">20:39:51</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-11-16 <span style="color: #949494;">20:39:53</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-11-20 <span style="color: #949494;">23:45:58</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-11-20 <span style="color: #949494;">23:46:00</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-11-20 <span style="color: #949494;">23:46:01</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-11-20 <span style="color: #949494;">23:46:02</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpacking the response is similar, adding only dplyr’s
 <code>group_split()</code> function to the chain. The parameter entered

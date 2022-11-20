@@ -112,6 +112,10 @@ drug coverage, available for several geographical areas.</p>
     </div>
 
     <div class="section level2">
+    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
+    <p>Centers for Medicare &amp; Medicaid Services</p>
+    </div>
+    <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>Calendar year of Medicare enrollment</p></dd>
@@ -171,39 +175,29 @@ information on yearly trends. The dataset is based on
 information gathered from CMS administrative enrollment
 data for beneficiaries enrolled in the Medicare program
 available from the CMS Chronic Conditions Data Warehouse.</p><div class="section">
-<h3 id="data-update-frequency">Data Update Frequency<a class="anchor" aria-label="anchor" href="#data-update-frequency"></a></h3>
-
-
-<p>Monthly</p>
-</div>
-
-<div class="section">
-<h3 id="data-source">Data Source<a class="anchor" aria-label="anchor" href="#data-source"></a></h3>
-
-
-<p>Centers for Medicare &amp; Medicaid Services</p>
-</div>
-
-<div class="section">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment" class="external-link">Medicare Monthly Enrollment</a></p></li>
 </ul></div>
 
     </div>
+    <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>Update Frequency: <strong>Monthly</strong></p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">provider_mme</span><span class="op">(</span>year      <span class="op">=</span> <span class="fl">2018</span>,</span></span>
-<span class="r-in"><span>             month     <span class="op">=</span> <span class="st">"Year"</span>,</span></span>
-<span class="r-in"><span>             geo_lvl   <span class="op">=</span> <span class="st">"County"</span>,</span></span>
-<span class="r-in"><span>             state_abb <span class="op">=</span> <span class="st">"AL"</span>,</span></span>
-<span class="r-in"><span>             county    <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">monthly_enroll</span><span class="op">(</span>year      <span class="op">=</span> <span class="fl">2018</span>,</span></span>
+<span class="r-in"><span>               month     <span class="op">=</span> <span class="st">"Year"</span>,</span></span>
+<span class="r-in"><span>               geo_lvl   <span class="op">=</span> <span class="st">"County"</span>,</span></span>
+<span class="r-in"><span>               state_abb <span class="op">=</span> <span class="st">"AL"</span>,</span></span>
+<span class="r-in"><span>               county    <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">provider_mme</span><span class="op">(</span>year    <span class="op">=</span> <span class="fl">2021</span>,</span></span>
-<span class="r-in"><span>             month   <span class="op">=</span> <span class="st">"August"</span>,</span></span>
-<span class="r-in"><span>             geo_lvl <span class="op">=</span> <span class="st">"County"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">monthly_enroll</span><span class="op">(</span>year    <span class="op">=</span> <span class="fl">2021</span>,</span></span>
+<span class="r-in"><span>               month   <span class="op">=</span> <span class="st">"August"</span>,</span></span>
+<span class="r-in"><span>               geo_lvl <span class="op">=</span> <span class="st">"County"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

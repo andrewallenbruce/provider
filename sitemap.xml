@@ -64,6 +64,15 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/age_days.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/cc_multiple.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/cc_specific.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/chronic_conditions.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/days_today.html</loc>
   </url>
   <url>
@@ -74,6 +83,12 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/monthly_enroll.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/order_refer.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_service.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_clia.html</loc>
