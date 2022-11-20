@@ -3,6 +3,9 @@
 \name{monthly_enroll}
 \alias{monthly_enroll}
 \title{Search the Medicare Monthly Enrollment API}
+\source{
+Centers for Medicare & Medicaid Services
+}
 \usage{
 monthly_enroll(
   year = NULL,
@@ -59,32 +62,25 @@ information on yearly trends. The dataset is based on
 information gathered from CMS administrative enrollment
 data for beneficiaries enrolled in the Medicare program
 available from the CMS Chronic Conditions Data Warehouse.
-\subsection{Data Update Frequency}{
-
-Monthly
-}
-
-\subsection{Data Source}{
-
-Centers for Medicare & Medicaid Services
-}
-
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment}{Medicare Monthly Enrollment}
 }
 }
 }
+\note{
+Update Frequency: \strong{Monthly}
+}
 \examples{
 \dontrun{
-provider_mme(year      = 2018,
-             month     = "Year",
-             geo_lvl   = "County",
-             state_abb = "AL",
-             county    = "Autauga")
+monthly_enroll(year      = 2018,
+               month     = "Year",
+               geo_lvl   = "County",
+               state_abb = "AL",
+               county    = "Autauga")
 
-provider_mme(year    = 2021,
-             month   = "August",
-             geo_lvl = "County")
+monthly_enroll(year    = 2021,
+               month   = "August",
+               geo_lvl = "County")
 }
 }

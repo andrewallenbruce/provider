@@ -21,14 +21,11 @@
 #'    data for beneficiaries enrolled in the Medicare program
 #'    available from the CMS Chronic Conditions Data Warehouse.
 #'
-#' ## Data Update Frequency
-#' Monthly
-#'
-#' ## Data Source
-#' Centers for Medicare & Medicaid Services
-#'
 #' ## Links
 #' * [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Monthly**
 #'
 #' @param year Calendar year of Medicare enrollment
 #' @param month Month of Medicare enrollment
@@ -45,15 +42,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' provider_mme(year      = 2018,
-#'              month     = "Year",
-#'              geo_lvl   = "County",
-#'              state_abb = "AL",
-#'              county    = "Autauga")
+#' monthly_enroll(year      = 2018,
+#'                month     = "Year",
+#'                geo_lvl   = "County",
+#'                state_abb = "AL",
+#'                county    = "Autauga")
 #'
-#' provider_mme(year    = 2021,
-#'              month   = "August",
-#'              geo_lvl = "County")
+#' monthly_enroll(year    = 2021,
+#'                month   = "August",
+#'                geo_lvl = "County")
 #' }
 #' @autoglobal
 #' @export
@@ -74,14 +71,14 @@ monthly_enroll <- function(year        = NULL,
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
-    ~x,                  ~y,
-    "YEAR",              year,
-    "MONTH",             month,
-    "BENE_GEO_LVL",      geo_lvl,
+                     ~x,        ~y,
+                 "YEAR",      year,
+                "MONTH",     month,
+         "BENE_GEO_LVL",   geo_lvl,
     "BENE_STATE_ABRVTN", state_abb,
-    "BENE_STATE_DESC",   state,
-    "BENE_COUNTY_DESC",  county,
-    "BENE_FIPS_CD",      fips)
+      "BENE_STATE_DESC",     state,
+     "BENE_COUNTY_DESC",    county,
+         "BENE_FIPS_CD",      fips)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
