@@ -1,8 +1,15 @@
-#' Search the Medicare Specific Chronic Conditions API
+#' Search the Medicare Multiple Chronic Conditions API
 #'
-#' @description Information on prevalence, use and spending by count of select chronic conditions among Original Medicare (or fee-for-service) beneficiaries.
+#' @description Information on prevalence, use and spending by count of select
+#'    chronic conditions among Original Medicare (or fee-for-service)
+#'    beneficiaries.
 #'
-#' @details The Multiple Chronic Conditions dataset provides information on the number of chronic conditions among Original Medicare beneficiaries. The dataset contains prevalence, use and spending organized by geography and the count of chronic conditions from the set of select 21 chronic conditions. The count of conditions is grouped into four categories (0-1, 2-3, 4-5 and 6 or more).
+#' @details The Multiple Chronic Conditions dataset provides information on
+#'    the number of chronic conditions among Original Medicare beneficiaries.
+#'    The dataset contains prevalence, use and spending organized by geography
+#'    and the count of chronic conditions from the set of select 21 chronic
+#'    conditions. The count of conditions is grouped into four categories
+#'    (0-1, 2-3, 4-5 and 6 or more).
 #'
 #' ## Links
 #' * [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
@@ -10,7 +17,8 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
 #'
-#' @param year Calendar year of Medicare enrollment
+#' @param year YYYY, calendar year of Medicare enrollment. 2007-2018 data is
+#'    currently available.
 #' @param geo_lvl Geographic level of data; options are "National", "State",
 #'    and "County"
 #' @param geo_desc The state and/or county where the Medicare beneficiary
@@ -40,7 +48,7 @@
 #'    Asian/Pacific Islander, Hispanic, and American Indian/Alaska Native.
 #'    All the chronic condition reports use the variable RTI_RACE_CD, which
 #'    is available on the Master Beneficiary Files in the CCW. For
-#'    Bene_Demo_Lvl='Dual Status',beneficiaries can be classified as
+#'    Bene_Demo_Lvl='Dual Status', beneficiaries can be classified as
 #'    'Medicare & Medicaid' or 'Medicare Only'. Beneficiares enrolled in
 #'    both Medicare and Medicaid are known as “dual eligibles.” Medicare
 #'    beneficiaries are classified as dual eligibles if in any month in the
@@ -73,38 +81,38 @@
 #'    beneficiary was admitted to an inpatient setting.
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
+#' @param lowercase Convert column names to lowercase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
-#' monthly_enroll(year      = 2018,
-#'                month     = "Year",
-#'                geo_lvl   = "County",
-#'                state_abb = "AL",
-#'                county    = "Autauga")
+#' cc_multiple(year     = 2018,
+#'             geo_lvl  = "State",
+#'             geo_desc = "California")
 #'
-#' monthly_enroll(year    = 2021,
-#'                month   = "August",
-#'                geo_lvl = "County")
+#' cc_multiple(year     = 2007,
+#'             geo_lvl  = "National",
+#'             demo_lvl = "Race")
 #' }
 #' @autoglobal
 #' @export
 
-cc_multiple <- function(year = NULL,
-                               geo_lvl = NULL,
-                               geo_desc = NULL,
-                               fips = NULL,
-                               age_lvl = NULL,
-                               demo_lvl = NULL,
-                               demo_desc = NULL,
-                               mcc = NULL,
-                               prevalence = NULL,
-                               stnd_pymt_pc = NULL,
-                               pymt_pc = NULL,
-                               readmit_rate = NULL,
-                               er_vis_per1k = NULL,
-                               clean_names = TRUE) {
+cc_multiple <- function(year         = 2018,
+                        geo_lvl      = NULL,
+                        geo_desc     = NULL,
+                        fips         = NULL,
+                        age_lvl      = NULL,
+                        demo_lvl     = NULL,
+                        demo_desc    = NULL,
+                        mcc          = NULL,
+                        prevalence   = NULL,
+                        stnd_pymt_pc = NULL,
+                        pymt_pc      = NULL,
+                        readmit_rate = NULL,
+                        er_vis_per1k = NULL,
+                        clean_names  = TRUE,
+                        lowercase    = TRUE) {
 
   # dataset version ids by year ---------------------------------------------
   id <- dplyr::case_when(year == 2018 ~ "f6e5faa2-047d-49f9-88bf-d02354d25d88",
@@ -161,10 +169,14 @@ cc_multiple <- function(year = NULL,
   results <- resp |>
     httr2::resp_body_json(check_type = FALSE,
                           simplifyVector = TRUE) |>
-    tibble::tibble()
+    tibble::tibble() |>
+    dplyr::mutate(Year = year) |>
+    dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results |> janitor::clean_names()}
+  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
+  # lowercase ---------------------------------------------------------------
+  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
 
   return(results)
 }

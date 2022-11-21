@@ -32,27 +32,14 @@
 #' @param year Year between 2010-2022, in YYYY format
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
-#' @param full If true, downloads the first 1000 rows of data;
-#'    default is `FALSE`.
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results with the
-#'    following columns:
-#'    \describe{
-#'    \item{prvdr_ctgry_sbtyp_cd}{Identifies the subtype of provider within the primary category. (01 = CLIA88 Lab)}
-#'    \item{prvdr_ctgry_cd}{Identifies the type of provider participating in the Medicare/Medicaid program. (22 = CLIA Lab)}
-#'    \item{chow_cnt}{Number of times this provider has undergone a change of ownership.}
-#'    \item{chow_dt}{Effective date of the most recent change of ownership for this provider.}
-#'    \item{city_name}{City in which the provider is physically located.}
-#'    }
-#'
+#' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
 #' \dontrun{
 #' provider_clia(name = "carbon hill", year = "2022")
 #'
 #' provider_clia(city = "alabaster")
 #'
-#' # Download First 1,000 Rows of Dataset =====================================
-#' provider_clia(full = TRUE)
 #' }
 #' @autoglobal
 #' @export
@@ -60,95 +47,76 @@
 provider_clia <- function(name = NULL,
                           city = NULL,
                           state = NULL,
-                          year = "2022",
-                          clean_names = TRUE,
-                          full = FALSE
-) {
+                          year = 2022,
+                          clean_names = TRUE) {
 
-  # Check internet connection
-  attempt::stop_if_not(
-    curl::has_internet() == TRUE,
-    msg = "Please check your internet connection.")
+  # dataset version ids by year ---------------------------------------------
+  id <- dplyr::case_when(year == 2022 ~ "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
+                         year == 2021 ~ "0a1e9e1d-ca8a-4fde-bfb8-1436973f18c4",
+                         year == 2020 ~ "0ac881d5-3742-4d71-85c0-b94cacf2c3f7",
+                         year == 2019 ~ "cf000286-6a42-4031-81dd-aaa4fc8446fc",
+                         year == 2018 ~ "4428eca4-3d4a-44e8-b146-df4e4cdba812",
+                         year == 2017 ~ "97285b4b-ccce-4834-bbe1-05050665e498",
+                         year == 2016 ~ "f68318d3-d74f-4e81-9b46-2d696ac599bb",
+                         year == 2015 ~ "3e4c89ea-3e3f-4e29-959b-00f257c4893f",
+                         year == 2014 ~ "cd7be382-7736-4411-a224-f01728cddae1",
+                         year == 2013 ~ "3d21bf00-189b-4d5b-9cf7-75f88b849f71",
+                         year == 2012 ~ "d5f8f520-824a-4ccb-bb99-25f83bba13f4",
+                         year == 2011 ~ "c7f8619d-945f-4d8b-9747-f1b3f2e56c84",
+                         year == 2010 ~ "3b635cea-fa5e-42de-ba61-4ba2f88e032f")
 
-  switch(year,
-         "2022" = yr <- "d3eb38ac-d8e9-40d3-b7b7-6205d3d1dc16",
-         "2021" = yr <- "0a1e9e1d-ca8a-4fde-bfb8-1436973f18c4",
-         "2020" = yr <- "0ac881d5-3742-4d71-85c0-b94cacf2c3f7",
-         "2019" = yr <- "cf000286-6a42-4031-81dd-aaa4fc8446fc",
-         "2018" = yr <- "4428eca4-3d4a-44e8-b146-df4e4cdba812",
-         "2017" = yr <- "97285b4b-ccce-4834-bbe1-05050665e498",
-         "2016" = yr <- "f68318d3-d74f-4e81-9b46-2d696ac599bb",
-         "2015" = yr <- "3e4c89ea-3e3f-4e29-959b-00f257c4893f",
-         "2014" = yr <- "cd7be382-7736-4411-a224-f01728cddae1",
-         "2013" = yr <- "3d21bf00-189b-4d5b-9cf7-75f88b849f71",
-         "2012" = yr <- "d5f8f520-824a-4ccb-bb99-25f83bba13f4",
-         "2011" = yr <- "c7f8619d-945f-4d8b-9747-f1b3f2e56c84",
-         "2010" = yr <- "3b635cea-fa5e-42de-ba61-4ba2f88e032f"
-  )
+  # param_format ------------------------------------------------------------
+  param_format <- function(param, arg) {
+    if (is.null(arg)) {param <- NULL} else {
+      paste0("filter[", param, "]=", arg, "&")}}
 
-  # Paste URL together
-  http <- "https://data.cms.gov/data-api/v1/dataset/"
-  clia_url <- paste0(http, yr, "/data")
+  # args tribble ------------------------------------------------------------
+  args <- tibble::tribble(
+    ~x,         ~y,
+    "Rndrng_NPI",        npi,
+    "Rndrng_Prvdr_Last_Org_Name",   last_org,
+    "Rndrng_Prvdr_First_Name",      first,
+    "Rndrng_Prvdr_Crdntls",       cred,
+    "Rndrng_Prvdr_Gndr",     gender,
+    "Rndrng_Prvdr_Ent_Cd",       type,
+    "Rndrng_Prvdr_City",       city,
+    "Rndrng_Prvdr_State_Abrvtn",  state_abb,
+    "Rndrng_Prvdr_State_FIPS",       fips,
+    "Rndrng_Prvdr_Zip5",        zip,
+    "Rndrng_Prvdr_RUCA",       ruca,
+    "Rndrng_Prvdr_Cntry",    country,
+    "Rndrng_Prvdr_Type",  specialty,
+    "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",    par_ind,
+    "HCPCS_Cd", hcpcs_code,
+    "HCPCS_Drug_Ind",   drug_ind,
+    "Place_Of_Srvc",        pos)
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
+  # map param_format and collapse -------------------------------------------
+  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
+    stringr::str_c(collapse = "")
 
-  # Create request
-  req <- polite_req(clia_url)
+  # build URL ---------------------------------------------------------------
+  http   <- "https://data.cms.gov/data-api/v1/dataset/"
+  post   <- "/data.json?"
+  url    <- paste0(http, id, post, params_args)
 
-  if (isTRUE(full)) {
+  # create request ----------------------------------------------------------
+  req <- httr2::request(url)
 
-    # Send and save response
-    resp <- req |>
-      httr2::req_url_query() |>
-      httr2::req_perform()
+  # send response -----------------------------------------------------------
+  resp <- req |> httr2::req_perform()
 
-  } else {
+  # parse response ----------------------------------------------------------
+  results <- resp |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE) |>
+    tibble::tibble() |>
+    dplyr::mutate(Year = year) |>
+    dplyr::relocate(Year)
 
-    # Create list of arguments
-    arg <- stringr::str_c(c(
-      name = name,
-      city = city,
-      state = state
-    ), collapse = ",")
+  # clean names -------------------------------------------------------------
+  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
+  # lowercase ---------------------------------------------------------------
+  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
 
-    # Check that at least one argument is not null
-    attempt::stop_if_all(arg, is.null,
-                         "You need to specify at least one argument")
-
-    # Send and save response
-    resp <- req |>
-      httr2::req_url_query(keyword = arg) |>
-      httr2::req_throttle(50 / 60) |>
-      httr2::req_perform()
-
-    # Save time of API query
-    datetime <- resp |> httr2::resp_date()
-
-  }
-
-  # Parse JSON response and save results
-  results <- resp |> httr2::resp_body_json(
-    check_type = FALSE,
-    simplifyVector = TRUE)
-
-  # Empty List - NPI is not in the database
-  if (isTRUE(insight::is_empty_object(results))) {
-
-    message("Search returned nothing.")
-
-  } else {
-
-    # Clean names with janitor
-    if (isTRUE(clean_names)) {
-
-      results <- results |>
-        janitor::clean_names()
-    }
-
-    return(results)
-  }
+  return(results)
 }

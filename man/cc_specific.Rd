@@ -8,7 +8,7 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 cc_specific(
-  year = NULL,
+  year = 2018,
   geo_lvl = NULL,
   geo_desc = NULL,
   fips = NULL,
@@ -21,11 +21,13 @@ cc_specific(
   pymt_pc = NULL,
   readmit_rate = NULL,
   er_vis_per1k = NULL,
-  clean_names = TRUE
+  clean_names = TRUE,
+  lowercase = TRUE
 )
 }
 \arguments{
-\item{year}{Calendar year of Medicare enrollment}
+\item{year}{YYYY, calendar year of Medicare enrollment. 2007-2018 data is
+currently available.}
 
 \item{geo_lvl}{Geographic level of data; options are "National", "State",
 and "County"}
@@ -105,6 +107,8 @@ beneficiary was admitted to an inpatient setting.}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
+
+\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -152,14 +156,12 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontrun{
-monthly_enroll(year      = 2018,
-               month     = "Year",
-               geo_lvl   = "County",
-               state_abb = "AL",
-               county    = "Autauga")
+cc_specific(year     = 2018,
+            geo_lvl  = "State",
+            geo_desc = "California")
 
-monthly_enroll(year    = 2021,
-               month   = "August",
-               geo_lvl = "County")
+cc_specific(year     = 2007,
+            geo_lvl  = "National",
+            demo_lvl = "Race")
 }
 }

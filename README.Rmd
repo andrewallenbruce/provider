@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# `provider` <img src="man/figures/logo.svg" align="right" height="150" />
+# `provider` <img src="man/figures/logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/R-CMD-check.yaml)
@@ -48,20 +48,6 @@ The goal of `provider` is to provide performant and reliable open-source tools t
  
 <br>
 
-Search for Providers:
-
-   * `provider_nppes()`   : by NPI, name, location, organization, taxonomy, etc.
-   * `provider_mppe()`    : who are actively approved to bill Medicare.
-   * `provider_moar()`    : who are legally eligible to order and refer in the Medicare program.
-   * `provider_mooa()`    : that have opted out of Medicare, along with their effective dates.
-   * `provider_mpstc()`   : eligible to enroll in Medicare programs with the proper provider taxonomy code.
-   * `provider_mrdd()`    : who are due to revalidate in the following six months.
-   * `provider_mpop()`    : and their utilization data across three related datasets and eight years.
-   * `provider_promdci()` : who do not have adequate contact information in the NPPES system.
-   * `provider_rcgpr()`   : and the group practice they reassign their billing to.
-   
-   
-
 ## Installation
 
 You can install the development version of `provider` from [GitHub](https://github.com/) with:
@@ -87,11 +73,10 @@ These APIs are generally concerned with providing access to up-to-date informati
 # Load library
 library(provider)
 
-# Define NPI parameter
+# Define search parameter
 npi <- 1083879860
 
-# Query the NPPES API by NPI
-# and unpack the response
+# Query the NPPES API and unpack the response
 nppes_ex <- provider_nppes(npi) |> 
             provider_unpack()
 ```
@@ -99,14 +84,18 @@ nppes_ex <- provider_nppes(npi) |>
 <br>
 
 ```{r results='asis', echo=FALSE}
-gluedown::md_table(nppes_ex[, 1:6] |> dplyr::slice_head())
+gluedown::md_heading("Basic Information", level = 1)
+gluedown::md_table(nppes_ex[, 1:5] |> dplyr::slice_head())
 gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 7:10] |> dplyr::slice_head())
+gluedown::md_table(nppes_ex[, 6:10] |> dplyr::slice_head())
+gluedown::md_rule(n = 60)
+gluedown::md_heading("Addresses", level = 1)
+gluedown::md_table(nppes_ex[, 13:17])
 gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 11:17])
+gluedown::md_heading("Taxonomy", level = 1)
+gluedown::md_table(nppes_ex[, 18:23] |> dplyr::slice_head())
 gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 18:23])
-gluedown::md_blank()
+gluedown::md_heading("Endpoints", level = 1)
 gluedown::md_table(nppes_ex[, 24:26] |> dplyr::slice_head())
 gluedown::md_blank()
 gluedown::md_table(nppes_ex[, 27:28] |> dplyr::slice_head())
@@ -130,9 +119,7 @@ mppe_ex <- provider_mppe(npi)
 <br>
 
 ```{r results='asis'}
-gluedown::md_table(mppe_ex[, 6:11])
-gluedown::md_blank()
-gluedown::md_table(mppe_ex[, 1:5])
+gluedown::md_table(list(mppe_ex[, 1:4], mppe_ex[, 5:9]), caption = "Title of the table", longtable = TRUE)
 ```
 
 <br>
@@ -142,7 +129,7 @@ gluedown::md_table(mppe_ex[, 1:5])
 Is a Provider currently eligible to:
 
 ```{r results='asis', echo=FALSE}
-md_bullet(list("Make referrals to Medicare Part B or a Home Health Agency (HHA)?", "Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? "), marker = "-")
+gluedown::md_bullet(list("Make referrals to Medicare Part B or a Home Health Agency (HHA)?", "Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? "), marker = "-")
 ```
 
 Search Medicare's **Order and Referring API** with `order_refer()`:
@@ -160,8 +147,8 @@ You may need to find Medicare's specialty codes for this provider's taxonomies. 
 
 <br>
 
-```{r}
-# mpstc_ex <- provider_mpstc(nppes_unpack$taxon_code[[1]])
+```{r results='asis'}
+provider_mpstc(nppes_ex[1,]$taxon_code) |> gluedown::md_table()
 ```
 
 <br>
@@ -172,8 +159,8 @@ You can check to see if a provider is due to revalidate their Medicare enrollmen
 
 <br>
 
-```{r}
-# mrdd_ex <- provider_mrdd(npi)
+```{r results='asis'}
+provider_mrdd(npi) |> gluedown::md_table()
 ```
 
 <br>
@@ -184,20 +171,20 @@ Providers may need to update their digital contact information in the NPPES syst
 
 <br>
 
-```{r}
-# provider_promdci(npi)
+```{r results='asis'}
+provider_promdci(1144224569) |> gluedown::md_table()
 ```
 
 <br>
 
 ### Opt-Out Affidavits
 
-You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `provider_mooa()`:
+You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `opt_out()`:
 
 <br>
 
-```{r}
-# mooa_ex <- provider_mooa(npi)
+```{r results='asis'}
+opt_out(last = "Aaron") |> gluedown::md_table()
 ```
 
 <br>
@@ -209,7 +196,7 @@ You can find out if a provider has opted out of Medicare by searching the **Medi
 <br>
 
 ```{r}
-# rcgpr_ex <- provider_rcgpr(npi)
+provider_rcgpr(npi)
 ```
 
 
@@ -220,7 +207,7 @@ These APIs are generally concerned with providing access to a provider's longitu
 ### Physician & Other Practitioners
 
 ```{r results='asis', echo=FALSE}
-md_quote("by Provider and Service API")
+gluedown::md_quote("by Provider and Service API")
 ```
 
 ```{r}

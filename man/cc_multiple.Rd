@@ -2,13 +2,13 @@
 % Please edit documentation in R/cc_multiple.R
 \name{cc_multiple}
 \alias{cc_multiple}
-\title{Search the Medicare Specific Chronic Conditions API}
+\title{Search the Medicare Multiple Chronic Conditions API}
 \source{
 Centers for Medicare & Medicaid Services
 }
 \usage{
 cc_multiple(
-  year = NULL,
+  year = 2018,
   geo_lvl = NULL,
   geo_desc = NULL,
   fips = NULL,
@@ -21,11 +21,13 @@ cc_multiple(
   pymt_pc = NULL,
   readmit_rate = NULL,
   er_vis_per1k = NULL,
-  clean_names = TRUE
+  clean_names = TRUE,
+  lowercase = TRUE
 )
 }
 \arguments{
-\item{year}{Calendar year of Medicare enrollment}
+\item{year}{YYYY, calendar year of Medicare enrollment. 2007-2018 data is
+currently available.}
 
 \item{geo_lvl}{Geographic level of data; options are "National", "State",
 and "County"}
@@ -61,7 +63,7 @@ classifications are: Non-Hispanic White, Black or African American,
 Asian/Pacific Islander, Hispanic, and American Indian/Alaska Native.
 All the chronic condition reports use the variable RTI_RACE_CD, which
 is available on the Master Beneficiary Files in the CCW. For
-Bene_Demo_Lvl='Dual Status',beneficiaries can be classified as
+Bene_Demo_Lvl='Dual Status', beneficiaries can be classified as
 'Medicare & Medicaid' or 'Medicare Only'. Beneficiares enrolled in
 both Medicare and Medicaid are known as “dual eligibles.” Medicare
 beneficiaries are classified as dual eligibles if in any month in the
@@ -101,15 +103,24 @@ beneficiary was admitted to an inpatient setting.}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
+
+\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on prevalence, use and spending by count of select chronic conditions among Original Medicare (or fee-for-service) beneficiaries.
+Information on prevalence, use and spending by count of select
+chronic conditions among Original Medicare (or fee-for-service)
+beneficiaries.
 }
 \details{
-The Multiple Chronic Conditions dataset provides information on the number of chronic conditions among Original Medicare beneficiaries. The dataset contains prevalence, use and spending organized by geography and the count of chronic conditions from the set of select 21 chronic conditions. The count of conditions is grouped into four categories (0-1, 2-3, 4-5 and 6 or more).
+The Multiple Chronic Conditions dataset provides information on
+the number of chronic conditions among Original Medicare beneficiaries.
+The dataset contains prevalence, use and spending organized by geography
+and the count of chronic conditions from the set of select 21 chronic
+conditions. The count of conditions is grouped into four categories
+(0-1, 2-3, 4-5 and 6 or more).
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions}{Medicare Multiple Chronic Conditions}
@@ -121,14 +132,12 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontrun{
-monthly_enroll(year      = 2018,
-               month     = "Year",
-               geo_lvl   = "County",
-               state_abb = "AL",
-               county    = "Autauga")
+cc_multiple(year     = 2018,
+            geo_lvl  = "State",
+            geo_desc = "California")
 
-monthly_enroll(year    = 2021,
-               month   = "August",
-               geo_lvl = "County")
+cc_multiple(year     = 2007,
+            geo_lvl  = "National",
+            demo_lvl = "Race")
 }
 }

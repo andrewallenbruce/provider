@@ -81,14 +81,8 @@ provider_rcgpr <- function(npi        = NULL,
   # Medicare Revalidation Clinic Group Practice Reassignment URL
   rcgpr_url <- "https://data.cms.gov/data-api/v1/dataset/e1f1fa9a-d6b4-417e-948a-c72dead8a41c/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(rcgpr_url)
+  req <- httr2::request(rcgpr_url)
 
   if (isTRUE(full)) {
 

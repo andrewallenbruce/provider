@@ -8,9 +8,8 @@ provider_clia(
   name = NULL,
   city = NULL,
   state = NULL,
-  year = "2022",
-  clean_names = TRUE,
-  full = FALSE
+  year = 2022,
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -25,20 +24,9 @@ and/or Medicaid programs.}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
-
-\item{full}{If true, downloads the first 1000 rows of data;
-default is \code{FALSE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results with the
-following columns:
-\describe{
-\item{prvdr_ctgry_sbtyp_cd}{Identifies the subtype of provider within the primary category. (01 = CLIA88 Lab)}
-\item{prvdr_ctgry_cd}{Identifies the type of provider participating in the Medicare/Medicaid program. (22 = CLIA Lab)}
-\item{chow_cnt}{Number of times this provider has undergone a change of ownership.}
-\item{chow_dt}{Effective date of the most recent change of ownership for this provider.}
-\item{city_name}{City in which the provider is physically located.}
-}
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 \code{\link[=provider_clia]{provider_clia()}} allows access to a dataset that
@@ -78,7 +66,5 @@ provider_clia(name = "carbon hill", year = "2022")
 
 provider_clia(city = "alabaster")
 
-# Download First 1,000 Rows of Dataset =====================================
-provider_clia(full = TRUE)
 }
 }

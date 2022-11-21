@@ -95,14 +95,8 @@ provider_mppe <- function(npi = NULL,
   # Medicare Fee-For-Service Public Provider Enrollment Base URL
   mppe_url <- "https://data.cms.gov/data-api/v1/dataset/2457ea29-fc82-48b0-86ec-3b0755de7515/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(mppe_url)
+  req <- httr2::request(mppe_url)
 
   if (isTRUE(full)) {
 

@@ -8,7 +8,7 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 monthly_enroll(
-  year = NULL,
+  year = 2021,
   month = NULL,
   geo_lvl = c("National", "State", "County"),
   state_abb = NULL,

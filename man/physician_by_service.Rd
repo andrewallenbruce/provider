@@ -172,7 +172,7 @@ npis <- c(1003026055,
 npis |> purrr::map_dfr(physician_by_service)
 
 # Retrieve All Provider Data, 2013-2020
-dates <- as.character(seq(from = 2013, to = 2020))
-purrr::map_dfr(dates, ~physician_by_service(npi = 1003000126, year = .x))
+purrr::map_dfr(as.character(2013:2020),
+~physician_by_service(npi = 1003000126, year = .x))
 }
 }

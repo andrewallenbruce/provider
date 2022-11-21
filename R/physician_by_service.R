@@ -116,8 +116,8 @@
 #' npis |> purrr::map_dfr(physician_by_service)
 #'
 #' # Retrieve All Provider Data, 2013-2020
-#' dates <- as.character(seq(from = 2013, to = 2020))
-#' purrr::map_dfr(dates, ~physician_by_service(npi = 1003000126, year = .x))
+#' purrr::map_dfr(as.character(2013:2020),
+#' ~physician_by_service(npi = 1003000126, year = .x))
 #' }
 #' @autoglobal
 #' @export
@@ -196,8 +196,7 @@ physician_by_service <- function(npi         = NULL,
 
   # parse response ----------------------------------------------------------
   results <- resp |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE) |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE) |>
     tibble::tibble() |>
     dplyr::mutate(Year = year) |>
     dplyr::relocate(Year)

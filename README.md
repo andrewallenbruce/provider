@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# `provider` <img src="man/figures/logo.svg" align="right" height="150" />
+# `provider` <img src="man/figures/logo.svg" align="right" height="200" />
 
 <!-- badges: start -->
 
@@ -53,26 +53,6 @@ APIs are:
 
 <br>
 
-Search for Providers:
-
-- `provider_nppes()` : by NPI, name, location, organization, taxonomy,
-  etc.
-- `provider_mppe()` : who are actively approved to bill Medicare.
-- `provider_moar()` : who are legally eligible to order and refer in the
-  Medicare program.
-- `provider_mooa()` : that have opted out of Medicare, along with their
-  effective dates.
-- `provider_mpstc()` : eligible to enroll in Medicare programs with the
-  proper provider taxonomy code.
-- `provider_mrdd()` : who are due to revalidate in the following six
-  months.
-- `provider_mpop()` : and their utilization data across three related
-  datasets and eight years.
-- `provider_promdci()` : who do not have adequate contact information in
-  the NPPES system.
-- `provider_rcgpr()` : and the group practice they reassign their
-  billing to.
-
 ## Installation
 
 You can install the development version of `provider` from
@@ -102,34 +82,42 @@ the transacting of healthcare.
 # Load library
 library(provider)
 
-# Define NPI parameter
+# Define search parameter
 npi <- 1083879860
 
-# Query the NPPES API by NPI
-# and unpack the response
+# Query the NPPES API and unpack the response
 nppes_ex <- provider_nppes(npi) |> 
             provider_unpack()
 ```
 
 <br>
 
-| npi        | prov_type | first_name  | last_name | sole_proprietor | gender |
-|:-----------|:----------|:------------|:----------|:----------------|:-------|
-| 1083879860 | NPI-1     | CHRISTOPHER | AARON     | NO              | M      |
+# Basic Information
 
-| enumeration_date | last_updated | certification_date | status |
-|:-----------------|:-------------|:-------------------|:-------|
-| 2008-07-22       | 2021-03-25   | 2020-05-01         | A      |
+| npi        | prov_type | first_name  | last_name | sole_proprietor |
+|:-----------|:----------|:------------|:----------|:----------------|
+| 1083879860 | NPI-1     | CHRISTOPHER | AARON     | NO              |
 
-| country_code | address_purpose | address_1           | city    | state | postal_code | telephone_number |
-|:-------------|:----------------|:--------------------|:--------|:------|:------------|:-----------------|
-| US           | location        | 792 GALLITZIN RD    | CRESSON | PA    | 166302213   | 814-886-8161     |
-| US           | mailing         | 10 CASTLE GARDEN CT | OLNEY   | MD    | 208321443   | NA               |
+| gender | enumeration_date | last_updated | certification_date | status |
+|:-------|:-----------------|:-------------|:-------------------|:-------|
+| M      | 2008-07-22       | 2021-03-25   | 2020-05-01         | A      |
+
+------------------------------------------------------------------------
+
+# Addresses
+
+| address_1           | city    | state | postal_code | telephone_number |
+|:--------------------|:--------|:------|:------------|:-----------------|
+| 792 GALLITZIN RD    | CRESSON | PA    | 166302213   | 814-886-8161     |
+| 10 CASTLE GARDEN CT | OLNEY   | MD    | 208321443   | NA               |
+
+# Taxonomy
 
 | taxon_code | taxonomy_group | taxon_desc      | taxon_state | taxon_license | taxon_primary |
 |:-----------|:---------------|:----------------|:------------|:--------------|:--------------|
 | 207Q00000X |                | Family Medicine | PA          | OS019703      | TRUE          |
-| 207Q00000X |                | Family Medicine | PA          | OS019703      | TRUE          |
+
+# Endpoints
 
 | endpts_endpoint_type | endpts_endpoint_type_description | endpts_endpoint                      |
 |:---------------------|:---------------------------------|:-------------------------------------|
@@ -159,13 +147,29 @@ mppe_ex <- provider_mppe(npi)
 
 <br>
 
-| state_cd | first_name  | mdl_name | last_name | org_name | gndr_sw |
-|:---------|:------------|:---------|:----------|:---------|:--------|
-| PA       | CHRISTOPHER | L        | AARON     |          | M       |
+<table class="kable_wrapper">
+<caption>
+Title of the table
+</caption>
+<tbody>
+<tr>
+<td>
 
-| npi        | pecos_asct_cntl_id | enrlmt_id       | provider_type_cd | provider_type_desc             |
-|:-----------|:-------------------|:----------------|:-----------------|:-------------------------------|
-| 1083879860 | 8426328519         | I20200617001010 | 14-08            | PRACTITIONER - FAMILY PRACTICE |
+| npi        | pecos_asct_cntl_id | enrlmt_id       | provider_type_cd |
+|:-----------|:-------------------|:----------------|:-----------------|
+| 1083879860 | 8426328519         | I20200617001010 | 14-08            |
+
+</td>
+<td>
+
+| provider_type_desc             | state_cd | first_name  | mdl_name | last_name |
+|:-------------------------------|:---------|:------------|:---------|:----------|
+| PRACTITIONER - FAMILY PRACTICE | PA       | CHRISTOPHER | L        | AARON     |
+
+</td>
+</tr>
+</tbody>
+</table>
 
 <br>
 
@@ -173,7 +177,9 @@ mppe_ex <- provider_mppe(npi)
 
 Is a Provider currently eligible to:
 
-    #> Error in md_bullet(list("Make referrals to Medicare Part B or a Home Health Agency (HHA)?", : could not find function "md_bullet"
+- Make referrals to Medicare Part B or a Home Health Agency (HHA)?
+- Order Durable Medical Equipment (DME) or Power Mobility Devices
+  (PMDs)?
 
 Search Medicare’s **Order and Referring API** with `order_refer()`:
 
@@ -189,6 +195,10 @@ Crosswalk API** with `provider_mpstc()`:
 
 <br>
 
+| medicare_specialty_code | medicare_provider_supplier_type_description | provider_taxonomy_code | provider_taxonomy_description_type_classification_specialization |
+|:------------------------|:--------------------------------------------|:-----------------------|:-----------------------------------------------------------------|
+| 8                       | Physician/Family Practice                   | 207Q00000X             | Allopathic & Osteopathic Physicians/Family Medicine              |
+
 <br>
 
 ### Revalidation Due Date
@@ -198,6 +208,10 @@ enrollment by accessing Medicare’s **Revalidation Due Date API** with
 `provider_mrdd()`:
 
 <br>
+
+| enrollment_id   | national_provider_identifier | first_name  | last_name | organization_name | enrollment_state_code | enrollment_type | provider_type_text | enrollment_specialty | revalidation_due_date | adjusted_due_date | individual_total_reassign_to | receiving_benefits_reassignment |
+|:----------------|:-----------------------------|:------------|:----------|:------------------|:----------------------|:----------------|:-------------------|:---------------------|:----------------------|:------------------|:-----------------------------|:--------------------------------|
+| I20200617001010 | 1083879860                   | Christopher | Aaron     |                   | PA                    | 3               | Non-DME Part B     | Family Practice      |                       |                   |                              | 1                               |
 
 <br>
 
@@ -211,14 +225,20 @@ contact information:
 
 <br>
 
+| npi        | provider_name |
+|:-----------|:--------------|
+| 1144224569 | Clouse,John   |
+
 <br>
 
 ### Opt-Out Affidavits
 
 You can find out if a provider has opted out of Medicare by searching
-the **Medicare Opt Out Affidavits API** with `provider_mooa()`:
+the **Medicare Opt Out Affidavits API** with `opt_out()`:
 
 <br>
+
+    #> Error in opt_out(last = "Aaron"): could not find function "opt_out"
 
 <br>
 
@@ -229,6 +249,17 @@ Practice Reassignment API**:
 
 <br>
 
+    #>   group_pac_id group_enrollment_id                   group_legal_business_name
+    #> 1   5395659312     O20040312000257 Upmc Altoona Regional Health Services, Inc.
+    #>   group_state_code group_due_date group_reassignments_and_physician_assistants
+    #> 1               PA     01/31/2022                                          446
+    #>    record_type individual_enrollment_id individual_npi individual_first_name
+    #> 1 Reassignment          I20200617001010     1083879860           Christopher
+    #>   individual_last_name individual_state_code individual_specialty_description
+    #> 1                Aaron                    PA                  Family Practice
+    #>   individual_due_date individual_total_employer_associations
+    #> 1                 TBD                                      1
+
 ## Provider Statistics
 
 These APIs are generally concerned with providing access to a provider’s
@@ -236,7 +267,7 @@ longitudinal utilization data.
 
 ### Physician & Other Practitioners
 
-    #> Error in md_quote("by Provider and Service API"): could not find function "md_quote"
+> by Provider and Service API
 
     #> Error in physician_by_service(npi = 1003000126, year = .x): could not find function "physician_by_service"
 

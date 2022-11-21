@@ -57,7 +57,7 @@
 #' @autoglobal
 #' @export
 
-monthly_enroll <- function(year        = NULL,
+monthly_enroll <- function(year        = 2021,
                            month       = NULL,
                            geo_lvl     = c("National", "State", "County"),
                            state_abb   = NULL,
@@ -91,8 +91,7 @@ monthly_enroll <- function(year        = NULL,
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   id     <- "30fe2d89-c56c-4a48-8e3a-3d07ad995c0b"
   post   <- "/data.json?"
-  offset <- "offset=0"
-  url    <- paste0(http, id, post, params_args, offset)
+  url    <- paste0(http, id, post, params_args)
 
   # create request ----------------------------------------------------------
   req <- httr2::request(url)
@@ -104,7 +103,9 @@ monthly_enroll <- function(year        = NULL,
   results <- resp |>
     httr2::resp_body_json(check_type = FALSE,
                           simplifyVector = TRUE) |>
-    tibble::tibble()
+    tibble::tibble() |>
+    dplyr::mutate(Year = year) |>
+    dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

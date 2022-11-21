@@ -91,14 +91,8 @@ provider_mpstc <- function(txn_code    = NULL,
   # Medicare Provider and Supplier Taxonomy Crosswalk Base URL
   mpstc_url <- "https://data.cms.gov/data-api/v1/dataset/113eb0bc-0c9a-4d91-9f93-3f6b28c0bf6b/data"
 
-  # Create polite version
-  polite_req <- polite::politely(
-    httr2::request,
-    verbose = FALSE,
-    delay = 2)
-
   # Create request
-  req <- polite_req(mpstc_url)
+  req <- httr2::request(mpstc_url)
 
   if (isTRUE(full)) {
 
