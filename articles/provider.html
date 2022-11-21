@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.2/font.css" rel="stylesheet">
-<link href="../deps/Fira_Code-0.4.2/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.3/font.css" rel="stylesheet">
+<link href="../deps/Fira_Code-0.4.3/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Overview of Provider">
@@ -148,7 +148,7 @@ API</strong> with the <code><a href="../reference/provider_nppes.html">provider_
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-11-21 <span style="color: #949494;">05:46:17</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-11-21 <span style="color: #949494;">17:49:06</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code>
 function:</p>
@@ -334,31 +334,13 @@ the <code><a href="../reference/provider_mppe.html">provider_mppe()</a></code> f
 <p>Is the provider currently eligible to make referrals to Medicare Part
 B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
 or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
-Referring API</strong> with <code><a href="../reference/provider_moar.html">provider_moar()</a></code>:</p>
+Referring API</strong> with <code>provider_moar()</code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_moar.html">provider_moar</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_moar</span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_moar(1760485387): could not find function "provider_moar"</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Last Name</th>
-<th align="left">First Name</th>
-<th align="left">Part B</th>
-<th align="left">DME</th>
-<th align="left">HHA</th>
-<th align="left">PMD</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">DEWEY</td>
-<td align="left">PAUL</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr></tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(moar_ex, NPI = npi, `Last Name` = last_name, `First Name` = first_name, : object 'moar_ex' not found</span></span></code></pre>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -370,7 +352,7 @@ taxonomies. Using the output from the NPPES search in the first example,
 you can search Medicare’s <strong>Provider and Supplier Taxonomy
 Crosswalk API</strong> with <code><a href="../reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -410,7 +392,7 @@ Medicine</td>
 Medicare enrollment by accessing Medicare’s <strong>Revalidation Due
 Date API</strong> with <code><a href="../reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table style="width:100%;" class="table">
@@ -452,7 +434,7 @@ of Missing Digital Contact Information API</strong> with
 <code><a href="../reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results,
 it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -470,7 +452,7 @@ it’s time to update their NPPES contact information:</p>
 the <strong>Medicare Opt Out Affidavits API</strong> with
 <code><a href="../reference/provider_mooa.html">provider_mooa()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mooa.html">provider_mooa</a></span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <table class="table">
@@ -519,7 +501,7 @@ the <strong>Medicare Opt Out Affidavits API</strong> with
 Physician &amp; Other Practitioners - by Provider and Service
 API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
 <span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
@@ -830,7 +812,7 @@ API</strong>:</p>
 <p>This API contains data going back to 2013, so you can perform a
 long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
 <span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
 <span><span class="va">mpop19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span>
@@ -1299,7 +1281,7 @@ graphs for reporting purposes:</p>
 <p><br></p>
 <details><summary>
 Click for Table Code
-</summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># First row of data</span></span>
 <span><span class="va">mpop_ex_2020_row1</span> <span class="op">&lt;-</span> <span class="va">mpop_ex_2020</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
@@ -1319,7 +1301,7 @@ Click for Table Code
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_state_abrvtn</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_zip5</span>, <span class="st">"both"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">mpop_13_20</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
 <span>                hcpcs     <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
@@ -1348,7 +1330,7 @@ Click for Table Code
 <span>    .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ben_sum</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_output</span> <span class="op">&lt;-</span> <span class="va">gt_table</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>

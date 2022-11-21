@@ -82,6 +82,9 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/monthly_enroll.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/opt_out.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/order_refer.html</loc>
   </url>
   <url>
@@ -92,9 +95,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_luhn.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/provider_moar.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_mooa.html</loc>
