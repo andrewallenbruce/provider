@@ -175,1155 +175,296 @@
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="motivating-example">Motivating Example<a class="anchor" aria-label="anchor" href="#motivating-example"></a>
+<h2 id="provider-information">Provider Information<a class="anchor" aria-label="anchor" href="#provider-information"></a>
 </h2>
-<p>You’re billing for a healthcare provider and receive a <code>CO-8</code> denial on a claim and you need to confirm whether or not the correct taxonomy code was entered on the claim. Armed with the provider’s NPI, you can search the <strong>NPPES NPI Registry API</strong> with the <code><a href="reference/provider_nppes.html">provider_nppes()</a></code> function:</p>
+<p>These APIs are generally concerned with providing access to up-to-date information a provider or her associates may need for many aspects of the transacting of healthcare.</p>
+<div class="section level3">
+<h3 id="nppes-npi-public-registry">NPPES NPI Public Registry<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry"></a>
+</h3>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Query the NPPES API by NPI</span></span>
-<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span>
+<span><span class="co"># Define NPI parameter</span></span>
+<span><span class="va">npi</span> <span class="op">&lt;-</span> <span class="fl">1083879860</span></span>
 <span></span>
-<span><span class="co"># Or by Name, City, State, etc.</span></span>
-<span><span class="co"># nppes_ex &lt;- provider_nppes(first = "Chris", </span></span>
-<span><span class="co">#                            last  = "Aaron",</span></span>
-<span><span class="co">#                            city  = "Cresson",</span></span>
-<span><span class="co">#                            state = "PA")</span></span></code></pre></div>
+<span><span class="co"># Query the NPPES API by NPI</span></span>
+<span><span class="co"># and unpack the response</span></span>
+<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>            <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 3</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2022-11-01 05:18:15 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
-<p><br></p>
-<p>Unpack the API response with the <code><a href="reference/provider_unpack.html">provider_unpack()</a></code> function:</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_unpack</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_unpack</span></span>
-<span><span class="co">#&gt; # A tibble: 2 × 38</span></span>
-<span><span class="co">#&gt;   npi      prov_…¹ first…² last_…³ sole_…⁴ gender enume…⁵ last_…⁶ certi…⁷ status</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; </span></span>
-<span><span class="co">#&gt; 1 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     </span></span>
-<span><span class="co">#&gt; 2 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     </span></span>
-<span><span class="co">#&gt; # … with 28 more variables: country_code &lt;chr&gt;, address_purpose &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   address_1 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, postal_code &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   telephone_number &lt;chr&gt;, taxon_code &lt;chr&gt;, taxonomy_group &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   taxon_desc &lt;chr&gt;, taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   taxon_primary &lt;lgl&gt;, endpts_endpoint_type &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   endpts_endpoint_type_description &lt;chr&gt;, endpts_endpoint &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   endpts_affiliation &lt;chr&gt;, endpts_affiliation_name &lt;chr&gt;, …</span></span></code></pre></div>
-<p><br></p>
-<p>Filter and wrangle the data for presentation:</p>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_table</span> <span class="op">&lt;-</span> <span class="va">nppes_unpack</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span>           <span class="op">=</span> <span class="va">npi</span>, </span>
-<span>                 <span class="st">"Last Name"</span>     <span class="op">=</span> <span class="va">last_name</span>,</span>
-<span>                 <span class="st">"Provider Type"</span> <span class="op">=</span> <span class="va">prov_type</span>, </span>
-<span>                 <span class="st">"Description"</span>   <span class="op">=</span> <span class="va">taxon_desc</span>, </span>
-<span>                 <span class="st">"Code"</span>          <span class="op">=</span> <span class="va">taxon_code</span>, </span>
-<span>                 <span class="st">"Primary"</span>       <span class="op">=</span> <span class="va">taxon_primary</span>, </span>
-<span>                 <span class="st">"State"</span>         <span class="op">=</span> <span class="va">taxon_state</span>, </span>
-<span>                 <span class="st">"License"</span>       <span class="op">=</span> <span class="va">taxon_license</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">Primary</span>, </span>
-<span>                   .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"NPPES NPI Registry Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span>,</span>
-<span>                        cgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"Taxonomy Information"</span><span class="op">)</span>, </span>
-<span>                        n.cgroup <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="10" style="text-align: left;">
-NPPES NPI Registry Search Results
-</td>
-</tr>
-<tr>
-<th style="border-top: 2px solid grey;">
-</th>
-<th colspan="3" style="font-weight: 900; border-top: 2px solid grey; text-align: center;">
-</th>
-<th style="border-bottom: none; border-top: 2px solid grey;" colspan="1">
- 
-</th>
-<th colspan="5" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
-Taxonomy Information
-</th>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-Last Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-Provider Type
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;" colspan="1">
- 
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-Description
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-Code
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-Primary
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-State
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: left;">
-License
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-AARON
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Individual
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;" colspan="1">
- 
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Family Medicine
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-207Q00000X
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TRUE
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-PA
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-OS019703
-</td>
+<table class="table">
+<colgroup>
+<col width="16%">
+<col width="15%">
+<col width="18%">
+<col width="15%">
+<col width="23%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">prov_type</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">sole_proprietor</th>
+<th align="left">gender</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1083879860</td>
+<td align="left">NPI-1</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">AARON</td>
+<td align="left">NO</td>
+<td align="left">M</td>
 </tr></tbody>
-<tfoot><tr>
-<td colspan="10">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
 </table>
-<p><br></p>
-<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mppe_table</span> <span class="op">&lt;-</span> <span class="va">mppe_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span>             <span class="op">=</span> <span class="va">npi</span>, </span>
-<span>                 <span class="st">"Last Name"</span>       <span class="op">=</span> <span class="va">last_name</span>, </span>
-<span>                 <span class="st">"PAC ID"</span>    <span class="op">=</span> <span class="va">pecos_asct_cntl_id</span>, </span>
-<span>                 <span class="st">"Enrollment ID"</span> <span class="op">=</span> <span class="va">enrlmt_id</span>, </span>
-<span>                 <span class="st">"Specialty"</span>       <span class="op">=</span> <span class="va">provider_type_desc</span>, </span>
-<span>                 <span class="st">"State"</span>           <span class="op">=</span> <span class="va">state_cd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Fee-For-Service Public Provider Enrollment Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="7" style="text-align: left;">
-Medicare Fee-For-Service Public Provider Enrollment Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Last Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-PAC ID
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enrollment ID
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Specialty
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-State
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-AARON
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-8426328519
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-I20200617001010
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-PRACTITIONER - FAMILY PRACTICE
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-PA
-</td>
+<table class="table">
+<thead><tr class="header">
+<th align="left">enumeration_date</th>
+<th align="left">last_updated</th>
+<th align="left">certification_date</th>
+<th align="left">status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">2008-07-22</td>
+<td align="left">2021-03-25</td>
+<td align="left">2020-05-01</td>
+<td align="left">A</td>
 </tr></tbody>
-<tfoot><tr>
-<td colspan="7">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
 </table>
-<p><br></p>
-<p>Is a Provider currently eligible to: * Make referrals to Medicare Part B or a Home Health Agency (HHA)? * Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)?</p>
-<p><br></p>
-<p>Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="reference/provider_moar.html">provider_moar()</a></code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_moar.html">provider_moar</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">moar_table</span> <span class="op">&lt;-</span> <span class="va">moar_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span>        <span class="op">=</span> <span class="va">npi</span>, </span>
-<span>                 <span class="st">"Last Name"</span>  <span class="op">=</span> <span class="va">last_name</span>,</span>
-<span>                 <span class="st">"First Name"</span> <span class="op">=</span> <span class="va">first_name</span>, </span>
-<span>                 <span class="st">"Part B"</span>     <span class="op">=</span> <span class="va">partb</span>, </span>
-<span>                 <span class="st">"DME"</span>        <span class="op">=</span> <span class="va">dme</span>,</span>
-<span>                 <span class="st">"HHA"</span>        <span class="op">=</span> <span class="va">hha</span>, </span>
-<span>                 <span class="st">"PMD"</span>        <span class="op">=</span> <span class="va">pmd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Order and Referring Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="8" style="text-align: left;">
-Medicare Order and Referring Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Last Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-First Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Part B
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-DME
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-HHA
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-PMD
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-AARON
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-CHRISTOPHER
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TRUE
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TRUE
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TRUE
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TRUE
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="8">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. You can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpstc.html">provider_mpstc</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">taxon_code</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpstc_table</span> <span class="op">&lt;-</span> <span class="va">mpstc_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"Taxonomy Code"</span>                  <span class="op">=</span> <span class="va">provider_taxonomy_code</span>, </span>
-<span>                 <span class="st">"Medicare Specialty Code"</span>        <span class="op">=</span> <span class="va">medicare_specialty_code</span>,</span>
-<span>                 <span class="st">"Medicare Specialty Description"</span> <span class="op">=</span> <span class="va">medicare_provider_supplier_type_description</span>,</span>
-<span>                 <span class="st">"Specialty"</span>                      <span class="op">=</span> <span class="va">medicare_provider_supplier_type_description</span>, </span>
-<span>                 <span class="st">"Classification"</span>                 <span class="op">=</span> <span class="va">provider_taxonomy_description_type_classification_specialization</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Provider and Supplier Taxonomy Crosswalk Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="6" style="text-align: left;">
-Medicare Provider and Supplier Taxonomy Crosswalk Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Taxonomy Code
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Medicare Specialty Code
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Medicare Specialty Description
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Specialty
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Classification
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-207Q00000X
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-8
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Physician/Family Practice
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Physician/Family Practice
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Allopathic &amp; Osteopathic Physicians/Family Medicine
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="6">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mrdd_table</span> <span class="op">&lt;-</span> <span class="va">mrdd_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span>                   <span class="op">=</span> <span class="va">national_provider_identifier</span>, </span>
-<span>                 <span class="st">"Last Name"</span>             <span class="op">=</span> <span class="va">last_name</span>,</span>
-<span>                 <span class="st">"Enrollment ID"</span>         <span class="op">=</span> <span class="va">enrollment_id</span>,</span>
-<span>                 <span class="st">"Enrollment Type"</span>       <span class="op">=</span> <span class="va">provider_type_text</span>,</span>
-<span>                 <span class="st">"Enrollment Specialty"</span>  <span class="op">=</span> <span class="va">enrollment_specialty</span>,</span>
-<span>                 <span class="st">"State"</span>                 <span class="op">=</span> <span class="va">enrollment_state_code</span>,</span>
-<span>                 <span class="st">"Provider Type"</span>         <span class="op">=</span> <span class="va">provider_type_text</span>, </span>
-<span>                 <span class="st">"Revalidation Due Date"</span> <span class="op">=</span> <span class="va">revalidation_due_date</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Revalidation Due Date Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="9" style="text-align: left;">
-Medicare Revalidation Due Date Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Last Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enrollment ID
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enrollment Type
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enrollment Specialty
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-State
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Provider Type
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Revalidation Due Date
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Aaron
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-I20200617001010
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Non-DME Part B
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Family Practice
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-PA
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Non-DME Part B
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="9">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p><br></p>
-<p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
-<p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="reference/provider_mooa.html">provider_mooa()</a></code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mooa.html">provider_mooa</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>NPI                        <span class="op">=</span> <span class="va">npi</span>,</span>
-<span>                 Last                       <span class="op">=</span> <span class="va">last_name</span>,</span>
-<span>                 First                      <span class="op">=</span> <span class="va">first_name</span>,</span>
-<span>                 <span class="st">"Optout Effective Date"</span>    <span class="op">=</span> <span class="va">optout_effective_date</span>,</span>
-<span>                 <span class="st">"Optout End Date"</span>          <span class="op">=</span> <span class="va">optout_end_date</span>,</span>
-<span>                 <span class="st">"Order &amp; Refer Eligible"</span>   <span class="op">=</span> <span class="va">eligible_to_order_and_refer</span>,</span>
-<span>                 Updated                    <span class="op">=</span> <span class="va">last_updated</span>,</span>
-<span>                 Specialty                  <span class="op">=</span> <span class="va">specialty</span>,</span>
-<span>                 Address                    <span class="op">=</span> <span class="va">first_line_street_address</span>,</span>
-<span>                 City                       <span class="op">=</span> <span class="va">city_name</span>,</span>
-<span>                 State                      <span class="op">=</span> <span class="va">state_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Revalidation Due Date Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `dplyr::select()`:</span></span>
-<span><span class="co">#&gt; ! `select()` doesn't handle lists.</span></span></code></pre></div>
-</details><p><br></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'mooa_table' not found</span></span></code></pre></div>
-<p><br></p>
-<p><code><a href="reference/provider_rcgpr.html">provider_rcgpr()</a></code> accesses <strong>Medicare’s Revalidation Clinic Group Practice Reassignment API</strong>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rcgpr_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_rcgpr.html">provider_rcgpr</a></span><span class="op">(</span><span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rcgpr_table</span> <span class="op">&lt;-</span> <span class="va">rcgpr_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span>                           <span class="op">=</span> <span class="va">individual_npi</span>,</span>
-<span>                 <span class="st">"Last"</span>                          <span class="op">=</span> <span class="va">individual_last_name</span>,</span>
-<span>                 <span class="st">"Type"</span>                          <span class="op">=</span> <span class="va">record_type</span>,</span>
-<span>                 <span class="st">"PAC ID Group "</span>                 <span class="op">=</span> <span class="va">group_pac_id</span>,</span>
-<span>                 <span class="st">"Enroll ID Group"</span>               <span class="op">=</span> <span class="va">group_enrollment_id</span>,</span>
-<span>                 <span class="st">"Business Name"</span>                 <span class="op">=</span> <span class="va">group_legal_business_name</span>,</span>
-<span>                 <span class="st">"Due Date Group"</span>                <span class="op">=</span> <span class="va">group_due_date</span>,</span>
-<span>                 <span class="st">"PAC ID Ind"</span>                    <span class="op">=</span> <span class="va">individual_pac_id</span>,</span>
-<span>                 <span class="st">"Enroll ID Ind"</span>                 <span class="op">=</span> <span class="va">individual_enrollment_id</span>,</span>
-<span>                 <span class="st">"Due Date Ind"</span>                  <span class="op">=</span> <span class="va">individual_due_date</span>,</span>
-<span>                 <span class="st">"Reassignments &amp; Phys Assts"</span>    <span class="op">=</span> <span class="va">group_reassignments_and_physician_assistants</span>,</span>
-<span>                 <span class="st">"Employer Associations"</span>         <span class="op">=</span> <span class="va">individual_total_employer_associations</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Revalidation Clinic Group Practice Reassignment Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="13" style="text-align: left;">
-Medicare Revalidation Clinic Group Practice Reassignment Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Last
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Type
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-PAC ID Group
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enroll ID Group
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Business Name
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Due Date Group
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-PAC ID Ind
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Enroll ID Ind
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Due Date Ind
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Reassignments &amp; Phys Assts
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Employer Associations
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Aaron
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Reassignment
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-5395659312
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-O20040312000257
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Upmc Altoona Regional Health Services, Inc.
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TBD
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-8426328519
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-I20200617001010
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-TBD
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-434
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="13">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p><br></p>
-<p>Using <code><a href="reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s Physician &amp; Other Practitioners API</strong>, enabling you to choose between three related datasets:</p>
-<blockquote>
-<ol style="list-style-type: decimal">
-<li>by Provider and Service API:</li>
-</ol>
-</blockquote>
-<p><br></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_serv_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, </span>
-<span>                              set <span class="op">=</span> <span class="st">"serv"</span>,</span>
-<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_serv_table</span> <span class="op">&lt;-</span> <span class="va">mpop_serv_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Year            <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                 NPI             <span class="op">=</span> <span class="va">rndrng_npi</span>,</span>
-<span>                 Last            <span class="op">=</span> <span class="va">rndrng_prvdr_last_org_name</span>,</span>
-<span>                 City            <span class="op">=</span> <span class="va">rndrng_prvdr_city</span>,</span>
-<span>                 State           <span class="op">=</span> <span class="va">rndrng_prvdr_state_abrvtn</span>,</span>
-<span>                 PAR             <span class="op">=</span> <span class="va">rndrng_prvdr_mdcr_prtcptg_ind</span>,</span>
-<span>                 HCPCS           <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
-<span>                 Beneficiaries   <span class="op">=</span> <span class="va">tot_benes</span>,</span>
-<span>                 <span class="st">"Services"</span>      <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
-<span>                 <span class="st">"Avg Billed"</span>    <span class="op">=</span> <span class="va">avg_sbmtd_chrg</span>,</span>
-<span>                 <span class="st">"Avg Allowed"</span>   <span class="op">=</span> <span class="va">avg_mdcr_alowd_amt</span>,</span>
-<span>                 <span class="st">"Avg Payment"</span>   <span class="op">=</span> <span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Provider &amp; Service Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="13" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Provider &amp; Service Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-NPI
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Last
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-City
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-State
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-PAR
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-HCPCS
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Beneficiaries
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Services
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Billed
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Allowed
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Payment
-</th>
-</tr>
-</thead>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="14%">
+<col width="17%">
+<col width="21%">
+<col width="9%">
+<col width="7%">
+<col width="13%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">country_code</th>
+<th align="left">address_purpose</th>
+<th align="left">address_1</th>
+<th align="left">city</th>
+<th align="left">state</th>
+<th align="left">postal_code</th>
+<th align="left">telephone_number</th>
+</tr></thead>
 <tbody>
-<tr>
-<td style="text-align: left;">
-1
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-1083879860
-</td>
-<td style="text-align: left;">
-Aaron
-</td>
-<td style="text-align: left;">
-Cresson
-</td>
-<td style="text-align: left;">
-PA
-</td>
-<td style="text-align: left;">
-Y
-</td>
-<td style="text-align: left;">
-36415
-</td>
-<td style="text-align: left;">
-38
-</td>
-<td style="text-align: left;">
-53
-</td>
-<td style="text-align: left;">
-15
-</td>
-<td style="text-align: left;">
-3
-</td>
-<td style="text-align: left;">
-3
-</td>
+<tr class="odd">
+<td align="left">US</td>
+<td align="left">location</td>
+<td align="left">792 GALLITZIN RD</td>
+<td align="left">CRESSON</td>
+<td align="left">PA</td>
+<td align="left">166302213</td>
+<td align="left">814-886-8161</td>
 </tr>
-<tr>
-<td style="text-align: left;">
-2
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-1083879860
-</td>
-<td style="text-align: left;">
-Aaron
-</td>
-<td style="text-align: left;">
-Cresson
-</td>
-<td style="text-align: left;">
-PA
-</td>
-<td style="text-align: left;">
-Y
-</td>
-<td style="text-align: left;">
-85610
-</td>
-<td style="text-align: left;">
-12
-</td>
-<td style="text-align: left;">
-32
-</td>
-<td style="text-align: left;">
-17
-</td>
-<td style="text-align: left;">
-4.29
-</td>
-<td style="text-align: left;">
-4.29
-</td>
-</tr>
-<tr>
-<td style="text-align: left;">
-3
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-1083879860
-</td>
-<td style="text-align: left;">
-Aaron
-</td>
-<td style="text-align: left;">
-Cresson
-</td>
-<td style="text-align: left;">
-PA
-</td>
-<td style="text-align: left;">
-Y
-</td>
-<td style="text-align: left;">
-90682
-</td>
-<td style="text-align: left;">
-15
-</td>
-<td style="text-align: left;">
-15
-</td>
-<td style="text-align: left;">
-34
-</td>
-<td style="text-align: left;">
-34
-</td>
-<td style="text-align: left;">
-34
-</td>
-</tr>
-<tr>
-<td style="text-align: left;">
-4
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-1083879860
-</td>
-<td style="text-align: left;">
-Aaron
-</td>
-<td style="text-align: left;">
-Cresson
-</td>
-<td style="text-align: left;">
-PA
-</td>
-<td style="text-align: left;">
-Y
-</td>
-<td style="text-align: left;">
-93793
-</td>
-<td style="text-align: left;">
-13
-</td>
-<td style="text-align: left;">
-33
-</td>
-<td style="text-align: left;">
-49
-</td>
-<td style="text-align: left;">
-11.58
-</td>
-<td style="text-align: left;">
-8.6987878788
-</td>
-</tr>
-<tr>
-<td style="text-align: left;">
-5
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-1083879860
-</td>
-<td style="text-align: left;">
-Aaron
-</td>
-<td style="text-align: left;">
-Cresson
-</td>
-<td style="text-align: left;">
-PA
-</td>
-<td style="text-align: left;">
-Y
-</td>
-<td style="text-align: left;">
-99214
-</td>
-<td style="text-align: left;">
-62
-</td>
-<td style="text-align: left;">
-101
-</td>
-<td style="text-align: left;">
-220
-</td>
-<td style="text-align: left;">
-105.40613861
-</td>
-<td style="text-align: left;">
-76.368019802
-</td>
-</tr>
-<tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-6
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1083879860
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Aaron
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Cresson
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-PA
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-Y
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-G0008
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-15
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-15
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-32
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-16.28
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-16.28
-</td>
+<tr class="even">
+<td align="left">US</td>
+<td align="left">mailing</td>
+<td align="left">10 CASTLE GARDEN CT</td>
+<td align="left">OLNEY</td>
+<td align="left">MD</td>
+<td align="left">208321443</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
-<tfoot><tr>
-<td colspan="13">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
+</table>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="13%">
+<col width="18%">
+<col width="19%">
+<col width="14%">
+<col width="17%">
+<col width="17%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">taxon_code</th>
+<th align="left">taxonomy_group</th>
+<th align="left">taxon_desc</th>
+<th align="left">taxon_state</th>
+<th align="left">taxon_license</th>
+<th align="left">taxon_primary</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">207Q00000X</td>
+<td align="left"></td>
+<td align="left">Family Medicine</td>
+<td align="left">PA</td>
+<td align="left">OS019703</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">207Q00000X</td>
+<td align="left"></td>
+<td align="left">Family Medicine</td>
+<td align="left">PA</td>
+<td align="left">OS019703</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="23%">
+<col width="36%">
+<col width="40%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">endpts_endpoint_type</th>
+<th align="left">endpts_endpoint_type_description</th>
+<th align="left">endpts_endpoint</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">DIRECT</td>
+<td align="left">Direct Messaging Address</td>
+<td align="left"><a href="mailto:christopher.l.aaron@upmcdirect.com" class="email">christopher.l.aaron@upmcdirect.com</a></td>
+</tr></tbody>
+</table>
+<table class="table">
+<thead><tr class="header">
+<th align="left">endpts_affiliation</th>
+<th align="left">endpts_affiliation_name</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">Y</td>
+<td align="left">UPMC</td>
+</tr></tbody>
+</table>
+<table class="table">
+<thead><tr class="header">
+<th align="left">endpts_address_2</th>
+<th align="left">endpts_city</th>
+<th align="left">endpts_state</th>
+<th align="left">endpts_postal_code</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">Floor 58</td>
+<td align="left">Pittsburgh</td>
+<td align="left">PA</td>
+<td align="left">152192702</td>
+</tr></tbody>
 </table>
 <p><br></p>
+</div>
+<div class="section level3">
+<h3 id="ffs-public-provider-enrollment">FFS Public Provider Enrollment<a class="anchor" aria-label="anchor" href="#ffs-public-provider-enrollment"></a>
+</h3>
+<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<table class="table">
+<thead><tr class="header">
+<th align="left">state_cd</th>
+<th align="left">first_name</th>
+<th align="left">mdl_name</th>
+<th align="left">last_name</th>
+<th align="left">org_name</th>
+<th align="left">gndr_sw</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">PA</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">L</td>
+<td align="left">AARON</td>
+<td align="left"></td>
+<td align="left">M</td>
+</tr></tbody>
+</table>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="20%">
+<col width="17%">
+<col width="18%">
+<col width="32%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pecos_asct_cntl_id</th>
+<th align="left">enrlmt_id</th>
+<th align="left">provider_type_cd</th>
+<th align="left">provider_type_desc</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1083879860</td>
+<td align="left">8426328519</td>
+<td align="left">I20200617001010</td>
+<td align="left">14-08</td>
+<td align="left">PRACTITIONER - FAMILY PRACTICE</td>
+</tr></tbody>
+</table>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="order-and-referring">Order and Referring<a class="anchor" aria-label="anchor" href="#order-and-referring"></a>
+</h3>
+<p>Is a Provider currently eligible to:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in md_bullet(list("Make referrals to Medicare Part B or a Home Health Agency (HHA)?", : could not find function "md_bullet"</span></span></code></pre></div>
+<p>Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="reference/order_refer.html">order_refer()</a></code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in order_refer(npi): could not find function "order_refer"</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="taxonomy-crosswalk">Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#taxonomy-crosswalk"></a>
+</h3>
+<p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. You can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="revalidation-due-date">Revalidation Due Date<a class="anchor" aria-label="anchor" href="#revalidation-due-date"></a>
+</h3>
+<p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="missing-digital-contact-information">Missing Digital Contact Information<a class="anchor" aria-label="anchor" href="#missing-digital-contact-information"></a>
+</h3>
+<p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="opt-out-affidavits">Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#opt-out-affidavits"></a>
+</h3>
+<p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="reference/provider_mooa.html">provider_mooa()</a></code>:</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="revalidation-clinic-group-practice-reassignment">Revalidation Clinic Group Practice Reassignment<a class="anchor" aria-label="anchor" href="#revalidation-clinic-group-practice-reassignment"></a>
+</h3>
+<p><code><a href="reference/provider_rcgpr.html">provider_rcgpr()</a></code> accesses <strong>Medicare’s Revalidation Clinic Group Practice Reassignment API</strong>:</p>
+<p><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="provider-statistics">Provider Statistics<a class="anchor" aria-label="anchor" href="#provider-statistics"></a>
+</h2>
+<p>These APIs are generally concerned with providing access to a provider’s longitudinal utilization data.</p>
+<div class="section level3">
+<h3 id="physician--other-practitioners">Physician &amp; Other Practitioners<a class="anchor" aria-label="anchor" href="#physician--other-practitioners"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in md_quote("by Provider and Service API"): could not find function "md_quote"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in physician_by_service(npi = 1003000126, year = .x): could not find function "physician_by_service"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in dplyr::select(serv_ex, year, hcpcs_cd, tot_benes, tot_srvcs, : object 'serv_ex' not found</span></span></code></pre></div>
 <blockquote>
 <ol start="2" style="list-style-type: decimal">
 <li>by Geography and Service API:</li>
 </ol>
 </blockquote>
-<p><br></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_geo_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>hcpcs   <span class="op">=</span> <span class="st">"99214"</span>, </span>
-<span>                             set     <span class="op">=</span> <span class="st">"geo"</span>,</span>
-<span>                             geo_lvl <span class="op">=</span> <span class="st">"National"</span>,</span>
-<span>                             year    <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_geo_table</span> <span class="op">&lt;-</span> <span class="va">mpop_geo_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Year                       <span class="op">=</span> <span class="va">year</span>, </span>
-<span>                 HCPCS                      <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
-<span>                 Region                     <span class="op">=</span> <span class="va">rndrng_prvdr_geo_desc</span>,</span>
-<span>                 POS                        <span class="op">=</span> <span class="va">place_of_srvc</span>,</span>
-<span>                 Providers                  <span class="op">=</span> <span class="va">tot_rndrng_prvdrs</span>,</span>
-<span>                 Beneficiaries              <span class="op">=</span> <span class="va">tot_benes</span>, </span>
-<span>                 Services                   <span class="op">=</span> <span class="va">tot_srvcs</span>, </span>
-<span>                 <span class="st">"Avg Charge"</span>               <span class="op">=</span> <span class="va">avg_sbmtd_chrg</span>, </span>
-<span>                 <span class="st">"Avg Allowed"</span>              <span class="op">=</span> <span class="va">avg_mdcr_alowd_amt</span>, </span>
-<span>                 <span class="st">"Avg Payment"</span>              <span class="op">=</span> <span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Geography &amp; Service Search Results"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="11" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Geography &amp; Service Search Results
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-HCPCS
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Region
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-POS
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Providers
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Beneficiaries
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Services
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Charge
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Allowed
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg Payment
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: left;">
-1
-</td>
-<td style="text-align: left;">
-2020
-</td>
-<td style="text-align: left;">
-99214
-</td>
-<td style="text-align: left;">
-National
-</td>
-<td style="text-align: left;">
-F
-</td>
-<td style="text-align: left;">
-159324
-</td>
-<td style="text-align: left;">
-3183652
-</td>
-<td style="text-align: left;">
-7008865
-</td>
-<td style="text-align: left;">
-210.09590176
-</td>
-<td style="text-align: left;">
-77.348125868
-</td>
-<td style="text-align: left;">
-55.276294601
-</td>
-</tr>
-<tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-99214
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-National
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-O
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-551728
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-21794074
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-81741450.8
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-222.24271159
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-104.99486506
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-72.227897324
-</td>
-</tr>
-</tbody>
-<tfoot><tr>
-<td colspan="11">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
 <p><br></p>
 <blockquote>
 <ol start="3" style="list-style-type: decimal">
@@ -1331,356 +472,23 @@ Retrieved on Tuesday, November 01, 2022 at 05:18 AM
 </ol>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_prov_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi  <span class="op">=</span> <span class="va">nppes_unpack</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, </span>
-<span>                              set  <span class="op">=</span> <span class="st">"prov"</span>,</span>
-<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_prov_totals_table</span> <span class="op">&lt;-</span> <span class="va">mpop_prov_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"Year"</span>              <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                 <span class="st">"Unique HCPCS"</span>      <span class="op">=</span> <span class="va">tot_hcpcs_cds</span>,</span>
-<span>                 <span class="st">"Beneficiaries"</span>     <span class="op">=</span> <span class="va">tot_benes</span>, </span>
-<span>                 <span class="st">"Services"</span>          <span class="op">=</span> <span class="va">tot_srvcs</span>, </span>
-<span>                 <span class="st">"Charges Submitted"</span> <span class="op">=</span> <span class="va">tot_sbmtd_chrg</span>,</span>
-<span>                 <span class="st">"Amount Allowed"</span>    <span class="op">=</span> <span class="va">tot_mdcr_alowd_amt</span>,</span>
-<span>                 <span class="st">"Payments"</span>          <span class="op">=</span> <span class="va">tot_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Provider: Yearly Totals"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="8" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Provider: Yearly Totals
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Unique HCPCS
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Beneficiaries
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Services
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Charges Submitted
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Amount Allowed
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Payments
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-37
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-93
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-333
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-35226
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-17076.15
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-13170.13
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="8">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_prov_age_table</span> <span class="op">&lt;-</span> <span class="va">mpop_prov_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"Year"</span>     <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                 <span class="st">"Average Age"</span> <span class="op">=</span> <span class="va">bene_avg_age</span>,</span>
-<span>                 <span class="st">"Under 65"</span> <span class="op">=</span> <span class="va">bene_age_lt_65_cnt</span>,</span>
-<span>                 <span class="st">"65 - 74"</span> <span class="op">=</span> <span class="va">bene_age_65_74_cnt</span>,</span>
-<span>                 <span class="st">"75 - 84"</span> <span class="op">=</span> <span class="va">bene_age_75_84_cnt</span>,</span>
-<span>                 <span class="st">"Over 84"</span> <span class="op">=</span> <span class="va">bene_age_gt_84_cnt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Age"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="7" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Age
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Average Age
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Under 65
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-65 - 74
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-75 - 84
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Over 84
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-72
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-14
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-45
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-23
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-11
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="7">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_prov_demo_table</span> <span class="op">&lt;-</span> <span class="va">mpop_prov_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"Year"</span> <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                 <span class="st">"Female"</span> <span class="op">=</span> <span class="va">bene_feml_cnt</span>,</span>
-<span>                 <span class="st">"Male"</span> <span class="op">=</span> <span class="va">bene_male_cnt</span>,</span>
-<span>                 <span class="st">"White"</span> <span class="op">=</span> <span class="va">bene_race_wht_cnt</span>,</span>
-<span>                 <span class="st">"Black"</span> <span class="op">=</span> <span class="va">bene_race_black_cnt</span>,</span>
-<span>                 <span class="st">"Dual"</span> <span class="op">=</span> <span class="va">bene_dual_cnt</span>,</span>
-<span>                 <span class="st">"Non-Dual"</span> <span class="op">=</span> <span class="va">bene_ndual_cnt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Demographics"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="8" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Demographics
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Female
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Male
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-White
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Black
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Dual
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Non-Dual
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-48
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-45
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-93
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-12
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-81
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="8">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
-<p><br></p>
-<p><br></p>
-<details><summary>
-Code
-</summary><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_prov_ccw_table</span> <span class="op">&lt;-</span> <span class="va">mpop_prov_ex</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"Year"</span> <span class="op">=</span> <span class="va">year</span>,</span>
-<span>                 <span class="st">"Cancer"</span> <span class="op">=</span> <span class="va">bene_cc_cncr_pct</span>,</span>
-<span>                 <span class="st">"CKD"</span> <span class="op">=</span> <span class="va">bene_cc_ckd_pct</span>,</span>
-<span>                 <span class="st">"Diabetes"</span> <span class="op">=</span> <span class="va">bene_cc_dbts_pct</span>,</span>
-<span>                 <span class="st">"Hyperlipidemia"</span> <span class="op">=</span> <span class="va">bene_cc_hyplpdma_pct</span>,</span>
-<span>                 <span class="st">"Hypertension"</span> <span class="op">=</span> <span class="va">bene_cc_hyprtnsn_pct</span>,</span>
-<span>                 <span class="st">"Rheumatoid Arthritis / Osteoarthritis"</span> <span class="op">=</span> <span class="va">bene_cc_raoa_pct</span>,</span>
-<span>                 <span class="st">"Avg. HCC Risk Score"</span> <span class="op">=</span> <span class="va">bene_avg_risk_scre</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/addStyles.html" class="external-link">addHtmlTableStyle</a></span><span class="op">(</span>align        <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>                                align.header <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>   <span class="fu">htmlTable</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/htmlTable/man/htmlTable.html" class="external-link">htmlTable</a></span><span class="op">(</span>caption <span class="op">=</span> <span class="st">"Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Chronic Disease Percentages"</span>, </span>
-<span>                        ctable <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"solid"</span>, <span class="st">"double"</span><span class="op">)</span>,</span>
-<span>                        tfoot <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/stamp.html" class="external-link">stamp</a></span><span class="op">(</span><span class="st">"Retrieved on Sunday, January 1, 1999 at 3:34 pm"</span>, </span>
-<span>                                                 quiet <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">$</span><span class="va">datetime</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><p><br></p>
-<table class="table gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
-<thead>
-<tr>
-<td colspan="9" style="text-align: left;">
-Medicare Physician &amp; Other Practitioners by Provider: Beneficiary Chronic Disease Percentages
-</td>
-</tr>
-<tr>
-<th style="border-bottom: 1px solid grey; border-top: 2px solid grey;">
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Year
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Cancer
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-CKD
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Diabetes
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Hyperlipidemia
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Hypertension
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Rheumatoid Arthritis / Osteoarthritis
-</th>
-<th style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: left;">
-Avg. HCC Risk Score
-</th>
-</tr>
-</thead>
-<tbody><tr>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-2020
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.12
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.3
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.34
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.6
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.7
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-0.42
-</td>
-<td style="border-bottom: 4px double grey; text-align: left;">
-1.1213
-</td>
-</tr></tbody>
-<tfoot><tr>
-<td colspan="9">
-Retrieved on Tuesday, November 01, 2022 at 05:18 AM
-</td>
-</tr></tfoot>
-</table>
+</div>
+<div class="section level3">
+<h3 id="medicare-monthly-enrollment">Medicare Monthly Enrollment<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">month_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/monthly_enroll.html">monthly_enroll</a></span><span class="op">(</span>year      <span class="op">=</span> <span class="fl">2018</span>, </span>
+<span>                           month     <span class="op">=</span> <span class="st">"Year"</span>, </span>
+<span>                           geo_lvl   <span class="op">=</span> <span class="st">"County"</span>, </span>
+<span>                           state_abb <span class="op">=</span> <span class="st">"AL"</span>, </span>
+<span>                           county    <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in monthly_enroll(year = 2018, month = "Year", geo_lvl = "County", : could not find function "monthly_enroll"</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in knitr::kable(x, format = "markdown", ...): object 'month_ex' not found</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in knitr::kable(x, format = "markdown", ...): object 'month_ex' not found</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in knitr::kable(x, format = "markdown", ...): object 'month_ex' not found</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in knitr::kable(x, format = "markdown", ...): object 'month_ex' not found</span></span></code></pre></div>
 <hr>
-<p>Using packages like {gt} &amp; {ggplot2}, you can create tables and graphs for reporting purposes:</p>
-<p><br></p>
-<p><br></p>
-<p><img src="reference/figures/gt_provider.png" style="width:100.0%"></p>
-<p><img src="reference/figures/gt_provider2.png" style="width:100.0%"></p>
-<p><img src="reference/figures/gt_provider3.png" style="width:100.0%"></p>
-<p><br><br></p>
-<hr>
+</div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>

@@ -107,7 +107,8 @@ enrollment records in Medicare.</p>
 <span>  dme <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pmd <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -144,6 +145,10 @@ enrollment records in Medicare.</p>
 <dt>clean_names</dt>
 <dd><p>Clean column names with janitor's
 <code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>lowercase</dt>
+<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
