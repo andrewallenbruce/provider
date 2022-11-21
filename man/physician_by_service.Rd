@@ -27,20 +27,90 @@ physician_by_service(
   drug_ind = NULL,
   pos = NULL,
   year = 2020,
-  clean_names = TRUE
+  clean_names = TRUE,
+  lowercase = TRUE
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI)}
+\item{npi}{National Provider Identifier (NPI) for the rendering provider
+on the claim. The provider NPI is the numeric identifier registered in
+NPPES.}
 
-\item{first}{Provider's first name}
+\item{last_org}{Last name/Organization name of the provider. When the
+provider is registered in NPPES as an individual (entity type code=’I’),
+this is the provider’s last name. When the provider is registered as an
+organization (entity type code = ‘O’), this is the organization name.}
+
+\item{first}{An individual provider's (entity type code=’I’) first name.
+An organization's (entity type code = ‘O’) will be blank.}
+
+\item{cred}{An individual provider's (entity type code=’I’) credentials.
+An organization's will be blank.}
+
+\item{gender}{An individual provider's gender.
+An organization's will be blank.}
+
+\item{type}{Type of entity reported in NPPES. An entity code of ‘I’
+identifies providers registered as individuals while an entity type
+code of ‘O’ identifies providers registered as organizations.}
+
+\item{city}{The city where the provider is located, as reported in NPPES.}
+
+\item{state_abb}{The state where the provider is located, as reported
+in NPPES.}
+
+\item{fips}{FIPS code for the rendering provider's state.}
+
+\item{zip}{The provider’s zip code, as reported in NPPES.}
+
+\item{ruca}{Rural-Urban Commuting Area Code (RUCA); a Census tract-based
+classification scheme that utilizes the standard Bureau of Census
+Urbanized Area and Urban Cluster definitions in combination with work
+commuting information to characterize all of the nation's Census tracts
+regarding their rural and urban status and relationships. The Referring
+Provider ZIP code was cross walked to the United States Department of
+Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.}
+
+\item{country}{The country where the provider is located, as reported
+in NPPES.}
+
+\item{specialty}{Derived from the provider specialty code reported on the
+claim. For providers that reported more than one specialty code on their
+claims, this is the specialty code associated with the largest number
+of services.}
+
+\item{par_ind}{Identifies whether the provider participates in Medicare
+and/or accepts assignment of Medicare allowed amounts. The value will
+be ‘Y’ for any provider that had at least one claim identifying the
+provider as participating in Medicare or accepting assignment of
+Medicare allowed amounts within HCPCS code and place of service. A
+non-participating provider may elect to accept Medicare allowed amounts
+for some services and not accept Medicare allowed amounts for other
+services.}
+
+\item{hcpcs_code}{HCPCS code used to identify the specific medical service
+furnished by the provider. HCPCS codes include two levels. Level I codes
+are the Current Procedural Terminology (CPT) codes that are maintained
+by the American Medical Association and Level II codes are created by
+CMS to identify products, supplies and services not covered by the CPT
+codes (such as ambulance services).}
+
+\item{drug_ind}{Identifies whether the HCPCS code for the specific service
+furnished by the provider is a HCPCS listed on the Medicare Part B Drug
+Average Sales Price (ASP) File. Please visit the ASP drug pricing page
+for additional information.}
+
+\item{pos}{Identifies whether the place of service submitted on the claims
+is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+is generally an office setting; however other entities are included
+in non-facility.}
 
 \item{year}{Year in YYYY format, between 2013-2020; default is 2020}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
 
-\item{last}{Provider's last name}
+\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

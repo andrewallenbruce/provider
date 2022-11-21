@@ -34,12 +34,66 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
 #'
-#' @param npi 10-digit National Provider Identifier (NPI)
-#' @param last Provider's last name
-#' @param first Provider's first name
+#' @param npi National Provider Identifier (NPI) for the rendering provider
+#'    on the claim. The provider NPI is the numeric identifier registered in
+#'    NPPES.
+#' @param last_org Last name/Organization name of the provider. When the
+#'    provider is registered in NPPES as an individual (entity type code=’I’),
+#'    this is the provider’s last name. When the provider is registered as an
+#'    organization (entity type code = ‘O’), this is the organization name.
+#' @param first An individual provider's (entity type code=’I’) first name.
+#'    An organization's (entity type code = ‘O’) will be blank.
+#' @param cred An individual provider's (entity type code=’I’) credentials.
+#'    An organization's will be blank.
+#' @param gender An individual provider's gender.
+#'    An organization's will be blank.
+#' @param type Type of entity reported in NPPES. An entity code of ‘I’
+#'    identifies providers registered as individuals while an entity type
+#'    code of ‘O’ identifies providers registered as organizations.
+#' @param city The city where the provider is located, as reported in NPPES.
+#' @param state_abb The state where the provider is located, as reported
+#'    in NPPES.
+#' @param fips FIPS code for the rendering provider's state.
+#' @param zip The provider’s zip code, as reported in NPPES.
+#' @param ruca Rural-Urban Commuting Area Code (RUCA); a Census tract-based
+#'    classification scheme that utilizes the standard Bureau of Census
+#'    Urbanized Area and Urban Cluster definitions in combination with work
+#'    commuting information to characterize all of the nation's Census tracts
+#'    regarding their rural and urban status and relationships. The Referring
+#'    Provider ZIP code was cross walked to the United States Department of
+#'    Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.
+#' @param country The country where the provider is located, as reported
+#'    in NPPES.
+#' @param specialty Derived from the provider specialty code reported on the
+#'    claim. For providers that reported more than one specialty code on their
+#'    claims, this is the specialty code associated with the largest number
+#'    of services.
+#' @param par_ind Identifies whether the provider participates in Medicare
+#'    and/or accepts assignment of Medicare allowed amounts. The value will
+#'    be ‘Y’ for any provider that had at least one claim identifying the
+#'    provider as participating in Medicare or accepting assignment of
+#'    Medicare allowed amounts within HCPCS code and place of service. A
+#'    non-participating provider may elect to accept Medicare allowed amounts
+#'    for some services and not accept Medicare allowed amounts for other
+#'    services.
+#' @param hcpcs_code HCPCS code used to identify the specific medical service
+#'    furnished by the provider. HCPCS codes include two levels. Level I codes
+#'    are the Current Procedural Terminology (CPT) codes that are maintained
+#'    by the American Medical Association and Level II codes are created by
+#'    CMS to identify products, supplies and services not covered by the CPT
+#'    codes (such as ambulance services).
+#' @param drug_ind Identifies whether the HCPCS code for the specific service
+#'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
+#'    Average Sales Price (ASP) File. Please visit the ASP drug pricing page
+#'    for additional information.
+#' @param pos Identifies whether the place of service submitted on the claims
+#'    is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+#'    is generally an office setting; however other entities are included
+#'    in non-facility.
 #' @param year Year in YYYY format, between 2013-2020; default is 2020
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
+#' @param lowercase Convert column names to lowercase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -86,7 +140,8 @@ physician_by_service <- function(npi         = NULL,
                                  drug_ind    = NULL,
                                  pos         = NULL,
                                  year        = 2020,
-                                 clean_names = TRUE) {
+                                 clean_names = TRUE,
+                                 lowercase   = TRUE) {
 
    # dataset version ids by year ---------------------------------------------
   id <- dplyr::case_when(year == 2020 ~ "862ed658-1f38-4b2f-b02b-0b359e12c78a",
@@ -131,8 +186,7 @@ physician_by_service <- function(npi         = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  offset <- "offset=0"
-  url    <- paste0(http, id, post, params_args, offset)
+  url    <- paste0(http, id, post, params_args)
 
   # create request ----------------------------------------------------------
   req <- httr2::request(url)
@@ -149,7 +203,9 @@ physician_by_service <- function(npi         = NULL,
     dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results |> janitor::clean_names()}
+  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
+  # lowercase ---------------------------------------------------------------
+  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
 
   return(results)
 }

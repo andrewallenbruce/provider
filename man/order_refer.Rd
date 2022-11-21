@@ -12,7 +12,8 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  clean_names = TRUE
+  clean_names = TRUE,
+  lowercase = TRUE
 )
 }
 \arguments{
@@ -32,6 +33,8 @@ order_refer(
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
+
+\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

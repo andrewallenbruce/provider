@@ -28,6 +28,7 @@
 #' @param pmd logical
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
+#' @param lowercase Convert column names to lowercase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -70,7 +71,8 @@ order_refer <- function(npi         = NULL,
                         dme         = NULL,
                         hha         = NULL,
                         pmd         = NULL,
-                        clean_names = TRUE) {
+                        clean_names = TRUE,
+                        lowercase   = TRUE) {
 
   # param_format ------------------------------------------------------------
   param_format <- function(param, arg) {
@@ -94,10 +96,9 @@ order_refer <- function(npi         = NULL,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "a6ed1176-9e3f-42ba-be45-764075c13215"
+  id     <- "1cb95115-25c9-4097-8d12-a8f76b266591"
   post   <- "/data.json?"
-  offset <- "offset=0"
-  url    <- paste0(http, id, post, params_args, offset)
+  url    <- paste0(http, id, post, params_args)
 
   # create request ----------------------------------------------------------
   req <- httr2::request(url)
@@ -127,8 +128,10 @@ order_refer <- function(npi         = NULL,
           PMD == as.character("N") ~ as.logical(FALSE),
           TRUE ~ NA))
 
-    # clean names -------------------------------------------------------------
-    if (isTRUE(clean_names)) {results |> janitor::clean_names(case = "swap")}
+  # clean names -------------------------------------------------------------
+  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
+  # lowercase ---------------------------------------------------------------
+  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
 
     return(results)
 }

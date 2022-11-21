@@ -3,7 +3,6 @@
 export(age_days)
 export(cc_multiple)
 export(cc_specific)
-export(chronic_conditions)
 export(days_today)
 export(format_zipcode)
 export(monthly_enroll)

@@ -37,6 +37,8 @@
 #' @param fips FIPS code of beneficiary residence
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
+#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#'
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -62,7 +64,8 @@ monthly_enroll <- function(year        = NULL,
                            state       = NULL,
                            county      = NULL,
                            fips        = NULL,
-                           clean_names = TRUE) {
+                           clean_names = TRUE,
+                           lowercase   = TRUE) {
 
   # param_format ------------------------------------------------------------
   param_format <- function(param, arg) {
@@ -104,7 +107,9 @@ monthly_enroll <- function(year        = NULL,
     tibble::tibble()
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results |> janitor::clean_names()}
+  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
+  # lowercase ---------------------------------------------------------------
+  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
 
   return(results)
 }
