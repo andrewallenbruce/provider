@@ -20,7 +20,7 @@ cc_specific(
   stnd_pymt_pc = NULL,
   pymt_pc = NULL,
   readmit_rate = NULL,
-  er_vis_per1k = NULL,
+  er_visits = NULL,
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -100,7 +100,7 @@ acute care hospital. Except when the patient died during the stay, each
 inpatient stay is classified as an index admission, a readmission,
 or both.}
 
-\item{er_vis_per1k}{Emergency department visits are presented as the number
+\item{er_visits}{Emergency department visits are presented as the number
 of visits per 1,000 beneficiaries. ED visits include visits where the
 beneficiary was released from the outpatient setting and where the
 beneficiary was admitted to an inpatient setting.}

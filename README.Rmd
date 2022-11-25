@@ -28,25 +28,53 @@ knitr::opts_chunk$set(
 [![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
+[![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 <!-- badges: end -->
 
 The goal of `provider` is to provide performant and reliable open-source tools to facilitate easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources. The current list of supported APIs are:
 
 <br>
-
-   *  [NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
-   *  [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
-   *  [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
    *  [Medicare Provider and Supplier Taxonomy Crosswalk API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
-   *  [Medicare Physician & Other Practitioners API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
    *  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
    *  [Medicare Revalidation Clinic Group Practice Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
-   *  [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+   *  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+   *  [Medicare Physician & Other Practitioners API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
    *  [Medicare Market Saturation & Utilization State-County API](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
    *  [Medicare Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
-   *  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
  
 <br>
+
+```{r results='asis', echo=FALSE}
+# Informational APIs
+nppes_func <- gluedown::md_code("nppes_npi()")
+nppes_link <- gluedown::md_link("NPPES National Provider Identifier (NPI) Registry" = "https://npiregistry.cms.hhs.gov/search")
+
+mppe_func <- gluedown::md_code("provider_enrollment()")
+mppe_link <- gluedown::md_link("Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
+
+order_func <- gluedown::md_code("order_refer()")
+order_link <- gluedown::md_link("Medicare Order and Referring" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring")
+
+opt_func <- gluedown::md_code("opt_out()")
+opt_link <- gluedown::md_link("Medicare Opt Out Affidavits" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits")
+
+# Statistical APIs
+pbs_link <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service")
+pbs_func <- gluedown::md_code("physician_by_service()")
+
+gluedown::md_table(data.frame(
+  Function = c(nppes_func, 
+               mppe_func, 
+               order_func,
+               opt_func,
+               pbs_func), 
+  API = c(nppes_link, 
+          mppe_link, 
+          order_link,
+          opt_link,
+          pbs_link)))
+```
+
 
 ## Installation
 

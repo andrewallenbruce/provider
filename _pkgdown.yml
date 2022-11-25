@@ -2,11 +2,11 @@ url: https://andrewallenbruce.github.io/provider/
 
 template:
   bootstrap: 5
-  bootswatch: lux
+  bootswatch: simplex
   bslib:
     base_font: {google: "Roboto"}
-    heading_font: {google: "Roboto"}
-    code_font: {google: "Fira Code"}
+    heading_font: {google: "Roboto Slab"}
+    code_font: {google: "JetBrains Mono"}
     pkgdown-nav-height: 100px
 
 home:

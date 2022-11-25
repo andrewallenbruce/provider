@@ -74,8 +74,6 @@
 #' @return A [tibble][tibble::tibble-package] containing the date-time the search was performed
 #'    and a list-column of the results.
 #'
-#' @seealso [provider_unpack()], [provider_luhn()]
-#'
 #' @examples
 #' \dontrun{
 #' # Single NPI
@@ -133,15 +131,6 @@ provider_nppes <- function(npi     = NULL,
   # Check internet connection
   attempt::stop_if_not(curl::has_internet() == TRUE,
     msg = "Please check your internet connection.")
-
-  if (!is.null(npi)) {
-
-    # Luhn check
-    attempt::stop_if_not(
-      provider::provider_luhn(npi) == TRUE,
-      msg = "Luhn Check: NPI may be invalid.")
-
-  }
 
   # Limit must be between 1 and 1200
   attempt::stop_if_not(limit > 1 || limit < 1200,

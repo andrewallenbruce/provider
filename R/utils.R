@@ -1,48 +1,137 @@
-#' Remove NULL elements from vector
+#' Calculate Number of Days Between Two Dates ------------------------------
+#' Note: Calculation includes end date in the sum (see example)
+#' @param df data frame containing date columns
+#' @param start column containing date(s) prior to end_date column
+#' @param end column containing date(s) after start_date column
+#' @param colname desired column name of output; default is "age"
+#' @return A [tibble][tibble::tibble-package] with a named column
+#'    containing the calculated number of days.
+#' @examples
+#' date_ex <- tibble::tibble(x = seq.Date(as.Date("2021-01-01"),
+#'                           by = "month", length.out = 3),
+#'                           y = seq.Date(as.Date("2022-01-01"),
+#'                           by = "month", length.out = 3))
+#' age_days(df = date_ex,
+#'          start = x,
+#'          end = y)
 #'
-#' Implements the basic functionality found in the \pkg{purrr} package's
-#' \code{compact} function.
+#' date_ex |>
+#' age_days(x, y, colname = "days_between_x_y")
+#'
+#' date_ex |>
+#' age_days(start = x,
+#' end = lubridate::today(),
+#' colname = "days_since_x")
+#'
+#' date_ex |>
+#' age_days(x, y, "days_between_x_y") |>
+#' age_days(x, lubridate::today(), "days_since_x") |>
+#' age_days(y, lubridate::today(), colname = "days_since_y")
+#' @autoglobal
 #' @noRd
-remove_null <- function(l) {
-  Filter(Negate(is.null), l)
+age_days <- function(df,
+                     start,
+                     end,
+                     colname = "age") {
+
+  results <- df |>
+    dplyr::mutate(start = as.Date({{ start }},
+                                  "%yyyy-%mm-%dd",
+                                  tz = "EST"),
+                  end = as.Date({{ end }},
+                                "%yyyy-%mm-%dd",
+                                tz = "EST")) |>
+    dplyr::mutate("{colname}" := ((as.numeric(
+      lubridate::days(end) - lubridate::days(start),
+      "hours") / 24) + 1)) |>
+    dplyr::select(!c(end, start))
+
+  return(results)
 }
 
-#' Clean up credentials
+#' Calculate Number of Days Between a Date and Today -----------------------
+#' @param df data frame containing date columns
+#' @param start date column
+#' @param colname desired column name of output
+#' @return data frame with a column containing the number of days
+#'    calculated.
+#' @examples
+#' ex <- data.frame(x = c("1992-02-05",
+#'                        "2020-01-04",
+#'                        "1996-05-01",
+#'                        "2020-05-01",
+#'                        "1996-02-04"))
 #'
+#' days_today(df = ex, start = x)
+#'
+#' ex |> days_today(x)
+#' @autoglobal
+#' @noRd
+days_today <- function(df, start, colname = "age") {
+
+  results <- df |>
+    dplyr::mutate(int = lubridate::interval({{ start }},
+                                            lubridate::today()),
+                  secs = lubridate::int_length(int),
+                  mins = secs/60,
+                  hrs = mins/60,
+                  "{colname}" := abs(hrs/24)) |>
+    dplyr::select(!c(int, secs, mins, hrs))
+
+  return(results)
+
+}
+
+#' Format US ZIP codes -----------------------------------------------------
+#' @param zip Nine-digit US ZIP code
+#' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
+#' @examples
+#' format_zipcode(123456789)
+#' format_zipcode(12345)
+#' @autoglobal
+#' @noRd
+format_zipcode <- function(zip) {
+  zip <- as.character(zip)
+  if (stringr::str_detect(zip, "^[[:digit:]]{9}$") == TRUE) {
+    zip <- paste0(stringr::str_sub(zip, 1, 5), "-",
+                  stringr::str_sub(zip, 6, 9))
+    return(zip)} else {return(zip)}
+}
+
+#' Remove NULL elements from vector ----------------------------------------
+#' @autoglobal
+#' @noRd
+remove_null <- function(l) {Filter(Negate(is.null), l)}
+
+#' Clean up credentials ----------------------------------------------------
 #' @param x Character vector of credentials
 #' @return List of cleaned character vectors, with one list element per element
-#'   of \code{x}
+#'   of `x`
+#' @autoglobal
 #' @noRd
 clean_credentials <- function(x) {
-  if (!is.character(x)) {
-    stop("x must be a character vector")
-  }
-
+  if (!is.character(x)) {stop("x must be a character vector")}
   out <- gsub("\\.", "", x)
   out <- stringr::str_split(out, "[,\\s;]+", simplify = FALSE)
-  out
+  return(out)
 }
 
-
-#' Create full address from elements
-#'
-#' @param df Data frame
-#' @param address_1 Quoted column name in \code{df} containing a character
-#'   vector of first-street-line addresses
-#' @param address_2 Quoted column name in \code{df} containing a character
-#'   vector of second-street-line addresses
-#' @param city Quoted column name in \code{df} containing a character vector of
-#'   cities
-#' @param state Quoted column name in \code{df} containing a character vector of
-#'   two-letter state abbreviations
-#' @param postal_code Quoted column name in \code{df} containing a character or
-#'   numeric vector of postal codes
-#'
-#' @return Character vector containing full one-line addresses
+#' Create full address -----------------------------------------------------
+#' @param df data frame
+#' @param address_1 Quoted column containing first-street address
+#' @param address_2 Quoted column containing second-street address
+#' @param city Quoted column containing city
+#' @param state Quoted column containing two-letter state abbreviation
+#' @param postal_code Quoted column containing postal codes
+#' @return Character vector containing full one-line address
+#' @autoglobal
 #' @noRd
-make_full_address <- function(df, address_1, city, state, postal_code) {
-
-  stopifnot(is.data.frame(df), all(c(address_1, city, state, postal_code) %in% names(df)))
+full_address <- function(df,
+                         address_1,
+                         address_2,
+                         city,
+                         state,
+                         postal_code) {
 
     stringr::str_c(stringr::str_trim(df[[address_1]], "both"),
                    ifelse(df[[address_2]] == "", "", " "),
@@ -50,84 +139,138 @@ make_full_address <- function(df, address_1, city, state, postal_code) {
                    stringr::str_trim(df[[city]], "both"), ", ",
                    stringr::str_trim(df[[state]], "both"), " ",
                    stringr::str_trim(df[[postal_code]], "both"))
-  }
-
-
-#' Send API requests
-#'
-#' Sends API requests and stores the responses in a list.
-#'
-#' @param results A list of query results.
-#' @return A list of API results.
-#' @noRd
-npi_get_results <- function(results = list(), ...) {
-  msg <- glue::glue(
-    "Requesting records {...$skip}-{...$skip + ...$limit}..."
-  )
-  rlang::inform("status_pre_request", message = msg)
-
-  result <- npi_get(npi_url(), query = ...)
-  append(results, list(result))
 }
 
-
-
+#' luhn check npis ---------------------------------------------------------
+#' @description checks NPIs against the Luhn algorithm for
+#' compliance with the CMS requirements stated in the linked PDF below.
+#'
+#' # Requirements for NPI Check Digit
+#'
+#' The National Provider Identifier (NPI) check digit is calculated using
+#' the Luhn formula for computing the modulus 10 “double-add-double” check
+#' digit. This algorithm is recognized as an ISO standard and is the specified
+#' check digit algorithm to be used for the card issuer identifier on a
+#' standard health identification card.
+#'
+#' When an NPI is used as a card issuer identifier on a standard health
+#' identification card, it is preceded by the prefix `80840`, in which `80`
+#' indicates health applications and `840` indicates the United States.
+#'
+#' The prefix is required only when the NPI is used as a card issuer
+#' identifier. However, in order that any NPI could be used as a card issuer
+#' identifier on a standard health identification card, the check digit will
+#' always be calculated as if the prefix is present. This is accomplished by
+#' adding the constant `24` in step 2 of the check digit calculation (as shown
+#' in the second example below) when the NPI is used without the prefix.
+#'
+#' ## Example NPI Check Digit Calculation (Card Issuer Identifier)
+#'
+#' Assume that the NPI is `123456789`. If used as a card issuer identifier on
+#' a standard health identification card, the full number would be
+#' `80840123456789`. Using the Luhn formula on the identifier portion, the
+#' check digit is calculated as follows:
+#'
+#' 1. Card issuer identifier without check digit: `80840123456789`
+#' 2. Double the value of alternate digits, beginning with the rightmost
+#'    digit: `0 8 2 6 10 14 18`
+#' 3. Add the individual digits of products of doubling, plus unaffected
+#'    digits:
+#'    `8 + 0 + 8 + 8 + 0 + 2 + 2 + 6 + 4 + 1 + 0 + 6 + 1 + 4 + 8 + 1 + 8 = 67`
+#' 4. Subtract from next higher number ending in zero: `70 – 67 = 3`
+#' 5. The check digit equals 3, thus the card issuer identifier with check
+#'    digit is **80840**123456789**3**.
+#'
+#' ## Example NPI Check Digit Calculation (without Prefix)
+#'
+#' Assume that the NPI is `123456789`. Using the Luhn formula on the
+#' identifier portion, the check digit is calculated as follows:
+#'
+#' 1. NPI without check digit: `123456789`
+#' 2. Double the value of alternate digits, beginning with the rightmost
+#'    digit: `2 6 10 14 18`
+#' 3. Add constant `24`, to account for the `80840` prefix that would be
+#'    present on a card issuer identifier, plus the individual digits of
+#'    products of doubling, plus unaffected digits:
+#'    `24 + 2 + 2 + 6 + 4 + 1 + 0 + 6 + 1 + 4 + 8 + 1 + 8 = 67`
+#' 4. Subtract from next higher number ending in zero: `70 – 67 = 3`
+#' 5. The check digit equals **3**, thus the NPI with check digit
+#'    is 123456789**3**.
+#'
+#' ## Links
+#'  * [The Luhn Algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm)
+#'  * [CMS NPI Standard](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)
+#'
+#' @param npi 10-digit National Provider Identifier (NPI).
+#' @return boolean, `TRUE` or `FALSE`
+#' @examples
+#' # Valid NPI:
+#' provider_luhn(npi = 1528060837)
+#'
+#' # Quoted NPIs are valid:
+#' provider_luhn(npi = "1528060837")
+#'
+#' # Invalid NPI (per Luhn algorithm):
+#' provider_luhn(npi = 1234567891)
+#'
+#' \dontrun{
+#' # NPIs with less than 10 digits throw an error:
+#' provider_luhn(npi = 123456789)
+#'
+#' # Inputting letters will throw an error, quoted or not:
+#' provider_luhn(npi = abcdefghij)
+#' provider_luhn(npi = "abcdefghij")
+#' }
+#' @autoglobal
 #' @noRd
-calc_results_stats <- function(results, user_n) {
-  # Determine how many records were returned and how many are left
-  last_n_returned <- ifelse(rlang::is_empty(results),
-                            0L,
-                            length(utils::tail(results, 1)[[1]])
-  )
-  tot_n_returned <- sum(vapply(results, length, integer(1L)))
-  n_remaining <- user_n - tot_n_returned
+luhn_check <- function(npi = NULL) {
 
-  # Return stats needed for error control and params for the next query
-  list(
-    last_n_returned = last_n_returned,
-    n_remaining = n_remaining,
-    params = list(
-      skip = tot_n_returned,
-      limit = ifelse(
-        n_remaining < MAX_N_PER_REQUEST,
-        n_remaining,
-        MAX_N_PER_REQUEST
-      )
-    )
-  )
+  # Number of digits should be 10
+  attempt::stop_if_not(nchar(npi) == 10,
+  msg = c("NPIs must have 10 digits.
+  Provided NPI has ", nchar(npi), " digits."))
+
+  # Return FALSE if not a number
+  if (!grepl("^[[:digit:]]+$", npi)) {return(FALSE)}
+
+  # Strip whitespace
+  npi <- gsub(pattern = " ", replacement = "", npi)
+
+  # Paste 80840 to each NPI number, per CMS documentation
+  npi <- paste0("80840", npi)
+
+  # Split string, Convert to list and reverse
+  npi <- unlist(strsplit(npi, ""))
+  npi <- npi[length(npi):1]
+  to_replace <- seq(2, length(npi), 2)
+  npi[to_replace] <- as.numeric(npi[to_replace]) * 2
+
+  # Convert to numeric
+  npi <- as.numeric(npi)
+
+  # Must be a single digit, any that are > 9, subtract 9
+  npi <- ifelse(npi > 9, npi - 9, npi)
+
+  # Check if the sum divides by 10
+  ((sum(npi) %% 10) == 0)
 }
 
-
-
-#' Page API requests
-#'
-#' Gets the maximum number of records allowed by the API in the fewest number
-#' of requests.
-#'
-#' @param params A list of query parameters.
-#' @param user_n A scalar integer representing the maximum number of records
-#'   the user requested.
-#' @param results A list of request results
-#' @return A final list of API results.
+#' param_format ------------------------------------------------------------
+#' @param param API parameter
+#' @param arg API function arg
+#' @return formatted API filters
+#' @autoglobal
 #' @noRd
-npi_control_requests <- function(params, user_n, results = list()) {
-  result_stats <- calc_results_stats(results = results, user_n = user_n)
+param_format <- function(param, arg) {
+  if (is.null(arg)) {param <- NULL} else {
+    paste0("filter[", param, "]=", arg, "&")}}
 
-  # Avoid an endless loop when the API returns no records
-  if (!rlang::is_empty(results) && result_stats[["last_n_returned"]] == 0L) {
-    return(tibble::tibble())
-  }
+#' param_space --------------------------------------------------------------
+#' Some API parameters have spaces, these must be converted to "%20".
+#' @param param parameter with a space
+#' @return parameter formatted with "%20" in lieu of a space
+#' @autoglobal
+#' @noRd
+param_space <- function(param) {gsub(" ", "%20", param)}
 
-  # Return `results` when either (1) we have `user_n` number of records, or
-  # (2) there were some records in the last result but not the max possible.
-  if (result_stats[["n_remaining"]] == 0L ||
-      (result_stats[["last_n_returned"]] > 0L &&
-       result_stats[["last_n_returned"]] < MAX_N_PER_REQUEST)) {
-    return(results)
-  }
 
-  query <- utils::modifyList(params, result_stats[["params"]])
-  results <- npi_get_results(results = results, query = query)
-  Sys.sleep(1.5)
-  npi_control_requests(params = params, user_n = user_n, results = results)
-}

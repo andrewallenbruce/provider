@@ -58,7 +58,9 @@ A list of practitioners who are currently opted out
 of Medicare.
 }
 \details{
-The Opt Out Affidavits dataset provides information on providers who have decided not to participate in Medicare. It contains the provider's NPI, specialty, address, and effective dates.
+The Opt Out Affidavits dataset provides information on providers
+who have decided not to participate in Medicare. It contains the
+provider's NPI, specialty, address, and effective dates.
 \subsection{Data Update Frequency}{
 
 Monthly
@@ -76,16 +78,28 @@ Centers for Medicare & Medicaid Services
 }
 }
 \examples{
-\dontrun{
-opt_out(specialty = "Psychiatry")
-opt_out(first = "David")
+opt_out(specialty = "Psychiatry", zip = "07626")
+opt_out(first = "David", last = "Smith")
 opt_out(npi = 1114974490)
 opt_out(state_abb = "NY", eligible = "N")
-
-opt_out(specialty = "Clinical\%20Psychologist")
-opt_out(city = "Los\%20Angeles")
-
+opt_out(date_start = "01/30/1998", date_end = "01/30/2024")
+opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
+\dontrun{
 # Returns empty list i.e., provider is not in the database
 opt_out(npi = 1326011057)
+
+# Example of possible data cleaning
+psych <- opt_out(specialty = "Psychiatry")
+
+psych |>
+dplyr::mutate(last_updated = as.Date(parsedate::parse_date(last_updated)),
+optout_effective_date = as.Date(parsedate::parse_date(optout_effective_date)),
+optout_end_date = as.Date(parsedate::parse_date(optout_end_date))) |>
+              age_days(date, optout_end_date, colname = "days_until_end") |>
+              age_days(last_updated, date, colname = "days_since_update") |>
+              age_days(optout_effective_date, date, colname = "days_since_optout") |>
+dplyr::mutate(zip_code = purrr::map_chr(zip_code, format_zipcode)) |>
+dplyr::mutate(address_full = full_address(.data, "first_line_street_address",
+"second_line_street_address", "city_name", "state_code","zip_code"))
 }
 }

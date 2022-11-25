@@ -143,8 +143,8 @@ physician_by_service <- function(npi         = NULL,
                                  clean_names = TRUE,
                                  lowercase   = TRUE) {
 
-   # dataset version ids by year ---------------------------------------------
-  id <- dplyr::case_when(year == 2020 ~ "862ed658-1f38-4b2f-b02b-0b359e12c78a",
+  # dataset version ids by year ----------------------------------------------
+  id <- dplyr::case_when(year == 2020 ~ "92396110-2aed-4d63-a6a2-5d6207d46a29",
                          year == 2019 ~ "5fccd951-9538-48a7-9075-6f02b9867868",
                          year == 2018 ~ "02c0692d-e2d9-4714-80c7-a1d16d72ec66",
                          year == 2017 ~ "7ebc578d-c2c7-46fd-8cc8-1b035eba7218",
@@ -152,11 +152,6 @@ physician_by_service <- function(npi         = NULL,
                          year == 2015 ~ "0ccba18d-b821-47c6-bb55-269b78921637",
                          year == 2014 ~ "e6aacd22-1b89-4914-855c-f8dacbd2ec60",
                          year == 2013 ~ "ebaf67d7-1572-4419-a053-c8631cc1cc9b")
-
-  # param_format ------------------------------------------------------------
-  param_format <- function(param, arg) {
-    if (is.null(arg)) {param <- NULL} else {
-      paste0("filter[", param, "]=", arg, "&")}}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -181,25 +176,20 @@ physician_by_service <- function(npi         = NULL,
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "")
+    stringr::str_c(collapse = "") |> param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  req <- httr2::request(url)
-
-  # send response -----------------------------------------------------------
-  resp <- req |> httr2::req_perform()
+  # send request ----------------------------------------------------------
+  resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- resp |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE) |>
-    tibble::tibble() |>
-    dplyr::mutate(Year = year) |>
-    dplyr::relocate(Year)
+  results <- tibble::tibble(httr2::resp_body_json(resp,
+             check_type = FALSE, simplifyVector = TRUE)) |>
+             dplyr::mutate(Year = year) |> dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

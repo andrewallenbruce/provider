@@ -66,12 +66,6 @@ monthly_enroll <- function(year        = 2021,
                            fips        = NULL,
                            clean_names = TRUE,
                            lowercase   = TRUE) {
-
-  # param_format ------------------------------------------------------------
-  param_format <- function(param, arg) {
-    if (is.null(arg)) {param <- NULL} else {
-      paste0("filter[", param, "]=", arg, "&")}}
-
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                      ~x,        ~y,
@@ -85,7 +79,7 @@ monthly_enroll <- function(year        = 2021,
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "")
+    stringr::str_c(collapse = "") |> param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -93,19 +87,13 @@ monthly_enroll <- function(year        = 2021,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  req <- httr2::request(url)
-
-  # send response -----------------------------------------------------------
-  resp <- req |> httr2::req_perform()
+  # send request ----------------------------------------------------------
+  resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- resp |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE) |>
-    tibble::tibble() |>
-    dplyr::mutate(Year = year) |>
-    dplyr::relocate(Year)
+  results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
+             simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
+             dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

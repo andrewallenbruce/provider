@@ -73,12 +73,6 @@ order_refer <- function(npi         = NULL,
                         pmd         = NULL,
                         clean_names = TRUE,
                         lowercase   = TRUE) {
-
-  # param_format ------------------------------------------------------------
-  param_format <- function(param, arg) {
-    if (is.null(arg)) {param <- NULL} else {
-      paste0("filter[", param, "]=", arg, "&")}}
-
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,           ~y,
@@ -92,7 +86,7 @@ order_refer <- function(npi         = NULL,
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "")
+    stringr::str_c(collapse = "") |> param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -100,33 +94,24 @@ order_refer <- function(npi         = NULL,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  req <- httr2::request(url)
-
-  # send response -----------------------------------------------------------
-  resp <- req |> httr2::req_perform()
+  # send request ----------------------------------------------------------
+  resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- resp |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE) |>
-      tibble::tibble() |>
-      dplyr::mutate(PARTB = dplyr::case_when(
-          PARTB == as.character("Y") ~ as.logical(TRUE),
-          PARTB == as.character("N") ~ as.logical(FALSE),
-          TRUE ~ NA),
-                    HHA = dplyr::case_when(
-          HHA == as.character("Y") ~ as.logical(TRUE),
-          HHA == as.character("N") ~ as.logical(FALSE),
-          TRUE ~ NA),
-                    DME = dplyr::case_when(
-          DME == as.character("Y") ~ as.logical(TRUE),
-          DME == as.character("N") ~ as.logical(FALSE),
-          TRUE ~ NA),
-                    PMD = dplyr::case_when(
-          PMD == as.character("Y") ~ as.logical(TRUE),
-          PMD == as.character("N") ~ as.logical(FALSE),
-          TRUE ~ NA))
+  results <- tibble::tibble(httr2::resp_body_json(resp,
+             check_type = FALSE, simplifyVector = TRUE)) |>
+             dplyr::mutate(PARTB = dplyr::case_when(
+               PARTB == as.character("Y") ~ as.logical(TRUE),
+               PARTB == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
+               HHA = dplyr::case_when(
+               HHA == as.character("Y") ~ as.logical(TRUE),
+               HHA == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
+               DME = dplyr::case_when(
+               DME == as.character("Y") ~ as.logical(TRUE),
+               DME == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
+               PMD = dplyr::case_when(
+               PMD == as.character("Y") ~ as.logical(TRUE),
+               PMD == as.character("N") ~ as.logical(FALSE), TRUE ~ NA))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

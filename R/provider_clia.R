@@ -65,11 +65,6 @@ provider_clia <- function(name = NULL,
                          year == 2011 ~ "c7f8619d-945f-4d8b-9747-f1b3f2e56c84",
                          year == 2010 ~ "3b635cea-fa5e-42de-ba61-4ba2f88e032f")
 
-  # param_format ------------------------------------------------------------
-  param_format <- function(param, arg) {
-    if (is.null(arg)) {param <- NULL} else {
-      paste0("filter[", param, "]=", arg, "&")}}
-
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,         ~y,

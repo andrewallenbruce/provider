@@ -26,8 +26,7 @@ Imports:
     janitor,
     tibble,
     purrr,
-    tidyr,
-    rlang,
+    tidyr
 Suggests: 
     covr,
     datefixR,

@@ -149,6 +149,3 @@ tibble::deframe() |>
 purrr::map_dfr(provider_nppes)
 }
 }
-\seealso{
-\code{\link[=provider_unpack]{provider_unpack()}}, \code{\link[=provider_luhn]{provider_luhn()}}
-}

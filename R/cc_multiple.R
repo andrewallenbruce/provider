@@ -75,7 +75,7 @@
 #'    acute care hospital. Except when the patient died during the stay, each
 #'    inpatient stay is classified as an index admission, a readmission,
 #'    or both.
-#' @param er_vis_per1k Emergency department visits are presented as the number
+#' @param er_visits Emergency department visits are presented as the number
 #'    of visits per 1,000 beneficiaries. ED visits include visits where the
 #'    beneficiary was released from the outpatient setting and where the
 #'    beneficiary was admitted to an inpatient setting.
@@ -110,7 +110,7 @@ cc_multiple <- function(year         = 2018,
                         stnd_pymt_pc = NULL,
                         pymt_pc      = NULL,
                         readmit_rate = NULL,
-                        er_vis_per1k = NULL,
+                        er_visits    = NULL,
                         clean_names  = TRUE,
                         lowercase    = TRUE) {
 
@@ -127,12 +127,6 @@ cc_multiple <- function(year         = 2018,
                          year == 2009 ~ "cf0dfa1c-9e09-4450-aebc-6172e7f8c22a",
                          year == 2008 ~ "d1cb4056-cd4c-4265-8dfa-ebacbb5bbf51",
                          year == 2007 ~ "ac9073d7-9bca-43ba-88f3-404c5fa531a3")
-
-  # param_format ------------------------------------------------------------
-  param_format <- function(param, arg) {
-    if (is.null(arg)) {param <- NULL} else {
-      paste0("filter[", param, "]=", arg, "&")}}
-
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,
@@ -147,31 +141,24 @@ cc_multiple <- function(year         = 2018,
     "Tot_Mdcr_Stdzd_Pymt_PC",   stnd_pymt_pc,
     "Tot_Mdcr_Pymt_PC",         pymt_pc,
     "Hosp_Readmsn_Rate",        readmit_rate,
-    "ER_Visits_Per_1000_Benes", er_vis_per1k)
+    "ER_Visits_Per_1000_Benes", er_visits)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "")
+    stringr::str_c(collapse = "") |> param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  offset <- "offset=0"
-  url    <- paste0(http, id, post, params_args, offset)
+  url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  req <- httr2::request(url)
-
-  # send response -----------------------------------------------------------
-  resp <- req |> httr2::req_perform()
+  # send request ----------------------------------------------------------
+  resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- resp |>
-    httr2::resp_body_json(check_type = FALSE,
-                          simplifyVector = TRUE) |>
-    tibble::tibble() |>
-    dplyr::mutate(Year = year) |>
-    dplyr::relocate(Year)
+  results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
+             simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
+             dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

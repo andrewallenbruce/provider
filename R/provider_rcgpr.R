@@ -93,10 +93,6 @@ provider_rcgpr <- function(npi        = NULL,
 
   } else if (!is.null(npi)) {
 
-    # Luhn check
-    attempt::stop_if_not(provider_luhn(npi) == TRUE,
-                         msg = "Luhn Check: NPI may be invalid.")
-
     # Send and save response
     resp <- req |>
       httr2::req_url_query(keyword = npi) |>
