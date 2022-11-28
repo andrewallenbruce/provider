@@ -31,50 +31,94 @@ knitr::opts_chunk$set(
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 <!-- badges: end -->
 
-The goal of `provider` is to provide performant and reliable open-source tools to facilitate easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources. The current list of supported APIs are:
-
-<br>
-   *  [Medicare Provider and Supplier Taxonomy Crosswalk API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
-   *  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
-   *  [Medicare Revalidation Clinic Group Practice Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)
-   *  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
-   *  [Medicare Physician & Other Practitioners API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
-   *  [Medicare Market Saturation & Utilization State-County API](https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county)
-   *  [Medicare Provider of Services File - Clinical Laboratories API](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
+The goal of `provider` is to provide performant and reliable open-source tools to facilitate easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources.
  
 <br>
 
 ```{r results='asis', echo=FALSE}
-# Informational APIs
 nppes_func <- gluedown::md_code("nppes_npi()")
 nppes_link <- gluedown::md_link("NPPES National Provider Identifier (NPI) Registry" = "https://npiregistry.cms.hhs.gov/search")
 
-mppe_func <- gluedown::md_code("provider_enrollment()")
-mppe_link <- gluedown::md_link("Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
+mppe_func  <- gluedown::md_code("provider_enrollment()")
+mppe_link  <- gluedown::md_link("Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
+
+mme_func   <- gluedown::md_code("beneficiary_enrollment()")
+mme_link   <- gluedown::md_link("Medicare Monthly Enrollment" = "https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment")
+
+miss_func  <- gluedown::md_code("missing_information()")
+miss_link  <- gluedown::md_link("CMS Public Reporting of Missing Digital Contact Information" = "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information")
 
 order_func <- gluedown::md_code("order_refer()")
 order_link <- gluedown::md_link("Medicare Order and Referring" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring")
 
-opt_func <- gluedown::md_code("opt_out()")
-opt_link <- gluedown::md_link("Medicare Opt Out Affidavits" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits")
+opt_func   <- gluedown::md_code("opt_out()")
+opt_link   <- gluedown::md_link("Medicare Opt Out Affidavits" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits")
 
-# Statistical APIs
-pbs_link <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service")
-pbs_func <- gluedown::md_code("physician_by_service()")
+pbp_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider")
+pbp_func   <- gluedown::md_code("physician_by_provider()")
 
-gluedown::md_table(data.frame(
+pbs_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service")
+pbs_func   <- gluedown::md_code("physician_by_service()")
+
+pbg_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Geography and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service")
+pbg_func   <- gluedown::md_code("physician_by_geography()")
+
+redd_func  <- gluedown::md_code("revalidation_date()")
+redd_link  <- gluedown::md_link("Medicare Revalidation Due Date" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list")
+
+recl_func  <- gluedown::md_code("revalidation_group()")
+recl_link  <- gluedown::md_link("Medicare Revalidation Clinic Group Practice Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment")
+
+ccs_func   <- gluedown::md_code("cc_specific()")
+ccs_link   <- gluedown::md_link("Medicare Specific Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions")
+
+ccm_func   <- gluedown::md_code("cc_multiple()")
+ccm_link   <- gluedown::md_link("Medicare Multiple Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions")
+
+clia_func  <- gluedown::md_code("clia_labs()")
+clia_link  <- gluedown::md_link("Medicare Provider of Services File - Clinical Laboratories" = "https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories")
+
+tax_func   <- gluedown::md_code("taxonomy_crosswalk()")
+tax_link   <- gluedown::md_link("Medicare Provider and Supplier Taxonomy Crosswalk" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk")
+
+
+
+gluedown::md_table(
+          data.frame(
   Function = c(nppes_func, 
                mppe_func, 
+               mme_func,
                order_func,
                opt_func,
-               pbs_func), 
-  API = c(nppes_link, 
-          mppe_link, 
-          order_link,
-          opt_link,
-          pbs_link)))
+               pbp_func,
+               pbs_func,
+               pbg_func,
+               redd_func,
+               recl_func,
+               ccs_func,
+               ccm_func,
+               clia_func,
+               tax_func,
+               miss_func
+               ), 
+  API      = c(nppes_link, 
+               mppe_link,
+               mme_link,
+               order_link,
+               opt_link,
+               pbp_link,
+               pbs_link,
+               pbg_link,
+               redd_link,
+               recl_link,
+               ccs_link,
+               ccm_link,
+               clia_link,
+               tax_link,
+               miss_link
+               )))
 ```
-
+<br>
 
 ## Installation
 
@@ -89,113 +133,91 @@ remotes::install_github("andrewallenbruce/provider")
 ```
 <br>
 
-## Provider Information
-
-These APIs are generally concerned with providing access to up-to-date information a provider or her associates may need for many aspects of the transacting of healthcare.
-
-### NPPES NPI Public Registry
-
-<br>
-
-```{r, echo=TRUE}
-# Load library
-library(provider)
-
-# Define search parameter
-npi <- 1083879860
-
-# Query the NPPES API and unpack the response
-nppes_ex <- provider_nppes(npi) |> 
-            provider_unpack()
-```
-
-<br>
-
-```{r results='asis', echo=FALSE}
-gluedown::md_heading("Basic Information", level = 1)
-gluedown::md_table(nppes_ex[, 1:5] |> dplyr::slice_head())
-gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 6:10] |> dplyr::slice_head())
-gluedown::md_rule(n = 60)
-gluedown::md_heading("Addresses", level = 1)
-gluedown::md_table(nppes_ex[, 13:17])
-gluedown::md_blank()
-gluedown::md_heading("Taxonomy", level = 1)
-gluedown::md_table(nppes_ex[, 18:23] |> dplyr::slice_head())
-gluedown::md_blank()
-gluedown::md_heading("Endpoints", level = 1)
-gluedown::md_table(nppes_ex[, 24:26] |> dplyr::slice_head())
-gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 27:28] |> dplyr::slice_head())
-gluedown::md_blank()
-gluedown::md_table(nppes_ex[, 35:38] |> dplyr::slice_head())
-```
-
-<br>
-
-### FFS Public Provider Enrollment
-
-What if you need the provider's PECOS PAC ID or Enrollment ID? Using the `provider_mppe()` function, you can search Medicare's **Fee-For-Service Public Provider Enrollment API**:
+# NPPES National Provider Identifier (NPI) Registry
 
 <br>
 
 ```{r echo=TRUE}
-mppe_ex <- provider_mppe(npi)
+# Load library
+library(provider)
+
+ex <- nppes_npi(npi = 1083879860)
 ```
 
+
+```{r echo=FALSE}
+ex |> 
+  tidyr::unnest(cols = c(basic, addresses, taxonomies, endpoints), 
+                names_repair = "universal") |> 
+  dplyr::select(-identifiers, -other_names, -taxonomy_group, 
+                -practice_locations, -useDescription, 
+                -contentTypeDescription) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
+```
+
+
+<br>
+
+# Medicare Fee-For-Service Public Provider Enrollment API
+
+<br>
+
+```{r echo=TRUE}
+exa <- provider_mppe(npi = ex$number)
+```
+
+```{r echo=FALSE}
+exa |> tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
+```
+
+<br>
+
+# Medicare Order and Referring API
+
+```{r results='asis'}
+order_refer(ex$number) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
+```
+
+<br>
+
+# Medicare Provider and Supplier Taxonomy Crosswalk API
 
 <br>
 
 ```{r results='asis'}
-gluedown::md_table(list(mppe_ex[, 1:4], mppe_ex[, 5:9]), caption = "Title of the table", longtable = TRUE)
+provider_mpstc(ex$taxonomies[[1]]$code) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
 ```
 
 <br>
 
-### Order and Referring
-
-Is a Provider currently eligible to:
-
-```{r results='asis', echo=FALSE}
-gluedown::md_bullet(list("Make referrals to Medicare Part B or a Home Health Agency (HHA)?", "Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? "), marker = "-")
-```
-
-Search Medicare's **Order and Referring API** with `order_refer()`:
-
-
-```{r results='asis'}
-order_refer(npi) |> gluedown::md_table()
-```
-
-<br>
-
-### Taxonomy Crosswalk
-
-You may need to find Medicare's specialty codes for this provider's taxonomies. You can search Medicare's **Provider and Supplier Taxonomy Crosswalk API** with `provider_mpstc()`:
+# Medicare Revalidation Due Date API
 
 <br>
 
 ```{r results='asis'}
-provider_mpstc(nppes_ex[1,]$taxon_code) |> gluedown::md_table()
+provider_mrdd(ex$number) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
 ```
 
 <br>
 
-### Revalidation Due Date
-
-You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare's **Revalidation Due Date API** with `provider_mrdd()`:
-
-<br>
-
-```{r results='asis'}
-provider_mrdd(npi) |> gluedown::md_table()
-```
-
-<br>
-
-### Missing Digital Contact Information
-
-Providers may need to update their digital contact information in the NPPES system. To check, you can access the **CMS Public Reporting of Missing Digital Contact Information API** with `provider_promdci()`. If they appear in the search results, it's time to update their NPPES contact information:
+# CMS Public Reporting of Missing Digital Contact Information API
 
 <br>
 
@@ -205,26 +227,30 @@ provider_promdci(1144224569) |> gluedown::md_table()
 
 <br>
 
-### Opt-Out Affidavits
-
-You can find out if a provider has opted out of Medicare by searching the **Medicare Opt Out Affidavits API** with `opt_out()`:
+# Medicare Opt-Out Affidavits API
 
 <br>
 
 ```{r results='asis'}
-opt_out(last = "Aaron") |> gluedown::md_table()
+opt_out(last = "Aaron") |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
 ```
 
 <br>
 
-### Revalidation Clinic Group Practice Reassignment
-
-`provider_rcgpr()` accesses **Medicare's Revalidation Clinic Group Practice Reassignment API**:
+# Medicare Revalidation Clinic Group Practice Reassignment
 
 <br>
 
-```{r}
-provider_rcgpr(npi)
+```{r results='asis'}
+provider_rcgpr(ex$number) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything(), 
+                      names_to = "name", 
+                      values_to = "value") |> gluedown::md_table()
 ```
 
 
