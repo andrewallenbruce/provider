@@ -17,22 +17,23 @@ Depends:
     R (>= 2.10)
 Imports: 
     attempt,
+    cli,
     curl,
     datawizard,
     dplyr,
     httr2,
     insight,
-    lubridate,
     janitor,
-    tibble,
+    lubridate,
     purrr,
+    tibble,
     tidyr
 Suggests: 
     covr,
     datefixR,
+    glue,
     gt,
     gtExtras,
-    glue,
     httptest2,
     knitr,
     rmarkdown,
@@ -40,7 +41,7 @@ Suggests:
     spelling,
     stringr,
     testthat (>= 3.0.0),
-    tidygeocoder,
+    tidygeocoder
 VignetteBuilder: 
     knitr
 Remotes: 

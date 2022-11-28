@@ -28,8 +28,8 @@
 #' @param last Last name of individual provider
 #' @param org_name Legal business name of organizational provider
 #' @param enroll_state Enrollment state
-#' @param enroll_type Provider type code (1 if Part A; 2 if DME;
-#'    3 if Non-DME Part B)
+#' @param enroll_type Provider type code (`1` if Part A; `2` if DME;
+#'    `3` if Non-DME Part B)
 #' @param prov_type Provider type description
 #' @param enroll_spec Enrollment specialty
 #' @param reval_date Previously assigned revalidation due date (blank if not
@@ -59,7 +59,8 @@
 #'                   1720392988, 1518184605), each = 8)
 #' months <- rep(c("Nov", "Oct", "Sep", "Aug",
 #'                 "Jul", "Jun", "Apr", "Feb"), times = 4)
-#' purrr::map2_dfr(npi_list, months, ~revalidation_date(npi = .x, version = .y))
+#' purrr::map2_dfr(npi_list, months, ~revalidation_date(npi = .x,
+#'                                                      version = .y))
 #' }
 #' @autoglobal
 #' @export
@@ -117,7 +118,7 @@ revalidation_date <- function(enroll_id         = NULL,
   #post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # send request ----------------------------------------------------------
+  # send request ------------------------------------------------------------
   resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------

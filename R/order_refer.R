@@ -10,14 +10,11 @@
 #'    eligible to order and refer in the Medicare program and who have current
 #'    enrollment records in Medicare.
 #'
-#' ## Data Update Frequency
-#' Weekly
-#'
-#' ## Data Source
-#' Centers for Medicare & Medicaid Services
-#'
 #' ## Links
 #' * [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param last Provider's last name

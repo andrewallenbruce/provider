@@ -39,8 +39,8 @@ revalidation_date(
 
 \item{enroll_state}{Enrollment state}
 
-\item{enroll_type}{Provider type code (1 if Part A; 2 if DME;
-3 if Non-DME Part B)}
+\item{enroll_type}{Provider type code (\code{1} if Part A; \code{2} if DME;
+\code{3} if Non-DME Part B)}
 
 \item{prov_type}{Provider type description}
 
@@ -105,6 +105,7 @@ npi_list <- rep(c(1003026055, 1316405939,
                   1720392988, 1518184605), each = 8)
 months <- rep(c("Nov", "Oct", "Sep", "Aug",
                 "Jul", "Jun", "Apr", "Feb"), times = 4)
-purrr::map2_dfr(npi_list, months, ~revalidation_date(npi = .x, version = .y))
+purrr::map2_dfr(npi_list, months, ~revalidation_date(npi = .x,
+                                                     version = .y))
 }
 }

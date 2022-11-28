@@ -3,6 +3,9 @@
 \name{order_refer}
 \alias{order_refer}
 \title{Search the Medicare Order and Referring API}
+\source{
+Centers for Medicare & Medicaid Services
+}
 \usage{
 order_refer(
   npi = NULL,
@@ -50,21 +53,14 @@ all physicians and non-physician practitioners, by their National
 Provider Identifier (NPI), who are of a type/specialty that is legally
 eligible to order and refer in the Medicare program and who have current
 enrollment records in Medicare.
-\subsection{Data Update Frequency}{
-
-Weekly
-}
-
-\subsection{Data Source}{
-
-Centers for Medicare & Medicaid Services
-}
-
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 }
 }
+}
+\note{
+Update Frequency: \strong{Weekly}
 }
 \examples{
 \dontrun{

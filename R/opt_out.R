@@ -7,14 +7,11 @@
 #'    who have decided not to participate in Medicare. It contains the
 #'    provider's NPI, specialty, address, and effective dates.
 #'
-#' ## Data Update Frequency
-#' Monthly
-#'
-#' ## Data Source
-#' Centers for Medicare & Medicaid Services
-#'
 #' ## Links
 #' * [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Monthly**
 #'
 #' @param first First Name of the Opt Out Provider
 #' @param last Last Name of the Opt Out Provider
@@ -53,9 +50,9 @@
 #' dplyr::mutate(last_updated = as.Date(parsedate::parse_date(last_updated)),
 #' optout_effective_date = as.Date(parsedate::parse_date(optout_effective_date)),
 #' optout_end_date = as.Date(parsedate::parse_date(optout_end_date))) |>
-#'               age_days(date, optout_end_date, colname = "days_until_end") |>
-#'               age_days(last_updated, date, colname = "days_since_update") |>
-#'               age_days(optout_effective_date, date, colname = "days_since_optout") |>
+#' age_days(date, optout_end_date, colname = "days_until_end") |>
+#' age_days(last_updated, date, colname = "days_since_update") |>
+#' age_days(optout_effective_date, date, colname = "days_since_optout") |>
 #' dplyr::mutate(zip_code = purrr::map_chr(zip_code, format_zipcode)) |>
 #' dplyr::mutate(address_full = full_address(.data, "first_line_street_address",
 #' "second_line_street_address", "city_name", "state_code","zip_code"))
