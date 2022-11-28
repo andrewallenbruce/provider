@@ -73,6 +73,12 @@ field is used, at least one other field, besides the \code{prov_type} and
 \code{country}, must be populated. Valid values for state abbreviations:
 \url{https://npiregistry.cms.hhs.gov/help-api/state}.}
 
+\item{postal_code}{The Postal Code associated with the provider's address
+identified in Address Purpose. If you enter a 5 digit postal code, it
+will match any appropriate 9 digit (zip+4) codes in the data. Trailing
+wildcard entries are permitted requiring at least two characters to be
+entered (e.g., "21*").}
+
 \item{country_code}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
 as the value selected \emph{is not} \strong{US} (United States). Valid values for
