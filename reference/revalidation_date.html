@@ -162,8 +162,8 @@ dates are appended to the list</p>
 
 
 <dt>enroll_type</dt>
-<dd><p>Provider type code (1 if Part A; 2 if DME;
-3 if Non-DME Part B)</p></dd>
+<dd><p>Provider type code (<code>1</code> if Part A; <code>2</code> if DME;
+<code>3</code> if Non-DME Part B)</p></dd>
 
 
 <dt>prov_type</dt>
@@ -238,7 +238,7 @@ their providers.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date       data_vers…¹ enrol…² natio…³ first…⁴ last_…⁵ organ…⁶ enrol…⁷ enrol…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-11-25 Nov-2022    I20031… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-11-28 Nov-2022    I20031… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more variables: provider_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   enrollment_specialty &lt;chr&gt;, revalidation_due_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;chr&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
@@ -250,8 +250,8 @@ their providers.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   date       data_vers…¹ enrol…² natio…³ first…⁴ last_…⁵ organ…⁶ enrol…⁷ enrol…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-11-25 Nov-2022    I20031… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-11-25 Nov-2022    I20090… 159879… Eric    Byrd    <span style="color: #949494;">""</span>      SC      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-11-28 Nov-2022    I20031… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-11-28 Nov-2022    I20090… 159879… Eric    Byrd    <span style="color: #949494;">""</span>      SC      3      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more variables: provider_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   enrollment_specialty &lt;chr&gt;, revalidation_due_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;chr&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
@@ -264,16 +264,16 @@ their providers.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,000 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    date       data_ver…¹ enrol…² natio…³ first…⁴ last_…⁵ organ…⁶ enrol…⁷ enrol…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-11-25 Nov-2022   I20031… 118469… John    Abt     <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-11-25 Nov-2022   I20031… 135643… Humber… Fernan… <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-11-25 Nov-2022   I20031… 146749… Jorge   Santan… <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-11-25 Nov-2022   I20031… 110487… Marian… De La … <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-11-25 Nov-2022   I20031… 143720… Mohamm… Sheikh  <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-11-25 Nov-2022   I20031… 141706… Richard Rizzo   <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-11-25 Nov-2022   I20031… 168964… Rene    Casano… <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-11-25 Nov-2022   I20031… 126558… Maria   Montea… <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-11-25 Nov-2022   I20031… 161994… Ricardo Doming… <span style="color: #949494;">""</span>      FL      3      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-11-25 Nov-2022   I20031… 103321… Arles   Perdomo <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-11-28 Nov-2022   I20031… 118469… John    Abt     <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-11-28 Nov-2022   I20031… 135643… Humber… Fernan… <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-11-28 Nov-2022   I20031… 146749… Jorge   Santan… <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-11-28 Nov-2022   I20031… 110487… Marian… De La … <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-11-28 Nov-2022   I20031… 143720… Mohamm… Sheikh  <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-11-28 Nov-2022   I20031… 141706… Richard Rizzo   <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-11-28 Nov-2022   I20031… 168964… Rene    Casano… <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-11-28 Nov-2022   I20031… 126558… Maria   Montea… <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-11-28 Nov-2022   I20031… 161994… Ricardo Doming… <span style="color: #949494;">""</span>      FL      3      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-11-28 Nov-2022   I20031… 103321… Arles   Perdomo <span style="color: #949494;">""</span>      FL      3      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 990 more rows, 6 more variables: provider_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   enrollment_specialty &lt;chr&gt;, revalidation_due_date &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;chr&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
@@ -285,7 +285,8 @@ their providers.</p><div class="section">
 <span class="r-in"><span>                  <span class="fl">1720392988</span>, <span class="fl">1518184605</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">months</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nov"</span>, <span class="st">"Oct"</span>, <span class="st">"Sep"</span>, <span class="st">"Aug"</span>,</span></span>
 <span class="r-in"><span>                <span class="st">"Jul"</span>, <span class="st">"Jun"</span>, <span class="st">"Apr"</span>, <span class="st">"Feb"</span><span class="op">)</span>, times <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">npi_list</span>, <span class="va">months</span>, <span class="op">~</span><span class="fu">revalidation_date</span><span class="op">(</span>npi <span class="op">=</span> <span class="va">.x</span>, version <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">npi_list</span>, <span class="va">months</span>, <span class="op">~</span><span class="fu">revalidation_date</span><span class="op">(</span>npi <span class="op">=</span> <span class="va">.x</span>,</span></span>
+<span class="r-in"><span>                                                     version <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
