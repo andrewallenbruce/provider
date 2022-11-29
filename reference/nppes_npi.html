@@ -253,9 +253,7 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>, state_abb <span class="op">=</span> <span class="st">"GA"</span>, country_code <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># First name, city, state</span></span></span>
-<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span></span>
-<span class="r-in"><span>               city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span></span>
-<span class="r-in"><span>               state_abb <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state_abb <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
@@ -268,8 +266,7 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">npi_list</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data frame of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1710983663</span>,</span></span>

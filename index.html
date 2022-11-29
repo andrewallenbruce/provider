@@ -126,8 +126,7 @@
 </div>
 <!-- badges: start -->
 
-<p>The goal of <code>provider</code> is to provide performant and reliable open-source tools to facilitate easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources. The current list of supported APIs are:</p>
-<p><br> * <a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare Provider and Supplier Taxonomy Crosswalk API</a> * <a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date API</a> * <a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment" class="external-link">Medicare Revalidation Clinic Group Practice Reassignment API</a> * <a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS Public Reporting of Missing Digital Contact Information API</a> * <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners API</a> * <a href="https://data.cms.gov/summary-statistics-on-use-and-payments/program-integrity-market-saturation-by-type-of-service/market-saturation-utilization-state-county" class="external-link">Medicare Market Saturation &amp; Utilization State-County API</a> * <a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">Medicare Provider of Services File - Clinical Laboratories API</a></p>
+<p>The goal of <code>provider</code> is to provide performant and reliable open-source tools to facilitate easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources.</p>
 <p><br></p>
 <table class="table">
 <colgroup>
@@ -148,19 +147,60 @@
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Fee-For-Service Public Provider Enrollment</a></td>
 </tr>
 <tr class="odd">
+<td align="left"><code>beneficiary_enrollment()</code></td>
+<td align="left"><a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment" class="external-link">Medicare Monthly Enrollment</a></td>
+</tr>
+<tr class="even">
 <td align="left"><code><a href="reference/order_refer.html">order_refer()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring" class="external-link">Medicare Order and Referring</a></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><code><a href="reference/opt_out.html">opt_out()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits" class="external-link">Medicare Opt Out Affidavits</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>physician_by_provider()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider</a></td>
 </tr>
 <tr class="odd">
 <td align="left"><code><a href="reference/physician_by_service.html">physician_by_service()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider and Service</a></td>
 </tr>
+<tr class="even">
+<td align="left"><code>physician_by_geography()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Geography and Service</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/revalidation_date.html">revalidation_date()</a></code></td>
+<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>revalidation_group()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment" class="external-link">Medicare Revalidation Clinic Group Practice Reassignment</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/cc_specific.html">cc_specific()</a></code></td>
+<td align="left"><a href="https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions" class="external-link">Medicare Specific Chronic Conditions</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/cc_multiple.html">cc_multiple()</a></code></td>
+<td align="left"><a href="https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions" class="external-link">Medicare Multiple Chronic Conditions</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>clia_labs()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories" class="external-link">Medicare Provider of Services File - Clinical Laboratories</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code>taxonomy_crosswalk()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare Provider and Supplier Taxonomy Crosswalk</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><code>missing_information()</code></td>
+<td align="left"><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS Public Reporting of Missing Digital Contact Information</a></td>
+</tr>
 </tbody>
 </table>
+<p><br></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -173,357 +213,53 @@
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
-<div class="section level2">
-<h2 id="provider-information">Provider Information<a class="anchor" aria-label="anchor" href="#provider-information"></a>
-</h2>
-<p>These APIs are generally concerned with providing access to up-to-date information a provider or her associates may need for many aspects of the transacting of healthcare.</p>
-<div class="section level3">
-<h3 id="nppes-npi-public-registry">NPPES NPI Public Registry<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry"></a>
-</h3>
+</div>
+<div class="section level1">
+<h1 id="nppes-national-provider-identifier-npi-registry">NPPES National Provider Identifier (NPI) Registry<a class="anchor" aria-label="anchor" href="#nppes-national-provider-identifier-npi-registry"></a>
+</h1>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Define search parameter</span></span>
-<span><span class="va">npi</span> <span class="op">&lt;-</span> <span class="fl">1083879860</span></span>
-<span></span>
-<span><span class="co"># Query the NPPES API and unpack the response</span></span>
-<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu"><a href="reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in nppes_npi(npi = 1083879860): could not find function "nppes_npi"</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in tidyr::unnest(ex, cols = c(basic, addresses, taxonomies, endpoints), : object 'ex' not found</span></span></code></pre></div>
 <p><br></p>
-</div>
-</div>
 </div>
 <div class="section level1">
-<h1 id="basic-information">Basic Information<a class="anchor" aria-label="anchor" href="#basic-information"></a>
+<h1 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
 </h1>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">prov_type</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">sole_proprietor</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1083879860</td>
-<td align="left">Individual</td>
-<td align="left">CHRISTOPHER</td>
-<td align="left">AARON</td>
-<td align="left">FALSE</td>
-</tr></tbody>
-</table>
-<table class="table">
-<colgroup>
-<col width="11%">
-<col width="26%">
-<col width="20%">
-<col width="29%">
-<col width="11%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">gender</th>
-<th align="left">enumeration_date</th>
-<th align="left">last_updated</th>
-<th align="left">certification_date</th>
-<th align="left">status</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">M</td>
-<td align="left">2008-07-22</td>
-<td align="left">2021-03-25</td>
-<td align="left">2020-05-01</td>
-<td align="left">A</td>
-</tr></tbody>
-</table>
-<hr>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">exa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">ex</span><span class="op">$</span><span class="va">number</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mppe(npi = ex$number): object 'ex' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in tidyr::pivot_longer(exa, cols = dplyr::everything(), names_to = "name", : object 'exa' not found</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level1">
-<h1 id="addresses">Addresses<a class="anchor" aria-label="anchor" href="#addresses"></a>
+<h1 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
 </h1>
-<table class="table">
-<colgroup>
-<col width="30%">
-<col width="13%">
-<col width="10%">
-<col width="19%">
-<col width="26%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">address_1</th>
-<th align="left">city</th>
-<th align="left">state</th>
-<th align="left">postal_code</th>
-<th align="left">telephone_number</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">792 GALLITZIN RD</td>
-<td align="left">CRESSON</td>
-<td align="left">PA</td>
-<td align="left">166302213</td>
-<td align="left">814-886-8161</td>
-</tr>
-<tr class="even">
-<td align="left">10 CASTLE GARDEN CT</td>
-<td align="left">OLNEY</td>
-<td align="left">MD</td>
-<td align="left">208321443</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in list2(...): object 'ex' not found</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level1">
-<h1 id="taxonomy">Taxonomy<a class="anchor" aria-label="anchor" href="#taxonomy"></a>
+<h1 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
 </h1>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="13%">
-<col width="18%">
-<col width="19%">
-<col width="14%">
-<col width="17%">
-<col width="17%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">taxon_code</th>
-<th align="left">taxonomy_group</th>
-<th align="left">taxon_desc</th>
-<th align="left">taxon_state</th>
-<th align="left">taxon_license</th>
-<th align="left">taxon_primary</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">207Q00000X</td>
-<td align="left"></td>
-<td align="left">Family Medicine</td>
-<td align="left">PA</td>
-<td align="left">OS019703</td>
-<td align="left">TRUE</td>
-</tr></tbody>
-</table>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in provider_mpstc(ex$taxonomies[[1]]$code): object 'ex' not found</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level1">
-<h1 id="endpoints">Endpoints<a class="anchor" aria-label="anchor" href="#endpoints"></a>
+<h1 id="medicare-revalidation-due-date-api">Medicare Revalidation Due Date API<a class="anchor" aria-label="anchor" href="#medicare-revalidation-due-date-api"></a>
 </h1>
-<table class="table">
-<colgroup>
-<col width="23%">
-<col width="36%">
-<col width="40%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">endpts_endpoint_type</th>
-<th align="left">endpts_endpoint_type_description</th>
-<th align="left">endpts_endpoint</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">DIRECT</td>
-<td align="left">Direct Messaging Address</td>
-<td align="left"><a href="mailto:christopher.l.aaron@upmcdirect.com" class="email">christopher.l.aaron@upmcdirect.com</a></td>
-</tr></tbody>
-</table>
-<table class="table">
-<thead><tr class="header">
-<th align="left">endpts_affiliation</th>
-<th align="left">endpts_affiliation_name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">Y</td>
-<td align="left">UPMC</td>
-</tr></tbody>
-</table>
-<table class="table">
-<thead><tr class="header">
-<th align="left">endpts_address_2</th>
-<th align="left">endpts_city</th>
-<th align="left">endpts_state</th>
-<th align="left">endpts_postal_code</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">Floor 58</td>
-<td align="left">Pittsburgh</td>
-<td align="left">PA</td>
-<td align="left">152192702</td>
-</tr></tbody>
-</table>
 <p><br></p>
-<div class="section level3">
-<h3 id="ffs-public-provider-enrollment">FFS Public Provider Enrollment<a class="anchor" aria-label="anchor" href="#ffs-public-provider-enrollment"></a>
-</h3>
-<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using the <code><a href="reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<table class="table kable_wrapper">
-<caption>
-Title of the table
-</caption>
-<tbody><tr>
-<td>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pecos_asct_cntl_id</th>
-<th align="left">enrlmt_id</th>
-<th align="left">provider_type_cd</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1083879860</td>
-<td align="left">8426328519</td>
-<td align="left">I20200617001010</td>
-<td align="left">14-08</td>
-</tr></tbody>
-</table>
-</td>
-<td>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="42%">
-<col width="13%">
-<col width="17%">
-<col width="13%">
-<col width="14%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">provider_type_desc</th>
-<th align="left">state_cd</th>
-<th align="left">first_name</th>
-<th align="left">mdl_name</th>
-<th align="left">last_name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">PRACTITIONER - FAMILY PRACTICE</td>
-<td align="left">PA</td>
-<td align="left">CHRISTOPHER</td>
-<td align="left">L</td>
-<td align="left">AARON</td>
-</tr></tbody>
-</table>
-</td>
-</tr></tbody>
-</table>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in provider_mrdd(ex$number): object 'ex' not found</span></span></code></pre></div>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="order-and-referring">Order and Referring<a class="anchor" aria-label="anchor" href="#order-and-referring"></a>
-</h3>
-<p>Is a Provider currently eligible to:</p>
-<ul>
-<li>Make referrals to Medicare Part B or a Home Health Agency (HHA)?</li>
-<li>Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)?</li>
-</ul>
-<p>Search Medicare’s <strong>Order and Referring API</strong> with <code><a href="reference/order_refer.html">order_refer()</a></code>:</p>
-<table class="table">
-<thead><tr class="header">
-<th align="right">npi</th>
-<th align="left">last_name</th>
-<th align="left">first_name</th>
-<th align="left">partb</th>
-<th align="left">dme</th>
-<th align="left">hha</th>
-<th align="left">pmd</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="right">1083879860</td>
-<td align="left">AARON</td>
-<td align="left">CHRISTOPHER</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr></tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="taxonomy-crosswalk">Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#taxonomy-crosswalk"></a>
-</h3>
-<p>You may need to find Medicare’s specialty codes for this provider’s taxonomies. You can search Medicare’s <strong>Provider and Supplier Taxonomy Crosswalk API</strong> with <code><a href="reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
-<p><br></p>
-<table class="table">
-<colgroup>
-<col width="15%">
-<col width="28%">
-<col width="15%">
-<col width="41%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">medicare_specialty_code</th>
-<th align="left">medicare_provider_supplier_type_description</th>
-<th align="left">provider_taxonomy_code</th>
-<th align="left">provider_taxonomy_description_type_classification_specialization</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">8</td>
-<td align="left">Physician/Family Practice</td>
-<td align="left">207Q00000X</td>
-<td align="left">Allopathic &amp; Osteopathic Physicians/Family Medicine</td>
-</tr></tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="revalidation-due-date">Revalidation Due Date<a class="anchor" aria-label="anchor" href="#revalidation-due-date"></a>
-</h3>
-<p>You can check to see if a provider is due to revalidate their Medicare enrollment by accessing Medicare’s <strong>Revalidation Due Date API</strong> with <code><a href="reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
-<p><br></p>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="6%">
-<col width="10%">
-<col width="4%">
-<col width="3%">
-<col width="6%">
-<col width="8%">
-<col width="6%">
-<col width="7%">
-<col width="7%">
-<col width="8%">
-<col width="6%">
-<col width="10%">
-<col width="11%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">enrollment_id</th>
-<th align="left">national_provider_identifier</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">organization_name</th>
-<th align="left">enrollment_state_code</th>
-<th align="left">enrollment_type</th>
-<th align="left">provider_type_text</th>
-<th align="left">enrollment_specialty</th>
-<th align="left">revalidation_due_date</th>
-<th align="left">adjusted_due_date</th>
-<th align="left">individual_total_reassign_to</th>
-<th align="left">receiving_benefits_reassignment</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">I20200617001010</td>
-<td align="left">1083879860</td>
-<td align="left">Christopher</td>
-<td align="left">Aaron</td>
-<td align="left"></td>
-<td align="left">PA</td>
-<td align="left">3</td>
-<td align="left">Non-DME Part B</td>
-<td align="left">Family Practice</td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left"></td>
-<td align="left">1</td>
-</tr></tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="missing-digital-contact-information">Missing Digital Contact Information<a class="anchor" aria-label="anchor" href="#missing-digital-contact-information"></a>
-</h3>
-<p>Providers may need to update their digital contact information in the NPPES system. To check, you can access the <strong>CMS Public Reporting of Missing Digital Contact Information API</strong> with <code><a href="reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results, it’s time to update their NPPES contact information:</p>
+<div class="section level1">
+<h1 id="cms-public-reporting-of-missing-digital-contact-information-api">CMS Public Reporting of Missing Digital Contact Information API<a class="anchor" aria-label="anchor" href="#cms-public-reporting-of-missing-digital-contact-information-api"></a>
+</h1>
 <p><br></p>
 <table class="table">
 <thead><tr class="header">
@@ -537,79 +273,81 @@ Title of the table
 </table>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="opt-out-affidavits">Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#opt-out-affidavits"></a>
-</h3>
-<p>You can find out if a provider has opted out of Medicare by searching the <strong>Medicare Opt Out Affidavits API</strong> with <code><a href="reference/opt_out.html">opt_out()</a></code>:</p>
+<div class="section level1">
+<h1 id="medicare-opt-out-affidavits-api">Medicare Opt-Out Affidavits API<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits-api"></a>
+</h1>
 <p><br></p>
 <table class="table">
-<colgroup>
-<col width="4%">
-<col width="5%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="9%">
-<col width="9%">
-<col width="6%">
-<col width="11%">
-<col width="11%">
-<col width="4%">
-<col width="4%">
-<col width="4%">
-<col width="11%">
-</colgroup>
 <thead><tr class="header">
-<th align="left">date</th>
-<th align="left">last_updated</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">npi</th>
-<th align="left">specialty</th>
-<th align="left">optout_effective_date</th>
-<th align="left">optout_end_date</th>
-<th align="left">first_line_street_address</th>
-<th align="left">second_line_street_address</th>
-<th align="left">city_name</th>
-<th align="left">state_code</th>
-<th align="left">zip_code</th>
-<th align="left">eligible_to_order_and_refer</th>
+<th align="left">name</th>
+<th align="left">value</th>
 </tr></thead>
-<tbody><tr class="odd">
-<td align="left">2022-11-25</td>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="left">2022-11-28</td>
+</tr>
+<tr class="even">
+<td align="left">last_updated</td>
 <td align="left">09/15/2022</td>
+</tr>
+<tr class="odd">
+<td align="left">first_name</td>
 <td align="left">Sheryl</td>
+</tr>
+<tr class="even">
+<td align="left">last_name</td>
 <td align="left">Aaron</td>
+</tr>
+<tr class="odd">
+<td align="left">npi</td>
 <td align="left">1427358282</td>
+</tr>
+<tr class="even">
+<td align="left">specialty</td>
 <td align="left">Clinical Social Worker</td>
+</tr>
+<tr class="odd">
+<td align="left">optout_effective_date</td>
 <td align="left">02/17/2022</td>
+</tr>
+<tr class="even">
+<td align="left">optout_end_date</td>
 <td align="left">02/17/2024</td>
+</tr>
+<tr class="odd">
+<td align="left">first_line_street_address</td>
 <td align="left">1633 Q ST NW</td>
+</tr>
+<tr class="even">
+<td align="left">second_line_street_address</td>
 <td align="left">STE 230</td>
+</tr>
+<tr class="odd">
+<td align="left">city_name</td>
 <td align="left">WASHINGTON</td>
+</tr>
+<tr class="even">
+<td align="left">state_code</td>
 <td align="left">DC</td>
+</tr>
+<tr class="odd">
+<td align="left">zip_code</td>
 <td align="left">200096351</td>
+</tr>
+<tr class="even">
+<td align="left">eligible_to_order_and_refer</td>
 <td align="left">N</td>
-</tr></tbody>
+</tr>
+</tbody>
 </table>
 <p><br></p>
 </div>
-<div class="section level3">
-<h3 id="revalidation-clinic-group-practice-reassignment">Revalidation Clinic Group Practice Reassignment<a class="anchor" aria-label="anchor" href="#revalidation-clinic-group-practice-reassignment"></a>
-</h3>
-<p><code><a href="reference/provider_rcgpr.html">provider_rcgpr()</a></code> accesses <strong>Medicare’s Revalidation Clinic Group Practice Reassignment API</strong>:</p>
+<div class="section level1">
+<h1 id="medicare-revalidation-clinic-group-practice-reassignment">Medicare Revalidation Clinic Group Practice Reassignment<a class="anchor" aria-label="anchor" href="#medicare-revalidation-clinic-group-practice-reassignment"></a>
+</h1>
 <p><br></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   group_pac_id group_enrollment_id                   group_legal_business_name</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1   5395659312     O20040312000257 Upmc Altoona Regional Health Services, Inc.</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   group_state_code group_due_date group_reassignments_and_physician_assistants</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1               PA     01/31/2022                                          446</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    record_type individual_enrollment_id individual_npi individual_first_name</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 Reassignment          I20200617001010     1083879860           Christopher</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   individual_last_name individual_state_code individual_specialty_description</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                Aaron                    PA                  Family Practice</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   individual_due_date individual_total_employer_associations</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1                 </span><span class="al">TBD</span><span class="co">                                      1</span></span></code></pre></div>
-</div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in provider_rcgpr(ex$number): object 'ex' not found</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="provider-statistics">Provider Statistics<a class="anchor" aria-label="anchor" href="#provider-statistics"></a>
 </h2>
@@ -1360,7 +1098,7 @@ Title of the table
 <div class="section level3">
 <h3 id="medicare-monthly-enrollment">Medicare Monthly Enrollment<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">month_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/monthly_enroll.html">monthly_enroll</a></span><span class="op">(</span>year      <span class="op">=</span> <span class="fl">2018</span>, </span>
 <span>                           month     <span class="op">=</span> <span class="st">"Year"</span>, </span>
 <span>                           geo_lvl   <span class="op">=</span> <span class="st">"County"</span>, </span>
