@@ -27,6 +27,7 @@ Imports:
     lubridate,
     purrr,
     tibble,
+    tibblify,
     tidyr
 Suggests: 
     covr,
@@ -52,6 +53,5 @@ Language: en-US
 LazyData: true
 Roxygen: list(
     markdown = TRUE,
-     = c("roclets = collate", "roclets = namespace", "roclets = rd", "roclets = roxyglobals::global_roclet"),
     roclets = c("collate", "namespace", "rd", "roxyglobals::global_roclet"))
 RoxygenNote: 7.2.2

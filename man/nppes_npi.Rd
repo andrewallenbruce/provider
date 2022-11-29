@@ -129,9 +129,7 @@ nppes_npi(npi = 1528060837)
 nppes_npi(city = "Atlanta", state_abb = "GA", country_code = "US")
 
 # First name, city, state
-nppes_npi(first = "John",
-               city = "Baltimore",
-               state_abb = "MD")
+nppes_npi(first = "John", city = "Baltimore", state_abb = "MD")
 
 # List of NPIs
 npi_list <- c(1003026055,
@@ -144,8 +142,7 @@ npi_list <- c(1003026055,
 
 npi_list |>
 purrr::map_dfr(nppes_npi) |>
-dplyr::group_split(outcome) |>
-purrr::map_dfr(provider_unpack)
+dplyr::group_split(outcome)
 
 # Data frame of NPIs
 npi_df <- data.frame(npi = c(1710983663,
