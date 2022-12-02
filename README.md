@@ -63,7 +63,7 @@ remotes::install_github("andrewallenbruce/provider")
 
 <br>
 
-# NPPES National Provider Identifier (NPI) Registry
+### NPPES National Provider Identifier (NPI) Registry API
 
 <br>
 
@@ -71,52 +71,208 @@ remotes::install_github("andrewallenbruce/provider")
 # Load library
 library(provider)
 
-ex <- nppes_npi(npi = 1083879860)
-#> Error in nppes_npi(npi = 1083879860): could not find function "nppes_npi"
+npi_ex <- provider::nppes_npi(npi = 1083879860)
 ```
 
-    #> Error in tidyr::unnest(ex, cols = c(basic, addresses, taxonomies, endpoints), : object 'ex' not found
+| name                    | value                                | group      |
+|:------------------------|:-------------------------------------|:-----------|
+| npi                     | 1083879860                           | basic      |
+| enum_type               | NPI-1                                | basic      |
+| first_name              | CHRISTOPHER                          | basic      |
+| last_name               | AARON                                | basic      |
+| sole_proprietor         | NO                                   | basic      |
+| gender                  | M                                    | basic      |
+| enumeration_date        | 2008-07-22                           | basic      |
+| last_updated            | 2021-03-25                           | basic      |
+| certification_date      | 2020-05-01                           | basic      |
+| status                  | A                                    | basic      |
+| country_code            | US                                   | addresses  |
+| country_name            | United States                        | addresses  |
+| address_purpose         | LOCATION                             | addresses  |
+| address_type            | DOM                                  | addresses  |
+| address_1               | 792 GALLITZIN RD                     | addresses  |
+| city                    | CRESSON                              | addresses  |
+| state                   | PA                                   | addresses  |
+| postal_code             | 166302213                            | addresses  |
+| telephone_number        | 814-886-8161                         | addresses  |
+| country_code            | US                                   | addresses  |
+| country_name            | United States                        | addresses  |
+| address_purpose         | MAILING                              | addresses  |
+| address_type            | DOM                                  | addresses  |
+| address_1               | 10 CASTLE GARDEN CT                  | addresses  |
+| city                    | OLNEY                                | addresses  |
+| state                   | MD                                   | addresses  |
+| postal_code             | 208321443                            | addresses  |
+| telephone_number        | NA                                   | addresses  |
+| code                    | 207Q00000X                           | taxonomies |
+| desc                    | Family Medicine                      | taxonomies |
+| state                   | PA                                   | taxonomies |
+| license                 | OS019703                             | taxonomies |
+| primary                 | TRUE                                 | taxonomies |
+| endpointType            | DIRECT                               | endpoints  |
+| endpointTypeDescription | Direct Messaging Address             | endpoints  |
+| endpoint                | <christopher.l.aaron@upmcdirect.com> | endpoints  |
+| affiliation             | Y                                    | endpoints  |
+| affiliationName         | UPMC                                 | endpoints  |
+| country_code            | US                                   | endpoints  |
+| country_name            | United States                        | endpoints  |
+| address_type            | DOM                                  | endpoints  |
+| address_1               | 600 Grant St                         | endpoints  |
+| address_2               | Floor 58                             | endpoints  |
+| city                    | Pittsburgh                           | endpoints  |
+| state                   | PA                                   | endpoints  |
+| postal_code             | 152192702                            | endpoints  |
 
 <br>
 
-# Medicare Fee-For-Service Public Provider Enrollment API
+### Medicare Fee-For-Service Public Provider Enrollment API
 
 <br>
 
 ``` r
-exa <- provider_mppe(npi = ex$number)
-#> Error in provider_mppe(npi = ex$number): object 'ex' not found
+exa <- provider::provider_mppe(npi = 1083879860)
 ```
 
-    #> Error in tidyr::pivot_longer(exa, cols = dplyr::everything(), names_to = "name", : object 'exa' not found
+| name               | value                          |
+|:-------------------|:-------------------------------|
+| npi                | 1083879860                     |
+| pecos_asct_cntl_id | 8426328519                     |
+| enrlmt_id          | I20200617001010                |
+| provider_type_cd   | 14-08                          |
+| provider_type_desc | PRACTITIONER - FAMILY PRACTICE |
+| state_cd           | PA                             |
+| first_name         | CHRISTOPHER                    |
+| mdl_name           | L                              |
+| last_name          | AARON                          |
+| org_name           |                                |
+| gndr_sw            | M                              |
 
 <br>
 
-# Medicare Order and Referring API
-
-    #> Error in list2(...): object 'ex' not found
+### Medicare Order and Referring API
 
 <br>
 
-# Medicare Provider and Supplier Taxonomy Crosswalk API
+``` r
+exb <- provider::order_refer(npi = 1083879860)
+```
+
+| name       | value       |
+|:-----------|:------------|
+| npi        | 1083879860  |
+| last_name  | AARON       |
+| first_name | CHRISTOPHER |
+| partb      | TRUE        |
+| dme        | TRUE        |
+| hha        | TRUE        |
+| pmd        | TRUE        |
 
 <br>
 
-    #> Error in provider_mpstc(ex$taxonomies[[1]]$code): object 'ex' not found
+### Medicare Provider and Supplier Taxonomy Crosswalk API
 
 <br>
 
-# Medicare Revalidation Due Date API
+``` r
+cross_ex <- provider::taxonomy_crosswalk(
+            specialty_desc = "Rehabilitation Agency")
+```
+
+| specialty_code | specialty_description | provider_taxonomy_code | provider_taxonomy_desc                                         |
+|:---------------|:----------------------|:-----------------------|:---------------------------------------------------------------|
+| B4\[14\]       | Rehabilitation Agency | 261QR0400X             | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation |
+| B4\[14\]       | Rehabilitation Agency | 315D00000X             | Nursing & Custodial Care Facilities/Hospice Inpatient          |
 
 <br>
 
-    #> Error in provider_mrdd(ex$number): object 'ex' not found
+### Medicare Revalidation Due Date API
 
 <br>
 
-# CMS Public Reporting of Missing Digital Contact Information API
+``` r
+reval_ex <- provider::revalidation_date(npi = 1710912209)
+```
+
+| name                            | value           |
+|:--------------------------------|:----------------|
+| date                            | 2022-12-02      |
+| data_version                    | Nov-2022        |
+| enrollment_id                   | I20040602001711 |
+| national_provider_identifier    | 1710912209      |
+| first_name                      | Yelena          |
+| last_name                       | Voronova        |
+| organization_name               |                 |
+| enrollment_state_code           | NY              |
+| enrollment_type                 | 3               |
+| provider_type_text              | Non-DME Part B  |
+| enrollment_specialty            | Podiatry        |
+| revalidation_due_date           | 2019-10-31      |
+| adjusted_due_date               |                 |
+| individual_total_reassign_to    |                 |
+| receiving_benefits_reassignment | 5               |
 
 <br>
+
+### Medicare Revalidation Clinic Group Practice Reassignment API
+
+``` r
+regroup_ex <- provider::revalidation_group(ind_npi = 1710912209)
+```
+
+| name                                   | value           |
+|:---------------------------------------|:----------------|
+| individual_enrollment_id               | I20040602001711 |
+| individual_npi                         | 1710912209      |
+| individual_first_name                  | Yelena          |
+| individual_last_name                   | Voronova        |
+| individual_state_code                  | NY              |
+| individual_specialty_description       | Podiatry        |
+| individual_due_date                    | 10/31/2019      |
+| individual_total_employer_associations | 5               |
+| record_type                            | Reassignment    |
+
+| name                                         | value                                           |
+|:---------------------------------------------|:------------------------------------------------|
+| group_pac_id                                 | 3678655222                                      |
+| group_enrollment_id                          | O20080205000002                                 |
+| group_legal_business_name                    | \#1 Wise Podiatry Care P.C.                     |
+| group_state_code                             | NY                                              |
+| group_due_date                               | 10/31/2019                                      |
+| group_reassignments_and_physician_assistants | 1                                               |
+| group_pac_id                                 | 9931511052                                      |
+| group_enrollment_id                          | O20201215000955                                 |
+| group_legal_business_name                    | Brighton Beach Podiatry Pllc                    |
+| group_state_code                             | NY                                              |
+| group_due_date                               | TBD                                             |
+| group_reassignments_and_physician_assistants | 1                                               |
+| group_pac_id                                 | 2062791411                                      |
+| group_enrollment_id                          | O20161108001365                                 |
+| group_legal_business_name                    | Fair Podiatry Practice Pllc                     |
+| group_state_code                             | NY                                              |
+| group_due_date                               | TBD                                             |
+| group_reassignments_and_physician_assistants | 1                                               |
+| group_pac_id                                 | 8527313170                                      |
+| group_enrollment_id                          | O20180622000028                                 |
+| group_legal_business_name                    | New York Jewish American Podiatry Practice Pllc |
+| group_state_code                             | NY                                              |
+| group_due_date                               | TBD                                             |
+| group_reassignments_and_physician_assistants | 1                                               |
+| group_pac_id                                 | 5193155174                                      |
+| group_enrollment_id                          | O20200414003240                                 |
+| group_legal_business_name                    | Podiatry Of Brooklyn Pllc                       |
+| group_state_code                             | NY                                              |
+| group_due_date                               | TBD                                             |
+| group_reassignments_and_physician_assistants | 1                                               |
+
+<br>
+
+### CMS Public Reporting of Missing Digital Contact Information API
+
+<br>
+
+``` r
+exe <- provider::provider_promdci(npi = 1144224569)
+```
 
 | npi        | provider_name |
 |:-----------|:--------------|
@@ -124,13 +280,17 @@ exa <- provider_mppe(npi = ex$number)
 
 <br>
 
-# Medicare Opt-Out Affidavits API
+### Medicare Opt-Out Affidavits API
 
 <br>
 
+``` r
+opt_ex <- provider::opt_out(last = "Aaron")
+```
+
 | name                        | value                  |
 |:----------------------------|:-----------------------|
-| date                        | 2022-11-28             |
+| date                        | 2022-12-02             |
 | last_updated                | 09/15/2022             |
 | first_name                  | Sheryl                 |
 | last_name                   | Aaron                  |
@@ -147,20 +307,47 @@ exa <- provider_mppe(npi = ex$number)
 
 <br>
 
-# Medicare Revalidation Clinic Group Practice Reassignment
+### Medicare Monthly Enrollment API
 
-<br>
+``` r
+bene_ex <- provider::beneficiary_enrollment(year      = 2018, 
+                                            month     = "Year", 
+                                            geo_lvl   = "County", 
+                                            state_abb = "AL", 
+                                            county    = "Autauga")
+```
 
-    #> Error in provider_rcgpr(ex$number): object 'ex' not found
+| name                           | value   |
+|:-------------------------------|:--------|
+| year                           | 2018    |
+| year_2                         | 2018    |
+| month                          | Year    |
+| bene_geo_lvl                   | County  |
+| bene_state_abrvtn              | AL      |
+| bene_state_desc                | Alabama |
+| bene_county_desc               | Autauga |
+| bene_fips_cd                   | 01001   |
+| tot_benes                      | 10645   |
+| orgnl_mdcr_benes               | 5700    |
+| ma_and_oth_benes               | 4945    |
+| aged_tot_benes                 | 8241    |
+| aged_esrd_benes                | 53      |
+| aged_no_esrd_benes             | 8189    |
+| dsbld_tot_benes                | 2403    |
+| dsbld_esrd_and_esrd_only_benes | 50      |
+| dsbld_no_esrd_benes            | 2353    |
+| a_b\_tot_benes                 | 9892    |
+| a_b\_orgnl_mdcr_benes          | 4948    |
+| a_b\_ma_and_oth_benes          | 4944    |
+| prscrptn_drug_tot_benes        | 7088    |
+| prscrptn_drug_pdp_benes        | 2260    |
+| prscrptn_drug_mapd_benes       | 4828    |
 
-## Provider Statistics
+### Medicare Physician & Other Practitioners
 
-These APIs are generally concerned with providing access to a provider’s
-longitudinal utilization data.
-
-### Physician & Other Practitioners
-
-> by Provider and Service API
+``` r
+exg <- provider::provider_rcgpr(npi = 1083879860)
+```
 
 | year | hcpcs_cd | tot_benes | tot_srvcs | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
 |:-----|:---------|----------:|----------:|---------------:|-------------------:|------------------:|
@@ -250,32 +437,6 @@ longitudinal utilization data.
 > 3.  by Provider API:
 
 <br>
-
-### Medicare Monthly Enrollment
-
-``` r
-month_ex <- monthly_enroll(year      = 2018, 
-                           month     = "Year", 
-                           geo_lvl   = "County", 
-                           state_abb = "AL", 
-                           county    = "Autauga")
-```
-
-| year | year_2 | month | bene_geo_lvl | bene_state_abrvtn | bene_state_desc | bene_county_desc |
-|-----:|-------:|:------|:-------------|:------------------|:----------------|:-----------------|
-| 2018 |   2018 | Year  | County       | AL                | Alabama         | Autauga          |
-
-| bene_fips_cd | tot_benes | orgnl_mdcr_benes | ma_and_oth_benes | aged_tot_benes | aged_esrd_benes |
-|:-------------|----------:|-----------------:|-----------------:|---------------:|----------------:|
-| 01001        |     10645 |             5700 |             4945 |           8241 |              53 |
-
-| aged_no_esrd_benes | dsbld_tot_benes | dsbld_esrd_and_esrd_only_benes | dsbld_no_esrd_benes | a_b\_tot_benes |
-|-------------------:|----------------:|-------------------------------:|--------------------:|---------------:|
-|               8189 |            2403 |                             50 |                2353 |           9892 |
-
-| a_b\_orgnl_mdcr_benes | a_b\_ma_and_oth_benes | prscrptn_drug_tot_benes | prscrptn_drug_pdp_benes |
-|----------------------:|----------------------:|------------------------:|------------------------:|
-|                  4948 |                  4944 |                    7088 |                    2260 |
 
 ------------------------------------------------------------------------
 

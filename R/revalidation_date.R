@@ -44,7 +44,6 @@
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
 #'
-#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples

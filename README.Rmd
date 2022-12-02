@@ -133,7 +133,7 @@ remotes::install_github("andrewallenbruce/provider")
 ```
 <br>
 
-# NPPES National Provider Identifier (NPI) Registry
+### NPPES National Provider Identifier (NPI) Registry API
 
 <br>
 
@@ -141,127 +141,186 @@ remotes::install_github("andrewallenbruce/provider")
 # Load library
 library(provider)
 
-ex <- nppes_npi(npi = 1083879860)
+npi_ex <- provider::nppes_npi(npi = 1083879860)
 ```
 
 
-```{r echo=FALSE}
-ex |> 
-  tidyr::unnest(cols = c(basic, addresses, taxonomies, endpoints), 
-                names_repair = "universal") |> 
-  dplyr::select(-identifiers, -other_names, -taxonomy_group, 
-                -practice_locations, -useDescription, 
-                -contentTypeDescription) |> 
+```{r results='asis', echo=FALSE}
+ex1 <- tibble::tibble(npi = npi_ex$number, 
+               enum_type = npi_ex$enumeration_type) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::mutate(group = "basic")
+
+ex_basic <- npi_ex$basic |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::mutate(group = "basic")
+
+ex_add <- npi_ex$addresses[[1]] |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::mutate(group = "addresses")
+
+ex_tax <- npi_ex$taxonomies[[1]] |> 
+  dplyr::select(-taxonomy_group) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::mutate(group = "taxonomies")
+
+ex_end <- npi_ex$endpoints[[1]] |> 
+  dplyr::select(-useDescription, -contentTypeDescription) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::mutate(group = "endpoints")
+
+dplyr::bind_rows(ex1, 
+                 ex_basic, 
+                 ex_add, 
+                 ex_tax, 
+                 ex_end) |> 
+  gluedown::md_table()
 ```
 
 
 <br>
 
-# Medicare Fee-For-Service Public Provider Enrollment API
+### Medicare Fee-For-Service Public Provider Enrollment API
 
 <br>
 
 ```{r echo=TRUE}
-exa <- provider_mppe(npi = ex$number)
+exa <- provider::provider_mppe(npi = 1083879860)
 ```
-
-```{r echo=FALSE}
-exa |> tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-<br>
-
-# Medicare Order and Referring API
-
-```{r results='asis'}
-order_refer(ex$number) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-<br>
-
-# Medicare Provider and Supplier Taxonomy Crosswalk API
-
-<br>
-
-```{r results='asis'}
-provider_mpstc(ex$taxonomies[[1]]$code) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-<br>
-
-# Medicare Revalidation Due Date API
-
-<br>
-
-```{r results='asis'}
-provider_mrdd(ex$number) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-<br>
-
-# CMS Public Reporting of Missing Digital Contact Information API
-
-<br>
-
-```{r results='asis'}
-provider_promdci(1144224569) |> gluedown::md_table()
-```
-
-<br>
-
-# Medicare Opt-Out Affidavits API
-
-<br>
-
-```{r results='asis'}
-opt_out(last = "Aaron") |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-<br>
-
-# Medicare Revalidation Clinic Group Practice Reassignment
-
-<br>
-
-```{r results='asis'}
-provider_rcgpr(ex$number) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything(), 
-                      names_to = "name", 
-                      values_to = "value") |> gluedown::md_table()
-```
-
-
-## Provider Statistics
-
-These APIs are generally concerned with providing access to a provider's longitudinal utilization data.
-
-### Physician & Other Practitioners
 
 ```{r results='asis', echo=FALSE}
-gluedown::md_quote("by Provider and Service API")
+exa |> tidyr::pivot_longer(cols = dplyr::everything()) |> 
+       gluedown::md_table()
+```
+
+<br>
+
+### Medicare Order and Referring API
+
+<br>
+
+```{r echo=TRUE}
+exb <- provider::order_refer(npi = 1083879860)
+```
+
+```{r results='asis', echo=FALSE}
+exb |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+       tidyr::pivot_longer(cols = dplyr::everything()) |> 
+       gluedown::md_table()
+```
+
+<br>
+
+### Medicare Provider and Supplier Taxonomy Crosswalk API
+
+<br>
+
+```{r echo=TRUE}
+cross_ex <- provider::taxonomy_crosswalk(
+            specialty_desc = "Rehabilitation Agency")
+```
+
+```{r results='asis', echo=FALSE}
+cross_ex |> 
+  dplyr::select(specialty_code = medicare_specialty_code,
+                specialty_description = medicare_provider_supplier_type_description,
+                provider_taxonomy_code,
+                provider_taxonomy_desc = provider_taxonomy_description_type_classification_specialization) |> 
+  #tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+<br>
+
+### Medicare Revalidation Due Date API
+
+<br>
+
+```{r echo=TRUE}
+reval_ex <- provider::revalidation_date(npi = 1710912209)
+```
+
+```{r results='asis', echo=FALSE}
+reval_ex |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> gluedown::md_table()
+```
+<br>
+
+### Medicare Revalidation Clinic Group Practice Reassignment API
+
+```{r echo=TRUE}
+regroup_ex <- provider::revalidation_group(ind_npi = 1710912209)
+```
+
+```{r results='asis', echo=FALSE}
+regroup_ex |> dplyr::select(starts_with("ind"), "record_type") |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = c(starts_with("ind"), "record_type")) |> 
+  dplyr::slice(1:9) |> 
+  gluedown::md_table()
+```
+
+```{r results='asis', echo=FALSE}
+regroup_ex |> dplyr::select(starts_with("group")) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(everything()) |> gluedown::md_table()
+```
+
+<br>
+
+### CMS Public Reporting of Missing Digital Contact Information API
+
+<br>
+
+```{r echo=TRUE}
+exe <- provider::provider_promdci(npi = 1144224569)
+```
+
+```{r results='asis', echo=FALSE}
+exe |> gluedown::md_table()
+```
+
+<br>
+
+### Medicare Opt-Out Affidavits API
+
+<br>
+
+```{r echo=TRUE}
+opt_ex <- provider::opt_out(last = "Aaron")
+```
+
+```{r results='asis', echo=FALSE}
+opt_ex |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> gluedown::md_table()
+```
+
+<br>
+
+### Medicare Monthly Enrollment API
+
+```{r echo=TRUE}
+bene_ex <- provider::beneficiary_enrollment(year      = 2018, 
+                                            month     = "Year", 
+                                            geo_lvl   = "County", 
+                                            state_abb = "AL", 
+                                            county    = "Autauga")
+```
+
+
+```{r results='asis', echo=FALSE}
+bene_ex |> dplyr::mutate(dplyr::across(everything(), as.character)) |> 
+  tidyr::pivot_longer(cols = dplyr::everything()) |> gluedown::md_table()
+```
+
+### Medicare Physician & Other Practitioners
+
+```{r echo=TRUE}
+exg <- provider::provider_rcgpr(npi = 1083879860)
 ```
 
 ```{r}
@@ -303,27 +362,6 @@ serv_ex |>
 # mpop_prov_ex <- provider_mpop(npi  = npi, 
 #                               set  = "prov",
 #                               year = "2020")
-```
-
-### Medicare Monthly Enrollment
-
-```{r echo=TRUE}
-month_ex <- monthly_enroll(year      = 2018, 
-                           month     = "Year", 
-                           geo_lvl   = "County", 
-                           state_abb = "AL", 
-                           county    = "Autauga")
-```
-
-
-```{r results='asis', echo=FALSE}
-gluedown::md_table(month_ex[, 1:7])
-gluedown::md_blank()
-gluedown::md_table(month_ex[, 8:13])
-gluedown::md_blank()
-gluedown::md_table(month_ex[, 14:18])
-gluedown::md_blank()
-gluedown::md_table(month_ex[, 19:22])
 ```
 
 ------------------------------------------------------------------------------

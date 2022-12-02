@@ -205,21 +205,21 @@ full_address <- function(df,
 #' @return boolean, `TRUE` or `FALSE`
 #' @examples
 #' # Valid NPI:
-#' provider_luhn(npi = 1528060837)
+#' luhn_check(npi = 1528060837)
 #'
 #' # Quoted NPIs are valid:
-#' provider_luhn(npi = "1528060837")
+#' luhn_check(npi = "1528060837")
 #'
 #' # Invalid NPI (per Luhn algorithm):
-#' provider_luhn(npi = 1234567891)
+#' luhn_check(npi = 1234567891)
 #'
 #' \dontrun{
 #' # NPIs with less than 10 digits throw an error:
-#' provider_luhn(npi = 123456789)
+#' luhn_check(npi = 123456789)
 #'
 #' # Inputting letters will throw an error, quoted or not:
-#' provider_luhn(npi = abcdefghij)
-#' provider_luhn(npi = "abcdefghij")
+#' luhn_check(npi = abcdefghij)
+#' luhn_check(npi = "abcdefghij")
 #' }
 #' @autoglobal
 #' @noRd
