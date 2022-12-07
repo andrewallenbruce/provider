@@ -102,16 +102,12 @@ level data for providers actively enrolled in Medicare.</p>
 <span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prov_type_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prov_type_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_id_reassign <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_id_receive <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -163,24 +159,10 @@ specialty.</p></dd>
 specialty type description</p></dd>
 
 
-<dt>city</dt>
-<dd><p>Provider practice location city. Each practice location is
-linked to an Enrollment ID. If any other provider reassigns benefits to
-an Enrollment ID listed in the Practice Location file, the practice
-location is also associated with that other provider.</p></dd>
-
-
 <dt>state</dt>
 <dd><p>Provider enrollment state, abbreviated location. Providers
 enroll at the state level, so one PAC ID may be associated with multiple
 ENRLMT_IDs and multiple STATE_CD values.</p></dd>
-
-
-<dt>zipcode</dt>
-<dd><p>Provider practice location zip code. Each practice location
-is linked to an Enrollment ID. If any other provider reassigns benefits
-to an Enrollment ID listed in the Practice Location file, the practice
-location is also associated with that other provider.</p></dd>
 
 
 <dt>first_name</dt>
@@ -201,20 +183,6 @@ location is also associated with that other provider.</p></dd>
 
 <dt>gender</dt>
 <dd><p>Individual provider gender; F(female), M(male), 9(unknown)</p></dd>
-
-
-<dt>enroll_id_reassign</dt>
-<dd><p>Enrollment ID of the provider reassigning benefits
-to bill to Medicare. To find enrollment information for providers
-reassigning their benefits to bill to Medicare, link
-REASGN_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.</p></dd>
-
-
-<dt>enroll_id_receive</dt>
-<dd><p>Enrollment ID of the provider receiving
-reassignment benefits to bill to Medicare. To find enrollment
-information for providers receiving reassignment benefits to bill to
-Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.</p></dd>
 
 
 <dt>clean_names</dt>
@@ -255,9 +223,21 @@ Transparency.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in resp_body_raw(resp):</span> Can not retrieve empty body</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 10030… 448682… I20170… 14-46   PRACTI… FL      RADHIKA PUSHKAR PHADKE  <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: gndr_sw &lt;chr&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name</span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>last <span class="op">=</span> <span class="st">"phadke"</span>, first <span class="op">=</span> <span class="st">"radhika"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in resp_body_raw(resp):</span> Can not retrieve empty body</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 10030… 448682… I20170… 14-46   PRACTI… FL      RADHIKA PUSHKAR PHADKE  <span style="color: #949494;">""</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1 more variable: gndr_sw &lt;chr&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name</span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>prov_type_desc <span class="op">=</span> <span class="st">"endocrinology"</span><span class="op">)</span></span></span>
 <span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in resp_body_raw(resp):</span> Can not retrieve empty body</span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
