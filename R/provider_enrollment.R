@@ -60,7 +60,7 @@
 #' @examples
 #' provider_enrollment(npi = 1003026055)
 #' provider_enrollment(last = "phadke", first = "radhika")
-#' provider_enrollment(prov_type_desc = "endocrinology")
+#' provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
 #' \dontrun{
 #' # Won't filter, returns entire dataset
 #' provider_enrollment(taxonomy_desc = "Trauma Surgery")
