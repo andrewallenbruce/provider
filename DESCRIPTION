@@ -39,6 +39,7 @@ Suggests:
     gtExtras,
     httptest2,
     knitr,
+    leaflet,
     rmarkdown,
     roxyglobals (>= 0.2.1),
     spelling,
