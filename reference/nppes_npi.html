@@ -101,15 +101,15 @@ API's documentation.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nppes_npi</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enum_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state_abb <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  postal_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  country_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">200</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -125,7 +125,7 @@ API's documentation.</p>
 <dd><p>10-digit National Provider Identifier (NPI).</p></dd>
 
 
-<dt>enum_type</dt>
+<dt>prov_type</dt>
 <dd><p>The Read API can be refined to retrieve only Individual
 Providers (<code>NPI-1</code> or Type 1) or Organizational Providers (<code>NPI-2</code> or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
@@ -179,7 +179,7 @@ apostrophe, colon, comma, forward slash, hyphen, left and right
 parentheses, period, pound sign, quotation mark, and semi-colon.</p></dd>
 
 
-<dt>state_abb</dt>
+<dt>state</dt>
 <dd><p>State abbreviation associated with the provider's address.
 This field <strong>cannot</strong> be used as the only input criterion. If this
 field is used, at least one other field, besides the <code>prov_type</code> and
@@ -187,7 +187,7 @@ field is used, at least one other field, besides the <code>prov_type</code> and
 <a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">https://npiregistry.cms.hhs.gov/help-api/state</a>.</p></dd>
 
 
-<dt>postal_code</dt>
+<dt>zip</dt>
 <dd><p>The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
@@ -195,7 +195,7 @@ wildcard entries are permitted requiring at least two characters to be
 entered (e.g., "21*").</p></dd>
 
 
-<dt>country_code</dt>
+<dt>country</dt>
 <dd><p>Country abbreviation associated with the provider's
 address. This field <strong>can</strong> be used as the only input criterion, as long
 as the value selected <em>is not</em> <strong>US</strong> (United States). Valid values for
@@ -246,16 +246,24 @@ to use the NPI Registry.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Single NPI</span></span></span>
+<span class="r-in"><span><span class="co">### Single NPI</span></span></span>
 <span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># City, state, country</span></span></span>
-<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>, state_abb <span class="op">=</span> <span class="st">"GA"</span>, country_code <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">### City, state, country</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span></span>
+<span class="r-in"><span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span></span>
+<span class="r-in"><span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># First name, city, state</span></span></span>
-<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state_abb <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">### First name, city, state</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span></span>
+<span class="r-in"><span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span></span>
+<span class="r-in"><span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># List of NPIs</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">### List of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1710983663</span>,</span></span>
 <span class="r-in"><span>              <span class="fl">1316405939</span>,</span></span>
@@ -268,7 +276,7 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Data frame of NPIs</span></span></span>
+<span class="r-in"><span><span class="co">### Data frame of NPIs</span></span></span>
 <span class="r-in"><span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1710983663</span>,</span></span>
 <span class="r-in"><span>                             <span class="fl">1003026055</span>,</span></span>
 <span class="r-in"><span>                             <span class="fl">1316405939</span>,</span></span>
@@ -279,6 +287,17 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span><span class="va">npi_df</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">###Tribble example</span></span></span>
+<span class="r-in"><span><span class="va">tribble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="op">~</span><span class="va">fn</span>,         <span class="op">~</span><span class="va">params</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1336413418</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1710975040</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1659781227</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
