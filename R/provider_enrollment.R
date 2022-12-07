@@ -59,12 +59,10 @@
 #'
 #' @examples
 #' provider_enrollment(npi = 1003026055)
-#' provider_enrollment(last = "phadke", first = "radhika")
+#' provider_enrollment(first_name = "DEBRA", middle_name = "L", last_name = "FROMER")
 #' provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
-#' \dontrun{
-#' # Won't filter, returns entire dataset
-#' provider_enrollment(taxonomy_desc = "Trauma Surgery")
-#' }
+#' provider_enrollment(prov_type_code = "14-41")
+#' provider_enrollment(gender = "9")
 #' @autoglobal
 #' @export
 
@@ -95,7 +93,6 @@ provider_enrollment <- function(npi                = NULL,
                     "LAST_NAME", last_name,
                      "ORG_NAME", org_name,
                       "GNDR_SW", gender)
-
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>

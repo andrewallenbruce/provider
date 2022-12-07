@@ -5,6 +5,11 @@ utils::globalVariables(c(
   "Year", # <cc_multiple>
   "Year", # <cc_specific>
   "Year", # <monthly_enroll>
+  "outcome", # <nppes_npi>
+  "data_lists", # <nppes_npi>
+  "description", # <nppes_npi>
+  "field", # <nppes_npi>
+  "number", # <nppes_npi>
   "NPI", # <opt_out>
   "Date", # <opt_out>
   "Year", # <physician_by_service>
@@ -116,5 +121,6 @@ utils::globalVariables(c(
   "mins", # <days_today>
   ":=", # <days_today>
   "hrs", # <days_today>
+  ":=", # <re_nest>
   NULL
 ))

@@ -317,5 +317,13 @@ re_nest <- function(df, col){
   return(results)
 }
 
+#' Calculate the percent difference between two values ----------------------
+#' @param x,y Values to determine the percent difference between.
+#' @autoglobal
+#' @noRd
+#' @examples
+#' pct_diff(265, 4701)
+pct_diff <- function(x, y) {abs(x - y) / mean(c(x, y))}
+
 
 

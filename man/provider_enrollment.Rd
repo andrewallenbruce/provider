@@ -99,10 +99,8 @@ Update Frequency: \strong{Quarterly}
 }
 \examples{
 provider_enrollment(npi = 1003026055)
-provider_enrollment(last = "phadke", first = "radhika")
-provider_enrollment(prov_type_desc = "endocrinology")
-\dontrun{
-# Won't filter, returns entire dataset
-provider_enrollment(taxonomy_desc = "Trauma Surgery")
-}
+provider_enrollment(first_name = "DEBRA", middle_name = "L", last_name = "FROMER")
+provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
+provider_enrollment(prov_type_code = "14-41")
+provider_enrollment(gender = "9")
 }
