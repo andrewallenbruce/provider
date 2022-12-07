@@ -32,6 +32,7 @@ Imports:
 Suggests: 
     covr,
     datefixR,
+    flextable,
     glue,
     gt,
     gtExtras,
