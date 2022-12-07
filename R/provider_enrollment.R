@@ -42,30 +42,14 @@
 #'    specialty.
 #' @param prov_type_desc Provider enrollment application and enrollment
 #'    specialty type description
-#' @param city Provider practice location city. Each practice location is
-#'    linked to an Enrollment ID. If any other provider reassigns benefits to
-#'    an Enrollment ID listed in the Practice Location file, the practice
-#'    location is also associated with that other provider.
 #' @param state Provider enrollment state, abbreviated location. Providers
 #'    enroll at the state level, so one PAC ID may be associated with multiple
 #'    ENRLMT_IDs and multiple STATE_CD values.
-#' @param zipcode Provider practice location zip code. Each practice location
-#'    is linked to an Enrollment ID. If any other provider reassigns benefits
-#'    to an Enrollment ID listed in the Practice Location file, the practice
-#'    location is also associated with that other provider.
 #' @param first_name Individual provider first name
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param org_name Organizational provider name
 #' @param gender Individual provider gender; F(female), M(male), 9(unknown)
-#' @param enroll_id_reassign Enrollment ID of the provider reassigning benefits
-#'    to bill to Medicare. To find enrollment information for providers
-#'    reassigning their benefits to bill to Medicare, link
-#'    REASGN_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.
-#' @param enroll_id_receive Enrollment ID of the provider receiving
-#'    reassignment benefits to bill to Medicare. To find enrollment
-#'    information for providers receiving reassignment benefits to bill to
-#'    Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
@@ -89,16 +73,12 @@ provider_enrollment <- function(npi                = NULL,
                                 enroll_id          = NULL,
                                 prov_type_code     = NULL,
                                 prov_type_desc     = NULL,
-                                city               = NULL,
                                 state              = NULL,
-                                zipcode            = NULL,
                                 first_name         = NULL,
                                 middle_name        = NULL,
                                 last_name          = NULL,
                                 org_name           = NULL,
                                 gender             = NULL,
-                                enroll_id_reassign = NULL,
-                                enroll_id_receive  = NULL,
                                 clean_names        = TRUE,
                                 lowercase          = TRUE) {
   # args tribble ------------------------------------------------------------
@@ -106,15 +86,15 @@ provider_enrollment <- function(npi                = NULL,
                         ~x,  ~y,
                           "NPI", npi,
            "PECOS_ASCT_CNTL_ID", pecos_id,
-                    "ENRLMT_ID", "TEXT",
-             "PROVIDER_TYPE_CD", "TEXT",
-           "PROVIDER_TYPE_DESC", "TEXT",
-                     "STATE_CD", "TEXT",
-                   "FIRST_NAME", "TEXT",
-                     "MDL_NAME", "TEXT",
-                    "LAST_NAME", "TEXT",
-                     "ORG_NAME", "TEXT",
-                      "GNDR_SW", "TEXT")
+                    "ENRLMT_ID", enroll_id,
+             "PROVIDER_TYPE_CD", prov_type_code,
+           "PROVIDER_TYPE_DESC", prov_type_desc,
+                     "STATE_CD", state,
+                   "FIRST_NAME", first_name,
+                     "MDL_NAME", middle_name,
+                    "LAST_NAME", last_name,
+                     "ORG_NAME", org_name,
+                      "GNDR_SW", gender)
 
 
   # map param_format and collapse -------------------------------------------

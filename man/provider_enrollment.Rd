@@ -13,16 +13,12 @@ provider_enrollment(
   enroll_id = NULL,
   prov_type_code = NULL,
   prov_type_desc = NULL,
-  city = NULL,
   state = NULL,
-  zipcode = NULL,
   first_name = NULL,
   middle_name = NULL,
   last_name = NULL,
   org_name = NULL,
   gender = NULL,
-  enroll_id_reassign = NULL,
-  enroll_id_receive = NULL,
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -58,19 +54,9 @@ specialty.}
 \item{prov_type_desc}{Provider enrollment application and enrollment
 specialty type description}
 
-\item{city}{Provider practice location city. Each practice location is
-linked to an Enrollment ID. If any other provider reassigns benefits to
-an Enrollment ID listed in the Practice Location file, the practice
-location is also associated with that other provider.}
-
 \item{state}{Provider enrollment state, abbreviated location. Providers
 enroll at the state level, so one PAC ID may be associated with multiple
 ENRLMT_IDs and multiple STATE_CD values.}
-
-\item{zipcode}{Provider practice location zip code. Each practice location
-is linked to an Enrollment ID. If any other provider reassigns benefits
-to an Enrollment ID listed in the Practice Location file, the practice
-location is also associated with that other provider.}
 
 \item{first_name}{Individual provider first name}
 
@@ -81,16 +67,6 @@ location is also associated with that other provider.}
 \item{org_name}{Organizational provider name}
 
 \item{gender}{Individual provider gender; F(female), M(male), 9(unknown)}
-
-\item{enroll_id_reassign}{Enrollment ID of the provider reassigning benefits
-to bill to Medicare. To find enrollment information for providers
-reassigning their benefits to bill to Medicare, link
-REASGN_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.}
-
-\item{enroll_id_receive}{Enrollment ID of the provider receiving
-reassignment benefits to bill to Medicare. To find enrollment
-information for providers receiving reassignment benefits to bill to
-Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}

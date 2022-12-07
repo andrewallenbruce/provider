@@ -311,7 +311,7 @@ re_nest <- function(df, col){
 
     results <- bind |>
       dplyr::select(!{{ col }}) |>
-      tidyr::nest("{col}" := contains({{ col }}))
+      tidyr::nest("{col}" := dplyr::contains({{ col }}))
   }
 
   return(results)
