@@ -9,15 +9,15 @@ Centers for Medicare & Medicaid Services
 \usage{
 nppes_npi(
   npi = NULL,
-  enum_type = NULL,
+  prov_type = NULL,
   first = NULL,
   last = NULL,
   org_name = NULL,
   taxonomy = NULL,
   city = NULL,
-  state_abb = NULL,
-  postal_code = NULL,
-  country_code = NULL,
+  state = NULL,
+  zip = NULL,
+  country = NULL,
   limit = 200,
   skip = NULL
 )
@@ -25,7 +25,7 @@ nppes_npi(
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI).}
 
-\item{enum_type}{The Read API can be refined to retrieve only Individual
+\item{prov_type}{The Read API can be refined to retrieve only Individual
 Providers (\code{NPI-1} or Type 1) or Organizational Providers (\code{NPI-2} or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 returned. When using the Enumeration Type, it cannot be the only
@@ -67,19 +67,19 @@ This field allows the following special characters: ampersand,
 apostrophe, colon, comma, forward slash, hyphen, left and right
 parentheses, period, pound sign, quotation mark, and semi-colon.}
 
-\item{state_abb}{State abbreviation associated with the provider's address.
+\item{state}{State abbreviation associated with the provider's address.
 This field \strong{cannot} be used as the only input criterion. If this
 field is used, at least one other field, besides the \code{prov_type} and
 \code{country}, must be populated. Valid values for state abbreviations:
 \url{https://npiregistry.cms.hhs.gov/help-api/state}.}
 
-\item{postal_code}{The Postal Code associated with the provider's address
+\item{zip}{The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 wildcard entries are permitted requiring at least two characters to be
 entered (e.g., "21*").}
 
-\item{country_code}{Country abbreviation associated with the provider's
+\item{country}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
 as the value selected \emph{is not} \strong{US} (United States). Valid values for
 country abbreviations:
@@ -122,16 +122,24 @@ Update Frequency: \strong{Weekly}
 }
 \examples{
 \dontrun{
-# Single NPI
+### Single NPI
 nppes_npi(npi = 1528060837)
 
-# City, state, country
-nppes_npi(city = "Atlanta", state_abb = "GA", country_code = "US")
+### City, state, country
+nppes_npi(city = "Atlanta",
+          state = "GA",
+          country = "US")
 
-# First name, city, state
-nppes_npi(first = "John", city = "Baltimore", state_abb = "MD")
+### First name, city, state
+nppes_npi(first = "John",
+          city = "Baltimore",
+          state = "MD")
 
-# List of NPIs
+nppes_npi(npi = 1336413418) # NPI-2
+nppes_npi(npi = 1710975040) # NPI-1
+nppes_npi(npi = 1659781227) # Deactivated
+
+### List of NPIs
 npi_list <- c(1003026055,
               1710983663,
               1316405939,
@@ -144,7 +152,7 @@ npi_list |>
 purrr::map_dfr(nppes_npi) |>
 dplyr::group_split(outcome)
 
-# Data frame of NPIs
+### Data frame of NPIs
 npi_df <- data.frame(npi = c(1710983663,
                              1003026055,
                              1316405939,
@@ -155,5 +163,16 @@ npi_df <- data.frame(npi = c(1710983663,
 npi_df |>
 tibble::deframe() |>
 purrr::map_dfr(nppes_npi)
+
+###Tribble example
+tribble <- tibble::tribble(
+~fn,         ~params,
+"nppes_npi", list(1336413418),
+"nppes_npi", list(1710975040),
+"nppes_npi", list(1659781227),
+"nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
+"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
+
+purrr::invoke_map_dfr(tribble$fn, tribble$params)
 }
 }

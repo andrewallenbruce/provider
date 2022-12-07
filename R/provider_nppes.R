@@ -89,6 +89,10 @@
 #'                city = "Baltimore",
 #'                state = "MD")
 #'
+#' provider_nppes(npi = 1336413418) # NPI-2
+#' provider_nppes(npi = 1710975040) # NPI-1
+#' provider_nppes(npi = 1659781227) # Deactivated
+#'
 #' # List of NPIs
 #' npi_list <- c(1003026055,
 #'               1710983663,

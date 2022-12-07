@@ -23,7 +23,7 @@
 #' @note Update Frequency: **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI).
-#' @param enum_type The Read API can be refined to retrieve only Individual
+#' @param prov_type The Read API can be refined to retrieve only Individual
 #'    Providers (`NPI-1` or Type 1) or Organizational Providers (`NPI-2` or
 #'    Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 #'    returned. When using the Enumeration Type, it cannot be the only
@@ -59,17 +59,17 @@
 #'    This field allows the following special characters: ampersand,
 #'    apostrophe, colon, comma, forward slash, hyphen, left and right
 #'    parentheses, period, pound sign, quotation mark, and semi-colon.
-#' @param state_abb State abbreviation associated with the provider's address.
+#' @param state State abbreviation associated with the provider's address.
 #'    This field **cannot** be used as the only input criterion. If this
 #'    field is used, at least one other field, besides the `prov_type` and
 #'    `country`, must be populated. Valid values for state abbreviations:
 #'    \url{https://npiregistry.cms.hhs.gov/help-api/state}.
-#' @param postal_code The Postal Code associated with the provider's address
+#' @param zip The Postal Code associated with the provider's address
 #'    identified in Address Purpose. If you enter a 5 digit postal code, it
 #'    will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 #'    wildcard entries are permitted requiring at least two characters to be
 #'    entered (e.g., "21*").
-#' @param country_code Country abbreviation associated with the provider's
+#' @param country Country abbreviation associated with the provider's
 #'    address. This field **can** be used as the only input criterion, as long
 #'    as the value selected *is not* **US** (United States). Valid values for
 #'    country abbreviations:
@@ -83,16 +83,24 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Single NPI
+#' ### Single NPI
 #' nppes_npi(npi = 1528060837)
 #'
-#' # City, state, country
-#' nppes_npi(city = "Atlanta", state_abb = "GA", country_code = "US")
+#' ### City, state, country
+#' nppes_npi(city = "Atlanta",
+#'           state = "GA",
+#'           country = "US")
 #'
-#' # First name, city, state
-#' nppes_npi(first = "John", city = "Baltimore", state_abb = "MD")
+#' ### First name, city, state
+#' nppes_npi(first = "John",
+#'           city = "Baltimore",
+#'           state = "MD")
 #'
-#' # List of NPIs
+#' nppes_npi(npi = 1336413418) # NPI-2
+#' nppes_npi(npi = 1710975040) # NPI-1
+#' nppes_npi(npi = 1659781227) # Deactivated
+#'
+#' ### List of NPIs
 #' npi_list <- c(1003026055,
 #'               1710983663,
 #'               1316405939,
@@ -105,7 +113,7 @@
 #' purrr::map_dfr(nppes_npi) |>
 #' dplyr::group_split(outcome)
 #'
-#' # Data frame of NPIs
+#' ### Data frame of NPIs
 #' npi_df <- data.frame(npi = c(1710983663,
 #'                              1003026055,
 #'                              1316405939,
@@ -116,22 +124,33 @@
 #' npi_df |>
 #' tibble::deframe() |>
 #' purrr::map_dfr(nppes_npi)
+#'
+#' ###Tribble example
+#' tribble <- tibble::tribble(
+#' ~fn,         ~params,
+#' "nppes_npi", list(1336413418),
+#' "nppes_npi", list(1710975040),
+#' "nppes_npi", list(1659781227),
+#' "nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
+#' "nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
+#'
+#' purrr::invoke_map_dfr(tribble$fn, tribble$params)
 #' }
 #' @autoglobal
 #' @export
 
-nppes_npi <- function(npi          = NULL,
-                      enum_type    = NULL,
-                      first        = NULL,
-                      last         = NULL,
-                      org_name     = NULL,
-                      taxonomy     = NULL,
-                      city         = NULL,
-                      state_abb    = NULL,
-                      postal_code  = NULL,
-                      country_code = NULL,
-                      limit        = 200,
-                      skip         = NULL) {
+nppes_npi <- function(npi       = NULL,
+                      prov_type = NULL,
+                      first     = NULL,
+                      last      = NULL,
+                      org_name  = NULL,
+                      taxonomy  = NULL,
+                      city      = NULL,
+                      state     = NULL,
+                      zip       = NULL,
+                      country   = NULL,
+                      limit     = 200,
+                      skip      = NULL) {
 
   # base URL ---------------------------------------------------------------
   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
@@ -139,29 +158,36 @@ nppes_npi <- function(npi          = NULL,
   # request and response ----------------------------------------------------
   resp <- httr2::request(url) |>
           httr2::req_url_query(number               = npi,
-                               enumeration_type     = enum_type,
+                               enumeration_type     = prov_type,
                                first_name           = first,
                                last_name            = last,
                                organization_name    = org_name,
                                taxonomy_description = taxonomy,
                                city                 = city,
-                               state                = state_abb,
-                               country_code         = country_code,
+                               state                = state,
+                               postal_code          = zip,
+                               country_code         = country,
                                limit                = limit,
                                skip                 = skip) |>
-                               httr2::req_perform()
+    httr2::req_perform()
 
-  # parse response ----------------------------------------------------------
-  results <- httr2::resp_body_json(resp,
-                                   check_type = FALSE,
-                                   simplifyVector = TRUE)
+  res <- httr2::resp_body_json(resp,
+                               check_type = FALSE,
+                               simplifyVector = TRUE)
 
-  # Save result count, remove it from results -------------------------------
-  count <- results$result_count
-  cli::cli_alert_info("Retrieved {count} result{?s}")
+  # Remove result_count header
+  res$result_count <- NULL
 
-  # Convert to tibble -------------------------------------------------------
-  results <- results$results |> tibble::tibble() |> janitor::clean_names()
+  # Convert to tibble
+  results <- tibble::enframe(res, name = "outcome", value = "data_lists") |>
+    dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1)
+
+  if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
+    results <- results |> tidyr::unnest(cols = c(data_lists)) |>
+    dplyr::mutate(outcome = stringr::str_extract(description,
+                            stringr::boundary("sentence")),
+                            data_lists = NA) |>
+    dplyr::select(-description, -field, -number)}
 
   return(results)
 

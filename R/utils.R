@@ -274,3 +274,48 @@ param_format <- function(param, arg) {
 param_space <- function(param) {gsub(" ", "%20", param)}
 
 
+#' is_empty_list -----------------------------------------------------------
+#' @param df data frame
+#' @param col quoted list-column in data frame
+#' @return boolean, TRUE or FALSE
+#' @autoglobal
+#' @noRd
+is_empty_list <- function(df, col){
+  list <- df[col][[1]][[1]]
+  if (is.list(list) == TRUE && length(list) == 0) {
+    return(TRUE)
+    } else {
+      return(FALSE)
+    }
+  }
+
+#' re_nest -----------------------------------------------------------------
+#' @param df data frame
+#' @param col quoted list-column in data frame
+#' @return A [tibble][tibble::tibble-package]
+#' @autoglobal
+#' @noRd
+re_nest <- function(df, col){
+
+  if (isTRUE(is_empty_list(df, col))) {
+
+    results <- dplyr::mutate(df, "{col}" := NA)
+
+  } else {
+
+    nested <- df[col]
+    unnested <- tidyr::unnest(nested, cols = c({{ col }}))
+    colnames(unnested) <- paste0(col, "_", colnames(unnested))
+
+    bind <- dplyr::bind_cols(df, unnested)
+
+    results <- bind |>
+      dplyr::select(!{{ col }}) |>
+      tidyr::nest("{col}" := contains({{ col }}))
+  }
+
+  return(results)
+}
+
+
+
