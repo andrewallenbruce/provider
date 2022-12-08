@@ -113,7 +113,7 @@ aggregated by provider and service.</p>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state_abb <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ruca <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -121,7 +121,7 @@ aggregated by provider and service.</p>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  par_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  drug_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -173,7 +173,7 @@ code of ‘O’ identifies providers registered as organizations.</p></dd>
 <dd><p>The city where the provider is located, as reported in NPPES.</p></dd>
 
 
-<dt>state_abb</dt>
+<dt>state</dt>
 <dd><p>The state where the provider is located, as reported
 in NPPES.</p></dd>
 
@@ -228,7 +228,7 @@ CMS to identify products, supplies and services not covered by the CPT
 codes (such as ambulance services).</p></dd>
 
 
-<dt>drug_ind</dt>
+<dt>hcpcs_drug</dt>
 <dd><p>Identifies whether the HCPCS code for the specific service
 furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 Average Sales Price (ASP) File. Please visit the ASP drug pricing page
