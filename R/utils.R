@@ -101,7 +101,7 @@ format_zipcode <- function(zip) {
 #' Remove NULL elements from vector ----------------------------------------
 #' @autoglobal
 #' @noRd
-remove_null <- function(l) {Filter(Negate(is.null), l)}
+remove_null <- function(x) {Filter(Negate(is.null), x)}
 
 #' Clean up credentials ----------------------------------------------------
 #' @param x Character vector of credentials
@@ -133,12 +133,12 @@ full_address <- function(df,
                          state,
                          postal_code) {
 
-    stringr::str_c(stringr::str_trim(df[[address_1]], "both"),
-                   ifelse(df[[address_2]] == "", "", " "),
-                   stringr::str_trim(df[[address_2]], "both"), ", ",
-                   stringr::str_trim(df[[city]], "both"), ", ",
-                   stringr::str_trim(df[[state]], "both"), " ",
-                   stringr::str_trim(df[[postal_code]], "both"))
+    stringr::str_c(stringr::str_trim(df[address_1], "both"),
+                   ifelse(df[address_2] == "", "", " "),
+                   stringr::str_trim(df[address_2], "both"), ", ",
+                   stringr::str_trim(df[city], "both"), ", ",
+                   stringr::str_trim(df[state], "both"), " ",
+                   stringr::str_trim(df[postal_code], "both"))
 }
 
 #' luhn check npis ---------------------------------------------------------

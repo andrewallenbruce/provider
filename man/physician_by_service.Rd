@@ -16,7 +16,7 @@ physician_by_service(
   gender = NULL,
   type = NULL,
   city = NULL,
-  state_abb = NULL,
+  state = NULL,
   fips = NULL,
   zip = NULL,
   ruca = NULL,
@@ -24,7 +24,7 @@ physician_by_service(
   specialty = NULL,
   par_ind = NULL,
   hcpcs_code = NULL,
-  drug_ind = NULL,
+  hcpcs_drug = NULL,
   pos = NULL,
   year = 2020,
   clean_names = TRUE,
@@ -56,7 +56,7 @@ code of ‘O’ identifies providers registered as organizations.}
 
 \item{city}{The city where the provider is located, as reported in NPPES.}
 
-\item{state_abb}{The state where the provider is located, as reported
+\item{state}{The state where the provider is located, as reported
 in NPPES.}
 
 \item{fips}{FIPS code for the rendering provider's state.}
@@ -95,7 +95,7 @@ by the American Medical Association and Level II codes are created by
 CMS to identify products, supplies and services not covered by the CPT
 codes (such as ambulance services).}
 
-\item{drug_ind}{Identifies whether the HCPCS code for the specific service
+\item{hcpcs_drug}{Identifies whether the HCPCS code for the specific service
 furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 for additional information.}

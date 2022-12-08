@@ -12,6 +12,7 @@ utils::globalVariables(c(
   "number", # <nppes_npi>
   "NPI", # <opt_out>
   "Date", # <opt_out>
+  "Year", # <physician_by_geography>
   "Year", # <physician_by_service>
   "npi", # <provider_clia>
   "last_org", # <provider_clia>

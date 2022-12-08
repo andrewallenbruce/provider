@@ -51,7 +51,7 @@
 #'    identifies providers registered as individuals while an entity type
 #'    code of ‘O’ identifies providers registered as organizations.
 #' @param city The city where the provider is located, as reported in NPPES.
-#' @param state_abb The state where the provider is located, as reported
+#' @param state The state where the provider is located, as reported
 #'    in NPPES.
 #' @param fips FIPS code for the rendering provider's state.
 #' @param zip The provider’s zip code, as reported in NPPES.
@@ -82,7 +82,7 @@
 #'    by the American Medical Association and Level II codes are created by
 #'    CMS to identify products, supplies and services not covered by the CPT
 #'    codes (such as ambulance services).
-#' @param drug_ind Identifies whether the HCPCS code for the specific service
+#' @param hcpcs_drug Identifies whether the HCPCS code for the specific service
 #'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 #'    Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 #'    for additional information.
@@ -129,7 +129,7 @@ physician_by_service <- function(npi         = NULL,
                                  gender      = NULL,
                                  type        = NULL,
                                  city        = NULL,
-                                 state_abb   = NULL,
+                                 state       = NULL,
                                  fips        = NULL,
                                  zip         = NULL,
                                  ruca        = NULL,
@@ -137,7 +137,7 @@ physician_by_service <- function(npi         = NULL,
                                  specialty   = NULL,
                                  par_ind     = NULL,
                                  hcpcs_code  = NULL,
-                                 drug_ind    = NULL,
+                                 hcpcs_drug  = NULL,
                                  pos         = NULL,
                                  year        = 2020,
                                  clean_names = TRUE,
@@ -163,7 +163,7 @@ physician_by_service <- function(npi         = NULL,
               "Rndrng_Prvdr_Gndr",     gender,
             "Rndrng_Prvdr_Ent_Cd",       type,
               "Rndrng_Prvdr_City",       city,
-      "Rndrng_Prvdr_State_Abrvtn",  state_abb,
+      "Rndrng_Prvdr_State_Abrvtn",      state,
         "Rndrng_Prvdr_State_FIPS",       fips,
               "Rndrng_Prvdr_Zip5",        zip,
               "Rndrng_Prvdr_RUCA",       ruca,
@@ -171,7 +171,7 @@ physician_by_service <- function(npi         = NULL,
               "Rndrng_Prvdr_Type",  specialty,
   "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",    par_ind,
                        "HCPCS_Cd", hcpcs_code,
-                 "HCPCS_Drug_Ind",   drug_ind,
+                 "HCPCS_Drug_Ind", hcpcs_drug,
                   "Place_Of_Srvc",        pos)
 
   # map param_format and collapse -------------------------------------------

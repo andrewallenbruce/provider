@@ -49,7 +49,8 @@
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param org_name Organizational provider name
-#' @param gender Individual provider gender; F(female), M(male), 9(unknown)
+#' @param gender Individual provider gender;
+#'    `F` (female), `M` (male), `9` (unknown)
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
@@ -58,11 +59,25 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' provider_enrollment(npi = 1003026055)
-#' provider_enrollment(first_name = "DEBRA", middle_name = "L", last_name = "FROMER")
-#' provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
-#' provider_enrollment(prov_type_code = "14-41")
-#' provider_enrollment(gender = "9")
+#' provider_enrollment(npi = 1417918293,
+#'                     prov_type_code = "14-41")
+#'
+#' provider_enrollment(first_name = "DEBRA",
+#'                     middle_name = "L",
+#'                     last_name = "FROMER")
+#'
+#' provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
+#'                     state = "NY",
+#'                     prov_type_code = "00-85")
+#'
+#' provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY",
+#'                     state = "AK",
+#'                     gender = "F")
+#'
+#'
+#' provider_enrollment(pecos_id = 2860305554,
+#'                     enroll_id = "I20031110000120",
+#'                     gender = "9")
 #' @autoglobal
 #' @export
 
