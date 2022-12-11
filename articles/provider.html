@@ -149,7 +149,7 @@ API</strong> with the <code><a href="../reference/provider_nppes.html">provider_
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-08 <span style="color: #949494;">02:24:15</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-11 <span style="color: #949494;">09:25:03</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code>
 function:</p>
@@ -294,38 +294,14 @@ and/or last name, city, state:</p>
 </h2>
 <p><br></p>
 <p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using
-the <code><a href="../reference/provider_mppe.html">provider_mppe()</a></code> function, you can search Medicare’s
+the <code>provider_mppe()</code> function, you can search Medicare’s
 <strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">mppe_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_mppe</span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mppe(1760485387): could not find function "provider_mppe"</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<colgroup>
-<col width="11%">
-<col width="10%">
-<col width="13%">
-<col width="21%">
-<col width="35%">
-<col width="6%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Last Name</th>
-<th align="left">PECOS PAC ID</th>
-<th align="left">PECOS Enrollment ID</th>
-<th align="left">Specialty</th>
-<th align="left">State</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">DEWEY</td>
-<td align="left">8729990007</td>
-<td align="left">I20100505000906</td>
-<td align="left">PRACTITIONER - INTERNAL MEDICINE</td>
-<td align="left">MN</td>
-</tr></tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(mppe_ex, NPI = npi, `Last Name` = last_name, `PECOS PAC ID` = pecos_asct_cntl_id, : object 'mppe_ex' not found</span></span></code></pre>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -337,7 +313,7 @@ B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
 or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
 Referring API</strong> with <code>provider_moar()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moar_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_moar</span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in provider_moar(1760485387): could not find function "provider_moar"</span></span></code></pre></div>
 <p><br></p>
@@ -351,439 +327,81 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
 <p>You may need to find Medicare’s specialty codes for this provider’s
 taxonomies. Using the output from the NPPES search in the first example,
 you can search Medicare’s <strong>Provider and Supplier Taxonomy
-Crosswalk API</strong> with <code><a href="../reference/provider_mpstc.html">provider_mpstc()</a></code>:</p>
+Crosswalk API</strong> with <code>provider_mpstc()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mpstc_ex</span> <span class="op">&lt;-</span> <span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span></span></code></pre></div>
+<span>            <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_mpstc' not found</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<colgroup>
-<col width="11%">
-<col width="19%">
-<col width="23%">
-<col width="44%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">Taxonomy Code</th>
-<th align="left">Medicare Specialty Code</th>
-<th align="left">Specialty</th>
-<th align="left">Classification</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">207R00000X</td>
-<td align="left">11</td>
-<td align="left">Physician/Internal Medicine</td>
-<td align="left">Allopathic &amp; Osteopathic Physicians/Internal
-Medicine</td>
-</tr>
-<tr class="even">
-<td align="left">208000000X</td>
-<td align="left">37</td>
-<td align="left">Physician/Pediatric Medicine</td>
-<td align="left">Allopathic &amp; Osteopathic Physicians/Pediatrics</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(mpstc_ex, `Taxonomy Code` = provider_taxonomy_code, : object 'mpstc_ex' not found</span></span></code></pre>
 <p><br></p>
 <p>You can check to see if a provider is due to revalidate their
 Medicare enrollment by accessing Medicare’s <strong>Revalidation Due
-Date API</strong> with <code><a href="../reference/provider_mrdd.html">provider_mrdd()</a></code>:</p>
+Date API</strong> with <code>provider_mrdd()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mrdd.html">provider_mrdd</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mrdd_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_mrdd</span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mrdd(1760485387): could not find function "provider_mrdd"</span></span></code></pre></div>
 <p><br></p>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="9%">
-<col width="14%">
-<col width="14%">
-<col width="8%">
-<col width="5%">
-<col width="13%">
-<col width="15%">
-<col width="19%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Enrollment ID</th>
-<th align="left">Enrollment Type</th>
-<th align="left">Last Name</th>
-<th align="left">State</th>
-<th align="left">Provider Type</th>
-<th align="left">Specialty</th>
-<th align="left">Revalidation Due Date</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">I20100505000906</td>
-<td align="left">3</td>
-<td align="left">Dewey</td>
-<td align="left">MN</td>
-<td align="left">Non-DME Part B</td>
-<td align="left">Internal Medicine</td>
-<td align="left">2018-09-30</td>
-</tr></tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(mrdd_ex, NPI = national_provider_identifier, `Enrollment ID` = enrollment_id, : object 'mrdd_ex' not found</span></span></code></pre>
 <p><br></p>
 <p>Providers may need to update their digital contact information in the
 NPPES system. To check, you can access the <strong>CMS Public Reporting
 of Missing Digital Contact Information API</strong> with
-<code><a href="../reference/provider_promdci.html">provider_promdci()</a></code>. If they appear in the search results,
+<code>provider_promdci()</code>. If they appear in the search results,
 it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">promdci_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_promdci</span><span class="op">(</span><span class="fl">1760485387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_promdci(1760485387): could not find function "provider_promdci"</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Provider Name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey,Paul</td>
-</tr></tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(promdci_ex, NPI = npi, `Provider Name` = provider_name): object 'promdci_ex' not found</span></span></code></pre>
 <p><br></p>
 <p>You can find out if a provider has opted out of Medicare by searching
 the <strong>Medicare Opt Out Affidavits API</strong> with
 <code>provider_mooa()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mooa_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_mooa</span><span class="op">(</span><span class="fl">1114974490</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in provider_mooa(1114974490): could not find function "provider_mooa"</span></span></code></pre></div>
 <p><br></p>
 <pre><code><span><span class="co">#&gt; Error in dplyr::select(mooa_ex, NPI = npi, optout_effective_date, optout_end_date, : object 'mooa_ex' not found</span></span></code></pre>
 <p><br></p>
-<p>Using <code><a href="../reference/provider_mpop.html">provider_mpop()</a></code>, you can access <strong>Medicare’s
+<p>Using <code>provider_mpop()</code>, you can access <strong>Medicare’s
 Physician &amp; Other Practitioners - by Provider and Service
 API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
-<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mpop_ex_2020</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, </span>
+<span>                              year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2020"): could not find function "provider_mpop"</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<colgroup>
-<col width="10%">
-<col width="5%">
-<col width="10%">
-<col width="5%">
-<col width="3%">
-<col width="5%">
-<col width="13%">
-<col width="8%">
-<col width="10%">
-<col width="11%">
-<col width="11%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">Last</th>
-<th align="left">City</th>
-<th align="left">State</th>
-<th align="left">PAR</th>
-<th align="left">HCPCS</th>
-<th align="right">Beneficiaries</th>
-<th align="right">Services</th>
-<th align="right">Avg Billed</th>
-<th align="right">Avg Allowed</th>
-<th align="right">Avg Payment</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">36415</td>
-<td align="right">122</td>
-<td align="right">196</td>
-<td align="right">29.0000</td>
-<td align="right">2.983469</td>
-<td align="right">2.983469</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">71046</td>
-<td align="right">16</td>
-<td align="right">17</td>
-<td align="right">141.0000</td>
-<td align="right">20.480588</td>
-<td align="right">10.592353</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">80048</td>
-<td align="right">71</td>
-<td align="right">100</td>
-<td align="right">63.0000</td>
-<td align="right">8.402200</td>
-<td align="right">8.402200</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">80053</td>
-<td align="right">36</td>
-<td align="right">39</td>
-<td align="right">85.0000</td>
-<td align="right">10.511539</td>
-<td align="right">10.511539</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">80061</td>
-<td align="right">53</td>
-<td align="right">54</td>
-<td align="right">116.0000</td>
-<td align="right">13.315000</td>
-<td align="right">13.315000</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">81001</td>
-<td align="right">19</td>
-<td align="right">24</td>
-<td align="right">48.0000</td>
-<td align="right">3.147500</td>
-<td align="right">3.147500</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">83036</td>
-<td align="right">26</td>
-<td align="right">37</td>
-<td align="right">74.0000</td>
-<td align="right">9.658649</td>
-<td align="right">9.658649</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">84153</td>
-<td align="right">13</td>
-<td align="right">14</td>
-<td align="right">111.0000</td>
-<td align="right">18.284286</td>
-<td align="right">18.284286</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">84443</td>
-<td align="right">26</td>
-<td align="right">35</td>
-<td align="right">97.0000</td>
-<td align="right">16.732000</td>
-<td align="right">16.732000</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">84450</td>
-<td align="right">14</td>
-<td align="right">14</td>
-<td align="right">43.0000</td>
-<td align="right">5.137143</td>
-<td align="right">5.137143</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">85025</td>
-<td align="right">11</td>
-<td align="right">12</td>
-<td align="right">69.0000</td>
-<td align="right">7.756667</td>
-<td align="right">7.756667</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">85027</td>
-<td align="right">48</td>
-<td align="right">52</td>
-<td align="right">69.0000</td>
-<td align="right">6.430000</td>
-<td align="right">6.430000</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">85610</td>
-<td align="right">17</td>
-<td align="right">35</td>
-<td align="right">43.0000</td>
-<td align="right">4.246286</td>
-<td align="right">4.246286</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">90662</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">68.0000</td>
-<td align="right">60.736400</td>
-<td align="right">60.736400</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">90686</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">27.0000</td>
-<td align="right">19.508461</td>
-<td align="right">19.508461</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">93000</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">113.0000</td>
-<td align="right">16.969200</td>
-<td align="right">10.853200</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">99213</td>
-<td align="right">91</td>
-<td align="right">252</td>
-<td align="right">226.0000</td>
-<td align="right">74.433254</td>
-<td align="right">48.886825</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">99214</td>
-<td align="right">81</td>
-<td align="right">136</td>
-<td align="right">334.0000</td>
-<td align="right">107.934265</td>
-<td align="right">66.875956</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">G0008</td>
-<td align="right">38</td>
-<td align="right">38</td>
-<td align="right">78.0000</td>
-<td align="right">16.802105</td>
-<td align="right">16.802105</td>
-</tr>
-<tr class="even">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">G0103</td>
-<td align="right">17</td>
-<td align="right">17</td>
-<td align="right">111.0000</td>
-<td align="right">19.172353</td>
-<td align="right">19.172353</td>
-</tr>
-<tr class="odd">
-<td align="left">1760485387</td>
-<td align="left">Dewey</td>
-<td align="left">Moose Lake</td>
-<td align="left">MN</td>
-<td align="left">Y</td>
-<td align="left">G0438</td>
-<td align="right">18</td>
-<td align="right">18</td>
-<td align="right">508.1111</td>
-<td align="right">170.250000</td>
-<td align="right">170.250000</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::select(mpop_ex_2020, NPI = rndrng_npi, Last = rndrng_prvdr_last_org_name, : object 'mpop_ex_2020' not found</span></span></code></pre>
 <p><br></p>
 <p>This API contains data going back to 2013, so you can perform a
 long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Retrieve the data from each year</span></span>
-<span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
-<span><span class="va">mpop19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span>
-<span><span class="va">mpop18</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2018"</span><span class="op">)</span></span>
-<span><span class="va">mpop17</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2017"</span><span class="op">)</span></span>
-<span><span class="va">mpop16</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2016"</span><span class="op">)</span></span>
-<span><span class="va">mpop15</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2015"</span><span class="op">)</span></span>
-<span><span class="va">mpop14</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2014"</span><span class="op">)</span></span>
-<span><span class="va">mpop13</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_mpop.html">provider_mpop</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2013"</span><span class="op">)</span></span>
+<span><span class="va">mpop20</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2020"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop19</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2019"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop18</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2018"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2018"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop17</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2017"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2017"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop16</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2016"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2016"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop15</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2015"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2015"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop14</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2014"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2014"): could not find function "provider_mpop"</span></span>
+<span><span class="va">mpop13</span> <span class="op">&lt;-</span> <span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2013"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_mpop(npi = 1760485387, year = "2013"): could not find function "provider_mpop"</span></span>
 <span></span>
 <span><span class="co"># Bind the data frames together by row</span></span>
 <span><span class="va">mpop_13_20</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">mpop20</span>, </span>
@@ -793,468 +411,31 @@ long-term analysis of a provider’s Medicare data:</p>
 <span>                               <span class="va">mpop16</span>, </span>
 <span>                               <span class="va">mpop15</span>, </span>
 <span>                               <span class="va">mpop14</span>, </span>
-<span>                               <span class="va">mpop13</span><span class="op">)</span></span></code></pre></div>
+<span>                               <span class="va">mpop13</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in list2(...): object 'mpop20' not found</span></span></code></pre></div>
 <p><br></p>
-<table class="table">
-<colgroup>
-<col width="3%">
-<col width="70%">
-<col width="4%">
-<col width="4%">
-<col width="5%">
-<col width="6%">
-<col width="6%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">HCPCS</th>
-<th align="left">HCPCS Description</th>
-<th align="right">Benefits</th>
-<th align="right">Services</th>
-<th align="right">Avg Charge</th>
-<th align="right">Avg Allowed</th>
-<th align="right">Avg Payment</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">83690</td>
-<td align="left">Lipase (fat enzyme) level</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">67.00</td>
-<td align="right">7.50</td>
-<td align="right">7.50</td>
-</tr>
-<tr class="even">
-<td align="left">93017</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG tracing and monitoring</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">220.00</td>
-<td align="right">41.61</td>
-<td align="right">33.18</td>
-</tr>
-<tr class="odd">
-<td align="left">90686</td>
-<td align="left">Vaccine for influenza for administration into muscle,
-0.5 ml dosage</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">27.00</td>
-<td align="right">19.51</td>
-<td align="right">19.51</td>
-</tr>
-<tr class="even">
-<td align="left">80069</td>
-<td align="left">Kidney function blood test panel</td>
-<td align="right">11</td>
-<td align="right">14</td>
-<td align="right">46.00</td>
-<td align="right">10.51</td>
-<td align="right">10.51</td>
-</tr>
-<tr class="odd">
-<td align="left">84153</td>
-<td align="left">Psa (prostate specific antigen) measurement</td>
-<td align="right">13</td>
-<td align="right">14</td>
-<td align="right">111.00</td>
-<td align="right">18.28</td>
-<td align="right">18.28</td>
-</tr>
-<tr class="even">
-<td align="left">84450</td>
-<td align="left">Liver enzyme (sgot), level</td>
-<td align="right">14</td>
-<td align="right">14</td>
-<td align="right">43.00</td>
-<td align="right">5.14</td>
-<td align="right">5.14</td>
-</tr>
-<tr class="odd">
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="right">13</td>
-<td align="right">14</td>
-<td align="right">514.00</td>
-<td align="right">189.07</td>
-<td align="right">146.33</td>
-</tr>
-<tr class="even">
-<td align="left">20610</td>
-<td align="left">Aspiration and/or injection of large joint or joint
-capsule</td>
-<td align="right">12</td>
-<td align="right">16</td>
-<td align="right">239.00</td>
-<td align="right">56.77</td>
-<td align="right">41.90</td>
-</tr>
-<tr class="odd">
-<td align="left">99235</td>
-<td align="left">Hospital observation or inpatient care moderate
-severity, 50 minutes per day’</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">508.00</td>
-<td align="right">155.69</td>
-<td align="right">123.51</td>
-</tr>
-<tr class="even">
-<td align="left">82306</td>
-<td align="left">Vitamin D-3 level</td>
-<td align="right">16</td>
-<td align="right">18</td>
-<td align="right">185.00</td>
-<td align="right">35.82</td>
-<td align="right">35.82</td>
-</tr>
-<tr class="odd">
-<td align="left">G0431</td>
-<td align="left">Drug screen, qualitative; multiple drug classes by high
-complexity test method (e. g. , immunoassay, enzyme assay), per patient
-encounter</td>
-<td align="right">12</td>
-<td align="right">20</td>
-<td align="right">140.00</td>
-<td align="right">98.25</td>
-<td align="right">98.25</td>
-</tr>
-<tr class="even">
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="right">22</td>
-<td align="right">22</td>
-<td align="right">103.00</td>
-<td align="right">21.26</td>
-<td align="right">16.16</td>
-</tr>
-<tr class="odd">
-<td align="left">81003</td>
-<td align="left">Automated urinalysis test</td>
-<td align="right">21</td>
-<td align="right">23</td>
-<td align="right">38.00</td>
-<td align="right">3.00</td>
-<td align="right">3.00</td>
-</tr>
-<tr class="even">
-<td align="left">93000</td>
-<td align="left">Routine ekg using at least 12 leads including
-interpretation and report</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">113.00</td>
-<td align="right">16.97</td>
-<td align="right">10.85</td>
-</tr>
-<tr class="odd">
-<td align="left">G0438</td>
-<td align="left">Annual wellness visit; includes a personalized
-prevention plan of service (pps), initial visit</td>
-<td align="right">29</td>
-<td align="right">29</td>
-<td align="right">444.06</td>
-<td align="right">169.23</td>
-<td align="right">169.23</td>
-</tr>
-<tr class="even">
-<td align="left">85018</td>
-<td align="left">Hemoglobin measurement</td>
-<td align="right">27</td>
-<td align="right">32</td>
-<td align="right">30.50</td>
-<td align="right">3.18</td>
-<td align="right">3.18</td>
-</tr>
-<tr class="odd">
-<td align="left">84443</td>
-<td align="left">Blood test, thyroid stimulating hormone (tsh)</td>
-<td align="right">26</td>
-<td align="right">35</td>
-<td align="right">97.00</td>
-<td align="right">16.73</td>
-<td align="right">16.73</td>
-</tr>
-<tr class="even">
-<td align="left">83036</td>
-<td align="left">Hemoglobin a1c level</td>
-<td align="right">26</td>
-<td align="right">37</td>
-<td align="right">74.00</td>
-<td align="right">9.66</td>
-<td align="right">9.66</td>
-</tr>
-<tr class="odd">
-<td align="left">85652</td>
-<td align="left">Red blood cell sedimentation rate, to detect
-inflammation</td>
-<td align="right">46</td>
-<td align="right">49</td>
-<td align="right">41.00</td>
-<td align="right">3.37</td>
-<td align="right">3.37</td>
-</tr>
-<tr class="even">
-<td align="left">93000</td>
-<td align="left">Routine EKG using at least 12 leads including
-interpretation and report</td>
-<td align="right">54</td>
-<td align="right">59</td>
-<td align="right">106.00</td>
-<td align="right">16.40</td>
-<td align="right">12.69</td>
-</tr>
-<tr class="odd">
-<td align="left">93306</td>
-<td align="left">Ultrasound examination of heart including
-color-depicted blood flow rate, direction, and valve function</td>
-<td align="right">61</td>
-<td align="right">63</td>
-<td align="right">823.25</td>
-<td align="right">167.68</td>
-<td align="right">127.70</td>
-</tr>
-<tr class="even">
-<td align="left">99238</td>
-<td align="left">Hospital discharge day management, 30 minutes or
-less</td>
-<td align="right">55</td>
-<td align="right">65</td>
-<td align="right">210.75</td>
-<td align="right">69.70</td>
-<td align="right">54.44</td>
-</tr>
-<tr class="odd">
-<td align="left">71046</td>
-<td align="left">X-ray of chest, 2 views</td>
-<td align="right">60</td>
-<td align="right">69</td>
-<td align="right">137.00</td>
-<td align="right">19.87</td>
-<td align="right">12.40</td>
-</tr>
-<tr class="even">
-<td align="left">J3301</td>
-<td align="left">Injection, triamcinolone acetonide, not otherwise
-specified, 10 mg</td>
-<td align="right">14</td>
-<td align="right">72</td>
-<td align="right">25.00</td>
-<td align="right">1.79</td>
-<td align="right">1.34</td>
-</tr>
-<tr class="odd">
-<td align="left">71020</td>
-<td align="left">X-ray of chest, 2 views, front and side</td>
-<td align="right">82</td>
-<td align="right">89</td>
-<td align="right">121.00</td>
-<td align="right">17.80</td>
-<td align="right">11.16</td>
-</tr>
-<tr class="even">
-<td align="left">90662</td>
-<td align="left">Vaccine for influenza for injection into muscle</td>
-<td align="right">96</td>
-<td align="right">96</td>
-<td align="right">64.00</td>
-<td align="right">51.04</td>
-<td align="right">51.04</td>
-</tr>
-<tr class="odd">
-<td align="left">84153</td>
-<td align="left">PSA (prostate specific antigen) measurement</td>
-<td align="right">90</td>
-<td align="right">98</td>
-<td align="right">98.00</td>
-<td align="right">23.63</td>
-<td align="right">23.63</td>
-</tr>
-<tr class="even">
-<td align="left">84450</td>
-<td align="left">Liver enzyme (SGOT), level</td>
-<td align="right">93</td>
-<td align="right">100</td>
-<td align="right">39.40</td>
-<td align="right">4.82</td>
-<td align="right">4.82</td>
-</tr>
-<tr class="odd">
-<td align="left">93005</td>
-<td align="left">Routine electrocardiogram (EKG) with tracing using at
-least 12 leads</td>
-<td align="right">98</td>
-<td align="right">101</td>
-<td align="right">52.50</td>
-<td align="right">8.54</td>
-<td align="right">6.23</td>
-</tr>
-<tr class="even">
-<td align="left">G0008</td>
-<td align="left">Administration of influenza virus vaccine</td>
-<td align="right">132</td>
-<td align="right">132</td>
-<td align="right">73.97</td>
-<td align="right">20.82</td>
-<td align="right">20.82</td>
-</tr>
-<tr class="odd">
-<td align="left">G0103</td>
-<td align="left">Prostate cancer screening; prostate specific antigen
-test (psa)</td>
-<td align="right">134</td>
-<td align="right">134</td>
-<td align="right">102.00</td>
-<td align="right">22.84</td>
-<td align="right">22.84</td>
-</tr>
-<tr class="even">
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="right">87</td>
-<td align="right">192</td>
-<td align="right">203.12</td>
-<td align="right">68.45</td>
-<td align="right">53.31</td>
-</tr>
-<tr class="odd">
-<td align="left">81001</td>
-<td align="left">Manual urinalysis test with examination using
-microscope</td>
-<td align="right">179</td>
-<td align="right">214</td>
-<td align="right">44.38</td>
-<td align="right">3.96</td>
-<td align="right">3.96</td>
-</tr>
-<tr class="even">
-<td align="left">83036</td>
-<td align="left">Hemoglobin A1C level</td>
-<td align="right">198</td>
-<td align="right">273</td>
-<td align="right">66.00</td>
-<td align="right">12.44</td>
-<td align="right">12.44</td>
-</tr>
-<tr class="odd">
-<td align="left">84443</td>
-<td align="left">Blood test, thyroid stimulating hormone (TSH)</td>
-<td align="right">244</td>
-<td align="right">288</td>
-<td align="right">85.71</td>
-<td align="right">21.61</td>
-<td align="right">21.61</td>
-</tr>
-<tr class="even">
-<td align="left">85025</td>
-<td align="left">Complete blood cell count (red cells, white blood cell,
-platelets), automated test</td>
-<td align="right">270</td>
-<td align="right">334</td>
-<td align="right">62.00</td>
-<td align="right">9.62</td>
-<td align="right">9.62</td>
-</tr>
-<tr class="odd">
-<td align="left">85027</td>
-<td align="left">Complete blood cell count (red cells, white blood cell,
-platelets), automated test</td>
-<td align="right">296</td>
-<td align="right">341</td>
-<td align="right">62.00</td>
-<td align="right">8.06</td>
-<td align="right">8.06</td>
-</tr>
-<tr class="even">
-<td align="left">85610</td>
-<td align="left">Blood test, clotting time</td>
-<td align="right">180</td>
-<td align="right">458</td>
-<td align="right">39.38</td>
-<td align="right">4.95</td>
-<td align="right">4.95</td>
-</tr>
-<tr class="odd">
-<td align="left">80061</td>
-<td align="left">Blood test, lipids (cholesterol and triglycerides)</td>
-<td align="right">534</td>
-<td align="right">586</td>
-<td align="right">105.50</td>
-<td align="right">14.53</td>
-<td align="right">14.53</td>
-</tr>
-<tr class="even">
-<td align="left">80053</td>
-<td align="left">Blood test, comprehensive group of blood chemicals</td>
-<td align="right">511</td>
-<td align="right">592</td>
-<td align="right">77.88</td>
-<td align="right">12.04</td>
-<td align="right">12.04</td>
-</tr>
-<tr class="odd">
-<td align="left">80048</td>
-<td align="left">Blood test, basic group of blood chemicals</td>
-<td align="right">547</td>
-<td align="right">742</td>
-<td align="right">56.00</td>
-<td align="right">9.74</td>
-<td align="right">9.74</td>
-</tr>
-<tr class="even">
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="right">455</td>
-<td align="right">768</td>
-<td align="right">315.43</td>
-<td align="right">104.76</td>
-<td align="right">66.37</td>
-</tr>
-<tr class="odd">
-<td align="left">99213</td>
-<td align="left">Established patient office or other outpatient visit,
-typically 15 minutes</td>
-<td align="right">457</td>
-<td align="right">951</td>
-<td align="right">213.20</td>
-<td align="right">71.45</td>
-<td align="right">46.25</td>
-</tr>
-<tr class="even">
-<td align="left">36415</td>
-<td align="left">Insertion of needle into vein for collection of blood
-sample</td>
-<td align="right">782</td>
-<td align="right">1162</td>
-<td align="right">25.50</td>
-<td align="right">2.92</td>
-<td align="right">2.92</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in dplyr::group_by(mpop_13_20, hcpcs_cd, hcpcs_desc): object 'mpop_13_20' not found</span></span></code></pre>
 <p><br></p>
 <p>Using packages like {gt} &amp; {ggplot2}, you can create tables and
 graphs for reporting purposes:</p>
 <p><br></p>
 <details><summary>
 Click for Table Code
-</summary><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+</summary><div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># First row of data</span></span>
 <span><span class="va">mpop_ex_2020_row1</span> <span class="op">&lt;-</span> <span class="va">mpop_ex_2020</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in dplyr::filter(mpop_ex_2020, dplyr::row_number() %in% 1): object 'mpop_ex_2020' not found</span></span>
 <span></span>
 <span><span class="co"># First, last, credentials</span></span>
 <span><span class="va">mpop_ex_name_cred</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span></span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_first_name</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_last_org_name</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">", "</span>,</span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_crdntls</span>, <span class="st">"both"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in stri_trim_both(string): object 'mpop_ex_2020_row1' not found</span></span>
 <span></span>
 <span><span class="co"># NPI</span></span>
 <span><span class="va">mpop_ex_npi</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span><span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_npi</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">""</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in stri_trim_both(string): object 'mpop_ex_2020_row1' not found</span></span>
 <span></span>
 <span><span class="co"># Address</span></span>
 <span><span class="va">mpop_ex_address</span> <span class="op">&lt;-</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_c.html" class="external-link">str_c</a></span><span class="op">(</span></span>
@@ -1262,8 +443,9 @@ Click for Table Code
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_city</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">", "</span>,</span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_state_abrvtn</span>, <span class="st">"both"</span><span class="op">)</span>, <span class="st">" "</span>,</span>
 <span>  <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html" class="external-link">str_trim</a></span><span class="op">(</span><span class="va">mpop_ex_2020_row1</span><span class="op">$</span><span class="va">rndrng_prvdr_zip5</span>, <span class="st">"both"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Error in stri_trim_both(string): object 'mpop_ex_2020_row1' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_table</span> <span class="op">&lt;-</span> <span class="va">mpop_13_20</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
 <span>                hcpcs     <span class="op">=</span> <span class="va">hcpcs_cd</span>,</span>
@@ -1291,8 +473,9 @@ Click for Table Code
 <span>    pay_spark  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">avg_pay</span><span class="op">)</span>,</span>
 <span>    .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">ben_sum</span> <span class="op">&gt;</span> <span class="fl">22</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">desc</span><span class="op">(</span><span class="va">ben_sum</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in dplyr::select(mpop_13_20, year, hcpcs = hcpcs_cd, benefits = tot_benes, : object 'mpop_13_20' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_output</span> <span class="op">&lt;-</span> <span class="va">gt_table</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
@@ -1431,6 +614,7 @@ Click for Table Code
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">pay_mean</span>, </span>
 <span>                          palette <span class="op">=</span> <span class="st">"RColorBrewer::Oranges"</span>, pal_type <span class="op">=</span> <span class="st">"continuous"</span>, domain <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">gt_table</span><span class="op">$</span><span class="va">pay_mean</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_vertical_padding.html" class="external-link">opt_vertical_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1.5</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in dplyr::group_vars(data): object 'gt_table' not found</span></span>
 <span></span>
 <span><span class="co">#gt::gtsave(gt_output, filename = "gt_provider3.png", expand = 20, zoom = 2, vwidth = 1500)</span></span></code></pre></div>
 </details><p><br><br></p>

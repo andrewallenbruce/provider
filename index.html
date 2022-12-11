@@ -159,7 +159,7 @@
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits" class="external-link">Medicare Opt Out Affidavits</a></td>
 </tr>
 <tr class="even">
-<td align="left"><code>physician_by_provider()</code></td>
+<td align="left"><code><a href="reference/physician_by_provider.html">physician_by_provider()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider</a></td>
 </tr>
 <tr class="odd">
@@ -195,7 +195,7 @@
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare Provider and Supplier Taxonomy Crosswalk</a></td>
 </tr>
 <tr class="odd">
-<td align="left"><code>missing_information()</code></td>
+<td align="left"><code><a href="reference/missing_information.html">missing_information()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS Public Reporting of Missing Digital Contact Information</a></td>
 </tr>
 </tbody>
@@ -220,259 +220,18 @@
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">npi_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="33%">
-<col width="50%">
-<col width="16%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">name</th>
-<th align="left">value</th>
-<th align="left">group</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">npi</td>
-<td align="left">1083879860</td>
-<td align="left">basic</td>
-</tr>
-<tr class="even">
-<td align="left">enum_type</td>
-<td align="left">NPI-1</td>
-<td align="left">basic</td>
-</tr>
-<tr class="odd">
-<td align="left">first_name</td>
-<td align="left">CHRISTOPHER</td>
-<td align="left">basic</td>
-</tr>
-<tr class="even">
-<td align="left">last_name</td>
-<td align="left">AARON</td>
-<td align="left">basic</td>
-</tr>
-<tr class="odd">
-<td align="left">sole_proprietor</td>
-<td align="left">NO</td>
-<td align="left">basic</td>
-</tr>
-<tr class="even">
-<td align="left">gender</td>
-<td align="left">M</td>
-<td align="left">basic</td>
-</tr>
-<tr class="odd">
-<td align="left">enumeration_date</td>
-<td align="left">2008-07-22</td>
-<td align="left">basic</td>
-</tr>
-<tr class="even">
-<td align="left">last_updated</td>
-<td align="left">2021-03-25</td>
-<td align="left">basic</td>
-</tr>
-<tr class="odd">
-<td align="left">certification_date</td>
-<td align="left">2020-05-01</td>
-<td align="left">basic</td>
-</tr>
-<tr class="even">
-<td align="left">status</td>
-<td align="left">A</td>
-<td align="left">basic</td>
-</tr>
-<tr class="odd">
-<td align="left">country_code</td>
-<td align="left">US</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">country_name</td>
-<td align="left">United States</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">address_purpose</td>
-<td align="left">LOCATION</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">address_type</td>
-<td align="left">DOM</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">address_1</td>
-<td align="left">792 GALLITZIN RD</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">city</td>
-<td align="left">CRESSON</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">state</td>
-<td align="left">PA</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">postal_code</td>
-<td align="left">166302213</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">telephone_number</td>
-<td align="left">814-886-8161</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">country_code</td>
-<td align="left">US</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">country_name</td>
-<td align="left">United States</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">address_purpose</td>
-<td align="left">MAILING</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">address_type</td>
-<td align="left">DOM</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">address_1</td>
-<td align="left">10 CASTLE GARDEN CT</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">city</td>
-<td align="left">OLNEY</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">state</td>
-<td align="left">MD</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">postal_code</td>
-<td align="left">208321443</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="even">
-<td align="left">telephone_number</td>
-<td align="left">NA</td>
-<td align="left">addresses</td>
-</tr>
-<tr class="odd">
-<td align="left">code</td>
-<td align="left">207Q00000X</td>
-<td align="left">taxonomies</td>
-</tr>
-<tr class="even">
-<td align="left">desc</td>
-<td align="left">Family Medicine</td>
-<td align="left">taxonomies</td>
-</tr>
-<tr class="odd">
-<td align="left">state</td>
-<td align="left">PA</td>
-<td align="left">taxonomies</td>
-</tr>
-<tr class="even">
-<td align="left">license</td>
-<td align="left">OS019703</td>
-<td align="left">taxonomies</td>
-</tr>
-<tr class="odd">
-<td align="left">primary</td>
-<td align="left">TRUE</td>
-<td align="left">taxonomies</td>
-</tr>
-<tr class="even">
-<td align="left">endpointType</td>
-<td align="left">DIRECT</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">endpointTypeDescription</td>
-<td align="left">Direct Messaging Address</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">endpoint</td>
-<td align="left"><a href="mailto:christopher.l.aaron@upmcdirect.com" class="email">christopher.l.aaron@upmcdirect.com</a></td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">affiliation</td>
-<td align="left">Y</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">affiliationName</td>
-<td align="left">UPMC</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">country_code</td>
-<td align="left">US</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">country_name</td>
-<td align="left">United States</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">address_type</td>
-<td align="left">DOM</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">address_1</td>
-<td align="left">600 Grant St</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">address_2</td>
-<td align="left">Floor 58</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">city</td>
-<td align="left">Pittsburgh</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="odd">
-<td align="left">state</td>
-<td align="left">PA</td>
-<td align="left">endpoints</td>
-</tr>
-<tr class="even">
-<td align="left">postal_code</td>
-<td align="left">152192702</td>
-<td align="left">endpoints</td>
-</tr>
-</tbody>
-</table>
+<span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 1 × 3</span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
+<span><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;list&gt;       </span></span>
+<span><span class="co">#&gt; 1 2022-12-11 04:19:53 results &lt;df [1 × 11]&gt;</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
 </h3>
-<p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exa</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/provider_mppe.html">provider_mppe</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -528,11 +287,114 @@
 <p><br></p>
 </div>
 <div class="section level3">
+<h3 id="medicare-monthly-enrollment-api">Medicare Monthly Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment-api"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, month <span class="op">=</span> <span class="st">"Year"</span>, </span>
+<span>  geo_level <span class="op">=</span> <span class="st">"County"</span>, state_abb <span class="op">=</span> <span class="st">"AL"</span>, county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">year</td>
+<td align="left">2021</td>
+</tr>
+<tr class="even">
+<td align="left">month</td>
+<td align="left">Year</td>
+</tr>
+<tr class="odd">
+<td align="left">bene_geo_lvl</td>
+<td align="left">County</td>
+</tr>
+<tr class="even">
+<td align="left">bene_state_abrvtn</td>
+<td align="left">AL</td>
+</tr>
+<tr class="odd">
+<td align="left">bene_state_desc</td>
+<td align="left">Alabama</td>
+</tr>
+<tr class="even">
+<td align="left">bene_county_desc</td>
+<td align="left">Autauga</td>
+</tr>
+<tr class="odd">
+<td align="left">bene_fips_cd</td>
+<td align="left">01001</td>
+</tr>
+<tr class="even">
+<td align="left">tot_benes</td>
+<td align="left">11398</td>
+</tr>
+<tr class="odd">
+<td align="left">orgnl_mdcr_benes</td>
+<td align="left">5339</td>
+</tr>
+<tr class="even">
+<td align="left">ma_and_oth_benes</td>
+<td align="left">6059</td>
+</tr>
+<tr class="odd">
+<td align="left">aged_tot_benes</td>
+<td align="left">9031</td>
+</tr>
+<tr class="even">
+<td align="left">aged_esrd_benes</td>
+<td align="left">56</td>
+</tr>
+<tr class="odd">
+<td align="left">aged_no_esrd_benes</td>
+<td align="left">8975</td>
+</tr>
+<tr class="even">
+<td align="left">dsbld_tot_benes</td>
+<td align="left">2367</td>
+</tr>
+<tr class="odd">
+<td align="left">dsbld_esrd_and_esrd_only_benes</td>
+<td align="left">49</td>
+</tr>
+<tr class="even">
+<td align="left">dsbld_no_esrd_benes</td>
+<td align="left">2318</td>
+</tr>
+<tr class="odd">
+<td align="left">a_b_tot_benes</td>
+<td align="left">10557</td>
+</tr>
+<tr class="even">
+<td align="left">a_b_orgnl_mdcr_benes</td>
+<td align="left">4501</td>
+</tr>
+<tr class="odd">
+<td align="left">a_b_ma_and_oth_benes</td>
+<td align="left">6057</td>
+</tr>
+<tr class="even">
+<td align="left">prscrptn_drug_tot_benes</td>
+<td align="left">7838</td>
+</tr>
+<tr class="odd">
+<td align="left">prscrptn_drug_pdp_benes</td>
+<td align="left">1931</td>
+</tr>
+<tr class="even">
+<td align="left">prscrptn_drug_mapd_benes</td>
+<td align="left">5907</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div class="section level3">
 <h3 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
 </h3>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exb</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -572,12 +434,81 @@
 <p><br></p>
 </div>
 <div class="section level3">
+<h3 id="medicare-opt-out-affidavits-api">Medicare Opt-Out Affidavits API<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits-api"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="left">2022-12-11</td>
+</tr>
+<tr class="even">
+<td align="left">last_updated</td>
+<td align="left">09/15/2022</td>
+</tr>
+<tr class="odd">
+<td align="left">first_name</td>
+<td align="left">Sheryl</td>
+</tr>
+<tr class="even">
+<td align="left">last_name</td>
+<td align="left">Aaron</td>
+</tr>
+<tr class="odd">
+<td align="left">npi</td>
+<td align="left">1427358282</td>
+</tr>
+<tr class="even">
+<td align="left">specialty</td>
+<td align="left">Clinical Social Worker</td>
+</tr>
+<tr class="odd">
+<td align="left">optout_effective_date</td>
+<td align="left">02/17/2022</td>
+</tr>
+<tr class="even">
+<td align="left">optout_end_date</td>
+<td align="left">02/17/2024</td>
+</tr>
+<tr class="odd">
+<td align="left">first_line_street_address</td>
+<td align="left">1633 Q ST NW</td>
+</tr>
+<tr class="even">
+<td align="left">second_line_street_address</td>
+<td align="left">STE 230</td>
+</tr>
+<tr class="odd">
+<td align="left">city_name</td>
+<td align="left">WASHINGTON</td>
+</tr>
+<tr class="even">
+<td align="left">state_code</td>
+<td align="left">DC</td>
+</tr>
+<tr class="odd">
+<td align="left">zip_code</td>
+<td align="left">200096351</td>
+</tr>
+<tr class="even">
+<td align="left">eligible_to_order_and_refer</td>
+<td align="left">N</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div class="section level3">
 <h3 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
 </h3>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cross_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span></span>
-<span>            specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="12%">
@@ -611,9 +542,8 @@
 <div class="section level3">
 <h3 id="medicare-revalidation-due-date-api">Medicare Revalidation Due Date API<a class="anchor" aria-label="anchor" href="#medicare-revalidation-due-date-api"></a>
 </h3>
-<p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">reval_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -621,62 +551,58 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">date</td>
-<td align="left">2022-12-02</td>
+<td align="left">month</td>
+<td align="left">2022-12-11</td>
 </tr>
 <tr class="even">
-<td align="left">data_version</td>
-<td align="left">Nov-2022</td>
-</tr>
-<tr class="odd">
 <td align="left">enrollment_id</td>
 <td align="left">I20040602001711</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">national_provider_identifier</td>
 <td align="left">1710912209</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">first_name</td>
 <td align="left">Yelena</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">last_name</td>
 <td align="left">Voronova</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">organization_name</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">enrollment_state_code</td>
 <td align="left">NY</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">enrollment_type</td>
 <td align="left">3</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">provider_type_text</td>
 <td align="left">Non-DME Part B</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">enrollment_specialty</td>
 <td align="left">Podiatry</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">revalidation_due_date</td>
 <td align="left">2019-10-31</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">adjusted_due_date</td>
 <td align="left"></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">individual_total_reassign_to</td>
 <td align="left"></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">receiving_benefits_reassignment</td>
 <td align="left">5</td>
 </tr>
@@ -687,8 +613,8 @@
 <div class="section level3">
 <h3 id="medicare-revalidation-clinic-group-practice-reassignment-api">Medicare Revalidation Clinic Group Practice Reassignment API<a class="anchor" aria-label="anchor" href="#medicare-revalidation-clinic-group-practice-reassignment-api"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">regroup_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -870,851 +796,147 @@
 <div class="section level3">
 <h3 id="cms-public-reporting-of-missing-digital-contact-information-api">CMS Public Reporting of Missing Digital Contact Information API<a class="anchor" aria-label="anchor" href="#cms-public-reporting-of-missing-digital-contact-information-api"></a>
 </h3>
-<p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exe</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/provider_promdci.html">provider_promdci</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">provider_name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1144224569</td>
-<td align="left">Clouse,John</td>
-</tr></tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="medicare-opt-out-affidavits-api">Medicare Opt-Out Affidavits API<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits-api"></a>
-</h3>
-<p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">opt_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">name</th>
-<th align="left">value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">date</td>
-<td align="left">2022-12-02</td>
-</tr>
-<tr class="even">
-<td align="left">last_updated</td>
-<td align="left">09/15/2022</td>
-</tr>
-<tr class="odd">
-<td align="left">first_name</td>
-<td align="left">Sheryl</td>
-</tr>
-<tr class="even">
-<td align="left">last_name</td>
-<td align="left">Aaron</td>
-</tr>
-<tr class="odd">
-<td align="left">npi</td>
-<td align="left">1427358282</td>
-</tr>
-<tr class="even">
-<td align="left">specialty</td>
-<td align="left">Clinical Social Worker</td>
-</tr>
-<tr class="odd">
-<td align="left">optout_effective_date</td>
-<td align="left">02/17/2022</td>
-</tr>
-<tr class="even">
-<td align="left">optout_end_date</td>
-<td align="left">02/17/2024</td>
-</tr>
-<tr class="odd">
-<td align="left">first_line_street_address</td>
-<td align="left">1633 Q ST NW</td>
-</tr>
-<tr class="even">
-<td align="left">second_line_street_address</td>
-<td align="left">STE 230</td>
-</tr>
-<tr class="odd">
-<td align="left">city_name</td>
-<td align="left">WASHINGTON</td>
-</tr>
-<tr class="even">
-<td align="left">state_code</td>
-<td align="left">DC</td>
-</tr>
-<tr class="odd">
-<td align="left">zip_code</td>
-<td align="left">200096351</td>
-</tr>
-<tr class="even">
-<td align="left">eligible_to_order_and_refer</td>
-<td align="left">N</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="medicare-monthly-enrollment-api">Medicare Monthly Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment-api"></a>
-</h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">bene_ex</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year      <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>                                            month     <span class="op">=</span> <span class="st">"Year"</span>, </span>
-<span>                                            geo_lvl   <span class="op">=</span> <span class="st">"County"</span>, </span>
-<span>                                            state_abb <span class="op">=</span> <span class="st">"AL"</span>, </span>
-<span>                                            county    <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">name</th>
-<th align="left">value</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">year</td>
-<td align="left">2018</td>
-</tr>
-<tr class="even">
-<td align="left">year_2</td>
-<td align="left">2018</td>
-</tr>
-<tr class="odd">
-<td align="left">month</td>
-<td align="left">Year</td>
-</tr>
-<tr class="even">
-<td align="left">bene_geo_lvl</td>
-<td align="left">County</td>
-</tr>
-<tr class="odd">
-<td align="left">bene_state_abrvtn</td>
-<td align="left">AL</td>
-</tr>
-<tr class="even">
-<td align="left">bene_state_desc</td>
-<td align="left">Alabama</td>
-</tr>
-<tr class="odd">
-<td align="left">bene_county_desc</td>
-<td align="left">Autauga</td>
-</tr>
-<tr class="even">
-<td align="left">bene_fips_cd</td>
-<td align="left">01001</td>
-</tr>
-<tr class="odd">
-<td align="left">tot_benes</td>
-<td align="left">10645</td>
-</tr>
-<tr class="even">
-<td align="left">orgnl_mdcr_benes</td>
-<td align="left">5700</td>
-</tr>
-<tr class="odd">
-<td align="left">ma_and_oth_benes</td>
-<td align="left">4945</td>
-</tr>
-<tr class="even">
-<td align="left">aged_tot_benes</td>
-<td align="left">8241</td>
-</tr>
-<tr class="odd">
-<td align="left">aged_esrd_benes</td>
-<td align="left">53</td>
-</tr>
-<tr class="even">
-<td align="left">aged_no_esrd_benes</td>
-<td align="left">8189</td>
-</tr>
-<tr class="odd">
-<td align="left">dsbld_tot_benes</td>
-<td align="left">2403</td>
-</tr>
-<tr class="even">
-<td align="left">dsbld_esrd_and_esrd_only_benes</td>
-<td align="left">50</td>
-</tr>
-<tr class="odd">
-<td align="left">dsbld_no_esrd_benes</td>
-<td align="left">2353</td>
-</tr>
-<tr class="even">
-<td align="left">a_b_tot_benes</td>
-<td align="left">9892</td>
-</tr>
-<tr class="odd">
-<td align="left">a_b_orgnl_mdcr_benes</td>
-<td align="left">4948</td>
-</tr>
-<tr class="even">
-<td align="left">a_b_ma_and_oth_benes</td>
-<td align="left">4944</td>
-</tr>
-<tr class="odd">
-<td align="left">prscrptn_drug_tot_benes</td>
-<td align="left">7088</td>
-</tr>
-<tr class="even">
-<td align="left">prscrptn_drug_pdp_benes</td>
-<td align="left">2260</td>
-</tr>
-<tr class="odd">
-<td align="left">prscrptn_drug_mapd_benes</td>
-<td align="left">4828</td>
-</tr>
-</tbody>
-</table>
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level3">
-<h3 id="medicare-physician--other-practitioners">Medicare Physician &amp; Other Practitioners<a class="anchor" aria-label="anchor" href="#medicare-physician--other-practitioners"></a>
+<h3 id="medicare-physician--other-practitioners-apis">Medicare Physician &amp; Other Practitioners APIs<a class="anchor" aria-label="anchor" href="#medicare-physician--other-practitioners-apis"></a>
 </h3>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>by Provider and Service API:</li>
+</ol>
+</blockquote>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">exg</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/provider_rcgpr.html">provider_rcgpr</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, </span>
+<span>      <span class="op">~</span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
 <colgroup>
-<col width="6%">
-<col width="10%">
-<col width="11%">
-<col width="11%">
-<col width="17%">
-<col width="21%">
+<col width="15%">
+<col width="7%">
+<col width="13%">
+<col width="13%">
 <col width="20%">
+<col width="16%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
-<th align="left">year</th>
-<th align="left">hcpcs_cd</th>
+<th align="left">npi</th>
+<th align="right">year</th>
 <th align="right">tot_benes</th>
 <th align="right">tot_srvcs</th>
 <th align="right">avg_sbmtd_chrg</th>
-<th align="right">avg_mdcr_alowd_amt</th>
-<th align="right">avg_mdcr_pymt_amt</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_pymt</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="left">2013</td>
-<td align="left">99222</td>
-<td align="right">138</td>
-<td align="right">142</td>
-<td align="right">368.6268</td>
-<td align="right">132.17007</td>
-<td align="right">104.29972</td>
+<td align="left">1003000126</td>
+<td align="right">2013</td>
+<td align="right">1112</td>
+<td align="right">1607</td>
+<td align="right">270.95</td>
+<td align="right">101.51</td>
+<td align="right">80.61</td>
 </tr>
 <tr class="even">
-<td align="left">2013</td>
-<td align="left">99223</td>
-<td align="right">95</td>
-<td align="right">96</td>
-<td align="right">524.6042</td>
-<td align="right">196.93240</td>
-<td align="right">155.90115</td>
+<td align="left">1003000126</td>
+<td align="right">2014</td>
+<td align="right">1748</td>
+<td align="right">2728</td>
+<td align="right">361.07</td>
+<td align="right">119.61</td>
+<td align="right">93.50</td>
 </tr>
 <tr class="odd">
-<td align="left">2013</td>
-<td align="left">99231</td>
-<td align="right">47</td>
-<td align="right">61</td>
-<td align="right">97.0000</td>
-<td align="right">37.68820</td>
-<td align="right">30.06525</td>
+<td align="left">1003000126</td>
+<td align="right">2015</td>
+<td align="right">1767</td>
+<td align="right">2751</td>
+<td align="right">365.43</td>
+<td align="right">114.19</td>
+<td align="right">89.82</td>
 </tr>
 <tr class="even">
-<td align="left">2013</td>
-<td align="left">99232</td>
-<td align="right">381</td>
-<td align="right">777</td>
-<td align="right">187.5946</td>
-<td align="right">69.43354</td>
-<td align="right">55.09135</td>
+<td align="left">1003000126</td>
+<td align="right">2016</td>
+<td align="right">1007</td>
+<td align="right">1450</td>
+<td align="right">587.63</td>
+<td align="right">121.90</td>
+<td align="right">96.25</td>
 </tr>
 <tr class="odd">
-<td align="left">2013</td>
-<td align="left">99233</td>
-<td align="right">106</td>
-<td align="right">170</td>
-<td align="right">271.9765</td>
-<td align="right">101.07035</td>
-<td align="right">80.64124</td>
+<td align="left">1003000126</td>
+<td align="right">2017</td>
+<td align="right">1088</td>
+<td align="right">1637</td>
+<td align="right">620.50</td>
+<td align="right">129.92</td>
+<td align="right">102.21</td>
 </tr>
 <tr class="even">
-<td align="left">2013</td>
-<td align="left">99238</td>
-<td align="right">208</td>
-<td align="right">219</td>
-<td align="right">201.0046</td>
-<td align="right">69.80708</td>
-<td align="right">55.65046</td>
+<td align="left">1003000126</td>
+<td align="right">2018</td>
+<td align="right">852</td>
+<td align="right">1192</td>
+<td align="right">676.98</td>
+<td align="right">124.04</td>
+<td align="right">98.62</td>
 </tr>
 <tr class="odd">
-<td align="left">2013</td>
-<td align="left">99239</td>
-<td align="right">137</td>
-<td align="right">142</td>
-<td align="right">245.8310</td>
-<td align="right">103.48056</td>
-<td align="right">82.63211</td>
+<td align="left">1003000126</td>
+<td align="right">2019</td>
+<td align="right">969</td>
+<td align="right">1367</td>
+<td align="right">420.85</td>
+<td align="right">126.46</td>
+<td align="right">100.82</td>
 </tr>
 <tr class="even">
-<td align="left">2014</td>
-<td align="left">99222</td>
-<td align="right">341</td>
-<td align="right">357</td>
-<td align="right">416.5462</td>
-<td align="right">137.74919</td>
-<td align="right">107.51787</td>
+<td align="left">1003000126</td>
+<td align="right">2020</td>
+<td align="right">488</td>
+<td align="right">738</td>
+<td align="right">631.54</td>
+<td align="right">118.24</td>
+<td align="right">94.48</td>
 </tr>
+</tbody>
+</table>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>by Geography and Service API:</li>
+</ol>
+</blockquote>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="13%">
+<col width="11%">
+<col width="12%">
+<col width="12%">
+<col width="13%">
+<col width="15%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">level</th>
+<th align="left">hcpcs_cd</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">avg_charge</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_pymt</th>
+</tr></thead>
+<tbody>
 <tr class="odd">
-<td align="left">2014</td>
-<td align="left">99223</td>
-<td align="right">98</td>
-<td align="right">98</td>
-<td align="right">611.0000</td>
-<td align="right">201.09684</td>
-<td align="right">152.55122</td>
-</tr>
-<tr class="even">
-<td align="left">2014</td>
-<td align="left">99231</td>
-<td align="right">65</td>
-<td align="right">104</td>
-<td align="right">119.0000</td>
-<td align="right">39.08673</td>
-<td align="right">30.83538</td>
-</tr>
-<tr class="odd">
-<td align="left">2014</td>
-<td align="left">99232</td>
-<td align="right">596</td>
-<td align="right">1418</td>
-<td align="right">217.0000</td>
-<td align="right">71.69861</td>
-<td align="right">56.29776</td>
-</tr>
-<tr class="even">
-<td align="left">2014</td>
-<td align="left">99233</td>
-<td align="right">104</td>
-<td align="right">175</td>
-<td align="right">312.0000</td>
-<td align="right">103.83000</td>
-<td align="right">82.39817</td>
-</tr>
-<tr class="odd">
-<td align="left">2014</td>
-<td align="left">99238</td>
-<td align="right">316</td>
-<td align="right">330</td>
-<td align="right">217.0000</td>
-<td align="right">72.37955</td>
-<td align="right">55.68124</td>
-</tr>
-<tr class="even">
-<td align="left">2014</td>
-<td align="left">99239</td>
-<td align="right">215</td>
-<td align="right">223</td>
-<td align="right">322.0000</td>
-<td align="right">106.37072</td>
-<td align="right">83.70637</td>
-</tr>
-<tr class="odd">
-<td align="left">2014</td>
-<td align="left">99291</td>
-<td align="right">13</td>
-<td align="right">23</td>
-<td align="right">674.0000</td>
-<td align="right">224.66000</td>
-<td align="right">179.00000</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99217</td>
-<td align="right">23</td>
-<td align="right">23</td>
-<td align="right">328.0000</td>
-<td align="right">71.57043</td>
-<td align="right">54.50261</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">99219</td>
-<td align="right">18</td>
-<td align="right">18</td>
-<td align="right">614.0000</td>
-<td align="right">133.79333</td>
-<td align="right">100.95889</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99221</td>
-<td align="right">58</td>
-<td align="right">59</td>
-<td align="right">333.2881</td>
-<td align="right">99.74085</td>
-<td align="right">79.46966</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">99222</td>
-<td align="right">130</td>
-<td align="right">132</td>
-<td align="right">356.4924</td>
-<td align="right">136.80970</td>
-<td align="right">107.93341</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99223</td>
-<td align="right">215</td>
-<td align="right">220</td>
-<td align="right">631.1864</td>
-<td align="right">199.45268</td>
-<td align="right">157.90895</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">99231</td>
-<td align="right">18</td>
-<td align="right">38</td>
-<td align="right">100.8421</td>
-<td align="right">38.92474</td>
-<td align="right">31.01579</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99232</td>
-<td align="right">481</td>
-<td align="right">1117</td>
-<td align="right">200.9320</td>
-<td align="right">71.87013</td>
-<td align="right">56.31386</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">99233</td>
-<td align="right">286</td>
-<td align="right">580</td>
-<td align="right">301.9810</td>
-<td align="right">101.51336</td>
-<td align="right">80.92938</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99238</td>
-<td align="right">172</td>
-<td align="right">175</td>
-<td align="right">210.8800</td>
-<td align="right">72.46834</td>
-<td align="right">57.07949</td>
-</tr>
-<tr class="odd">
-<td align="left">2015</td>
-<td align="left">99239</td>
-<td align="right">353</td>
-<td align="right">368</td>
-<td align="right">308.3016</td>
-<td align="right">106.55685</td>
-<td align="right">83.94720</td>
-</tr>
-<tr class="even">
-<td align="left">2015</td>
-<td align="left">99291</td>
-<td align="right">13</td>
-<td align="right">21</td>
-<td align="right">633.8095</td>
-<td align="right">223.42190</td>
-<td align="right">178.01190</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99217</td>
-<td align="right">55</td>
-<td align="right">57</td>
-<td align="right">325.1579</td>
-<td align="right">70.79825</td>
-<td align="right">54.47439</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99219</td>
-<td align="right">38</td>
-<td align="right">38</td>
-<td align="right">614.0000</td>
-<td align="right">132.85000</td>
-<td align="right">105.85000</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99220</td>
-<td align="right">23</td>
-<td align="right">23</td>
-<td align="right">769.3478</td>
-<td align="right">186.25913</td>
-<td align="right">146.11652</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99221</td>
-<td align="right">20</td>
-<td align="right">20</td>
-<td align="right">460.0000</td>
-<td align="right">99.14000</td>
-<td align="right">78.99000</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99222</td>
-<td align="right">87</td>
-<td align="right">96</td>
-<td align="right">625.0000</td>
-<td align="right">134.09740</td>
-<td align="right">105.47760</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99223</td>
-<td align="right">141</td>
-<td align="right">148</td>
-<td align="right">920.6149</td>
-<td align="right">200.54466</td>
-<td align="right">159.08345</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99225</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">328.0000</td>
-<td align="right">71.32000</td>
-<td align="right">56.82000</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99232</td>
-<td align="right">270</td>
-<td align="right">596</td>
-<td align="right">326.4866</td>
-<td align="right">70.71562</td>
-<td align="right">56.21099</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99233</td>
-<td align="right">85</td>
-<td align="right">117</td>
-<td align="right">470.0000</td>
-<td align="right">101.88538</td>
-<td align="right">80.90932</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99238</td>
-<td align="right">20</td>
-<td align="right">20</td>
-<td align="right">328.0000</td>
-<td align="right">71.04550</td>
-<td align="right">52.83150</td>
-</tr>
-<tr class="odd">
-<td align="left">2016</td>
-<td align="left">99239</td>
-<td align="right">231</td>
-<td align="right">271</td>
-<td align="right">485.0000</td>
-<td align="right">105.05000</td>
-<td align="right">83.70000</td>
-</tr>
-<tr class="even">
-<td align="left">2016</td>
-<td align="left">99291</td>
-<td align="right">26</td>
-<td align="right">53</td>
-<td align="right">1400.0000</td>
-<td align="right">219.04000</td>
-<td align="right">174.52000</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99217</td>
-<td align="right">96</td>
-<td align="right">100</td>
-<td align="right">325.7800</td>
-<td align="right">71.96390</td>
-<td align="right">56.82720</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="left">99218</td>
-<td align="right">25</td>
-<td align="right">26</td>
-<td align="right">449.0000</td>
-<td align="right">98.48000</td>
-<td align="right">78.46000</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99219</td>
-<td align="right">51</td>
-<td align="right">52</td>
-<td align="right">614.0000</td>
-<td align="right">134.28385</td>
-<td align="right">102.80769</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="left">99220</td>
-<td align="right">59</td>
-<td align="right">59</td>
-<td align="right">755.9322</td>
-<td align="right">184.32203</td>
-<td align="right">141.29356</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99221</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">462.8125</td>
-<td align="right">100.05000</td>
-<td align="right">79.71000</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="left">99222</td>
-<td align="right">57</td>
-<td align="right">59</td>
-<td align="right">625.0000</td>
-<td align="right">135.14729</td>
-<td align="right">105.82542</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99223</td>
-<td align="right">110</td>
-<td align="right">114</td>
-<td align="right">923.9912</td>
-<td align="right">202.79219</td>
-<td align="right">160.37719</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="left">99232</td>
-<td align="right">233</td>
-<td align="right">627</td>
-<td align="right">326.2456</td>
-<td align="right">71.24051</td>
-<td align="right">56.36673</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99233</td>
-<td align="right">127</td>
-<td align="right">207</td>
-<td align="right">461.0725</td>
-<td align="right">103.94768</td>
-<td align="right">82.82068</td>
-</tr>
-<tr class="even">
-<td align="left">2017</td>
-<td align="left">99239</td>
-<td align="right">291</td>
-<td align="right">341</td>
-<td align="right">481.6862</td>
-<td align="right">106.32874</td>
-<td align="right">84.05616</td>
-</tr>
-<tr class="odd">
-<td align="left">2017</td>
-<td align="left">99291</td>
-<td align="right">23</td>
-<td align="right">36</td>
-<td align="right">1400.0000</td>
-<td align="right">220.58000</td>
-<td align="right">175.75000</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99217</td>
-<td align="right">67</td>
-<td align="right">68</td>
-<td align="right">381.3088</td>
-<td align="right">72.64103</td>
-<td align="right">57.88029</td>
-</tr>
-<tr class="odd">
-<td align="left">2018</td>
-<td align="left">99218</td>
-<td align="right">19</td>
-<td align="right">19</td>
-<td align="right">476.9474</td>
-<td align="right">99.31158</td>
-<td align="right">76.79526</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99220</td>
-<td align="right">26</td>
-<td align="right">26</td>
-<td align="right">1086.9231</td>
-<td align="right">185.10154</td>
-<td align="right">147.47923</td>
-</tr>
-<tr class="odd">
-<td align="left">2018</td>
-<td align="left">99221</td>
-<td align="right">24</td>
-<td align="right">24</td>
-<td align="right">474.5833</td>
-<td align="right">100.60125</td>
-<td align="right">80.15500</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99222</td>
-<td align="right">17</td>
-<td align="right">17</td>
-<td align="right">625.0000</td>
-<td align="right">135.83647</td>
-<td align="right">108.22529</td>
-</tr>
-<tr class="odd">
-<td align="left">2018</td>
-<td align="left">99223</td>
-<td align="right">82</td>
-<td align="right">86</td>
-<td align="right">1093.5000</td>
-<td align="right">199.75721</td>
-<td align="right">159.25907</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99232</td>
-<td align="right">206</td>
-<td align="right">360</td>
-<td align="right">360.5722</td>
-<td align="right">72.38542</td>
-<td align="right">57.67031</td>
-</tr>
-<tr class="odd">
-<td align="left">2018</td>
-<td align="left">99233</td>
-<td align="right">148</td>
-<td align="right">284</td>
-<td align="right">576.9894</td>
-<td align="right">103.66095</td>
-<td align="right">82.51299</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99238</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">415.3125</td>
-<td align="right">72.66688</td>
-<td align="right">57.90125</td>
-</tr>
-<tr class="odd">
-<td align="left">2018</td>
-<td align="left">99239</td>
-<td align="right">217</td>
-<td align="right">250</td>
-<td align="right">555.6400</td>
-<td align="right">106.73396</td>
-<td align="right">85.03664</td>
-</tr>
-<tr class="even">
-<td align="left">2018</td>
-<td align="left">99291</td>
-<td align="right">30</td>
-<td align="right">42</td>
-<td align="right">1400.0000</td>
-<td align="right">215.74119</td>
-<td align="right">171.89333</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">99217</td>
-<td align="right">40</td>
-<td align="right">40</td>
-<td align="right">232.2750</td>
-<td align="right">72.59000</td>
-<td align="right">57.87000</td>
-</tr>
-<tr class="even">
-<td align="left">2019</td>
-<td align="left">99220</td>
-<td align="right">25</td>
-<td align="right">25</td>
-<td align="right">712.8000</td>
-<td align="right">186.72520</td>
-<td align="right">148.85160</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">99221</td>
-<td align="right">24</td>
-<td align="right">24</td>
-<td align="right">320.1667</td>
-<td align="right">101.12125</td>
-<td align="right">80.61583</td>
-</tr>
-<tr class="even">
-<td align="left">2019</td>
-<td align="left">99223</td>
-<td align="right">157</td>
-<td align="right">158</td>
-<td align="right">651.4177</td>
-<td align="right">200.93000</td>
-<td align="right">160.19000</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">99232</td>
-<td align="right">117</td>
-<td align="right">205</td>
-<td align="right">245.6146</td>
-<td align="right">72.75639</td>
-<td align="right">58.00556</td>
-</tr>
-<tr class="even">
-<td align="left">2019</td>
-<td align="left">99233</td>
-<td align="right">306</td>
-<td align="right">605</td>
-<td align="right">345.2364</td>
-<td align="right">103.58820</td>
-<td align="right">82.58817</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">99238</td>
-<td align="right">39</td>
-<td align="right">40</td>
-<td align="right">229.4750</td>
-<td align="right">72.59000</td>
-<td align="right">57.87000</td>
-</tr>
-<tr class="even">
-<td align="left">2019</td>
-<td align="left">99239</td>
-<td align="right">240</td>
-<td align="right">243</td>
-<td align="right">349.2593</td>
-<td align="right">106.54309</td>
-<td align="right">84.96992</td>
-</tr>
-<tr class="odd">
-<td align="left">2019</td>
-<td align="left">99291</td>
-<td align="right">21</td>
-<td align="right">27</td>
-<td align="right">701.4444</td>
-<td align="right">221.27000</td>
-<td align="right">176.40000</td>
-</tr>
-<tr class="even">
-<td align="left">2020</td>
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99217</td>
 <td align="right">23</td>
 <td align="right">23</td>
@@ -1722,8 +944,9 @@
 <td align="right">76.80391</td>
 <td align="right">61.40174</td>
 </tr>
-<tr class="odd">
-<td align="left">2020</td>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99218</td>
 <td align="right">16</td>
 <td align="right">16</td>
@@ -1731,8 +954,9 @@
 <td align="right">108.24938</td>
 <td align="right">85.08125</td>
 </tr>
-<tr class="even">
-<td align="left">2020</td>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99220</td>
 <td align="right">16</td>
 <td align="right">16</td>
@@ -1740,8 +964,9 @@
 <td align="right">191.96062</td>
 <td align="right">152.37688</td>
 </tr>
-<tr class="odd">
-<td align="left">2020</td>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99221</td>
 <td align="right">12</td>
 <td align="right">12</td>
@@ -1749,8 +974,9 @@
 <td align="right">110.04750</td>
 <td align="right">82.23750</td>
 </tr>
-<tr class="even">
-<td align="left">2020</td>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99223</td>
 <td align="right">52</td>
 <td align="right">52</td>
@@ -1758,8 +984,9 @@
 <td align="right">209.42385</td>
 <td align="right">170.83462</td>
 </tr>
-<tr class="odd">
-<td align="left">2020</td>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99232</td>
 <td align="right">57</td>
 <td align="right">134</td>
@@ -1767,8 +994,9 @@
 <td align="right">73.45470</td>
 <td align="right">57.95582</td>
 </tr>
-<tr class="even">
-<td align="left">2020</td>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99233</td>
 <td align="right">154</td>
 <td align="right">326</td>
@@ -1776,8 +1004,9 @@
 <td align="right">108.84687</td>
 <td align="right">88.94589</td>
 </tr>
-<tr class="odd">
-<td align="left">2020</td>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99238</td>
 <td align="right">13</td>
 <td align="right">13</td>
@@ -1785,8 +1014,9 @@
 <td align="right">74.15769</td>
 <td align="right">60.53308</td>
 </tr>
-<tr class="even">
-<td align="left">2020</td>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Individual</td>
 <td align="left">99239</td>
 <td align="right">145</td>
 <td align="right">146</td>
@@ -1796,18 +1026,255 @@
 </tr>
 </tbody>
 </table>
-<blockquote>
-<ol start="2" style="list-style-type: decimal">
-<li>by Geography and Service API:</li>
-</ol>
-</blockquote>
-<p><br></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, </span>
+<span>               <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_level <span class="op">=</span> <span class="st">"National"</span>, </span>
+<span>                                       year <span class="op">=</span> <span class="fl">2020</span>, </span>
+<span>                                       hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="7%">
+<col width="11%">
+<col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="14%">
+<col width="15%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">level</th>
+<th align="left">hcpcs_cd</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">avg_charge</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99217</td>
+<td align="right">960315</td>
+<td align="right">1083287</td>
+<td align="right">226.5243</td>
+<td align="right">71.85383</td>
+<td align="right">56.39061</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99218</td>
+<td align="right">107097</td>
+<td align="right">113741</td>
+<td align="right">279.0389</td>
+<td align="right">99.76702</td>
+<td align="right">77.72797</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99220</td>
+<td align="right">1057367</td>
+<td align="right">1251727</td>
+<td align="right">602.4899</td>
+<td align="right">184.34005</td>
+<td align="right">144.10759</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99221</td>
+<td align="right">1095114</td>
+<td align="right">1469013</td>
+<td align="right">262.3614</td>
+<td align="right">101.74503</td>
+<td align="right">79.93905</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99223</td>
+<td align="right">3820713</td>
+<td align="right">9472774</td>
+<td align="right">502.2729</td>
+<td align="right">204.68211</td>
+<td align="right">161.39257</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99232</td>
+<td align="right">3982972</td>
+<td align="right">39627779</td>
+<td align="right">175.3005</td>
+<td align="right">72.96044</td>
+<td align="right">58.10423</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99233</td>
+<td align="right">3338934</td>
+<td align="right">24561011</td>
+<td align="right">282.3940</td>
+<td align="right">105.81724</td>
+<td align="right">84.56269</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99238</td>
+<td align="right">1561729</td>
+<td align="right">1996528</td>
+<td align="right">188.4993</td>
+<td align="right">73.12491</td>
+<td align="right">57.87497</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">National</td>
+<td align="left">99239</td>
+<td align="right">3093233</td>
+<td align="right">4564152</td>
+<td align="right">310.6096</td>
+<td align="right">107.56667</td>
+<td align="right">85.47697</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">hcpcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, </span>
+<span>               <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_desc <span class="op">=</span> <span class="st">"Maryland"</span>, </span>
+<span>                                       year <span class="op">=</span> <span class="fl">2020</span>, </span>
+<span>                                       hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="7%">
+<col width="11%">
+<col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="14%">
+<col width="15%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">level</th>
+<th align="left">hcpcs_cd</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">avg_charge</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99217</td>
+<td align="right">31433</td>
+<td align="right">35505</td>
+<td align="right">300.8633</td>
+<td align="right">73.32784</td>
+<td align="right">57.82643</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99218</td>
+<td align="right">3847</td>
+<td align="right">4042</td>
+<td align="right">377.2237</td>
+<td align="right">102.47521</td>
+<td align="right">80.32934</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99220</td>
+<td align="right">41984</td>
+<td align="right">49557</td>
+<td align="right">761.2434</td>
+<td align="right">188.95922</td>
+<td align="right">147.87499</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99221</td>
+<td align="right">26136</td>
+<td align="right">32153</td>
+<td align="right">269.1815</td>
+<td align="right">106.16173</td>
+<td align="right">83.30873</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99223</td>
+<td align="right">98672</td>
+<td align="right">183066</td>
+<td align="right">556.9738</td>
+<td align="right">211.89818</td>
+<td align="right">166.53387</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99232</td>
+<td align="right">104865</td>
+<td align="right">634904</td>
+<td align="right">176.7973</td>
+<td align="right">75.67333</td>
+<td align="right">60.11680</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99233</td>
+<td align="right">102804</td>
+<td align="right">508985</td>
+<td align="right">338.0418</td>
+<td align="right">109.47410</td>
+<td align="right">87.22652</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99238</td>
+<td align="right">19248</td>
+<td align="right">21567</td>
+<td align="right">207.3356</td>
+<td align="right">76.11991</td>
+<td align="right">60.27566</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="left">Maryland</td>
+<td align="left">99239</td>
+<td align="right">77391</td>
+<td align="right">99591</td>
+<td align="right">367.9219</td>
+<td align="right">111.66222</td>
+<td align="right">88.69363</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <ol start="3" style="list-style-type: decimal">
 <li>by Provider API:</li>
 </ol>
 </blockquote>
-<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></code></pre></div>
 <hr>
 </div>
 </div>
