@@ -71,66 +71,19 @@ remotes::install_github("andrewallenbruce/provider")
 # Load library
 library(provider)
 
-npi_ex <- provider::nppes_npi(npi = 1083879860)
+provider::nppes_npi(npi = 1083879860)
+#> # A tibble: 1 × 3
+#>   datetime            outcome data_lists   
+#>   <dttm>              <chr>   <list>       
+#> 1 2022-12-11 04:19:53 results <df [1 × 11]>
 ```
-
-| name                    | value                                | group      |
-|:------------------------|:-------------------------------------|:-----------|
-| npi                     | 1083879860                           | basic      |
-| enum_type               | NPI-1                                | basic      |
-| first_name              | CHRISTOPHER                          | basic      |
-| last_name               | AARON                                | basic      |
-| sole_proprietor         | NO                                   | basic      |
-| gender                  | M                                    | basic      |
-| enumeration_date        | 2008-07-22                           | basic      |
-| last_updated            | 2021-03-25                           | basic      |
-| certification_date      | 2020-05-01                           | basic      |
-| status                  | A                                    | basic      |
-| country_code            | US                                   | addresses  |
-| country_name            | United States                        | addresses  |
-| address_purpose         | LOCATION                             | addresses  |
-| address_type            | DOM                                  | addresses  |
-| address_1               | 792 GALLITZIN RD                     | addresses  |
-| city                    | CRESSON                              | addresses  |
-| state                   | PA                                   | addresses  |
-| postal_code             | 166302213                            | addresses  |
-| telephone_number        | 814-886-8161                         | addresses  |
-| country_code            | US                                   | addresses  |
-| country_name            | United States                        | addresses  |
-| address_purpose         | MAILING                              | addresses  |
-| address_type            | DOM                                  | addresses  |
-| address_1               | 10 CASTLE GARDEN CT                  | addresses  |
-| city                    | OLNEY                                | addresses  |
-| state                   | MD                                   | addresses  |
-| postal_code             | 208321443                            | addresses  |
-| telephone_number        | NA                                   | addresses  |
-| code                    | 207Q00000X                           | taxonomies |
-| desc                    | Family Medicine                      | taxonomies |
-| state                   | PA                                   | taxonomies |
-| license                 | OS019703                             | taxonomies |
-| primary                 | TRUE                                 | taxonomies |
-| endpointType            | DIRECT                               | endpoints  |
-| endpointTypeDescription | Direct Messaging Address             | endpoints  |
-| endpoint                | <christopher.l.aaron@upmcdirect.com> | endpoints  |
-| affiliation             | Y                                    | endpoints  |
-| affiliationName         | UPMC                                 | endpoints  |
-| country_code            | US                                   | endpoints  |
-| country_name            | United States                        | endpoints  |
-| address_type            | DOM                                  | endpoints  |
-| address_1               | 600 Grant St                         | endpoints  |
-| address_2               | Floor 58                             | endpoints  |
-| city                    | Pittsburgh                           | endpoints  |
-| state                   | PA                                   | endpoints  |
-| postal_code             | 152192702                            | endpoints  |
 
 <br>
 
 ### Medicare Fee-For-Service Public Provider Enrollment API
 
-<br>
-
 ``` r
-exa <- provider::provider_mppe(npi = 1083879860)
+provider::provider_enrollment(npi = 1083879860)
 ```
 
 | name               | value                          |
@@ -149,12 +102,44 @@ exa <- provider::provider_mppe(npi = 1083879860)
 
 <br>
 
-### Medicare Order and Referring API
+### Medicare Monthly Enrollment API
+
+``` r
+provider::beneficiary_enrollment(year = 2021, month = "Year", 
+  geo_level = "County", state_abb = "AL", county = "Autauga")
+```
+
+| name                           | value   |
+|:-------------------------------|:--------|
+| year                           | 2021    |
+| month                          | Year    |
+| bene_geo_lvl                   | County  |
+| bene_state_abrvtn              | AL      |
+| bene_state_desc                | Alabama |
+| bene_county_desc               | Autauga |
+| bene_fips_cd                   | 01001   |
+| tot_benes                      | 11398   |
+| orgnl_mdcr_benes               | 5339    |
+| ma_and_oth_benes               | 6059    |
+| aged_tot_benes                 | 9031    |
+| aged_esrd_benes                | 56      |
+| aged_no_esrd_benes             | 8975    |
+| dsbld_tot_benes                | 2367    |
+| dsbld_esrd_and_esrd_only_benes | 49      |
+| dsbld_no_esrd_benes            | 2318    |
+| a_b\_tot_benes                 | 10557   |
+| a_b\_orgnl_mdcr_benes          | 4501    |
+| a_b\_ma_and_oth_benes          | 6057    |
+| prscrptn_drug_tot_benes        | 7838    |
+| prscrptn_drug_pdp_benes        | 1931    |
+| prscrptn_drug_mapd_benes       | 5907    |
 
 <br>
 
+### Medicare Order and Referring API
+
 ``` r
-exb <- provider::order_refer(npi = 1083879860)
+provider::order_refer(npi = 1083879860)
 ```
 
 | name       | value       |
@@ -169,13 +154,35 @@ exb <- provider::order_refer(npi = 1083879860)
 
 <br>
 
-### Medicare Provider and Supplier Taxonomy Crosswalk API
+### Medicare Opt-Out Affidavits API
+
+``` r
+provider::opt_out(last = "Aaron")
+```
+
+| name                        | value                  |
+|:----------------------------|:-----------------------|
+| date                        | 2022-12-11             |
+| last_updated                | 09/15/2022             |
+| first_name                  | Sheryl                 |
+| last_name                   | Aaron                  |
+| npi                         | 1427358282             |
+| specialty                   | Clinical Social Worker |
+| optout_effective_date       | 02/17/2022             |
+| optout_end_date             | 02/17/2024             |
+| first_line_street_address   | 1633 Q ST NW           |
+| second_line_street_address  | STE 230                |
+| city_name                   | WASHINGTON             |
+| state_code                  | DC                     |
+| zip_code                    | 200096351              |
+| eligible_to_order_and_refer | N                      |
 
 <br>
 
+### Medicare Provider and Supplier Taxonomy Crosswalk API
+
 ``` r
-cross_ex <- provider::taxonomy_crosswalk(
-            specialty_desc = "Rehabilitation Agency")
+provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 ```
 
 | specialty_code | specialty_description | provider_taxonomy_code | provider_taxonomy_desc                                         |
@@ -187,16 +194,13 @@ cross_ex <- provider::taxonomy_crosswalk(
 
 ### Medicare Revalidation Due Date API
 
-<br>
-
 ``` r
-reval_ex <- provider::revalidation_date(npi = 1710912209)
+provider::revalidation_date(npi = 1710912209)
 ```
 
 | name                            | value           |
 |:--------------------------------|:----------------|
-| date                            | 2022-12-02      |
-| data_version                    | Nov-2022        |
+| month                           | 2022-12-11      |
 | enrollment_id                   | I20040602001711 |
 | national_provider_identifier    | 1710912209      |
 | first_name                      | Yelena          |
@@ -216,7 +220,7 @@ reval_ex <- provider::revalidation_date(npi = 1710912209)
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
 ``` r
-regroup_ex <- provider::revalidation_group(ind_npi = 1710912209)
+provider::revalidation_group(ind_npi = 1710912209)
 ```
 
 | name                                   | value           |
@@ -268,175 +272,97 @@ regroup_ex <- provider::revalidation_group(ind_npi = 1710912209)
 
 ### CMS Public Reporting of Missing Digital Contact Information API
 
-<br>
-
 ``` r
-exe <- provider::provider_promdci(npi = 1144224569)
+provider::missing_information(npi = 1144224569)
 ```
-
-| npi        | provider_name |
-|:-----------|:--------------|
-| 1144224569 | Clouse,John   |
 
 <br>
 
-### Medicare Opt-Out Affidavits API
+### Medicare Physician & Other Practitioners APIs
 
-<br>
-
-``` r
-opt_ex <- provider::opt_out(last = "Aaron")
-```
-
-| name                        | value                  |
-|:----------------------------|:-----------------------|
-| date                        | 2022-12-02             |
-| last_updated                | 09/15/2022             |
-| first_name                  | Sheryl                 |
-| last_name                   | Aaron                  |
-| npi                         | 1427358282             |
-| specialty                   | Clinical Social Worker |
-| optout_effective_date       | 02/17/2022             |
-| optout_end_date             | 02/17/2024             |
-| first_line_street_address   | 1633 Q ST NW           |
-| second_line_street_address  | STE 230                |
-| city_name                   | WASHINGTON             |
-| state_code                  | DC                     |
-| zip_code                    | 200096351              |
-| eligible_to_order_and_refer | N                      |
-
-<br>
-
-### Medicare Monthly Enrollment API
+> 1.  by Provider and Service API:
 
 ``` r
-bene_ex <- provider::beneficiary_enrollment(year      = 2018, 
-                                            month     = "Year", 
-                                            geo_lvl   = "County", 
-                                            state_abb = "AL", 
-                                            county    = "Autauga")
+purrr::map_dfr(2013:2020, 
+      ~physician_by_service(npi = 1003000126, year = .x))
 ```
 
-| name                           | value   |
-|:-------------------------------|:--------|
-| year                           | 2018    |
-| year_2                         | 2018    |
-| month                          | Year    |
-| bene_geo_lvl                   | County  |
-| bene_state_abrvtn              | AL      |
-| bene_state_desc                | Alabama |
-| bene_county_desc               | Autauga |
-| bene_fips_cd                   | 01001   |
-| tot_benes                      | 10645   |
-| orgnl_mdcr_benes               | 5700    |
-| ma_and_oth_benes               | 4945    |
-| aged_tot_benes                 | 8241    |
-| aged_esrd_benes                | 53      |
-| aged_no_esrd_benes             | 8189    |
-| dsbld_tot_benes                | 2403    |
-| dsbld_esrd_and_esrd_only_benes | 50      |
-| dsbld_no_esrd_benes            | 2353    |
-| a_b\_tot_benes                 | 9892    |
-| a_b\_orgnl_mdcr_benes          | 4948    |
-| a_b\_ma_and_oth_benes          | 4944    |
-| prscrptn_drug_tot_benes        | 7088    |
-| prscrptn_drug_pdp_benes        | 2260    |
-| prscrptn_drug_mapd_benes       | 4828    |
-
-### Medicare Physician & Other Practitioners
-
-``` r
-exg <- provider::provider_rcgpr(npi = 1083879860)
-```
-
-| year | hcpcs_cd | tot_benes | tot_srvcs | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
-|:-----|:---------|----------:|----------:|---------------:|-------------------:|------------------:|
-| 2013 | 99222    |       138 |       142 |       368.6268 |          132.17007 |         104.29972 |
-| 2013 | 99223    |        95 |        96 |       524.6042 |          196.93240 |         155.90115 |
-| 2013 | 99231    |        47 |        61 |        97.0000 |           37.68820 |          30.06525 |
-| 2013 | 99232    |       381 |       777 |       187.5946 |           69.43354 |          55.09135 |
-| 2013 | 99233    |       106 |       170 |       271.9765 |          101.07035 |          80.64124 |
-| 2013 | 99238    |       208 |       219 |       201.0046 |           69.80708 |          55.65046 |
-| 2013 | 99239    |       137 |       142 |       245.8310 |          103.48056 |          82.63211 |
-| 2014 | 99222    |       341 |       357 |       416.5462 |          137.74919 |         107.51787 |
-| 2014 | 99223    |        98 |        98 |       611.0000 |          201.09684 |         152.55122 |
-| 2014 | 99231    |        65 |       104 |       119.0000 |           39.08673 |          30.83538 |
-| 2014 | 99232    |       596 |      1418 |       217.0000 |           71.69861 |          56.29776 |
-| 2014 | 99233    |       104 |       175 |       312.0000 |          103.83000 |          82.39817 |
-| 2014 | 99238    |       316 |       330 |       217.0000 |           72.37955 |          55.68124 |
-| 2014 | 99239    |       215 |       223 |       322.0000 |          106.37072 |          83.70637 |
-| 2014 | 99291    |        13 |        23 |       674.0000 |          224.66000 |         179.00000 |
-| 2015 | 99217    |        23 |        23 |       328.0000 |           71.57043 |          54.50261 |
-| 2015 | 99219    |        18 |        18 |       614.0000 |          133.79333 |         100.95889 |
-| 2015 | 99221    |        58 |        59 |       333.2881 |           99.74085 |          79.46966 |
-| 2015 | 99222    |       130 |       132 |       356.4924 |          136.80970 |         107.93341 |
-| 2015 | 99223    |       215 |       220 |       631.1864 |          199.45268 |         157.90895 |
-| 2015 | 99231    |        18 |        38 |       100.8421 |           38.92474 |          31.01579 |
-| 2015 | 99232    |       481 |      1117 |       200.9320 |           71.87013 |          56.31386 |
-| 2015 | 99233    |       286 |       580 |       301.9810 |          101.51336 |          80.92938 |
-| 2015 | 99238    |       172 |       175 |       210.8800 |           72.46834 |          57.07949 |
-| 2015 | 99239    |       353 |       368 |       308.3016 |          106.55685 |          83.94720 |
-| 2015 | 99291    |        13 |        21 |       633.8095 |          223.42190 |         178.01190 |
-| 2016 | 99217    |        55 |        57 |       325.1579 |           70.79825 |          54.47439 |
-| 2016 | 99219    |        38 |        38 |       614.0000 |          132.85000 |         105.85000 |
-| 2016 | 99220    |        23 |        23 |       769.3478 |          186.25913 |         146.11652 |
-| 2016 | 99221    |        20 |        20 |       460.0000 |           99.14000 |          78.99000 |
-| 2016 | 99222    |        87 |        96 |       625.0000 |          134.09740 |         105.47760 |
-| 2016 | 99223    |       141 |       148 |       920.6149 |          200.54466 |         159.08345 |
-| 2016 | 99225    |        11 |        11 |       328.0000 |           71.32000 |          56.82000 |
-| 2016 | 99232    |       270 |       596 |       326.4866 |           70.71562 |          56.21099 |
-| 2016 | 99233    |        85 |       117 |       470.0000 |          101.88538 |          80.90932 |
-| 2016 | 99238    |        20 |        20 |       328.0000 |           71.04550 |          52.83150 |
-| 2016 | 99239    |       231 |       271 |       485.0000 |          105.05000 |          83.70000 |
-| 2016 | 99291    |        26 |        53 |      1400.0000 |          219.04000 |         174.52000 |
-| 2017 | 99217    |        96 |       100 |       325.7800 |           71.96390 |          56.82720 |
-| 2017 | 99218    |        25 |        26 |       449.0000 |           98.48000 |          78.46000 |
-| 2017 | 99219    |        51 |        52 |       614.0000 |          134.28385 |         102.80769 |
-| 2017 | 99220    |        59 |        59 |       755.9322 |          184.32203 |         141.29356 |
-| 2017 | 99221    |        16 |        16 |       462.8125 |          100.05000 |          79.71000 |
-| 2017 | 99222    |        57 |        59 |       625.0000 |          135.14729 |         105.82542 |
-| 2017 | 99223    |       110 |       114 |       923.9912 |          202.79219 |         160.37719 |
-| 2017 | 99232    |       233 |       627 |       326.2456 |           71.24051 |          56.36673 |
-| 2017 | 99233    |       127 |       207 |       461.0725 |          103.94768 |          82.82068 |
-| 2017 | 99239    |       291 |       341 |       481.6862 |          106.32874 |          84.05616 |
-| 2017 | 99291    |        23 |        36 |      1400.0000 |          220.58000 |         175.75000 |
-| 2018 | 99217    |        67 |        68 |       381.3088 |           72.64103 |          57.88029 |
-| 2018 | 99218    |        19 |        19 |       476.9474 |           99.31158 |          76.79526 |
-| 2018 | 99220    |        26 |        26 |      1086.9231 |          185.10154 |         147.47923 |
-| 2018 | 99221    |        24 |        24 |       474.5833 |          100.60125 |          80.15500 |
-| 2018 | 99222    |        17 |        17 |       625.0000 |          135.83647 |         108.22529 |
-| 2018 | 99223    |        82 |        86 |      1093.5000 |          199.75721 |         159.25907 |
-| 2018 | 99232    |       206 |       360 |       360.5722 |           72.38542 |          57.67031 |
-| 2018 | 99233    |       148 |       284 |       576.9894 |          103.66095 |          82.51299 |
-| 2018 | 99238    |        16 |        16 |       415.3125 |           72.66688 |          57.90125 |
-| 2018 | 99239    |       217 |       250 |       555.6400 |          106.73396 |          85.03664 |
-| 2018 | 99291    |        30 |        42 |      1400.0000 |          215.74119 |         171.89333 |
-| 2019 | 99217    |        40 |        40 |       232.2750 |           72.59000 |          57.87000 |
-| 2019 | 99220    |        25 |        25 |       712.8000 |          186.72520 |         148.85160 |
-| 2019 | 99221    |        24 |        24 |       320.1667 |          101.12125 |          80.61583 |
-| 2019 | 99223    |       157 |       158 |       651.4177 |          200.93000 |         160.19000 |
-| 2019 | 99232    |       117 |       205 |       245.6146 |           72.75639 |          58.00556 |
-| 2019 | 99233    |       306 |       605 |       345.2364 |          103.58820 |          82.58817 |
-| 2019 | 99238    |        39 |        40 |       229.4750 |           72.59000 |          57.87000 |
-| 2019 | 99239    |       240 |       243 |       349.2593 |          106.54309 |          84.96992 |
-| 2019 | 99291    |        21 |        27 |       701.4444 |          221.27000 |         176.40000 |
-| 2020 | 99217    |        23 |        23 |       406.1739 |           76.80391 |          61.40174 |
-| 2020 | 99218    |        16 |        16 |       811.8125 |          108.24938 |          85.08125 |
-| 2020 | 99220    |        16 |        16 |      1150.9375 |          191.96062 |         152.37688 |
-| 2020 | 99221    |        12 |        12 |       681.6667 |          110.04750 |          82.23750 |
-| 2020 | 99223    |        52 |        52 |      1108.3846 |          209.42385 |         170.83462 |
-| 2020 | 99232    |        57 |       134 |       251.3284 |           73.45470 |          57.95582 |
-| 2020 | 99233    |       154 |       326 |       513.2117 |          108.84687 |          88.94589 |
-| 2020 | 99238    |        13 |        13 |       268.4615 |           74.15769 |          60.53308 |
-| 2020 | 99239    |       145 |       146 |       491.8699 |          111.25979 |          90.92384 |
+| npi        | year | tot_benes | tot_srvcs | avg_sbmtd_chrg | avg_allowed | avg_pymt |
+|:-----------|-----:|----------:|----------:|---------------:|------------:|---------:|
+| 1003000126 | 2013 |      1112 |      1607 |         270.95 |      101.51 |    80.61 |
+| 1003000126 | 2014 |      1748 |      2728 |         361.07 |      119.61 |    93.50 |
+| 1003000126 | 2015 |      1767 |      2751 |         365.43 |      114.19 |    89.82 |
+| 1003000126 | 2016 |      1007 |      1450 |         587.63 |      121.90 |    96.25 |
+| 1003000126 | 2017 |      1088 |      1637 |         620.50 |      129.92 |   102.21 |
+| 1003000126 | 2018 |       852 |      1192 |         676.98 |      124.04 |    98.62 |
+| 1003000126 | 2019 |       969 |      1367 |         420.85 |      126.46 |   100.82 |
+| 1003000126 | 2020 |       488 |       738 |         631.54 |      118.24 |    94.48 |
 
 > 2.  by Geography and Service API:
 
-<br>
+``` r
+physician_by_service(npi = 1003000126, year = 2020)
+```
+
+| year | level      | hcpcs_cd | tot_benes | tot_srvcs | avg_charge | avg_allowed |  avg_pymt |
+|-----:|:-----------|:---------|----------:|----------:|-----------:|------------:|----------:|
+| 2020 | Individual | 99217    |        23 |        23 |   406.1739 |    76.80391 |  61.40174 |
+| 2020 | Individual | 99218    |        16 |        16 |   811.8125 |   108.24938 |  85.08125 |
+| 2020 | Individual | 99220    |        16 |        16 |  1150.9375 |   191.96062 | 152.37688 |
+| 2020 | Individual | 99221    |        12 |        12 |   681.6667 |   110.04750 |  82.23750 |
+| 2020 | Individual | 99223    |        52 |        52 |  1108.3846 |   209.42385 | 170.83462 |
+| 2020 | Individual | 99232    |        57 |       134 |   251.3284 |    73.45470 |  57.95582 |
+| 2020 | Individual | 99233    |       154 |       326 |   513.2117 |   108.84687 |  88.94589 |
+| 2020 | Individual | 99238    |        13 |        13 |   268.4615 |    74.15769 |  60.53308 |
+| 2020 | Individual | 99239    |       145 |       146 |   491.8699 |   111.25979 |  90.92384 |
+
+``` r
+hcpcs <- physician_by_service(npi = 1003000126, year = 2020)
+
+purrr::map_dfr(hcpcs$hcpcs_cd, 
+               ~physician_by_geography(geo_level = "National", 
+                                       year = 2020, 
+                                       hcpcs_code = .x))
+```
+
+| year | level    | hcpcs_cd | tot_benes | tot_srvcs | avg_charge | avg_allowed |  avg_pymt |
+|-----:|:---------|:---------|----------:|----------:|-----------:|------------:|----------:|
+| 2020 | National | 99217    |    960315 |   1083287 |   226.5243 |    71.85383 |  56.39061 |
+| 2020 | National | 99218    |    107097 |    113741 |   279.0389 |    99.76702 |  77.72797 |
+| 2020 | National | 99220    |   1057367 |   1251727 |   602.4899 |   184.34005 | 144.10759 |
+| 2020 | National | 99221    |   1095114 |   1469013 |   262.3614 |   101.74503 |  79.93905 |
+| 2020 | National | 99223    |   3820713 |   9472774 |   502.2729 |   204.68211 | 161.39257 |
+| 2020 | National | 99232    |   3982972 |  39627779 |   175.3005 |    72.96044 |  58.10423 |
+| 2020 | National | 99233    |   3338934 |  24561011 |   282.3940 |   105.81724 |  84.56269 |
+| 2020 | National | 99238    |   1561729 |   1996528 |   188.4993 |    73.12491 |  57.87497 |
+| 2020 | National | 99239    |   3093233 |   4564152 |   310.6096 |   107.56667 |  85.47697 |
+
+``` r
+hcpcs <- physician_by_service(npi = 1003000126, year = 2020)
+
+purrr::map_dfr(hcpcs$hcpcs_cd, 
+               ~physician_by_geography(geo_desc = "Maryland", 
+                                       year = 2020, 
+                                       hcpcs_code = .x))
+```
+
+| year | level    | hcpcs_cd | tot_benes | tot_srvcs | avg_charge | avg_allowed |  avg_pymt |
+|-----:|:---------|:---------|----------:|----------:|-----------:|------------:|----------:|
+| 2020 | Maryland | 99217    |     31433 |     35505 |   300.8633 |    73.32784 |  57.82643 |
+| 2020 | Maryland | 99218    |      3847 |      4042 |   377.2237 |   102.47521 |  80.32934 |
+| 2020 | Maryland | 99220    |     41984 |     49557 |   761.2434 |   188.95922 | 147.87499 |
+| 2020 | Maryland | 99221    |     26136 |     32153 |   269.1815 |   106.16173 |  83.30873 |
+| 2020 | Maryland | 99223    |     98672 |    183066 |   556.9738 |   211.89818 | 166.53387 |
+| 2020 | Maryland | 99232    |    104865 |    634904 |   176.7973 |    75.67333 |  60.11680 |
+| 2020 | Maryland | 99233    |    102804 |    508985 |   338.0418 |   109.47410 |  87.22652 |
+| 2020 | Maryland | 99238    |     19248 |     21567 |   207.3356 |    76.11991 |  60.27566 |
+| 2020 | Maryland | 99239    |     77391 |     99591 |   367.9219 |   111.66222 |  88.69363 |
 
 > 3.  by Provider API:
 
-<br>
+``` r
+physician_by_provider(npi = 1003000126)
+```
 
 ------------------------------------------------------------------------
 

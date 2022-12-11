@@ -2,7 +2,7 @@
 % Please edit documentation in R/revalidation_date.R
 \name{revalidation_date}
 \alias{revalidation_date}
-\title{Search the Medicare Revalidation Due Date API}
+\title{Search the Medicare Revalidation Due Date List API}
 \source{
 Centers for Medicare & Medicaid Services
 }
@@ -10,18 +10,14 @@ Centers for Medicare & Medicaid Services
 revalidation_date(
   enroll_id = NULL,
   npi = NULL,
-  first = NULL,
-  last = NULL,
+  first_name = NULL,
+  last_name = NULL,
   org_name = NULL,
-  enroll_state = NULL,
-  enroll_type = NULL,
+  state = NULL,
+  type_code = NULL,
   prov_type = NULL,
-  enroll_spec = NULL,
-  reval_date = NULL,
-  adjust_date = NULL,
-  indiv_reassign = NULL,
-  benefits_reassign = NULL,
-  version = "Nov",
+  specialty = NULL,
+  month = "Latest",
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -31,33 +27,23 @@ revalidation_date(
 
 \item{npi}{National Provider Identifier (NPI)}
 
-\item{first}{First name of individual provider}
+\item{first_name}{First name of individual provider}
 
-\item{last}{Last name of individual provider}
+\item{last_name}{Last name of individual provider}
 
 \item{org_name}{Legal business name of organizational provider}
 
-\item{enroll_state}{Enrollment state}
+\item{state}{Enrollment state}
 
-\item{enroll_type}{Provider type code (\code{1} if Part A; \code{2} if DME;
-\code{3} if Non-DME Part B)}
+\item{type_code}{Provider enrollment type code (\code{1} if \emph{Part A};
+\code{2} if \emph{DME}; \code{3} if \emph{Non-DME Part B})}
 
 \item{prov_type}{Provider type description}
 
-\item{enroll_spec}{Enrollment specialty}
+\item{specialty}{Enrollment specialty}
 
-\item{reval_date}{Previously assigned revalidation due date (blank if not
-previously assigned a due date)}
-
-\item{adjust_date}{Next revalidation due date (blank if not yet assigned)}
-
-\item{indiv_reassign}{Number of individual enrollment associations that are
-reassigning benefits to or are employed by the organizational provider}
-
-\item{benefits_reassign}{Number of organizational enrollment associations
-to which the individual provider reassigns benefits or is employed by}
-
-\item{version}{dataset version; current possible values are "Feb" - "Nov"}
+\item{month}{dataset version, \code{Latest} is default; possible months are
+\code{Feb}, \code{Apr}, \code{Jun}, \code{Jul}, \code{Aug}, \code{Sep}, \code{Oct}, \code{Nov},\code{Dec}}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
@@ -94,18 +80,41 @@ their providers.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-revalidation_date(enroll_id = "I20031110000070", npi = 1184699621)
+revalidation_date(enroll_id = "I20031110000070",
+                  npi = 1184699621)
 
-revalidation_date(first = "Eric", last = "Byrd")
+revalidation_date(first_name = "Eric",
+                  last_name = "Byrd")
 
-revalidation_date(enroll_state = "FL", enroll_type = "3",
-                  enroll_spec = "General Practice")
+revalidation_date(state = "FL",
+                  type_code = "3",
+                  specialty = "General Practice")
+
+revalidation_date(enroll_id = "O20110620000324",
+                  org_name = "Lee Memorial Health System",
+                  state = "FL",
+                  prov_type = "DME",
+                  type_code = "2")
 \dontrun{
-npi_list <- rep(c(1003026055, 1316405939,
-                  1720392988, 1518184605), each = 8)
-months <- rep(c("Nov", "Oct", "Sep", "Aug",
-                "Jul", "Jun", "Apr", "Feb"), times = 4)
-purrr::map2_dfr(npi_list, months, ~revalidation_date(npi = .x,
-                                                     version = .y))
+npi_list <- rep(c(1003026055,
+                  1316405939,
+                  1720392988,
+                  1518184605),
+                  each = 8)
+
+months <- rep(c("Nov",
+                "Oct",
+                "Sep",
+                "Aug",
+                "Jul",
+                "Jun",
+                "Apr",
+                "Feb"),
+                times = 4)
+
+purrr::map2_dfr(npi_list,
+                months,
+                ~revalidation_date(npi = .x,
+                month = .y))
 }
 }

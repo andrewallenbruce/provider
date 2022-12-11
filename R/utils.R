@@ -70,12 +70,12 @@ age_days <- function(df,
 days_today <- function(df, start, colname = "age") {
 
   results <- df |>
-    dplyr::mutate(int = lubridate::interval({{ start }},
-                                            lubridate::today()),
-                  secs = lubridate::int_length(int),
-                  mins = secs/60,
-                  hrs = mins/60,
-                  "{colname}" := abs(hrs/24)) |>
+  dplyr::mutate(int = lubridate::interval({{ start }},
+                      lubridate::today()),
+               secs = lubridate::int_length(int),
+               mins = secs/60,
+               hrs = mins/60,
+               "{colname}" := abs(hrs/24)) |>
     dplyr::select(!c(int, secs, mins, hrs))
 
   return(results)
@@ -90,13 +90,10 @@ days_today <- function(df, start, colname = "age") {
 #' format_zipcode(12345)
 #' @autoglobal
 #' @noRd
-format_zipcode <- function(zip) {
-  zip <- as.character(zip)
+format_zipcode <- function(zip) {zip <- as.character(zip)
   if (stringr::str_detect(zip, "^[[:digit:]]{9}$") == TRUE) {
-    zip <- paste0(stringr::str_sub(zip, 1, 5), "-",
-                  stringr::str_sub(zip, 6, 9))
-    return(zip)} else {return(zip)}
-}
+  zip <- paste0(stringr::str_sub(zip, 1, 5), "-", stringr::str_sub(zip, 6, 9))
+  return(zip)} else {return(zip)}}
 
 #' Remove NULL elements from vector ----------------------------------------
 #' @autoglobal
@@ -126,20 +123,13 @@ clean_credentials <- function(x) {
 #' @return Character vector containing full one-line address
 #' @autoglobal
 #' @noRd
-full_address <- function(df,
-                         address_1,
-                         address_2,
-                         city,
-                         state,
-                         postal_code) {
-
-    stringr::str_c(stringr::str_trim(df[address_1], "both"),
-                   ifelse(df[address_2] == "", "", " "),
-                   stringr::str_trim(df[address_2], "both"), ", ",
-                   stringr::str_trim(df[city], "both"), ", ",
-                   stringr::str_trim(df[state], "both"), " ",
-                   stringr::str_trim(df[postal_code], "both"))
-}
+full_address <- function(df, address_1, address_2, city, state, postal_code) {
+  stringr::str_c(stringr::str_trim(df[[address_1]], "both"),
+  ifelse(df[[address_2]] == "", "", " "),
+  stringr::str_trim(df[[address_2]], "both"), ", ",
+  stringr::str_trim(df[[city]], "both"), ", ",
+  stringr::str_trim(df[[state]], "both"), " ",
+  stringr::str_trim(df[[postal_code]], "both"))}
 
 #' luhn check npis ---------------------------------------------------------
 #' @description checks NPIs against the Luhn algorithm for
@@ -261,9 +251,8 @@ luhn_check <- function(npi = NULL) {
 #' @return formatted API filters
 #' @autoglobal
 #' @noRd
-param_format <- function(param, arg) {
-  if (is.null(arg)) {param <- NULL} else {
-    paste0("filter[", param, "]=", arg, "&")}}
+param_format <- function(param, arg) {if (is.null(arg)) {param <- NULL}
+  else {paste0("filter[", param, "]=", arg, "&")}}
 
 #' param_space --------------------------------------------------------------
 #' Some API parameters have spaces, these must be converted to "%20".
@@ -273,21 +262,25 @@ param_format <- function(param, arg) {
 #' @noRd
 param_space <- function(param) {gsub(" ", "%20", param)}
 
-
 #' is_empty_list -----------------------------------------------------------
 #' @param df data frame
 #' @param col quoted list-column in data frame
 #' @return boolean, TRUE or FALSE
 #' @autoglobal
 #' @noRd
-is_empty_list <- function(df, col){
-  list <- df[col][[1]][[1]]
-  if (is.list(list) == TRUE && length(list) == 0) {
-    return(TRUE)
-    } else {
-      return(FALSE)
-    }
-  }
+is_empty_list <- function(df, col){list <- df[col][[1]][[1]]
+  if (is.list(list) == TRUE && length(list) == 0) {return(TRUE)}
+  else {return(FALSE)}}
+
+
+#' is_empty_list2 -----------------------------------------------------------
+#' @param df data frame
+#' @return boolean, TRUE or FALSE
+#' @autoglobal
+#' @noRd
+is_empty_list2 <- function(df){list <- df[[1]]
+if (is.list(list) == TRUE && length(list) == 0) {return(TRUE)}
+else {return(FALSE)}}
 
 #' re_nest -----------------------------------------------------------------
 #' @param df data frame
@@ -324,6 +317,3 @@ re_nest <- function(df, col){
 #' @examples
 #' pct_diff(265, 4701)
 pct_diff <- function(x, y) {abs(x - y) / mean(c(x, y))}
-
-
-

@@ -12,7 +12,6 @@ revalidation_group(
   group_enroll_id = NULL,
   group_bus_name = NULL,
   group_state = NULL,
-  group_due_date = NULL,
   record_type = NULL,
   ind_enroll_id = NULL,
   ind_npi = NULL,
@@ -20,8 +19,7 @@ revalidation_group(
   ind_last = NULL,
   ind_state = NULL,
   ind_specialty = NULL,
-  ind_due_date = NULL,
-  version = "Latest",
+  month = "Latest",
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -39,11 +37,8 @@ reassignment or is the employer}
 \item{group_state}{Enrollment state of provider who is receiving
 reassignment or is the employer}
 
-\item{group_due_date}{Revalidation due date of provider who is receiving
-reassignment or is the employer (TBD if yet to be assigned)}
-
 \item{record_type}{Identifies whether the record is for a reassignment
-('Reassignment') or employment ('Physician Assistant')}
+(\code{Reassignment}) or employment (\verb{Physician Assistant})}
 
 \item{ind_enroll_id}{Enrollment ID of provider who is reassigning their
 benefits or is an employee}
@@ -63,10 +58,8 @@ benefits or is an employee}
 \item{ind_specialty}{Enrollment specialty of the provider who is
 reassigning their benefits or is an employee}
 
-\item{ind_due_date}{Revalidation due date of the provider who is
-reassigning their benefits or is an employee (TBD if yet to be assigned)}
-
-\item{version}{dataset version; current possible values are "Jan" - "Dec"}
+\item{month}{dataset version, \code{Latest} is default; possible months are
+\code{Jan}, \code{Feb}, \code{Apr}, \code{Jun}, \code{Jul}, \code{Aug}, \code{Sep}, \code{Oct}, \code{Nov}, \code{Dec}}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
@@ -88,7 +81,7 @@ association counts and the revalidation dates for the individual
 physician as well as the clinic group practice.
 \subsection{Links}{
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}{Medicare Revalidation Due Date API}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment}{Medicare Revalidation Clinic Group Practice Reassignment API}
 }
 }
 }
@@ -96,24 +89,35 @@ physician as well as the clinic group practice.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-\dontrun{
-revalidation_group(ind_npi = 1427050418)
+revalidation_group(ind_enroll_id = "I20200929003184",
+                   ind_npi = 1962026229,
+                   ind_first = "Rashadda",
+                   ind_last = "Wong",
+                   ind_state = "CT",
+                   ind_specialty = "Physician Assistant")
 
-revalidation_group(ind_last = "Denney",
-                   ind_first = "James")
-
-revalidation_group(group_pac_id = 3870645856,
-                   group_enroll_id = "I20090722000504",
+revalidation_group(group_pac_id = 9436483807,
+                   group_enroll_id = "O20190619002165",
+                   group_bus_name = "1st Call Urgent Care",
+                   group_state = "FL",
                    record_type = "Reassignment")
+\dontrun{
+npi_list <- rep(c(1326063900,
+                  1588191308,
+                  1639176803,
+                  1326057050), each = 9)
 
-revalidation_group(group_enroll_id = "I20090918000323",
-                   ind_enroll_id = "I20100205000262")
+months <- rep(c("Nov",
+                "Oct",
+                "Sep",
+                "Aug",
+                "Jul",
+                "Jun",
+                "Apr",
+                "Feb",
+                "Jan"), times = 4)
 
-npi_list <- rep(c(1588620801, 1356924799,
-                  1336147057, 1124210513), each = 9)
-months <- rep(c("Nov", "Oct", "Sep", "Aug",
-                "Jul", "Jun", "Apr", "Feb", "Jan"), times = 4)
-purrr::map2_dfr(npi_list, months, ~revalidation_group(ind_npi = .x,
-                                                      version = .y))
+purrr::map2_dfr(npi_list,
+months, ~revalidation_group(ind_npi = .x, month = .y))
 }
 }

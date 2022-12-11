@@ -29,7 +29,7 @@
 #'
 #' @param year Calendar year of Medicare enrollment
 #' @param month Month of Medicare enrollment
-#' @param geo_lvl Geographic level of data; options are "National", "State",
+#' @param geo_level Geographic level of data; options are "National", "State",
 #'    and "County"
 #' @param state_abb Two-letter state abbreviation of beneficiary residence
 #' @param state Full state name of beneficiary residence
@@ -46,20 +46,20 @@
 #' \dontrun{
 #' beneficiary_enrollment(year      = 2018,
 #'                        month     = "Year",
-#'                        geo_lvl   = "County",
+#'                        geo_level = "County",
 #'                        state_abb = "AL",
 #'                        county    = "Autauga")
 #'
 #' beneficiary_enrollment(year    = 2021,
 #'                        month   = "August",
-#'                        geo_lvl = "County")
+#'                        geo_level = "County")
 #' }
 #' @autoglobal
 #' @export
 
 beneficiary_enrollment <- function(year        = 2021,
                                    month       = NULL,
-                                   geo_lvl     = NULL,
+                                   geo_level   = NULL,
                                    state_abb   = NULL,
                                    state       = NULL,
                                    county      = NULL,
@@ -71,7 +71,7 @@ beneficiary_enrollment <- function(year        = 2021,
                      ~x,        ~y,
                  "YEAR",      year,
                 "MONTH",     month,
-         "BENE_GEO_LVL",   geo_lvl,
+         "BENE_GEO_LVL", geo_level,
     "BENE_STATE_ABRVTN", state_abb,
       "BENE_STATE_DESC",     state,
      "BENE_COUNTY_DESC",    county,
@@ -92,8 +92,7 @@ beneficiary_enrollment <- function(year        = 2021,
 
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
-             simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
-             dplyr::relocate(Year)
+             simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

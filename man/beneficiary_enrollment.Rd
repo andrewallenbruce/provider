@@ -10,7 +10,7 @@ Centers for Medicare & Medicaid Services
 beneficiary_enrollment(
   year = 2021,
   month = NULL,
-  geo_lvl = NULL,
+  geo_level = NULL,
   state_abb = NULL,
   state = NULL,
   county = NULL,
@@ -24,7 +24,7 @@ beneficiary_enrollment(
 
 \item{month}{Month of Medicare enrollment}
 
-\item{geo_lvl}{Geographic level of data; options are "National", "State",
+\item{geo_level}{Geographic level of data; options are "National", "State",
 and "County"}
 
 \item{state_abb}{Two-letter state abbreviation of beneficiary residence}
@@ -78,12 +78,12 @@ Update Frequency: \strong{Monthly}
 \dontrun{
 beneficiary_enrollment(year      = 2018,
                        month     = "Year",
-                       geo_lvl   = "County",
+                       geo_level = "County",
                        state_abb = "AL",
                        county    = "Autauga")
 
 beneficiary_enrollment(year    = 2021,
                        month   = "August",
-                       geo_lvl = "County")
+                       geo_level = "County")
 }
 }
