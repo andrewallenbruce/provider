@@ -75,7 +75,7 @@ provider::nppes_npi(npi = 1083879860)
 #> # A tibble: 1 × 3
 #>   datetime            outcome data_lists   
 #>   <dttm>              <chr>   <list>       
-#> 1 2022-12-11 04:19:53 results <df [1 × 11]>
+#> 1 2022-12-11 16:56:11 results <df [1 × 11]>
 ```
 
 <br>
@@ -133,6 +133,77 @@ provider::beneficiary_enrollment(year = 2021, month = "Year",
 | prscrptn_drug_tot_benes        | 7838    |
 | prscrptn_drug_pdp_benes        | 1931    |
 | prscrptn_drug_mapd_benes       | 5907    |
+
+``` r
+months <- tibble::enframe(month.name) |> 
+  dplyr::select(-name) |> 
+  dplyr::slice(1:7) |> 
+  tibble::deframe()
+
+ga_bene <- purrr::map_dfr(months, 
+      ~beneficiary_enrollment(year = 2022, 
+                              geo_level = "State", 
+                              state = "Georgia", 
+                              month = .x))
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                tot_benes,
+                orgnl_mdcr_benes,
+                ma_and_oth_benes,
+                a_b_tot_benes:a_b_ma_and_oth_benes) |> 
+  gluedown::md_table()
+```
+
+| year | month    | state | tot_benes | orgnl_mdcr_benes | ma_and_oth_benes | a_b\_tot_benes | a_b\_orgnl_mdcr_benes | a_b\_ma_and_oth_benes |
+|-----:|:---------|:------|----------:|-----------------:|-----------------:|---------------:|----------------------:|----------------------:|
+| 2022 | January  | GA    |   1830959 |           915752 |           915207 |        1681852 |                767454 |                914398 |
+| 2022 | February | GA    |   1830025 |           913347 |           916678 |        1680770 |                764903 |                915867 |
+| 2022 | March    | GA    |   1831573 |           912897 |           918676 |        1681852 |                763986 |                917866 |
+| 2022 | April    | GA    |   1833135 |           911263 |           921872 |        1683513 |                762450 |                921063 |
+| 2022 | May      | GA    |   1835187 |           910417 |           924770 |        1685479 |                761518 |                923961 |
+| 2022 | June     | GA    |   1837394 |           909778 |           927616 |        1687818 |                761012 |                926806 |
+| 2022 | July     | GA    |   1840128 |           907070 |           933058 |        1696372 |                764122 |                932250 |
+
+``` r
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                aged_tot_benes:aged_no_esrd_benes,
+                dsbld_tot_benes:dsbld_no_esrd_benes) |> 
+  gluedown::md_table()
+```
+
+| year | month    | state | aged_tot_benes | aged_esrd_benes | aged_no_esrd_benes | dsbld_tot_benes | dsbld_esrd_and_esrd_only_benes | dsbld_no_esrd_benes |
+|-----:|:---------|:------|---------------:|----------------:|-------------------:|----------------:|-------------------------------:|--------------------:|
+| 2022 | January  | GA    |        1572257 |           11635 |            1560622 |          258702 |                          12011 |              246691 |
+| 2022 | February | GA    |        1571050 |           11312 |            1559738 |          258975 |                          11905 |              247070 |
+| 2022 | March    | GA    |        1572037 |           11096 |            1560941 |          259536 |                          11853 |              247683 |
+| 2022 | April    | GA    |        1573058 |           10888 |            1562170 |          260077 |                          11835 |              248242 |
+| 2022 | May      | GA    |        1574570 |           10716 |            1563854 |          260617 |                          11827 |              248790 |
+| 2022 | June     | GA    |        1575954 |           10525 |            1565429 |          261440 |                          11790 |              249650 |
+| 2022 | July     | GA    |        1578129 |           10368 |            1567761 |          261999 |                          11713 |              250286 |
+
+``` r
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                dsbld_tot_benes:dsbld_no_esrd_benes) |> 
+  gluedown::md_table()
+```
+
+| year | month    | state | dsbld_tot_benes | dsbld_esrd_and_esrd_only_benes | dsbld_no_esrd_benes |
+|-----:|:---------|:------|----------------:|-------------------------------:|--------------------:|
+| 2022 | January  | GA    |          258702 |                          12011 |              246691 |
+| 2022 | February | GA    |          258975 |                          11905 |              247070 |
+| 2022 | March    | GA    |          259536 |                          11853 |              247683 |
+| 2022 | April    | GA    |          260077 |                          11835 |              248242 |
+| 2022 | May      | GA    |          260617 |                          11827 |              248790 |
+| 2022 | June     | GA    |          261440 |                          11790 |              249650 |
+| 2022 | July     | GA    |          261999 |                          11713 |              250286 |
 
 <br>
 
@@ -276,6 +347,10 @@ provider::revalidation_group(ind_npi = 1710912209)
 provider::missing_information(npi = 1144224569)
 ```
 
+| npi        | last_name | first_name |
+|:-----------|:----------|:-----------|
+| 1144224569 | Clouse    | John       |
+
 <br>
 
 ### Medicare Physician & Other Practitioners APIs
@@ -363,6 +438,83 @@ purrr::map_dfr(hcpcs$hcpcs_cd,
 ``` r
 physician_by_provider(npi = 1003000126)
 ```
+
+| name                          | value                                                                               |
+|:------------------------------|:------------------------------------------------------------------------------------|
+| year                          | 2020                                                                                |
+| rndrng_npi                    | 1003000126                                                                          |
+| rndrng_prvdr_last_org_name    | Enkeshafi                                                                           |
+| rndrng_prvdr_first_name       | Ardalan                                                                             |
+| rndrng_prvdr_mi               |                                                                                     |
+| rndrng_prvdr_crdntls          | M.D.                                                                                |
+| rndrng_prvdr_gndr             | M                                                                                   |
+| rndrng_prvdr_ent_cd           | I                                                                                   |
+| rndrng_prvdr_st1              | 6410 Rockledge Dr Ste 304                                                           |
+| rndrng_prvdr_st2              |                                                                                     |
+| rndrng_prvdr_city             | Bethesda                                                                            |
+| rndrng_prvdr_state_abrvtn     | MD                                                                                  |
+| rndrng_prvdr_state_fips       | 24                                                                                  |
+| rndrng_prvdr_zip5             | 20817                                                                               |
+| rndrng_prvdr_ruca             | 1                                                                                   |
+| rndrng_prvdr_ruca_desc        | Metropolitan area core: primary flow within an urbanized area of 50,000 and greater |
+| rndrng_prvdr_cntry            | US                                                                                  |
+| rndrng_prvdr_type             | Internal Medicine                                                                   |
+| rndrng_prvdr_mdcr_prtcptg_ind | Y                                                                                   |
+| tot_hcpcs_cds                 | 16                                                                                  |
+| tot_benes                     | 291                                                                                 |
+| tot_srvcs                     | 764                                                                                 |
+| tot_sbmtd_chrg                | 402812                                                                              |
+| tot_mdcr_alowd_amt            | 85319.63                                                                            |
+| tot_mdcr_pymt_amt             | 69175.78                                                                            |
+| tot_mdcr_stdzd_amt            | 66401.61                                                                            |
+| drug_sprsn_ind                |                                                                                     |
+| drug_tot_hcpcs_cds            | 0                                                                                   |
+| drug_tot_benes                | 0                                                                                   |
+| drug_tot_srvcs                | 0                                                                                   |
+| drug_sbmtd_chrg               | 0                                                                                   |
+| drug_mdcr_alowd_amt           | 0                                                                                   |
+| drug_mdcr_pymt_amt            | 0                                                                                   |
+| drug_mdcr_stdzd_amt           | 0                                                                                   |
+| med_sprsn_ind                 |                                                                                     |
+| med_tot_hcpcs_cds             | 16                                                                                  |
+| med_tot_benes                 | 291                                                                                 |
+| med_tot_srvcs                 | 764                                                                                 |
+| med_sbmtd_chrg                | 402812                                                                              |
+| med_mdcr_alowd_amt            | 85319.63                                                                            |
+| med_mdcr_pymt_amt             | 69175.78                                                                            |
+| med_mdcr_stdzd_amt            | 66401.61                                                                            |
+| bene_avg_age                  | 77                                                                                  |
+| bene_age_lt_65_cnt            | 27                                                                                  |
+| bene_age_65_74_cnt            | 88                                                                                  |
+| bene_age_75_84_cnt            | 104                                                                                 |
+| bene_age_gt_84_cnt            | 72                                                                                  |
+| bene_feml_cnt                 | 161                                                                                 |
+| bene_male_cnt                 | 130                                                                                 |
+| bene_race_wht_cnt             | 210                                                                                 |
+| bene_race_black_cnt           | 50                                                                                  |
+| bene_race_api_cnt             |                                                                                     |
+| bene_race_hspnc_cnt           | 12                                                                                  |
+| bene_race_nat_ind_cnt         |                                                                                     |
+| bene_race_othr_cnt            |                                                                                     |
+| bene_dual_cnt                 | 61                                                                                  |
+| bene_ndual_cnt                | 230                                                                                 |
+| bene_cc_af_pct                | 0.31                                                                                |
+| bene_cc_alzhmr_pct            | 0.43                                                                                |
+| bene_cc_asthma_pct            | 0.15                                                                                |
+| bene_cc_cncr_pct              | 0.18                                                                                |
+| bene_cc_chf_pct               | 0.48                                                                                |
+| bene_cc_ckd_pct               | 0.65                                                                                |
+| bene_cc_copd_pct              | 0.29                                                                                |
+| bene_cc_dprssn_pct            | 0.35                                                                                |
+| bene_cc_dbts_pct              | 0.47                                                                                |
+| bene_cc_hyplpdma_pct          | 0.73                                                                                |
+| bene_cc_hyprtnsn_pct          | 0.75                                                                                |
+| bene_cc_ihd_pct               | 0.66                                                                                |
+| bene_cc_opo_pct               | 0.11                                                                                |
+| bene_cc_raoa_pct              | 0.51                                                                                |
+| bene_cc_sz_pct                | 0.09                                                                                |
+| bene_cc_strok_pct             | 0.19                                                                                |
+| bene_avg_risk_scre            | 2.5028                                                                              |
 
 ------------------------------------------------------------------------
 

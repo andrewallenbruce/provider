@@ -32,12 +32,12 @@
 #'
 #' @examples
 #' taxonomy_crosswalk(specialty_code = "B4[14]")
+#'
 #' taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+#'
 #' taxonomy_crosswalk(taxonomy_code = "2086S0102X")
-#' \dontrun{
-#' # Won't filter, returns entire dataset
-#' taxonomy_crosswalk(taxonomy_desc = "Trauma Surgery")
-#' }
+#'
+#' taxonomy_crosswalk(taxonomy_desc = "Agencies/Hospice Care Community Based")
 #' @autoglobal
 #' @export
 
@@ -53,7 +53,7 @@ taxonomy_crosswalk <- function(specialty_code = NULL,
   "MEDICARE SPECIALTY CODE", specialty_code,
   "MEDICARE PROVIDER/SUPPLIER TYPE DESCRIPTION", specialty_desc,
   "PROVIDER TAXONOMY CODE", taxonomy_code,
-  "PROVIDER TAXONOMY DESCRIPTION: TYPE CLASSIFICATION SPECIALIZATION",
+  "PROVIDER TAXONOMY DESCRIPTION:  TYPE CLASSIFICATION SPECIALIZATION",
   taxonomy_desc)
 
   # map param_format and collapse -------------------------------------------

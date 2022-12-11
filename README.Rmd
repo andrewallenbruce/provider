@@ -217,6 +217,48 @@ provider::beneficiary_enrollment(year = 2021, month = "Year",
   gluedown::md_table()
 ```
 
+```{r results='asis', echo=TRUE}
+months <- tibble::enframe(month.name) |> 
+  dplyr::select(-name) |> 
+  dplyr::slice(1:7) |> 
+  tibble::deframe()
+
+ga_bene <- purrr::map_dfr(months, 
+      ~beneficiary_enrollment(year = 2022, 
+                              geo_level = "State", 
+                              state = "Georgia", 
+                              month = .x))
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                tot_benes,
+                orgnl_mdcr_benes,
+                ma_and_oth_benes,
+                a_b_tot_benes:a_b_ma_and_oth_benes) |> 
+  gluedown::md_table()
+```
+
+```{r results='asis', echo=TRUE}
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                aged_tot_benes:aged_no_esrd_benes,
+                dsbld_tot_benes:dsbld_no_esrd_benes) |> 
+  gluedown::md_table()
+```
+
+```{r results='asis', echo=TRUE}
+ga_bene |> 
+  dplyr::select(year, 
+                month, 
+                state = bene_state_abrvtn, 
+                dsbld_tot_benes:dsbld_no_esrd_benes) |> 
+  gluedown::md_table()
+```
+
+
 <br>
 
 ### Medicare Order and Referring API
@@ -312,7 +354,7 @@ gluedown::md_table()
 provider::missing_information(npi = 1144224569)
 ```
 
-```{r results='asis', echo=FALSE, eval=FALSE}
+```{r results='asis', echo=FALSE}
 provider::missing_information(npi = 1144224569) |> gluedown::md_table()
 ```
 
@@ -424,7 +466,7 @@ physician_by_provider(npi = 1003000126)
 ```
 
 
-```{r results='asis', echo=FALSE, eval=FALSE}
+```{r results='asis', echo=FALSE}
 physician_by_provider(npi = 1003000126) |> 
 dplyr::mutate(dplyr::across(everything(), as.character)) |> 
 tidyr::pivot_longer(everything()) |> 

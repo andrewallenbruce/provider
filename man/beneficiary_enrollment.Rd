@@ -9,8 +9,8 @@ Centers for Medicare & Medicaid Services
 \usage{
 beneficiary_enrollment(
   year = 2021,
-  month = NULL,
-  geo_level = NULL,
+  month = "Year",
+  geo_level = c("National", "State", "County"),
   state_abb = NULL,
   state = NULL,
   county = NULL,
@@ -20,12 +20,15 @@ beneficiary_enrollment(
 )
 }
 \arguments{
-\item{year}{Calendar year of Medicare enrollment}
+\item{year}{Calendar year of Medicare enrollment; current options are
+\code{2017 - 2022}}
 
-\item{month}{Month of Medicare enrollment}
+\item{month}{Timeframe of Medicare enrollment; options are \code{Year} or any
+month within the 12-month timespan of the month in the dataset's version
+name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
 
-\item{geo_level}{Geographic level of data; options are "National", "State",
-and "County"}
+\item{geo_level}{Geographic level of data; options are \code{National}, \code{State},
+and \code{County}}
 
 \item{state_abb}{Two-letter state abbreviation of beneficiary residence}
 
@@ -60,7 +63,7 @@ Health Plans) and the prescription drug coverage data can
 be examined by those enrolled in stand-alone Prescription
 Drug Plans and those enrolled in Medicare Advantage
 Prescription Drug plans. The dataset includes enrollee
-counts on a rolling 12 month basis and also provides
+counts on a \emph{rolling 12 month basis} and also provides
 information on yearly trends. The dataset is based on
 information gathered from CMS administrative enrollment
 data for beneficiaries enrolled in the Medicare program
@@ -75,15 +78,22 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-\dontrun{
-beneficiary_enrollment(year      = 2018,
-                       month     = "Year",
+beneficiary_enrollment(year = 2018,
+                       month = "Year",
                        geo_level = "County",
                        state_abb = "AL",
-                       county    = "Autauga")
+                       county = "Autauga")
 
-beneficiary_enrollment(year    = 2021,
-                       month   = "August",
-                       geo_level = "County")
-}
+beneficiary_enrollment(year = 2021,
+                       geo_level = "County",
+                       fips = "01001")
+
+beneficiary_enrollment(year = 2022,
+                       month = "July",
+                       geo_level = "State",
+                       state = "Georgia")
+
+beneficiary_enrollment(year = 2017,
+                       geo_level = "State",
+                       fips = "10")
 }

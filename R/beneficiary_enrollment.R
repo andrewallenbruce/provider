@@ -15,7 +15,7 @@
 #'    be examined by those enrolled in stand-alone Prescription
 #'    Drug Plans and those enrolled in Medicare Advantage
 #'    Prescription Drug plans. The dataset includes enrollee
-#'    counts on a rolling 12 month basis and also provides
+#'    counts on a *rolling 12 month basis* and also provides
 #'    information on yearly trends. The dataset is based on
 #'    information gathered from CMS administrative enrollment
 #'    data for beneficiaries enrolled in the Medicare program
@@ -27,10 +27,13 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
 #'
-#' @param year Calendar year of Medicare enrollment
-#' @param month Month of Medicare enrollment
-#' @param geo_level Geographic level of data; options are "National", "State",
-#'    and "County"
+#' @param year Calendar year of Medicare enrollment; current options are
+#'    `2017 - 2022`
+#' @param month Timeframe of Medicare enrollment; options are `Year` or any
+#'    month within the 12-month timespan of the month in the dataset's version
+#'    name (listed [here](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs))
+#' @param geo_level Geographic level of data; options are `National`, `State`,
+#'    and `County`
 #' @param state_abb Two-letter state abbreviation of beneficiary residence
 #' @param state Full state name of beneficiary residence
 #' @param county County of beneficiary residence
@@ -43,29 +46,50 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' \dontrun{
-#' beneficiary_enrollment(year      = 2018,
-#'                        month     = "Year",
+#' beneficiary_enrollment(year = 2018,
+#'                        month = "Year",
 #'                        geo_level = "County",
 #'                        state_abb = "AL",
-#'                        county    = "Autauga")
+#'                        county = "Autauga")
 #'
-#' beneficiary_enrollment(year    = 2021,
-#'                        month   = "August",
-#'                        geo_level = "County")
-#' }
+#' beneficiary_enrollment(year = 2021,
+#'                        geo_level = "County",
+#'                        fips = "01001")
+#'
+#' beneficiary_enrollment(year = 2022,
+#'                        month = "July",
+#'                        geo_level = "State",
+#'                        state = "Georgia")
+#'
+#' beneficiary_enrollment(year = 2017,
+#'                        geo_level = "State",
+#'                        fips = "10")
 #' @autoglobal
 #' @export
 
 beneficiary_enrollment <- function(year        = 2021,
-                                   month       = NULL,
-                                   geo_level   = NULL,
+                                   month       = "Year",
+                                   geo_level   = c("National", "State", "County"),
                                    state_abb   = NULL,
                                    state       = NULL,
                                    county      = NULL,
                                    fips        = NULL,
                                    clean_names = TRUE,
                                    lowercase   = TRUE) {
+
+  # if (geo_level == "National" & !is.null(state_abb) | !is.null(state) |
+  #     !is.null(county) | !is.null(fips)) {rlang::abort(c(
+  #       "'If geo_level' is 'National', the following must be NULL:",
+  #       "*" = "state_abb",
+  #       "*" = "state",
+  #       "*" = "county",
+  #       "*" = "fips"))}
+
+  # match geo_level args ----------------------------------------------------
+  month <- rlang::arg_match(month, values = c("Year", month.name))
+  geo_level <- rlang::arg_match(geo_level)
+
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                      ~x,        ~y,
