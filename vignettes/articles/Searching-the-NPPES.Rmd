@@ -3,20 +3,7 @@ title: "Searching the NPPES"
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  echo      = TRUE, 
-  message   = FALSE, 
-  warning   = FALSE,
-  tidy = "styler",
-  comment = "#>",
-  dpi = 72, 
-  out.width = "100%",
-  dev = "png",
-  dev.args = list(png = list(type = "cairo-png")),
-  optipng = "-o1 -quiet",
-  error = TRUE
-)
+source("setup/setup.R")
 ```
 
 <br><br>

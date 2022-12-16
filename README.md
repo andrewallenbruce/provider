@@ -75,7 +75,32 @@ provider::nppes_npi(npi = 1083879860)
 #> # A tibble: 1 × 3
 #>   datetime            outcome data_lists   
 #>   <dttm>              <chr>   <list>       
-#> 1 2022-12-11 16:56:11 results <df [1 × 11]>
+#> 1 2022-12-16 03:41:24 results <df [1 × 11]>
+```
+
+``` r
+npi_ex <- provider::nppes_npi(npi = 1083879860) |> 
+          provider::provider_unpack()
+
+npi_ex |> dplyr::mutate(address_1 = stringr::str_to_title(address_1),
+                        city = stringr::str_to_title(city)) |> 
+          tidyr::unite("full_address", c(address_1, city, state), sep = ", ", remove = FALSE)
+#> # A tibble: 2 × 39
+#>   npi      prov_…¹ first…² last_…³ sole_…⁴ gender enume…⁵ last_…⁶ certi…⁷ status
+#>   <chr>    <chr>   <chr>   <chr>   <lgl>   <chr>  <chr>   <chr>   <chr>   <chr> 
+#> 1 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
+#> 2 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
+#> # … with 29 more variables: country_code <chr>, address_purpose <chr>,
+#> #   full_address <chr>, address_1 <chr>, city <chr>, state <chr>,
+#> #   postal_code <chr>, telephone_number <chr>, taxon_code <chr>,
+#> #   taxonomy_group <chr>, taxon_desc <chr>, taxon_state <chr>,
+#> #   taxon_license <chr>, taxon_primary <lgl>, endpts_endpoint_type <chr>,
+#> #   endpts_endpoint_type_description <chr>, endpts_endpoint <chr>,
+#> #   endpts_affiliation <chr>, endpts_affiliation_name <chr>, …
+  dplyr::rowwise() |> 
+  full_address(cols = c(address_1, city, state, postal_code)) |> 
+  tidyr::unnest(full_address)
+#> Error in full_address(dplyr::rowwise(), cols = c(address_1, city, state, : could not find function "full_address"
 ```
 
 <br>
@@ -233,7 +258,7 @@ provider::opt_out(last = "Aaron")
 
 | name                        | value                  |
 |:----------------------------|:-----------------------|
-| date                        | 2022-12-11             |
+| date                        | 2022-12-16             |
 | last_updated                | 09/15/2022             |
 | first_name                  | Sheryl                 |
 | last_name                   | Aaron                  |
@@ -271,7 +296,7 @@ provider::revalidation_date(npi = 1710912209)
 
 | name                            | value           |
 |:--------------------------------|:----------------|
-| month                           | 2022-12-11      |
+| month                           | 2022-12-16      |
 | enrollment_id                   | I20040602001711 |
 | national_provider_identifier    | 1710912209      |
 | first_name                      | Yelena          |

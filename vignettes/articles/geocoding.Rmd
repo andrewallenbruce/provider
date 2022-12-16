@@ -2,17 +2,14 @@
 title: "Healthcare Providers: Why Geocode?"
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
+```{r setup, include = FALSE}
+source("setup/setup.R")
 ```
 
-```{r setup}
+```{r load}
 library(provider)     # Access Public Healthcare Provider Data
 #library(zipcodeR)     # Data & Functions for Working with US ZIP Codes
-#library(fipio)        # Lightweight FIPS Code Information Retrieval
+library(fipio)        # Lightweight FIPS Code Information Retrieval
 library(tidygeocoder) # Geocoding Made Easy
 library(leaflet)      # Create Interactive Web Maps
 ```

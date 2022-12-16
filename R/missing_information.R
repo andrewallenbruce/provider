@@ -54,6 +54,7 @@ missing_information <- function(npi         = NULL,
          check_type = FALSE, simplifyVector = TRUE))
 
   if (isTRUE(is_empty_list2(res))) {
+    npi <- as.character(npi)
     results <- tibble::tribble(
       ~npi, ~last_name, ~first_name,
        npi,  "NA",      "NA")

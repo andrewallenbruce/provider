@@ -3,27 +3,69 @@ title: "CMS Public Reporting of Missing Digital Contact Information API"
 output: html_document
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-library(flextable)
-library(ftExtra)
-use_df_printer()
+```{r setup, include = FALSE}
+source("setup/setup.R")
 ```
 
-<br>
+```{r}
+library(provider)
+```
+
+
+## Purpose
+
+Digital contact information, also known as **endpoints**, provide a secure way for health care
+entities, including providers and hospitals, to send authenticated, encrypted health information
+directly to known, trusted recipients over the internet. Health care organizations seeking to
+engage in electronic health information exchange need accurate information about the
+electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other
+digital contact information) of potential exchange partners to facilitate this information exchange.
+
+## Usage
+
+If a provider shows up in the search results of this API, then they have no Endpoints entered into the NPPES.
+
+```{r results='asis'}
+missing_information(npi = 1144224569) |> 
+  gluedown::md_table()
+```
+
+We can confirm this by searching the NPPES, which should contain an empty `endpoints` list-column:
+
+```{r results='asis'}
+nppes_npi(npi = 1144224569) |> 
+  tidyr::unnest(data_lists) |>
+  tidyr::unnest(basic) |>
+  dplyr::select(npi = number, last_name, first_name, endpoints) |> 
+  gluedown::md_table()
+```
+### Multiple searches with {purrr}
+
+```{r results='asis'}
+purrr::map_dfr(c(1134122013, 1144224569, 1003000423), missing_information) |> 
+  gluedown::md_table()
+```
+
+```{r results='asis'}
+purrr::map_dfr(c(1134122013, 1144224569, 1003000423), nppes_npi) |> 
+  tidyr::unnest(data_lists) |>
+  tidyr::unnest(basic) |>
+  dplyr::select(npi = number, last_name, first_name, endpoints) |> 
+  gluedown::md_table()
+```
 
 ### Data Dictionary
 
-```{r echo=FALSE}
+```{r results='asis', echo=FALSE}
 promdci <- tibble::tibble(
   Variable = c("`npi`", "`provider_name`"),
   Term = c("NPI", "Provider Name"),
   Definition = c("The provider's 10-digit National Provider Identifier.", "Name of the provider. It consists of the legal last name followed by the first name, separated by a comma."),
 )
-flextable::flextable(promdci) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+
+gluedown::md_table(promdci)
 ```
+   - [Dictionary Link](https://data.cms.gov/resources/public-reporting-of-missing-digital-contact-information-data-dictionary)
+   - [Endpoints Information](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html)
 
 <br><br>
