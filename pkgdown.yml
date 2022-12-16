@@ -1,8 +1,7 @@
 pandoc: 2.19.2
-pkgdown: 2.0.6
+pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  Searching-the-NPPES: Searching-the-NPPES.html
   cms-miss-contact-info: cms-miss-contact-info.html
   geocoding: geocoding.html
   mcr-ffs-prov-enroll: mcr-ffs-prov-enroll.html
@@ -14,7 +13,7 @@ articles:
   mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
   nppes-npi-registry: nppes-npi-registry.html
   provider: provider.html
-last_built: 2022-12-11T22:01Z
+last_built: 2022-12-16T19:04Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles

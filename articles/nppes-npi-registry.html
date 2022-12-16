@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="provider">
-<title>NPPES NPI Public Registry API • provider</title>
+<title>NPPES NPI Registry • provider</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link href="../deps/Roboto_Slab-0.4.4/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NPPES NPI Public Registry API">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NPPES NPI Registry">
 <meta property="og:description" content="provider">
 <meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -54,7 +54,6 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/Searching-the-NPPES.html">Searching the NPPES</a>
     <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
     <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
     <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
@@ -64,7 +63,7 @@
     <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
     <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
     <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry API</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
   </div>
 </li>
       </ul>
@@ -117,7 +116,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>NPPES NPI Public Registry API</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>NPPES NPI Registry</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/nppes-npi-registry.Rmd" class="external-link"><code>vignettes/articles/nppes-npi-registry.Rmd</code></a></small>
@@ -128,400 +127,315 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<p>There are three methods of entering search terms into the
-functions:</p>
-<ul>
-<li>single 10-digit number</li>
-<li>list of multiple 10-digit numbers</li>
-<li>data frame of 10-digit numbers</li>
-</ul>
-<p>I’ll create the example list and data frame I’ll be using in the
-examples for each API.</p>
-<p><br></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Example list</span></span>
-<span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, </span>
-<span>              <span class="fl">1316405939</span>, </span>
-<span>              <span class="fl">1720392988</span>, </span>
-<span>              <span class="fl">1518184605</span>, </span>
-<span>              <span class="fl">1922056829</span>, </span>
-<span>              <span class="fl">1083879860</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Example data frame</span></span>
-<span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,  </span>
-<span>                             <span class="fl">1316405939</span>, </span>
-<span>                             <span class="fl">1720392988</span>, </span>
-<span>                             <span class="fl">1518184605</span>, </span>
-<span>                             <span class="fl">1922056829</span>, </span>
-<span>                             <span class="fl">1083879860</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level2">
-<h2 id="nppes-npi-public-registry-api">NPPES NPI Public Registry API<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry-api"></a>
+<h2 id="the-nppes-npi-registry">The NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#the-nppes-npi-registry"></a>
 </h2>
-<p>The NPPES NPI Registry Public Search is a free directory of all
-active National Provider Identifier (NPI) records. Healthcare providers
-acquire their unique 10-digit NPIs to identify themselves in a standard
-way throughout their industry. After CMS supplies an NPI, they publish
-the parts of the NPI record that have public relevance, including the
+<p><br></p>
+<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
+Public Search</a> is a free directory of all active <strong>National
+Provider Identifier</strong> (NPI) records. Healthcare providers acquire
+their unique 10-digit NPIs to identify themselves in a standard way
+throughout their industry. After CMS supplies an NPI, they publish the
+parts of the NPI record that have public relevance, including the
 provider’s name, specialty (taxonomy) and practice address. It enables
 you to search for providers in the NPPES (National Plan and Provider
 Enumeration System.) All information produced by the NPI Registry is
 provided in accordance with the NPPES Data Dissemination Notice. There
-is no charge to use the NPI Registry. The NPPES Application Programming
-Interface (API) is a faster alternative to the downloadable NPPES data
-files. It allows systems to access NPPES public data in real-time,
-rather than through batched uploads. The API retrieves data from NPPES
-daily. An API query will return a maximum of 200 results per request.
-The Skip field in the API will let you skip up to 1000 records. By using
-these two fields with your search criteria, you can get up to a maximum
-of 1,200 records over six requests.</p>
+is no charge to use the NPI Registry.</p>
+<p><br></p>
+<div class="section level3">
+<h3 id="the-nppes-api">The NPPES API<a class="anchor" aria-label="anchor" href="#the-nppes-api"></a>
+</h3>
+<p>The NPPES <em>Application Programming Interface</em> (API) is a
+faster alternative to the <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html" class="external-link">downloadable
+NPPES data files</a>. It allows systems to access NPPES public data in
+real-time, rather than through batched uploads. The API retrieves data
+from NPPES daily. An API query will return a maximum of 200 results per
+request. The <em>Skip</em> field in the API will let you skip up to 1000
+records. By using these two fields with your search criteria, you can
+get up to a maximum of 1,200 records over six requests.</p>
+<p><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="searching-the-nppes-by-npi">Searching the NPPES by NPI<a class="anchor" aria-label="anchor" href="#searching-the-nppes-by-npi"></a>
+</h2>
+<p>The following is a basic example of searching for an NPI using the
+using <code>prov_npi_nppes()</code>. The only argument is the provider’s
+10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National
+Provider Identifier</a>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumerati…¹ number addre…² pract…³ first…⁴ last_…⁵</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-16 <span style="color: #949494;">19:05:30</span> results NPI-1       11144… &lt;df&gt;    &lt;df&gt;    DOMINI… LOUDA  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: credential &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, certification_date &lt;chr&gt;, status &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, dates &lt;list&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​enumeration_type, ²​addresses, ³​practiceLocations, ⁴​first_name, ⁵​last_name</span></span></span></code></pre></div>
+<p><br><br></p>
+<p>This returns a <code>tibble</code> containing the NPI that was
+searched for (<code>search</code>), the <code>datetime</code> of the
+query, an <code>outcome</code> status column and
+<code>data_lists</code>, a list-column containing a collection of
+variables and nested data frames:</p>
+<p><br></p>
+<p>The <strong>variables</strong> returned are as follows:</p>
+<p><br></p>
 <ul>
-<li><a href="https://npiregistry.cms.hhs.gov/search" class="external-link">U.S. NPPES National
-Provider Identifier (NPI) Registry API</a></li>
+<li>
+<code>created_epoch</code>: date when the NPI was issued</li>
+<li>
+<code>enumeration_type</code>: NPI Entity Type, either
+NPI-1(individual) or NPI-2(organizational)</li>
+<li>
+<code>last_updated_epoch</code>: date when the information was last
+updated by the provider</li>
+<li>
+<code>number</code>: provider’s NPI, as listed in the NPPES</li>
 </ul>
+<p><br></p>
+<blockquote>
+<p>Note: <code>last_updated_epoch</code> / <code>created_epoch</code>
+are dates in <a href="https://www.epochconverter.com/" class="external-link">Unix time</a>.
+They are repeated in the <code>basic</code> list as
+<code>last_updated</code> and <code>enumeration_date</code>,
+respectively.</p>
+</blockquote>
+<p><br></p>
+<p>The <strong>list-columns</strong> returned are as follows:</p>
+<p><br></p>
+<ul>
+<li>
+<code>basic</code>: Basic information</li>
+<li>
+<code>other_names</code>: Other names used by the provider</li>
+<li>
+<code>addresses</code>: Primary location and mailing addresses</li>
+<li>
+<code>taxonomies</code>: Specialty classification and related
+information</li>
+<li>
+<code>identifiers</code>: Various other identifiers such as
+payer-specific IDs, CLIA numbers, etc.</li>
+<li>
+<code>practice_locations</code>: Provider’s practice locations</li>
+<li>
+<code>endpoints</code>: Information regarding the provider’s
+endpoints for Health Information Exchange (HIE)</li>
+</ul>
+<p><br><br></p>
+<blockquote>
+<p>Note: All list-columns may not be available for every provider. This
+depends on factors such as NPI type, incorporated individual status,
+subpart delegation, and, quite simply, the information provided to the
+NPPES by providers.</p>
+</blockquote>
+<p><br><br></p>
+<div class="section level3">
+<h3 id="unpack-the-response">Unpack the Response<a class="anchor" aria-label="anchor" href="#unpack-the-response"></a>
+</h3>
+<p><br></p>
+<p>Flatten the response tibble into a tidy data format with
+<code>prov_nppes_unpack()</code>:</p>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#provider_unpack(nppes_npi_resp)</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="search-for-multiple-npis">Search for Multiple NPIs<a class="anchor" aria-label="anchor" href="#search-for-multiple-npis"></a>
+</h2>
+<p><br></p>
+<p>To search for more than one NPI at a time, there are two options, the
+first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as
+opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>            <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span></span>
-<span>              height <span class="op">=</span> <span class="st">"500px"</span>, </span>
-<span>              fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co">#npi_list &lt;- c(1336413418, 1710975040, 1659781227, 1528060837)</span></span></code></pre></div>
+<p><br></p>
+<p>Then pipe the list into <code>prov_npi_nppes()</code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code>
+function to loop over the list:</p>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-11 <span style="color: #949494;">22:02:51</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-12-11 <span style="color: #949494;">22:02:53</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-12-11 <span style="color: #949494;">22:02:54</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-12-11 <span style="color: #949494;">22:02:56</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2022-12-11 <span style="color: #949494;">22:02:57</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2022-12-11 <span style="color: #949494;">22:02:59</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-fee-for-service-ffs-provider-enrollment-api">Medicare Fee-For-Service (FFS) Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-ffs-provider-enrollment-api"></a>
-</h2>
+<code class="sourceCode R"><span><span class="co">#npi_list_resp &lt;- npi_list |&gt; purrr::map_dfr(provider_nppes)</span></span></code></pre></div>
 <p><br></p>
-<p>The Medicare Fee-For-Service Public Provider Enrollment dataset
-includes information on providers who are actively approved to bill
-Medicare or have completed the 855O at the time the data was pulled from
-the <a href="https://pecos.cms.hhs.gov" class="external-link">Provider Enrollment and Chain
-Ownership System</a> (PECOS). These files are populated from PECOS and
-contain basic enrollment and provider information, reassignment of
-benefits information and practice location city, state and zip. These
-files are not intended to be used as real time reporting as the data
-changes from day to day and the files are updated only on a quarterly
-basis. This data does not include information on opt-out providers.
-Information is redacted where necessary to protect Medicare provider
-privacy.</p>
-<p><br></p>
-<ul>
-<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare
-Fee-For-Service Public Provider Enrollment API</a></li>
-<li><a href="https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf" class="external-link">Medicare
-Fee-For-Service Public Provider Enrollment - Data Dictionary</a></li>
-<li><a href="https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv" class="external-link">Reassignment
-Sub-File</a></li>
-</ul>
+<p>Unpacking the response is similar, adding only dplyr’s
+<code>group_split()</code> function to the chain. The parameter entered
+into <code>group_split()</code> must be <code>search</code>.</p>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mppe</span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># npi_list_resp |&gt; dplyr::group_split(outcome) |&gt; </span></span>
+<span><span class="co">#                  purrr::map_dfr(provider_unpack)</span></span></code></pre></div>
+<p><br></p>
+<p>Searching for a column of NPIs in a data frame is only slightly
+different. I’ll create a data frame with the same NPIs in the list
+example:</p>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mppe</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># npi_df &lt;- data.frame(npi = c(1336413418, 1710975040, 1659781227, 1528060837))</span></span></code></pre></div>
 <p><br></p>
+<p>We can even chain the search and unpack function chains together
+using <code>|&gt;</code>, R’s lovely pipe. Again, the
+<code>group_split()</code> input should be the column containing the
+NPIs.</p>
+<p>Split and purrr, then split and purrr:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mppe</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># npi_df_resp &lt;- npi_df |&gt; tibble::deframe() |&gt; </span></span>
+<span><span class="co">#                          purrr::map_dfr(provider_nppes) |&gt; </span></span>
+<span><span class="co">#                          dplyr::group_split(outcome) |&gt; </span></span>
+<span><span class="co">#                          purrr::map_dfr(provider_unpack)</span></span></code></pre></div>
 <p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
-</h2>
-<p><br></p>
-<p>The Order and Referring dataset provides information on all
-physicians and non-physician practitioners, by their National Provider
-Identifier (NPI), who are of a type/specialty that is legally eligible
-to order and refer in the Medicare program and who have current
-enrollment records in Medicare. This dataset is based on information
-gathered from the Provider Enrollment, Chain and Ownership System
-(PECOS).</p>
-<p><br></p>
-<ul>
-<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring" class="external-link">Medicare
-Order and Referring API</a></li>
-</ul>
+<div class="section level4">
+<h4 id="constraints-for-invalid-parameters">Constraints for Invalid Parameters<a class="anchor" aria-label="anchor" href="#constraints-for-invalid-parameters"></a>
+</h4>
+<p>Several constraints have been implemented so as to not batter the
+NPPES API with invalid searches. The input must be 10 digits or the
+function will throw an error:</p>
+<p><br><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_moar</span><span class="op">(</span><span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_moar(1003026055): could not find function "provider_moar"</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-16 <span style="color: #949494;">19:05:35</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+<p>It also must be a valid NPI. The <code>prov_npi_nppes()</code>
+function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>,
+as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a>
+(documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
+<p><br><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_moar</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>            <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_moar' not found</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">1234567891</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-16 <span style="color: #949494;">19:05:36</span> results <span style="color: #949494;">&lt;list [0]&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+<p>Inputting letters will throw an error:</p>
+<p><br><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_df</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_moar</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>          <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_moar' not found</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="va">abcdefghij</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in list2(...): object 'abcdefghij' not found</span></span></code></pre></div>
 <p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
-</h2>
-<p><br> The Medicare Provider and Supplier Taxonomy Crosswalk dataset
-lists the providers and suppliers eligible to enroll in Medicare
-programs with the proper healthcare provider taxonomy code. This data
-includes the Medicare speciality codes, if available, provider/supplier
-type description, taxonomy code, and the taxonomy description. This
-dataset is derived from information gathered from the National Plan and
-Provider Enumerator System (NPPES) and the Provider Enrollment, Chain
-and Ownership System (PECOS). <br></p>
-<ul>
-<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare
-Provider and Supplier Taxonomy Crosswalk</a></li>
-</ul>
-<p><br></p>
+<p>The Luhn check will catch any letters wrapped in quotes:</p>
+<p><br><br></p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpstc</span><span class="op">(</span><span class="st">"2086S0102X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_mpstc("2086S0102X"): could not find function "provider_mpstc"</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="st">"abcdefghij"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-16 <span style="color: #949494;">19:05:38</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+<p>But will let quoted numbers through:</p>
+<p><br><br></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_mpstc</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">npi_mpstc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpstc</span><span class="op">(</span>full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_mpstc(full = TRUE): could not find function "provider_mpstc"</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="st">"123456789"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-16 <span style="color: #949494;">19:05:40</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
+<p>As long as they’re 10 digits long.</p>
 <p><br><br></p>
 </div>
+</div>
 <div class="section level2">
-<h2 id="medicare-revalidation-due-date-list-api">Medicare Revalidation Due Date List API<a class="anchor" aria-label="anchor" href="#medicare-revalidation-due-date-list-api"></a>
+<h2 id="api-documentation-overview">API Documentation Overview<a class="anchor" aria-label="anchor" href="#api-documentation-overview"></a>
 </h2>
 <p><br></p>
-<p>Medicare Providers must validate their enrollment record every three
-or five years. CMS sets every Provider’s Revalidation due date at the
-end of a month and posts the upcoming six to seven months of due dates
-online. A due date of ‘TBD’ means that CMS has not set the due date yet.
-These lists are refreshed every two months and two months’ worth of due
-dates are appended to the list.</p>
+<p>This section outlines the NPPES API’s documentation, going over valid
+search inputs, constraints to those inputs, and descriptions of the many
+possible outputs.</p>
 <p><br></p>
-<p>The Revalidation Due Date List dataset contains revalidation due
-dates for Medicare providers who are due to revalidate in the following
-six months. If a provider’s due date does not fall within the ensuing
-six months, the due date is marked ‘TBD’. In addition the dataset also
-includes subfiles with reassignment information for a given provider as
-well as due date listings for clinics and group practices and their
-providers. This dataset is based on information gathered from the
-Provider Enrollment, Chain and Ownership System (PECOS).</p>
+<div class="section level3">
+<h3 id="terminology-notes">Terminology Notes<a class="anchor" aria-label="anchor" href="#terminology-notes"></a>
+</h3>
 <p><br></p>
+<div class="section level4">
+<h4 id="enumeration-type">Enumeration Type<a class="anchor" aria-label="anchor" href="#enumeration-type"></a>
+</h4>
+<p><br> Two categories of health care providers exist for NPI
+enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity
+<em>Type 2</em> (Organizational). <br></p>
+<div class="section level5">
+<h5 id="npi-1-individual">NPI-1: Individual<a class="anchor" aria-label="anchor" href="#npi-1-individual"></a>
+</h5>
+<p>Individual health care providers (including sole proprietors) may get
+an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they
+must apply for the NPI using your own SSN, not an Employer
+Identification Number (EIN) even if they have an EIN. As a sole
+proprietor, they may get only one NPI, just like any other
+individual.</p>
+<p>The following factors <strong>do not</strong> affect whether a sole
+proprietor is an Entity Type 1:</p>
 <ul>
-<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare
-Revalidation Due Date API</a></li>
-<li><a href="https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary" class="external-link">Medicare
-Revalidation Due Date - Data Dictionary</a></li>
+<li>Number of different office locations</li>
+<li>Whether they have employees</li>
+<li>Whether the IRS issued them an EIN.</li>
 </ul>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mrdd</span><span class="op">(</span><span class="fl">1184699621</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_mrdd(1184699621): could not find function "provider_mrdd"</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mrdd</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_mrdd' not found</span></span></code></pre></div>
+<blockquote>
+<p>An <strong>incorporated individual</strong> is a single health care
+provider who forms and conducts business under a corporation. A sole
+proprietor <strong>is not</strong> an incorporated individual because
+the sole proprietor didn’t form a corporation. If you’re a sole/solo
+practitioner, it doesn’t necessarily mean you’re a sole proprietor, and
+vice versa. If you’re an individual health care provider who’s
+incorporated, you may need to get an NPI for yourself (Entity Type 1)
+and an NPI for your corporation or LLC (Entity Type 2).</p>
+</blockquote>
+<p><br></p>
+</div>
+<div class="section level5">
+<h5 id="npi-2-organizational">NPI-2: Organizational<a class="anchor" aria-label="anchor" href="#npi-2-organizational"></a>
+</h5>
+<p><br></p>
+<p>Organizational health care providers are group health care providers
+eligible for NPIs as Entity Type 2. Organization health care providers
+may have a single employee or thousands of employees. An example is an
+incorporated individual who is an organization’s only employee.</p>
+<p>Some organization health care providers are made up of parts that
+work somewhat independently from their parent organization. These parts
+may offer different types of health care or offer health care in
+separate physical locations. These parts and their physical locations
+aren’t themselves legal entities but are part of the organization health
+care provider (which is a legal entity). The NPI Final Rule refers to
+the parts and locations as subparts.</p>
+<p>An organization health care provider can get its subparts their own
+NPIs. If a subpart conducts any HIPAA standard transactions on its own
+(separately from its parent), it must get its own NPI. Subpart
+determination makes sure that entities within a covered organization are
+uniquely identified in HIPAA standard transactions they conduct with
+Medicare and other covered entities. For example, a hospital offers
+acute care, laboratory, pharmacy, and rehabilitation services. Each of
+these subparts may need its own NPI because each sends its own standard
+transactions to one or more health plans.</p>
+<blockquote>
+<p>Subpart delegation doesn’t affect Entity Type 1 health care
+providers. As individuals, these health care providers can’t choose
+subparts and are not subparts.</p>
+</blockquote>
+<p><br></p>
+</div>
+<div class="section level5">
+<h5 id="authorized-official">Authorized Official<a class="anchor" aria-label="anchor" href="#authorized-official"></a>
+</h5>
+<p><br></p>
+<p>An appointed official (e.g., chief executive officer, chief financial
+officer, general partner, chairman of the board, or direct owner) to
+whom the organization has granted the legal authority to enroll it in
+the Medicare program, to make changes or updates to the organization’s
+status in the Medicare program, and to commit the organization to fully
+abide by the statutes, regulations, and program instructions of the
+Medicare program. See 42 CFR 424.502 for additional information.</p>
 <p><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="cms-public-reporting-of-missing-digital-contact-information-api">CMS Public Reporting of Missing Digital Contact Information API<a class="anchor" aria-label="anchor" href="#cms-public-reporting-of-missing-digital-contact-information-api"></a>
-</h2>
-<p><br></p>
-<p>In the May 2020 CMS Interoperability and Patient Access final rule,
-CMS finalized the policy to publicly report the names and NPIs of those
-providers who do not have digital contact information included in the
-NPPES system (85 FR 25584). This data includes the NPI and provider name
-of providers and clinicians without digital contact information in
-NPPES. This data is gathered from NPPES for providers who are missing
-digital contact information.</p>
-<p><br></p>
-<ul>
-<li><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS
-Public Reporting of Missing Digital Contact Information API</a></li>
-</ul>
-<p><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_promdci</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">kable_styling</span><span class="op">(</span>full_width <span class="op">=</span> <span class="cn">F</span>, </span>
-<span>  position <span class="op">=</span> <span class="st">"float_right"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_promdci</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_promdci' not found</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#provider_promdci(full = TRUE)</span></span></code></pre></div>
-<p><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="medicare-physician-other-practitioners---by-provider-and-service-api">Medicare Physician &amp; Other Practitioners - by Provider and
-Service API<a class="anchor" aria-label="anchor" href="#medicare-physician-other-practitioners---by-provider-and-service-api"></a>
-</h2>
-<p><br></p>
-<ul>
-<li><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare
-Physician &amp; Other Practitioners - by Provider and Service
-API</a></li>
-</ul>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpop</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_mpop' not found</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">T</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">kable_styling</span><span class="op">(</span>bootstrap_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"striped"</span>, <span class="st">"hover"</span>, <span class="st">"condensed"</span>, <span class="st">"responsive"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2019"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2018"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2017"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2016"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2015"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2014"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider_mpop</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="st">"2013"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>              <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span>height <span class="op">=</span> <span class="st">"500px"</span>, fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br><br></p>
 </div>
-<div class="section level2">
-<h2 id="cms-open-data-catalog">CMS Open Data Catalog<a class="anchor" aria-label="anchor" href="#cms-open-data-catalog"></a>
-</h2>
-<p><br></p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cms_open_data_catalog</span> <span class="op">&lt;-</span> <span class="st">"https://data.cms.gov/data.json"</span></span>
-<span></span>
-<span><span class="co"># Create polite version</span></span>
-<span><span class="va">polite_req</span> <span class="op">&lt;-</span> <span class="fu">polite</span><span class="fu">::</span><span class="fu">politely</span><span class="op">(</span></span>
-<span>  <span class="fu">httr2</span><span class="fu">::</span><span class="va"><a href="https://httr2.r-lib.org/reference/request.html" class="external-link">request</a></span>,</span>
-<span>  verbose <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  delay <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'polite'</span></span>
-<span></span>
-<span><span class="co"># Create request</span></span>
-<span><span class="va">req</span> <span class="op">&lt;-</span> <span class="fu">polite_req</span><span class="op">(</span><span class="va">cms_open_data_catalog</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in polite_req(cms_open_data_catalog): could not find function "polite_req"</span></span>
-<span></span>
-<span><span class="co"># Send and save response</span></span>
-<span><span class="va">resp</span> <span class="op">&lt;-</span> <span class="va">req</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/req_url.html" class="external-link">req_url_query</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/req_throttle.html" class="external-link">req_throttle</a></span><span class="op">(</span><span class="fl">50</span> <span class="op">/</span> <span class="fl">60</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/req_perform.html" class="external-link">req_perform</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in is_request(req): object 'req' not found</span></span>
-<span></span>
-<span><span class="co"># Parse JSON response and save results</span></span>
-<span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">resp</span> <span class="op">|&gt;</span> <span class="fu">httr2</span><span class="fu">::</span><span class="fu"><a href="https://httr2.r-lib.org/reference/resp_body_raw.html" class="external-link">resp_body_json</a></span><span class="op">(</span></span>
-<span>  check_type <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  simplifyVector <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in is_response(req): object 'resp' not found</span></span>
-<span></span>
-<span><span class="va">results_dataset</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">dataset</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">bureauCode</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">language</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">programCode</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">references</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">theme</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in tidyr::unnest(results$dataset, bureauCode): object 'results' not found</span></span>
-<span></span>
-<span><span class="va">results_dataset</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">title</span>, <span class="va">description</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span></span>
-<span>    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
-<span>    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results_dataset</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">title</span>, </span>
-<span>                time_period <span class="op">=</span> <span class="va">temporal</span>, </span>
-<span>                <span class="va">distribution</span>, </span>
-<span>                <span class="va">identifier</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">dataset</span> <span class="op">==</span> <span class="st">"Medicare Physician &amp; Other Practitioners - by Provider and Service"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">distribution</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">format</span> <span class="op">==</span> <span class="st">"API"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">title</span>, </span>
-<span>                <span class="va">accessURL</span>, </span>
-<span>                <span class="va">temporal</span>, </span>
-<span>                <span class="va">modified</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">kableExtra</span><span class="fu">::</span><span class="fu">scroll_box</span><span class="op">(</span></span>
-<span>    height <span class="op">=</span> <span class="st">"500px"</span>, </span>
-<span>    fixed_thead <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre></div>
-<p><br><br></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -536,7 +450,7 @@ API</a></li>
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
     </footer>

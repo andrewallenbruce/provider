@@ -13,9 +13,6 @@
     <loc>https://andrewallenbruce.github.io/provider/LICENSE.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/Searching-the-NPPES.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/cms-miss-contact-info.html</loc>
   </url>
   <url>
@@ -77,6 +74,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_unpack.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/opt_out.html</loc>
