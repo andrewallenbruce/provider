@@ -169,7 +169,7 @@ nppes_npi <- function(npi       = NULL,
                                country_code         = country,
                                limit                = limit,
                                skip                 = skip) |>
-    httr2::req_perform()
+          httr2::req_perform()
 
   res <- httr2::resp_body_json(resp,
                                check_type = FALSE,
@@ -180,14 +180,19 @@ nppes_npi <- function(npi       = NULL,
 
   # Convert to tibble
   results <- tibble::enframe(res, name = "outcome", value = "data_lists") |>
-    dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1)
+    dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1) |>
+    tidyr::unnest(cols = c(data_lists))
 
   if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
-    results <- results |> tidyr::unnest(cols = c(data_lists)) |>
-    dplyr::mutate(outcome = stringr::str_extract(description,
-                            stringr::boundary("sentence")),
-                            data_lists = NA) |>
-    dplyr::select(-description, -field, -number)}
+    results <- results |> tidyr::nest(errors = c(description, field, number))}
+
+  if (nrow(dplyr::filter(results, outcome == "results")) >= 1) {
+    results <- results |>
+      tidyr::unnest(cols = c(basic)) |>
+      tidyr::nest(dates = c(enumeration_date,
+                            last_updated,
+                            created_epoch,
+                            last_updated_epoch))}
 
   return(results)
 

@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 <!-- badges: end -->
 
-The goal of `provider` is to provide performant and reliable open-source tools to facilitate easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources.
+> Functions offering easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources.
  
 <br>
 
@@ -142,8 +142,21 @@ remotes::install_github("andrewallenbruce/provider")
 # Load library
 library(provider)
 
-provider::nppes_npi(npi = 1083879860)
+provider::nppes_npi(npi = 1336413418)
 ```
+
+```{r}
+tribble <- tibble::tribble(
+~fn,         ~params,
+"nppes_npi", list(1336413418),
+"nppes_npi", list(1659781227),
+"nppes_npi", list(first = "John", city = "Baltimore", state = "MD", limit = 1),
+"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA", limit = 1),
+)
+
+purrr::invoke_map_dfr(tribble$fn, tribble$params)
+```
+
 
 
 ```{r results='asis', echo=FALSE, eval=FALSE}

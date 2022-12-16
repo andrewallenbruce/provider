@@ -5,33 +5,47 @@ output: html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
-library(flextable)
-library(ftExtra)
-use_df_printer()
 ```
 
+```{r}
+library(provider)
+```
+
+## Medicare Fee-For-Service (FFS) Provider Enrollment API
+
+<br>
+
+The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
+
+<br>
+
+ -   [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+ -   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
+ -   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
+
+<br>
+
+```{r}
+provider_enrollment(1003026055)
+```
 
 
 <br>
 
-### Data Dictionary
-
-```{r eval=FALSE, include=FALSE}
-mppe_1 <- mppe_1 |> 
-  dplyr::mutate(variable_name = stringr::str_to_lower(variable_name)) |> 
-  dplyr::mutate(variable_name = formulaic::add.backtick(variable_name, include.backtick = "all")) |> 
-  dplyr::mutate(term_name = stringr::str_replace_all(term_name, "\r\n", " ")) |> 
-  dplyr::mutate(definition = stringr::str_replace_all(definition, "\r\n", " ")) |> 
-  dplyr::select(Variable = variable_name, Term = term_name, Definition = definition)
-
-constructive::construct(mppe_1)
-```
+### API Data Dictionary
 
 ```{r echo=FALSE}
-mppe_1 <- tibble::tibble(
+tibble::tibble(
   Variable = c(
     "`npi`", "`pecos_asct_cntl_id`", "`enrlmt_id`", "`provider_type_cd`",
     "`provider_type_desc`", "`state_cd`", "`first_name`", "`mdl_name`",
@@ -59,25 +73,20 @@ mppe_1 <- tibble::tibble(
     "Enrollment ID of the provider receiving reassignment benefits to bill to Medicare. To find enrollment information for providers receiving reassignment benefits to bill to Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.",
     "Provider practice location city. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider.",
     "Provider practice location zip code. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider."
-  ),
-)
-flextable::flextable(mppe_1) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+  )) |>
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 <br><br>
 
-```{r eval=FALSE, include=FALSE}
-mppe_2 <- mppe_2 |> 
-  dplyr::mutate(description = stringr::str_to_title(description)) |> 
-  dplyr::mutate(code = formulaic::add.backtick(code, include.backtick = "all")) |> 
-  tidyr::separate(description, into = c("type", "subtype"), sep = " - ", remove = TRUE, extra = "merge") |> 
-  dplyr::select(Code = code, Type = type, Subtype = subtype)
-
-constructive::construct(mppe_2)
-```
 
 ```{r echo=FALSE}
-mppe_2 <- tibble::tibble(
+cd <- tibble::tibble(
   Code = c(
     "`00-00`", "`00-01`", "`00-02`", "`00-03`", "`00-04`", "`00-05`",
     "`00-06`", "`00-07`", "`00-08`", "`00-09`", "`00-10`", "`00-13`",
@@ -308,9 +317,14 @@ mppe_2 <- tibble::tibble(
     "Radiation Oncology", "Emergency Medicine", "Interventional Radiology",
     "Physician Assistant", "Gynecological Oncology", "Other (Physician)",
     "Sleep Laboratory/Medicine", "Interventional Cardiology", "In-Person MDPP Supplier"
-  ),
-)
+  ))
 
-flextable::flextable(mppe_2) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+cd |>
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Code) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 

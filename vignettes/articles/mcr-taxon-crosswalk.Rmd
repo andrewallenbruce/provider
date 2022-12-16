@@ -5,22 +5,60 @@ output: html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
-library(flextable)
-library(ftExtra)
-use_df_printer()
+```
+
+```{r}
+library(provider)
 ```
 
 <br>
 
-### Data Dictionary
+## Medicare Provider and Supplier Taxonomy Crosswalk API
+
+<br>
+The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS).
+<br>
+
+- [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+
+<br>
+
+```{r}
+taxonomy_crosswalk(taxonomy_code = "2086S0102X")
+```
+<br>
+
+```{r}
+npi_mpstc <- npi_list |> purrr::map_dfr(provider_nppes) |> 
+                         dplyr::group_split(outcome) |>
+                         purrr::map_dfr(provider_unpack)
+
+npi_mpstc |> dplyr::distinct(taxon_code) |> 
+             tibble::deframe() |> 
+             purrr::map_dfr(provider_mpstc)
+```
+
+
+
+<br><br>
+
+
+### API Data Dictionary
 
 <br>
 
 ```{r echo=FALSE}
-mpstc <- tibble::tibble(
+tibble::tibble(
   Variable = c(
     "`medicare_specialty_code`", "`medicare_provider_supplier_type_description`",
     "`provider_taxonomy_code`", "`provider_taxonomy_description_type_classification_specialization`"
@@ -33,10 +71,20 @@ mpstc <- tibble::tibble(
     "Specialty code that corresponds to the listed Medicare specialty",
     "The description of the Medicare Provider/Supplier Type", "The taxonomy codes the Providers use",
     "The description of the taxonomy that the Providers use"
-  ),
-)
-flextable::flextable(mpstc) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+  )) |>
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
+<br>
+
+### Further Reading
+
+   - [Endpoints Information](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html)
+   - [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
 
 <br><br>

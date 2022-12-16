@@ -5,12 +5,16 @@ output: html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
-library(flextable)
-library(ftExtra)
-use_df_printer()
 ```
 
 <br>
@@ -19,8 +23,8 @@ use_df_printer()
 
 <br>
 
-```{r echo=FALSE}
-mooa <- tibble::tibble(
+```{r echo=FALSE, results='asis'}
+tibble::tibble(
   Variable = c(
     "`first_name`", "`last_name`", "`npi`", "`specialty`", "`optout_effective_date`",
     "`optout_end_date`", "`first_line_street_address`", "`second_line_street_address`",
@@ -37,10 +41,8 @@ mooa <- tibble::tibble(
     "Specialty of the Opt Out Provider", "Date from which the Provider's Opt Out Status is effective",
     "Date on which the Provider's Opt Out Status ends", "Provider's Street Address",
     "Provider's Street Address", "Provider's City", "Provider's State Abbreviation",
-    "Provider's Zip Code", "Flag indicating whether the Provider is eligible to Order and Refer"
-  ),
-)
-flextable::flextable(mooa) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+    "Provider's Zip Code", "Flag indicating whether the Provider is eligible to Order and Refer")) |> 
+  gluedown::md_table()
 ```
 
 <br><br>

@@ -3,11 +3,36 @@
 utils::globalVariables(c(
   "Year", # <cc_multiple>
   "Year", # <cc_specific>
-  "outcome", # <nppes_npi>
   "data_lists", # <nppes_npi>
+  "outcome", # <nppes_npi>
   "description", # <nppes_npi>
   "field", # <nppes_npi>
   "number", # <nppes_npi>
+  "basic", # <nppes_npi>
+  "enumeration_date", # <nppes_npi>
+  "last_updated", # <nppes_npi>
+  "created_epoch", # <nppes_npi>
+  "last_updated_epoch", # <nppes_npi>
+  "outcome", # <nppes_unpack>
+  "data_lists", # <nppes_unpack>
+  "description", # <nppes_unpack>
+  "field", # <nppes_unpack>
+  "number", # <nppes_unpack>
+  "datetime", # <nppes_unpack>
+  "basic", # <nppes_unpack>
+  "enumeration_date", # <nppes_unpack>
+  "last_updated", # <nppes_unpack>
+  "certification_date", # <nppes_unpack>
+  "created_epoch", # <nppes_unpack>
+  "last_updated_epoch", # <nppes_unpack>
+  "enumeration_type", # <nppes_unpack>
+  "npi", # <nppes_unpack>
+  "value", # <nppes_unpack>
+  "address_purpose", # <nppes_unpack>
+  "country_name", # <nppes_unpack>
+  "address_type", # <nppes_unpack>
+  "country_code", # <nppes_unpack>
+  "state", # <nppes_unpack>
   "Tot_Benes", # <provider_mpop>
   "Tot_Srvcs", # <provider_mpop>
   "Tot_Bene_Day_Srvcs", # <provider_mpop>

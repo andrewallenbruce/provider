@@ -4,68 +4,147 @@ output: html_document
 ---
 
 ```{r setup, include = FALSE}
-source("setup/setup.R")
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
 ```
 
 ```{r}
 library(provider)
 ```
 
-
 ## Purpose
 
-Digital contact information, also known as **endpoints**, provide a secure way for health care
-entities, including providers and hospitals, to send authenticated, encrypted health information
-directly to known, trusted recipients over the internet. Health care organizations seeking to
-engage in electronic health information exchange need accurate information about the
-electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other
-digital contact information) of potential exchange partners to facilitate this information exchange.
+Digital contact information, also known as **endpoints**, provide a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other digital contact information) of potential exchange partners to facilitate this information exchange.
 
-## Usage
+<br>
+
+## Link Between the Missing Information and NPPES APIs
 
 If a provider shows up in the search results of this API, then they have no Endpoints entered into the NPPES.
 
-```{r results='asis'}
+<br>
+
+```{r}
 missing_information(npi = 1144224569) |> 
-  gluedown::md_table()
+  gt::gt() |> 
+  gt::tab_header("CMS Public Reporting of Missing Digital Contact Information") |> 
+  gtExtras::gt_theme_538() |> 
+  gt::opt_stylize(style = 4, color = "red", add_row_striping = FALSE)
 ```
 
-We can confirm this by searching the NPPES, which should contain an empty `endpoints` list-column:
+<br>
 
-```{r results='asis'}
+We can confirm this by searching for the provider in the NPPES, which should contain a `NULL` or `NA` `endpoints` list-column:
+
+<br>
+
+```{r}
 nppes_npi(npi = 1144224569) |> 
-  tidyr::unnest(data_lists) |>
-  tidyr::unnest(basic) |>
   dplyr::select(npi = number, last_name, first_name, endpoints) |> 
-  gluedown::md_table()
-```
-### Multiple searches with {purrr}
-
-```{r results='asis'}
-purrr::map_dfr(c(1134122013, 1144224569, 1003000423), missing_information) |> 
-  gluedown::md_table()
+  dplyr::mutate(endpoints = NA) |> 
+  gt::gt() |> 
+  gt::tab_header("NPPES National Provider Identifier Registry API") |> 
+  gtExtras::gt_theme_538() |> 
+  gt::opt_stylize(style = 4, color = "red", add_row_striping = FALSE)
 ```
 
-```{r results='asis'}
-purrr::map_dfr(c(1134122013, 1144224569, 1003000423), nppes_npi) |> 
-  tidyr::unnest(data_lists) |>
-  tidyr::unnest(basic) |>
+<br>
+
+### A Provider Not Missing Information Looks Like This
+
+<br>
+
+```{r}
+purrr::map_dfr(c(1144224569, 1003000423), missing_information) |> 
+  gt::gt() |> 
+  gt::tab_header("CMS Public Reporting of Missing Digital Contact Information API") |> 
+  gtExtras::gt_theme_538() |> 
+  gt::opt_stylize(style = 4, 
+                  color = "red", 
+                  add_row_striping = FALSE)
+```
+
+<br>
+
+We can again check by searching for the NPI in the NPPES:
+
+<br>
+
+```{r}
+nppes_npi(1003000423) |> 
   dplyr::select(npi = number, last_name, first_name, endpoints) |> 
-  gluedown::md_table()
+  tidyr::unnest_wider(endpoints, 
+                      names_sep = NULL, 
+                      simplify = TRUE, 
+                      strict = TRUE) |> 
+  dplyr::select(!c(endpointType, 
+                   use, 
+                   contentType, 
+                   contentTypeDescription, 
+                   country_name, 
+                   country_code, 
+                   address_type,
+                   affiliation,
+                   useDescription,
+                   contentOtherDescription)) |> 
+  gt::gt() |> 
+  gt::sub_missing(
+    columns = dplyr::everything(),
+    missing_text = " ") |>
+  gt::cols_merge(
+    columns = c(address_1, city, state, postal_code),
+    pattern = "{1}, {2}, {3}, {4}")  |> 
+  gt::cols_merge(
+    columns = c(endpointTypeDescription, endpointDescription),
+    pattern = "{1}, {2}")  |> 
+  gt::cols_label(
+    address_1 = "address", 
+    endpointTypeDescription = "description") |> 
+  gtExtras::gt_merge_stack(col1 = endpoint, 
+                           col2 = endpointTypeDescription, 
+                           small_cap = FALSE) |> 
+  gtExtras::gt_theme_538() |> 
+  gt::opt_stylize(style = 4, 
+                  color = "red", 
+                  add_row_striping = FALSE)
 ```
 
-### Data Dictionary
+<br>
 
-```{r results='asis', echo=FALSE}
-promdci <- tibble::tibble(
+## API Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+dd <- tibble::tibble(
   Variable = c("`npi`", "`provider_name`"),
   Term = c("NPI", "Provider Name"),
-  Definition = c("The provider's 10-digit National Provider Identifier.", "Name of the provider. It consists of the legal last name followed by the first name, separated by a comma."),
-)
-
-gluedown::md_table(promdci)
+  Definition = c("The provider's 10-digit National Provider Identifier.", 
+                 "Name of the provider. It consists of the legal last name 
+                 followed by the first name, separated by a comma."))
+dd |> 
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
-   - [Dictionary Link](https://data.cms.gov/resources/public-reporting-of-missing-digital-contact-information-data-dictionary)
+
+<br>
+
+### Further Reading
+
    - [Endpoints Information](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html)
+   - [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
 
 <br><br>

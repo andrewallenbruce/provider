@@ -5,41 +5,24 @@ output: html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
-library(flextable)
-library(ftExtra)
-use_df_printer()
 ```
 
 <br>
 
 ### Data Dictionary
 
-<br>
-
-```{r eval=FALSE, include=FALSE}
-rcgpr_names <- provider_rcgpr(npi = 1427050418)
-rcgpr_names <- names(rcgpr_names) |> tibble::tibble() |> dplyr::rename(variable_name = "names(rcgpr_names)")
-
-rcgpr <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "rcgpr")
-
-rcgpr <- rcgpr |> 
-  dplyr::mutate(variable_name = rcgpr_names) |> 
-  tidyr::unnest(variable_name) |> 
-  dplyr::mutate(variable_name = formulaic::add.backtick(variable_name, include.backtick = "all")) |> 
-  dplyr::mutate(term_name = stringr::str_replace_all(term_name, "\r\n", " ")) |> 
-  dplyr::mutate(definition = stringr::str_replace_all(definition, "\r\n", " ")) |> 
-  dplyr::select(Variable = variable_name, Term = term_name, Definition = definition)
-
-constructive::construct(rcgpr)
-```
-
-
-
-```{r echo=FALSE}
-rcgpr <- tibble::tibble(
+```{r results='asis', echo=FALSE}
+tibble::tibble(
   Variable = c(
     "`group_pac_id`", "`group_enrollment_id`", "`group_legal_business_name`",
     "`group_state_code`", "`group_due_date`", "`group_reassignments_and_physician_assistants`",
@@ -71,9 +54,7 @@ rcgpr <- tibble::tibble(
     "Enrollment specialty of the provider who is reassigning their benefits or is an employee",
     "Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)",
     "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"
-  ),
-)
-flextable::flextable(rcgpr) |> flextable::autofit() |> ftExtra::colformat_md() |> flextable::theme_vanilla()
+  )) |> gluedown::md_table()
 ```
 
 

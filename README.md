@@ -21,10 +21,9 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 <!-- badges: end -->
 
-The goal of `provider` is to provide performant and reliable open-source
-tools to facilitate easy access to [healthcare
-provider](https://en.wikipedia.org/wiki/Health_care_provider) data
-through publicly available APIs & sources.
+> Functions offering easy access to [healthcare
+> provider](https://en.wikipedia.org/wiki/Health_care_provider) data
+> through publicly available APIs & sources.
 
 <br>
 
@@ -71,32 +70,57 @@ remotes::install_github("andrewallenbruce/provider")
 # Load library
 library(provider)
 
-provider::nppes_npi(npi = 1083879860)
-#> # A tibble: 1 × 3
-#>   datetime            outcome data_lists   
-#>   <dttm>              <chr>   <list>       
-#> 1 2022-12-16 03:41:24 results <df [1 × 11]>
+provider::nppes_npi(npi = 1336413418)
+#> # A tibble: 1 × 21
+#>   datetime            outcome enumerati…¹ number addre…² pract…³ organ…⁴ organ…⁵
+#>   <dttm>              <chr>   <chr>       <chr>  <list>  <list>  <chr>   <chr>  
+#> 1 2022-12-16 13:56:02 results NPI-2       13364… <df>    <list>  LUMINU… NO     
+#> # … with 13 more variables: certification_date <chr>, status <chr>,
+#> #   authorized_official_first_name <chr>, authorized_official_last_name <chr>,
+#> #   authorized_official_middle_name <chr>,
+#> #   authorized_official_telephone_number <chr>,
+#> #   authorized_official_title_or_position <chr>,
+#> #   authorized_official_name_prefix <chr>, taxonomies <list>,
+#> #   identifiers <list>, endpoints <list>, other_names <list>, dates <list>, …
+```
+
+``` r
+tribble <- tibble::tribble(
+~fn,         ~params,
+"nppes_npi", list(1336413418),
+"nppes_npi", list(1659781227),
+"nppes_npi", list(first = "John", city = "Baltimore", state = "MD", limit = 1),
+"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA", limit = 1),
+)
+
+purrr::invoke_map_dfr(tribble$fn, tribble$params)
+#> # A tibble: 4 × 30
+#>   datetime            outcome enumerati…¹ number addre…² pract…³ organ…⁴ organ…⁵
+#>   <dttm>              <chr>   <chr>       <chr>  <list>  <list>  <chr>   <chr>  
+#> 1 2022-12-16 13:56:03 results NPI-2       13364… <df>    <list>  LUMINU… NO     
+#> 2 2022-12-16 13:56:03 Errors  <NA>        <NA>   <NULL>  <NULL>  <NA>    <NA>   
+#> 3 2022-12-16 13:56:03 results NPI-1       14275… <df>    <list>  <NA>    <NA>   
+#> 4 2022-12-16 13:56:04 results NPI-1       10033… <df>    <list>  <NA>    <NA>   
+#> # … with 22 more variables: certification_date <chr>, status <chr>,
+#> #   authorized_official_first_name <chr>, authorized_official_last_name <chr>,
+#> #   authorized_official_middle_name <chr>,
+#> #   authorized_official_telephone_number <chr>,
+#> #   authorized_official_title_or_position <chr>,
+#> #   authorized_official_name_prefix <chr>, taxonomies <list>,
+#> #   identifiers <list>, endpoints <list>, other_names <list>, dates <list>, …
 ```
 
 ``` r
 npi_ex <- provider::nppes_npi(npi = 1083879860) |> 
           provider::provider_unpack()
+#> Error in `tidyr::unnest()`:
+#> ! Can't subset columns that don't exist.
+#> ✖ Column `data_lists` doesn't exist.
 
 npi_ex |> dplyr::mutate(address_1 = stringr::str_to_title(address_1),
                         city = stringr::str_to_title(city)) |> 
           tidyr::unite("full_address", c(address_1, city, state), sep = ", ", remove = FALSE)
-#> # A tibble: 2 × 39
-#>   npi      prov_…¹ first…² last_…³ sole_…⁴ gender enume…⁵ last_…⁶ certi…⁷ status
-#>   <chr>    <chr>   <chr>   <chr>   <lgl>   <chr>  <chr>   <chr>   <chr>   <chr> 
-#> 1 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
-#> 2 1083879… Indivi… CHRIST… AARON   FALSE   M      2008-0… 2021-0… 2020-0… A     
-#> # … with 29 more variables: country_code <chr>, address_purpose <chr>,
-#> #   full_address <chr>, address_1 <chr>, city <chr>, state <chr>,
-#> #   postal_code <chr>, telephone_number <chr>, taxon_code <chr>,
-#> #   taxonomy_group <chr>, taxon_desc <chr>, taxon_state <chr>,
-#> #   taxon_license <chr>, taxon_primary <lgl>, endpts_endpoint_type <chr>,
-#> #   endpts_endpoint_type_description <chr>, endpts_endpoint <chr>,
-#> #   endpts_affiliation <chr>, endpts_affiliation_name <chr>, …
+#> Error in dplyr::mutate(npi_ex, address_1 = stringr::str_to_title(address_1), : object 'npi_ex' not found
   dplyr::rowwise() |> 
   full_address(cols = c(address_1, city, state, postal_code)) |> 
   tidyr::unnest(full_address)

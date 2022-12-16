@@ -1,393 +1,278 @@
 ---
-title: "NPPES NPI Public Registry API"
+title: "NPPES NPI Registry"
 output: html_document
 ---
 
 ```{r setup, include = FALSE}
-source("setup/setup.R")
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
 ```
 
-```{r setup}
+```{r}
 library(provider)
 ```
 
-<br>
-
-There are three methods of entering search terms into the functions:
-
- - single 10-digit number
- - list of multiple 10-digit numbers
- - data frame of 10-digit numbers
-
-I'll create the example list and data frame I'll be using in the examples for each API.
-
-<br>
-
-```{r}
-# Example list
-npi_list <- c(1003026055, 
-              1316405939, 
-              1720392988, 
-              1518184605, 
-              1922056829, 
-              1083879860)
-
-# Example data frame
-npi_df <- data.frame(npi = c(1003026055,  
-                             1316405939, 
-                             1720392988, 
-                             1518184605, 
-                             1922056829, 
-                             1083879860))
-```
-
-
 <br><br>
 
-## NPPES NPI Public Registry API
+# The NPPES NPI Registry
 
-The NPPES NPI Registry Public Search is a free directory of all active National Provider Identifier (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider’s name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry. The NPPES Application Programming Interface (API) is a faster alternative to the downloadable NPPES data files. It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The Skip field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
+<br>
 
--  [U.S. NPPES National Provider Identifier (NPI) Registry API](https://npiregistry.cms.hhs.gov/search)
+The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider's name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+
+<br>
+
+## The NPPES API
+
+The NPPES *Application Programming Interface* (API) is a faster alternative to the [downloadable NPPES data files](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html). It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The *Skip* field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
+
+<br>
+
+# Searching the NPPES by NPI
+
+The following is a basic example of searching for an NPI using the using `prov_npi_nppes()`. The only argument is the provider's 10-digit [National Provider Identifier](https://en.wikipedia.org/wiki/National_Provider_Identifier):
 
 <br>
 
 ```{r message=FALSE, warning=FALSE}
-provider_nppes(1003026055) |> 
-  provider_unpack() |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(fixed_thead = TRUE)
-```
-
-<br>
-
-```{r warning=FALSE}
-npi_list |> purrr::map_dfr(provider_nppes) |> 
-            dplyr::group_split(outcome) |>
-            purrr::map_dfr(provider_unpack) |> 
-            knitr::kable() |> 
-            kableExtra::scroll_box(
-              height = "500px", 
-              fixed_thead = TRUE)
-```
-
-<br>
-
-```{r message=FALSE, warning=FALSE}
-npi_df |> tibble::deframe() |> 
-          purrr::map_dfr(provider_nppes)
-```
-
-<br><br>
-
-## Medicare Fee-For-Service (FFS) Provider Enrollment API
-
-<br>
-
-The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
-
-<br>
-
- -   [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
- -   [Medicare Fee-For-Service Public Provider Enrollment - Data Dictionary](https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf)
- -   [Reassignment Sub-File](https://data.cms.gov/sites/default/files/2022-07/ac01de5f-4aca-4aea-ac4d-2eb4dda8bc65/Study_01.032.02_2022.07.01_PPEF_Reassignment_Extract.csv)
-
-<br>
-
-```{r}
-provider_mppe(1003026055) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(fixed_thead = TRUE)
-```
-
-<br>
-
-
-```{r}
-npi_list |> purrr::map_dfr(provider_mppe) |> 
-            knitr::kable() |> 
-            kableExtra::scroll_box(fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-npi_df |> tibble::deframe() |> 
-          purrr::map_dfr(provider_mppe) |> 
-          knitr::kable() |> 
-          kableExtra::scroll_box(fixed_thead = TRUE)
+nppes_npi(1114499340)
 ```
 
 
 <br><br>
 
-## Medicare Order and Referring API
+This returns a `tibble` containing the NPI that was searched for (`search`), the `datetime` of the query, an `outcome` status column and `data_lists`, a list-column containing a collection of variables and nested data frames:
 
 <br>
 
-The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+The **variables** returned are as follows:
 
 <br>
 
- - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-
-```{r}
-provider_moar(1003026055) |> knitr::kable()
-```
-
-<br>
-
-```{r}
-npi_list |> purrr::map_dfr(provider_moar) |> 
-            knitr::kable()
-```
+ * `created_epoch`: date when the NPI was issued
+ * `enumeration_type`: NPI Entity Type, either NPI-1(individual) or NPI-2(organizational)
+ * `last_updated_epoch`: date when the information was last updated by the provider
+ * `number`: provider's NPI, as listed in the NPPES
 
 <br>
 
-```{r}
-npi_df |> tibble::deframe() |> 
-          purrr::map_dfr(provider_moar) |> 
-          knitr::kable()
-```
+> Note: `last_updated_epoch` / `created_epoch` are dates in [Unix time](https://www.epochconverter.com/). They are repeated in the `basic` list as `last_updated` and `enumeration_date`, respectively.
+
+<br>
+
+The **list-columns** returned are as follows:
+
+<br>
+
+ * `basic`: Basic information
+ * `other_names`: Other names used by the provider
+ * `addresses`: Primary location and mailing addresses
+ * `taxonomies`: Specialty classification and related information
+ * `identifiers`: Various other identifiers such as payer-specific IDs, CLIA numbers, etc.
+ * `practice_locations`: Provider's practice locations
+ * `endpoints`: Information regarding the provider's endpoints for Health Information Exchange (HIE)
+
+<br><br>
+ 
+> Note: All list-columns may not be available for every provider. This depends on factors such as NPI type, incorporated individual status, subpart delegation, and, quite simply, the information provided to the NPPES by providers.
 
 <br><br>
 
-## Medicare Provider and Supplier Taxonomy Crosswalk API
+## Unpack the Response
 
 <br>
-The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the providers and suppliers eligible to enroll in Medicare programs with the proper healthcare provider taxonomy code. This data includes the Medicare speciality codes, if available, provider/supplier type description, taxonomy code, and the taxonomy description. This dataset is derived from information gathered from the National Plan and Provider Enumerator System (NPPES) and the Provider Enrollment, Chain and Ownership System (PECOS).
-<br>
 
-- [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
+Flatten the response tibble into a tidy data format with `prov_nppes_unpack()`:
 
 <br>
 
 ```{r}
-provider_mpstc("2086S0102X") |> knitr::kable()
-```
-<br>
-
-```{r}
-npi_mpstc <- npi_list |> purrr::map_dfr(provider_nppes) |> 
-                         dplyr::group_split(outcome) |>
-                         purrr::map_dfr(provider_unpack)
-
-npi_mpstc |> dplyr::distinct(taxon_code) |> 
-             tibble::deframe() |> 
-             purrr::map_dfr(provider_mpstc) |> 
-             knitr::kable() |> 
-             kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-
-```{r}
-provider_mpstc(full = TRUE)
+#provider_unpack(nppes_npi_resp)
 ```
 
 
 <br><br>
 
-## Medicare Revalidation Due Date List API
+# Search for Multiple NPIs
 
 <br>
 
-Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet. These lists are refreshed every two months and two months’ worth of due dates are appended to the list.
+To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using `c()` as opposed to `list()`) of said NPIs:
 
 <br>
 
-The Revalidation Due Date List dataset contains revalidation due dates for Medicare providers who are due to revalidate in the following six months. If a provider's due date does not fall within the ensuing six months, the due date is marked 'TBD'. In addition the dataset also includes subfiles with reassignment information for a given provider as well as due date listings for clinics and group practices and their providers. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
-
-<br>
-
--  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
--  [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
-
-
-```{r}
-provider_mrdd(1184699621) |> knitr::kable()
-```
-
-```{r}
-npi_list |> purrr::map_dfr(provider_mrdd)
-```
-
-
-<br><br>
-
-## CMS Public Reporting of Missing Digital Contact Information API
-
-<br>
-
-In the May 2020 CMS Interoperability and Patient Access final rule, CMS finalized the policy to publicly report the names and NPIs of those providers who do not have digital contact information included in the NPPES system (85 FR 25584). This data includes the NPI and provider name of providers and clinicians without digital contact information in NPPES. This data is gathered from NPPES for providers who are missing digital contact information.
-
-<br>
-
--  [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
-
-<br>
-
-```{r}
-provider_promdci(npi = 1760485387) |> 
-  knitr::kable() |> 
-  kableExtra::kable_styling(full_width = F, 
-  position = "float_right")
+```{r message=TRUE, warning=FALSE}
+#npi_list <- c(1336413418, 1710975040, 1659781227, 1528060837)
 ```
 
 <br>
 
-```{r}
-npi_list |> purrr::map_dfr(provider_promdci)
+Then pipe the list into `prov_npi_nppes()` using [purrr's](https://purrr.tidyverse.org/) `map_dfr()` function to loop over the list:
+
+<br>
+
+```{r message=TRUE, warning=FALSE}
+#npi_list_resp <- npi_list |> purrr::map_dfr(provider_nppes)
 ```
+
+
+<br>
+
+
+Unpacking the response is similar, adding only dplyr's `group_split()` function to the chain. The parameter entered into `group_split()` must be `search`.
+
+<br>
+
+```{r message=TRUE, warning=FALSE}
+# npi_list_resp |> dplyr::group_split(outcome) |> 
+#                  purrr::map_dfr(provider_unpack)
+```
+
+
+<br>
+
+Searching for a column of NPIs in a data frame is only slightly different. I'll create a data frame with the same NPIs in the list example:
 
 <br>
 
 ```{r}
-#provider_promdci(full = TRUE)
+# npi_df <- data.frame(npi = c(1336413418, 1710975040, 1659781227, 1528060837))
 ```
 
 
-<br><br>
-
-## Medicare Physician & Other Practitioners - by Provider and Service API
 
 <br>
 
--  [Medicare Physician & Other Practitioners - by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+We can even chain the search and unpack function chains together using `|>`, R's lovely pipe. Again, the `group_split()` input should be the column containing the NPIs. 
 
-
-```{r}
-npi_list |> purrr::map_dfr(provider_mpop)
-```
-
-<br>
+Split and purrr, then split and purrr:
 
 ```{r}
-provider_mpop(npi = 1003000126, year = "2020") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = T) |> 
-  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2019") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2018") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2017") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2016") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2015") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2014") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-provider_mpop(npi = 1003000126, year = "2013") |> 
-              knitr::kable() |> 
-              kableExtra::scroll_box(height = "500px", fixed_thead = TRUE)
-```
-
-<br><br>
-
-## CMS Open Data Catalog
-
-<br>
-
-```{r}
-cms_open_data_catalog <- "https://data.cms.gov/data.json"
-
-# Create polite version
-polite_req <- polite::politely(
-  httr2::request,
-  verbose = FALSE,
-  delay = 2)
-
-# Create request
-req <- polite_req(cms_open_data_catalog)
-
-# Send and save response
-resp <- req |>
-  httr2::req_url_query() |>
-  httr2::req_throttle(50 / 60) |>
-  httr2::req_perform()
-
-# Parse JSON response and save results
-results <- resp |> httr2::resp_body_json(
-  check_type = FALSE,
-  simplifyVector = TRUE)
-
-results_dataset <- results$dataset |> 
-  tidyr::unnest(bureauCode) |> 
-  tidyr::unnest(language) |> 
-  tidyr::unnest(programCode) |> 
-  tidyr::unnest(references) |> 
-  tidyr::unnest(theme)
-
-results_dataset |> 
-  dplyr::select(title, description) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(
-    height = "500px", 
-    fixed_thead = TRUE)
-```
-
-<br>
-
-```{r}
-results_dataset |> 
-  dplyr::select(dataset = title, 
-                time_period = temporal, 
-                distribution, 
-                identifier) |> 
-  dplyr::filter(dataset == "Medicare Physician & Other Practitioners - by Provider and Service") |> 
-  tidyr::unnest(distribution) |> 
-  dplyr::filter(format == "API") |> 
-  dplyr::select(title, 
-                accessURL, 
-                temporal, 
-                modified) |> 
-  knitr::kable() |> 
-  kableExtra::scroll_box(
-    height = "500px", 
-    fixed_thead = TRUE)
+# npi_df_resp <- npi_df |> tibble::deframe() |> 
+#                          purrr::map_dfr(provider_nppes) |> 
+#                          dplyr::group_split(outcome) |> 
+#                          purrr::map_dfr(provider_unpack)
 ```
 
 
 <br><br>
+
+### Constraints for Invalid Parameters
+
+Several constraints have been implemented so as to not batter the NPPES API with invalid searches. The input must be 10 digits or the function will throw an error:
+
+<br><br>
+
+```{r, error=TRUE}
+provider_nppes(123456789)
+```
+
+<br><br>
+
+It also must be a valid NPI. The `prov_npi_nppes()` function checks for validity using the [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm), as per it's implementation by [CMS](https://www.cms.gov/) (documented [here](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)):
+
+<br><br>
+
+```{r, error=TRUE}
+provider_nppes(1234567891)
+```
+
+<br><br>
+
+Inputting letters will throw an error:
+
+<br><br>
+
+```{r, error=TRUE}
+provider_nppes(abcdefghij)
+```
+
+<br><br>
+
+The Luhn check will catch any letters wrapped in quotes:
+
+<br><br>
+
+```{r, error=TRUE}
+provider_nppes("abcdefghij")
+```
+
+<br><br>
+
+But will let quoted numbers through:
+
+<br><br>
+
+```{r, error=TRUE}
+provider_nppes("123456789")
+```
+
+As long as they're 10 digits long.
+
+<br><br>
+
+
+# API Documentation Overview
+
+<br>
+
+This section outlines the NPPES API's documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.
+
+<br>
+
+## Terminology Notes
+
+<br>
+
+### Enumeration Type
+
+<br>
+Two categories of health care providers exist for NPI enumeration purposes: Entity *Type 1* (Individual) and Entity *Type 2* (Organizational).
+<br>
+
+#### NPI-1: Individual
+
+Individual health care providers (including sole proprietors) may get an NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.
+
+The following factors **do not** affect whether a sole proprietor is an Entity Type 1:
+
+-   Number of different office locations
+-   Whether they have employees
+-   Whether the IRS issued them an EIN.
+
+
+> An **incorporated individual** is a single health care provider who forms and conducts business under a corporation. A sole proprietor **is not** an incorporated individual because the sole proprietor didn't form a corporation. If you're a sole/solo practitioner, it doesn't necessarily mean you're a sole proprietor, and vice versa. If you're an individual health care provider who's incorporated, you may need to get an NPI for yourself (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+
+<br>
+
+#### NPI-2: Organizational
+
+<br>
+
+Organizational health care providers are group health care providers eligible for NPIs as Entity Type 2. Organization health care providers may have a single employee or thousands of employees. An example is an incorporated individual who is an organization's only employee.
+
+Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren't themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.
+
+An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.
+
+> Subpart delegation doesn't affect Entity Type 1 health care providers. As individuals, these health care providers can't choose subparts and are not subparts.
+
+<br>
+
+#### Authorized Official
+
+<br>
+
+An appointed official (e.g., chief executive officer, chief financial officer, general partner, chairman of the board, or direct owner) to whom the organization has granted the legal authority to enroll it in the Medicare program, to make changes or updates to the organization's status in the Medicare program, and to commit the organization to fully abide by the statutes, regulations, and program instructions of the Medicare program. See 42 CFR 424.502 for additional information.
+
+<br><br>
+

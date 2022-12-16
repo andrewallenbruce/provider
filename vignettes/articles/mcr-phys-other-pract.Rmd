@@ -5,12 +5,16 @@ output: html_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
 )
-library(flextable)
-library(ftExtra)
-use_df_printer()
 ```
 
 <br>
@@ -298,10 +302,14 @@ mpop_prov <- tibble::tibble(
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for schizophrenia and other psychotic disorders. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for stroke. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Average Hierarchical Condition Category (HCC) risk score of beneficiaries."
-  ),
-)
+  ))
 
-flextable(mpop_prov) |> autofit() |> ftExtra::colformat_md()
+mpop_prov |> gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 
@@ -347,10 +355,14 @@ mpop_geo <- tibble::tibble(
     "Average of the Medicare allowed amount for the service. Medicare allowed amounts includes the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
     "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.",
     "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Additional information on the standardization of Medicare payments can be found in the “Geographic Variation Public Use File: Technical Supplement on Standardization.”"
-  ),
-)
+  ))
 
-flextable(mpop_geo) |> autofit() |> ftExtra::colformat_md() |> theme_vanilla()
+mpop_geo |> gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 <br><br>
@@ -431,22 +443,14 @@ mpop_serv <- tibble::tibble(
     "Average of the Medicare allowed amount for the service; this figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
     "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service. Note: In general, Medicare FFS claims with dates-of-service or dates-of-discharge on or after April 1, 2013, incurred a 2 percent reduction in Medicare payment. This is in response to mandatory across-the-board reductions in Federal spending, also known as sequestration.",
     "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Note: This variable is available starting with the calendar year 2014 data. Please refer to the “Additional Information” section of this document for more details on the standardization of Medicare payments."
-  ),
-)
+  ))
 
-flextable(mpop_serv) |> autofit() |> ftExtra::colformat_md() |> theme_vanilla()
+mpop_serv |> gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 <br><br>
-
-```{r eval=FALSE, include=FALSE}
-mpop_serv <- readxl::read_excel("C:/Users/andyb/Desktop/Desktop Archive/provider_api_schemas.xlsx", sheet = "mpop_serv")
-mpop_serv <- mpop_serv |> 
-  dplyr::mutate(variable_name = stringr::str_to_lower(variable_name)) |> 
-  dplyr::mutate(variable_name = formulaic::add.backtick(variable_name, include.backtick = "all")) |> 
-  dplyr::mutate(term_name = stringr::str_replace_all(term_name, "\r\n", " ")) |> 
-  dplyr::mutate(definition = stringr::str_replace_all(definition, "\r\n", " ")) |> 
-  dplyr::select(Variable = variable_name, Term = term_name, Definition = definition)
-
-constructive::construct(mpop_serv)
-```
