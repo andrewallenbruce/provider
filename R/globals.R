@@ -8,11 +8,10 @@ utils::globalVariables(c(
   "description", # <nppes_npi>
   "field", # <nppes_npi>
   "number", # <nppes_npi>
-  "basic", # <nppes_npi>
-  "enumeration_date", # <nppes_npi>
-  "last_updated", # <nppes_npi>
   "created_epoch", # <nppes_npi>
   "last_updated_epoch", # <nppes_npi>
+  "enumeration_type", # <nppes_npi>
+  "basic", # <nppes_npi>
   "outcome", # <nppes_unpack>
   "data_lists", # <nppes_unpack>
   "description", # <nppes_unpack>

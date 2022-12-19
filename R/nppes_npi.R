@@ -184,16 +184,43 @@ nppes_npi <- function(npi       = NULL,
     tidyr::unnest(cols = c(data_lists))
 
   if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
-    results <- results |> tidyr::nest(errors = c(description, field, number))}
+    results <- results |> tidyr::nest(errors = c(description, field, number))
+    return(results)
+    }
 
   if (nrow(dplyr::filter(results, outcome == "results")) >= 1) {
-    results <- results |>
-      tidyr::unnest(cols = c(basic)) |>
-      tidyr::nest(dates = c(enumeration_date,
-                            last_updated,
-                            created_epoch,
-                            last_updated_epoch))}
+    results <- results |> tidyr::nest(epochs = c(created_epoch, last_updated_epoch))}
 
-  return(results)
+  if (nrow(dplyr::filter(results, enumeration_type == "NPI-2")) >= 1) {
+    results <- results |>
+      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
+      tidyr::nest(authorized_official = tidyr::contains("authorized"),
+                  basic_other = tidyr::any_of(c("basic_organizational_subpart",
+                                                "basic_certification_date",
+                                                "basic_enumeration_date",
+                                                "basic_last_updated",
+                                                "basic_status",
+                                                "basic_parent_organization_legal_business_name"))) |>
+      dplyr::relocate(tidyr::contains("basic"), .after = number)
+    return(results)
+    }
+
+  if (nrow(dplyr::filter(results, enumeration_type == "NPI-1")) >= 1) {
+    results <- results |>
+      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
+      tidyr::nest(basic_other = tidyr::any_of(c("basic_middle_name",
+                                                "basic_credential",
+                                                "basic_name_prefix",
+                                                "basic_name_suffix",
+                                                "basic_sole_proprietor",
+                                                "basic_gender",
+                                                "basic_enumeration_date",
+                                                "basic_last_updated",
+                                                "basic_status"))) |>
+      dplyr::relocate(tidyr::contains("basic"), .after = number)
+    return(results)
+    }
+
+  #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
 }

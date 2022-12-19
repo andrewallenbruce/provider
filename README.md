@@ -60,71 +60,41 @@ devtools::install_github("andrewallenbruce/provider")
 remotes::install_github("andrewallenbruce/provider")
 ```
 
-<br>
-
-### NPPES National Provider Identifier (NPI) Registry API
-
-<br>
-
 ``` r
 # Load library
 library(provider)
-
-provider::nppes_npi(npi = 1336413418)
-#> # A tibble: 1 × 21
-#>   datetime            outcome enumerati…¹ number addre…² pract…³ organ…⁴ organ…⁵
-#>   <dttm>              <chr>   <chr>       <chr>  <list>  <list>  <chr>   <chr>  
-#> 1 2022-12-16 13:56:02 results NPI-2       13364… <df>    <list>  LUMINU… NO     
-#> # … with 13 more variables: certification_date <chr>, status <chr>,
-#> #   authorized_official_first_name <chr>, authorized_official_last_name <chr>,
-#> #   authorized_official_middle_name <chr>,
-#> #   authorized_official_telephone_number <chr>,
-#> #   authorized_official_title_or_position <chr>,
-#> #   authorized_official_name_prefix <chr>, taxonomies <list>,
-#> #   identifiers <list>, endpoints <list>, other_names <list>, dates <list>, …
 ```
+
+### NPPES National Provider Identifier Registry API
 
 ``` r
 tribble <- tibble::tribble(
 ~fn,         ~params,
 "nppes_npi", list(1336413418),
 "nppes_npi", list(1659781227),
-"nppes_npi", list(first = "John", city = "Baltimore", state = "MD", limit = 1),
-"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA", limit = 1),
+"nppes_npi", list(prov_type = "NPI-2", city = "Baltimore", state = "MD", limit = 10),
+"nppes_npi", list(prov_type = "NPI-1", city = "Atlanta", state = "GA", limit = 10),
 )
 
 purrr::invoke_map_dfr(tribble$fn, tribble$params)
-#> # A tibble: 4 × 30
-#>   datetime            outcome enumerati…¹ number addre…² pract…³ organ…⁴ organ…⁵
-#>   <dttm>              <chr>   <chr>       <chr>  <list>  <list>  <chr>   <chr>  
-#> 1 2022-12-16 13:56:03 results NPI-2       13364… <df>    <list>  LUMINU… NO     
-#> 2 2022-12-16 13:56:03 Errors  <NA>        <NA>   <NULL>  <NULL>  <NA>    <NA>   
-#> 3 2022-12-16 13:56:03 results NPI-1       14275… <df>    <list>  <NA>    <NA>   
-#> 4 2022-12-16 13:56:04 results NPI-1       10033… <df>    <list>  <NA>    <NA>   
-#> # … with 22 more variables: certification_date <chr>, status <chr>,
-#> #   authorized_official_first_name <chr>, authorized_official_last_name <chr>,
-#> #   authorized_official_middle_name <chr>,
-#> #   authorized_official_telephone_number <chr>,
-#> #   authorized_official_title_or_position <chr>,
-#> #   authorized_official_name_prefix <chr>, taxonomies <list>,
-#> #   identifiers <list>, endpoints <list>, other_names <list>, dates <list>, …
-```
-
-``` r
-npi_ex <- provider::nppes_npi(npi = 1083879860) |> 
-          provider::provider_unpack()
-#> Error in `tidyr::unnest()`:
-#> ! Can't subset columns that don't exist.
-#> ✖ Column `data_lists` doesn't exist.
-
-npi_ex |> dplyr::mutate(address_1 = stringr::str_to_title(address_1),
-                        city = stringr::str_to_title(city)) |> 
-          tidyr::unite("full_address", c(address_1, city, state), sep = ", ", remove = FALSE)
-#> Error in dplyr::mutate(npi_ex, address_1 = stringr::str_to_title(address_1), : object 'npi_ex' not found
-  dplyr::rowwise() |> 
-  full_address(cols = c(address_1, city, state, postal_code)) |> 
-  tidyr::unnest(full_address)
-#> Error in full_address(dplyr::rowwise(), cols = c(address_1, city, state, : could not find function "full_address"
+#> # A tibble: 22 × 17
+#>    datetime            outcome enumera…¹ number basic…² basic_…³ addre…⁴ pract…⁵
+#>    <dttm>              <chr>   <chr>     <chr>  <chr>   <list>   <list>  <list> 
+#>  1 2022-12-19 18:21:32 results NPI-2     13364… LUMINU… <tibble> <df>    <list> 
+#>  2 2022-12-19 18:21:32 Errors  <NA>      <NA>   <NA>    <NULL>   <NULL>  <NULL> 
+#>  3 2022-12-19 18:21:32 results NPI-2     14271… MCGUIR… <tibble> <df>    <list> 
+#>  4 2022-12-19 18:21:32 results NPI-2     18818… MENLO … <tibble> <df>    <list> 
+#>  5 2022-12-19 18:21:32 results NPI-2     16999… MILFOR… <tibble> <df>    <list> 
+#>  6 2022-12-19 18:21:32 results NPI-2     12756… VIRGIN… <tibble> <df>    <list> 
+#>  7 2022-12-19 18:21:32 results NPI-2     17100… VIRGIN… <tibble> <df>    <list> 
+#>  8 2022-12-19 18:21:32 results NPI-2     19322… VIRGIN… <tibble> <df>    <list> 
+#>  9 2022-12-19 18:21:32 results NPI-2     18414… FRANRE… <tibble> <df>    <list> 
+#> 10 2022-12-19 18:21:32 results NPI-2     12454… PLANNE… <tibble> <df>    <list> 
+#> # … with 12 more rows, 9 more variables: taxonomies <list>, identifiers <list>,
+#> #   endpoints <list>, other_names <list>, epochs <list>,
+#> #   authorized_official <list>, errors <list>, basic_first_name <chr>,
+#> #   basic_last_name <chr>, and abbreviated variable names ¹​enumeration_type,
+#> #   ²​basic_organization_name, ³​basic_other, ⁴​addresses, ⁵​practiceLocations
 ```
 
 <br>
@@ -282,7 +252,7 @@ provider::opt_out(last = "Aaron")
 
 | name                        | value                  |
 |:----------------------------|:-----------------------|
-| date                        | 2022-12-16             |
+| date                        | 2022-12-19             |
 | last_updated                | 09/15/2022             |
 | first_name                  | Sheryl                 |
 | last_name                   | Aaron                  |
@@ -320,7 +290,7 @@ provider::revalidation_date(npi = 1710912209)
 
 | name                            | value           |
 |:--------------------------------|:----------------|
-| month                           | 2022-12-16      |
+| month                           | 2022-12-19      |
 | enrollment_id                   | I20040602001711 |
 | national_provider_identifier    | 1710912209      |
 | first_name                      | Yelena          |

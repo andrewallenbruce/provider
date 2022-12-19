@@ -132,87 +132,26 @@ devtools::install_github("andrewallenbruce/provider")
 # install.packages("remotes")
 remotes::install_github("andrewallenbruce/provider")
 ```
-<br>
-
-### NPPES National Provider Identifier (NPI) Registry API
-
-<br>
 
 ```{r echo=TRUE}
 # Load library
 library(provider)
-
-provider::nppes_npi(npi = 1336413418)
 ```
+
+
+### NPPES National Provider Identifier Registry API
+
 
 ```{r}
 tribble <- tibble::tribble(
 ~fn,         ~params,
 "nppes_npi", list(1336413418),
 "nppes_npi", list(1659781227),
-"nppes_npi", list(first = "John", city = "Baltimore", state = "MD", limit = 1),
-"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA", limit = 1),
+"nppes_npi", list(prov_type = "NPI-2", city = "Baltimore", state = "MD", limit = 10),
+"nppes_npi", list(prov_type = "NPI-1", city = "Atlanta", state = "GA", limit = 10),
 )
 
 purrr::invoke_map_dfr(tribble$fn, tribble$params)
-```
-
-
-
-```{r results='asis', echo=FALSE, eval=FALSE}
-npi_ex <- provider::nppes_npi(npi = 1083879860) |> 
-          provider::provider_unpack()
-
-npi_ex |> dplyr::rowwise() |> 
-  full_address(cols = c(address_1, city, state, postal_code)) |> 
-  tidyr::unnest(full_address)
-
-ex1 <- tibble::tibble(npi = npi_ex$npi[[1]], 
-               enum_type = npi_ex$prov_type[[1]]) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  dplyr::mutate(group = "basic")
-
-ex_basic <- npi_ex$basic |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  dplyr::mutate(group = "basic")
-
-ex_add <- npi_ex$addresses[[1]] |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  dplyr::mutate(group = "addresses")
-
-ex_tax <- npi_ex$taxonomies[[1]] |> 
-  dplyr::select(-taxonomy_group) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  dplyr::mutate(group = "taxonomies")
-
-ex_end <- npi_ex$endpoints[[1]] |> 
-  dplyr::select(-useDescription, -contentTypeDescription) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  dplyr::mutate(group = "endpoints")
-
-dplyr::bind_rows(ex1, 
-                 ex_basic, 
-                 ex_add, 
-                 ex_tax, 
-                 ex_end) |> 
-  gluedown::md_table()
-```
-
-
-```{r}
-npi_ex <- provider::nppes_npi(npi = 1083879860) |> 
-          provider::provider_unpack()
-
-npi_ex |> dplyr::mutate(address_1 = stringr::str_to_title(address_1),
-                        city = stringr::str_to_title(city)) |> 
-          tidyr::unite("full_address", c(address_1, city, state), sep = ", ", remove = FALSE)
-  dplyr::rowwise() |> 
-  full_address(cols = c(address_1, city, state, postal_code)) |> 
-  tidyr::unnest(full_address)
 ```
 
 
