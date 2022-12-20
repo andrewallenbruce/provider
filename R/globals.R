@@ -12,26 +12,31 @@ utils::globalVariables(c(
   "last_updated_epoch", # <nppes_npi>
   "enumeration_type", # <nppes_npi>
   "basic", # <nppes_npi>
-  "outcome", # <nppes_unpack>
-  "data_lists", # <nppes_unpack>
-  "description", # <nppes_unpack>
-  "field", # <nppes_unpack>
-  "number", # <nppes_unpack>
-  "datetime", # <nppes_unpack>
-  "basic", # <nppes_unpack>
-  "enumeration_date", # <nppes_unpack>
-  "last_updated", # <nppes_unpack>
-  "certification_date", # <nppes_unpack>
-  "created_epoch", # <nppes_unpack>
-  "last_updated_epoch", # <nppes_unpack>
-  "enumeration_type", # <nppes_unpack>
-  "npi", # <nppes_unpack>
-  "value", # <nppes_unpack>
-  "address_purpose", # <nppes_unpack>
-  "country_name", # <nppes_unpack>
-  "address_type", # <nppes_unpack>
-  "country_code", # <nppes_unpack>
-  "state", # <nppes_unpack>
+  "basic_organization_name", # <nppes_npi>
+  "addresses", # <nppes_npi>
+  "basic_first_name", # <nppes_npi>
+  "basic_last_name", # <nppes_npi>
+  "outcome", # <provider_nppes>
+  "data_lists", # <provider_nppes>
+  "description", # <provider_nppes>
+  "field", # <provider_nppes>
+  "number", # <provider_nppes>
+  "prov_type", # <provider_nppes>
+  "outcome", # <provider_unpack>
+  "data_lists", # <provider_unpack>
+  "datetime", # <provider_unpack>
+  "number", # <provider_unpack>
+  "enumeration_type", # <provider_unpack>
+  "created_epoch", # <provider_unpack>
+  "last_updated_epoch", # <provider_unpack>
+  "npi", # <provider_unpack>
+  "prov_type", # <provider_unpack>
+  "value", # <provider_unpack>
+  "address_purpose", # <provider_unpack>
+  "country_name", # <provider_unpack>
+  "address_type", # <provider_unpack>
+  "country_code", # <provider_unpack>
+  "state", # <provider_unpack>
   "Tot_Benes", # <provider_mpop>
   "Tot_Srvcs", # <provider_mpop>
   "Tot_Bene_Day_Srvcs", # <provider_mpop>
@@ -114,27 +119,6 @@ utils::globalVariables(c(
   "Year", # <physician_by_geography>
   "Year", # <physician_by_provider>
   "Year", # <physician_by_service>
-  "outcome", # <provider_nppes>
-  "data_lists", # <provider_nppes>
-  "description", # <provider_nppes>
-  "field", # <provider_nppes>
-  "number", # <provider_nppes>
-  "prov_type", # <provider_nppes>
-  "outcome", # <provider_unpack>
-  "data_lists", # <provider_unpack>
-  "datetime", # <provider_unpack>
-  "number", # <provider_unpack>
-  "enumeration_type", # <provider_unpack>
-  "created_epoch", # <provider_unpack>
-  "last_updated_epoch", # <provider_unpack>
-  "npi", # <provider_unpack>
-  "prov_type", # <provider_unpack>
-  "value", # <provider_unpack>
-  "address_purpose", # <provider_unpack>
-  "country_name", # <provider_unpack>
-  "address_type", # <provider_unpack>
-  "country_code", # <provider_unpack>
-  "state", # <provider_unpack>
   ":=", # <age_days>
   "int", # <days_today>
   "secs", # <days_today>

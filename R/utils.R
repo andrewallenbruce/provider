@@ -131,10 +131,6 @@ full_address1 <- function(df, address_1, address_2, city, state, postal_code) {
   stringr::str_trim(df[[state]], "both"), " ",
   stringr::str_trim(df[[postal_code]], "both"))}
 
-full_address <- function(df, cols = c(address_1, city, state, postal_code)) {
-
-  }
-
 #' luhn check npis ---------------------------------------------------------
 #' @description checks NPIs against the Luhn algorithm for
 #' compliance with the CMS requirements stated in the linked PDF below.

@@ -194,30 +194,19 @@ nppes_npi <- function(npi       = NULL,
   if (nrow(dplyr::filter(results, enumeration_type == "NPI-2")) >= 1) {
     results <- results |>
       tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
+      dplyr::mutate(name = basic_organization_name, .after = 4) |>
       tidyr::nest(authorized_official = tidyr::contains("authorized"),
-                  basic_other = tidyr::any_of(c("basic_organizational_subpart",
-                                                "basic_certification_date",
-                                                "basic_enumeration_date",
-                                                "basic_last_updated",
-                                                "basic_status",
-                                                "basic_parent_organization_legal_business_name"))) |>
-      dplyr::relocate(tidyr::contains("basic"), .after = number)
+                  basic = tidyr::contains("basic")) |>
+      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
     return(results)
     }
 
   if (nrow(dplyr::filter(results, enumeration_type == "NPI-1")) >= 1) {
     results <- results |>
       tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
-      tidyr::nest(basic_other = tidyr::any_of(c("basic_middle_name",
-                                                "basic_credential",
-                                                "basic_name_prefix",
-                                                "basic_name_suffix",
-                                                "basic_sole_proprietor",
-                                                "basic_gender",
-                                                "basic_enumeration_date",
-                                                "basic_last_updated",
-                                                "basic_status"))) |>
-      dplyr::relocate(tidyr::contains("basic"), .after = number)
+      dplyr::mutate(name = stringr::str_c(basic_first_name, basic_last_name, sep = " "), .after = 4) |>
+      tidyr::nest(basic = tidyr::contains("basic")) |>
+      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
     return(results)
     }
 
