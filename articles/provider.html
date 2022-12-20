@@ -148,13 +148,14 @@ API</strong> with the <code><a href="../reference/provider_nppes.html">provider_
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-19 <span style="color: #949494;">23:26:54</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:56:01</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
 <p><br></p>
-<p>Unpack the API response with the <code><a href="../reference/provider_unpack.html">provider_unpack()</a></code>
+<p>Unpack the API response with the <code>provider_unpack()</code>
 function:</p>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_unpack</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_unpack(nppes_ex): could not find function "provider_unpack"</span></span></code></pre></div>
 <p><br></p>
 <p>Giving you the results in tibble form:</p>
 <p><br></p>
@@ -179,14 +180,9 @@ function:</p>
 <span>                            <span class="va">postal_code</span>, </span>
 <span>                            <span class="va">telephone_number</span>, </span>
 <span>                            <span class="va">fax_number</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
-<span><span class="co">#&gt;   npi     prov_…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enume…⁷ last_…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 176048… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   identifiers &lt;list&gt;, taxonomies &lt;list&gt;, addresses &lt;list&gt;, and abbreviated</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​prov_type, ²​first_name, ³​last_name, ⁴​middle_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​credential, ⁶​sole_proprietor, ⁷​enumeration_date, ⁸​last_updated</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.f()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `ident_code` doesn't exist.</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -253,7 +249,7 @@ Date API</strong> with <code>provider_mrdd()</code>:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
 <span><span class="co">#&gt;   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-19 I201005050… 176048… Paul    Dewey   <span style="color: #949494;">""</span>      MN      3       Non-DM…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 I201005050… 176048… Paul    Dewey   <span style="color: #949494;">""</span>      MN      3       Non-DM…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span></span>
@@ -283,7 +279,7 @@ the <strong>Medicare Opt Out Affidavits API</strong> with
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
 <span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-19 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>

@@ -113,10 +113,8 @@
 
 
 
-<script src="geocoding_files/htmlwidgets-1.6.0/htmlwidgets.js"></script><link href="geocoding_files/leaflet-1.3.1/leaflet.css" rel="stylesheet">
-<script src="geocoding_files/leaflet-1.3.1/leaflet.js"></script><link href="geocoding_files/leafletfix-1.0.0/leafletfix.css" rel="stylesheet">
-<script src="geocoding_files/proj4-2.6.2/proj4.min.js"></script><script src="geocoding_files/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="geocoding_files/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet">
-<script src="geocoding_files/leaflet-binding-2.1.1/leaflet.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Healthcare Providers: Why Geocode?</h1>
             
@@ -141,47 +139,21 @@
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu"><a href="../reference/provider_unpack.html">provider_unpack</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>             <span class="fu">provider_unpack</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_unpack(provider_nppes(npi = 1760485387)): could not find function "provider_unpack"</span></span>
 <span></span>
 <span><span class="va">geo_nppes</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 32</span></span></span>
-<span><span class="co">#&gt;    npi    prov_…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enume…⁷ last_…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 17604… Indivi… PAUL    DEWEY   R.      M.D.    FALSE   M      2005-0… 2012-1…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 22 more variables: status &lt;chr&gt;, name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country_code &lt;chr&gt;, address_purpose &lt;chr&gt;, address_1 &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, postal_code &lt;chr&gt;, telephone_number &lt;chr&gt;, fax_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_code &lt;chr&gt;, taxonomy_group &lt;chr&gt;, taxon_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxon_state &lt;chr&gt;, taxon_license &lt;chr&gt;, taxon_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ident_code &lt;chr&gt;, ident_desc &lt;chr&gt;, ident_issuer &lt;lgl&gt;, identifier &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ident_state &lt;chr&gt;, and abbreviated variable names ¹​prov_type, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'geo_nppes' not found</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_add</span> <span class="op">&lt;-</span> <span class="va">geo_nppes</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="va">city</span>, <span class="va">state</span>, <span class="va">postal_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>address_1 <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove_all</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in dplyr::select(geo_nppes, address_1, city, state, postal_code): object 'geo_nppes' not found</span></span>
 <span></span>
 <span><span class="va">geo_add</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   address_1       city       state postal_code</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 4570 CTY HWY 61 MOOSE LAKE MN    55767</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'geo_add' not found</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_ltlg</span> <span class="op">&lt;-</span> <span class="va">geo_add</span> <span class="op">|&gt;</span> <span class="fu">tidygeocoder</span><span class="fu">::</span><span class="fu"><a href="https://jessecambon.github.io/tidygeocoder/reference/geocode.html" class="external-link">geocode</a></span><span class="op">(</span>street <span class="op">=</span> <span class="va">address_1</span>,</span>
@@ -192,26 +164,17 @@
 <span>                                             lat <span class="op">=</span> <span class="va">latitude</span>, </span>
 <span>                                             long <span class="op">=</span> <span class="va">longitude</span>, </span>
 <span>                                             full_results <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in is.data.frame(.tbl): object 'geo_add' not found</span></span>
 <span><span class="va">geo_ltlg</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
-<span><span class="co">#&gt;   address_1  city  state posta…¹ latit…² longi…³ match…⁴ tiger…⁵ tiger…⁶ addre…⁷</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 4570 CTY … MOOS… MN    55767      46.4   -<span style="color: #BB0000;">92.8</span> 4570 C… R       162668… 55767  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: addressComponents.streetName &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.preType &lt;chr&gt;, addressComponents.city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.preDirection &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixDirection &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.fromAddress &lt;chr&gt;, addressComponents.state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixType &lt;chr&gt;, addressComponents.toAddress &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   addressComponents.suffixQualifier &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'geo_ltlg' not found</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">leaflet</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/map-layers.html" class="external-link">addMarkers</a></span><span class="op">(</span>lng <span class="op">=</span> <span class="va">geo_ltlg</span><span class="op">$</span><span class="va">longitude</span>, </span>
-<span>                      lat <span class="op">=</span> <span class="va">geo_ltlg</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span></span></code></pre></div>
-<div class="leaflet html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-840240401c6b4473a37b" style="width:100%;height:1351.97775030902px;"></div>
-<script type="application/json" data-for="htmlwidget-840240401c6b4473a37b">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"https://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"https://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]},{"method":"addMarkers","args":[46.4420123582375,-92.7769899879775,null,null,null,{"interactive":true,"draggable":false,"keyboard":true,"title":"","alt":"","zIndexOffset":0,"opacity":1,"riseOnHover":false,"riseOffset":250},null,null,null,null,null,{"interactive":false,"permanent":false,"direction":"auto","opacity":1,"offset":[0,0],"textsize":"10px","textOnly":false,"className":"","sticky":true},null]}],"limits":{"lat":[46.4420123582375,46.4420123582375],"lng":[-92.7769899879775,-92.7769899879775]}},"evals":[],"jsHooks":[]}</script><p><br><br></p>
+<span>                      lat <span class="op">=</span> <span class="va">geo_ltlg</span><span class="op">$</span><span class="va">latitude</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in resolveFormula(lng, data): object 'geo_ltlg' not found</span></span></code></pre></div>
+<p><br><br></p>
 </div>
   </main>
 </div>
