@@ -54,16 +54,19 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
-    <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits API</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order and Referring API</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physician &amp; Other Practitioners APIs</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
+    <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
+    <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
+    <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
+    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-chronic-cond.html">Medicare Chronic Conditions</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
   </div>
 </li>
       </ul>
@@ -125,15 +128,159 @@
 
     
     
-<p><br></p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+<blockquote>
+<p>A List of Practitioners Who are Currently Opted Out of Medicare.</p>
+</blockquote>
+<div class="section level2">
+<h2 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
+</h2>
+<p>Physicians and practitioners who do not wish to enroll in the
+Medicare program may “opt-out” of Medicare. This means that neither the
+physician, nor the beneficiary submits the bill to Medicare for services
+rendered. Instead, the beneficiary pays the physician out-of-pocket and
+neither party is reimbursed by Medicare. A private contract is signed
+between the physician and the beneficiary that states that neither one
+can receive payment from Medicare for the services that were
+performed.</p>
+<p>Opt-out periods last for two years and cannot be terminated early
+unless the provider is opting out for the very first time and he or she
+terminates their opt-out no later than 90 days after the effective date
+of their first opt-out period. Physicians and practitioners may NOT
+opt-out if they intend to be a Medicare Advantage (Part C) provider or
+furnish services covered by traditional Medicare fee-for-service (Part
+B).</p>
+<p>Opt-out statuses are effective for two years. Opt-out affidavits
+signed on or after June 16, 2015 will automatically renew every two
+years. Physicians and practitioners that file valid opt-out affidavits
+effective on or after June 16, 2015 and do not want to extend their
+opt-out status at the end of a two year opt-out period may cancel by
+notifying all Medicare contractors with which they filed an affidavit in
+writing at least 30 days prior to the start of the next two year opt-out
+period.</p>
+<p>The Opt Out Affidavits dataset provides information on providers who
+have decided not to participate in Medicare. It contains provider’s NPI,
+specialty, address, and effective dates.</p>
+<p>If you retire, surrender your license, or no longer want to
+participate in the Medicare program, you must officially withdraw within
+90 days. DMEPOS suppliers must withdraw within 30 days.</p>
+<p>What does it mean to opt out of Medicare? You don’t want to bill
+Medicare for your services, but instead want your Medicare patients to
+pay out of pocket. Medicare coverage would apply when you order or
+certify items and services.</p>
+<p>Please note, your decision to opt out will be made public on the CMS
+Opt-Out Dataset.</p>
+<p>Impacts on Medicare Advantage (MA) plans:</p>
+<p>May not pay (directly or indirectly) on any basis, for basic benefits
+furnished to a Medicare enrollee by a physician or other practitioner
+(as noted below) who has filed a valid opt-out affidavit with Medicare,
+and Must pay for urgent care or emergency services furnished by a
+physician or practitioner who has not signed a private contract with the
+beneficiary they are treating. May make payment to an opted-out
+physician or practitioner for services that are not basic benefits, but
+are provided to a beneficiary as a supplemental benefit consistent with
+regulations found at 42 CFR §422.102. To opt out, you will need to:</p>
+<p>Be of an eligible type or specialty. Submit an opt-out affidavit to
+Medicare. Enter into a private contract with each of your Medicare
+patients. This contract will reflect the agreement between you and your
+patients that they will pay out of pocket for services, and that nobody
+will submit the bill to Medicare for reimbursement. Contact your
+Medicare Administrative Contractor (MAC) (PDF) to see what information
+you should include in your opt-out affidavit and private contract.</p>
+</div>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 11/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   Laura    Brenner 1235… Psychi… 05/01/… 05/01/… 135 CO…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-12-21 09/15/2022   Ruchi    Nadella 1356… Psychi… 03/30/… 03/30/… 135 CO…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-12-21 09/15/2022   Sireesha Jathav… 1508… Psychi… 01/22/… 01/22/… 145 CO…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   David    Smith   1649… Maxill… 06/25/… 06/25/… 909 W …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-12-21 09/15/2022   David    Smith   1750… Oral S… 05/07/… 05/07/… 1116 N…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-12-21 09/15/2022   David    Smith   1114… Psychi… 08/15/… 08/15/… 3101 S…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-12-21 11/15/2022   David    Smith   1023… Obstet… 10/01/… 10/01/… 755 N …</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2022-12-21 09/15/2022   David    Smith   1790… Oral S… 03/26/… 03/26/… 6800 M…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2022-12-21 09/15/2022   David    Smith   1659… Dentist 05/26/… 05/26/… 3038 B…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>date_start <span class="op">=</span> <span class="st">"01/30/1998"</span>, date_end <span class="op">=</span> <span class="st">"01/30/2024"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   Jonathan Raines  1720… Psychi… 01/30/… 01/30/… 1629 M…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 14</span></span></span>
+<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   Ned      Cowan   1649… Psychi… 12/30/… 12/30/… 9201 W…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2022-12-21 09/15/2022   Geemee   Chung   1497… Infect… 04/20/… 04/20/… 9201 W…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2022-12-21 11/15/2022   Genise   Fraiman 1598… Intern… 10/13/… 10/13/… 9201 W…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2022-12-21 09/15/2022   David    Saleha… 1760… Oral S… 04/06/… 04/06/… 9201 W…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2022-12-21 11/15/2022   Colleen  Ryan    1952… Family… 09/21/… 09/21/… 9201 W…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<p><br></p>
 <pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'gluedown'</span></span></code></pre>
+<p><br></p>
+</div>
+<div class="section level3">
+<h3 id="related-links">Related Links<a class="anchor" aria-label="anchor" href="#related-links"></a>
+</h3>
+<ul>
+<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits" class="external-link">Medicare
+Opt Out Affidavits API</a></li>
+</ul>
 <p><br><br></p>
 </div>
-  </main>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

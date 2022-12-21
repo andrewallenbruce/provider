@@ -54,16 +54,19 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
-    <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits API</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order and Referring API</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physician &amp; Other Practitioners APIs</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
+    <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
+    <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
+    <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
+    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-chronic-cond.html">Medicare Chronic Conditions</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
   </div>
 </li>
       </ul>
@@ -136,19 +139,17 @@
 <code>CO-8</code> denial on a claim and you need to confirm whether or
 not the correct taxonomy code was entered on the claim. Armed with the
 provider’s NPI, you can search the <strong>NPPES NPI Registry
-API</strong> with the <code><a href="../reference/provider_nppes.html">provider_nppes()</a></code> function:</p>
+API</strong> with the <code>provider_nppes()</code> function:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Query the NPPES API</span></span>
-<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in provider_nppes(npi = 1760485387): could not find function "provider_nppes"</span></span></code></pre></div>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists   </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:56:01</span> results <span style="color: #949494;">&lt;df [1 × 11]&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_ex' not found</span></span></code></pre>
 <p><br></p>
 <p>Unpack the API response with the <code>provider_unpack()</code>
 function:</p>
@@ -180,9 +181,7 @@ function:</p>
 <span>                            <span class="va">postal_code</span>, </span>
 <span>                            <span class="va">telephone_number</span>, </span>
 <span>                            <span class="va">fax_number</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.f()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `ident_code` doesn't exist.</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in tidyr::nest(nppes_ex, identifiers = c(ident_code, ident_desc, : object 'nppes_ex' not found</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -249,7 +248,7 @@ Date API</strong> with <code>provider_mrdd()</code>:</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
 <span><span class="co">#&gt;   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 I201005050… 176048… Paul    Dewey   <span style="color: #949494;">""</span>      MN      3       Non-DM…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 I201005050… 176048… Paul    Dewey   <span style="color: #949494;">""</span>      MN      3       Non-DM…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span></span>
@@ -279,7 +278,7 @@ the <strong>Medicare Opt Out Affidavits API</strong> with
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
 <span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>

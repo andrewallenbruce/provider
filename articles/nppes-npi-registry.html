@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="provider">
-<title>NPPES NPI Registry • provider</title>
+<title>NPPES NPI Registry API • provider</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link href="../deps/Roboto_Slab-0.4.4/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NPPES NPI Registry">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NPPES NPI Registry API">
 <meta property="og:description" content="provider">
 <meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -54,16 +54,19 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
-    <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits API</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order and Referring API</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physician &amp; Other Practitioners APIs</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
+    <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
+    <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
+    <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
+    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-chronic-cond.html">Medicare Chronic Conditions</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
   </div>
 </li>
       </ul>
@@ -116,7 +119,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>NPPES NPI Registry</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>NPPES NPI Registry API</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/nppes-npi-registry.Rmd" class="external-link"><code>vignettes/articles/nppes-npi-registry.Rmd</code></a></small>
@@ -127,11 +130,12 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<p><br><br></p>
-<div class="section level2">
-<h2 id="the-nppes-npi-registry">The NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#the-nppes-npi-registry"></a>
-</h2>
-<p><br></p>
+<blockquote>
+<p>insert quick summary</p>
+</blockquote>
+<div class="section level3">
+<h3 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
+</h3>
 <p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
 Public Search</a> is a free directory of all active <strong>National
 Provider Identifier</strong> (NPI) records. Healthcare providers acquire
@@ -143,10 +147,6 @@ you to search for providers in the NPPES (National Plan and Provider
 Enumeration System.) All information produced by the NPI Registry is
 provided in accordance with the NPPES Data Dissemination Notice. There
 is no charge to use the NPI Registry.</p>
-<p><br></p>
-<div class="section level3">
-<h3 id="the-nppes-api">The NPPES API<a class="anchor" aria-label="anchor" href="#the-nppes-api"></a>
-</h3>
 <p>The NPPES <em>Application Programming Interface</em> (API) is a
 faster alternative to the <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html" class="external-link">downloadable
 NPPES data files</a>. It allows systems to access NPPES public data in
@@ -157,21 +157,15 @@ records. By using these two fields with your search criteria, you can
 get up to a maximum of 1,200 records over six requests.</p>
 <p><br></p>
 </div>
-</div>
-<div class="section level2">
-<h2 id="searching-the-nppes-by-npi">Searching the NPPES by NPI<a class="anchor" aria-label="anchor" href="#searching-the-nppes-by-npi"></a>
-</h2>
-<p>The following is a basic example of searching for an NPI using the
-using <code>prov_npi_nppes()</code>. The only argument is the provider’s
-10-digit <a href="https://en.wikipedia.org/wiki/National_Provider_Identifier" class="external-link">National
-Provider Identifier</a>:</p>
-<p><br></p>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
 <span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:55:47</span> results NPI-1     11144… DOMI… SAN … CA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 <span style="color: #949494;">05:21:49</span> results NPI-1     11144… DOMI… SAN … CA    &lt;df&gt;    &lt;df&gt;   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span></span>
@@ -234,114 +228,7 @@ depends on factors such as NPI type, incorporated individual status,
 subpart delegation, and, quite simply, the information provided to the
 NPPES by providers.</p>
 </blockquote>
-<p><br><br></p>
-<div class="section level3">
-<h3 id="unpack-the-response">Unpack the Response<a class="anchor" aria-label="anchor" href="#unpack-the-response"></a>
-</h3>
 <p><br></p>
-<p>Flatten the response tibble into a tidy data format with
-<code>prov_nppes_unpack()</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#provider_unpack(nppes_npi_resp)</span></span></code></pre></div>
-<p><br><br></p>
-</div>
-</div>
-<div class="section level2">
-<h2 id="search-for-multiple-npis">Search for Multiple NPIs<a class="anchor" aria-label="anchor" href="#search-for-multiple-npis"></a>
-</h2>
-<p><br></p>
-<p>To search for more than one NPI at a time, there are two options, the
-first of which is to create an unnamed list (using <code><a href="https://rdrr.io/r/base/c.html" class="external-link">c()</a></code> as
-opposed to <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code>) of said NPIs:</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#npi_list &lt;- c(1336413418, 1710975040, 1659781227, 1528060837)</span></span></code></pre></div>
-<p><br></p>
-<p>Then pipe the list into <code>prov_npi_nppes()</code> using <a href="https://purrr.tidyverse.org/" class="external-link">purrr’s</a> <code>map_dfr()</code>
-function to loop over the list:</p>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#npi_list_resp &lt;- npi_list |&gt; purrr::map_dfr(provider_nppes)</span></span></code></pre></div>
-<p><br></p>
-<p>Unpacking the response is similar, adding only dplyr’s
-<code>group_split()</code> function to the chain. The parameter entered
-into <code>group_split()</code> must be <code>search</code>.</p>
-<p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># npi_list_resp |&gt; dplyr::group_split(outcome) |&gt; </span></span>
-<span><span class="co">#                  purrr::map_dfr(provider_unpack)</span></span></code></pre></div>
-<p><br></p>
-<p>Searching for a column of NPIs in a data frame is only slightly
-different. I’ll create a data frame with the same NPIs in the list
-example:</p>
-<p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># npi_df &lt;- data.frame(npi = c(1336413418, 1710975040, 1659781227, 1528060837))</span></span></code></pre></div>
-<p><br></p>
-<p>We can even chain the search and unpack function chains together
-using <code>|&gt;</code>, R’s lovely pipe. Again, the
-<code>group_split()</code> input should be the column containing the
-NPIs.</p>
-<p>Split and purrr, then split and purrr:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># npi_df_resp &lt;- npi_df |&gt; tibble::deframe() |&gt; </span></span>
-<span><span class="co">#                          purrr::map_dfr(provider_nppes) |&gt; </span></span>
-<span><span class="co">#                          dplyr::group_split(outcome) |&gt; </span></span>
-<span><span class="co">#                          purrr::map_dfr(provider_unpack)</span></span></code></pre></div>
-<p><br><br></p>
-<div class="section level4">
-<h4 id="constraints-for-invalid-parameters">Constraints for Invalid Parameters<a class="anchor" aria-label="anchor" href="#constraints-for-invalid-parameters"></a>
-</h4>
-<p>Several constraints have been implemented so as to not batter the
-NPPES API with invalid searches. The input must be 10 digits or the
-function will throw an error:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:55:52</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
-<p><br><br></p>
-<p>It also must be a valid NPI. The <code>prov_npi_nppes()</code>
-function checks for validity using the <a href="https://en.wikipedia.org/wiki/Luhn_algorithm" class="external-link">Luhn algorithm</a>,
-as per it’s implementation by <a href="https://www.cms.gov/" class="external-link">CMS</a>
-(documented <a href="https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf" class="external-link">here</a>):</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="fl">1234567891</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:55:53</span> results <span style="color: #949494;">&lt;list [0]&gt;</span></span></span></code></pre></div>
-<p><br><br></p>
-<p>Inputting letters will throw an error:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="va">abcdefghij</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in list2(...): object 'abcdefghij' not found</span></span></code></pre></div>
-<p><br><br></p>
-<p>The Luhn check will catch any letters wrapped in quotes:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="st">"abcdefghij"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:55:55</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
-<p><br><br></p>
-<p>But will let quoted numbers through:</p>
-<p><br><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span><span class="st">"123456789"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome data_lists      </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-20 <span style="color: #949494;">01:55:57</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 2]&gt;</span></span></span></code></pre></div>
-<p>As long as they’re 10 digits long.</p>
-<p><br><br></p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="api-documentation-overview">API Documentation Overview<a class="anchor" aria-label="anchor" href="#api-documentation-overview"></a>

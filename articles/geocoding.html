@@ -54,16 +54,19 @@
 <li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Public Reporting of Missing Digital Contact Information API</a>
-    <a class="dropdown-item" href="../articles/geocoding.html">Healthcare Providers: Why Geocode?</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Fee-For-Service Public Provider Enrollment API</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits API</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order and Referring API</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physician &amp; Other Practitioners APIs</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-due-date.html">Medicare Revalidation Due Date API</a>
-    <a class="dropdown-item" href="../articles/mcr-reval-practice-reassign.html">Medicare Revalidation Clinic Group Practice Reassignment API</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Provider and Supplier Taxonomy Crosswalk API</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
+    <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
+    <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
+    <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
+    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-chronic-cond.html">Medicare Chronic Conditions</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
   </div>
 </li>
       </ul>
@@ -126,31 +129,35 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span>     <span class="co"># Access Public Healthcare Provider Data</span></span>
-<span><span class="co">#library(zipcodeR)     # Data &amp; Functions for Working with US ZIP Codes</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fipio.justinsingh.me" class="external-link">fipio</a></span><span class="op">)</span>        <span class="co"># Lightweight FIPS Code Information Retrieval</span></span>
-<span><span class="co">#&gt; Error in library(fipio): there is no package called 'fipio'</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jessecambon.github.io/tidygeocoder/" class="external-link">tidygeocoder</a></span><span class="op">)</span> <span class="co"># Geocoding Made Easy</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span>      <span class="co"># Create Interactive Web Maps</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span>   </span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jessecambon.github.io/tidygeocoder/" class="external-link">tidygeocoder</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span>  </span></code></pre></div>
 <p><br></p>
 <div class="section level2">
 <h2 id="providers-current-practice-address">Provider’s Current Practice Address<a class="anchor" aria-label="anchor" href="#providers-current-practice-address"></a>
 </h2>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">geo_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_nppes.html">provider_nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">provider_unpack</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_unpack(provider_nppes(npi = 1760485387)): could not find function "provider_unpack"</span></span>
+<code class="sourceCode R"><span><span class="va">geo_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">geo_nppes</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'geo_nppes' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 <span style="color: #949494;">05:20:33</span> results NPI-1     17604… PAUL… MOOS… MN    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​practiceLocations</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_add</span> <span class="op">&lt;-</span> <span class="va">geo_nppes</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="va">city</span>, <span class="va">state</span>, <span class="va">postal_code</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/ranking.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>address_1 <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove_all</a></span><span class="op">(</span><span class="va">address_1</span>, <span class="st">"\\."</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in dplyr::select(geo_nppes, address_1, city, state, postal_code): object 'geo_nppes' not found</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `address_1` doesn't exist.</span></span>
 <span></span>
 <span><span class="va">geo_add</span></span>
 <span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'geo_add' not found</span></span></code></pre></div>

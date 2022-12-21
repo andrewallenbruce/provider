@@ -22,6 +22,9 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-ffs-prov-enroll.html</loc>
   </url>
   <url>
@@ -38,6 +41,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-reval-practice-reassign.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-taxon-crosswalk.html</loc>
@@ -94,13 +100,13 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_enrollment.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/provider_nppes.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_date.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_group.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_reassign.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
