@@ -17,6 +17,10 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r}
+library(provider)
+```
+
 <br>
 
 ## Medicare Revalidation Due Date List API
