@@ -120,7 +120,7 @@
 #' purrr::map_dfr(provider_nppes)
 #' }
 #' @autoglobal
-#' @export
+#' @noRd
 
 provider_nppes <- function(npi     = NULL,
                            first   = NULL,

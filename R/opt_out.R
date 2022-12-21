@@ -101,12 +101,20 @@ opt_out <- function(first        = NULL,
   # send request ----------------------------------------------------------
   resp <- httr2::request(url) |> httr2::req_perform()
 
+  if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
+
+    results <- tibble::tibble(Date = as.Date(httr2::resp_date(resp)))
+
+  } else {
+
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(resp,
             check_type = FALSE, simplifyVector = TRUE)) |>
     dplyr::mutate(Date = as.Date(httr2::resp_date(resp)),
                   NPI = as.character(NPI)) |>
     dplyr::relocate(Date, "Last updated")
+
+  }
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

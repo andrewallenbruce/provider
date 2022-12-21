@@ -66,6 +66,9 @@ pbg_func   <- gluedown::md_code("physician_by_geography()")
 redd_func  <- gluedown::md_code("revalidation_date()")
 redd_link  <- gluedown::md_link("Medicare Revalidation Due Date" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list")
 
+rere_func  <- gluedown::md_code("revalidation_reassign()")
+rere_link  <- gluedown::md_link("Medicare Revalidation Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list")
+
 recl_func  <- gluedown::md_code("revalidation_group()")
 recl_link  <- gluedown::md_link("Medicare Revalidation Clinic Group Practice Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment")
 
@@ -81,8 +84,6 @@ clia_link  <- gluedown::md_link("Medicare Provider of Services File - Clinical L
 tax_func   <- gluedown::md_code("taxonomy_crosswalk()")
 tax_link   <- gluedown::md_link("Medicare Provider and Supplier Taxonomy Crosswalk" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk")
 
-
-
 gluedown::md_table(
           data.frame(
   Function = c(nppes_func, 
@@ -95,6 +96,7 @@ gluedown::md_table(
                pbg_func,
                redd_func,
                recl_func,
+               rere_func,
                ccs_func,
                ccm_func,
                clia_func,
@@ -111,6 +113,7 @@ gluedown::md_table(
                pbg_link,
                redd_link,
                recl_link,
+               rere_link,
                ccs_link,
                ccm_link,
                clia_link,
@@ -220,8 +223,13 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 ```{r}
 provider::revalidation_date(npi = 1710912209)
 ```
-
 <br>
+
+### Medicare Revalidation Reassignment List API
+
+```{r}
+provider::revalidation_reassign(ind_npi = 1710912209)
+```
 
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 

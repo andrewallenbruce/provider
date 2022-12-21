@@ -1,5 +1,5 @@
 ---
-title: "NPPES NPI Registry"
+title: "NPPES NPI Registry API"
 output: html_document
 ---
 
@@ -21,27 +21,17 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br><br>
+> insert quick summary
 
-# The NPPES NPI Registry
-
-<br>
+## Purpose
 
 The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider's name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
-
-<br>
-
-## The NPPES API
 
 The NPPES *Application Programming Interface* (API) is a faster alternative to the [downloadable NPPES data files](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html). It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The *Skip* field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
 
 <br>
 
-# Searching the NPPES by NPI
-
-The following is a basic example of searching for an NPI using the using `prov_npi_nppes()`. The only argument is the provider's 10-digit [National Provider Identifier](https://en.wikipedia.org/wiki/National_Provider_Identifier):
-
-<br>
+## Examples
 
 ```{r message=FALSE, warning=FALSE}
 nppes_npi(1114499340)
@@ -85,140 +75,7 @@ The **list-columns** returned are as follows:
  
 > Note: All list-columns may not be available for every provider. This depends on factors such as NPI type, incorporated individual status, subpart delegation, and, quite simply, the information provided to the NPPES by providers.
 
-<br><br>
-
-## Unpack the Response
-
 <br>
-
-Flatten the response tibble into a tidy data format with `prov_nppes_unpack()`:
-
-<br>
-
-```{r}
-#provider_unpack(nppes_npi_resp)
-```
-
-
-<br><br>
-
-# Search for Multiple NPIs
-
-<br>
-
-To search for more than one NPI at a time, there are two options, the first of which is to create an unnamed list (using `c()` as opposed to `list()`) of said NPIs:
-
-<br>
-
-```{r message=TRUE, warning=FALSE}
-#npi_list <- c(1336413418, 1710975040, 1659781227, 1528060837)
-```
-
-<br>
-
-Then pipe the list into `prov_npi_nppes()` using [purrr's](https://purrr.tidyverse.org/) `map_dfr()` function to loop over the list:
-
-<br>
-
-```{r message=TRUE, warning=FALSE}
-#npi_list_resp <- npi_list |> purrr::map_dfr(provider_nppes)
-```
-
-
-<br>
-
-
-Unpacking the response is similar, adding only dplyr's `group_split()` function to the chain. The parameter entered into `group_split()` must be `search`.
-
-<br>
-
-```{r message=TRUE, warning=FALSE}
-# npi_list_resp |> dplyr::group_split(outcome) |> 
-#                  purrr::map_dfr(provider_unpack)
-```
-
-
-<br>
-
-Searching for a column of NPIs in a data frame is only slightly different. I'll create a data frame with the same NPIs in the list example:
-
-<br>
-
-```{r}
-# npi_df <- data.frame(npi = c(1336413418, 1710975040, 1659781227, 1528060837))
-```
-
-
-
-<br>
-
-We can even chain the search and unpack function chains together using `|>`, R's lovely pipe. Again, the `group_split()` input should be the column containing the NPIs. 
-
-Split and purrr, then split and purrr:
-
-```{r}
-# npi_df_resp <- npi_df |> tibble::deframe() |> 
-#                          purrr::map_dfr(provider_nppes) |> 
-#                          dplyr::group_split(outcome) |> 
-#                          purrr::map_dfr(provider_unpack)
-```
-
-
-<br><br>
-
-### Constraints for Invalid Parameters
-
-Several constraints have been implemented so as to not batter the NPPES API with invalid searches. The input must be 10 digits or the function will throw an error:
-
-<br><br>
-
-```{r, error=TRUE}
-provider_nppes(123456789)
-```
-
-<br><br>
-
-It also must be a valid NPI. The `prov_npi_nppes()` function checks for validity using the [Luhn algorithm](https://en.wikipedia.org/wiki/Luhn_algorithm), as per it's implementation by [CMS](https://www.cms.gov/) (documented [here](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/Downloads/NPIcheckdigit.pdf)):
-
-<br><br>
-
-```{r, error=TRUE}
-provider_nppes(1234567891)
-```
-
-<br><br>
-
-Inputting letters will throw an error:
-
-<br><br>
-
-```{r, error=TRUE}
-provider_nppes(abcdefghij)
-```
-
-<br><br>
-
-The Luhn check will catch any letters wrapped in quotes:
-
-<br><br>
-
-```{r, error=TRUE}
-provider_nppes("abcdefghij")
-```
-
-<br><br>
-
-But will let quoted numbers through:
-
-<br><br>
-
-```{r, error=TRUE}
-provider_nppes("123456789")
-```
-
-As long as they're 10 digits long.
-
-<br><br>
 
 
 # API Documentation Overview

@@ -37,6 +37,33 @@ navbar:
     reference:
       text: Reference
       href: reference/index.html
+    articles:
+      text: Articles
+      menu:
+      - text: Use Cases
+      - text: Geocoding
+        href: articles/geocoding.html
+      - text: API Overviews
+      - text: CMS Missing Contact Info
+        href: articles/cms-miss-contact-info.html
+      - text: Medicare Monthly Enrollment
+        href: articles/mcr-month-enroll.html
+      - text: Medicare Provider Enrollment
+        href: articles/mcr-ffs-prov-enroll.html
+      - text: Medicare Opt Out Affidavits
+        href: articles/mcr-opt-out-affid.html
+      - text: Medicare Order & Referring
+        href: articles/mcr-ord-referring.html
+      - text: Medicare Physicians & Practitioners
+        href: articles/mcr-phys-other-pract.html
+      - text: Medicare Revalidation Dates
+        href: articles/mcr-revalidation.html
+      - text: Medicare Taxonomy Crosswalk
+        href: articles/mcr-taxon-crosswalk.html
+      - text: Medicare Chronic Conditions
+        href: articles/mcr-chronic-cond.html
+      - text: NPPES NPI Public Registry
+        href: articles/nppes-npi-registry.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html

@@ -21,20 +21,26 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br>
+> All physicians and non-physician practitioners who are legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare.
 
-## Medicare Order and Referring API
-
-<br>
+## Purpose
 
 The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 
-<br>
+Ordering providers can order non-physician services for patients. Referring providers can request items or services which Medicare may reimburse on behalf of Medicare beneficiaries. To qualify as an ordering and certifying/referring provider, a provider must have an individual National Provider Identifier (NPI), be enrolled in Medicare in either an “approved” or an “opt-out” status, and be of an eligible specialty type. Providers currently enrolled as a Medicare Part B provider can already order and certifyand do not need to re-enroll in Medicare.
 
- - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+In the event a provider does not want to bill Medicare for their services, they can still order and refer/certify by opting out of Medicare or enrolling solely to order and certify. Medicare coverage will then apply when ordering or certifying:
+
+   - Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+   - Clinical Laboratory Services
+   - Imaging Services
+   - Home Health Services
+
+## Examples
 
 ```{r}
-order_refer(1003026055)
+order_refer(npi = 1003026055) |> 
+  knitr::kable()
 ```
 
 <br>
@@ -67,9 +73,10 @@ tibble::tibble(
 
 <br>
 
-### Further Reading
+### Related Links
 
-   - [Endpoints Information](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html)
-   - [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
+   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying)
+   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 
 <br><br>

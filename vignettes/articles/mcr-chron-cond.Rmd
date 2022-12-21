@@ -1,0 +1,92 @@
+---
+title: "Medicare Chronic Conditions APIs"
+output: html_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+> Information on prevalence, use and spending by count of select chronic conditions among Original Medicare (or fee-for-service) beneficiaries.
+
+## Medicare Multiple Chronic Conditions API
+
+The Multiple Chronic Conditions dataset provides information on the number of chronic conditions among Original Medicare beneficiaries. The dataset contains prevalence, use and spending organized by geography and the count of chronic conditions from the set of select 21 chronic conditions. The count of conditions is grouped into four categories (0-1, 2-3, 4-5 and 6 or more).
+
+### Examples
+
+```{r}
+cc_multiple(year = 2018, 
+            geo_lvl = "State", 
+            geo_desc = "California") |> 
+  knitr::kable()
+```
+
+<br>
+
+```{r}
+cc_multiple(year = 2007, 
+            geo_lvl = "National", 
+            demo_lvl = "Race") |> 
+  knitr::kable()
+```
+
+<br>
+
+## Medicare Specific Chronic Conditions API
+
+The Select Chronic Conditions dataset provides information on 21 selected chronic conditions among Original Medicare beneficiaries. The dataset contains prevalence, use and spending organized by geography and distinct chronic conditions listed below.
+
+-   Alcohol Abuse Drug Abuse / Substance Abuse
+-   Alzheimer's Disease and Related Dementia
+-   Arthritis (Osteoarthritis and Rheumatoid)
+-   Asthma
+-   Atrial Fibrillation
+-   Autism Spectrum Disorders
+-   Cancer (Breast, Colorectal, Lung, and Prostate)
+-   Chronic Kidney Disease
+-   Chronic Obstructive Pulmonary Disease
+-   Depression
+-   Diabetes
+-   Drug Abuse / Substance Abuse
+-   Heart Failure
+-   Hepatitis (Chronic Viral B & C)
+-   HIV/AIDS
+-   Hyperlipidemia (High cholesterol)
+-   Hypertension (High blood pressure)
+-   Ischemic Heart Disease
+-   Osteoporosis
+-   Schizophrenia and Other Psychotic Disorders
+-   Stroke
+
+### Examples
+
+```{r}
+cc_specific(year = 2018, 
+            geo_lvl = "State", 
+            geo_desc = "California") |> 
+  knitr::kable()
+```
+
+<br>
+
+```{r}
+cc_specific(year = 2007, 
+            geo_lvl = "National", 
+            demo_lvl = "Race") |> 
+  knitr::kable()
+```
+
+<br>
+
+### Related Links
+
+-   [Medicare Multiple Chronic Conditions API](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
+-   [Medicare Specific Chronic Conditions API](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)

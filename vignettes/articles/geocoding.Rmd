@@ -1,5 +1,6 @@
 ---
 title: "Healthcare Providers: Why Geocode?"
+output: html_document
 ---
 
 ```{r setup, include = FALSE}
@@ -16,12 +17,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r load}
-library(provider)     # Access Public Healthcare Provider Data
-#library(zipcodeR)     # Data & Functions for Working with US ZIP Codes
-library(fipio)        # Lightweight FIPS Code Information Retrieval
-library(tidygeocoder) # Geocoding Made Easy
-library(leaflet)      # Create Interactive Web Maps
+```{r}
+library(provider)   
+library(tidygeocoder)
+library(leaflet)  
 ```
 
 
@@ -32,8 +31,7 @@ library(leaflet)      # Create Interactive Web Maps
 <br>
 
 ```{r}
-geo_nppes <- provider_nppes(npi = 1760485387) |> 
-             provider_unpack()
+geo_nppes <- nppes_npi(npi = 1760485387)
 
 geo_nppes
 ```

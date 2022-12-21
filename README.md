@@ -39,6 +39,7 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 | `physician_by_geography()` | [Medicare Physician & Other Practitioners: by Geography and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service) |
 | `revalidation_date()`      | [Medicare Revalidation Due Date](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)                                                                                      |
 | `revalidation_group()`     | [Medicare Revalidation Clinic Group Practice Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)                                       |
+| `revalidation_reassign()`  | [Medicare Revalidation Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)                                                                              |
 | `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
 | `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
 | `clia_labs()`              | [Medicare Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)                                            |
@@ -80,18 +81,18 @@ purrr::invoke_map_dfr(nppes$fn, nppes$params)
 #> # A tibble: 12 × 17
 #>    datetime            outcome enumer…¹ number name  city  state addre…² pract…³
 #>    <dttm>              <chr>   <chr>    <chr>  <chr> <chr> <chr> <list>  <list> 
-#>  1 2022-12-19 20:50:26 results NPI-2    13364… LUMI… TIFT… GA    <df>    <list> 
-#>  2 2022-12-19 20:50:27 Errors  <NA>     <NA>   <NA>  <NA>  <NA>  <NULL>  <NULL> 
-#>  3 2022-12-19 20:50:27 results NPI-2    14271… MCGU… BALT… MD    <df>    <list> 
-#>  4 2022-12-19 20:50:27 results NPI-2    18818… MENL… BALT… MD    <df>    <list> 
-#>  5 2022-12-19 20:50:27 results NPI-2    16999… MILF… BALT… MD    <df>    <list> 
-#>  6 2022-12-19 20:50:27 results NPI-2    12756… VIRG… BALT… MD    <df>    <list> 
-#>  7 2022-12-19 20:50:27 results NPI-2    17100… VIRG… BALT… MD    <df>    <list> 
-#>  8 2022-12-19 20:50:27 results NPI-1    10837… KIMB… AUST… GA    <df>    <list> 
-#>  9 2022-12-19 20:50:27 results NPI-1    10130… BART… ATLA… GA    <df>    <list> 
-#> 10 2022-12-19 20:50:27 results NPI-1    16699… DERE… ATLA… GA    <df>    <list> 
-#> 11 2022-12-19 20:50:27 results NPI-1    17706… SARA… ATLA… GA    <df>    <list> 
-#> 12 2022-12-19 20:50:27 results NPI-1    18012… CHER… ALPH… GA    <df>    <list> 
+#>  1 2022-12-21 00:15:50 results NPI-2    13364… LUMI… TIFT… GA    <df>    <list> 
+#>  2 2022-12-21 00:15:51 Errors  <NA>     <NA>   <NA>  <NA>  <NA>  <NULL>  <NULL> 
+#>  3 2022-12-21 00:15:51 results NPI-2    14271… MCGU… BALT… MD    <df>    <list> 
+#>  4 2022-12-21 00:15:51 results NPI-2    18818… MENL… BALT… MD    <df>    <list> 
+#>  5 2022-12-21 00:15:51 results NPI-2    16999… MILF… BALT… MD    <df>    <list> 
+#>  6 2022-12-21 00:15:51 results NPI-2    12756… VIRG… BALT… MD    <df>    <list> 
+#>  7 2022-12-21 00:15:51 results NPI-2    17100… VIRG… BALT… MD    <df>    <list> 
+#>  8 2022-12-21 00:15:51 results NPI-1    12352… WILL… COVI… TN    <df>    <list> 
+#>  9 2022-12-21 00:15:51 results NPI-1    17302… MARS… EAST… GA    <df>    <list> 
+#> 10 2022-12-21 00:15:51 results NPI-1    16695… GARY… ATLA… GA    <df>    <list> 
+#> 11 2022-12-21 00:15:51 results NPI-1    10434… JOAN… ATLA… GA    <df>    <list> 
+#> 12 2022-12-21 00:15:51 results NPI-1    13666… GRAC… ATLA… GA    <df>    <list> 
 #> # … with 8 more variables: taxonomies <list>, identifiers <list>,
 #> #   endpoints <list>, other_names <list>, epochs <list>,
 #> #   authorized_official <list>, basic <list>, errors <list>, and abbreviated
@@ -176,7 +177,7 @@ provider::opt_out(last = "Aaron")
 #> # A tibble: 1 × 14
 #>   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶
 #>   <date>     <chr>        <chr>    <chr>   <chr> <chr>   <chr>   <chr>   <chr>  
-#> 1 2022-12-20 09/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…
+#> 1 2022-12-21 09/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…
 #> # … with 5 more variables: second_line_street_address <chr>, city_name <chr>,
 #> #   state_code <chr>, zip_code <chr>, eligible_to_order_and_refer <chr>, and
 #> #   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,
@@ -208,7 +209,7 @@ provider::revalidation_date(npi = 1710912209)
 #> # A tibble: 1 × 14
 #>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸
 #>   <date>     <chr>       <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-#> 1 2022-12-20 I200406020… 171091… Yelena  Vorono… ""      NY      3       Non-DM…
+#> 1 2022-12-21 I200406020… 171091… Yelena  Vorono… ""      NY      3       Non-DM…
 #> # … with 5 more variables: enrollment_specialty <chr>,
 #> #   revalidation_due_date <chr>, adjusted_due_date <chr>,
 #> #   individual_total_reassign_to <chr>, receiving_benefits_reassignment <int>,
@@ -219,6 +220,27 @@ provider::revalidation_date(npi = 1710912209)
 
 <br>
 
+### Medicare Revalidation Reassignment List API
+
+``` r
+provider::revalidation_reassign(ind_npi = 1710912209)
+#> # A tibble: 5 × 17
+#>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
+#>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>     <dbl>
+#> 1 2022-12-21  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi…  2.86e9
+#> 2 2022-12-21  9931511052 O20201… Bright… NY      TBD           1 Reassi…  2.86e9
+#> 3 2022-12-21  2062791411 O20161… Fair P… NY      TBD           1 Reassi…  2.86e9
+#> 4 2022-12-21  8527313170 O20180… New Yo… NY      TBD           1 Reassi…  2.86e9
+#> 5 2022-12-21  5193155174 O20200… Podiat… NY      TBD           1 Reassi…  2.86e9
+#> # … with 8 more variables: individual_enrollment_id <chr>,
+#> #   individual_npi <int>, individual_first_name <chr>,
+#> #   individual_last_name <chr>, individual_state_code <chr>,
+#> #   individual_specialty_description <chr>, individual_due_date <chr>,
+#> #   individual_total_employer_associations <int>, and abbreviated variable
+#> #   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,
+#> #   ⁴​group_state_code, ⁵​group_due_date, …
+```
+
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
 ``` r
@@ -226,11 +248,11 @@ provider::revalidation_group(ind_npi = 1710912209)
 #> # A tibble: 5 × 16
 #>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
 #>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>  
-#> 1 2022-12-20  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi… I20040…
-#> 2 2022-12-20  9931511052 O20201… Bright… NY      TBD           1 Reassi… I20040…
-#> 3 2022-12-20  2062791411 O20161… Fair P… NY      TBD           1 Reassi… I20040…
-#> 4 2022-12-20  8527313170 O20180… New Yo… NY      TBD           1 Reassi… I20040…
-#> 5 2022-12-20  5193155174 O20200… Podiat… NY      TBD           1 Reassi… I20040…
+#> 1 2022-12-21  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi… I20040…
+#> 2 2022-12-21  9931511052 O20201… Bright… NY      TBD           1 Reassi… I20040…
+#> 3 2022-12-21  2062791411 O20161… Fair P… NY      TBD           1 Reassi… I20040…
+#> 4 2022-12-21  8527313170 O20180… New Yo… NY      TBD           1 Reassi… I20040…
+#> 5 2022-12-21  5193155174 O20200… Podiat… NY      TBD           1 Reassi… I20040…
 #> # … with 7 more variables: individual_npi <int>, individual_first_name <chr>,
 #> #   individual_last_name <chr>, individual_state_code <chr>,
 #> #   individual_specialty_description <chr>, individual_due_date <chr>,

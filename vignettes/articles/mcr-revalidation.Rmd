@@ -1,0 +1,169 @@
+---
+title: "Medicare Revalidation APIs"
+output: html_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+<br>
+
+## Medicare Revalidation Due Date List API
+
+<br>
+
+Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet. These lists are refreshed every two months and two months’ worth of due dates are appended to the list.
+
+<br>
+
+The Revalidation Due Date List dataset contains revalidation due dates for Medicare providers who are due to revalidate in the following six months. If a provider's due date does not fall within the ensuing six months, the due date is marked 'TBD'. In addition the dataset also includes subfiles with reassignment information for a given provider as well as due date listings for clinics and group practices and their providers. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
+
+<br>
+
+-  [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
+-  [Medicare Revalidation Due Date - Data Dictionary](https://data.cms.gov/resources/revalidation-due-date-list-data-dictionary)  
+
+
+```{r}
+revalidation_date(enroll_id = "I20031110000070", npi = 1184699621)
+```
+
+<br>
+
+```{r}
+revalidation_date(first_name = "Eric", last_name = "Byrd")
+```
+
+<br>
+
+```{r}
+revalidation_date(state = "FL", type_code = "3", specialty = "General Practice")
+```
+
+<br>
+
+### API Data Dictionary
+
+<br>
+
+```{r echo=FALSE}
+mrdd <- tibble::tibble(
+  Variable = c(
+    "`enrollment_id`", "`national_provider_identifier`", "`first_name`",
+    "`last_name`", "`organization_name`", "`enrollment_state_code`",
+    "`enrollment_type`", "`provider_type_text`", "`enrollment_specialty`",
+    "`revalidation_due_date`", "`adjusted_due_date`", "`individual_total_reassign_to`",
+    "`receiving_benefits_reassignment`"
+  ),
+  Term = c(
+    "Enrollment ID", "National Provider Identifier", "First Name",
+    "Last Name", "Organization Name", "Enrollment State Code", "Enrollment Type",
+    "Provider Type Text", "Enrollment Specialty", "Revalidation Due Date",
+    "Adjusted Due Date", "Individual Total Reassign To", "Receiving Benefits Reassignment"
+  ),
+  Definition = c(
+    "Enrollment ID", "National Provider Identifier (NPI)", "First name of individual provider",
+    "Last name of individual provider", "Legal business name of organizational provider",
+    "Enrollment state", "Provider type code (1 if Part A; 2 if DME; 3 if Non-DME Part B)",
+    "Provider type description", "Enrollment specialty", "Previously assigned revalidation due date (blank if not previously assigned a due date)",
+    "Next revalidation due date (blank if not yet assigned)", "Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider",
+    "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"))
+mrdd |> gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
+```
+
+<br>
+
+## Medicare Revalidation Clinic Group Practice Reassignment API
+
+
+<br>
+
+### Data Dictionary
+
+```{r results='asis', echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`group_pac_id`", "`group_enrollment_id`", "`group_legal_business_name`",
+    "`group_state_code`", "`group_due_date`", "`group_reassignments_and_physician_assistants`",
+    "`record_type`", "`individual_enrollment_id`", "`individual_npi`",
+    "`individual_first_name`", "`individual_last_name`", "`individual_state_code`",
+    "`individual_specialty_description`", "`individual_due_date`",
+    "`individual_total_employer_associations`"
+  ),
+  Term = c(
+    "Group PAC ID", "Group Enrollment ID", "Group Legal Business Name",
+    "Group State Code", "Group Due Date", "Group Reassignments and Physician Assistants",
+    "Record Type", "Individual Enrollment ID", "Individual NPI",
+    "Individual First Name", "Individual Last Name", "Individual State Code",
+    "Individual Specialty Description", "Individual Due Date", "Individual Total Employer Associations"
+  ),
+  Definition = c(
+    "PAC ID of provider who is receiving reassignment or is the employer",
+    "Enrollment ID of provider who is receiving reassignment or is the employer",
+    "Legal business name of provider who is receiving reassignment or is the employer",
+    "Enrollment state of provider who is receiving reassignment or is the employer",
+    "Revalidation due date of provider who is receiving reassignment or is the employer (TBD if yet to be assigned)",
+    "Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider",
+    "Identifies whether the record is for a reassignment ('Reassignment') or employment ('Physician Assistant')",
+    "Enrollment ID of provider who is reassigning their benefits or is an employee",
+    "NPI of provider who is reassigning their benefits or is an employee",
+    "First name of provider who is reassigning their benefits or is an employee",
+    "Last name of provider who is reassigning their benefits or is an employee",
+    "Enrollment state of provider who is reassigning their benefits or is an employee",
+    "Enrollment specialty of the provider who is reassigning their benefits or is an employee",
+    "Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)",
+    "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"
+  )) |> gluedown::md_table()
+```
+
+<br>
+
+## Medicare Revalidation Reassignment List API
+
+> Reassignments of Providers who are due for Revalidation.
+
+### Purpose
+
+The Revalidation Reassignment List dataset provides information on reassignments of providers who are due for revalidation.
+
+Section 6401 (a) of the Affordable Care Act established a requirement for all enrolled providers/suppliers to revalidate their Medicare enrollment information under new enrollment screening criteria. CMS has completed its initial round of revalidations and will be resuming regular revalidation cycles in accordance with 42 CFR §424.515. In an effort to streamline the revalidation process and reduce provider/supplier burden, CMS has implemented several revalidation processing improvements one of which is established due dates by which Providers must revalidate.
+
+ 
+
+Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet.
+
+### Examples
+
+```{r}
+revalidation_reassign(ind_enroll_id = "I20200929003184",
+                    ind_npi = 1962026229,
+                    ind_first = "Rashadda",
+                    ind_last = "Wong",
+                    ind_state = "CT",
+                    ind_specialty = "Physician Assistant")
+```
+
+
+### Data Dictionary
+
+### Related Links
+
+   - [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
+
+<br><br>
