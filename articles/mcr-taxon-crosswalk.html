@@ -158,21 +158,21 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_mpstc</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">npi_mpstc</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span>
+<span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_unpack' not found</span></span>
 <span></span>
 <span><span class="va">npi_mpstc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>             <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span></span>
+<span>             <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_mpstc' not found</span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="rrznwczbmz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hnyuctgrzd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -180,7 +180,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#rrznwczbmz .gt_table {
+#hnyuctgrzd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -205,7 +205,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_heading {
+#hnyuctgrzd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -217,12 +217,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#rrznwczbmz .gt_caption {
+#hnyuctgrzd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#rrznwczbmz .gt_title {
+#hnyuctgrzd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -234,7 +234,7 @@ html {
   border-bottom-width: 0;
 }
 
-#rrznwczbmz .gt_subtitle {
+#hnyuctgrzd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -246,13 +246,13 @@ html {
   border-top-width: 0;
 }
 
-#rrznwczbmz .gt_bottom_border {
+#hnyuctgrzd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_col_headings {
+#hnyuctgrzd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -267,7 +267,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#rrznwczbmz .gt_col_heading {
+#hnyuctgrzd .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -287,7 +287,7 @@ html {
   overflow-x: hidden;
 }
 
-#rrznwczbmz .gt_column_spanner_outer {
+#hnyuctgrzd .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -299,15 +299,15 @@ html {
   padding-right: 4px;
 }
 
-#rrznwczbmz .gt_column_spanner_outer:first-child {
+#hnyuctgrzd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#rrznwczbmz .gt_column_spanner_outer:last-child {
+#hnyuctgrzd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#rrznwczbmz .gt_column_spanner {
+#hnyuctgrzd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -319,7 +319,7 @@ html {
   width: 100%;
 }
 
-#rrznwczbmz .gt_group_heading {
+#hnyuctgrzd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +345,7 @@ html {
   text-align: left;
 }
 
-#rrznwczbmz .gt_empty_group_heading {
+#hnyuctgrzd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -360,15 +360,15 @@ html {
   vertical-align: middle;
 }
 
-#rrznwczbmz .gt_from_md > :first-child {
+#hnyuctgrzd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#rrznwczbmz .gt_from_md > :last-child {
+#hnyuctgrzd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#rrznwczbmz .gt_row {
+#hnyuctgrzd .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -387,7 +387,7 @@ html {
   overflow-x: hidden;
 }
 
-#rrznwczbmz .gt_stub {
+#hnyuctgrzd .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -400,7 +400,7 @@ html {
   padding-right: 5px;
 }
 
-#rrznwczbmz .gt_stub_row_group {
+#hnyuctgrzd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -414,11 +414,11 @@ html {
   vertical-align: top;
 }
 
-#rrznwczbmz .gt_row_group_first td {
+#hnyuctgrzd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#rrznwczbmz .gt_summary_row {
+#hnyuctgrzd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -428,16 +428,16 @@ html {
   padding-right: 5px;
 }
 
-#rrznwczbmz .gt_first_summary_row {
+#hnyuctgrzd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_first_summary_row.thick {
+#hnyuctgrzd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#rrznwczbmz .gt_last_summary_row {
+#hnyuctgrzd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -447,7 +447,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_grand_summary_row {
+#hnyuctgrzd .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -457,7 +457,7 @@ html {
   padding-right: 5px;
 }
 
-#rrznwczbmz .gt_first_grand_summary_row {
+#hnyuctgrzd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -467,11 +467,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_striped {
+#hnyuctgrzd .gt_striped {
   background-color: #F4F4F4;
 }
 
-#rrznwczbmz .gt_table_body {
+#hnyuctgrzd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -480,7 +480,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#rrznwczbmz .gt_footnotes {
+#hnyuctgrzd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -494,7 +494,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#rrznwczbmz .gt_footnote {
+#hnyuctgrzd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -503,7 +503,7 @@ html {
   padding-right: 5px;
 }
 
-#rrznwczbmz .gt_sourcenotes {
+#hnyuctgrzd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -517,7 +517,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#rrznwczbmz .gt_sourcenote {
+#hnyuctgrzd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -525,64 +525,64 @@ html {
   padding-right: 5px;
 }
 
-#rrznwczbmz .gt_left {
+#hnyuctgrzd .gt_left {
   text-align: left;
 }
 
-#rrznwczbmz .gt_center {
+#hnyuctgrzd .gt_center {
   text-align: center;
 }
 
-#rrznwczbmz .gt_right {
+#hnyuctgrzd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#rrznwczbmz .gt_font_normal {
+#hnyuctgrzd .gt_font_normal {
   font-weight: normal;
 }
 
-#rrznwczbmz .gt_font_bold {
+#hnyuctgrzd .gt_font_bold {
   font-weight: bold;
 }
 
-#rrznwczbmz .gt_font_italic {
+#hnyuctgrzd .gt_font_italic {
   font-style: italic;
 }
 
-#rrznwczbmz .gt_super {
+#hnyuctgrzd .gt_super {
   font-size: 65%;
 }
 
-#rrznwczbmz .gt_footnote_marks {
+#hnyuctgrzd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#rrznwczbmz .gt_asterisk {
+#hnyuctgrzd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#rrznwczbmz .gt_indent_1 {
+#hnyuctgrzd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#rrznwczbmz .gt_indent_2 {
+#hnyuctgrzd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#rrznwczbmz .gt_indent_3 {
+#hnyuctgrzd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#rrznwczbmz .gt_indent_4 {
+#hnyuctgrzd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#rrznwczbmz .gt_indent_5 {
+#hnyuctgrzd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
