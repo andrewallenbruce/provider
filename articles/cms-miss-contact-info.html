@@ -65,7 +65,7 @@
     <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
     <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
     <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
-    <a class="dropdown-item" href="../articles/mcr-chronic-cond.html">Medicare Chronic Conditions</a>
+    <a class="dropdown-item" href="../articles/mcr-chron-cond.html">Medicare Chronic Conditions</a>
     <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
   </div>
 </li>
@@ -130,15 +130,14 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 <blockquote>
-<p>Information on Providers That are Missing Digital Contact Information
-in the NPPES System.</p>
+<p><em>Information on Providers That are Missing Digital Contact
+Information in the NPPES System.</em></p>
 </blockquote>
-<div class="section level2">
-<h2 id="purpose">Purpose<a class="anchor" aria-label="anchor" href="#purpose"></a>
-</h2>
+<p><br></p>
 <p>Digital contact information, also known as <a href="https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html" class="external-link">Endpoints</a>,
-provide a secure way for health care entities to send authenticated,
+provides a secure way for health care entities to send authenticated,
 encrypted health information to trusted recipients over the internet.
 Health care organizations seeking to engage in electronic health
 information exchange need accurate information about the electronic
@@ -146,115 +145,50 @@ addresses (for example, Direct address, FHIR server URL, query endpoint,
 or other digital contact information) of potential exchange partners to
 facilitate this information exchange.</p>
 <p><br></p>
+<div class="section level2">
+<h2 id="missing_information-nppes_npi">
+<code>missing_information() != nppes_npi()</code><a class="anchor" aria-label="anchor" href="#missing_information-nppes_npi"></a>
+</h2>
+<p>A provider that appears in the search results of the Missing
+Information API has no Endpoints entered into the NPPES NPI
+Registry.</p>
+<div class="row">
+<div class="col-md-6">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre>
+</div>
+<div class="col-md-6">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre>
+</div>
+</div>
+<p><br><br></p>
 </div>
 <div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+<h2 id="nppes_npi-missing_information">
+<code>nppes_npi() != missing_information()</code><a class="anchor" aria-label="anchor" href="#nppes_npi-missing_information"></a>
 </h2>
-<p>If a provider appears in the search results of the Missing
-Information API, then they have no Endpoints entered into the NPPES NPI
-Registry.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">last_name</th>
-<th align="left">first_name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1144224569</td>
-<td align="left">Clouse</td>
-<td align="left">John</td>
-</tr></tbody>
-</table>
-<p><br></p>
-<p>We can confirm this by searching for the provider in the NPPES, which
-should contain a <code>NULL</code> or <code>NA</code>
-<code>endpoints</code> list-column:</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">number</span>, </span>
-<span>                <span class="va">name</span>, </span>
-<span>                <span class="va">endpoints</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>endpoints <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># empty list</span></span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">name</th>
-<th align="left">endpoints</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1144224569</td>
-<td align="left">JOHN CLOUSE</td>
-<td align="left">NA</td>
-</tr></tbody>
-</table>
-<p><br></p>
-<p>A provider <em>with</em> endpoint information in the NPPES would not
-appear in the search results, like so:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">last_name</th>
-<th align="left">first_name</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1003000423</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr></tbody>
-</table>
-<p><br></p>
-<p>We can again check by searching for the provider’s NPI in the
-NPPES:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">number</span>, </span>
-<span>                <span class="va">name</span>, </span>
-<span>                <span class="va">endpoints</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">endpoints</span>, </span>
-<span>                      names_sep <span class="op">=</span> <span class="cn">NULL</span>, </span>
-<span>                      simplify <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>                      strict <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">number</span>, </span>
-<span>                <span class="va">name</span>, </span>
-<span>                <span class="va">endpoint</span>, </span>
-<span>                endpoint_description <span class="op">=</span> <span class="va">endpointDescription</span>, </span>
-<span>                endpoint_type <span class="op">=</span> <span class="va">endpointTypeDescription</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="9%">
-<col width="14%">
-<col width="37%">
-<col width="17%">
-<col width="21%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">name</th>
-<th align="left">endpoint</th>
-<th align="left">endpoint_description</th>
-<th align="left">endpoint_type</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1003000423</td>
-<td align="left">JENNIFER VELOTTA</td>
-<td align="left"><a href="mailto:Jennifer.velotta@log.eclinicaldirectplus.com" class="email">Jennifer.velotta@log.eclinicaldirectplus.com</a></td>
-<td align="left">eclinicaldirectplus</td>
-<td align="left">Direct Messaging Address</td>
-</tr></tbody>
-</table>
+<p>A provider with Endpoint information in the NPPES will not appear in
+the Missing Information search results.</p>
+<div class="row">
+<div class="col-md-6">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre>
+</div>
+<div class="col-md-6">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'kableExtra'</span></span></code></pre>
+</div>
+</div>
 <p><br></p>
 <div class="section level3">
-<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+<h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
 </h3>
-<div id="dxmxazghwi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="onxunrebda" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -262,7 +196,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#dxmxazghwi .gt_table {
+#onxunrebda .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -287,7 +221,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#dxmxazghwi .gt_heading {
+#onxunrebda .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -299,12 +233,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#dxmxazghwi .gt_caption {
+#onxunrebda .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dxmxazghwi .gt_title {
+#onxunrebda .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -316,7 +250,7 @@ html {
   border-bottom-width: 0;
 }
 
-#dxmxazghwi .gt_subtitle {
+#onxunrebda .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -328,13 +262,13 @@ html {
   border-top-width: 0;
 }
 
-#dxmxazghwi .gt_bottom_border {
+#onxunrebda .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#dxmxazghwi .gt_col_headings {
+#onxunrebda .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -349,7 +283,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#dxmxazghwi .gt_col_heading {
+#onxunrebda .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -369,7 +303,7 @@ html {
   overflow-x: hidden;
 }
 
-#dxmxazghwi .gt_column_spanner_outer {
+#onxunrebda .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -381,15 +315,15 @@ html {
   padding-right: 4px;
 }
 
-#dxmxazghwi .gt_column_spanner_outer:first-child {
+#onxunrebda .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dxmxazghwi .gt_column_spanner_outer:last-child {
+#onxunrebda .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dxmxazghwi .gt_column_spanner {
+#onxunrebda .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -401,7 +335,7 @@ html {
   width: 100%;
 }
 
-#dxmxazghwi .gt_group_heading {
+#onxunrebda .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -427,7 +361,7 @@ html {
   text-align: left;
 }
 
-#dxmxazghwi .gt_empty_group_heading {
+#onxunrebda .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -442,15 +376,15 @@ html {
   vertical-align: middle;
 }
 
-#dxmxazghwi .gt_from_md > :first-child {
+#onxunrebda .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dxmxazghwi .gt_from_md > :last-child {
+#onxunrebda .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dxmxazghwi .gt_row {
+#onxunrebda .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -469,7 +403,7 @@ html {
   overflow-x: hidden;
 }
 
-#dxmxazghwi .gt_stub {
+#onxunrebda .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -482,7 +416,7 @@ html {
   padding-right: 5px;
 }
 
-#dxmxazghwi .gt_stub_row_group {
+#onxunrebda .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -496,11 +430,11 @@ html {
   vertical-align: top;
 }
 
-#dxmxazghwi .gt_row_group_first td {
+#onxunrebda .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dxmxazghwi .gt_summary_row {
+#onxunrebda .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -510,16 +444,16 @@ html {
   padding-right: 5px;
 }
 
-#dxmxazghwi .gt_first_summary_row {
+#onxunrebda .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#dxmxazghwi .gt_first_summary_row.thick {
+#onxunrebda .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dxmxazghwi .gt_last_summary_row {
+#onxunrebda .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -529,7 +463,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#dxmxazghwi .gt_grand_summary_row {
+#onxunrebda .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -539,7 +473,7 @@ html {
   padding-right: 5px;
 }
 
-#dxmxazghwi .gt_first_grand_summary_row {
+#onxunrebda .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -549,11 +483,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#dxmxazghwi .gt_striped {
+#onxunrebda .gt_striped {
   background-color: #F4F4F4;
 }
 
-#dxmxazghwi .gt_table_body {
+#onxunrebda .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -562,7 +496,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#dxmxazghwi .gt_footnotes {
+#onxunrebda .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -576,7 +510,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#dxmxazghwi .gt_footnote {
+#onxunrebda .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -585,7 +519,7 @@ html {
   padding-right: 5px;
 }
 
-#dxmxazghwi .gt_sourcenotes {
+#onxunrebda .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -599,7 +533,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#dxmxazghwi .gt_sourcenote {
+#onxunrebda .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -607,64 +541,64 @@ html {
   padding-right: 5px;
 }
 
-#dxmxazghwi .gt_left {
+#onxunrebda .gt_left {
   text-align: left;
 }
 
-#dxmxazghwi .gt_center {
+#onxunrebda .gt_center {
   text-align: center;
 }
 
-#dxmxazghwi .gt_right {
+#onxunrebda .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dxmxazghwi .gt_font_normal {
+#onxunrebda .gt_font_normal {
   font-weight: normal;
 }
 
-#dxmxazghwi .gt_font_bold {
+#onxunrebda .gt_font_bold {
   font-weight: bold;
 }
 
-#dxmxazghwi .gt_font_italic {
+#onxunrebda .gt_font_italic {
   font-style: italic;
 }
 
-#dxmxazghwi .gt_super {
+#onxunrebda .gt_super {
   font-size: 65%;
 }
 
-#dxmxazghwi .gt_footnote_marks {
+#onxunrebda .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#dxmxazghwi .gt_asterisk {
+#onxunrebda .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dxmxazghwi .gt_indent_1 {
+#onxunrebda .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dxmxazghwi .gt_indent_2 {
+#onxunrebda .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dxmxazghwi .gt_indent_3 {
+#onxunrebda .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dxmxazghwi .gt_indent_4 {
+#onxunrebda .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dxmxazghwi .gt_indent_5 {
+#onxunrebda .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

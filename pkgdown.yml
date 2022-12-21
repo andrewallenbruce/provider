@@ -6,6 +6,7 @@ articles:
   geocoding: geocoding.html
   mcr-chron-cond: mcr-chron-cond.html
   mcr-ffs-prov-enroll: mcr-ffs-prov-enroll.html
+  mcr-month-enroll: mcr-month-enroll.html
   mcr-opt-out-affid: mcr-opt-out-affid.html
   mcr-ord-referring: mcr-ord-referring.html
   mcr-phys-other-pract: mcr-phys-other-pract.html
@@ -15,7 +16,7 @@ articles:
   mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
   nppes-npi-registry: nppes-npi-registry.html
   provider: provider.html
-last_built: 2022-12-21T05:20Z
+last_built: 2022-12-21T13:35Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles
