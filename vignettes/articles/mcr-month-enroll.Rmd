@@ -1,0 +1,67 @@
+---
+title: "Medicare Monthly Enrollment API"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+
+options(knitr.table.format = "html")
+```
+
+```{r}
+library(provider)
+```
+
+<br>
+
+> *Current information on the number of Medicare beneficiaries with hospital/medical coverage and prescription drug coverage, available for several geographical areas.*
+
+<br>
+
+The Medicare Monthly Enrollment data provides current monthly information on the number of Medicare beneficiaries with hospital/medical coverage and prescription drug coverage, available for several geographic areas including national, state/territory, and county. The hospital/medical coverage data can be broken down further by health care delivery (Original Medicare versus Medicare Advantage and Other Health Plans) and the prescription drug coverage data can be examined by those enrolled in stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage Prescription Drug plans. The dataset includes enrollee counts on a rolling 12 month basis and also provides information on yearly trends. The dataset is based on information gathered from CMS administrative enrollment data for beneficiaries enrolled in the Medicare program available from the CMS Chronic Conditions Data Warehouse.
+
+<br>
+
+## Examples
+
+```{r}
+beneficiary_enrollment(year = 2018,
+                       month = "Year",
+                       geo_level = "County",
+                       state_abb = "AL",
+                       county = "Autauga")
+
+beneficiary_enrollment(year = 2021,
+                       geo_level = "County",
+                       fips = "01001")
+
+beneficiary_enrollment(year = 2022,
+                       month = "July",
+                       geo_level = "State",
+                       state = "Georgia")
+
+beneficiary_enrollment(year = 2017,
+                       geo_level = "State",
+                       fips = "10")
+```
+
+<br>
+
+## Data Dictionary
+
+<br>
+
+## Related Links
+
+   - [Medicare Monthly Enrollment API](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)

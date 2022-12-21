@@ -21,9 +21,12 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-> All physicians and non-physician practitioners who are legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare.
+<br>
 
-## Purpose
+> *Providers That are Legally Eligible to Order and Refer in the Medicare Program and Have Current Enrollment Records in Medicare.*
+
+<br>
+
 
 The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
 
@@ -36,12 +39,14 @@ In the event a provider does not want to bill Medicare for their services, they 
    - Imaging Services
    - Home Health Services
 
-## Examples
+<br>
+
+## `order_refer()`
 
 ```{r}
-order_refer(npi = 1003026055) |> 
-  knitr::kable()
+order_refer(npi = 1003026055)
 ```
+
 
 <br>
 

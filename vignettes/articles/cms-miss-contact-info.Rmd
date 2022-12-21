@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
@@ -16,59 +16,77 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+
+options(knitr.table.format = "html")
 ```
 
 ```{r}
 library(provider)
 ```
 
-> Information on Providers That are Missing Digital Contact Information in the NPPES System.
+<br>
 
-## Purpose
-
-Digital contact information, also known as [Endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html), provide a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other digital contact information) of potential exchange partners to facilitate this information exchange.
+> *Information on Providers That are Missing Digital Contact Information in the NPPES System.*
 
 <br>
 
-## Examples
+Digital contact information, also known as [Endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html), provides a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other digital contact information) of potential exchange partners to facilitate this information exchange.
 
-If a provider appears in the search results of the Missing Information API, then they have no Endpoints entered into the NPPES NPI Registry.
+<br>
 
-```{r}
-missing_information(npi = 1144224569) |> 
-  knitr::kable()
+## `missing_information() != nppes_npi()`
+
+A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry.
+
+::: row
+::: col-md-6
+
+```{r eval=FALSE}
+missing_information(npi = 1144224569)
 ```
 
+```{r echo=FALSE}
+missing_information(npi = 1144224569) |> 
+  kableExtra::kbl(col.names = c("NPI", "Last Name", "First Name")) |> 
+  kableExtra::kable_styling(full_width = FALSE)
+```
 
+:::
 
-<br>
+::: col-md-6
 
-We can confirm this by searching for the provider in the NPPES, which should contain a `NULL` or `NA` `endpoints` list-column:
+```{r eval=FALSE}
+nppes_npi(npi = 1144224569)
+```
 
-<br>
-
-```{r}
+```{r echo=FALSE}
 nppes_npi(npi = 1144224569) |> 
   dplyr::select(npi = number, 
                 name, 
                 endpoints) |> 
   dplyr::mutate(endpoints = NA) |> # empty list
-  knitr::kable()
+  kableExtra::kbl(col.names = c("NPI", "Name", "Endpoints")) |> 
+  kableExtra::kable_styling(full_width = FALSE)
 ```
 
+:::
+:::
+
+<br>
 <br>
 
-A provider *with* endpoint information in the NPPES would not appear in the search results, like so:
+## `nppes_npi() != missing_information()`
 
-```{r}
-missing_information(npi = 1003000423) |> knitr::kable()
+A provider with Endpoint information in the NPPES will not appear in the Missing Information search results.
+
+::: row
+::: col-md-6
+
+```{r eval=FALSE}
+nppes_npi(npi = 1144224569)
 ```
 
-<br>
-
-We can again check by searching for the provider's NPI in the NPPES:
-
-```{r}
+```{r echo=FALSE}
 nppes_npi(1003000423) |> 
   dplyr::select(number, 
                 name, 
@@ -77,17 +95,39 @@ nppes_npi(1003000423) |>
                       names_sep = NULL, 
                       simplify = TRUE, 
                       strict = TRUE) |> 
-  dplyr::select(npi = number, 
-                name, 
-                endpoint, 
-                endpoint_description = endpointDescription, 
-                endpoint_type = endpointTypeDescription) |> 
-  knitr::kable()
+  dplyr::select(NPI = number, 
+                dplyr::contains("endpoint")) |> 
+  tidyr::pivot_longer(cols = dplyr::contains("endpoint"), 
+                      names_to = "Description", 
+                      values_to = "Endpoint") |> 
+  dplyr::select(-Description) |> 
+  kableExtra::kbl() |> 
+  kableExtra::collapse_rows(columns = 1:2, valign = "top") |> 
+  kableExtra::kable_styling(full_width = FALSE)
 ```
+
+:::
+
+::: col-md-6
+
+```{r eval=FALSE}
+missing_information(npi = 1003000423)
+```
+
+
+```{r echo=FALSE}
+missing_information(npi = 1003000423) |> 
+kableExtra::kbl(col.names = c("NPI", "Last Name", "First Name")) |> 
+  kableExtra::kable_styling(full_width = FALSE)
+```
+
+
+:::
+:::
 
 <br>
 
-### Data Dictionary
+### API Data Dictionary
 
 ```{r echo=FALSE}
 dd <- tibble::tibble(

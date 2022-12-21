@@ -14,11 +14,17 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-> Information on prevalence, use and spending by count of select chronic conditions among Original Medicare (or fee-for-service) beneficiaries.
+<br>
+
+> *Information on prevalence, use and spending by count of select chronic conditions among Original Medicare (or fee-for-service) beneficiaries.*
+
+<br>
 
 ## Medicare Multiple Chronic Conditions API
 
 The Multiple Chronic Conditions dataset provides information on the number of chronic conditions among Original Medicare beneficiaries. The dataset contains prevalence, use and spending organized by geography and the count of chronic conditions from the set of select 21 chronic conditions. The count of conditions is grouped into four categories (0-1, 2-3, 4-5 and 6 or more).
+
+<br>
 
 ### Examples
 
@@ -65,6 +71,8 @@ The Select Chronic Conditions dataset provides information on 21 selected chroni
 -   Osteoporosis
 -   Schizophrenia and Other Psychotic Disorders
 -   Stroke
+
+<br>
 
 ### Examples
 

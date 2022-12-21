@@ -103,7 +103,22 @@ opt_out <- function(first        = NULL,
 
   if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
 
-    results <- tibble::tibble(Date = as.Date(httr2::resp_date(resp)))
+    results <- tibble::tibble(date = as.Date(httr2::resp_date(resp)),
+                              last_updated = NA,
+                              first_name = NA,
+                              last_name = NA,
+                              npi = NA,
+                              specialty = NA,
+                              optout_effective_date = NA,
+                              optout_end_date = NA,
+                              first_line_street_address = NA,
+                              second_line_street_address = NA,
+                              city_name = NA,
+                              state_code = NA,
+                              zip_code = NA,
+                              eligible_to_order_and_refer = NA)
+
+    return(results)
 
   } else {
 

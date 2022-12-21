@@ -21,9 +21,11 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-> A List of Practitioners Who are Currently Opted Out of Medicare.
+<br>
 
-## Purpose
+> *A List of Practitioners Who are Currently Opted Out of Medicare.*
+
+<br>
 
 Physicians and practitioners who do not wish to enroll in the Medicare program may “opt-out” of Medicare. This means that neither the physician, nor the beneficiary submits the bill to Medicare for services rendered. Instead, the beneficiary pays the physician out-of-pocket and neither party is reimbursed by Medicare. A private contract is signed between the physician and the beneficiary that states that neither one can receive payment from Medicare for the services that were performed.
 
@@ -51,6 +53,8 @@ Be of an eligible type or specialty.
 Submit an opt-out affidavit to Medicare.
 Enter into a private contract with each of your Medicare patients. This contract will reflect the agreement between you and your patients that they will pay out of pocket for services, and that nobody will submit the bill to Medicare for reimbursement.
 Contact your Medicare Administrative Contractor (MAC) (PDF) to see what information you should include in your opt-out affidavit and private contract.
+
+<br>
 
 ## Examples
 
@@ -83,9 +87,11 @@ opt_out(date_start = "01/30/1998", date_end = "01/30/2024")
 opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
 ```
 
+<br>
+
 ### Data Dictionary
 
-```{r echo=FALSE, results='asis'}
+```{r echo=FALSE}
 tibble::tibble(
   Variable = c(
     "`first_name`", "`last_name`", "`npi`", "`specialty`", "`optout_effective_date`",
@@ -104,7 +110,12 @@ tibble::tibble(
     "Date on which the Provider's Opt Out Status ends", "Provider's Street Address",
     "Provider's Street Address", "Provider's City", "Provider's State Abbreviation",
     "Provider's Zip Code", "Flag indicating whether the Provider is eligible to Order and Refer")) |> 
-  gluedown::md_table()
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 <br>

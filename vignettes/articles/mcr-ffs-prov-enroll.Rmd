@@ -21,9 +21,11 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-> Information on a point-in-time snapshot of enrollment-level data for Providers actively enrolled in Medicare.
+<br>
 
-## Purpose
+> *Information on a point-in-time snapshot of enrollment-level data for Providers actively enrolled in Medicare.*
+
+<br>
 
 The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). 
 

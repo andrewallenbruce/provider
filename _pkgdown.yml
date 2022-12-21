@@ -61,7 +61,7 @@ navbar:
       - text: Medicare Taxonomy Crosswalk
         href: articles/mcr-taxon-crosswalk.html
       - text: Medicare Chronic Conditions
-        href: articles/mcr-chronic-cond.html
+        href: articles/mcr-chron-cond.html
       - text: NPPES NPI Public Registry
         href: articles/nppes-npi-registry.html
     news:
