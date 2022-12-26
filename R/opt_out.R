@@ -101,6 +101,7 @@ opt_out <- function(first        = NULL,
   # send request ----------------------------------------------------------
   resp <- httr2::request(url) |> httr2::req_perform()
 
+  # no search results returns empty tibble ----------------------------------
   if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
 
     results <- tibble::tibble(date = as.Date(httr2::resp_date(resp)),
@@ -117,7 +118,6 @@ opt_out <- function(first        = NULL,
                               state_code = NA,
                               zip_code = NA,
                               eligible_to_order_and_refer = NA)
-
     return(results)
 
   } else {
@@ -127,8 +127,8 @@ opt_out <- function(first        = NULL,
             check_type = FALSE, simplifyVector = TRUE)) |>
     dplyr::mutate(Date = as.Date(httr2::resp_date(resp)),
                   NPI = as.character(NPI)) |>
-    dplyr::relocate(Date, "Last updated")
-
+    dplyr::relocate(Date, "Last updated") |>
+    dplyr::mutate(dplyr::across(dplyr::contains("Eligible"), yn_logical))
   }
 
   # clean names -------------------------------------------------------------

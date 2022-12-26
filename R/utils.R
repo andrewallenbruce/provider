@@ -317,3 +317,14 @@ re_nest <- function(df, col){
 #' @examples
 #' pct_diff(265, 4701)
 pct_diff <- function(x, y) {abs(x - y) / mean(c(x, y))}
+
+#' Convert Y/N char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
+yn_logical <- function(x){
+  dplyr::case_when(
+    x == as.character("Y") ~ as.logical(TRUE),
+    x == as.character("N") ~ as.logical(FALSE),
+    TRUE ~ NA)
+}

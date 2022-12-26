@@ -77,18 +77,9 @@ beneficiary_enrollment <- function(year        = 2021,
                                    clean_names = TRUE,
                                    lowercase   = TRUE) {
 
-  # if (geo_level == "National" & !is.null(state_abb) | !is.null(state) |
-  #     !is.null(county) | !is.null(fips)) {rlang::abort(c(
-  #       "'If geo_level' is 'National', the following must be NULL:",
-  #       "*" = "state_abb",
-  #       "*" = "state",
-  #       "*" = "county",
-  #       "*" = "fips"))}
-
   # match geo_level args ----------------------------------------------------
   month <- rlang::arg_match(month, values = c("Year", month.name))
   geo_level <- rlang::arg_match(geo_level)
-
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

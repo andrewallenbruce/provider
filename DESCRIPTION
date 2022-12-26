@@ -30,13 +30,18 @@ Imports:
     tidyr
 Suggests: 
     covr,
+    campfin,
     kableExtra,
+    downloadthis,
+    fontawesome,
+    htmltools,
     glue,
     gt,
     gtExtras,
     httptest2,
     knitr,
     leaflet,
+    parsedate,
     rmarkdown,
     roxyglobals (>= 0.2.1),
     spelling,

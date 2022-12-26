@@ -94,21 +94,29 @@ order_refer <- function(npi         = NULL,
   # send request ----------------------------------------------------------
   resp <- httr2::request(url) |> httr2::req_perform()
 
+  # no search results returns empty tibble ----------------------------------
+  if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
+
+    results <- tibble::tibble(npi = NA,
+                              last_name = NA,
+                              first_name = NA,
+                              partb = NA,
+                              hha = NA,
+                              dme = NA,
+                              pmd = NA)
+    return(results)
+
+  } else {
+
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(resp,
              check_type = FALSE, simplifyVector = TRUE)) |>
-             dplyr::mutate(PARTB = dplyr::case_when(
-               PARTB == as.character("Y") ~ as.logical(TRUE),
-               PARTB == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
-               HHA = dplyr::case_when(
-               HHA == as.character("Y") ~ as.logical(TRUE),
-               HHA == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
-               DME = dplyr::case_when(
-               DME == as.character("Y") ~ as.logical(TRUE),
-               DME == as.character("N") ~ as.logical(FALSE), TRUE ~ NA),
-               PMD = dplyr::case_when(
-               PMD == as.character("Y") ~ as.logical(TRUE),
-               PMD == as.character("N") ~ as.logical(FALSE), TRUE ~ NA))
+    dplyr::mutate(PARTB = yn_logical(PARTB),
+                  HHA = yn_logical(HHA),
+                  DME = yn_logical(DME),
+                  PMD = yn_logical(PMD))
+
+  }
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

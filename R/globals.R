@@ -116,6 +116,10 @@ utils::globalVariables(c(
   "lowercase", # <provider_clia>
   "NPI", # <opt_out>
   "Date", # <opt_out>
+  "PARTB", # <order_refer>
+  "HHA", # <order_refer>
+  "DME", # <order_refer>
+  "PMD", # <order_refer>
   "Year", # <physician_by_geography>
   "Year", # <physician_by_provider>
   "Year", # <physician_by_service>

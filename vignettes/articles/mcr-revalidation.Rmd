@@ -40,24 +40,28 @@ The Revalidation Due Date List dataset contains revalidation due dates for Medic
 
 
 ```{r}
-revalidation_date(enroll_id = "I20031110000070", npi = 1184699621)
+revalidation_date(enroll_id = "I20031110000070", 
+                  npi = 1184699621)
 ```
 
 <br>
 
 ```{r}
-revalidation_date(first_name = "Eric", last_name = "Byrd")
+revalidation_date(first_name = "Eric", 
+                  last_name = "Byrd")
 ```
 
 <br>
 
 ```{r}
-revalidation_date(state = "FL", type_code = "3", specialty = "General Practice")
+revalidation_date(state = "FL", 
+                  type_code = "3", 
+                  specialty = "General Practice")
 ```
 
 <br>
 
-### API Data Dictionary
+### Data Dictionary
 
 <br>
 
@@ -95,6 +99,25 @@ mrdd |> gt::gt() |>
 
 ## Medicare Revalidation Clinic Group Practice Reassignment API
 
+```{r}
+revalidation_group(ind_enroll_id = "I20200929003184",
+                   ind_npi = 1962026229,
+                   ind_first = "Rashadda",
+                   ind_last = "Wong",
+                   ind_state = "CT",
+                   ind_specialty = "Physician Assistant")
+```
+
+
+<br>
+
+```{r}
+revalidation_group(group_pac_id = 9436483807,
+                   group_enroll_id = "O20190619002165",
+                   group_bus_name = "1st Call Urgent Care",
+                   group_state = "FL",
+                   record_type = "Reassignment")
+```
 
 <br>
 
@@ -152,13 +175,9 @@ tibble::tibble(
 
 <br>
 
-
-
 The Revalidation Reassignment List dataset provides information on reassignments of providers who are due for revalidation. Section 6401 (a) of the Affordable Care Act established a requirement for all enrolled providers/suppliers to revalidate their Medicare enrollment information under new enrollment screening criteria. CMS has completed its initial round of revalidations and will be resuming regular revalidation cycles in accordance with 42 CFR §424.515. In an effort to streamline the revalidation process and reduce provider/supplier burden, CMS has implemented several revalidation processing improvements one of which is established due dates by which Providers must revalidate. Medicare Providers must validate their enrollment record every three or five years. CMS sets every Provider’s Revalidation due date at the end of a month and posts the upcoming six to seven months of due dates online. A due date of ‘TBD’ means that CMS has not set the due date yet.
 
 <br>
-
-### Examples
 
 ```{r}
 revalidation_reassign(ind_enroll_id = "I20200929003184",
@@ -175,7 +194,7 @@ revalidation_reassign(ind_enroll_id = "I20200929003184",
 
 <br>
 
-### Related Links
+## Related Links
 
    - [Medicare Revalidation Reassignment List API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)
 
