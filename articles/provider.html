@@ -132,75 +132,188 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <div class="section level2">
-<h2 id="nppes-npi-public-registry-api">NPPES NPI Public Registry API<a class="anchor" aria-label="anchor" href="#nppes-npi-public-registry-api"></a>
+<h2 id="example-opt-out-provider">Example: Opt-Out Provider<a class="anchor" aria-label="anchor" href="#example-opt-out-provider"></a>
 </h2>
-<p><br></p>
-<p>You’re billing for a healthcare provider and receive a
-<code>CO-8</code> denial on a claim and you need to confirm whether or
-not the correct taxonomy code was entered on the claim. Armed with the
-provider’s NPI, you can search the <strong>NPPES NPI Registry
-API</strong> with the <code>provider_nppes()</code> function:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load library</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Query the NPPES API</span></span>
-<span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_nppes(npi = 1760485387): could not find function "provider_nppes"</span></span></code></pre></div>
-<p><br></p>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_ex' not found</span></span></code></pre>
-<p><br></p>
-<p>Unpack the API response with the <code>provider_unpack()</code>
-function:</p>
+<span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">optex_final</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 29</span></span></span>
+<span><span class="co">#&gt;   NPI        `Enumeration Type` Name Pr…¹ First…² Middl…³ Last …⁴ Crede…⁵ Gender</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114058443 Individual         Dr.       David   Lawren… Smith   M.D.    M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 21 more variables: `Enumeration Date` &lt;dttm&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   `Certification Date` &lt;dttm&gt;, `Last Updated` &lt;dttm&gt;, City &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   State &lt;chr&gt;, `Postal Code` &lt;chr&gt;, `Telephone Number` &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   `Fax Number` &lt;chr&gt;, `Location Address` &lt;chr&gt;, `Mailing Address` &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   Code &lt;chr&gt;, Description &lt;chr&gt;, License &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   `Opt Out Effective Date` &lt;dttm&gt;, `Opt Out End Date` &lt;dttm&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   `Refer To Part B` &lt;lgl&gt;, `Refer To Hhas` &lt;lgl&gt;, `Order Dme` &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_ex</span> <span class="op">&lt;-</span> <span class="fu">provider_unpack</span><span class="op">(</span><span class="va">nppes_ex</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_unpack(nppes_ex): could not find function "provider_unpack"</span></span></code></pre></div>
-<p><br></p>
-<p>Giving you the results in tibble form:</p>
+<code class="sourceCode R"><span><span class="va">optex_long</span> <span class="op">&lt;-</span> <span class="va">optex_final</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes_ex</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>identifiers <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">ident_code</span>, </span>
-<span>                              <span class="va">ident_desc</span>, </span>
-<span>                              <span class="va">ident_issuer</span>, </span>
-<span>                              <span class="va">identifier</span>, </span>
-<span>                              <span class="va">ident_state</span><span class="op">)</span>,</span>
-<span>              taxonomies <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">taxon_code</span>, </span>
-<span>                             <span class="va">taxonomy_group</span>, </span>
-<span>                             <span class="va">taxon_desc</span>, </span>
-<span>                             <span class="va">taxon_state</span>, </span>
-<span>                             <span class="va">taxon_license</span>, </span>
-<span>                             <span class="va">taxon_primary</span><span class="op">)</span>,</span>
-<span>              addresses <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">country_code</span>, </span>
-<span>                            <span class="va">address_purpose</span>, </span>
-<span>                            <span class="va">address_1</span>, </span>
-<span>                            <span class="va">city</span>, </span>
-<span>                            <span class="va">state</span>, </span>
-<span>                            <span class="va">postal_code</span>, </span>
-<span>                            <span class="va">telephone_number</span>, </span>
-<span>                            <span class="va">fax_number</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in tidyr::nest(nppes_ex, identifiers = c(ident_code, ident_desc, : object 'nppes_ex' not found</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-fee-for-service-public-provider-enrollment-api">Medicare Fee-For-Service Public Provider Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment-api"></a>
-</h2>
-<p><br></p>
-<p>What if you need the provider’s PECOS PAC ID or Enrollment ID? Using
-the <code>provider_mppe()</code> function, you can search Medicare’s
-<strong>Fee-For-Service Public Provider Enrollment API</strong>:</p>
-<p><br></p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/fmmattioni/downloadthis" class="external-link">downloadthis</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># CSV file</span></span>
+<span><span class="va">attach_csv</span> <span class="op">&lt;-</span> <span class="va">optex_long</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">downloadthis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/downloadthis/man/download_this.html" class="external-link">download_this</a></span><span class="op">(</span></span>
+<span>    output_name <span class="op">=</span> <span class="st">"providercsv"</span>,</span>
+<span>    output_extension <span class="op">=</span> <span class="st">".csv"</span>,</span>
+<span>    button_label <span class="op">=</span> <span class="st">"Download CSV"</span>,</span>
+<span>    button_type <span class="op">=</span> <span class="st">"default"</span>,</span>
+<span>    has_icon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    icon <span class="op">=</span> <span class="st">"fa fa-save"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co"># Excel file</span></span>
+<span><span class="va">attach_excel</span> <span class="op">&lt;-</span> <span class="va">optex_long</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">downloadthis</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/downloadthis/man/download_this.html" class="external-link">download_this</a></span><span class="op">(</span></span>
+<span>    output_name <span class="op">=</span> <span class="st">"providerxlsx"</span>,</span>
+<span>    output_extension <span class="op">=</span> <span class="st">".xlsx"</span>,</span>
+<span>    button_label <span class="op">=</span> <span class="st">"Download Excel"</span>,</span>
+<span>    button_type <span class="op">=</span> <span class="st">"primary"</span>,</span>
+<span>    has_icon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>    icon <span class="op">=</span> <span class="st">"fa fa-save"</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="va">gt_theme_provider</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">data</span>,<span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_all_caps.html" class="external-link">opt_all_caps</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_row_striping.html" class="external-link">opt_row_striping</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span></span>
+<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span><span class="st">"Chivo"</span><span class="op">)</span>,</span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>    <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
+<span>      style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_borders.html" class="external-link">cell_borders</a></span><span class="op">(</span></span>
+<span>        sides <span class="op">=</span> <span class="st">"bottom"</span>, </span>
+<span>        color <span class="op">=</span> <span class="st">"transparent"</span>, </span>
+<span>        weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>      locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span></span>
+<span>        columns <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>        rows <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">data</span><span class="op">$</span><span class="va">`_data`</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>  <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span></span>
+<span>    footnotes.multiline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    row.striping.background_color <span class="op">=</span> <span class="st">"#fafafa"</span>,</span>
+<span>    table_body.hlines.color <span class="op">=</span> <span class="st">"#f6f7f7"</span>,</span>
+<span>    table.border.top.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    table.border.top.color <span class="op">=</span> <span class="st">"gray"</span>,</span>
+<span>    table.border.bottom.color <span class="op">=</span> <span class="st">"gray"</span>,</span>
+<span>    table.border.bottom.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    column_labels.border.top.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    column_labels.border.top.color <span class="op">=</span> <span class="st">"gray"</span>,</span>
+<span>    column_labels.border.bottom.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    column_labels.border.bottom.color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>    column_labels.background.color <span class="op">=</span> <span class="st">"white"</span>,</span>
+<span>    data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    source_notes.multiline <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>    source_notes.font.size <span class="op">=</span> <span class="fl">12</span>,</span>
+<span>    source_notes.border.bottom.color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>    source_notes.border.bottom.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>    table.font.size <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>    heading.align <span class="op">=</span> <span class="st">"left"</span>,</span>
+<span>    <span class="va">...</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">add_badge</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="va">add_color</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"Individual"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="st">"background: hsl(116, 60%, 90%); color: hsl(116, 30%, 25%);"</span></span>
+<span>        <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"Organization"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>          <span class="st">"background: hsl(350, 70%, 90%); color: hsl(350, 45%, 30%);"</span></span>
+<span>        <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">!=</span> <span class="st">"Individual"</span> <span class="op">|</span> <span class="va">x</span> <span class="op">!=</span> <span class="st">"Organization"</span><span class="op">)</span> <span class="op">{</span> <span class="va">x</span> </span>
+<span>          <span class="op">}</span></span>
+<span>      <span class="va">div_out</span> <span class="op">&lt;-</span> <span class="fu">htmltools</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span></span>
+<span>        style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;"</span>, <span class="va">add_color</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span> </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">div_out</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">add_check_xmark</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">add_checkx</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="st">"FALSE"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">!=</span> <span class="st">"Individual"</span> <span class="op">|</span> <span class="va">x</span> <span class="op">!=</span> <span class="st">"Organization"</span><span class="op">)</span> <span class="op">{</span> </span>
+<span>      <span class="va">x</span> </span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="va">div_out</span> <span class="op">&lt;-</span> <span class="fu">htmltools</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/htmltools/reference/builder.html" class="external-link">div</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;"</span>, <span class="va">add_checkx</span><span class="op">)</span>, <span class="va">x</span><span class="op">)</span> </span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">div_out</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 17604… 872999… I20100… 14-11   PRACTI… MN      PAUL    ROBERT  DEWEY   <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: gndr_sw &lt;chr&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">optex_long</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co">#dplyr::mutate(value = purrr::map(value, add_badge)) |&gt;</span></span>
+<span>  <span class="co">#dplyr::mutate(value = purrr::map(value, add_check_xmark)) |&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"name"</span>, style <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Label"</span>, value <span class="op">=</span> <span class="st">"Value"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html" class="external-link">tab_row_group</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Important Dates"</span>, </span>
+<span>                    rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Enumeration Date"</span>, </span>
+<span>                                       <span class="st">"Certification Date"</span>, </span>
+<span>                                       <span class="st">"Last Updated"</span>, </span>
+<span>                                       <span class="st">"Opt Out Effective Date"</span>, </span>
+<span>                                       <span class="st">"Opt Out End Date"</span>,</span>
+<span>                                       <span class="st">"Practice Length"</span>,</span>
+<span>                                       <span class="st">"Opt Out Length"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html" class="external-link">tab_row_group</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Eligible to Order &amp; Refer"</span>, </span>
+<span>                    rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Refer To Part B"</span>, </span>
+<span>                                       <span class="st">"Refer To Hhas"</span>, </span>
+<span>                                       <span class="st">"Order Dme"</span>, </span>
+<span>                                       <span class="st">"Order Pmds"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html" class="external-link">tab_row_group</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Taxonomy"</span>, </span>
+<span>                    rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Code"</span>, </span>
+<span>                                       <span class="st">"Description"</span>, </span>
+<span>                                       <span class="st">"License"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html" class="external-link">tab_row_group</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Address"</span>, </span>
+<span>                    rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Location Address"</span>, </span>
+<span>                                       <span class="st">"Mailing Address"</span>, </span>
+<span>                                       <span class="st">"City"</span>, </span>
+<span>                                       <span class="st">"State"</span>, </span>
+<span>                                       <span class="st">"Postal Code"</span>, </span>
+<span>                                       <span class="st">"Telephone Number"</span>, </span>
+<span>                                       <span class="st">"Fax Number"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_row_group.html" class="external-link">tab_row_group</a></span><span class="op">(</span>group <span class="op">=</span> <span class="st">"Basic Information"</span>, </span>
+<span>                    rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NPI"</span>, </span>
+<span>                                       <span class="st">"Enumeration Type"</span>, </span>
+<span>                                       <span class="st">"Name Prefix"</span>, </span>
+<span>                                       <span class="st">"First Name"</span>, </span>
+<span>                                       <span class="st">"Middle Name"</span>, </span>
+<span>                                       <span class="st">"Last Name"</span>, </span>
+<span>                                       <span class="st">"Credential"</span>, </span>
+<span>                                       <span class="st">"Gender"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"darkred"</span><span class="op">)</span>, <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html" class="external-link">cells_row_groups</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Provider Results for NPI 1114058443"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/add_text_img.html" class="external-link">add_text_img</a></span><span class="op">(</span><span class="st">"Report generated with"</span>, url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png"</span>, height <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co">#gt::fmt_date(columns = c(value), rows = dplyr::contains("date"), date_style = 5) |&gt; </span></span>
+<span>  <span class="co">#gtExtras::gt_badge(value, palette = c("Individual" = "red")) |&gt; </span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span><span class="va">attach_csv</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span><span class="va">attach_excel</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span>locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span>, </span>
+<span>                     rows <span class="op">=</span> <span class="va">name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"eligible_to_order_and_refer"</span>, </span>
+<span>                                       <span class="st">"refer_partb"</span>, </span>
+<span>                                       <span class="st">"refer_hha"</span>, </span>
+<span>                                       <span class="st">"order_dme"</span>, </span>
+<span>                                       <span class="st">"order_pmd"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>                       <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                         <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                         <span class="op">}</span></span>
+<span>                     <span class="op">}</span></span>
+<span>                       <span class="op">)</span></span>
+<span><span class="co">#&gt; Error in if (x == as.character("TRUE")) {: argument is of length zero</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `resp_body_raw()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can not retrieve empty body</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -212,12 +325,12 @@ B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
 or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
 Referring API</strong> with <code>provider_moar()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
 <span><span class="co">#&gt;          npi last_name first_name partb dme   hha   pmd  </span></span>
 <span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">1</span>760<span style="text-decoration: underline;">485</span>387 DEWEY     PAUL       TRUE  TRUE  TRUE  TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">1</span>114<span style="text-decoration: underline;">058</span>443 SMITH     DAVID      TRUE  TRUE  TRUE  TRUE</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -229,32 +342,21 @@ taxonomies. Using the output from the NPPES search in the first example,
 you can search Medicare’s <strong>Provider and Supplier Taxonomy
 Crosswalk API</strong> with <code>provider_mpstc()</code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2084P0800X"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
 <span><span class="co">#&gt;   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2                       Physician/General Surgery              2086S0… Allopa…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 26                      Physician/Psychiatry                   2084P0… Allopa…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 86                      Physician/Neuropsychiatry              2084P0… Allopa…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span></span></code></pre></div>
 <p><br></p>
-<p>You can check to see if a provider is due to revalidate their
-Medicare enrollment by accessing Medicare’s <strong>Revalidation Due
-Date API</strong> with <code>provider_mrdd()</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
-<span><span class="co">#&gt;   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 I201005050… 176048… Paul    Dewey   <span style="color: #949494;">""</span>      MN      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `resp_body_raw()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can not retrieve empty body</span></span></code></pre></div>
 <p><br></p>
 <p>Providers may need to update their digital contact information in the
 NPPES system. To check, you can access the <strong>CMS Public Reporting
@@ -262,25 +364,21 @@ of Missing Digital Contact Information API</strong> with
 <code>provider_promdci()</code>. If they appear in the search results,
 it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
 <span><span class="co">#&gt;   npi        last_name first_name</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1760485387 Dewey     Paul</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114058443 Smith     David</span></span></code></pre></div>
 <p><br></p>
-<p>You can find out if a provider has opted out of Medicare by searching
-the <strong>Medicare Opt Out Affidavits API</strong> with
-<code>provider_mooa()</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
 <span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-21 09/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2022-12-26 11/15/2022   David    Smith   1114… Psychi… 08/15/… 08/15/… 3101 S…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;chr&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
 <p><br></p>
@@ -288,34 +386,16 @@ the <strong>Medicare Opt Out Affidavits API</strong> with
 Physician &amp; Other Practitioners - by Provider and Service
 API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 21 × 30</span></span></span>
-<span><span class="co">#&gt;    year  rndrn…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020  176048… Dewey   Paul    R       M.D.    M       I       4570 C… <span style="color: #949494;">""</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more rows, 20 more variables: rndrng_prvdr_city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_state_abrvtn &lt;chr&gt;, rndrng_prvdr_state_fips &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_zip5 &lt;chr&gt;, rndrng_prvdr_ruca &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_ruca_desc &lt;chr&gt;, rndrng_prvdr_cntry &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_type &lt;chr&gt;, rndrng_prvdr_mdcr_prtcptg_ind &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug_ind &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   place_of_srvc &lt;chr&gt;, tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, …</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span>, year <span class="op">=</span> <span class="st">"2020"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `resp_body_raw()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can not retrieve empty body</span></span></code></pre></div>
 <p><br></p>
 <p>This API contains data going back to 2013, so you can perform a
 long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hcpcs_cd</span>, <span class="va">hcpcs_desc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>    Benefits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_benes</span><span class="op">)</span>,</span>
@@ -330,193 +410,11 @@ long-term analysis of a provider’s Medicare data:</p>
 <span>                <span class="st">"Avg Allowed"</span> <span class="op">=</span> <span class="va">Avg_Allowed</span>,</span>
 <span>                <span class="st">"Avg Payment"</span> <span class="op">=</span> <span class="va">Avg_Payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">Services</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="4%">
-<col width="56%">
-<col width="6%">
-<col width="6%">
-<col width="8%">
-<col width="8%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">HCPCS</th>
-<th align="left">HCPCS Description</th>
-<th align="right">Benefits</th>
-<th align="right">Services</th>
-<th align="right">Avg Charge</th>
-<th align="right">Avg Allowed</th>
-<th align="right">Avg Payment</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="right">2341</td>
-<td align="right">5234</td>
-<td align="right">264.47</td>
-<td align="right">71.69</td>
-<td align="right">56.74</td>
-</tr>
-<tr class="even">
-<td align="left">99233</td>
-<td align="left">Subsequent hospital inpatient care, typically 35
-minutes per day</td>
-<td align="right">1316</td>
-<td align="right">2464</td>
-<td align="right">406.56</td>
-<td align="right">103.54</td>
-<td align="right">82.72</td>
-</tr>
-<tr class="odd">
-<td align="left">99239</td>
-<td align="left">Hospital discharge day management, more than 30
-minutes</td>
-<td align="right">1829</td>
-<td align="right">1984</td>
-<td align="right">404.95</td>
-<td align="right">106.54</td>
-<td align="right">84.87</td>
-</tr>
-<tr class="even">
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="right">950</td>
-<td align="right">972</td>
-<td align="right">808.09</td>
-<td align="right">201.37</td>
-<td align="right">159.51</td>
-</tr>
-<tr class="odd">
-<td align="left">99238</td>
-<td align="left">Hospital discharge day management, 30 minutes or
-less</td>
-<td align="right">784</td>
-<td align="right">813</td>
-<td align="right">267.16</td>
-<td align="right">72.16</td>
-<td align="right">56.79</td>
-</tr>
-<tr class="even">
-<td align="left">99222</td>
-<td align="left">Initial hospital inpatient care, typically 50 minutes
-per day</td>
-<td align="right">770</td>
-<td align="right">803</td>
-<td align="right">502.78</td>
-<td align="right">135.30</td>
-<td align="right">106.55</td>
-</tr>
-<tr class="odd">
-<td align="left">99231</td>
-<td align="left">Subsequent hospital inpatient care, typically 15
-minutes per day</td>
-<td align="right">130</td>
-<td align="right">203</td>
-<td align="right">105.61</td>
-<td align="right">38.57</td>
-<td align="right">30.64</td>
-</tr>
-<tr class="even">
-<td align="left">99291</td>
-<td align="left">Critical care delivery critically ill or injured
-patient, first 30-74 minutes</td>
-<td align="right">126</td>
-<td align="right">202</td>
-<td align="right">1034.88</td>
-<td align="right">220.79</td>
-<td align="right">175.93</td>
-</tr>
-<tr class="odd">
-<td align="left">99217</td>
-<td align="left">Hospital observation care discharge</td>
-<td align="right">174</td>
-<td align="right">180</td>
-<td align="right">326.31</td>
-<td align="right">71.44</td>
-<td align="right">55.27</td>
-</tr>
-<tr class="even">
-<td align="left">99221</td>
-<td align="left">Initial hospital inpatient care, typically 30 minutes
-per day</td>
-<td align="right">154</td>
-<td align="right">155</td>
-<td align="right">455.42</td>
-<td align="right">101.78</td>
-<td align="right">80.20</td>
-</tr>
-<tr class="odd">
-<td align="left">99217</td>
-<td align="left">Hospital observation care on day of discharge</td>
-<td align="right">130</td>
-<td align="right">131</td>
-<td align="right">339.92</td>
-<td align="right">74.01</td>
-<td align="right">59.05</td>
-</tr>
-<tr class="even">
-<td align="left">99219</td>
-<td align="left">Hospital observation care typically 50 minutes</td>
-<td align="right">107</td>
-<td align="right">108</td>
-<td align="right">614.00</td>
-<td align="right">133.64</td>
-<td align="right">103.21</td>
-</tr>
-<tr class="odd">
-<td align="left">99220</td>
-<td align="left">Hospital observation care typically 70 minutes per
-day</td>
-<td align="right">82</td>
-<td align="right">82</td>
-<td align="right">762.64</td>
-<td align="right">185.29</td>
-<td align="right">143.71</td>
-</tr>
-<tr class="even">
-<td align="left">99220</td>
-<td align="left">Hospital observation care, typically 70 minutes</td>
-<td align="right">67</td>
-<td align="right">67</td>
-<td align="right">983.55</td>
-<td align="right">187.93</td>
-<td align="right">149.57</td>
-</tr>
-<tr class="odd">
-<td align="left">99218</td>
-<td align="left">Hospital observation care, typically 30 minutes</td>
-<td align="right">35</td>
-<td align="right">35</td>
-<td align="right">644.38</td>
-<td align="right">103.78</td>
-<td align="right">80.94</td>
-</tr>
-<tr class="even">
-<td align="left">99218</td>
-<td align="left">Hospital observation care typically 30 minutes</td>
-<td align="right">25</td>
-<td align="right">26</td>
-<td align="right">449.00</td>
-<td align="right">98.48</td>
-<td align="right">78.46</td>
-</tr>
-<tr class="odd">
-<td align="left">99225</td>
-<td align="left">Subsequent observation care, typically 25 minutes per
-day</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">328.00</td>
-<td align="right">71.32</td>
-<td align="right">56.82</td>
-</tr>
-</tbody>
-</table>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `resp_body_raw()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can not retrieve empty body</span></span></code></pre></div>
 <p>Using packages like {gt} &amp; {ggplot2}, you can create tables and
 graphs for reporting purposes:</p>
 <p><br></p>
