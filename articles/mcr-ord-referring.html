@@ -169,16 +169,24 @@ will then apply when ordering or certifying:</p>
 <code>order_refer()</code><a class="anchor" aria-label="anchor" href="#order_refer"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
-<span><span class="co">#&gt;          npi last_name first_name partb dme   hha   pmd  </span></span>
-<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">1</span>003<span style="text-decoration: underline;">026</span>055 PHADKE    RADHIKA    TRUE  TRUE  TRUE  TRUE</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Provider Results for NPI 1083879860"</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/add_text_img.html" class="external-link">add_text_img</a></span><span class="op">(</span><span class="st">"Report generated with"</span>, url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png"</span>, height <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span>locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
+<span>                       <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                         <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
+<span>                         <span class="op">}</span></span>
+<span>                     <span class="op">}</span></span>
+<span>                       <span class="op">)</span></span>
+<span><span class="co">#&gt; Error in gt_theme_provider(gt::gt(order_refer(npi = 1003026055))): could not find function "gt_theme_provider"</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="gakdorqirt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cmutjesspd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -186,7 +194,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gakdorqirt .gt_table {
+#cmutjesspd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -211,7 +219,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_heading {
+#cmutjesspd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -223,12 +231,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gakdorqirt .gt_caption {
+#cmutjesspd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gakdorqirt .gt_title {
+#cmutjesspd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -240,7 +248,7 @@ html {
   border-bottom-width: 0;
 }
 
-#gakdorqirt .gt_subtitle {
+#cmutjesspd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -252,13 +260,13 @@ html {
   border-top-width: 0;
 }
 
-#gakdorqirt .gt_bottom_border {
+#cmutjesspd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_col_headings {
+#cmutjesspd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -273,7 +281,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gakdorqirt .gt_col_heading {
+#cmutjesspd .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -293,7 +301,7 @@ html {
   overflow-x: hidden;
 }
 
-#gakdorqirt .gt_column_spanner_outer {
+#cmutjesspd .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -305,15 +313,15 @@ html {
   padding-right: 4px;
 }
 
-#gakdorqirt .gt_column_spanner_outer:first-child {
+#cmutjesspd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gakdorqirt .gt_column_spanner_outer:last-child {
+#cmutjesspd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gakdorqirt .gt_column_spanner {
+#cmutjesspd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -325,7 +333,7 @@ html {
   width: 100%;
 }
 
-#gakdorqirt .gt_group_heading {
+#cmutjesspd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -351,7 +359,7 @@ html {
   text-align: left;
 }
 
-#gakdorqirt .gt_empty_group_heading {
+#cmutjesspd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -366,15 +374,15 @@ html {
   vertical-align: middle;
 }
 
-#gakdorqirt .gt_from_md > :first-child {
+#cmutjesspd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gakdorqirt .gt_from_md > :last-child {
+#cmutjesspd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gakdorqirt .gt_row {
+#cmutjesspd .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -393,7 +401,7 @@ html {
   overflow-x: hidden;
 }
 
-#gakdorqirt .gt_stub {
+#cmutjesspd .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -406,7 +414,7 @@ html {
   padding-right: 5px;
 }
 
-#gakdorqirt .gt_stub_row_group {
+#cmutjesspd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -420,11 +428,11 @@ html {
   vertical-align: top;
 }
 
-#gakdorqirt .gt_row_group_first td {
+#cmutjesspd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gakdorqirt .gt_summary_row {
+#cmutjesspd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -434,16 +442,16 @@ html {
   padding-right: 5px;
 }
 
-#gakdorqirt .gt_first_summary_row {
+#cmutjesspd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_first_summary_row.thick {
+#cmutjesspd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gakdorqirt .gt_last_summary_row {
+#cmutjesspd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -453,7 +461,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_grand_summary_row {
+#cmutjesspd .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -463,7 +471,7 @@ html {
   padding-right: 5px;
 }
 
-#gakdorqirt .gt_first_grand_summary_row {
+#cmutjesspd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -473,11 +481,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_striped {
+#cmutjesspd .gt_striped {
   background-color: #F4F4F4;
 }
 
-#gakdorqirt .gt_table_body {
+#cmutjesspd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -486,7 +494,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#gakdorqirt .gt_footnotes {
+#cmutjesspd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -500,7 +508,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gakdorqirt .gt_footnote {
+#cmutjesspd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -509,7 +517,7 @@ html {
   padding-right: 5px;
 }
 
-#gakdorqirt .gt_sourcenotes {
+#cmutjesspd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -523,7 +531,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gakdorqirt .gt_sourcenote {
+#cmutjesspd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -531,122 +539,135 @@ html {
   padding-right: 5px;
 }
 
-#gakdorqirt .gt_left {
+#cmutjesspd .gt_left {
   text-align: left;
 }
 
-#gakdorqirt .gt_center {
+#cmutjesspd .gt_center {
   text-align: center;
 }
 
-#gakdorqirt .gt_right {
+#cmutjesspd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gakdorqirt .gt_font_normal {
+#cmutjesspd .gt_font_normal {
   font-weight: normal;
 }
 
-#gakdorqirt .gt_font_bold {
+#cmutjesspd .gt_font_bold {
   font-weight: bold;
 }
 
-#gakdorqirt .gt_font_italic {
+#cmutjesspd .gt_font_italic {
   font-style: italic;
 }
 
-#gakdorqirt .gt_super {
+#cmutjesspd .gt_super {
   font-size: 65%;
 }
 
-#gakdorqirt .gt_footnote_marks {
+#cmutjesspd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gakdorqirt .gt_asterisk {
+#cmutjesspd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gakdorqirt .gt_indent_1 {
+#cmutjesspd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gakdorqirt .gt_indent_2 {
+#cmutjesspd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gakdorqirt .gt_indent_3 {
+#cmutjesspd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gakdorqirt .gt_indent_4 {
+#cmutjesspd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gakdorqirt .gt_indent_5 {
+#cmutjesspd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Term">Term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Definition">Definition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>npi</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">NPI</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">National Provider Identifier (NPI) of the Order and Referring Provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">NPI</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">National Provider Identifier (NPI) of the Order and Referring Provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>last_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Last Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Last Name of the Order and Referring Provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Last Name of the Order and Referring Provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>first_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">First Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">First Name of the Order and Referring Provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">First Name of the Order and Referring Provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>partb</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Part B</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Indicates if Provider can refer to Medicare Part B</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Part B</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicates if Provider can refer to Medicare Part B</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>dme</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">DME</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Indicates if Provider can order Durable Medical Equipment (DME)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">DME</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicates if Provider can order Durable Medical Equipment (DME)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>hha</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">HHA</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Indicates if Provider can refer to a Home Health Agency (HHA)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">HHA</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicates if Provider can refer to a Home Health Agency (HHA)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>pmd</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">PMD</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Indicates if Provider can order Power Mobility Devices (PMDs)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">PMD</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicates if Provider can order Power Mobility Devices (PMDs)</span></div>
+</td>
 </tr>
 </tbody>
 </table>
