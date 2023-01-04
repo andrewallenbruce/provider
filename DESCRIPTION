@@ -47,11 +47,11 @@ Suggests:
     spelling,
     stringr,
     testthat (>= 3.0.0),
-    terse,
     tidygeocoder
 VignetteBuilder: 
     knitr
 Remotes: 
+    coolbutuseless/terse,
     anthonynorth/roxyglobals
 Config/testthat/edition: 3
 Encoding: UTF-8
