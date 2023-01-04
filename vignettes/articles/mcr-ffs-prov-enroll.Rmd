@@ -36,7 +36,7 @@ These files are populated from PECOS and contain basic enrollment and provider i
 ## Example
 
 ```{r}
-provider_enrollment(npi = 1003026055) |> knitr::kable()
+provider_enrollment(npi = 1003026055) |> terse::terse()
 ```
 
 
@@ -52,7 +52,7 @@ tibble::tibble(
     "`last_name`", "`org_name`", "`gndr_sw`", "`reasgn_bnft_enrlmt_id`",
     "`rcv_bnft_enrlmt_id`", "`city_name`", "`zip_cd`"
   ),
-  Term = c(
+  Description = c(
     "National Provider Identifier", "PECOS Associate Control ID",
     "Enrollment ID", "Provider Type Code", "Provider Type Description",
     "State Code", "First Name", "Middle Name", "Last Name", "Organization Name",
@@ -77,6 +77,12 @@ tibble::tibble(
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")
@@ -324,6 +330,12 @@ cd |>
   gt::gt() |> 
   gt::fmt_markdown(columns = Code) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Type, 
+                           col2 = Subtype,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")

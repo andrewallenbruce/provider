@@ -328,3 +328,88 @@ yn_logical <- function(x){
     x == as.character("N") ~ as.logical(FALSE),
     TRUE ~ NA)
 }
+
+#' gt functions --------------------------------------------------------------
+#' @param data data frame
+#' @autoglobal
+#' @noRd
+gt_theme_provider <- function(data,...) {
+  data |>
+    gt::opt_all_caps() |>
+    gt::opt_row_striping() |>
+    gt::opt_table_font(
+      font = list(
+        gt::google_font("Chivo"),
+        gt::default_fonts())) |>
+    gt::tab_style(
+      style = gt::cell_borders(
+        sides = "bottom",
+        color = "transparent",
+        weight = gt::px(2)),
+      locations = gt::cells_body(
+        columns = dplyr::everything(),
+        rows = nrow(data$`_data`)))  |>
+    gt::tab_options(
+      footnotes.multiline = FALSE,
+      footnotes.font.size = 12,
+      footnotes.padding = gt::px(3),
+      row_group.as_column = FALSE,
+      row.striping.background_color = "#fafafa",
+      table_body.hlines.color = "#f6f7f7",
+      table.border.top.width = gt::px(3),
+      table.border.top.color = "gray",
+      table.border.bottom.color = "gray",
+      table.border.bottom.width = gt::px(3),
+      column_labels.border.top.width = gt::px(3),
+      column_labels.border.top.color = "gray",
+      column_labels.border.bottom.width = gt::px(3),
+      column_labels.border.bottom.color = "#440D0D",
+      column_labels.background.color = "#FDD4D0",
+      data_row.padding = gt::px(3),
+      source_notes.multiline = FALSE,
+      source_notes.font.size = 12,
+      source_notes.border.bottom.color = "#440D0D",
+      source_notes.border.bottom.width = gt::px(3),
+      table.font.size = 16,
+      heading.background.color = "#FDD4D0",
+      heading.align = "left",
+      heading.title.font.size = 16,
+      heading.title.font.weight = "bold",
+      heading.subtitle.font.size = 14,
+      heading.subtitle.font.weight = NULL,
+      heading.padding = NULL,
+      heading.padding.horizontal = NULL,
+      heading.border.bottom.style = NULL,
+      heading.border.bottom.width = NULL,
+      heading.border.bottom.color = NULL,
+      heading.border.lr.style = NULL,
+      heading.border.lr.width = NULL,
+      heading.border.lr.color = NULL,
+      ...)
+}
+
+#' @noRd
+gt_add_badge <- function(x){
+  add_color <- if (x == "Individual") {
+    "background: hsl(116, 60%, 90%); color: hsl(116, 30%, 25%);"
+  } else if (x == "Organization") {
+    "background: hsl(350, 70%, 90%); color: hsl(350, 45%, 30%);"
+  } else if (x != "Individual" | x != "Organization") { x
+  }
+  div_out <- htmltools::div(
+    style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;", add_color), x)
+  as.character(div_out) |> gt::html()
+}
+
+#' @noRd
+gt_check_xmark <- function(x) {
+  add_checkx <- if (x == TRUE) {
+    fontawesome::fa("circle-check", prefer_type = "solid", fill = "#F24141", height = "1.5em", width = "1.5em")
+  } else if (x == "FALSE") {
+    fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "#F54444")
+  } else if (x != "Individual" | x != "Organization") {
+    x
+  }
+  div_out <- htmltools::div(style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;", add_checkx), x)
+  as.character(div_out) |> gt::html()
+}

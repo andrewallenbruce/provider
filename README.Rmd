@@ -6,7 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = TRUE,
+  collapse  = FALSE,
   echo      = TRUE, 
   message   = FALSE, 
   warning   = FALSE,
@@ -84,8 +84,7 @@ clia_link  <- gluedown::md_link("Medicare Provider of Services File - Clinical L
 tax_func   <- gluedown::md_code("taxonomy_crosswalk()")
 tax_link   <- gluedown::md_link("Medicare Provider and Supplier Taxonomy Crosswalk" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk")
 
-gluedown::md_table(
-          data.frame(
+gluedown::md_table(data.frame(
   Function = c(nppes_func, 
                mppe_func, 
                mme_func,
@@ -141,6 +140,11 @@ remotes::install_github("andrewallenbruce/provider")
 library(provider)
 ```
 
+<br>
+
+## Goal
+
+The underlying motivation
 
 ### NPPES National Provider Identifier Registry API
 

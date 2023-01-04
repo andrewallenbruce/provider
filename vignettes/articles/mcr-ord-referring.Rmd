@@ -44,7 +44,18 @@ In the event a provider does not want to bill Medicare for their services, they 
 ## `order_refer()`
 
 ```{r}
-order_refer(npi = 1003026055)
+order_refer(npi = 1003026055) |> 
+gt::gt() |> 
+  gt_theme_provider() |> 
+  gt::tab_header(title = "Provider Results for NPI 1083879860",
+    subtitle = gtExtras::add_text_img("Report generated with", url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", height = 25)) |> 
+  gt::text_transform(locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),
+                     fn = function(x) {
+                       if (x == as.character("TRUE")) {gt::html(fontawesome::fa("circle-check", prefer_type = "solid", fill = "green", height = "1.5em", width = "1.5em"))
+                         } else if (x == as.character("FALSE")) {gt::html(fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "red"))
+                         }
+                     }
+                       )
 ```
 
 
@@ -58,7 +69,7 @@ tibble::tibble(
     "`npi`", "`last_name`", "`first_name`", "`partb`", "`dme`",
     "`hha`", "`pmd`"
   ),
-  Term = c("NPI", "Last Name", "First Name", "Part B", "DME", "HHA", "PMD"),
+  Description = c("NPI", "Last Name", "First Name", "Part B", "DME", "HHA", "PMD"),
   Definition = c(
     "National Provider Identifier (NPI) of the Order and Referring Provider",
     "Last Name of the Order and Referring Provider", 
@@ -71,6 +82,12 @@ tibble::tibble(
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")

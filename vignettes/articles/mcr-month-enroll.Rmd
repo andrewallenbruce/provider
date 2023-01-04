@@ -74,7 +74,7 @@ beneficiary_enrollment(year = 2017,
 
 ```{r echo=FALSE}
 tibble::tribble(
-  ~Term,                                                          ~Variable,         ~Definition,
+  ~Description,                                                          ~Variable,         ~Definition,
   "Year",                                                          "`Year`",          "Indicates the calendar year of Medicare enrollment",
   "Month",                                                         "`Month`",           "Indicates the month of Medicare enrollment",
   "Beneficiary State",                                             "`Bene_State`",       "Area of beneficiary residence",
@@ -95,9 +95,16 @@ tibble::tribble(
         "Total Medicare Part D beneficiaries", "`Prscrptn_Drug_Tot_Benes`", "Count of all Medicare Prescription Drug (or Part D) beneficiaries",
         "Total Medicare Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_PDP_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Prescription Drug Plan",
         "Total Medicare Advantage Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_MAPD_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Medicare Advantage Prescription Drug plan") |> 
+  dplyr::select(Variable, Description, Definition) |> 
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "solid")

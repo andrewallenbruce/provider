@@ -132,7 +132,7 @@ kableExtra::kbl(col.names = c("NPI", "Last Name", "First Name")) |>
 ```{r echo=FALSE}
 dd <- tibble::tibble(
   Variable = c("`npi`", "`provider_name`"),
-  Term = c("NPI", "Provider Name"),
+  Description = c("National Provider Identifier", "Provider Name"),
   Definition = c("The provider's 10-digit National Provider Identifier.", 
                  "Name of the provider. It consists of the legal last name 
                  followed by the first name, separated by a comma."))
@@ -140,7 +140,15 @@ dd |>
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, 
+                  color = "gray", 
+                  add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "solid")
 ```

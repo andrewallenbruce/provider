@@ -66,6 +66,12 @@ remotes::install_github("andrewallenbruce/provider")
 library(provider)
 ```
 
+<br>
+
+## Goal
+
+The underlying motivation
+
 ### NPPES National Provider Identifier Registry API
 
 ``` r
@@ -78,26 +84,27 @@ nppes <- tibble::tribble(
 )
 
 purrr::invoke_map_dfr(nppes$fn, nppes$params)
-#> # A tibble: 12 × 17
-#>    datetime            outcome enumer…¹ number name  city  state addre…² pract…³
-#>    <dttm>              <chr>   <chr>    <chr>  <chr> <chr> <chr> <list>  <list> 
-#>  1 2022-12-21 00:15:50 results NPI-2    13364… LUMI… TIFT… GA    <df>    <list> 
-#>  2 2022-12-21 00:15:51 Errors  <NA>     <NA>   <NA>  <NA>  <NA>  <NULL>  <NULL> 
-#>  3 2022-12-21 00:15:51 results NPI-2    14271… MCGU… BALT… MD    <df>    <list> 
-#>  4 2022-12-21 00:15:51 results NPI-2    18818… MENL… BALT… MD    <df>    <list> 
-#>  5 2022-12-21 00:15:51 results NPI-2    16999… MILF… BALT… MD    <df>    <list> 
-#>  6 2022-12-21 00:15:51 results NPI-2    12756… VIRG… BALT… MD    <df>    <list> 
-#>  7 2022-12-21 00:15:51 results NPI-2    17100… VIRG… BALT… MD    <df>    <list> 
-#>  8 2022-12-21 00:15:51 results NPI-1    12352… WILL… COVI… TN    <df>    <list> 
-#>  9 2022-12-21 00:15:51 results NPI-1    17302… MARS… EAST… GA    <df>    <list> 
-#> 10 2022-12-21 00:15:51 results NPI-1    16695… GARY… ATLA… GA    <df>    <list> 
-#> 11 2022-12-21 00:15:51 results NPI-1    10434… JOAN… ATLA… GA    <df>    <list> 
-#> 12 2022-12-21 00:15:51 results NPI-1    13666… GRAC… ATLA… GA    <df>    <list> 
-#> # … with 8 more variables: taxonomies <list>, identifiers <list>,
-#> #   endpoints <list>, other_names <list>, epochs <list>,
-#> #   authorized_official <list>, basic <list>, errors <list>, and abbreviated
-#> #   variable names ¹​enumeration_type, ²​addresses, ³​practiceLocations
 ```
+
+    #> # A tibble: 12 × 17
+    #>    datetime            outcome enumer…¹ number name  city  state addre…² pract…³
+    #>    <dttm>              <chr>   <chr>    <chr>  <chr> <chr> <chr> <list>  <list> 
+    #>  1 2023-01-04 18:01:00 results NPI-2    13364… LUMI… TIFT… GA    <df>    <list> 
+    #>  2 2023-01-04 18:01:01 Errors  <NA>     <NA>   <NA>  <NA>  <NA>  <NULL>  <NULL> 
+    #>  3 2023-01-04 18:01:01 results NPI-2    14271… MCGU… BALT… MD    <df>    <list> 
+    #>  4 2023-01-04 18:01:01 results NPI-2    18818… MENL… BALT… MD    <df>    <list> 
+    #>  5 2023-01-04 18:01:01 results NPI-2    16999… MILF… BALT… MD    <df>    <list> 
+    #>  6 2023-01-04 18:01:01 results NPI-2    12756… VIRG… BALT… MD    <df>    <list> 
+    #>  7 2023-01-04 18:01:01 results NPI-2    17100… VIRG… BALT… MD    <df>    <list> 
+    #>  8 2023-01-04 18:01:01 results NPI-1    12352… WILL… COVI… TN    <df>    <list> 
+    #>  9 2023-01-04 18:01:01 results NPI-1    17302… MARS… EAST… GA    <df>    <list> 
+    #> 10 2023-01-04 18:01:01 results NPI-1    16695… GARY… ATLA… GA    <df>    <list> 
+    #> 11 2023-01-04 18:01:01 results NPI-1    10434… JOAN… ATLA… GA    <df>    <list> 
+    #> 12 2023-01-04 18:01:01 results NPI-1    13666… GRAC… ATLA… GA    <df>    <list> 
+    #> # … with 8 more variables: taxonomies <list>, identifiers <list>,
+    #> #   endpoints <list>, other_names <list>, epochs <list>,
+    #> #   authorized_official <list>, basic <list>, errors <list>, and abbreviated
+    #> #   variable names ¹​enumeration_type, ²​addresses, ³​practiceLocations
 
 <br>
 
@@ -112,16 +119,17 @@ prven <- tibble::tribble(
 )
 
 purrr::invoke_map_dfr(prven$fn, prven$params)
-#> # A tibble: 3 × 11
-#>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹
-#>   <chr>  <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-#> 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     
-#> 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     
-#> 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…
-#> # … with 1 more variable: gndr_sw <chr>, and abbreviated variable names
-#> #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,
-#> #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name
 ```
+
+    #> # A tibble: 3 × 11
+    #>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹
+    #>   <chr>  <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    #> 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     
+    #> 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     
+    #> 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…
+    #> # … with 1 more variable: gndr_sw <chr>, and abbreviated variable names
+    #> #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,
+    #> #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name
 
 <br>
 
@@ -137,24 +145,25 @@ purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022,
                                                geo_level = "State", 
                                                state = "Georgia", 
                                                month = .x))
-#> # A tibble: 7 × 22
-#>    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸
-#>   <int> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>   <int>
-#> 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207
-#> 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678
-#> 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676
-#> 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872
-#> 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770
-#> 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616
-#> 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058
-#> # … with 12 more variables: aged_tot_benes <int>, aged_esrd_benes <int>,
-#> #   aged_no_esrd_benes <int>, dsbld_tot_benes <int>,
-#> #   dsbld_esrd_and_esrd_only_benes <int>, dsbld_no_esrd_benes <int>,
-#> #   a_b_tot_benes <int>, a_b_orgnl_mdcr_benes <int>,
-#> #   a_b_ma_and_oth_benes <int>, prscrptn_drug_tot_benes <int>,
-#> #   prscrptn_drug_pdp_benes <int>, prscrptn_drug_mapd_benes <int>, and
-#> #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …
 ```
+
+    #> # A tibble: 7 × 22
+    #>    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸
+    #>   <int> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>   <int>
+    #> 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207
+    #> 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678
+    #> 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676
+    #> 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872
+    #> 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770
+    #> 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616
+    #> 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058
+    #> # … with 12 more variables: aged_tot_benes <int>, aged_esrd_benes <int>,
+    #> #   aged_no_esrd_benes <int>, dsbld_tot_benes <int>,
+    #> #   dsbld_esrd_and_esrd_only_benes <int>, dsbld_no_esrd_benes <int>,
+    #> #   a_b_tot_benes <int>, a_b_orgnl_mdcr_benes <int>,
+    #> #   a_b_ma_and_oth_benes <int>, prscrptn_drug_tot_benes <int>,
+    #> #   prscrptn_drug_pdp_benes <int>, prscrptn_drug_mapd_benes <int>, and
+    #> #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …
 
 <br>
 
@@ -162,11 +171,12 @@ purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022,
 
 ``` r
 provider::order_refer(npi = 1083879860)
-#> # A tibble: 1 × 7
-#>          npi last_name first_name  partb dme   hha   pmd  
-#>        <int> <chr>     <chr>       <lgl> <lgl> <lgl> <lgl>
-#> 1 1083879860 AARON     CHRISTOPHER TRUE  TRUE  TRUE  TRUE
 ```
+
+    #> # A tibble: 1 × 7
+    #>          npi last_name first_name  partb dme   hha   pmd  
+    #>        <int> <chr>     <chr>       <lgl> <lgl> <lgl> <lgl>
+    #> 1 1083879860 AARON     CHRISTOPHER TRUE  TRUE  TRUE  TRUE
 
 <br>
 
@@ -174,15 +184,16 @@ provider::order_refer(npi = 1083879860)
 
 ``` r
 provider::opt_out(last = "Aaron")
-#> # A tibble: 1 × 14
-#>   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶
-#>   <date>     <chr>        <chr>    <chr>   <chr> <chr>   <chr>   <chr>   <chr>  
-#> 1 2022-12-21 09/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…
-#> # … with 5 more variables: second_line_street_address <chr>, city_name <chr>,
-#> #   state_code <chr>, zip_code <chr>, eligible_to_order_and_refer <chr>, and
-#> #   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,
-#> #   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address
 ```
+
+    #> # A tibble: 1 × 14
+    #>   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶
+    #>   <date>     <chr>        <chr>    <chr>   <chr> <chr>   <chr>   <chr>   <chr>  
+    #> 1 2023-01-04 11/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…
+    #> # … with 5 more variables: second_line_street_address <chr>, city_name <chr>,
+    #> #   state_code <chr>, zip_code <chr>, eligible_to_order_and_refer <lgl>, and
+    #> #   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,
+    #> #   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address
 
 <br>
 
@@ -190,15 +201,16 @@ provider::opt_out(last = "Aaron")
 
 ``` r
 provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
-#> # A tibble: 2 × 4
-#>   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³
-#>   <chr>                   <chr>                                  <chr>   <chr>  
-#> 1 B4[14]                  Rehabilitation Agency                  261QR0… Ambula…
-#> 2 B4[14]                  Rehabilitation Agency                  315D00… Nursin…
-#> # … with abbreviated variable names
-#> #   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,
-#> #   ³​provider_taxonomy_description_type_classification_specialization
 ```
+
+    #> # A tibble: 2 × 4
+    #>   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³
+    #>   <chr>                   <chr>                                  <chr>   <chr>  
+    #> 1 B4[14]                  Rehabilitation Agency                  261QR0… Ambula…
+    #> 2 B4[14]                  Rehabilitation Agency                  315D00… Nursin…
+    #> # … with abbreviated variable names
+    #> #   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,
+    #> #   ³​provider_taxonomy_description_type_classification_specialization
 
 <br>
 
@@ -206,17 +218,18 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 
 ``` r
 provider::revalidation_date(npi = 1710912209)
-#> # A tibble: 1 × 14
-#>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸
-#>   <date>     <chr>       <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-#> 1 2022-12-21 I200406020… 171091… Yelena  Vorono… ""      NY      3       Non-DM…
-#> # … with 5 more variables: enrollment_specialty <chr>,
-#> #   revalidation_due_date <chr>, adjusted_due_date <chr>,
-#> #   individual_total_reassign_to <chr>, receiving_benefits_reassignment <int>,
-#> #   and abbreviated variable names ¹​enrollment_id,
-#> #   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,
-#> #   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text
 ```
+
+    #> # A tibble: 1 × 14
+    #>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸
+    #>   <date>     <chr>       <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    #> 1 2023-01-04 I200406020… 171091… Yelena  Vorono… ""      NY      3       Non-DM…
+    #> # … with 5 more variables: enrollment_specialty <chr>,
+    #> #   revalidation_due_date <chr>, adjusted_due_date <chr>,
+    #> #   individual_total_reassign_to <chr>, receiving_benefits_reassignment <int>,
+    #> #   and abbreviated variable names ¹​enrollment_id,
+    #> #   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,
+    #> #   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text
 
 <br>
 
@@ -224,43 +237,45 @@ provider::revalidation_date(npi = 1710912209)
 
 ``` r
 provider::revalidation_reassign(ind_npi = 1710912209)
-#> # A tibble: 5 × 17
-#>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
-#>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>     <dbl>
-#> 1 2022-12-21  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi…  2.86e9
-#> 2 2022-12-21  9931511052 O20201… Bright… NY      TBD           1 Reassi…  2.86e9
-#> 3 2022-12-21  2062791411 O20161… Fair P… NY      TBD           1 Reassi…  2.86e9
-#> 4 2022-12-21  8527313170 O20180… New Yo… NY      TBD           1 Reassi…  2.86e9
-#> 5 2022-12-21  5193155174 O20200… Podiat… NY      TBD           1 Reassi…  2.86e9
-#> # … with 8 more variables: individual_enrollment_id <chr>,
-#> #   individual_npi <int>, individual_first_name <chr>,
-#> #   individual_last_name <chr>, individual_state_code <chr>,
-#> #   individual_specialty_description <chr>, individual_due_date <chr>,
-#> #   individual_total_employer_associations <int>, and abbreviated variable
-#> #   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,
-#> #   ⁴​group_state_code, ⁵​group_due_date, …
 ```
+
+    #> # A tibble: 5 × 17
+    #>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
+    #>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>     <dbl>
+    #> 1 2023-01-04  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi…  2.86e9
+    #> 2 2023-01-04  9931511052 O20201… Bright… NY      TBD           1 Reassi…  2.86e9
+    #> 3 2023-01-04  2062791411 O20161… Fair P… NY      TBD           1 Reassi…  2.86e9
+    #> 4 2023-01-04  8527313170 O20180… New Yo… NY      TBD           1 Reassi…  2.86e9
+    #> 5 2023-01-04  5193155174 O20200… Podiat… NY      TBD           1 Reassi…  2.86e9
+    #> # … with 8 more variables: individual_enrollment_id <chr>,
+    #> #   individual_npi <int>, individual_first_name <chr>,
+    #> #   individual_last_name <chr>, individual_state_code <chr>,
+    #> #   individual_specialty_description <chr>, individual_due_date <chr>,
+    #> #   individual_total_employer_associations <int>, and abbreviated variable
+    #> #   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,
+    #> #   ⁴​group_state_code, ⁵​group_due_date, …
 
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
 ``` r
 provider::revalidation_group(ind_npi = 1710912209)
-#> # A tibble: 5 × 16
-#>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
-#>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>  
-#> 1 2022-12-21  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi… I20040…
-#> 2 2022-12-21  9931511052 O20201… Bright… NY      TBD           1 Reassi… I20040…
-#> 3 2022-12-21  2062791411 O20161… Fair P… NY      TBD           1 Reassi… I20040…
-#> 4 2022-12-21  8527313170 O20180… New Yo… NY      TBD           1 Reassi… I20040…
-#> 5 2022-12-21  5193155174 O20200… Podiat… NY      TBD           1 Reassi… I20040…
-#> # … with 7 more variables: individual_npi <int>, individual_first_name <chr>,
-#> #   individual_last_name <chr>, individual_state_code <chr>,
-#> #   individual_specialty_description <chr>, individual_due_date <chr>,
-#> #   individual_total_employer_associations <int>, and abbreviated variable
-#> #   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,
-#> #   ⁴​group_state_code, ⁵​group_due_date,
-#> #   ⁶​group_reassignments_and_physician_assistants, ⁷​record_type, …
 ```
+
+    #> # A tibble: 5 × 16
+    #>   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸
+    #>   <date>           <dbl> <chr>   <chr>   <chr>   <chr>     <int> <chr>   <chr>  
+    #> 1 2023-01-04  3678655222 O20080… #1 Wis… NY      10/31/…       1 Reassi… I20040…
+    #> 2 2023-01-04  9931511052 O20201… Bright… NY      TBD           1 Reassi… I20040…
+    #> 3 2023-01-04  2062791411 O20161… Fair P… NY      TBD           1 Reassi… I20040…
+    #> 4 2023-01-04  8527313170 O20180… New Yo… NY      TBD           1 Reassi… I20040…
+    #> 5 2023-01-04  5193155174 O20200… Podiat… NY      TBD           1 Reassi… I20040…
+    #> # … with 7 more variables: individual_npi <int>, individual_first_name <chr>,
+    #> #   individual_last_name <chr>, individual_state_code <chr>,
+    #> #   individual_specialty_description <chr>, individual_due_date <chr>,
+    #> #   individual_total_employer_associations <int>, and abbreviated variable
+    #> #   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,
+    #> #   ⁴​group_state_code, ⁵​group_due_date,
+    #> #   ⁶​group_reassignments_and_physician_assistants, ⁷​record_type, …
 
 <br>
 
@@ -268,11 +283,12 @@ provider::revalidation_group(ind_npi = 1710912209)
 
 ``` r
 provider::missing_information(npi = 1144224569)
-#> # A tibble: 1 × 3
-#>   npi        last_name first_name
-#>   <chr>      <chr>     <chr>     
-#> 1 1144224569 Clouse    John
 ```
+
+    #> # A tibble: 1 × 3
+    #>   npi        last_name first_name
+    #>   <chr>      <chr>     <chr>     
+    #> 1 1144224569 Clouse    John
 
 <br>
 
@@ -286,27 +302,28 @@ provider::missing_information(npi = 1144224569)
 
 ``` r
 purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
-#> # A tibble: 78 × 30
-#>     year rndrn…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹
-#>    <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-#>  1  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  2  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  3  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  4  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  5  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  6  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  7  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  8  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#>  9  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#> 10  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
-#> # … with 68 more rows, 20 more variables: rndrng_prvdr_city <chr>,
-#> #   rndrng_prvdr_state_abrvtn <chr>, rndrng_prvdr_state_fips <chr>,
-#> #   rndrng_prvdr_zip5 <chr>, rndrng_prvdr_ruca <chr>,
-#> #   rndrng_prvdr_ruca_desc <chr>, rndrng_prvdr_cntry <chr>,
-#> #   rndrng_prvdr_type <chr>, rndrng_prvdr_mdcr_prtcptg_ind <chr>,
-#> #   hcpcs_cd <chr>, hcpcs_desc <chr>, hcpcs_drug_ind <chr>,
-#> #   place_of_srvc <chr>, tot_benes <int>, tot_srvcs <int>, …
 ```
+
+    #> # A tibble: 78 × 30
+    #>     year rndrn…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹
+    #>    <int> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    #>  1  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  2  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  3  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  4  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  5  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  6  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  7  2013 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  8  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #>  9  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #> 10  2014 100300… Enkesh… Ardalan ""      M.D.    M       I       900 Se… ""     
+    #> # … with 68 more rows, 20 more variables: rndrng_prvdr_city <chr>,
+    #> #   rndrng_prvdr_state_abrvtn <chr>, rndrng_prvdr_state_fips <chr>,
+    #> #   rndrng_prvdr_zip5 <chr>, rndrng_prvdr_ruca <chr>,
+    #> #   rndrng_prvdr_ruca_desc <chr>, rndrng_prvdr_cntry <chr>,
+    #> #   rndrng_prvdr_type <chr>, rndrng_prvdr_mdcr_prtcptg_ind <chr>,
+    #> #   hcpcs_cd <chr>, hcpcs_desc <chr>, hcpcs_drug_ind <chr>,
+    #> #   place_of_srvc <chr>, tot_benes <int>, tot_srvcs <int>, …
 
 <br>
 
@@ -318,60 +335,64 @@ purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
 service <- physician_by_service(npi = 1003000126, year = 2020)
 
 purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
-#> # A tibble: 18 × 16
-#>     year rndrn…¹ rndrn…² rndrn…³ hcpcs…⁴ hcpcs…⁵ hcpcs…⁶ place…⁷ tot_r…⁸ tot_b…⁹
-#>    <dbl> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>
-#>  1  2020 Nation… ""      Nation… 99217   Hospit… N       F         90842  960315
-#>  2  2020 Nation… ""      Nation… 99217   Hospit… N       O           693    3650
-#>  3  2020 Nation… ""      Nation… 99218   Hospit… N       F         37219  107097
-#>  4  2020 Nation… ""      Nation… 99218   Hospit… N       O           250     433
-#>  5  2020 Nation… ""      Nation… 99220   Hospit… N       F         88585 1057367
-#>  6  2020 Nation… ""      Nation… 99220   Hospit… N       O           807    4043
-#>  7  2020 Nation… ""      Nation… 99221   Initia… N       F        170573 1095114
-#>  8  2020 Nation… ""      Nation… 99221   Initia… N       O           542    1250
-#>  9  2020 Nation… ""      Nation… 99223   Initia… N       F        243208 3820713
-#> 10  2020 Nation… ""      Nation… 99223   Initia… N       O          1540    5666
-#> 11  2020 Nation… ""      Nation… 99232   Subseq… N       F        298435 3982972
-#> 12  2020 Nation… ""      Nation… 99232   Subseq… N       O          2894   12875
-#> 13  2020 Nation… ""      Nation… 99233   Subseq… N       F        241646 3338934
-#> 14  2020 Nation… ""      Nation… 99233   Subseq… N       O          2006    7191
-#> 15  2020 Nation… ""      Nation… 99238   Hospit… N       F        124642 1561729
-#> 16  2020 Nation… ""      Nation… 99238   Hospit… N       O           407    1773
-#> 17  2020 Nation… ""      Nation… 99239   Hospit… N       F        105545 3093233
-#> 18  2020 Nation… ""      Nation… 99239   Hospit… N       O           603    1737
-#> # … with 6 more variables: tot_srvcs <dbl>, tot_bene_day_srvcs <int>,
-#> #   avg_sbmtd_chrg <dbl>, avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>,
-#> #   avg_mdcr_stdzd_amt <dbl>, and abbreviated variable names
-#> #   ¹​rndrng_prvdr_geo_lvl, ²​rndrng_prvdr_geo_cd, ³​rndrng_prvdr_geo_desc,
-#> #   ⁴​hcpcs_cd, ⁵​hcpcs_desc, ⁶​hcpcs_drug_ind, ⁷​place_of_srvc,
-#> #   ⁸​tot_rndrng_prvdrs, ⁹​tot_benes
-
-purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
-#> # A tibble: 15 × 16
-#>     year rndrn…¹ rndrn…² rndrn…³ hcpcs…⁴ hcpcs…⁵ hcpcs…⁶ place…⁷ tot_r…⁸ tot_b…⁹
-#>    <dbl> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>
-#>  1  2020 State   24      Maryla… 99217   Hospit… N       F          1523   31433
-#>  2  2020 State   24      Maryla… 99218   Hospit… N       F           785    3847
-#>  3  2020 State   24      Maryla… 99220   Hospit… N       F          1795   41984
-#>  4  2020 State   24      Maryla… 99221   Initia… N       F          3498   26136
-#>  5  2020 State   24      Maryla… 99221   Initia… N       O            46      77
-#>  6  2020 State   24      Maryla… 99223   Initia… N       F          4803   98672
-#>  7  2020 State   24      Maryla… 99223   Initia… N       O            59     103
-#>  8  2020 State   24      Maryla… 99232   Subseq… N       F          5942  104865
-#>  9  2020 State   24      Maryla… 99232   Subseq… N       O            89     137
-#> 10  2020 State   24      Maryla… 99233   Subseq… N       F          5032  102804
-#> 11  2020 State   24      Maryla… 99233   Subseq… N       O            74     108
-#> 12  2020 State   24      Maryla… 99238   Hospit… N       F          2039   19248
-#> 13  2020 State   24      Maryla… 99238   Hospit… N       O            11      12
-#> 14  2020 State   24      Maryla… 99239   Hospit… N       F          2146   77391
-#> 15  2020 State   24      Maryla… 99239   Hospit… N       O            12      13
-#> # … with 6 more variables: tot_srvcs <int>, tot_bene_day_srvcs <int>,
-#> #   avg_sbmtd_chrg <dbl>, avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>,
-#> #   avg_mdcr_stdzd_amt <dbl>, and abbreviated variable names
-#> #   ¹​rndrng_prvdr_geo_lvl, ²​rndrng_prvdr_geo_cd, ³​rndrng_prvdr_geo_desc,
-#> #   ⁴​hcpcs_cd, ⁵​hcpcs_desc, ⁶​hcpcs_drug_ind, ⁷​place_of_srvc,
-#> #   ⁸​tot_rndrng_prvdrs, ⁹​tot_benes
 ```
+
+    #> # A tibble: 18 × 16
+    #>     year rndrn…¹ rndrn…² rndrn…³ hcpcs…⁴ hcpcs…⁵ hcpcs…⁶ place…⁷ tot_r…⁸ tot_b…⁹
+    #>    <dbl> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>
+    #>  1  2020 Nation… ""      Nation… 99217   Hospit… N       F         90842  960315
+    #>  2  2020 Nation… ""      Nation… 99217   Hospit… N       O           693    3650
+    #>  3  2020 Nation… ""      Nation… 99218   Hospit… N       F         37219  107097
+    #>  4  2020 Nation… ""      Nation… 99218   Hospit… N       O           250     433
+    #>  5  2020 Nation… ""      Nation… 99220   Hospit… N       F         88585 1057367
+    #>  6  2020 Nation… ""      Nation… 99220   Hospit… N       O           807    4043
+    #>  7  2020 Nation… ""      Nation… 99221   Initia… N       F        170573 1095114
+    #>  8  2020 Nation… ""      Nation… 99221   Initia… N       O           542    1250
+    #>  9  2020 Nation… ""      Nation… 99223   Initia… N       F        243208 3820713
+    #> 10  2020 Nation… ""      Nation… 99223   Initia… N       O          1540    5666
+    #> 11  2020 Nation… ""      Nation… 99232   Subseq… N       F        298435 3982972
+    #> 12  2020 Nation… ""      Nation… 99232   Subseq… N       O          2894   12875
+    #> 13  2020 Nation… ""      Nation… 99233   Subseq… N       F        241646 3338934
+    #> 14  2020 Nation… ""      Nation… 99233   Subseq… N       O          2006    7191
+    #> 15  2020 Nation… ""      Nation… 99238   Hospit… N       F        124642 1561729
+    #> 16  2020 Nation… ""      Nation… 99238   Hospit… N       O           407    1773
+    #> 17  2020 Nation… ""      Nation… 99239   Hospit… N       F        105545 3093233
+    #> 18  2020 Nation… ""      Nation… 99239   Hospit… N       O           603    1737
+    #> # … with 6 more variables: tot_srvcs <dbl>, tot_bene_day_srvcs <int>,
+    #> #   avg_sbmtd_chrg <dbl>, avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>,
+    #> #   avg_mdcr_stdzd_amt <dbl>, and abbreviated variable names
+    #> #   ¹​rndrng_prvdr_geo_lvl, ²​rndrng_prvdr_geo_cd, ³​rndrng_prvdr_geo_desc,
+    #> #   ⁴​hcpcs_cd, ⁵​hcpcs_desc, ⁶​hcpcs_drug_ind, ⁷​place_of_srvc,
+    #> #   ⁸​tot_rndrng_prvdrs, ⁹​tot_benes
+
+``` r
+purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
+```
+
+    #> # A tibble: 15 × 16
+    #>     year rndrn…¹ rndrn…² rndrn…³ hcpcs…⁴ hcpcs…⁵ hcpcs…⁶ place…⁷ tot_r…⁸ tot_b…⁹
+    #>    <dbl> <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>
+    #>  1  2020 State   24      Maryla… 99217   Hospit… N       F          1523   31433
+    #>  2  2020 State   24      Maryla… 99218   Hospit… N       F           785    3847
+    #>  3  2020 State   24      Maryla… 99220   Hospit… N       F          1795   41984
+    #>  4  2020 State   24      Maryla… 99221   Initia… N       F          3498   26136
+    #>  5  2020 State   24      Maryla… 99221   Initia… N       O            46      77
+    #>  6  2020 State   24      Maryla… 99223   Initia… N       F          4803   98672
+    #>  7  2020 State   24      Maryla… 99223   Initia… N       O            59     103
+    #>  8  2020 State   24      Maryla… 99232   Subseq… N       F          5942  104865
+    #>  9  2020 State   24      Maryla… 99232   Subseq… N       O            89     137
+    #> 10  2020 State   24      Maryla… 99233   Subseq… N       F          5032  102804
+    #> 11  2020 State   24      Maryla… 99233   Subseq… N       O            74     108
+    #> 12  2020 State   24      Maryla… 99238   Hospit… N       F          2039   19248
+    #> 13  2020 State   24      Maryla… 99238   Hospit… N       O            11      12
+    #> 14  2020 State   24      Maryla… 99239   Hospit… N       F          2146   77391
+    #> 15  2020 State   24      Maryla… 99239   Hospit… N       O            12      13
+    #> # … with 6 more variables: tot_srvcs <int>, tot_bene_day_srvcs <int>,
+    #> #   avg_sbmtd_chrg <dbl>, avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>,
+    #> #   avg_mdcr_stdzd_amt <dbl>, and abbreviated variable names
+    #> #   ¹​rndrng_prvdr_geo_lvl, ²​rndrng_prvdr_geo_cd, ³​rndrng_prvdr_geo_desc,
+    #> #   ⁴​hcpcs_cd, ⁵​hcpcs_desc, ⁶​hcpcs_drug_ind, ⁷​place_of_srvc,
+    #> #   ⁸​tot_rndrng_prvdrs, ⁹​tot_benes
 
 <br>
 
@@ -381,18 +402,19 @@ purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", 
 
 ``` r
 physician_by_provider(npi = 1003000126)
-#> # A tibble: 1 × 74
-#>    year rndrng…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹
-#>   <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-#> 1  2020 1003000… Enkesh… Ardalan ""      M.D.    M       I       6410 R… ""     
-#> # … with 64 more variables: rndrng_prvdr_city <chr>,
-#> #   rndrng_prvdr_state_abrvtn <chr>, rndrng_prvdr_state_fips <chr>,
-#> #   rndrng_prvdr_zip5 <chr>, rndrng_prvdr_ruca <chr>,
-#> #   rndrng_prvdr_ruca_desc <chr>, rndrng_prvdr_cntry <chr>,
-#> #   rndrng_prvdr_type <chr>, rndrng_prvdr_mdcr_prtcptg_ind <chr>,
-#> #   tot_hcpcs_cds <chr>, tot_benes <int>, tot_srvcs <int>,
-#> #   tot_sbmtd_chrg <int>, tot_mdcr_alowd_amt <dbl>, tot_mdcr_pymt_amt <dbl>, …
 ```
+
+    #> # A tibble: 1 × 74
+    #>    year rndrng…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹
+    #>   <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    #> 1  2020 1003000… Enkesh… Ardalan ""      M.D.    M       I       6410 R… ""     
+    #> # … with 64 more variables: rndrng_prvdr_city <chr>,
+    #> #   rndrng_prvdr_state_abrvtn <chr>, rndrng_prvdr_state_fips <chr>,
+    #> #   rndrng_prvdr_zip5 <chr>, rndrng_prvdr_ruca <chr>,
+    #> #   rndrng_prvdr_ruca_desc <chr>, rndrng_prvdr_cntry <chr>,
+    #> #   rndrng_prvdr_type <chr>, rndrng_prvdr_mdcr_prtcptg_ind <chr>,
+    #> #   tot_hcpcs_cds <chr>, tot_benes <int>, tot_srvcs <int>,
+    #> #   tot_sbmtd_chrg <int>, tot_mdcr_alowd_amt <dbl>, tot_mdcr_pymt_amt <dbl>, …
 
 <br>
 
@@ -400,24 +422,25 @@ physician_by_provider(npi = 1003000126)
 
 ``` r
 cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
-#> # A tibble: 60 × 13
-#>     year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
-#>    <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>    <dbl>   <dbl>
-#>  1  2007 National Nation… ""      65+     Race    Asian … 0 to 1   0.327   1033.
-#>  2  2007 National Nation… ""      65+     Race    Asian … 2 to 3   0.344   3280.
-#>  3  2007 National Nation… ""      65+     Race    Asian … 4 to 5   0.221   7689.
-#>  4  2007 National Nation… ""      65+     Race    Asian … 6+       0.108  23479.
-#>  5  2007 National Nation… ""      65+     Race    Hispan… 0 to 1   0.330   1048.
-#>  6  2007 National Nation… ""      65+     Race    Hispan… 2 to 3   0.284   4241.
-#>  7  2007 National Nation… ""      65+     Race    Hispan… 4 to 5   0.226   9788.
-#>  8  2007 National Nation… ""      65+     Race    Hispan… 6+       0.160  29290.
-#>  9  2007 National Nation… ""      65+     Race    Native… 0 to 1   0.324   1356.
-#> 10  2007 National Nation… ""      65+     Race    Native… 2 to 3   0.323   4742.
-#> # … with 50 more rows, 3 more variables: tot_mdcr_pymt_pc <dbl>,
-#> #   hosp_readmsn_rate <dbl>, er_visits_per_1000_benes <dbl>, and abbreviated
-#> #   variable names ¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd, ⁴​bene_age_lvl,
-#> #   ⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_mcc, ⁸​tot_mdcr_stdzd_pymt_pc
 ```
+
+    #> # A tibble: 60 × 13
+    #>     year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
+    #>    <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>    <dbl>   <dbl>
+    #>  1  2007 National Nation… ""      65+     Race    Asian … 0 to 1   0.327   1033.
+    #>  2  2007 National Nation… ""      65+     Race    Asian … 2 to 3   0.344   3280.
+    #>  3  2007 National Nation… ""      65+     Race    Asian … 4 to 5   0.221   7689.
+    #>  4  2007 National Nation… ""      65+     Race    Asian … 6+       0.108  23479.
+    #>  5  2007 National Nation… ""      65+     Race    Hispan… 0 to 1   0.330   1048.
+    #>  6  2007 National Nation… ""      65+     Race    Hispan… 2 to 3   0.284   4241.
+    #>  7  2007 National Nation… ""      65+     Race    Hispan… 4 to 5   0.226   9788.
+    #>  8  2007 National Nation… ""      65+     Race    Hispan… 6+       0.160  29290.
+    #>  9  2007 National Nation… ""      65+     Race    Native… 0 to 1   0.324   1356.
+    #> 10  2007 National Nation… ""      65+     Race    Native… 2 to 3   0.323   4742.
+    #> # … with 50 more rows, 3 more variables: tot_mdcr_pymt_pc <dbl>,
+    #> #   hosp_readmsn_rate <dbl>, er_visits_per_1000_benes <dbl>, and abbreviated
+    #> #   variable names ¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd, ⁴​bene_age_lvl,
+    #> #   ⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_mcc, ⁸​tot_mdcr_stdzd_pymt_pc
 
 <br>
 
@@ -425,24 +448,25 @@ cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
 
 ``` r
 cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race")
-#> # A tibble: 315 × 13
-#>     year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
-#>    <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <chr>  
-#>  1  2007 National Nation… ""      65+     Race    Asian … Alcoho… 0.0036 ""     
-#>  2  2007 National Nation… ""      <65     Race    Asian … Alcoho… 0.021  ""     
-#>  3  2007 National Nation… ""      All     Race    Asian … Alcoho… 0.0057 ""     
-#>  4  2007 National Nation… ""      65+     Race    Hispan… Alcoho… 0.0107 ""     
-#>  5  2007 National Nation… ""      <65     Race    Hispan… Alcoho… 0.0383 ""     
-#>  6  2007 National Nation… ""      All     Race    Hispan… Alcoho… 0.0178 ""     
-#>  7  2007 National Nation… ""      65+     Race    Native… Alcoho… 0.0288 ""     
-#>  8  2007 National Nation… ""      <65     Race    Native… Alcoho… 0.08   ""     
-#>  9  2007 National Nation… ""      All     Race    Native… Alcoho… 0.0453 ""     
-#> 10  2007 National Nation… ""      65+     Race    non-Hi… Alcoho… 0.0148 ""     
-#> # … with 305 more rows, 3 more variables: tot_mdcr_pymt_pc <chr>,
-#> #   hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>, and abbreviated
-#> #   variable names ¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd, ⁴​bene_age_lvl,
-#> #   ⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_cond, ⁸​tot_mdcr_stdzd_pymt_pc
 ```
+
+    #> # A tibble: 315 × 13
+    #>     year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
+    #>    <dbl> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <chr>  
+    #>  1  2007 National Nation… ""      65+     Race    Asian … Alcoho… 0.0036 ""     
+    #>  2  2007 National Nation… ""      <65     Race    Asian … Alcoho… 0.021  ""     
+    #>  3  2007 National Nation… ""      All     Race    Asian … Alcoho… 0.0057 ""     
+    #>  4  2007 National Nation… ""      65+     Race    Hispan… Alcoho… 0.0107 ""     
+    #>  5  2007 National Nation… ""      <65     Race    Hispan… Alcoho… 0.0383 ""     
+    #>  6  2007 National Nation… ""      All     Race    Hispan… Alcoho… 0.0178 ""     
+    #>  7  2007 National Nation… ""      65+     Race    Native… Alcoho… 0.0288 ""     
+    #>  8  2007 National Nation… ""      <65     Race    Native… Alcoho… 0.08   ""     
+    #>  9  2007 National Nation… ""      All     Race    Native… Alcoho… 0.0453 ""     
+    #> 10  2007 National Nation… ""      65+     Race    non-Hi… Alcoho… 0.0148 ""     
+    #> # … with 305 more rows, 3 more variables: tot_mdcr_pymt_pc <chr>,
+    #> #   hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>, and abbreviated
+    #> #   variable names ¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd, ⁴​bene_age_lvl,
+    #> #   ⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_cond, ⁸​tot_mdcr_stdzd_pymt_pc
 
 <br>
 

@@ -98,7 +98,7 @@ tibble::tibble(
     "`optout_end_date`", "`first_line_street_address`", "`second_line_street_address`",
     "`city_name`", "`state_code`", "`zip_code`", "`eligible_to_order_and_refer`"
   ),
-  Term = c(
+  Description = c(
     "First Name", "Last Name", "NPI", "Specialty", "Optout Effective Date",
     "Optout End Date", "First Line Street Address", "Second Line Street Address",
     "City Name", "State Code", "Zip Code", "Eligible to Order and Refer"
@@ -112,7 +112,13 @@ tibble::tibble(
     "Provider's Zip Code", "Flag indicating whether the Provider is eligible to Order and Refer")) |> 
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_theme_nytimes() |>
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")

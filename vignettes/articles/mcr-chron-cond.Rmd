@@ -39,7 +39,9 @@ The Multiple Chronic Conditions dataset provides information on the number of ch
 cc_multiple(year = 2018, 
             geo_lvl = "State", 
             geo_desc = "California") |> 
-  knitr::kable()
+  dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
+  gt::gt() |> 
+  gt_theme_provider()
 ```
 
 <br>
@@ -48,7 +50,9 @@ cc_multiple(year = 2018,
 cc_multiple(year = 2007, 
             geo_lvl = "National", 
             demo_lvl = "Race") |> 
-  knitr::kable()
+  dplyr::select(!c(bene_geo_desc, bene_geo_cd)) |> 
+  gt::gt() |> 
+  gt_theme_provider()
 ```
 
 <br>
@@ -87,7 +91,10 @@ The Select Chronic Conditions dataset provides information on 21 selected chroni
 cc_specific(year = 2018, 
             geo_lvl = "State", 
             geo_desc = "California") |> 
-  knitr::kable()
+  dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
+  dplyr::arrange(dplyr::desc(bene_age_lvl), bene_demo_lvl) |> 
+  gt::gt() |> 
+  gt_theme_provider()
 ```
 
 <br>
@@ -96,7 +103,111 @@ cc_specific(year = 2018,
 cc_specific(year = 2007, 
             geo_lvl = "National", 
             demo_lvl = "Race") |> 
-  knitr::kable()
+  gt::gt() |> 
+  gt_theme_provider()
+```
+
+<br>
+
+### Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c("`Bene_Geo_Lvl`",	
+               "`Bene_Geo_Desc`",	
+               "`Bene_Geo_Cd`",	
+               "`Bene_Age_Lvl`",	
+               "`Bene_Demo_Lvl`",	
+               "`Bene_Demo_Desc`",	
+               "`Bene_MCC`",
+               "`Bene_Cond`",	
+               "`Prvlnc`",	
+               "`Tot_Mdcr_Stdzd_Pymt_PC`",	
+               "`Tot_Mdcr_Pymt_PC`",
+               "`Hosp_Readmsn_Rate`",	
+               "`ER_Visits_Per_1000_Benes`"),
+  Description = c("Beneficiary Geographic Level", 
+                  "Beneficiary Geographic Description", 
+                  "Beneficiary Geographic Code", 
+                  "Beneficiary Age Level", 
+                  "Beneficiary Demographic Level", 
+                  "Beneficiary Demographic Description", 
+                  "Beneficiary Chronic Condition",
+                  "Beneficiary Multiple Chronic Condition Group",
+                  "Prevalence",
+                  "Total Medicare Standardized Per Capita Spending",
+                  "Total Medicare Per Capita Spending",
+                  "Hospital Readmission Rate",
+                  "Emergency Room Visits per 1,000 Beneficiaries"),
+  Definition = c("Identifies the level of geography that the data in the row has been aggregated. 
+                 A value of 'County' indicates the data in the row is aggregated to the county level 
+                 and identifies a Medicare beneficiary’s geographic place of residence. A value of 'State' 
+                 indicates the data in the row is aggregated to a single state identified as a Medicare 
+                 beneficiary’s geographic place of residence. A value of 'National' indicates the data in 
+                 the row is aggregated across all states, the District of Columbia, Puerto Rico and the U.S. Virgin Islands.",
+                 
+                 "The state and/or county where the Medicare beneficiary resides. The values include the 50 United States, 
+                 District of Columbia, Puerto Rico or U.S. Virgin Islands. Data aggregated at the National level are identified by 'National'.", 
+                 
+                 "FIPS state and/or county code where the Medicare beneficiary resides. The `Bene_Geo_Cd` 
+                 will be blank for data aggregated at the National level or for Puerto Rico and Virgin Islands.",
+                 
+                 "Identifies the age level of the population that the data has been aggregated. A value of 'All' 
+                 indicates the data in the row represents all Fee-for-Service Medicare Beneficiaries. A value of 
+                 '<65' or '65+' indicates that the data is aggregated by the age of the Medicare Beneficiaries at 
+                 the end of the calendar year.", 
+                 
+                 "Identifies the demographic level of the population that the data has been aggregated. A value of 'All' 
+                 indicates the data in the row is represents all Fee-for-Service Medicare beneficiaries. A value of 'Sex' 
+                 indicates that the data has been aggregated by the Medicare beneficiary's sex. A value of 'Race' indicates 
+                 that the data has been aggregated by the Medicare beneficiary's race. A value of 'Dual Status' indicates 
+                 that the data has been aggregated by the Medicare beneficiary's dual eligibility status.",
+                 
+                 "For Bene_Demo_Lvl = 'Sex', a beneficiary’s sex is classified as Male or Female and is identified using 
+                 information from the CMS enrollment database. For Bene_Demo_Lvl = 'Race', the race/ethnicity classifications 
+                 are: Non-Hispanic White, Black or African American, Asian/Pacific Islander, Hispanic, and American Indian/Alaska Native. 
+                 All the chronic condition tables use the variable RTI_RACE_CD, which is available on the Master Beneficiary Files in the CCW. 
+                 For Bene_Demo_Lvl = 'Dual Status', beneficiaries can be classified as 'Medicare & Medicaid' or 'Medicare Only'. 
+                 Beneficiares enrolled in both Medicare and Medicaid are known as `dual eligibles`. Medicare beneficiaries are classified as 
+                 dual eligibles if in any month in the given calendar year they were receiving full or partial Medicaid benefits.", 
+                 
+                 "Identifies the chronic condition for which the prevalence and utilization is compiled. There are 21 chronic conditions 
+                 identified using Medicare administrative claims. A Medicare beneficiary is considered to have a chronic condition if the 
+                 CMS administrative data have a claim indicating that the beneficiary received a service or treatment for the specific condition. 
+                 Beneficiaries may have more than one of the chronic conditions listed.",
+                 
+                 "To classify MCC for each Medicare beneficiary, the 21 chronic conditions are counted and grouped into four categories (0-1, 2-3, 4-5 and 6 or more).",
+                 
+                 "Prevalence estimates are calculated by taking the beneficiaries with a particular condition divided by the total number of 
+                 beneficiaries in our fee-for-service population, expressed as a percentage.",
+                 
+                 "Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per 
+                 beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care 
+                 use among beneficiaries.",
+                 
+                 "Medicare spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita).",
+                 
+                 "Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to 
+                 an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is
+                 classified as an index admission, a readmission, or both.",
+                 
+                 "Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was 
+                 released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.")) |>
+  gt::gt() |> 
+  gt::fmt_markdown(columns = dplyr::everything()) |> 
+  #gt_theme_provider() |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::tab_footnote(footnote = "This information should not be used to attribute utilization or payments strictly to the specific condition selected, as beneficiaries with any of the specific conditions presented may have other health conditions that contribute to their Medicare utilization and spending amounts.", 
+                   locations = gt::cells_body(columns = Variable, rows = 10:13)) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
 
 <br>
