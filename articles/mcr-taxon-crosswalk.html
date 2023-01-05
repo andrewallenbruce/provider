@@ -148,31 +148,14 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 </ul>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
-<span><span class="co">#&gt;   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2                       Physician/General Surgery              2086S0… Allopa…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_mpstc</span> <span class="op">&lt;-</span> <span class="va">npi_list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_nppes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>                         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>                         <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_unpack</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_unpack' not found</span></span>
-<span></span>
-<span><span class="va">npi_mpstc</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">taxon_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>             <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">provider_mpstc</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in as_mapper(.f, ...): object 'provider_mpstc' not found</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="atcbzqucwg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gqymffntzy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -180,7 +163,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#atcbzqucwg .gt_table {
+#gqymffntzy .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -205,7 +188,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_heading {
+#gqymffntzy .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -217,12 +200,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#atcbzqucwg .gt_caption {
+#gqymffntzy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#atcbzqucwg .gt_title {
+#gqymffntzy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -234,7 +217,7 @@ html {
   border-bottom-width: 0;
 }
 
-#atcbzqucwg .gt_subtitle {
+#gqymffntzy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -246,13 +229,13 @@ html {
   border-top-width: 0;
 }
 
-#atcbzqucwg .gt_bottom_border {
+#gqymffntzy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_col_headings {
+#gqymffntzy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -267,7 +250,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#atcbzqucwg .gt_col_heading {
+#gqymffntzy .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -287,7 +270,7 @@ html {
   overflow-x: hidden;
 }
 
-#atcbzqucwg .gt_column_spanner_outer {
+#gqymffntzy .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -299,15 +282,15 @@ html {
   padding-right: 4px;
 }
 
-#atcbzqucwg .gt_column_spanner_outer:first-child {
+#gqymffntzy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#atcbzqucwg .gt_column_spanner_outer:last-child {
+#gqymffntzy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#atcbzqucwg .gt_column_spanner {
+#gqymffntzy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -319,7 +302,7 @@ html {
   width: 100%;
 }
 
-#atcbzqucwg .gt_group_heading {
+#gqymffntzy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -345,7 +328,7 @@ html {
   text-align: left;
 }
 
-#atcbzqucwg .gt_empty_group_heading {
+#gqymffntzy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -360,15 +343,15 @@ html {
   vertical-align: middle;
 }
 
-#atcbzqucwg .gt_from_md > :first-child {
+#gqymffntzy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#atcbzqucwg .gt_from_md > :last-child {
+#gqymffntzy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#atcbzqucwg .gt_row {
+#gqymffntzy .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -387,7 +370,7 @@ html {
   overflow-x: hidden;
 }
 
-#atcbzqucwg .gt_stub {
+#gqymffntzy .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -400,7 +383,7 @@ html {
   padding-right: 5px;
 }
 
-#atcbzqucwg .gt_stub_row_group {
+#gqymffntzy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -414,11 +397,11 @@ html {
   vertical-align: top;
 }
 
-#atcbzqucwg .gt_row_group_first td {
+#gqymffntzy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#atcbzqucwg .gt_summary_row {
+#gqymffntzy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -428,16 +411,16 @@ html {
   padding-right: 5px;
 }
 
-#atcbzqucwg .gt_first_summary_row {
+#gqymffntzy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_first_summary_row.thick {
+#gqymffntzy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#atcbzqucwg .gt_last_summary_row {
+#gqymffntzy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -447,7 +430,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_grand_summary_row {
+#gqymffntzy .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -457,7 +440,7 @@ html {
   padding-right: 5px;
 }
 
-#atcbzqucwg .gt_first_grand_summary_row {
+#gqymffntzy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -467,11 +450,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_striped {
+#gqymffntzy .gt_striped {
   background-color: #F4F4F4;
 }
 
-#atcbzqucwg .gt_table_body {
+#gqymffntzy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -480,7 +463,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#atcbzqucwg .gt_footnotes {
+#gqymffntzy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -494,7 +477,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#atcbzqucwg .gt_footnote {
+#gqymffntzy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -503,7 +486,7 @@ html {
   padding-right: 5px;
 }
 
-#atcbzqucwg .gt_sourcenotes {
+#gqymffntzy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -517,7 +500,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#atcbzqucwg .gt_sourcenote {
+#gqymffntzy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -525,101 +508,108 @@ html {
   padding-right: 5px;
 }
 
-#atcbzqucwg .gt_left {
+#gqymffntzy .gt_left {
   text-align: left;
 }
 
-#atcbzqucwg .gt_center {
+#gqymffntzy .gt_center {
   text-align: center;
 }
 
-#atcbzqucwg .gt_right {
+#gqymffntzy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#atcbzqucwg .gt_font_normal {
+#gqymffntzy .gt_font_normal {
   font-weight: normal;
 }
 
-#atcbzqucwg .gt_font_bold {
+#gqymffntzy .gt_font_bold {
   font-weight: bold;
 }
 
-#atcbzqucwg .gt_font_italic {
+#gqymffntzy .gt_font_italic {
   font-style: italic;
 }
 
-#atcbzqucwg .gt_super {
+#gqymffntzy .gt_super {
   font-size: 65%;
 }
 
-#atcbzqucwg .gt_footnote_marks {
+#gqymffntzy .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#atcbzqucwg .gt_asterisk {
+#gqymffntzy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#atcbzqucwg .gt_indent_1 {
+#gqymffntzy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#atcbzqucwg .gt_indent_2 {
+#gqymffntzy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#atcbzqucwg .gt_indent_3 {
+#gqymffntzy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#atcbzqucwg .gt_indent_4 {
+#gqymffntzy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#atcbzqucwg .gt_indent_5 {
+#gqymffntzy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Term">Term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Definition">Definition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>medicare_specialty_code</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Medicare Specialty Code</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Specialty code that corresponds to the listed Medicare specialty</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Medicare Specialty Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Specialty code that corresponds to the listed Medicare specialty</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>medicare_provider_supplier_type_description</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Medicare Provider/Supplier Type Description</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">The description of the Medicare Provider/Supplier Type</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Medicare Provider/Supplier Type Description</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The description of the Medicare Provider/Supplier Type</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>provider_taxonomy_code</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Provider Taxonomy Code</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">The taxonomy codes the Providers use</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Taxonomy Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The taxonomy codes the Providers use</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>provider_taxonomy_description_type_classification_specialization</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Provider Taxonomy Description</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">The description of the taxonomy that the Providers use</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Taxonomy Description</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The description of the taxonomy that the Providers use</span></div>
+</td>
 </tr>
 </tbody>
 </table>

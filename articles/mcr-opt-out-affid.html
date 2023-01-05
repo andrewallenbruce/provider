@@ -193,81 +193,33 @@ you should include in your opt-out affidavit and private contract.</p>
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   Sheryl   Aaron   1427… Clinic… 02/17/… 02/17/… 1633 Q…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   Laura    Brenner 1235… Psychi… 05/01/… 05/01/… 135 CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04 11/15/2022   Ruchi    Nadella 1356… Psychi… 03/30/… 03/30/… 135 CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-04 11/15/2022   Sireesha Jathav… 1508… Psychi… 01/22/… 01/22/… 145 CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   David    Smith   1649… Maxill… 06/25/… 06/25/… 909 W …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04 11/15/2022   David    Smith   1750… Oral S… 05/07/… 05/07/… 1116 N…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-04 11/15/2022   David    Smith   1114… Psychi… 08/15/… 08/15/… 3101 S…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-01-04 11/15/2022   David    Smith   1023… Obstet… 10/01/… 10/01/… 755 N …</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-01-04 11/15/2022   David    Smith   1790… Oral S… 03/26/… 03/26/… 6800 M…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-01-04 11/15/2022   David    Smith   1659… Dentist 05/26/… 05/26/… 3038 B…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   David    Altchek 1114… Orthop… 07/01/… 07/01/… 535 EA…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>date_start <span class="op">=</span> <span class="st">"01/30/1998"</span>, date_end <span class="op">=</span> <span class="st">"01/30/2024"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   Jonathan Raines  1720… Psychi… 01/30/… 01/30/… 1629 M…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>date_start <span class="op">=</span> <span class="st">"01/30/1998"</span>, date_end <span class="op">=</span> <span class="st">"01/30/2024"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 14</span></span></span>
-<span><span class="co">#&gt;   date       last_updated first_…¹ last_…² npi   speci…³ optou…⁴ optou…⁵ first…⁶</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 11/15/2022   Ned      Cowan   1649… Psychi… 12/30/… 12/30/… 9201 W…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04 11/15/2022   Geemee   Chung   1497… Infect… 04/20/… 04/20/… 9201 W…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-04 11/15/2022   Genise   Fraiman 1598… Intern… 10/13/… 10/13/… 9201 W…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-01-04 11/15/2022   David    Saleha… 1760… Oral S… 04/06/… 04/06/… 9201 W…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-01-04 11/15/2022   Colleen  Ryan    1952… Family… 09/21/… 09/21/… 9201 W…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state_code &lt;chr&gt;, zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, and</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​first_name, ²​last_name, ³​specialty,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​optout_effective_date, ⁵​optout_end_date, ⁶​first_line_street_address</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="zqdnjwmjit" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="apchwzjuin" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -275,7 +227,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#zqdnjwmjit .gt_table {
+#apchwzjuin .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -300,7 +252,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_heading {
+#apchwzjuin .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -312,12 +264,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#zqdnjwmjit .gt_caption {
+#apchwzjuin .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zqdnjwmjit .gt_title {
+#apchwzjuin .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -329,7 +281,7 @@ html {
   border-bottom-width: 0;
 }
 
-#zqdnjwmjit .gt_subtitle {
+#apchwzjuin .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -341,13 +293,13 @@ html {
   border-top-width: 0;
 }
 
-#zqdnjwmjit .gt_bottom_border {
+#apchwzjuin .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_col_headings {
+#apchwzjuin .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -362,7 +314,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#zqdnjwmjit .gt_col_heading {
+#apchwzjuin .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -382,7 +334,7 @@ html {
   overflow-x: hidden;
 }
 
-#zqdnjwmjit .gt_column_spanner_outer {
+#apchwzjuin .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -394,15 +346,15 @@ html {
   padding-right: 4px;
 }
 
-#zqdnjwmjit .gt_column_spanner_outer:first-child {
+#apchwzjuin .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zqdnjwmjit .gt_column_spanner_outer:last-child {
+#apchwzjuin .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zqdnjwmjit .gt_column_spanner {
+#apchwzjuin .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -414,7 +366,7 @@ html {
   width: 100%;
 }
 
-#zqdnjwmjit .gt_group_heading {
+#apchwzjuin .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -440,7 +392,7 @@ html {
   text-align: left;
 }
 
-#zqdnjwmjit .gt_empty_group_heading {
+#apchwzjuin .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -455,15 +407,15 @@ html {
   vertical-align: middle;
 }
 
-#zqdnjwmjit .gt_from_md > :first-child {
+#apchwzjuin .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zqdnjwmjit .gt_from_md > :last-child {
+#apchwzjuin .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zqdnjwmjit .gt_row {
+#apchwzjuin .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -482,7 +434,7 @@ html {
   overflow-x: hidden;
 }
 
-#zqdnjwmjit .gt_stub {
+#apchwzjuin .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -495,7 +447,7 @@ html {
   padding-right: 5px;
 }
 
-#zqdnjwmjit .gt_stub_row_group {
+#apchwzjuin .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -509,11 +461,11 @@ html {
   vertical-align: top;
 }
 
-#zqdnjwmjit .gt_row_group_first td {
+#apchwzjuin .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zqdnjwmjit .gt_summary_row {
+#apchwzjuin .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -523,16 +475,16 @@ html {
   padding-right: 5px;
 }
 
-#zqdnjwmjit .gt_first_summary_row {
+#apchwzjuin .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_first_summary_row.thick {
+#apchwzjuin .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zqdnjwmjit .gt_last_summary_row {
+#apchwzjuin .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -542,7 +494,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_grand_summary_row {
+#apchwzjuin .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -552,7 +504,7 @@ html {
   padding-right: 5px;
 }
 
-#zqdnjwmjit .gt_first_grand_summary_row {
+#apchwzjuin .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -562,11 +514,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_striped {
+#apchwzjuin .gt_striped {
   background-color: #F4F4F4;
 }
 
-#zqdnjwmjit .gt_table_body {
+#apchwzjuin .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -575,7 +527,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#zqdnjwmjit .gt_footnotes {
+#apchwzjuin .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -589,7 +541,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#zqdnjwmjit .gt_footnote {
+#apchwzjuin .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -598,7 +550,7 @@ html {
   padding-right: 5px;
 }
 
-#zqdnjwmjit .gt_sourcenotes {
+#apchwzjuin .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -612,7 +564,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#zqdnjwmjit .gt_sourcenote {
+#apchwzjuin .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -620,64 +572,64 @@ html {
   padding-right: 5px;
 }
 
-#zqdnjwmjit .gt_left {
+#apchwzjuin .gt_left {
   text-align: left;
 }
 
-#zqdnjwmjit .gt_center {
+#apchwzjuin .gt_center {
   text-align: center;
 }
 
-#zqdnjwmjit .gt_right {
+#apchwzjuin .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zqdnjwmjit .gt_font_normal {
+#apchwzjuin .gt_font_normal {
   font-weight: normal;
 }
 
-#zqdnjwmjit .gt_font_bold {
+#apchwzjuin .gt_font_bold {
   font-weight: bold;
 }
 
-#zqdnjwmjit .gt_font_italic {
+#apchwzjuin .gt_font_italic {
   font-style: italic;
 }
 
-#zqdnjwmjit .gt_super {
+#apchwzjuin .gt_super {
   font-size: 65%;
 }
 
-#zqdnjwmjit .gt_footnote_marks {
+#apchwzjuin .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#zqdnjwmjit .gt_asterisk {
+#apchwzjuin .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zqdnjwmjit .gt_indent_1 {
+#apchwzjuin .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zqdnjwmjit .gt_indent_2 {
+#apchwzjuin .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zqdnjwmjit .gt_indent_3 {
+#apchwzjuin .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zqdnjwmjit .gt_indent_4 {
+#apchwzjuin .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zqdnjwmjit .gt_indent_5 {
+#apchwzjuin .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

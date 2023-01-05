@@ -159,62 +159,25 @@ Revalidation Due Date - Data Dictionary</a></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>, </span>
-<span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
-<span><span class="co">#&gt;   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 I200311100… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span></span></code></pre></div>
+<span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>, </span>
-<span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 14</span></span></span>
-<span><span class="co">#&gt;   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04 I200311100… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04 I200901280… 159879… Eric    Byrd    <span style="color: #949494;">""</span>      SC      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span></span></code></pre></div>
+<span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, </span>
 <span>                  type_code <span class="op">=</span> <span class="st">"3"</span>, </span>
-<span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,480 × 14</span></span></span>
-<span><span class="co">#&gt;    month      enrollme…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-01-04 I20031104… 118469… John    Abt     <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-01-04 I20031105… 135643… Humber… Fernan… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-01-04 I20031105… 146749… Jorge   Santan… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-01-04 I20031111… 110487… Marian… De La … <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-01-04 I20031204… 143720… Mohamm… Sheikh  <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-01-04 I20031209… 141706… Richard Rizzo   <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-01-04 I20031211… 168964… Rene    Casano… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-01-04 I20031211… 126558… Maria   Montea… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-01-04 I20031215… 161994… Ricardo Doming… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-01-04 I20031215… 103321… Arles   Perdomo <span style="color: #949494;">""</span>      FL      3       Non-DM…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1,470 more rows, 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span></span></code></pre></div>
+<span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="pvytfvspor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="azgjxcnocq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -222,7 +185,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#pvytfvspor .gt_table {
+#azgjxcnocq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -247,7 +210,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_heading {
+#azgjxcnocq .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -259,12 +222,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pvytfvspor .gt_caption {
+#azgjxcnocq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pvytfvspor .gt_title {
+#azgjxcnocq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -276,7 +239,7 @@ html {
   border-bottom-width: 0;
 }
 
-#pvytfvspor .gt_subtitle {
+#azgjxcnocq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -288,13 +251,13 @@ html {
   border-top-width: 0;
 }
 
-#pvytfvspor .gt_bottom_border {
+#azgjxcnocq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_col_headings {
+#azgjxcnocq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -309,7 +272,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pvytfvspor .gt_col_heading {
+#azgjxcnocq .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -329,7 +292,7 @@ html {
   overflow-x: hidden;
 }
 
-#pvytfvspor .gt_column_spanner_outer {
+#azgjxcnocq .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -341,15 +304,15 @@ html {
   padding-right: 4px;
 }
 
-#pvytfvspor .gt_column_spanner_outer:first-child {
+#azgjxcnocq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pvytfvspor .gt_column_spanner_outer:last-child {
+#azgjxcnocq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pvytfvspor .gt_column_spanner {
+#azgjxcnocq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -361,7 +324,7 @@ html {
   width: 100%;
 }
 
-#pvytfvspor .gt_group_heading {
+#azgjxcnocq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -387,7 +350,7 @@ html {
   text-align: left;
 }
 
-#pvytfvspor .gt_empty_group_heading {
+#azgjxcnocq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -402,15 +365,15 @@ html {
   vertical-align: middle;
 }
 
-#pvytfvspor .gt_from_md > :first-child {
+#azgjxcnocq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pvytfvspor .gt_from_md > :last-child {
+#azgjxcnocq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pvytfvspor .gt_row {
+#azgjxcnocq .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -429,7 +392,7 @@ html {
   overflow-x: hidden;
 }
 
-#pvytfvspor .gt_stub {
+#azgjxcnocq .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -442,7 +405,7 @@ html {
   padding-right: 5px;
 }
 
-#pvytfvspor .gt_stub_row_group {
+#azgjxcnocq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -456,11 +419,11 @@ html {
   vertical-align: top;
 }
 
-#pvytfvspor .gt_row_group_first td {
+#azgjxcnocq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pvytfvspor .gt_summary_row {
+#azgjxcnocq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -470,16 +433,16 @@ html {
   padding-right: 5px;
 }
 
-#pvytfvspor .gt_first_summary_row {
+#azgjxcnocq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_first_summary_row.thick {
+#azgjxcnocq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pvytfvspor .gt_last_summary_row {
+#azgjxcnocq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,7 +452,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_grand_summary_row {
+#azgjxcnocq .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -499,7 +462,7 @@ html {
   padding-right: 5px;
 }
 
-#pvytfvspor .gt_first_grand_summary_row {
+#azgjxcnocq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,11 +472,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_striped {
+#azgjxcnocq .gt_striped {
   background-color: #F4F4F4;
 }
 
-#pvytfvspor .gt_table_body {
+#azgjxcnocq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -522,7 +485,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#pvytfvspor .gt_footnotes {
+#azgjxcnocq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -536,7 +499,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pvytfvspor .gt_footnote {
+#azgjxcnocq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -545,7 +508,7 @@ html {
   padding-right: 5px;
 }
 
-#pvytfvspor .gt_sourcenotes {
+#azgjxcnocq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -559,7 +522,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#pvytfvspor .gt_sourcenote {
+#azgjxcnocq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -567,164 +530,189 @@ html {
   padding-right: 5px;
 }
 
-#pvytfvspor .gt_left {
+#azgjxcnocq .gt_left {
   text-align: left;
 }
 
-#pvytfvspor .gt_center {
+#azgjxcnocq .gt_center {
   text-align: center;
 }
 
-#pvytfvspor .gt_right {
+#azgjxcnocq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pvytfvspor .gt_font_normal {
+#azgjxcnocq .gt_font_normal {
   font-weight: normal;
 }
 
-#pvytfvspor .gt_font_bold {
+#azgjxcnocq .gt_font_bold {
   font-weight: bold;
 }
 
-#pvytfvspor .gt_font_italic {
+#azgjxcnocq .gt_font_italic {
   font-style: italic;
 }
 
-#pvytfvspor .gt_super {
+#azgjxcnocq .gt_super {
   font-size: 65%;
 }
 
-#pvytfvspor .gt_footnote_marks {
+#azgjxcnocq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#pvytfvspor .gt_asterisk {
+#azgjxcnocq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pvytfvspor .gt_indent_1 {
+#azgjxcnocq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pvytfvspor .gt_indent_2 {
+#azgjxcnocq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pvytfvspor .gt_indent_3 {
+#azgjxcnocq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pvytfvspor .gt_indent_4 {
+#azgjxcnocq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pvytfvspor .gt_indent_5 {
+#azgjxcnocq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Term">Term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Definition">Definition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>enrollment_id</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment ID</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment ID</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Enrollment ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment ID</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>national_provider_identifier</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">National Provider Identifier</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">National Provider Identifier (NPI)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">National Provider Identifier (NPI)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>first_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">First Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">First name of individual provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">First name of individual provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>last_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Last Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Last name of individual provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Last name of individual provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>organization_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Organization Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Legal business name of organizational provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Organization Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Legal business name of organizational provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>enrollment_state_code</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment State Code</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment state</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Enrollment State Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment state</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>enrollment_type</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment Type</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Provider type code (1 if Part A; 2 if DME; 3 if Non-DME Part B)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Enrollment Type</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider type code (1 if Part A; 2 if DME; 3 if Non-DME Part B)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>provider_type_text</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Provider Type Text</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Provider type description</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Type Text</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider type description</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>enrollment_specialty</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment Specialty</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment specialty</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Enrollment Specialty</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment specialty</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>revalidation_due_date</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Revalidation Due Date</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Previously assigned revalidation due date (blank if not previously assigned a due date)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Revalidation Due Date</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Previously assigned revalidation due date (blank if not previously assigned a due date)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>adjusted_due_date</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Adjusted Due Date</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Next revalidation due date (blank if not yet assigned)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Adjusted Due Date</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Next revalidation due date (blank if not yet assigned)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_total_reassign_to</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Total Reassign To</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Total Reassign To</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>receiving_benefits_reassignment</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Receiving Benefits Reassignment</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Receiving Benefits Reassignment</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by</span></div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -741,43 +729,21 @@ html {
 <span>                   ind_first <span class="op">=</span> <span class="st">"Rashadda"</span>,</span>
 <span>                   ind_last <span class="op">=</span> <span class="st">"Wong"</span>,</span>
 <span>                   ind_state <span class="op">=</span> <span class="st">"CT"</span>,</span>
-<span>                   ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 16</span></span></span>
-<span><span class="co">#&gt;   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04  <span style="text-decoration: underline;">4</span>688<span style="text-decoration: underline;">988</span>371 O20150… 127197… CT      TBD          34 Physic… I20200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04  <span style="text-decoration: underline;">3</span>173<span style="text-decoration: underline;">866</span>241 O20190… Hartfo… CT      TBD        <span style="text-decoration: underline;">1</span>676 Physic… I20200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-04  <span style="text-decoration: underline;">7</span>618<span style="text-decoration: underline;">242</span>777 O20170… Hartfo… CT      TBD         262 Physic… I20200…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: individual_npi &lt;int&gt;, individual_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_last_name &lt;chr&gt;, individual_state_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_specialty_description &lt;chr&gt;, individual_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_employer_associations &lt;int&gt;, and abbreviated variable</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​group_state_code, ⁵​group_due_date,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​group_reassignments_and_physician_assistants, ⁷​record_type, …</span></span></span></code></pre></div>
+<span>                   ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>group_pac_id <span class="op">=</span> <span class="fl">9436483807</span>,</span>
 <span>                   group_enroll_id <span class="op">=</span> <span class="st">"O20190619002165"</span>,</span>
 <span>                   group_bus_name <span class="op">=</span> <span class="st">"1st Call Urgent Care"</span>,</span>
 <span>                   group_state <span class="op">=</span> <span class="st">"FL"</span>,</span>
-<span>                   record_type <span class="op">=</span> <span class="st">"Reassignment"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
-<span><span class="co">#&gt;   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04  <span style="text-decoration: underline;">9</span>436<span style="text-decoration: underline;">483</span>807 O20190… 1st Ca… FL      TBD           1 Reassi… I20190…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: individual_npi &lt;int&gt;, individual_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_last_name &lt;chr&gt;, individual_state_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_specialty_description &lt;chr&gt;, individual_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_employer_associations &lt;int&gt;, and abbreviated variable</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​group_state_code, ⁵​group_due_date,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁶​group_reassignments_and_physician_assistants, ⁷​record_type, …</span></span></span></code></pre></div>
+<span>                   record_type <span class="op">=</span> <span class="st">"Reassignment"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary-1">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-1"></a>
 </h3>
-<div id="gqgirkredi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pojfextsas" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -785,7 +751,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gqgirkredi .gt_table {
+#pojfextsas .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -810,7 +776,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_heading {
+#pojfextsas .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -822,12 +788,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gqgirkredi .gt_caption {
+#pojfextsas .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gqgirkredi .gt_title {
+#pojfextsas .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -839,7 +805,7 @@ html {
   border-bottom-width: 0;
 }
 
-#gqgirkredi .gt_subtitle {
+#pojfextsas .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -851,13 +817,13 @@ html {
   border-top-width: 0;
 }
 
-#gqgirkredi .gt_bottom_border {
+#pojfextsas .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_col_headings {
+#pojfextsas .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -872,7 +838,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gqgirkredi .gt_col_heading {
+#pojfextsas .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -892,7 +858,7 @@ html {
   overflow-x: hidden;
 }
 
-#gqgirkredi .gt_column_spanner_outer {
+#pojfextsas .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -904,15 +870,15 @@ html {
   padding-right: 4px;
 }
 
-#gqgirkredi .gt_column_spanner_outer:first-child {
+#pojfextsas .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gqgirkredi .gt_column_spanner_outer:last-child {
+#pojfextsas .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gqgirkredi .gt_column_spanner {
+#pojfextsas .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -924,7 +890,7 @@ html {
   width: 100%;
 }
 
-#gqgirkredi .gt_group_heading {
+#pojfextsas .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -950,7 +916,7 @@ html {
   text-align: left;
 }
 
-#gqgirkredi .gt_empty_group_heading {
+#pojfextsas .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -965,15 +931,15 @@ html {
   vertical-align: middle;
 }
 
-#gqgirkredi .gt_from_md > :first-child {
+#pojfextsas .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gqgirkredi .gt_from_md > :last-child {
+#pojfextsas .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gqgirkredi .gt_row {
+#pojfextsas .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -992,7 +958,7 @@ html {
   overflow-x: hidden;
 }
 
-#gqgirkredi .gt_stub {
+#pojfextsas .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1005,7 +971,7 @@ html {
   padding-right: 5px;
 }
 
-#gqgirkredi .gt_stub_row_group {
+#pojfextsas .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1019,11 +985,11 @@ html {
   vertical-align: top;
 }
 
-#gqgirkredi .gt_row_group_first td {
+#pojfextsas .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gqgirkredi .gt_summary_row {
+#pojfextsas .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1033,16 +999,16 @@ html {
   padding-right: 5px;
 }
 
-#gqgirkredi .gt_first_summary_row {
+#pojfextsas .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_first_summary_row.thick {
+#pojfextsas .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gqgirkredi .gt_last_summary_row {
+#pojfextsas .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1052,7 +1018,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_grand_summary_row {
+#pojfextsas .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -1062,7 +1028,7 @@ html {
   padding-right: 5px;
 }
 
-#gqgirkredi .gt_first_grand_summary_row {
+#pojfextsas .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1072,11 +1038,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_striped {
+#pojfextsas .gt_striped {
   background-color: #F4F4F4;
 }
 
-#gqgirkredi .gt_table_body {
+#pojfextsas .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1085,7 +1051,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#gqgirkredi .gt_footnotes {
+#pojfextsas .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1099,7 +1065,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gqgirkredi .gt_footnote {
+#pojfextsas .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1108,7 +1074,7 @@ html {
   padding-right: 5px;
 }
 
-#gqgirkredi .gt_sourcenotes {
+#pojfextsas .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1122,7 +1088,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#gqgirkredi .gt_sourcenote {
+#pojfextsas .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1130,178 +1096,207 @@ html {
   padding-right: 5px;
 }
 
-#gqgirkredi .gt_left {
+#pojfextsas .gt_left {
   text-align: left;
 }
 
-#gqgirkredi .gt_center {
+#pojfextsas .gt_center {
   text-align: center;
 }
 
-#gqgirkredi .gt_right {
+#pojfextsas .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gqgirkredi .gt_font_normal {
+#pojfextsas .gt_font_normal {
   font-weight: normal;
 }
 
-#gqgirkredi .gt_font_bold {
+#pojfextsas .gt_font_bold {
   font-weight: bold;
 }
 
-#gqgirkredi .gt_font_italic {
+#pojfextsas .gt_font_italic {
   font-style: italic;
 }
 
-#gqgirkredi .gt_super {
+#pojfextsas .gt_super {
   font-size: 65%;
 }
 
-#gqgirkredi .gt_footnote_marks {
+#pojfextsas .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gqgirkredi .gt_asterisk {
+#pojfextsas .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gqgirkredi .gt_indent_1 {
+#pojfextsas .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gqgirkredi .gt_indent_2 {
+#pojfextsas .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gqgirkredi .gt_indent_3 {
+#pojfextsas .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gqgirkredi .gt_indent_4 {
+#pojfextsas .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gqgirkredi .gt_indent_5 {
+#pojfextsas .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table">
 <thead class="gt_col_headings"><tr>
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Term">Term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Definition">Definition</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_pac_id</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group PAC ID</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">PAC ID of provider who is receiving reassignment or is the employer</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group PAC ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">PAC ID of provider who is receiving reassignment or is the employer</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_enrollment_id</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group Enrollment ID</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment ID of provider who is receiving reassignment or is the employer</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group Enrollment ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment ID of provider who is receiving reassignment or is the employer</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_legal_business_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group Legal Business Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Legal business name of provider who is receiving reassignment or is the employer</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group Legal Business Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Legal business name of provider who is receiving reassignment or is the employer</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_state_code</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group State Code</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment state of provider who is receiving reassignment or is the employer</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group State Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment state of provider who is receiving reassignment or is the employer</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_due_date</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group Due Date</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Revalidation due date of provider who is receiving reassignment or is the employer (TBD if yet to be assigned)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group Due Date</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Revalidation due date of provider who is receiving reassignment or is the employer (TBD if yet to be assigned)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>group_reassignments_and_physician_assistants</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Group Reassignments and Physician Assistants</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group Reassignments and Physician Assistants</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>record_type</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Record Type</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Identifies whether the record is for a reassignment ('Reassignment') or employment ('Physician Assistant')</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Record Type</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies whether the record is for a reassignment ('Reassignment') or employment ('Physician Assistant')</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_enrollment_id</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Enrollment ID</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment ID of provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Enrollment ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment ID of provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_npi</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual NPI</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">NPI of provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual NPI</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">NPI of provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_first_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual First Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">First name of provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">First name of provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_last_name</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Last Name</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Last name of provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Last name of provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_state_code</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual State Code</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment state of provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual State Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment state of provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_specialty_description</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Specialty Description</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Enrollment specialty of the provider who is reassigning their benefits or is an employee</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Specialty Description</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment specialty of the provider who is reassigning their benefits or is an employee</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_due_date</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Due Date</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Due Date</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)</span></div>
+</td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
 <p><code>individual_total_employer_associations</code></p>
 </div></td>
-<td headers="Term" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Individual Total Employer Associations</td>
-<td headers="Definition" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by</td>
+<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Individual Total Employer Associations</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by</span></div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -1339,20 +1334,8 @@ yet.</p>
 <span>                    ind_first <span class="op">=</span> <span class="st">"Rashadda"</span>,</span>
 <span>                    ind_last <span class="op">=</span> <span class="st">"Wong"</span>,</span>
 <span>                    ind_state <span class="op">=</span> <span class="st">"CT"</span>,</span>
-<span>                    ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 17</span></span></span>
-<span><span class="co">#&gt;   month      group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷ indiv…⁸</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-04  <span style="text-decoration: underline;">4</span>688<span style="text-decoration: underline;">988</span>371 O20150… 127197… CT      TBD          34 Physic…  2.77<span style="color: #949494;">e</span>9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-04  <span style="text-decoration: underline;">3</span>173<span style="text-decoration: underline;">866</span>241 O20190… Hartfo… CT      TBD        <span style="text-decoration: underline;">1</span>676 Physic…  2.77<span style="color: #949494;">e</span>9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-04  <span style="text-decoration: underline;">7</span>618<span style="text-decoration: underline;">242</span>777 O20170… Hartfo… CT      TBD         262 Physic…  2.77<span style="color: #949494;">e</span>9</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 8 more variables: individual_enrollment_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_npi &lt;int&gt;, individual_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_last_name &lt;chr&gt;, individual_state_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_specialty_description &lt;chr&gt;, individual_due_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   individual_total_employer_associations &lt;int&gt;, and abbreviated variable</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   names ¹​group_pac_id, ²​group_enrollment_id, ³​group_legal_business_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​group_state_code, ⁵​group_due_date, …</span></span></span></code></pre></div>
+<span>                    ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary-2">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-2"></a>
