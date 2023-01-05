@@ -31,7 +31,7 @@ knitr::opts_chunk$set(
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 <!-- badges: end -->
 
-> Functions offering easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider) data through publicly available APIs & sources.
+> Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider)-centric data through publicly available APIs & sources.
  
 <br>
 
@@ -142,9 +142,9 @@ library(provider)
 
 <br>
 
-## Goal
+## Motivation
 
-The underlying motivation
+This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. Nothing too shocking there. It only gets interesting when you start to link them together.
 
 ### NPPES National Provider Identifier Registry API
 
@@ -158,7 +158,7 @@ nppes <- tibble::tribble(
 "nppes_npi", list(prov_type = "NPI-1", city = "Atlanta", state = "GA", limit = 5),
 )
 
-purrr::invoke_map_dfr(nppes$fn, nppes$params)
+purrr::invoke_map_dfr(nppes$fn, nppes$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -174,7 +174,7 @@ prven <- tibble::tribble(
 "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"),
 )
 
-purrr::invoke_map_dfr(prven$fn, prven$params)
+purrr::invoke_map_dfr(prven$fn, prven$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -188,10 +188,7 @@ months <- tibble::enframe(month.name) |>
   dplyr::slice(1:7) |> 
   tibble::deframe()
 
-purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, 
-                                               geo_level = "State", 
-                                               state = "Georgia", 
-                                               month = .x))
+purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State", state = "Georgia", month = .x)) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -200,7 +197,7 @@ purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022,
 ### Medicare Order and Referring API
 
 ```{r}
-provider::order_refer(npi = 1083879860)
+provider::order_refer(npi = 1083879860) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -209,7 +206,7 @@ provider::order_refer(npi = 1083879860)
 ### Medicare Opt-Out Affidavits API
 
 ```{r}
-provider::opt_out(last = "Aaron")
+provider::opt_out(last = "Aaron") |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -217,7 +214,8 @@ provider::opt_out(last = "Aaron")
 ### Medicare Provider and Supplier Taxonomy Crosswalk API
 
 ```{r}
-provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
+  terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -225,20 +223,20 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 ### Medicare Revalidation Due Date API
 
 ```{r}
-provider::revalidation_date(npi = 1710912209)
+provider::revalidation_date(npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 <br>
 
 ### Medicare Revalidation Reassignment List API
 
 ```{r}
-provider::revalidation_reassign(ind_npi = 1710912209)
+provider::revalidation_reassign(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
 ```{r}
-provider::revalidation_group(ind_npi = 1710912209)
+provider::revalidation_group(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -246,7 +244,7 @@ provider::revalidation_group(ind_npi = 1710912209)
 ### CMS Public Reporting of Missing Digital Contact Information API
 
 ```{r}
-provider::missing_information(npi = 1144224569)
+provider::missing_information(npi = 1144224569) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -260,7 +258,7 @@ provider::missing_information(npi = 1144224569)
 <br>
 
 ```{r}
-purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
+purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -271,10 +269,20 @@ purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
 
 ```{r}
 service <- physician_by_service(npi = 1003000126, year = 2020)
+```
 
-purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
+<br>
 
-purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
+```{r}
+purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x)) |> 
+  terse::terse(config = list(ansi = FALSE), width = 100)
+```
+
+<br>
+
+```{r}
+purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x)) |> 
+  terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -284,7 +292,7 @@ purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", 
 <br>
 
 ```{r}
-physician_by_provider(npi = 1003000126)
+physician_by_provider(npi = 1003000126) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -292,7 +300,7 @@ physician_by_provider(npi = 1003000126)
 ### Medicare Multiple Chronic Conditions API
 
 ```{r}
-cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
+cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race") |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>
@@ -300,7 +308,8 @@ cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
 ### Medicare Specific Chronic Conditions API
 
 ```{r}
-cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race")
+cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race") |> 
+  terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 <br>

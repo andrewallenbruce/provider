@@ -41,7 +41,8 @@ cc_multiple(year = 2018,
             geo_desc = "California") |> 
   dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
   gt::gt() |> 
-  gt_theme_provider()
+  gt::gt_preview() |> 
+  provider:::gt_theme_provider()
 ```
 
 <br>
@@ -52,7 +53,8 @@ cc_multiple(year = 2007,
             demo_lvl = "Race") |> 
   dplyr::select(!c(bene_geo_desc, bene_geo_cd)) |> 
   gt::gt() |> 
-  gt_theme_provider()
+  gt::gt_preview() |> 
+  provider:::gt_theme_provider()
 ```
 
 <br>
@@ -94,7 +96,8 @@ cc_specific(year = 2018,
   dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
   dplyr::arrange(dplyr::desc(bene_age_lvl), bene_demo_lvl) |> 
   gt::gt() |> 
-  gt_theme_provider()
+  gt::gt_preview() |> 
+  provider:::gt_theme_provider()
 ```
 
 <br>
@@ -104,7 +107,8 @@ cc_specific(year = 2007,
             geo_lvl = "National", 
             demo_lvl = "Race") |> 
   gt::gt() |> 
-  gt_theme_provider()
+  gt::gt_preview() |> 
+  provider:::gt_theme_provider()
 ```
 
 <br>

@@ -59,32 +59,32 @@ Contact your Medicare Administrative Contractor (MAC) (PDF) to see what informat
 ## Examples
 
 ```{r}
-opt_out(last = "Aaron")
+opt_out(last = "Aaron") |> terse::terse()
 ```
-
+<br>
 
 ```{r}
-opt_out(specialty = "Psychiatry", zip = "07626")
+opt_out(specialty = "Psychiatry", zip = "07626") |> terse::terse()
 ```
-
+<br>
 
 ```{r}
-opt_out(first = "David", last = "Smith")
+opt_out(first = "David", last = "Smith") |> terse::terse()
 ```
-
+<br>
 
 ```{r}
-opt_out(npi = 1114974490)
+opt_out(npi = 1114974490) |> terse::terse()
 ```
-
+<br>
 
 ```{r}
-opt_out(date_start = "01/30/1998", date_end = "01/30/2024")
+opt_out(date_start = "01/30/1998", date_end = "01/30/2024") |> terse::terse()
 ```
-
+<br>
 
 ```{r}
-opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
+opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD") |> terse::terse()
 ```
 
 <br>

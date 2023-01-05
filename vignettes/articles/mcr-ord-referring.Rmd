@@ -46,7 +46,7 @@ In the event a provider does not want to bill Medicare for their services, they 
 ```{r}
 order_refer(npi = 1003026055) |> 
 gt::gt() |> 
-  gt_theme_provider() |> 
+  provider:::gt_theme_provider() |> 
   gt::tab_header(title = "Provider Results for NPI 1083879860",
     subtitle = gtExtras::add_text_img("Report generated with", url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", height = 25)) |> 
   gt::text_transform(locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),

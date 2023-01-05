@@ -36,7 +36,7 @@ The NPPES *Application Programming Interface* (API) is a faster alternative to t
 ## Examples
 
 ```{r}
-nppes_npi(1114499340)
+nppes_npi(1114499340) |> terse::terse()
 ```
 
 

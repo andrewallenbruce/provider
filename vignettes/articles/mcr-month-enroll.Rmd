@@ -40,7 +40,7 @@ beneficiary_enrollment(year = 2018,
                        month = "Year",
                        geo_level = "County",
                        state_abb = "AL",
-                       county = "Autauga")
+                       county = "Autauga") |> terse::terse()
 ```
 
 <br>
@@ -48,7 +48,7 @@ beneficiary_enrollment(year = 2018,
 ```{r}
 beneficiary_enrollment(year = 2021,
                        geo_level = "County",
-                       fips = "01001")
+                       fips = "01001") |> terse::terse()
 ```
 
 <br>
@@ -57,7 +57,7 @@ beneficiary_enrollment(year = 2021,
 beneficiary_enrollment(year = 2022,
                        month = "July",
                        geo_level = "State",
-                       state = "Georgia")
+                       state = "Georgia") |> terse::terse()
 ```
 
 <br>
@@ -65,7 +65,7 @@ beneficiary_enrollment(year = 2022,
 ```{r}
 beneficiary_enrollment(year = 2017,
                        geo_level = "State",
-                       fips = "10")
+                       fips = "10") |> terse::terse()
 ```
 
 <br>

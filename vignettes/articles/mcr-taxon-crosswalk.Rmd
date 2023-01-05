@@ -34,21 +34,8 @@ The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the provider
 <br>
 
 ```{r}
-taxonomy_crosswalk(taxonomy_code = "2086S0102X")
+taxonomy_crosswalk(taxonomy_code = "2086S0102X") |> terse::terse()
 ```
-<br>
-
-```{r}
-npi_mpstc <- npi_list |> purrr::map_dfr(provider_nppes) |> 
-                         dplyr::group_split(outcome) |>
-                         purrr::map_dfr(provider_unpack)
-
-npi_mpstc |> dplyr::distinct(taxon_code) |> 
-             tibble::deframe() |> 
-             purrr::map_dfr(provider_mpstc)
-```
-
-
 
 <br><br>
 
@@ -63,7 +50,7 @@ tibble::tibble(
     "`medicare_specialty_code`", "`medicare_provider_supplier_type_description`",
     "`provider_taxonomy_code`", "`provider_taxonomy_description_type_classification_specialization`"
   ),
-  Term = c(
+  Description = c(
     "Medicare Specialty Code", "Medicare Provider/Supplier Type Description",
     "Provider Taxonomy Code", "Provider Taxonomy Description"
   ),
@@ -75,6 +62,12 @@ tibble::tibble(
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")

@@ -132,7 +132,7 @@ The **Provider** data subset provides information on use, payments, submitted ch
 <br>
 
 ```{r echo=FALSE}
-mpop_prov <- tibble::tibble(
+tibble::tibble(
   Variable = c(
     "`rndrng_npi`", "`rndrng_prvdr_last_org_name`", "`rndrng_prvdr_first_name`",
     "`rndrng_prvdr_mi`", "`rndrng_prvdr_crdntls`", "`rndrng_prvdr_gndr`",
@@ -159,7 +159,7 @@ mpop_prov <- tibble::tibble(
     "`bene_cc_ihd_pct`", "`bene_cc_opo_pct`", "`bene_cc_raoa_pct`",
     "`bene_cc_sz_pct`", "`bene_cc_strok_pct`", "`bene_avg_risk_scre`"
   ),
-  Term = c(
+  Description = c(
     "National Provider Identifier", 
     "Last Name/Organization Name of the Provider",
     "First Name of the Provider", 
@@ -302,11 +302,16 @@ mpop_prov <- tibble::tibble(
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for schizophrenia and other psychotic disorders. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for stroke. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Average Hierarchical Condition Category (HCC) risk score of beneficiaries."
-  ))
-
-mpop_prov |> gt::gt() |> 
+  )) |> 
+  gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")
@@ -323,7 +328,7 @@ mpop_prov |> gt::gt() |>
 ### Data Dictionary
 
 ```{r echo=FALSE}
-mpop_geo <- tibble::tibble(
+tibble::tibble(
   Variable = c(
     "`rndrng_prvdr_geo_lvl`", "`rndrng_prvdr_geo_cd`", "`rndrng_prvdr_geo_desc`",
     "`hcpcs_cd`", "`hcpcs_desc`", "`hcpcs_drug_ind`", "`place_of_srvc`",
@@ -331,7 +336,7 @@ mpop_geo <- tibble::tibble(
     "`avg_sbmtd_chrg`", "`avg_mdcr_alowd_amt`", "`avg_mdcr_pymt_amt`",
     "`avg_mdcr_stdzd_amt`"
   ),
-  Term = c(
+  Description = c(
     "Geography Level", "Rendering Provider Geography Code", "Rendering Provider Geography Description",
     "HCPCS Code", "HCPCS Description", "HCPCS Drug Indicator", "Place of Service",
     "Number of Providers", "Number of Services", "Number of Medicare Beneficiaries",
@@ -355,11 +360,16 @@ mpop_geo <- tibble::tibble(
     "Average of the Medicare allowed amount for the service. Medicare allowed amounts includes the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
     "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.",
     "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Additional information on the standardization of Medicare payments can be found in the “Geographic Variation Public Use File: Technical Supplement on Standardization.”"
-  ))
-
-mpop_geo |> gt::gt() |> 
+  )) |> 
+  gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")
@@ -389,7 +399,7 @@ There can be multiple records for a given NPI based on the number of distinct HC
 ### Data Dictionary
 
 ```{r echo=FALSE}
-mpop_serv <- tibble::tibble(
+tibble::tibble(
   Variable = c(
     "`rndrng_npi`", "`rndrng_prvdr_last_org_name`", "`rndrng_prvdr_first_name`",
     "`rndrng_prvdr_mi`", "`rndrng_prvdr_crdntls`", "`rndrng_prvdr_gndr`",
@@ -401,7 +411,7 @@ mpop_serv <- tibble::tibble(
     "`tot_benes`", "`tot_srvcs`", "`tot_bene_day_srvcs`", "`avg_sbmtd_chrg`",
     "`avg_mdcr_alowd_amt`", "`avg_mdcr_pymt_amt`", "`avg_mdcr_stdzd_amt`"
   ),
-  Term = c(
+  Description = c(
     "National Provider Identifier", "Last Name/Organization Name of the Provider",
     "First Name of the Provider", "Middle Initial of the Provider",
     "Credentials of the Provider", "Gender of the Provider", "Entity Type of the Provider",
@@ -443,11 +453,16 @@ mpop_serv <- tibble::tibble(
     "Average of the Medicare allowed amount for the service; this figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
     "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service. Note: In general, Medicare FFS claims with dates-of-service or dates-of-discharge on or after April 1, 2013, incurred a 2 percent reduction in Medicare payment. This is in response to mandatory across-the-board reductions in Federal spending, also known as sequestration.",
     "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Note: This variable is available starting with the calendar year 2014 data. Please refer to the “Additional Information” section of this document for more details on the standardization of Medicare payments."
-  ))
-
-mpop_serv |> gt::gt() |> 
+  )) |> 
+  gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
   gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")
