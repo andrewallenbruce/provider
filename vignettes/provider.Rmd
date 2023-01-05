@@ -250,9 +250,6 @@ eliz2 <- purrr::invoke_map_dfr(nppes$fn, nppes$params)
 
 eliz2 |> terse::terse()
 ```
-```{r}
-eliz2
-```
 
 
 <br>
@@ -291,13 +288,7 @@ You may need to find Medicare's specialty codes for this provider's taxonomies. 
 <br>
 
 ```{r}
-taxonomy_crosswalk(taxonomy_code = "282NC0060X")
-```
-
-<br>
-
-```{r}
-revalidation_date(npi = 1114058443)
+taxonomy_crosswalk(taxonomy_code = "282NC0060X") |> terse::terse()
 ```
 
 <br>
@@ -307,13 +298,13 @@ Providers may need to update their digital contact information in the NPPES syst
 <br>
 
 ```{r}
-missing_information(npi = 1114058443)
+missing_information(npi = 1114058443) |> terse::terse()
 ```
 
 <br>
 
 ```{r}
-opt_out(npi = 1114058443)
+opt_out(npi = 1114058443) |> terse::terse()
 ```
 
 <br>
@@ -323,7 +314,7 @@ Using `physician_by_service()`, you can access **Medicare's Physician & Other Pr
 <br>
 
 ```{r}
-physician_by_service(npi = 1114058443, year = "2020")
+purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> terse::terse()
 ```
 
 
@@ -334,22 +325,38 @@ This API contains data going back to 2013, so you can perform a long-term analys
 <br>
 
 ```{r}
-purrr::map_dfr(as.character(2013:2020), ~physician_by_service(npi = 1114058443, year = .x)) |> 
+purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> 
   dplyr::group_by(hcpcs_cd, hcpcs_desc) |> 
   dplyr::summarise(
-    Benefits = sum(tot_benes),
+    Beneficiaries = sum(tot_benes),
     Services = sum(tot_srvcs),
     Avg_Billed = janitor::round_half_up(mean(avg_sbmtd_chrg), digits = 2),
     Avg_Allowed = janitor::round_half_up(mean(avg_mdcr_alowd_amt), digits = 2),
     Avg_Payment = janitor::round_half_up(mean(avg_mdcr_pymt_amt), digits = 2)) |> 
   dplyr::ungroup() |> 
   dplyr::rename(HCPCS = hcpcs_cd, 
-                "HCPCS Description" = hcpcs_desc,
+                Description = hcpcs_desc,
                 "Avg Charge" = Avg_Billed,
                 "Avg Allowed" = Avg_Allowed,
                 "Avg Payment" = Avg_Payment) |> 
   dplyr::arrange(dplyr::desc(Services)) |> 
-  knitr::kable()
+  gt::gt() |> 
+  gtExtras::gt_add_divider(columns = "HCPCS", style = "dotted") |> 
+  gtExtras::gt_merge_stack(col1 = HCPCS, 
+                           col2 = Description,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::tab_style(style = list(gt::cell_fill(color = "#F54444"), 
+                             gt::cell_text(color = "white", 
+                                           weight = "bold")), 
+                locations = gt::cells_row_groups()) |> 
+  provider:::gt_theme_provider() |> 
+  gt::tab_header(title = "Provider Results for NPI 1114058443",
+  subtitle = gtExtras::add_text_img("Report generated with", 
+  url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", 
+  height = 25))
 ```
 
 
