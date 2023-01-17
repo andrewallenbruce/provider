@@ -160,33 +160,117 @@ Chronic Conditions Data Warehouse.</p>
 <span>                       month <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span>
 <span>                       state_abb <span class="op">=</span> <span class="st">"AL"</span>,</span>
-<span>                       county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<span>                       county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2018   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Year   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_geo_lvl                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">County </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_abrvtn              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">AL     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_desc                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Alabama</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_county_desc               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Autauga</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_fips_cd                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">01001  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                      <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">10645  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>orgnl_mdcr_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">5700   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>ma_and_oth_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">4945   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">8241   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_esrd_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">53     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_no_esrd_benes             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">8189   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2403   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_esrd_and_esrd_only_benes <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">50     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_no_esrd_benes            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2353   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_tot_benes                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">9892   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_orgnl_mdcr_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">4948   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_ma_and_oth_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">4944   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_tot_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">7088   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_pdp_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2260   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_mapd_benes       <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">4828   </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>,</span>
 <span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span>
-<span>                       fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<span>                       fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2021   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Year   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_geo_lvl                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">County </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_abrvtn              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">AL     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_desc                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Alabama</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_county_desc               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Autauga</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_fips_cd                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">01001  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                      <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">11398  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>orgnl_mdcr_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">5339   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>ma_and_oth_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">6059   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">9031   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_esrd_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">56     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_no_esrd_benes             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">8975   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2367   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_esrd_and_esrd_only_benes <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">49     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_no_esrd_benes            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2318   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_tot_benes                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">10557  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_orgnl_mdcr_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">4501   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_ma_and_oth_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">6057   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_tot_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">7838   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_pdp_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1931   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_mapd_benes       <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">5907   </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>                       month <span class="op">=</span> <span class="st">"July"</span>,</span>
 <span>                       geo_level <span class="op">=</span> <span class="st">"State"</span>,</span>
-<span>                       state <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<span>                       state <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2022   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">July   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_geo_lvl                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">State  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_abrvtn              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">GA     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_desc                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Georgia</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_county_desc               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Total  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_fips_cd                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">13     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                      <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1840128</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>orgnl_mdcr_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">907070 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>ma_and_oth_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">933058 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1578129</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_esrd_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">10368  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_no_esrd_benes             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1567761</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">261999 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_esrd_and_esrd_only_benes <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">11713  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_no_esrd_benes            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">250286 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_tot_benes                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1696372</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_orgnl_mdcr_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">764122 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_ma_and_oth_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">932250 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_tot_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">1422171</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_pdp_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">533004 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_mapd_benes       <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">889167 </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>,</span>
 <span>                       geo_level <span class="op">=</span> <span class="st">"State"</span>,</span>
-<span>                       fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<span>                       fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">2017    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Year    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_geo_lvl                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">State   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_abrvtn              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">DE      </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_state_desc                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Delaware</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_county_desc               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Total   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_fips_cd                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">10      </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                      <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">193585  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>orgnl_mdcr_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">171150  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>ma_and_oth_benes               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">22435   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">166603  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_esrd_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">949     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>aged_no_esrd_benes             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">165654  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">26982   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_esrd_and_esrd_only_benes <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">853     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>dsbld_no_esrd_benes            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">26129   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_tot_benes                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">179142  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_orgnl_mdcr_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">156719  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>a_b_ma_and_oth_benes           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">22423   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_tot_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">143495  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_pdp_benes        <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">125925  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>prscrptn_drug_mapd_benes       <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">17571   </span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="lfxqquycef" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="seaedwiqrh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -194,7 +278,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lfxqquycef .gt_table {
+#seaedwiqrh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -219,7 +303,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#lfxqquycef .gt_heading {
+#seaedwiqrh .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -231,12 +315,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lfxqquycef .gt_caption {
+#seaedwiqrh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lfxqquycef .gt_title {
+#seaedwiqrh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -248,7 +332,7 @@ html {
   border-bottom-width: 0;
 }
 
-#lfxqquycef .gt_subtitle {
+#seaedwiqrh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -260,13 +344,13 @@ html {
   border-top-width: 0;
 }
 
-#lfxqquycef .gt_bottom_border {
+#seaedwiqrh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#lfxqquycef .gt_col_headings {
+#seaedwiqrh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -281,7 +365,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lfxqquycef .gt_col_heading {
+#seaedwiqrh .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -301,7 +385,7 @@ html {
   overflow-x: hidden;
 }
 
-#lfxqquycef .gt_column_spanner_outer {
+#seaedwiqrh .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -313,15 +397,15 @@ html {
   padding-right: 4px;
 }
 
-#lfxqquycef .gt_column_spanner_outer:first-child {
+#seaedwiqrh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lfxqquycef .gt_column_spanner_outer:last-child {
+#seaedwiqrh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lfxqquycef .gt_column_spanner {
+#seaedwiqrh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -333,7 +417,7 @@ html {
   width: 100%;
 }
 
-#lfxqquycef .gt_group_heading {
+#seaedwiqrh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -359,7 +443,7 @@ html {
   text-align: left;
 }
 
-#lfxqquycef .gt_empty_group_heading {
+#seaedwiqrh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -374,15 +458,15 @@ html {
   vertical-align: middle;
 }
 
-#lfxqquycef .gt_from_md > :first-child {
+#seaedwiqrh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lfxqquycef .gt_from_md > :last-child {
+#seaedwiqrh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lfxqquycef .gt_row {
+#seaedwiqrh .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -401,7 +485,7 @@ html {
   overflow-x: hidden;
 }
 
-#lfxqquycef .gt_stub {
+#seaedwiqrh .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -414,7 +498,7 @@ html {
   padding-right: 5px;
 }
 
-#lfxqquycef .gt_stub_row_group {
+#seaedwiqrh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -428,11 +512,11 @@ html {
   vertical-align: top;
 }
 
-#lfxqquycef .gt_row_group_first td {
+#seaedwiqrh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lfxqquycef .gt_summary_row {
+#seaedwiqrh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -442,16 +526,16 @@ html {
   padding-right: 5px;
 }
 
-#lfxqquycef .gt_first_summary_row {
+#seaedwiqrh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#lfxqquycef .gt_first_summary_row.thick {
+#seaedwiqrh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lfxqquycef .gt_last_summary_row {
+#seaedwiqrh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -461,7 +545,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#lfxqquycef .gt_grand_summary_row {
+#seaedwiqrh .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -471,7 +555,7 @@ html {
   padding-right: 5px;
 }
 
-#lfxqquycef .gt_first_grand_summary_row {
+#seaedwiqrh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -481,11 +565,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#lfxqquycef .gt_striped {
+#seaedwiqrh .gt_striped {
   background-color: #F4F4F4;
 }
 
-#lfxqquycef .gt_table_body {
+#seaedwiqrh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -494,7 +578,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#lfxqquycef .gt_footnotes {
+#seaedwiqrh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -508,7 +592,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lfxqquycef .gt_footnote {
+#seaedwiqrh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -517,7 +601,7 @@ html {
   padding-right: 5px;
 }
 
-#lfxqquycef .gt_sourcenotes {
+#seaedwiqrh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -531,7 +615,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#lfxqquycef .gt_sourcenote {
+#seaedwiqrh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -539,64 +623,64 @@ html {
   padding-right: 5px;
 }
 
-#lfxqquycef .gt_left {
+#seaedwiqrh .gt_left {
   text-align: left;
 }
 
-#lfxqquycef .gt_center {
+#seaedwiqrh .gt_center {
   text-align: center;
 }
 
-#lfxqquycef .gt_right {
+#seaedwiqrh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lfxqquycef .gt_font_normal {
+#seaedwiqrh .gt_font_normal {
   font-weight: normal;
 }
 
-#lfxqquycef .gt_font_bold {
+#seaedwiqrh .gt_font_bold {
   font-weight: bold;
 }
 
-#lfxqquycef .gt_font_italic {
+#seaedwiqrh .gt_font_italic {
   font-style: italic;
 }
 
-#lfxqquycef .gt_super {
+#seaedwiqrh .gt_super {
   font-size: 65%;
 }
 
-#lfxqquycef .gt_footnote_marks {
+#seaedwiqrh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lfxqquycef .gt_asterisk {
+#seaedwiqrh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lfxqquycef .gt_indent_1 {
+#seaedwiqrh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lfxqquycef .gt_indent_2 {
+#seaedwiqrh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lfxqquycef .gt_indent_3 {
+#seaedwiqrh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lfxqquycef .gt_indent_4 {
+#seaedwiqrh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lfxqquycef .gt_indent_5 {
+#seaedwiqrh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

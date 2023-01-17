@@ -193,33 +193,111 @@ you should include in your opt-out affidavit and private contract.</p>
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-17            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">11/15/2022            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Sheryl                </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Aaron                 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1427358282            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Clinical Social Worker</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">02/17/2022            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">02/17/2024            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1633 Q ST NW          </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">STE 230               </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">WASHINGTON            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">DC                    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">200096351             </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">F                     </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D3</span> <span style="color: #3A3A3A;">2023-01-17     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-17     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-1</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">11/15/2022     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">11/15/2022     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">11/15/202</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">Laura          </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Ruchi          </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Sireesha </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">Brenner        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Nadella        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Jathaveda</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">1235359019     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1356579841     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">150802392</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">Psychiatry     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Psychiatry     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Psychiatr</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">05/01/2006     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">03/30/2016     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">01/22/201</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">05/01/2024     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">03/30/2024     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">01/22/202</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">135 COUNTY ROAD</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">135 COUNTY ROAD</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">145 COUNT</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">SUITE 2C       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">SUITE 2C       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">CRESSKILL      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">CRESSKILL      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">CRESSKILL</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">NJ             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">NJ             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">NJ       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">07626          </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">07626          </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">07626    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l3</span> <span style="color: #3A3A3A;">T              </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">T              </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">T        </span> ...</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D6</span> <span style="color: #3A3A3A;">2023-01-17           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-17        </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">11/15/2022           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">11/15/2022        </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">David                </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">David             </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">Smith                </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Smith             </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">1649265760           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1750565958        </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">Maxillofacial Surgery</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Oral Surgery      </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">06/25/2012           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">05/07/2013        </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">06/25/2024           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">05/07/2023        </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">909 W FOXWOOD DR     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1116 N CHINOWTH ST</span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">                     </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">                  </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">RAYMORE              </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">VISALIA           </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">MO                   </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">CA                </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c6</span> <span style="color: #3A3A3A;">640837200            </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">932917896         </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l6</span> <span style="color: #3A3A3A;">T                    </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">T                 </span><span style="color: #DADADA;">, </span> ...</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-17        </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">11/15/2022        </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David             </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Altchek           </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114974490        </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Orthopedic Surgery</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">07/01/2012        </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">07/01/2024        </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">535 EAST 70TH ST  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">NEW YORK          </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">NY                </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">100214823         </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">T                 </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>date_start <span class="op">=</span> <span class="st">"01/30/1998"</span>, date_end <span class="op">=</span> <span class="st">"01/30/2024"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>date_start <span class="op">=</span> <span class="st">"01/30/1998"</span>, date_end <span class="op">=</span> <span class="st">"01/30/2024"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-17  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">11/15/2022  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Jonathan    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Raines      </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1720444581  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Psychiatry  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">01/30/1998  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">01/30/2024  </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1629 MONK RD</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">P O BOX 470 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">GLADWYNE    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">PA          </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">190351349   </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">F           </span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>date                        <span style="color: #5FAF87;">D5</span> <span style="color: #3A3A3A;">2023-01-17        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-17        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">202</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">11/15/2022        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">11/15/2022        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">11/</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">Ned               </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Geemee            </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Gen</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">Cowan             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Chung             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Fra</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">1649484007        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1497783484        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">159</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">Psychiatry        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Infectious Disease</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Int</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">12/30/2012        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">04/20/2016        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">10/</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">12/30/2022        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">04/20/2024        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">10/</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">9201 W SUNSET BLVD</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">9201 W SUNSET BLVD</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">920</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">STE 712           </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;"># 107             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;"># 1</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">LOS ANGELES       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">LOS ANGELES       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">LOS</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">CA                </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">CA                </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">CA </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c5</span> <span style="color: #3A3A3A;">900693708         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">900693701         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">900</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l5</span> <span style="color: #3A3A3A;">T                 </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">T                 </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">T  </span> ...</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="jrwtshnssp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="tobjxhstrd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -227,7 +305,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jrwtshnssp .gt_table {
+#tobjxhstrd .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -252,7 +330,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_heading {
+#tobjxhstrd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -264,12 +342,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jrwtshnssp .gt_caption {
+#tobjxhstrd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jrwtshnssp .gt_title {
+#tobjxhstrd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -281,7 +359,7 @@ html {
   border-bottom-width: 0;
 }
 
-#jrwtshnssp .gt_subtitle {
+#tobjxhstrd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -293,13 +371,13 @@ html {
   border-top-width: 0;
 }
 
-#jrwtshnssp .gt_bottom_border {
+#tobjxhstrd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_col_headings {
+#tobjxhstrd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -314,7 +392,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jrwtshnssp .gt_col_heading {
+#tobjxhstrd .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -334,7 +412,7 @@ html {
   overflow-x: hidden;
 }
 
-#jrwtshnssp .gt_column_spanner_outer {
+#tobjxhstrd .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -346,15 +424,15 @@ html {
   padding-right: 4px;
 }
 
-#jrwtshnssp .gt_column_spanner_outer:first-child {
+#tobjxhstrd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jrwtshnssp .gt_column_spanner_outer:last-child {
+#tobjxhstrd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jrwtshnssp .gt_column_spanner {
+#tobjxhstrd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -366,7 +444,7 @@ html {
   width: 100%;
 }
 
-#jrwtshnssp .gt_group_heading {
+#tobjxhstrd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -392,7 +470,7 @@ html {
   text-align: left;
 }
 
-#jrwtshnssp .gt_empty_group_heading {
+#tobjxhstrd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -407,15 +485,15 @@ html {
   vertical-align: middle;
 }
 
-#jrwtshnssp .gt_from_md > :first-child {
+#tobjxhstrd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jrwtshnssp .gt_from_md > :last-child {
+#tobjxhstrd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jrwtshnssp .gt_row {
+#tobjxhstrd .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -434,7 +512,7 @@ html {
   overflow-x: hidden;
 }
 
-#jrwtshnssp .gt_stub {
+#tobjxhstrd .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -447,7 +525,7 @@ html {
   padding-right: 5px;
 }
 
-#jrwtshnssp .gt_stub_row_group {
+#tobjxhstrd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -461,11 +539,11 @@ html {
   vertical-align: top;
 }
 
-#jrwtshnssp .gt_row_group_first td {
+#tobjxhstrd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jrwtshnssp .gt_summary_row {
+#tobjxhstrd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -475,16 +553,16 @@ html {
   padding-right: 5px;
 }
 
-#jrwtshnssp .gt_first_summary_row {
+#tobjxhstrd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_first_summary_row.thick {
+#tobjxhstrd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jrwtshnssp .gt_last_summary_row {
+#tobjxhstrd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +572,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_grand_summary_row {
+#tobjxhstrd .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -504,7 +582,7 @@ html {
   padding-right: 5px;
 }
 
-#jrwtshnssp .gt_first_grand_summary_row {
+#tobjxhstrd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,11 +592,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_striped {
+#tobjxhstrd .gt_striped {
   background-color: #F4F4F4;
 }
 
-#jrwtshnssp .gt_table_body {
+#tobjxhstrd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -527,7 +605,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#jrwtshnssp .gt_footnotes {
+#tobjxhstrd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -541,7 +619,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jrwtshnssp .gt_footnote {
+#tobjxhstrd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -550,7 +628,7 @@ html {
   padding-right: 5px;
 }
 
-#jrwtshnssp .gt_sourcenotes {
+#tobjxhstrd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -564,7 +642,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jrwtshnssp .gt_sourcenote {
+#tobjxhstrd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -572,64 +650,64 @@ html {
   padding-right: 5px;
 }
 
-#jrwtshnssp .gt_left {
+#tobjxhstrd .gt_left {
   text-align: left;
 }
 
-#jrwtshnssp .gt_center {
+#tobjxhstrd .gt_center {
   text-align: center;
 }
 
-#jrwtshnssp .gt_right {
+#tobjxhstrd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jrwtshnssp .gt_font_normal {
+#tobjxhstrd .gt_font_normal {
   font-weight: normal;
 }
 
-#jrwtshnssp .gt_font_bold {
+#tobjxhstrd .gt_font_bold {
   font-weight: bold;
 }
 
-#jrwtshnssp .gt_font_italic {
+#tobjxhstrd .gt_font_italic {
   font-style: italic;
 }
 
-#jrwtshnssp .gt_super {
+#tobjxhstrd .gt_super {
   font-size: 65%;
 }
 
-#jrwtshnssp .gt_footnote_marks {
+#tobjxhstrd .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jrwtshnssp .gt_asterisk {
+#tobjxhstrd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jrwtshnssp .gt_indent_1 {
+#tobjxhstrd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jrwtshnssp .gt_indent_2 {
+#tobjxhstrd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jrwtshnssp .gt_indent_3 {
+#tobjxhstrd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jrwtshnssp .gt_indent_4 {
+#tobjxhstrd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jrwtshnssp .gt_indent_5 {
+#tobjxhstrd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

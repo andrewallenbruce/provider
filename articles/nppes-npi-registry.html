@@ -159,8 +159,22 @@ get up to a maximum of 1,200 records over six requests.</p>
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu">terse</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'terse'</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>datetime          <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2023-01-17 01:06:40</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>outcome           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">results            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>enumeration_type  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">NPI-1              </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>number            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114499340         </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>name              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">DOMINICK LOUDA     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">SAN DIEGO          </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA                 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>addresses         <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(country_code = c("US", "US"), cou</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>practiceLocations <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(country_code = "US", country_name</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomies        <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(code = "225100000X", taxonomy_gro</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>identifiers       <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>endpoints         <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>other_names       <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>epochs            <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(created_epoch = "1546027807000", </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>basic             <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(basic_first_name = "DOMINICK", ba</span> ...</span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was
 searched for (<code>search</code>), the <code>datetime</code> of the
