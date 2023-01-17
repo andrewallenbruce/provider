@@ -262,6 +262,32 @@ param_format <- function(param, arg) {if (is.null(arg)) {param <- NULL}
 #' @noRd
 param_space <- function(param) {gsub(" ", "%20", param)}
 
+#' param_brackets -----------------------------------------------------------
+#' Some API parameters have spaces, these must be converted to "%20".
+#' @param param parameter with a space
+#' @return parameter formatted with "%20" in lieu of a space
+#' @autoglobal
+#' @noRd
+param_brackets <- function(param,
+                           right = TRUE,
+                           left = TRUE,
+                           asterisk = TRUE) {
+  param <- gsub("[", "%5B", param, fixed = TRUE)
+  param <- gsub("*", "%2A", param, fixed = TRUE)
+  param <- gsub("]", "%5D", param, fixed = TRUE)
+  return(param)
+}
+
+#' sql_format ------------------------------------------------------------
+#' @param param API parameter
+#' @param arg API function arg
+#' @return formatted API filters
+#' @autoglobal
+#' @noRd
+sql_format <- function(param, arg) {
+  if (is.null(arg)) {param <- NULL} else {
+    paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}}
+
 #' is_empty_list -----------------------------------------------------------
 #' @param df data frame
 #' @param col quoted list-column in data frame

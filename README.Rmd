@@ -39,6 +39,9 @@ knitr::opts_chunk$set(
 nppes_func <- gluedown::md_code("nppes_npi()")
 nppes_link <- gluedown::md_link("NPPES National Provider Identifier (NPI) Registry" = "https://npiregistry.cms.hhs.gov/search")
 
+open_func <- gluedown::md_code("open_payments()")
+open_link <- gluedown::md_link("CMS Open Payments Program" = "https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202")
+
 mppe_func  <- gluedown::md_code("provider_enrollment()")
 mppe_link  <- gluedown::md_link("Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
 
@@ -86,6 +89,7 @@ tax_link   <- gluedown::md_link("Medicare Provider and Supplier Taxonomy Crosswa
 
 gluedown::md_table(data.frame(
   Function = c(nppes_func, 
+               open_func,
                mppe_func, 
                mme_func,
                order_func,
@@ -103,6 +107,7 @@ gluedown::md_table(data.frame(
                miss_func
                ), 
   API      = c(nppes_link, 
+               open_link,
                mppe_link,
                mme_link,
                order_link,
@@ -159,6 +164,15 @@ nppes <- tibble::tribble(
 )
 
 purrr::invoke_map_dfr(nppes$fn, nppes$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
+```
+
+
+<br>
+
+### CMS Open Payments Program API
+
+```{r}
+open_payments(covered_recipient_npi = "1043218118") |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -232,6 +246,8 @@ provider::revalidation_date(npi = 1710912209) |> terse::terse(config = list(ansi
 ```{r}
 provider::revalidation_reassign(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
+
+<br>
 
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
