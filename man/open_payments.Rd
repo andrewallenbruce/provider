@@ -2,13 +2,14 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Search CMS' Open Payments API}
+\title{Search CMS' Open Payments Program API}
 \source{
 Centers for Medicare & Medicaid Services
 }
 \usage{
 open_payments(
   covered_recipient_type = NULL,
+  covered_recipient_profile_id = NULL,
   covered_recipient_npi = NULL,
   covered_recipient_first_name = NULL,
   covered_recipient_middle_name = NULL,
@@ -16,6 +17,7 @@ open_payments(
   recipient_city = NULL,
   recipient_state = NULL,
   recipient_zip_code = NULL,
+  applicable_manufacturer_or_applicable_gpo_making_payment_id = NULL,
   year = 2021,
   clean_names = TRUE,
   lowercase = TRUE
@@ -24,19 +26,23 @@ open_payments(
 \arguments{
 \item{covered_recipient_type}{"Covered Recipient Physician"}
 
+\item{covered_recipient_profile_id}{Payment recipient's unique Open Payments ID}
+
 \item{covered_recipient_npi}{10-digit National Provider Identifier (NPI).}
 
-\item{covered_recipient_first_name}{First name}
+\item{covered_recipient_first_name}{Recipient's first name}
 
-\item{covered_recipient_middle_name}{Middle name}
+\item{covered_recipient_middle_name}{Recipient's middle name}
 
-\item{covered_recipient_last_name}{Last name}
+\item{covered_recipient_last_name}{Recipient's last name}
 
 \item{recipient_city}{City}
 
 \item{recipient_state}{State}
 
 \item{recipient_zip_code}{Zip code}
+
+\item{applicable_manufacturer_or_applicable_gpo_making_payment_id}{Paying entity's unique Open Payments ID}
 
 \item{year}{Reporting year, 2015-2021, default is 2021}
 
@@ -49,11 +55,32 @@ open_payments(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{\link[=open_payments]{open_payments()}} allows you to search CMS' NCCI Procedure
-to Procedure Edits (PTP) API.
+\code{\link[=open_payments]{open_payments()}} allows you to search CMS' Open Payments
+Program API.
 }
 \details{
-The Open Payments program is a national disclosure program that promotes a more transparent and accountable health care system. Open Payments houses a publicly accessible database of payments that reporting entities, including drug and medical device companies, make to covered recipients like physicians. Please note that CMS does not comment on what relationships may be beneficial or potential conflicts of interest. CMS publishes the data attested to by reporting entities. The data is open to individual interpretation.
+The Open Payments program is a national disclosure program that
+promotes a more transparent and accountable health care system. Open
+Payments houses a publicly accessible database of payments that reporting
+entities, including drug and medical device companies, make to covered
+recipients like physicians. Please note that CMS does not comment on
+what relationships may be beneficial or potential conflicts of interest.
+CMS publishes the data attested to by reporting entities. The data is
+open to individual interpretation.
+
+Open Payments is a national transparency program that collects and
+publishes information about financial relationships between drug and
+medical device companies (referred to as "reporting entities") and
+certain health care providers (referred to as "covered recipients").
+These relationships may involve payments to providers for things
+including but not limited to research, meals, travel, gifts or speaking
+fees.
+
+The purpose of the program is to provide the public with a more
+transparent health care system. All information available on the Open
+Payments database is open to personal interpretation and if there are
+questions about what the data means, patients and their advocates should
+speak directly to the health care provider for a better understanding.
 \subsection{Links}{
 \itemize{
 \item \href{https://www.cms.gov/OpenPayments}{What is the Open Payments Program?}
@@ -62,7 +89,7 @@ The Open Payments program is a national disclosure program that promotes a more 
 }
 }
 \note{
-Update Frequency: \strong{Quarterly}
+Update Frequency: \strong{Yearly}
 }
 \examples{
 \dontrun{

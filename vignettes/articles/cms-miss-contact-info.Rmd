@@ -3,8 +3,7 @@ title: "CMS Missing Digital Contact Information API"
 output: html_document
 ---
 
-
-```{r setup, include = FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
@@ -18,15 +17,36 @@ knitr::opts_chunk$set(
 )
 
 options(knitr.table.format = "html")
+library(htmltools)
+
+row <- function(...) {
+  div(
+    class = "custom_note",
+    ...
+  )
+}
 ```
 
-```{r}
+```{css, echo=FALSE}
+.custom_note {
+  border-left: solid 5px hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 95%);
+  padding: 5px;
+  margin-bottom: 10px
+}
+```
+
+<br>
+
+```{r setup}
 library(provider)
 ```
 
 <br>
 
-> *Information on Providers That are Missing Digital Contact Information in the NPPES System.*
+```{r echo=FALSE, warning=FALSE}
+row("Information on Providers That are Missing Digital Contact Information in the NPPES System")
+```
 
 <br>
 

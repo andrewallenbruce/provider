@@ -46,6 +46,8 @@ navbar:
       - text: API Overviews
       - text: CMS Missing Contact Info
         href: articles/cms-miss-contact-info.html
+      - text: CMS Open Payments
+        href: articles/cms-open-payments.html
       - text: Medicare Monthly Enrollment
         href: articles/mcr-month-enroll.html
       - text: Medicare Provider Enrollment

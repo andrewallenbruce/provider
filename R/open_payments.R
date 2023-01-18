@@ -1,25 +1,48 @@
-#' Search CMS' Open Payments API
+#' Search CMS' Open Payments Program API
 #'
-#' @description [open_payments()] allows you to search CMS' NCCI Procedure
-#'    to Procedure Edits (PTP) API.
+#' @description [open_payments()] allows you to search CMS' Open Payments
+#'    Program API.
 #'
-#' @details The Open Payments program is a national disclosure program that promotes a more transparent and accountable health care system. Open Payments houses a publicly accessible database of payments that reporting entities, including drug and medical device companies, make to covered recipients like physicians. Please note that CMS does not comment on what relationships may be beneficial or potential conflicts of interest. CMS publishes the data attested to by reporting entities. The data is open to individual interpretation.
+#' @details The Open Payments program is a national disclosure program that
+#'    promotes a more transparent and accountable health care system. Open
+#'    Payments houses a publicly accessible database of payments that reporting
+#'    entities, including drug and medical device companies, make to covered
+#'    recipients like physicians. Please note that CMS does not comment on
+#'    what relationships may be beneficial or potential conflicts of interest.
+#'    CMS publishes the data attested to by reporting entities. The data is
+#'    open to individual interpretation.
+#'
+#'    Open Payments is a national transparency program that collects and
+#'    publishes information about financial relationships between drug and
+#'    medical device companies (referred to as "reporting entities") and
+#'    certain health care providers (referred to as "covered recipients").
+#'    These relationships may involve payments to providers for things
+#'    including but not limited to research, meals, travel, gifts or speaking
+#'    fees.
+#'
+#'    The purpose of the program is to provide the public with a more
+#'    transparent health care system. All information available on the Open
+#'    Payments database is open to personal interpretation and if there are
+#'    questions about what the data means, patients and their advocates should
+#'    speak directly to the health care provider for a better understanding.
 #'
 #' ## Links
 #'  * [What is the Open Payments Program?](https://www.cms.gov/OpenPayments)
 #'  * [OpenPaymentsData.cms.gov](https://www.cms.gov/OpenPaymentsData.cms.gov)
 #'
 #' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Quarterly**
+#' @note Update Frequency: **Yearly**
 #'
 #' @param covered_recipient_type "Covered Recipient Physician"
+#' @param covered_recipient_profile_id Payment recipient's unique Open Payments ID
 #' @param covered_recipient_npi 10-digit National Provider Identifier (NPI).
-#' @param covered_recipient_first_name First name
-#' @param covered_recipient_middle_name Middle name
-#' @param covered_recipient_last_name Last name
+#' @param covered_recipient_first_name Recipient's first name
+#' @param covered_recipient_middle_name Recipient's middle name
+#' @param covered_recipient_last_name Recipient's last name
 #' @param recipient_city City
 #' @param recipient_state State
 #' @param recipient_zip_code Zip code
+#' @param applicable_manufacturer_or_applicable_gpo_making_payment_id Paying entity's unique Open Payments ID
 #' @param year Reporting year, 2015-2021, default is 2021
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
@@ -34,6 +57,7 @@
 #' @autoglobal
 #' @export
 open_payments <- function(covered_recipient_type = NULL,
+                          covered_recipient_profile_id = NULL,
                           covered_recipient_npi = NULL,
                           covered_recipient_first_name = NULL,
                           covered_recipient_middle_name = NULL,
@@ -41,6 +65,7 @@ open_payments <- function(covered_recipient_type = NULL,
                           recipient_city = NULL,
                           recipient_state = NULL,
                           recipient_zip_code = NULL,
+                          applicable_manufacturer_or_applicable_gpo_making_payment_id = NULL,
                           year = 2021,
                           clean_names = TRUE,
                           lowercase   = TRUE) {
@@ -48,13 +73,15 @@ open_payments <- function(covered_recipient_type = NULL,
   args <- tibble::tribble(
     ~x,                              ~y,
     "covered_recipient_type",        covered_recipient_type,
+    "covered_recipient_profile_id",  covered_recipient_profile_id,
     "covered_recipient_npi",         covered_recipient_npi,
     "covered_recipient_first_name",  covered_recipient_first_name,
     "covered_recipient_middle_name", covered_recipient_middle_name,
     "covered_recipient_last_name",   covered_recipient_last_name,
     "recipient_city",                recipient_city,
     "recipient_state",               recipient_state,
-    "recipient_zip_code",            recipient_zip_code)
+    "recipient_zip_code",            recipient_zip_code,
+    "applicable_manufacturer_or_applicable_gpo_making_payment_id", applicable_manufacturer_or_applicable_gpo_making_payment_id)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
@@ -79,7 +106,7 @@ open_payments <- function(covered_recipient_type = NULL,
   resp <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
+  if (as.numeric(httr2::resp_header(resp, "content-length")) == 0) {
 
     results <- tibble::tibble(record_number = NA,
                               change_type = NA,
@@ -171,7 +198,7 @@ open_payments <- function(covered_recipient_type = NULL,
                               name_of_drug_or_biological_or_device_or_medical_supply_5 = NA,
                               associated_drug_or_biological_ndc_5 = NA,
                               associated_device_or_medical_supply_pdi_5 = NA,
-                              program_year = NA,
+                              program_year = year,
                               payment_publication_date = NA)
     return(results)
 

@@ -76,8 +76,8 @@ be linked together via a healthcare provider’s National Provider
 Identifier (NPI). Thus far, none of the APIs require the creation of a
 user account or API key. The data tend to fall into (and sometimes
 between) one of two categories: informational/operational and
-analytical. Nothing too shocking there. It only gets interesting when
-you start to link them together.
+analytical. It only gets interesting when you start to link them
+together.
 
 ### NPPES National Provider Identifier Registry API
 
@@ -93,7 +93,7 @@ nppes <- tibble::tribble(
 purrr::invoke_map_dfr(nppes$fn, nppes$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> $datetime            p12 2023-01-16 19:58:05     , 2023-01-16 19:58:05, 2023-01-16 19:58:05     ...
+    #> $datetime            p12 2023-01-18 17:38:23     , 2023-01-18 17:38:24, 2023-01-18 17:38:24     ...
     #> $outcome             c12 results                 , Errors             , results                 ...
     #> $enumeration_type    c12 NPI-2                   , NA                 , NPI-2                   ...
     #> $number              c12 1336413418              , NA                 , 1427115567              ...
@@ -299,7 +299,7 @@ provider::order_refer(npi = 1083879860) |> terse::terse(config = list(ansi = FAL
 provider::opt_out(last = "Aaron") |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> $date                        D1 2023-01-17            
+    #> $date                        D1 2023-01-18            
     #> $last_updated                c1 11/15/2022            
     #> $first_name                  c1 Sheryl                
     #> $last_name                   c1 Aaron                 
@@ -336,7 +336,7 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |>
 provider::revalidation_date(npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> $month                           D1 2023-01-17     
+    #> $month                           D1 2023-01-18     
     #> $enrollment_id                   c1 I20040602001711
     #> $national_provider_identifier    c1 1710912209     
     #> $first_name                      c1 Yelena         
@@ -359,7 +359,7 @@ provider::revalidation_date(npi = 1710912209) |> terse::terse(config = list(ansi
 provider::revalidation_reassign(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> $month                                        D5 2023-01-17                , 2023-01-17         ...
+    #> $month                                        D5 2023-01-18                , 2023-01-18         ...
     #> $group_pac_id                                 d5 3678655222                , 9931511052         ...
     #> $group_enrollment_id                          c5 O20080205000002           , O20201215000955    ...
     #> $group_legal_business_name                    c5 #1 Wise Podiatry Care P.C., Brighton Beach Pod ...
@@ -385,7 +385,7 @@ provider::revalidation_reassign(ind_npi = 1710912209) |> terse::terse(config = l
 provider::revalidation_group(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> $month                                        D5 2023-01-17                , 2023-01-17         ...
+    #> $month                                        D5 2023-01-18                , 2023-01-18         ...
     #> $group_pac_id                                 d5 3678655222                , 9931511052         ...
     #> $group_enrollment_id                          c5 O20080205000002           , O20201215000955    ...
     #> $group_legal_business_name                    c5 #1 Wise Podiatry Care P.C., Brighton Beach Pod ...

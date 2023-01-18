@@ -3,7 +3,7 @@ title: "NPPES NPI Registry API"
 output: html_document
 ---
 
-```{r setup, include = FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
@@ -15,15 +15,38 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+
+options(knitr.table.format = "html")
+library(htmltools)
+
+row <- function(...) {
+  div(
+    class = "custom_note",
+    ...
+  )
+}
 ```
 
-```{r}
+```{css, echo=FALSE}
+.custom_note {
+  border-left: solid 5px hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 95%);
+  padding: 5px;
+  margin-bottom: 10px
+}
+```
+
+<br>
+
+```{r setup}
 library(provider)
 ```
 
 <br>
 
-> *insert quick summary*
+```{r echo=FALSE, warning=FALSE}
+row("Find Health Care Providers by Name, Location, NPI number, or Specialty")
+```
 
 <br>
 
@@ -36,7 +59,12 @@ The NPPES *Application Programming Interface* (API) is a faster alternative to t
 ## Examples
 
 ```{r}
-nppes_npi(1114499340) |> terse::terse()
+x <- nppes_npi(npi = 1114499340)
+```
+
+```{r}
+tibble::tibble(basic = x$basic[[1]], 
+               addresses = x$addresses[[1]])
 ```
 
 
@@ -66,7 +94,7 @@ The **list-columns** returned are as follows:
 <br>
 
  * `basic`: Basic information
- * `other_names`: Other names used by the provider
+ * `other_names`: Other names used by type 2 (organization) providers only
  * `addresses`: Primary location and mailing addresses
  * `taxonomies`: Specialty classification and related information
  * `identifiers`: Various other identifiers such as payer-specific IDs, CLIA numbers, etc.
@@ -79,6 +107,81 @@ The **list-columns** returned are as follows:
 
 <br>
 
+## Examples
+
+```{r}
+nppes_npi(npi = 1528060837)
+```
+
+
+```{r}
+### City, state, country
+nppes_npi(city = "Atlanta",
+          state = "GA",
+          country = "US")
+```
+
+
+```{r}
+### First name, city, state
+nppes_npi(first = "John",
+          city = "Baltimore",
+          state = "MD")
+```
+
+
+```{r}
+nppes_npi(npi = 1336413418) # NPI-2
+nppes_npi(npi = 1710975040) # NPI-1
+nppes_npi(npi = 1659781227) # Deactivated
+```
+
+
+```{r}
+### List of NPIs
+npi_list <- c(1003026055,
+              1710983663,
+              1316405939,
+              1720392988,
+              1518184605,
+              1922056829,
+              1083879860)
+
+npi_list |>
+purrr::map_dfr(nppes_npi) |>
+dplyr::group_split(outcome)
+```
+
+
+```{r}
+### Data frame of NPIs
+npi_df <- data.frame(npi = c(1710983663,
+                             1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860))
+npi_df |>
+tibble::deframe() |>
+purrr::map_dfr(nppes_npi)
+```
+
+
+```{r}
+###Tribble example
+tribble <- tibble::tribble(
+~fn,         ~params,
+"nppes_npi", list(1336413418),
+"nppes_npi", list(1710975040),
+"nppes_npi", list(1659781227),
+"nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
+"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
+
+purrr::invoke_map_dfr(tribble$fn, tribble$params)
+```
+
+<br><br>
 
 # API Documentation Overview
 
@@ -100,7 +203,7 @@ Two categories of health care providers exist for NPI enumeration purposes: Enti
 
 #### NPI-1: Individual
 
-Individual health care providers (including sole proprietors) may get an NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI using your own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.
+Individual health care providers (including sole proprietors) may get an NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI using their own SSN, not an Employer Identification Number (EIN) even if they have an EIN. As a sole proprietor, they may get only one NPI, just like any other individual.
 
 The following factors **do not** affect whether a sole proprietor is an Entity Type 1:
 
@@ -122,6 +225,7 @@ Organizational health care providers are group health care providers eligible fo
 Some organization health care providers are made up of parts that work somewhat independently from their parent organization. These parts may offer different types of health care or offer health care in separate physical locations. These parts and their physical locations aren't themselves legal entities but are part of the organization health care provider (which is a legal entity). The NPI Final Rule refers to the parts and locations as subparts.
 
 An organization health care provider can get its subparts their own NPIs. If a subpart conducts any HIPAA standard transactions on its own (separately from its parent), it must get its own NPI. Subpart determination makes sure that entities within a covered organization are uniquely identified in HIPAA standard transactions they conduct with Medicare and other covered entities. For example, a hospital offers acute care, laboratory, pharmacy, and rehabilitation services. Each of these subparts may need its own NPI because each sends its own standard transactions to one or more health plans.
+
 
 > Subpart delegation doesn't affect Entity Type 1 health care providers. As individuals, these health care providers can't choose subparts and are not subparts.
 

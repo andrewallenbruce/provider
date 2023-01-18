@@ -149,7 +149,7 @@ library(provider)
 
 ## Motivation
 
-This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. Nothing too shocking there. It only gets interesting when you start to link them together.
+This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. It only gets interesting when you start to link them together.
 
 ### NPPES National Provider Identifier Registry API
 
