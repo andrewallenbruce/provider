@@ -58,6 +58,7 @@
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
     <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
     <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/cms-open-payments.html">CMS Open Payments</a>
     <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
     <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
     <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
@@ -128,12 +129,19 @@
 
     
     
+<style type="text/css">
+.custom_note {
+  border-left: solid 5px hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 95%);
+  padding: 5px;
+  margin-bottom: 10px
+}
+</style>
+<p><br></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<blockquote>
-<p><em>insert quick summary</em></p>
-</blockquote>
+<div class="custom_note">Find Health Care Providers by Name, Location, NPI number, or Specialty</div>
 <p><br></p>
 <p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
 Public Search</a> is a free directory of all active <strong>National
@@ -159,22 +167,22 @@ get up to a maximum of 1,200 records over six requests.</p>
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1114499340</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>datetime          <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2023-01-17 01:12:50</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>outcome           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">results            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>enumeration_type  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">NPI-1              </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>number            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114499340         </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>name              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">DOMINICK LOUDA     </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">SAN DIEGO          </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA                 </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>addresses         <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(country_code = c("US", "US"), cou</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>practiceLocations <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(country_code = "US", country_name</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomies        <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(code = "225100000X", taxonomy_gro</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>identifiers       <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>endpoints         <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>other_names       <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(list())</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>epochs            <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(created_epoch = "1546027807000", </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>basic             <span style="color: #5FAF87;">L1</span> <span style="color: #DADADA;">list(structure(list(basic_first_name = "DOMINICK", ba</span> ...</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span>basic <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">basic</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>               addresses <span class="op">=</span> <span class="va">x</span><span class="op">$</span><span class="va">addresses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;   basic$basic_…¹ $basi…² $basi…³ $basi…⁴ $basi…⁵ $basi…⁶ $basi…⁷ $basi…⁸ addre…⁹</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> DOMINICK       LOUDA   DPT     NO      M       2018-1… 2020-0… 2020-0… US     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> DOMINICK       LOUDA   DPT     NO      M       2018-1… 2020-0… 2020-0… US     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 10 more variables: basic$basic_status &lt;chr&gt;, $basic_name_prefix &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addresses$country_name &lt;chr&gt;, $address_purpose &lt;chr&gt;, $address_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   $address_1 &lt;chr&gt;, $city &lt;chr&gt;, $state &lt;chr&gt;, $postal_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   $telephone_number &lt;chr&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​basic$basic_first_name, ²​$basic_last_name, ³​$basic_credential,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​$basic_sole_proprietor, ⁵​$basic_gender, ⁶​$basic_enumeration_date,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁷​$basic_last_updated, ⁸​$basic_certification_date, ⁹​addresses$country_code</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was
 searched for (<code>search</code>), the <code>datetime</code> of the
@@ -211,7 +219,8 @@ respectively.</p>
 <li>
 <code>basic</code>: Basic information</li>
 <li>
-<code>other_names</code>: Other names used by the provider</li>
+<code>other_names</code>: Other names used by type 2 (organization)
+providers only</li>
 <li>
 <code>addresses</code>: Primary location and mailing addresses</li>
 <li>
@@ -234,6 +243,199 @@ subpart delegation, and, quite simply, the information provided to the
 NPPES by providers.</p>
 </blockquote>
 <p><br></p>
+</div>
+<div class="section level3">
+<h3 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
+</h3>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:06</span> results NPI-1     15280… JOHN… ROCK… MD    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​practiceLocations</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### City, state, country</span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span>
+<span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span>
+<span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 16</span></span></span>
+<span><span class="co">#&gt;    datetime            outcome enumer…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    17302… <span style="color: #BB0000;">NA</span>    EAST… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    16695… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    10434… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    13666… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    16394… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    10637… <span style="color: #BB0000;">NA</span>    DECA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    14071… <span style="color: #BB0000;">NA</span>    MARI… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    16798… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    19023… <span style="color: #BB0000;">NA</span>    ATLA… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-01-18 <span style="color: #949494;">22:44:07</span> results NPI-1    10033… <span style="color: #BB0000;">NA</span>    LOCU… GA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 190 more rows, 7 more variables: taxonomies &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   identifiers &lt;list&gt;, endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official &lt;list&gt;, basic &lt;list&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​enumeration_type, ²​addresses, ³​practiceLocations</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### First name, city, state</span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span>
+<span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span>
+<span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 15</span></span></span>
+<span><span class="co">#&gt;    datetime            outcome enumer…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    10331… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    13467… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    19424… JACK… CHAR… VA    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    10939… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    18616… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    15088… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    16997… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    12554… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    15387… JACK… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-01-18 <span style="color: #949494;">22:44:08</span> results NPI-1    13866… JACK… MIDD… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 190 more rows, 6 more variables: taxonomies &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   identifiers &lt;list&gt;, endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   basic &lt;list&gt;, and abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​practiceLocations</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:09</span> results NPI-2     13364… LUMI… TIFT… GA    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official &lt;list&gt;, basic &lt;list&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​enumeration_type, ²​addresses, ³​practiceLocations</span></span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:09</span> results NPI-1     17109… JOHN… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​practiceLocations</span></span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome errors          </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:09</span> Errors  <span style="color: #949494;">&lt;tibble [1 × 3]&gt;</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### List of NPIs</span></span>
+<span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span>
+<span>              <span class="fl">1710983663</span>,</span>
+<span>              <span class="fl">1316405939</span>,</span>
+<span>              <span class="fl">1720392988</span>,</span>
+<span>              <span class="fl">1518184605</span>,</span>
+<span>              <span class="fl">1922056829</span>,</span>
+<span>              <span class="fl">1083879860</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">npi_list</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
+<span><span class="co">#&gt; &lt;list_of&lt;</span></span>
+<span><span class="co">#&gt;   tbl_df&lt;</span></span>
+<span><span class="co">#&gt;     datetime         : datetime&lt;local&gt;</span></span>
+<span><span class="co">#&gt;     outcome          : character</span></span>
+<span><span class="co">#&gt;     enumeration_type : character</span></span>
+<span><span class="co">#&gt;     number           : character</span></span>
+<span><span class="co">#&gt;     name             : character</span></span>
+<span><span class="co">#&gt;     city             : character</span></span>
+<span><span class="co">#&gt;     state            : character</span></span>
+<span><span class="co">#&gt;     addresses        : list</span></span>
+<span><span class="co">#&gt;     practiceLocations: list</span></span>
+<span><span class="co">#&gt;     taxonomies       : list</span></span>
+<span><span class="co">#&gt;     identifiers      : list</span></span>
+<span><span class="co">#&gt;     endpoints        : list</span></span>
+<span><span class="co">#&gt;     other_names      : list</span></span>
+<span><span class="co">#&gt;     epochs           : list</span></span>
+<span><span class="co">#&gt;     basic            : list</span></span>
+<span><span class="co">#&gt;     errors           : list</span></span>
+<span><span class="co">#&gt;   &gt;</span></span>
+<span><span class="co">#&gt; &gt;[2]&gt;</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> Errors  <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span>  <span style="color: #949494;">&lt;NULL&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   errors &lt;list&gt;, and abbreviated variable names ¹​enumeration_type,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​addresses, ³​practiceLocations</span></span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 16</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     10030… RADH… COCO… FL    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     13164… JAEN… SCOT… AZ    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     17203… MUST… CHAR… OH    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     15181… DANI… BOST… MA    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     19220… CYNT… DETR… MI    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-01-18 <span style="color: #949494;">22:44:10</span> results NPI-1     10838… CHRI… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   errors &lt;list&gt;, and abbreviated variable names ¹​enumeration_type,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​addresses, ³​practiceLocations</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">### Data frame of NPIs</span></span>
+<span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1710983663</span>,</span>
+<span>                             <span class="fl">1003026055</span>,</span>
+<span>                             <span class="fl">1316405939</span>,</span>
+<span>                             <span class="fl">1720392988</span>,</span>
+<span>                             <span class="fl">1518184605</span>,</span>
+<span>                             <span class="fl">1922056829</span>,</span>
+<span>                             <span class="fl">1083879860</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">npi_df</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 16</span></span></span>
+<span><span class="co">#&gt;   datetime            outcome errors   enumer…¹ number name  city  state addre…²</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-01-18 <span style="color: #949494;">22:44:11</span> Errors  &lt;tibble&gt; <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-01-18 <span style="color: #949494;">22:44:11</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    10030… RADH… COCO… FL    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-01-18 <span style="color: #949494;">22:44:11</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    13164… JAEN… SCOT… AZ    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-01-18 <span style="color: #949494;">22:44:11</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    17203… MUST… CHAR… OH    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-01-18 <span style="color: #949494;">22:44:12</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    15181… DANI… BOST… MA    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-01-18 <span style="color: #949494;">22:44:12</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    19220… CYNT… DETR… MI    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2023-01-18 <span style="color: #949494;">22:44:12</span> results <span style="color: #949494;">&lt;NULL&gt;</span>   NPI-1    10838… CHRI… OLNEY MD    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: practiceLocations &lt;list&gt;, taxonomies &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   identifiers &lt;list&gt;, endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   basic &lt;list&gt;, and abbreviated variable names ¹​enumeration_type, ²​addresses</span></span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">###Tribble example</span></span>
+<span><span class="va">tribble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
+<span><span class="op">~</span><span class="va">fn</span>,         <span class="op">~</span><span class="va">params</span>,</span>
+<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1336413418</span><span class="op">)</span>,</span>
+<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1710975040</span><span class="op">)</span>,</span>
+<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1659781227</span><span class="op">)</span>,</span>
+<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span>,</span>
+<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 403 × 17</span></span></span>
+<span><span class="co">#&gt;    datetime            outcome enumer…¹ number name  city  state addre…² pract…³</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-01-18 <span style="color: #949494;">22:44:12</span> results NPI-2    13364… LUMI… TIFT… GA    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    17109… JOHN… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> Errors  <span style="color: #BB0000;">NA</span>       <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span>  <span style="color: #949494;">&lt;NULL&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    14275… JOHN… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    16891… JONA… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    11745… JOHN… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    11840… JONA… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    16493… JOHN… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    17009… JOHN… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-01-18 <span style="color: #949494;">22:44:13</span> results NPI-1    10837… JOHN… BALT… MD    &lt;df&gt;    &lt;df&gt;   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 393 more rows, 8 more variables: taxonomies &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   identifiers &lt;list&gt;, endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official &lt;list&gt;, basic &lt;list&gt;, errors &lt;list&gt;, and abbreviated</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​enumeration_type, ²​addresses, ³​practiceLocations</span></span></span></code></pre></div>
+<p><br><br></p>
 </div>
 <div class="section level2">
 <h2 id="api-documentation-overview">API Documentation Overview<a class="anchor" aria-label="anchor" href="#api-documentation-overview"></a>
@@ -258,7 +460,7 @@ enumeration purposes: Entity <em>Type 1</em> (Individual) and Entity
 </h5>
 <p>Individual health care providers (including sole proprietors) may get
 an NPI as <strong>Entity Type 1</strong>. As a sole proprietor, they
-must apply for the NPI using your own SSN, not an Employer
+must apply for the NPI using their own SSN, not an Employer
 Identification Number (EIN) even if they have an EIN. As a sole
 proprietor, they may get only one NPI, just like any other
 individual.</p>

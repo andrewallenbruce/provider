@@ -3,6 +3,7 @@ pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   cms-miss-contact-info: cms-miss-contact-info.html
+  cms-open-payments: cms-open-payments.html
   geocoding: geocoding.html
   mcr-chron-cond: mcr-chron-cond.html
   mcr-ffs-prov-enroll: mcr-ffs-prov-enroll.html
@@ -14,7 +15,7 @@ articles:
   mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
   nppes-npi-registry: nppes-npi-registry.html
   provider: provider.html
-last_built: 2023-01-17T01:10Z
+last_built: 2023-01-18T22:42Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles

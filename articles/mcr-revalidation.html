@@ -58,6 +58,7 @@
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
     <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
     <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
+    <a class="dropdown-item" href="../articles/cms-open-payments.html">CMS Open Payments</a>
     <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
     <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
     <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
@@ -160,7 +161,7 @@ Revalidation Due Date - Data Dictionary</a></li>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>, </span>
 <span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-17       </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-18       </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>enrollment_id                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">I20031110000070  </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>national_provider_identifier    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1184699621       </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                      <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Eric             </span></span></span>
@@ -178,7 +179,7 @@ Revalidation Due Date - Data Dictionary</a></li>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>, </span>
 <span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D2</span> <span style="color: #3A3A3A;">2023-01-17       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-17      </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D2</span> <span style="color: #3A3A3A;">2023-01-18       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-18      </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>enrollment_id                   <span style="color: #5FAF87;">c2</span> <span style="color: #3A3A3A;">I20031110000070  </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">I20090128000461 </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>national_provider_identifier    <span style="color: #5FAF87;">c2</span> <span style="color: #3A3A3A;">1184699621       </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1598792285      </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                      <span style="color: #5FAF87;">c2</span> <span style="color: #3A3A3A;">Eric             </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Eric            </span></span></span>
@@ -197,7 +198,7 @@ Revalidation Due Date - Data Dictionary</a></li>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, </span>
 <span>                  type_code <span class="op">=</span> <span class="st">"3"</span>, </span>
 <span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D1480</span> <span style="color: #3A3A3A;">2023-01-17      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-17      </span><span style="color: #DADADA;">, </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                           <span style="color: #5FAF87;">D1480</span> <span style="color: #3A3A3A;">2023-01-18      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-01-18      </span><span style="color: #DADADA;">, </span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>enrollment_id                   <span style="color: #5FAF87;">c1480</span> <span style="color: #3A3A3A;">I20031104000582 </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">I20031105000008 </span><span style="color: #DADADA;">, </span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>national_provider_identifier    <span style="color: #5FAF87;">c1480</span> <span style="color: #3A3A3A;">1184693400      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1356436786      </span><span style="color: #DADADA;">, </span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                      <span style="color: #5FAF87;">c1480</span> <span style="color: #3A3A3A;">John            </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Humberto        </span><span style="color: #DADADA;">, </span> ...</span></span>
@@ -216,7 +217,7 @@ Revalidation Due Date - Data Dictionary</a></li>
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="augcjugevm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mhkzjvqbnx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -224,7 +225,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#augcjugevm .gt_table {
+#mhkzjvqbnx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -249,7 +250,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#augcjugevm .gt_heading {
+#mhkzjvqbnx .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -261,12 +262,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#augcjugevm .gt_caption {
+#mhkzjvqbnx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#augcjugevm .gt_title {
+#mhkzjvqbnx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -278,7 +279,7 @@ html {
   border-bottom-width: 0;
 }
 
-#augcjugevm .gt_subtitle {
+#mhkzjvqbnx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -290,13 +291,13 @@ html {
   border-top-width: 0;
 }
 
-#augcjugevm .gt_bottom_border {
+#mhkzjvqbnx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#augcjugevm .gt_col_headings {
+#mhkzjvqbnx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -311,7 +312,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#augcjugevm .gt_col_heading {
+#mhkzjvqbnx .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -331,7 +332,7 @@ html {
   overflow-x: hidden;
 }
 
-#augcjugevm .gt_column_spanner_outer {
+#mhkzjvqbnx .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -343,15 +344,15 @@ html {
   padding-right: 4px;
 }
 
-#augcjugevm .gt_column_spanner_outer:first-child {
+#mhkzjvqbnx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#augcjugevm .gt_column_spanner_outer:last-child {
+#mhkzjvqbnx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#augcjugevm .gt_column_spanner {
+#mhkzjvqbnx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -363,7 +364,7 @@ html {
   width: 100%;
 }
 
-#augcjugevm .gt_group_heading {
+#mhkzjvqbnx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -389,7 +390,7 @@ html {
   text-align: left;
 }
 
-#augcjugevm .gt_empty_group_heading {
+#mhkzjvqbnx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -404,15 +405,15 @@ html {
   vertical-align: middle;
 }
 
-#augcjugevm .gt_from_md > :first-child {
+#mhkzjvqbnx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#augcjugevm .gt_from_md > :last-child {
+#mhkzjvqbnx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#augcjugevm .gt_row {
+#mhkzjvqbnx .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -431,7 +432,7 @@ html {
   overflow-x: hidden;
 }
 
-#augcjugevm .gt_stub {
+#mhkzjvqbnx .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -444,7 +445,7 @@ html {
   padding-right: 5px;
 }
 
-#augcjugevm .gt_stub_row_group {
+#mhkzjvqbnx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -458,11 +459,11 @@ html {
   vertical-align: top;
 }
 
-#augcjugevm .gt_row_group_first td {
+#mhkzjvqbnx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#augcjugevm .gt_summary_row {
+#mhkzjvqbnx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -472,16 +473,16 @@ html {
   padding-right: 5px;
 }
 
-#augcjugevm .gt_first_summary_row {
+#mhkzjvqbnx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#augcjugevm .gt_first_summary_row.thick {
+#mhkzjvqbnx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#augcjugevm .gt_last_summary_row {
+#mhkzjvqbnx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -491,7 +492,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#augcjugevm .gt_grand_summary_row {
+#mhkzjvqbnx .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -501,7 +502,7 @@ html {
   padding-right: 5px;
 }
 
-#augcjugevm .gt_first_grand_summary_row {
+#mhkzjvqbnx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -511,11 +512,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#augcjugevm .gt_striped {
+#mhkzjvqbnx .gt_striped {
   background-color: #F4F4F4;
 }
 
-#augcjugevm .gt_table_body {
+#mhkzjvqbnx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -524,7 +525,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#augcjugevm .gt_footnotes {
+#mhkzjvqbnx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -538,7 +539,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#augcjugevm .gt_footnote {
+#mhkzjvqbnx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -547,7 +548,7 @@ html {
   padding-right: 5px;
 }
 
-#augcjugevm .gt_sourcenotes {
+#mhkzjvqbnx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -561,7 +562,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#augcjugevm .gt_sourcenote {
+#mhkzjvqbnx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -569,64 +570,64 @@ html {
   padding-right: 5px;
 }
 
-#augcjugevm .gt_left {
+#mhkzjvqbnx .gt_left {
   text-align: left;
 }
 
-#augcjugevm .gt_center {
+#mhkzjvqbnx .gt_center {
   text-align: center;
 }
 
-#augcjugevm .gt_right {
+#mhkzjvqbnx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#augcjugevm .gt_font_normal {
+#mhkzjvqbnx .gt_font_normal {
   font-weight: normal;
 }
 
-#augcjugevm .gt_font_bold {
+#mhkzjvqbnx .gt_font_bold {
   font-weight: bold;
 }
 
-#augcjugevm .gt_font_italic {
+#mhkzjvqbnx .gt_font_italic {
   font-style: italic;
 }
 
-#augcjugevm .gt_super {
+#mhkzjvqbnx .gt_super {
   font-size: 65%;
 }
 
-#augcjugevm .gt_footnote_marks {
+#mhkzjvqbnx .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#augcjugevm .gt_asterisk {
+#mhkzjvqbnx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#augcjugevm .gt_indent_1 {
+#mhkzjvqbnx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#augcjugevm .gt_indent_2 {
+#mhkzjvqbnx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#augcjugevm .gt_indent_3 {
+#mhkzjvqbnx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#augcjugevm .gt_indent_4 {
+#mhkzjvqbnx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#augcjugevm .gt_indent_5 {
+#mhkzjvqbnx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -769,7 +770,7 @@ html {
 <span>                   ind_last <span class="op">=</span> <span class="st">"Wong"</span>,</span>
 <span>                   ind_state <span class="op">=</span> <span class="st">"CT"</span>,</span>
 <span>                   ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D3</span> <span style="color: #3A3A3A;">2023-01-17         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D3</span> <span style="color: #3A3A3A;">2023-01-18         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_pac_id                                 <span style="color: #5FAF87;">d3</span> <span style="color: #3A3A3A;">4688988371         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">31738</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_enrollment_id                          <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">O20150810001133    </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">O2019</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_legal_business_name                    <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">1271972 Llc        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Hartf</span> ...</span></span>
@@ -792,7 +793,7 @@ html {
 <span>                   group_bus_name <span class="op">=</span> <span class="st">"1st Call Urgent Care"</span>,</span>
 <span>                   group_state <span class="op">=</span> <span class="st">"FL"</span>,</span>
 <span>                   record_type <span class="op">=</span> <span class="st">"Reassignment"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-17          </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-01-18          </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_pac_id                                 <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">9436483807          </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_enrollment_id                          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">O20190619002165     </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_legal_business_name                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1st Call Urgent Care</span></span></span>
@@ -812,7 +813,7 @@ html {
 <div class="section level3">
 <h3 id="data-dictionary-1">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-1"></a>
 </h3>
-<div id="jgjztmhmrh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jbubynxqqg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -820,7 +821,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jgjztmhmrh .gt_table {
+#jbubynxqqg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -845,7 +846,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_heading {
+#jbubynxqqg .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -857,12 +858,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jgjztmhmrh .gt_caption {
+#jbubynxqqg .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jgjztmhmrh .gt_title {
+#jbubynxqqg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -874,7 +875,7 @@ html {
   border-bottom-width: 0;
 }
 
-#jgjztmhmrh .gt_subtitle {
+#jbubynxqqg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -886,13 +887,13 @@ html {
   border-top-width: 0;
 }
 
-#jgjztmhmrh .gt_bottom_border {
+#jbubynxqqg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_col_headings {
+#jbubynxqqg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -907,7 +908,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jgjztmhmrh .gt_col_heading {
+#jbubynxqqg .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -927,7 +928,7 @@ html {
   overflow-x: hidden;
 }
 
-#jgjztmhmrh .gt_column_spanner_outer {
+#jbubynxqqg .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -939,15 +940,15 @@ html {
   padding-right: 4px;
 }
 
-#jgjztmhmrh .gt_column_spanner_outer:first-child {
+#jbubynxqqg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jgjztmhmrh .gt_column_spanner_outer:last-child {
+#jbubynxqqg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jgjztmhmrh .gt_column_spanner {
+#jbubynxqqg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -959,7 +960,7 @@ html {
   width: 100%;
 }
 
-#jgjztmhmrh .gt_group_heading {
+#jbubynxqqg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -985,7 +986,7 @@ html {
   text-align: left;
 }
 
-#jgjztmhmrh .gt_empty_group_heading {
+#jbubynxqqg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1000,15 +1001,15 @@ html {
   vertical-align: middle;
 }
 
-#jgjztmhmrh .gt_from_md > :first-child {
+#jbubynxqqg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jgjztmhmrh .gt_from_md > :last-child {
+#jbubynxqqg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jgjztmhmrh .gt_row {
+#jbubynxqqg .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1027,7 +1028,7 @@ html {
   overflow-x: hidden;
 }
 
-#jgjztmhmrh .gt_stub {
+#jbubynxqqg .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1040,7 +1041,7 @@ html {
   padding-right: 5px;
 }
 
-#jgjztmhmrh .gt_stub_row_group {
+#jbubynxqqg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1054,11 +1055,11 @@ html {
   vertical-align: top;
 }
 
-#jgjztmhmrh .gt_row_group_first td {
+#jbubynxqqg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jgjztmhmrh .gt_summary_row {
+#jbubynxqqg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1068,16 +1069,16 @@ html {
   padding-right: 5px;
 }
 
-#jgjztmhmrh .gt_first_summary_row {
+#jbubynxqqg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_first_summary_row.thick {
+#jbubynxqqg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jgjztmhmrh .gt_last_summary_row {
+#jbubynxqqg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1087,7 +1088,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_grand_summary_row {
+#jbubynxqqg .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -1097,7 +1098,7 @@ html {
   padding-right: 5px;
 }
 
-#jgjztmhmrh .gt_first_grand_summary_row {
+#jbubynxqqg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1107,11 +1108,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_striped {
+#jbubynxqqg .gt_striped {
   background-color: #F4F4F4;
 }
 
-#jgjztmhmrh .gt_table_body {
+#jbubynxqqg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1120,7 +1121,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#jgjztmhmrh .gt_footnotes {
+#jbubynxqqg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1134,7 +1135,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jgjztmhmrh .gt_footnote {
+#jbubynxqqg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1143,7 +1144,7 @@ html {
   padding-right: 5px;
 }
 
-#jgjztmhmrh .gt_sourcenotes {
+#jbubynxqqg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1157,7 +1158,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#jgjztmhmrh .gt_sourcenote {
+#jbubynxqqg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1165,64 +1166,64 @@ html {
   padding-right: 5px;
 }
 
-#jgjztmhmrh .gt_left {
+#jbubynxqqg .gt_left {
   text-align: left;
 }
 
-#jgjztmhmrh .gt_center {
+#jbubynxqqg .gt_center {
   text-align: center;
 }
 
-#jgjztmhmrh .gt_right {
+#jbubynxqqg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jgjztmhmrh .gt_font_normal {
+#jbubynxqqg .gt_font_normal {
   font-weight: normal;
 }
 
-#jgjztmhmrh .gt_font_bold {
+#jbubynxqqg .gt_font_bold {
   font-weight: bold;
 }
 
-#jgjztmhmrh .gt_font_italic {
+#jbubynxqqg .gt_font_italic {
   font-style: italic;
 }
 
-#jgjztmhmrh .gt_super {
+#jbubynxqqg .gt_super {
   font-size: 65%;
 }
 
-#jgjztmhmrh .gt_footnote_marks {
+#jbubynxqqg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jgjztmhmrh .gt_asterisk {
+#jbubynxqqg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jgjztmhmrh .gt_indent_1 {
+#jbubynxqqg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jgjztmhmrh .gt_indent_2 {
+#jbubynxqqg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jgjztmhmrh .gt_indent_3 {
+#jbubynxqqg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jgjztmhmrh .gt_indent_4 {
+#jbubynxqqg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jgjztmhmrh .gt_indent_5 {
+#jbubynxqqg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1404,7 +1405,7 @@ yet.</p>
 <span>                    ind_last <span class="op">=</span> <span class="st">"Wong"</span>,</span>
 <span>                    ind_state <span class="op">=</span> <span class="st">"CT"</span>,</span>
 <span>                    ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D3</span> <span style="color: #3A3A3A;">2023-01-17         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>month                                        <span style="color: #5FAF87;">D3</span> <span style="color: #3A3A3A;">2023-01-18         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2023-</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_pac_id                                 <span style="color: #5FAF87;">d3</span> <span style="color: #3A3A3A;">4688988371         </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">31738</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_enrollment_id                          <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">O20150810001133    </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">O2019</span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>group_legal_business_name                    <span style="color: #5FAF87;">c3</span> <span style="color: #3A3A3A;">1271972 Llc        </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">Hartf</span> ...</span></span>
