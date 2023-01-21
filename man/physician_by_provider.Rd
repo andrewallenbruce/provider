@@ -126,7 +126,6 @@ physician_by_provider(type = "I",
                       cred = "M.D.",
                       specialty = "Anesthesiology")
 \dontrun{
-provider <- purrr::map_dfr(as.character(2013:2020),
-           ~physician_by_provider(npi = 1003000126, year = .x))
+purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
 }
 }

@@ -85,6 +85,13 @@ speak directly to the health care provider for a better understanding.
 \itemize{
 \item \href{https://www.cms.gov/OpenPayments}{What is the Open Payments Program?}
 \item \href{https://www.cms.gov/OpenPaymentsData.cms.gov}{OpenPaymentsData.cms.gov}
+\item \href{https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202}{2021 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/a08c4b30-5cf3-4948-ad40-36f404619019}{2020 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/4e54dd6c-30f8-4f86-86a7-3c109a89528e}{2019 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/f003634c-c103-568f-876c-73017fa83be0}{2018 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/74e3a32c-e8f8-595c-899c-35f9bffa828f}{2017 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/4c774e90-7f9e-5d19-b168-ff9be1e69034}{2016 General Payment Data}
+\item \href{https://openpaymentsdata.cms.gov/dataset/e657f6f0-7abb-5e82-8b42-23bff09f0763}{2015 General Payment Data}
 }
 }
 }

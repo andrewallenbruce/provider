@@ -180,13 +180,20 @@ op2_packed <- op2 |> dplyr::mutate(dplyr::across(tidyselect::where(is.character)
                      dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
                      dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                      dplyr::across(dplyr::contains("dollars"), ~as.numeric(.))) |> 
+   dplyr::relocate(record_id, program_year, .after = record_number) |> 
   tidyr::pack(teaching_hospital = dplyr::contains("teaching_hospital"),
-              covered_recipient_primary_type = dplyr::contains("covered_recipient_primary_type"),
-              covered_recipient_specialty = dplyr::contains("covered_recipient_specialty"),
-              covered_recipient_license_state_code = dplyr::contains("covered_recipient_license_state_code"),
+              #covered_recipient_primary_type = dplyr::contains("covered_recipient_primary_type"),
+              #covered_recipient_specialty = dplyr::contains("covered_recipient_specialty"),
+              #covered_recipient_license_state_code = dplyr::contains("covered_recipient_license_state_code"),
+              covered_recipient = dplyr::starts_with("covered_recipient_"),
+              recipient = dplyr::starts_with("recipient_"),
+              applicable_mfg_gpo = dplyr::contains("applicable_manufacturer_or_applicable_gpo"),
+              product_device = dplyr::ends_with(c("_1", "_2", "_3", "_4", "_5")),
+              travel = dplyr::ends_with("_travel"),
+              indicators = dplyr::ends_with("_indicator"),
               publication_delay_dispute = c(delay_in_publication_indicator, dispute_status_for_publication))
 
-op2_packed
+op2_packed |> tidyr::unpack(cols = covered_recipient)
 ```
 
 <br><br>

@@ -17,17 +17,16 @@ Depends:
     R (>= 2.10)
 Imports: 
     attempt,
-    curl,
-    datawizard,
     dplyr,
     httr2,
-    insight,
     janitor,
     lubridate,
     purrr,
     rlang,
+    strex,
     tibble,
-    tidyr
+    tidyr,
+    tidyselect
 Suggests: 
     covr,
     campfin,

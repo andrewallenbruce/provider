@@ -3,7 +3,7 @@ title: "Medicare Physician & Other Practitioners APIs"
 output: html_document
 ---
 
-```{r, include = FALSE}
+```{r include = FALSE}
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
@@ -15,11 +15,33 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+
+options(knitr.table.format = "html")
+library(htmltools)
+
+row <- function(...) {div(class = "custom_note", ...)}
+```
+
+```{css, echo=FALSE}
+.custom_note {
+  border-left: solid 5px hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 95%);
+  padding: 10px;
+  margin-bottom: 10px
+}
 ```
 
 <br>
 
-> Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.
+```{r setup}
+library(provider)
+```
+
+<br>
+
+```{r echo=FALSE, warning=FALSE}
+row("Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.")
+```
 
 <br>
 
@@ -126,6 +148,56 @@ The **Provider** data subset provides information on use, payments, submitted ch
 
   * Data update frequency: **Annually**
   * Data source: **Centers for Medicare & Medicaid Services**
+  
+  
+## Examples
+
+```{r}
+physician_by_provider(npi = 1003000126) |> terse::terse()
+```
+
+
+<br>
+
+```{r}
+physician_by_provider(npi = 1003000423, year = 2020) |> terse::terse()
+```
+
+<br>
+
+```{r}
+physician_by_provider(type = "I",
+                      city = "Hershey",
+                      state = "PA",
+                      fips = 42,
+                      ruca = 1,
+                      gender = "F",
+                      cred = "M.D.",
+                      specialty = "Anesthesiology") |> terse::terse()
+```
+
+
+```{r}
+#purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x)) |> terse::terse()
+```
+
+```{r}
+x20 <- physician_by_provider(npi = 1003000126, year = 2020)
+x19 <- physician_by_provider(npi = 1003000126, year = 2019)
+x18 <- physician_by_provider(npi = 1003000126, year = 2018)
+
+xx18 <- x18 |> dplyr::mutate(dplyr::across(dplyr::ends_with("cnt"), ~as.integer(.)),
+                     dplyr::across(dplyr::ends_with("pct"), ~as.double(.)),
+                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |> 
+  tidyr::nest(rndrng_prvdr = dplyr::contains("rndrng_prvdr"),
+              totals = dplyr::starts_with("tot_"),
+              drug = dplyr::starts_with("drug_"),
+              med = dplyr::starts_with("med_"),
+              bene = dplyr::starts_with("bene_"))
+xx18$rndrng_prvdr
+```
+
 
 ### Data Dictionary
 

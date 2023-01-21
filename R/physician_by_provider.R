@@ -77,8 +77,7 @@
 #'                       cred = "M.D.",
 #'                       specialty = "Anesthesiology")
 #' \dontrun{
-#' provider <- purrr::map_dfr(as.character(2013:2020),
-#'            ~physician_by_provider(npi = 1003000126, year = .x))
+#' purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
 #' }
 #' @autoglobal
 #' @export
@@ -101,15 +100,18 @@ physician_by_provider <- function(npi         = NULL,
                                   clean_names = TRUE,
                                   lowercase   = TRUE) {
 
+  # update distribution ids -------------------------------------------------
+  ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider")
+
   # dataset version ids by year ----------------------------------------------
-  id <- dplyr::case_when(year == 2020 ~ "8889d81e-2ee7-448f-8713-f071038289b5",
-                         year == 2019 ~ "a399e5c1-1cd1-4cbe-957f-d2cc8fe5d897",
-                         year == 2018 ~ "a5cfcc24-eaf7-472c-8831-7f396c77a890",
-                         year == 2017 ~ "bed1a455-2dad-4359-9cec-ec59cf251a14",
-                         year == 2016 ~ "9301285e-f2ff-4035-9b59-48eaa09a0572",
-                         year == 2015 ~ "acba6dc6-3e76-4176-9564-84ab5ea4c8aa",
-                         year == 2014 ~ "d3d74823-9909-4177-946d-cdaa268b90ab",
-                         year == 2013 ~ "bbec6d8a-3b0d-49bb-98be-3170639d3ab5")
+  id <- dplyr::case_when(year == 2020 ~ ids$distribution[2],
+                         year == 2019 ~ ids$distribution[3],
+                         year == 2018 ~ ids$distribution[4],
+                         year == 2017 ~ ids$distribution[5],
+                         year == 2016 ~ ids$distribution[6],
+                         year == 2015 ~ ids$distribution[7],
+                         year == 2014 ~ ids$distribution[8],
+                         year == 2013 ~ ids$distribution[9])
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

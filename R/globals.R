@@ -3,6 +3,13 @@
 utils::globalVariables(c(
   "Year", # <cc_multiple>
   "Year", # <cc_specific>
+  "title", # <cms_update_ids>
+  "modified", # <cms_update_ids>
+  "distribution", # <cms_update_ids>
+  "distribution_format", # <cms_update_ids>
+  "distribution_title", # <cms_update_ids>
+  "distribution_modified", # <cms_update_ids>
+  "distribution_accessURL", # <cms_update_ids>
   "data_lists", # <nppes_npi>
   "outcome", # <nppes_npi>
   "description", # <nppes_npi>
@@ -16,104 +23,14 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi>
   "basic_first_name", # <nppes_npi>
   "basic_last_name", # <nppes_npi>
-  "outcome", # <provider_nppes>
-  "data_lists", # <provider_nppes>
-  "description", # <provider_nppes>
-  "field", # <provider_nppes>
-  "number", # <provider_nppes>
-  "prov_type", # <provider_nppes>
-  "outcome", # <provider_unpack>
-  "data_lists", # <provider_unpack>
-  "datetime", # <provider_unpack>
-  "number", # <provider_unpack>
-  "enumeration_type", # <provider_unpack>
-  "created_epoch", # <provider_unpack>
-  "last_updated_epoch", # <provider_unpack>
-  "npi", # <provider_unpack>
-  "prov_type", # <provider_unpack>
-  "value", # <provider_unpack>
-  "address_purpose", # <provider_unpack>
-  "country_name", # <provider_unpack>
-  "address_type", # <provider_unpack>
-  "country_code", # <provider_unpack>
-  "state", # <provider_unpack>
-  "Tot_Benes", # <provider_mpop>
-  "Tot_Srvcs", # <provider_mpop>
-  "Tot_Bene_Day_Srvcs", # <provider_mpop>
-  "Avg_Sbmtd_Chrg", # <provider_mpop>
-  "Avg_Mdcr_Alowd_Amt", # <provider_mpop>
-  "Avg_Mdcr_Pymt_Amt", # <provider_mpop>
-  "Avg_Mdcr_Stdzd_Amt", # <provider_mpop>
-  "Tot_Rndrng_Prvdrs", # <provider_mpop>
-  "Tot_HCPCS_Cds", # <provider_mpop>
-  "Tot_Sbmtd_Chrg", # <provider_mpop>
-  "Tot_Mdcr_Alowd_Amt", # <provider_mpop>
-  "Tot_Mdcr_Pymt_Amt", # <provider_mpop>
-  "Tot_Mdcr_Stdzd_Amt", # <provider_mpop>
-  "Drug_Tot_HCPCS_Cds", # <provider_mpop>
-  "Drug_Tot_Benes", # <provider_mpop>
-  "Drug_Tot_Srvcs", # <provider_mpop>
-  "Drug_Sbmtd_Chrg", # <provider_mpop>
-  "Drug_Mdcr_Alowd_Amt", # <provider_mpop>
-  "Drug_Mdcr_Pymt_Amt", # <provider_mpop>
-  "Drug_Mdcr_Stdzd_Amt", # <provider_mpop>
-  "Med_Tot_HCPCS_Cds", # <provider_mpop>
-  "Med_Tot_Benes", # <provider_mpop>
-  "Med_Tot_Srvcs", # <provider_mpop>
-  "Med_Sbmtd_Chrg", # <provider_mpop>
-  "Med_Mdcr_Alowd_Amt", # <provider_mpop>
-  "Med_Mdcr_Pymt_Amt", # <provider_mpop>
-  "Med_Mdcr_Stdzd_Amt", # <provider_mpop>
-  "Bene_Avg_Age", # <provider_mpop>
-  "Bene_Age_LT_65_Cnt", # <provider_mpop>
-  "Bene_Age_65_74_Cnt", # <provider_mpop>
-  "Bene_Age_75_84_Cnt", # <provider_mpop>
-  "Bene_Age_GT_84_Cnt", # <provider_mpop>
-  "Bene_Feml_Cnt", # <provider_mpop>
-  "Bene_Male_Cnt", # <provider_mpop>
-  "Bene_Race_Wht_Cnt", # <provider_mpop>
-  "Bene_Race_Black_Cnt", # <provider_mpop>
-  "Bene_Race_API_Cnt", # <provider_mpop>
-  "Bene_Race_Hspnc_Cnt", # <provider_mpop>
-  "Bene_Race_NatInd_Cnt", # <provider_mpop>
-  "Bene_Race_Othr_Cnt", # <provider_mpop>
-  "Bene_Dual_Cnt", # <provider_mpop>
-  "Bene_Ndual_Cnt", # <provider_mpop>
-  "Bene_CC_AF_Pct", # <provider_mpop>
-  "Bene_CC_Alzhmr_Pct", # <provider_mpop>
-  "Bene_CC_Asthma_Pct", # <provider_mpop>
-  "Bene_CC_Cncr_Pct", # <provider_mpop>
-  "Bene_CC_CHF_Pct", # <provider_mpop>
-  "Bene_CC_CKD_Pct", # <provider_mpop>
-  "Bene_CC_COPD_Pct", # <provider_mpop>
-  "Bene_CC_Dprssn_Pct", # <provider_mpop>
-  "Bene_CC_Dbts_Pct", # <provider_mpop>
-  "Bene_CC_Hyplpdma_Pct", # <provider_mpop>
-  "Bene_CC_Hyprtnsn_Pct", # <provider_mpop>
-  "Bene_CC_IHD_Pct", # <provider_mpop>
-  "Bene_CC_Opo_Pct", # <provider_mpop>
-  "Bene_CC_RAOA_Pct", # <provider_mpop>
-  "Bene_CC_Sz_Pct", # <provider_mpop>
-  "Bene_CC_Strok_Pct", # <provider_mpop>
-  "Bene_Avg_Risk_Scre", # <provider_mpop>
-  "npi", # <provider_clia>
-  "last_org", # <provider_clia>
-  "first", # <provider_clia>
-  "cred", # <provider_clia>
-  "gender", # <provider_clia>
-  "type", # <provider_clia>
-  "state_abb", # <provider_clia>
-  "fips", # <provider_clia>
-  "zip", # <provider_clia>
-  "ruca", # <provider_clia>
-  "country", # <provider_clia>
-  "specialty", # <provider_clia>
-  "par_ind", # <provider_clia>
-  "hcpcs_code", # <provider_clia>
-  "drug_ind", # <provider_clia>
-  "pos", # <provider_clia>
-  "Year", # <provider_clia>
-  "lowercase", # <provider_clia>
+  "record_id", # <open_payments>
+  "program_year", # <open_payments>
+  "record_number", # <open_payments>
+  "title", # <open_payments_update_ids>
+  "modified", # <open_payments_update_ids>
+  "distribution", # <open_payments_update_ids>
+  "data", # <open_payments_update_ids>
+  "identifier", # <open_payments_update_ids>
   "NPI", # <opt_out>
   "Date", # <opt_out>
   "PARTB", # <order_refer>

@@ -29,6 +29,13 @@
 #' ## Links
 #'  * [What is the Open Payments Program?](https://www.cms.gov/OpenPayments)
 #'  * [OpenPaymentsData.cms.gov](https://www.cms.gov/OpenPaymentsData.cms.gov)
+#'  * [2021 General Payment Data](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)
+#'  * [2020 General Payment Data](https://openpaymentsdata.cms.gov/dataset/a08c4b30-5cf3-4948-ad40-36f404619019)
+#'  * [2019 General Payment Data](https://openpaymentsdata.cms.gov/dataset/4e54dd6c-30f8-4f86-86a7-3c109a89528e)
+#'  * [2018 General Payment Data](https://openpaymentsdata.cms.gov/dataset/f003634c-c103-568f-876c-73017fa83be0)
+#'  * [2017 General Payment Data](https://openpaymentsdata.cms.gov/dataset/74e3a32c-e8f8-595c-899c-35f9bffa828f)
+#'  * [2016 General Payment Data](https://openpaymentsdata.cms.gov/dataset/4c774e90-7f9e-5d19-b168-ff9be1e69034)
+#'  * [2015 General Payment Data](https://openpaymentsdata.cms.gov/dataset/e657f6f0-7abb-5e82-8b42-23bff09f0763)
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Yearly**
@@ -87,19 +94,25 @@ open_payments <- function(covered_recipient_type = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
+
+  # update distribution ids -------------------------------------------------
+  ids <- open_payments_update_ids()
+
   id <- dplyr::case_when(
-    year == 2021 ~ "[SELECT * FROM 7dfb0fb2-e573-5448-a968-67899434ce8b]",
-    year == 2020 ~ "[SELECT * FROM 93d9435c-cf1f-56fb-83f4-71824fbdf8ec]",
-    year == 2019 ~ "[SELECT * FROM 3ac03130-dafb-5a7b-89fb-2b2790c05f26]",
-    year == 2018 ~ "[SELECT * FROM 9dfd9047-64b2-5b52-8fe2-48f280859693]",
-    year == 2017 ~ "[SELECT * FROM eeca1e54-a309-5a62-8203-9b88de15f31f]",
-    year == 2016 ~ "[SELECT * FROM 47fcc5d3-e7f7-5b49-870e-44f002f8cdcf]",
-    year == 2015 ~ "[SELECT * FROM 3526a13d-5d1c-5de1-bdc7-d298703270cf]")
+    year == 2021 ~ ids$identifier[1],
+    year == 2020 ~ ids$identifier[2],
+    year == 2019 ~ ids$identifier[3],
+    year == 2018 ~ ids$identifier[4],
+    year == 2017 ~ ids$identifier[5],
+    year == 2016 ~ ids$identifier[6],
+    year == 2015 ~ ids$identifier[7])
+
+  id_fmt <- paste0("[SELECT * FROM ", id, "]")
 
   # build URL ---------------------------------------------------------------
   http   <- "https://openpaymentsdata.cms.gov/api/1/datastore/sql?query="
   post   <- "[LIMIT 10000 OFFSET 0]&show_db_columns"
-  url    <- paste0(http, id, params_args, post) |>
+  url    <- paste0(http, id_fmt, params_args, post) |>
     param_brackets() |> param_space()
 
   # send request ----------------------------------------------------------
@@ -206,7 +219,12 @@ open_payments <- function(covered_recipient_type = NULL,
 
     # parse response ---------------------------------------------------------
     results <- tibble::tibble(httr2::resp_body_json(resp,
-               check_type = FALSE, simplifyVector = TRUE))
+               check_type = FALSE, simplifyVector = TRUE)) |>
+      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("dollars"), ~as.numeric(.))) |>
+      dplyr::relocate(record_id, program_year, .after = record_number)
 
   }
 

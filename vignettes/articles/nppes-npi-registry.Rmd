@@ -63,8 +63,33 @@ x <- nppes_npi(npi = 1114499340)
 ```
 
 ```{r}
-tibble::tibble(basic = x$basic[[1]], 
-               addresses = x$addresses[[1]])
+x$addresses[[1]]
+```
+
+```{r}
+x$practiceLocations[[1]]
+```
+
+```{r}
+x$taxonomies[[1]]
+```
+
+```{r}
+x$endpoints[[1]]
+```
+
+```{r}
+x$other_names[[1]] # ONLY NPI-2
+```
+
+
+
+```{r}
+basic <- x$basic[[1]] |> tibble::tibble()
+addresses <- x$addresses[[1]] |> tibble::tibble()
+
+tibble::tibble(basic, 
+               addresses)
 ```
 
 
