@@ -129,12 +129,19 @@
 
     
     
+<style type="text/css">
+.custom_note {
+  border-left: solid 5px hsl(0, 100%, 30%);
+  background-color: hsl(0, 100%, 95%);
+  padding: 10px;
+  margin-bottom: 10px
+}
+</style>
 <p><br></p>
-<blockquote>
-<p>Information on services and procedures provided to Original Medicare
-(fee-for-service) Part B (Medical Insurance) beneficiaries by physicians
-and other healthcare professionals.</p>
-</blockquote>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<div class="custom_note">Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.</div>
 <p><br></p>
 <div class="section level3">
 <h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
@@ -373,11 +380,280 @@ Chronic Conditions Data Warehouse.</p>
 Services</strong>
 </li>
 </ul>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2020                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1003000126                               </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Enkeshafi                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Ardalan                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M.D.                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">I                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">6410 Rockledge Dr Ste 304                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Bethesda                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">MD                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">24                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">20817                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow with</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">US                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Internal Medicine                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Y                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">16                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">291                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">764                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">402812                                   </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">85319.63                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">69175.78                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">66401.61                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">16                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">291                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">764                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">402812                                   </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">85319.63                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">69175.78                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">66401.61                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">77                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">27                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">88                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">104                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">72                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">161                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">130                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">210                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">50                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">12                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">61                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">230                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.31                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.43                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.15                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.18                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.48                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.65                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.29                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.35                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.47                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.73                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.75                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.66                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.11                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.51                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.09                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.19                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2.5028                                   </span> ...</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2020                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1003000423                               </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Velotta                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Jennifer                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">A                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M.D.                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">F                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">I                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">11100 Euclid Ave                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Cleveland                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">OH                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">39                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">44106                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow with</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">US                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Obstetrics &amp; Gynecology                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Y                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">21                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">56                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">571                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">23680                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">9011.99                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">7224.35                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">7301.35                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">*                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">#                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">67                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">12                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">33                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">56                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">11                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">45                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.27                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.52                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.5                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.23                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.2                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.32                                     </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.7089                                   </span> ...</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"I"</span>,</span>
+<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>,</span>
+<span>                      state <span class="op">=</span> <span class="st">"PA"</span>,</span>
+<span>                      fips <span class="op">=</span> <span class="fl">42</span>,</span>
+<span>                      ruca <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                      gender <span class="op">=</span> <span class="st">"F"</span>,</span>
+<span>                      cred <span class="op">=</span> <span class="st">"M.D."</span>,</span>
+<span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">2020                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">1023230596                              </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Barbieri                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Carolyn                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">M.D.                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">F                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">I                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">500 University Dr                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">H088                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Hershey                                 </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">PA                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">42                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">17033                                   </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">1                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow wit</span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">US                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Anesthesiology                          </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Y                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">44                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">79                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">90                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">124654                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">17954.95                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14396.68                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14122.13                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">44                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">79                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">90                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">124654                                  </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">17954.95                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14396.68                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14122.13                                </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">70                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">40                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">17                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">42                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">37                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">14                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">65                                      </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.24                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.16                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.44                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.14                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.29                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.34                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.59                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">0.66                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.35                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.44                                    </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">1.4752                                  </span> ...</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co">#purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x)) |&gt; terse::terse()</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="va">x19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="va">x18</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">xx18</span> <span class="op">&lt;-</span> <span class="va">x18</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"cnt"</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"pct"</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html" class="external-link">na_if</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html" class="external-link">na_if</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"N/A"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>rndrng_prvdr <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"rndrng_prvdr"</span><span class="op">)</span>,</span>
+<span>              totals <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"tot_"</span><span class="op">)</span>,</span>
+<span>              drug <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"drug_"</span><span class="op">)</span>,</span>
+<span>              med <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"med_"</span><span class="op">)</span>,</span>
+<span>              bene <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bene_"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">xx18</span><span class="op">$</span><span class="va">rndrng_prvdr</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 17</span></span></span>
+<span><span class="co">#&gt;   rndrng_prvdr…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Enkeshafi      Ardalan <span style="color: #BB0000;">NA</span>      M.D.    M       I       900 Se… <span style="color: #BB0000;">NA</span>      Cumber…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 8 more variables: rndrng_prvdr_state_abrvtn &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_state_fips &lt;chr&gt;, rndrng_prvdr_zip5 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_ruca &lt;chr&gt;, rndrng_prvdr_ruca_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_cntry &lt;chr&gt;, rndrng_prvdr_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_mdcr_prtcptg_ind &lt;chr&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​rndrng_prvdr_last_org_name, ²​rndrng_prvdr_first_name, ³​rndrng_prvdr_mi,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​rndrng_prvdr_crdntls, ⁵​rndrng_prvdr_gndr, ⁶​rndrng_prvdr_ent_cd, …</span></span></span></code></pre></div>
 <div class="section level4">
 <h4 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h4>
 <p><br></p>
-<div id="aeffxpdnrl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mvwzckjtzu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -385,7 +661,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#aeffxpdnrl .gt_table {
+#mvwzckjtzu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -410,7 +686,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_heading {
+#mvwzckjtzu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -422,12 +698,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aeffxpdnrl .gt_caption {
+#mvwzckjtzu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aeffxpdnrl .gt_title {
+#mvwzckjtzu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -439,7 +715,7 @@ html {
   border-bottom-width: 0;
 }
 
-#aeffxpdnrl .gt_subtitle {
+#mvwzckjtzu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -451,13 +727,13 @@ html {
   border-top-width: 0;
 }
 
-#aeffxpdnrl .gt_bottom_border {
+#mvwzckjtzu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_col_headings {
+#mvwzckjtzu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -472,7 +748,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aeffxpdnrl .gt_col_heading {
+#mvwzckjtzu .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -492,7 +768,7 @@ html {
   overflow-x: hidden;
 }
 
-#aeffxpdnrl .gt_column_spanner_outer {
+#mvwzckjtzu .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -504,15 +780,15 @@ html {
   padding-right: 4px;
 }
 
-#aeffxpdnrl .gt_column_spanner_outer:first-child {
+#mvwzckjtzu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aeffxpdnrl .gt_column_spanner_outer:last-child {
+#mvwzckjtzu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aeffxpdnrl .gt_column_spanner {
+#mvwzckjtzu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -524,7 +800,7 @@ html {
   width: 100%;
 }
 
-#aeffxpdnrl .gt_group_heading {
+#mvwzckjtzu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -550,7 +826,7 @@ html {
   text-align: left;
 }
 
-#aeffxpdnrl .gt_empty_group_heading {
+#mvwzckjtzu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -565,15 +841,15 @@ html {
   vertical-align: middle;
 }
 
-#aeffxpdnrl .gt_from_md > :first-child {
+#mvwzckjtzu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aeffxpdnrl .gt_from_md > :last-child {
+#mvwzckjtzu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aeffxpdnrl .gt_row {
+#mvwzckjtzu .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -592,7 +868,7 @@ html {
   overflow-x: hidden;
 }
 
-#aeffxpdnrl .gt_stub {
+#mvwzckjtzu .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -605,7 +881,7 @@ html {
   padding-right: 5px;
 }
 
-#aeffxpdnrl .gt_stub_row_group {
+#mvwzckjtzu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -619,11 +895,11 @@ html {
   vertical-align: top;
 }
 
-#aeffxpdnrl .gt_row_group_first td {
+#mvwzckjtzu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aeffxpdnrl .gt_summary_row {
+#mvwzckjtzu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +909,16 @@ html {
   padding-right: 5px;
 }
 
-#aeffxpdnrl .gt_first_summary_row {
+#mvwzckjtzu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_first_summary_row.thick {
+#mvwzckjtzu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aeffxpdnrl .gt_last_summary_row {
+#mvwzckjtzu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +928,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_grand_summary_row {
+#mvwzckjtzu .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -662,7 +938,7 @@ html {
   padding-right: 5px;
 }
 
-#aeffxpdnrl .gt_first_grand_summary_row {
+#mvwzckjtzu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,11 +948,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_striped {
+#mvwzckjtzu .gt_striped {
   background-color: #F4F4F4;
 }
 
-#aeffxpdnrl .gt_table_body {
+#mvwzckjtzu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -685,7 +961,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#aeffxpdnrl .gt_footnotes {
+#mvwzckjtzu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -699,7 +975,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aeffxpdnrl .gt_footnote {
+#mvwzckjtzu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -708,7 +984,7 @@ html {
   padding-right: 5px;
 }
 
-#aeffxpdnrl .gt_sourcenotes {
+#mvwzckjtzu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -722,7 +998,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aeffxpdnrl .gt_sourcenote {
+#mvwzckjtzu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -730,64 +1006,64 @@ html {
   padding-right: 5px;
 }
 
-#aeffxpdnrl .gt_left {
+#mvwzckjtzu .gt_left {
   text-align: left;
 }
 
-#aeffxpdnrl .gt_center {
+#mvwzckjtzu .gt_center {
   text-align: center;
 }
 
-#aeffxpdnrl .gt_right {
+#mvwzckjtzu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aeffxpdnrl .gt_font_normal {
+#mvwzckjtzu .gt_font_normal {
   font-weight: normal;
 }
 
-#aeffxpdnrl .gt_font_bold {
+#mvwzckjtzu .gt_font_bold {
   font-weight: bold;
 }
 
-#aeffxpdnrl .gt_font_italic {
+#mvwzckjtzu .gt_font_italic {
   font-style: italic;
 }
 
-#aeffxpdnrl .gt_super {
+#mvwzckjtzu .gt_super {
   font-size: 65%;
 }
 
-#aeffxpdnrl .gt_footnote_marks {
+#mvwzckjtzu .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#aeffxpdnrl .gt_asterisk {
+#mvwzckjtzu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aeffxpdnrl .gt_indent_1 {
+#mvwzckjtzu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aeffxpdnrl .gt_indent_2 {
+#mvwzckjtzu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aeffxpdnrl .gt_indent_3 {
+#mvwzckjtzu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aeffxpdnrl .gt_indent_4 {
+#mvwzckjtzu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aeffxpdnrl .gt_indent_5 {
+#mvwzckjtzu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1459,6 +1735,7 @@ html {
 </div>
 <p><br><br></p>
 </div>
+</div>
 <div class="section level3">
 <h3 id="dataset-geography-and-service">Dataset: Geography and Service<a class="anchor" aria-label="anchor" href="#dataset-geography-and-service"></a>
 </h3>
@@ -1466,7 +1743,7 @@ html {
 <div class="section level4">
 <h4 id="data-dictionary-1">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-1"></a>
 </h4>
-<div id="okxptyhpws" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ijvqhnazmt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -1474,7 +1751,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#okxptyhpws .gt_table {
+#ijvqhnazmt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1499,7 +1776,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_heading {
+#ijvqhnazmt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1511,12 +1788,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#okxptyhpws .gt_caption {
+#ijvqhnazmt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#okxptyhpws .gt_title {
+#ijvqhnazmt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1528,7 +1805,7 @@ html {
   border-bottom-width: 0;
 }
 
-#okxptyhpws .gt_subtitle {
+#ijvqhnazmt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1540,13 +1817,13 @@ html {
   border-top-width: 0;
 }
 
-#okxptyhpws .gt_bottom_border {
+#ijvqhnazmt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_col_headings {
+#ijvqhnazmt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1561,7 +1838,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#okxptyhpws .gt_col_heading {
+#ijvqhnazmt .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1581,7 +1858,7 @@ html {
   overflow-x: hidden;
 }
 
-#okxptyhpws .gt_column_spanner_outer {
+#ijvqhnazmt .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1593,15 +1870,15 @@ html {
   padding-right: 4px;
 }
 
-#okxptyhpws .gt_column_spanner_outer:first-child {
+#ijvqhnazmt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#okxptyhpws .gt_column_spanner_outer:last-child {
+#ijvqhnazmt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#okxptyhpws .gt_column_spanner {
+#ijvqhnazmt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -1613,7 +1890,7 @@ html {
   width: 100%;
 }
 
-#okxptyhpws .gt_group_heading {
+#ijvqhnazmt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1639,7 +1916,7 @@ html {
   text-align: left;
 }
 
-#okxptyhpws .gt_empty_group_heading {
+#ijvqhnazmt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1654,15 +1931,15 @@ html {
   vertical-align: middle;
 }
 
-#okxptyhpws .gt_from_md > :first-child {
+#ijvqhnazmt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#okxptyhpws .gt_from_md > :last-child {
+#ijvqhnazmt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#okxptyhpws .gt_row {
+#ijvqhnazmt .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1681,7 +1958,7 @@ html {
   overflow-x: hidden;
 }
 
-#okxptyhpws .gt_stub {
+#ijvqhnazmt .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1694,7 +1971,7 @@ html {
   padding-right: 5px;
 }
 
-#okxptyhpws .gt_stub_row_group {
+#ijvqhnazmt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1708,11 +1985,11 @@ html {
   vertical-align: top;
 }
 
-#okxptyhpws .gt_row_group_first td {
+#ijvqhnazmt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#okxptyhpws .gt_summary_row {
+#ijvqhnazmt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1722,16 +1999,16 @@ html {
   padding-right: 5px;
 }
 
-#okxptyhpws .gt_first_summary_row {
+#ijvqhnazmt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_first_summary_row.thick {
+#ijvqhnazmt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#okxptyhpws .gt_last_summary_row {
+#ijvqhnazmt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1741,7 +2018,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_grand_summary_row {
+#ijvqhnazmt .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -1751,7 +2028,7 @@ html {
   padding-right: 5px;
 }
 
-#okxptyhpws .gt_first_grand_summary_row {
+#ijvqhnazmt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1761,11 +2038,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_striped {
+#ijvqhnazmt .gt_striped {
   background-color: #F4F4F4;
 }
 
-#okxptyhpws .gt_table_body {
+#ijvqhnazmt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1774,7 +2051,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#okxptyhpws .gt_footnotes {
+#ijvqhnazmt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1788,7 +2065,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#okxptyhpws .gt_footnote {
+#ijvqhnazmt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1797,7 +2074,7 @@ html {
   padding-right: 5px;
 }
 
-#okxptyhpws .gt_sourcenotes {
+#ijvqhnazmt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1811,7 +2088,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#okxptyhpws .gt_sourcenote {
+#ijvqhnazmt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1819,64 +2096,64 @@ html {
   padding-right: 5px;
 }
 
-#okxptyhpws .gt_left {
+#ijvqhnazmt .gt_left {
   text-align: left;
 }
 
-#okxptyhpws .gt_center {
+#ijvqhnazmt .gt_center {
   text-align: center;
 }
 
-#okxptyhpws .gt_right {
+#ijvqhnazmt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#okxptyhpws .gt_font_normal {
+#ijvqhnazmt .gt_font_normal {
   font-weight: normal;
 }
 
-#okxptyhpws .gt_font_bold {
+#ijvqhnazmt .gt_font_bold {
   font-weight: bold;
 }
 
-#okxptyhpws .gt_font_italic {
+#ijvqhnazmt .gt_font_italic {
   font-style: italic;
 }
 
-#okxptyhpws .gt_super {
+#ijvqhnazmt .gt_super {
   font-size: 65%;
 }
 
-#okxptyhpws .gt_footnote_marks {
+#ijvqhnazmt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#okxptyhpws .gt_asterisk {
+#ijvqhnazmt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#okxptyhpws .gt_indent_1 {
+#ijvqhnazmt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#okxptyhpws .gt_indent_2 {
+#ijvqhnazmt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#okxptyhpws .gt_indent_3 {
+#ijvqhnazmt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#okxptyhpws .gt_indent_4 {
+#ijvqhnazmt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#okxptyhpws .gt_indent_5 {
+#ijvqhnazmt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2050,7 +2327,7 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level4">
 <h4 id="data-dictionary-2">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-2"></a>
 </h4>
-<div id="aqtxmwrhth" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cecrvmzyjr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2058,7 +2335,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#aqtxmwrhth .gt_table {
+#cecrvmzyjr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2083,7 +2360,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_heading {
+#cecrvmzyjr .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2095,12 +2372,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aqtxmwrhth .gt_caption {
+#cecrvmzyjr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aqtxmwrhth .gt_title {
+#cecrvmzyjr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2112,7 +2389,7 @@ html {
   border-bottom-width: 0;
 }
 
-#aqtxmwrhth .gt_subtitle {
+#cecrvmzyjr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2124,13 +2401,13 @@ html {
   border-top-width: 0;
 }
 
-#aqtxmwrhth .gt_bottom_border {
+#cecrvmzyjr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_col_headings {
+#cecrvmzyjr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2145,7 +2422,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aqtxmwrhth .gt_col_heading {
+#cecrvmzyjr .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2165,7 +2442,7 @@ html {
   overflow-x: hidden;
 }
 
-#aqtxmwrhth .gt_column_spanner_outer {
+#cecrvmzyjr .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2177,15 +2454,15 @@ html {
   padding-right: 4px;
 }
 
-#aqtxmwrhth .gt_column_spanner_outer:first-child {
+#cecrvmzyjr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aqtxmwrhth .gt_column_spanner_outer:last-child {
+#cecrvmzyjr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aqtxmwrhth .gt_column_spanner {
+#cecrvmzyjr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2197,7 +2474,7 @@ html {
   width: 100%;
 }
 
-#aqtxmwrhth .gt_group_heading {
+#cecrvmzyjr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2223,7 +2500,7 @@ html {
   text-align: left;
 }
 
-#aqtxmwrhth .gt_empty_group_heading {
+#cecrvmzyjr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2238,15 +2515,15 @@ html {
   vertical-align: middle;
 }
 
-#aqtxmwrhth .gt_from_md > :first-child {
+#cecrvmzyjr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aqtxmwrhth .gt_from_md > :last-child {
+#cecrvmzyjr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aqtxmwrhth .gt_row {
+#cecrvmzyjr .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2265,7 +2542,7 @@ html {
   overflow-x: hidden;
 }
 
-#aqtxmwrhth .gt_stub {
+#cecrvmzyjr .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2278,7 +2555,7 @@ html {
   padding-right: 5px;
 }
 
-#aqtxmwrhth .gt_stub_row_group {
+#cecrvmzyjr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2292,11 +2569,11 @@ html {
   vertical-align: top;
 }
 
-#aqtxmwrhth .gt_row_group_first td {
+#cecrvmzyjr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aqtxmwrhth .gt_summary_row {
+#cecrvmzyjr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2306,16 +2583,16 @@ html {
   padding-right: 5px;
 }
 
-#aqtxmwrhth .gt_first_summary_row {
+#cecrvmzyjr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_first_summary_row.thick {
+#cecrvmzyjr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aqtxmwrhth .gt_last_summary_row {
+#cecrvmzyjr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2325,7 +2602,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_grand_summary_row {
+#cecrvmzyjr .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2335,7 +2612,7 @@ html {
   padding-right: 5px;
 }
 
-#aqtxmwrhth .gt_first_grand_summary_row {
+#cecrvmzyjr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2345,11 +2622,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_striped {
+#cecrvmzyjr .gt_striped {
   background-color: #F4F4F4;
 }
 
-#aqtxmwrhth .gt_table_body {
+#cecrvmzyjr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2358,7 +2635,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#aqtxmwrhth .gt_footnotes {
+#cecrvmzyjr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2372,7 +2649,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aqtxmwrhth .gt_footnote {
+#cecrvmzyjr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2381,7 +2658,7 @@ html {
   padding-right: 5px;
 }
 
-#aqtxmwrhth .gt_sourcenotes {
+#cecrvmzyjr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2395,7 +2672,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#aqtxmwrhth .gt_sourcenote {
+#cecrvmzyjr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2403,64 +2680,64 @@ html {
   padding-right: 5px;
 }
 
-#aqtxmwrhth .gt_left {
+#cecrvmzyjr .gt_left {
   text-align: left;
 }
 
-#aqtxmwrhth .gt_center {
+#cecrvmzyjr .gt_center {
   text-align: center;
 }
 
-#aqtxmwrhth .gt_right {
+#cecrvmzyjr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aqtxmwrhth .gt_font_normal {
+#cecrvmzyjr .gt_font_normal {
   font-weight: normal;
 }
 
-#aqtxmwrhth .gt_font_bold {
+#cecrvmzyjr .gt_font_bold {
   font-weight: bold;
 }
 
-#aqtxmwrhth .gt_font_italic {
+#cecrvmzyjr .gt_font_italic {
   font-style: italic;
 }
 
-#aqtxmwrhth .gt_super {
+#cecrvmzyjr .gt_super {
   font-size: 65%;
 }
 
-#aqtxmwrhth .gt_footnote_marks {
+#cecrvmzyjr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#aqtxmwrhth .gt_asterisk {
+#cecrvmzyjr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aqtxmwrhth .gt_indent_1 {
+#cecrvmzyjr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aqtxmwrhth .gt_indent_2 {
+#cecrvmzyjr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aqtxmwrhth .gt_indent_3 {
+#cecrvmzyjr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aqtxmwrhth .gt_indent_4 {
+#cecrvmzyjr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aqtxmwrhth .gt_indent_5 {
+#cecrvmzyjr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
