@@ -143,10 +143,6 @@
 <p><br></p>
 <div class="custom_note">Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.</div>
 <p><br></p>
-<div class="section level3">
-<h3 id="background">Background<a class="anchor" aria-label="anchor" href="#background"></a>
-</h3>
-<p><br></p>
 <p>The Centers for Medicare &amp; Medicaid Services (CMS) has prepared a
 public data set, the Provider Utilization and Payment Data Physician and
 Other Practitioners Dataset, with information on services and procedures
@@ -163,208 +159,9 @@ population. Claims processed by Durable Medical Equipment, Prosthetic,
 Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC)
 are not included in the Physician and Other Practitioners Dataset.</p>
 <p><br></p>
-</div>
-<div class="section level3">
-<h3 id="key-data-sources">Key Data Sources<a class="anchor" aria-label="anchor" href="#key-data-sources"></a>
-</h3>
-<p><br></p>
-<p>The data for the Physician and Other Practitioners Dataset are based
-upon CMS administrative claims data for Medicare beneficiaries enrolled
-in the fee-for-service program. The data are available from the CMS
-Chronic Condition Data Warehouse (CCW), a database with 100% of Medicare
-enrollment and fee-for-service claims data. Service counts, beneficiary
-counts, provider charges, Medicare allowed amounts and payments and the
-place of service indicator are summarized from Part B non-institutional
-claims processed through Medicare Administrative Contractor (MAC)
-Jurisdictions (NCH Claim Type Codes ‘71’, ‘72’). Please see the <a href="https://www2.ccwdata.org/web/guest/home/" class="external-link">CCW website</a> for
-additional information.</p>
-<p><br></p>
-<p>For all Physician and Other Practitioners Dataset data years,
-provider demographics (name, credentials, gender, complete address and
-entity type) are included from the National Plan &amp; Provider
-Enumeration System (NPPES). CMS developed the NPPES to assign unique
-identifiers, known as National Provider Identifiers (NPIs), to health
-care providers. The health care provider’s demographic information is
-collected at the time of enrollment and updated periodically. The
-demographics information provided in the Physician and Other
-Practitioners Dataset was extracted from NPPES at the end of calendar
-year following the reporting year (e.g. for CY2017 reporting year, the
-NPPES data was extracted at the end of calendar year 2018). Please visit
-the <a href="https://nppes.cms.hhs.gov" class="external-link">NPPES website</a> for additional
-information.</p>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="population">Population<a class="anchor" aria-label="anchor" href="#population"></a>
-</h3>
-<p><br></p>
-<p>The Physician and Other Practitioners Dataset includes data for
-providers that had a valid NPI and submitted Medicare Part B
-non-institutional claims (excluding DMEPOS) during the reporting period.
-To protect the privacy of Medicare beneficiaries, any aggregated records
-which are derived from 10 or fewer beneficiaries are excluded from the
-Physician and Other Practitioners Dataset.</p>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="data-limitations">Data Limitations<a class="anchor" aria-label="anchor" href="#data-limitations"></a>
-</h3>
-<p><br></p>
-<p>Although the Physician and Other Practitioners Dataset has a wealth
-of payment and utilization information about many Medicare Part B
-services, the dataset also has a number of limitations that are worth
-noting.</p>
-<p><br></p>
-<p>First, the data in the Physician and Other Practitioners Dataset may
-not be representative of a physician’s entire practice. The data in the
-file only have information for Medicare beneficiaries with Part B FFS
-coverage, but physicians typically treat many other patients who do not
-have that form of coverage. The Physician and Other Practitioners
-Dataset does not have any information on patients who are not covered by
-Medicare, such as those with coverage from other federal programs (like
-the Federal Employees Health Benefits Program or Tricare), those with
-private health insurance (such as an individual policy or
-employer-sponsored coverage), or those who are uninsured. Even within
-Medicare, the Physician and Other Practitioners Dataset does not include
-information for patients who are enrolled in any form of Medicare
-Advantage plan.</p>
-<p><br></p>
-<p>The information presented in this file also does not indicate the
-quality of care provided by individual physicians. The file only
-contains cost and utilization information, and for the reasons described
-in the preceding paragraph, the volume of procedures presented may not
-be fully inclusive of all procedures performed by the provider. Medicare
-allowed amounts and Medicare payments for a given HCPCS code/place of
-service can vary based on a number of factors, including modifiers,
-geography, and other services performed during the same day/visit. For
-example, modifiers (two-character designators that signal a change in
-how the HCPCS code for the procedure or service should be applied) may
-be included on the claim line when the service intensity was increased
-or decreased, when an additional physician administered services, or
-when the service provided differs from the procedure definition. In some
-cases, modifiers impact allowed amounts and payments. In addition,
-allowed amounts and payments vary geographically because Medicare makes
-adjustments for most services based on an area’s cost of living. Allowed
-amounts and payments can also be adjusted when a physician renders
-multiple services to a beneficiary on the same day, which is referred to
-as a multiple procedure payment reduction. For standard payment and
-allowed amount rates by CPT/HCPCS code, please visit the <a href="https://www.cms.gov/apps/physician-fee-schedule/overview.aspx" class="external-link">Physician
-fee schedule</a>.</p>
-<p><br></p>
-<p>In general, when a provider administers drugs to a patient, the
-provider purchases the drug and Medicare pays the provider 106% of the
-average sales price (ASP) for the drug. Although the ASP list was used
-in these datasets to define drug services, the drugs listed on the ASP
-fee schedule are not a complete listing of drugs paid under part B, but
-the ASP fee schedule represents the majority of drugs that are used in
-the office. For more information on payments for drugs covered under
-Part B, please visit <a href="https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Part-B-Drugs/McrPartBDrugAvgSalesPrice/index" class="external-link">ASP
-Drug Pricing</a>.</p>
-<p><br></p>
-<p>Additionally, the data are not risk adjusted and thus do not account
-for difference in the underlying severity of disease of patient
-populations treated by providers. However, we have provided average
-beneficiary risk scores in the “Medicare Physician and Other
-Practitioners by Provider Dataset” (i.e., one record per NPI) to provide
-information on the health status of the beneficiaries the providers
-serve. Also, since the data presented are summarized from actual claims
-received from providers and no attempts were made to modify any data
-(i.e., no statistical outliers were removed or truncated), in rare
-instances the average submitted charge amount may reflect errors
-included on claims submitted by providers.</p>
-<p><br></p>
-<p>As noted earlier, the file does not include data for services that
-were performed on 10 or fewer beneficiaries, so users should be aware
-that summing the data in the file may underestimate the true Part B FFS
-totals. In addition, some providers bill under both an individual NPI
-and an organizational NPI. In this case, users cannot determine a
-provider’s actual total because there is no way to identify the
-individual’s portion when billed under their organization.</p>
-<p><br></p>
-<p>Medicare pays differently when services are provided in a facility
-setting versus a freestanding physicians’ office (or other non-facility
-setting). When services are delivered in a facility setting, Medicare
-makes two payments, one for the physician’s professional fee and one for
-the facility. For services delivered in a facility (Place_Of_Srvc =
-”F”), the data in the Physician and Other Practitioners Dataset
-generally represents the physician’s professional fee and does not
-include the facility payment. The exception is services delivered in
-Ambulatory Surgical Centers (ASCs). In these cases, both the physician’s
-professional fee and the ASC’s fee are represented in the Physician and
-Other Practitioners Dataset. ASCs can be identified using the provider
-type. For services delivered in a non-facility setting, such as a
-physician’s office (Place_Of_Srvc = ”O”), the Physician and Other
-Practitioners Dataset represents the complete payment for the
-service.</p>
-<p><br></p>
-<p>If users try to link data from this file to other public datasets,
-please be aware of the particular Medicare populations included and
-timeframes used in each file that will be merged. For example, efforts
-to link the Physician and Other Practitioners Dataset data to Part D
-prescription drug data would need to account for the fact that some
-beneficiaries who have FFS Part B coverage (and are thus included in the
-Physician and Other Practitioners Dataset) do not have Part D drug
-coverage (and thus not represented in Part D data files). At the same
-time, some beneficiaries that have Part D coverage (and are thus
-included in the Part D data) do not have FFS Part B coverage (and thus
-not included in the Physician and Other Practitioners Dataset). Another
-example would be linking to data constructed from different or
-non-aligning time periods, such as publically available data on
-physician referral patterns, which is based on an 18-month period.</p>
-<p><br></p>
-<p>Finally, users should be aware that payments from some CMS
-demonstration programs are included in the Physician and Other
-Practitioners Dataset. Since some CMS demonstration programs utilize the
-Medicare claims submission process, payments for services under these
-demonstrations are included in the data file and may be grouped under
-specific demonstration HCPCS codes or aggregated under non-demonstration
-specific HCPCS codes. Demonstration programs that are paid outside of
-the Medicare claims submission process are not included in the Physician
-and Other Practitioners Dataset.</p>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="additional-information">Additional Information<a class="anchor" aria-label="anchor" href="#additional-information"></a>
-</h3>
-<p><strong>Other Data Sources</strong></p>
-<p>CMS also releases the “Medicare Fee-For-Service Public Provider
-Enrollment Data” that include provider name and address information from
-the Provider Enrollment and Chain Ownership System (PECOS). These data
-are updated on a quarterly basis and are available at <a href="https://data.cms.gov/resources/data.cms.gov" class="external-link">data.cms.gov</a>.</p>
-<p><br></p>
-<p><strong>Medicare Standardized Spending</strong></p>
-<p>Users can find more information on Medicare payment standardization
-by referring to the Geographic Variation Methodology available within
-the “Risk adjustment and standardization” section of the following web
-page: <a href="https://data.cms.gov/resources/geographic-variation-methodology" class="external-link">Geographic
-Variation Methodology</a>.</p>
-<p><br></p>
-<p><strong>HCCs (Hierarchical Condition Categories)</strong></p>
-<p>CMS developed a risk-adjustment model that uses HCCs (hierarchical
-condition categories) to assign risk scores. Those scores estimate how
-beneficiaries’ FFS spending will compare to the overall average for the
-entire Medicare population. The summary on average risk scores of
-beneficiaries represented in each calendar year of the Medicare
-Physician &amp; Other Practitioners - by Provider dataset are located in
-the “Resources’” section of the following web page: <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare
-Physician &amp; Other Practitioners - by Provider</a>. Beneficiaries
-with scores greater than the average risk score are expected to have
-above-average spending, and vice versa. Risk scores are based on a
-beneficiary’s age and sex; whether the beneficiary is eligible for
-Medicaid, first qualified for Medicare on the basis of disability, or
-lives in an institution (usually a nursing home); and the beneficiary’s
-diagnoses from the previous year.</p>
-<p><br></p>
-<p>The HCC model was designed for risk adjustment on larger populations,
-such as the enrollees in an MA plan, and generates more accurate results
-when used to compare groups of beneficiaries rather than individuals.
-Please visit <a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Risk-Adjustors" class="external-link">HCC
-risk score</a> for more information.</p>
-<p><br><br></p>
-<hr>
-</div>
 <div class="section level2">
-<h2 id="dataset-provider">Dataset: Provider<a class="anchor" aria-label="anchor" href="#dataset-provider"></a>
+<h2 id="physician-other-practitioners-by-provider">Physician &amp; Other Practitioners: <strong>by
+Provider</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-provider"></a>
 </h2>
 <p><br></p>
 <p>The <strong>Provider</strong> data subset provides information on
@@ -384,276 +181,158 @@ Services</strong>
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2020                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1003000126                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Enkeshafi                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Ardalan                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M.D.                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">I                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">6410 Rockledge Dr Ste 304                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Bethesda                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">MD                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">24                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">20817                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow with</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">US                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Internal Medicine                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Y                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">16                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">291                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">764                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">402812                                   </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">85319.63                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">69175.78                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">66401.61                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">16                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">291                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">764                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">402812                                   </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">85319.63                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">69175.78                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">66401.61                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">77                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">27                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">88                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">104                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">72                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">161                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">130                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">210                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">50                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">12                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">61                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">230                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.31                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.43                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.15                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.18                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.48                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.65                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.29                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.35                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.47                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.73                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.75                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.66                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.11                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.51                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.09                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.19                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2.5028                                   </span> ...</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
+<span><span class="co">#&gt;    year rndrng_…¹ rndrng…² totals…³ drug_s…⁴ med_sr…⁵ bene_age bene_sex bene_r…⁶</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 10030004… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: bene_status &lt;list&gt;, bene_cc &lt;list&gt;, and abbreviated</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​rndrng_npi, ²​rndrng_prvdr, ³​totals_srvcs, ⁴​drug_srvcs,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​med_srvcs, ⁶​bene_race</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">2020                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1003000423                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Velotta                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Jennifer                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">A                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">M.D.                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">F                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">I                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">11100 Euclid Ave                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Cleveland                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">OH                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">39                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">44106                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow with</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">US                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Obstetrics &amp; Gynecology                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Y                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">21                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">56                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">571                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">23680                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">9011.99                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">7224.35                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">7301.35                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">*                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">#                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">67                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">12                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">33                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">56                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">11                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">45                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.27                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.52                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.5                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.23                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.2                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.32                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">i1</span> <span style="color: #3A3A3A;">0                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">                                         </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">0.7089                                   </span> ...</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"I"</span>, </span>
+<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>, </span>
+<span>                      state <span class="op">=</span> <span class="st">"PA"</span>, </span>
+<span>                      fips <span class="op">=</span> <span class="fl">42</span>, </span>
+<span>                      ruca <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>                      gender <span class="op">=</span> <span class="st">"F"</span>, </span>
+<span>                      cred <span class="op">=</span> <span class="st">"M.D."</span>, </span>
+<span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 19 × 11</span></span></span>
+<span><span class="co">#&gt;     year rndrng…¹ rndrng…² totals…³ drug_s…⁴ med_sr…⁵ bene_age bene_sex bene_r…⁶</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>020 1023230… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>020 1104213… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>020 1114930… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>020 1124240… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>020 1154522… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>020 1326249… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>020 1376754… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>020 1467763… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>020 1518255… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>020 1538506… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>020 1558780… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>020 1568489… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>020 1578906… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>020 1629289… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>020 1710109… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>020 1841466… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>020 1942460… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>  <span style="text-decoration: underline;">2</span>020 1952796… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>  <span style="text-decoration: underline;">2</span>020 1972946… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: bene_status &lt;list&gt;, bene_cc &lt;list&gt;, and abbreviated</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​rndrng_npi, ²​rndrng_prvdr, ³​totals_srvcs, ⁴​drug_srvcs,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​med_srvcs, ⁶​bene_race</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"I"</span>,</span>
-<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>,</span>
-<span>                      state <span class="op">=</span> <span class="st">"PA"</span>,</span>
-<span>                      fips <span class="op">=</span> <span class="fl">42</span>,</span>
-<span>                      ruca <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                      gender <span class="op">=</span> <span class="st">"F"</span>,</span>
-<span>                      cred <span class="op">=</span> <span class="st">"M.D."</span>,</span>
-<span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year                          <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">2020                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi                    <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">1023230596                              </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_last_org_name    <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Barbieri                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_first_name       <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Carolyn                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mi               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_crdntls          <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">M.D.                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_gndr             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">F                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ent_cd           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">I                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st1              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">500 University Dr                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_st2              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">H088                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_city             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Hershey                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_abrvtn     <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">PA                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_state_fips       <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">42                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_zip5             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">17033                                   </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">1                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_ruca_desc        <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Metropolitan area core: primary flow wit</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_cntry            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">US                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_type             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Anesthesiology                          </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_prvdr_mdcr_prtcptg_ind <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">Y                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_hcpcs_cds                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">44                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes                     <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">79                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs                     <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">90                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_sbmtd_chrg                <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">124654                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_alowd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">17954.95                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_pymt_amt             <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14396.68                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_mdcr_stdzd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14122.13                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sprsn_ind                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_hcpcs_cds            <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_benes                <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_tot_srvcs                <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_sbmtd_chrg               <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_alowd_amt           <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_pymt_amt            <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>drug_mdcr_stdzd_amt           <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sprsn_ind                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_hcpcs_cds             <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">44                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_benes                 <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">79                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_tot_srvcs                 <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">90                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_sbmtd_chrg                <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">124654                                  </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_alowd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">17954.95                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_pymt_amt             <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14396.68                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>med_mdcr_stdzd_amt            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">14122.13                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_age                  <span style="color: #5FAF87;">i19</span> <span style="color: #3A3A3A;">70                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_lt_65_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_65_74_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">40                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_75_84_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">17                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_age_gt_84_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_feml_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">42                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_male_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">37                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_wht_cnt             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_black_cnt           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_api_cnt             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_hspnc_cnt           <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_nat_ind_cnt         <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_race_othr_cnt            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_dual_cnt                 <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">14                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_ndual_cnt                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">65                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_af_pct                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_alzhmr_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_asthma_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_cncr_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.24                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_chf_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.16                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ckd_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.44                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_copd_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.14                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dprssn_pct            <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.29                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_dbts_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.34                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyplpdma_pct          <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.59                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_hyprtnsn_pct          <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">0.66                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_ihd_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.35                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_opo_pct               <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_raoa_pct              <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0.44                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_sz_pct                <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">0                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_cc_strok_pct             <span style="color: #5FAF87;">c19</span> <span style="color: #3A3A3A;">                                        </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>bene_avg_risk_scre            <span style="color: #5FAF87;">d19</span> <span style="color: #3A3A3A;">1.4752                                  </span> ...</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co">#purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x)) |&gt; terse::terse()</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x20</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="va">x19</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span><span class="va">x18</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">xx18</span> <span class="op">&lt;-</span> <span class="va">x18</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"cnt"</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">ends_with</a></span><span class="op">(</span><span class="st">"pct"</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="va">.</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html" class="external-link">na_if</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">""</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">tidyselect</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="va">is.character</span><span class="op">)</span>, <span class="op">~</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/na_if.html" class="external-link">na_if</a></span><span class="op">(</span><span class="va">.</span>, <span class="st">"N/A"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/nest.html" class="external-link">nest</a></span><span class="op">(</span>rndrng_prvdr <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"rndrng_prvdr"</span><span class="op">)</span>,</span>
-<span>              totals <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"tot_"</span><span class="op">)</span>,</span>
-<span>              drug <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"drug_"</span><span class="op">)</span>,</span>
-<span>              med <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"med_"</span><span class="op">)</span>,</span>
-<span>              bene <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"bene_"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">xx18</span><span class="op">$</span><span class="va">rndrng_prvdr</span></span>
-<span><span class="co">#&gt; [[1]]</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 17</span></span></span>
-<span><span class="co">#&gt;   rndrng_prvdr…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸ rndrn…⁹</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Enkeshafi      Ardalan <span style="color: #BB0000;">NA</span>      M.D.    M       I       900 Se… <span style="color: #BB0000;">NA</span>      Cumber…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 8 more variables: rndrng_prvdr_state_abrvtn &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_state_fips &lt;chr&gt;, rndrng_prvdr_zip5 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_ruca &lt;chr&gt;, rndrng_prvdr_ruca_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_cntry &lt;chr&gt;, rndrng_prvdr_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   rndrng_prvdr_mdcr_prtcptg_ind &lt;chr&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​rndrng_prvdr_last_org_name, ²​rndrng_prvdr_first_name, ³​rndrng_prvdr_mi,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​rndrng_prvdr_crdntls, ⁵​rndrng_prvdr_gndr, ⁶​rndrng_prvdr_ent_cd, …</span></span></span></code></pre></div>
-<div class="section level4">
-<h4 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
-</h4>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="physician-other-practitioners-by-geography-and-service">Physician &amp; Other Practitioners: <strong>by Geography and
+Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-geography-and-service"></a>
+</h2>
 <p><br></p>
-<div id="ktqrxleifo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div class="section level3">
+<h3 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
+</h3>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 16</span></span></span>
+<span><span class="co">#&gt;    year rndrng…¹ rndrn…² rndrn…³ hcpcs…⁴ hcpcs…⁵ hcpcs…⁶ place…⁷ tot_r…⁸ tot_b…⁹</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 National <span style="color: #949494;">""</span>      Nation… 0002A   Adm sa… N       O            53     279</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>06<span style="color: #949494;">"</span>    Califo… 0002A   Adm sa… N       O             3      91</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>12<span style="color: #949494;">"</span>    Florida 0002A   Adm sa… N       O             5      16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>17<span style="color: #949494;">"</span>    Illino… 0002A   Adm sa… N       O             3      18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>23<span style="color: #949494;">"</span>    Maine   0002A   Adm sa… N       O             1      22</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>24<span style="color: #949494;">"</span>    Maryla… 0002A   Adm sa… N       O             3      18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>25<span style="color: #949494;">"</span>    Massac… 0002A   Adm sa… N       O             3      16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>34<span style="color: #949494;">"</span>    New Je… 0002A   Adm sa… N       O             3      14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State    <span style="color: #949494;">"</span>42<span style="color: #949494;">"</span>    Pennsy… 0002A   Adm sa… N       O             4      40</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: tot_srvcs &lt;int&gt;, tot_bene_day_srvcs &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_sbmtd_chrg &lt;dbl&gt;, avg_mdcr_alowd_amt &lt;dbl&gt;, avg_mdcr_pymt_amt &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_mdcr_stdzd_amt &lt;dbl&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​rndrng_prvdr_geo_lvl, ²​rndrng_prvdr_geo_cd, ³​rndrng_prvdr_geo_desc,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​hcpcs_cd, ⁵​hcpcs_desc, ⁶​hcpcs_drug_ind, ⁷​place_of_srvc,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁸​tot_rndrng_prvdrs, ⁹​tot_benes</span></span></span></code></pre></div>
+<p><br><br></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">service</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="physician-other-practitioners-by-provider-and-service">Physician &amp; Other Practitioners: <strong>by Provider and
+Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-provider-and-service"></a>
+</h2>
+<p><br></p>
+<p>The spending and utilization data in the Physician and Other
+Practitioners by Provider and Service Dataset are aggregated to the
+following:</p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li>the NPI for the performing provider,</li>
+<li>the Healthcare Common Procedure Coding System (HCPCS) code, and</li>
+<li>the place of service (either facility or non-facility).</li>
+</ol>
+<p><br></p>
+<p>There can be multiple records for a given NPI based on the number of
+distinct HCPCS codes that were billed and where the services were
+provided. Data have been aggregated based on the place of service
+because separate fee schedules apply depending on whether the place of
+service submitted on the claim is facility or non-facility.</p>
+<p><br></p>
+<div class="section level3">
+<h3 id="examples-2">Examples<a class="anchor" aria-label="anchor" href="#examples-2"></a>
+</h3>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Search by NPI</span></span>
+<span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 6</span></span></span>
+<span><span class="co">#&gt;    year rndrng_npi rndrng_prvdr      totals_srvcs     hcpcs            averages</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 1003000126 <span style="color: #949494;">&lt;tibble [9 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [9 × 3]&gt;</span> <span style="color: #949494;">&lt;tibble [9 × 4]&gt;</span> &lt;tibble&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Search by Last Name for 2019</span></span>
+<span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720392988</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 6</span></span></span>
+<span><span class="co">#&gt;    year rndrng_npi rndrng_prvdr       totals_srvcs      hcpcs    averages</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>019 1720392988 <span style="color: #949494;">&lt;tibble [20 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [20 × 3]&gt;</span> &lt;tibble&gt; &lt;tibble&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple NPIs</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="co">#npis &lt;- c(1003026055,</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1720392988</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1518184605</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1922056829</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>          <span class="dv">1083879860</span><span class="er">)</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#npis |&gt; purrr::map_dfr(physician_by_service)</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: &lt;text&gt;:3:21: unexpected ','</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2: #npis &lt;- c(1003026055,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3:           1720392988,</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;                        ^</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Retrieve All Provider Data, 2013-2020</span></span>
+<span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>,</span>
+<span><span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 6</span></span></span>
+<span><span class="co">#&gt;   year  rndrng_npi rndrng_prvdr       totals_srvcs      hcpcs    averages</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2013  1003000126 <span style="color: #949494;">&lt;tibble [7 × 17]&gt;</span>  <span style="color: #949494;">&lt;tibble [7 × 3]&gt;</span>  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2014  1003000126 <span style="color: #949494;">&lt;tibble [8 × 17]&gt;</span>  <span style="color: #949494;">&lt;tibble [8 × 3]&gt;</span>  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2015  1003000126 <span style="color: #949494;">&lt;tibble [11 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [11 × 3]&gt;</span> &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2016  1003000126 <span style="color: #949494;">&lt;tibble [12 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [12 × 3]&gt;</span> &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2017  1003000126 <span style="color: #949494;">&lt;tibble [11 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [11 × 3]&gt;</span> &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2018  1003000126 <span style="color: #949494;">&lt;tibble [11 × 17]&gt;</span> <span style="color: #949494;">&lt;tibble [11 × 3]&gt;</span> &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2019  1003000126 <span style="color: #949494;">&lt;tibble [9 × 17]&gt;</span>  <span style="color: #949494;">&lt;tibble [9 × 3]&gt;</span>  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 2020  1003000126 <span style="color: #949494;">&lt;tibble [9 × 17]&gt;</span>  <span style="color: #949494;">&lt;tibble [9 × 3]&gt;</span>  &lt;tibble&gt; &lt;tibble&gt;</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="provider-data-dictionary">Provider Data Dictionary<a class="anchor" aria-label="anchor" href="#provider-data-dictionary"></a>
+</h3>
+<div id="xaidbnlrkk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -661,7 +340,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#ktqrxleifo .gt_table {
+#xaidbnlrkk .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -686,7 +365,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_heading {
+#xaidbnlrkk .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -698,12 +377,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ktqrxleifo .gt_caption {
+#xaidbnlrkk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ktqrxleifo .gt_title {
+#xaidbnlrkk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -715,7 +394,7 @@ html {
   border-bottom-width: 0;
 }
 
-#ktqrxleifo .gt_subtitle {
+#xaidbnlrkk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -727,13 +406,13 @@ html {
   border-top-width: 0;
 }
 
-#ktqrxleifo .gt_bottom_border {
+#xaidbnlrkk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_col_headings {
+#xaidbnlrkk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -748,7 +427,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ktqrxleifo .gt_col_heading {
+#xaidbnlrkk .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -768,7 +447,7 @@ html {
   overflow-x: hidden;
 }
 
-#ktqrxleifo .gt_column_spanner_outer {
+#xaidbnlrkk .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -780,15 +459,15 @@ html {
   padding-right: 4px;
 }
 
-#ktqrxleifo .gt_column_spanner_outer:first-child {
+#xaidbnlrkk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ktqrxleifo .gt_column_spanner_outer:last-child {
+#xaidbnlrkk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ktqrxleifo .gt_column_spanner {
+#xaidbnlrkk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -800,7 +479,7 @@ html {
   width: 100%;
 }
 
-#ktqrxleifo .gt_group_heading {
+#xaidbnlrkk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -826,7 +505,7 @@ html {
   text-align: left;
 }
 
-#ktqrxleifo .gt_empty_group_heading {
+#xaidbnlrkk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -841,15 +520,15 @@ html {
   vertical-align: middle;
 }
 
-#ktqrxleifo .gt_from_md > :first-child {
+#xaidbnlrkk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ktqrxleifo .gt_from_md > :last-child {
+#xaidbnlrkk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ktqrxleifo .gt_row {
+#xaidbnlrkk .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -868,7 +547,7 @@ html {
   overflow-x: hidden;
 }
 
-#ktqrxleifo .gt_stub {
+#xaidbnlrkk .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -881,7 +560,7 @@ html {
   padding-right: 5px;
 }
 
-#ktqrxleifo .gt_stub_row_group {
+#xaidbnlrkk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -895,11 +574,11 @@ html {
   vertical-align: top;
 }
 
-#ktqrxleifo .gt_row_group_first td {
+#xaidbnlrkk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ktqrxleifo .gt_summary_row {
+#xaidbnlrkk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -909,16 +588,16 @@ html {
   padding-right: 5px;
 }
 
-#ktqrxleifo .gt_first_summary_row {
+#xaidbnlrkk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_first_summary_row.thick {
+#xaidbnlrkk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ktqrxleifo .gt_last_summary_row {
+#xaidbnlrkk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -928,7 +607,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_grand_summary_row {
+#xaidbnlrkk .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -938,7 +617,7 @@ html {
   padding-right: 5px;
 }
 
-#ktqrxleifo .gt_first_grand_summary_row {
+#xaidbnlrkk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,11 +627,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_striped {
+#xaidbnlrkk .gt_striped {
   background-color: #F4F4F4;
 }
 
-#ktqrxleifo .gt_table_body {
+#xaidbnlrkk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -961,7 +640,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#ktqrxleifo .gt_footnotes {
+#xaidbnlrkk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -975,7 +654,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ktqrxleifo .gt_footnote {
+#xaidbnlrkk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -984,7 +663,7 @@ html {
   padding-right: 5px;
 }
 
-#ktqrxleifo .gt_sourcenotes {
+#xaidbnlrkk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -998,7 +677,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#ktqrxleifo .gt_sourcenote {
+#xaidbnlrkk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1006,64 +685,64 @@ html {
   padding-right: 5px;
 }
 
-#ktqrxleifo .gt_left {
+#xaidbnlrkk .gt_left {
   text-align: left;
 }
 
-#ktqrxleifo .gt_center {
+#xaidbnlrkk .gt_center {
   text-align: center;
 }
 
-#ktqrxleifo .gt_right {
+#xaidbnlrkk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ktqrxleifo .gt_font_normal {
+#xaidbnlrkk .gt_font_normal {
   font-weight: normal;
 }
 
-#ktqrxleifo .gt_font_bold {
+#xaidbnlrkk .gt_font_bold {
   font-weight: bold;
 }
 
-#ktqrxleifo .gt_font_italic {
+#xaidbnlrkk .gt_font_italic {
   font-style: italic;
 }
 
-#ktqrxleifo .gt_super {
+#xaidbnlrkk .gt_super {
   font-size: 65%;
 }
 
-#ktqrxleifo .gt_footnote_marks {
+#xaidbnlrkk .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#ktqrxleifo .gt_asterisk {
+#xaidbnlrkk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ktqrxleifo .gt_indent_1 {
+#xaidbnlrkk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ktqrxleifo .gt_indent_2 {
+#xaidbnlrkk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ktqrxleifo .gt_indent_3 {
+#xaidbnlrkk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ktqrxleifo .gt_indent_4 {
+#xaidbnlrkk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ktqrxleifo .gt_indent_5 {
+#xaidbnlrkk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1733,17 +1412,11 @@ html {
 </tbody>
 </table>
 </div>
-<p><br><br></p>
-</div>
 </div>
 <div class="section level3">
-<h3 id="dataset-geography-and-service">Dataset: Geography and Service<a class="anchor" aria-label="anchor" href="#dataset-geography-and-service"></a>
+<h3 id="geography-data-dictionary">Geography Data Dictionary<a class="anchor" aria-label="anchor" href="#geography-data-dictionary"></a>
 </h3>
-<p><br></p>
-<div class="section level4">
-<h4 id="data-dictionary-1">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-1"></a>
-</h4>
-<div id="orxvqnukmh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="notiolsxay" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -1751,7 +1424,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#orxvqnukmh .gt_table {
+#notiolsxay .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1776,7 +1449,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_heading {
+#notiolsxay .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1788,12 +1461,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#orxvqnukmh .gt_caption {
+#notiolsxay .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#orxvqnukmh .gt_title {
+#notiolsxay .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1805,7 +1478,7 @@ html {
   border-bottom-width: 0;
 }
 
-#orxvqnukmh .gt_subtitle {
+#notiolsxay .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1817,13 +1490,13 @@ html {
   border-top-width: 0;
 }
 
-#orxvqnukmh .gt_bottom_border {
+#notiolsxay .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_col_headings {
+#notiolsxay .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1838,7 +1511,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#orxvqnukmh .gt_col_heading {
+#notiolsxay .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1858,7 +1531,7 @@ html {
   overflow-x: hidden;
 }
 
-#orxvqnukmh .gt_column_spanner_outer {
+#notiolsxay .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1870,15 +1543,15 @@ html {
   padding-right: 4px;
 }
 
-#orxvqnukmh .gt_column_spanner_outer:first-child {
+#notiolsxay .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#orxvqnukmh .gt_column_spanner_outer:last-child {
+#notiolsxay .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#orxvqnukmh .gt_column_spanner {
+#notiolsxay .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -1890,7 +1563,7 @@ html {
   width: 100%;
 }
 
-#orxvqnukmh .gt_group_heading {
+#notiolsxay .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1916,7 +1589,7 @@ html {
   text-align: left;
 }
 
-#orxvqnukmh .gt_empty_group_heading {
+#notiolsxay .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1931,15 +1604,15 @@ html {
   vertical-align: middle;
 }
 
-#orxvqnukmh .gt_from_md > :first-child {
+#notiolsxay .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#orxvqnukmh .gt_from_md > :last-child {
+#notiolsxay .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#orxvqnukmh .gt_row {
+#notiolsxay .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1958,7 +1631,7 @@ html {
   overflow-x: hidden;
 }
 
-#orxvqnukmh .gt_stub {
+#notiolsxay .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1971,7 +1644,7 @@ html {
   padding-right: 5px;
 }
 
-#orxvqnukmh .gt_stub_row_group {
+#notiolsxay .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1985,11 +1658,11 @@ html {
   vertical-align: top;
 }
 
-#orxvqnukmh .gt_row_group_first td {
+#notiolsxay .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#orxvqnukmh .gt_summary_row {
+#notiolsxay .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1999,16 +1672,16 @@ html {
   padding-right: 5px;
 }
 
-#orxvqnukmh .gt_first_summary_row {
+#notiolsxay .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_first_summary_row.thick {
+#notiolsxay .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#orxvqnukmh .gt_last_summary_row {
+#notiolsxay .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2018,7 +1691,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_grand_summary_row {
+#notiolsxay .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2028,7 +1701,7 @@ html {
   padding-right: 5px;
 }
 
-#orxvqnukmh .gt_first_grand_summary_row {
+#notiolsxay .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2038,11 +1711,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_striped {
+#notiolsxay .gt_striped {
   background-color: #F4F4F4;
 }
 
-#orxvqnukmh .gt_table_body {
+#notiolsxay .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2051,7 +1724,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#orxvqnukmh .gt_footnotes {
+#notiolsxay .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2065,7 +1738,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#orxvqnukmh .gt_footnote {
+#notiolsxay .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2074,7 +1747,7 @@ html {
   padding-right: 5px;
 }
 
-#orxvqnukmh .gt_sourcenotes {
+#notiolsxay .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2088,7 +1761,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#orxvqnukmh .gt_sourcenote {
+#notiolsxay .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2096,64 +1769,64 @@ html {
   padding-right: 5px;
 }
 
-#orxvqnukmh .gt_left {
+#notiolsxay .gt_left {
   text-align: left;
 }
 
-#orxvqnukmh .gt_center {
+#notiolsxay .gt_center {
   text-align: center;
 }
 
-#orxvqnukmh .gt_right {
+#notiolsxay .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#orxvqnukmh .gt_font_normal {
+#notiolsxay .gt_font_normal {
   font-weight: normal;
 }
 
-#orxvqnukmh .gt_font_bold {
+#notiolsxay .gt_font_bold {
   font-weight: bold;
 }
 
-#orxvqnukmh .gt_font_italic {
+#notiolsxay .gt_font_italic {
   font-style: italic;
 }
 
-#orxvqnukmh .gt_super {
+#notiolsxay .gt_super {
   font-size: 65%;
 }
 
-#orxvqnukmh .gt_footnote_marks {
+#notiolsxay .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#orxvqnukmh .gt_asterisk {
+#notiolsxay .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#orxvqnukmh .gt_indent_1 {
+#notiolsxay .gt_indent_1 {
   text-indent: 5px;
 }
 
-#orxvqnukmh .gt_indent_2 {
+#notiolsxay .gt_indent_2 {
   text-indent: 10px;
 }
 
-#orxvqnukmh .gt_indent_3 {
+#notiolsxay .gt_indent_3 {
   text-indent: 15px;
 }
 
-#orxvqnukmh .gt_indent_4 {
+#notiolsxay .gt_indent_4 {
   text-indent: 20px;
 }
 
-#orxvqnukmh .gt_indent_5 {
+#notiolsxay .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2301,33 +1974,11 @@ html {
 </tbody>
 </table>
 </div>
-<p><br><br></p>
-</div>
 </div>
 <div class="section level3">
-<h3 id="dataset-provider-and-service">Dataset: Provider and Service<a class="anchor" aria-label="anchor" href="#dataset-provider-and-service"></a>
+<h3 id="service-data-dictionary">Service Data Dictionary<a class="anchor" aria-label="anchor" href="#service-data-dictionary"></a>
 </h3>
-<p><br></p>
-<p>The spending and utilization data in the Physician and Other
-Practitioners by Provider and Service Dataset are aggregated to the
-following:</p>
-<p><br></p>
-<ol style="list-style-type: decimal">
-<li>the NPI for the performing provider,</li>
-<li>the Healthcare Common Procedure Coding System (HCPCS) code, and</li>
-<li>the place of service (either facility or non-facility).</li>
-</ol>
-<p><br></p>
-<p>There can be multiple records for a given NPI based on the number of
-distinct HCPCS codes that were billed and where the services were
-provided. Data have been aggregated based on the place of service
-because separate fee schedules apply depending on whether the place of
-service submitted on the claim is facility or non-facility.</p>
-<p><br></p>
-<div class="section level4">
-<h4 id="data-dictionary-2">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-2"></a>
-</h4>
-<div id="madraejqbw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lhbpgfjzon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2335,7 +1986,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#madraejqbw .gt_table {
+#lhbpgfjzon .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2360,7 +2011,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#madraejqbw .gt_heading {
+#lhbpgfjzon .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2372,12 +2023,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#madraejqbw .gt_caption {
+#lhbpgfjzon .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#madraejqbw .gt_title {
+#lhbpgfjzon .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2389,7 +2040,7 @@ html {
   border-bottom-width: 0;
 }
 
-#madraejqbw .gt_subtitle {
+#lhbpgfjzon .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2401,13 +2052,13 @@ html {
   border-top-width: 0;
 }
 
-#madraejqbw .gt_bottom_border {
+#lhbpgfjzon .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#madraejqbw .gt_col_headings {
+#lhbpgfjzon .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2422,7 +2073,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#madraejqbw .gt_col_heading {
+#lhbpgfjzon .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2442,7 +2093,7 @@ html {
   overflow-x: hidden;
 }
 
-#madraejqbw .gt_column_spanner_outer {
+#lhbpgfjzon .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2454,15 +2105,15 @@ html {
   padding-right: 4px;
 }
 
-#madraejqbw .gt_column_spanner_outer:first-child {
+#lhbpgfjzon .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#madraejqbw .gt_column_spanner_outer:last-child {
+#lhbpgfjzon .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#madraejqbw .gt_column_spanner {
+#lhbpgfjzon .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2474,7 +2125,7 @@ html {
   width: 100%;
 }
 
-#madraejqbw .gt_group_heading {
+#lhbpgfjzon .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2500,7 +2151,7 @@ html {
   text-align: left;
 }
 
-#madraejqbw .gt_empty_group_heading {
+#lhbpgfjzon .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2515,15 +2166,15 @@ html {
   vertical-align: middle;
 }
 
-#madraejqbw .gt_from_md > :first-child {
+#lhbpgfjzon .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#madraejqbw .gt_from_md > :last-child {
+#lhbpgfjzon .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#madraejqbw .gt_row {
+#lhbpgfjzon .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2542,7 +2193,7 @@ html {
   overflow-x: hidden;
 }
 
-#madraejqbw .gt_stub {
+#lhbpgfjzon .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2555,7 +2206,7 @@ html {
   padding-right: 5px;
 }
 
-#madraejqbw .gt_stub_row_group {
+#lhbpgfjzon .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2569,11 +2220,11 @@ html {
   vertical-align: top;
 }
 
-#madraejqbw .gt_row_group_first td {
+#lhbpgfjzon .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#madraejqbw .gt_summary_row {
+#lhbpgfjzon .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2583,16 +2234,16 @@ html {
   padding-right: 5px;
 }
 
-#madraejqbw .gt_first_summary_row {
+#lhbpgfjzon .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#madraejqbw .gt_first_summary_row.thick {
+#lhbpgfjzon .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#madraejqbw .gt_last_summary_row {
+#lhbpgfjzon .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2602,7 +2253,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#madraejqbw .gt_grand_summary_row {
+#lhbpgfjzon .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2612,7 +2263,7 @@ html {
   padding-right: 5px;
 }
 
-#madraejqbw .gt_first_grand_summary_row {
+#lhbpgfjzon .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2622,11 +2273,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#madraejqbw .gt_striped {
+#lhbpgfjzon .gt_striped {
   background-color: #F4F4F4;
 }
 
-#madraejqbw .gt_table_body {
+#lhbpgfjzon .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2635,7 +2286,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#madraejqbw .gt_footnotes {
+#lhbpgfjzon .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2649,7 +2300,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#madraejqbw .gt_footnote {
+#lhbpgfjzon .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2658,7 +2309,7 @@ html {
   padding-right: 5px;
 }
 
-#madraejqbw .gt_sourcenotes {
+#lhbpgfjzon .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2672,7 +2323,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#madraejqbw .gt_sourcenote {
+#lhbpgfjzon .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2680,64 +2331,64 @@ html {
   padding-right: 5px;
 }
 
-#madraejqbw .gt_left {
+#lhbpgfjzon .gt_left {
   text-align: left;
 }
 
-#madraejqbw .gt_center {
+#lhbpgfjzon .gt_center {
   text-align: center;
 }
 
-#madraejqbw .gt_right {
+#lhbpgfjzon .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#madraejqbw .gt_font_normal {
+#lhbpgfjzon .gt_font_normal {
   font-weight: normal;
 }
 
-#madraejqbw .gt_font_bold {
+#lhbpgfjzon .gt_font_bold {
   font-weight: bold;
 }
 
-#madraejqbw .gt_font_italic {
+#lhbpgfjzon .gt_font_italic {
   font-style: italic;
 }
 
-#madraejqbw .gt_super {
+#lhbpgfjzon .gt_super {
   font-size: 65%;
 }
 
-#madraejqbw .gt_footnote_marks {
+#lhbpgfjzon .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#madraejqbw .gt_asterisk {
+#lhbpgfjzon .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#madraejqbw .gt_indent_1 {
+#lhbpgfjzon .gt_indent_1 {
   text-indent: 5px;
 }
 
-#madraejqbw .gt_indent_2 {
+#lhbpgfjzon .gt_indent_2 {
   text-indent: 10px;
 }
 
-#madraejqbw .gt_indent_3 {
+#lhbpgfjzon .gt_indent_3 {
   text-indent: 15px;
 }
 
-#madraejqbw .gt_indent_4 {
+#lhbpgfjzon .gt_indent_4 {
   text-indent: 20px;
 }
 
-#madraejqbw .gt_indent_5 {
+#lhbpgfjzon .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3014,6 +2665,204 @@ html {
 <p><br><br></p>
 </div>
 </div>
+<div class="section level2">
+<h2 id="key-data-sources">Key Data Sources<a class="anchor" aria-label="anchor" href="#key-data-sources"></a>
+</h2>
+<p><br></p>
+<p>The data for the Physician and Other Practitioners Dataset are based
+upon CMS administrative claims data for Medicare beneficiaries enrolled
+in the fee-for-service program. The data are available from the CMS
+Chronic Condition Data Warehouse (CCW), a database with 100% of Medicare
+enrollment and fee-for-service claims data. Service counts, beneficiary
+counts, provider charges, Medicare allowed amounts and payments and the
+place of service indicator are summarized from Part B non-institutional
+claims processed through Medicare Administrative Contractor (MAC)
+Jurisdictions (NCH Claim Type Codes ‘71’, ‘72’). Please see the <a href="https://www2.ccwdata.org/web/guest/home/" class="external-link">CCW website</a> for
+additional information.</p>
+<p><br></p>
+<p>For all Physician and Other Practitioners Dataset data years,
+provider demographics (name, credentials, gender, complete address and
+entity type) are included from the National Plan &amp; Provider
+Enumeration System (NPPES). CMS developed the NPPES to assign unique
+identifiers, known as National Provider Identifiers (NPIs), to health
+care providers. The health care provider’s demographic information is
+collected at the time of enrollment and updated periodically. The
+demographics information provided in the Physician and Other
+Practitioners Dataset was extracted from NPPES at the end of calendar
+year following the reporting year (e.g. for CY2017 reporting year, the
+NPPES data was extracted at the end of calendar year 2018). Please visit
+the <a href="https://nppes.cms.hhs.gov" class="external-link">NPPES website</a> for additional
+information.</p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="population">Population<a class="anchor" aria-label="anchor" href="#population"></a>
+</h2>
+<p><br></p>
+<p>The Physician and Other Practitioners Dataset includes data for
+providers that had a valid NPI and submitted Medicare Part B
+non-institutional claims (excluding DMEPOS) during the reporting period.
+To protect the privacy of Medicare beneficiaries, any aggregated records
+which are derived from 10 or fewer beneficiaries are excluded from the
+Physician and Other Practitioners Dataset.</p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="data-limitations">Data Limitations<a class="anchor" aria-label="anchor" href="#data-limitations"></a>
+</h2>
+<p><br></p>
+<p>Although the Physician and Other Practitioners Dataset has a wealth
+of payment and utilization information about many Medicare Part B
+services, the dataset also has a number of limitations that are worth
+noting.</p>
+<p><br></p>
+<p>First, the data in the Physician and Other Practitioners Dataset may
+not be representative of a physician’s entire practice. The data in the
+file only have information for Medicare beneficiaries with Part B FFS
+coverage, but physicians typically treat many other patients who do not
+have that form of coverage. The Physician and Other Practitioners
+Dataset does not have any information on patients who are not covered by
+Medicare, such as those with coverage from other federal programs (like
+the Federal Employees Health Benefits Program or Tricare), those with
+private health insurance (such as an individual policy or
+employer-sponsored coverage), or those who are uninsured. Even within
+Medicare, the Physician and Other Practitioners Dataset does not include
+information for patients who are enrolled in any form of Medicare
+Advantage plan.</p>
+<p><br></p>
+<p>The information presented in this file also does not indicate the
+quality of care provided by individual physicians. The file only
+contains cost and utilization information, and for the reasons described
+in the preceding paragraph, the volume of procedures presented may not
+be fully inclusive of all procedures performed by the provider. Medicare
+allowed amounts and Medicare payments for a given HCPCS code/place of
+service can vary based on a number of factors, including modifiers,
+geography, and other services performed during the same day/visit. For
+example, modifiers (two-character designators that signal a change in
+how the HCPCS code for the procedure or service should be applied) may
+be included on the claim line when the service intensity was increased
+or decreased, when an additional physician administered services, or
+when the service provided differs from the procedure definition. In some
+cases, modifiers impact allowed amounts and payments. In addition,
+allowed amounts and payments vary geographically because Medicare makes
+adjustments for most services based on an area’s cost of living. Allowed
+amounts and payments can also be adjusted when a physician renders
+multiple services to a beneficiary on the same day, which is referred to
+as a multiple procedure payment reduction. For standard payment and
+allowed amount rates by CPT/HCPCS code, please visit the <a href="https://www.cms.gov/apps/physician-fee-schedule/overview.aspx" class="external-link">Physician
+fee schedule</a>.</p>
+<p><br></p>
+<p>In general, when a provider administers drugs to a patient, the
+provider purchases the drug and Medicare pays the provider 106% of the
+average sales price (ASP) for the drug. Although the ASP list was used
+in these datasets to define drug services, the drugs listed on the ASP
+fee schedule are not a complete listing of drugs paid under part B, but
+the ASP fee schedule represents the majority of drugs that are used in
+the office. For more information on payments for drugs covered under
+Part B, please visit <a href="https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Part-B-Drugs/McrPartBDrugAvgSalesPrice/index" class="external-link">ASP
+Drug Pricing</a>.</p>
+<p><br></p>
+<p>Additionally, the data are not risk adjusted and thus do not account
+for difference in the underlying severity of disease of patient
+populations treated by providers. However, we have provided average
+beneficiary risk scores in the “Medicare Physician and Other
+Practitioners by Provider Dataset” (i.e., one record per NPI) to provide
+information on the health status of the beneficiaries the providers
+serve. Also, since the data presented are summarized from actual claims
+received from providers and no attempts were made to modify any data
+(i.e., no statistical outliers were removed or truncated), in rare
+instances the average submitted charge amount may reflect errors
+included on claims submitted by providers.</p>
+<p><br></p>
+<p>As noted earlier, the file does not include data for services that
+were performed on 10 or fewer beneficiaries, so users should be aware
+that summing the data in the file may underestimate the true Part B FFS
+totals. In addition, some providers bill under both an individual NPI
+and an organizational NPI. In this case, users cannot determine a
+provider’s actual total because there is no way to identify the
+individual’s portion when billed under their organization.</p>
+<p><br></p>
+<p>Medicare pays differently when services are provided in a facility
+setting versus a freestanding physicians’ office (or other non-facility
+setting). When services are delivered in a facility setting, Medicare
+makes two payments, one for the physician’s professional fee and one for
+the facility. For services delivered in a facility (Place_Of_Srvc =
+”F”), the data in the Physician and Other Practitioners Dataset
+generally represents the physician’s professional fee and does not
+include the facility payment. The exception is services delivered in
+Ambulatory Surgical Centers (ASCs). In these cases, both the physician’s
+professional fee and the ASC’s fee are represented in the Physician and
+Other Practitioners Dataset. ASCs can be identified using the provider
+type. For services delivered in a non-facility setting, such as a
+physician’s office (Place_Of_Srvc = ”O”), the Physician and Other
+Practitioners Dataset represents the complete payment for the
+service.</p>
+<p><br></p>
+<p>If users try to link data from this file to other public datasets,
+please be aware of the particular Medicare populations included and
+timeframes used in each file that will be merged. For example, efforts
+to link the Physician and Other Practitioners Dataset data to Part D
+prescription drug data would need to account for the fact that some
+beneficiaries who have FFS Part B coverage (and are thus included in the
+Physician and Other Practitioners Dataset) do not have Part D drug
+coverage (and thus not represented in Part D data files). At the same
+time, some beneficiaries that have Part D coverage (and are thus
+included in the Part D data) do not have FFS Part B coverage (and thus
+not included in the Physician and Other Practitioners Dataset). Another
+example would be linking to data constructed from different or
+non-aligning time periods, such as publically available data on
+physician referral patterns, which is based on an 18-month period.</p>
+<p><br></p>
+<p>Finally, users should be aware that payments from some CMS
+demonstration programs are included in the Physician and Other
+Practitioners Dataset. Since some CMS demonstration programs utilize the
+Medicare claims submission process, payments for services under these
+demonstrations are included in the data file and may be grouped under
+specific demonstration HCPCS codes or aggregated under non-demonstration
+specific HCPCS codes. Demonstration programs that are paid outside of
+the Medicare claims submission process are not included in the Physician
+and Other Practitioners Dataset.</p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="additional-information">Additional Information<a class="anchor" aria-label="anchor" href="#additional-information"></a>
+</h2>
+<p><strong>Other Data Sources</strong></p>
+<p>CMS also releases the “Medicare Fee-For-Service Public Provider
+Enrollment Data” that include provider name and address information from
+the Provider Enrollment and Chain Ownership System (PECOS). These data
+are updated on a quarterly basis and are available at <a href="https://data.cms.gov/resources/data.cms.gov" class="external-link">data.cms.gov</a>.</p>
+<p><br></p>
+<p><strong>Medicare Standardized Spending</strong></p>
+<p>Users can find more information on Medicare payment standardization
+by referring to the Geographic Variation Methodology available within
+the “Risk adjustment and standardization” section of the following web
+page: <a href="https://data.cms.gov/resources/geographic-variation-methodology" class="external-link">Geographic
+Variation Methodology</a>.</p>
+<p><br></p>
+<p><strong>HCCs (Hierarchical Condition Categories)</strong></p>
+<p>CMS developed a risk-adjustment model that uses HCCs (hierarchical
+condition categories) to assign risk scores. Those scores estimate how
+beneficiaries’ FFS spending will compare to the overall average for the
+entire Medicare population. The summary on average risk scores of
+beneficiaries represented in each calendar year of the Medicare
+Physician &amp; Other Practitioners - by Provider dataset are located in
+the “Resources’” section of the following web page: <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare
+Physician &amp; Other Practitioners - by Provider</a>. Beneficiaries
+with scores greater than the average risk score are expected to have
+above-average spending, and vice versa. Risk scores are based on a
+beneficiary’s age and sex; whether the beneficiary is eligible for
+Medicaid, first qualified for Medicare on the basis of disability, or
+lives in an institution (usually a nursing home); and the beneficiary’s
+diagnoses from the previous year.</p>
+<p><br></p>
+<p>The HCC model was designed for risk adjustment on larger populations,
+such as the enrollees in an MA plan, and generates more accurate results
+when used to compare groups of beneficiaries rather than individuals.
+Please visit <a href="https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Risk-Adjustors" class="external-link">HCC
+risk score</a> for more information.</p>
+<p><br><br></p>
+<hr>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
