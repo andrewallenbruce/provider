@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9005 (2023-01-22)
+
+* nesting larger outputs
+
+
 # provider 0.0.0.9004 (2023-01-21)
 
 * initial implementation of distribution id update functions
