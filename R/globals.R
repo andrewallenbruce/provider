@@ -23,9 +23,21 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi>
   "basic_first_name", # <nppes_npi>
   "basic_last_name", # <nppes_npi>
-  "record_id", # <open_payments>
   "program_year", # <open_payments>
-  "record_number", # <open_payments>
+  "contextual_information", # <open_payments>
+  "number_of_payments_included_in_total_amount", # <open_payments>
+  "related_product_indicator", # <open_payments>
+  "physician_ownership_indicator", # <open_payments>
+  "third_party_payment_recipient_indicator", # <open_payments>
+  "name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc", # <open_payments>
+  "charity_indicator", # <open_payments>
+  "third_party_equals_covered_recipient_indicator", # <open_payments>
+  "city_of_travel", # <open_payments>
+  "state_of_travel", # <open_payments>
+  "country_of_travel", # <open_payments>
+  "payment_publication_date", # <open_payments>
+  "delay_in_publication_indicator", # <open_payments>
+  "dispute_status_for_publication", # <open_payments>
   "title", # <open_payments_update_ids>
   "modified", # <open_payments_update_ids>
   "distribution", # <open_payments_update_ids>
@@ -39,7 +51,31 @@ utils::globalVariables(c(
   "PMD", # <order_refer>
   "Year", # <physician_by_geography>
   "Year", # <physician_by_provider>
+  "Tot_HCPCS_Cds", # <physician_by_provider>
+  "Tot_Benes", # <physician_by_provider>
+  "Tot_Srvcs", # <physician_by_provider>
+  "Drug_Tot_HCPCS_Cds", # <physician_by_provider>
+  "Drug_Tot_Benes", # <physician_by_provider>
+  "Drug_Tot_Srvcs", # <physician_by_provider>
+  "Med_Tot_HCPCS_Cds", # <physician_by_provider>
+  "Med_Tot_Benes", # <physician_by_provider>
+  "Med_Tot_Srvcs", # <physician_by_provider>
+  "bene_avg_age", # <physician_by_provider>
+  "bene_age_gt_84_cnt", # <physician_by_provider>
+  "bene_feml_cnt", # <physician_by_provider>
+  "bene_male_cnt", # <physician_by_provider>
+  "bene_dual_cnt", # <physician_by_provider>
+  "bene_ndual_cnt", # <physician_by_provider>
+  "bene_cc_af_pct", # <physician_by_provider>
+  "bene_avg_risk_scre", # <physician_by_provider>
   "Year", # <physician_by_service>
+  "Tot_Benes", # <physician_by_service>
+  "Tot_Srvcs", # <physician_by_service>
+  "Tot_Bene_Day_Srvcs", # <physician_by_service>
+  "hcpcs_cd", # <physician_by_service>
+  "hcpcs_desc", # <physician_by_service>
+  "hcpcs_drug_ind", # <physician_by_service>
+  "place_of_srvc", # <physician_by_service>
   ":=", # <age_days>
   "int", # <days_today>
   "secs", # <days_today>

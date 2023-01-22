@@ -33,7 +33,7 @@ row <- function(...) {div(class = "custom_note", ...)}
 
 <br>
 
-```{r setup}
+```{r}
 library(provider)
 ```
 
@@ -45,102 +45,11 @@ row("Information on services and procedures provided to Original Medicare (fee-f
 
 <br>
 
-## Background
-
-<br>
-
 The Centers for Medicare & Medicaid Services (CMS) has prepared a public data set, the Provider Utilization and Payment Data Physician and Other Practitioners Dataset, with information on services and procedures provided to Medicare beneficiaries by physicians and other healthcare professionals. The Physician and Other Practitioners Dataset contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. The data in the Physician and Other Practitioners dataset contains 100% final-action (i.e., all claim adjustments have been resolved) physician/supplier Part B non-institutional line items for the Medicare fee-for-service (FFS) population. Claims processed by Durable Medical Equipment, Prosthetic, Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC) are not included in the Physician and Other Practitioners Dataset.
 
 <br>
 
-## Key Data Sources
-
-<br>
-
-The data for the Physician and Other Practitioners Dataset are based upon CMS administrative claims data for Medicare beneficiaries enrolled in the fee-for-service program. The data are available from the CMS Chronic Condition Data Warehouse (CCW), a database with 100% of Medicare enrollment and fee-for-service claims data. Service counts, beneficiary counts, provider charges, Medicare allowed amounts and payments and the place of service indicator are summarized from Part B non-institutional claims processed through Medicare Administrative Contractor (MAC) Jurisdictions (NCH Claim Type Codes '71', '72'). Please see the [CCW website](https://www2.ccwdata.org/web/guest/home/) for additional information.
-
-<br>
-
-For all Physician and Other Practitioners Dataset data years, provider demographics (name, credentials, gender, complete address and entity type) are included from the National Plan & Provider Enumeration System (NPPES). CMS developed the NPPES to assign unique identifiers, known as National Provider Identifiers (NPIs), to health care providers. The health care provider’s demographic information is collected at the time of enrollment and updated periodically. The demographics information provided in the Physician and Other Practitioners Dataset was extracted from NPPES at the end of calendar year following the reporting year (e.g. for CY2017 reporting year, the NPPES data was extracted at the end of calendar year 2018). Please visit the [NPPES website](https://nppes.cms.hhs.gov) for additional information.
-
-<br>
-
-## Population
-
-<br>
-
-The Physician and Other Practitioners Dataset includes data for providers that had a valid NPI and submitted Medicare Part B non-institutional claims (excluding DMEPOS) during the reporting period. To protect the privacy of Medicare beneficiaries, any aggregated records which are derived from 10 or fewer beneficiaries are excluded from the Physician and Other Practitioners Dataset.
-
-<br>
-
-## Data Limitations
-
-<br>
-
-Although the Physician and Other Practitioners Dataset has a wealth of payment and utilization information about many Medicare Part B services, the dataset also has a number of limitations that are worth noting.
-
-<br>
-
-First, the data in the Physician and Other Practitioners Dataset may not be representative of a physician’s entire practice. The data in the file only have information for Medicare beneficiaries with Part B FFS coverage, but physicians typically treat many other patients who do not have that form of coverage. The Physician and Other Practitioners Dataset does not have any information on patients who are not covered by Medicare, such as those with coverage from other federal programs (like the Federal Employees Health Benefits Program or Tricare), those with private health insurance (such as an individual policy or employer-sponsored coverage), or those who are uninsured. Even within Medicare, the Physician and Other Practitioners Dataset does not include information for patients who are enrolled in any form of Medicare Advantage plan.
-
-<br>
-
-The information presented in this file also does not indicate the quality of care provided by individual physicians. The file only contains cost and utilization information, and for the reasons described in the preceding paragraph, the volume of procedures presented may not be fully inclusive of all procedures performed by the provider. 
-Medicare allowed amounts and Medicare payments for a given HCPCS code/place of service can vary based on a number of factors, including modifiers, geography, and other services performed during the same day/visit. For example, modifiers (two-character designators that signal a change in how the HCPCS code for the procedure or service should be applied) may be included on the claim line when the service intensity was increased or decreased, when an additional physician administered services, or when the service provided differs from the procedure definition. In some cases, modifiers impact allowed amounts and payments. In addition, allowed amounts and payments vary geographically because Medicare makes adjustments for most services based on an area's cost of living. Allowed amounts and payments can also be adjusted when a physician renders multiple services to a beneficiary on the same day, which is referred to as a multiple procedure payment reduction.  For standard payment and allowed amount rates by CPT/HCPCS code, please visit the [Physician fee schedule](https://www.cms.gov/apps/physician-fee-schedule/overview.aspx). 
-
-<br>
-
-In general, when a provider administers drugs to a patient, the provider purchases the drug and Medicare pays the provider 106% of the average sales price (ASP) for the drug.  Although the ASP list was used in these datasets to define drug services, the drugs listed on the ASP fee schedule are not a complete listing of drugs paid under part B, but the ASP fee schedule represents the majority of drugs that are used in the office. For more information on payments for drugs covered under Part B, please visit [ASP Drug Pricing](https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Part-B-Drugs/McrPartBDrugAvgSalesPrice/index). 
-
-<br>
-
-Additionally, the data are not risk adjusted and thus do not account for difference in the underlying severity of disease of patient populations treated by providers. However, we have provided average beneficiary risk scores in the “Medicare Physician and Other Practitioners by Provider Dataset” (i.e., one record per NPI) to provide information on the health status of the beneficiaries the providers serve. Also, since the data presented are summarized from actual claims received from providers and no attempts were made to modify any data (i.e., no statistical outliers were removed or truncated), in rare instances the average submitted charge amount may reflect errors included on claims submitted by providers.
-
-<br>
-
-As noted earlier, the file does not include data for services that were performed on 10 or fewer beneficiaries, so users should be aware that summing the data in the file may underestimate the true Part B FFS totals.  In addition, some providers bill under both an individual NPI and an organizational NPI.  In this case, users cannot determine a provider’s actual total because there is no way to identify the individual’s portion when billed under their organization.
-
-<br>
-
-Medicare pays differently when services are provided in a facility setting versus a freestanding physicians’ office (or other non-facility setting).  When services are delivered in a facility setting, Medicare makes two payments, one for the physician’s professional fee and one for the facility. For services delivered in a facility (Place_Of_Srvc = ”F”), the data in the Physician and Other Practitioners Dataset generally represents the physician’s professional fee and does not include the facility payment.  The exception is services delivered in Ambulatory Surgical Centers (ASCs). In these cases, both the physician’s professional fee and the ASC’s fee are represented in the Physician and Other Practitioners Dataset. ASCs can be identified using the provider type. For services delivered in a non-facility setting, such as a physician’s office (Place_Of_Srvc = ”O”), the Physician and Other Practitioners Dataset represents the complete payment for the service.  
-
-<br>
-
-If users try to link data from this file to other public datasets, please be aware of the particular Medicare populations included and timeframes used in each file that will be merged.  For example, efforts to link the Physician and Other Practitioners Dataset data to Part D prescription drug data would need to account for the fact that some beneficiaries who have FFS Part B coverage (and are thus included in the Physician and Other Practitioners Dataset) do not have Part D drug coverage (and thus not represented in Part D data files).  At the same time, some beneficiaries that have Part D coverage (and are thus included in the Part D data) do not have FFS Part B coverage (and thus not included in the Physician and Other Practitioners Dataset).  Another example would be linking to data constructed from different or non-aligning time periods, such as publically available data on physician referral patterns, which is based on an 18-month period.  
-
-<br>
-
-Finally, users should be aware that payments from some CMS demonstration programs are included in the Physician and Other Practitioners Dataset.  Since some CMS demonstration programs utilize the Medicare claims submission process, payments for services under these demonstrations are included in the data file and may be grouped under specific demonstration HCPCS codes or aggregated under non-demonstration specific HCPCS codes.  Demonstration programs that are paid outside of the Medicare claims submission process are not included in the Physician and Other Practitioners Dataset.
-
-<br>
-
-## Additional Information
-
-**Other Data Sources**
-
-CMS also releases the “Medicare Fee-For-Service Public Provider Enrollment Data” that include provider name and address information from the Provider Enrollment and Chain Ownership System (PECOS). These data are updated on a quarterly basis and are available at [data.cms.gov](https://data.cms.gov/resources/data.cms.gov).
-
-<br>
-
-**Medicare Standardized Spending**
-
-Users can find more information on Medicare payment standardization by referring to the Geographic Variation Methodology available within the “Risk adjustment and standardization” section of the following web page:  [Geographic Variation Methodology](https://data.cms.gov/resources/geographic-variation-methodology).
-
-<br>
-
-**HCCs (Hierarchical Condition Categories)**
-
-CMS developed a risk-adjustment model that uses HCCs (hierarchical condition categories) to assign risk scores. Those scores estimate how beneficiaries’ FFS spending will compare to the overall average for the entire Medicare population. The summary on average risk scores of beneficiaries represented in each calendar year of the Medicare Physician & Other Practitioners - by Provider dataset are located in the "Resources'" section of the following web page: [Medicare Physician & Other Practitioners - by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider). Beneficiaries with scores greater than the average risk score are expected to have above-average spending, and vice versa. Risk scores are based on a beneficiary’s age and sex; whether the beneficiary is eligible for Medicaid, first qualified for Medicare on the basis of disability, or lives in an institution (usually a nursing home); and the beneficiary’s diagnoses from the previous year.
-
-<br>
-
-The HCC model was designed for risk adjustment on larger populations, such as the enrollees in an MA plan, and generates more accurate results when used to compare groups of beneficiaries rather than individuals. Please visit [HCC risk score](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Risk-Adjustors) for more information.
-
-<br><br>
-
-------------------------------------------------------------------------------
-
-# Dataset: Provider
+## Physician & Other Practitioners: **by Provider**
 
 <br>
 
@@ -150,58 +59,105 @@ The **Provider** data subset provides information on use, payments, submitted ch
   * Data source: **Centers for Medicare & Medicaid Services**
   
   
-## Examples
+### Examples
 
 ```{r}
-physician_by_provider(npi = 1003000126) |> terse::terse()
-```
-
-
-<br>
-
-```{r}
-physician_by_provider(npi = 1003000423, year = 2020) |> terse::terse()
+physician_by_provider(npi = 1003000423, year = 2020)
 ```
 
 <br>
 
 ```{r}
-physician_by_provider(type = "I",
-                      city = "Hershey",
-                      state = "PA",
-                      fips = 42,
-                      ruca = 1,
-                      gender = "F",
-                      cred = "M.D.",
-                      specialty = "Anesthesiology") |> terse::terse()
+physician_by_provider(type = "I", 
+                      city = "Hershey", 
+                      state = "PA", 
+                      fips = 42, 
+                      ruca = 1, 
+                      gender = "F", 
+                      cred = "M.D.", 
+                      specialty = "Anesthesiology")
 ```
 
 
 ```{r}
-#purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x)) |> terse::terse()
-```
-
-```{r}
-x20 <- physician_by_provider(npi = 1003000126, year = 2020)
-x19 <- physician_by_provider(npi = 1003000126, year = 2019)
-x18 <- physician_by_provider(npi = 1003000126, year = 2018)
-
-xx18 <- x18 |> dplyr::mutate(dplyr::across(dplyr::ends_with("cnt"), ~as.integer(.)),
-                     dplyr::across(dplyr::ends_with("pct"), ~as.double(.)),
-                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |> 
-  tidyr::nest(rndrng_prvdr = dplyr::contains("rndrng_prvdr"),
-              totals = dplyr::starts_with("tot_"),
-              drug = dplyr::starts_with("drug_"),
-              med = dplyr::starts_with("med_"),
-              bene = dplyr::starts_with("bene_"))
-xx18$rndrng_prvdr
+x <- purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
 ```
 
 
-### Data Dictionary
+
 
 <br>
+<br>
+
+## Physician & Other Practitioners: **by Geography and Service**
+
+<br>
+
+### Examples
+
+```{r}
+physician_by_geography(hcpcs_code = "0002A", year = 2020)
+```
+
+<br><br>
+
+```{r}
+service <- purrr::map_dfr(as.character(2013:2020), ~physician_by_service(npi = 1003000126, year = .x))
+```
+
+<br><br>
+
+## Physician & Other Practitioners: **by Provider and Service**
+
+<br>
+
+The spending and utilization data in the Physician and Other Practitioners by Provider and Service Dataset are aggregated to the following:
+
+<br>
+
+  1. the NPI for the performing provider,
+  2. the Healthcare Common Procedure Coding System (HCPCS) code, and
+  3. the place of service (either facility or non-facility).
+
+<br>
+
+There can be multiple records for a given NPI based on the number of distinct HCPCS codes that were billed and where the services were provided. Data have been aggregated based on the place of service because separate fee schedules apply depending on whether the place of service submitted on the claim is facility or non-facility.
+
+<br>
+
+### Examples
+
+```{r}
+# Search by NPI
+physician_by_service(npi = 1003000126)
+```
+
+
+```{r}
+# Search by Last Name for 2019
+physician_by_service(npi = 1720392988, year = 2019)
+```
+
+
+```{r}
+# Multiple NPIs
+#npis <- c(1003026055,
+          1720392988,
+          1518184605,
+          1922056829,
+          1083879860)
+
+#npis |> purrr::map_dfr(physician_by_service)
+```
+
+
+```{r}
+# Retrieve All Provider Data, 2013-2020
+purrr::map_dfr(as.character(2013:2020),
+~physician_by_service(npi = 1003000126, year = .x))
+```
+
+### Provider Data Dictionary
 
 ```{r echo=FALSE}
 tibble::tibble(
@@ -390,14 +346,7 @@ tibble::tibble(
 ```
 
 
-<br>
-<br>
-
-## Dataset: Geography and Service
-
-<br>
-
-### Data Dictionary
+### Geography Data Dictionary
 
 ```{r echo=FALSE}
 tibble::tibble(
@@ -447,28 +396,8 @@ tibble::tibble(
   gt::opt_table_outline(style = "none")
 ```
 
-<br><br>
 
-## Dataset: Provider and Service
-
-<br>
-
-The spending and utilization data in the Physician and Other Practitioners by Provider and Service Dataset are aggregated to the following:
-
-<br>
-
-  1. the NPI for the performing provider,
-  2. the Healthcare Common Procedure Coding System (HCPCS) code, and
-  3. the place of service (either facility or non-facility).
-
-<br>
-
-There can be multiple records for a given NPI based on the number of distinct HCPCS codes that were billed and where the services were provided. Data have been aggregated based on the place of service because separate fee schedules apply depending on whether the place of service submitted on the claim is facility or non-facility.
-
-<br>
-
-
-### Data Dictionary
+### Service Data Dictionary
 
 ```{r echo=FALSE}
 tibble::tibble(
@@ -541,3 +470,91 @@ tibble::tibble(
 ```
 
 <br><br>
+
+
+## Key Data Sources
+
+<br>
+
+The data for the Physician and Other Practitioners Dataset are based upon CMS administrative claims data for Medicare beneficiaries enrolled in the fee-for-service program. The data are available from the CMS Chronic Condition Data Warehouse (CCW), a database with 100% of Medicare enrollment and fee-for-service claims data. Service counts, beneficiary counts, provider charges, Medicare allowed amounts and payments and the place of service indicator are summarized from Part B non-institutional claims processed through Medicare Administrative Contractor (MAC) Jurisdictions (NCH Claim Type Codes '71', '72'). Please see the [CCW website](https://www2.ccwdata.org/web/guest/home/) for additional information.
+
+<br>
+
+For all Physician and Other Practitioners Dataset data years, provider demographics (name, credentials, gender, complete address and entity type) are included from the National Plan & Provider Enumeration System (NPPES). CMS developed the NPPES to assign unique identifiers, known as National Provider Identifiers (NPIs), to health care providers. The health care provider’s demographic information is collected at the time of enrollment and updated periodically. The demographics information provided in the Physician and Other Practitioners Dataset was extracted from NPPES at the end of calendar year following the reporting year (e.g. for CY2017 reporting year, the NPPES data was extracted at the end of calendar year 2018). Please visit the [NPPES website](https://nppes.cms.hhs.gov) for additional information.
+
+<br>
+
+## Population
+
+<br>
+
+The Physician and Other Practitioners Dataset includes data for providers that had a valid NPI and submitted Medicare Part B non-institutional claims (excluding DMEPOS) during the reporting period. To protect the privacy of Medicare beneficiaries, any aggregated records which are derived from 10 or fewer beneficiaries are excluded from the Physician and Other Practitioners Dataset.
+
+<br>
+
+## Data Limitations
+
+<br>
+
+Although the Physician and Other Practitioners Dataset has a wealth of payment and utilization information about many Medicare Part B services, the dataset also has a number of limitations that are worth noting.
+
+<br>
+
+First, the data in the Physician and Other Practitioners Dataset may not be representative of a physician’s entire practice. The data in the file only have information for Medicare beneficiaries with Part B FFS coverage, but physicians typically treat many other patients who do not have that form of coverage. The Physician and Other Practitioners Dataset does not have any information on patients who are not covered by Medicare, such as those with coverage from other federal programs (like the Federal Employees Health Benefits Program or Tricare), those with private health insurance (such as an individual policy or employer-sponsored coverage), or those who are uninsured. Even within Medicare, the Physician and Other Practitioners Dataset does not include information for patients who are enrolled in any form of Medicare Advantage plan.
+
+<br>
+
+The information presented in this file also does not indicate the quality of care provided by individual physicians. The file only contains cost and utilization information, and for the reasons described in the preceding paragraph, the volume of procedures presented may not be fully inclusive of all procedures performed by the provider. 
+Medicare allowed amounts and Medicare payments for a given HCPCS code/place of service can vary based on a number of factors, including modifiers, geography, and other services performed during the same day/visit. For example, modifiers (two-character designators that signal a change in how the HCPCS code for the procedure or service should be applied) may be included on the claim line when the service intensity was increased or decreased, when an additional physician administered services, or when the service provided differs from the procedure definition. In some cases, modifiers impact allowed amounts and payments. In addition, allowed amounts and payments vary geographically because Medicare makes adjustments for most services based on an area's cost of living. Allowed amounts and payments can also be adjusted when a physician renders multiple services to a beneficiary on the same day, which is referred to as a multiple procedure payment reduction.  For standard payment and allowed amount rates by CPT/HCPCS code, please visit the [Physician fee schedule](https://www.cms.gov/apps/physician-fee-schedule/overview.aspx). 
+
+<br>
+
+In general, when a provider administers drugs to a patient, the provider purchases the drug and Medicare pays the provider 106% of the average sales price (ASP) for the drug.  Although the ASP list was used in these datasets to define drug services, the drugs listed on the ASP fee schedule are not a complete listing of drugs paid under part B, but the ASP fee schedule represents the majority of drugs that are used in the office. For more information on payments for drugs covered under Part B, please visit [ASP Drug Pricing](https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Part-B-Drugs/McrPartBDrugAvgSalesPrice/index). 
+
+<br>
+
+Additionally, the data are not risk adjusted and thus do not account for difference in the underlying severity of disease of patient populations treated by providers. However, we have provided average beneficiary risk scores in the “Medicare Physician and Other Practitioners by Provider Dataset” (i.e., one record per NPI) to provide information on the health status of the beneficiaries the providers serve. Also, since the data presented are summarized from actual claims received from providers and no attempts were made to modify any data (i.e., no statistical outliers were removed or truncated), in rare instances the average submitted charge amount may reflect errors included on claims submitted by providers.
+
+<br>
+
+As noted earlier, the file does not include data for services that were performed on 10 or fewer beneficiaries, so users should be aware that summing the data in the file may underestimate the true Part B FFS totals.  In addition, some providers bill under both an individual NPI and an organizational NPI.  In this case, users cannot determine a provider’s actual total because there is no way to identify the individual’s portion when billed under their organization.
+
+<br>
+
+Medicare pays differently when services are provided in a facility setting versus a freestanding physicians’ office (or other non-facility setting).  When services are delivered in a facility setting, Medicare makes two payments, one for the physician’s professional fee and one for the facility. For services delivered in a facility (Place_Of_Srvc = ”F”), the data in the Physician and Other Practitioners Dataset generally represents the physician’s professional fee and does not include the facility payment.  The exception is services delivered in Ambulatory Surgical Centers (ASCs). In these cases, both the physician’s professional fee and the ASC’s fee are represented in the Physician and Other Practitioners Dataset. ASCs can be identified using the provider type. For services delivered in a non-facility setting, such as a physician’s office (Place_Of_Srvc = ”O”), the Physician and Other Practitioners Dataset represents the complete payment for the service.  
+
+<br>
+
+If users try to link data from this file to other public datasets, please be aware of the particular Medicare populations included and timeframes used in each file that will be merged.  For example, efforts to link the Physician and Other Practitioners Dataset data to Part D prescription drug data would need to account for the fact that some beneficiaries who have FFS Part B coverage (and are thus included in the Physician and Other Practitioners Dataset) do not have Part D drug coverage (and thus not represented in Part D data files).  At the same time, some beneficiaries that have Part D coverage (and are thus included in the Part D data) do not have FFS Part B coverage (and thus not included in the Physician and Other Practitioners Dataset).  Another example would be linking to data constructed from different or non-aligning time periods, such as publically available data on physician referral patterns, which is based on an 18-month period.  
+
+<br>
+
+Finally, users should be aware that payments from some CMS demonstration programs are included in the Physician and Other Practitioners Dataset.  Since some CMS demonstration programs utilize the Medicare claims submission process, payments for services under these demonstrations are included in the data file and may be grouped under specific demonstration HCPCS codes or aggregated under non-demonstration specific HCPCS codes.  Demonstration programs that are paid outside of the Medicare claims submission process are not included in the Physician and Other Practitioners Dataset.
+
+<br>
+
+## Additional Information
+
+**Other Data Sources**
+
+CMS also releases the “Medicare Fee-For-Service Public Provider Enrollment Data” that include provider name and address information from the Provider Enrollment and Chain Ownership System (PECOS). These data are updated on a quarterly basis and are available at [data.cms.gov](https://data.cms.gov/resources/data.cms.gov).
+
+<br>
+
+**Medicare Standardized Spending**
+
+Users can find more information on Medicare payment standardization by referring to the Geographic Variation Methodology available within the “Risk adjustment and standardization” section of the following web page:  [Geographic Variation Methodology](https://data.cms.gov/resources/geographic-variation-methodology).
+
+<br>
+
+**HCCs (Hierarchical Condition Categories)**
+
+CMS developed a risk-adjustment model that uses HCCs (hierarchical condition categories) to assign risk scores. Those scores estimate how beneficiaries’ FFS spending will compare to the overall average for the entire Medicare population. The summary on average risk scores of beneficiaries represented in each calendar year of the Medicare Physician & Other Practitioners - by Provider dataset are located in the "Resources'" section of the following web page: [Medicare Physician & Other Practitioners - by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider). Beneficiaries with scores greater than the average risk score are expected to have above-average spending, and vice versa. Risk scores are based on a beneficiary’s age and sex; whether the beneficiary is eligible for Medicaid, first qualified for Medicare on the basis of disability, or lives in an institution (usually a nursing home); and the beneficiary’s diagnoses from the previous year.
+
+<br>
+
+The HCC model was designed for risk adjustment on larger populations, such as the enrollees in an MA plan, and generates more accurate results when used to compare groups of beneficiaries rather than individuals. Please visit [HCC risk score](https://www.cms.gov/Medicare/Health-Plans/MedicareAdvtgSpecRateStats/Risk-Adjustors) for more information.
+
+<br><br>
+
+------------------------------------------------------------------------------

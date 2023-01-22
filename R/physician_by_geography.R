@@ -97,15 +97,18 @@ physician_by_geography <- function(geo_level   = NULL,
                                    clean_names = TRUE,
                                    lowercase   = TRUE) {
 
+  # update distribution ids -------------------------------------------------
+  ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Geography and Service")
+
   # dataset version ids by year ----------------------------------------------
-  id <- dplyr::case_when(year == 2020 ~ "6fea9d79-0129-4e4c-b1b8-23cd86a4f435",
-                         year == 2019 ~ "673030ae-ceed-4561-8fca-b1275395a86a",
-                         year == 2018 ~ "05a85700-052f-4509-af43-7042b9b35868",
-                         year == 2017 ~ "8e96a9f2-ce6e-46fd-b30d-8c695c756bfd",
-                         year == 2016 ~ "c7d3f18c-2f00-4553-8cd1-871b727d5cdd",
-                         year == 2015 ~ "dbee9609-2c90-43ca-b1b8-161bd9cfcdb2",
-                         year == 2014 ~ "28181bd2-b377-4003-b73a-4bd92d1db4a9",
-                         year == 2013 ~ "3c2a4756-0a8c-4e4d-845a-6ad169cb13d3")
+  id <- dplyr::case_when(year == 2020 ~ ids$distribution[2],
+                         year == 2019 ~ ids$distribution[3],
+                         year == 2018 ~ ids$distribution[4],
+                         year == 2017 ~ ids$distribution[5],
+                         year == 2016 ~ ids$distribution[6],
+                         year == 2015 ~ ids$distribution[7],
+                         year == 2014 ~ ids$distribution[8],
+                         year == 2013 ~ ids$distribution[9])
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

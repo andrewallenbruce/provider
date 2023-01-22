@@ -149,30 +149,49 @@ library(provider)
 
 ## Motivation
 
+<br>
+
 This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. It only gets interesting when you start to link them together.
 
-### NPPES National Provider Identifier Registry API
+<br>
+
+## NPPES NPI Registry API
+
+> **Info**  
+> The Windows installer modifes your PATH. When using Windows Terminal, you will need to **open a new window** for the changes to take affect. (Simply opening a new tab will _not_ be sufficient.)
 
 
-```{r}
-nppes <- tibble::tribble(
-~fn,         ~params,
-"nppes_npi", list(npi = 1336413418),
-"nppes_npi", list(npi = 1659781227),
-"nppes_npi", list(prov_type = "NPI-2", city = "Baltimore", state = "MD", limit = 5),
-"nppes_npi", list(prov_type = "NPI-1", city = "Atlanta", state = "GA", limit = 5),
-)
 
-purrr::invoke_map_dfr(nppes$fn, nppes$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
+```{r results='asis', echo=TRUE}
+nppes_npi(npi = 1710975040) # NPI-1
+```
+
+
+```{r results='asis', echo=TRUE}
+nppes_npi(npi = 1336413418) # NPI-2
+```
+
+
+```{r results='asis', echo=TRUE}
+nppes_npi(npi = 1659781227) # Deactivated
 ```
 
 
 <br>
 
-### CMS Open Payments Program API
+## CMS Open Payments API
 
 ```{r}
-open_payments(covered_recipient_npi = "1043218118") |> terse::terse(config = list(ansi = FALSE), width = 100)
+open_payments(recipient_npi = 1043218118)
+```
+
+
+<br>
+
+## CMS Missing Digital Contact Information API
+
+```{r}
+provider::missing_information(npi = 1144224569) |> terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
 
@@ -257,14 +276,6 @@ provider::revalidation_group(ind_npi = 1710912209) |> terse::terse(config = list
 
 <br>
 
-### CMS Public Reporting of Missing Digital Contact Information API
-
-```{r}
-provider::missing_information(npi = 1144224569) |> terse::terse(config = list(ansi = FALSE), width = 100)
-```
-
-<br>
-
 ### Medicare Physician & Other Practitioners APIs
 
 <br>
@@ -308,7 +319,57 @@ purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", 
 <br>
 
 ```{r}
-physician_by_provider(npi = 1003000126) |> terse::terse(config = list(ansi = FALSE), width = 100)
+x <- purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(rndrng_npi, rndrng_prvdr) |> 
+     tidyr::unnest(cols = c(rndrng_prvdr)) |> 
+     dplyr::slice_head() |> 
+     tidyr::pivot_longer(cols = dplyr::everything()) |> 
+     gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(year, totals_srvcs) |> 
+     tidyr::unnest(cols = c(totals_srvcs)) |> 
+     gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(year, bene_age) |> 
+     tidyr::unnest(cols = c(bene_age)) |> 
+     gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(year, bene_sex, bene_status) |> 
+     tidyr::unnest(cols = c(bene_sex, bene_status)) |> 
+     gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(year, bene_race) |> 
+     tidyr::unnest(cols = c(bene_race)) |> 
+     gluedown::md_table()
+```
+
+<br>
+
+```{r results='asis', echo=TRUE}
+x |> dplyr::select(year, bene_cc) |> 
+     tidyr::unnest(cols = c(bene_cc)) |> 
+     gluedown::md_table()
 ```
 
 <br>

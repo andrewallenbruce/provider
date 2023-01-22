@@ -94,6 +94,7 @@
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param nest Nest related columns together; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -141,17 +142,21 @@ physician_by_service <- function(npi         = NULL,
                                  pos         = NULL,
                                  year        = 2020,
                                  clean_names = TRUE,
-                                 lowercase   = TRUE) {
+                                 lowercase   = TRUE,
+                                 nest        = TRUE) {
+
+  # update distribution ids -------------------------------------------------
+  ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider and Service")
 
   # dataset version ids by year ----------------------------------------------
-  id <- dplyr::case_when(year == 2020 ~ "92396110-2aed-4d63-a6a2-5d6207d46a29",
-                         year == 2019 ~ "5fccd951-9538-48a7-9075-6f02b9867868",
-                         year == 2018 ~ "02c0692d-e2d9-4714-80c7-a1d16d72ec66",
-                         year == 2017 ~ "7ebc578d-c2c7-46fd-8cc8-1b035eba7218",
-                         year == 2016 ~ "5055d307-4fb3-4474-adbb-a11f4182ee35",
-                         year == 2015 ~ "0ccba18d-b821-47c6-bb55-269b78921637",
-                         year == 2014 ~ "e6aacd22-1b89-4914-855c-f8dacbd2ec60",
-                         year == 2013 ~ "ebaf67d7-1572-4419-a053-c8631cc1cc9b")
+  id <- dplyr::case_when(year == 2020 ~ ids$distribution[2],
+                         year == 2019 ~ ids$distribution[3],
+                         year == 2018 ~ ids$distribution[4],
+                         year == 2017 ~ ids$distribution[5],
+                         year == 2016 ~ ids$distribution[6],
+                         year == 2015 ~ ids$distribution[7],
+                         year == 2014 ~ ids$distribution[8],
+                         year == 2013 ~ ids$distribution[9])
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -187,14 +192,28 @@ physician_by_service <- function(npi         = NULL,
   resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
+  res <- tibble::tibble(httr2::resp_body_json(resp,
              check_type = FALSE, simplifyVector = TRUE)) |>
              dplyr::mutate(Year = year) |> dplyr::relocate(Year)
+
+  results <- res |>
+    dplyr::mutate(dplyr::across(c(Tot_Benes,
+                                  Tot_Srvcs,
+                                  Tot_Bene_Day_Srvcs), ~as.integer(.)),
+    dplyr::across(dplyr::ends_with(c("Amt", "Chrg")), ~as.double(.)),
+    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
   # lowercase ---------------------------------------------------------------
   if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
-
+  # nest columns ------------------------------------------------------------
+  if (isTRUE(nest)) {
+    results <- results |>
+      tidyr::nest(rndrng_prvdr = dplyr::contains("rndrng_prvdr"),
+                  totals_srvcs = dplyr::starts_with("tot_"),
+                  hcpcs = c(hcpcs_cd, hcpcs_desc, hcpcs_drug_ind, place_of_srvc),
+                  averages = dplyr::starts_with("avg_"))
+    }
   return(results)
 }

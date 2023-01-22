@@ -8,48 +8,86 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 open_payments(
-  covered_recipient_type = NULL,
-  covered_recipient_profile_id = NULL,
-  covered_recipient_npi = NULL,
-  covered_recipient_first_name = NULL,
-  covered_recipient_middle_name = NULL,
-  covered_recipient_last_name = NULL,
+  recipient_npi = NULL,
+  recipient_type = NULL,
+  recipient_id = NULL,
+  recipient_first_name = NULL,
+  recipient_last_name = NULL,
   recipient_city = NULL,
   recipient_state = NULL,
   recipient_zip_code = NULL,
-  applicable_manufacturer_or_applicable_gpo_making_payment_id = NULL,
+  teaching_hospital_name = NULL,
+  manufacturer_gpo_name = NULL,
+  manufacturer_gpo_id = NULL,
+  form_of_payment = NULL,
+  nature_of_payment = NULL,
   year = 2021,
+  offset = 0,
   clean_names = TRUE,
-  lowercase = TRUE
+  lowercase = TRUE,
+  nest = TRUE
 )
 }
 \arguments{
-\item{covered_recipient_type}{"Covered Recipient Physician"}
+\item{recipient_npi}{10-digit National Provider Identifier (NPI).}
 
-\item{covered_recipient_profile_id}{Payment recipient's unique Open Payments ID}
+\item{recipient_type}{e.g.,
+\itemize{
+\item \verb{Covered Recipient Physician}
+\item \verb{Covered Recipient Non-Physician Practitioner}
+\item \verb{Covered Recipient Teaching Hospital}
+}}
 
-\item{covered_recipient_npi}{10-digit National Provider Identifier (NPI).}
+\item{recipient_id}{Payment recipient's unique Open Payments ID}
 
-\item{covered_recipient_first_name}{Recipient's first name}
+\item{recipient_first_name}{Recipient's first name}
 
-\item{covered_recipient_middle_name}{Recipient's middle name}
-
-\item{covered_recipient_last_name}{Recipient's last name}
+\item{recipient_last_name}{Recipient's last name}
 
 \item{recipient_city}{City}
 
-\item{recipient_state}{State}
+\item{recipient_state}{State, abbreviation}
 
 \item{recipient_zip_code}{Zip code}
 
-\item{applicable_manufacturer_or_applicable_gpo_making_payment_id}{Paying entity's unique Open Payments ID}
+\item{teaching_hospital_name}{Name of teaching hospital, e.g.
+\verb{Vanderbilt University Medical Center}}
 
-\item{year}{Reporting year, 2015-2021, default is 2021}
+\item{manufacturer_gpo_name}{Paying entity's name. Examples:
+\itemize{
+\item \verb{Pharmacosmos Therapeutics Inc.}
+\item \verb{Getinge USA Sales, LLC}
+\item \verb{Agiliti Health, Inc.}
+\item \verb{OrthoScan, Inc.}
+}}
+
+\item{manufacturer_gpo_id}{Paying entity's unique Open Payments ID}
+
+\item{form_of_payment}{Form of payment, examples:
+\itemize{
+\item \verb{Stock option}
+\item \verb{Cash or cash equivalent}
+\item \verb{In-kind items and services}
+}}
+
+\item{nature_of_payment}{Nature of payment or transfer of value, examples:
+\itemize{
+\item \verb{Royalty or License}
+\item \verb{Charitable Contribution}
+\item \verb{Current or prospective ownership or investment interest}
+\item \verb{Food and Beverage}
+}}
+
+\item{year}{Reporting year, 2015-2021, default is \code{2021}}
+
+\item{offset}{offset}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
 
 \item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+
+\item{nest}{Nest related columns together; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -100,6 +138,10 @@ Update Frequency: \strong{Yearly}
 }
 \examples{
 \dontrun{
-open_payments(covered_recipient_npi = "1043218118")
+open_payments(recipient_npi = 1043218118, year = 2021)
+open_payments(nature_of_payment = "Royalty or License")
+open_payments(form_of_payment = "Stock option")
+open_payments(manufacturer_gpo_name = "Adaptive Biotechnologies Corporation")
+open_payments(teaching_hospital_name = "Nyu Langone Hospitals")
 }
 }

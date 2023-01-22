@@ -40,55 +40,87 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Yearly**
 #'
-#' @param covered_recipient_type "Covered Recipient Physician"
-#' @param covered_recipient_profile_id Payment recipient's unique Open Payments ID
-#' @param covered_recipient_npi 10-digit National Provider Identifier (NPI).
-#' @param covered_recipient_first_name Recipient's first name
-#' @param covered_recipient_middle_name Recipient's middle name
-#' @param covered_recipient_last_name Recipient's last name
+#' @param recipient_npi 10-digit National Provider Identifier (NPI).
+#' @param recipient_type e.g.,
+#'    * `Covered Recipient Physician`
+#'    * `Covered Recipient Non-Physician Practitioner`
+#'    * `Covered Recipient Teaching Hospital`
+#' @param teaching_hospital_name Name of teaching hospital, e.g.
+#'    `Vanderbilt University Medical Center`
+#' @param recipient_id Payment recipient's unique Open Payments ID
+#' @param recipient_first_name Recipient's first name
+#' @param recipient_last_name Recipient's last name
 #' @param recipient_city City
-#' @param recipient_state State
+#' @param recipient_state State, abbreviation
 #' @param recipient_zip_code Zip code
-#' @param applicable_manufacturer_or_applicable_gpo_making_payment_id Paying entity's unique Open Payments ID
-#' @param year Reporting year, 2015-2021, default is 2021
+#' @param manufacturer_gpo_name Paying entity's name. Examples:
+#'    * `Pharmacosmos Therapeutics Inc.`
+#'    * `Getinge USA Sales, LLC`
+#'    * `Agiliti Health, Inc.`
+#'    * `OrthoScan, Inc.`
+#' @param manufacturer_gpo_id Paying entity's unique Open Payments ID
+#' @param form_of_payment Form of payment, examples:
+#'    * `Stock option`
+#'    * `Cash or cash equivalent`
+#'    * `In-kind items and services`
+#' @param nature_of_payment Nature of payment or transfer of value, examples:
+#'    * `Royalty or License`
+#'    * `Charitable Contribution`
+#'    * `Current or prospective ownership or investment interest`
+#'    * `Food and Beverage`
+#' @param year Reporting year, 2015-2021, default is `2021`
+#' @param offset offset
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param nest Nest related columns together; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' \dontrun{
-#' open_payments(covered_recipient_npi = "1043218118")
+#' open_payments(recipient_npi = 1043218118, year = 2021)
+#' open_payments(nature_of_payment = "Royalty or License")
+#' open_payments(form_of_payment = "Stock option")
+#' open_payments(manufacturer_gpo_name = "Adaptive Biotechnologies Corporation")
+#' open_payments(teaching_hospital_name = "Nyu Langone Hospitals")
 #' }
 #' @autoglobal
 #' @export
-open_payments <- function(covered_recipient_type = NULL,
-                          covered_recipient_profile_id = NULL,
-                          covered_recipient_npi = NULL,
-                          covered_recipient_first_name = NULL,
-                          covered_recipient_middle_name = NULL,
-                          covered_recipient_last_name = NULL,
+open_payments <- function(recipient_npi = NULL,
+                          recipient_type = NULL,
+                          recipient_id = NULL,
+                          recipient_first_name = NULL,
+                          recipient_last_name = NULL,
                           recipient_city = NULL,
                           recipient_state = NULL,
                           recipient_zip_code = NULL,
-                          applicable_manufacturer_or_applicable_gpo_making_payment_id = NULL,
+                          teaching_hospital_name = NULL,
+                          manufacturer_gpo_name = NULL,
+                          manufacturer_gpo_id = NULL,
+                          form_of_payment = NULL,
+                          nature_of_payment = NULL,
                           year = 2021,
+                          offset = 0,
                           clean_names = TRUE,
-                          lowercase   = TRUE) {
+                          lowercase   = TRUE,
+                          nest = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,
-    "covered_recipient_type",        covered_recipient_type,
-    "covered_recipient_profile_id",  covered_recipient_profile_id,
-    "covered_recipient_npi",         covered_recipient_npi,
-    "covered_recipient_first_name",  covered_recipient_first_name,
-    "covered_recipient_middle_name", covered_recipient_middle_name,
-    "covered_recipient_last_name",   covered_recipient_last_name,
+    "covered_recipient_profile_id",  recipient_id,
+    "covered_recipient_npi",         recipient_npi,
+    "covered_recipient_type",        recipient_type,
+    "covered_recipient_first_name",  recipient_first_name,
+    "covered_recipient_last_name",   recipient_last_name,
     "recipient_city",                recipient_city,
     "recipient_state",               recipient_state,
     "recipient_zip_code",            recipient_zip_code,
-    "applicable_manufacturer_or_applicable_gpo_making_payment_id", applicable_manufacturer_or_applicable_gpo_making_payment_id)
+    "teaching_hospital_name",        teaching_hospital_name,
+    "form_of_payment_or_transfer_of_value", form_of_payment,
+    "nature_of_payment_or_transfer_of_value", nature_of_payment,
+    "applicable_manufacturer_or_applicable_gpo_making_payment_name", manufacturer_gpo_name,
+    "applicable_manufacturer_or_applicable_gpo_making_payment_id", manufacturer_gpo_id)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
@@ -111,7 +143,7 @@ open_payments <- function(covered_recipient_type = NULL,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://openpaymentsdata.cms.gov/api/1/datastore/sql?query="
-  post   <- "[LIMIT 10000 OFFSET 0]&show_db_columns"
+  post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
   url    <- paste0(http, id_fmt, params_args, post) |>
     param_brackets() |> param_space()
 
@@ -120,111 +152,17 @@ open_payments <- function(covered_recipient_type = NULL,
 
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(resp, "content-length")) == 0) {
-
-    results <- tibble::tibble(record_number = NA,
-                              change_type = NA,
-                              covered_recipient_type = NA,
-                              teaching_hospital_ccn = NA,
-                              teaching_hospital_id = NA,
-                              teaching_hospital_name = NA,
-                              covered_recipient_profile_id = NA,
-                              covered_recipient_npi = NA,
-                              covered_recipient_first_name = NA,
-                              covered_recipient_middle_name = NA,
-                              covered_recipient_last_name = NA,
-                              covered_recipient_name_suffix = NA,
-                              recipient_primary_business_street_address_line1 = NA,
-                              recipient_primary_business_street_address_line2 = NA,
-                              recipient_city = NA,
-                              recipient_state = NA,
-                              recipient_zip_code = NA,
-                              recipient_country = NA,
-                              recipient_province = NA,
-                              recipient_postal_code = NA,
-                              covered_recipient_primary_type_1 = NA,
-                              covered_recipient_primary_type_2 = NA,
-                              covered_recipient_primary_type_3 = NA,
-                              covered_recipient_primary_type_4 = NA,
-                              covered_recipient_primary_type_5 = NA,
-                              covered_recipient_primary_type_6 = NA,
-                              covered_recipient_specialty_1 = NA,
-                              covered_recipient_specialty_2 = NA,
-                              covered_recipient_specialty_3 = NA,
-                              covered_recipient_specialty_4 = NA,
-                              covered_recipient_specialty_5 = NA,
-                              covered_recipient_specialty_6 = NA,
-                              covered_recipient_license_state_code1 = NA,
-                              covered_recipient_license_state_code2 = NA,
-                              covered_recipient_license_state_code3 = NA,
-                              covered_recipient_license_state_code4 = NA,
-                              covered_recipient_license_state_code5 = NA,
-                              submitting_applicable_manufacturer_or_applicable_gpo_name = NA,
-                              applicable_manufacturer_or_applicable_gpo_making_payment_id = NA,
-                              applicable_manufacturer_or_applicable_gpo_making_payment_name = NA,
-                              applicable_manufacturer_or_applicable_gpo_making_payment_state = NA,
-                              applicable_manufacturer_or_applicable_gpo_making_payment_country = NA,
-                              total_amount_of_payment_usdollars = NA,
-                              date_of_payment = NA,
-                              number_of_payments_included_in_total_amount = NA,
-                              form_of_payment_or_transfer_of_value = NA,
-                              nature_of_payment_or_transfer_of_value = NA,
-                              city_of_travel = NA,
-                              state_of_travel = NA,
-                              country_of_travel = NA,
-                              physician_ownership_indicator = NA,
-                              third_party_payment_recipient_indicator = NA,
-                              name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc = NA,
-                              charity_indicator = NA,
-                              third_party_equals_covered_recipient_indicator = NA,
-                              contextual_information = NA,
-                              delay_in_publication_indicator = NA,
-                              record_id = NA,
-                              dispute_status_for_publication = NA,
-                              related_product_indicator = NA,
-                              covered_or_noncovered_indicator_1 = NA,
-                              indicate_drug_or_biological_or_device_or_medical_supply_1 = NA,
-                              product_category_or_therapeutic_area_1 = NA,
-                              name_of_drug_or_biological_or_device_or_medical_supply_1 = NA,
-                              associated_drug_or_biological_ndc_1 = NA,
-                              associated_device_or_medical_supply_pdi_1 = NA,
-                              covered_or_noncovered_indicator_2 = NA,
-                              indicate_drug_or_biological_or_device_or_medical_supply_2 = NA,
-                              product_category_or_therapeutic_area_2 = NA,
-                              name_of_drug_or_biological_or_device_or_medical_supply_2 = NA,
-                              associated_drug_or_biological_ndc_2 = NA,
-                              associated_device_or_medical_supply_pdi_2 = NA,
-                              covered_or_noncovered_indicator_3 = NA,
-                              indicate_drug_or_biological_or_device_or_medical_supply_3 = NA,
-                              product_category_or_therapeutic_area_3 = NA,
-                              name_of_drug_or_biological_or_device_or_medical_supply_3 = NA,
-                              associated_drug_or_biological_ndc_3 = NA,
-                              associated_device_or_medical_supply_pdi_3 = NA,
-                              covered_or_noncovered_indicator_4 = NA,
-                              indicate_drug_or_biological_or_device_or_medical_supply_4 = NA,
-                              product_category_or_therapeutic_area_4 = NA,
-                              name_of_drug_or_biological_or_device_or_medical_supply_4 = NA,
-                              associated_drug_or_biological_ndc_4 = NA,
-                              associated_device_or_medical_supply_pdi_4 = NA,
-                              covered_or_noncovered_indicator_5 = NA,
-                              indicate_drug_or_biological_or_device_or_medical_supply_5 = NA,
-                              product_category_or_therapeutic_area_5 = NA,
-                              name_of_drug_or_biological_or_device_or_medical_supply_5 = NA,
-                              associated_drug_or_biological_ndc_5 = NA,
-                              associated_device_or_medical_supply_pdi_5 = NA,
-                              program_year = year,
-                              payment_publication_date = NA)
-    return(results)
-
+    return(tibble::tibble())
   } else {
 
     # parse response ---------------------------------------------------------
     results <- tibble::tibble(httr2::resp_body_json(resp,
                check_type = FALSE, simplifyVector = TRUE)) |>
-      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
-                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("dollars"), ~as.numeric(.))) |>
-      dplyr::relocate(record_id, program_year, .after = record_number)
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+      dplyr::relocate(program_year)
 
   }
 
@@ -232,6 +170,28 @@ open_payments <- function(covered_recipient_type = NULL,
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
   # lowercase ---------------------------------------------------------------
   if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
-
+  # nest columns ------------------------------------------------------------
+  if (isTRUE(nest)) {
+    results <- results |>
+      tidyr::nest(covered_recipient = dplyr::starts_with("covered_recipient_"),
+                  recipient_address = dplyr::starts_with("recipient_"),
+                  applicable_mfg_gpo = dplyr::contains("applicable_manufacturer_or_applicable_gpo"),
+                  associated_drug_device = dplyr::ends_with(c("_1", "_2", "_3", "_4", "_5")),
+                  payment_related_data = c(contextual_information,
+                                           number_of_payments_included_in_total_amount,
+                                           related_product_indicator,
+                                           physician_ownership_indicator,
+                                           third_party_payment_recipient_indicator,
+                                           name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc,
+                                           charity_indicator,
+                                           third_party_equals_covered_recipient_indicator,
+                                           city_of_travel,
+                                           state_of_travel,
+                                           country_of_travel,
+                                           payment_publication_date,
+                                           delay_in_publication_indicator,
+                                           dispute_status_for_publication),
+                  teaching_hospital = dplyr::contains("teaching_hospital"))
+  }
   return(results)
 }

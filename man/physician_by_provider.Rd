@@ -25,7 +25,8 @@ physician_by_provider(
   par_ind = NULL,
   year = 2020,
   clean_names = TRUE,
-  lowercase = TRUE
+  lowercase = TRUE,
+  nest = TRUE
 )
 }
 \arguments{
@@ -90,6 +91,8 @@ services.}
 \code{clean_names()} function; default is \code{TRUE}.}
 
 \item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+
+\item{nest}{Nest related columns together; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

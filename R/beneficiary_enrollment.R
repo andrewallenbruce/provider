@@ -46,8 +46,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' beneficiary_enrollment(year = 2018,
-#'                        month = "Year",
+#' beneficiary_enrollment(month = "Year",
 #'                        geo_level = "County",
 #'                        state_abb = "AL",
 #'                        county = "Autauga")
@@ -61,8 +60,7 @@
 #'                        geo_level = "State",
 #'                        state = "Georgia")
 #'
-#' beneficiary_enrollment(year = 2017,
-#'                        geo_level = "State",
+#' beneficiary_enrollment(geo_level = "State",
 #'                        fips = "10")
 #' @autoglobal
 #' @export

@@ -61,6 +61,7 @@
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param nest Nest related columns together; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -98,7 +99,8 @@ physician_by_provider <- function(npi         = NULL,
                                   par_ind     = NULL,
                                   year        = 2020,
                                   clean_names = TRUE,
-                                  lowercase   = TRUE) {
+                                  lowercase   = TRUE,
+                                  nest        = TRUE) {
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider")
@@ -145,14 +147,41 @@ physician_by_provider <- function(npi         = NULL,
   resp <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
+  res <- tibble::tibble(httr2::resp_body_json(resp,
              check_type = FALSE, simplifyVector = TRUE)) |>
              dplyr::mutate(Year = year) |> dplyr::relocate(Year)
+
+  results <- res |>
+    dplyr::mutate(dplyr::across(c(Tot_HCPCS_Cds,
+                                  Tot_Benes,
+                                  Tot_Srvcs,
+                                  Drug_Tot_HCPCS_Cds,
+                                  Drug_Tot_Benes,
+                                  Drug_Tot_Srvcs,
+                                  Med_Tot_HCPCS_Cds,
+                                  Med_Tot_Benes,
+                                  Med_Tot_Srvcs), ~as.integer(.)),
+    dplyr::across(dplyr::ends_with(c("Amt", "Chrg")), ~as.double(.)),
+    dplyr::across(dplyr::ends_with("Cnt"), ~as.integer(.)),
+    dplyr::across(dplyr::ends_with("Pct"), ~as.double(.)),
+    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
   # lowercase ---------------------------------------------------------------
   if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
-
+  # nest columns ------------------------------------------------------------
+  if (isTRUE(nest)) {
+    results <- results |>
+      tidyr::nest(rndrng_prvdr = dplyr::contains("rndrng_prvdr"),
+                  totals_srvcs = dplyr::starts_with("tot_"),
+                  drug_srvcs = dplyr::starts_with("drug_"),
+                  med_srvcs = dplyr::starts_with("med_"),
+                  bene_age = c(bene_avg_age:bene_age_gt_84_cnt),
+                  bene_sex = c(bene_feml_cnt, bene_male_cnt),
+                  bene_race = dplyr::starts_with("bene_race"),
+                  bene_status = c(bene_dual_cnt, bene_ndual_cnt),
+                  bene_cc = c(bene_cc_af_pct:bene_avg_risk_scre))
+    }
   return(results)
 }
