@@ -85,88 +85,369 @@ together.
 
 ## NPPES NPI Registry API
 
-> **Info**  
-> The Windows installer modifes your PATH. When using Windows Terminal,
-> you will need to **open a new window** for the changes to take affect.
-> (Simply opening a new tab will *not* be sufficient.)
-
 ``` r
-nppes_npi(npi = 1710975040) # NPI-1
+ # NPI-1
+npi_1 <- nppes_npi(npi = 1710975040)
+
+npi_1 |> dplyr::select(datetime:state) |> gluedown::md_table()
 ```
 
-# A tibble: 1 × 15
-
-datetime outcome enumera…¹ number name city state addre…² pract…³ <dttm>
-<chr> <chr> <chr> <chr> <chr> <chr> <list> <list> 1 2023-01-22 10:19:08
-results NPI-1 17109… JOHN… OLNEY MD <df> <list> \# … with 6 more
-variables: taxonomies <list>, identifiers <list>, \# endpoints <list>,
-other_names <list>, epochs <list>, basic <list>, and \# abbreviated
-variable names ¹​enumeration_type, ²​addresses, \# ³​practiceLocations
-
-``` r
-nppes_npi(npi = 1336413418) # NPI-2
-```
-
-# A tibble: 1 × 16
-
-datetime outcome enumera…¹ number name city state addre…² pract…³ <dttm>
-<chr> <chr> <chr> <chr> <chr> <chr> <list> <list> 1 2023-01-22 10:19:08
-results NPI-2 13364… LUMI… TIFT… GA <df> <list> \# … with 7 more
-variables: taxonomies <list>, identifiers <list>, \# endpoints <list>,
-other_names <list>, epochs <list>, \# authorized_official <list>, basic
-<list>, and abbreviated variable names \# ¹​enumeration_type, ²​addresses,
-³​practiceLocations
-
-``` r
-nppes_npi(npi = 1659781227) # Deactivated
-```
-
-# A tibble: 1 × 3
-
-datetime outcome errors  
-<dttm> <chr> <list>  
-1 2023-01-22 10:19:09 Errors \<tibble \[1 × 3\]\>
+| datetime            | outcome | enumeration_type | number     | name         | city  | state |
+|:--------------------|:--------|:-----------------|:-----------|:-------------|:------|:------|
+| 2023-01-22 18:24:08 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
 
 <br>
+
+``` r
+npi_1 |> 
+  dplyr::select(basic) |> 
+  tidyr::unnest(basic) |> 
+  tidyr::pivot_longer(dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+| name                   | value      |
+|:-----------------------|:-----------|
+| basic_first_name       | JOHN       |
+| basic_last_name        | HERRING    |
+| basic_middle_name      | E          |
+| basic_credential       | MD         |
+| basic_sole_proprietor  | NO         |
+| basic_gender           | M          |
+| basic_enumeration_date | 2005-10-11 |
+| basic_last_updated     | 2007-07-08 |
+| basic_status           | A          |
+| basic_name_prefix      | –          |
+| basic_name_suffix      | –          |
+
+<br>
+
+``` r
+npi_1 |> 
+  dplyr::select(taxonomies) |> 
+  tidyr::unnest(taxonomies) |> 
+  gluedown::md_table()
+```
+
+| code       | taxonomy_group | desc              | state | license  | primary |
+|:-----------|:---------------|:------------------|:------|:---------|:--------|
+| 207R00000X |                | Internal Medicine | MD    | D0030414 | TRUE    |
+
+<br>
+
+``` r
+npi_1 |> 
+  dplyr::select(addresses) |> 
+  tidyr::unnest(addresses) |> 
+  gluedown::md_table()
+```
+
+| country_code | country_name  | address_purpose | address_type | address_1              | address_2 | city      | state | postal_code | telephone_number | fax_number   |
+|:-------------|:--------------|:----------------|:-------------|:-----------------------|:----------|:----------|:------|:------------|:-----------------|:-------------|
+| US           | United States | MAILING         | DOM          | 1300 PICCARD DR        | SUITE 202 | ROCKVILLE | MD    | 208504303   | 310-921-7900     | 301-921-7915 |
+| US           | United States | LOCATION        | DOM          | 18101 PRINCE PHILIP DR | NA        | OLNEY     | MD    | 208321514   | 301-774-8900     | 301-570-8574 |
+
+<br>
+
+``` r
+npi_1 |> 
+  dplyr::select(identifiers) |> 
+  tidyr::unnest(identifiers) |> 
+  gluedown::md_table()
+```
+
+| code | desc                         | issuer    | identifier | state |
+|:-----|:-----------------------------|:----------|:-----------|:------|
+| 05   | MEDICAID                     | NA        | 367151800  | MD    |
+| 01   | Other (non-Medicare)         | Carefirst | 367151810  | NA    |
+| 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | MD    |
+| 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | VA    |
+| 02   | MEDICARE UPIN                | NA        | C59183     | NA    |
+
+<br>
+
+``` r
+ # NPI-2
+npi_2 <- nppes_npi(npi = 1336413418)
+
+npi_2 |> dplyr::select(datetime:state) |> 
+  gluedown::md_table()
+```
+
+| datetime            | outcome | enumeration_type | number     | name                     | city   | state |
+|:--------------------|:--------|:-----------------|:-----------|:-------------------------|:-------|:------|
+| 2023-01-22 18:24:09 | results | NPI-2            | 1336413418 | LUMINUS DIAGNOSTICS, LLC | TIFTON | GA    |
+
+``` r
+npi_2 |> 
+  dplyr::select(basic) |> 
+  tidyr::unnest(basic) |> 
+  tidyr::pivot_longer(dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+| name                                        | value                    |
+|:--------------------------------------------|:-------------------------|
+| basic_organization_name                     | LUMINUS DIAGNOSTICS, LLC |
+| basic_organizational_subpart                | NO                       |
+| basic_enumeration_date                      | 2012-03-07               |
+| basic_last_updated                          | 2020-01-07               |
+| basic_certification_date                    | 2020-01-07               |
+| basic_status                                | A                        |
+| basic_authorized_official_first_name        | Laurel                   |
+| basic_authorized_official_last_name         | Gamage                   |
+| basic_authorized_official_middle_name       | Smith                    |
+| basic_authorized_official_telephone_number  | 2292380790               |
+| basic_authorized_official_title_or_position | Manager                  |
+| basic_authorized_official_name_prefix       | Mrs.                     |
+
+``` r
+npi_2 |> 
+  dplyr::select(taxonomies) |> 
+  tidyr::unnest(taxonomies) |> 
+  gluedown::md_table()
+```
+
+| code       | taxonomy_group | desc                        | state | license | primary |
+|:-----------|:---------------|:----------------------------|:------|:--------|:--------|
+| 291U00000X |                | Clinical Medical Laboratory | NA    | NA      | TRUE    |
+
+``` r
+npi_2 |> 
+  dplyr::select(addresses) |> 
+  tidyr::unnest(addresses) |> 
+  gluedown::md_table()
+```
+
+| country_code | country_name  | address_purpose | address_type | address_1        | address_2 | city   | state | postal_code | telephone_number | fax_number   |
+|:-------------|:--------------|:----------------|:-------------|:-----------------|:----------|:-------|:------|:------------|:-----------------|:-------------|
+| US           | United States | MAILING         | DOM          | 2773 MARSHALL DR | SUITE D   | TIFTON | GA    | 317938101   | 229-238-0790     | 229-238-0791 |
+| US           | United States | LOCATION        | DOM          | 2773 MARSHALL DR | SUITE D   | TIFTON | GA    | 317938101   | 229-238-0790     | 229-238-0791 |
+
+<br>
+
+``` r
+ # Deactivated
+nppes_npi(npi = 1659781227) |> 
+  tidyr::unnest(cols = c(errors)) |> 
+  gluedown::md_table()
+```
+
+| datetime            | outcome | description                                                                                                                                                            | field  | number |
+|:--------------------|:--------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------|:-------|
+| 2023-01-22 18:24:10 | Errors  | CMS deactivated NPI 1659781227. The provider can no longer use this NPI. Our public registry does not display provider information about NPIs that are not in service. | number | 15     |
+
+<br><br>
 
 ## CMS Open Payments API
 
 ``` r
-open_payments(recipient_npi = 1043218118)
+op <- open_payments(recipient_npi = 1043218118)
 ```
 
-    #> # A tibble: 92 × 14
-    #>    program…¹ recor…² chang…³ total…⁴ date_of_payment     form_…⁵ natur…⁶ recor…⁷
-    #>    <chr>     <chr>   <chr>     <dbl> <dttm>              <chr>   <chr>   <chr>  
-    #>  1 2021      1       UNCHAN…  2500   2021-05-26 00:00:00 Cash o… Compen… 754966…
-    #>  2 2021      692021  UNCHAN…    69.9 2021-03-04 00:00:00 In-kin… Food a… 787838…
-    #>  3 2021      4385936 UNCHAN…   108.  2021-08-24 00:00:00 In-kin… Food a… 797168…
-    #>  4 2021      4385946 UNCHAN…    97.1 2021-08-24 00:00:00 In-kin… Food a… 797168…
-    #>  5 2021      4385951 UNCHAN…    23.9 2021-09-30 00:00:00 In-kin… Food a… 797168…
-    #>  6 2021      4385956 UNCHAN…    25.6 2021-11-10 00:00:00 In-kin… Food a… 797168…
-    #>  7 2021      4579206 UNCHAN…    13.8 2021-12-08 00:00:00 In-kin… Food a… 799201…
-    #>  8 2021      4579226 UNCHAN…    16.6 2021-04-15 00:00:00 In-kin… Food a… 799201…
-    #>  9 2021      4624246 UNCHAN…   114.  2021-05-06 00:00:00 In-kin… Food a… 797710…
-    #> 10 2021      4766366 UNCHAN…    14.7 2021-10-06 00:00:00 In-kin… Food a… 797773…
-    #> # … with 82 more rows, 6 more variables: covered_recipient <list>,
-    #> #   recipient_address <list>, applicable_mfg_gpo <list>,
-    #> #   associated_drug_device <list>, payment_related_data <list>,
-    #> #   teaching_hospital <list>, and abbreviated variable names ¹​program_year,
-    #> #   ²​record_number, ³​change_type, ⁴​total_amount_of_payment_usdollars,
-    #> #   ⁵​form_of_payment_or_transfer_of_value,
-    #> #   ⁶​nature_of_payment_or_transfer_of_value, ⁷​record_id
+<br><br>
 
-<br>
+``` r
+op |> tidyr::hoist(covered_recipient, 
+                   recipient_npi = "covered_recipient_npi",
+                   profile_id = "covered_recipient_profile_id",
+                   first_name = "covered_recipient_first_name", 
+                   last_name = "covered_recipient_last_name",
+                   credential = "covered_recipient_primary_type_1",) |> 
+      tidyr::hoist(recipient_address, 
+                   city = "recipient_city", 
+                   state = "recipient_state") |> 
+      dplyr::select(program_year, 
+                    recipient_npi, 
+                    profile_id,
+                    first_name,
+                    last_name,
+                    credential,
+                    city,
+                    state) |> 
+      dplyr::slice_head() |> 
+      gluedown::md_table()
+```
+
+| program_year | recipient_npi | profile_id | first_name | last_name | credential     | city       | state |
+|:-------------|:--------------|:-----------|:-----------|:----------|:---------------|:-----------|:------|
+| 2021         | 1043218118    | 92058      | Ahad       | Mahootchi | Medical Doctor | Zephrhills | FL    |
+
+<br><br>
+
+``` r
+op_2 <- op |> tidyr::hoist(applicable_mfg_gpo, 
+                           manufacturer_gpo_paying = "applicable_manufacturer_or_applicable_gpo_making_payment_name") |>
+             tidyr::hoist(associated_drug_device, 
+                          type = "indicate_drug_or_biological_or_device_or_medical_supply_1",
+                          therapeutic_category = "product_category_or_therapeutic_area_1",
+                          name = "name_of_drug_or_biological_or_device_or_medical_supply_1") |> 
+             dplyr::select(payment_date = date_of_payment, 
+                          manufacturer_gpo_paying,
+                          type, 
+                          name,
+                          therapeutic_category,
+                          payment_total = total_amount_of_payment_usdollars,
+                          nature_of_payment = nature_of_payment_or_transfer_of_value) |> 
+             dplyr::arrange(payment_date)
+
+op_2 |> dplyr::mutate(nature_of_payment = stringr::str_trunc(nature_of_payment, 20, "right"),
+                      manufacturer_gpo_paying = stringr::str_trunc(manufacturer_gpo_paying, 20, "right"),
+                      name = stringr::str_trunc(name, 20, "right"),
+                      therapeutic_category = stringr::str_trunc(therapeutic_category, 20, "right")) |> gluedown::md_table()
+```
+
+| payment_date | manufacturer_gpo_paying | type       | name                 | therapeutic_category | payment_total | nature_of_payment  |
+|:-------------|:------------------------|:-----------|:---------------------|:---------------------|--------------:|:-------------------|
+| 2021-01-04   | Bausch & Lomb, a …      | Device     | STELLARIS            | Ophthalmology        |       3000.00 | Consulting Fee     |
+| 2021-01-13   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |        325.00 | Consulting Fee     |
+| 2021-01-15   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        487.50 | Consulting Fee     |
+| 2021-02-02   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         98.21 | Food and Beverage  |
+| 2021-02-04   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |          2.34 | Food and Beverage  |
+| 2021-02-19   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         18.62 | Food and Beverage  |
+| 2021-02-25   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         17.61 | Food and Beverage  |
+| 2021-02-26   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        433.33 | Consulting Fee     |
+| 2021-03-02   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         15.04 | Food and Beverage  |
+| 2021-03-04   | Johnson & Johnson…      | Device     | Tecnis IOL           | Optics               |         69.90 | Food and Beverage  |
+| 2021-03-04   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         24.30 | Food and Beverage  |
+| 2021-03-09   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         16.93 | Food and Beverage  |
+| 2021-03-09   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         18.33 | Food and Beverage  |
+| 2021-03-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
+| 2021-03-17   | Bausch & Lomb, a …      | Device     | CRYSTALENS           | Ophthalmology        |        116.93 | Food and Beverage  |
+| 2021-03-20   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       2600.00 | Compensation for … |
+| 2021-03-22   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        379.17 | Consulting Fee     |
+| 2021-03-30   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         16.32 | Food and Beverage  |
+| 2021-04-13   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |          4.80 | Food and Beverage  |
+| 2021-04-14   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         28.24 | Food and Beverage  |
+| 2021-04-15   | EyePoint Pharmace…      | Drug       | DEXYCU               | Postoperative Inf…   |         16.64 | Food and Beverage  |
+| 2021-04-16   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |          4.05 | Food and Beverage  |
+| 2021-04-20   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         54.17 | Consulting Fee     |
+| 2021-04-21   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
+| 2021-04-22   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         16.73 | Food and Beverage  |
+| 2021-04-29   | Iridex Corporation      | NA         | NA                   | NA                   |         14.97 | Food and Beverage  |
+| 2021-05-03   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1000.00 | Compensation for … |
+| 2021-05-06   | Alcon Vision LLC        | Device     | Precision 1          | Ophthalmology        |        114.20 | Food and Beverage  |
+| 2021-05-06   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         21.65 | Food and Beverage  |
+| 2021-05-11   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         16.68 | Food and Beverage  |
+| 2021-05-13   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |         12.26 | Food and Beverage  |
+| 2021-05-13   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |        112.23 | Food and Beverage  |
+| 2021-05-20   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         16.30 | Food and Beverage  |
+| 2021-05-26   | Mobius Therapeuti…      | Drug       | Mitosol              | Ophthamology         |       2500.00 | Compensation for … |
+| 2021-05-27   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         17.65 | Food and Beverage  |
+| 2021-06-03   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         22.16 | Food and Beverage  |
+| 2021-06-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         41.67 | Food and Beverage  |
+| 2021-06-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1750.00 | Compensation for … |
+| 2021-06-11   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         24.40 | Food and Beverage  |
+| 2021-06-16   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        975.00 | Consulting Fee     |
+| 2021-06-17   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         54.17 | Consulting Fee     |
+| 2021-06-17   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |        100.97 | Food and Beverage  |
+| 2021-06-17   | Iridex Corporation      | NA         | NA                   | NA                   |       1000.00 | Consulting Fee     |
+| 2021-06-23   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |        123.02 | Food and Beverage  |
+| 2021-06-24   | Dompe US, Inc.          | Drug       | OXERVATE             | SOLUTION/ DROPS      |         20.48 | Food and Beverage  |
+| 2021-07-01   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         15.44 | Food and Beverage  |
+| 2021-07-05   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
+| 2021-07-08   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         20.04 | Food and Beverage  |
+| 2021-07-09   | NEW WORLD MEDICAL…      | Device     | Ahmed Glaucoma Valve | Ophthalmology        |        116.20 | Food and Beverage  |
+| 2021-07-10   | Sight Sciences, Inc.    | Device     | TearCare SmartLid    | Ophthalmology        |         96.30 | Food and Beverage  |
+| 2021-07-10   | Ocular Therapeuti…      | Drug       | DEXTENZA             | Corticosteroid in…   |         54.83 | Food and Beverage  |
+| 2021-07-10   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         26.19 | Food and Beverage  |
+| 2021-07-10   | NEW WORLD MEDICAL…      | Device     | Ahmed Glaucoma Valve | Ophthalmology        |         40.66 | Food and Beverage  |
+| 2021-07-16   | Checkpoint Surgic…      | Device     | Checkpoint Stimul…   | Surgery              |         14.74 | Food and Beverage  |
+| 2021-07-25   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         94.36 | Food and Beverage  |
+| 2021-07-25   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1750.00 | Compensation for … |
+| 2021-08-06   | Allergan, Inc.          | NA         | NA                   | NA                   |         73.24 | Food and Beverage  |
+| 2021-08-19   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         20.07 | Food and Beverage  |
+| 2021-08-24   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |        107.93 | Food and Beverage  |
+| 2021-08-24   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         97.14 | Food and Beverage  |
+| 2021-08-31   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         27.20 | Food and Beverage  |
+| 2021-09-02   | Ocular Therapeuti…      | Drug       | DEXTENZA             | Corticosteroid in…   |         14.44 | Food and Beverage  |
+| 2021-09-06   | Beaver-Visitec In…      | NA         | NA                   | NA                   |         25.02 | Food and Beverage  |
+| 2021-09-09   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         16.54 | Food and Beverage  |
+| 2021-09-16   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |         16.73 | Food and Beverage  |
+| 2021-09-17   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |          4.90 | Food and Beverage  |
+| 2021-09-22   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
+| 2021-09-23   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         15.21 | Food and Beverage  |
+| 2021-09-30   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         23.87 | Food and Beverage  |
+| 2021-10-05   | Iridex Corporation      | NA         | NA                   | NA                   |         19.90 | Food and Beverage  |
+| 2021-10-06   | Alcon Vision LLC        | Device     | AcrySof IQ VIVITY…   | Ophthalmology        |         14.73 | Food and Beverage  |
+| 2021-10-12   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |          8.57 | Food and Beverage  |
+| 2021-10-12   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         19.49 | Food and Beverage  |
+| 2021-10-14   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         19.40 | Food and Beverage  |
+| 2021-10-15   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        162.50 | Consulting Fee     |
+| 2021-10-18   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        379.17 | Consulting Fee     |
+| 2021-10-19   | Regeneron Healthc…      | Biological | EYLEA                | OPHTHALMOLOGY        |        125.01 | Food and Beverage  |
+| 2021-10-26   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         23.90 | Food and Beverage  |
+| 2021-10-27   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         10.00 | Food and Beverage  |
+| 2021-10-28   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         20.44 | Food and Beverage  |
+| 2021-11-03   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         23.38 | Food and Beverage  |
+| 2021-11-04   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |       1500.00 | Consulting Fee     |
+| 2021-11-04   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |        132.45 | Food and Beverage  |
+| 2021-11-04   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         17.12 | Food and Beverage  |
+| 2021-11-10   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         25.63 | Food and Beverage  |
+| 2021-11-16   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         28.72 | Food and Beverage  |
+| 2021-11-17   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        216.67 | Consulting Fee     |
+| 2021-11-18   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |        115.91 | Food and Beverage  |
+| 2021-11-18   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         17.44 | Food and Beverage  |
+| 2021-12-07   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         92.33 | Food and Beverage  |
+| 2021-12-08   | EyePoint Pharmace…      | Drug       | YUTIQ                | Chronic Non-infec…   |         13.85 | Food and Beverage  |
+| 2021-12-15   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         18.87 | Food and Beverage  |
+
+<br><br>
+
+``` r
+op_2 |> 
+  dplyr::group_by(manufacturer_gpo_paying, nature_of_payment, name) |> 
+  dplyr::summarise(n = dplyr::n(),
+                   payment_total = sum(payment_total), .groups = "drop") |> 
+  dplyr::mutate(nature_of_payment = stringr::str_trunc(nature_of_payment, 20, "right")) |> 
+  dplyr::arrange(dplyr::desc(payment_total)) |> 
+  gluedown::md_table()
+```
+
+| manufacturer_gpo_paying                            | nature_of_payment  | name                          |   n | payment_total |
+|:---------------------------------------------------|:-------------------|:------------------------------|----:|--------------:|
+| Allergan, Inc.                                     | Compensation for … | XEN GLAUCOMA TREATMENT SYSTEM |   4 |       7100.00 |
+| Allergan, Inc.                                     | Consulting Fee     | XEN GLAUCOMA TREATMENT SYSTEM |  13 |       4441.68 |
+| Bausch & Lomb, a division of Bausch Health US, LLC | Consulting Fee     | STELLARIS                     |   1 |       3000.00 |
+| Mobius Therapeutics, LLC                           | Compensation for … | Mitosol                       |   1 |       2500.00 |
+| Ivantis, Inc                                       | Consulting Fee     | Hydrus Microstent             |   1 |       1500.00 |
+| Iridex Corporation                                 | Consulting Fee     | NA                            |   1 |       1000.00 |
+| Allergan, Inc.                                     | Consulting Fee     | DURYSTA                       |   1 |        325.00 |
+| Allergan, Inc.                                     | Food and Beverage  | XEN GLAUCOMA TREATMENT SYSTEM |   7 |        317.32 |
+| Ivantis, Inc                                       | Food and Beverage  | Hydrus Microstent             |   6 |        304.85 |
+| Horizon Therapeutics plc                           | Food and Beverage  | TEPEZZA                       |   4 |        254.57 |
+| Allergan, Inc.                                     | Food and Beverage  | DURYSTA                       |   7 |        197.35 |
+| SUN PHARMACEUTICAL INDUSTRIES INC.                 | Food and Beverage  | Cequa                         |   5 |        175.53 |
+| Mallinckrodt Hospital Products Inc.                | Food and Beverage  | ACTHAR                        |   4 |        156.91 |
+| NEW WORLD MEDICAL,INC.                             | Food and Beverage  | Ahmed Glaucoma Valve          |   2 |        156.86 |
+| Sight Sciences, Inc.                               | Food and Beverage  | OMNI(R) SURGICAL SYSTEM (US)  |   4 |        153.97 |
+| Kala Pharmaceuticals, Inc.                         | Food and Beverage  | INVELTYS                      |   7 |        138.46 |
+| Regeneron Healthcare Solutions, Inc.               | Food and Beverage  | EYLEA                         |   1 |        125.01 |
+| Bausch & Lomb, a division of Bausch Health US, LLC | Food and Beverage  | CRYSTALENS                    |   1 |        116.93 |
+| Alcon Vision LLC                                   | Food and Beverage  | Precision 1                   |   1 |        114.20 |
+| Sight Sciences, Inc.                               | Food and Beverage  | TearCare SmartLid             |   1 |         96.30 |
+| Alimera Sciences, Inc.                             | Food and Beverage  | ILUVIEN                       |   5 |         89.25 |
+| Allergan, Inc.                                     | Food and Beverage  | NA                            |   1 |         73.24 |
+| Johnson & Johnson Surgical Vision, Inc.            | Food and Beverage  | Tecnis IOL                    |   1 |         69.90 |
+| Ocular Therapeutix, Inc.                           | Food and Beverage  | DEXTENZA                      |   2 |         69.27 |
+| Novartis Pharmaceuticals Corporation               | Food and Beverage  | BEOVU                         |   3 |         61.57 |
+| Iridex Corporation                                 | Food and Beverage  | NA                            |   2 |         34.87 |
+| Beaver-Visitec International, Inc.                 | Food and Beverage  | NA                            |   1 |         25.02 |
+| Dompe US, Inc.                                     | Food and Beverage  | OXERVATE                      |   1 |         20.48 |
+| EyePoint Pharmaceuticals US, Inc.                  | Food and Beverage  | DEXYCU                        |   1 |         16.64 |
+| Checkpoint Surgical, Inc                           | Food and Beverage  | Checkpoint Stimulators        |   1 |         14.74 |
+| Alcon Vision LLC                                   | Food and Beverage  | AcrySof IQ VIVITY IOL         |   1 |         14.73 |
+| EyePoint Pharmaceuticals US, Inc.                  | Food and Beverage  | YUTIQ                         |   1 |         13.85 |
 
 ## CMS Missing Digital Contact Information API
 
 ``` r
-provider::missing_information(npi = 1144224569) |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::missing_information(npi = 1144224569) |> gluedown::md_table()
 ```
 
-    #> $npi        c1 1144224569
-    #> $last_name  c1 Clouse    
-    #> $first_name c1 John
+| npi        | last_name | first_name |
+|:-----------|:----------|:-----------|
+| 1144224569 | Clouse    | John       |
 
 <br>
 
@@ -180,20 +461,18 @@ prven <- tibble::tribble(
 "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"),
 )
 
-purrr::invoke_map_dfr(prven$fn, prven$params) |> terse::terse(config = list(ansi = FALSE), width = 100)
+purrr::invoke_map_dfr(prven$fn, prven$params)
 ```
 
-    #> $npi                c3 1083879860                    , 1932192150              , 1336413418     ...
-    #> $pecos_asct_cntl_id c3 8426328519                    , 4183536311              , 1355507260     ...
-    #> $enrlmt_id          c3 I20200617001010               , I20031105000174         , O2012072300004 ...
-    #> $provider_type_cd   c3 14-08                         , 14-13                   , 12-69          ...
-    #> $provider_type_desc c3 PRACTITIONER - FAMILY PRACTICE, PRACTITIONER - NEUROLOGY, PART B SUPPLIE ...
-    #> $state_cd           c3 PA                            , MD                      , GA             ...
-    #> $first_name         c3 CHRISTOPHER                   , MICHAEL                 ,                ...
-    #> $mdl_name           c3 L                             , K                       ,                ...
-    #> $last_name          c3 AARON                         , GREENBERG               ,                ...
-    #> $org_name           c3                               ,                         , LUMINUS DIAGNO ...
-    #> $gndr_sw            c3 M                             , M                       ,                ...
+    #> # A tibble: 3 × 11
+    #>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹
+    #>   <chr>  <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
+    #> 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     
+    #> 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     
+    #> 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…
+    #> # … with 1 more variable: gndr_sw <chr>, and abbreviated variable names
+    #> #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,
+    #> #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name
 
 <br>
 
@@ -205,158 +484,139 @@ months <- tibble::enframe(month.name) |>
   dplyr::slice(1:7) |> 
   tibble::deframe()
 
-purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State", state = "Georgia", month = .x)) |> terse::terse(config = list(ansi = FALSE), width = 100)
+purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State", state = "Georgia", month = .x))
 ```
 
-    #> $year                           i7 2022   , 2022    , 2022   , 2022   , 2022   , 2022   , 2022   
-    #> $month                          c7 January, February, March  , April  , May    , June   , July   
-    #> $bene_geo_lvl                   c7 State  , State   , State  , State  , State  , State  , State  
-    #> $bene_state_abrvtn              c7 GA     , GA      , GA     , GA     , GA     , GA     , GA     
-    #> $bene_state_desc                c7 Georgia, Georgia , Georgia, Georgia, Georgia, Georgia, Georgia
-    #> $bene_county_desc               c7 Total  , Total   , Total  , Total  , Total  , Total  , Total  
-    #> $bene_fips_cd                   c7 13     , 13      , 13     , 13     , 13     , 13     , 13     
-    #> $tot_benes                      i7 1830959, 1830025 , 1831573, 1833135, 1835187, 1837394, 1840128
-    #> $orgnl_mdcr_benes               i7 915752 , 913347  , 912897 , 911263 , 910417 , 909778 , 907070 
-    #> $ma_and_oth_benes               i7 915207 , 916678  , 918676 , 921872 , 924770 , 927616 , 933058 
-    #> $aged_tot_benes                 i7 1572257, 1571050 , 1572037, 1573058, 1574570, 1575954, 1578129
-    #> $aged_esrd_benes                i7 11635  , 11312   , 11096  , 10888  , 10716  , 10525  , 10368  
-    #> $aged_no_esrd_benes             i7 1560622, 1559738 , 1560941, 1562170, 1563854, 1565429, 1567761
-    #> $dsbld_tot_benes                i7 258702 , 258975  , 259536 , 260077 , 260617 , 261440 , 261999 
-    #> $dsbld_esrd_and_esrd_only_benes i7 12011  , 11905   , 11853  , 11835  , 11827  , 11790  , 11713  
-    #> $dsbld_no_esrd_benes            i7 246691 , 247070  , 247683 , 248242 , 248790 , 249650 , 250286 
-    #> $a_b_tot_benes                  i7 1681852, 1680770 , 1681852, 1683513, 1685479, 1687818, 1696372
-    #> $a_b_orgnl_mdcr_benes           i7 767454 , 764903  , 763986 , 762450 , 761518 , 761012 , 764122 
-    #> $a_b_ma_and_oth_benes           i7 914398 , 915867  , 917866 , 921063 , 923961 , 926806 , 932250 
-    #> $prscrptn_drug_tot_benes        i7 1410752, 1410748 , 1411729, 1413507, 1415521, 1417811, 1422171
-    #> $prscrptn_drug_pdp_benes        i7 538559 , 536815  , 535968 , 534687 , 534006 , 533731 , 533004 
-    #> $prscrptn_drug_mapd_benes       i7 872193 , 873933  , 875761 , 878820 , 881515 , 884080 , 889167
+    #> # A tibble: 7 × 22
+    #>    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸
+    #>   <int> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>   <int>
+    #> 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207
+    #> 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678
+    #> 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676
+    #> 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872
+    #> 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770
+    #> 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616
+    #> 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058
+    #> # … with 12 more variables: aged_tot_benes <int>, aged_esrd_benes <int>,
+    #> #   aged_no_esrd_benes <int>, dsbld_tot_benes <int>,
+    #> #   dsbld_esrd_and_esrd_only_benes <int>, dsbld_no_esrd_benes <int>,
+    #> #   a_b_tot_benes <int>, a_b_orgnl_mdcr_benes <int>,
+    #> #   a_b_ma_and_oth_benes <int>, prscrptn_drug_tot_benes <int>,
+    #> #   prscrptn_drug_pdp_benes <int>, prscrptn_drug_mapd_benes <int>, and
+    #> #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …
 
 <br>
 
 ### Medicare Order and Referring API
 
 ``` r
-provider::order_refer(npi = 1083879860) |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::order_refer(npi = 1083879860) |> 
+  gluedown::md_table()
 ```
 
-    #> $npi        i1 1083879860 
-    #> $last_name  c1 AARON      
-    #> $first_name c1 CHRISTOPHER
-    #> $partb      l1 T          
-    #> $dme        l1 T          
-    #> $hha        l1 T          
-    #> $pmd        l1 T
+|        npi | last_name | first_name  | partb | dme  | hha  | pmd  |
+|-----------:|:----------|:------------|:------|:-----|:-----|:-----|
+| 1083879860 | AARON     | CHRISTOPHER | TRUE  | TRUE | TRUE | TRUE |
 
 <br>
 
 ### Medicare Opt-Out Affidavits API
 
 ``` r
-provider::opt_out(last = "Aaron") |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::opt_out(last = "Aaron") |> 
+  gluedown::md_table()
 ```
 
-    #> $date                        D1 2023-01-22            
-    #> $last_updated                c1 11/15/2022            
-    #> $first_name                  c1 Sheryl                
-    #> $last_name                   c1 Aaron                 
-    #> $npi                         c1 1427358282            
-    #> $specialty                   c1 Clinical Social Worker
-    #> $optout_effective_date       c1 02/17/2022            
-    #> $optout_end_date             c1 02/17/2024            
-    #> $first_line_street_address   c1 1633 Q ST NW          
-    #> $second_line_street_address  c1 STE 230               
-    #> $city_name                   c1 WASHINGTON            
-    #> $state_code                  c1 DC                    
-    #> $zip_code                    c1 200096351             
-    #> $eligible_to_order_and_refer l1 F
+| date       | last_updated | first_name | last_name | npi        | specialty              | optout_effective_date | optout_end_date | first_line_street_address | second_line_street_address | city_name  | state_code | zip_code  | eligible_to_order_and_refer |
+|:-----------|:-------------|:-----------|:----------|:-----------|:-----------------------|:----------------------|:----------------|:--------------------------|:---------------------------|:-----------|:-----------|:----------|:----------------------------|
+| 2023-01-22 | 11/15/2022   | Sheryl     | Aaron     | 1427358282 | Clinical Social Worker | 02/17/2022            | 02/17/2024      | 1633 Q ST NW              | STE 230                    | WASHINGTON | DC         | 200096351 | FALSE                       |
 
 <br>
 
 ### Medicare Provider and Supplier Taxonomy Crosswalk API
 
 ``` r
-provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
-  terse::terse(config = list(ansi = FALSE), width = 100)
+provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 ```
 
-    #> $medicare_specialty_code                                          c2 B4[14]                     ...
-    #> $medicare_provider_supplier_type_description                      c2 Rehabilitation Agency      ...
-    #> $provider_taxonomy_code                                           c2 261QR0400X                 ...
-    #> $provider_taxonomy_description_type_classification_specialization c2 Ambulatory Health Care Fac ...
+# A tibble: 2 × 4
+
+medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…²
+provi…³ <chr> <chr> <chr> <chr>  
+1 B4\[14\] Rehabilitation Agency 261QR0… Ambula… 2 B4\[14\]
+Rehabilitation Agency 315D00… Nursin… \# … with abbreviated variable
+names \# ¹​medicare_provider_supplier_type_description,
+²​provider_taxonomy_code, \#
+³​provider_taxonomy_description_type_classification_specialization
 
 <br>
 
 ### Medicare Revalidation Due Date API
 
 ``` r
-provider::revalidation_date(npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::revalidation_date(npi = 1710912209)
 ```
 
-    #> $month                           D1 2023-01-22     
-    #> $enrollment_id                   c1 I20040602001711
-    #> $national_provider_identifier    c1 1710912209     
-    #> $first_name                      c1 Yelena         
-    #> $last_name                       c1 Voronova       
-    #> $organization_name               c1                
-    #> $enrollment_state_code           c1 NY             
-    #> $enrollment_type                 c1 3              
-    #> $provider_type_text              c1 Non-DME Part B 
-    #> $enrollment_specialty            c1 Podiatry       
-    #> $revalidation_due_date           c1 2019-10-31     
-    #> $adjusted_due_date               c1                
-    #> $individual_total_reassign_to    c1                
-    #> $receiving_benefits_reassignment i1 5
+# A tibble: 1 × 14
 
-<br>
+month enrollmen…¹ natio…² first…³ last\_…⁴ organ…⁵ enrol…⁶ enrol…⁷
+provi…⁸ <date> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>  
+1 2023-01-22 I200406020… 171091… Yelena Vorono… “” NY 3 Non-DM… \# …
+with 5 more variables: enrollment_specialty <chr>, \#
+revalidation_due_date <chr>, adjusted_due_date <chr>, \#
+individual_total_reassign_to <chr>, receiving_benefits_reassignment
+<int>, \# and abbreviated variable names ¹​enrollment_id, \#
+²​national_provider_identifier, ³​first_name, ⁴​last_name,
+⁵​organization_name, \# ⁶​enrollment_state_code, ⁷​enrollment_type,
+⁸​provider_type_text <br>
 
 ### Medicare Revalidation Reassignment List API
 
 ``` r
-provider::revalidation_reassign(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::revalidation_reassign(ind_npi = 1710912209)
 ```
 
-    #> $month                                        D5 2023-01-22                , 2023-01-22         ...
-    #> $group_pac_id                                 d5 3678655222                , 9931511052         ...
-    #> $group_enrollment_id                          c5 O20080205000002           , O20201215000955    ...
-    #> $group_legal_business_name                    c5 #1 Wise Podiatry Care P.C., Brighton Beach Pod ...
-    #> $group_state_code                             c5 NY                        , NY                 ...
-    #> $group_due_date                               c5 10/31/2019                , TBD                ...
-    #> $group_reassignments_and_physician_assistants i5 1                         , 1                  ...
-    #> $record_type                                  c5 Reassignment              , Reassignment       ...
-    #> $individual_pac_id                            d5 2860474988                , 2860474988         ...
-    #> $individual_enrollment_id                     c5 I20040602001711           , I20040602001711    ...
-    #> $individual_npi                               i5 1710912209                , 1710912209         ...
-    #> $individual_first_name                        c5 Yelena                    , Yelena             ...
-    #> $individual_last_name                         c5 Voronova                  , Voronova           ...
-    #> $individual_state_code                        c5 NY                        , NY                 ...
-    #> $individual_specialty_description             c5 Podiatry                  , Podiatry           ...
-    #> $individual_due_date                          c5 10/31/2019                , 10/31/2019         ...
-    #> $individual_total_employer_associations       i5 5                         , 5                  ...
+# A tibble: 5 × 17
+
+month group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷
+indiv…⁸ <date> <dbl> <chr> <chr> <chr> <chr> <int> <chr> <dbl> 1
+2023-01-22 3678655222 O20080… \#1 Wis… NY 10/31/… 1 Reassi… 2.86e9 2
+2023-01-22 9931511052 O20201… Bright… NY TBD 1 Reassi… 2.86e9 3
+2023-01-22 2062791411 O20161… Fair P… NY TBD 1 Reassi… 2.86e9 4
+2023-01-22 8527313170 O20180… New Yo… NY TBD 1 Reassi… 2.86e9 5
+2023-01-22 5193155174 O20200… Podiat… NY TBD 1 Reassi… 2.86e9 \# … with
+8 more variables: individual_enrollment_id <chr>, \# individual_npi
+<int>, individual_first_name <chr>, \# individual_last_name <chr>,
+individual_state_code <chr>, \# individual_specialty_description <chr>,
+individual_due_date <chr>, \# individual_total_employer_associations
+<int>, and abbreviated variable \# names ¹​group_pac_id,
+²​group_enrollment_id, ³​group_legal_business_name, \# ⁴​group_state_code,
+⁵​group_due_date, …
 
 <br>
 
 ### Medicare Revalidation Clinic Group Practice Reassignment API
 
 ``` r
-provider::revalidation_group(ind_npi = 1710912209) |> terse::terse(config = list(ansi = FALSE), width = 100)
+provider::revalidation_group(ind_npi = 1710912209)
 ```
 
-    #> $month                                        D5 2023-01-22                , 2023-01-22         ...
-    #> $group_pac_id                                 d5 3678655222                , 9931511052         ...
-    #> $group_enrollment_id                          c5 O20080205000002           , O20201215000955    ...
-    #> $group_legal_business_name                    c5 #1 Wise Podiatry Care P.C., Brighton Beach Pod ...
-    #> $group_state_code                             c5 NY                        , NY                 ...
-    #> $group_due_date                               c5 10/31/2019                , TBD                ...
-    #> $group_reassignments_and_physician_assistants i5 1                         , 1                  ...
-    #> $record_type                                  c5 Reassignment              , Reassignment       ...
-    #> $individual_enrollment_id                     c5 I20040602001711           , I20040602001711    ...
-    #> $individual_npi                               i5 1710912209                , 1710912209         ...
-    #> $individual_first_name                        c5 Yelena                    , Yelena             ...
-    #> $individual_last_name                         c5 Voronova                  , Voronova           ...
-    #> $individual_state_code                        c5 NY                        , NY                 ...
-    #> $individual_specialty_description             c5 Podiatry                  , Podiatry           ...
-    #> $individual_due_date                          c5 10/31/2019                , 10/31/2019         ...
-    #> $individual_total_employer_associations       i5 5                         , 5                  ...
+# A tibble: 5 × 16
+
+month group_pac…¹ group…² group…³ group…⁴ group…⁵ group…⁶ recor…⁷
+indiv…⁸ <date> <dbl> <chr> <chr> <chr> <chr> <int> <chr> <chr>  
+1 2023-01-22 3678655222 O20080… \#1 Wis… NY 10/31/… 1 Reassi… I20040… 2
+2023-01-22 9931511052 O20201… Bright… NY TBD 1 Reassi… I20040… 3
+2023-01-22 2062791411 O20161… Fair P… NY TBD 1 Reassi… I20040… 4
+2023-01-22 8527313170 O20180… New Yo… NY TBD 1 Reassi… I20040… 5
+2023-01-22 5193155174 O20200… Podiat… NY TBD 1 Reassi… I20040… \# … with
+7 more variables: individual_npi <int>, individual_first_name <chr>, \#
+individual_last_name <chr>, individual_state_code <chr>, \#
+individual_specialty_description <chr>, individual_due_date <chr>, \#
+individual_total_employer_associations <int>, and abbreviated variable
+\# names ¹​group_pac_id, ²​group_enrollment_id,
+³​group_legal_business_name, \# ⁴​group_state_code, ⁵​group_due_date, \#
+⁶​group_reassignments_and_physician_assistants, ⁷​record_type, …
 
 <br>
 
@@ -369,15 +629,8 @@ provider::revalidation_group(ind_npi = 1710912209) |> terse::terse(config = list
 <br>
 
 ``` r
-purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> terse::terse(config = list(ansi = FALSE), width = 100)
+pbs <- purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
 ```
-
-    #> $year         i8 2013      , 2014      , 2015      , 2016      , 2017      , 2018      , 2019   ...
-    #> $rndrng_npi   c8 1003000126, 1003000126, 1003000126, 1003000126, 1003000126, 1003000126, 100300 ...
-    #> $rndrng_prvdr L8 list(structure(list(rndrng_prvdr_last_org_name = c("Enkeshafi", "Enkeshafi", " ...
-    #> $totals_srvcs L8 list(structure(list(tot_benes = c(138L, 95L, 47L, 381L, 106L, 208L, 137L), tot ...
-    #> $hcpcs        L8 list(structure(list(hcpcs_cd = c("99222", "99223", "99231", "99232", "99233",  ...
-    #> $averages     L8 list(structure(list(avg_sbmtd_chrg = c(368.62676056, 524.60416667, 97, 187.594 ...
 
 <br>
 
@@ -386,8 +639,31 @@ purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |>
 <br>
 
 ``` r
-service <- physician_by_service(npi = 1003000126, year = 2020)
+srvcs <- physician_by_service(npi = 1003000126, year = 2020)
+
+srvcs |> tidyr::unnest(cols = c(rndrng_prvdr, totals_srvcs, hcpcs, averages))
 ```
+
+# A tibble: 9 × 30
+
+year rndrng…¹ rndrn…² rndrn…³ rndrn…⁴ rndrn…⁵ rndrn…⁶ rndrn…⁷ rndrn…⁸
+rndrn…⁹ <dbl> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>  
+1 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+2 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+3 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+4 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+5 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+6 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+7 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+8 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+9 2020 1003000… Enkesh… Ardalan <NA> M.D. M I 6410 R… <NA>  
+\# … with 20 more variables: rndrng_prvdr_city <chr>, \#
+rndrng_prvdr_state_abrvtn <chr>, rndrng_prvdr_state_fips <chr>, \#
+rndrng_prvdr_zip5 <chr>, rndrng_prvdr_ruca <chr>, \#
+rndrng_prvdr_ruca_desc <chr>, rndrng_prvdr_cntry <chr>, \#
+rndrng_prvdr_type <chr>, rndrng_prvdr_mdcr_prtcptg_ind <chr>, \#
+tot_benes <int>, tot_srvcs <int>, tot_bene_day_srvcs <int>, hcpcs_cd
+<chr>, \# hcpcs_desc <chr>, hcpcs_drug_ind <chr>, place_of_srvc <chr>, …
 
 <br>
 
@@ -396,7 +672,7 @@ purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_level = "National",
   terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> Error in (function (..., na.rm = FALSE) : no arguments
+    #> Error in vctrs_vec_compat(.x, .purrr_user_env): object 'service' not found
 
 <br>
 
@@ -405,7 +681,7 @@ purrr::map_dfr(service$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", 
   terse::terse(config = list(ansi = FALSE), width = 100)
 ```
 
-    #> Error in (function (..., na.rm = FALSE) : no arguments
+    #> Error in vctrs_vec_compat(.x, .purrr_user_env): object 'service' not found
 
 <br>
 
@@ -548,45 +824,56 @@ x |> dplyr::select(year, bene_cc) |>
 ### Medicare Multiple Chronic Conditions API
 
 ``` r
-cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race") |> terse::terse(config = list(ansi = FALSE), width = 100)
+cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
 ```
 
-    #> $year                     d60 2007                  , 2007                  , 2007              ...
-    #> $bene_geo_lvl             c60 National              , National              , National          ...
-    #> $bene_geo_desc            c60 National              , National              , National          ...
-    #> $bene_geo_cd              c60                       ,                       ,                   ...
-    #> $bene_age_lvl             c60 65+                   , 65+                   , 65+               ...
-    #> $bene_demo_lvl            c60 Race                  , Race                  , Race              ...
-    #> $bene_demo_desc           c60 Asian Pacific Islander, Asian Pacific Islander, Asian Pacific Isl ...
-    #> $bene_mcc                 c60 0 to 1                , 2 to 3                , 4 to 5            ...
-    #> $prvlnc                   d60 0.3271                , 0.3438                , 0.2213            ...
-    #> $tot_mdcr_stdzd_pymt_pc   d60 1033.4246             , 3279.7851             , 7688.8443         ...
-    #> $tot_mdcr_pymt_pc         d60 1116.9013             , 3692.2481             , 8993.6581         ...
-    #> $hosp_readmsn_rate        d60 0.0612                , 0.0765                , 0.1237            ...
-    #> $er_visits_per_1000_benes d60 82.1561               , 210.1455              , 440.5998          ...
+# A tibble: 60 × 13
+
+    year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
+
+<dbl> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <dbl> <dbl> 1 2007
+National Nation… “” 65+ Race Asian … 0 to 1 0.327 1033. 2 2007 National
+Nation… “” 65+ Race Asian … 2 to 3 0.344 3280. 3 2007 National Nation…
+“” 65+ Race Asian … 4 to 5 0.221 7689. 4 2007 National Nation… “” 65+
+Race Asian … 6+ 0.108 23479. 5 2007 National Nation… “” 65+ Race Hispan…
+0 to 1 0.330 1048. 6 2007 National Nation… “” 65+ Race Hispan… 2 to 3
+0.284 4241. 7 2007 National Nation… “” 65+ Race Hispan… 4 to 5 0.226
+9788. 8 2007 National Nation… “” 65+ Race Hispan… 6+ 0.160 29290. 9 2007
+National Nation… “” 65+ Race Native… 0 to 1 0.324 1356. 10 2007 National
+Nation… “” 65+ Race Native… 2 to 3 0.323 4742. \# … with 50 more rows, 3
+more variables: tot_mdcr_pymt_pc <dbl>, \# hosp_readmsn_rate <dbl>,
+er_visits_per_1000_benes <dbl>, and abbreviated \# variable names
+¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd, ⁴​bene_age_lvl, \#
+⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_mcc, ⁸​tot_mdcr_stdzd_pymt_pc
 
 <br>
 
 ### Medicare Specific Chronic Conditions API
 
 ``` r
-cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race") |> 
-  terse::terse(config = list(ansi = FALSE), width = 100)
+cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race")
 ```
 
-    #> $year                     d315 2007                  , 2007                  , 2007             ...
-    #> $bene_geo_lvl             c315 National              , National              , National         ...
-    #> $bene_geo_desc            c315 National              , National              , National         ...
-    #> $bene_geo_cd              c315                       ,                       ,                  ...
-    #> $bene_age_lvl             c315 65+                   , <65                   , All              ...
-    #> $bene_demo_lvl            c315 Race                  , Race                  , Race             ...
-    #> $bene_demo_desc           c315 Asian Pacific Islander, Asian Pacific Islander, Asian Pacific Is ...
-    #> $bene_cond                c315 Alcohol Abuse         , Alcohol Abuse         , Alcohol Abuse    ...
-    #> $prvlnc                   c315 0.0036                , 0.021                 , 0.0057           ...
-    #> $tot_mdcr_stdzd_pymt_pc   c315                       ,                       ,                  ...
-    #> $tot_mdcr_pymt_pc         c315                       ,                       ,                  ...
-    #> $hosp_readmsn_rate        c315                       ,                       ,                  ...
-    #> $er_visits_per_1000_benes c315                       ,                       ,                  ...
+# A tibble: 315 × 13
+
+    year bene_g…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ bene_…⁶ bene_…⁷ prvlnc tot_m…⁸
+
+<dbl> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>  
+1 2007 National Nation… “” 65+ Race Asian … Alcoho… 0.0036 “”  
+2 2007 National Nation… “” \<65 Race Asian … Alcoho… 0.021 “”  
+3 2007 National Nation… “” All Race Asian … Alcoho… 0.0057 “”  
+4 2007 National Nation… “” 65+ Race Hispan… Alcoho… 0.0107 “”  
+5 2007 National Nation… “” \<65 Race Hispan… Alcoho… 0.0383 “”  
+6 2007 National Nation… “” All Race Hispan… Alcoho… 0.0178 “”  
+7 2007 National Nation… “” 65+ Race Native… Alcoho… 0.0288 “”  
+8 2007 National Nation… “” \<65 Race Native… Alcoho… 0.08 “”  
+9 2007 National Nation… “” All Race Native… Alcoho… 0.0453 “”  
+10 2007 National Nation… “” 65+ Race non-Hi… Alcoho… 0.0148 “”  
+\# … with 305 more rows, 3 more variables: tot_mdcr_pymt_pc <chr>, \#
+hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>, and abbreviated
+\# variable names ¹​bene_geo_lvl, ²​bene_geo_desc, ³​bene_geo_cd,
+⁴​bene_age_lvl, \# ⁵​bene_demo_lvl, ⁶​bene_demo_desc, ⁷​bene_cond,
+⁸​tot_mdcr_stdzd_pymt_pc
 
 <br>
 
