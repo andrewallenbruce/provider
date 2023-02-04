@@ -33,103 +33,6 @@ knitr::opts_chunk$set(
 
 > Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider)-centric data through publicly available APIs & sources.
  
-<br>
-
-```{r results='asis', echo=FALSE}
-nppes_func <- gluedown::md_code("nppes_npi()")
-nppes_link <- gluedown::md_link("NPPES National Provider Identifier (NPI) Registry" = "https://npiregistry.cms.hhs.gov/search")
-
-open_func <- gluedown::md_code("open_payments()")
-open_link <- gluedown::md_link("CMS Open Payments Program" = "https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202")
-
-mppe_func  <- gluedown::md_code("provider_enrollment()")
-mppe_link  <- gluedown::md_link("Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
-
-mme_func   <- gluedown::md_code("beneficiary_enrollment()")
-mme_link   <- gluedown::md_link("Medicare Monthly Enrollment" = "https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment")
-
-miss_func  <- gluedown::md_code("missing_information()")
-miss_link  <- gluedown::md_link("CMS Public Reporting of Missing Digital Contact Information" = "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information")
-
-order_func <- gluedown::md_code("order_refer()")
-order_link <- gluedown::md_link("Medicare Order and Referring" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring")
-
-opt_func   <- gluedown::md_code("opt_out()")
-opt_link   <- gluedown::md_link("Medicare Opt Out Affidavits" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits")
-
-pbp_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider")
-pbp_func   <- gluedown::md_code("physician_by_provider()")
-
-pbs_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Provider and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service")
-pbs_func   <- gluedown::md_code("physician_by_service()")
-
-pbg_link   <- gluedown::md_link("Medicare Physician & Other Practitioners: by Geography and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service")
-pbg_func   <- gluedown::md_code("physician_by_geography()")
-
-redd_func  <- gluedown::md_code("revalidation_date()")
-redd_link  <- gluedown::md_link("Medicare Revalidation Due Date" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list")
-
-rere_func  <- gluedown::md_code("revalidation_reassign()")
-rere_link  <- gluedown::md_link("Medicare Revalidation Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list")
-
-recl_func  <- gluedown::md_code("revalidation_group()")
-recl_link  <- gluedown::md_link("Medicare Revalidation Clinic Group Practice Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment")
-
-ccs_func   <- gluedown::md_code("cc_specific()")
-ccs_link   <- gluedown::md_link("Medicare Specific Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions")
-
-ccm_func   <- gluedown::md_code("cc_multiple()")
-ccm_link   <- gluedown::md_link("Medicare Multiple Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions")
-
-clia_func  <- gluedown::md_code("clia_labs()")
-clia_link  <- gluedown::md_link("Medicare Provider of Services File - Clinical Laboratories" = "https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories")
-
-tax_func   <- gluedown::md_code("taxonomy_crosswalk()")
-tax_link   <- gluedown::md_link("Medicare Provider and Supplier Taxonomy Crosswalk" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk")
-
-pend_func   <- gluedown::md_code("pending_applications()")
-pend_link   <- gluedown::md_link("Medicare Pending Initial Logging and Tracking" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians")
-
-gluedown::md_table(data.frame(
-  Function = c(nppes_func, 
-               open_func,
-               mppe_func, 
-               mme_func,
-               order_func,
-               opt_func,
-               pbp_func,
-               pbs_func,
-               pbg_func,
-               redd_func,
-               recl_func,
-               rere_func,
-               ccs_func,
-               ccm_func,
-               clia_func,
-               tax_func,
-               miss_func,
-               pend_func
-               ), 
-  API      = c(nppes_link, 
-               open_link,
-               mppe_link,
-               mme_link,
-               order_link,
-               opt_link,
-               pbp_link,
-               pbs_link,
-               pbg_link,
-               redd_link,
-               recl_link,
-               rere_link,
-               ccs_link,
-               ccm_link,
-               clia_link,
-               tax_link,
-               miss_link,
-               pend_link
-               )))
-```
 
 <br>
 
@@ -145,14 +48,19 @@ devtools::install_github("andrewallenbruce/provider")
 # install.packages("remotes")
 remotes::install_github("andrewallenbruce/provider")
 ```
-```{r echo=TRUE}
-# Load library
-library(provider)
+
+```{r results='asis', echo=FALSE}
+provider:::function_tbl()
 ```
 
 <br>
 
 ## Motivation
+
+```{r echo=TRUE}
+# Load library
+library(provider)
+```
 
 <br>
 
@@ -165,7 +73,7 @@ This package is primarily focused on accessing public API data that can be linke
 ### NPPES NPI Registry
 
 ```{r}
-(npi_1 <- nppes_npi(npi = 1710975040))
+(npi_1 <- provider::nppes_npi(npi = 1710975040))
 ```
 <br>
 
@@ -220,6 +128,67 @@ npi_1 |>
 ```
 
 <br><br>
+
+### CMS Physician Facility Affiliations
+
+```{r results='asis', echo=TRUE}
+provider::facility_affiliations(npi = 1003019563) |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  gluedown::md_table()
+```
+<br><br>
+
+```{r results='asis', echo=TRUE}
+provider::facility_affiliations(facility_ccn = "060004") |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  head(n = 25) |> 
+  gluedown::md_table()
+```
+
+<br><br>
+
+```{r results='asis', echo=TRUE}
+provider::facility_affiliations(parent_ccn = 670055) |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  gluedown::md_table()
+```
+
+<br><br>
+
+```{r results='asis', echo=TRUE}
+provider::facility_affiliations(first_name = "John", 
+                                last_name = "Hill", 
+                                facility_type = "Home Health Agency") |> 
+  dplyr::select(-record_number) |> 
+  gluedown::md_table()
+```
+
+
+<br><br>
+
+### CMS Doctors and Clinicians National File
+
+```{r results='asis', echo=TRUE}
+doctors_and_clinicians(npi = 1407263999) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |>
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+<br><br>
+
+```{r results='asis', echo=TRUE}
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2003, 
+                       state = "FL") |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |>
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+
+<br><br>
+
 
 ### CMS Missing Contact Information
 
@@ -454,7 +423,9 @@ srvcs <- provider::physician_by_service(npi = 1003000126, year = 2020) |>
          tidyr::unnest(cols = c(rndrng_prvdr, totals_srvcs, hcpcs, averages))
 
 srvcs |> dplyr::select(year, 
-                       tot_benes:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+                       tot_benes:tot_srvcs, 
+                       hcpcs_cd, 
+                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
          gluedown::md_table()
 ```
 
@@ -465,7 +436,10 @@ srvcs |> dplyr::select(year,
 nat <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
 
 nat |> dplyr::filter(place_of_srvc == "F") |>  
-       dplyr::select(year, tot_rndrng_prvdrs:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+       dplyr::select(year, 
+                     tot_rndrng_prvdrs:tot_srvcs, 
+                     hcpcs_cd, 
+                     avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
        gluedown::md_table()
 ```
 
@@ -476,7 +450,10 @@ nat |> dplyr::filter(place_of_srvc == "F") |>
 state <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
 
 state |> dplyr::filter(place_of_srvc == "F") |>  
-         dplyr::select(year, tot_rndrng_prvdrs:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+         dplyr::select(year, 
+                       tot_rndrng_prvdrs:tot_srvcs, 
+                       hcpcs_cd, 
+                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
          gluedown::md_table()
 ```
 

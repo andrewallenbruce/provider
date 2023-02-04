@@ -27,6 +27,21 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 
 <br>
 
+## Installation
+
+You can install the development version of `provider` from
+[GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("andrewallenbruce/provider")
+```
+
+``` r
+# install.packages("remotes")
+remotes::install_github("andrewallenbruce/provider")
+```
+
 | Function                   | API                                                                                                                                                                                                                                   |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `nppes_npi()`              | [NPPES National Provider Identifier (NPI) Registry](https://npiregistry.cms.hhs.gov/search)                                                                                                                                           |
@@ -47,32 +62,17 @@ coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badg
 | `taxonomy_crosswalk()`     | [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)                                            |
 | `missing_information()`    | [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)                                                                       |
 | `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
+| `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
+| `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
 
 <br>
 
-## Installation
-
-You can install the development version of `provider` from
-[GitHub](https://github.com/) with:
-
-``` r
-# install.packages("devtools")
-devtools::install_github("andrewallenbruce/provider")
-```
-
-``` r
-# install.packages("remotes")
-remotes::install_github("andrewallenbruce/provider")
-```
+## Motivation
 
 ``` r
 # Load library
 library(provider)
 ```
-
-<br>
-
-## Motivation
 
 <br>
 
@@ -91,13 +91,13 @@ together.
 ### NPPES NPI Registry
 
 ``` r
-(npi_1 <- nppes_npi(npi = 1710975040))
+(npi_1 <- provider::nppes_npi(npi = 1710975040))
 ```
 
     #> # A tibble: 1 × 15
     #>   datetime            outcome enumera…¹ number name  city  state addre…² pract…³
     #>   <dttm>              <chr>   <chr>     <chr>  <chr> <chr> <chr> <list>  <list> 
-    #> 1 2023-02-03 23:24:30 results NPI-1     17109… JOHN… OLNEY MD    <df>    <list> 
+    #> 1 2023-02-04 14:16:46 results NPI-1     17109… JOHN… OLNEY MD    <df>    <list> 
     #> # … with 6 more variables: taxonomies <list>, identifiers <list>,
     #> #   endpoints <list>, other_names <list>, epochs <list>, basic <list>, and
     #> #   abbreviated variable names ¹​enumeration_type, ²​addresses,
@@ -111,7 +111,7 @@ npi_1 |> dplyr::select(datetime:state) |> gluedown::md_table()
 
 | datetime            | outcome | enumeration_type | number     | name         | city  | state |
 |:--------------------|:--------|:-----------------|:-----------|:-------------|:------|:------|
-| 2023-02-03 23:24:30 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
+| 2023-02-04 14:16:46 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
 
 <br>
 
@@ -199,6 +199,387 @@ npi_1 |>
 | 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | MD    |
 | 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | VA    |
 | 02   | MEDICARE UPIN                | NA        | C59183     | NA    |
+
+<br><br>
+
+### CMS Physician Facility Affiliations
+
+``` r
+provider::facility_affiliations(npi = 1003019563) |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  gluedown::md_table()
+```
+
+| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | facility_type | facility_afl_ccn |
+|:-----------|:-----------|:-------|:--------|:-------|:--------------|:-----------------|
+| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060004           |
+| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060009           |
+| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060028           |
+| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060116           |
+
+<br><br>
+
+``` r
+provider::facility_affiliations(facility_ccn = "060004") |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  head(n = 25) |> 
+  gluedown::md_table()
+```
+
+| npi        | ind_pac_id | lst_nm         | frst_nm  | mid_nm  | facility_type | facility_afl_ccn |
+|:-----------|:-----------|:---------------|:---------|:--------|:--------------|:-----------------|
+| 1003002890 | 6002953973 | HAMMAN         | DANIEL   | RICHARD | Hospital      | 060004           |
+| 1003019563 | 4688707060 | FRANK          | JOHN     | JOSEPH  | Hospital      | 060004           |
+| 1003045022 | 5890926059 | DONAHUE        | ARTHUR   | H       | Hospital      | 060004           |
+| 1003105636 | 6507182847 | HIGHAM KESSLER | JAMES    | CHARLES | Hospital      | 060004           |
+| 1003845249 | 1254326994 | WEINER         | GARETH   | R       | Hospital      | 060004           |
+| 1003987124 | 5496905754 | KLIMA          | KATHRYN  | ANN     | Hospital      | 060004           |
+| 1013069566 | 7810096328 | HELZER         | AMITY    | D       | Hospital      | 060004           |
+| 1013115989 | 4385891712 | PYLE           | ASHLEY   | L       | Hospital      | 060004           |
+| 1013979566 | 1557374014 | MUWALLA        | FIRAS    | NA      | Hospital      | 060004           |
+| 1023261963 | 2860687431 | LUCCI          | CHAD     | MICHAEL | Hospital      | 060004           |
+| 1023365244 | 4284851650 | MCARTHUR       | HADLEY   | J       | Hospital      | 060004           |
+| 1033373410 | 6507902681 | FONTENOT       | JOHN     | C       | Hospital      | 060004           |
+| 1053897264 | 4385994623 | BROOKS         | ERIN     | NA      | Hospital      | 060004           |
+| 1063693646 | 8729208624 | PAN            | LORRAINE | Y       | Hospital      | 060004           |
+| 1063964096 | 4183903958 | HAYES          | SUSAN    | E       | Hospital      | 060004           |
+| 1073952412 | 2961796966 | JERANKO        | CHELSEA  | M       | Hospital      | 060004           |
+| 1083097976 | 3375876626 | CHMIELECKI     | DAVID    | NA      | Hospital      | 060004           |
+| 1083687362 | 3375435647 | RABOR          | DONALD   | A       | Hospital      | 060004           |
+| 1093949620 | 8325279615 | MANGELSON      | JOHN     | J.      | Hospital      | 060004           |
+| 1104224294 | 0648565150 | MCCOOL         | CANDICE  | NA      | Hospital      | 060004           |
+| 1114345576 | 3476772997 | MCNITT         | WILLIAM  | C       | Hospital      | 060004           |
+| 1114395688 | 7416379045 | VERAN-TAGUIBAO | SONIA    | GO      | Hospital      | 060004           |
+| 1124332978 | 9931393535 | LEWIS          | KRISTINA | NA      | Hospital      | 060004           |
+| 1124340583 | 3779612247 | OAKLEAF        | CAROL    | NA      | Hospital      | 060004           |
+| 1134104227 | 1254224231 | GILLILAND      | J        | D       | Hospital      | 060004           |
+
+<br><br>
+
+``` r
+provider::facility_affiliations(parent_ccn = 670055) |> 
+  dplyr::select(-record_number, -suff, -parent_ccn) |> 
+  gluedown::md_table()
+```
+
+| npi        | ind_pac_id | lst_nm     | frst_nm | mid_nm  | facility_type                     | facility_afl_ccn |
+|:-----------|:-----------|:-----------|:--------|:--------|:----------------------------------|:-----------------|
+| 1083742829 | 5698833655 | FORNARIS   | RAFAEL  | JORGE   | Inpatient rehabilitation facility | 67T055           |
+| 1144429580 | 3577659580 | CURRY      | LYSA    | LEE     | Inpatient rehabilitation facility | 67T055           |
+| 1386840197 | 3274620216 | HAU        | HORACIO | G       | Inpatient rehabilitation facility | 67T055           |
+| 1427107028 | 1456328152 | CHANEY     | DENNIS  | M       | Inpatient rehabilitation facility | 67T055           |
+| 1518985373 | 8628026861 | GUERRA     | ANTONIO | F       | Inpatient rehabilitation facility | 67T055           |
+| 1558595660 | 8921241142 | ALFONSO    | JOHN    | D       | Inpatient rehabilitation facility | 67T055           |
+| 1609973650 | 0840373239 | WILCOX     | GEORGE  | KIMBELL | Inpatient rehabilitation facility | 67T055           |
+| 1710112370 | 9739337122 | VADDEMPUDI | VIDYA   | NA      | Inpatient rehabilitation facility | 67T055           |
+| 1720069859 | 7012947229 | JANES      | WILLIAM | WARREN  | Inpatient rehabilitation facility | 67T055           |
+| 1740577212 | 0345473773 | WEIKLE     | GEOFF   | R       | Inpatient rehabilitation facility | 67T055           |
+| 1912260464 | 5092036509 | MANSOOR    | SAAD    | MD      | Inpatient rehabilitation facility | 67T055           |
+
+<br><br>
+
+``` r
+provider::facility_affiliations(first_name = "John", 
+                                last_name = "Hill", 
+                                facility_type = "Home Health Agency") |> 
+  dplyr::select(-record_number) |> 
+  gluedown::md_table()
+```
+
+| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | suff | facility_type      | facility_afl_ccn | parent_ccn |
+|:-----------|:-----------|:-------|:--------|:-------|:-----|:-------------------|:-----------------|:-----------|
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117021           | NA         |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117036           | NA         |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117069           | NA         |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117125           | NA         |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107338           | NA         |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107408           | NA         |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107689           | NA         |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107707           | NA         |
+
+<br><br>
+
+### CMS Doctors and Clinicians National File
+
+``` r
+doctors_and_clinicians(npi = 1407263999) |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |>
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+| name          | value                     |
+|:--------------|:--------------------------|
+| record_number | 1                         |
+| npi           | 1407263999                |
+| ind_pac_id    | 8729208152                |
+| ind_enrl_id   | I20141006002245           |
+| lst_nm        | AVERY                     |
+| frst_nm       | ROBIN                     |
+| mid_nm        | A                         |
+| suff          | NA                        |
+| gndr          | F                         |
+| cred          | NA                        |
+| med_sch       | OTHER                     |
+| grd_yr        | 1989                      |
+| pri_spec      | CLINICAL PSYCHOLOGIST     |
+| sec_spec_1    | NA                        |
+| sec_spec_2    | NA                        |
+| sec_spec_3    | NA                        |
+| sec_spec_4    | NA                        |
+| sec_spec_all  | NA                        |
+| telehlth      | Y                         |
+| org_nm        | NA                        |
+| org_pac_id    | NA                        |
+| num_org_mem   | NA                        |
+| adr_ln_1      | 9999 NE 2ND AVE           |
+| adr_ln_2      | SUITE 209E                |
+| ln_2\_sprs    | NA                        |
+| cty           | MIAMI SHORES              |
+| st            | FL                        |
+| zip           | 331382345                 |
+| phn_numbr     | NA                        |
+| ind_assgn     | Y                         |
+| grp_assgn     | M                         |
+| adrs_id       | FL331382345MI9999XAVEX403 |
+| record_number | 8580791                   |
+| npi           | 1407263999                |
+| ind_pac_id    | 8729208152                |
+| ind_enrl_id   | I20141006002245           |
+| lst_nm        | AVERY                     |
+| frst_nm       | ROBIN                     |
+| mid_nm        | A                         |
+| suff          | NA                        |
+| gndr          | F                         |
+| cred          | NA                        |
+| med_sch       | OTHER                     |
+| grd_yr        | 1989                      |
+| pri_spec      | CLINICAL PSYCHOLOGIST     |
+| sec_spec_1    | NA                        |
+| sec_spec_2    | NA                        |
+| sec_spec_3    | NA                        |
+| sec_spec_4    | NA                        |
+| sec_spec_all  | NA                        |
+| telehlth      | Y                         |
+| org_nm        | LARRY BROOKS, PH.D., LLC  |
+| org_pac_id    | 6608028899                |
+| num_org_mem   | 2                         |
+| adr_ln_1      | 3810 HOLLYWOOD BLVD       |
+| adr_ln_2      | SUITE 2                   |
+| ln_2\_sprs    | NA                        |
+| cty           | HOLLYWOOD                 |
+| st            | FL                        |
+| zip           | 330216779                 |
+| phn_numbr     | 9549623888                |
+| ind_assgn     | Y                         |
+| grp_assgn     | Y                         |
+| adrs_id       | FL330216779HO3810XBLVD301 |
+
+<br><br>
+
+``` r
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2003, 
+                       state = "FL") |> 
+  dplyr::mutate(dplyr::across(everything(), as.character)) |>
+  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  gluedown::md_table()
+```
+
+| name          | value                                  |
+|:--------------|:---------------------------------------|
+| record_number | 2241611                                |
+| npi           | 1497955652                             |
+| ind_pac_id    | 3476647330                             |
+| ind_enrl_id   | I20070922000027                        |
+| lst_nm        | CHIEN                                  |
+| frst_nm       | YUI                                    |
+| mid_nm        | F                                      |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | OPHTHALMOLOGY                          |
+| sec_spec_1    | NA                                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | NA                                     |
+| telehlth      | NA                                     |
+| org_nm        | EYE PHYSICIANS OF FLORIDA LLP          |
+| org_pac_id    | 1254414675                             |
+| num_org_mem   | 49                                     |
+| adr_ln_1      | 1 SW 129TH AVE                         |
+| adr_ln_2      | 209 CORRECTVISION LASER INSTITUTE LLC  |
+| ln_2\_sprs    | NA                                     |
+| cty           | PEMBROKE PINES                         |
+| st            | FL                                     |
+| zip           | 330271717                              |
+| phn_numbr     | 9544421133                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL330271717PE1XXXXAVEX405              |
+| record_number | 2241616                                |
+| npi           | 1497955652                             |
+| ind_pac_id    | 3476647330                             |
+| ind_enrl_id   | I20070922000027                        |
+| lst_nm        | CHIEN                                  |
+| frst_nm       | YUI                                    |
+| mid_nm        | F                                      |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | OPHTHALMOLOGY                          |
+| sec_spec_1    | NA                                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | NA                                     |
+| telehlth      | NA                                     |
+| org_nm        | EYE PHYSICIANS OF FLORIDA LLP          |
+| org_pac_id    | 1254414675                             |
+| num_org_mem   | 49                                     |
+| adr_ln_1      | 8051 W SUNRISE BLVD                    |
+| adr_ln_2      | NA                                     |
+| ln_2\_sprs    | NA                                     |
+| cty           | PLANTATION                             |
+| st            | FL                                     |
+| zip           | 333224103                              |
+| phn_numbr     | 9544742900                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL333224103PL8051XBLVD400              |
+| record_number | 4005191                                |
+| npi           | 1497955652                             |
+| ind_pac_id    | 3476647330                             |
+| ind_enrl_id   | I20070922000027                        |
+| lst_nm        | CHIEN                                  |
+| frst_nm       | YUI                                    |
+| mid_nm        | F                                      |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | OPHTHALMOLOGY                          |
+| sec_spec_1    | NA                                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | NA                                     |
+| telehlth      | NA                                     |
+| org_nm        | OCEAN OPHTHALMOLOGY GROUP              |
+| org_pac_id    | 2860553724                             |
+| num_org_mem   | 3                                      |
+| adr_ln_1      | 1400 NE MIAMI GARDENS DR               |
+| adr_ln_2      | SUITE 203                              |
+| ln_2\_sprs    | NA                                     |
+| cty           | NORTH MIAMI BEACH                      |
+| st            | FL                                     |
+| zip           | 331794844                              |
+| phn_numbr     | 3059401500                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL331794844NO1400XDRXX501              |
+| record_number | 4586101                                |
+| npi           | 1801000963                             |
+| ind_pac_id    | 3577616598                             |
+| ind_enrl_id   | I20090807000530                        |
+| lst_nm        | SCHETTINO                              |
+| frst_nm       | CHRIS                                  |
+| mid_nm        | J                                      |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | PEDIATRIC MEDICINE                     |
+| sec_spec_1    | RADIATION ONCOLOGY                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | RADIATION ONCOLOGY                     |
+| telehlth      | NA                                     |
+| org_nm        | UNIVERSITY OF MIAMI                    |
+| org_pac_id    | 3274795109                             |
+| num_org_mem   | 1646                                   |
+| adr_ln_1      | 1611 NW 12TH AVE                       |
+| adr_ln_2      | JMH                                    |
+| ln_2\_sprs    | NA                                     |
+| cty           | MIAMI                                  |
+| st            | FL                                     |
+| zip           | 331361005                              |
+| phn_numbr     | 3052434000                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL331361005MI1611XAVEX429              |
+| record_number | 6700176                                |
+| npi           | 1033237524                             |
+| ind_pac_id    | 7618041781                             |
+| ind_enrl_id   | I20220614002174                        |
+| lst_nm        | GOLDBERG                               |
+| frst_nm       | BRIAN                                  |
+| mid_nm        | KEITH                                  |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | PHYSICAL MEDICINE AND REHABILITATION   |
+| sec_spec_1    | NA                                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | NA                                     |
+| telehlth      | NA                                     |
+| org_nm        | ROTHMAN ORTHOPAEDICS OF FLORIDA,PLLC   |
+| org_pac_id    | 4880009786                             |
+| num_org_mem   | 56                                     |
+| adr_ln_1      | 15502 STONEYBROOK W PKWY               |
+| adr_ln_2      | SUITE 114                              |
+| ln_2\_sprs    | NA                                     |
+| cty           | WINTER GARDEN                          |
+| st            | FL                                     |
+| zip           | 347874767                              |
+| phn_numbr     | 8444074070                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL347874767WI15502PKWY403              |
+| record_number | 7027061                                |
+| npi           | 1164628830                             |
+| ind_pac_id    | 5698811768                             |
+| ind_enrl_id   | I20091002000129                        |
+| lst_nm        | KAPLAN                                 |
+| frst_nm       | KEVIN                                  |
+| mid_nm        | M                                      |
+| suff          | NA                                     |
+| gndr          | M                                      |
+| cred          | NA                                     |
+| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
+| grd_yr        | 2003                                   |
+| pri_spec      | SPORTS MEDICINE                        |
+| sec_spec_1    | ORTHOPEDIC SURGERY                     |
+| sec_spec_2    | NA                                     |
+| sec_spec_3    | NA                                     |
+| sec_spec_4    | NA                                     |
+| sec_spec_all  | ORTHOPEDIC SURGERY                     |
+| telehlth      | NA                                     |
+| org_nm        | JACKSONVILLE ORTHOPAEDIC INSTITUTE INC |
+| org_pac_id    | 5193625499                             |
+| num_org_mem   | 111                                    |
+| adr_ln_1      | 1325 SAN MARCO BLVD                    |
+| adr_ln_2      | SUITE 102                              |
+| ln_2\_sprs    | NA                                     |
+| cty           | JACKSONVILLE                           |
+| st            | FL                                     |
+| zip           | 322078549                              |
+| phn_numbr     | 9048587045                             |
+| ind_assgn     | Y                                      |
+| grp_assgn     | Y                                      |
+| adrs_id       | FL322078549JA1325XBLVD402              |
 
 <br><br>
 
@@ -874,7 +1255,9 @@ srvcs <- provider::physician_by_service(npi = 1003000126, year = 2020) |>
          tidyr::unnest(cols = c(rndrng_prvdr, totals_srvcs, hcpcs, averages))
 
 srvcs |> dplyr::select(year, 
-                       tot_benes:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+                       tot_benes:tot_srvcs, 
+                       hcpcs_cd, 
+                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
          gluedown::md_table()
 ```
 
@@ -896,7 +1279,10 @@ srvcs |> dplyr::select(year,
 nat <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
 
 nat |> dplyr::filter(place_of_srvc == "F") |>  
-       dplyr::select(year, tot_rndrng_prvdrs:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+       dplyr::select(year, 
+                     tot_rndrng_prvdrs:tot_srvcs, 
+                     hcpcs_cd, 
+                     avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
        gluedown::md_table()
 ```
 
@@ -918,7 +1304,10 @@ nat |> dplyr::filter(place_of_srvc == "F") |>
 state <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
 
 state |> dplyr::filter(place_of_srvc == "F") |>  
-         dplyr::select(year, tot_rndrng_prvdrs:tot_srvcs, hcpcs_cd, avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+         dplyr::select(year, 
+                       tot_rndrng_prvdrs:tot_srvcs, 
+                       hcpcs_cd, 
+                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
          gluedown::md_table()
 ```
 
