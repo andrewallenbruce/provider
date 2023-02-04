@@ -133,6 +133,16 @@
 <p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a>-centric data through publicly available APIs &amp; sources.</p>
 </blockquote>
 <p><br></p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="10%">
@@ -215,27 +225,24 @@
 <td align="left"><code><a href="reference/pending_applications.html">pending_applications()</a></code></td>
 <td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians" class="external-link">Medicare Pending Initial Logging and Tracking</a></td>
 </tr>
+<tr class="odd">
+<td align="left"><code><a href="reference/facility_affiliations.html">facility_affiliations()</a></code></td>
+<td align="left"><a href="https://data.cms.gov/provider-data/dataset/27ea-46a8" class="external-link">CMS Physician Facility Affiliations</a></td>
+</tr>
+<tr class="even">
+<td align="left"><code><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians()</a></code></td>
+<td align="left"><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">Doctors and Clinicians National Downloadable File</a></td>
+</tr>
 </tbody>
 </table>
-<p><br></p>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>You can install the development version of <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Load library</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load library</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <p>This package is primarily focused on accessing public API data that can be linked together via a healthcare provider’s National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. It only gets interesting when you start to link them together.</p>
 <p><br></p>
@@ -247,18 +254,18 @@
 <h3 id="nppes-npi-registry">NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#nppes-npi-registry"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">npi_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="op">(</span><span class="va">npi_1</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 15</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;list&gt;  &lt;list&gt; </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2023-02-03 23:24:30 results NPI-1     17109… JOHN… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2023-02-04 14:16:46 results NPI-1     17109… JOHN… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ³​practiceLocations</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">:</span><span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">:</span><span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="23%">
@@ -279,7 +286,7 @@
 <th align="left">state</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left">2023-02-03 23:24:30</td>
+<td align="left">2023-02-04 14:16:46</td>
 <td align="left">results</td>
 <td align="left">NPI-1</td>
 <td align="left">1710975040</td>
@@ -297,7 +304,7 @@
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">basic</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">basic</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -358,7 +365,7 @@
 <code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">taxonomies</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">taxonomies</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="16%">
@@ -396,7 +403,7 @@
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">address_purpose</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">address_purpose</span>, </span>
 <span>                     values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -464,7 +471,7 @@
 <code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">identifiers</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">identifiers</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">code</th>
@@ -514,10 +521,1635 @@
 <p><br><br></p>
 </div>
 <div class="section level3">
-<h3 id="cms-missing-contact-information">CMS Missing Contact Information<a class="anchor" aria-label="anchor" href="#cms-missing-contact-information"></a>
+<h3 id="cms-physician-facility-affiliations">CMS Physician Facility Affiliations<a class="anchor" aria-label="anchor" href="#cms-physician-facility-affiliations"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003019563</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span>, <span class="op">-</span><span class="va">suff</span>, <span class="op">-</span><span class="va">parent_ccn</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="14%">
+<col width="9%">
+<col width="10%">
+<col width="9%">
+<col width="18%">
+<col width="21%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">ind_pac_id</th>
+<th align="left">lst_nm</th>
+<th align="left">frst_nm</th>
+<th align="left">mid_nm</th>
+<th align="left">facility_type</th>
+<th align="left">facility_afl_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1003019563</td>
+<td align="left">4688707060</td>
+<td align="left">FRANK</td>
+<td align="left">JOHN</td>
+<td align="left">JOSEPH</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1003019563</td>
+<td align="left">4688707060</td>
+<td align="left">FRANK</td>
+<td align="left">JOHN</td>
+<td align="left">JOSEPH</td>
+<td align="left">Hospital</td>
+<td align="left">060009</td>
+</tr>
+<tr class="odd">
+<td align="left">1003019563</td>
+<td align="left">4688707060</td>
+<td align="left">FRANK</td>
+<td align="left">JOHN</td>
+<td align="left">JOSEPH</td>
+<td align="left">Hospital</td>
+<td align="left">060028</td>
+</tr>
+<tr class="even">
+<td align="left">1003019563</td>
+<td align="left">4688707060</td>
+<td align="left">FRANK</td>
+<td align="left">JOHN</td>
+<td align="left">JOSEPH</td>
+<td align="left">Hospital</td>
+<td align="left">060116</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span>, <span class="op">-</span><span class="va">suff</span>, <span class="op">-</span><span class="va">parent_ccn</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">25</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="13%">
+<col width="17%">
+<col width="10%">
+<col width="9%">
+<col width="16%">
+<col width="19%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">ind_pac_id</th>
+<th align="left">lst_nm</th>
+<th align="left">frst_nm</th>
+<th align="left">mid_nm</th>
+<th align="left">facility_type</th>
+<th align="left">facility_afl_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1003002890</td>
+<td align="left">6002953973</td>
+<td align="left">HAMMAN</td>
+<td align="left">DANIEL</td>
+<td align="left">RICHARD</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1003019563</td>
+<td align="left">4688707060</td>
+<td align="left">FRANK</td>
+<td align="left">JOHN</td>
+<td align="left">JOSEPH</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1003045022</td>
+<td align="left">5890926059</td>
+<td align="left">DONAHUE</td>
+<td align="left">ARTHUR</td>
+<td align="left">H</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1003105636</td>
+<td align="left">6507182847</td>
+<td align="left">HIGHAM KESSLER</td>
+<td align="left">JAMES</td>
+<td align="left">CHARLES</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1003845249</td>
+<td align="left">1254326994</td>
+<td align="left">WEINER</td>
+<td align="left">GARETH</td>
+<td align="left">R</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1003987124</td>
+<td align="left">5496905754</td>
+<td align="left">KLIMA</td>
+<td align="left">KATHRYN</td>
+<td align="left">ANN</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1013069566</td>
+<td align="left">7810096328</td>
+<td align="left">HELZER</td>
+<td align="left">AMITY</td>
+<td align="left">D</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1013115989</td>
+<td align="left">4385891712</td>
+<td align="left">PYLE</td>
+<td align="left">ASHLEY</td>
+<td align="left">L</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1013979566</td>
+<td align="left">1557374014</td>
+<td align="left">MUWALLA</td>
+<td align="left">FIRAS</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1023261963</td>
+<td align="left">2860687431</td>
+<td align="left">LUCCI</td>
+<td align="left">CHAD</td>
+<td align="left">MICHAEL</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1023365244</td>
+<td align="left">4284851650</td>
+<td align="left">MCARTHUR</td>
+<td align="left">HADLEY</td>
+<td align="left">J</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1033373410</td>
+<td align="left">6507902681</td>
+<td align="left">FONTENOT</td>
+<td align="left">JOHN</td>
+<td align="left">C</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1053897264</td>
+<td align="left">4385994623</td>
+<td align="left">BROOKS</td>
+<td align="left">ERIN</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1063693646</td>
+<td align="left">8729208624</td>
+<td align="left">PAN</td>
+<td align="left">LORRAINE</td>
+<td align="left">Y</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1063964096</td>
+<td align="left">4183903958</td>
+<td align="left">HAYES</td>
+<td align="left">SUSAN</td>
+<td align="left">E</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1073952412</td>
+<td align="left">2961796966</td>
+<td align="left">JERANKO</td>
+<td align="left">CHELSEA</td>
+<td align="left">M</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1083097976</td>
+<td align="left">3375876626</td>
+<td align="left">CHMIELECKI</td>
+<td align="left">DAVID</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1083687362</td>
+<td align="left">3375435647</td>
+<td align="left">RABOR</td>
+<td align="left">DONALD</td>
+<td align="left">A</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1093949620</td>
+<td align="left">8325279615</td>
+<td align="left">MANGELSON</td>
+<td align="left">JOHN</td>
+<td align="left">J.</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1104224294</td>
+<td align="left">0648565150</td>
+<td align="left">MCCOOL</td>
+<td align="left">CANDICE</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1114345576</td>
+<td align="left">3476772997</td>
+<td align="left">MCNITT</td>
+<td align="left">WILLIAM</td>
+<td align="left">C</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1114395688</td>
+<td align="left">7416379045</td>
+<td align="left">VERAN-TAGUIBAO</td>
+<td align="left">SONIA</td>
+<td align="left">GO</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1124332978</td>
+<td align="left">9931393535</td>
+<td align="left">LEWIS</td>
+<td align="left">KRISTINA</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="even">
+<td align="left">1124340583</td>
+<td align="left">3779612247</td>
+<td align="left">OAKLEAF</td>
+<td align="left">CAROL</td>
+<td align="left">NA</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+<tr class="odd">
+<td align="left">1134104227</td>
+<td align="left">1254224231</td>
+<td align="left">GILLILAND</td>
+<td align="left">J</td>
+<td align="left">D</td>
+<td align="left">Hospital</td>
+<td align="left">060004</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span>, <span class="op">-</span><span class="va">suff</span>, <span class="op">-</span><span class="va">parent_ccn</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="11%">
+<col width="8%">
+<col width="8%">
+<col width="32%">
+<col width="16%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">ind_pac_id</th>
+<th align="left">lst_nm</th>
+<th align="left">frst_nm</th>
+<th align="left">mid_nm</th>
+<th align="left">facility_type</th>
+<th align="left">facility_afl_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1083742829</td>
+<td align="left">5698833655</td>
+<td align="left">FORNARIS</td>
+<td align="left">RAFAEL</td>
+<td align="left">JORGE</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="even">
+<td align="left">1144429580</td>
+<td align="left">3577659580</td>
+<td align="left">CURRY</td>
+<td align="left">LYSA</td>
+<td align="left">LEE</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="odd">
+<td align="left">1386840197</td>
+<td align="left">3274620216</td>
+<td align="left">HAU</td>
+<td align="left">HORACIO</td>
+<td align="left">G</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="even">
+<td align="left">1427107028</td>
+<td align="left">1456328152</td>
+<td align="left">CHANEY</td>
+<td align="left">DENNIS</td>
+<td align="left">M</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="odd">
+<td align="left">1518985373</td>
+<td align="left">8628026861</td>
+<td align="left">GUERRA</td>
+<td align="left">ANTONIO</td>
+<td align="left">F</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="even">
+<td align="left">1558595660</td>
+<td align="left">8921241142</td>
+<td align="left">ALFONSO</td>
+<td align="left">JOHN</td>
+<td align="left">D</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="odd">
+<td align="left">1609973650</td>
+<td align="left">0840373239</td>
+<td align="left">WILCOX</td>
+<td align="left">GEORGE</td>
+<td align="left">KIMBELL</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="even">
+<td align="left">1710112370</td>
+<td align="left">9739337122</td>
+<td align="left">VADDEMPUDI</td>
+<td align="left">VIDYA</td>
+<td align="left">NA</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="odd">
+<td align="left">1720069859</td>
+<td align="left">7012947229</td>
+<td align="left">JANES</td>
+<td align="left">WILLIAM</td>
+<td align="left">WARREN</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="even">
+<td align="left">1740577212</td>
+<td align="left">0345473773</td>
+<td align="left">WEIKLE</td>
+<td align="left">GEOFF</td>
+<td align="left">R</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+<tr class="odd">
+<td align="left">1912260464</td>
+<td align="left">5092036509</td>
+<td align="left">MANSOOR</td>
+<td align="left">SAAD</td>
+<td align="left">MD</td>
+<td align="left">Inpatient rehabilitation facility</td>
+<td align="left">67T055</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, </span>
+<span>                                last_name <span class="op">=</span> <span class="st">"Hill"</span>, </span>
+<span>                                facility_type <span class="op">=</span> <span class="st">"Home Health Agency"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">record_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="11%">
+<col width="11%">
+<col width="7%">
+<col width="8%">
+<col width="7%">
+<col width="5%">
+<col width="19%">
+<col width="17%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">ind_pac_id</th>
+<th align="left">lst_nm</th>
+<th align="left">frst_nm</th>
+<th align="left">mid_nm</th>
+<th align="left">suff</th>
+<th align="left">facility_type</th>
+<th align="left">facility_afl_ccn</th>
+<th align="left">parent_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1174587588</td>
+<td align="left">7214998079</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">C</td>
+<td align="left">III</td>
+<td align="left">Home health agency</td>
+<td align="left">117021</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1174587588</td>
+<td align="left">7214998079</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">C</td>
+<td align="left">III</td>
+<td align="left">Home health agency</td>
+<td align="left">117036</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">1174587588</td>
+<td align="left">7214998079</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">C</td>
+<td align="left">III</td>
+<td align="left">Home health agency</td>
+<td align="left">117069</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1174587588</td>
+<td align="left">7214998079</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">C</td>
+<td align="left">III</td>
+<td align="left">Home health agency</td>
+<td align="left">117125</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">1558380444</td>
+<td align="left">4789619362</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">M</td>
+<td align="left">NA</td>
+<td align="left">Home health agency</td>
+<td align="left">107338</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1558380444</td>
+<td align="left">4789619362</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">M</td>
+<td align="left">NA</td>
+<td align="left">Home health agency</td>
+<td align="left">107408</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">1558380444</td>
+<td align="left">4789619362</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">M</td>
+<td align="left">NA</td>
+<td align="left">Home health agency</td>
+<td align="left">107689</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1558380444</td>
+<td align="left">4789619362</td>
+<td align="left">HILL</td>
+<td align="left">JOHN</td>
+<td align="left">M</td>
+<td align="left">NA</td>
+<td align="left">Home health agency</td>
+<td align="left">107707</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+</div>
+<div class="section level3">
+<h3 id="cms-doctors-and-clinicians-national-file">CMS Doctors and Clinicians National File<a class="anchor" aria-label="anchor" href="#cms-doctors-and-clinicians-national-file"></a>
+</h3>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1407263999</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">8729208152</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20141006002245</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">AVERY</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">ROBIN</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">OTHER</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">1989</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">CLINICAL PSYCHOLOGIST</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">9999 NE 2ND AVE</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">SUITE 209E</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">MIAMI SHORES</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">331382345</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL331382345MI9999XAVEX403</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">8580791</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1407263999</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">8729208152</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20141006002245</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">AVERY</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">ROBIN</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">A</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">OTHER</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">1989</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">CLINICAL PSYCHOLOGIST</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">LARRY BROOKS, PH.D., LLC</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">6608028899</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">3810 HOLLYWOOD BLVD</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">SUITE 2</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">HOLLYWOOD</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">330216779</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">9549623888</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL330216779HO3810XBLVD301</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
+<span>                       grad_year <span class="op">=</span> <span class="fl">2003</span>, </span>
+<span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">2241611</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1497955652</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">3476647330</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20070922000027</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">CHIEN</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">YUI</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">OPHTHALMOLOGY</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">EYE PHYSICIANS OF FLORIDA LLP</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">1254414675</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">49</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">1 SW 129TH AVE</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">209 CORRECTVISION LASER INSTITUTE LLC</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">PEMBROKE PINES</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">330271717</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">9544421133</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL330271717PE1XXXXAVEX405</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">2241616</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1497955652</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">3476647330</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20070922000027</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">CHIEN</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">YUI</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">OPHTHALMOLOGY</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">EYE PHYSICIANS OF FLORIDA LLP</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">1254414675</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">49</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">8051 W SUNRISE BLVD</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">PLANTATION</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">333224103</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">9544742900</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL333224103PL8051XBLVD400</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">4005191</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1497955652</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">3476647330</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20070922000027</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">CHIEN</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">YUI</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">OPHTHALMOLOGY</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">OCEAN OPHTHALMOLOGY GROUP</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">2860553724</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">3</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">1400 NE MIAMI GARDENS DR</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">SUITE 203</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">NORTH MIAMI BEACH</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">331794844</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">3059401500</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL331794844NO1400XDRXX501</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">4586101</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1801000963</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">3577616598</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20090807000530</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">SCHETTINO</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">CHRIS</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">J</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">PEDIATRIC MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">RADIATION ONCOLOGY</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">RADIATION ONCOLOGY</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">UNIVERSITY OF MIAMI</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">3274795109</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">1646</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">1611 NW 12TH AVE</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">JMH</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">MIAMI</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">331361005</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">3052434000</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL331361005MI1611XAVEX429</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">6700176</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1033237524</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">7618041781</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20220614002174</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">GOLDBERG</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">BRIAN</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">KEITH</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">PHYSICAL MEDICINE AND REHABILITATION</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">ROTHMAN ORTHOPAEDICS OF FLORIDA,PLLC</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">4880009786</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">56</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">15502 STONEYBROOK W PKWY</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">SUITE 114</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">WINTER GARDEN</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">347874767</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">8444074070</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL347874767WI15502PKWY403</td>
+</tr>
+<tr class="odd">
+<td align="left">record_number</td>
+<td align="left">7027061</td>
+</tr>
+<tr class="even">
+<td align="left">npi</td>
+<td align="left">1164628830</td>
+</tr>
+<tr class="odd">
+<td align="left">ind_pac_id</td>
+<td align="left">5698811768</td>
+</tr>
+<tr class="even">
+<td align="left">ind_enrl_id</td>
+<td align="left">I20091002000129</td>
+</tr>
+<tr class="odd">
+<td align="left">lst_nm</td>
+<td align="left">KAPLAN</td>
+</tr>
+<tr class="even">
+<td align="left">frst_nm</td>
+<td align="left">KEVIN</td>
+</tr>
+<tr class="odd">
+<td align="left">mid_nm</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">suff</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">cred</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">med_sch</td>
+<td align="left">NEW YORK UNIVERSITY SCHOOL OF MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">grd_yr</td>
+<td align="left">2003</td>
+</tr>
+<tr class="odd">
+<td align="left">pri_spec</td>
+<td align="left">SPORTS MEDICINE</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_1</td>
+<td align="left">ORTHOPEDIC SURGERY</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_3</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">sec_spec_4</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">sec_spec_all</td>
+<td align="left">ORTHOPEDIC SURGERY</td>
+</tr>
+<tr class="odd">
+<td align="left">telehlth</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">org_nm</td>
+<td align="left">JACKSONVILLE ORTHOPAEDIC INSTITUTE INC</td>
+</tr>
+<tr class="odd">
+<td align="left">org_pac_id</td>
+<td align="left">5193625499</td>
+</tr>
+<tr class="even">
+<td align="left">num_org_mem</td>
+<td align="left">111</td>
+</tr>
+<tr class="odd">
+<td align="left">adr_ln_1</td>
+<td align="left">1325 SAN MARCO BLVD</td>
+</tr>
+<tr class="even">
+<td align="left">adr_ln_2</td>
+<td align="left">SUITE 102</td>
+</tr>
+<tr class="odd">
+<td align="left">ln_2_sprs</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">cty</td>
+<td align="left">JACKSONVILLE</td>
+</tr>
+<tr class="odd">
+<td align="left">st</td>
+<td align="left">FL</td>
+</tr>
+<tr class="even">
+<td align="left">zip</td>
+<td align="left">322078549</td>
+</tr>
+<tr class="odd">
+<td align="left">phn_numbr</td>
+<td align="left">9048587045</td>
+</tr>
+<tr class="even">
+<td align="left">ind_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="odd">
+<td align="left">grp_assgn</td>
+<td align="left">Y</td>
+</tr>
+<tr class="even">
+<td align="left">adrs_id</td>
+<td align="left">FL322078549JA1325XBLVD402</td>
+</tr>
+</tbody>
+</table>
+<p><br><br></p>
+</div>
+<div class="section level3">
+<h3 id="cms-missing-contact-information">CMS Missing Contact Information<a class="anchor" aria-label="anchor" href="#cms-missing-contact-information"></a>
+</h3>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -535,8 +2167,8 @@
 <div class="section level3">
 <h3 id="medicare-order-and-referring">Medicare Order and Referring<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="right">npi</th>
@@ -562,11 +2194,11 @@
 <div class="section level3">
 <h3 id="medicare-opt-out-affidavits">Medicare Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -636,13 +2268,13 @@
 <div class="section level3">
 <h3 id="medicare-provider-and-supplier-taxonomy-crosswalk">Medicare Provider and Supplier Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">medicare_specialty_code</span>, </span>
 <span>                medicare_specialty_description <span class="op">=</span> <span class="va">medicare_provider_supplier_type_description</span>,</span>
 <span>                <span class="va">provider_taxonomy_code</span>,</span>
 <span>                provider_taxonomy_description <span class="op">=</span> <span class="va">provider_taxonomy_description_type_classification_specialization</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="17%">
@@ -676,7 +2308,7 @@
 <div class="section level3">
 <h3 id="medicare-fee-for-service-public-provider-enrollment">Medicare Fee-For-Service Public Provider Enrollment<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prven</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
 <span><span class="op">~</span><span class="va">fn</span>,         <span class="op">~</span><span class="va">params</span>,</span>
 <span><span class="st">"provider_enrollment"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span>,</span>
@@ -685,24 +2317,24 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">prven</span><span class="op">$</span><span class="va">fn</span>, <span class="va">prven</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 11</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹</span></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     </span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     </span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more variable: gndr_sw &lt;chr&gt;, and abbreviated variable names</span></span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 11</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;  </span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     </span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     </span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 1 more variable: gndr_sw &lt;chr&gt;, and abbreviated variable names</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="medicare-pending-initial-logging-and-tracking">Medicare Pending Initial Logging and Tracking<a class="anchor" aria-label="anchor" href="#medicare-pending-initial-logging-and-tracking"></a>
 </h3>
 <p><br></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -716,9 +2348,9 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -732,9 +2364,9 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Abbott"</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -748,9 +2380,9 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -936,12 +2568,12 @@
 <h3 id="medicare-revalidation-apis">Medicare Revalidation APIs<a class="anchor" aria-label="anchor" href="#medicare-revalidation-apis"></a>
 </h3>
 <p>Medicare Revalidation Due Date API</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span><span class="va">date</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
 <th align="left">name</th>
@@ -1008,12 +2640,12 @@
 </table>
 <p><br><br></p>
 <p>Medicare Revalidation Reassignment List API</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">list</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">list</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="48%">
@@ -1368,12 +3000,12 @@
 </table>
 <p><br><br></p>
 <p>Medicare Revalidation Clinic Group Practice Reassignment API</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">group</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>         <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="48%">
@@ -1715,10 +3347,10 @@
 <div class="section level3">
 <h3 id="cms-open-payments-api">CMS Open Payments API<a class="anchor" aria-label="anchor" href="#cms-open-payments-api"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op</span> <span class="op">|&gt;</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">hoist</a></span><span class="op">(</span><span class="va">covered_recipient</span>, </span>
 <span>                   recipient_npi <span class="op">=</span> <span class="st">"covered_recipient_npi"</span>,</span>
 <span>                   profile_id <span class="op">=</span> <span class="st">"covered_recipient_profile_id"</span>,</span>
@@ -1737,7 +3369,7 @@
 <span>                    <span class="va">city</span>,</span>
 <span>                    <span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>      <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>      <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>      <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="14%">
@@ -1771,7 +3403,7 @@
 </tr></tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op_2</span> <span class="op">&lt;-</span> <span class="va">op</span> <span class="op">|&gt;</span> <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">hoist</a></span><span class="op">(</span><span class="va">applicable_mfg_gpo</span>, </span>
 <span>                           manufacturer_gpo_paying <span class="op">=</span> <span class="st">"applicable_manufacturer_or_applicable_gpo_making_payment_name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>             <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">hoist</a></span><span class="op">(</span><span class="va">associated_drug_device</span>, </span>
@@ -1790,7 +3422,7 @@
 <span><span class="va">op_2</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nature_of_payment <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">nature_of_payment</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span>,</span>
 <span>                      manufacturer_gpo_paying <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">manufacturer_gpo_paying</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span>,</span>
 <span>                      name <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">name</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span>,</span>
-<span>                      therapeutic_category <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">therapeutic_category</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>                      therapeutic_category <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">therapeutic_category</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="10%">
@@ -2642,14 +4274,14 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op_2</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">manufacturer_gpo_paying</span>, <span class="va">nature_of_payment</span>, <span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>                   payment_total <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">payment_total</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>nature_of_payment <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trunc.html" class="external-link">str_trunc</a></span><span class="op">(</span><span class="va">nature_of_payment</span>, <span class="fl">20</span>, <span class="st">"right"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">payment_total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="42%">
@@ -2897,30 +4529,30 @@
 <div class="section level3">
 <h3 id="medicare-monthly-enrollment-api">Medicare Monthly Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment-api"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">months</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span><span class="va">month.name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">months</span>, <span class="op">~</span><span class="fu"><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>, geo_level <span class="op">=</span> <span class="st">"State"</span>, state <span class="op">=</span> <span class="st">"Georgia"</span>, month <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb29"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 22</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;   &lt;int&gt;</span></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676</span></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770</span></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058</span></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more variables: aged_tot_benes &lt;int&gt;, aged_esrd_benes &lt;int&gt;,</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   aged_no_esrd_benes &lt;int&gt;, dsbld_tot_benes &lt;int&gt;,</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   dsbld_esrd_and_esrd_only_benes &lt;int&gt;, dsbld_no_esrd_benes &lt;int&gt;,</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   a_b_tot_benes &lt;int&gt;, a_b_orgnl_mdcr_benes &lt;int&gt;,</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   a_b_ma_and_oth_benes &lt;int&gt;, prscrptn_drug_tot_benes &lt;int&gt;,</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   prscrptn_drug_pdp_benes &lt;int&gt;, prscrptn_drug_mapd_benes &lt;int&gt;, and</span></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 × 22</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt;     &lt;int&gt;   &lt;int&gt;   &lt;int&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 12 more variables: aged_tot_benes &lt;int&gt;, aged_esrd_benes &lt;int&gt;,</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   aged_no_esrd_benes &lt;int&gt;, dsbld_tot_benes &lt;int&gt;,</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   dsbld_esrd_and_esrd_only_benes &lt;int&gt;, dsbld_no_esrd_benes &lt;int&gt;,</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   a_b_tot_benes &lt;int&gt;, a_b_orgnl_mdcr_benes &lt;int&gt;,</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   a_b_ma_and_oth_benes &lt;int&gt;, prscrptn_drug_tot_benes &lt;int&gt;,</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   prscrptn_drug_pdp_benes &lt;int&gt;, prscrptn_drug_mapd_benes &lt;int&gt;, and</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
@@ -2933,19 +4565,19 @@
 </ol>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">pbs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 × 6</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year rndrng_npi rndrng_prvdr       totals_srvcs      hcpcs    averages</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;      &lt;list&gt;             &lt;list&gt;            &lt;list&gt;   &lt;list&gt;  </span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2013 1003000126 &lt;tibble [7 × 17]&gt;  &lt;tibble [7 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2014 1003000126 &lt;tibble [8 × 17]&gt;  &lt;tibble [8 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2015 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2016 1003000126 &lt;tibble [12 × 17]&gt; &lt;tibble [12 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2017 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2018 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2019 1003000126 &lt;tibble [9 × 17]&gt;  &lt;tibble [9 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2020 1003000126 &lt;tibble [9 × 17]&gt;  &lt;tibble [9 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 × 6</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year rndrng_npi rndrng_prvdr       totals_srvcs      hcpcs    averages</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;int&gt; &lt;chr&gt;      &lt;list&gt;             &lt;list&gt;            &lt;list&gt;   &lt;list&gt;  </span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2013 1003000126 &lt;tibble [7 × 17]&gt;  &lt;tibble [7 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2  2014 1003000126 &lt;tibble [8 × 17]&gt;  &lt;tibble [8 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3  2015 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4  2016 1003000126 &lt;tibble [12 × 17]&gt; &lt;tibble [12 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5  2017 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6  2018 1003000126 &lt;tibble [11 × 17]&gt; &lt;tibble [11 × 3]&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7  2019 1003000126 &lt;tibble [9 × 17]&gt;  &lt;tibble [9 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8  2020 1003000126 &lt;tibble [9 × 17]&gt;  &lt;tibble [9 × 3]&gt;  &lt;tibble&gt; &lt;tibble&gt;</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <ol start="2" style="list-style-type: decimal">
@@ -2953,13 +4585,15 @@
 </ol>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srvcs</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>         <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span>, <span class="va">totals_srvcs</span>, <span class="va">hcpcs</span>, <span class="va">averages</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">srvcs</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                       <span class="va">tot_benes</span><span class="op">:</span><span class="va">tot_srvcs</span>, <span class="va">hcpcs_cd</span>, <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>                       <span class="va">tot_benes</span><span class="op">:</span><span class="va">tot_srvcs</span>, </span>
+<span>                       <span class="va">hcpcs_cd</span>, </span>
+<span>                       <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -3064,12 +4698,15 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nat</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">srvcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_level <span class="op">=</span> <span class="st">"National"</span>, year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nat</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">place_of_srvc</span> <span class="op">==</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
-<span>       <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_rndrng_prvdrs</span><span class="op">:</span><span class="va">tot_srvcs</span>, <span class="va">hcpcs_cd</span>, <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>       <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>       <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                     <span class="va">tot_rndrng_prvdrs</span><span class="op">:</span><span class="va">tot_srvcs</span>, </span>
+<span>                     <span class="va">hcpcs_cd</span>, </span>
+<span>                     <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>       <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -3185,12 +4822,15 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">srvcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_desc <span class="op">=</span> <span class="st">"Maryland"</span>, year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">state</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">place_of_srvc</span> <span class="op">==</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
-<span>         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_rndrng_prvdrs</span><span class="op">:</span><span class="va">tot_srvcs</span>, <span class="va">hcpcs_cd</span>, <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>         <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                       <span class="va">tot_rndrng_prvdrs</span><span class="op">:</span><span class="va">tot_srvcs</span>, </span>
+<span>                       <span class="va">hcpcs_cd</span>, </span>
+<span>                       <span class="va">avg_sbmtd_chrg</span><span class="op">:</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>         <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -3312,29 +4952,29 @@
 </ol>
 </blockquote>
 <p><br><br></p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">prov</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 × 11</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   year  rndrng_…¹ rndrng…² totals…³ drug_s…⁴ med_sr…⁵ bene_age bene_sex bene_r…⁶</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;  </span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2013  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2014  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2015  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2016  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2017  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2018  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 2019  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 2020  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 2 more variables: bene_status &lt;list&gt;, bene_cc &lt;list&gt;, and abbreviated</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   variable names ¹​rndrng_npi, ²​rndrng_prvdr, ³​totals_srvcs, ⁴​drug_srvcs,</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​med_srvcs, ⁶​bene_race</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 8 × 11</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   year  rndrng_…¹ rndrng…² totals…³ drug_s…⁴ med_sr…⁵ bene_age bene_sex bene_r…⁶</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;     &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;   &lt;list&gt;  </span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2013  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2014  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2015  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2016  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2017  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2018  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 2019  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 2020  10030001… &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt; &lt;tibble&gt;</span></span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 2 more variables: bene_status &lt;list&gt;, bene_cc &lt;list&gt;, and abbreviated</span></span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   variable names ¹​rndrng_npi, ²​rndrng_prvdr, ³​totals_srvcs, ⁴​drug_srvcs,</span></span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ⁵​med_srvcs, ⁶​bene_race</span></span></code></pre></div>
 <p><br><br></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rndrng_npi</span>, <span class="va">rndrng_prvdr</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="26%">
@@ -3420,10 +5060,10 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">totals_srvcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">totals_srvcs</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="5%">
@@ -3529,10 +5169,10 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_age</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_age</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="6%">
@@ -3618,10 +5258,10 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_sex</span>, <span class="va">bene_status</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_sex</span>, <span class="va">bene_status</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="8%">
@@ -3697,10 +5337,10 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_race</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_race</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="4%">
@@ -3796,10 +5436,10 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_cc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>     <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_cc</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>     <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>     <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="1%">
@@ -4014,11 +5654,11 @@
 <p>Medicare Multiple Chronic Conditions API</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, geo_lvl <span class="op">=</span> <span class="st">"National"</span>, demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mult</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_age_lvl</span>, <span class="va">bene_demo_desc</span><span class="op">:</span><span class="va">er_visits_per_1000_benes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="4%">
@@ -4710,11 +6350,11 @@
 <p>Medicare Specific Chronic Conditions API</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, geo_lvl <span class="op">=</span> <span class="st">"National"</span>, demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spec</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_age_lvl</span>, <span class="va">bene_demo_desc</span><span class="op">:</span><span class="va">prvlnc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu">md_table</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="6%">
