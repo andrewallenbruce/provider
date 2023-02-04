@@ -78,10 +78,7 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-beneficiary_enrollment(month = "Year",
-                       geo_level = "County",
-                       state_abb = "AL",
-                       county = "Autauga")
+beneficiary_enrollment(month = "Year", geo_level = "County", state_abb = "AL", county = "Autauga")
 
 beneficiary_enrollment(year = 2021,
                        geo_level = "County",

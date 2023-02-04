@@ -46,10 +46,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' beneficiary_enrollment(month = "Year",
-#'                        geo_level = "County",
-#'                        state_abb = "AL",
-#'                        county = "Autauga")
+#' beneficiary_enrollment(month = "Year", geo_level = "County", state_abb = "AL", county = "Autauga")
 #'
 #' beneficiary_enrollment(year = 2021,
 #'                        geo_level = "County",

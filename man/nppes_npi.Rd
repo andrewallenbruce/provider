@@ -124,6 +124,7 @@ Update Frequency: \strong{Weekly}
 \dontrun{
 ### Single NPI
 nppes_npi(npi = 1528060837)
+nppes_npi(npi = 1336413418)
 
 ### City, state, country
 nppes_npi(city = "Atlanta",
@@ -140,13 +141,7 @@ nppes_npi(npi = 1710975040) # NPI-1
 nppes_npi(npi = 1659781227) # Deactivated
 
 ### List of NPIs
-npi_list <- c(1003026055,
-              1710983663,
-              1316405939,
-              1720392988,
-              1518184605,
-              1922056829,
-              1083879860)
+npi_list <- c(1003026055, 1710983663, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
 
 npi_list |>
 purrr::map_dfr(nppes_npi) |>
