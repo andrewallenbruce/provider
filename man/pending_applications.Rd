@@ -2,8 +2,7 @@
 % Please edit documentation in R/pending_applications.R
 \name{pending_applications}
 \alias{pending_applications}
-\title{Search the Medicare Pending Initial Logging and Tracking API
-by Provider Type}
+\title{Search the Medicare Pending Initial Logging and Tracking API}
 \source{
 Centers for Medicare & Medicaid Services
 }
@@ -35,8 +34,8 @@ pending_applications(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-A list of applications pending CMS contractor review for
-physicians & non-physicians..
+A list of enrollment applications pending CMS contractor
+review for physicians & non-physicians.
 }
 \details{
 The Pending Initial Logging and Tracking (L & T) dataset provides
@@ -57,6 +56,4 @@ pending_applications(npi = 1487003984, type = "physician")
 pending_applications(npi = 1487003984, type = "non-physician")
 pending_applications(last_name = "Abbott", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
-\dontrun{
-}
 }

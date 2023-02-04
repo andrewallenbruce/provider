@@ -3,6 +3,8 @@
 export(beneficiary_enrollment)
 export(cc_multiple)
 export(cc_specific)
+export(doctors_and_clinicians)
+export(facility_affiliations)
 export(missing_information)
 export(nppes_npi)
 export(open_payments)

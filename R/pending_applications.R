@@ -1,8 +1,7 @@
 #' Search the Medicare Pending Initial Logging and Tracking API
-#'    by Provider Type
 #'
-#' @description A list of applications pending CMS contractor review for
-#'    physicians & non-physicians..
+#' @description A list of enrollment applications pending CMS contractor
+#'    review for physicians & non-physicians.
 #'
 #' @details The Pending Initial Logging and Tracking (L & T) dataset provides
 #'    a list of pending applications that have not been processed by CMS
@@ -30,8 +29,6 @@
 #' pending_applications(npi = 1487003984, type = "non-physician")
 #' pending_applications(last_name = "Abbott", type = "non-physician")
 #' pending_applications(first_name = "John", type = "physician")
-#' \dontrun{
-#' }
 #' @autoglobal
 #' @export
 

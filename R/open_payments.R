@@ -69,7 +69,7 @@
 #'    * `Current or prospective ownership or investment interest`
 #'    * `Food and Beverage`
 #' @param year Reporting year, 2015-2021, default is `2021`
-#' @param offset offset
+#' @param offset offset; API pagination
 #' @param clean_names Clean column names with {janitor}'s
 #'    `clean_names()` function; default is `TRUE`.
 #' @param lowercase Convert column names to lowercase; default is `TRUE`.
@@ -87,24 +87,24 @@
 #' }
 #' @autoglobal
 #' @export
-open_payments <- function(recipient_npi = NULL,
-                          recipient_type = NULL,
-                          recipient_id = NULL,
-                          recipient_first_name = NULL,
-                          recipient_last_name = NULL,
-                          recipient_city = NULL,
-                          recipient_state = NULL,
-                          recipient_zip_code = NULL,
+open_payments <- function(recipient_npi          = NULL,
+                          recipient_type         = NULL,
+                          recipient_id           = NULL,
+                          recipient_first_name   = NULL,
+                          recipient_last_name    = NULL,
+                          recipient_city         = NULL,
+                          recipient_state        = NULL,
+                          recipient_zip_code     = NULL,
                           teaching_hospital_name = NULL,
-                          manufacturer_gpo_name = NULL,
-                          manufacturer_gpo_id = NULL,
-                          form_of_payment = NULL,
-                          nature_of_payment = NULL,
-                          year = 2021,
-                          offset = 0,
-                          clean_names = TRUE,
-                          lowercase   = TRUE,
-                          nest = TRUE) {
+                          manufacturer_gpo_name  = NULL,
+                          manufacturer_gpo_id    = NULL,
+                          form_of_payment        = NULL,
+                          nature_of_payment      = NULL,
+                          year                   = 2021,
+                          offset                 = 0,
+                          clean_names            = TRUE,
+                          lowercase              = TRUE,
+                          nest                   = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,

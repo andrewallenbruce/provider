@@ -80,7 +80,7 @@ open_payments(
 
 \item{year}{Reporting year, 2015-2021, default is \code{2021}}
 
-\item{offset}{offset}
+\item{offset}{offset; API pagination}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
