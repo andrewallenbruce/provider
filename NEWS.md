@@ -1,5 +1,11 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9007 (2023-02-04)
+
+* doctors_and_clinicians() function
+* facility_affiliations() function
+
+
 # provider 0.0.0.9006 (2023-02-03)
 
 * pending_applications() function
