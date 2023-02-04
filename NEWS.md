@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9006 (2023-02-03)
+
+* pending_applications() function
+
+
 # provider 0.0.0.9005 (2023-01-22)
 
 * nesting larger outputs
