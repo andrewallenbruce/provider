@@ -73,7 +73,8 @@ This package is primarily focused on accessing public API data that can be linke
 ### NPPES NPI Registry
 
 ```{r}
-(npi_1 <- provider::nppes_npi(npi = 1710975040))
+npi_1 <- provider::nppes_npi(npi = 1710975040)
+npi_1 |> dplyr::glimpse()
 ```
 <br>
 
@@ -169,6 +170,7 @@ provider::facility_affiliations(first_name = "John",
 ### CMS Doctors and Clinicians National File
 
 ```{r results='asis', echo=TRUE}
+# search by npi
 doctors_and_clinicians(npi = 1407263999) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |>
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
@@ -178,6 +180,7 @@ doctors_and_clinicians(npi = 1407263999) |>
 <br><br>
 
 ```{r results='asis', echo=TRUE}
+# search by medical school
 doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2003, 
                        state = "FL") |> 

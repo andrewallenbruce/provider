@@ -91,17 +91,27 @@ together.
 ### NPPES NPI Registry
 
 ``` r
-(npi_1 <- provider::nppes_npi(npi = 1710975040))
+npi_1 <- provider::nppes_npi(npi = 1710975040)
+npi_1 |> dplyr::glimpse()
 ```
 
-    #> # A tibble: 1 × 15
-    #>   datetime            outcome enumera…¹ number name  city  state addre…² pract…³
-    #>   <dttm>              <chr>   <chr>     <chr>  <chr> <chr> <chr> <list>  <list> 
-    #> 1 2023-02-04 14:16:46 results NPI-1     17109… JOHN… OLNEY MD    <df>    <list> 
-    #> # … with 6 more variables: taxonomies <list>, identifiers <list>,
-    #> #   endpoints <list>, other_names <list>, epochs <list>, basic <list>, and
-    #> #   abbreviated variable names ¹​enumeration_type, ²​addresses,
-    #> #   ³​practiceLocations
+    #> Rows: 1
+    #> Columns: 15
+    #> $ datetime          <dttm> 2023-02-07 23:07:36
+    #> $ outcome           <chr> "results"
+    #> $ enumeration_type  <chr> "NPI-1"
+    #> $ number            <chr> "1710975040"
+    #> $ name              <chr> "JOHN HERRING"
+    #> $ city              <chr> "OLNEY"
+    #> $ state             <chr> "MD"
+    #> $ addresses         <list> [<data.frame[2 x 11]>]
+    #> $ practiceLocations <list> []
+    #> $ taxonomies        <list> [<data.frame[1 x 6]>]
+    #> $ identifiers       <list> [<data.frame[5 x 5]>]
+    #> $ endpoints         <list> []
+    #> $ other_names       <list> []
+    #> $ epochs            <list> [<tbl_df[1 x 2]>]
+    #> $ basic             <list> [<tbl_df[1 x 11]>]
 
 <br>
 
@@ -111,7 +121,7 @@ npi_1 |> dplyr::select(datetime:state) |> gluedown::md_table()
 
 | datetime            | outcome | enumeration_type | number     | name         | city  | state |
 |:--------------------|:--------|:-----------------|:-----------|:-------------|:------|:------|
-| 2023-02-04 14:16:46 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
+| 2023-02-07 23:07:36 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
 
 <br>
 
@@ -302,6 +312,7 @@ provider::facility_affiliations(first_name = "John",
 ### CMS Doctors and Clinicians National File
 
 ``` r
+# search by npi
 doctors_and_clinicians(npi = 1407263999) |> 
   dplyr::mutate(dplyr::across(everything(), as.character)) |>
   tidyr::pivot_longer(cols = dplyr::everything()) |> 
@@ -378,6 +389,7 @@ doctors_and_clinicians(npi = 1407263999) |>
 <br><br>
 
 ``` r
+# search by medical school
 doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2003, 
                        state = "FL") |> 
@@ -618,7 +630,7 @@ provider::opt_out(last = "Aaron") |>
 
 | name                        | value                  |
 |:----------------------------|:-----------------------|
-| date                        | 2023-02-04             |
+| date                        | 2023-02-08             |
 | last_updated                | 12/15/2022             |
 | first_name                  | Sheryl                 |
 | last_name                   | Aaron                  |
@@ -773,7 +785,7 @@ date |>
 
 | name                            | value           |
 |:--------------------------------|:----------------|
-| month                           | 2023-02-04      |
+| month                           | 2023-02-08      |
 | enrollment_id                   | I20040602001711 |
 | national_provider_identifier    | 1710912209      |
 | first_name                      | Yelena          |
@@ -802,7 +814,7 @@ list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 
 | name                                         | value                                           |
 |:---------------------------------------------|:------------------------------------------------|
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 3678655222                                      |
 | group_enrollment_id                          | O20080205000002                                 |
 | group_legal_business_name                    | \#1 Wise Podiatry Care P.C.                     |
@@ -819,7 +831,7 @@ list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 9931511052                                      |
 | group_enrollment_id                          | O20201215000955                                 |
 | group_legal_business_name                    | Brighton Beach Podiatry Pllc                    |
@@ -836,7 +848,7 @@ list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 2062791411                                      |
 | group_enrollment_id                          | O20161108001365                                 |
 | group_legal_business_name                    | Fair Podiatry Practice Pllc                     |
@@ -853,7 +865,7 @@ list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 8527313170                                      |
 | group_enrollment_id                          | O20180622000028                                 |
 | group_legal_business_name                    | New York Jewish American Podiatry Practice Pllc |
@@ -870,7 +882,7 @@ list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 5193155174                                      |
 | group_enrollment_id                          | O20200414003240                                 |
 | group_legal_business_name                    | Podiatry Of Brooklyn Pllc                       |
@@ -902,7 +914,7 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 
 | name                                         | value                                           |
 |:---------------------------------------------|:------------------------------------------------|
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 3678655222                                      |
 | group_enrollment_id                          | O20080205000002                                 |
 | group_legal_business_name                    | \#1 Wise Podiatry Care P.C.                     |
@@ -918,7 +930,7 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 9931511052                                      |
 | group_enrollment_id                          | O20201215000955                                 |
 | group_legal_business_name                    | Brighton Beach Podiatry Pllc                    |
@@ -934,7 +946,7 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 2062791411                                      |
 | group_enrollment_id                          | O20161108001365                                 |
 | group_legal_business_name                    | Fair Podiatry Practice Pllc                     |
@@ -950,7 +962,7 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 8527313170                                      |
 | group_enrollment_id                          | O20180622000028                                 |
 | group_legal_business_name                    | New York Jewish American Podiatry Practice Pllc |
@@ -966,7 +978,7 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 | individual_specialty_description             | Podiatry                                        |
 | individual_due_date                          | 10/31/2019                                      |
 | individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-04                                      |
+| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 5193155174                                      |
 | group_enrollment_id                          | O20200414003240                                 |
 | group_legal_business_name                    | Podiatry Of Brooklyn Pllc                       |
