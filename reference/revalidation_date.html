@@ -124,7 +124,6 @@ dates are appended to the list</p>
 <span>  type_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  month <span class="op">=</span> <span class="st">"Latest"</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -173,11 +172,6 @@ dates are appended to the list</p>
 <dd><p>Enrollment specialty</p></dd>
 
 
-<dt>month</dt>
-<dd><p>dataset version, <code>Latest</code> is default; possible months are
-<code>Feb</code>, <code>Apr</code>, <code>Jun</code>, <code>Jul</code>, <code>Aug</code>, <code>Sep</code>, <code>Oct</code>, <code>Nov</code>,<code>Dec</code></p></dd>
-
-
 <dt>clean_names</dt>
 <dd><p>Clean column names with janitor's
 <code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
@@ -217,91 +211,65 @@ their providers.</p><div class="section">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>,</span></span>
 <span class="r-in"><span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2023-02-08 I200311100… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi    first…¹ last_…² organ…³ enrol…⁴ enrol…⁵ provi…⁶ enrol…⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I20031110000070 11846… Eric    Byrd    <span style="color: #BB0000;">NA</span>      NC      3       Non-DM… Intern…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: revalidation_due_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;dttm&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   receiving_benefits_reassignment &lt;int&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​first_name, ²​last_name, ³​organization_name, ⁴​enrollment_state_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​enrollment_type, ⁶​provider_type_text, ⁷​enrollment_specialty</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>,</span></span>
 <span class="r-in"><span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2023-02-08 I200311100… 118469… Eric    Byrd    <span style="color: #949494;">""</span>      NC      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2023-02-08 I200901280… 159879… Eric    Byrd    <span style="color: #949494;">""</span>      SC      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi    first…¹ last_…² organ…³ enrol…⁴ enrol…⁵ provi…⁶ enrol…⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I20031110000070 11846… Eric    Byrd    <span style="color: #BB0000;">NA</span>      NC      3       Non-DM… Intern…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> I20090128000461 15987… Eric    Byrd    <span style="color: #BB0000;">NA</span>      SC      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: revalidation_due_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;dttm&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   receiving_benefits_reassignment &lt;int&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​first_name, ²​last_name, ³​organization_name, ⁴​enrollment_state_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​enrollment_type, ⁶​provider_type_text, ⁷​enrollment_specialty</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
 <span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"3"</span>,</span></span>
 <span class="r-in"><span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,480 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    month      enrollme…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2023-02-08 I20031104… 118469… John    Abt     <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2023-02-08 I20031105… 135643… Humber… Fernan… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2023-02-08 I20031105… 146749… Jorge   Santan… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2023-02-08 I20031111… 110487… Marian… De La … <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2023-02-08 I20031204… 143720… Mohamm… Sheikh  <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2023-02-08 I20031209… 141706… Richard Rizzo   <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2023-02-08 I20031211… 168964… Rene    Casano… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2023-02-08 I20031211… 126558… Maria   Montea… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2023-02-08 I20031215… 161994… Ricardo Doming… <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2023-02-08 I20031215… 103321… Arles   Perdomo <span style="color: #949494;">""</span>      FL      3       Non-DM…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,470 more rows, 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,480 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    enrollment_id   npi   first…¹ last_…² organ…³ enrol…⁴ enrol…⁵ provi…⁶ enrol…⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> I20031104000582 1184… John    Abt     <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> I20031105000008 1356… Humber… Fernan… <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> I20031105000534 1467… Jorge   Santan… <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> I20031111000679 1104… Marian… De La … <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> I20031204000571 1437… Mohamm… Sheikh  <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> I20031209000730 1417… Richard Rizzo   <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> I20031211000318 1689… Rene    Casano… <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> I20031211001075 1265… Maria   Montea… <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> I20031215000276 1619… Ricardo Doming… <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> I20031215000394 1033… Arles   Perdomo <span style="color: #BB0000;">NA</span>      FL      3       Non-DM… Genera…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 1,470 more rows, 4 more variables: revalidation_due_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;dttm&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   receiving_benefits_reassignment &lt;chr&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​first_name, ²​last_name, ³​organization_name, ⁴​enrollment_state_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​enrollment_type, ⁶​provider_type_text, ⁷​enrollment_specialty</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span>,</span></span>
 <span class="r-in"><span>                  org_name <span class="op">=</span> <span class="st">"Lee Memorial Health System"</span>,</span></span>
 <span class="r-in"><span>                  state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
 <span class="r-in"><span>                  prov_type <span class="op">=</span> <span class="st">"DME"</span>,</span></span>
 <span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   month      enrollmen…¹ natio…² first…³ last_…⁴ organ…⁵ enrol…⁶ enrol…⁷ provi…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2023-02-08 O201106200… 180119… <span style="color: #949494;">""</span>      <span style="color: #949494;">""</span>      Lee Me… FL      2       DME    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;chr&gt;, adjusted_due_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   and abbreviated variable names ¹​enrollment_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ²​national_provider_identifier, ³​first_name, ⁴​last_name, ⁵​organization_name,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁶​enrollment_state_code, ⁷​enrollment_type, ⁸​provider_type_text</span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
-<span class="r-in"><span>                  <span class="fl">1316405939</span>,</span></span>
-<span class="r-in"><span>                  <span class="fl">1720392988</span>,</span></span>
-<span class="r-in"><span>                  <span class="fl">1518184605</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  each <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">months</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Nov"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Oct"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Sep"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Aug"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Jul"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Jun"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Apr"</span>,</span></span>
-<span class="r-in"><span>                <span class="st">"Feb"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                times <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map2_dfr</a></span><span class="op">(</span><span class="va">npi_list</span>,</span></span>
-<span class="r-in"><span>                <span class="va">months</span>,</span></span>
-<span class="r-in"><span>                <span class="op">~</span><span class="fu">revalidation_date</span><span class="op">(</span>npi <span class="op">=</span> <span class="va">.x</span>,</span></span>
-<span class="r-in"><span>                month <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 13</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi    first…¹ last_…² organ…³ enrol…⁴ enrol…⁵ provi…⁶ enrol…⁷</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> O20110620000324 18011… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      Lee Me… FL      2       DME     Pharma…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: revalidation_due_date &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adjusted_due_date &lt;dttm&gt;, individual_total_reassign_to &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   receiving_benefits_reassignment &lt;chr&gt;, and abbreviated variable names</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​first_name, ²​last_name, ³​organization_name, ⁴​enrollment_state_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ⁵​enrollment_type, ⁶​provider_type_text, ⁷​enrollment_specialty</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
