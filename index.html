@@ -254,15 +254,25 @@
 <h3 id="nppes-npi-registry">NPPES NPI Registry<a class="anchor" aria-label="anchor" href="#nppes-npi-registry"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">npi_1</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 15</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   datetime            outcome enumera…¹ number name  city  state addre…² pract…³</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;list&gt;  &lt;list&gt; </span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2023-02-04 14:16:46 results NPI-1     17109… JOHN… OLNEY MD    &lt;df&gt;    &lt;list&gt; </span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # … with 6 more variables: taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   endpoints &lt;list&gt;, other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;, and</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   abbreviated variable names ¹​enumeration_type, ²​addresses,</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   ³​practiceLocations</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span></span>
+<span><span class="va">npi_1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 15</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ datetime          &lt;dttm&gt; 2023-02-07 23:07:36</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ outcome           &lt;chr&gt; "results"</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enumeration_type  &lt;chr&gt; "NPI-1"</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ number            &lt;chr&gt; "1710975040"</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ name              &lt;chr&gt; "JOHN HERRING"</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ city              &lt;chr&gt; "OLNEY"</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ state             &lt;chr&gt; "MD"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ addresses         &lt;list&gt; [&lt;data.frame[2 x 11]&gt;]</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ practiceLocations &lt;list&gt; []</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ taxonomies        &lt;list&gt; [&lt;data.frame[1 x 6]&gt;]</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ identifiers       &lt;list&gt; [&lt;data.frame[5 x 5]&gt;]</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ endpoints         &lt;list&gt; []</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ other_names       &lt;list&gt; []</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ epochs            &lt;list&gt; [&lt;tbl_df[1 x 2]&gt;]</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ basic             &lt;list&gt; [&lt;tbl_df[1 x 11]&gt;]</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">npi_1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">datetime</span><span class="op">:</span><span class="va">state</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -286,7 +296,7 @@
 <th align="left">state</th>
 </tr></thead>
 <tbody><tr class="odd">
-<td align="left">2023-02-04 14:16:46</td>
+<td align="left">2023-02-07 23:07:36</td>
 <td align="left">results</td>
 <td align="left">NPI-1</td>
 <td align="left">1710975040</td>
@@ -1091,7 +1101,8 @@
 <h3 id="cms-doctors-and-clinicians-national-file">CMS Doctors and Clinicians National File<a class="anchor" aria-label="anchor" href="#cms-doctors-and-clinicians-national-file"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="co"># search by npi</span></span>
+<span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1361,7 +1372,8 @@
 </table>
 <p><br><br></p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
+<code class="sourceCode R"><span><span class="co"># search by medical school</span></span>
+<span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
 <span>                       grad_year <span class="op">=</span> <span class="fl">2003</span>, </span>
 <span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">everything</span><span class="op">(</span><span class="op">)</span>, <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2207,7 +2219,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">date</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">last_updated</td>
@@ -2582,7 +2594,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">enrollment_id</td>
@@ -2658,7 +2670,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -2726,7 +2738,7 @@
 </tr>
 <tr class="even">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="odd">
 <td align="left">group_pac_id</td>
@@ -2794,7 +2806,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -2862,7 +2874,7 @@
 </tr>
 <tr class="even">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="odd">
 <td align="left">group_pac_id</td>
@@ -2930,7 +2942,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -3018,7 +3030,7 @@
 <tbody>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -3082,7 +3094,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -3146,7 +3158,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -3210,7 +3222,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
@@ -3274,7 +3286,7 @@
 </tr>
 <tr class="odd">
 <td align="left">month</td>
-<td align="left">2023-02-04</td>
+<td align="left">2023-02-08</td>
 </tr>
 <tr class="even">
 <td align="left">group_pac_id</td>
