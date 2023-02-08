@@ -44,27 +44,28 @@ remotes::install_github("andrewallenbruce/provider")
 
 | Function                   | API                                                                                                                                                                                                                                   |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `addl_phone_numbers()`     | [Physician Additional Phone Numbers](https://data.cms.gov/provider-data/dataset/phys-phon)                                                                                                                                            |
+| `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
+| `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
+| `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
+| `clia_labs()`              | [Medicare Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)                                            |
+| `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
+| `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
+| `hospital_enrollment()`    | [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)                                                                                                             |
+| `missing_information()`    | [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)                                                                       |
 | `nppes_npi()`              | [NPPES National Provider Identifier (NPI) Registry](https://npiregistry.cms.hhs.gov/search)                                                                                                                                           |
 | `open_payments()`          | [CMS Open Payments Program](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)                                                                                                                            |
-| `provider_enrollment()`    | [Medicare Fee-For-Service Public Provider Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)                                        |
-| `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
-| `order_refer()`            | [Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)                                                                                               |
 | `opt_out()`                | [Medicare Opt Out Affidavits](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)                                                                                                 |
+| `order_refer()`            | [Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)                                                                                               |
+| `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
+| `physician_by_geography()` | [Medicare Physician & Other Practitioners: by Geography and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service) |
 | `physician_by_provider()`  | [Medicare Physician & Other Practitioners: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)                           |
 | `physician_by_service()`   | [Medicare Physician & Other Practitioners: by Provider and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)   |
-| `physician_by_geography()` | [Medicare Physician & Other Practitioners: by Geography and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service) |
+| `provider_enrollment()`    | [Medicare Fee-For-Service Public Provider Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)                                        |
 | `revalidation_date()`      | [Medicare Revalidation Due Date](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)                                                                                      |
 | `revalidation_group()`     | [Medicare Revalidation Clinic Group Practice Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)                                       |
 | `revalidation_reassign()`  | [Medicare Revalidation Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)                                                                              |
-| `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
-| `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
-| `clia_labs()`              | [Medicare Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)                                            |
 | `taxonomy_crosswalk()`     | [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)                                            |
-| `missing_information()`    | [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)                                                                       |
-| `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
-| `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
-| `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
-| `addl_phone_numbers()`     | [Physician Additional Phone Numbers](https://data.cms.gov/provider-data/dataset/phys-phon)                                                                                                                                            |
 
 <br>
 
@@ -97,7 +98,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-08 05:19:55
+    #> $ datetime          <dttm> 2023-02-08 12:27:28
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -329,6 +330,58 @@ provider::facility_affiliations(first_name = "John",
 
 <br><br>
 
+### Hospital Enrollments
+
+``` r
+provider::hospital_enrollment(ccn = "060004") |> 
+  tidyr::unite("address", address_line_1:address_line_2, 
+               remove = TRUE, na.rm = TRUE, sep = " ") |> 
+  dplyr::mutate(address = campfin::normal_address(address),
+                zip_code = campfin::normal_zip(zip_code)) |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+    #> |name                         |value                                                 |
+    #> |:----------------------------|:-----------------------------------------------------|
+    #> |enrollment_id                |O20070619000323                                       |
+    #> |enrollment_state             |CO                                                    |
+    #> |provider_type_code           |00-09                                                 |
+    #> |provider_type_text           |PART A PROVIDER - HOSPITAL                            |
+    #> |npi                          |1629071758                                            |
+    #> |multiple_npi_flag            |FALSE                                                 |
+    #> |ccn                          |060004                                                |
+    #> |associate_id                 |1153213814                                            |
+    #> |organization_name            |BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
+    #> |doing_business_as_name       |PLATTE VALLEY MEDICAL CENTER                          |
+    #> |incorporation_date           |1958-08-18                                            |
+    #> |incorporation_state          |CO                                                    |
+    #> |organization_type_structure  |CORPORATION                                           |
+    #> |organization_other_type_text |NA                                                    |
+    #> |proprietary_nonprofit        |FALSE                                                 |
+    #> |address                      |1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
+    #> |city                         |BRIGHTON                                              |
+    #> |state                        |CO                                                    |
+    #> |zip_code                     |80601                                                 |
+    #> |practice_location_type       |MAIN/PRIMARY HOSPITAL LOCATION                        |
+    #> |location_other_type_text     |NA                                                    |
+    #> |subgroup_general             |FALSE                                                 |
+    #> |subgroup_acute_care          |TRUE                                                  |
+    #> |subgroup_alcohol_drug        |FALSE                                                 |
+    #> |subgroup_childrens           |FALSE                                                 |
+    #> |subgroup_long_term           |FALSE                                                 |
+    #> |subgroup_psychiatric         |FALSE                                                 |
+    #> |subgroup_rehabilitation      |FALSE                                                 |
+    #> |subgroup_short_term          |FALSE                                                 |
+    #> |subgroup_swing_bed_approved  |FALSE                                                 |
+    #> |subgroup_psychiatric_unit    |FALSE                                                 |
+    #> |subgroup_rehabilitation_unit |FALSE                                                 |
+    #> |subgroup_specialty_hospital  |FALSE                                                 |
+    #> |subgroup_other               |FALSE                                                 |
+    #> |subgroup_other_text          |NA                                                    |
+
+<br><br>
+
 ### CMS Doctors and Clinicians National File
 
 ``` r
@@ -443,7 +496,7 @@ dr_clin |>
 <br><br>
 
 ``` r
-# search by medical school
+# search by medical school and/or graduation year
 provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                                  grad_year = 2003, 
                                  state = "FL") |> 
@@ -2082,7 +2135,7 @@ spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |>
 
 ## Code of Conduct
 
-Please note that the provider project is released with a [Contributor
+Please note that the `provider` project is released with a [Contributor
 Code of
 Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html).
 By contributing to this project, you agree to abide by its terms.

@@ -10,6 +10,13 @@ utils::globalVariables(c(
   "distribution_title", # <cms_update_ids>
   "distribution_modified", # <cms_update_ids>
   "distribution_accessURL", # <cms_update_ids>
+  "title", # <cms_dataset_full>
+  "description", # <cms_dataset_full>
+  "title", # <cms_dataset_search>
+  "modified", # <cms_dataset_search>
+  "keyword", # <cms_dataset_search>
+  "identifier", # <cms_dataset_search>
+  "description", # <cms_dataset_search>
   "data_lists", # <nppes_npi>
   "outcome", # <nppes_npi>
   "description", # <nppes_npi>

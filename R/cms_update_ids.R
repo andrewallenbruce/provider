@@ -48,3 +48,49 @@ cms_update_ids <- function(api = NULL) {
 
   return(ids)
 }
+
+
+#' Browse full CMS.gov API datasets
+#' @autoglobal
+#' @noRd
+cms_dataset_full <- function() {
+
+  resp <- httr2::request("https://data.cms.gov/data.json") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE)
+
+  ids <- resp$dataset |>
+    tibble::tibble() |>
+    dplyr::select(title,
+                  description)
+
+  return(ids)
+}
+
+
+#' Search CMS.gov API datasets by keyword
+#' @param keyword search term
+#' @autoglobal
+#' @noRd
+cms_dataset_search <- function(search = NULL) {
+
+  resp <- httr2::request("https://data.cms.gov/data.json") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE,
+                          simplifyVector = TRUE)
+
+  ids <- resp$dataset |>
+    tibble::tibble() |>
+    dplyr::select(title,
+                  modified,
+                  keyword,
+                  identifier,
+                  description) |>
+    tidyr::unnest(keyword)
+
+  if (!is.null(search)) {
+    ids <- ids |> dplyr::filter(keyword == {{ search }})
+  }
+  return(ids)
+}

@@ -50,7 +50,9 @@ remotes::install_github("andrewallenbruce/provider")
 ```
 
 ```{r results='asis', echo=FALSE}
-provider:::function_tbl()
+provider:::function_tbl() |> 
+  dplyr::arrange(Function) |> 
+  gluedown::md_table()
 ```
 
 <br>
@@ -183,6 +185,21 @@ provider::facility_affiliations(first_name = "John",
 
 <br><br>
 
+### Hospital Enrollments
+
+```{r}
+provider::hospital_enrollment(ccn = "060004") |> 
+  tidyr::unite("address", address_line_1:address_line_2, 
+               remove = TRUE, na.rm = TRUE, sep = " ") |> 
+  dplyr::mutate(address = campfin::normal_address(address),
+                zip_code = campfin::normal_zip(zip_code)) |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+
+<br><br>
+
 ### CMS Doctors and Clinicians National File
 
 ```{r}
@@ -225,7 +242,7 @@ dr_clin |>
 <br><br>
 
 ```{r}
-# search by medical school
+# search by medical school and/or graduation year
 provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                                  grad_year = 2003, 
                                  state = "FL") |> 
@@ -811,4 +828,4 @@ spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |>
 
 ## Code of Conduct
 
-Please note that the provider project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
+Please note that the `provider` project is released with a [Contributor Code of Conduct](https://andrewallenbruce.github.io/provider/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

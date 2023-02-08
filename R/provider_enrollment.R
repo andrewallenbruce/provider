@@ -82,8 +82,12 @@
 #' prven <- tibble::tribble(
 #' ~fn,         ~params,
 #' "provider_enrollment", list(npi = 1083879860),
-#' "provider_enrollment", list(first_name = "MICHAEL", middle_name = "K", last_name = "GREENBERG", state = "MD"),
-#' "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"))
+#' "provider_enrollment", list(first_name = "MICHAEL",
+#'                             middle_name = "K",
+#'                             last_name = "GREENBERG",
+#'                             state = "MD"),
+#' "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
+#'                             state = "GA"))
 #'
 #' purrr::invoke_map_dfr(prven$fn, prven$params)
 #' }
