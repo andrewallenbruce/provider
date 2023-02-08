@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9008 (2023-02-07)
+
+* added addl_phone_numbers() function
+* added nucc_taxonomy_230 dataset
+* added examples for new functions
+
+
 # provider 0.0.0.9007 (2023-02-04)
 
 * doctors_and_clinicians() function
