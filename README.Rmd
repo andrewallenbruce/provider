@@ -186,7 +186,7 @@ provider::facility_affiliations(first_name = "John",
 ### CMS Doctors and Clinicians National File
 
 ```{r}
-dr_clin <- doctors_and_clinicians(npi = 1407263999) |> 
+dr_clin <- provider::doctors_and_clinicians(npi = 1407263999) |> 
   dplyr::select(!c(record_number, 
                    suff, 
                    cred, 
@@ -224,11 +224,11 @@ dr_clin |>
 
 <br><br>
 
-```{r results='asis', echo=TRUE}
+```{r}
 # search by medical school
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
-                       grad_year = 2003, 
-                       state = "FL") |> 
+provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                                 grad_year = 2003, 
+                                 state = "FL") |> 
   dplyr::glimpse()
 ```
 
@@ -248,7 +248,7 @@ provider::addl_phone_numbers(npi = 1407263999) |>
 ```
 <br><br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 addl_phone_numbers(provider_id = "0042100190") |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
@@ -259,7 +259,7 @@ addl_phone_numbers(provider_id = "0042100190") |>
 ```
 <br><br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 addl_phone_numbers(org_pac_id = 6608028899) |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
@@ -573,7 +573,7 @@ pbs |> dplyr::glimpse()
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 pbs |> 
   dplyr::select(rndrng_prvdr) |> 
   tidyr::unnest(rndrng_prvdr) |> 
@@ -584,7 +584,7 @@ pbs |>
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 pbs |> 
   dplyr::select(year, totals_srvcs, hcpcs, averages) |> 
   tidyr::unnest(c(totals_srvcs, hcpcs, averages)) |> 
@@ -675,7 +675,7 @@ join_2020 <- dplyr::full_join(ind_lng, st_lng, by = c("hcpcs_cd", "name", "level
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_sbmtd_chrg") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -687,7 +687,7 @@ join_2020 |>
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_mdcr_alowd_amt") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -699,7 +699,7 @@ join_2020 |>
 
 <br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_mdcr_pymt_amt") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -716,7 +716,7 @@ join_2020 |>
 
 <br><br>
 
-```{r, echo=TRUE}
+```{r}
 prov <- purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
 prov |> dplyr::glimpse()
 ```
