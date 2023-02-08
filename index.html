@@ -261,7 +261,7 @@
 <span><span class="va">npi_1</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 1</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 15</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ datetime          &lt;dttm&gt; 2023-02-08 04:38:11</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ datetime          &lt;dttm&gt; 2023-02-08 05:19:55</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ outcome           &lt;chr&gt; "results"</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ enumeration_type  &lt;chr&gt; "NPI-1"</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi               &lt;chr&gt; "1710975040"</span></span>
@@ -1103,7 +1103,7 @@
 <h3 id="cms-doctors-and-clinicians-national-file">CMS Doctors and Clinicians National File<a class="anchor" aria-label="anchor" href="#cms-doctors-and-clinicians-national-file"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dr_clin</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">dr_clin</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">record_number</span>, </span>
 <span>                   <span class="va">suff</span>, </span>
 <span>                   <span class="va">cred</span>, </span>
@@ -1341,17 +1341,50 @@
 <p><br><br></p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># search by medical school</span></span>
-<span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
-<span>                       grad_year <span class="op">=</span> <span class="fl">2003</span>, </span>
-<span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
+<span>                                 grad_year <span class="op">=</span> <span class="fl">2003</span>, </span>
+<span>                                 state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>Rows: 6 Columns: 32 $ record_number <chr> “2241611”, “2241616”, “4005191”, “4586101”, “6700176”, “… $ npi <chr>”1497955652”, “1497955652”, “1497955652”, “1801000963”, … $ ind_pac_id <chr> “3476647330”, “3476647330”, “3476647330”, “3577616598”, … $ ind_enrl_id <chr> “I20070922000027”, “I20070922000027”, “I20070922000027”,… $ lst_nm <chr> “CHIEN”, “CHIEN”, “CHIEN”, “SCHETTINO”, “GOLDBERG”, “KAP… $ frst_nm <chr>”YUI”, “YUI”, “YUI”, “CHRIS”, “BRIAN”, “KEVIN” $ mid_nm <chr> “F”, “F”, “F”, “J”, “KEITH”, “M” $ suff <chr> NA, NA, NA, NA, NA, NA $ gndr <chr> “M”, “M”, “M”, “M”, “M”, “M” $ cred <chr> NA, NA, NA, NA, NA, NA $ med_sch <chr> “NEW YORK UNIVERSITY SCHOOL OF MEDICINE”, “NEW YORK UNIV… $ grd_yr <chr>”2003”, “2003”, “2003”, “2003”, “2003”, “2003” $ pri_spec <chr> “OPHTHALMOLOGY”, “OPHTHALMOLOGY”, “OPHTHALMOLOGY”, “PEDI… $ sec_spec_1 <chr> NA, NA, NA,”RADIATION ONCOLOGY”, NA, “ORTHOPEDIC SURGER… $ sec_spec_2 <chr> NA, NA, NA, NA, NA, NA $ sec_spec_3 <chr> NA, NA, NA, NA, NA, NA $ sec_spec_4 <chr> NA, NA, NA, NA, NA, NA $ sec_spec_all <chr> NA, NA, NA,”RADIATION ONCOLOGY”, NA, “ORTHOPEDIC SURGER… $ telehlth <chr> NA, NA, NA, NA, NA, NA $ org_nm <chr>”EYE PHYSICIANS OF FLORIDA LLP”, “EYE PHYSICIANS OF FLOR… $ org_pac_id <chr>”1254414675”, “1254414675”, “2860553724”, “3274795109”, … $ num_org_mem <chr> “49”, “49”, “3”, “1646”, “56”, “111” $ adr_ln_1 <chr> “1 SW 129TH AVE”, “8051 W SUNRISE BLVD”, “1400 NE MIAMI … $ adr_ln_2 <chr>”209 CORRECTVISION LASER INSTITUTE LLC”, NA, “SUITE 203”… $ ln_2_sprs <chr> NA, NA, NA, NA, NA, NA $ cty <chr> “PEMBROKE PINES”, “PLANTATION”, “NORTH MIAMI BEACH”, “MI… $ st <chr>”FL”, “FL”, “FL”, “FL”, “FL”, “FL” $ zip <chr> “330271717”, “333224103”, “331794844”, “331361005”, “347… $ phn_numbr <chr>”9544421133”, “9544742900”, “3059401500”, “3052434000”, … $ ind_assgn <chr> “Y”, “Y”, “Y”, “Y”, “Y”, “Y” $ grp_assgn <chr> “Y”, “Y”, “Y”, “Y”, “Y”, “Y” $ adrs_id <chr> “FL330271717PE1XXXXAVEX405”, “FL333224103PL8051XBLVD400”…</chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></chr></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 6</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 32</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_number &lt;chr&gt; "2241611", "2241616", "4005191", "4586101", "6700176", "…</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ npi           &lt;chr&gt; "1497955652", "1497955652", "1497955652", "1801000963", …</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_pac_id    &lt;chr&gt; "3476647330", "3476647330", "3476647330", "3577616598", …</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_enrl_id   &lt;chr&gt; "I20070922000027", "I20070922000027", "I20070922000027",…</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ lst_nm        &lt;chr&gt; "CHIEN", "CHIEN", "CHIEN", "SCHETTINO", "GOLDBERG", "KAP…</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ frst_nm       &lt;chr&gt; "YUI", "YUI", "YUI", "CHRIS", "BRIAN", "KEVIN"</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ mid_nm        &lt;chr&gt; "F", "F", "F", "J", "KEITH", "M"</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ suff          &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ gndr          &lt;chr&gt; "M", "M", "M", "M", "M", "M"</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ cred          &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ med_sch       &lt;chr&gt; "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", "NEW YORK UNIV…</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ grd_yr        &lt;chr&gt; "2003", "2003", "2003", "2003", "2003", "2003"</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ pri_spec      &lt;chr&gt; "OPHTHALMOLOGY", "OPHTHALMOLOGY", "OPHTHALMOLOGY", "PEDI…</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sec_spec_1    &lt;chr&gt; NA, NA, NA, "RADIATION ONCOLOGY", NA, "ORTHOPEDIC SURGER…</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sec_spec_2    &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sec_spec_3    &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sec_spec_4    &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ sec_spec_all  &lt;chr&gt; NA, NA, NA, "RADIATION ONCOLOGY", NA, "ORTHOPEDIC SURGER…</span></span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ telehlth      &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_nm        &lt;chr&gt; "EYE PHYSICIANS OF FLORIDA LLP", "EYE PHYSICIANS OF FLOR…</span></span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ org_pac_id    &lt;chr&gt; "1254414675", "1254414675", "2860553724", "3274795109", …</span></span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ num_org_mem   &lt;chr&gt; "49", "49", "3", "1646", "56", "111"</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ adr_ln_1      &lt;chr&gt; "1 SW 129TH AVE", "8051 W SUNRISE BLVD", "1400 NE MIAMI …</span></span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ adr_ln_2      &lt;chr&gt; "209 CORRECTVISION LASER INSTITUTE LLC", NA, "SUITE 203"…</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ln_2_sprs     &lt;chr&gt; NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ cty           &lt;chr&gt; "PEMBROKE PINES", "PLANTATION", "NORTH MIAMI BEACH", "MI…</span></span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ st            &lt;chr&gt; "FL", "FL", "FL", "FL", "FL", "FL"</span></span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ zip           &lt;chr&gt; "330271717", "333224103", "331794844", "331361005", "347…</span></span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ phn_numbr     &lt;chr&gt; "9544421133", "9544742900", "3059401500", "3052434000", …</span></span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ind_assgn     &lt;chr&gt; "Y", "Y", "Y", "Y", "Y", "Y"</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ grp_assgn     &lt;chr&gt; "Y", "Y", "Y", "Y", "Y", "Y"</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ adrs_id       &lt;chr&gt; "FL330271717PE1XXXXAVEX405", "FL333224103PL8051XBLVD400"…</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="additional-phone-numbers">Additional Phone Numbers<a class="anchor" aria-label="anchor" href="#additional-phone-numbers"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/addl_phone_numbers.html">addl_phone_numbers</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">prvdr_id</span>, <span class="va">frst_nm</span>, <span class="va">lst_nm</span>, <span class="va">adr_ln_1</span>, <span class="va">adr_ln_2</span><span class="op">:</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, <span class="va">adr_ln_1</span><span class="op">:</span><span class="va">adr_ln_2</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1412,7 +1445,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/addl_phone_numbers.html">addl_phone_numbers</a></span><span class="op">(</span>provider_id <span class="op">=</span> <span class="st">"0042100190"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">prvdr_id</span>, <span class="va">frst_nm</span>, <span class="va">lst_nm</span>, <span class="va">adr_ln_1</span>, <span class="va">adr_ln_2</span><span class="op">:</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, <span class="va">adr_ln_1</span><span class="op">:</span><span class="va">adr_ln_2</span>, remove <span class="op">=</span> <span class="cn">TRUE</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span>, sep <span class="op">=</span> <span class="st">" "</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1420,11 +1453,70 @@
 <span>                zip <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_zip.html" class="external-link">normal_zip</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span>,</span>
 <span>                address <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_address.html" class="external-link">normal_address</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |prvdr_id   |frst_nm |lst_nm    |address             |cty          |st |zip   |org_pac_id |phn_numbr      |npi        |</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:----------|:-------|:---------|:-------------------|:------------|:--|:-----|:----------|:--------------|:----------|</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |0042100190 |JOHN    |VERBRUGGE |100 MICHIGAN NE     |GRAND RAPIDS |MI |49503 |1951404185 |(616) 391-1680 |1154338044 |</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |0042100190 |JOHN    |VERBRUGGE |100 MICHIGAN AVE NE |GRAND RAPIDS |MI |49503 |8628327384 |(616) 391-1680 |1154338044 |</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |0042100190 |JOHN    |VERBRUGGE |1840 WEALTHY SE     |GRAND RAPIDS |MI |49506 |1951404185 |(616) 774-7444 |1154338044 |</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="9%">
+<col width="7%">
+<col width="9%">
+<col width="17%">
+<col width="11%">
+<col width="4%">
+<col width="5%">
+<col width="9%">
+<col width="14%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">prvdr_id</th>
+<th align="left">frst_nm</th>
+<th align="left">lst_nm</th>
+<th align="left">address</th>
+<th align="left">cty</th>
+<th align="left">st</th>
+<th align="left">zip</th>
+<th align="left">org_pac_id</th>
+<th align="left">phn_numbr</th>
+<th align="left">npi</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">0042100190</td>
+<td align="left">JOHN</td>
+<td align="left">VERBRUGGE</td>
+<td align="left">100 MICHIGAN NE</td>
+<td align="left">GRAND RAPIDS</td>
+<td align="left">MI</td>
+<td align="left">49503</td>
+<td align="left">1951404185</td>
+<td align="left">(616) 391-1680</td>
+<td align="left">1154338044</td>
+</tr>
+<tr class="even">
+<td align="left">0042100190</td>
+<td align="left">JOHN</td>
+<td align="left">VERBRUGGE</td>
+<td align="left">100 MICHIGAN AVE NE</td>
+<td align="left">GRAND RAPIDS</td>
+<td align="left">MI</td>
+<td align="left">49503</td>
+<td align="left">8628327384</td>
+<td align="left">(616) 391-1680</td>
+<td align="left">1154338044</td>
+</tr>
+<tr class="odd">
+<td align="left">0042100190</td>
+<td align="left">JOHN</td>
+<td align="left">VERBRUGGE</td>
+<td align="left">1840 WEALTHY SE</td>
+<td align="left">GRAND RAPIDS</td>
+<td align="left">MI</td>
+<td align="left">49506</td>
+<td align="left">1951404185</td>
+<td align="left">(616) 774-7444</td>
+<td align="left">1154338044</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/addl_phone_numbers.html">addl_phone_numbers</a></span><span class="op">(</span>org_pac_id <span class="op">=</span> <span class="fl">6608028899</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1434,16 +1526,64 @@
 <span>                zip <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_zip.html" class="external-link">normal_zip</a></span><span class="op">(</span><span class="va">zip</span><span class="op">)</span>,</span>
 <span>                address <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_address.html" class="external-link">normal_address</a></span><span class="op">(</span><span class="va">address</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |prvdr_id   |frst_nm  |lst_nm |address                     |cty       |st |zip   |org_pac_id |phn_numbr      |npi        |</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:----------|:--------|:------|:---------------------------|:---------|:--|:-----|:----------|:--------------|:----------|</span></span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |3971798604 |LAWRENCE |BROOKS |3810 HOLLYWOOD BLVD SUITE 2 |HOLLYWOOD |FL |33021 |6608028899 |(954) 962-3888 |1548577034 |</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |8729208152 |ROBIN    |AVERY  |3810 HOLLYWOOD BLVD SUITE 2 |HOLLYWOOD |FL |33021 |6608028899 |(954) 962-3888 |1407263999 |</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="9%">
+<col width="8%">
+<col width="6%">
+<col width="23%">
+<col width="8%">
+<col width="4%">
+<col width="5%">
+<col width="9%">
+<col width="14%">
+<col width="9%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">prvdr_id</th>
+<th align="left">frst_nm</th>
+<th align="left">lst_nm</th>
+<th align="left">address</th>
+<th align="left">cty</th>
+<th align="left">st</th>
+<th align="left">zip</th>
+<th align="left">org_pac_id</th>
+<th align="left">phn_numbr</th>
+<th align="left">npi</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">3971798604</td>
+<td align="left">LAWRENCE</td>
+<td align="left">BROOKS</td>
+<td align="left">3810 HOLLYWOOD BLVD SUITE 2</td>
+<td align="left">HOLLYWOOD</td>
+<td align="left">FL</td>
+<td align="left">33021</td>
+<td align="left">6608028899</td>
+<td align="left">(954) 962-3888</td>
+<td align="left">1548577034</td>
+</tr>
+<tr class="even">
+<td align="left">8729208152</td>
+<td align="left">ROBIN</td>
+<td align="left">AVERY</td>
+<td align="left">3810 HOLLYWOOD BLVD SUITE 2</td>
+<td align="left">HOLLYWOOD</td>
+<td align="left">FL</td>
+<td align="left">33021</td>
+<td align="left">6608028899</td>
+<td align="left">(954) 962-3888</td>
+<td align="left">1407263999</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="cms-missing-contact-information">CMS Missing Contact Information<a class="anchor" aria-label="anchor" href="#cms-missing-contact-information"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -1462,7 +1602,7 @@
 <div class="section level3">
 <h3 id="medicare-order-and-referring">Medicare Order and Referring<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <thead><tr class="header">
@@ -1489,7 +1629,7 @@
 <div class="section level3">
 <h3 id="medicare-opt-out-affidavits">Medicare Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#medicare-opt-out-affidavits"></a>
 </h3>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unite.html" class="external-link">unite</a></span><span class="op">(</span><span class="st">"address"</span>, <span class="va">first_line_street_address</span><span class="op">:</span><span class="va">second_line_street_address</span>, </span>
 <span>               remove <span class="op">=</span> <span class="cn">TRUE</span>, </span>
@@ -1560,7 +1700,7 @@
 <div class="section level3">
 <h3 id="medicare-provider-and-supplier-taxonomy-crosswalk">Medicare Provider and Supplier Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">medicare_specialty_code</span>, </span>
 <span>                medicare_specialty_description <span class="op">=</span> <span class="va">medicare_provider_supplier_type_description</span>,</span>
@@ -1600,7 +1740,7 @@
 <div class="section level3">
 <h3 id="medicare-fee-for-service-public-provider-enrollment">Medicare Fee-For-Service Public Provider Enrollment<a class="anchor" aria-label="anchor" href="#medicare-fee-for-service-public-provider-enrollment"></a>
 </h3>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1662,7 +1802,7 @@
 <h3 id="medicare-pending-initial-logging-and-tracking">Medicare Pending Initial Logging and Tracking<a class="anchor" aria-label="anchor" href="#medicare-pending-initial-logging-and-tracking"></a>
 </h3>
 <p><br></p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, </span>
 <span>                               type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1679,7 +1819,7 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, </span>
 <span>                               type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1696,7 +1836,7 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Abbott"</span>, </span>
 <span>                               type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1713,7 +1853,7 @@
 </tr></tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, </span>
 <span>                     type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1904,7 +2044,7 @@
 <blockquote>
 <p>Revalidation Due Date List</p>
 </blockquote>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">date</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span><span class="va">date</span> <span class="op">|&gt;</span> <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -1971,29 +2111,29 @@
 <blockquote>
 <p>Revalidation Reassignment List</p>
 </blockquote>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reassign</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span><span class="va">reassign</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 5</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 16</span></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_pac_id                                 &lt;dbl&gt; 3678655222, 9931511052, 2…</span></span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_enrollment_id                          &lt;chr&gt; "O20080205000002", "O2020…</span></span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_legal_business_name                    &lt;chr&gt; "#1 Wise Podiatry Care P.…</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_state_code                             &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_due_date                               &lt;chr&gt; "10/31/2019", "TBD", "TBD…</span></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_reassignments_and_physician_assistants &lt;int&gt; 1, 1, 1, 1, 1</span></span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_type                                  &lt;chr&gt; "Reassignment", "Reassign…</span></span>
-<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_pac_id                            &lt;dbl&gt; 2860474988, 2860474988, 2…</span></span>
-<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_enrollment_id                     &lt;chr&gt; "I20040602001711", "I2004…</span></span>
-<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_npi                               &lt;int&gt; 1710912209, 1710912209, 1…</span></span>
-<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_first_name                        &lt;chr&gt; "Yelena", "Yelena", "Yele…</span></span>
-<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_last_name                         &lt;chr&gt; "Voronova", "Voronova", "…</span></span>
-<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_state_code                        &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
-<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_specialty_description             &lt;chr&gt; "Podiatry", "Podiatry", "…</span></span>
-<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_due_date                          &lt;chr&gt; "10/31/2019", "10/31/2019…</span></span>
-<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_total_employer_associations       &lt;int&gt; 5, 5, 5, 5, 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 5</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 16</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_pac_id                                 &lt;dbl&gt; 3678655222, 9931511052, 2…</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_enrollment_id                          &lt;chr&gt; "O20080205000002", "O2020…</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_legal_business_name                    &lt;chr&gt; "#1 Wise Podiatry Care P.…</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_state_code                             &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_due_date                               &lt;chr&gt; "10/31/2019", "TBD", "TBD…</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_reassignments_and_physician_assistants &lt;int&gt; 1, 1, 1, 1, 1</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_type                                  &lt;chr&gt; "Reassignment", "Reassign…</span></span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_pac_id                            &lt;dbl&gt; 2860474988, 2860474988, 2…</span></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_enrollment_id                     &lt;chr&gt; "I20040602001711", "I2004…</span></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_npi                               &lt;int&gt; 1710912209, 1710912209, 1…</span></span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_first_name                        &lt;chr&gt; "Yelena", "Yelena", "Yele…</span></span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_last_name                         &lt;chr&gt; "Voronova", "Voronova", "…</span></span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_state_code                        &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_specialty_description             &lt;chr&gt; "Podiatry", "Podiatry", "…</span></span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_due_date                          &lt;chr&gt; "10/31/2019", "10/31/2019…</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_total_employer_associations       &lt;int&gt; 5, 5, 5, 5, 5</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reassign</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"individual"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2044,7 +2184,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reassign</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"group"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2185,28 +2325,28 @@
 <blockquote>
 <p>Revalidation Clinic Group Practice Reassignment</p>
 </blockquote>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>ind_npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span>
 <span><span class="va">group</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 5</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 15</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_pac_id                                 &lt;dbl&gt; 3678655222, 9931511052, 2…</span></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_enrollment_id                          &lt;chr&gt; "O20080205000002", "O2020…</span></span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_legal_business_name                    &lt;chr&gt; "#1 Wise Podiatry Care P.…</span></span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_state_code                             &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_due_date                               &lt;chr&gt; "10/31/2019", "TBD", "TBD…</span></span>
-<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_reassignments_and_physician_assistants &lt;int&gt; 1, 1, 1, 1, 1</span></span>
-<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_type                                  &lt;chr&gt; "Reassignment", "Reassign…</span></span>
-<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_enrollment_id                     &lt;chr&gt; "I20040602001711", "I2004…</span></span>
-<span id="cb40-11"><a href="#cb40-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_npi                               &lt;int&gt; 1710912209, 1710912209, 1…</span></span>
-<span id="cb40-12"><a href="#cb40-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_first_name                        &lt;chr&gt; "Yelena", "Yelena", "Yele…</span></span>
-<span id="cb40-13"><a href="#cb40-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_last_name                         &lt;chr&gt; "Voronova", "Voronova", "…</span></span>
-<span id="cb40-14"><a href="#cb40-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_state_code                        &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
-<span id="cb40-15"><a href="#cb40-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_specialty_description             &lt;chr&gt; "Podiatry", "Podiatry", "…</span></span>
-<span id="cb40-16"><a href="#cb40-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_due_date                          &lt;chr&gt; "10/31/2019", "10/31/2019…</span></span>
-<span id="cb40-17"><a href="#cb40-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_total_employer_associations       &lt;int&gt; 5, 5, 5, 5, 5</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 5</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 15</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_pac_id                                 &lt;dbl&gt; 3678655222, 9931511052, 2…</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_enrollment_id                          &lt;chr&gt; "O20080205000002", "O2020…</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_legal_business_name                    &lt;chr&gt; "#1 Wise Podiatry Care P.…</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_state_code                             &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_due_date                               &lt;chr&gt; "10/31/2019", "TBD", "TBD…</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ group_reassignments_and_physician_assistants &lt;int&gt; 1, 1, 1, 1, 1</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_type                                  &lt;chr&gt; "Reassignment", "Reassign…</span></span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_enrollment_id                     &lt;chr&gt; "I20040602001711", "I2004…</span></span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_npi                               &lt;int&gt; 1710912209, 1710912209, 1…</span></span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_first_name                        &lt;chr&gt; "Yelena", "Yelena", "Yele…</span></span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_last_name                         &lt;chr&gt; "Voronova", "Voronova", "…</span></span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_state_code                        &lt;chr&gt; "NY", "NY", "NY", "NY", "…</span></span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_specialty_description             &lt;chr&gt; "Podiatry", "Podiatry", "…</span></span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_due_date                          &lt;chr&gt; "10/31/2019", "10/31/2019…</span></span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ individual_total_employer_associations       &lt;int&gt; 5, 5, 5, 5, 5</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">group</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"individual"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2252,7 +2392,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">group</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"group"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2398,27 +2538,27 @@
 <div class="section level3">
 <h3 id="cms-open-payments-api">CMS Open Payments API<a class="anchor" aria-label="anchor" href="#cms-open-payments-api"></a>
 </h3>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span></span>
 <span><span class="va">op</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 92</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 14</span></span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ program_year                           &lt;chr&gt; "2021", "2021", "2021", "2021",…</span></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_number                          &lt;chr&gt; "1", "692021", "4385936", "4385…</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ change_type                            &lt;chr&gt; "UNCHANGED", "UNCHANGED", "UNCH…</span></span>
-<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ total_amount_of_payment_usdollars      &lt;dbl&gt; 2500.00, 69.90, 107.93, 97.14, …</span></span>
-<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ date_of_payment                        &lt;dttm&gt; 2021-05-26, 2021-03-04, 2021-0…</span></span>
-<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ form_of_payment_or_transfer_of_value   &lt;chr&gt; "Cash or cash equivalent", "In-…</span></span>
-<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ nature_of_payment_or_transfer_of_value &lt;chr&gt; "Compensation for services othe…</span></span>
-<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_id                              &lt;chr&gt; "754966348", "787838145", "7971…</span></span>
-<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ covered_recipient                      &lt;list&gt; [&lt;tbl_df[1 x 24]&gt;], [&lt;tbl_df[1…</span></span>
-<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ recipient_address                      &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 …</span></span>
-<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ applicable_mfg_gpo                     &lt;list&gt; [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 …</span></span>
-<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ associated_drug_device                 &lt;list&gt; [&lt;tbl_df[1 x 40]&gt;], [&lt;tbl_df[1…</span></span>
-<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payment_related_data                   &lt;list&gt; [&lt;tbl_df[1 x 14]&gt;], [&lt;tbl_df[1…</span></span>
-<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ teaching_hospital                      &lt;list&gt; [&lt;tbl_df[1 x 3]&gt;], [&lt;tbl_df[1 …</span></span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 92</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 14</span></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ program_year                           &lt;chr&gt; "2021", "2021", "2021", "2021",…</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_number                          &lt;chr&gt; "1", "692021", "4385936", "4385…</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ change_type                            &lt;chr&gt; "UNCHANGED", "UNCHANGED", "UNCH…</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ total_amount_of_payment_usdollars      &lt;dbl&gt; 2500.00, 69.90, 107.93, 97.14, …</span></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ date_of_payment                        &lt;dttm&gt; 2021-05-26, 2021-03-04, 2021-0…</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ form_of_payment_or_transfer_of_value   &lt;chr&gt; "Cash or cash equivalent", "In-…</span></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ nature_of_payment_or_transfer_of_value &lt;chr&gt; "Compensation for services othe…</span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ record_id                              &lt;chr&gt; "754966348", "787838145", "7971…</span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ covered_recipient                      &lt;list&gt; [&lt;tbl_df[1 x 24]&gt;], [&lt;tbl_df[1…</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ recipient_address                      &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 …</span></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ applicable_mfg_gpo                     &lt;list&gt; [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 …</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ associated_drug_device                 &lt;list&gt; [&lt;tbl_df[1 x 40]&gt;], [&lt;tbl_df[1…</span></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ payment_related_data                   &lt;list&gt; [&lt;tbl_df[1 x 14]&gt;], [&lt;tbl_df[1…</span></span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ teaching_hospital                      &lt;list&gt; [&lt;tbl_df[1 x 3]&gt;], [&lt;tbl_df[1 …</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">hoist</a></span><span class="op">(</span><span class="va">covered_recipient</span>, </span>
 <span>               recipient_npi <span class="op">=</span> <span class="st">"covered_recipient_npi"</span>,</span>
@@ -2481,7 +2621,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">op_2</span> <span class="op">&lt;-</span> <span class="va">op</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/hoist.html" class="external-link">hoist</a></span><span class="op">(</span><span class="va">applicable_mfg_gpo</span>, </span>
 <span>               manufacturer_gpo_paying <span class="op">=</span> <span class="st">"applicable_manufacturer_or_applicable_gpo_making_payment_name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2755,7 +2895,7 @@
 <div class="section level3">
 <h3 id="medicare-monthly-enrollment-api">Medicare Monthly Enrollment API<a class="anchor" aria-label="anchor" href="#medicare-monthly-enrollment-api"></a>
 </h3>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">months</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">enframe</a></span><span class="op">(</span><span class="va">month.name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2767,32 +2907,32 @@
 <span>                                                       month <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bene</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 7</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 22</span></span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year                           &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022</span></span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ month                          &lt;chr&gt; "January", "February", "March", "April"…</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_geo_lvl                   &lt;chr&gt; "State", "State", "State", "State", "St…</span></span>
-<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_state_abrvtn              &lt;chr&gt; "GA", "GA", "GA", "GA", "GA", "GA", "GA"</span></span>
-<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_state_desc                &lt;chr&gt; "Georgia", "Georgia", "Georgia", "Georg…</span></span>
-<span id="cb48-8"><a href="#cb48-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_county_desc               &lt;chr&gt; "Total", "Total", "Total", "Total", "To…</span></span>
-<span id="cb48-9"><a href="#cb48-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_fips_cd                   &lt;chr&gt; "13", "13", "13", "13", "13", "13", "13"</span></span>
-<span id="cb48-10"><a href="#cb48-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tot_benes                      &lt;int&gt; 1830959, 1830025, 1831573, 1833135, 183…</span></span>
-<span id="cb48-11"><a href="#cb48-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ orgnl_mdcr_benes               &lt;int&gt; 915752, 913347, 912897, 911263, 910417,…</span></span>
-<span id="cb48-12"><a href="#cb48-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ma_and_oth_benes               &lt;int&gt; 915207, 916678, 918676, 921872, 924770,…</span></span>
-<span id="cb48-13"><a href="#cb48-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_tot_benes                 &lt;int&gt; 1572257, 1571050, 1572037, 1573058, 157…</span></span>
-<span id="cb48-14"><a href="#cb48-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_esrd_benes                &lt;int&gt; 11635, 11312, 11096, 10888, 10716, 1052…</span></span>
-<span id="cb48-15"><a href="#cb48-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_no_esrd_benes             &lt;int&gt; 1560622, 1559738, 1560941, 1562170, 156…</span></span>
-<span id="cb48-16"><a href="#cb48-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_tot_benes                &lt;int&gt; 258702, 258975, 259536, 260077, 260617,…</span></span>
-<span id="cb48-17"><a href="#cb48-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_esrd_and_esrd_only_benes &lt;int&gt; 12011, 11905, 11853, 11835, 11827, 1179…</span></span>
-<span id="cb48-18"><a href="#cb48-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_no_esrd_benes            &lt;int&gt; 246691, 247070, 247683, 248242, 248790,…</span></span>
-<span id="cb48-19"><a href="#cb48-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_tot_benes                  &lt;int&gt; 1681852, 1680770, 1681852, 1683513, 168…</span></span>
-<span id="cb48-20"><a href="#cb48-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_orgnl_mdcr_benes           &lt;int&gt; 767454, 764903, 763986, 762450, 761518,…</span></span>
-<span id="cb48-21"><a href="#cb48-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_ma_and_oth_benes           &lt;int&gt; 914398, 915867, 917866, 921063, 923961,…</span></span>
-<span id="cb48-22"><a href="#cb48-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_tot_benes        &lt;int&gt; 1410752, 1410748, 1411729, 1413507, 141…</span></span>
-<span id="cb48-23"><a href="#cb48-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_pdp_benes        &lt;int&gt; 538559, 536815, 535968, 534687, 534006,…</span></span>
-<span id="cb48-24"><a href="#cb48-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_mapd_benes       &lt;int&gt; 872193, 873933, 875761, 878820, 881515,…</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 7</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 22</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year                           &lt;int&gt; 2022, 2022, 2022, 2022, 2022, 2022, 2022</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ month                          &lt;chr&gt; "January", "February", "March", "April"…</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_geo_lvl                   &lt;chr&gt; "State", "State", "State", "State", "St…</span></span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_state_abrvtn              &lt;chr&gt; "GA", "GA", "GA", "GA", "GA", "GA", "GA"</span></span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_state_desc                &lt;chr&gt; "Georgia", "Georgia", "Georgia", "Georg…</span></span>
+<span id="cb47-8"><a href="#cb47-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_county_desc               &lt;chr&gt; "Total", "Total", "Total", "Total", "To…</span></span>
+<span id="cb47-9"><a href="#cb47-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_fips_cd                   &lt;chr&gt; "13", "13", "13", "13", "13", "13", "13"</span></span>
+<span id="cb47-10"><a href="#cb47-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ tot_benes                      &lt;int&gt; 1830959, 1830025, 1831573, 1833135, 183…</span></span>
+<span id="cb47-11"><a href="#cb47-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ orgnl_mdcr_benes               &lt;int&gt; 915752, 913347, 912897, 911263, 910417,…</span></span>
+<span id="cb47-12"><a href="#cb47-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ ma_and_oth_benes               &lt;int&gt; 915207, 916678, 918676, 921872, 924770,…</span></span>
+<span id="cb47-13"><a href="#cb47-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_tot_benes                 &lt;int&gt; 1572257, 1571050, 1572037, 1573058, 157…</span></span>
+<span id="cb47-14"><a href="#cb47-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_esrd_benes                &lt;int&gt; 11635, 11312, 11096, 10888, 10716, 1052…</span></span>
+<span id="cb47-15"><a href="#cb47-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ aged_no_esrd_benes             &lt;int&gt; 1560622, 1559738, 1560941, 1562170, 156…</span></span>
+<span id="cb47-16"><a href="#cb47-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_tot_benes                &lt;int&gt; 258702, 258975, 259536, 260077, 260617,…</span></span>
+<span id="cb47-17"><a href="#cb47-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_esrd_and_esrd_only_benes &lt;int&gt; 12011, 11905, 11853, 11835, 11827, 1179…</span></span>
+<span id="cb47-18"><a href="#cb47-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ dsbld_no_esrd_benes            &lt;int&gt; 246691, 247070, 247683, 248242, 248790,…</span></span>
+<span id="cb47-19"><a href="#cb47-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_tot_benes                  &lt;int&gt; 1681852, 1680770, 1681852, 1683513, 168…</span></span>
+<span id="cb47-20"><a href="#cb47-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_orgnl_mdcr_benes           &lt;int&gt; 767454, 764903, 763986, 762450, 761518,…</span></span>
+<span id="cb47-21"><a href="#cb47-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ a_b_ma_and_oth_benes           &lt;int&gt; 914398, 915867, 917866, 921063, 923961,…</span></span>
+<span id="cb47-22"><a href="#cb47-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_tot_benes        &lt;int&gt; 1410752, 1410748, 1411729, 1413507, 141…</span></span>
+<span id="cb47-23"><a href="#cb47-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_pdp_benes        &lt;int&gt; 538559, 536815, 535968, 534687, 534006,…</span></span>
+<span id="cb47-24"><a href="#cb47-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ prscrptn_drug_mapd_benes       &lt;int&gt; 872193, 873933, 875761, 878820, 881515,…</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bene</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">bene_state_abrvtn</span>,</span>
 <span>                <span class="va">month</span>, </span>
@@ -2898,7 +3038,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bene</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>state <span class="op">=</span> <span class="va">bene_state_abrvtn</span>,</span>
 <span>                <span class="va">month</span>, </span>
@@ -3004,7 +3144,7 @@
 </tbody>
 </table>
 <p><br></p>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bene</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">month</span>, </span>
 <span>                <span class="va">tot_benes</span>,</span>
@@ -3141,139 +3281,844 @@
 </ol>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbs</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">pbs</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 8</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 6</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year         &lt;int&gt; 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</span></span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_npi   &lt;chr&gt; "1003000126", "1003000126", "1003000126", "1003000126", "…</span></span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_prvdr &lt;list&gt; [&lt;tbl_df[7 x 17]&gt;], [&lt;tbl_df[8 x 17]&gt;], [&lt;tbl_df[11 x 17]…</span></span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ totals_srvcs &lt;list&gt; [&lt;tbl_df[7 x 3]&gt;], [&lt;tbl_df[8 x 3]&gt;], [&lt;tbl_df[11 x 3]&gt;]…</span></span>
-<span id="cb53-7"><a href="#cb53-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ hcpcs        &lt;list&gt; [&lt;tbl_df[7 x 4]&gt;], [&lt;tbl_df[8 x 4]&gt;], [&lt;tbl_df[11 x 4]&gt;]…</span></span>
-<span id="cb53-8"><a href="#cb53-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ averages     &lt;list&gt; [&lt;tbl_df[7 x 4]&gt;], [&lt;tbl_df[8 x 4]&gt;], [&lt;tbl_df[11 x 4]&gt;]…</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 8</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 6</span></span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year         &lt;int&gt; 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020</span></span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_npi   &lt;chr&gt; "1003000126", "1003000126", "1003000126", "1003000126", "…</span></span>
+<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_prvdr &lt;list&gt; [&lt;tbl_df[7 x 17]&gt;], [&lt;tbl_df[8 x 17]&gt;], [&lt;tbl_df[11 x 17]…</span></span>
+<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ totals_srvcs &lt;list&gt; [&lt;tbl_df[7 x 3]&gt;], [&lt;tbl_df[8 x 3]&gt;], [&lt;tbl_df[11 x 3]&gt;]…</span></span>
+<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ hcpcs        &lt;list&gt; [&lt;tbl_df[7 x 4]&gt;], [&lt;tbl_df[8 x 4]&gt;], [&lt;tbl_df[11 x 4]&gt;]…</span></span>
+<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ averages     &lt;list&gt; [&lt;tbl_df[7 x 4]&gt;], [&lt;tbl_df[8 x 4]&gt;], [&lt;tbl_df[11 x 4]&gt;]…</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |name                          |value                                                                               |</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:-----------------------------|:-----------------------------------------------------------------------------------|</span></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_last_org_name    |Enkeshafi                                                                           |</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_first_name       |Ardalan                                                                             |</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_mi               |NA                                                                                  |</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_crdntls          |M.D.                                                                                |</span></span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_gndr             |M                                                                                   |</span></span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_ent_cd           |I                                                                                   |</span></span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_st1              |900 Seton Dr                                                                        |</span></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_st2              |NA                                                                                  |</span></span>
-<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_city             |Cumberland                                                                          |</span></span>
-<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_state_abrvtn     |MD                                                                                  |</span></span>
-<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_state_fips       |24                                                                                  |</span></span>
-<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_zip5             |21502                                                                               |</span></span>
-<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_ruca             |1                                                                                   |</span></span>
-<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_ruca_desc        |Metropolitan area core: primary flow within an urbanized area of 50,000 and greater |</span></span>
-<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_cntry            |US                                                                                  |</span></span>
-<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_type             |Internal Medicine                                                                   |</span></span>
-<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |rndrng_prvdr_mdcr_prtcptg_ind |Y                                                                                   |</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="26%">
+<col width="73%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">name</th>
+<th align="left">value</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">rndrng_prvdr_last_org_name</td>
+<td align="left">Enkeshafi</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_first_name</td>
+<td align="left">Ardalan</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_mi</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_crdntls</td>
+<td align="left">M.D.</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_gndr</td>
+<td align="left">M</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_ent_cd</td>
+<td align="left">I</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_st1</td>
+<td align="left">900 Seton Dr</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_st2</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_city</td>
+<td align="left">Cumberland</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_state_abrvtn</td>
+<td align="left">MD</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_state_fips</td>
+<td align="left">24</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_zip5</td>
+<td align="left">21502</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_ruca</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_ruca_desc</td>
+<td align="left">Metropolitan area core: primary flow within an urbanized area of 50,000 and greater</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_cntry</td>
+<td align="left">US</td>
+</tr>
+<tr class="even">
+<td align="left">rndrng_prvdr_type</td>
+<td align="left">Internal Medicine</td>
+</tr>
+<tr class="odd">
+<td align="left">rndrng_prvdr_mdcr_prtcptg_ind</td>
+<td align="left">Y</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pbs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">totals_srvcs</span>, <span class="va">hcpcs</span>, <span class="va">averages</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">totals_srvcs</span>, <span class="va">hcpcs</span>, <span class="va">averages</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">hcpcs_desc</span><span class="op">:</span><span class="va">place_of_srvc</span>, <span class="va">tot_bene_day_srvcs</span>, <span class="va">avg_mdcr_stdzd_amt</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span>, <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">tot_srvcs</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb57"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | year| tot_benes| tot_srvcs|hcpcs_cd | avg_sbmtd_chrg| avg_mdcr_alowd_amt| avg_mdcr_pymt_amt|</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |----:|---------:|---------:|:--------|--------------:|------------------:|-----------------:|</span></span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|       154|       326|99233    |       513.2117|          108.84687|          88.94589|</span></span>
-<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|       145|       146|99239    |       491.8699|          111.25979|          90.92384|</span></span>
-<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        57|       134|99232    |       251.3284|           73.45470|          57.95582|</span></span>
-<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        52|        52|99223    |      1108.3846|          209.42385|         170.83462|</span></span>
-<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        23|        23|99217    |       406.1739|           76.80391|          61.40174|</span></span>
-<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        16|        16|99218    |       811.8125|          108.24938|          85.08125|</span></span>
-<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        16|        16|99220    |      1150.9375|          191.96062|         152.37688|</span></span>
-<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        13|        13|99238    |       268.4615|           74.15769|          60.53308|</span></span>
-<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2020|        12|        12|99221    |       681.6667|          110.04750|          82.23750|</span></span>
-<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|       306|       605|99233    |       345.2364|          103.58820|          82.58817|</span></span>
-<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|       240|       243|99239    |       349.2593|          106.54309|          84.96992|</span></span>
-<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|       117|       205|99232    |       245.6146|           72.75639|          58.00556|</span></span>
-<span id="cb57-15"><a href="#cb57-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|       157|       158|99223    |       651.4177|          200.93000|         160.19000|</span></span>
-<span id="cb57-16"><a href="#cb57-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|        40|        40|99217    |       232.2750|           72.59000|          57.87000|</span></span>
-<span id="cb57-17"><a href="#cb57-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|        39|        40|99238    |       229.4750|           72.59000|          57.87000|</span></span>
-<span id="cb57-18"><a href="#cb57-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|        21|        27|99291    |       701.4444|          221.27000|         176.40000|</span></span>
-<span id="cb57-19"><a href="#cb57-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|        25|        25|99220    |       712.8000|          186.72520|         148.85160|</span></span>
-<span id="cb57-20"><a href="#cb57-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2019|        24|        24|99221    |       320.1667|          101.12125|          80.61583|</span></span>
-<span id="cb57-21"><a href="#cb57-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|       206|       360|99232    |       360.5722|           72.38542|          57.67031|</span></span>
-<span id="cb57-22"><a href="#cb57-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|       148|       284|99233    |       576.9894|          103.66095|          82.51299|</span></span>
-<span id="cb57-23"><a href="#cb57-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|       217|       250|99239    |       555.6400|          106.73396|          85.03664|</span></span>
-<span id="cb57-24"><a href="#cb57-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        82|        86|99223    |      1093.5000|          199.75721|         159.25907|</span></span>
-<span id="cb57-25"><a href="#cb57-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        67|        68|99217    |       381.3088|           72.64103|          57.88029|</span></span>
-<span id="cb57-26"><a href="#cb57-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        30|        42|99291    |      1400.0000|          215.74119|         171.89333|</span></span>
-<span id="cb57-27"><a href="#cb57-27" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        26|        26|99220    |      1086.9231|          185.10154|         147.47923|</span></span>
-<span id="cb57-28"><a href="#cb57-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        24|        24|99221    |       474.5833|          100.60125|          80.15500|</span></span>
-<span id="cb57-29"><a href="#cb57-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        19|        19|99218    |       476.9474|           99.31158|          76.79526|</span></span>
-<span id="cb57-30"><a href="#cb57-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        17|        17|99222    |       625.0000|          135.83647|         108.22529|</span></span>
-<span id="cb57-31"><a href="#cb57-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2018|        16|        16|99238    |       415.3125|           72.66688|          57.90125|</span></span>
-<span id="cb57-32"><a href="#cb57-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|       233|       627|99232    |       326.2456|           71.24051|          56.36673|</span></span>
-<span id="cb57-33"><a href="#cb57-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|       291|       341|99239    |       481.6862|          106.32874|          84.05616|</span></span>
-<span id="cb57-34"><a href="#cb57-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|       127|       207|99233    |       461.0725|          103.94768|          82.82068|</span></span>
-<span id="cb57-35"><a href="#cb57-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|       110|       114|99223    |       923.9912|          202.79219|         160.37719|</span></span>
-<span id="cb57-36"><a href="#cb57-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        96|       100|99217    |       325.7800|           71.96390|          56.82720|</span></span>
-<span id="cb57-37"><a href="#cb57-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        59|        59|99220    |       755.9322|          184.32203|         141.29356|</span></span>
-<span id="cb57-38"><a href="#cb57-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        57|        59|99222    |       625.0000|          135.14729|         105.82542|</span></span>
-<span id="cb57-39"><a href="#cb57-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        51|        52|99219    |       614.0000|          134.28385|         102.80769|</span></span>
-<span id="cb57-40"><a href="#cb57-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        23|        36|99291    |      1400.0000|          220.58000|         175.75000|</span></span>
-<span id="cb57-41"><a href="#cb57-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        25|        26|99218    |       449.0000|           98.48000|          78.46000|</span></span>
-<span id="cb57-42"><a href="#cb57-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2017|        16|        16|99221    |       462.8125|          100.05000|          79.71000|</span></span>
-<span id="cb57-43"><a href="#cb57-43" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|       270|       596|99232    |       326.4866|           70.71562|          56.21099|</span></span>
-<span id="cb57-44"><a href="#cb57-44" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|       231|       271|99239    |       485.0000|          105.05000|          83.70000|</span></span>
-<span id="cb57-45"><a href="#cb57-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|       141|       148|99223    |       920.6149|          200.54466|         159.08345|</span></span>
-<span id="cb57-46"><a href="#cb57-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        85|       117|99233    |       470.0000|          101.88538|          80.90932|</span></span>
-<span id="cb57-47"><a href="#cb57-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        87|        96|99222    |       625.0000|          134.09740|         105.47760|</span></span>
-<span id="cb57-48"><a href="#cb57-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        55|        57|99217    |       325.1579|           70.79825|          54.47439|</span></span>
-<span id="cb57-49"><a href="#cb57-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        26|        53|99291    |      1400.0000|          219.04000|         174.52000|</span></span>
-<span id="cb57-50"><a href="#cb57-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        38|        38|99219    |       614.0000|          132.85000|         105.85000|</span></span>
-<span id="cb57-51"><a href="#cb57-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        23|        23|99220    |       769.3478|          186.25913|         146.11652|</span></span>
-<span id="cb57-52"><a href="#cb57-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        20|        20|99221    |       460.0000|           99.14000|          78.99000|</span></span>
-<span id="cb57-53"><a href="#cb57-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        20|        20|99238    |       328.0000|           71.04550|          52.83150|</span></span>
-<span id="cb57-54"><a href="#cb57-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2016|        11|        11|99225    |       328.0000|           71.32000|          56.82000|</span></span>
-<span id="cb57-55"><a href="#cb57-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       481|      1117|99232    |       200.9320|           71.87013|          56.31386|</span></span>
-<span id="cb57-56"><a href="#cb57-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       286|       580|99233    |       301.9810|          101.51336|          80.92938|</span></span>
-<span id="cb57-57"><a href="#cb57-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       353|       368|99239    |       308.3016|          106.55685|          83.94720|</span></span>
-<span id="cb57-58"><a href="#cb57-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       215|       220|99223    |       631.1864|          199.45268|         157.90895|</span></span>
-<span id="cb57-59"><a href="#cb57-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       172|       175|99238    |       210.8800|           72.46834|          57.07949|</span></span>
-<span id="cb57-60"><a href="#cb57-60" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|       130|       132|99222    |       356.4924|          136.80970|         107.93341|</span></span>
-<span id="cb57-61"><a href="#cb57-61" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|        58|        59|99221    |       333.2881|           99.74085|          79.46966|</span></span>
-<span id="cb57-62"><a href="#cb57-62" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|        18|        38|99231    |       100.8421|           38.92474|          31.01579|</span></span>
-<span id="cb57-63"><a href="#cb57-63" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|        23|        23|99217    |       328.0000|           71.57043|          54.50261|</span></span>
-<span id="cb57-64"><a href="#cb57-64" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|        13|        21|99291    |       633.8095|          223.42190|         178.01190|</span></span>
-<span id="cb57-65"><a href="#cb57-65" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2015|        18|        18|99219    |       614.0000|          133.79333|         100.95889|</span></span>
-<span id="cb57-66"><a href="#cb57-66" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|       596|      1418|99232    |       217.0000|           71.69861|          56.29776|</span></span>
-<span id="cb57-67"><a href="#cb57-67" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|       341|       357|99222    |       416.5462|          137.74919|         107.51787|</span></span>
-<span id="cb57-68"><a href="#cb57-68" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|       316|       330|99238    |       217.0000|           72.37955|          55.68124|</span></span>
-<span id="cb57-69"><a href="#cb57-69" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|       215|       223|99239    |       322.0000|          106.37072|          83.70637|</span></span>
-<span id="cb57-70"><a href="#cb57-70" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|       104|       175|99233    |       312.0000|          103.83000|          82.39817|</span></span>
-<span id="cb57-71"><a href="#cb57-71" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|        65|       104|99231    |       119.0000|           39.08673|          30.83538|</span></span>
-<span id="cb57-72"><a href="#cb57-72" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|        98|        98|99223    |       611.0000|          201.09684|         152.55122|</span></span>
-<span id="cb57-73"><a href="#cb57-73" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2014|        13|        23|99291    |       674.0000|          224.66000|         179.00000|</span></span>
-<span id="cb57-74"><a href="#cb57-74" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|       381|       777|99232    |       187.5946|           69.43354|          55.09135|</span></span>
-<span id="cb57-75"><a href="#cb57-75" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|       208|       219|99238    |       201.0046|           69.80708|          55.65046|</span></span>
-<span id="cb57-76"><a href="#cb57-76" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|       106|       170|99233    |       271.9765|          101.07035|          80.64124|</span></span>
-<span id="cb57-77"><a href="#cb57-77" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|       138|       142|99222    |       368.6268|          132.17007|         104.29972|</span></span>
-<span id="cb57-78"><a href="#cb57-78" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|       137|       142|99239    |       245.8310|          103.48056|          82.63211|</span></span>
-<span id="cb57-79"><a href="#cb57-79" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|        95|        96|99223    |       524.6042|          196.93240|         155.90115|</span></span>
-<span id="cb57-80"><a href="#cb57-80" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; | 2013|        47|        61|99231    |        97.0000|           37.68820|          30.06525|</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="11%">
+<col width="11%">
+<col width="10%">
+<col width="17%">
+<col width="21%">
+<col width="20%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="left">hcpcs_cd</th>
+<th align="right">avg_sbmtd_chrg</th>
+<th align="right">avg_mdcr_alowd_amt</th>
+<th align="right">avg_mdcr_pymt_amt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">154</td>
+<td align="right">326</td>
+<td align="left">99233</td>
+<td align="right">513.2117</td>
+<td align="right">108.84687</td>
+<td align="right">88.94589</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="right">145</td>
+<td align="right">146</td>
+<td align="left">99239</td>
+<td align="right">491.8699</td>
+<td align="right">111.25979</td>
+<td align="right">90.92384</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">57</td>
+<td align="right">134</td>
+<td align="left">99232</td>
+<td align="right">251.3284</td>
+<td align="right">73.45470</td>
+<td align="right">57.95582</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="right">52</td>
+<td align="right">52</td>
+<td align="left">99223</td>
+<td align="right">1108.3846</td>
+<td align="right">209.42385</td>
+<td align="right">170.83462</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">23</td>
+<td align="right">23</td>
+<td align="left">99217</td>
+<td align="right">406.1739</td>
+<td align="right">76.80391</td>
+<td align="right">61.40174</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="left">99218</td>
+<td align="right">811.8125</td>
+<td align="right">108.24938</td>
+<td align="right">85.08125</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="left">99220</td>
+<td align="right">1150.9375</td>
+<td align="right">191.96062</td>
+<td align="right">152.37688</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="left">99238</td>
+<td align="right">268.4615</td>
+<td align="right">74.15769</td>
+<td align="right">60.53308</td>
+</tr>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">12</td>
+<td align="right">12</td>
+<td align="left">99221</td>
+<td align="right">681.6667</td>
+<td align="right">110.04750</td>
+<td align="right">82.23750</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">306</td>
+<td align="right">605</td>
+<td align="left">99233</td>
+<td align="right">345.2364</td>
+<td align="right">103.58820</td>
+<td align="right">82.58817</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">240</td>
+<td align="right">243</td>
+<td align="left">99239</td>
+<td align="right">349.2593</td>
+<td align="right">106.54309</td>
+<td align="right">84.96992</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">117</td>
+<td align="right">205</td>
+<td align="left">99232</td>
+<td align="right">245.6146</td>
+<td align="right">72.75639</td>
+<td align="right">58.00556</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">157</td>
+<td align="right">158</td>
+<td align="left">99223</td>
+<td align="right">651.4177</td>
+<td align="right">200.93000</td>
+<td align="right">160.19000</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">40</td>
+<td align="right">40</td>
+<td align="left">99217</td>
+<td align="right">232.2750</td>
+<td align="right">72.59000</td>
+<td align="right">57.87000</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">39</td>
+<td align="right">40</td>
+<td align="left">99238</td>
+<td align="right">229.4750</td>
+<td align="right">72.59000</td>
+<td align="right">57.87000</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">21</td>
+<td align="right">27</td>
+<td align="left">99291</td>
+<td align="right">701.4444</td>
+<td align="right">221.27000</td>
+<td align="right">176.40000</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">25</td>
+<td align="right">25</td>
+<td align="left">99220</td>
+<td align="right">712.8000</td>
+<td align="right">186.72520</td>
+<td align="right">148.85160</td>
+</tr>
+<tr class="even">
+<td align="right">2019</td>
+<td align="right">24</td>
+<td align="right">24</td>
+<td align="left">99221</td>
+<td align="right">320.1667</td>
+<td align="right">101.12125</td>
+<td align="right">80.61583</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">206</td>
+<td align="right">360</td>
+<td align="left">99232</td>
+<td align="right">360.5722</td>
+<td align="right">72.38542</td>
+<td align="right">57.67031</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">148</td>
+<td align="right">284</td>
+<td align="left">99233</td>
+<td align="right">576.9894</td>
+<td align="right">103.66095</td>
+<td align="right">82.51299</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">217</td>
+<td align="right">250</td>
+<td align="left">99239</td>
+<td align="right">555.6400</td>
+<td align="right">106.73396</td>
+<td align="right">85.03664</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">82</td>
+<td align="right">86</td>
+<td align="left">99223</td>
+<td align="right">1093.5000</td>
+<td align="right">199.75721</td>
+<td align="right">159.25907</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">67</td>
+<td align="right">68</td>
+<td align="left">99217</td>
+<td align="right">381.3088</td>
+<td align="right">72.64103</td>
+<td align="right">57.88029</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">30</td>
+<td align="right">42</td>
+<td align="left">99291</td>
+<td align="right">1400.0000</td>
+<td align="right">215.74119</td>
+<td align="right">171.89333</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">26</td>
+<td align="right">26</td>
+<td align="left">99220</td>
+<td align="right">1086.9231</td>
+<td align="right">185.10154</td>
+<td align="right">147.47923</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">24</td>
+<td align="right">24</td>
+<td align="left">99221</td>
+<td align="right">474.5833</td>
+<td align="right">100.60125</td>
+<td align="right">80.15500</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">19</td>
+<td align="right">19</td>
+<td align="left">99218</td>
+<td align="right">476.9474</td>
+<td align="right">99.31158</td>
+<td align="right">76.79526</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="left">99222</td>
+<td align="right">625.0000</td>
+<td align="right">135.83647</td>
+<td align="right">108.22529</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="left">99238</td>
+<td align="right">415.3125</td>
+<td align="right">72.66688</td>
+<td align="right">57.90125</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">233</td>
+<td align="right">627</td>
+<td align="left">99232</td>
+<td align="right">326.2456</td>
+<td align="right">71.24051</td>
+<td align="right">56.36673</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">291</td>
+<td align="right">341</td>
+<td align="left">99239</td>
+<td align="right">481.6862</td>
+<td align="right">106.32874</td>
+<td align="right">84.05616</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">127</td>
+<td align="right">207</td>
+<td align="left">99233</td>
+<td align="right">461.0725</td>
+<td align="right">103.94768</td>
+<td align="right">82.82068</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">110</td>
+<td align="right">114</td>
+<td align="left">99223</td>
+<td align="right">923.9912</td>
+<td align="right">202.79219</td>
+<td align="right">160.37719</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">96</td>
+<td align="right">100</td>
+<td align="left">99217</td>
+<td align="right">325.7800</td>
+<td align="right">71.96390</td>
+<td align="right">56.82720</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">59</td>
+<td align="right">59</td>
+<td align="left">99220</td>
+<td align="right">755.9322</td>
+<td align="right">184.32203</td>
+<td align="right">141.29356</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">57</td>
+<td align="right">59</td>
+<td align="left">99222</td>
+<td align="right">625.0000</td>
+<td align="right">135.14729</td>
+<td align="right">105.82542</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">51</td>
+<td align="right">52</td>
+<td align="left">99219</td>
+<td align="right">614.0000</td>
+<td align="right">134.28385</td>
+<td align="right">102.80769</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">23</td>
+<td align="right">36</td>
+<td align="left">99291</td>
+<td align="right">1400.0000</td>
+<td align="right">220.58000</td>
+<td align="right">175.75000</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">25</td>
+<td align="right">26</td>
+<td align="left">99218</td>
+<td align="right">449.0000</td>
+<td align="right">98.48000</td>
+<td align="right">78.46000</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="left">99221</td>
+<td align="right">462.8125</td>
+<td align="right">100.05000</td>
+<td align="right">79.71000</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">270</td>
+<td align="right">596</td>
+<td align="left">99232</td>
+<td align="right">326.4866</td>
+<td align="right">70.71562</td>
+<td align="right">56.21099</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">231</td>
+<td align="right">271</td>
+<td align="left">99239</td>
+<td align="right">485.0000</td>
+<td align="right">105.05000</td>
+<td align="right">83.70000</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">141</td>
+<td align="right">148</td>
+<td align="left">99223</td>
+<td align="right">920.6149</td>
+<td align="right">200.54466</td>
+<td align="right">159.08345</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">85</td>
+<td align="right">117</td>
+<td align="left">99233</td>
+<td align="right">470.0000</td>
+<td align="right">101.88538</td>
+<td align="right">80.90932</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">87</td>
+<td align="right">96</td>
+<td align="left">99222</td>
+<td align="right">625.0000</td>
+<td align="right">134.09740</td>
+<td align="right">105.47760</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">55</td>
+<td align="right">57</td>
+<td align="left">99217</td>
+<td align="right">325.1579</td>
+<td align="right">70.79825</td>
+<td align="right">54.47439</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">26</td>
+<td align="right">53</td>
+<td align="left">99291</td>
+<td align="right">1400.0000</td>
+<td align="right">219.04000</td>
+<td align="right">174.52000</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">38</td>
+<td align="right">38</td>
+<td align="left">99219</td>
+<td align="right">614.0000</td>
+<td align="right">132.85000</td>
+<td align="right">105.85000</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">23</td>
+<td align="right">23</td>
+<td align="left">99220</td>
+<td align="right">769.3478</td>
+<td align="right">186.25913</td>
+<td align="right">146.11652</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td align="left">99221</td>
+<td align="right">460.0000</td>
+<td align="right">99.14000</td>
+<td align="right">78.99000</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="right">20</td>
+<td align="right">20</td>
+<td align="left">99238</td>
+<td align="right">328.0000</td>
+<td align="right">71.04550</td>
+<td align="right">52.83150</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="left">99225</td>
+<td align="right">328.0000</td>
+<td align="right">71.32000</td>
+<td align="right">56.82000</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">481</td>
+<td align="right">1117</td>
+<td align="left">99232</td>
+<td align="right">200.9320</td>
+<td align="right">71.87013</td>
+<td align="right">56.31386</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">286</td>
+<td align="right">580</td>
+<td align="left">99233</td>
+<td align="right">301.9810</td>
+<td align="right">101.51336</td>
+<td align="right">80.92938</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">353</td>
+<td align="right">368</td>
+<td align="left">99239</td>
+<td align="right">308.3016</td>
+<td align="right">106.55685</td>
+<td align="right">83.94720</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">215</td>
+<td align="right">220</td>
+<td align="left">99223</td>
+<td align="right">631.1864</td>
+<td align="right">199.45268</td>
+<td align="right">157.90895</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">172</td>
+<td align="right">175</td>
+<td align="left">99238</td>
+<td align="right">210.8800</td>
+<td align="right">72.46834</td>
+<td align="right">57.07949</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">130</td>
+<td align="right">132</td>
+<td align="left">99222</td>
+<td align="right">356.4924</td>
+<td align="right">136.80970</td>
+<td align="right">107.93341</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">58</td>
+<td align="right">59</td>
+<td align="left">99221</td>
+<td align="right">333.2881</td>
+<td align="right">99.74085</td>
+<td align="right">79.46966</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">18</td>
+<td align="right">38</td>
+<td align="left">99231</td>
+<td align="right">100.8421</td>
+<td align="right">38.92474</td>
+<td align="right">31.01579</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">23</td>
+<td align="right">23</td>
+<td align="left">99217</td>
+<td align="right">328.0000</td>
+<td align="right">71.57043</td>
+<td align="right">54.50261</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="right">13</td>
+<td align="right">21</td>
+<td align="left">99291</td>
+<td align="right">633.8095</td>
+<td align="right">223.42190</td>
+<td align="right">178.01190</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">18</td>
+<td align="right">18</td>
+<td align="left">99219</td>
+<td align="right">614.0000</td>
+<td align="right">133.79333</td>
+<td align="right">100.95889</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">596</td>
+<td align="right">1418</td>
+<td align="left">99232</td>
+<td align="right">217.0000</td>
+<td align="right">71.69861</td>
+<td align="right">56.29776</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="right">341</td>
+<td align="right">357</td>
+<td align="left">99222</td>
+<td align="right">416.5462</td>
+<td align="right">137.74919</td>
+<td align="right">107.51787</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">316</td>
+<td align="right">330</td>
+<td align="left">99238</td>
+<td align="right">217.0000</td>
+<td align="right">72.37955</td>
+<td align="right">55.68124</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="right">215</td>
+<td align="right">223</td>
+<td align="left">99239</td>
+<td align="right">322.0000</td>
+<td align="right">106.37072</td>
+<td align="right">83.70637</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">104</td>
+<td align="right">175</td>
+<td align="left">99233</td>
+<td align="right">312.0000</td>
+<td align="right">103.83000</td>
+<td align="right">82.39817</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="right">65</td>
+<td align="right">104</td>
+<td align="left">99231</td>
+<td align="right">119.0000</td>
+<td align="right">39.08673</td>
+<td align="right">30.83538</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">98</td>
+<td align="right">98</td>
+<td align="left">99223</td>
+<td align="right">611.0000</td>
+<td align="right">201.09684</td>
+<td align="right">152.55122</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="right">13</td>
+<td align="right">23</td>
+<td align="left">99291</td>
+<td align="right">674.0000</td>
+<td align="right">224.66000</td>
+<td align="right">179.00000</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="right">381</td>
+<td align="right">777</td>
+<td align="left">99232</td>
+<td align="right">187.5946</td>
+<td align="right">69.43354</td>
+<td align="right">55.09135</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">208</td>
+<td align="right">219</td>
+<td align="left">99238</td>
+<td align="right">201.0046</td>
+<td align="right">69.80708</td>
+<td align="right">55.65046</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="right">106</td>
+<td align="right">170</td>
+<td align="left">99233</td>
+<td align="right">271.9765</td>
+<td align="right">101.07035</td>
+<td align="right">80.64124</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">138</td>
+<td align="right">142</td>
+<td align="left">99222</td>
+<td align="right">368.6268</td>
+<td align="right">132.17007</td>
+<td align="right">104.29972</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="right">137</td>
+<td align="right">142</td>
+<td align="left">99239</td>
+<td align="right">245.8310</td>
+<td align="right">103.48056</td>
+<td align="right">82.63211</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">95</td>
+<td align="right">96</td>
+<td align="left">99223</td>
+<td align="right">524.6042</td>
+<td align="right">196.93240</td>
+<td align="right">155.90115</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="right">47</td>
+<td align="right">61</td>
+<td align="left">99231</td>
+<td align="right">97.0000</td>
+<td align="right">37.68820</td>
+<td align="right">30.06525</td>
+</tr>
+</tbody>
+</table>
 <blockquote>
 <ol start="2" style="list-style-type: decimal">
 <li>by Geography and Service API:</li>
 </ol>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">srvcs</span> <span class="op">&lt;-</span> <span class="fu">provider</span><span class="fu">::</span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>         <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span>, <span class="va">totals_srvcs</span>, <span class="va">hcpcs</span>, <span class="va">averages</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -3402,7 +4247,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">srvcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_desc <span class="op">=</span> <span class="st">"Maryland"</span>, year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">state</span> <span class="op">|&gt;</span> </span>
@@ -3529,7 +4374,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nat</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">srvcs</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>geo_level <span class="op">=</span> <span class="st">"National"</span>, year <span class="op">=</span> <span class="fl">2020</span>, hcpcs_code <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nat</span> <span class="op">&lt;-</span> <span class="va">nat</span> <span class="op">|&gt;</span> </span>
@@ -3657,7 +4502,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ind_lng</span> <span class="op">&lt;-</span> <span class="va">ind</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">level</span>, <span class="va">hcpcs_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3677,7 +4522,7 @@
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="va">nat_lng</span>, by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"hcpcs_cd"</span>, <span class="st">"name"</span>, <span class="st">"level"</span>, <span class="st">"value"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">hcpcs_cd</span>, <span class="va">name</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">join_2020</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"avg_sbmtd_chrg"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
@@ -3685,19 +4530,78 @@
 <span>                     values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |hcpcs_cd | Individual_avg_charge| State_avg_charge| National_avg_charge|</span></span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:--------|---------------------:|----------------:|-------------------:|</span></span>
-<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99217    |                406.17|           300.86|              226.52|</span></span>
-<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99218    |                811.81|           377.22|              279.04|</span></span>
-<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99220    |               1150.94|           761.24|              602.49|</span></span>
-<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99221    |                681.67|           269.18|              262.36|</span></span>
-<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99223    |               1108.38|           556.97|              502.27|</span></span>
-<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99232    |                251.33|           176.80|              175.30|</span></span>
-<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99233    |                513.21|           338.04|              282.39|</span></span>
-<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99238    |                268.46|           207.34|              188.50|</span></span>
-<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99239    |                491.87|           367.92|              310.61|</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="31%">
+<col width="25%">
+<col width="29%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">hcpcs_cd</th>
+<th align="right">Individual_avg_charge</th>
+<th align="right">State_avg_charge</th>
+<th align="right">National_avg_charge</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">99217</td>
+<td align="right">406.17</td>
+<td align="right">300.86</td>
+<td align="right">226.52</td>
+</tr>
+<tr class="even">
+<td align="left">99218</td>
+<td align="right">811.81</td>
+<td align="right">377.22</td>
+<td align="right">279.04</td>
+</tr>
+<tr class="odd">
+<td align="left">99220</td>
+<td align="right">1150.94</td>
+<td align="right">761.24</td>
+<td align="right">602.49</td>
+</tr>
+<tr class="even">
+<td align="left">99221</td>
+<td align="right">681.67</td>
+<td align="right">269.18</td>
+<td align="right">262.36</td>
+</tr>
+<tr class="odd">
+<td align="left">99223</td>
+<td align="right">1108.38</td>
+<td align="right">556.97</td>
+<td align="right">502.27</td>
+</tr>
+<tr class="even">
+<td align="left">99232</td>
+<td align="right">251.33</td>
+<td align="right">176.80</td>
+<td align="right">175.30</td>
+</tr>
+<tr class="odd">
+<td align="left">99233</td>
+<td align="right">513.21</td>
+<td align="right">338.04</td>
+<td align="right">282.39</td>
+</tr>
+<tr class="even">
+<td align="left">99238</td>
+<td align="right">268.46</td>
+<td align="right">207.34</td>
+<td align="right">188.50</td>
+</tr>
+<tr class="odd">
+<td align="left">99239</td>
+<td align="right">491.87</td>
+<td align="right">367.92</td>
+<td align="right">310.61</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">join_2020</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"avg_mdcr_alowd_amt"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
@@ -3705,19 +4609,78 @@
 <span>                     values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |hcpcs_cd | Individual_avg_allowed| State_avg_allowed| National_avg_allowed|</span></span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:--------|----------------------:|-----------------:|--------------------:|</span></span>
-<span id="cb65-3"><a href="#cb65-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99217    |                  76.80|             73.33|                71.85|</span></span>
-<span id="cb65-4"><a href="#cb65-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99218    |                 108.25|            102.48|                99.77|</span></span>
-<span id="cb65-5"><a href="#cb65-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99220    |                 191.96|            188.96|               184.34|</span></span>
-<span id="cb65-6"><a href="#cb65-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99221    |                 110.05|            106.16|               101.75|</span></span>
-<span id="cb65-7"><a href="#cb65-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99223    |                 209.42|            211.90|               204.68|</span></span>
-<span id="cb65-8"><a href="#cb65-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99232    |                  73.45|             75.67|                72.96|</span></span>
-<span id="cb65-9"><a href="#cb65-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99233    |                 108.85|            109.47|               105.82|</span></span>
-<span id="cb65-10"><a href="#cb65-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99238    |                  74.16|             76.12|                73.12|</span></span>
-<span id="cb65-11"><a href="#cb65-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99239    |                 111.26|            111.66|               107.57|</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="32%">
+<col width="25%">
+<col width="29%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">hcpcs_cd</th>
+<th align="right">Individual_avg_allowed</th>
+<th align="right">State_avg_allowed</th>
+<th align="right">National_avg_allowed</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">99217</td>
+<td align="right">76.80</td>
+<td align="right">73.33</td>
+<td align="right">71.85</td>
+</tr>
+<tr class="even">
+<td align="left">99218</td>
+<td align="right">108.25</td>
+<td align="right">102.48</td>
+<td align="right">99.77</td>
+</tr>
+<tr class="odd">
+<td align="left">99220</td>
+<td align="right">191.96</td>
+<td align="right">188.96</td>
+<td align="right">184.34</td>
+</tr>
+<tr class="even">
+<td align="left">99221</td>
+<td align="right">110.05</td>
+<td align="right">106.16</td>
+<td align="right">101.75</td>
+</tr>
+<tr class="odd">
+<td align="left">99223</td>
+<td align="right">209.42</td>
+<td align="right">211.90</td>
+<td align="right">204.68</td>
+</tr>
+<tr class="even">
+<td align="left">99232</td>
+<td align="right">73.45</td>
+<td align="right">75.67</td>
+<td align="right">72.96</td>
+</tr>
+<tr class="odd">
+<td align="left">99233</td>
+<td align="right">108.85</td>
+<td align="right">109.47</td>
+<td align="right">105.82</td>
+</tr>
+<tr class="even">
+<td align="left">99238</td>
+<td align="right">74.16</td>
+<td align="right">76.12</td>
+<td align="right">73.12</td>
+</tr>
+<tr class="odd">
+<td align="left">99239</td>
+<td align="right">111.26</td>
+<td align="right">111.66</td>
+<td align="right">107.57</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
-<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">join_2020</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">name</span> <span class="op">==</span> <span class="st">"avg_mdcr_pymt_amt"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
@@ -3725,17 +4688,70 @@
 <span>                     values_from <span class="op">=</span> <span class="va">value</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |hcpcs_cd | Individual_avg_pymt| State_avg_pymt| National_avg_pymt|</span></span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |:--------|-------------------:|--------------:|-----------------:|</span></span>
-<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99217    |               61.40|          57.83|             56.39|</span></span>
-<span id="cb67-4"><a href="#cb67-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99218    |               85.08|          80.33|             77.73|</span></span>
-<span id="cb67-5"><a href="#cb67-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99220    |              152.38|         147.87|            144.11|</span></span>
-<span id="cb67-6"><a href="#cb67-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99221    |               82.24|          83.31|             79.94|</span></span>
-<span id="cb67-7"><a href="#cb67-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99223    |              170.83|         166.53|            161.39|</span></span>
-<span id="cb67-8"><a href="#cb67-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99232    |               57.96|          60.12|             58.10|</span></span>
-<span id="cb67-9"><a href="#cb67-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99233    |               88.95|          87.23|             84.56|</span></span>
-<span id="cb67-10"><a href="#cb67-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99238    |               60.53|          60.28|             57.87|</span></span>
-<span id="cb67-11"><a href="#cb67-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; |99239    |               90.92|          88.69|             85.48|</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">hcpcs_cd</th>
+<th align="right">Individual_avg_pymt</th>
+<th align="right">State_avg_pymt</th>
+<th align="right">National_avg_pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">99217</td>
+<td align="right">61.40</td>
+<td align="right">57.83</td>
+<td align="right">56.39</td>
+</tr>
+<tr class="even">
+<td align="left">99218</td>
+<td align="right">85.08</td>
+<td align="right">80.33</td>
+<td align="right">77.73</td>
+</tr>
+<tr class="odd">
+<td align="left">99220</td>
+<td align="right">152.38</td>
+<td align="right">147.87</td>
+<td align="right">144.11</td>
+</tr>
+<tr class="even">
+<td align="left">99221</td>
+<td align="right">82.24</td>
+<td align="right">83.31</td>
+<td align="right">79.94</td>
+</tr>
+<tr class="odd">
+<td align="left">99223</td>
+<td align="right">170.83</td>
+<td align="right">166.53</td>
+<td align="right">161.39</td>
+</tr>
+<tr class="even">
+<td align="left">99232</td>
+<td align="right">57.96</td>
+<td align="right">60.12</td>
+<td align="right">58.10</td>
+</tr>
+<tr class="odd">
+<td align="left">99233</td>
+<td align="right">88.95</td>
+<td align="right">87.23</td>
+<td align="right">84.56</td>
+</tr>
+<tr class="even">
+<td align="left">99238</td>
+<td align="right">60.53</td>
+<td align="right">60.28</td>
+<td align="right">57.87</td>
+</tr>
+<tr class="odd">
+<td align="left">99239</td>
+<td align="right">90.92</td>
+<td align="right">88.69</td>
+<td align="right">85.48</td>
+</tr>
+</tbody>
+</table>
 <p><br><br></p>
 <blockquote>
 <ol start="3" style="list-style-type: decimal">
@@ -3743,24 +4759,24 @@
 </ol>
 </blockquote>
 <p><br><br></p>
-<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb69"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 8</span></span>
-<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 11</span></span>
-<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year         &lt;chr&gt; "2013", "2014", "2015", "2016", "2017", "2018", "2019", "…</span></span>
-<span id="cb69-4"><a href="#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_npi   &lt;chr&gt; "1003000126", "1003000126", "1003000126", "1003000126", "…</span></span>
-<span id="cb69-5"><a href="#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_prvdr &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]…</span></span>
-<span id="cb69-6"><a href="#cb69-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ totals_srvcs &lt;list&gt; [&lt;tbl_df[1 x 7]&gt;], [&lt;tbl_df[1 x 7]&gt;], [&lt;tbl_df[1 x 7]&gt;],…</span></span>
-<span id="cb69-7"><a href="#cb69-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ drug_srvcs   &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;],…</span></span>
-<span id="cb69-8"><a href="#cb69-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ med_srvcs    &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;],…</span></span>
-<span id="cb69-9"><a href="#cb69-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age     &lt;list&gt; [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 x 5]&gt;],…</span></span>
-<span id="cb69-10"><a href="#cb69-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_sex     &lt;list&gt; [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;],…</span></span>
-<span id="cb69-11"><a href="#cb69-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race    &lt;list&gt; [&lt;tbl_df[1 x 6]&gt;], [&lt;tbl_df[1 x 6]&gt;], [&lt;tbl_df[1 x 6]&gt;],…</span></span>
-<span id="cb69-12"><a href="#cb69-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_status  &lt;list&gt; [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;],…</span></span>
-<span id="cb69-13"><a href="#cb69-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_cc      &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]…</span></span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Rows: 8</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Columns: 11</span></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ year         &lt;chr&gt; "2013", "2014", "2015", "2016", "2017", "2018", "2019", "…</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_npi   &lt;chr&gt; "1003000126", "1003000126", "1003000126", "1003000126", "…</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ rndrng_prvdr &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]…</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ totals_srvcs &lt;list&gt; [&lt;tbl_df[1 x 7]&gt;], [&lt;tbl_df[1 x 7]&gt;], [&lt;tbl_df[1 x 7]&gt;],…</span></span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ drug_srvcs   &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;],…</span></span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ med_srvcs    &lt;list&gt; [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;], [&lt;tbl_df[1 x 8]&gt;],…</span></span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_age     &lt;list&gt; [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 x 5]&gt;], [&lt;tbl_df[1 x 5]&gt;],…</span></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_sex     &lt;list&gt; [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;],…</span></span>
+<span id="cb63-11"><a href="#cb63-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_race    &lt;list&gt; [&lt;tbl_df[1 x 6]&gt;], [&lt;tbl_df[1 x 6]&gt;], [&lt;tbl_df[1 x 6]&gt;],…</span></span>
+<span id="cb63-12"><a href="#cb63-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_status  &lt;list&gt; [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;], [&lt;tbl_df[1 x 2]&gt;],…</span></span>
+<span id="cb63-13"><a href="#cb63-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; $ bene_cc      &lt;list&gt; [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]&gt;], [&lt;tbl_df[1 x 17]…</span></span></code></pre></div>
 <p><br><br></p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">rndrng_npi</span>, <span class="va">rndrng_prvdr</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rndrng_prvdr</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3851,7 +4867,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">totals_srvcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">totals_srvcs</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -3960,7 +4976,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_age</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_age</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -4049,7 +5065,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_sex</span>, <span class="va">bene_status</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_sex</span>, <span class="va">bene_status</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -4128,7 +5144,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_race</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_race</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>        <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -4227,7 +5243,7 @@
 </tbody>
 </table>
 <p><br><br></p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">prov</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_cc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>     <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_cc</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>     <span class="fu">gluedown</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gluedown/man/md_table.html" class="external-link">md_table</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -4445,7 +5461,7 @@
 <p>Medicare Multiple Chronic Conditions API</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mult</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, </span>
 <span>                    geo_lvl <span class="op">=</span> <span class="st">"National"</span>, </span>
 <span>                    demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span>
@@ -5145,7 +6161,7 @@
 <p>Medicare Specific Chronic Conditions API</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">spec</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, geo_lvl <span class="op">=</span> <span class="st">"National"</span>, demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">spec</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_age_lvl</span>, <span class="va">bene_demo_desc</span><span class="op">:</span><span class="va">prvlnc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
