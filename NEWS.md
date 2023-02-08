@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9009 (2023-02-08)
+
+* implemented cms_update_ids() to applicable functions
+
+
 # provider 0.0.0.9008 (2023-02-07)
 
 * added addl_phone_numbers() function
