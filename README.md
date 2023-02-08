@@ -98,7 +98,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-08 12:27:28
+    #> $ datetime          <dttm> 2023-02-08 13:07:04
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -342,43 +342,43 @@ provider::hospital_enrollment(ccn = "060004") |>
   gluedown::md_table()
 ```
 
-    #> |name                         |value                                                 |
-    #> |:----------------------------|:-----------------------------------------------------|
-    #> |enrollment_id                |O20070619000323                                       |
-    #> |enrollment_state             |CO                                                    |
-    #> |provider_type_code           |00-09                                                 |
-    #> |provider_type_text           |PART A PROVIDER - HOSPITAL                            |
-    #> |npi                          |1629071758                                            |
-    #> |multiple_npi_flag            |FALSE                                                 |
-    #> |ccn                          |060004                                                |
-    #> |associate_id                 |1153213814                                            |
-    #> |organization_name            |BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
-    #> |doing_business_as_name       |PLATTE VALLEY MEDICAL CENTER                          |
-    #> |incorporation_date           |1958-08-18                                            |
-    #> |incorporation_state          |CO                                                    |
-    #> |organization_type_structure  |CORPORATION                                           |
-    #> |organization_other_type_text |NA                                                    |
-    #> |proprietary_nonprofit        |FALSE                                                 |
-    #> |address                      |1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
-    #> |city                         |BRIGHTON                                              |
-    #> |state                        |CO                                                    |
-    #> |zip_code                     |80601                                                 |
-    #> |practice_location_type       |MAIN/PRIMARY HOSPITAL LOCATION                        |
-    #> |location_other_type_text     |NA                                                    |
-    #> |subgroup_general             |FALSE                                                 |
-    #> |subgroup_acute_care          |TRUE                                                  |
-    #> |subgroup_alcohol_drug        |FALSE                                                 |
-    #> |subgroup_childrens           |FALSE                                                 |
-    #> |subgroup_long_term           |FALSE                                                 |
-    #> |subgroup_psychiatric         |FALSE                                                 |
-    #> |subgroup_rehabilitation      |FALSE                                                 |
-    #> |subgroup_short_term          |FALSE                                                 |
-    #> |subgroup_swing_bed_approved  |FALSE                                                 |
-    #> |subgroup_psychiatric_unit    |FALSE                                                 |
-    #> |subgroup_rehabilitation_unit |FALSE                                                 |
-    #> |subgroup_specialty_hospital  |FALSE                                                 |
-    #> |subgroup_other               |FALSE                                                 |
-    #> |subgroup_other_text          |NA                                                    |
+| name                         | value                                                 |
+|:-----------------------------|:------------------------------------------------------|
+| enrollment_id                | O20070619000323                                       |
+| enrollment_state             | CO                                                    |
+| provider_type_code           | 00-09                                                 |
+| provider_type_text           | PART A PROVIDER - HOSPITAL                            |
+| npi                          | 1629071758                                            |
+| multiple_npi_flag            | FALSE                                                 |
+| ccn                          | 060004                                                |
+| associate_id                 | 1153213814                                            |
+| organization_name            | BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
+| doing_business_as_name       | PLATTE VALLEY MEDICAL CENTER                          |
+| incorporation_date           | 1958-08-18                                            |
+| incorporation_state          | CO                                                    |
+| organization_type_structure  | CORPORATION                                           |
+| organization_other_type_text | NA                                                    |
+| proprietary_nonprofit        | FALSE                                                 |
+| address                      | 1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
+| city                         | BRIGHTON                                              |
+| state                        | CO                                                    |
+| zip_code                     | 80601                                                 |
+| practice_location_type       | MAIN/PRIMARY HOSPITAL LOCATION                        |
+| location_other_type_text     | NA                                                    |
+| subgroup_general             | FALSE                                                 |
+| subgroup_acute_care          | TRUE                                                  |
+| subgroup_alcohol_drug        | FALSE                                                 |
+| subgroup_childrens           | FALSE                                                 |
+| subgroup_long_term           | FALSE                                                 |
+| subgroup_psychiatric         | FALSE                                                 |
+| subgroup_rehabilitation      | FALSE                                                 |
+| subgroup_short_term          | FALSE                                                 |
+| subgroup_swing_bed_approved  | FALSE                                                 |
+| subgroup_psychiatric_unit    | FALSE                                                 |
+| subgroup_rehabilitation_unit | FALSE                                                 |
+| subgroup_specialty_hospital  | FALSE                                                 |
+| subgroup_other               | FALSE                                                 |
+| subgroup_other_text          | NA                                                    |
 
 <br><br>
 

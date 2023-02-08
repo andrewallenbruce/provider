@@ -187,7 +187,7 @@ provider::facility_affiliations(first_name = "John",
 
 ### Hospital Enrollments
 
-```{r}
+```{r results='asis', echo=TRUE}
 provider::hospital_enrollment(ccn = "060004") |> 
   tidyr::unite("address", address_line_1:address_line_2, 
                remove = TRUE, na.rm = TRUE, sep = " ") |> 
