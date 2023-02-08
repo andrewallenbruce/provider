@@ -17,7 +17,6 @@ revalidation_date(
   type_code = NULL,
   prov_type = NULL,
   specialty = NULL,
-  month = "Latest",
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -41,9 +40,6 @@ revalidation_date(
 \item{prov_type}{Provider type description}
 
 \item{specialty}{Enrollment specialty}
-
-\item{month}{dataset version, \code{Latest} is default; possible months are
-\code{Feb}, \code{Apr}, \code{Jun}, \code{Jul}, \code{Aug}, \code{Sep}, \code{Oct}, \code{Nov},\code{Dec}}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
@@ -95,26 +91,4 @@ revalidation_date(enroll_id = "O20110620000324",
                   state = "FL",
                   prov_type = "DME",
                   type_code = "2")
-\dontrun{
-npi_list <- rep(c(1003026055,
-                  1316405939,
-                  1720392988,
-                  1518184605),
-                  each = 8)
-
-months <- rep(c("Nov",
-                "Oct",
-                "Sep",
-                "Aug",
-                "Jul",
-                "Jun",
-                "Apr",
-                "Feb"),
-                times = 4)
-
-purrr::map2_dfr(npi_list,
-                months,
-                ~revalidation_date(npi = .x,
-                month = .y))
-}
 }

@@ -118,4 +118,13 @@ provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY",
 provider_enrollment(pecos_id = 2860305554,
                     enroll_id = "I20031110000120",
                     gender = "9")
+\dontrun{
+prven <- tibble::tribble(
+~fn,         ~params,
+"provider_enrollment", list(npi = 1083879860),
+"provider_enrollment", list(first_name = "MICHAEL", middle_name = "K", last_name = "GREENBERG", state = "MD"),
+"provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"))
+
+purrr::invoke_map_dfr(prven$fn, prven$params)
+}
 }

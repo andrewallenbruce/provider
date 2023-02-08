@@ -78,6 +78,15 @@
 #' provider_enrollment(pecos_id = 2860305554,
 #'                     enroll_id = "I20031110000120",
 #'                     gender = "9")
+#' \dontrun{
+#' prven <- tibble::tribble(
+#' ~fn,         ~params,
+#' "provider_enrollment", list(npi = 1083879860),
+#' "provider_enrollment", list(first_name = "MICHAEL", middle_name = "K", last_name = "GREENBERG", state = "MD"),
+#' "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"))
+#'
+#' purrr::invoke_map_dfr(prven$fn, prven$params)
+#' }
 #' @autoglobal
 #' @export
 
@@ -124,7 +133,9 @@ provider_enrollment <- function(npi                = NULL,
 
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
-                                                  simplifyVector = TRUE))
+                                                  simplifyVector = TRUE)) |>
+    dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}

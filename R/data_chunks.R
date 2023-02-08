@@ -62,6 +62,9 @@ function_tbl    <- function() {
   drclin_func   <- gluedown::md_code("doctors_and_clinicians()")
   drclin_link   <- gluedown::md_link(
     "Doctors and Clinicians National Downloadable File" = "https://data.cms.gov/provider-data/dataset/mj5m-pzi6")
+  addph_func   <- gluedown::md_code("addl_phone_numbers()")
+  addph_link   <- gluedown::md_link(
+    "Physician Additional Phone Numbers" = "https://data.cms.gov/provider-data/dataset/phys-phon")
 
   func_tbl <- gluedown::md_table(data.frame(Function = c(nppes_func,
                                                          open_func,
@@ -82,7 +85,8 @@ function_tbl    <- function() {
                                                          miss_func,
                                                          pend_func,
                                                          affil_func,
-                                                         drclin_func
+                                                         drclin_func,
+                                                         addph_func
                                                          ),
                                             API      = c(nppes_link,
                                                          open_link,
@@ -103,7 +107,8 @@ function_tbl    <- function() {
                                                          miss_link,
                                                          pend_link,
                                                          affil_link,
-                                                         drclin_link
+                                                         drclin_link,
+                                                         addph_link
                                                          )))
 
   return(func_tbl)

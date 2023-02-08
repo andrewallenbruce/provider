@@ -44,7 +44,6 @@ utils::globalVariables(c(
   "data", # <open_payments_update_ids>
   "identifier", # <open_payments_update_ids>
   "NPI", # <opt_out>
-  "Date", # <opt_out>
   "PARTB", # <order_refer>
   "HHA", # <order_refer>
   "DME", # <order_refer>

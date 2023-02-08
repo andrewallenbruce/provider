@@ -64,13 +64,13 @@ remotes::install_github("andrewallenbruce/provider")
 | `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
 | `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
 | `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
+| `addl_phone_numbers()`     | [Physician Additional Phone Numbers](https://data.cms.gov/provider-data/dataset/phys-phon)                                                                                                                                            |
 
 <br>
 
 ## Motivation
 
 ``` r
-# Load library
 library(provider)
 ```
 
@@ -86,21 +86,21 @@ together.
 
 <br>
 
-## Informational APIs
+## Information APIs
 
 ### NPPES NPI Registry
 
 ``` r
-npi_1 <- provider::nppes_npi(npi = 1710975040)
+npi_1 <- provider::nppes_npi(npi = 1710975040) |> dplyr::rename(npi = number)
 npi_1 |> dplyr::glimpse()
 ```
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-07 23:07:36
+    #> $ datetime          <dttm> 2023-02-08 04:38:11
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
-    #> $ number            <chr> "1710975040"
+    #> $ npi               <chr> "1710975040"
     #> $ name              <chr> "JOHN HERRING"
     #> $ city              <chr> "OLNEY"
     #> $ state             <chr> "MD"
@@ -116,16 +116,18 @@ npi_1 |> dplyr::glimpse()
 <br>
 
 ``` r
-npi_1 |> dplyr::select(datetime:state) |> gluedown::md_table()
+npi_1 |> 
+  dplyr::select(enumeration_type:state) |> 
+  gluedown::md_table()
 ```
 
-| datetime            | outcome | enumeration_type | number     | name         | city  | state |
-|:--------------------|:--------|:-----------------|:-----------|:-------------|:------|:------|
-| 2023-02-07 23:07:36 | results | NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
+| enumeration_type | npi        | name         | city  | state |
+|:-----------------|:-----------|:-------------|:------|:------|
+| NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
 
 <br>
 
-- Basic Information
+> Basic Information
 
 ``` r
 npi_1 |> 
@@ -151,49 +153,67 @@ npi_1 |>
 
 <br>
 
-- Taxonomies
+> Taxonomies
 
 ``` r
 npi_1 |> 
   dplyr::select(taxonomies) |> 
   tidyr::unnest(taxonomies) |> 
+  dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |> 
+  dplyr::left_join(nucc_taxonomy_230, by = "code") |> 
+  dplyr::select(!c(taxonomy_group, desc, specialization, definition, notes, display_name, section)) |> 
+  provider:::display_long() |> 
   gluedown::md_table()
 ```
 
-| code       | taxonomy_group | desc              | state | license  | primary |
-|:-----------|:---------------|:------------------|:------|:---------|:--------|
-| 207R00000X |                | Internal Medicine | MD    | D0030414 | TRUE    |
+| name           | value                               |
+|:---------------|:------------------------------------|
+| code           | 207R00000X                          |
+| state          | MD                                  |
+| license        | D0030414                            |
+| primary        | TRUE                                |
+| grouping       | Allopathic & Osteopathic Physicians |
+| classification | Internal Medicine                   |
 
 <br>
 
-- Addresses
+> Addresses
 
 ``` r
 npi_1 |> 
   dplyr::select(addresses) |> 
   tidyr::unnest(addresses) |> 
+  tidyr::unite("address", 
+               address_1:address_2, 
+               remove = TRUE, 
+               na.rm = TRUE, 
+               sep = " ") |> 
+  dplyr::mutate(telephone_number = campfin::normal_phone(telephone_number),
+                fax_number = campfin::normal_phone(fax_number),
+                postal_code = campfin::normal_zip(postal_code),
+                address = campfin::normal_address(address)) |> 
   tidyr::pivot_longer(!address_purpose) |> 
   tidyr::pivot_wider(names_from = address_purpose, 
                      values_from = value) |> 
   gluedown::md_table()
 ```
 
-| name             | MAILING         | LOCATION               |
-|:-----------------|:----------------|:-----------------------|
-| country_code     | US              | US                     |
-| country_name     | United States   | United States          |
-| address_type     | DOM             | DOM                    |
-| address_1        | 1300 PICCARD DR | 18101 PRINCE PHILIP DR |
-| address_2        | SUITE 202       | NA                     |
-| city             | ROCKVILLE       | OLNEY                  |
-| state            | MD              | MD                     |
-| postal_code      | 208504303       | 208321514              |
-| telephone_number | 310-921-7900    | 301-774-8900           |
-| fax_number       | 301-921-7915    | 301-570-8574           |
+| name             | MAILING                   | LOCATION               |
+|:-----------------|:--------------------------|:-----------------------|
+| country_code     | US                        | US                     |
+| country_name     | United States             | United States          |
+| address_type     | DOM                       | DOM                    |
+| address          | 1300 PICCARD DR SUITE 202 | 18101 PRINCE PHILIP DR |
+| city             | ROCKVILLE                 | OLNEY                  |
+| state            | MD                        | MD                     |
+| postal_code      | 20850                     | 20832                  |
+| telephone_number | \(310\) 921-7900          | \(301\) 774-8900       |
+| fax_number       | \(301\) 921-7915          | \(301\) 570-8574       |
 
 <br>
 
-- Identifiers
+> Identifiers
 
 ``` r
 npi_1 |> 
@@ -292,99 +312,133 @@ provider::facility_affiliations(parent_ccn = 670055) |>
 provider::facility_affiliations(first_name = "John", 
                                 last_name = "Hill", 
                                 facility_type = "Home Health Agency") |> 
-  dplyr::select(-record_number) |> 
+  dplyr::select(-record_number, -parent_ccn) |> 
   gluedown::md_table()
 ```
 
-| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | suff | facility_type      | facility_afl_ccn | parent_ccn |
-|:-----------|:-----------|:-------|:--------|:-------|:-----|:-------------------|:-----------------|:-----------|
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117021           | NA         |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117036           | NA         |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117069           | NA         |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117125           | NA         |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107338           | NA         |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107408           | NA         |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107689           | NA         |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107707           | NA         |
+| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | suff | facility_type      | facility_afl_ccn |
+|:-----------|:-----------|:-------|:--------|:-------|:-----|:-------------------|:-----------------|
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117021           |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117036           |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117069           |
+| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117125           |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107338           |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107408           |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107689           |
+| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107707           |
 
 <br><br>
 
 ### CMS Doctors and Clinicians National File
 
 ``` r
-# search by npi
-doctors_and_clinicians(npi = 1407263999) |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |>
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+dr_clin <- doctors_and_clinicians(npi = 1407263999) |> 
+  dplyr::select(!c(record_number, 
+                   suff, 
+                   cred, 
+                   sec_spec_1:sec_spec_all, 
+                   ln_2_sprs, adrs_id)) |> 
+  tidyr::unite("address", 
+               adr_ln_1:adr_ln_2, 
+               remove = TRUE, 
+               na.rm = TRUE, 
+               sep = " ") |> 
+  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
+                zip = campfin::normal_zip(zip),
+                address = campfin::normal_address(address))
+
+dr_clin |> dplyr::glimpse()
+```
+
+    #> Rows: 2
+    #> Columns: 21
+    #> $ npi         <chr> "1407263999", "1407263999"
+    #> $ ind_pac_id  <chr> "8729208152", "8729208152"
+    #> $ ind_enrl_id <chr> "I20141006002245", "I20141006002245"
+    #> $ lst_nm      <chr> "AVERY", "AVERY"
+    #> $ frst_nm     <chr> "ROBIN", "ROBIN"
+    #> $ mid_nm      <chr> "A", "A"
+    #> $ gndr        <chr> "F", "F"
+    #> $ med_sch     <chr> "OTHER", "OTHER"
+    #> $ grd_yr      <chr> "1989", "1989"
+    #> $ pri_spec    <chr> "CLINICAL PSYCHOLOGIST", "CLINICAL PSYCHOLOGIST"
+    #> $ telehlth    <chr> "Y", "Y"
+    #> $ org_nm      <chr> NA, "LARRY BROOKS, PH.D., LLC"
+    #> $ org_pac_id  <chr> NA, "6608028899"
+    #> $ num_org_mem <chr> NA, "2"
+    #> $ address     <chr> "9999 NE 2ND AVE SUITE 209E", "3810 HOLLYWOOD BLVD SUITE 2"
+    #> $ cty         <chr> "MIAMI SHORES", "HOLLYWOOD"
+    #> $ st          <chr> "FL", "FL"
+    #> $ zip         <chr> "33138", "33021"
+    #> $ phn_numbr   <chr> NA, "(954) 962-3888"
+    #> $ ind_assgn   <chr> "Y", "Y"
+    #> $ grp_assgn   <chr> "M", "Y"
+
+<br>
+
+``` r
+dr_clin |> 
+  dplyr::slice_head() |> 
+  provider:::display_long() |> 
   gluedown::md_table()
 ```
 
-| name          | value                     |
-|:--------------|:--------------------------|
-| record_number | 1                         |
-| npi           | 1407263999                |
-| ind_pac_id    | 8729208152                |
-| ind_enrl_id   | I20141006002245           |
-| lst_nm        | AVERY                     |
-| frst_nm       | ROBIN                     |
-| mid_nm        | A                         |
-| suff          | NA                        |
-| gndr          | F                         |
-| cred          | NA                        |
-| med_sch       | OTHER                     |
-| grd_yr        | 1989                      |
-| pri_spec      | CLINICAL PSYCHOLOGIST     |
-| sec_spec_1    | NA                        |
-| sec_spec_2    | NA                        |
-| sec_spec_3    | NA                        |
-| sec_spec_4    | NA                        |
-| sec_spec_all  | NA                        |
-| telehlth      | Y                         |
-| org_nm        | NA                        |
-| org_pac_id    | NA                        |
-| num_org_mem   | NA                        |
-| adr_ln_1      | 9999 NE 2ND AVE           |
-| adr_ln_2      | SUITE 209E                |
-| ln_2\_sprs    | NA                        |
-| cty           | MIAMI SHORES              |
-| st            | FL                        |
-| zip           | 331382345                 |
-| phn_numbr     | NA                        |
-| ind_assgn     | Y                         |
-| grp_assgn     | M                         |
-| adrs_id       | FL331382345MI9999XAVEX403 |
-| record_number | 8580791                   |
-| npi           | 1407263999                |
-| ind_pac_id    | 8729208152                |
-| ind_enrl_id   | I20141006002245           |
-| lst_nm        | AVERY                     |
-| frst_nm       | ROBIN                     |
-| mid_nm        | A                         |
-| suff          | NA                        |
-| gndr          | F                         |
-| cred          | NA                        |
-| med_sch       | OTHER                     |
-| grd_yr        | 1989                      |
-| pri_spec      | CLINICAL PSYCHOLOGIST     |
-| sec_spec_1    | NA                        |
-| sec_spec_2    | NA                        |
-| sec_spec_3    | NA                        |
-| sec_spec_4    | NA                        |
-| sec_spec_all  | NA                        |
-| telehlth      | Y                         |
-| org_nm        | LARRY BROOKS, PH.D., LLC  |
-| org_pac_id    | 6608028899                |
-| num_org_mem   | 2                         |
-| adr_ln_1      | 3810 HOLLYWOOD BLVD       |
-| adr_ln_2      | SUITE 2                   |
-| ln_2\_sprs    | NA                        |
-| cty           | HOLLYWOOD                 |
-| st            | FL                        |
-| zip           | 330216779                 |
-| phn_numbr     | 9549623888                |
-| ind_assgn     | Y                         |
-| grp_assgn     | Y                         |
-| adrs_id       | FL330216779HO3810XBLVD301 |
+| name        | value                      |
+|:------------|:---------------------------|
+| npi         | 1407263999                 |
+| ind_pac_id  | 8729208152                 |
+| ind_enrl_id | I20141006002245            |
+| lst_nm      | AVERY                      |
+| frst_nm     | ROBIN                      |
+| mid_nm      | A                          |
+| gndr        | F                          |
+| med_sch     | OTHER                      |
+| grd_yr      | 1989                       |
+| pri_spec    | CLINICAL PSYCHOLOGIST      |
+| telehlth    | Y                          |
+| org_nm      | NA                         |
+| org_pac_id  | NA                         |
+| num_org_mem | NA                         |
+| address     | 9999 NE 2ND AVE SUITE 209E |
+| cty         | MIAMI SHORES               |
+| st          | FL                         |
+| zip         | 33138                      |
+| phn_numbr   | NA                         |
+| ind_assgn   | Y                          |
+| grp_assgn   | M                          |
+
+<br>
+
+``` r
+dr_clin |> 
+  dplyr::slice_tail() |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+| name        | value                       |
+|:------------|:----------------------------|
+| npi         | 1407263999                  |
+| ind_pac_id  | 8729208152                  |
+| ind_enrl_id | I20141006002245             |
+| lst_nm      | AVERY                       |
+| frst_nm     | ROBIN                       |
+| mid_nm      | A                           |
+| gndr        | F                           |
+| med_sch     | OTHER                       |
+| grd_yr      | 1989                        |
+| pri_spec    | CLINICAL PSYCHOLOGIST       |
+| telehlth    | Y                           |
+| org_nm      | LARRY BROOKS, PH.D., LLC    |
+| org_pac_id  | 6608028899                  |
+| num_org_mem | 2                           |
+| address     | 3810 HOLLYWOOD BLVD SUITE 2 |
+| cty         | HOLLYWOOD                   |
+| st          | FL                          |
+| zip         | 33021                       |
+| phn_numbr   | \(954\) 962-3888            |
+| ind_assgn   | Y                           |
+| grp_assgn   | Y                           |
 
 <br><br>
 
@@ -393,205 +447,93 @@ doctors_and_clinicians(npi = 1407263999) |>
 doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2003, 
                        state = "FL") |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |>
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  dplyr::glimpse()
+```
+
+Rows: 6 Columns: 32 \$ record_number <chr> “2241611”, “2241616”,
+“4005191”, “4586101”, “6700176”, “… \$ npi <chr>”1497955652”,
+“1497955652”, “1497955652”, “1801000963”, … \$ ind_pac_id <chr>
+“3476647330”, “3476647330”, “3476647330”, “3577616598”, … \$ ind_enrl_id
+<chr> “I20070922000027”, “I20070922000027”, “I20070922000027”,… \$
+lst_nm <chr> “CHIEN”, “CHIEN”, “CHIEN”, “SCHETTINO”, “GOLDBERG”, “KAP…
+\$ frst_nm <chr>”YUI”, “YUI”, “YUI”, “CHRIS”, “BRIAN”, “KEVIN” \$ mid_nm
+<chr> “F”, “F”, “F”, “J”, “KEITH”, “M” \$ suff <chr> NA, NA, NA, NA, NA,
+NA \$ gndr <chr> “M”, “M”, “M”, “M”, “M”, “M” \$ cred <chr> NA, NA, NA,
+NA, NA, NA \$ med_sch <chr> “NEW YORK UNIVERSITY SCHOOL OF MEDICINE”,
+“NEW YORK UNIV… \$ grd_yr <chr>”2003”, “2003”, “2003”, “2003”, “2003”,
+“2003” \$ pri_spec <chr> “OPHTHALMOLOGY”, “OPHTHALMOLOGY”,
+“OPHTHALMOLOGY”, “PEDI… \$ sec_spec_1 <chr> NA, NA, NA,”RADIATION
+ONCOLOGY”, NA, “ORTHOPEDIC SURGER… \$ sec_spec_2 <chr> NA, NA, NA, NA,
+NA, NA \$ sec_spec_3 <chr> NA, NA, NA, NA, NA, NA \$ sec_spec_4 <chr>
+NA, NA, NA, NA, NA, NA \$ sec_spec_all <chr> NA, NA, NA,”RADIATION
+ONCOLOGY”, NA, “ORTHOPEDIC SURGER… \$ telehlth <chr> NA, NA, NA, NA, NA,
+NA \$ org_nm <chr>”EYE PHYSICIANS OF FLORIDA LLP”, “EYE PHYSICIANS OF
+FLOR… \$ org_pac_id <chr>”1254414675”, “1254414675”, “2860553724”,
+“3274795109”, … \$ num_org_mem <chr> “49”, “49”, “3”, “1646”, “56”,
+“111” \$ adr_ln_1 <chr> “1 SW 129TH AVE”, “8051 W SUNRISE BLVD”, “1400
+NE MIAMI … \$ adr_ln_2 <chr>”209 CORRECTVISION LASER INSTITUTE LLC”, NA,
+“SUITE 203”… \$ ln_2\_sprs <chr> NA, NA, NA, NA, NA, NA \$ cty <chr>
+“PEMBROKE PINES”, “PLANTATION”, “NORTH MIAMI BEACH”, “MI… \$ st
+<chr>”FL”, “FL”, “FL”, “FL”, “FL”, “FL” \$ zip <chr> “330271717”,
+“333224103”, “331794844”, “331361005”, “347… \$ phn_numbr
+<chr>”9544421133”, “9544742900”, “3059401500”, “3052434000”, … \$
+ind_assgn <chr> “Y”, “Y”, “Y”, “Y”, “Y”, “Y” \$ grp_assgn <chr> “Y”,
+“Y”, “Y”, “Y”, “Y”, “Y” \$ adrs_id <chr> “FL330271717PE1XXXXAVEX405”,
+“FL333224103PL8051XBLVD400”…
+
+<br><br>
+
+### Additional Phone Numbers
+
+``` r
+provider::addl_phone_numbers(npi = 1407263999) |> 
+  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
+  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
+  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
+                zip = campfin::normal_zip(zip),
+                address = campfin::normal_address(address)) |> 
   gluedown::md_table()
 ```
 
-| name          | value                                  |
-|:--------------|:---------------------------------------|
-| record_number | 2241611                                |
-| npi           | 1497955652                             |
-| ind_pac_id    | 3476647330                             |
-| ind_enrl_id   | I20070922000027                        |
-| lst_nm        | CHIEN                                  |
-| frst_nm       | YUI                                    |
-| mid_nm        | F                                      |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | OPHTHALMOLOGY                          |
-| sec_spec_1    | NA                                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | NA                                     |
-| telehlth      | NA                                     |
-| org_nm        | EYE PHYSICIANS OF FLORIDA LLP          |
-| org_pac_id    | 1254414675                             |
-| num_org_mem   | 49                                     |
-| adr_ln_1      | 1 SW 129TH AVE                         |
-| adr_ln_2      | 209 CORRECTVISION LASER INSTITUTE LLC  |
-| ln_2\_sprs    | NA                                     |
-| cty           | PEMBROKE PINES                         |
-| st            | FL                                     |
-| zip           | 330271717                              |
-| phn_numbr     | 9544421133                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL330271717PE1XXXXAVEX405              |
-| record_number | 2241616                                |
-| npi           | 1497955652                             |
-| ind_pac_id    | 3476647330                             |
-| ind_enrl_id   | I20070922000027                        |
-| lst_nm        | CHIEN                                  |
-| frst_nm       | YUI                                    |
-| mid_nm        | F                                      |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | OPHTHALMOLOGY                          |
-| sec_spec_1    | NA                                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | NA                                     |
-| telehlth      | NA                                     |
-| org_nm        | EYE PHYSICIANS OF FLORIDA LLP          |
-| org_pac_id    | 1254414675                             |
-| num_org_mem   | 49                                     |
-| adr_ln_1      | 8051 W SUNRISE BLVD                    |
-| adr_ln_2      | NA                                     |
-| ln_2\_sprs    | NA                                     |
-| cty           | PLANTATION                             |
-| st            | FL                                     |
-| zip           | 333224103                              |
-| phn_numbr     | 9544742900                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL333224103PL8051XBLVD400              |
-| record_number | 4005191                                |
-| npi           | 1497955652                             |
-| ind_pac_id    | 3476647330                             |
-| ind_enrl_id   | I20070922000027                        |
-| lst_nm        | CHIEN                                  |
-| frst_nm       | YUI                                    |
-| mid_nm        | F                                      |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | OPHTHALMOLOGY                          |
-| sec_spec_1    | NA                                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | NA                                     |
-| telehlth      | NA                                     |
-| org_nm        | OCEAN OPHTHALMOLOGY GROUP              |
-| org_pac_id    | 2860553724                             |
-| num_org_mem   | 3                                      |
-| adr_ln_1      | 1400 NE MIAMI GARDENS DR               |
-| adr_ln_2      | SUITE 203                              |
-| ln_2\_sprs    | NA                                     |
-| cty           | NORTH MIAMI BEACH                      |
-| st            | FL                                     |
-| zip           | 331794844                              |
-| phn_numbr     | 3059401500                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL331794844NO1400XDRXX501              |
-| record_number | 4586101                                |
-| npi           | 1801000963                             |
-| ind_pac_id    | 3577616598                             |
-| ind_enrl_id   | I20090807000530                        |
-| lst_nm        | SCHETTINO                              |
-| frst_nm       | CHRIS                                  |
-| mid_nm        | J                                      |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | PEDIATRIC MEDICINE                     |
-| sec_spec_1    | RADIATION ONCOLOGY                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | RADIATION ONCOLOGY                     |
-| telehlth      | NA                                     |
-| org_nm        | UNIVERSITY OF MIAMI                    |
-| org_pac_id    | 3274795109                             |
-| num_org_mem   | 1646                                   |
-| adr_ln_1      | 1611 NW 12TH AVE                       |
-| adr_ln_2      | JMH                                    |
-| ln_2\_sprs    | NA                                     |
-| cty           | MIAMI                                  |
-| st            | FL                                     |
-| zip           | 331361005                              |
-| phn_numbr     | 3052434000                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL331361005MI1611XAVEX429              |
-| record_number | 6700176                                |
-| npi           | 1033237524                             |
-| ind_pac_id    | 7618041781                             |
-| ind_enrl_id   | I20220614002174                        |
-| lst_nm        | GOLDBERG                               |
-| frst_nm       | BRIAN                                  |
-| mid_nm        | KEITH                                  |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | PHYSICAL MEDICINE AND REHABILITATION   |
-| sec_spec_1    | NA                                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | NA                                     |
-| telehlth      | NA                                     |
-| org_nm        | ROTHMAN ORTHOPAEDICS OF FLORIDA,PLLC   |
-| org_pac_id    | 4880009786                             |
-| num_org_mem   | 56                                     |
-| adr_ln_1      | 15502 STONEYBROOK W PKWY               |
-| adr_ln_2      | SUITE 114                              |
-| ln_2\_sprs    | NA                                     |
-| cty           | WINTER GARDEN                          |
-| st            | FL                                     |
-| zip           | 347874767                              |
-| phn_numbr     | 8444074070                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL347874767WI15502PKWY403              |
-| record_number | 7027061                                |
-| npi           | 1164628830                             |
-| ind_pac_id    | 5698811768                             |
-| ind_enrl_id   | I20091002000129                        |
-| lst_nm        | KAPLAN                                 |
-| frst_nm       | KEVIN                                  |
-| mid_nm        | M                                      |
-| suff          | NA                                     |
-| gndr          | M                                      |
-| cred          | NA                                     |
-| med_sch       | NEW YORK UNIVERSITY SCHOOL OF MEDICINE |
-| grd_yr        | 2003                                   |
-| pri_spec      | SPORTS MEDICINE                        |
-| sec_spec_1    | ORTHOPEDIC SURGERY                     |
-| sec_spec_2    | NA                                     |
-| sec_spec_3    | NA                                     |
-| sec_spec_4    | NA                                     |
-| sec_spec_all  | ORTHOPEDIC SURGERY                     |
-| telehlth      | NA                                     |
-| org_nm        | JACKSONVILLE ORTHOPAEDIC INSTITUTE INC |
-| org_pac_id    | 5193625499                             |
-| num_org_mem   | 111                                    |
-| adr_ln_1      | 1325 SAN MARCO BLVD                    |
-| adr_ln_2      | SUITE 102                              |
-| ln_2\_sprs    | NA                                     |
-| cty           | JACKSONVILLE                           |
-| st            | FL                                     |
-| zip           | 322078549                              |
-| phn_numbr     | 9048587045                             |
-| ind_assgn     | Y                                      |
-| grp_assgn     | Y                                      |
-| adrs_id       | FL322078549JA1325XBLVD402              |
+| prvdr_id   | frst_nm | lst_nm | address                     | cty          | st  | zip   | org_pac_id | phn_numbr        | npi        |
+|:-----------|:--------|:-------|:----------------------------|:-------------|:----|:------|:-----------|:-----------------|:-----------|
+| 8729208152 | ROBIN   | AVERY  | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD    | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1407263999 |
+| 8729208152 | ROBIN   | AVERY  | 9999 NE 2ND AVE SUITE 209E  | MIAMI SHORES | FL  | 33138 | NA         | \(786\) 615-4758 | 1407263999 |
+
+<br><br>
+
+``` r
+addl_phone_numbers(provider_id = "0042100190") |> 
+  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
+  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
+  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
+                zip = campfin::normal_zip(zip),
+                address = campfin::normal_address(address)) |> 
+  gluedown::md_table()
+```
+
+    #> |prvdr_id   |frst_nm |lst_nm    |address             |cty          |st |zip   |org_pac_id |phn_numbr      |npi        |
+    #> |:----------|:-------|:---------|:-------------------|:------------|:--|:-----|:----------|:--------------|:----------|
+    #> |0042100190 |JOHN    |VERBRUGGE |100 MICHIGAN NE     |GRAND RAPIDS |MI |49503 |1951404185 |(616) 391-1680 |1154338044 |
+    #> |0042100190 |JOHN    |VERBRUGGE |100 MICHIGAN AVE NE |GRAND RAPIDS |MI |49503 |8628327384 |(616) 391-1680 |1154338044 |
+    #> |0042100190 |JOHN    |VERBRUGGE |1840 WEALTHY SE     |GRAND RAPIDS |MI |49506 |1951404185 |(616) 774-7444 |1154338044 |
+
+<br><br>
+
+``` r
+addl_phone_numbers(org_pac_id = 6608028899) |> 
+  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
+  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
+  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
+                zip = campfin::normal_zip(zip),
+                address = campfin::normal_address(address)) |> 
+  gluedown::md_table()
+```
+
+    #> |prvdr_id   |frst_nm  |lst_nm |address                     |cty       |st |zip   |org_pac_id |phn_numbr      |npi        |
+    #> |:----------|:--------|:------|:---------------------------|:---------|:--|:-----|:----------|:--------------|:----------|
+    #> |3971798604 |LAWRENCE |BROOKS |3810 HOLLYWOOD BLVD SUITE 2 |HOLLYWOOD |FL |33021 |6608028899 |(954) 962-3888 |1548577034 |
+    #> |8729208152 |ROBIN    |AVERY  |3810 HOLLYWOOD BLVD SUITE 2 |HOLLYWOOD |FL |33021 |6608028899 |(954) 962-3888 |1407263999 |
 
 <br><br>
 
@@ -623,27 +565,30 @@ provider::order_refer(npi = 1083879860) |> gluedown::md_table()
 
 ``` r
 provider::opt_out(last = "Aaron") |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |>
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
+  tidyr::unite("address", first_line_street_address:second_line_street_address, 
+               remove = TRUE, 
+               na.rm = TRUE, 
+               sep = " ") |> 
+  dplyr::mutate(zip_code = campfin::normal_zip(zip_code),
+                address = campfin::normal_address(address)) |> 
+  provider:::display_long() |> 
   gluedown::md_table()
 ```
 
 | name                        | value                  |
 |:----------------------------|:-----------------------|
-| date                        | 2023-02-08             |
-| last_updated                | 12/15/2022             |
 | first_name                  | Sheryl                 |
 | last_name                   | Aaron                  |
 | npi                         | 1427358282             |
 | specialty                   | Clinical Social Worker |
-| optout_effective_date       | 02/17/2022             |
-| optout_end_date             | 02/17/2024             |
-| first_line_street_address   | 1633 Q ST NW           |
-| second_line_street_address  | STE 230                |
+| optout_effective_date       | 2022-02-17             |
+| optout_end_date             | 2024-02-17             |
+| address                     | 1633 Q ST NW STE 230   |
 | city_name                   | WASHINGTON             |
 | state_code                  | DC                     |
-| zip_code                    | 200096351              |
+| zip_code                    | 20009                  |
 | eligible_to_order_and_refer | FALSE                  |
+| last_updated                | 2022-12-15             |
 
 <br><br>
 
@@ -668,25 +613,24 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |>
 ### Medicare Fee-For-Service Public Provider Enrollment
 
 ``` r
-prven <- tibble::tribble(
-~fn,         ~params,
-"provider_enrollment", list(npi = 1083879860),
-"provider_enrollment", list(first_name = "MICHAEL", middle_name = "K", last_name = "GREENBERG", state = "MD"),
-"provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"),
-)
-
-purrr::invoke_map_dfr(prven$fn, prven$params)
+provider::provider_enrollment(npi = 1083879860) |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
 ```
 
-    #> # A tibble: 3 × 11
-    #>   npi    pecos…¹ enrlm…² provi…³ provi…⁴ state…⁵ first…⁶ mdl_n…⁷ last_…⁸ org_n…⁹
-    #>   <chr>  <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  
-    #> 1 10838… 842632… I20200… 14-08   PRACTI… PA      "CHRIS… "L"     "AARON" ""     
-    #> 2 19321… 418353… I20031… 14-13   PRACTI… MD      "MICHA… "K"     "GREEN… ""     
-    #> 3 13364… 135550… O20120… 12-69   PART B… GA      ""      ""      ""      "LUMIN…
-    #> # … with 1 more variable: gndr_sw <chr>, and abbreviated variable names
-    #> #   ¹​pecos_asct_cntl_id, ²​enrlmt_id, ³​provider_type_cd, ⁴​provider_type_desc,
-    #> #   ⁵​state_cd, ⁶​first_name, ⁷​mdl_name, ⁸​last_name, ⁹​org_name
+| name               | value                          |
+|:-------------------|:-------------------------------|
+| npi                | 1083879860                     |
+| pecos_asct_cntl_id | 8426328519                     |
+| enrlmt_id          | I20200617001010                |
+| provider_type_cd   | 14-08                          |
+| provider_type_desc | PRACTITIONER - FAMILY PRACTICE |
+| state_cd           | PA                             |
+| first_name         | CHRISTOPHER                    |
+| mdl_name           | L                              |
+| last_name          | AARON                          |
+| org_name           | NA                             |
+| gndr_sw            | M                              |
 
 <br><br>
 
@@ -695,7 +639,8 @@ purrr::invoke_map_dfr(prven$fn, prven$params)
 <br>
 
 ``` r
-provider::pending_applications(npi = 1487003984, type = "physician") |> 
+provider::pending_applications(npi = 1487003984, 
+                               type = "physician") |> 
   gluedown::md_table()
 ```
 
@@ -706,7 +651,8 @@ provider::pending_applications(npi = 1487003984, type = "physician") |>
 <br><br>
 
 ``` r
-provider::pending_applications(npi = 1487003984, type = "non-physician") |> 
+provider::pending_applications(npi = 1487003984, 
+                               type = "non-physician") |> 
   gluedown::md_table()
 ```
 
@@ -717,7 +663,8 @@ provider::pending_applications(npi = 1487003984, type = "non-physician") |>
 <br><br>
 
 ``` r
-provider::pending_applications(last_name = "Abbott", type = "non-physician") |> 
+provider::pending_applications(last_name = "Abbott", 
+                               type = "non-physician") |> 
   gluedown::md_table()
 ```
 
@@ -728,7 +675,8 @@ provider::pending_applications(last_name = "Abbott", type = "non-physician") |>
 <br><br>
 
 ``` r
-pending_applications(first_name = "John", type = "physician") |> 
+pending_applications(first_name = "John", 
+                     type = "physician") |> 
   gluedown::md_table()
 ```
 
@@ -773,227 +721,208 @@ pending_applications(first_name = "John", type = "physician") |>
 
 ### Medicare Revalidation APIs
 
-Medicare Revalidation Due Date API
+> Revalidation Due Date List
 
 ``` r
 date <- provider::revalidation_date(npi = 1710912209)
-date |> 
-  dplyr::mutate(dplyr::across(everything(), as.character)) |>
-  tidyr::pivot_longer(cols = dplyr::everything()) |> 
-  gluedown::md_table()
+date |> provider:::display_long() |> gluedown::md_table()
 ```
 
 | name                            | value           |
 |:--------------------------------|:----------------|
-| month                           | 2023-02-08      |
 | enrollment_id                   | I20040602001711 |
-| national_provider_identifier    | 1710912209      |
+| npi                             | 1710912209      |
 | first_name                      | Yelena          |
 | last_name                       | Voronova        |
-| organization_name               |                 |
+| organization_name               | NA              |
 | enrollment_state_code           | NY              |
 | enrollment_type                 | 3               |
 | provider_type_text              | Non-DME Part B  |
 | enrollment_specialty            | Podiatry        |
 | revalidation_due_date           | 2019-10-31      |
-| adjusted_due_date               |                 |
-| individual_total_reassign_to    |                 |
+| adjusted_due_date               | NA              |
+| individual_total_reassign_to    | NA              |
 | receiving_benefits_reassignment | 5               |
 
 <br><br>
 
-Medicare Revalidation Reassignment List API
+> Revalidation Reassignment List
 
 ``` r
-list <- provider::revalidation_reassign(ind_npi = 1710912209)
+reassign <- provider::revalidation_reassign(ind_npi = 1710912209)
+reassign |> dplyr::glimpse()
+```
 
-list |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
-        tidyr::pivot_longer(cols = dplyr::everything()) |> 
-        gluedown::md_table()
+    #> Rows: 5
+    #> Columns: 16
+    #> $ group_pac_id                                 <dbl> 3678655222, 9931511052, 2…
+    #> $ group_enrollment_id                          <chr> "O20080205000002", "O2020…
+    #> $ group_legal_business_name                    <chr> "#1 Wise Podiatry Care P.…
+    #> $ group_state_code                             <chr> "NY", "NY", "NY", "NY", "…
+    #> $ group_due_date                               <chr> "10/31/2019", "TBD", "TBD…
+    #> $ group_reassignments_and_physician_assistants <int> 1, 1, 1, 1, 1
+    #> $ record_type                                  <chr> "Reassignment", "Reassign…
+    #> $ individual_pac_id                            <dbl> 2860474988, 2860474988, 2…
+    #> $ individual_enrollment_id                     <chr> "I20040602001711", "I2004…
+    #> $ individual_npi                               <int> 1710912209, 1710912209, 1…
+    #> $ individual_first_name                        <chr> "Yelena", "Yelena", "Yele…
+    #> $ individual_last_name                         <chr> "Voronova", "Voronova", "…
+    #> $ individual_state_code                        <chr> "NY", "NY", "NY", "NY", "…
+    #> $ individual_specialty_description             <chr> "Podiatry", "Podiatry", "…
+    #> $ individual_due_date                          <chr> "10/31/2019", "10/31/2019…
+    #> $ individual_total_employer_associations       <int> 5, 5, 5, 5, 5
+
+<br>
+
+``` r
+reassign |> 
+  dplyr::select(dplyr::contains("individual")) |> 
+  dplyr::slice_head() |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+| name                                   | value           |
+|:---------------------------------------|:----------------|
+| individual_pac_id                      | 2860474988      |
+| individual_enrollment_id               | I20040602001711 |
+| individual_npi                         | 1710912209      |
+| individual_first_name                  | Yelena          |
+| individual_last_name                   | Voronova        |
+| individual_state_code                  | NY              |
+| individual_specialty_description       | Podiatry        |
+| individual_due_date                    | 10/31/2019      |
+| individual_total_employer_associations | 5               |
+
+<br>
+
+``` r
+reassign |> 
+  dplyr::select(dplyr::contains("group")) |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
 ```
 
 | name                                         | value                                           |
 |:---------------------------------------------|:------------------------------------------------|
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 3678655222                                      |
 | group_enrollment_id                          | O20080205000002                                 |
 | group_legal_business_name                    | \#1 Wise Podiatry Care P.C.                     |
 | group_state_code                             | NY                                              |
 | group_due_date                               | 10/31/2019                                      |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_pac_id                            | 2860474988                                      |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 9931511052                                      |
 | group_enrollment_id                          | O20201215000955                                 |
 | group_legal_business_name                    | Brighton Beach Podiatry Pllc                    |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_pac_id                            | 2860474988                                      |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 2062791411                                      |
 | group_enrollment_id                          | O20161108001365                                 |
 | group_legal_business_name                    | Fair Podiatry Practice Pllc                     |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_pac_id                            | 2860474988                                      |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 8527313170                                      |
 | group_enrollment_id                          | O20180622000028                                 |
 | group_legal_business_name                    | New York Jewish American Podiatry Practice Pllc |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_pac_id                            | 2860474988                                      |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 5193155174                                      |
 | group_enrollment_id                          | O20200414003240                                 |
 | group_legal_business_name                    | Podiatry Of Brooklyn Pllc                       |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_pac_id                            | 2860474988                                      |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
 
 <br><br>
 
-Medicare Revalidation Clinic Group Practice Reassignment API
+> Revalidation Clinic Group Practice Reassignment
 
 ``` r
 group <- provider::revalidation_group(ind_npi = 1710912209)
+group |> dplyr::glimpse()
+```
 
-group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
-         tidyr::pivot_longer(cols = dplyr::everything()) |> 
-         gluedown::md_table()
+    #> Rows: 5
+    #> Columns: 15
+    #> $ group_pac_id                                 <dbl> 3678655222, 9931511052, 2…
+    #> $ group_enrollment_id                          <chr> "O20080205000002", "O2020…
+    #> $ group_legal_business_name                    <chr> "#1 Wise Podiatry Care P.…
+    #> $ group_state_code                             <chr> "NY", "NY", "NY", "NY", "…
+    #> $ group_due_date                               <chr> "10/31/2019", "TBD", "TBD…
+    #> $ group_reassignments_and_physician_assistants <int> 1, 1, 1, 1, 1
+    #> $ record_type                                  <chr> "Reassignment", "Reassign…
+    #> $ individual_enrollment_id                     <chr> "I20040602001711", "I2004…
+    #> $ individual_npi                               <int> 1710912209, 1710912209, 1…
+    #> $ individual_first_name                        <chr> "Yelena", "Yelena", "Yele…
+    #> $ individual_last_name                         <chr> "Voronova", "Voronova", "…
+    #> $ individual_state_code                        <chr> "NY", "NY", "NY", "NY", "…
+    #> $ individual_specialty_description             <chr> "Podiatry", "Podiatry", "…
+    #> $ individual_due_date                          <chr> "10/31/2019", "10/31/2019…
+    #> $ individual_total_employer_associations       <int> 5, 5, 5, 5, 5
+
+<br>
+
+``` r
+group |> 
+  dplyr::select(dplyr::contains("individual")) |> 
+  dplyr::slice_head() |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+| name                                   | value           |
+|:---------------------------------------|:----------------|
+| individual_enrollment_id               | I20040602001711 |
+| individual_npi                         | 1710912209      |
+| individual_first_name                  | Yelena          |
+| individual_last_name                   | Voronova        |
+| individual_state_code                  | NY              |
+| individual_specialty_description       | Podiatry        |
+| individual_due_date                    | 10/31/2019      |
+| individual_total_employer_associations | 5               |
+
+``` r
+group |> 
+  dplyr::select(dplyr::contains("group")) |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
 ```
 
 | name                                         | value                                           |
 |:---------------------------------------------|:------------------------------------------------|
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 3678655222                                      |
 | group_enrollment_id                          | O20080205000002                                 |
 | group_legal_business_name                    | \#1 Wise Podiatry Care P.C.                     |
 | group_state_code                             | NY                                              |
 | group_due_date                               | 10/31/2019                                      |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 9931511052                                      |
 | group_enrollment_id                          | O20201215000955                                 |
 | group_legal_business_name                    | Brighton Beach Podiatry Pllc                    |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 2062791411                                      |
 | group_enrollment_id                          | O20161108001365                                 |
 | group_legal_business_name                    | Fair Podiatry Practice Pllc                     |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 8527313170                                      |
 | group_enrollment_id                          | O20180622000028                                 |
 | group_legal_business_name                    | New York Jewish American Podiatry Practice Pllc |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
-| month                                        | 2023-02-08                                      |
 | group_pac_id                                 | 5193155174                                      |
 | group_enrollment_id                          | O20200414003240                                 |
 | group_legal_business_name                    | Podiatry Of Brooklyn Pllc                       |
 | group_state_code                             | NY                                              |
 | group_due_date                               | TBD                                             |
 | group_reassignments_and_physician_assistants | 1                                               |
-| record_type                                  | Reassignment                                    |
-| individual_enrollment_id                     | I20040602001711                                 |
-| individual_npi                               | 1710912209                                      |
-| individual_first_name                        | Yelena                                          |
-| individual_last_name                         | Voronova                                        |
-| individual_state_code                        | NY                                              |
-| individual_specialty_description             | Podiatry                                        |
-| individual_due_date                          | 10/31/2019                                      |
-| individual_total_employer_associations       | 5                                               |
 
 <br><br>
 
@@ -1003,162 +932,89 @@ group |> dplyr::mutate(dplyr::across(everything(), as.character)) |>
 
 ``` r
 op <- open_payments(recipient_npi = 1043218118)
+op |> dplyr::glimpse()
 ```
+
+    #> Rows: 92
+    #> Columns: 14
+    #> $ program_year                           <chr> "2021", "2021", "2021", "2021",…
+    #> $ record_number                          <chr> "1", "692021", "4385936", "4385…
+    #> $ change_type                            <chr> "UNCHANGED", "UNCHANGED", "UNCH…
+    #> $ total_amount_of_payment_usdollars      <dbl> 2500.00, 69.90, 107.93, 97.14, …
+    #> $ date_of_payment                        <dttm> 2021-05-26, 2021-03-04, 2021-0…
+    #> $ form_of_payment_or_transfer_of_value   <chr> "Cash or cash equivalent", "In-…
+    #> $ nature_of_payment_or_transfer_of_value <chr> "Compensation for services othe…
+    #> $ record_id                              <chr> "754966348", "787838145", "7971…
+    #> $ covered_recipient                      <list> [<tbl_df[1 x 24]>], [<tbl_df[1…
+    #> $ recipient_address                      <list> [<tbl_df[1 x 8]>], [<tbl_df[1 …
+    #> $ applicable_mfg_gpo                     <list> [<tbl_df[1 x 5]>], [<tbl_df[1 …
+    #> $ associated_drug_device                 <list> [<tbl_df[1 x 40]>], [<tbl_df[1…
+    #> $ payment_related_data                   <list> [<tbl_df[1 x 14]>], [<tbl_df[1…
+    #> $ teaching_hospital                      <list> [<tbl_df[1 x 3]>], [<tbl_df[1 …
 
 <br>
 
 ``` r
-op |> tidyr::hoist(covered_recipient, 
-                   recipient_npi = "covered_recipient_npi",
-                   profile_id = "covered_recipient_profile_id",
-                   first_name = "covered_recipient_first_name", 
-                   last_name = "covered_recipient_last_name",
-                   credential = "covered_recipient_primary_type_1",) |> 
-      tidyr::hoist(recipient_address, 
-                   city = "recipient_city", 
-                   state = "recipient_state") |> 
-      dplyr::select(program_year, 
-                    recipient_npi, 
-                    profile_id,
-                    first_name,
-                    last_name,
-                    credential,
-                    city,
-                    state) |> 
-      dplyr::slice_head() |> 
-      gluedown::md_table()
+op |> 
+  tidyr::hoist(covered_recipient, 
+               recipient_npi = "covered_recipient_npi",
+               profile_id = "covered_recipient_profile_id",
+               first_name = "covered_recipient_first_name", 
+               last_name = "covered_recipient_last_name",
+               credential = "covered_recipient_primary_type_1",) |> 
+  tidyr::hoist(recipient_address, 
+               city = "recipient_city", 
+               state = "recipient_state") |> 
+  dplyr::select(program_year, 
+                recipient_npi, 
+                profile_id,
+                first_name,
+                last_name,
+                credential,
+                city,
+                state) |> 
+  dplyr::slice_head() |>
+  provider:::display_long() |> 
+  gluedown::md_table()
 ```
 
-| program_year | recipient_npi | profile_id | first_name | last_name | credential     | city       | state |
-|:-------------|:--------------|:-----------|:-----------|:----------|:---------------|:-----------|:------|
-| 2021         | 1043218118    | 92058      | Ahad       | Mahootchi | Medical Doctor | Zephrhills | FL    |
+| name          | value          |
+|:--------------|:---------------|
+| program_year  | 2021           |
+| recipient_npi | 1043218118     |
+| profile_id    | 92058          |
+| first_name    | Ahad           |
+| last_name     | Mahootchi      |
+| credential    | Medical Doctor |
+| city          | Zephrhills     |
+| state         | FL             |
 
 <br>
 
 ``` r
-op_2 <- op |> tidyr::hoist(applicable_mfg_gpo, 
-                           manufacturer_gpo_paying = "applicable_manufacturer_or_applicable_gpo_making_payment_name") |>
-             tidyr::hoist(associated_drug_device, 
-                          type = "indicate_drug_or_biological_or_device_or_medical_supply_1",
-                          therapeutic_category = "product_category_or_therapeutic_area_1",
-                          name = "name_of_drug_or_biological_or_device_or_medical_supply_1") |> 
-             dplyr::select(payment_date = date_of_payment, 
-                          manufacturer_gpo_paying,
-                          type, 
-                          name,
-                          therapeutic_category,
-                          payment_total = total_amount_of_payment_usdollars,
-                          nature_of_payment = nature_of_payment_or_transfer_of_value) |> 
-             dplyr::arrange(payment_date)
+op_2 <- op |> 
+  tidyr::hoist(applicable_mfg_gpo, 
+               manufacturer_gpo_paying = "applicable_manufacturer_or_applicable_gpo_making_payment_name") |>
+  tidyr::hoist(associated_drug_device, 
+               type = "indicate_drug_or_biological_or_device_or_medical_supply_1",
+               therapeutic_category = "product_category_or_therapeutic_area_1",
+               name = "name_of_drug_or_biological_or_device_or_medical_supply_1") |> 
+  dplyr::select(payment_date = date_of_payment, 
+                manufacturer_gpo_paying,
+                type, 
+                name,
+                therapeutic_category,
+                payment_total = total_amount_of_payment_usdollars,
+                nature_of_payment = nature_of_payment_or_transfer_of_value) |> 
+  dplyr::arrange(payment_date)
 
-op_2 |> dplyr::mutate(nature_of_payment = stringr::str_trunc(nature_of_payment, 20, "right"),
-                      manufacturer_gpo_paying = stringr::str_trunc(manufacturer_gpo_paying, 20, "right"),
-                      name = stringr::str_trunc(name, 20, "right"),
-                      therapeutic_category = stringr::str_trunc(therapeutic_category, 20, "right")) |> gluedown::md_table()
-```
-
-| payment_date | manufacturer_gpo_paying | type       | name                 | therapeutic_category | payment_total | nature_of_payment  |
-|:-------------|:------------------------|:-----------|:---------------------|:---------------------|--------------:|:-------------------|
-| 2021-01-04   | Bausch & Lomb, a …      | Device     | STELLARIS            | Ophthalmology        |       3000.00 | Consulting Fee     |
-| 2021-01-13   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |        325.00 | Consulting Fee     |
-| 2021-01-15   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        487.50 | Consulting Fee     |
-| 2021-02-02   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         98.21 | Food and Beverage  |
-| 2021-02-04   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |          2.34 | Food and Beverage  |
-| 2021-02-19   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         18.62 | Food and Beverage  |
-| 2021-02-25   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         17.61 | Food and Beverage  |
-| 2021-02-26   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        433.33 | Consulting Fee     |
-| 2021-03-02   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         15.04 | Food and Beverage  |
-| 2021-03-04   | Johnson & Johnson…      | Device     | Tecnis IOL           | Optics               |         69.90 | Food and Beverage  |
-| 2021-03-04   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         24.30 | Food and Beverage  |
-| 2021-03-09   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         16.93 | Food and Beverage  |
-| 2021-03-09   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         18.33 | Food and Beverage  |
-| 2021-03-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
-| 2021-03-17   | Bausch & Lomb, a …      | Device     | CRYSTALENS           | Ophthalmology        |        116.93 | Food and Beverage  |
-| 2021-03-20   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       2600.00 | Compensation for … |
-| 2021-03-22   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        379.17 | Consulting Fee     |
-| 2021-03-30   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         16.32 | Food and Beverage  |
-| 2021-04-13   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |          4.80 | Food and Beverage  |
-| 2021-04-14   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         28.24 | Food and Beverage  |
-| 2021-04-15   | EyePoint Pharmace…      | Drug       | DEXYCU               | Postoperative Inf…   |         16.64 | Food and Beverage  |
-| 2021-04-16   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |          4.05 | Food and Beverage  |
-| 2021-04-20   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         54.17 | Consulting Fee     |
-| 2021-04-21   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
-| 2021-04-22   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         16.73 | Food and Beverage  |
-| 2021-04-29   | Iridex Corporation      | NA         | NA                   | NA                   |         14.97 | Food and Beverage  |
-| 2021-05-03   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1000.00 | Compensation for … |
-| 2021-05-06   | Alcon Vision LLC        | Device     | Precision 1          | Ophthalmology        |        114.20 | Food and Beverage  |
-| 2021-05-06   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         21.65 | Food and Beverage  |
-| 2021-05-11   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         16.68 | Food and Beverage  |
-| 2021-05-13   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |         12.26 | Food and Beverage  |
-| 2021-05-13   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |        112.23 | Food and Beverage  |
-| 2021-05-20   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         16.30 | Food and Beverage  |
-| 2021-05-26   | Mobius Therapeuti…      | Drug       | Mitosol              | Ophthamology         |       2500.00 | Compensation for … |
-| 2021-05-27   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         17.65 | Food and Beverage  |
-| 2021-06-03   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         22.16 | Food and Beverage  |
-| 2021-06-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         41.67 | Food and Beverage  |
-| 2021-06-10   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1750.00 | Compensation for … |
-| 2021-06-11   | Sight Sciences, Inc.    | Device     | OMNI(R) SURGICAL …   | Ophthalmology        |         24.40 | Food and Beverage  |
-| 2021-06-16   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        975.00 | Consulting Fee     |
-| 2021-06-17   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         54.17 | Consulting Fee     |
-| 2021-06-17   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |        100.97 | Food and Beverage  |
-| 2021-06-17   | Iridex Corporation      | NA         | NA                   | NA                   |       1000.00 | Consulting Fee     |
-| 2021-06-23   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |        123.02 | Food and Beverage  |
-| 2021-06-24   | Dompe US, Inc.          | Drug       | OXERVATE             | SOLUTION/ DROPS      |         20.48 | Food and Beverage  |
-| 2021-07-01   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         15.44 | Food and Beverage  |
-| 2021-07-05   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
-| 2021-07-08   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         20.04 | Food and Beverage  |
-| 2021-07-09   | NEW WORLD MEDICAL…      | Device     | Ahmed Glaucoma Valve | Ophthalmology        |        116.20 | Food and Beverage  |
-| 2021-07-10   | Sight Sciences, Inc.    | Device     | TearCare SmartLid    | Ophthalmology        |         96.30 | Food and Beverage  |
-| 2021-07-10   | Ocular Therapeuti…      | Drug       | DEXTENZA             | Corticosteroid in…   |         54.83 | Food and Beverage  |
-| 2021-07-10   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         26.19 | Food and Beverage  |
-| 2021-07-10   | NEW WORLD MEDICAL…      | Device     | Ahmed Glaucoma Valve | Ophthalmology        |         40.66 | Food and Beverage  |
-| 2021-07-16   | Checkpoint Surgic…      | Device     | Checkpoint Stimul…   | Surgery              |         14.74 | Food and Beverage  |
-| 2021-07-25   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         94.36 | Food and Beverage  |
-| 2021-07-25   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |       1750.00 | Compensation for … |
-| 2021-08-06   | Allergan, Inc.          | NA         | NA                   | NA                   |         73.24 | Food and Beverage  |
-| 2021-08-19   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         20.07 | Food and Beverage  |
-| 2021-08-24   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |        107.93 | Food and Beverage  |
-| 2021-08-24   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         97.14 | Food and Beverage  |
-| 2021-08-31   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         27.20 | Food and Beverage  |
-| 2021-09-02   | Ocular Therapeuti…      | Drug       | DEXTENZA             | Corticosteroid in…   |         14.44 | Food and Beverage  |
-| 2021-09-06   | Beaver-Visitec In…      | NA         | NA                   | NA                   |         25.02 | Food and Beverage  |
-| 2021-09-09   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         16.54 | Food and Beverage  |
-| 2021-09-16   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |         16.73 | Food and Beverage  |
-| 2021-09-17   | Mallinckrodt Hosp…      | Biological | ACTHAR               | IMMUNOLOGY           |          4.90 | Food and Beverage  |
-| 2021-09-22   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        325.00 | Consulting Fee     |
-| 2021-09-23   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         15.21 | Food and Beverage  |
-| 2021-09-30   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         23.87 | Food and Beverage  |
-| 2021-10-05   | Iridex Corporation      | NA         | NA                   | NA                   |         19.90 | Food and Beverage  |
-| 2021-10-06   | Alcon Vision LLC        | Device     | AcrySof IQ VIVITY…   | Ophthalmology        |         14.73 | Food and Beverage  |
-| 2021-10-12   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |          8.57 | Food and Beverage  |
-| 2021-10-12   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |         19.49 | Food and Beverage  |
-| 2021-10-14   | Alimera Sciences,…      | Drug       | ILUVIEN              | OPHTHALMOLOGY        |         19.40 | Food and Beverage  |
-| 2021-10-15   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        162.50 | Consulting Fee     |
-| 2021-10-18   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        379.17 | Consulting Fee     |
-| 2021-10-19   | Regeneron Healthc…      | Biological | EYLEA                | OPHTHALMOLOGY        |        125.01 | Food and Beverage  |
-| 2021-10-26   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         23.90 | Food and Beverage  |
-| 2021-10-27   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |         10.00 | Food and Beverage  |
-| 2021-10-28   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         20.44 | Food and Beverage  |
-| 2021-11-03   | Novartis Pharmace…      | Drug       | BEOVU                | OPHTHALMOLOGY        |         23.38 | Food and Beverage  |
-| 2021-11-04   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |       1500.00 | Consulting Fee     |
-| 2021-11-04   | Ivantis, Inc            | Device     | Hydrus Microstent    | Ophthalmic Surgery   |        132.45 | Food and Beverage  |
-| 2021-11-04   | SUN PHARMACEUTICA…      | Drug       | Cequa                | Ophthalmology        |         17.12 | Food and Beverage  |
-| 2021-11-10   | Horizon Therapeut…      | Drug       | TEPEZZA              | TEPEZZA              |         25.63 | Food and Beverage  |
-| 2021-11-16   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         28.72 | Food and Beverage  |
-| 2021-11-17   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |        216.67 | Consulting Fee     |
-| 2021-11-18   | Allergan, Inc.          | Drug       | DURYSTA              | GLAUCOMA             |        115.91 | Food and Beverage  |
-| 2021-11-18   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         17.44 | Food and Beverage  |
-| 2021-12-07   | Allergan, Inc.          | Device     | XEN GLAUCOMA TREA…   | GLAUCOMA             |         92.33 | Food and Beverage  |
-| 2021-12-08   | EyePoint Pharmace…      | Drug       | YUTIQ                | Chronic Non-infec…   |         13.85 | Food and Beverage  |
-| 2021-12-15   | Kala Pharmaceutic…      | Drug       | INVELTYS             | Ocular               |         18.87 | Food and Beverage  |
-
-<br>
-
-``` r
 op_2 |> 
-  dplyr::group_by(manufacturer_gpo_paying, nature_of_payment, name) |> 
+  dplyr::group_by(manufacturer_gpo_paying, 
+                  nature_of_payment, 
+                  name) |> 
   dplyr::summarise(n = dplyr::n(),
-                   payment_total = sum(payment_total), .groups = "drop") |> 
+                   payment_total = sum(payment_total), 
+                   .groups = "drop") |> 
   dplyr::mutate(nature_of_payment = stringr::str_trunc(nature_of_payment, 20, "right")) |> 
   dplyr::arrange(dplyr::desc(payment_total)) |> 
   gluedown::md_table()
@@ -1209,26 +1065,115 @@ months <- tibble::enframe(month.name) |>
   dplyr::slice(1:7) |> 
   tibble::deframe()
 
-purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State", state = "Georgia", month = .x))
+bene <- purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, 
+                                                       geo_level = "State", 
+                                                       state = "Georgia", 
+                                                       month = .x))
+
+bene |> dplyr::glimpse()
 ```
 
-    #> # A tibble: 7 × 22
-    #>    year month    bene_…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸
-    #>   <int> <chr>    <chr>   <chr>   <chr>   <chr>   <chr>     <int>   <int>   <int>
-    #> 1  2022 January  State   GA      Georgia Total   13      1830959  915752  915207
-    #> 2  2022 February State   GA      Georgia Total   13      1830025  913347  916678
-    #> 3  2022 March    State   GA      Georgia Total   13      1831573  912897  918676
-    #> 4  2022 April    State   GA      Georgia Total   13      1833135  911263  921872
-    #> 5  2022 May      State   GA      Georgia Total   13      1835187  910417  924770
-    #> 6  2022 June     State   GA      Georgia Total   13      1837394  909778  927616
-    #> 7  2022 July     State   GA      Georgia Total   13      1840128  907070  933058
-    #> # … with 12 more variables: aged_tot_benes <int>, aged_esrd_benes <int>,
-    #> #   aged_no_esrd_benes <int>, dsbld_tot_benes <int>,
-    #> #   dsbld_esrd_and_esrd_only_benes <int>, dsbld_no_esrd_benes <int>,
-    #> #   a_b_tot_benes <int>, a_b_orgnl_mdcr_benes <int>,
-    #> #   a_b_ma_and_oth_benes <int>, prscrptn_drug_tot_benes <int>,
-    #> #   prscrptn_drug_pdp_benes <int>, prscrptn_drug_mapd_benes <int>, and
-    #> #   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …
+    #> Rows: 7
+    #> Columns: 22
+    #> $ year                           <int> 2022, 2022, 2022, 2022, 2022, 2022, 2022
+    #> $ month                          <chr> "January", "February", "March", "April"…
+    #> $ bene_geo_lvl                   <chr> "State", "State", "State", "State", "St…
+    #> $ bene_state_abrvtn              <chr> "GA", "GA", "GA", "GA", "GA", "GA", "GA"
+    #> $ bene_state_desc                <chr> "Georgia", "Georgia", "Georgia", "Georg…
+    #> $ bene_county_desc               <chr> "Total", "Total", "Total", "Total", "To…
+    #> $ bene_fips_cd                   <chr> "13", "13", "13", "13", "13", "13", "13"
+    #> $ tot_benes                      <int> 1830959, 1830025, 1831573, 1833135, 183…
+    #> $ orgnl_mdcr_benes               <int> 915752, 913347, 912897, 911263, 910417,…
+    #> $ ma_and_oth_benes               <int> 915207, 916678, 918676, 921872, 924770,…
+    #> $ aged_tot_benes                 <int> 1572257, 1571050, 1572037, 1573058, 157…
+    #> $ aged_esrd_benes                <int> 11635, 11312, 11096, 10888, 10716, 1052…
+    #> $ aged_no_esrd_benes             <int> 1560622, 1559738, 1560941, 1562170, 156…
+    #> $ dsbld_tot_benes                <int> 258702, 258975, 259536, 260077, 260617,…
+    #> $ dsbld_esrd_and_esrd_only_benes <int> 12011, 11905, 11853, 11835, 11827, 1179…
+    #> $ dsbld_no_esrd_benes            <int> 246691, 247070, 247683, 248242, 248790,…
+    #> $ a_b_tot_benes                  <int> 1681852, 1680770, 1681852, 1683513, 168…
+    #> $ a_b_orgnl_mdcr_benes           <int> 767454, 764903, 763986, 762450, 761518,…
+    #> $ a_b_ma_and_oth_benes           <int> 914398, 915867, 917866, 921063, 923961,…
+    #> $ prscrptn_drug_tot_benes        <int> 1410752, 1410748, 1411729, 1413507, 141…
+    #> $ prscrptn_drug_pdp_benes        <int> 538559, 536815, 535968, 534687, 534006,…
+    #> $ prscrptn_drug_mapd_benes       <int> 872193, 873933, 875761, 878820, 881515,…
+
+<br>
+
+``` r
+bene |> 
+  dplyr::select(state = bene_state_abrvtn,
+                month, 
+                tot_benes, 
+                orgnl_mdcr_benes, 
+                ma_and_oth_benes) |> 
+  dplyr::mutate(tot_change = tot_benes - dplyr::lag(tot_benes), .after = tot_benes) |>  
+  dplyr::mutate(orig_pct = round(orgnl_mdcr_benes / tot_benes, 2),
+                ma_other_pct = round(ma_and_oth_benes / tot_benes, 2)) |> 
+  gluedown::md_table()
+```
+
+| state | month    | tot_benes | tot_change | orgnl_mdcr_benes | ma_and_oth_benes | orig_pct | ma_other_pct |
+|:------|:---------|----------:|-----------:|-----------------:|-----------------:|---------:|-------------:|
+| GA    | January  |   1830959 |         NA |           915752 |           915207 |     0.50 |         0.50 |
+| GA    | February |   1830025 |       -934 |           913347 |           916678 |     0.50 |         0.50 |
+| GA    | March    |   1831573 |       1548 |           912897 |           918676 |     0.50 |         0.50 |
+| GA    | April    |   1833135 |       1562 |           911263 |           921872 |     0.50 |         0.50 |
+| GA    | May      |   1835187 |       2052 |           910417 |           924770 |     0.50 |         0.50 |
+| GA    | June     |   1837394 |       2207 |           909778 |           927616 |     0.50 |         0.50 |
+| GA    | July     |   1840128 |       2734 |           907070 |           933058 |     0.49 |         0.51 |
+
+<br>
+
+``` r
+bene |> 
+  dplyr::select(state = bene_state_abrvtn,
+                month, 
+                tot_benes, 
+                aged_tot_benes,
+                aged_esrd_benes,
+                aged_no_esrd_benes) |> 
+  dplyr::mutate(aged_pct_of_tot = round(aged_tot_benes / tot_benes, 2), .after = aged_tot_benes) |> 
+  dplyr::mutate(esrd_pct_of_aged = round(aged_esrd_benes / aged_tot_benes, 2), .after = aged_esrd_benes) |> 
+  gluedown::md_table()
+```
+
+| state | month    | tot_benes | aged_tot_benes | aged_pct_of_tot | aged_esrd_benes | esrd_pct_of_aged | aged_no_esrd_benes |
+|:------|:---------|----------:|---------------:|----------------:|----------------:|-----------------:|-------------------:|
+| GA    | January  |   1830959 |        1572257 |            0.86 |           11635 |             0.01 |            1560622 |
+| GA    | February |   1830025 |        1571050 |            0.86 |           11312 |             0.01 |            1559738 |
+| GA    | March    |   1831573 |        1572037 |            0.86 |           11096 |             0.01 |            1560941 |
+| GA    | April    |   1833135 |        1573058 |            0.86 |           10888 |             0.01 |            1562170 |
+| GA    | May      |   1835187 |        1574570 |            0.86 |           10716 |             0.01 |            1563854 |
+| GA    | June     |   1837394 |        1575954 |            0.86 |           10525 |             0.01 |            1565429 |
+| GA    | July     |   1840128 |        1578129 |            0.86 |           10368 |             0.01 |            1567761 |
+
+<br>
+
+``` r
+bene |> 
+  dplyr::select(month, 
+                tot_benes,
+                tot_orig = orgnl_mdcr_benes, 
+                tot_ma_oth = ma_and_oth_benes,
+                ab_tot = a_b_tot_benes,
+                ab_orig = a_b_orgnl_mdcr_benes,
+                ab_ma_oth = a_b_ma_and_oth_benes) |> 
+  dplyr::mutate(tot_check = tot_orig + tot_ma_oth, .after = tot_benes) |> 
+  dplyr::mutate(ab_tot_check = ab_orig + ab_ma_oth, .after = ab_tot) |> 
+  dplyr::mutate(tot_ab_diff = tot_benes - ab_tot) |> 
+  gluedown::md_table()
+```
+
+| month    | tot_benes | tot_check | tot_orig | tot_ma_oth |  ab_tot | ab_tot_check | ab_orig | ab_ma_oth | tot_ab_diff |
+|:---------|----------:|----------:|---------:|-----------:|--------:|-------------:|--------:|----------:|------------:|
+| January  |   1830959 |   1830959 |   915752 |     915207 | 1681852 |      1681852 |  767454 |    914398 |      149107 |
+| February |   1830025 |   1830025 |   913347 |     916678 | 1680770 |      1680770 |  764903 |    915867 |      149255 |
+| March    |   1831573 |   1831573 |   912897 |     918676 | 1681852 |      1681852 |  763986 |    917866 |      149721 |
+| April    |   1833135 |   1833135 |   911263 |     921872 | 1683513 |      1683513 |  762450 |    921063 |      149622 |
+| May      |   1835187 |   1835187 |   910417 |     924770 | 1685479 |      1685479 |  761518 |    923961 |      149708 |
+| June     |   1837394 |   1837394 |   909778 |     927616 | 1687818 |      1687818 |  761012 |    926806 |      149576 |
+| July     |   1840128 |   1840128 |   907070 |     933058 | 1696372 |      1696372 |  764122 |    932250 |      143756 |
 
 <br><br>
 
@@ -1236,27 +1181,146 @@ purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State",
 
 <br>
 
-> 1.  by Provider and Service API:
+> 1.  by Provider and Service:
 
 <br>
 
 ``` r
-(pbs <- purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)))
+pbs <- purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
+pbs |> dplyr::glimpse()
 ```
 
-    #> # A tibble: 8 × 6
-    #>    year rndrng_npi rndrng_prvdr       totals_srvcs      hcpcs    averages
-    #>   <int> <chr>      <list>             <list>            <list>   <list>  
-    #> 1  2013 1003000126 <tibble [7 × 17]>  <tibble [7 × 3]>  <tibble> <tibble>
-    #> 2  2014 1003000126 <tibble [8 × 17]>  <tibble [8 × 3]>  <tibble> <tibble>
-    #> 3  2015 1003000126 <tibble [11 × 17]> <tibble [11 × 3]> <tibble> <tibble>
-    #> 4  2016 1003000126 <tibble [12 × 17]> <tibble [12 × 3]> <tibble> <tibble>
-    #> 5  2017 1003000126 <tibble [11 × 17]> <tibble [11 × 3]> <tibble> <tibble>
-    #> 6  2018 1003000126 <tibble [11 × 17]> <tibble [11 × 3]> <tibble> <tibble>
-    #> 7  2019 1003000126 <tibble [9 × 17]>  <tibble [9 × 3]>  <tibble> <tibble>
-    #> 8  2020 1003000126 <tibble [9 × 17]>  <tibble [9 × 3]>  <tibble> <tibble>
+    #> Rows: 8
+    #> Columns: 6
+    #> $ year         <int> 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020
+    #> $ rndrng_npi   <chr> "1003000126", "1003000126", "1003000126", "1003000126", "…
+    #> $ rndrng_prvdr <list> [<tbl_df[7 x 17]>], [<tbl_df[8 x 17]>], [<tbl_df[11 x 17]…
+    #> $ totals_srvcs <list> [<tbl_df[7 x 3]>], [<tbl_df[8 x 3]>], [<tbl_df[11 x 3]>]…
+    #> $ hcpcs        <list> [<tbl_df[7 x 4]>], [<tbl_df[8 x 4]>], [<tbl_df[11 x 4]>]…
+    #> $ averages     <list> [<tbl_df[7 x 4]>], [<tbl_df[8 x 4]>], [<tbl_df[11 x 4]>]…
 
 <br>
+
+``` r
+pbs |> 
+  dplyr::select(rndrng_prvdr) |> 
+  tidyr::unnest(rndrng_prvdr) |> 
+  dplyr::slice_head() |> 
+  provider:::display_long() |> 
+  gluedown::md_table()
+```
+
+    #> |name                          |value                                                                               |
+    #> |:-----------------------------|:-----------------------------------------------------------------------------------|
+    #> |rndrng_prvdr_last_org_name    |Enkeshafi                                                                           |
+    #> |rndrng_prvdr_first_name       |Ardalan                                                                             |
+    #> |rndrng_prvdr_mi               |NA                                                                                  |
+    #> |rndrng_prvdr_crdntls          |M.D.                                                                                |
+    #> |rndrng_prvdr_gndr             |M                                                                                   |
+    #> |rndrng_prvdr_ent_cd           |I                                                                                   |
+    #> |rndrng_prvdr_st1              |900 Seton Dr                                                                        |
+    #> |rndrng_prvdr_st2              |NA                                                                                  |
+    #> |rndrng_prvdr_city             |Cumberland                                                                          |
+    #> |rndrng_prvdr_state_abrvtn     |MD                                                                                  |
+    #> |rndrng_prvdr_state_fips       |24                                                                                  |
+    #> |rndrng_prvdr_zip5             |21502                                                                               |
+    #> |rndrng_prvdr_ruca             |1                                                                                   |
+    #> |rndrng_prvdr_ruca_desc        |Metropolitan area core: primary flow within an urbanized area of 50,000 and greater |
+    #> |rndrng_prvdr_cntry            |US                                                                                  |
+    #> |rndrng_prvdr_type             |Internal Medicine                                                                   |
+    #> |rndrng_prvdr_mdcr_prtcptg_ind |Y                                                                                   |
+
+<br>
+
+``` r
+pbs |> 
+  dplyr::select(year, totals_srvcs, hcpcs, averages) |> 
+  tidyr::unnest(c(totals_srvcs, hcpcs, averages)) |> 
+  dplyr::select(!c(hcpcs_desc:place_of_srvc, tot_bene_day_srvcs, avg_mdcr_stdzd_amt)) |> 
+  dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs)) |> 
+  gluedown::md_table()
+```
+
+    #> | year| tot_benes| tot_srvcs|hcpcs_cd | avg_sbmtd_chrg| avg_mdcr_alowd_amt| avg_mdcr_pymt_amt|
+    #> |----:|---------:|---------:|:--------|--------------:|------------------:|-----------------:|
+    #> | 2020|       154|       326|99233    |       513.2117|          108.84687|          88.94589|
+    #> | 2020|       145|       146|99239    |       491.8699|          111.25979|          90.92384|
+    #> | 2020|        57|       134|99232    |       251.3284|           73.45470|          57.95582|
+    #> | 2020|        52|        52|99223    |      1108.3846|          209.42385|         170.83462|
+    #> | 2020|        23|        23|99217    |       406.1739|           76.80391|          61.40174|
+    #> | 2020|        16|        16|99218    |       811.8125|          108.24938|          85.08125|
+    #> | 2020|        16|        16|99220    |      1150.9375|          191.96062|         152.37688|
+    #> | 2020|        13|        13|99238    |       268.4615|           74.15769|          60.53308|
+    #> | 2020|        12|        12|99221    |       681.6667|          110.04750|          82.23750|
+    #> | 2019|       306|       605|99233    |       345.2364|          103.58820|          82.58817|
+    #> | 2019|       240|       243|99239    |       349.2593|          106.54309|          84.96992|
+    #> | 2019|       117|       205|99232    |       245.6146|           72.75639|          58.00556|
+    #> | 2019|       157|       158|99223    |       651.4177|          200.93000|         160.19000|
+    #> | 2019|        40|        40|99217    |       232.2750|           72.59000|          57.87000|
+    #> | 2019|        39|        40|99238    |       229.4750|           72.59000|          57.87000|
+    #> | 2019|        21|        27|99291    |       701.4444|          221.27000|         176.40000|
+    #> | 2019|        25|        25|99220    |       712.8000|          186.72520|         148.85160|
+    #> | 2019|        24|        24|99221    |       320.1667|          101.12125|          80.61583|
+    #> | 2018|       206|       360|99232    |       360.5722|           72.38542|          57.67031|
+    #> | 2018|       148|       284|99233    |       576.9894|          103.66095|          82.51299|
+    #> | 2018|       217|       250|99239    |       555.6400|          106.73396|          85.03664|
+    #> | 2018|        82|        86|99223    |      1093.5000|          199.75721|         159.25907|
+    #> | 2018|        67|        68|99217    |       381.3088|           72.64103|          57.88029|
+    #> | 2018|        30|        42|99291    |      1400.0000|          215.74119|         171.89333|
+    #> | 2018|        26|        26|99220    |      1086.9231|          185.10154|         147.47923|
+    #> | 2018|        24|        24|99221    |       474.5833|          100.60125|          80.15500|
+    #> | 2018|        19|        19|99218    |       476.9474|           99.31158|          76.79526|
+    #> | 2018|        17|        17|99222    |       625.0000|          135.83647|         108.22529|
+    #> | 2018|        16|        16|99238    |       415.3125|           72.66688|          57.90125|
+    #> | 2017|       233|       627|99232    |       326.2456|           71.24051|          56.36673|
+    #> | 2017|       291|       341|99239    |       481.6862|          106.32874|          84.05616|
+    #> | 2017|       127|       207|99233    |       461.0725|          103.94768|          82.82068|
+    #> | 2017|       110|       114|99223    |       923.9912|          202.79219|         160.37719|
+    #> | 2017|        96|       100|99217    |       325.7800|           71.96390|          56.82720|
+    #> | 2017|        59|        59|99220    |       755.9322|          184.32203|         141.29356|
+    #> | 2017|        57|        59|99222    |       625.0000|          135.14729|         105.82542|
+    #> | 2017|        51|        52|99219    |       614.0000|          134.28385|         102.80769|
+    #> | 2017|        23|        36|99291    |      1400.0000|          220.58000|         175.75000|
+    #> | 2017|        25|        26|99218    |       449.0000|           98.48000|          78.46000|
+    #> | 2017|        16|        16|99221    |       462.8125|          100.05000|          79.71000|
+    #> | 2016|       270|       596|99232    |       326.4866|           70.71562|          56.21099|
+    #> | 2016|       231|       271|99239    |       485.0000|          105.05000|          83.70000|
+    #> | 2016|       141|       148|99223    |       920.6149|          200.54466|         159.08345|
+    #> | 2016|        85|       117|99233    |       470.0000|          101.88538|          80.90932|
+    #> | 2016|        87|        96|99222    |       625.0000|          134.09740|         105.47760|
+    #> | 2016|        55|        57|99217    |       325.1579|           70.79825|          54.47439|
+    #> | 2016|        26|        53|99291    |      1400.0000|          219.04000|         174.52000|
+    #> | 2016|        38|        38|99219    |       614.0000|          132.85000|         105.85000|
+    #> | 2016|        23|        23|99220    |       769.3478|          186.25913|         146.11652|
+    #> | 2016|        20|        20|99221    |       460.0000|           99.14000|          78.99000|
+    #> | 2016|        20|        20|99238    |       328.0000|           71.04550|          52.83150|
+    #> | 2016|        11|        11|99225    |       328.0000|           71.32000|          56.82000|
+    #> | 2015|       481|      1117|99232    |       200.9320|           71.87013|          56.31386|
+    #> | 2015|       286|       580|99233    |       301.9810|          101.51336|          80.92938|
+    #> | 2015|       353|       368|99239    |       308.3016|          106.55685|          83.94720|
+    #> | 2015|       215|       220|99223    |       631.1864|          199.45268|         157.90895|
+    #> | 2015|       172|       175|99238    |       210.8800|           72.46834|          57.07949|
+    #> | 2015|       130|       132|99222    |       356.4924|          136.80970|         107.93341|
+    #> | 2015|        58|        59|99221    |       333.2881|           99.74085|          79.46966|
+    #> | 2015|        18|        38|99231    |       100.8421|           38.92474|          31.01579|
+    #> | 2015|        23|        23|99217    |       328.0000|           71.57043|          54.50261|
+    #> | 2015|        13|        21|99291    |       633.8095|          223.42190|         178.01190|
+    #> | 2015|        18|        18|99219    |       614.0000|          133.79333|         100.95889|
+    #> | 2014|       596|      1418|99232    |       217.0000|           71.69861|          56.29776|
+    #> | 2014|       341|       357|99222    |       416.5462|          137.74919|         107.51787|
+    #> | 2014|       316|       330|99238    |       217.0000|           72.37955|          55.68124|
+    #> | 2014|       215|       223|99239    |       322.0000|          106.37072|          83.70637|
+    #> | 2014|       104|       175|99233    |       312.0000|          103.83000|          82.39817|
+    #> | 2014|        65|       104|99231    |       119.0000|           39.08673|          30.83538|
+    #> | 2014|        98|        98|99223    |       611.0000|          201.09684|         152.55122|
+    #> | 2014|        13|        23|99291    |       674.0000|          224.66000|         179.00000|
+    #> | 2013|       381|       777|99232    |       187.5946|           69.43354|          55.09135|
+    #> | 2013|       208|       219|99238    |       201.0046|           69.80708|          55.65046|
+    #> | 2013|       106|       170|99233    |       271.9765|          101.07035|          80.64124|
+    #> | 2013|       138|       142|99222    |       368.6268|          132.17007|         104.29972|
+    #> | 2013|       137|       142|99239    |       245.8310|          103.48056|          82.63211|
+    #> | 2013|        95|        96|99223    |       524.6042|          196.93240|         155.90115|
+    #> | 2013|        47|        61|99231    |        97.0000|           37.68820|          30.06525|
 
 > 2.  by Geography and Service API:
 
@@ -1266,74 +1330,181 @@ purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, geo_level = "State",
 srvcs <- provider::physician_by_service(npi = 1003000126, year = 2020) |> 
          tidyr::unnest(cols = c(rndrng_prvdr, totals_srvcs, hcpcs, averages))
 
-srvcs |> dplyr::select(year, 
-                       tot_benes:tot_srvcs, 
-                       hcpcs_cd, 
-                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
-         gluedown::md_table()
+ind <- srvcs |> 
+  dplyr::mutate(level = "Individual") |> 
+  dplyr::select(year, 
+                level,
+                tot_benes:tot_srvcs, 
+                hcpcs_cd, 
+                avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+  dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs))
+
+ind |> gluedown::md_table()
 ```
 
-| year | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
-|-----:|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
-| 2020 |        23 |        23 | 99217    |       406.1739 |           76.80391 |          61.40174 |
-| 2020 |        16 |        16 | 99218    |       811.8125 |          108.24938 |          85.08125 |
-| 2020 |        16 |        16 | 99220    |      1150.9375 |          191.96062 |         152.37688 |
-| 2020 |        12 |        12 | 99221    |       681.6667 |          110.04750 |          82.23750 |
-| 2020 |        52 |        52 | 99223    |      1108.3846 |          209.42385 |         170.83462 |
-| 2020 |        57 |       134 | 99232    |       251.3284 |           73.45470 |          57.95582 |
-| 2020 |       154 |       326 | 99233    |       513.2117 |          108.84687 |          88.94589 |
-| 2020 |        13 |        13 | 99238    |       268.4615 |           74.15769 |          60.53308 |
-| 2020 |       145 |       146 | 99239    |       491.8699 |          111.25979 |          90.92384 |
-
-<br> <br>
-
-``` r
-nat <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
-
-nat |> dplyr::filter(place_of_srvc == "F") |>  
-       dplyr::select(year, 
-                     tot_rndrng_prvdrs:tot_srvcs, 
-                     hcpcs_cd, 
-                     avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
-       gluedown::md_table()
-```
-
-| year | tot_rndrng_prvdrs | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
-|-----:|------------------:|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
-| 2020 |             90842 |    960315 |   1083287 | 99217    |       226.5243 |           71.85383 |          56.39061 |
-| 2020 |             37219 |    107097 |    113741 | 99218    |       279.0389 |           99.76702 |          77.72797 |
-| 2020 |             88585 |   1057367 |   1251727 | 99220    |       602.4899 |          184.34005 |         144.10759 |
-| 2020 |            170573 |   1095114 |   1469013 | 99221    |       262.3614 |          101.74503 |          79.93905 |
-| 2020 |            243208 |   3820713 |   9472774 | 99223    |       502.2729 |          204.68211 |         161.39257 |
-| 2020 |            298435 |   3982972 |  39627779 | 99232    |       175.3005 |           72.96044 |          58.10423 |
-| 2020 |            241646 |   3338934 |  24561011 | 99233    |       282.3940 |          105.81724 |          84.56269 |
-| 2020 |            124642 |   1561729 |   1996528 | 99238    |       188.4993 |           73.12491 |          57.87497 |
-| 2020 |            105545 |   3093233 |   4564152 | 99239    |       310.6096 |          107.56667 |          85.47697 |
+| year | level      | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
+|-----:|:-----------|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
+| 2020 | Individual |       154 |       326 | 99233    |       513.2117 |          108.84687 |          88.94589 |
+| 2020 | Individual |       145 |       146 | 99239    |       491.8699 |          111.25979 |          90.92384 |
+| 2020 | Individual |        57 |       134 | 99232    |       251.3284 |           73.45470 |          57.95582 |
+| 2020 | Individual |        52 |        52 | 99223    |      1108.3846 |          209.42385 |         170.83462 |
+| 2020 | Individual |        23 |        23 | 99217    |       406.1739 |           76.80391 |          61.40174 |
+| 2020 | Individual |        16 |        16 | 99218    |       811.8125 |          108.24938 |          85.08125 |
+| 2020 | Individual |        16 |        16 | 99220    |      1150.9375 |          191.96062 |         152.37688 |
+| 2020 | Individual |        13 |        13 | 99238    |       268.4615 |           74.15769 |          60.53308 |
+| 2020 | Individual |        12 |        12 | 99221    |       681.6667 |          110.04750 |          82.23750 |
 
 <br> <br>
 
 ``` r
 state <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
 
-state |> dplyr::filter(place_of_srvc == "F") |>  
-         dplyr::select(year, 
-                       tot_rndrng_prvdrs:tot_srvcs, 
-                       hcpcs_cd, 
-                       avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
-         gluedown::md_table()
+state <- state |> 
+  dplyr::filter(place_of_srvc == "F") |>  
+  dplyr::select(year, 
+                level = rndrng_prvdr_geo_lvl,
+                tot_benes:tot_srvcs,
+                hcpcs_cd, 
+                avg_sbmtd_chrg:avg_mdcr_pymt_amt)
+
+state |> gluedown::md_table()
 ```
 
-| year | tot_rndrng_prvdrs | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
-|-----:|------------------:|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
-| 2020 |              1523 |     31433 |     35505 | 99217    |       300.8633 |           73.32784 |          57.82643 |
-| 2020 |               785 |      3847 |      4042 | 99218    |       377.2237 |          102.47521 |          80.32934 |
-| 2020 |              1795 |     41984 |     49557 | 99220    |       761.2434 |          188.95922 |         147.87499 |
-| 2020 |              3498 |     26136 |     32153 | 99221    |       269.1815 |          106.16173 |          83.30873 |
-| 2020 |              4803 |     98672 |    183066 | 99223    |       556.9738 |          211.89818 |         166.53387 |
-| 2020 |              5942 |    104865 |    634904 | 99232    |       176.7973 |           75.67333 |          60.11680 |
-| 2020 |              5032 |    102804 |    508985 | 99233    |       338.0418 |          109.47410 |          87.22652 |
-| 2020 |              2039 |     19248 |     21567 | 99238    |       207.3356 |           76.11991 |          60.27566 |
-| 2020 |              2146 |     77391 |     99591 | 99239    |       367.9219 |          111.66222 |          88.69363 |
+| year | level | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
+|-----:|:------|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
+| 2020 | State |     31433 |     35505 | 99217    |       300.8633 |           73.32784 |          57.82643 |
+| 2020 | State |      3847 |      4042 | 99218    |       377.2237 |          102.47521 |          80.32934 |
+| 2020 | State |     41984 |     49557 | 99220    |       761.2434 |          188.95922 |         147.87499 |
+| 2020 | State |     26136 |     32153 | 99221    |       269.1815 |          106.16173 |          83.30873 |
+| 2020 | State |     98672 |    183066 | 99223    |       556.9738 |          211.89818 |         166.53387 |
+| 2020 | State |    104865 |    634904 | 99232    |       176.7973 |           75.67333 |          60.11680 |
+| 2020 | State |    102804 |    508985 | 99233    |       338.0418 |          109.47410 |          87.22652 |
+| 2020 | State |     19248 |     21567 | 99238    |       207.3356 |           76.11991 |          60.27566 |
+| 2020 | State |     77391 |     99591 | 99239    |       367.9219 |          111.66222 |          88.69363 |
+
+<br><br>
+
+``` r
+nat <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
+
+nat <- nat |> 
+  dplyr::filter(place_of_srvc == "F") |>  
+  dplyr::select(year, 
+                level = rndrng_prvdr_geo_desc,
+                tot_benes:tot_srvcs,
+                hcpcs_cd, 
+                avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
+  dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs))
+
+nat |> gluedown::md_table()
+```
+
+| year | level    | tot_benes | tot_srvcs | hcpcs_cd | avg_sbmtd_chrg | avg_mdcr_alowd_amt | avg_mdcr_pymt_amt |
+|-----:|:---------|----------:|----------:|:---------|---------------:|-------------------:|------------------:|
+| 2020 | National |   3982972 |  39627779 | 99232    |       175.3005 |           72.96044 |          58.10423 |
+| 2020 | National |   3338934 |  24561011 | 99233    |       282.3940 |          105.81724 |          84.56269 |
+| 2020 | National |   3820713 |   9472774 | 99223    |       502.2729 |          204.68211 |         161.39257 |
+| 2020 | National |   3093233 |   4564152 | 99239    |       310.6096 |          107.56667 |          85.47697 |
+| 2020 | National |   1561729 |   1996528 | 99238    |       188.4993 |           73.12491 |          57.87497 |
+| 2020 | National |   1095114 |   1469013 | 99221    |       262.3614 |          101.74503 |          79.93905 |
+| 2020 | National |   1057367 |   1251727 | 99220    |       602.4899 |          184.34005 |         144.10759 |
+| 2020 | National |    960315 |   1083287 | 99217    |       226.5243 |           71.85383 |          56.39061 |
+| 2020 | National |    107097 |    113741 | 99218    |       279.0389 |           99.76702 |          77.72797 |
+
+<br> <br>
+
+``` r
+ind_lng <- ind |> 
+  dplyr::select(!c(year)) |> 
+  tidyr::pivot_longer(!c(level, hcpcs_cd)) |> 
+  dplyr::mutate(value = round(value, 2))
+
+st_lng <- state |> 
+  dplyr::select(!c(year)) |> 
+  tidyr::pivot_longer(!c(level, hcpcs_cd)) |> 
+  dplyr::mutate(value = round(value, 2))
+
+nat_lng <- nat |> 
+  dplyr::select(!c(year)) |> 
+  tidyr::pivot_longer(!c(level, hcpcs_cd)) |> 
+  dplyr::mutate(value = round(value, 2))
+
+join_2020 <- dplyr::full_join(ind_lng, st_lng, by = c("hcpcs_cd", "name", "level", "value")) |> 
+  dplyr::full_join(nat_lng, by = c("hcpcs_cd", "name", "level", "value")) |> 
+  dplyr::arrange(hcpcs_cd, name)
+```
+
+<br>
+
+``` r
+join_2020 |> 
+  dplyr::filter(name == "avg_sbmtd_chrg") |> 
+  tidyr::pivot_wider(names_from = level, 
+                     names_glue = "{level}_avg_charge", 
+                     values_from = value) |> 
+  dplyr::select(!c(name)) |> 
+  gluedown::md_table()
+```
+
+    #> |hcpcs_cd | Individual_avg_charge| State_avg_charge| National_avg_charge|
+    #> |:--------|---------------------:|----------------:|-------------------:|
+    #> |99217    |                406.17|           300.86|              226.52|
+    #> |99218    |                811.81|           377.22|              279.04|
+    #> |99220    |               1150.94|           761.24|              602.49|
+    #> |99221    |                681.67|           269.18|              262.36|
+    #> |99223    |               1108.38|           556.97|              502.27|
+    #> |99232    |                251.33|           176.80|              175.30|
+    #> |99233    |                513.21|           338.04|              282.39|
+    #> |99238    |                268.46|           207.34|              188.50|
+    #> |99239    |                491.87|           367.92|              310.61|
+
+<br>
+
+``` r
+join_2020 |> 
+  dplyr::filter(name == "avg_mdcr_alowd_amt") |> 
+  tidyr::pivot_wider(names_from = level, 
+                     names_glue = "{level}_avg_allowed", 
+                     values_from = value) |> 
+  dplyr::select(!c(name)) |> 
+  gluedown::md_table()
+```
+
+    #> |hcpcs_cd | Individual_avg_allowed| State_avg_allowed| National_avg_allowed|
+    #> |:--------|----------------------:|-----------------:|--------------------:|
+    #> |99217    |                  76.80|             73.33|                71.85|
+    #> |99218    |                 108.25|            102.48|                99.77|
+    #> |99220    |                 191.96|            188.96|               184.34|
+    #> |99221    |                 110.05|            106.16|               101.75|
+    #> |99223    |                 209.42|            211.90|               204.68|
+    #> |99232    |                  73.45|             75.67|                72.96|
+    #> |99233    |                 108.85|            109.47|               105.82|
+    #> |99238    |                  74.16|             76.12|                73.12|
+    #> |99239    |                 111.26|            111.66|               107.57|
+
+<br>
+
+``` r
+join_2020 |> 
+  dplyr::filter(name == "avg_mdcr_pymt_amt") |> 
+  tidyr::pivot_wider(names_from = level, 
+                     names_glue = "{level}_avg_pymt", 
+                     values_from = value) |> 
+  dplyr::select(!c(name)) |> 
+  gluedown::md_table()
+```
+
+    #> |hcpcs_cd | Individual_avg_pymt| State_avg_pymt| National_avg_pymt|
+    #> |:--------|-------------------:|--------------:|-----------------:|
+    #> |99217    |               61.40|          57.83|             56.39|
+    #> |99218    |               85.08|          80.33|             77.73|
+    #> |99220    |              152.38|         147.87|            144.11|
+    #> |99221    |               82.24|          83.31|             79.94|
+    #> |99223    |              170.83|         166.53|            161.39|
+    #> |99232    |               57.96|          60.12|             58.10|
+    #> |99233    |               88.95|          87.23|             84.56|
+    #> |99238    |               60.53|          60.28|             57.87|
+    #> |99239    |               90.92|          88.69|             85.48|
 
 <br> <br>
 
@@ -1342,23 +1513,23 @@ state |> dplyr::filter(place_of_srvc == "F") |>
 <br><br>
 
 ``` r
-(prov <- purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x)))
+prov <- purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
+prov |> dplyr::glimpse()
 ```
 
-    #> # A tibble: 8 × 11
-    #>   year  rndrng_…¹ rndrng…² totals…³ drug_s…⁴ med_sr…⁵ bene_age bene_sex bene_r…⁶
-    #>   <chr> <chr>     <list>   <list>   <list>   <list>   <list>   <list>   <list>  
-    #> 1 2013  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 2 2014  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 3 2015  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 4 2016  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 5 2017  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 6 2018  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 7 2019  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> 8 2020  10030001… <tibble> <tibble> <tibble> <tibble> <tibble> <tibble> <tibble>
-    #> # … with 2 more variables: bene_status <list>, bene_cc <list>, and abbreviated
-    #> #   variable names ¹​rndrng_npi, ²​rndrng_prvdr, ³​totals_srvcs, ⁴​drug_srvcs,
-    #> #   ⁵​med_srvcs, ⁶​bene_race
+    #> Rows: 8
+    #> Columns: 11
+    #> $ year         <chr> "2013", "2014", "2015", "2016", "2017", "2018", "2019", "…
+    #> $ rndrng_npi   <chr> "1003000126", "1003000126", "1003000126", "1003000126", "…
+    #> $ rndrng_prvdr <list> [<tbl_df[1 x 17]>], [<tbl_df[1 x 17]>], [<tbl_df[1 x 17]…
+    #> $ totals_srvcs <list> [<tbl_df[1 x 7]>], [<tbl_df[1 x 7]>], [<tbl_df[1 x 7]>],…
+    #> $ drug_srvcs   <list> [<tbl_df[1 x 8]>], [<tbl_df[1 x 8]>], [<tbl_df[1 x 8]>],…
+    #> $ med_srvcs    <list> [<tbl_df[1 x 8]>], [<tbl_df[1 x 8]>], [<tbl_df[1 x 8]>],…
+    #> $ bene_age     <list> [<tbl_df[1 x 5]>], [<tbl_df[1 x 5]>], [<tbl_df[1 x 5]>],…
+    #> $ bene_sex     <list> [<tbl_df[1 x 2]>], [<tbl_df[1 x 2]>], [<tbl_df[1 x 2]>],…
+    #> $ bene_race    <list> [<tbl_df[1 x 6]>], [<tbl_df[1 x 6]>], [<tbl_df[1 x 6]>],…
+    #> $ bene_status  <list> [<tbl_df[1 x 2]>], [<tbl_df[1 x 2]>], [<tbl_df[1 x 2]>],…
+    #> $ bene_cc      <list> [<tbl_df[1 x 17]>], [<tbl_df[1 x 17]>], [<tbl_df[1 x 17]…
 
 <br><br>
 
@@ -1497,9 +1668,13 @@ prov |> dplyr::select(year, bene_cc) |>
 <br>
 
 ``` r
-mult <- cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race")
+mult <- cc_multiple(year = 2007, 
+                    geo_lvl = "National", 
+                    demo_lvl = "Race")
 
-mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_benes) |> 
+mult |> dplyr::select(year, 
+                      bene_age_lvl, 
+                      bene_demo_desc:er_visits_per_1000_benes) |> 
         gluedown::md_table()
 ```
 

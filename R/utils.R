@@ -355,11 +355,23 @@ yn_logical <- function(x){
     TRUE ~ NA)
 }
 
+
+#' display_long ------------------------------------------------------------
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+display_long <- function(df){
+
+  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
+        tidyr::pivot_longer(dplyr::everything())
+}
+
+
 #' gt functions --------------------------------------------------------------
 #' @param data data frame
 #' @autoglobal
 #' @noRd
-gt_theme_provider <- function(data,...) {
+gt_theme_provider <- function(data,...){
   data |>
     gt::opt_all_caps() |>
     gt::opt_row_striping() |>

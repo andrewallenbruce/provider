@@ -138,19 +138,22 @@ cc_specific <- function(year         = 2018,
                         clean_names  = TRUE,
                         lowercase    = TRUE) {
 
+  # update distribution ids -------------------------------------------------
+  ids <- cms_update_ids(api = "Specific Chronic Conditions")
+
   # dataset version ids by year ---------------------------------------------
-  id <- dplyr::case_when(year == 2018 ~ "60ccbf1c-d3f5-4354-86a3-465711d81c5a",
-                         year == 2017 ~ "51231049-d7bc-41d2-90aa-07d711c375b2",
-                         year == 2016 ~ "547d7d2c-6667-46ca-9973-6c6e93f6a467",
-                         year == 2015 ~ "f7675b78-2006-422c-96cf-dc22e3d22b90",
-                         year == 2014 ~ "40dab184-4531-4865-8d0b-3ba32d4ac3e9",
-                         year == 2013 ~ "3659b970-d9c1-4a8d-8052-9180598fd27c",
-                         year == 2012 ~ "d88974a6-3214-4e09-8ae7-b56dc479125e",
-                         year == 2011 ~ "dfad5b34-3ad8-45e5-833f-e53d9dbd7584",
-                         year == 2010 ~ "c78b10cd-4a19-4468-abf7-0266d1c0dbb9",
-                         year == 2009 ~ "b12072e9-e736-4bac-a794-ab3f842813c4",
-                         year == 2008 ~ "ab51ced1-1984-4d66-b60a-47857fc48023",
-                         year == 2007 ~ "4b079921-8e18-463f-91cc-beb538004498")
+  id <- dplyr::case_when(year == 2018 ~ ids$distribution[2],
+                         year == 2017 ~ ids$distribution[3],
+                         year == 2016 ~ ids$distribution[4],
+                         year == 2015 ~ ids$distribution[5],
+                         year == 2014 ~ ids$distribution[6],
+                         year == 2013 ~ ids$distribution[7],
+                         year == 2012 ~ ids$distribution[8],
+                         year == 2011 ~ ids$distribution[9],
+                         year == 2010 ~ ids$distribution[10],
+                         year == 2009 ~ ids$distribution[11],
+                         year == 2008 ~ ids$distribution[12],
+                         year == 2007 ~ ids$distribution[13])
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,

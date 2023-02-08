@@ -1,16 +1,10 @@
 #' Search the CMS Physician - Additional Phone Numbers API
 #'
-#' @description Dataset of Additional phone numbers when clinicians have more
+#' @description Dataset of additional phone numbers when clinicians have more
 #'   than one phone number at a single practice address.
 #'
-#' @details The Doctors and Clinicians national downloadable file is organized
-#'   such that each line is unique at the clinician/enrollment
-#'   record/group/address level. Clinicians with multiple Medicare enrollment
-#'   records and/or single enrollments linking to multiple practice locations
-#'   are listed on multiple lines.
-#'
 #'   ## Links
-#'   * [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+#'   * [Physician - Additional Phone Numbers](https://data.cms.gov/provider-data/dataset/phys-phon)
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
@@ -92,9 +86,8 @@ addl_phone_numbers <- function(npi           = NULL,
 
     # parse response ---------------------------------------------------------
     results <- tibble::tibble(httr2::resp_body_json(resp,
-                                                    check_type = FALSE, simplifyVector = TRUE)) |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                check_type = FALSE, simplifyVector = TRUE)) |>
+      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
 
   }

@@ -125,10 +125,11 @@ opt_out <- function(first        = NULL,
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(resp,
             check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::mutate(Date = as.Date(httr2::resp_date(resp)),
-                  NPI = as.character(NPI)) |>
-    dplyr::relocate(Date, "Last updated") |>
-    dplyr::mutate(dplyr::across(dplyr::contains("Eligible"), yn_logical))
+    dplyr::mutate(NPI = as.character(NPI)) |>
+    dplyr::mutate(dplyr::across(dplyr::contains("Eligible"), yn_logical)) |>
+    dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
   }
 
   # clean names -------------------------------------------------------------

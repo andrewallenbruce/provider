@@ -52,18 +52,11 @@ function; default is \code{TRUE}.}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Dataset of Additional phone numbers when clinicians have more
+Dataset of additional phone numbers when clinicians have more
 than one phone number at a single practice address.
-}
-\details{
-The Doctors and Clinicians national downloadable file is organized
-such that each line is unique at the clinician/enrollment
-record/group/address level. Clinicians with multiple Medicare enrollment
-records and/or single enrollments linking to multiple practice locations
-are listed on multiple lines.
 \subsection{Links}{
 \itemize{
-\item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{Doctors and Clinicians National Downloadable File}
+\item \href{https://data.cms.gov/provider-data/dataset/phys-phon}{Physician - Additional Phone Numbers}
 }
 }
 }

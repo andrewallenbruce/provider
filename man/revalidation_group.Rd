@@ -19,7 +19,6 @@ revalidation_group(
   ind_last = NULL,
   ind_state = NULL,
   ind_specialty = NULL,
-  month = "Latest",
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -57,9 +56,6 @@ benefits or is an employee}
 
 \item{ind_specialty}{Enrollment specialty of the provider who is
 reassigning their benefits or is an employee}
-
-\item{month}{dataset version, \code{Latest} is default; possible months are
-\code{Jan}, \code{Feb}, \code{Apr}, \code{Jun}, \code{Jul}, \code{Aug}, \code{Sep}, \code{Oct}, \code{Nov}, \code{Dec}}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
@@ -101,23 +97,4 @@ revalidation_group(group_pac_id = 9436483807,
                    group_bus_name = "1st Call Urgent Care",
                    group_state = "FL",
                    record_type = "Reassignment")
-\dontrun{
-npi_list <- rep(c(1326063900,
-                  1588191308,
-                  1639176803,
-                  1326057050), each = 9)
-
-months <- rep(c("Nov",
-                "Oct",
-                "Sep",
-                "Aug",
-                "Jul",
-                "Jun",
-                "Apr",
-                "Feb",
-                "Jan"), times = 4)
-
-purrr::map2_dfr(npi_list,
-months, ~revalidation_group(ind_npi = .x, month = .y))
-}
 }
