@@ -8,15 +8,13 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 opt_out(
-  first = NULL,
-  last = NULL,
+  first_name = NULL,
+  last_name = NULL,
   npi = NULL,
   specialty = NULL,
-  date_start = NULL,
-  date_end = NULL,
   address = NULL,
   city = NULL,
-  state_abb = NULL,
+  state = NULL,
   zip = NULL,
   eligible = NULL,
   clean_names = TRUE,
@@ -24,24 +22,19 @@ opt_out(
 )
 }
 \arguments{
-\item{first}{First Name of the Opt Out Provider}
+\item{first_name}{First Name of the Opt Out Provider}
 
-\item{last}{Last Name of the Opt Out Provider}
+\item{last_name}{Last Name of the Opt Out Provider}
 
 \item{npi}{National Provider Identifier (NPI) number of the Opt Out Provider}
 
 \item{specialty}{Specialty of the Opt Out Provider}
 
-\item{date_start}{Date from which the Provider's Opt Out Status is
-effective}
-
-\item{date_end}{Date on which the Provider's Opt Out Status ends}
-
 \item{address}{Provider's Street Address}
 
 \item{city}{Provider's City}
 
-\item{state_abb}{Provider's State Abbreviation}
+\item{state}{Provider's State Abbreviation}
 
 \item{zip}{Provider's Zip Code}
 
@@ -77,8 +70,7 @@ Update Frequency: \strong{Monthly}
 opt_out(specialty = "Psychiatry", zip = "07626")
 opt_out(first = "David", last = "Smith")
 opt_out(npi = 1114974490)
-opt_out(state_abb = "NY", eligible = "N")
-opt_out(date_start = "01/30/1998", date_end = "01/30/2024")
+opt_out(state = "NY", eligible = "N")
 opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
 \dontrun{
 # Returns empty list i.e., provider is not in the database

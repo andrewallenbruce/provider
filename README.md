@@ -77,6 +77,9 @@ library(provider)
 
 <br>
 
+The goal of `provider` is to make the experience of getting location
+data easier and more consistent across a wide variety of sources.
+
 This package is primarily focused on accessing public API data that can
 be linked together via a healthcare provider’s National Provider
 Identifier (NPI). Thus far, none of the APIs require the creation of a
@@ -98,7 +101,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-08 13:07:04
+    #> $ datetime          <dttm> 2023-02-27 14:50:50
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -119,12 +122,17 @@ npi_1 |> dplyr::glimpse()
 ``` r
 npi_1 |> 
   dplyr::select(enumeration_type:state) |> 
+  provider:::display_long() |> 
   gluedown::md_table()
 ```
 
-| enumeration_type | npi        | name         | city  | state |
-|:-----------------|:-----------|:-------------|:------|:------|
-| NPI-1            | 1710975040 | JOHN HERRING | OLNEY | MD    |
+| name             | value        |
+|:-----------------|:-------------|
+| enumeration_type | NPI-1        |
+| npi              | 1710975040   |
+| name             | JOHN HERRING |
+| city             | OLNEY        |
+| state            | MD           |
 
 <br>
 
@@ -230,6 +238,63 @@ npi_1 |>
 | 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | MD    |
 | 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | VA    |
 | 02   | MEDICARE UPIN                | NA        | C59183     | NA    |
+
+<br><br>
+
+``` r
+### Data frame of NPIs
+npi_df <- data.frame(npi = c(1710983663,
+                             1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860,
+                             1346243805,
+                             1679576722,
+                             1093718892,
+                             1477556405,
+                             1770586539,
+                             1871596692,
+                             1174526925, 
+                             1720081441,
+                             1558364273,
+                             1801899513
+                             ))
+npi_df |>
+  tibble::deframe() |> 
+  as.list() |> 
+  purrr::map(nppes_npi_new) |> 
+  dplyr::bind_rows() |> 
+  dplyr::mutate(certification_date = anytime::anydate(certification_date))
+```
+
+    #> # A tibble: 16 × 21
+    #>    npi        enumer…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enumerat…⁷
+    #>    <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <date>    
+    #>  1 1003026055 NPI-1    RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-05-22
+    #>  2 1316405939 NPI-1    JAENA   ABARZUA KAE     MC, LP… NO      F      2019-03-04
+    #>  3 1720392988 NPI-1    MUSTAFA ABAS    <NA>    M.D.,   NO      M      2010-07-29
+    #>  4 1518184605 NPI-1    DANIEL  AARON   LOUIS   M.D.    NO      M      2007-04-19
+    #>  5 1922056829 NPI-1    CYNTHIA AARON   K       M.D.    NO      F      2006-05-04
+    #>  6 1083879860 NPI-1    CHRIST… AARON   <NA>    <NA>    NO      M      2008-07-22
+    #>  7 1346243805 NPI-1    HIE     KIM     C       M.D.    NO      M      2005-05-27
+    #>  8 1679576722 NPI-1    DAVID   WIEBE   A       M.D.    NO      M      2005-05-23
+    #>  9 1093718892 NPI-1    DINESH  GOYAL   K       MD      NO      M      2005-05-24
+    #> 10 1477556405 NPI-1    CHARLES LINSEN… M       M.D.    NO      M      2005-05-23
+    #> 11 1770586539 NPI-1    SUSAN   LANGEV… <NA>    MS, RD… NO      F      2005-05-24
+    #> 12 1871596692 NPI-1    NOEMI   DOSOVA  S.      M.D.    NO      F      2005-05-24
+    #> 13 1174526925 NPI-1    AKULA   KRISHNA V       M.D.    NO      M      2005-05-24
+    #> 14 1720081441 NPI-1    KATHLE… STAUDI… M       MD      NO      F      2005-05-27
+    #> 15 1558364273 NPI-1    JOHN    BAXTER  C       MD      NO      M      2005-05-27
+    #> 16 1801899513 NPI-1    GEORGE  DAUWEL  C       d.c.    NO      M      2005-05-27
+    #> # … with 12 more variables: last_updated <date>, status <chr>,
+    #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
+    #> #   identifiers <list>, endpoints <list>, other_names <list>, addresses <list>,
+    #> #   practice_locations <lgl>, enumeration_age <Duration>,
+    #> #   certification_date <date>, and abbreviated variable names
+    #> #   ¹​enumeration_type, ²​first_name, ³​last_name, ⁴​middle_name, ⁵​credential,
+    #> #   ⁶​sole_proprietor, ⁷​enumeration_date
 
 <br><br>
 
@@ -569,11 +634,7 @@ addl_phone_numbers(provider_id = "0042100190") |>
   gluedown::md_table()
 ```
 
-| prvdr_id   | frst_nm | lst_nm    | address             | cty          | st  | zip   | org_pac_id | phn_numbr        | npi        |
-|:-----------|:--------|:----------|:--------------------|:-------------|:----|:------|:-----------|:-----------------|:-----------|
-| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN NE     | GRAND RAPIDS | MI  | 49503 | 1951404185 | \(616\) 391-1680 | 1154338044 |
-| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN AVE NE | GRAND RAPIDS | MI  | 49503 | 8628327384 | \(616\) 391-1680 | 1154338044 |
-| 0042100190 | JOHN    | VERBRUGGE | 1840 WEALTHY SE     | GRAND RAPIDS | MI  | 49506 | 1951404185 | \(616\) 774-7444 | 1154338044 |
+    #> Error in addl_phone_numbers(provider_id = "0042100190"): unused argument (provider_id = "0042100190")
 
 <br><br>
 
@@ -621,7 +682,7 @@ provider::order_refer(npi = 1083879860) |> gluedown::md_table()
 ### Medicare Opt-Out Affidavits
 
 ``` r
-provider::opt_out(last = "Aaron") |> 
+provider::opt_out(last_name = "Aaron") |> 
   tidyr::unite("address", first_line_street_address:second_line_street_address, 
                remove = TRUE, 
                na.rm = TRUE, 
@@ -645,7 +706,7 @@ provider::opt_out(last = "Aaron") |>
 | state_code                  | DC                     |
 | zip_code                    | 20009                  |
 | eligible_to_order_and_refer | FALSE                  |
-| last_updated                | 2022-12-15             |
+| last_updated                | 2023-01-16             |
 
 <br><br>
 
@@ -701,9 +762,9 @@ provider::pending_applications(npi = 1487003984,
   gluedown::md_table()
 ```
 
-| npi        | last_name | first_name |
-|:-----------|:----------|:-----------|
-| 1487003984 | AALAI     | MARRIAM    |
+| npi | last_name | first_name |
+|:----|:----------|:-----------|
+| NA  | NA        | NA         |
 
 <br><br>
 
@@ -725,9 +786,9 @@ provider::pending_applications(last_name = "Abbott",
   gluedown::md_table()
 ```
 
-| npi        | last_name | first_name |
-|:-----------|:----------|:-----------|
-| 1871240168 | ABBOTT    | ELISE      |
+| npi | last_name | first_name |
+|:----|:----------|:-----------|
+| NA  | NA        | NA         |
 
 <br><br>
 
@@ -737,42 +798,41 @@ pending_applications(first_name = "John",
   gluedown::md_table()
 ```
 
-| npi        | last_name          | first_name |
-|:-----------|:-------------------|:-----------|
-| 1881791739 | ADAMS              | JOHN       |
-| 1841280963 | BIGBEE             | JOHN       |
-| 1619996378 | BODDEN             | JOHN       |
-| 1588744569 | BRUNO              | JOHN       |
-| 1861142556 | BURKE              | JOHN       |
-| 1700348547 | CARTER             | JOHN       |
-| 1306817531 | COMBS              | JOHN       |
-| 1144815689 | DELA CRUZ PORTUGAL | JOHN       |
-| 1730349580 | ECHEVARRIA         | JOHN       |
-| 1982680997 | EVERED             | JOHN       |
-| 1376571554 | FLYNN              | JOHN       |
-| 1689774804 | FREEMAN            | JOHN       |
-| 1386604080 | GIANNINI           | JOHN       |
-| 1316239189 | HAMMONS            | JOHN       |
-| 1407832538 | HELLRUNG           | JOHN       |
-| 1649734195 | HILTON             | JOHN       |
-| 1992799001 | HOLLINGSWORTH      | JOHN       |
-| 1710905674 | JONES              | JOHN       |
-| 1821495573 | LEE                | JOHN       |
-| 1851513428 | LOVEJOY III        | JOHN       |
-| 1023000163 | LUDU               | JOHN       |
-| 1710403092 | LUU                | JOHN       |
-| 1144205394 | MAHANY             | JOHN       |
-| 1942307897 | MCGINNIS           | JOHN       |
-| 1669506580 | MCKEON             | JOHN       |
-| 1275184079 | MCNEELY            | JOHN       |
-| 1245970896 | MEISNER            | JOHN       |
-| 1275596066 | MUNROE             | JOHN       |
-| 1457370702 | PEDERSEN           | JOHN       |
-| 1851715767 | PETTYGROVE         | JOHN       |
-| 1568506368 | SMITH              | JOHN       |
-| 1548823594 | SUTTER             | JOHN       |
-| 1366437204 | VARENHOLT          | JOHN       |
-| 1639191166 | VERVILLE           | JOHN       |
+| npi        | last_name     | first_name |
+|:-----------|:--------------|:-----------|
+| 1881791739 | ADAMS         | JOHN       |
+| 1841280963 | BIGBEE        | JOHN       |
+| 1619996378 | BODDEN        | JOHN       |
+| 1588744569 | BRUNO         | JOHN       |
+| 1861142556 | BURKE         | JOHN       |
+| 1306817531 | COMBS         | JOHN       |
+| 1730349580 | ECHEVARRIA    | JOHN       |
+| 1982680997 | EVERED        | JOHN       |
+| 1376571554 | FLYNN         | JOHN       |
+| 1689774804 | FREEMAN       | JOHN       |
+| 1386604080 | GIANNINI      | JOHN       |
+| 1427395326 | HAGGERTY      | JOHN       |
+| 1316239189 | HAMMONS       | JOHN       |
+| 1407832538 | HELLRUNG      | JOHN       |
+| 1649734195 | HILTON        | JOHN       |
+| 1992799001 | HOLLINGSWORTH | JOHN       |
+| 1407317084 | HURLEY        | JOHN       |
+| 1710905674 | JONES         | JOHN       |
+| 1679161996 | KLUBE         | JOHN       |
+| 1851513428 | LOVEJOY III   | JOHN       |
+| 1023000163 | LUDU          | JOHN       |
+| 1144205394 | MAHANY        | JOHN       |
+| 1053763698 | MARINO        | JOHN       |
+| 1942307897 | MCGINNIS      | JOHN       |
+| 1669506580 | MCKEON        | JOHN       |
+| 1245970896 | MEISNER       | JOHN       |
+| 1275596066 | MUNROE        | JOHN       |
+| 1457370702 | PEDERSEN      | JOHN       |
+| 1851715767 | PETTYGROVE    | JOHN       |
+| 1568506368 | SMITH         | JOHN       |
+| 1548823594 | SUTTER        | JOHN       |
+| 1366437204 | VARENHOLT     | JOHN       |
+| 1639191166 | VERVILLE      | JOHN       |
 
 <br><br>
 
@@ -993,21 +1053,99 @@ op |> dplyr::glimpse()
 ```
 
     #> Rows: 92
-    #> Columns: 14
-    #> $ program_year                           <chr> "2021", "2021", "2021", "2021",…
-    #> $ record_number                          <chr> "1", "692021", "4385936", "4385…
-    #> $ change_type                            <chr> "UNCHANGED", "UNCHANGED", "UNCH…
-    #> $ total_amount_of_payment_usdollars      <dbl> 2500.00, 69.90, 107.93, 97.14, …
-    #> $ date_of_payment                        <dttm> 2021-05-26, 2021-03-04, 2021-0…
-    #> $ form_of_payment_or_transfer_of_value   <chr> "Cash or cash equivalent", "In-…
-    #> $ nature_of_payment_or_transfer_of_value <chr> "Compensation for services othe…
-    #> $ record_id                              <chr> "754966348", "787838145", "7971…
-    #> $ covered_recipient                      <list> [<tbl_df[1 x 24]>], [<tbl_df[1…
-    #> $ recipient_address                      <list> [<tbl_df[1 x 8]>], [<tbl_df[1 …
-    #> $ applicable_mfg_gpo                     <list> [<tbl_df[1 x 5]>], [<tbl_df[1 …
-    #> $ associated_drug_device                 <list> [<tbl_df[1 x 40]>], [<tbl_df[1…
-    #> $ payment_related_data                   <list> [<tbl_df[1 x 14]>], [<tbl_df[1…
-    #> $ teaching_hospital                      <list> [<tbl_df[1 x 3]>], [<tbl_df[1 …
+    #> Columns: 92
+    #> $ program_year                                                     <chr> "2021…
+    #> $ record_number                                                    <chr> "1", …
+    #> $ change_type                                                      <chr> "UNCH…
+    #> $ covered_recipient_type                                           <chr> "Cove…
+    #> $ teaching_hospital_ccn                                            <chr> NA, N…
+    #> $ teaching_hospital_id                                             <chr> NA, N…
+    #> $ teaching_hospital_name                                           <chr> NA, N…
+    #> $ covered_recipient_profile_id                                     <chr> "9205…
+    #> $ covered_recipient_npi                                            <chr> "1043…
+    #> $ covered_recipient_first_name                                     <chr> "Ahad…
+    #> $ covered_recipient_middle_name                                    <chr> NA, N…
+    #> $ covered_recipient_last_name                                      <chr> "Maho…
+    #> $ covered_recipient_name_suffix                                    <chr> NA, N…
+    #> $ recipient_primary_business_street_address_line1                  <chr> "6739…
+    #> $ recipient_primary_business_street_address_line2                  <chr> NA, N…
+    #> $ recipient_city                                                   <chr> "Zeph…
+    #> $ recipient_state                                                  <chr> "FL",…
+    #> $ recipient_zip_code                                               <chr> "3354…
+    #> $ recipient_country                                                <chr> "Unit…
+    #> $ recipient_province                                               <chr> NA, N…
+    #> $ recipient_postal_code                                            <chr> NA, N…
+    #> $ covered_recipient_primary_type_1                                 <chr> "Medi…
+    #> $ covered_recipient_primary_type_2                                 <chr> NA, N…
+    #> $ covered_recipient_primary_type_3                                 <chr> NA, N…
+    #> $ covered_recipient_primary_type_4                                 <chr> NA, N…
+    #> $ covered_recipient_primary_type_5                                 <chr> NA, N…
+    #> $ covered_recipient_primary_type_6                                 <chr> NA, N…
+    #> $ covered_recipient_specialty_1                                    <chr> "Allo…
+    #> $ covered_recipient_specialty_2                                    <chr> NA, N…
+    #> $ covered_recipient_specialty_3                                    <chr> NA, N…
+    #> $ covered_recipient_specialty_4                                    <chr> NA, N…
+    #> $ covered_recipient_specialty_5                                    <chr> NA, N…
+    #> $ covered_recipient_specialty_6                                    <chr> NA, N…
+    #> $ covered_recipient_license_state_code1                            <chr> "FL",…
+    #> $ covered_recipient_license_state_code2                            <chr> NA, N…
+    #> $ covered_recipient_license_state_code3                            <chr> NA, N…
+    #> $ covered_recipient_license_state_code4                            <chr> NA, N…
+    #> $ covered_recipient_license_state_code5                            <chr> NA, N…
+    #> $ submitting_applicable_manufacturer_or_applicable_gpo_name        <chr> "Mobi…
+    #> $ applicable_manufacturer_or_applicable_gpo_making_payment_id      <chr> "1000…
+    #> $ applicable_manufacturer_or_applicable_gpo_making_payment_name    <chr> "Mobi…
+    #> $ applicable_manufacturer_or_applicable_gpo_making_payment_state   <chr> "MO",…
+    #> $ applicable_manufacturer_or_applicable_gpo_making_payment_country <chr> "Unit…
+    #> $ total_amount_of_payment_usdollars                                <dbl> 2500.…
+    #> $ date_of_payment                                                  <dttm> 2021…
+    #> $ number_of_payments_included_in_total_amount                      <chr> "1", …
+    #> $ form_of_payment_or_transfer_of_value                             <chr> "Cash…
+    #> $ nature_of_payment_or_transfer_of_value                           <chr> "Comp…
+    #> $ city_of_travel                                                   <chr> NA, N…
+    #> $ state_of_travel                                                  <chr> NA, N…
+    #> $ country_of_travel                                                <chr> NA, N…
+    #> $ physician_ownership_indicator                                    <chr> "No",…
+    #> $ third_party_payment_recipient_indicator                          <chr> "No T…
+    #> $ name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc <chr> NA, N…
+    #> $ charity_indicator                                                <chr> "No",…
+    #> $ third_party_equals_covered_recipient_indicator                   <chr> NA, N…
+    #> $ contextual_information                                           <chr> NA, N…
+    #> $ delay_in_publication_indicator                                   <chr> "No",…
+    #> $ record_id                                                        <chr> "7549…
+    #> $ dispute_status_for_publication                                   <chr> "No",…
+    #> $ related_product_indicator                                        <chr> "Yes"…
+    #> $ covered_or_noncovered_indicator_1                                <chr> "Cove…
+    #> $ indicate_drug_or_biological_or_device_or_medical_supply_1        <chr> "Drug…
+    #> $ product_category_or_therapeutic_area_1                           <chr> "Opht…
+    #> $ name_of_drug_or_biological_or_device_or_medical_supply_1         <chr> "Mito…
+    #> $ associated_drug_or_biological_ndc_1                              <chr> "4977…
+    #> $ associated_device_or_medical_supply_pdi_1                        <chr> NA, "…
+    #> $ covered_or_noncovered_indicator_2                                <chr> NA, N…
+    #> $ indicate_drug_or_biological_or_device_or_medical_supply_2        <chr> NA, N…
+    #> $ product_category_or_therapeutic_area_2                           <chr> NA, N…
+    #> $ name_of_drug_or_biological_or_device_or_medical_supply_2         <chr> NA, N…
+    #> $ associated_drug_or_biological_ndc_2                              <chr> NA, N…
+    #> $ associated_device_or_medical_supply_pdi_2                        <chr> NA, N…
+    #> $ covered_or_noncovered_indicator_3                                <chr> NA, N…
+    #> $ indicate_drug_or_biological_or_device_or_medical_supply_3        <chr> NA, N…
+    #> $ product_category_or_therapeutic_area_3                           <chr> NA, N…
+    #> $ name_of_drug_or_biological_or_device_or_medical_supply_3         <chr> NA, N…
+    #> $ associated_drug_or_biological_ndc_3                              <chr> NA, N…
+    #> $ associated_device_or_medical_supply_pdi_3                        <chr> NA, N…
+    #> $ covered_or_noncovered_indicator_4                                <chr> NA, N…
+    #> $ indicate_drug_or_biological_or_device_or_medical_supply_4        <chr> NA, N…
+    #> $ product_category_or_therapeutic_area_4                           <chr> NA, N…
+    #> $ name_of_drug_or_biological_or_device_or_medical_supply_4         <chr> NA, N…
+    #> $ associated_drug_or_biological_ndc_4                              <chr> NA, N…
+    #> $ associated_device_or_medical_supply_pdi_4                        <chr> NA, N…
+    #> $ covered_or_noncovered_indicator_5                                <chr> NA, N…
+    #> $ indicate_drug_or_biological_or_device_or_medical_supply_5        <chr> NA, N…
+    #> $ product_category_or_therapeutic_area_5                           <chr> NA, N…
+    #> $ name_of_drug_or_biological_or_device_or_medical_supply_5         <chr> NA, N…
+    #> $ associated_drug_or_biological_ndc_5                              <chr> NA, N…
+    #> $ associated_device_or_medical_supply_pdi_5                        <chr> NA, N…
+    #> $ payment_publication_date                                         <dttm> 2023…
 
 <br>
 
@@ -1035,16 +1173,9 @@ op |>
   gluedown::md_table()
 ```
 
-| name          | value          |
-|:--------------|:---------------|
-| program_year  | 2021           |
-| recipient_npi | 1043218118     |
-| profile_id    | 92058          |
-| first_name    | Ahad           |
-| last_name     | Mahootchi      |
-| credential    | Medical Doctor |
-| city          | Zephrhills     |
-| state         | FL             |
+    #> Error in `tidyr::hoist()`:
+    #> Caused by error:
+    #> ! object 'covered_recipient' not found
 
 <br>
 
@@ -1064,7 +1195,13 @@ op_2 <- op |>
                 payment_total = total_amount_of_payment_usdollars,
                 nature_of_payment = nature_of_payment_or_transfer_of_value) |> 
   dplyr::arrange(payment_date)
+```
 
+    #> Error in `tidyr::hoist()`:
+    #> Caused by error:
+    #> ! object 'applicable_mfg_gpo' not found
+
+``` r
 op_2 |> 
   dplyr::group_by(manufacturer_gpo_paying, 
                   nature_of_payment, 
@@ -1077,40 +1214,7 @@ op_2 |>
   gluedown::md_table()
 ```
 
-| manufacturer_gpo_paying                            | nature_of_payment  | name                          |   n | payment_total |
-|:---------------------------------------------------|:-------------------|:------------------------------|----:|--------------:|
-| Allergan, Inc.                                     | Compensation for … | XEN GLAUCOMA TREATMENT SYSTEM |   4 |       7100.00 |
-| Allergan, Inc.                                     | Consulting Fee     | XEN GLAUCOMA TREATMENT SYSTEM |  13 |       4441.68 |
-| Bausch & Lomb, a division of Bausch Health US, LLC | Consulting Fee     | STELLARIS                     |   1 |       3000.00 |
-| Mobius Therapeutics, LLC                           | Compensation for … | Mitosol                       |   1 |       2500.00 |
-| Ivantis, Inc                                       | Consulting Fee     | Hydrus Microstent             |   1 |       1500.00 |
-| Iridex Corporation                                 | Consulting Fee     | NA                            |   1 |       1000.00 |
-| Allergan, Inc.                                     | Consulting Fee     | DURYSTA                       |   1 |        325.00 |
-| Allergan, Inc.                                     | Food and Beverage  | XEN GLAUCOMA TREATMENT SYSTEM |   7 |        317.32 |
-| Ivantis, Inc                                       | Food and Beverage  | Hydrus Microstent             |   6 |        304.85 |
-| Horizon Therapeutics plc                           | Food and Beverage  | TEPEZZA                       |   4 |        254.57 |
-| Allergan, Inc.                                     | Food and Beverage  | DURYSTA                       |   7 |        197.35 |
-| SUN PHARMACEUTICAL INDUSTRIES INC.                 | Food and Beverage  | Cequa                         |   5 |        175.53 |
-| Mallinckrodt Hospital Products Inc.                | Food and Beverage  | ACTHAR                        |   4 |        156.91 |
-| NEW WORLD MEDICAL,INC.                             | Food and Beverage  | Ahmed Glaucoma Valve          |   2 |        156.86 |
-| Sight Sciences, Inc.                               | Food and Beverage  | OMNI(R) SURGICAL SYSTEM (US)  |   4 |        153.97 |
-| Kala Pharmaceuticals, Inc.                         | Food and Beverage  | INVELTYS                      |   7 |        138.46 |
-| Regeneron Healthcare Solutions, Inc.               | Food and Beverage  | EYLEA                         |   1 |        125.01 |
-| Bausch & Lomb, a division of Bausch Health US, LLC | Food and Beverage  | CRYSTALENS                    |   1 |        116.93 |
-| Alcon Vision LLC                                   | Food and Beverage  | Precision 1                   |   1 |        114.20 |
-| Sight Sciences, Inc.                               | Food and Beverage  | TearCare SmartLid             |   1 |         96.30 |
-| Alimera Sciences, Inc.                             | Food and Beverage  | ILUVIEN                       |   5 |         89.25 |
-| Allergan, Inc.                                     | Food and Beverage  | NA                            |   1 |         73.24 |
-| Johnson & Johnson Surgical Vision, Inc.            | Food and Beverage  | Tecnis IOL                    |   1 |         69.90 |
-| Ocular Therapeutix, Inc.                           | Food and Beverage  | DEXTENZA                      |   2 |         69.27 |
-| Novartis Pharmaceuticals Corporation               | Food and Beverage  | BEOVU                         |   3 |         61.57 |
-| Iridex Corporation                                 | Food and Beverage  | NA                            |   2 |         34.87 |
-| Beaver-Visitec International, Inc.                 | Food and Beverage  | NA                            |   1 |         25.02 |
-| Dompe US, Inc.                                     | Food and Beverage  | OXERVATE                      |   1 |         20.48 |
-| EyePoint Pharmaceuticals US, Inc.                  | Food and Beverage  | DEXYCU                        |   1 |         16.64 |
-| Checkpoint Surgical, Inc                           | Food and Beverage  | Checkpoint Stimulators        |   1 |         14.74 |
-| Alcon Vision LLC                                   | Food and Beverage  | AcrySof IQ VIVITY IOL         |   1 |         14.73 |
-| EyePoint Pharmaceuticals US, Inc.                  | Food and Beverage  | YUTIQ                         |   1 |         13.85 |
+    #> Error in dplyr::group_by(op_2, manufacturer_gpo_paying, nature_of_payment, : object 'op_2' not found
 
 <br><br>
 
@@ -1716,6 +1820,75 @@ prov |> dplyr::select(year, bene_cc) |>
 
 <br><br>
 
+``` r
+prov <- purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
+
+prov_sex_count <- prov |> 
+  dplyr::select(year, bene_sex) |> 
+  tidyr::unnest(cols = c(bene_sex)) |> 
+  dplyr::rename(female = bene_feml_cnt, 
+                male = bene_male_cnt) |> 
+  tidyr::pivot_longer(cols = female:male, names_to = "gender", values_to = "count")
+
+prov_sex_pct <- prov |> 
+  dplyr::select(year, bene_sex) |> 
+  tidyr::unnest(cols = c(bene_sex)) |> 
+  dplyr::rename(female = bene_feml_cnt, 
+                male = bene_male_cnt) |> 
+  dplyr::mutate(female = round((female / (female + male) * 100), 2),
+                male = round((male / (female + male) * 100), 2)) |> 
+  tidyr::pivot_longer(cols = female:male, names_to = "gender", values_to = "percent")
+
+prov_sex <- dplyr::left_join(prov_sex_count, prov_sex_pct, by = dplyr::join_by(year, gender)) |> 
+  dplyr::mutate(gender = forcats::as_factor(gender),
+                year = forcats::as_factor(year))
+
+py1 <- apyramid::age_pyramid(prov_sex, 
+            age_group = year, 
+            split_by = gender, 
+            count = count,
+            pyramid = TRUE)
+
+py1 + ggplot2::labs(title = "Fisher's *Iris* data set",
+       subtitle = "Demonstrating the TDC theme for ggplot2",
+       x = "The x axis", y = "The y axis",
+       caption = "Fisher's **Iris** data set") +
+  tdcthemes::style_tdc(legend = TRUE) +
+  tdcthemes::scale_fill_tdc() 
+```
+
+    #> Error in theme(legend.position = "bottom"): could not find function "theme"
+
+<br>
+
+``` r
+prov_age <- prov |> 
+  dplyr::select(year, bene_age) |> 
+  tidyr::unnest(cols = c(bene_age)) |> 
+  dplyr::select(-bene_avg_age) |> 
+  dplyr::rename("<65" = bene_age_lt_65_cnt,
+                "65-74" = bene_age_65_74_cnt,
+                "75-84" = bene_age_75_84_cnt,
+                ">84" = bene_age_gt_84_cnt) |> 
+  tidyr::pivot_longer(cols = c("<65", "65-74", "75-84", ">84"), 
+                      names_to = "age", 
+                      values_to = "count") |>
+  dplyr::mutate(age = forcats::as_factor(age),
+                year = forcats::as_factor(year)
+                )
+
+apyramid::age_pyramid(data = prov_age, 
+            age_group = year, 
+            split_by = age, 
+            count = count,
+            pyramid = TRUE
+            )
+```
+
+<img src="man/figures/README-unnamed-chunk-64-1.png" width="100%" />
+
+<br><br>
+
 ### Medicare Chronic Conditions APIs
 
 <br>
@@ -1725,14 +1898,8 @@ prov |> dplyr::select(year, bene_cc) |>
 <br>
 
 ``` r
-mult <- cc_multiple(year = 2007, 
-                    geo_lvl = "National", 
-                    demo_lvl = "Race")
-
-mult |> dplyr::select(year, 
-                      bene_age_lvl, 
-                      bene_demo_desc:er_visits_per_1000_benes) |> 
-        gluedown::md_table()
+mult <- cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
+mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_benes) |> gluedown::md_table()
 ```
 
 | year | bene_age_lvl | bene_demo_desc         | bene_mcc | prvlnc | tot_mdcr_stdzd_pymt_pc | tot_mdcr_pymt_pc | hosp_readmsn_rate | er_visits_per_1000_benes |
@@ -1805,329 +1972,17 @@ mult |> dplyr::select(year,
 <br>
 
 ``` r
-spec <- cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race")
-
-spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> 
-        gluedown::md_table()
+spec <- cc_specific(year = 2007, geo_level = "County", state = "GA", county = "Lowndes", demo_level = "Race")
 ```
 
-| year | bene_age_lvl | bene_demo_desc         | bene_cond                                   | prvlnc |
-|-----:|:-------------|:-----------------------|:--------------------------------------------|:-------|
-| 2007 | 65+          | Asian Pacific Islander | Alcohol Abuse                               | 0.0036 |
-| 2007 | \<65         | Asian Pacific Islander | Alcohol Abuse                               | 0.021  |
-| 2007 | All          | Asian Pacific Islander | Alcohol Abuse                               | 0.0057 |
-| 2007 | 65+          | Hispanic               | Alcohol Abuse                               | 0.0107 |
-| 2007 | \<65         | Hispanic               | Alcohol Abuse                               | 0.0383 |
-| 2007 | All          | Hispanic               | Alcohol Abuse                               | 0.0178 |
-| 2007 | 65+          | Native American        | Alcohol Abuse                               | 0.0288 |
-| 2007 | \<65         | Native American        | Alcohol Abuse                               | 0.08   |
-| 2007 | All          | Native American        | Alcohol Abuse                               | 0.0453 |
-| 2007 | 65+          | non-Hispanic Black     | Alcohol Abuse                               | 0.0148 |
-| 2007 | \<65         | non-Hispanic Black     | Alcohol Abuse                               | 0.0487 |
-| 2007 | All          | non-Hispanic Black     | Alcohol Abuse                               | 0.0266 |
-| 2007 | 65+          | non-Hispanic White     | Alcohol Abuse                               | 0.0087 |
-| 2007 | \<65         | non-Hispanic White     | Alcohol Abuse                               | 0.0425 |
-| 2007 | All          | non-Hispanic White     | Alcohol Abuse                               | 0.0134 |
-| 2007 | 65+          | Asian Pacific Islander | Alzheimer’s Disease/Dementia                | 0.0936 |
-| 2007 | \<65         | Asian Pacific Islander | Alzheimer’s Disease/Dementia                | 0.0261 |
-| 2007 | All          | Asian Pacific Islander | Alzheimer’s Disease/Dementia                | 0.0855 |
-| 2007 | 65+          | Hispanic               | Alzheimer’s Disease/Dementia                | 0.1228 |
-| 2007 | \<65         | Hispanic               | Alzheimer’s Disease/Dementia                | 0.0281 |
-| 2007 | All          | Hispanic               | Alzheimer’s Disease/Dementia                | 0.0983 |
-| 2007 | 65+          | Native American        | Alzheimer’s Disease/Dementia                | 0.1025 |
-| 2007 | \<65         | Native American        | Alzheimer’s Disease/Dementia                | 0.0233 |
-| 2007 | All          | Native American        | Alzheimer’s Disease/Dementia                | 0.0769 |
-| 2007 | 65+          | non-Hispanic Black     | Alzheimer’s Disease/Dementia                | 0.1538 |
-| 2007 | \<65         | non-Hispanic Black     | Alzheimer’s Disease/Dementia                | 0.0294 |
-| 2007 | All          | non-Hispanic Black     | Alzheimer’s Disease/Dementia                | 0.1105 |
-| 2007 | 65+          | non-Hispanic White     | Alzheimer’s Disease/Dementia                | 0.1168 |
-| 2007 | \<65         | non-Hispanic White     | Alzheimer’s Disease/Dementia                | 0.0313 |
-| 2007 | All          | non-Hispanic White     | Alzheimer’s Disease/Dementia                | 0.1048 |
-| 2007 | 65+          | Asian Pacific Islander | Arthritis                                   | 0.2476 |
-| 2007 | \<65         | Asian Pacific Islander | Arthritis                                   | 0.118  |
-| 2007 | All          | Asian Pacific Islander | Arthritis                                   | 0.2321 |
-| 2007 | 65+          | Hispanic               | Arthritis                                   | 0.2936 |
-| 2007 | \<65         | Hispanic               | Arthritis                                   | 0.1801 |
-| 2007 | All          | Hispanic               | Arthritis                                   | 0.2643 |
-| 2007 | 65+          | Native American        | Arthritis                                   | 0.2791 |
-| 2007 | \<65         | Native American        | Arthritis                                   | 0.1953 |
-| 2007 | All          | Native American        | Arthritis                                   | 0.2521 |
-| 2007 | 65+          | non-Hispanic Black     | Arthritis                                   | 0.2855 |
-| 2007 | \<65         | non-Hispanic Black     | Arthritis                                   | 0.1767 |
-| 2007 | All          | non-Hispanic Black     | Arthritis                                   | 0.2476 |
-| 2007 | 65+          | non-Hispanic White     | Arthritis                                   | 0.2791 |
-| 2007 | \<65         | non-Hispanic White     | Arthritis                                   | 0.1928 |
-| 2007 | All          | non-Hispanic White     | Arthritis                                   | 0.267  |
-| 2007 | 65+          | Asian Pacific Islander | Asthma                                      | 0.0439 |
-| 2007 | \<65         | Asian Pacific Islander | Asthma                                      | 0.047  |
-| 2007 | All          | Asian Pacific Islander | Asthma                                      | 0.0442 |
-| 2007 | 65+          | Hispanic               | Asthma                                      | 0.0493 |
-| 2007 | \<65         | Hispanic               | Asthma                                      | 0.0665 |
-| 2007 | All          | Hispanic               | Asthma                                      | 0.0538 |
-| 2007 | 65+          | Native American        | Asthma                                      | 0.0474 |
-| 2007 | \<65         | Native American        | Asthma                                      | 0.0706 |
-| 2007 | All          | Native American        | Asthma                                      | 0.0549 |
-| 2007 | 65+          | non-Hispanic Black     | Asthma                                      | 0.0458 |
-| 2007 | \<65         | non-Hispanic Black     | Asthma                                      | 0.0739 |
-| 2007 | All          | non-Hispanic Black     | Asthma                                      | 0.0556 |
-| 2007 | 65+          | non-Hispanic White     | Asthma                                      | 0.0358 |
-| 2007 | \<65         | non-Hispanic White     | Asthma                                      | 0.0616 |
-| 2007 | All          | non-Hispanic White     | Asthma                                      | 0.0394 |
-| 2007 | 65+          | Asian Pacific Islander | Atrial Fibrillation                         | 0.0457 |
-| 2007 | \<65         | Asian Pacific Islander | Atrial Fibrillation                         | 0.0163 |
-| 2007 | All          | Asian Pacific Islander | Atrial Fibrillation                         | 0.0422 |
-| 2007 | 65+          | Hispanic               | Atrial Fibrillation                         | 0.0438 |
-| 2007 | \<65         | Hispanic               | Atrial Fibrillation                         | 0.0124 |
-| 2007 | All          | Hispanic               | Atrial Fibrillation                         | 0.0357 |
-| 2007 | 65+          | Native American        | Atrial Fibrillation                         | 0.0529 |
-| 2007 | \<65         | Native American        | Atrial Fibrillation                         | 0.0124 |
-| 2007 | All          | Native American        | Atrial Fibrillation                         | 0.0398 |
-| 2007 | 65+          | non-Hispanic Black     | Atrial Fibrillation                         | 0.0448 |
-| 2007 | \<65         | non-Hispanic Black     | Atrial Fibrillation                         | 0.0149 |
-| 2007 | All          | non-Hispanic Black     | Atrial Fibrillation                         | 0.0344 |
-| 2007 | 65+          | non-Hispanic White     | Atrial Fibrillation                         | 0.0941 |
-| 2007 | \<65         | non-Hispanic White     | Atrial Fibrillation                         | 0.0192 |
-| 2007 | All          | non-Hispanic White     | Atrial Fibrillation                         | 0.0836 |
-| 2007 | 65+          | Asian Pacific Islander | Autism Spectrum Disorders                   | 0      |
-| 2007 | \<65         | Asian Pacific Islander | Autism Spectrum Disorders                   | 0.0044 |
-| 2007 | All          | Asian Pacific Islander | Autism Spectrum Disorders                   | 6e-04  |
-| 2007 | 65+          | Hispanic               | Autism Spectrum Disorders                   | 0      |
-| 2007 | \<65         | Hispanic               | Autism Spectrum Disorders                   | 0.0024 |
-| 2007 | All          | Hispanic               | Autism Spectrum Disorders                   | 6e-04  |
-| 2007 | 65+          | Native American        | Autism Spectrum Disorders                   |        |
-| 2007 | \<65         | Native American        | Autism Spectrum Disorders                   |        |
-| 2007 | All          | Native American        | Autism Spectrum Disorders                   | 8e-04  |
-| 2007 | 65+          | non-Hispanic Black     | Autism Spectrum Disorders                   | 1e-04  |
-| 2007 | \<65         | non-Hispanic Black     | Autism Spectrum Disorders                   | 0.0026 |
-| 2007 | All          | non-Hispanic Black     | Autism Spectrum Disorders                   | 0.001  |
-| 2007 | 65+          | non-Hispanic White     | Autism Spectrum Disorders                   | 1e-04  |
-| 2007 | \<65         | non-Hispanic White     | Autism Spectrum Disorders                   | 0.0048 |
-| 2007 | All          | non-Hispanic White     | Autism Spectrum Disorders                   | 7e-04  |
-| 2007 | 65+          | Asian Pacific Islander | COPD                                        | 0.075  |
-| 2007 | \<65         | Asian Pacific Islander | COPD                                        | 0.0457 |
-| 2007 | All          | Asian Pacific Islander | COPD                                        | 0.0715 |
-| 2007 | 65+          | Hispanic               | COPD                                        | 0.0994 |
-| 2007 | \<65         | Hispanic               | COPD                                        | 0.0619 |
-| 2007 | All          | Hispanic               | COPD                                        | 0.0897 |
-| 2007 | 65+          | Native American        | COPD                                        | 0.1301 |
-| 2007 | \<65         | Native American        | COPD                                        | 0.095  |
-| 2007 | All          | Native American        | COPD                                        | 0.1188 |
-| 2007 | 65+          | non-Hispanic Black     | COPD                                        | 0.1008 |
-| 2007 | \<65         | non-Hispanic Black     | COPD                                        | 0.0772 |
-| 2007 | All          | non-Hispanic Black     | COPD                                        | 0.0926 |
-| 2007 | 65+          | non-Hispanic White     | COPD                                        | 0.1185 |
-| 2007 | \<65         | non-Hispanic White     | COPD                                        | 0.1175 |
-| 2007 | All          | non-Hispanic White     | COPD                                        | 0.1183 |
-| 2007 | 65+          | Asian Pacific Islander | Cancer                                      | 0.0576 |
-| 2007 | \<65         | Asian Pacific Islander | Cancer                                      | 0.0209 |
-| 2007 | All          | Asian Pacific Islander | Cancer                                      | 0.0532 |
-| 2007 | 65+          | Hispanic               | Cancer                                      | 0.0612 |
-| 2007 | \<65         | Hispanic               | Cancer                                      | 0.0197 |
-| 2007 | All          | Hispanic               | Cancer                                      | 0.0505 |
-| 2007 | 65+          | Native American        | Cancer                                      | 0.0647 |
-| 2007 | \<65         | Native American        | Cancer                                      | 0.0195 |
-| 2007 | All          | Native American        | Cancer                                      | 0.0501 |
-| 2007 | 65+          | non-Hispanic Black     | Cancer                                      | 0.0944 |
-| 2007 | \<65         | non-Hispanic Black     | Cancer                                      | 0.0271 |
-| 2007 | All          | non-Hispanic Black     | Cancer                                      | 0.071  |
-| 2007 | 65+          | non-Hispanic White     | Cancer                                      | 0.0912 |
-| 2007 | \<65         | non-Hispanic White     | Cancer                                      | 0.0253 |
-| 2007 | All          | non-Hispanic White     | Cancer                                      | 0.082  |
-| 2007 | 65+          | Asian Pacific Islander | Chronic Kidney Disease                      | 0.1076 |
-| 2007 | \<65         | Asian Pacific Islander | Chronic Kidney Disease                      | 0.1415 |
-| 2007 | All          | Asian Pacific Islander | Chronic Kidney Disease                      | 0.1117 |
-| 2007 | 65+          | Hispanic               | Chronic Kidney Disease                      | 0.1217 |
-| 2007 | \<65         | Hispanic               | Chronic Kidney Disease                      | 0.1276 |
-| 2007 | All          | Hispanic               | Chronic Kidney Disease                      | 0.1232 |
-| 2007 | 65+          | Native American        | Chronic Kidney Disease                      | 0.1462 |
-| 2007 | \<65         | Native American        | Chronic Kidney Disease                      | 0.1269 |
-| 2007 | All          | Native American        | Chronic Kidney Disease                      | 0.1399 |
-| 2007 | 65+          | non-Hispanic Black     | Chronic Kidney Disease                      | 0.1814 |
-| 2007 | \<65         | non-Hispanic Black     | Chronic Kidney Disease                      | 0.1546 |
-| 2007 | All          | non-Hispanic Black     | Chronic Kidney Disease                      | 0.1721 |
-| 2007 | 65+          | non-Hispanic White     | Chronic Kidney Disease                      | 0.1112 |
-| 2007 | \<65         | non-Hispanic White     | Chronic Kidney Disease                      | 0.0809 |
-| 2007 | All          | non-Hispanic White     | Chronic Kidney Disease                      | 0.107  |
-| 2007 | 65+          | Asian Pacific Islander | Depression                                  | 0.0496 |
-| 2007 | \<65         | Asian Pacific Islander | Depression                                  | 0.1598 |
-| 2007 | All          | Asian Pacific Islander | Depression                                  | 0.0628 |
-| 2007 | 65+          | Hispanic               | Depression                                  | 0.104  |
-| 2007 | \<65         | Hispanic               | Depression                                  | 0.2164 |
-| 2007 | All          | Hispanic               | Depression                                  | 0.1331 |
-| 2007 | 65+          | Native American        | Depression                                  | 0.1058 |
-| 2007 | \<65         | Native American        | Depression                                  | 0.2375 |
-| 2007 | All          | Native American        | Depression                                  | 0.1484 |
-| 2007 | 65+          | non-Hispanic Black     | Depression                                  | 0.0717 |
-| 2007 | \<65         | non-Hispanic Black     | Depression                                  | 0.1637 |
-| 2007 | All          | non-Hispanic Black     | Depression                                  | 0.1038 |
-| 2007 | 65+          | non-Hispanic White     | Depression                                  | 0.1022 |
-| 2007 | \<65         | non-Hispanic White     | Depression                                  | 0.2632 |
-| 2007 | All          | non-Hispanic White     | Depression                                  | 0.1247 |
-| 2007 | 65+          | Asian Pacific Islander | Diabetes                                    | 0.3215 |
-| 2007 | \<65         | Asian Pacific Islander | Diabetes                                    | 0.254  |
-| 2007 | All          | Asian Pacific Islander | Diabetes                                    | 0.3134 |
-| 2007 | 65+          | Hispanic               | Diabetes                                    | 0.3746 |
-| 2007 | \<65         | Hispanic               | Diabetes                                    | 0.3116 |
-| 2007 | All          | Hispanic               | Diabetes                                    | 0.3584 |
-| 2007 | 65+          | Native American        | Diabetes                                    | 0.3668 |
-| 2007 | \<65         | Native American        | Diabetes                                    | 0.3017 |
-| 2007 | All          | Native American        | Diabetes                                    | 0.3458 |
-| 2007 | 65+          | non-Hispanic Black     | Diabetes                                    | 0.3818 |
-| 2007 | \<65         | non-Hispanic Black     | Diabetes                                    | 0.2871 |
-| 2007 | All          | non-Hispanic Black     | Diabetes                                    | 0.3488 |
-| 2007 | 65+          | non-Hispanic White     | Diabetes                                    | 0.2367 |
-| 2007 | \<65         | non-Hispanic White     | Diabetes                                    | 0.2204 |
-| 2007 | All          | non-Hispanic White     | Diabetes                                    | 0.2344 |
-| 2007 | 65+          | Asian Pacific Islander | Drug/Substance Abuse                        | 0.0019 |
-| 2007 | \<65         | Asian Pacific Islander | Drug/Substance Abuse                        | 0.0243 |
-| 2007 | All          | Asian Pacific Islander | Drug/Substance Abuse                        | 0.0046 |
-| 2007 | 65+          | Hispanic               | Drug/Substance Abuse                        | 0.0039 |
-| 2007 | \<65         | Hispanic               | Drug/Substance Abuse                        | 0.0384 |
-| 2007 | All          | Hispanic               | Drug/Substance Abuse                        | 0.0128 |
-| 2007 | 65+          | Native American        | Drug/Substance Abuse                        | 0.0117 |
-| 2007 | \<65         | Native American        | Drug/Substance Abuse                        | 0.0649 |
-| 2007 | All          | Native American        | Drug/Substance Abuse                        | 0.0289 |
-| 2007 | 65+          | non-Hispanic Black     | Drug/Substance Abuse                        | 0.0061 |
-| 2007 | \<65         | non-Hispanic Black     | Drug/Substance Abuse                        | 0.0614 |
-| 2007 | All          | non-Hispanic Black     | Drug/Substance Abuse                        | 0.0253 |
-| 2007 | 65+          | non-Hispanic White     | Drug/Substance Abuse                        | 0.0054 |
-| 2007 | \<65         | non-Hispanic White     | Drug/Substance Abuse                        | 0.0478 |
-| 2007 | All          | non-Hispanic White     | Drug/Substance Abuse                        | 0.0114 |
-| 2007 | 65+          | Asian Pacific Islander | HIV/AIDS                                    | 5e-04  |
-| 2007 | \<65         | Asian Pacific Islander | HIV/AIDS                                    | 0.0101 |
-| 2007 | All          | Asian Pacific Islander | HIV/AIDS                                    | 0.0017 |
-| 2007 | 65+          | Hispanic               | HIV/AIDS                                    | 0.0032 |
-| 2007 | \<65         | Hispanic               | HIV/AIDS                                    | 0.0275 |
-| 2007 | All          | Hispanic               | HIV/AIDS                                    | 0.0095 |
-| 2007 | 65+          | Native American        | HIV/AIDS                                    | 7e-04  |
-| 2007 | \<65         | Native American        | HIV/AIDS                                    | 0.0123 |
-| 2007 | All          | Native American        | HIV/AIDS                                    | 0.0044 |
-| 2007 | 65+          | non-Hispanic Black     | HIV/AIDS                                    | 0.0029 |
-| 2007 | \<65         | non-Hispanic Black     | HIV/AIDS                                    | 0.0363 |
-| 2007 | All          | non-Hispanic Black     | HIV/AIDS                                    | 0.0145 |
-| 2007 | 65+          | non-Hispanic White     | HIV/AIDS                                    | 6e-04  |
-| 2007 | \<65         | non-Hispanic White     | HIV/AIDS                                    | 0.0114 |
-| 2007 | All          | non-Hispanic White     | HIV/AIDS                                    | 0.0021 |
-| 2007 | 65+          | Asian Pacific Islander | Heart Failure                               | 0.1381 |
-| 2007 | \<65         | Asian Pacific Islander | Heart Failure                               | 0.0898 |
-| 2007 | All          | Asian Pacific Islander | Heart Failure                               | 0.1323 |
-| 2007 | 65+          | Hispanic               | Heart Failure                               | 0.1825 |
-| 2007 | \<65         | Hispanic               | Heart Failure                               | 0.1071 |
-| 2007 | All          | Hispanic               | Heart Failure                               | 0.1631 |
-| 2007 | 65+          | Native American        | Heart Failure                               | 0.1806 |
-| 2007 | \<65         | Native American        | Heart Failure                               | 0.0995 |
-| 2007 | All          | Native American        | Heart Failure                               | 0.1544 |
-| 2007 | 65+          | non-Hispanic Black     | Heart Failure                               | 0.2196 |
-| 2007 | \<65         | non-Hispanic Black     | Heart Failure                               | 0.145  |
-| 2007 | All          | non-Hispanic Black     | Heart Failure                               | 0.1936 |
-| 2007 | 65+          | non-Hispanic White     | Heart Failure                               | 0.1757 |
-| 2007 | \<65         | non-Hispanic White     | Heart Failure                               | 0.0951 |
-| 2007 | All          | non-Hispanic White     | Heart Failure                               | 0.1644 |
-| 2007 | 65+          | Asian Pacific Islander | Hepatitis (Chronic Viral B & C)             | 0.0179 |
-| 2007 | \<65         | Asian Pacific Islander | Hepatitis (Chronic Viral B & C)             | 0.0305 |
-| 2007 | All          | Asian Pacific Islander | Hepatitis (Chronic Viral B & C)             | 0.0194 |
-| 2007 | 65+          | Hispanic               | Hepatitis (Chronic Viral B & C)             | 0.005  |
-| 2007 | \<65         | Hispanic               | Hepatitis (Chronic Viral B & C)             | 0.0273 |
-| 2007 | All          | Hispanic               | Hepatitis (Chronic Viral B & C)             | 0.0108 |
-| 2007 | 65+          | Native American        | Hepatitis (Chronic Viral B & C)             | 0.0026 |
-| 2007 | \<65         | Native American        | Hepatitis (Chronic Viral B & C)             | 0.0256 |
-| 2007 | All          | Native American        | Hepatitis (Chronic Viral B & C)             | 0.01   |
-| 2007 | 65+          | non-Hispanic Black     | Hepatitis (Chronic Viral B & C)             | 0.0053 |
-| 2007 | \<65         | non-Hispanic Black     | Hepatitis (Chronic Viral B & C)             | 0.0268 |
-| 2007 | All          | non-Hispanic Black     | Hepatitis (Chronic Viral B & C)             | 0.0128 |
-| 2007 | 65+          | non-Hispanic White     | Hepatitis (Chronic Viral B & C)             | 0.0016 |
-| 2007 | \<65         | non-Hispanic White     | Hepatitis (Chronic Viral B & C)             | 0.0195 |
-| 2007 | All          | non-Hispanic White     | Hepatitis (Chronic Viral B & C)             | 0.0041 |
-| 2007 | 65+          | Asian Pacific Islander | Hyperlipidemia                              | 0.4612 |
-| 2007 | \<65         | Asian Pacific Islander | Hyperlipidemia                              | 0.2765 |
-| 2007 | All          | Asian Pacific Islander | Hyperlipidemia                              | 0.4391 |
-| 2007 | 65+          | Hispanic               | Hyperlipidemia                              | 0.4235 |
-| 2007 | \<65         | Hispanic               | Hyperlipidemia                              | 0.2929 |
-| 2007 | All          | Hispanic               | Hyperlipidemia                              | 0.3898 |
-| 2007 | 65+          | Native American        | Hyperlipidemia                              | 0.328  |
-| 2007 | \<65         | Native American        | Hyperlipidemia                              | 0.2162 |
-| 2007 | All          | Native American        | Hyperlipidemia                              | 0.2919 |
-| 2007 | 65+          | non-Hispanic Black     | Hyperlipidemia                              | 0.3822 |
-| 2007 | \<65         | non-Hispanic Black     | Hyperlipidemia                              | 0.2383 |
-| 2007 | All          | non-Hispanic Black     | Hyperlipidemia                              | 0.3321 |
-| 2007 | 65+          | non-Hispanic White     | Hyperlipidemia                              | 0.4346 |
-| 2007 | \<65         | non-Hispanic White     | Hyperlipidemia                              | 0.2784 |
-| 2007 | All          | non-Hispanic White     | Hyperlipidemia                              | 0.4127 |
-| 2007 | 65+          | Asian Pacific Islander | Hypertension                                | 0.5861 |
-| 2007 | \<65         | Asian Pacific Islander | Hypertension                                | 0.3311 |
-| 2007 | All          | Asian Pacific Islander | Hypertension                                | 0.5556 |
-| 2007 | 65+          | Hispanic               | Hypertension                                | 0.5801 |
-| 2007 | \<65         | Hispanic               | Hypertension                                | 0.3746 |
-| 2007 | All          | Hispanic               | Hypertension                                | 0.527  |
-| 2007 | 65+          | Native American        | Hypertension                                | 0.5687 |
-| 2007 | \<65         | Native American        | Hypertension                                | 0.3574 |
-| 2007 | All          | Native American        | Hypertension                                | 0.5004 |
-| 2007 | 65+          | non-Hispanic Black     | Hypertension                                | 0.6876 |
-| 2007 | \<65         | non-Hispanic Black     | Hypertension                                | 0.4724 |
-| 2007 | All          | non-Hispanic Black     | Hypertension                                | 0.6127 |
-| 2007 | 65+          | non-Hispanic White     | Hypertension                                | 0.5612 |
-| 2007 | \<65         | non-Hispanic White     | Hypertension                                | 0.3364 |
-| 2007 | All          | non-Hispanic White     | Hypertension                                | 0.5297 |
-| 2007 | 65+          | Asian Pacific Islander | Ischemic Heart Disease                      | 0.2968 |
-| 2007 | \<65         | Asian Pacific Islander | Ischemic Heart Disease                      | 0.1533 |
-| 2007 | All          | Asian Pacific Islander | Ischemic Heart Disease                      | 0.2796 |
-| 2007 | 65+          | Hispanic               | Ischemic Heart Disease                      | 0.3432 |
-| 2007 | \<65         | Hispanic               | Ischemic Heart Disease                      | 0.1932 |
-| 2007 | All          | Hispanic               | Ischemic Heart Disease                      | 0.3045 |
-| 2007 | 65+          | Native American        | Ischemic Heart Disease                      | 0.3049 |
-| 2007 | \<65         | Native American        | Ischemic Heart Disease                      | 0.1683 |
-| 2007 | All          | Native American        | Ischemic Heart Disease                      | 0.2607 |
-| 2007 | 65+          | non-Hispanic Black     | Ischemic Heart Disease                      | 0.3141 |
-| 2007 | \<65         | non-Hispanic Black     | Ischemic Heart Disease                      | 0.1901 |
-| 2007 | All          | non-Hispanic Black     | Ischemic Heart Disease                      | 0.2709 |
-| 2007 | 65+          | non-Hispanic White     | Ischemic Heart Disease                      | 0.3398 |
-| 2007 | \<65         | non-Hispanic White     | Ischemic Heart Disease                      | 0.1861 |
-| 2007 | All          | non-Hispanic White     | Ischemic Heart Disease                      | 0.3183 |
-| 2007 | 65+          | Asian Pacific Islander | Osteoporosis                                | 0.1109 |
-| 2007 | \<65         | Asian Pacific Islander | Osteoporosis                                | 0.0249 |
-| 2007 | All          | Asian Pacific Islander | Osteoporosis                                | 0.1006 |
-| 2007 | 65+          | Hispanic               | Osteoporosis                                | 0.0809 |
-| 2007 | \<65         | Hispanic               | Osteoporosis                                | 0.0245 |
-| 2007 | All          | Hispanic               | Osteoporosis                                | 0.0663 |
-| 2007 | 65+          | Native American        | Osteoporosis                                | 0.0543 |
-| 2007 | \<65         | Native American        | Osteoporosis                                | 0.0178 |
-| 2007 | All          | Native American        | Osteoporosis                                | 0.0425 |
-| 2007 | 65+          | non-Hispanic Black     | Osteoporosis                                | 0.0355 |
-| 2007 | \<65         | non-Hispanic Black     | Osteoporosis                                | 0.0108 |
-| 2007 | All          | non-Hispanic Black     | Osteoporosis                                | 0.0269 |
-| 2007 | 65+          | non-Hispanic White     | Osteoporosis                                | 0.0733 |
-| 2007 | \<65         | non-Hispanic White     | Osteoporosis                                | 0.0247 |
-| 2007 | All          | non-Hispanic White     | Osteoporosis                                | 0.0665 |
-| 2007 | 65+          | Asian Pacific Islander | Schizophrenia and Other Psychotic Disorders | 0.0125 |
-| 2007 | \<65         | Asian Pacific Islander | Schizophrenia and Other Psychotic Disorders | 0.1288 |
-| 2007 | All          | Asian Pacific Islander | Schizophrenia and Other Psychotic Disorders | 0.0264 |
-| 2007 | 65+          | Hispanic               | Schizophrenia and Other Psychotic Disorders | 0.0229 |
-| 2007 | \<65         | Hispanic               | Schizophrenia and Other Psychotic Disorders | 0.0843 |
-| 2007 | All          | Hispanic               | Schizophrenia and Other Psychotic Disorders | 0.0388 |
-| 2007 | 65+          | Native American        | Schizophrenia and Other Psychotic Disorders | 0.0238 |
-| 2007 | \<65         | Native American        | Schizophrenia and Other Psychotic Disorders | 0.0909 |
-| 2007 | All          | Native American        | Schizophrenia and Other Psychotic Disorders | 0.0455 |
-| 2007 | 65+          | non-Hispanic Black     | Schizophrenia and Other Psychotic Disorders | 0.0362 |
-| 2007 | \<65         | non-Hispanic Black     | Schizophrenia and Other Psychotic Disorders | 0.1135 |
-| 2007 | All          | non-Hispanic Black     | Schizophrenia and Other Psychotic Disorders | 0.0631 |
-| 2007 | 65+          | non-Hispanic White     | Schizophrenia and Other Psychotic Disorders | 0.0226 |
-| 2007 | \<65         | non-Hispanic White     | Schizophrenia and Other Psychotic Disorders | 0.0935 |
-| 2007 | All          | non-Hispanic White     | Schizophrenia and Other Psychotic Disorders | 0.0325 |
-| 2007 | 65+          | Asian Pacific Islander | Stroke                                      | 0.0398 |
-| 2007 | \<65         | Asian Pacific Islander | Stroke                                      | 0.0268 |
-| 2007 | All          | Asian Pacific Islander | Stroke                                      | 0.0383 |
-| 2007 | 65+          | Hispanic               | Stroke                                      | 0.0466 |
-| 2007 | \<65         | Hispanic               | Stroke                                      | 0.0249 |
-| 2007 | All          | Hispanic               | Stroke                                      | 0.041  |
-| 2007 | 65+          | Native American        | Stroke                                      | 0.0377 |
-| 2007 | \<65         | Native American        | Stroke                                      | 0.0205 |
-| 2007 | All          | Native American        | Stroke                                      | 0.0322 |
-| 2007 | 65+          | non-Hispanic Black     | Stroke                                      | 0.0644 |
-| 2007 | \<65         | non-Hispanic Black     | Stroke                                      | 0.0344 |
-| 2007 | All          | non-Hispanic Black     | Stroke                                      | 0.0539 |
-| 2007 | 65+          | non-Hispanic White     | Stroke                                      | 0.0446 |
-| 2007 | \<65         | non-Hispanic White     | Stroke                                      | 0.0231 |
-| 2007 | All          | non-Hispanic White     | Stroke                                      | 0.0416 |
+    #> Error in `resp_body_raw()`:
+    #> ! Can not retrieve empty body
+
+``` r
+spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> gluedown::md_table()
+```
+
+    #> Error in dplyr::select(spec, year, bene_age_lvl, bene_demo_desc:prvlnc): object 'spec' not found
 
 <br><br>
 

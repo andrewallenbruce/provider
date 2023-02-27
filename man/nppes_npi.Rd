@@ -9,11 +9,11 @@ Centers for Medicare & Medicaid Services
 \usage{
 nppes_npi(
   npi = NULL,
-  prov_type = NULL,
-  first = NULL,
-  last = NULL,
+  enum_type = NULL,
+  first_name = NULL,
+  last_name = NULL,
   org_name = NULL,
-  taxonomy = NULL,
+  taxonomy_desc = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -25,13 +25,13 @@ nppes_npi(
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI).}
 
-\item{prov_type}{The Read API can be refined to retrieve only Individual
+\item{enum_type}{The Read API can be refined to retrieve only Individual
 Providers (\code{NPI-1} or Type 1) or Organizational Providers (\code{NPI-2} or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 returned. When using the Enumeration Type, it cannot be the only
 criteria entered. Additional criteria must also be entered as well.}
 
-\item{first}{Provider's first name. Applies to
+\item{first_name}{Provider's first name. Applies to
 \strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
 permitted requiring at least two characters to be entered (e.g. "jo*" ).
 This field allows the following special characters: ampersand(\code{&}),
@@ -39,7 +39,7 @@ apostrophe(\verb{,}), colon(\code{:}), comma(\verb{,}), forward slash(\code{/}),
 hyphen(\code{-}), left and right parentheses(\verb{()}), period(\code{.}),
 pound sign(\verb{#}), quotation mark(\verb{"}), and semi-colon(\verb{;}).}
 
-\item{last}{Provider's last name. Applies to
+\item{last_name}{Provider's last name. Applies to
 \strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
 permitted requiring at least two characters to be entered (e.g. "jo*" ).
 This field allows the following special characters: ampersand(\code{&}),
@@ -58,7 +58,7 @@ characters: ampersand, apostrophe, "at" sign, colon, comma, forward
 slash, hyphen, left and right parentheses, period, pound sign, quotation
 mark, and semi-colon.}
 
-\item{taxonomy}{Search for providers by their taxonomy by entering the
+\item{taxonomy_desc}{Search for providers by their taxonomy by entering the
 taxonomy description.}
 
 \item{city}{City associated with the provider's address. To search for a
@@ -132,7 +132,7 @@ nppes_npi(city = "Atlanta",
           country = "US")
 
 ### First name, city, state
-nppes_npi(first = "John",
+nppes_npi(first_name = "John",
           city = "Baltimore",
           state = "MD")
 
@@ -165,8 +165,8 @@ tribble <- tibble::tribble(
 "nppes_npi", list(1336413418),
 "nppes_npi", list(1710975040),
 "nppes_npi", list(1659781227),
-"nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
-"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
+"nppes_npi", list(first_name = "John", city = "Baltimore", state = "MD"),
+"nppes_npi", list(first_name = "Andrew", city = "Atlanta", state = "GA"))
 
 purrr::invoke_map_dfr(tribble$fn, tribble$params)
 }

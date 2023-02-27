@@ -3,24 +3,32 @@
 \name{cc_specific}
 \alias{cc_specific}
 \title{Search the Medicare Specific Chronic Conditions API}
+\format{
+\subsection{In addition to the searchable columns:}{
+
+\describe{
+\item{Prvlnc}{Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.}
+\item{Tot_Mdcr_Stdzd_Pymt_PC}{Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care use among beneficiaries.}
+\item{Tot_Mdcr_Pymt_PC}{Medicare spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita).}
+\item{Hosp_Readmsn_Rate}{Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is classified as an index admission, a readmission, or both.}
+\item{ER_Visits_Per_1000_Benes}{Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.}
+}
+}
+}
 \source{
 Centers for Medicare & Medicaid Services
 }
 \usage{
 cc_specific(
   year = 2018,
-  geo_lvl = NULL,
-  geo_desc = NULL,
+  geo_level = c("National", "State", "County"),
+  state = NULL,
+  county = NULL,
   fips = NULL,
-  age_lvl = NULL,
-  demo_lvl = NULL,
+  age_level = NULL,
+  demo_level = NULL,
   demo_desc = NULL,
   condition = NULL,
-  prevalence = NULL,
-  stnd_pymt_pc = NULL,
-  pymt_pc = NULL,
-  readmit_rate = NULL,
-  er_visits = NULL,
   clean_names = TRUE,
   lowercase = TRUE
 )
@@ -29,31 +37,30 @@ cc_specific(
 \item{year}{YYYY, calendar year of Medicare enrollment. 2007-2018 data is
 currently available.}
 
-\item{geo_lvl}{Geographic level of data; options are "National", "State",
-and "County"}
+\item{geo_level}{Geographic level of data; options are \code{National}, \code{State},
+and \code{County}}
 
-\item{geo_desc}{The state and/or county where the Medicare beneficiary
-resides. The values include the 50 United States, District of Columbia,
-Puerto Rico or U.S. Virgin Islands. Data aggregated at the National
-level are identified by "National'.}
+\item{state}{state}
+
+\item{county}{county}
 
 \item{fips}{FIPS state and/or county code where the Medicare beneficiary
 resides. The Bene_Geo_Cd will be blank for data aggregated at the
 National level or for Puerto Rico and Virgin Islands.}
 
-\item{age_lvl}{Identifies the age level of the population that the data
+\item{age_level}{Identifies the age level of the population that the data
 has been aggregated. A value of 'All' indicates the data in the row
 represents all Fee-for-Service Medicare Beneficiaries. A value of
 '<65' or '65+' indicates that the data is aggregated by the age of
 the Medicare Beneficiaries at the end of the calendar year.}
 
-\item{demo_lvl}{Identifies the demographic level of the population that
-the data has been aggregated. A value of 'All' indicates the data in
+\item{demo_level}{Identifies the demographic level of the population that
+the data has been aggregated. A value of \code{All} indicates the data in
 the row is represents all Fee-for-Service Medicare beneficiaries. A
-value of 'Sex' indicates that the data has been aggregated by the
-Medicare beneficiary's sex. A value of 'Race' indicates that the data
+value of \code{Sex} indicates that the data has been aggregated by the
+Medicare beneficiary's sex. A value of \code{Race} indicates that the data
 has been aggregated by the Medicare beneficiary's race. A value of
-'Dual Status' indicates that the data has been aggregated by the
+\verb{Dual Status} indicates that the data has been aggregated by the
 Medicare beneficiary's dual eligibility status.}
 
 \item{demo_desc}{For Bene_Demo_Lvl='Sex', a beneficiary’s sex is classified
@@ -77,33 +84,6 @@ considered to have a chronic condition if the CMS administrative data
 have a claim indicating that the beneficiary received a service or
 treatment for the specific condition. Beneficiaries may have more than
 one of the chronic conditions listed.}
-
-\item{prevalence}{Prevalence estimates are calculated by taking the
-beneficiaries within the MCC category divided by the total number of
-beneficiaries in the fee-for-service population, expressed as a
-percentage.}
-
-\item{stnd_pymt_pc}{Medicare standardized spending includes total Medicare
-payments for all covered services in Parts A and B and is presented per
-beneficiary (i.e. per capita). Standardized payments are presented to
-allow for comparisons across geographic areas in health care use among
-beneficiaries.}
-
-\item{pymt_pc}{Medicare spending includes total Medicare payments for all
-covered services in Parts A and B and is presented per beneficiary
-(i.e. per capita).}
-
-\item{readmit_rate}{Hospital readmissions are expressed as a percentage of
-all admissions. A 30-day readmission is defined as an admission to an
-acute care hospital for any cause within 30 days of discharge from an
-acute care hospital. Except when the patient died during the stay, each
-inpatient stay is classified as an index admission, a readmission,
-or both.}
-
-\item{er_visits}{Emergency department visits are presented as the number
-of visits per 1,000 beneficiaries. ED visits include visits where the
-beneficiary was released from the outpatient setting and where the
-beneficiary was admitted to an inpatient setting.}
 
 \item{clean_names}{Clean column names with {janitor}'s
 \code{clean_names()} function; default is \code{TRUE}.}
@@ -156,12 +136,7 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontrun{
-cc_specific(year     = 2018,
-            geo_lvl  = "State",
-            geo_desc = "California")
-
-cc_specific(year     = 2007,
-            geo_lvl  = "National",
-            demo_lvl = "Race")
+cc_specific(year = 2018, geo_level = "State", state = "CA")
+cc_specific(year = 2007, geo_level  = "National", demo_lvl = "Race")
 }
 }

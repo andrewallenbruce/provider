@@ -30,6 +30,12 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi>
   "basic_first_name", # <nppes_npi>
   "basic_last_name", # <nppes_npi>
+  "number", # <nppes_npi_new>
+  "basic", # <nppes_npi_new>
+  "addresses", # <nppes_npi_new>
+  "practiceLocations", # <nppes_npi_new>
+  "enumeration_date", # <nppes_npi_new>
+  "last_updated", # <nppes_npi_new>
   "program_year", # <open_payments>
   "contextual_information", # <open_payments>
   "number_of_payments_included_in_total_amount", # <open_payments>

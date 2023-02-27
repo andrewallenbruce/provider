@@ -65,6 +65,8 @@ library(provider)
 
 <br>
 
+The goal of `provider` is to make the experience of getting location data easier and more consistent across a wide variety of sources.
+
 This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. It only gets interesting when you start to link them together.
 
 <br>
@@ -82,6 +84,7 @@ npi_1 |> dplyr::glimpse()
 ```{r results='asis', echo=TRUE}
 npi_1 |> 
   dplyr::select(enumeration_type:state) |> 
+  provider:::display_long() |> 
   gluedown::md_table()
 ```
 <br>
@@ -135,6 +138,7 @@ npi_1 |>
   gluedown::md_table()
 ```
 
+
 <br>
 
    > Identifiers
@@ -144,6 +148,37 @@ npi_1 |>
   dplyr::select(identifiers) |> 
   tidyr::unnest(identifiers) |> 
   gluedown::md_table()
+```
+
+<br><br>
+
+
+```{r}
+### Data frame of NPIs
+npi_df <- data.frame(npi = c(1710983663,
+                             1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860,
+                             1346243805,
+                             1679576722,
+                             1093718892,
+                             1477556405,
+                             1770586539,
+                             1871596692,
+                             1174526925, 
+                             1720081441,
+                             1558364273,
+                             1801899513
+                             ))
+npi_df |>
+  tibble::deframe() |> 
+  as.list() |> 
+  purrr::map(nppes_npi_new) |> 
+  dplyr::bind_rows() |> 
+  dplyr::mutate(certification_date = anytime::anydate(certification_date))
 ```
 
 <br><br>
@@ -307,7 +342,7 @@ provider::order_refer(npi = 1083879860) |> gluedown::md_table()
 ### Medicare Opt-Out Affidavits
 
 ```{r results='asis', echo=TRUE}
-provider::opt_out(last = "Aaron") |> 
+provider::opt_out(last_name = "Aaron") |> 
   tidyr::unite("address", first_line_street_address:second_line_street_address, 
                remove = TRUE, 
                na.rm = TRUE, 
@@ -790,6 +825,73 @@ prov |> dplyr::select(year, bene_cc) |>
 
 <br><br>
 
+```{r}
+prov <- purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
+
+prov_sex_count <- prov |> 
+  dplyr::select(year, bene_sex) |> 
+  tidyr::unnest(cols = c(bene_sex)) |> 
+  dplyr::rename(female = bene_feml_cnt, 
+                male = bene_male_cnt) |> 
+  tidyr::pivot_longer(cols = female:male, names_to = "gender", values_to = "count")
+
+prov_sex_pct <- prov |> 
+  dplyr::select(year, bene_sex) |> 
+  tidyr::unnest(cols = c(bene_sex)) |> 
+  dplyr::rename(female = bene_feml_cnt, 
+                male = bene_male_cnt) |> 
+  dplyr::mutate(female = round((female / (female + male) * 100), 2),
+                male = round((male / (female + male) * 100), 2)) |> 
+  tidyr::pivot_longer(cols = female:male, names_to = "gender", values_to = "percent")
+
+prov_sex <- dplyr::left_join(prov_sex_count, prov_sex_pct, by = dplyr::join_by(year, gender)) |> 
+  dplyr::mutate(gender = forcats::as_factor(gender),
+                year = forcats::as_factor(year))
+
+py1 <- apyramid::age_pyramid(prov_sex, 
+            age_group = year, 
+            split_by = gender, 
+            count = count,
+            pyramid = TRUE)
+
+py1 + ggplot2::labs(title = "Fisher's *Iris* data set",
+       subtitle = "Demonstrating the TDC theme for ggplot2",
+       x = "The x axis", y = "The y axis",
+       caption = "Fisher's **Iris** data set") +
+  tdcthemes::style_tdc(legend = TRUE) +
+  tdcthemes::scale_fill_tdc() 
+```
+
+
+
+<br>
+
+```{r}
+prov_age <- prov |> 
+  dplyr::select(year, bene_age) |> 
+  tidyr::unnest(cols = c(bene_age)) |> 
+  dplyr::select(-bene_avg_age) |> 
+  dplyr::rename("<65" = bene_age_lt_65_cnt,
+                "65-74" = bene_age_65_74_cnt,
+                "75-84" = bene_age_75_84_cnt,
+                ">84" = bene_age_gt_84_cnt) |> 
+  tidyr::pivot_longer(cols = c("<65", "65-74", "75-84", ">84"), 
+                      names_to = "age", 
+                      values_to = "count") |>
+  dplyr::mutate(age = forcats::as_factor(age),
+                year = forcats::as_factor(year)
+                )
+
+apyramid::age_pyramid(data = prov_age, 
+            age_group = year, 
+            split_by = age, 
+            count = count,
+            pyramid = TRUE
+            )
+```
+
+<br><br>
+
 ### Medicare Chronic Conditions APIs
 
 <br>
@@ -799,14 +901,8 @@ prov |> dplyr::select(year, bene_cc) |>
 <br>
 
 ```{r results='asis', echo=TRUE}
-mult <- cc_multiple(year = 2007, 
-                    geo_lvl = "National", 
-                    demo_lvl = "Race")
-
-mult |> dplyr::select(year, 
-                      bene_age_lvl, 
-                      bene_demo_desc:er_visits_per_1000_benes) |> 
-        gluedown::md_table()
+mult <- cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
+mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_benes) |> gluedown::md_table()
 ```
 
 <br><br>
@@ -816,10 +912,8 @@ mult |> dplyr::select(year,
 <br>
 
 ```{r results='asis', echo=TRUE}
-spec <- cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race")
-
-spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> 
-        gluedown::md_table()
+spec <- cc_specific(year = 2007, geo_level = "County", state = "GA", county = "Lowndes", demo_level = "Race")
+spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> gluedown::md_table()
 ```
 
 <br><br>

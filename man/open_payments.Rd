@@ -25,7 +25,7 @@ open_payments(
   offset = 0,
   clean_names = TRUE,
   lowercase = TRUE,
-  nest = TRUE
+  nest = FALSE
 )
 }
 \arguments{

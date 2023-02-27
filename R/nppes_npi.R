@@ -23,19 +23,19 @@
 #' @note Update Frequency: **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI).
-#' @param prov_type The Read API can be refined to retrieve only Individual
+#' @param enum_type The Read API can be refined to retrieve only Individual
 #'    Providers (`NPI-1` or Type 1) or Organizational Providers (`NPI-2` or
 #'    Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 #'    returned. When using the Enumeration Type, it cannot be the only
 #'    criteria entered. Additional criteria must also be entered as well.
-#' @param first Provider's first name. Applies to
+#' @param first_name Provider's first name. Applies to
 #'    **Individual Providers (NPI-1)** only. Trailing wildcard entries are
 #'    permitted requiring at least two characters to be entered (e.g. "jo*" ).
 #'    This field allows the following special characters: ampersand(`&`),
 #'    apostrophe(`,`), colon(`:`), comma(`,`), forward slash(`/`),
 #'    hyphen(`-`), left and right parentheses(`()`), period(`.`),
 #'    pound sign(`#`), quotation mark(`"`), and semi-colon(`;`).
-#' @param last Provider's last name. Applies to
+#' @param last_name Provider's last name. Applies to
 #'    **Individual Providers (NPI-1)** only. Trailing wildcard entries are
 #'    permitted requiring at least two characters to be entered (e.g. "jo*" ).
 #'    This field allows the following special characters: ampersand(`&`),
@@ -52,7 +52,7 @@
 #'    characters: ampersand, apostrophe, "at" sign, colon, comma, forward
 #'    slash, hyphen, left and right parentheses, period, pound sign, quotation
 #'    mark, and semi-colon.
-#' @param taxonomy Search for providers by their taxonomy by entering the
+#' @param taxonomy_desc Search for providers by their taxonomy by entering the
 #'    taxonomy description.
 #' @param city City associated with the provider's address. To search for a
 #'    Military Address, enter either `APO` or `FPO` into the City field.
@@ -93,7 +93,7 @@
 #'           country = "US")
 #'
 #' ### First name, city, state
-#' nppes_npi(first = "John",
+#' nppes_npi(first_name = "John",
 #'           city = "Baltimore",
 #'           state = "MD")
 #'
@@ -126,26 +126,26 @@
 #' "nppes_npi", list(1336413418),
 #' "nppes_npi", list(1710975040),
 #' "nppes_npi", list(1659781227),
-#' "nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
-#' "nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
+#' "nppes_npi", list(first_name = "John", city = "Baltimore", state = "MD"),
+#' "nppes_npi", list(first_name = "Andrew", city = "Atlanta", state = "GA"))
 #'
 #' purrr::invoke_map_dfr(tribble$fn, tribble$params)
 #' }
 #' @autoglobal
 #' @export
 
-nppes_npi <- function(npi       = NULL,
-                      prov_type = NULL,
-                      first     = NULL,
-                      last      = NULL,
-                      org_name  = NULL,
-                      taxonomy  = NULL,
-                      city      = NULL,
-                      state     = NULL,
-                      zip       = NULL,
-                      country   = NULL,
-                      limit     = 200,
-                      skip      = NULL) {
+nppes_npi <- function(npi            = NULL,
+                      enum_type      = NULL,
+                      first_name     = NULL,
+                      last_name      = NULL,
+                      org_name       = NULL,
+                      taxonomy_desc  = NULL,
+                      city           = NULL,
+                      state          = NULL,
+                      zip            = NULL,
+                      country        = NULL,
+                      limit          = 200,
+                      skip           = NULL) {
 
   # base URL ---------------------------------------------------------------
   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
@@ -153,11 +153,11 @@ nppes_npi <- function(npi       = NULL,
   # request and response ----------------------------------------------------
   resp <- httr2::request(url) |>
           httr2::req_url_query(number               = npi,
-                               enumeration_type     = prov_type,
-                               first_name           = first,
-                               last_name            = last,
+                               enumeration_type     = enum_type,
+                               first_name           = first_name,
+                               last_name            = last_name,
                                organization_name    = org_name,
-                               taxonomy_description = taxonomy,
+                               taxonomy_description = taxonomy_desc,
                                city                 = city,
                                state                = state,
                                postal_code          = zip,
@@ -207,4 +207,109 @@ nppes_npi <- function(npi       = NULL,
 
   #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
+}
+
+#' @inheritParams nppes_npi
+#' @autoglobal
+#' @export
+nppes_npi_new <- function(npi            = NULL,
+                          enum_type      = NULL,
+                          first_name     = NULL,
+                          last_name      = NULL,
+                          org_name       = NULL,
+                          taxonomy_desc  = NULL,
+                          city           = NULL,
+                          state          = NULL,
+                          zip            = NULL,
+                          country        = NULL,
+                          limit          = 200,
+                          skip           = NULL,
+                          clean_names = TRUE,
+                          tidy = TRUE,
+                          verbose = TRUE) {
+
+  # base URL ---------------------------------------------------------------
+  url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
+
+  # request and response ----------------------------------------------------
+  req <- httr2::request(url) |>
+    httr2::req_url_query(number               = npi,
+                         enumeration_type     = enum_type,
+                         first_name           = first_name,
+                         last_name            = last_name,
+                         organization_name    = org_name,
+                         taxonomy_description = taxonomy_desc,
+                         city                 = city,
+                         state                = state,
+                         postal_code          = zip,
+                         country_code         = country,
+                         limit                = limit,
+                         skip                 = skip
+    ) |>
+    httr2::req_perform()
+
+  # parse response ---------------------------------------------------------
+  resp <- httr2::resp_body_json(req, check_type = FALSE, simplifyVector = TRUE)
+  res_cnt <- resp$result_count
+  size <- as.numeric(httr2::resp_header(req, "content-length"))
+
+  if (isTRUE(verbose)) {provider_cli("NPPES NPI Registry", resp = resp, size = size)}
+
+  # no search results returns empty tibble ----------------------------------
+  if (as.numeric(httr2::resp_header(req, "content-length")) == 0) {
+
+    return(tibble::tibble())
+
+  } else if (as.numeric(res_cnt) == 0) {
+
+    return(tibble::tibble())
+
+  } else {
+
+    # results -- unnest basic ------------------------------------------------
+    results <- resp$results |>
+      dplyr::mutate(npi = number,
+                    number = NULL,
+                    created_epoch = NULL,
+                    last_updated_epoch = NULL) |>
+      tidyr::unnest(basic) |>
+      dplyr::relocate(npi) |>
+      dplyr::relocate(addresses, practiceLocations, .after = dplyr::last_col())
+
+    # replace empty lists with NA ------------------------------------------------
+    results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+
+    # tidy options ---------------------------------------------------------
+    if (isTRUE(tidy)) {results <- results |>
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+                    enumeration_date = lubridate::ymd(enumeration_date),
+                    last_updated = lubridate::ymd(last_updated),
+                    #certification_date = anytime::anydate(certification_date),
+                    enumeration_age = lubridate::as.duration(lubridate::today() - enumeration_date)
+      )
+    }
+    # clean names -------------------------------------------------------------
+    if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
+  }
+  return(results)
+}
+
+
+#' @param df data frame, tibble
+#' @autoglobal
+#' @export
+nppes_npi_multi <- function(df) {
+
+  npis <- df |>
+    tibble::deframe() |>
+    as.list()
+
+  results <- npis |>
+    purrr::map(nppes_npi_new) |>
+    dplyr::bind_rows()
+
+  return(results)
 }

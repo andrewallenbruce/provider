@@ -21,7 +21,7 @@
 #'    must obtain before enrolling in Medicare. It is assigned to health care
 #'    providers upon application through the National Plan and Provider
 #'    Enumeration System (NPPES).
-#' @param pecos_id Provider associate level variable (PAC ID) from PECOS
+#' @param pac_id Provider associate level variable (PAC ID) from PECOS
 #'    database used to link across tables. A PAC ID is a 10-digit unique
 #'    numeric identifier that is assigned to each individual or organization
 #'    in PECOS. All entity-level information (e.g., tax identification numbers
@@ -34,13 +34,13 @@
 #'    All enrollment-level information (e.g., enrollment type, enrollment
 #'    state, provider specialty and reassignment of benefits) is linked
 #'    through the Enrollment ID.
-#' @param prov_type_code Provider enrollment application and enrollment
+#' @param specialty_code Provider enrollment application and enrollment
 #'    specialty type. This field shows the provider’s primary specialty code.
 #'    For practitioners and DME suppliers, please see the Secondary Specialty
 #'    file for a list of secondary specialties (when applicable). Only about
 #'    20% of practitioners and DME suppliers have at least one secondary
 #'    specialty.
-#' @param prov_type_desc Provider enrollment application and enrollment
+#' @param specialty_desc Provider enrollment application and enrollment
 #'    specialty type description
 #' @param state Provider enrollment state, abbreviated location. Providers
 #'    enroll at the state level, so one PAC ID may be associated with multiple
@@ -59,8 +59,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' provider_enrollment(npi = 1417918293,
-#'                     prov_type_code = "14-41")
+#' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 #'
 #' provider_enrollment(first_name = "DEBRA",
 #'                     middle_name = "L",
@@ -68,14 +67,14 @@
 #'
 #' provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
 #'                     state = "NY",
-#'                     prov_type_code = "00-85")
+#'                     specialty_code = "00-85")
 #'
-#' provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY",
+#' provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
 #'                     state = "AK",
 #'                     gender = "F")
 #'
 #'
-#' provider_enrollment(pecos_id = 2860305554,
+#' provider_enrollment(pac_id = 2860305554,
 #'                     enroll_id = "I20031110000120",
 #'                     gender = "9")
 #' \dontrun{
@@ -95,10 +94,10 @@
 #' @export
 
 provider_enrollment <- function(npi                = NULL,
-                                pecos_id           = NULL,
+                                pac_id             = NULL,
                                 enroll_id          = NULL,
-                                prov_type_code     = NULL,
-                                prov_type_desc     = NULL,
+                                specialty_code     = NULL,
+                                specialty_desc     = NULL,
                                 state              = NULL,
                                 first_name         = NULL,
                                 middle_name        = NULL,
@@ -111,10 +110,10 @@ provider_enrollment <- function(npi                = NULL,
   args <- tibble::tribble(
                         ~x,  ~y,
                           "NPI", npi,
-           "PECOS_ASCT_CNTL_ID", pecos_id,
+           "PECOS_ASCT_CNTL_ID", pac_id,
                     "ENRLMT_ID", enroll_id,
-             "PROVIDER_TYPE_CD", prov_type_code,
-           "PROVIDER_TYPE_DESC", prov_type_desc,
+             "PROVIDER_TYPE_CD", specialty_code,
+           "PROVIDER_TYPE_DESC", specialty_desc,
                      "STATE_CD", state,
                    "FIRST_NAME", first_name,
                      "MDL_NAME", middle_name,

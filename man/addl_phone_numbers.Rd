@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 addl_phone_numbers(
   npi = NULL,
-  provider_id = NULL,
+  ind_pac_id = NULL,
   first_name = NULL,
   middle_name = NULL,
   last_name = NULL,
@@ -25,7 +25,7 @@ addl_phone_numbers(
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{provider_id}{Unique individual clinician ID assigned by PECOS}
+\item{ind_pac_id}{Unique individual clinician ID assigned by PECOS}
 
 \item{first_name}{Individual clinician first name}
 
@@ -65,7 +65,7 @@ Update Frequency: \strong{Monthly}
 }
 \examples{
 addl_phone_numbers(npi = 1407263999)
-addl_phone_numbers(provider_id = "0042100190")
+addl_phone_numbers(ind_pac_id = "0042100190")
 addl_phone_numbers(org_pac_id = 6608028899)
 \dontrun{
 addl_phone_numbers(city = "Atlanta")

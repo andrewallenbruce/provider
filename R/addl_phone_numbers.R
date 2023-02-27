@@ -10,7 +10,7 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param provider_id Unique individual clinician ID assigned by PECOS
+#' @param ind_pac_id Unique individual clinician ID assigned by PECOS
 #' @param first_name Individual clinician first name
 #' @param last_name Individual clinician last name
 #' @param middle_name Individual clinician middle name
@@ -27,7 +27,7 @@
 #'
 #' @examples
 #' addl_phone_numbers(npi = 1407263999)
-#' addl_phone_numbers(provider_id = "0042100190")
+#' addl_phone_numbers(ind_pac_id = "0042100190")
 #' addl_phone_numbers(org_pac_id = 6608028899)
 #' \dontrun{
 #' addl_phone_numbers(city = "Atlanta")
@@ -37,7 +37,7 @@
 #' @export
 
 addl_phone_numbers <- function(npi           = NULL,
-                               provider_id   = NULL,
+                               ind_pac_id   = NULL,
                                first_name    = NULL,
                                middle_name   = NULL,
                                last_name     = NULL,
@@ -53,7 +53,7 @@ addl_phone_numbers <- function(npi           = NULL,
   args <- tibble::tribble(
     ~x,           ~y,
     "npi",        npi,
-    "prvdr_id",   provider_id,
+    "prvdr_id",   ind_pac_id,
     "frst_nm",    first_name,
     "mid_nm",     middle_name,
     "lst_nm",     last_name,

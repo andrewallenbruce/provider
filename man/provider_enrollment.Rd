@@ -9,10 +9,10 @@ Centers for Medicare & Medicaid Services
 \usage{
 provider_enrollment(
   npi = NULL,
-  pecos_id = NULL,
+  pac_id = NULL,
   enroll_id = NULL,
-  prov_type_code = NULL,
-  prov_type_desc = NULL,
+  specialty_code = NULL,
+  specialty_desc = NULL,
   state = NULL,
   first_name = NULL,
   middle_name = NULL,
@@ -29,7 +29,7 @@ must obtain before enrolling in Medicare. It is assigned to health care
 providers upon application through the National Plan and Provider
 Enumeration System (NPPES).}
 
-\item{pecos_id}{Provider associate level variable (PAC ID) from PECOS
+\item{pac_id}{Provider associate level variable (PAC ID) from PECOS
 database used to link across tables. A PAC ID is a 10-digit unique
 numeric identifier that is assigned to each individual or organization
 in PECOS. All entity-level information (e.g., tax identification numbers
@@ -44,14 +44,14 @@ All enrollment-level information (e.g., enrollment type, enrollment
 state, provider specialty and reassignment of benefits) is linked
 through the Enrollment ID.}
 
-\item{prov_type_code}{Provider enrollment application and enrollment
+\item{specialty_code}{Provider enrollment application and enrollment
 specialty type. This field shows the provider’s primary specialty code.
 For practitioners and DME suppliers, please see the Secondary Specialty
 file for a list of secondary specialties (when applicable). Only about
 20\% of practitioners and DME suppliers have at least one secondary
 specialty.}
 
-\item{prov_type_desc}{Provider enrollment application and enrollment
+\item{specialty_desc}{Provider enrollment application and enrollment
 specialty type description}
 
 \item{state}{Provider enrollment state, abbreviated location. Providers
@@ -99,8 +99,7 @@ Transparency.
 Update Frequency: \strong{Quarterly}
 }
 \examples{
-provider_enrollment(npi = 1417918293,
-                    prov_type_code = "14-41")
+provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 
 provider_enrollment(first_name = "DEBRA",
                     middle_name = "L",
@@ -108,22 +107,26 @@ provider_enrollment(first_name = "DEBRA",
 
 provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
                     state = "NY",
-                    prov_type_code = "00-85")
+                    specialty_code = "00-85")
 
-provider_enrollment(prov_type_desc = "PRACTITIONER - ENDOCRINOLOGY",
+provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
                     state = "AK",
                     gender = "F")
 
 
-provider_enrollment(pecos_id = 2860305554,
+provider_enrollment(pac_id = 2860305554,
                     enroll_id = "I20031110000120",
                     gender = "9")
 \dontrun{
 prven <- tibble::tribble(
 ~fn,         ~params,
 "provider_enrollment", list(npi = 1083879860),
-"provider_enrollment", list(first_name = "MICHAEL", middle_name = "K", last_name = "GREENBERG", state = "MD"),
-"provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC", state = "GA"))
+"provider_enrollment", list(first_name = "MICHAEL",
+                            middle_name = "K",
+                            last_name = "GREENBERG",
+                            state = "MD"),
+"provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
+                            state = "GA"))
 
 purrr::invoke_map_dfr(prven$fn, prven$params)
 }

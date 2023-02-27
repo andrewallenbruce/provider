@@ -18,7 +18,7 @@
 #'   OSCAR Number
 #' @param enroll_id Hospital’s enrollment ID
 #' @param enroll_state Hospital’s enrollment state
-#' @param prov_type_cd Enrollment application and specialty type code
+#' @param specialty_code Enrollment application and specialty type code
 #' @param pac_id Hospital’s PECOS Associate Control (PAC) ID
 #' @param org_name Hospital’s legal business name
 #' @param dba_name Hospital’s doing-business-as name
@@ -42,25 +42,25 @@
 #' @autoglobal
 #' @export
 
-hospital_enrollment <- function(npi          = NULL,
-                                ccn          = NULL,
-                                enroll_id    = NULL,
-                                enroll_state = NULL,
-                                prov_type_cd = NULL,
-                                pac_id       = NULL,
-                                org_name     = NULL,
-                                dba_name     = NULL,
-                                city         = NULL,
-                                state        = NULL,
-                                zip          = NULL,
-                                clean_names  = TRUE,
-                                lowercase    = TRUE) {
+hospital_enrollment <- function(npi            = NULL,
+                                ccn            = NULL,
+                                enroll_id      = NULL,
+                                enroll_state   = NULL,
+                                specialty_code = NULL,
+                                pac_id         = NULL,
+                                org_name       = NULL,
+                                dba_name       = NULL,
+                                city           = NULL,
+                                state          = NULL,
+                                zip            = NULL,
+                                clean_names    = TRUE,
+                                lowercase      = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                       ~y,
     "ENROLLMENT ID",          enroll_id,
     "ENROLLMENT STATE",       enroll_state,
-    "PROVIDER TYPE CODE",     prov_type_cd,
+    "PROVIDER TYPE CODE",     specialty_code,
     "NPI",                    npi,
     "CCN",                    ccn,
     "ASSOCIATE ID",           pac_id,

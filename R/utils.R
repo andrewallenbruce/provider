@@ -288,6 +288,45 @@ sql_format <- function(param, arg) {
   if (is.null(arg)) {param <- NULL} else {
     paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}}
 
+#' str_to_snakecase --------------------------------------------------------
+#' @param string string
+#' @return string formatted to snakecase
+#' @autoglobal
+#' @noRd
+str_to_snakecase <- function(string) {
+string |>
+  stringr::str_split("(?=[[:upper:]])") |>
+  purrr::map_chr(function(string) {
+    string |>
+      stringr::str_to_lower() |>
+      stringr::str_c(collapse = "_")
+  }) |>
+  stringr::str_remove("^_")
+}
+
+
+#' provider_cli ------------------------------------------------------------
+#' @param apiname Name of API
+#' @param resp httr2 response object
+#' @param size size of responses downloaded
+provider_cli <- function(apiname, resp, size) {
+
+  res_cnt <- resp$result_count
+
+  if (as.numeric(res_cnt) == 0) {
+    cli::cli_h2("Queried {.api {apiname}}")
+    cli::cli_alert_warning("Found {res_cnt} result{?s}")
+    cli::cli_alert_info("Downloaded {prettyunits::pretty_bytes(size)}")
+
+  } else {
+    cli::cli_h2("Queried {.api {apiname}}")
+    cli::cli_alert_success("Found {res_cnt} result{?s}")
+    cli::cli_alert_info("Downloaded {prettyunits::pretty_bytes(size)}")
+  }
+}
+
+
+
 #' is_empty_list -----------------------------------------------------------
 #' @param df data frame
 #' @param col quoted list-column in data frame

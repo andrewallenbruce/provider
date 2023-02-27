@@ -104,7 +104,7 @@ open_payments <- function(recipient_npi          = NULL,
                           offset                 = 0,
                           clean_names            = TRUE,
                           lowercase              = TRUE,
-                          nest                   = TRUE) {
+                          nest                   = FALSE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,

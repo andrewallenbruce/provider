@@ -12,7 +12,7 @@ hospital_enrollment(
   ccn = NULL,
   enroll_id = NULL,
   enroll_state = NULL,
-  prov_type_cd = NULL,
+  specialty_code = NULL,
   pac_id = NULL,
   org_name = NULL,
   dba_name = NULL,
@@ -33,7 +33,7 @@ OSCAR Number}
 
 \item{enroll_state}{Hospital’s enrollment state}
 
-\item{prov_type_cd}{Enrollment application and specialty type code}
+\item{specialty_code}{Enrollment application and specialty type code}
 
 \item{pac_id}{Hospital’s PECOS Associate Control (PAC) ID}
 
