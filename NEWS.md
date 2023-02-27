@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9011 (2023-02-27)
+
+* nppes_npi_new implementation
+
+
 # provider 0.0.0.9010 (2023-02-08)
 
 * added hospital_enrollment() function
