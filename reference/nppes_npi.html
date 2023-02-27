@@ -104,11 +104,11 @@ API's documentation.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nppes_npi</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enum_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  taxonomy <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -128,7 +128,7 @@ API's documentation.</p>
 <dd><p>10-digit National Provider Identifier (NPI).</p></dd>
 
 
-<dt>prov_type</dt>
+<dt>enum_type</dt>
 <dd><p>The Read API can be refined to retrieve only Individual
 Providers (<code>NPI-1</code> or Type 1) or Organizational Providers (<code>NPI-2</code> or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
@@ -136,7 +136,7 @@ returned. When using the Enumeration Type, it cannot be the only
 criteria entered. Additional criteria must also be entered as well.</p></dd>
 
 
-<dt>first</dt>
+<dt>first_name</dt>
 <dd><p>Provider's first name. Applies to
 <strong>Individual Providers (NPI-1)</strong> only. Trailing wildcard entries are
 permitted requiring at least two characters to be entered (e.g. "jo*" ).
@@ -146,7 +146,7 @@ hyphen(<code>-</code>), left and right parentheses(<code>()</code>), period(<cod
 pound sign(<code>#</code>), quotation mark(<code>"</code>), and semi-colon(<code>;</code>).</p></dd>
 
 
-<dt>last</dt>
+<dt>last_name</dt>
 <dd><p>Provider's last name. Applies to
 <strong>Individual Providers (NPI-1)</strong> only. Trailing wildcard entries are
 permitted requiring at least two characters to be entered (e.g. "jo*" ).
@@ -169,7 +169,7 @@ slash, hyphen, left and right parentheses, period, pound sign, quotation
 mark, and semi-colon.</p></dd>
 
 
-<dt>taxonomy</dt>
+<dt>taxonomy_desc</dt>
 <dd><p>Search for providers by their taxonomy by entering the
 taxonomy description.</p></dd>
 
@@ -259,7 +259,7 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">### First name, city, state</span></span></span>
-<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>,</span></span>
 <span class="r-in"><span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span></span>
 <span class="r-in"><span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -292,8 +292,8 @@ to use the NPI Registry.</p><div class="section">
 <span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1336413418</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1710975040</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1659781227</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, city <span class="op">=</span> <span class="st">"Baltimore"</span>, state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

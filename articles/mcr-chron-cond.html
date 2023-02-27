@@ -158,536 +158,8 @@ conditions. The count of conditions is grouped into four categories
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_geo_lvl</span>, <span class="va">bene_geo_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="slzfpsopoo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#slzfpsopoo .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_heading {
-  background-color: #FDD4D0;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#slzfpsopoo .gt_title {
-  color: #333333;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#slzfpsopoo .gt_subtitle {
-  color: #333333;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#slzfpsopoo .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_col_heading {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#slzfpsopoo .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#slzfpsopoo .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#slzfpsopoo .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#slzfpsopoo .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#slzfpsopoo .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#slzfpsopoo .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#slzfpsopoo .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#slzfpsopoo .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#slzfpsopoo .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #F6F7F7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#slzfpsopoo .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#slzfpsopoo .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#slzfpsopoo .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#slzfpsopoo .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#slzfpsopoo .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#slzfpsopoo .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#slzfpsopoo .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_striped {
-  background-color: #FAFAFA;
-}
-
-#slzfpsopoo .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#slzfpsopoo .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#slzfpsopoo .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#slzfpsopoo .gt_left {
-  text-align: left;
-}
-
-#slzfpsopoo .gt_center {
-  text-align: center;
-}
-
-#slzfpsopoo .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#slzfpsopoo .gt_font_normal {
-  font-weight: normal;
-}
-
-#slzfpsopoo .gt_font_bold {
-  font-weight: bold;
-}
-
-#slzfpsopoo .gt_font_italic {
-  font-style: italic;
-}
-
-#slzfpsopoo .gt_super {
-  font-size: 65%;
-}
-
-#slzfpsopoo .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#slzfpsopoo .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#slzfpsopoo .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#slzfpsopoo .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#slzfpsopoo .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#slzfpsopoo .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#slzfpsopoo .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_geo_desc">bene_geo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_age_lvl">bene_age_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_lvl">bene_demo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_desc">bene_demo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_mcc">bene_mcc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="prvlnc">prvlnc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_stdzd_pymt_pc">tot_mdcr_stdzd_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_pymt_pc">tot_mdcr_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hosp_readmsn_rate">hosp_readmsn_rate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="er_visits_per_1000_benes">er_visits_per_1000_benes</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_1 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_1 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_1 bene_demo_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_1 bene_demo_desc" class="gt_row gt_left">All</td>
-<td headers="stub_1_1 bene_mcc" class="gt_row gt_left">0 to 1</td>
-<td headers="stub_1_1 prvlnc" class="gt_row gt_right">0.3286</td>
-<td headers="stub_1_1 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">1870.944</td>
-<td headers="stub_1_1 tot_mdcr_pymt_pc" class="gt_row gt_right">2128.528</td>
-<td headers="stub_1_1 hosp_readmsn_rate" class="gt_row gt_right">0.0433</td>
-<td headers="stub_1_1 er_visits_per_1000_benes" class="gt_row gt_right">113.4499</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 year" class="gt_row gt_right gt_striped">2018</td>
-<td headers="stub_1_2 bene_geo_desc" class="gt_row gt_left gt_striped">California</td>
-<td headers="stub_1_2 bene_age_lvl" class="gt_row gt_left gt_striped">65+</td>
-<td headers="stub_1_2 bene_demo_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_2 bene_demo_desc" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_2 bene_mcc" class="gt_row gt_left gt_striped">2 to 3</td>
-<td headers="stub_1_2 prvlnc" class="gt_row gt_right gt_striped">0.2839</td>
-<td headers="stub_1_2 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">5556.735</td>
-<td headers="stub_1_2 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">6565.682</td>
-<td headers="stub_1_2 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.0618</td>
-<td headers="stub_1_2 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">307.0677</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
-<td headers="stub_1_3 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_3 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_3 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_3 bene_demo_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_demo_desc" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_mcc" class="gt_row gt_left">4 to 5</td>
-<td headers="stub_1_3 prvlnc" class="gt_row gt_right">0.2138</td>
-<td headers="stub_1_3 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">10436.174</td>
-<td headers="stub_1_3 tot_mdcr_pymt_pc" class="gt_row gt_right">12806.785</td>
-<td headers="stub_1_3 hosp_readmsn_rate" class="gt_row gt_right">0.0953</td>
-<td headers="stub_1_3 er_visits_per_1000_benes" class="gt_row gt_right">596.8894</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
-<td headers="stub_1_4 year" class="gt_row gt_right gt_striped">2018</td>
-<td headers="stub_1_4 bene_geo_desc" class="gt_row gt_left gt_striped">California</td>
-<td headers="stub_1_4 bene_age_lvl" class="gt_row gt_left gt_striped">65+</td>
-<td headers="stub_1_4 bene_demo_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_4 bene_demo_desc" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_4 bene_mcc" class="gt_row gt_left gt_striped">6+</td>
-<td headers="stub_1_4 prvlnc" class="gt_row gt_right gt_striped">0.1737</td>
-<td headers="stub_1_4 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">29357.544</td>
-<td headers="stub_1_4 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">37676.252</td>
-<td headers="stub_1_4 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.2165</td>
-<td headers="stub_1_4 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">1647.3678</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
-<td headers="stub_1_5 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_5 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_5 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_5 bene_demo_lvl" class="gt_row gt_left">Dual Status</td>
-<td headers="stub_1_5 bene_demo_desc" class="gt_row gt_left">Medicare Only</td>
-<td headers="stub_1_5 bene_mcc" class="gt_row gt_left">0 to 1</td>
-<td headers="stub_1_5 prvlnc" class="gt_row gt_right">0.3632</td>
-<td headers="stub_1_5 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">1939.263</td>
-<td headers="stub_1_5 tot_mdcr_pymt_pc" class="gt_row gt_right">2189.799</td>
-<td headers="stub_1_5 hosp_readmsn_rate" class="gt_row gt_right">0.0397</td>
-<td headers="stub_1_5 er_visits_per_1000_benes" class="gt_row gt_right">102.1065</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">6..119</th>
-<td headers="stub_1_6 year" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_age_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_mcc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 prvlnc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 hosp_readmsn_rate" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 er_visits_per_1000_benes" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">120</th>
-<td headers="stub_1_7 year" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">2018</td>
-<td headers="stub_1_7 bene_geo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">California</td>
-<td headers="stub_1_7 bene_age_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">All</td>
-<td headers="stub_1_7 bene_demo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Race</td>
-<td headers="stub_1_7 bene_demo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">non-Hispanic White</td>
-<td headers="stub_1_7 bene_mcc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">6+</td>
-<td headers="stub_1_7 prvlnc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.1633</td>
-<td headers="stub_1_7 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">30255.671</td>
-<td headers="stub_1_7 tot_mdcr_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">38627.296</td>
-<td headers="stub_1_7 hosp_readmsn_rate" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.2204</td>
-<td headers="stub_1_7 er_visits_per_1000_benes" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">1805.3114</td>
-</tr>
-</tbody>
-</table>
-</div>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cc_multiple(year = 2018, geo_lvl = "State", geo_desc = "California"): unused argument (geo_lvl = "State")</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, </span>
@@ -696,536 +168,8 @@ html {
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_geo_desc</span>, <span class="va">bene_geo_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="qiqytcuvse" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#qiqytcuvse .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_heading {
-  background-color: #FDD4D0;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#qiqytcuvse .gt_title {
-  color: #333333;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#qiqytcuvse .gt_subtitle {
-  color: #333333;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#qiqytcuvse .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_col_heading {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#qiqytcuvse .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#qiqytcuvse .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#qiqytcuvse .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#qiqytcuvse .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#qiqytcuvse .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#qiqytcuvse .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#qiqytcuvse .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#qiqytcuvse .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#qiqytcuvse .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #F6F7F7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#qiqytcuvse .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#qiqytcuvse .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#qiqytcuvse .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#qiqytcuvse .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#qiqytcuvse .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#qiqytcuvse .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#qiqytcuvse .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_striped {
-  background-color: #FAFAFA;
-}
-
-#qiqytcuvse .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#qiqytcuvse .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#qiqytcuvse .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#qiqytcuvse .gt_left {
-  text-align: left;
-}
-
-#qiqytcuvse .gt_center {
-  text-align: center;
-}
-
-#qiqytcuvse .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#qiqytcuvse .gt_font_normal {
-  font-weight: normal;
-}
-
-#qiqytcuvse .gt_font_bold {
-  font-weight: bold;
-}
-
-#qiqytcuvse .gt_font_italic {
-  font-style: italic;
-}
-
-#qiqytcuvse .gt_super {
-  font-size: 65%;
-}
-
-#qiqytcuvse .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#qiqytcuvse .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#qiqytcuvse .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#qiqytcuvse .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#qiqytcuvse .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#qiqytcuvse .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#qiqytcuvse .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_geo_lvl">bene_geo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_age_lvl">bene_age_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_lvl">bene_demo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_desc">bene_demo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_mcc">bene_mcc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="prvlnc">prvlnc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_stdzd_pymt_pc">tot_mdcr_stdzd_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_pymt_pc">tot_mdcr_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hosp_readmsn_rate">hosp_readmsn_rate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="er_visits_per_1000_benes">er_visits_per_1000_benes</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_1 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_1 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_1 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_1 bene_demo_desc" class="gt_row gt_left">Asian Pacific Islander</td>
-<td headers="stub_1_1 bene_mcc" class="gt_row gt_left">0 to 1</td>
-<td headers="stub_1_1 prvlnc" class="gt_row gt_right">0.3271</td>
-<td headers="stub_1_1 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">1033.425</td>
-<td headers="stub_1_1 tot_mdcr_pymt_pc" class="gt_row gt_right">1116.901</td>
-<td headers="stub_1_1 hosp_readmsn_rate" class="gt_row gt_right">0.0612</td>
-<td headers="stub_1_1 er_visits_per_1000_benes" class="gt_row gt_right">82.1561</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 year" class="gt_row gt_right gt_striped">2007</td>
-<td headers="stub_1_2 bene_geo_lvl" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_2 bene_age_lvl" class="gt_row gt_left gt_striped">65+</td>
-<td headers="stub_1_2 bene_demo_lvl" class="gt_row gt_left gt_striped">Race</td>
-<td headers="stub_1_2 bene_demo_desc" class="gt_row gt_left gt_striped">Asian Pacific Islander</td>
-<td headers="stub_1_2 bene_mcc" class="gt_row gt_left gt_striped">2 to 3</td>
-<td headers="stub_1_2 prvlnc" class="gt_row gt_right gt_striped">0.3438</td>
-<td headers="stub_1_2 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">3279.785</td>
-<td headers="stub_1_2 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">3692.248</td>
-<td headers="stub_1_2 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.0765</td>
-<td headers="stub_1_2 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">210.1455</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
-<td headers="stub_1_3 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_3 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_3 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_3 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_3 bene_demo_desc" class="gt_row gt_left">Asian Pacific Islander</td>
-<td headers="stub_1_3 bene_mcc" class="gt_row gt_left">4 to 5</td>
-<td headers="stub_1_3 prvlnc" class="gt_row gt_right">0.2213</td>
-<td headers="stub_1_3 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">7688.844</td>
-<td headers="stub_1_3 tot_mdcr_pymt_pc" class="gt_row gt_right">8993.658</td>
-<td headers="stub_1_3 hosp_readmsn_rate" class="gt_row gt_right">0.1237</td>
-<td headers="stub_1_3 er_visits_per_1000_benes" class="gt_row gt_right">440.5998</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
-<td headers="stub_1_4 year" class="gt_row gt_right gt_striped">2007</td>
-<td headers="stub_1_4 bene_geo_lvl" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_4 bene_age_lvl" class="gt_row gt_left gt_striped">65+</td>
-<td headers="stub_1_4 bene_demo_lvl" class="gt_row gt_left gt_striped">Race</td>
-<td headers="stub_1_4 bene_demo_desc" class="gt_row gt_left gt_striped">Asian Pacific Islander</td>
-<td headers="stub_1_4 bene_mcc" class="gt_row gt_left gt_striped">6+</td>
-<td headers="stub_1_4 prvlnc" class="gt_row gt_right gt_striped">0.1078</td>
-<td headers="stub_1_4 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">23479.215</td>
-<td headers="stub_1_4 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">28630.010</td>
-<td headers="stub_1_4 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.2514</td>
-<td headers="stub_1_4 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">1263.9579</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
-<td headers="stub_1_5 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_5 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_5 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_5 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_5 bene_demo_desc" class="gt_row gt_left">Hispanic</td>
-<td headers="stub_1_5 bene_mcc" class="gt_row gt_left">0 to 1</td>
-<td headers="stub_1_5 prvlnc" class="gt_row gt_right">0.3299</td>
-<td headers="stub_1_5 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">1048.381</td>
-<td headers="stub_1_5 tot_mdcr_pymt_pc" class="gt_row gt_right">1068.586</td>
-<td headers="stub_1_5 hosp_readmsn_rate" class="gt_row gt_right">0.0616</td>
-<td headers="stub_1_5 er_visits_per_1000_benes" class="gt_row gt_right">121.4645</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">6..59</th>
-<td headers="stub_1_6 year" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_age_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_mcc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 prvlnc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 hosp_readmsn_rate" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 er_visits_per_1000_benes" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">60</th>
-<td headers="stub_1_7 year" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">2007</td>
-<td headers="stub_1_7 bene_geo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">National</td>
-<td headers="stub_1_7 bene_age_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">All</td>
-<td headers="stub_1_7 bene_demo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Race</td>
-<td headers="stub_1_7 bene_demo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">non-Hispanic White</td>
-<td headers="stub_1_7 bene_mcc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">6+</td>
-<td headers="stub_1_7 prvlnc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.1227</td>
-<td headers="stub_1_7 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">27161.302</td>
-<td headers="stub_1_7 tot_mdcr_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">28437.683</td>
-<td headers="stub_1_7 hosp_readmsn_rate" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.2490</td>
-<td headers="stub_1_7 er_visits_per_1000_benes" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">1862.0246</td>
-</tr>
-</tbody>
-</table>
-</div>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race"): unused arguments (geo_lvl = "National", demo_lvl = "Race")</span></span></code></pre></div>
 <p><br></p>
 </div>
 </div>
@@ -1271,536 +215,8 @@ distinct chronic conditions listed below.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">bene_age_lvl</span><span class="op">)</span>, <span class="va">bene_demo_lvl</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="gxtkuebdon" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#gxtkuebdon .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_heading {
-  background-color: #FDD4D0;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#gxtkuebdon .gt_title {
-  color: #333333;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#gxtkuebdon .gt_subtitle {
-  color: #333333;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#gxtkuebdon .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_col_heading {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#gxtkuebdon .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#gxtkuebdon .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#gxtkuebdon .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#gxtkuebdon .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#gxtkuebdon .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#gxtkuebdon .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#gxtkuebdon .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#gxtkuebdon .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#gxtkuebdon .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #F6F7F7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#gxtkuebdon .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#gxtkuebdon .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#gxtkuebdon .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#gxtkuebdon .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#gxtkuebdon .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#gxtkuebdon .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#gxtkuebdon .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_striped {
-  background-color: #FAFAFA;
-}
-
-#gxtkuebdon .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#gxtkuebdon .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#gxtkuebdon .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#gxtkuebdon .gt_left {
-  text-align: left;
-}
-
-#gxtkuebdon .gt_center {
-  text-align: center;
-}
-
-#gxtkuebdon .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#gxtkuebdon .gt_font_normal {
-  font-weight: normal;
-}
-
-#gxtkuebdon .gt_font_bold {
-  font-weight: bold;
-}
-
-#gxtkuebdon .gt_font_italic {
-  font-style: italic;
-}
-
-#gxtkuebdon .gt_super {
-  font-size: 65%;
-}
-
-#gxtkuebdon .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#gxtkuebdon .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#gxtkuebdon .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#gxtkuebdon .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#gxtkuebdon .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#gxtkuebdon .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#gxtkuebdon .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_geo_desc">bene_geo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_age_lvl">bene_age_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_lvl">bene_demo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_desc">bene_demo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_cond">bene_cond</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="prvlnc">prvlnc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_stdzd_pymt_pc">tot_mdcr_stdzd_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_pymt_pc">tot_mdcr_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hosp_readmsn_rate">hosp_readmsn_rate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="er_visits_per_1000_benes">er_visits_per_1000_benes</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_1 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_1 bene_age_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_1 bene_demo_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_1 bene_demo_desc" class="gt_row gt_left">All</td>
-<td headers="stub_1_1 bene_cond" class="gt_row gt_left">Alcohol Abuse</td>
-<td headers="stub_1_1 prvlnc" class="gt_row gt_right">0.0215</td>
-<td headers="stub_1_1 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">25617.0342</td>
-<td headers="stub_1_1 tot_mdcr_pymt_pc" class="gt_row gt_right">34132.9987</td>
-<td headers="stub_1_1 hosp_readmsn_rate" class="gt_row gt_right">0.2839</td>
-<td headers="stub_1_1 er_visits_per_1000_benes" class="gt_row gt_right">2558.2373</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 year" class="gt_row gt_right gt_striped">2018</td>
-<td headers="stub_1_2 bene_geo_desc" class="gt_row gt_left gt_striped">California</td>
-<td headers="stub_1_2 bene_age_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_2 bene_demo_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_2 bene_demo_desc" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_2 bene_cond" class="gt_row gt_left gt_striped">Alzheimer's Disease/Dementia</td>
-<td headers="stub_1_2 prvlnc" class="gt_row gt_right gt_striped">0.1047</td>
-<td headers="stub_1_2 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">25625.7932</td>
-<td headers="stub_1_2 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">33052.3705</td>
-<td headers="stub_1_2 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.2297</td>
-<td headers="stub_1_2 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">1496.2582</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
-<td headers="stub_1_3 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_3 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_3 bene_age_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_demo_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_demo_desc" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_cond" class="gt_row gt_left">Arthritis</td>
-<td headers="stub_1_3 prvlnc" class="gt_row gt_right">0.3118</td>
-<td headers="stub_1_3 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">15862.1478</td>
-<td headers="stub_1_3 tot_mdcr_pymt_pc" class="gt_row gt_right">19750.8565</td>
-<td headers="stub_1_3 hosp_readmsn_rate" class="gt_row gt_right">0.1906</td>
-<td headers="stub_1_3 er_visits_per_1000_benes" class="gt_row gt_right">949.5653</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
-<td headers="stub_1_4 year" class="gt_row gt_right gt_striped">2018</td>
-<td headers="stub_1_4 bene_geo_desc" class="gt_row gt_left gt_striped">California</td>
-<td headers="stub_1_4 bene_age_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_4 bene_demo_lvl" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_4 bene_demo_desc" class="gt_row gt_left gt_striped">All</td>
-<td headers="stub_1_4 bene_cond" class="gt_row gt_left gt_striped">Asthma</td>
-<td headers="stub_1_4 prvlnc" class="gt_row gt_right gt_striped">0.053</td>
-<td headers="stub_1_4 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped">21031.6907</td>
-<td headers="stub_1_4 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped">26889.3604</td>
-<td headers="stub_1_4 hosp_readmsn_rate" class="gt_row gt_right gt_striped">0.2284</td>
-<td headers="stub_1_4 er_visits_per_1000_benes" class="gt_row gt_right gt_striped">1633.1378</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
-<td headers="stub_1_5 year" class="gt_row gt_right">2018</td>
-<td headers="stub_1_5 bene_geo_desc" class="gt_row gt_left">California</td>
-<td headers="stub_1_5 bene_age_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_5 bene_demo_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_5 bene_demo_desc" class="gt_row gt_left">All</td>
-<td headers="stub_1_5 bene_cond" class="gt_row gt_left">Atrial Fibrillation</td>
-<td headers="stub_1_5 prvlnc" class="gt_row gt_right">0.0749</td>
-<td headers="stub_1_5 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right">25354.5636</td>
-<td headers="stub_1_5 tot_mdcr_pymt_pc" class="gt_row gt_right">32832.2883</td>
-<td headers="stub_1_5 hosp_readmsn_rate" class="gt_row gt_right">0.2364</td>
-<td headers="stub_1_5 er_visits_per_1000_benes" class="gt_row gt_right">1449.3866</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">6..629</th>
-<td headers="stub_1_6 year" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_age_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_cond" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 prvlnc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 hosp_readmsn_rate" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 er_visits_per_1000_benes" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">630</th>
-<td headers="stub_1_7 year" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">2018</td>
-<td headers="stub_1_7 bene_geo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">California</td>
-<td headers="stub_1_7 bene_age_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">65+</td>
-<td headers="stub_1_7 bene_demo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Sex</td>
-<td headers="stub_1_7 bene_demo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Male</td>
-<td headers="stub_1_7 bene_cond" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Stroke</td>
-<td headers="stub_1_7 prvlnc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.0389</td>
-<td headers="stub_1_7 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 tot_mdcr_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 hosp_readmsn_rate" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 er_visits_per_1000_benes" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-</tr>
-</tbody>
-</table>
-</div>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cc_specific(year = 2018, geo_lvl = "State", geo_desc = "California"): unused arguments (geo_lvl = "State", geo_desc = "California")</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, </span>
@@ -1808,558 +224,14 @@ html {
 <span>            demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="ofbrlsbxwy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#ofbrlsbxwy .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_heading {
-  background-color: #FDD4D0;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#ofbrlsbxwy .gt_title {
-  color: #333333;
-  font-size: 16px;
-  font-weight: bold;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#ofbrlsbxwy .gt_subtitle {
-  color: #333333;
-  font-size: 14px;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#ofbrlsbxwy .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_col_heading {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#ofbrlsbxwy .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FDD4D0;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#ofbrlsbxwy .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#ofbrlsbxwy .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#ofbrlsbxwy .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#ofbrlsbxwy .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#ofbrlsbxwy .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#ofbrlsbxwy .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#ofbrlsbxwy .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#ofbrlsbxwy .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #F6F7F7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#ofbrlsbxwy .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ofbrlsbxwy .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#ofbrlsbxwy .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#ofbrlsbxwy .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ofbrlsbxwy .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#ofbrlsbxwy .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ofbrlsbxwy .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_striped {
-  background-color: #FAFAFA;
-}
-
-#ofbrlsbxwy .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_footnote {
-  margin: 0px;
-  font-size: 12px;
-  padding-left: 3px;
-  padding-right: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ofbrlsbxwy .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#ofbrlsbxwy .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#ofbrlsbxwy .gt_left {
-  text-align: left;
-}
-
-#ofbrlsbxwy .gt_center {
-  text-align: center;
-}
-
-#ofbrlsbxwy .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#ofbrlsbxwy .gt_font_normal {
-  font-weight: normal;
-}
-
-#ofbrlsbxwy .gt_font_bold {
-  font-weight: bold;
-}
-
-#ofbrlsbxwy .gt_font_italic {
-  font-style: italic;
-}
-
-#ofbrlsbxwy .gt_super {
-  font-size: 65%;
-}
-
-#ofbrlsbxwy .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 75%;
-  vertical-align: 0.4em;
-}
-
-#ofbrlsbxwy .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#ofbrlsbxwy .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#ofbrlsbxwy .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#ofbrlsbxwy .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#ofbrlsbxwy .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#ofbrlsbxwy .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table">
-<thead class="gt_col_headings"><tr>
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_geo_lvl">bene_geo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_geo_desc">bene_geo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="bene_geo_cd">bene_geo_cd</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_age_lvl">bene_age_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_lvl">bene_demo_lvl</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_demo_desc">bene_demo_desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="bene_cond">bene_cond</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="prvlnc">prvlnc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_stdzd_pymt_pc">tot_mdcr_stdzd_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tot_mdcr_pymt_pc">tot_mdcr_pymt_pc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="hosp_readmsn_rate">hosp_readmsn_rate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="er_visits_per_1000_benes">er_visits_per_1000_benes</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">1</th>
-<td headers="stub_1_1 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_1 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_1 bene_geo_desc" class="gt_row gt_left">National</td>
-<td headers="stub_1_1 bene_geo_cd" class="gt_row gt_right"></td>
-<td headers="stub_1_1 bene_age_lvl" class="gt_row gt_left">65+</td>
-<td headers="stub_1_1 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_1 bene_demo_desc" class="gt_row gt_left">Asian Pacific Islander</td>
-<td headers="stub_1_1 bene_cond" class="gt_row gt_left">Alcohol Abuse</td>
-<td headers="stub_1_1 prvlnc" class="gt_row gt_right">0.0036</td>
-<td headers="stub_1_1 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_1 tot_mdcr_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_1 hosp_readmsn_rate" class="gt_row gt_right"></td>
-<td headers="stub_1_1 er_visits_per_1000_benes" class="gt_row gt_right"></td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">2</th>
-<td headers="stub_1_2 year" class="gt_row gt_right gt_striped">2007</td>
-<td headers="stub_1_2 bene_geo_lvl" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_2 bene_geo_desc" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_2 bene_geo_cd" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_2 bene_age_lvl" class="gt_row gt_left gt_striped">&lt;65</td>
-<td headers="stub_1_2 bene_demo_lvl" class="gt_row gt_left gt_striped">Race</td>
-<td headers="stub_1_2 bene_demo_desc" class="gt_row gt_left gt_striped">Asian Pacific Islander</td>
-<td headers="stub_1_2 bene_cond" class="gt_row gt_left gt_striped">Alcohol Abuse</td>
-<td headers="stub_1_2 prvlnc" class="gt_row gt_right gt_striped">0.021</td>
-<td headers="stub_1_2 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_2 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_2 hosp_readmsn_rate" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_2 er_visits_per_1000_benes" class="gt_row gt_right gt_striped"></td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">3</th>
-<td headers="stub_1_3 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_3 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_3 bene_geo_desc" class="gt_row gt_left">National</td>
-<td headers="stub_1_3 bene_geo_cd" class="gt_row gt_right"></td>
-<td headers="stub_1_3 bene_age_lvl" class="gt_row gt_left">All</td>
-<td headers="stub_1_3 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_3 bene_demo_desc" class="gt_row gt_left">Asian Pacific Islander</td>
-<td headers="stub_1_3 bene_cond" class="gt_row gt_left">Alcohol Abuse</td>
-<td headers="stub_1_3 prvlnc" class="gt_row gt_right">0.0057</td>
-<td headers="stub_1_3 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_3 tot_mdcr_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_3 hosp_readmsn_rate" class="gt_row gt_right"></td>
-<td headers="stub_1_3 er_visits_per_1000_benes" class="gt_row gt_right"></td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">4</th>
-<td headers="stub_1_4 year" class="gt_row gt_right gt_striped">2007</td>
-<td headers="stub_1_4 bene_geo_lvl" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_4 bene_geo_desc" class="gt_row gt_left gt_striped">National</td>
-<td headers="stub_1_4 bene_geo_cd" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_4 bene_age_lvl" class="gt_row gt_left gt_striped">65+</td>
-<td headers="stub_1_4 bene_demo_lvl" class="gt_row gt_left gt_striped">Race</td>
-<td headers="stub_1_4 bene_demo_desc" class="gt_row gt_left gt_striped">Hispanic</td>
-<td headers="stub_1_4 bene_cond" class="gt_row gt_left gt_striped">Alcohol Abuse</td>
-<td headers="stub_1_4 prvlnc" class="gt_row gt_right gt_striped">0.0107</td>
-<td headers="stub_1_4 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_4 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_4 hosp_readmsn_rate" class="gt_row gt_right gt_striped"></td>
-<td headers="stub_1_4 er_visits_per_1000_benes" class="gt_row gt_right gt_striped"></td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">5</th>
-<td headers="stub_1_5 year" class="gt_row gt_right">2007</td>
-<td headers="stub_1_5 bene_geo_lvl" class="gt_row gt_left">National</td>
-<td headers="stub_1_5 bene_geo_desc" class="gt_row gt_left">National</td>
-<td headers="stub_1_5 bene_geo_cd" class="gt_row gt_right"></td>
-<td headers="stub_1_5 bene_age_lvl" class="gt_row gt_left">&lt;65</td>
-<td headers="stub_1_5 bene_demo_lvl" class="gt_row gt_left">Race</td>
-<td headers="stub_1_5 bene_demo_desc" class="gt_row gt_left">Hispanic</td>
-<td headers="stub_1_5 bene_cond" class="gt_row gt_left">Alcohol Abuse</td>
-<td headers="stub_1_5 prvlnc" class="gt_row gt_right">0.0383</td>
-<td headers="stub_1_5 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_5 tot_mdcr_pymt_pc" class="gt_row gt_right"></td>
-<td headers="stub_1_5 hosp_readmsn_rate" class="gt_row gt_right"></td>
-<td headers="stub_1_5 er_visits_per_1000_benes" class="gt_row gt_right"></td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier; font-size: x-small; background-color: #E4E4E4;">6..314</th>
-<td headers="stub_1_6 year" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_geo_cd" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_age_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_lvl" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_demo_desc" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 bene_cond" class="gt_row gt_left gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 prvlnc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 tot_mdcr_pymt_pc" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 hosp_readmsn_rate" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-<td headers="stub_1_6 er_visits_per_1000_benes" class="gt_row gt_right gt_striped" style="background-color: #E4E4E4;"></td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub" style="font-family: Courier;">315</th>
-<td headers="stub_1_7 year" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">2007</td>
-<td headers="stub_1_7 bene_geo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">National</td>
-<td headers="stub_1_7 bene_geo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">National</td>
-<td headers="stub_1_7 bene_geo_cd" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 bene_age_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">All</td>
-<td headers="stub_1_7 bene_demo_lvl" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Race</td>
-<td headers="stub_1_7 bene_demo_desc" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">non-Hispanic White</td>
-<td headers="stub_1_7 bene_cond" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">Stroke</td>
-<td headers="stub_1_7 prvlnc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">0.0416</td>
-<td headers="stub_1_7 tot_mdcr_stdzd_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 tot_mdcr_pymt_pc" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 hosp_readmsn_rate" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-<td headers="stub_1_7 er_visits_per_1000_benes" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"></td>
-</tr>
-</tbody>
-</table>
-</div>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race"): unused arguments (geo_lvl = "National", demo_lvl = "Race")</span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="yxclyzyvrq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hetktdbrtq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
@@ -2367,7 +239,7 @@ html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#yxclyzyvrq .gt_table {
+#hetktdbrtq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2392,7 +264,7 @@ html {
   border-left-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_heading {
+#hetktdbrtq .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2404,12 +276,12 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#yxclyzyvrq .gt_caption {
+#hetktdbrtq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yxclyzyvrq .gt_title {
+#hetktdbrtq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2421,7 +293,7 @@ html {
   border-bottom-width: 0;
 }
 
-#yxclyzyvrq .gt_subtitle {
+#hetktdbrtq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2433,13 +305,13 @@ html {
   border-top-width: 0;
 }
 
-#yxclyzyvrq .gt_bottom_border {
+#hetktdbrtq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_col_headings {
+#hetktdbrtq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2454,7 +326,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#yxclyzyvrq .gt_col_heading {
+#hetktdbrtq .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2474,7 +346,7 @@ html {
   overflow-x: hidden;
 }
 
-#yxclyzyvrq .gt_column_spanner_outer {
+#hetktdbrtq .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2486,15 +358,15 @@ html {
   padding-right: 4px;
 }
 
-#yxclyzyvrq .gt_column_spanner_outer:first-child {
+#hetktdbrtq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yxclyzyvrq .gt_column_spanner_outer:last-child {
+#hetktdbrtq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yxclyzyvrq .gt_column_spanner {
+#hetktdbrtq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2506,7 +378,7 @@ html {
   width: 100%;
 }
 
-#yxclyzyvrq .gt_group_heading {
+#hetktdbrtq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2532,7 +404,7 @@ html {
   text-align: left;
 }
 
-#yxclyzyvrq .gt_empty_group_heading {
+#hetktdbrtq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2547,15 +419,15 @@ html {
   vertical-align: middle;
 }
 
-#yxclyzyvrq .gt_from_md > :first-child {
+#hetktdbrtq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yxclyzyvrq .gt_from_md > :last-child {
+#hetktdbrtq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yxclyzyvrq .gt_row {
+#hetktdbrtq .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2574,7 +446,7 @@ html {
   overflow-x: hidden;
 }
 
-#yxclyzyvrq .gt_stub {
+#hetktdbrtq .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2587,7 +459,7 @@ html {
   padding-right: 5px;
 }
 
-#yxclyzyvrq .gt_stub_row_group {
+#hetktdbrtq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2601,11 +473,11 @@ html {
   vertical-align: top;
 }
 
-#yxclyzyvrq .gt_row_group_first td {
+#hetktdbrtq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yxclyzyvrq .gt_summary_row {
+#hetktdbrtq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2615,16 +487,16 @@ html {
   padding-right: 5px;
 }
 
-#yxclyzyvrq .gt_first_summary_row {
+#hetktdbrtq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_first_summary_row.thick {
+#hetktdbrtq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yxclyzyvrq .gt_last_summary_row {
+#hetktdbrtq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2634,7 +506,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_grand_summary_row {
+#hetktdbrtq .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2644,7 +516,7 @@ html {
   padding-right: 5px;
 }
 
-#yxclyzyvrq .gt_first_grand_summary_row {
+#hetktdbrtq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2654,11 +526,11 @@ html {
   border-top-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_striped {
+#hetktdbrtq .gt_striped {
   background-color: #F4F4F4;
 }
 
-#yxclyzyvrq .gt_table_body {
+#hetktdbrtq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2667,7 +539,7 @@ html {
   border-bottom-color: #D5D5D5;
 }
 
-#yxclyzyvrq .gt_footnotes {
+#hetktdbrtq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2681,7 +553,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#yxclyzyvrq .gt_footnote {
+#hetktdbrtq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2690,7 +562,7 @@ html {
   padding-right: 5px;
 }
 
-#yxclyzyvrq .gt_sourcenotes {
+#hetktdbrtq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2704,7 +576,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#yxclyzyvrq .gt_sourcenote {
+#hetktdbrtq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2712,64 +584,64 @@ html {
   padding-right: 5px;
 }
 
-#yxclyzyvrq .gt_left {
+#hetktdbrtq .gt_left {
   text-align: left;
 }
 
-#yxclyzyvrq .gt_center {
+#hetktdbrtq .gt_center {
   text-align: center;
 }
 
-#yxclyzyvrq .gt_right {
+#hetktdbrtq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yxclyzyvrq .gt_font_normal {
+#hetktdbrtq .gt_font_normal {
   font-weight: normal;
 }
 
-#yxclyzyvrq .gt_font_bold {
+#hetktdbrtq .gt_font_bold {
   font-weight: bold;
 }
 
-#yxclyzyvrq .gt_font_italic {
+#hetktdbrtq .gt_font_italic {
   font-style: italic;
 }
 
-#yxclyzyvrq .gt_super {
+#hetktdbrtq .gt_super {
   font-size: 65%;
 }
 
-#yxclyzyvrq .gt_footnote_marks {
+#hetktdbrtq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#yxclyzyvrq .gt_asterisk {
+#hetktdbrtq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yxclyzyvrq .gt_indent_1 {
+#hetktdbrtq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yxclyzyvrq .gt_indent_2 {
+#hetktdbrtq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yxclyzyvrq .gt_indent_3 {
+#hetktdbrtq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yxclyzyvrq .gt_indent_4 {
+#hetktdbrtq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yxclyzyvrq .gt_indent_5 {
+#hetktdbrtq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
