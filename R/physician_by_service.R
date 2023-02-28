@@ -91,9 +91,7 @@
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
 #' @param year Year in YYYY format, between 2013-2020; default is 2020
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #' @param nest Nest related columns together; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -142,7 +140,6 @@ physician_by_service <- function(npi         = NULL,
                                  pos         = NULL,
                                  year        = 2020,
                                  clean_names = TRUE,
-                                 lowercase   = TRUE,
                                  nest        = TRUE) {
 
   # update distribution ids -------------------------------------------------
@@ -204,9 +201,7 @@ physician_by_service <- function(npi         = NULL,
     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
   # nest columns ------------------------------------------------------------
   if (isTRUE(nest)) {
     results <- results |>

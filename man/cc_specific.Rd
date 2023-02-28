@@ -29,8 +29,7 @@ cc_specific(
   demo_level = NULL,
   demo_desc = NULL,
   condition = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -85,10 +84,7 @@ have a claim indicating that the beneficiary received a service or
 treatment for the specific condition. Beneficiaries may have more than
 one of the chronic conditions listed.}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

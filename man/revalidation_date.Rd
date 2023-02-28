@@ -17,8 +17,7 @@ revalidation_date(
   type_code = NULL,
   prov_type = NULL,
   specialty = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -41,10 +40,7 @@ revalidation_date(
 
 \item{specialty}{Enrollment specialty}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -28,8 +28,7 @@ cc_multiple(
   age_level = NULL,
   demo_level = NULL,
   demo_desc = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -76,10 +75,7 @@ Medicaid are known as “dual eligibles.” Medicare beneficiaries are
 classified as dual eligibles if in any month in the given calendar year
 they were receiving full or partial Medicaid benefits.}
 
-\item{clean_names}{Clean column names with {janitor}'s \code{clean_names()}
-function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

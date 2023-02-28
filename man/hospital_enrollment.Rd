@@ -9,24 +9,23 @@ Centers for Medicare & Medicaid Services
 \usage{
 hospital_enrollment(
   npi = NULL,
-  ccn = NULL,
+  facility_ccn = NULL,
   enroll_id = NULL,
   enroll_state = NULL,
   specialty_code = NULL,
-  pac_id = NULL,
+  pac_id_org = NULL,
   org_name = NULL,
   dba_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
 \item{npi}{Hospital’s National Provider Identifier (NPI)}
 
-\item{ccn}{Hospital’s CMS Certification Number (CCN), formerly called an
+\item{facility_ccn}{Hospital’s CMS Certification Number (CCN), formerly called an
 OSCAR Number}
 
 \item{enroll_id}{Hospital’s enrollment ID}
@@ -35,7 +34,7 @@ OSCAR Number}
 
 \item{specialty_code}{Enrollment application and specialty type code}
 
-\item{pac_id}{Hospital’s PECOS Associate Control (PAC) ID}
+\item{pac_id_org}{Hospital’s PECOS Associate Control (PAC) ID}
 
 \item{org_name}{Hospital’s legal business name}
 
@@ -47,10 +46,7 @@ OSCAR Number}
 
 \item{zip}{Zip code of the hospital’s practice location address}
 
-\item{clean_names}{Clean column names with {janitor}'s \code{clean_names()}
-function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

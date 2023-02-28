@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 facility_affiliations(
   npi = NULL,
-  pac_id = NULL,
+  pac_id_ind = NULL,
   last_name = NULL,
   first_name = NULL,
   middle_name = NULL,
@@ -17,14 +17,13 @@ facility_affiliations(
   facility_ccn = NULL,
   parent_ccn = NULL,
   offset = 0,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{pac_id}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
 
 \item{last_name}{Individual clinician last name}
 
@@ -51,10 +50,7 @@ services in a unit within the hospital.}
 
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

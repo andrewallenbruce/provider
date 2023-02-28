@@ -101,7 +101,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-27 14:50:50
+    #> $ datetime          <dttm> 2023-02-28 01:36:32
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -291,7 +291,7 @@ npi_df |>
     #> # … with 12 more variables: last_updated <date>, status <chr>,
     #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
     #> #   identifiers <list>, endpoints <list>, other_names <list>, addresses <list>,
-    #> #   practice_locations <lgl>, enumeration_age <Duration>,
+    #> #   practicelocations <lgl>, enumeration_age <Duration>,
     #> #   certification_date <date>, and abbreviated variable names
     #> #   ¹​enumeration_type, ²​first_name, ³​last_name, ⁴​middle_name, ⁵​credential,
     #> #   ⁶​sole_proprietor, ⁷​enumeration_date
@@ -407,43 +407,7 @@ provider::hospital_enrollment(ccn = "060004") |>
   gluedown::md_table()
 ```
 
-| name                         | value                                                 |
-|:-----------------------------|:------------------------------------------------------|
-| enrollment_id                | O20070619000323                                       |
-| enrollment_state             | CO                                                    |
-| provider_type_code           | 00-09                                                 |
-| provider_type_text           | PART A PROVIDER - HOSPITAL                            |
-| npi                          | 1629071758                                            |
-| multiple_npi_flag            | FALSE                                                 |
-| ccn                          | 060004                                                |
-| associate_id                 | 1153213814                                            |
-| organization_name            | BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
-| doing_business_as_name       | PLATTE VALLEY MEDICAL CENTER                          |
-| incorporation_date           | 1958-08-18                                            |
-| incorporation_state          | CO                                                    |
-| organization_type_structure  | CORPORATION                                           |
-| organization_other_type_text | NA                                                    |
-| proprietary_nonprofit        | FALSE                                                 |
-| address                      | 1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
-| city                         | BRIGHTON                                              |
-| state                        | CO                                                    |
-| zip_code                     | 80601                                                 |
-| practice_location_type       | MAIN/PRIMARY HOSPITAL LOCATION                        |
-| location_other_type_text     | NA                                                    |
-| subgroup_general             | FALSE                                                 |
-| subgroup_acute_care          | TRUE                                                  |
-| subgroup_alcohol_drug        | FALSE                                                 |
-| subgroup_childrens           | FALSE                                                 |
-| subgroup_long_term           | FALSE                                                 |
-| subgroup_psychiatric         | FALSE                                                 |
-| subgroup_rehabilitation      | FALSE                                                 |
-| subgroup_short_term          | FALSE                                                 |
-| subgroup_swing_bed_approved  | FALSE                                                 |
-| subgroup_psychiatric_unit    | FALSE                                                 |
-| subgroup_rehabilitation_unit | FALSE                                                 |
-| subgroup_specialty_hospital  | FALSE                                                 |
-| subgroup_other               | FALSE                                                 |
-| subgroup_other_text          | NA                                                    |
+    #> Error in provider::hospital_enrollment(ccn = "060004"): unused argument (ccn = "060004")
 
 <br><br>
 
@@ -648,10 +612,7 @@ addl_phone_numbers(org_pac_id = 6608028899) |>
   gluedown::md_table()
 ```
 
-| prvdr_id   | frst_nm  | lst_nm | address                     | cty       | st  | zip   | org_pac_id | phn_numbr        | npi        |
-|:-----------|:---------|:-------|:----------------------------|:----------|:----|:------|:-----------|:-----------------|:-----------|
-| 3971798604 | LAWRENCE | BROOKS | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1548577034 |
-| 8729208152 | ROBIN    | AVERY  | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1407263999 |
+    #> Error in addl_phone_numbers(org_pac_id = 6608028899): unused argument (org_pac_id = 6608028899)
 
 <br><br>
 
@@ -721,10 +682,9 @@ provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |>
   gluedown::md_table()
 ```
 
-| medicare_specialty_code | medicare_specialty_description | provider_taxonomy_code | provider_taxonomy_description                                  |
-|:------------------------|:-------------------------------|:-----------------------|:---------------------------------------------------------------|
-| B4\[14\]                | Rehabilitation Agency          | 261QR0400X             | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation |
-| B4\[14\]                | Rehabilitation Agency          | 315D00000X             | Nursing & Custodial Care Facilities/Hospice Inpatient          |
+    #> Error in `dplyr::select()`:
+    #> ! Can't subset columns that don't exist.
+    #> ✖ Column `medicare_provider_supplier_type_description` doesn't exist.
 
 <br><br>
 
@@ -1788,16 +1748,16 @@ prov |> dplyr::select(year, bene_race) |>
         gluedown::md_table()
 ```
 
-| year | bene_race_wht_cnt | bene_race_black_cnt | bene_race_api_cnt | bene_race_hspnc_cnt | bene_race_nat_ind_cnt | bene_race_othr_cnt |
-|:-----|------------------:|--------------------:|------------------:|--------------------:|----------------------:|-------------------:|
-| 2013 |               639 |                  14 |                NA |                  NA |                     0 |                 NA |
-| 2014 |               880 |                  NA |                NA |                  NA |                    NA |                 NA |
-| 2015 |               887 |                  31 |                NA |                  NA |                     0 |                 NA |
-| 2016 |               466 |                  39 |                NA |                  NA |                     0 |                 NA |
-| 2017 |               525 |                  38 |                NA |                  NA |                     0 |                 NA |
-| 2018 |               408 |                  NA |                NA |                  NA |                    NA |                 NA |
-| 2019 |               402 |                 175 |                NA |                  15 |                    NA |                 NA |
-| 2020 |               210 |                  50 |                NA |                  12 |                    NA |                 NA |
+| year | bene_race_wht_cnt | bene_race_black_cnt | bene_race_api_cnt | bene_race_hspnc_cnt | bene_race_natind_cnt | bene_race_othr_cnt |
+|:-----|------------------:|--------------------:|------------------:|--------------------:|---------------------:|-------------------:|
+| 2013 |               639 |                  14 |                NA |                  NA |                    0 |                 NA |
+| 2014 |               880 |                  NA |                NA |                  NA |                   NA |                 NA |
+| 2015 |               887 |                  31 |                NA |                  NA |                    0 |                 NA |
+| 2016 |               466 |                  39 |                NA |                  NA |                    0 |                 NA |
+| 2017 |               525 |                  38 |                NA |                  NA |                    0 |                 NA |
+| 2018 |               408 |                  NA |                NA |                  NA |                   NA |                 NA |
+| 2019 |               402 |                 175 |                NA |                  15 |                   NA |                 NA |
+| 2020 |               210 |                  50 |                NA |                  12 |                   NA |                 NA |
 
 <br><br>
 

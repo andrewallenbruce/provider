@@ -10,25 +10,23 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param ind_pac_id Unique individual clinician ID assigned by PECOS
+#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
+#' @param pac_id_org Unique group ID assigned by PECOS to the group
 #' @param first_name Individual clinician first name
 #' @param last_name Individual clinician last name
 #' @param middle_name Individual clinician middle name
 #' @param city Group or individual's city
 #' @param state Group or individual's state
 #' @param zip Group or individual's ZIP code (9 digits when available)
-#' @param org_pac_id Unique group ID assigned by PECOS to the group
 #' @param offset offset; API pagination
-#' @param clean_names Clean column names with {janitor}'s `clean_names()`
-#'   function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' addl_phone_numbers(npi = 1407263999)
-#' addl_phone_numbers(ind_pac_id = "0042100190")
-#' addl_phone_numbers(org_pac_id = 6608028899)
+#' addl_phone_numbers(pac_id_ind = "0042100190")
+#' addl_phone_numbers(pac_id_org = 6608028899)
 #' \dontrun{
 #' addl_phone_numbers(city = "Atlanta")
 #' addl_phone_numbers(zip = 303421606)
@@ -37,30 +35,29 @@
 #' @export
 
 addl_phone_numbers <- function(npi           = NULL,
-                               ind_pac_id   = NULL,
+                               pac_id_ind   = NULL,
+                               pac_id_org    = NULL,
                                first_name    = NULL,
                                middle_name   = NULL,
                                last_name     = NULL,
                                city          = NULL,
                                state         = NULL,
                                zip           = NULL,
-                               org_pac_id    = NULL,
                                offset        = 0,
-                               clean_names   = TRUE,
-                               lowercase     = TRUE) {
+                               clean_names   = TRUE) {
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,           ~y,
     "npi",        npi,
-    "prvdr_id",   ind_pac_id,
+    "prvdr_id",   pac_id_ind,
     "frst_nm",    first_name,
     "mid_nm",     middle_name,
     "lst_nm",     last_name,
     "cty",        city,
     "st",         state,
     "zip",        zip,
-    "org_pac_id", org_pac_id)
+    "org_pac_id", pac_id_org)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
@@ -93,9 +90,8 @@ addl_phone_numbers <- function(npi           = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
   return(results)
 }
 

@@ -9,22 +9,21 @@ Centers for Medicare & Medicaid Services
 \usage{
 order_refer(
   npi = NULL,
-  last = NULL,
-  first = NULL,
+  first_name = NULL,
+  last_name = NULL,
   partb = NULL,
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI)}
 
-\item{last}{Provider's last name}
+\item{first_name}{Provider's first name}
 
-\item{first}{Provider's first name}
+\item{last_name}{Provider's last name}
 
 \item{partb}{logical}
 
@@ -34,10 +33,7 @@ order_refer(
 
 \item{pmd}{logical}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

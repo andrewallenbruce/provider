@@ -7,15 +7,12 @@
 Centers for Medicare & Medicaid Services
 }
 \usage{
-missing_information(npi = NULL, clean_names = TRUE, lowercase = TRUE)
+missing_information(npi = NULL, clean_names = TRUE)
 }
 \arguments{
 \item{npi}{The provider’s National Provider Identifier}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

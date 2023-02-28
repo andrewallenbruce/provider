@@ -15,7 +15,7 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id Unique individual clinician ID assigned by PECOS
+#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
 #' @param last_name Individual clinician last name
 #' @param first_name Individual clinician first name
 #' @param middle_name Individual clinician middle name
@@ -34,9 +34,7 @@
 #'    individual clinician provides service, should the clinician provide
 #'    services in a unit within the hospital.
 #' @param offset offset; API pagination
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -52,7 +50,7 @@
 #' @export
 
 facility_affiliations <- function(npi           = NULL,
-                                  pac_id        = NULL,
+                                  pac_id_ind        = NULL,
                                   last_name     = NULL,
                                   first_name    = NULL,
                                   middle_name   = NULL,
@@ -60,13 +58,12 @@ facility_affiliations <- function(npi           = NULL,
                                   facility_ccn  = NULL,
                                   parent_ccn    = NULL,
                                   offset        = 0,
-                                  clean_names   = TRUE,
-                                  lowercase     = TRUE) {
+                                  clean_names   = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_id,
+    "Ind_PAC_ID",         pac_id_ind,
     "lst_nm",             last_name,
     "frst_nm",            first_name,
     "mid_nm",             middle_name,
@@ -106,8 +103,7 @@ facility_affiliations <- function(npi           = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
   return(results)
 }

@@ -53,9 +53,7 @@
 #'   Medicaid are known as “dual eligibles.” Medicare beneficiaries are
 #'   classified as dual eligibles if in any month in the given calendar year
 #'   they were receiving full or partial Medicaid benefits.
-#' @param clean_names Clean column names with {janitor}'s `clean_names()`
-#'   function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @format ## In addition to the searchable columns:
 #' \describe{
@@ -82,8 +80,7 @@ cc_multiple <- function(year         = 2018,
                         age_level    = NULL,
                         demo_level   = NULL,
                         demo_desc    = NULL,
-                        clean_names  = TRUE,
-                        lowercase    = TRUE) {
+                        clean_names  = TRUE) {
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Multiple Chronic Conditions")
@@ -129,9 +126,7 @@ cc_multiple <- function(year         = 2018,
              dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   return(results)
 }

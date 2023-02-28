@@ -24,7 +24,6 @@ open_payments(
   year = 2021,
   offset = 0,
   clean_names = TRUE,
-  lowercase = TRUE,
   nest = FALSE
 )
 }
@@ -82,10 +81,7 @@ open_payments(
 
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 
 \item{nest}{Nest related columns together; default is \code{TRUE}.}
 }

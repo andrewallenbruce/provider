@@ -28,7 +28,6 @@ physician_by_service(
   pos = NULL,
   year = 2020,
   clean_names = TRUE,
-  lowercase = TRUE,
   nest = TRUE
 )
 }
@@ -108,10 +107,7 @@ in non-facility.}
 
 \item{year}{Year in YYYY format, between 2013-2020; default is 2020}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 
 \item{nest}{Nest related columns together; default is \code{TRUE}.}
 }

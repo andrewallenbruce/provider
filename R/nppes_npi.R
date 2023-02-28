@@ -208,8 +208,33 @@ nppes_npi <- function(npi            = NULL,
   #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
 }
-
+#' Search the NPPES National Provider Identifier Registry API
+#'
+#' @description `provider_nppes()` allows you to search the NPPES NPI
+#'    Registry's public API by many of the parameters defined in the
+#'    API's documentation.
+#'
+#' @details The NPPES NPI Registry Public Search is a free directory of all
+#'    active National Provider Identifier (NPI) records. Healthcare providers
+#'    acquire their unique 10-digit NPIs to identify themselves in a standard
+#'    way throughout their industry. After CMS supplies an NPI, they publish
+#'    the parts of the NPI record that have public relevance, including the
+#'    provider’s name, taxonomy and practice address. It enables you to search
+#'    for providers in the NPPES (National Plan and Provider Enumeration
+#'    System.) All information produced by the NPI Registry is provided in
+#'    accordance with the NPPES Data Dissemination Notice. There is no charge
+#'    to use the NPI Registry.
+#'
+#' ## Links
+#' * [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
+#' * [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Weekly**
 #' @inheritParams nppes_npi
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param tidy default is `TRUE`.
+#' @param verbose default is `TRUE`.
 #' @autoglobal
 #' @export
 nppes_npi_new <- function(npi            = NULL,
@@ -224,9 +249,9 @@ nppes_npi_new <- function(npi            = NULL,
                           country        = NULL,
                           limit          = 200,
                           skip           = NULL,
-                          clean_names = TRUE,
-                          tidy = TRUE,
-                          verbose = TRUE) {
+                          clean_names    = TRUE,
+                          tidy           = TRUE,
+                          verbose        = TRUE) {
 
   # base URL ---------------------------------------------------------------
   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
@@ -297,7 +322,29 @@ nppes_npi_new <- function(npi            = NULL,
   return(results)
 }
 
-
+#' Search the NPPES National Provider Identifier Registry API
+#'
+#' @description `nppes_npi_multi()` allows you to search the NPPES NPI
+#'    Registry's public API by many of the parameters defined in the
+#'    API's documentation.
+#'
+#' @details The NPPES NPI Registry Public Search is a free directory of all
+#'    active National Provider Identifier (NPI) records. Healthcare providers
+#'    acquire their unique 10-digit NPIs to identify themselves in a standard
+#'    way throughout their industry. After CMS supplies an NPI, they publish
+#'    the parts of the NPI record that have public relevance, including the
+#'    provider’s name, taxonomy and practice address. It enables you to search
+#'    for providers in the NPPES (National Plan and Provider Enumeration
+#'    System.) All information produced by the NPI Registry is provided in
+#'    accordance with the NPPES Data Dissemination Notice. There is no charge
+#'    to use the NPI Registry.
+#'
+#' ## Links
+#' * [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
+#' * [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Weekly**
 #' @param df data frame, tibble
 #' @autoglobal
 #' @export

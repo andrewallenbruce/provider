@@ -79,9 +79,7 @@
 #'    have a claim indicating that the beneficiary received a service or
 #'    treatment for the specific condition. Beneficiaries may have more than
 #'    one of the chronic conditions listed.
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @format ## In addition to the searchable columns:
 #' \describe{
@@ -108,8 +106,7 @@ cc_specific <- function(year         = 2018,
                         demo_level   = NULL,
                         demo_desc    = NULL,
                         condition    = NULL,
-                        clean_names  = TRUE,
-                        lowercase    = TRUE) {
+                        clean_names  = TRUE) {
 
   # arg_match ---------------------------------------------------------------
   rlang::arg_match(geo_level)
@@ -165,9 +162,7 @@ cc_specific <- function(year         = 2018,
              dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   return(results)
 }

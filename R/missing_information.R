@@ -17,9 +17,7 @@
 #' @note Update Frequency: **Quarterly**
 #'
 #' @param npi The provider’s National Provider Identifier
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -29,8 +27,7 @@
 #' @export
 
 missing_information <- function(npi         = NULL,
-                                clean_names = TRUE,
-                                lowercase   = TRUE) {
+                                clean_names = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(~x,             ~y,
                           "NPI",          npi)
@@ -65,9 +62,7 @@ missing_information <- function(npi         = NULL,
       }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   return(results)
 }

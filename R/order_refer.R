@@ -17,15 +17,13 @@
 #' @note Update Frequency: **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
-#' @param last Provider's last name
-#' @param first Provider's first name
+#' @param first_name Provider's first name
+#' @param last_name Provider's last name
 #' @param partb logical
 #' @param dme logical
 #' @param hha logical
 #' @param pmd logical
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -61,21 +59,20 @@
 #' @autoglobal
 #' @export
 
-order_refer <- function(npi         = NULL,
-                        last        = NULL,
-                        first       = NULL,
-                        partb       = NULL,
-                        dme         = NULL,
-                        hha         = NULL,
-                        pmd         = NULL,
-                        clean_names = TRUE,
-                        lowercase   = TRUE) {
+order_refer <- function(npi              = NULL,
+                        first_name       = NULL,
+                        last_name        = NULL,
+                        partb            = NULL,
+                        dme              = NULL,
+                        hha              = NULL,
+                        pmd              = NULL,
+                        clean_names      = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,           ~y,
     "NPI",        npi,
-    "LAST_NAME",  last,
-    "FIRST_NAME", first,
+    "FIRST_NAME", first_name,
+    "LAST_NAME",  last_name,
     "PARTB",      partb,
     "DME",        dme,
     "HHA",        hha,
@@ -119,9 +116,7 @@ order_refer <- function(npi         = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
     return(results)
 }

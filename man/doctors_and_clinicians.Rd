@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 doctors_and_clinicians(
   npi = NULL,
-  pac_id = NULL,
+  pac_id_ind = NULL,
   enroll_id = NULL,
   last_name = NULL,
   first_name = NULL,
@@ -24,14 +24,13 @@ doctors_and_clinicians(
   ind_assign = NULL,
   group_assign = NULL,
   offset = 0,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{pac_id}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
 
 \item{enroll_id}{Unique ID for the clinician enrollment that is the source
 for the data in the observation}
@@ -67,10 +66,7 @@ as payment in full. \code{M} = Clinician may accept Medicare Assignment.}
 
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Clean column names with {janitor}'s \code{clean_names()}
-function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -95,7 +91,7 @@ Update Frequency: \strong{Monthly}
 }
 \examples{
 doctors_and_clinicians(npi = 1407263999)
-doctors_and_clinicians(pac_id = 4688974991)
+doctors_and_clinicians(pac_id_ind = 4688974991)
 doctors_and_clinicians(enroll_id = "I20081002000549")
 \dontrun{
 doctors_and_clinicians(first_name = "John")

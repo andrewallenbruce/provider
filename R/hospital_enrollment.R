@@ -14,20 +14,18 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Hospital’s National Provider Identifier (NPI)
-#' @param ccn Hospital’s CMS Certification Number (CCN), formerly called an
+#' @param facility_ccn Hospital’s CMS Certification Number (CCN), formerly called an
 #'   OSCAR Number
 #' @param enroll_id Hospital’s enrollment ID
 #' @param enroll_state Hospital’s enrollment state
 #' @param specialty_code Enrollment application and specialty type code
-#' @param pac_id Hospital’s PECOS Associate Control (PAC) ID
+#' @param pac_id_org Hospital’s PECOS Associate Control (PAC) ID
 #' @param org_name Hospital’s legal business name
 #' @param dba_name Hospital’s doing-business-as name
 #' @param city City of the hospital’s practice location address
 #' @param state State of the hospital’s practice location address.
 #' @param zip Zip code of the hospital’s practice location address
-#' @param clean_names Clean column names with {janitor}'s `clean_names()`
-#'   function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -43,18 +41,17 @@
 #' @export
 
 hospital_enrollment <- function(npi            = NULL,
-                                ccn            = NULL,
+                                facility_ccn            = NULL,
                                 enroll_id      = NULL,
                                 enroll_state   = NULL,
                                 specialty_code = NULL,
-                                pac_id         = NULL,
+                                pac_id_org         = NULL,
                                 org_name       = NULL,
                                 dba_name       = NULL,
                                 city           = NULL,
                                 state          = NULL,
                                 zip            = NULL,
-                                clean_names    = TRUE,
-                                lowercase      = TRUE) {
+                                clean_names    = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                       ~y,
@@ -62,8 +59,8 @@ hospital_enrollment <- function(npi            = NULL,
     "ENROLLMENT STATE",       enroll_state,
     "PROVIDER TYPE CODE",     specialty_code,
     "NPI",                    npi,
-    "CCN",                    ccn,
-    "ASSOCIATE ID",           pac_id,
+    "CCN",                    facility_ccn,
+    "ASSOCIATE ID",           pac_id_org,
     "ORGANIZATION NAME",      org_name,
     "DOING BUSINESS AS NAME", dba_name,
     "CITY",                   city,
@@ -98,9 +95,8 @@ hospital_enrollment <- function(npi            = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
   return(results)
 
 

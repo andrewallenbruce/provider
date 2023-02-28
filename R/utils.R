@@ -294,14 +294,30 @@ sql_format <- function(param, arg) {
 #' @autoglobal
 #' @noRd
 str_to_snakecase <- function(string) {
-string |>
-  stringr::str_split("(?=[[:upper:]])") |>
-  purrr::map_chr(function(string) {
-    string |>
-      stringr::str_to_lower() |>
-      stringr::str_c(collapse = "_")
-  }) |>
-  stringr::str_remove("^_")
+
+  string |>
+    #stringr::str_split("(?=[[:upper:]])") |>
+    purrr::map_chr(function(string) {
+
+      string |>
+        stringr::str_to_lower() |>
+        stringr::str_c(collapse = "_")}) |>
+    stringr::str_remove("^_") |>
+    stringr::str_replace_all(" ", "_") |>
+    stringr::str_replace_all("-", "") |>
+    stringr::str_replace_all("__", "_")
+}
+
+
+#' provider_progress ------------------------------------------------------
+provider_progress <- function() {
+  cli::cli_progress_bar("Searching")
+  while (TRUE) {
+    if (1 < 0.01) break
+    Sys.sleep(0.01)
+    cli::cli_progress_update()
+  }
+  cli::cli_progress_update(force = TRUE)
 }
 
 

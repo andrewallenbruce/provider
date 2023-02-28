@@ -9,23 +9,24 @@ Centers for Medicare & Medicaid Services
 \usage{
 addl_phone_numbers(
   npi = NULL,
-  ind_pac_id = NULL,
+  pac_id_ind = NULL,
+  pac_id_org = NULL,
   first_name = NULL,
   middle_name = NULL,
   last_name = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
-  org_pac_id = NULL,
   offset = 0,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{ind_pac_id}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
+
+\item{pac_id_org}{Unique group ID assigned by PECOS to the group}
 
 \item{first_name}{Individual clinician first name}
 
@@ -39,14 +40,9 @@ addl_phone_numbers(
 
 \item{zip}{Group or individual's ZIP code (9 digits when available)}
 
-\item{org_pac_id}{Unique group ID assigned by PECOS to the group}
-
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Clean column names with {janitor}'s \code{clean_names()}
-function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -65,8 +61,8 @@ Update Frequency: \strong{Monthly}
 }
 \examples{
 addl_phone_numbers(npi = 1407263999)
-addl_phone_numbers(ind_pac_id = "0042100190")
-addl_phone_numbers(org_pac_id = 6608028899)
+addl_phone_numbers(pac_id_ind = "0042100190")
+addl_phone_numbers(pac_id_org = 6608028899)
 \dontrun{
 addl_phone_numbers(city = "Atlanta")
 addl_phone_numbers(zip = 303421606)

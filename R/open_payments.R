@@ -70,9 +70,7 @@
 #'    * `Food and Beverage`
 #' @param year Reporting year, 2015-2021, default is `2021`
 #' @param offset offset; API pagination
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #' @param nest Nest related columns together; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -103,7 +101,6 @@ open_payments <- function(recipient_npi          = NULL,
                           year                   = 2021,
                           offset                 = 0,
                           clean_names            = TRUE,
-                          lowercase              = TRUE,
                           nest                   = FALSE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -167,9 +164,8 @@ open_payments <- function(recipient_npi          = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
   # nest columns ------------------------------------------------------------
   if (isTRUE(nest)) {
     results <- results |>

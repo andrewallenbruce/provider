@@ -12,8 +12,7 @@ pending_applications(
   last_name = NULL,
   first_name = NULL,
   type = c("physician", "non-physician"),
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -25,10 +24,7 @@ pending_applications(
 
 \item{type}{physician or non-physician}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

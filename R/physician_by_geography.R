@@ -54,9 +54,7 @@
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
 #' @param year Year in YYYY format, between 2013-2020; default is 2020
-#' @param clean_names Clean column names with {janitor}'s
-#'    `clean_names()` function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -94,8 +92,7 @@ physician_by_geography <- function(geo_level   = NULL,
                                    hcpcs_drug  = NULL,
                                    pos         = NULL,
                                    year        = 2020,
-                                   clean_names = TRUE,
-                                   lowercase   = TRUE) {
+                                   clean_names = TRUE) {
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Geography and Service")
@@ -140,9 +137,7 @@ physician_by_geography <- function(geo_level   = NULL,
     dplyr::mutate(Year = year) |> dplyr::relocate(Year)
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   return(results)
 }

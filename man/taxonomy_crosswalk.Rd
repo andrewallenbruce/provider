@@ -12,8 +12,7 @@ taxonomy_crosswalk(
   specialty_desc = NULL,
   taxonomy_code = NULL,
   taxonomy_desc = NULL,
-  clean_names = TRUE,
-  lowercase = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -25,10 +24,7 @@ taxonomy_crosswalk(
 
 \item{taxonomy_desc}{The description of the taxonomy that the providers use}
 
-\item{clean_names}{Clean column names with {janitor}'s
-\code{clean_names()} function; default is \code{TRUE}.}
-
-\item{lowercase}{Convert column names to lowercase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

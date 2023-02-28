@@ -15,7 +15,7 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id Unique individual clinician ID assigned by PECOS
+#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
 #' @param enroll_id Unique ID for the clinician enrollment that is the source
 #'   for the data in the observation
 #' @param last_name Individual clinician last name
@@ -36,15 +36,13 @@
 #'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
 #'   as payment in full. `M` = Clinician may accept Medicare Assignment.
 #' @param offset offset; API pagination
-#' @param clean_names Clean column names with {janitor}'s `clean_names()`
-#'   function; default is `TRUE`.
-#' @param lowercase Convert column names to lowercase; default is `TRUE`.
+#' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' doctors_and_clinicians(npi = 1407263999)
-#' doctors_and_clinicians(pac_id = 4688974991)
+#' doctors_and_clinicians(pac_id_ind = 4688974991)
 #' doctors_and_clinicians(enroll_id = "I20081002000549")
 #' \dontrun{
 #' doctors_and_clinicians(first_name = "John")
@@ -55,7 +53,7 @@
 #' @export
 
 doctors_and_clinicians <- function(npi           = NULL,
-                                   pac_id        = NULL,
+                                   pac_id_ind        = NULL,
                                    enroll_id     = NULL,
                                    last_name     = NULL,
                                    first_name    = NULL,
@@ -70,13 +68,12 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    ind_assign    = NULL,
                                    group_assign  = NULL,
                                    offset        = 0,
-                                   clean_names   = TRUE,
-                                   lowercase     = TRUE) {
+                                   clean_names   = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_id,
+    "Ind_PAC_ID",         pac_id_ind,
     "Ind_enrl_ID",        enroll_id,
     "lst_nm",             last_name,
     "frst_nm",            first_name,
@@ -123,9 +120,8 @@ doctors_and_clinicians <- function(npi           = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- janitor::clean_names(results)}
-  # lowercase ---------------------------------------------------------------
-  if (isTRUE(lowercase)) {results <- dplyr::rename_with(results, tolower)}
+  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+
   return(results)
 }
 
