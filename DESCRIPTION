@@ -21,6 +21,7 @@ Imports:
     dplyr,
     fipio,
     httr2,
+    janitor,
     lubridate,
     purrr,
     rlang,

@@ -27,20 +27,61 @@ library(provider)
 
 <br>
 
-## Example: Opt-Out Provider
+## You Need to Find A Healthcare Provider Using Only Partial Information
+
+So, you have to find healthcare provider using just partial information. For instance all you have is "**EYE doctor RANIA in REDMOND**". Strictly speaking, it is necessary to perform a search with minimum information and the maximum level of relevance of the result. The second result in the list is "**REDMOND EYE DOCTORS, PLLC**" where *Dr. Rania Montecillo* specified an owner.
 
 <br>
 
-```{r eval=FALSE}
-nppes_npi(npi = 1114058443)
-
-order_refer(npi = 1114058443)
-
-opt_out(npi = 1114058443)
+```{r}
+nppes_npi_new(city = "Redmond", 
+              state = "WA", 
+              first_name = "Rania") |> 
+  tidyr::unnest(addresses) |> 
+  dplyr::filter(last_name == "MONTECILLO")
 ```
 
-```{r echo=FALSE}
-nppes <- nppes_npi(npi = 1114058443)
+<br><br>
+
+## You Need to Find Detailed Healthcare Provider Information Using Known NPI Number
+
+This is very common scenario. You need to get full replica of NPI record. Again, it simple. Just use code provided below. API response may contain single NPI record, or empty list in case NPI does not exist in the CMS National Plan and Provider Enumeration System (NPPES) Registry.
+
+<br>
+
+```{r}
+nppes_npi_new(npi = 1285636522)
+```
+<br><br>
+
+## You Need to Lookup Multiple Healthcare Providers Using A List of NPI Numbers
+
+You may need to perform bulk search for performance optimization. The "getcodes" operation allows you to decrease number of round trips in orders of magnitude. For instance you can get information about hundred NPI in one REST call, instead of sending NPI numbers one-by-one.
+
+<br>
+
+```{r}
+list <- c(1285636522, 1730198755, 1427145176)
+list |> purrr::map_dfr(nppes_npi_new) 
+```
+
+
+<br><br>
+
+## You Need to Check NPI Number Status
+
+Again, very common scenario. You just need to check NPI number status. It is simple. Take a look at the code below. Expected result contains requested NPI number, status, and short status description.
+
+<br>
+
+```{r}
+nppes_npi_new(npi = 1285636522) |> 
+  dplyr::select(npi, status)
+```
+
+
+```{r}
+nppes <- nppes_npi_new(npi = 1285636522)
 
 nppes_type_npi <- nppes |> 
   dplyr::select(NPI = number, 

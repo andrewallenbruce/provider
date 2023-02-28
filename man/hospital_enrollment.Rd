@@ -70,8 +70,8 @@ Update Frequency: \strong{Monthly}
 }
 \examples{
 hospital_enrollment(npi = 1689653487)
-hospital_enrollment(ccn = "440058")
-hospital_enrollment(pac_id = 6103733050)
+hospital_enrollment(facility_ccn = "440058")
+hospital_enrollment(pac_id_org = 6103733050)
 \dontrun{
 hospital_enrollment(city = "Atlanta")
 hospital_enrollment(zip = 117771928)
