@@ -98,7 +98,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -113,8 +113,7 @@
 <span>  ind_assign <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  group_assign <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -128,7 +127,7 @@
 <dd><p>Unique clinician ID assigned by NPPES</p></dd>
 
 
-<dt>pac_id</dt>
+<dt>pac_id_ind</dt>
 <dd><p>Unique individual clinician ID assigned by PECOS</p></dd>
 
 
@@ -195,12 +194,7 @@ as payment in full. <code>M</code> = Clinician may accept Medicare Assignment.</
 
 
 <dt>clean_names</dt>
-<dd><p>Clean column names with janitor's <code>clean_names()</code>
-function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>lowercase</dt>
-<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -242,7 +236,7 @@ are listed on multiple lines.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, phn_numbr &lt;chr&gt;, ind_assgn &lt;chr&gt;, grp_assgn &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   adrs_id &lt;chr&gt;, and abbreviated variable names ¹​record_number, ²​ind_pac_id,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​ind_enrl_id</span></span>
-<span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">4688974991</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>pac_id_ind <span class="op">=</span> <span class="fl">4688974991</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 32</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   record…¹ npi   ind_p…² ind_e…³ lst_nm frst_nm mid_nm suff  gndr  cred  med_sch</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>

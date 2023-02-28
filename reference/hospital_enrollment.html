@@ -98,18 +98,17 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">hospital_enrollment</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dba_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -123,7 +122,7 @@
 <dd><p>Hospital’s National Provider Identifier (NPI)</p></dd>
 
 
-<dt>ccn</dt>
+<dt>facility_ccn</dt>
 <dd><p>Hospital’s CMS Certification Number (CCN), formerly called an
 OSCAR Number</p></dd>
 
@@ -140,7 +139,7 @@ OSCAR Number</p></dd>
 <dd><p>Enrollment application and specialty type code</p></dd>
 
 
-<dt>pac_id</dt>
+<dt>pac_id_org</dt>
 <dd><p>Hospital’s PECOS Associate Control (PAC) ID</p></dd>
 
 
@@ -165,12 +164,7 @@ OSCAR Number</p></dd>
 
 
 <dt>clean_names</dt>
-<dd><p>Clean column names with janitor's <code>clean_names()</code>
-function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>lowercase</dt>
-<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -212,17 +206,7 @@ business as name, organization type and address.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_other_type_text &lt;chr&gt;, subgroup_general &lt;lgl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   subgroup_acute_care &lt;lgl&gt;, subgroup_alcohol_drug &lt;lgl&gt;, …</span></span>
 <span class="r-in"><span><span class="fu">hospital_enrollment</span><span class="op">(</span>ccn <span class="op">=</span> <span class="st">"440058"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 36</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollme…¹ enrol…² provi…³ provi…⁴ npi   multi…⁵ ccn   assoc…⁶ organ…⁷ doing…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> O20020812… TN      00-09   PART A… 1467… FALSE   4400… 519363… SOUTHE… SOUTHE…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 26 more variables: incorporation_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_state &lt;chr&gt;, organization_type_structure &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_other_type_text &lt;chr&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address_line_1 &lt;chr&gt;, address_line_2 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;int&gt;, practice_location_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_other_type_text &lt;chr&gt;, subgroup_general &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   subgroup_acute_care &lt;lgl&gt;, subgroup_alcohol_drug &lt;lgl&gt;, …</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in hospital_enrollment(ccn = "440058"):</span> unused argument (ccn = "440058")</span>
 <span class="r-in"><span><span class="fu">hospital_enrollment</span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 36</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   enrollme…¹ enrol…² provi…³ provi…⁴ npi   multi…⁵ ccn   assoc…⁶ organ…⁷ doing…⁸</span>

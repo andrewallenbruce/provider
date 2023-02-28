@@ -98,7 +98,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">facility_affiliations</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -106,8 +106,7 @@
 <span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -121,7 +120,7 @@
 <dd><p>Unique clinician ID assigned by NPPES</p></dd>
 
 
-<dt>pac_id</dt>
+<dt>pac_id_ind</dt>
 <dd><p>Unique individual clinician ID assigned by PECOS</p></dd>
 
 
@@ -165,12 +164,7 @@ services in a unit within the hospital.</p></dd>
 
 
 <dt>clean_names</dt>
-<dd><p>Clean column names with janitor's
-<code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>lowercase</dt>
-<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

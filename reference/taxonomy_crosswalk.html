@@ -104,8 +104,7 @@ proper taxonomy code eligible for medicare programs.</p>
 <span>  specialty_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -132,12 +131,7 @@ proper taxonomy code eligible for medicare programs.</p>
 
 
 <dt>clean_names</dt>
-<dd><p>Clean column names with janitor's
-<code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>lowercase</dt>
-<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -172,7 +166,7 @@ Ownership System (PECOS).</p><div class="section">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    medicare_specialty_code medicare_provider_supplier_type_des…¹ provi…² provi…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    medicare_specialty_code medicare_provider/supplier_type_des…¹ provi…² provi…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> B4[14]                  <span style="color: #949494;">"</span>Rehabilitation Agency<span style="color: #949494;">"</span>               <span style="color: #949494;">"</span>261QR… Ambula…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> B4[14]                  <span style="color: #949494;">"</span>Organ Procurement Organization<span style="color: #949494;">"</span>      <span style="color: #949494;">"</span>335U0… Suppli…</span>
@@ -188,36 +182,36 @@ Ownership System (PECOS).</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> B4[14]                  <span style="color: #949494;">"</span>Religious Non-Medical Health Care I… <span style="color: #949494;">"</span>282J0… Hospit…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> B4[14]                  <span style="color: #949494;">"</span>Rural Health Clinic <span style="color: #949494;">"</span>                <span style="color: #949494;">"</span>261QR… Ambula…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​`medicare_provider/supplier_type_description`, ²​provider_taxonomy_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​`provider_taxonomy_description:_type_classification_specialization`</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider/supplier_type_desc…¹ provi…² provi…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> B4[14]                  Rehabilitation Agency                  261QR0… Ambula…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> B4[14]                  Rehabilitation Agency                  315D00… Nursin…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​`medicare_provider/supplier_type_description`, ²​provider_taxonomy_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​`provider_taxonomy_description:_type_classification_specialization`</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider/supplier_type_desc…¹ provi…² provi…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2                       Physician/General Surgery              2086S0… Allopa…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​`medicare_provider/supplier_type_description`, ²​provider_taxonomy_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​`provider_taxonomy_description:_type_classification_specialization`</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_desc <span class="op">=</span> <span class="st">"Agencies/Hospice Care Community Based"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider_supplier_type_desc…¹ provi…² provi…³</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   medicare_specialty_code medicare_provider/supplier_type_desc…¹ provi…² provi…³</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> B4[14]                  Hospice                                251G00… Agenci…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​medicare_provider_supplier_type_description, ²​provider_taxonomy_code,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​provider_taxonomy_description_type_classification_specialization</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ¹​`medicare_provider/supplier_type_description`, ²​provider_taxonomy_code,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​`provider_taxonomy_description:_type_classification_specialization`</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

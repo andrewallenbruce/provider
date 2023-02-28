@@ -94,6 +94,12 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi_multi.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi_new.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nucc_taxonomy_230.html</loc>
   </url>
   <url>
@@ -122,6 +128,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_enrollment.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_progress.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_date.html</loc>

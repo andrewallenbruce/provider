@@ -104,14 +104,13 @@ enrollment records in Medicare.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">order_refer</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  partb <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  dme <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hha <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pmd <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  lowercase <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -125,12 +124,12 @@ enrollment records in Medicare.</p>
 <dd><p>10-digit National Provider Identifier (NPI)</p></dd>
 
 
-<dt>last</dt>
-<dd><p>Provider's last name</p></dd>
-
-
-<dt>first</dt>
+<dt>first_name</dt>
 <dd><p>Provider's first name</p></dd>
+
+
+<dt>last_name</dt>
+<dd><p>Provider's last name</p></dd>
 
 
 <dt>partb</dt>
@@ -150,12 +149,7 @@ enrollment records in Medicare.</p>
 
 
 <dt>clean_names</dt>
-<dd><p>Clean column names with janitor's
-<code>clean_names()</code> function; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>lowercase</dt>
-<dd><p>Convert column names to lowercase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
