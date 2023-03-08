@@ -113,7 +113,7 @@ in NPPES.</p>
 
 
 <dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -144,10 +144,22 @@ information in NPPES.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">missing_information</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1134122013</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">CMS Public Reporting of Missing Digital Contact Information API</span> <span style="color: #00BBBB;">─────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 1 result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi        last_name first_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1134122013 Henry     Timothy   </span>
+<span class="r-in"><span><span class="fu">missing_information</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1386128379</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">CMS Public Reporting of Missing Digital Contact Information API</span> <span style="color: #00BBBB;">─────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Found 0 results</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 0 × 0</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

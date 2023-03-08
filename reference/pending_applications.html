@@ -131,7 +131,7 @@ review for physicians &amp; non-physicians.</p>
 
 
 <dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -160,21 +160,29 @@ contractors.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi   last_name first_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Medicare Pending Initial Logging and Tracking Physicians API</span> <span style="color: #00BBBB;">────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Found 0 results</span>
 <span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1487003984</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi   last_name first_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Medicare Pending Initial Logging and Tracking Non-Physicians API</span> <span style="color: #00BBBB;">────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Found 0 results</span>
 <span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Abbott"</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi   last_name first_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span>        <span style="color: #BB0000;">NA</span>        </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Medicare Pending Initial Logging and Tracking Non-Physicians API</span> <span style="color: #00BBBB;">────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Found 0 results</span>
 <span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Medicare Pending Initial Logging and Tracking Physicians API</span> <span style="color: #00BBBB;">────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 33 results</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 33 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    npi        last_name  first_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>

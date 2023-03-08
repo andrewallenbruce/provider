@@ -105,7 +105,7 @@ beneficiaries.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cc_specific</span><span class="op">(</span></span>
 <span>  year <span class="op">=</span> <span class="fl">2018</span>,</span>
 <span>  geo_level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National"</span>, <span class="st">"State"</span>, <span class="st">"County"</span><span class="op">)</span>,</span>
-<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state_abb <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  age_level <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -158,7 +158,7 @@ currently available.</p></dd>
 and <code>County</code></p></dd>
 
 
-<dt>state</dt>
+<dt>state_abb</dt>
 <dd><p>state</p></dd>
 
 
@@ -218,7 +218,7 @@ one of the chronic conditions listed.</p></dd>
 
 
 <dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -268,8 +268,8 @@ geography and distinct chronic conditions listed below.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, geo_level <span class="op">=</span> <span class="st">"State"</span>, state <span class="op">=</span> <span class="st">"CA"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, geo_level  <span class="op">=</span> <span class="st">"National"</span>, demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, geo_level <span class="op">=</span> <span class="st">"State"</span>, state_abb <span class="op">=</span> <span class="st">"CA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, geo_level  <span class="op">=</span> <span class="st">"National"</span>, demo_level <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

@@ -91,6 +91,9 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/missing_information.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/noresults_cli.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi.html</loc>
   </url>
   <url>
@@ -124,13 +127,16 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_service.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/provider_cli.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/provider_cli_2.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_enrollment.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_progress.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/results_cli.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_date.html</loc>

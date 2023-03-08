@@ -107,7 +107,7 @@ drug coverage, available for several geographical areas.</p>
 <span>  month <span class="op">=</span> <span class="st">"Year"</span>,</span>
 <span>  geo_level <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"National"</span>, <span class="st">"State"</span>, <span class="st">"County"</span><span class="op">)</span>,</span>
 <span>  state_abb <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -126,8 +126,8 @@ drug coverage, available for several geographical areas.</p>
 
 
 <dt>month</dt>
-<dd><p>Timeframe of Medicare enrollment; options are <code>Year</code> or any
-month within the 12-month timespan of the month in the dataset's version
+<dd><p>Time frame of Medicare enrollment; options are <code>Year</code> or any
+month within the 12-month time span of the month in the data set's version
 name (listed <a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs" class="external-link">here</a>)</p></dd>
 
 
@@ -140,7 +140,7 @@ and <code>County</code></p></dd>
 <dd><p>Two-letter state abbreviation of beneficiary residence</p></dd>
 
 
-<dt>state</dt>
+<dt>state_name</dt>
 <dd><p>Full state name of beneficiary residence</p></dd>
 
 
@@ -153,7 +153,7 @@ and <code>County</code></p></dd>
 
 
 <dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -193,7 +193,15 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>month <span class="op">=</span> <span class="st">"Year"</span>, geo_level <span class="op">=</span> <span class="st">"County"</span>, state_abb <span class="op">=</span> <span class="st">"AL"</span>, county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>month <span class="op">=</span> <span class="st">"Year"</span>,</span></span>
+<span class="r-in"><span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span></span>
+<span class="r-in"><span>                       state_abb <span class="op">=</span> <span class="st">"AL"</span>,</span></span>
+<span class="r-in"><span>                       county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Medicare Monthly (Beneficiary) Enrollment API</span> <span style="color: #00BBBB;">───────────────────────────────</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> URL:</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB; font-style: italic;">&lt;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment&gt;</span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">✔</span> Found 1 result</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year month bene_geo…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
@@ -209,47 +217,17 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>,</span></span>
 <span class="r-in"><span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span></span>
 <span class="r-in"><span>                       fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year month bene_geo…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>021 Year  County     AL      Alabama Autauga 01001     <span style="text-decoration: underline;">11</span>398    <span style="text-decoration: underline;">5</span>339    <span style="text-decoration: underline;">6</span>059</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 12 more variables: aged_tot_benes &lt;int&gt;, aged_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   aged_no_esrd_benes &lt;int&gt;, dsbld_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dsbld_esrd_and_esrd_only_benes &lt;int&gt;, dsbld_no_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_tot_benes &lt;int&gt;, a_b_orgnl_mdcr_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_ma_and_oth_benes &lt;int&gt;, prscrptn_drug_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prscrptn_drug_pdp_benes &lt;int&gt;, prscrptn_drug_mapd_benes &lt;int&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in beneficiary_enrollment(year = 2021, geo_level = "County", fips = "01001"):</span> `state_abb` must be a character vector, not NULL.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>,</span></span>
 <span class="r-in"><span>                       month <span class="op">=</span> <span class="st">"July"</span>,</span></span>
 <span class="r-in"><span>                       geo_level <span class="op">=</span> <span class="st">"State"</span>,</span></span>
-<span class="r-in"><span>                       state <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year month bene_geo…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>022 July  State      GA      Georgia Total   13      1<span style="text-decoration: underline;">840</span>128  <span style="text-decoration: underline;">907</span>070  <span style="text-decoration: underline;">933</span>058</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 12 more variables: aged_tot_benes &lt;int&gt;, aged_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   aged_no_esrd_benes &lt;int&gt;, dsbld_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dsbld_esrd_and_esrd_only_benes &lt;int&gt;, dsbld_no_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_tot_benes &lt;int&gt;, a_b_orgnl_mdcr_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_ma_and_oth_benes &lt;int&gt;, prscrptn_drug_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prscrptn_drug_pdp_benes &lt;int&gt;, prscrptn_drug_mapd_benes &lt;int&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …</span></span>
+<span class="r-in"><span>                       state_name <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in beneficiary_enrollment(year = 2022, month = "July", geo_level = "State",     state_name = "Georgia"):</span> `state_abb` must be a character vector, not NULL.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>geo_level <span class="op">=</span> <span class="st">"State"</span>,</span></span>
 <span class="r-in"><span>                       fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year month bene_geo…¹ bene_…² bene_…³ bene_…⁴ bene_…⁵ tot_b…⁶ orgnl…⁷ ma_an…⁸</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>021 Year  State      DE      Delawa… Total   10       <span style="text-decoration: underline;">222</span>850  <span style="text-decoration: underline;">171</span>170   <span style="text-decoration: underline;">51</span>680</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 12 more variables: aged_tot_benes &lt;int&gt;, aged_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   aged_no_esrd_benes &lt;int&gt;, dsbld_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   dsbld_esrd_and_esrd_only_benes &lt;int&gt;, dsbld_no_esrd_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_tot_benes &lt;int&gt;, a_b_orgnl_mdcr_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   a_b_ma_and_oth_benes &lt;int&gt;, prscrptn_drug_tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   prscrptn_drug_pdp_benes &lt;int&gt;, prscrptn_drug_mapd_benes &lt;int&gt;, and</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   abbreviated variable names ¹​bene_geo_lvl, ²​bene_state_abrvtn, …</span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in beneficiary_enrollment(geo_level = "State", fips = "10"):</span> `state_abb` must be a character vector, not NULL.</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
