@@ -101,7 +101,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-02-28 01:36:32
+    #> $ datetime          <dttm> 2023-03-08 08:08:16
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -269,6 +269,142 @@ npi_df |>
   dplyr::mutate(certification_date = anytime::anydate(certification_date))
 ```
 
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✖ Found 0 results
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
     #> # A tibble: 16 × 21
     #>    npi        enumer…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enumerat…⁷
     #>    <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <date>    
@@ -297,6 +433,187 @@ npi_df |>
     #> #   ⁶​sole_proprietor, ⁷​enumeration_date
 
 <br><br>
+
+``` r
+npi_df |> nppes_npi_multi()
+```
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✖ Found 0 results
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✔ Found 1 result
+
+    #> # A tibble: 16 × 21
+    #>    npi        enumer…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enumerat…⁷
+    #>    <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <date>    
+    #>  1 1003026055 NPI-1    RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-05-22
+    #>  2 1316405939 NPI-1    JAENA   ABARZUA KAE     MC, LP… NO      F      2019-03-04
+    #>  3 1720392988 NPI-1    MUSTAFA ABAS    <NA>    M.D.,   NO      M      2010-07-29
+    #>  4 1518184605 NPI-1    DANIEL  AARON   LOUIS   M.D.    NO      M      2007-04-19
+    #>  5 1922056829 NPI-1    CYNTHIA AARON   K       M.D.    NO      F      2006-05-04
+    #>  6 1083879860 NPI-1    CHRIST… AARON   <NA>    <NA>    NO      M      2008-07-22
+    #>  7 1346243805 NPI-1    HIE     KIM     C       M.D.    NO      M      2005-05-27
+    #>  8 1679576722 NPI-1    DAVID   WIEBE   A       M.D.    NO      M      2005-05-23
+    #>  9 1093718892 NPI-1    DINESH  GOYAL   K       MD      NO      M      2005-05-24
+    #> 10 1477556405 NPI-1    CHARLES LINSEN… M       M.D.    NO      M      2005-05-23
+    #> 11 1770586539 NPI-1    SUSAN   LANGEV… <NA>    MS, RD… NO      F      2005-05-24
+    #> 12 1871596692 NPI-1    NOEMI   DOSOVA  S.      M.D.    NO      F      2005-05-24
+    #> 13 1174526925 NPI-1    AKULA   KRISHNA V       M.D.    NO      M      2005-05-24
+    #> 14 1720081441 NPI-1    KATHLE… STAUDI… M       MD      NO      F      2005-05-27
+    #> 15 1558364273 NPI-1    JOHN    BAXTER  C       MD      NO      M      2005-05-27
+    #> 16 1801899513 NPI-1    GEORGE  DAUWEL  C       d.c.    NO      M      2005-05-27
+    #> # … with 12 more variables: last_updated <date>, status <chr>,
+    #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
+    #> #   identifiers <list>, endpoints <list>, other_names <list>, addresses <list>,
+    #> #   practicelocations <lgl>, enumeration_age <Duration>,
+    #> #   certification_date <dttm>, and abbreviated variable names
+    #> #   ¹​enumeration_type, ²​first_name, ³​last_name, ⁴​middle_name, ⁵​credential,
+    #> #   ⁶​sole_proprietor, ⁷​enumeration_date
+
+``` r
+nppes_npi_new(npi = 1710983663)
+```
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
+
+    #> ✖ Found 0 results
+
+    #> # A tibble: 0 × 0
 
 ### CMS Physician Facility Affiliations
 
@@ -398,7 +715,7 @@ provider::facility_affiliations(first_name = "John",
 ### Hospital Enrollments
 
 ``` r
-provider::hospital_enrollment(ccn = "060004") |> 
+provider::hospital_enrollment(facility_ccn = "060004") |> 
   tidyr::unite("address", address_line_1:address_line_2, 
                remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(address = campfin::normal_address(address),
@@ -407,7 +724,43 @@ provider::hospital_enrollment(ccn = "060004") |>
   gluedown::md_table()
 ```
 
-    #> Error in provider::hospital_enrollment(ccn = "060004"): unused argument (ccn = "060004")
+| name                         | value                                                 |
+|:-----------------------------|:------------------------------------------------------|
+| enrollment_id                | O20070619000323                                       |
+| enrollment_state             | CO                                                    |
+| provider_type_code           | 00-09                                                 |
+| provider_type_text           | PART A PROVIDER - HOSPITAL                            |
+| npi                          | 1629071758                                            |
+| multiple_npi_flag            | FALSE                                                 |
+| ccn                          | 060004                                                |
+| associate_id                 | 1153213814                                            |
+| organization_name            | BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
+| doing_business_as_name       | PLATTE VALLEY MEDICAL CENTER                          |
+| incorporation_date           | 1958-08-18                                            |
+| incorporation_state          | CO                                                    |
+| organization_type_structure  | CORPORATION                                           |
+| organization_other_type_text | NA                                                    |
+| proprietary_nonprofit        | FALSE                                                 |
+| address                      | 1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
+| city                         | BRIGHTON                                              |
+| state                        | CO                                                    |
+| zip_code                     | 80601                                                 |
+| practice_location_type       | MAIN/PRIMARY HOSPITAL LOCATION                        |
+| location_other_type_text     | NA                                                    |
+| subgroup_general             | FALSE                                                 |
+| subgroup_acute_care          | TRUE                                                  |
+| subgroup_alcohol_drug        | FALSE                                                 |
+| subgroup_childrens           | FALSE                                                 |
+| subgroup_longterm            | FALSE                                                 |
+| subgroup_psychiatric         | FALSE                                                 |
+| subgroup_rehabilitation      | FALSE                                                 |
+| subgroup_shortterm           | FALSE                                                 |
+| subgroup_swingbed_approved   | FALSE                                                 |
+| subgroup_psychiatric_unit    | FALSE                                                 |
+| subgroup_rehabilitation_unit | FALSE                                                 |
+| subgroup_specialty_hospital  | FALSE                                                 |
+| subgroup_other               | FALSE                                                 |
+| subgroup_other_text          | NA                                                    |
 
 <br><br>
 
@@ -589,7 +942,7 @@ provider::addl_phone_numbers(npi = 1407263999) |>
 <br><br>
 
 ``` r
-addl_phone_numbers(provider_id = "0042100190") |> 
+addl_phone_numbers(pac_id_ind = "0042100190") |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
@@ -598,12 +951,16 @@ addl_phone_numbers(provider_id = "0042100190") |>
   gluedown::md_table()
 ```
 
-    #> Error in addl_phone_numbers(provider_id = "0042100190"): unused argument (provider_id = "0042100190")
+| prvdr_id   | frst_nm | lst_nm    | address             | cty          | st  | zip   | org_pac_id | phn_numbr        | npi        |
+|:-----------|:--------|:----------|:--------------------|:-------------|:----|:------|:-----------|:-----------------|:-----------|
+| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN NE     | GRAND RAPIDS | MI  | 49503 | 1951404185 | \(616\) 391-1680 | 1154338044 |
+| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN AVE NE | GRAND RAPIDS | MI  | 49503 | 8628327384 | \(616\) 391-1680 | 1154338044 |
+| 0042100190 | JOHN    | VERBRUGGE | 1840 WEALTHY SE     | GRAND RAPIDS | MI  | 49506 | 1951404185 | \(616\) 774-7444 | 1154338044 |
 
 <br><br>
 
 ``` r
-addl_phone_numbers(org_pac_id = 6608028899) |> 
+addl_phone_numbers(pac_id_org = 6608028899) |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
@@ -612,7 +969,10 @@ addl_phone_numbers(org_pac_id = 6608028899) |>
   gluedown::md_table()
 ```
 
-    #> Error in addl_phone_numbers(org_pac_id = 6608028899): unused argument (org_pac_id = 6608028899)
+| prvdr_id   | frst_nm  | lst_nm | address                     | cty       | st  | zip   | org_pac_id | phn_numbr        | npi        |
+|:-----------|:---------|:-------|:----------------------------|:----------|:----|:------|:-----------|:-----------------|:-----------|
+| 3971798604 | LAWRENCE | BROOKS | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1548577034 |
+| 8729208152 | ROBIN    | AVERY  | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1407263999 |
 
 <br><br>
 
@@ -621,6 +981,15 @@ addl_phone_numbers(org_pac_id = 6608028899) |>
 ``` r
 provider::missing_information(npi = 1144224569) |> gluedown::md_table()
 ```
+
+    #> 
+
+    #> ── CMS Public Reporting of Missing Digital Contact Information API ─────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-informationhttps://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information]8;;>
+
+    #> ✔ Found 1 result
 
 | npi        | last_name | first_name |
 |:-----------|:----------|:-----------|
@@ -676,15 +1045,16 @@ provider::opt_out(last_name = "Aaron") |>
 ``` r
 provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
   dplyr::select(medicare_specialty_code, 
-                medicare_specialty_description = medicare_provider_supplier_type_description,
-                provider_taxonomy_code,
-                provider_taxonomy_description = provider_taxonomy_description_type_classification_specialization) |> 
+                medicare_specialty_description = "medicare_provider/supplier_type_description",
+                taxonomy_code = provider_taxonomy_code,
+                taxonomy_description = "provider_taxonomy_description:_type_classification_specialization") |> 
   gluedown::md_table()
 ```
 
-    #> Error in `dplyr::select()`:
-    #> ! Can't subset columns that don't exist.
-    #> ✖ Column `medicare_provider_supplier_type_description` doesn't exist.
+| medicare_specialty_code | medicare_specialty_description | taxonomy_code | taxonomy_description                                           |
+|:------------------------|:-------------------------------|:--------------|:---------------------------------------------------------------|
+| B4\[14\]                | Rehabilitation Agency          | 261QR0400X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation |
+| B4\[14\]                | Rehabilitation Agency          | 315D00000X    | Nursing & Custodial Care Facilities/Hospice Inpatient          |
 
 <br><br>
 
@@ -722,9 +1092,18 @@ provider::pending_applications(npi = 1487003984,
   gluedown::md_table()
 ```
 
-| npi | last_name | first_name |
-|:----|:----------|:-----------|
-| NA  | NA        | NA         |
+    #> 
+
+    #> ── Medicare Pending Initial Logging and Tracking Physicians API ────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians]8;;>
+
+    #> ✖ Found 0 results
+
+| x              |
+|:---------------|
+| cli-102512-224 |
 
 <br><br>
 
@@ -734,9 +1113,18 @@ provider::pending_applications(npi = 1487003984,
   gluedown::md_table()
 ```
 
-| npi | last_name | first_name |
-|:----|:----------|:-----------|
-| NA  | NA        | NA         |
+    #> 
+
+    #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians]8;;>
+
+    #> ✖ Found 0 results
+
+| x              |
+|:---------------|
+| cli-102512-230 |
 
 <br><br>
 
@@ -746,9 +1134,18 @@ provider::pending_applications(last_name = "Abbott",
   gluedown::md_table()
 ```
 
-| npi | last_name | first_name |
-|:----|:----------|:-----------|
-| NA  | NA        | NA         |
+    #> 
+
+    #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians]8;;>
+
+    #> ✖ Found 0 results
+
+| x              |
+|:---------------|
+| cli-102512-236 |
 
 <br><br>
 
@@ -757,6 +1154,15 @@ pending_applications(first_name = "John",
                      type = "physician") |> 
   gluedown::md_table()
 ```
+
+    #> 
+
+    #> ── Medicare Pending Initial Logging and Tracking Physicians API ────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians]8;;>
+
+    #> ✔ Found 33 results
 
 | npi        | last_name     | first_name |
 |:-----------|:--------------|:-----------|
@@ -1188,9 +1594,74 @@ months <- tibble::enframe(month.name) |>
 
 bene <- purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, 
                                                        geo_level = "State", 
-                                                       state = "Georgia", 
+                                                       state_abb = "GA", 
                                                        month = .x))
+```
 
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+    #> 
+
+    #> ── Medicare Monthly (Beneficiary) Enrollment API ───────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollmenthttps://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment]8;;>
+
+    #> ✔ Found 1 result
+
+``` r
 bene |> dplyr::glimpse()
 ```
 
@@ -1817,7 +2288,7 @@ py1 + ggplot2::labs(title = "Fisher's *Iris* data set",
   tdcthemes::scale_fill_tdc() 
 ```
 
-    #> Error in theme(legend.position = "bottom"): could not find function "theme"
+    #> Error in loadNamespace(x): there is no package called 'tdcthemes'
 
 <br>
 
@@ -1845,7 +2316,7 @@ apyramid::age_pyramid(data = prov_age,
             )
 ```
 
-<img src="man/figures/README-unnamed-chunk-64-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-66-1.png" width="100%" />
 
 <br><br>
 
@@ -1859,6 +2330,18 @@ apyramid::age_pyramid(data = prov_age,
 
 ``` r
 mult <- cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
+```
+
+    #> 
+
+    #> ── Medicare Multiple Chronic Conditions API ────────────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditionshttps://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions]8;;>
+
+    #> ✔ Found 60 results
+
+``` r
 mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_benes) |> gluedown::md_table()
 ```
 
@@ -1935,14 +2418,22 @@ mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_bene
 spec <- cc_specific(year = 2007, geo_level = "County", state = "GA", county = "Lowndes", demo_level = "Race")
 ```
 
-    #> Error in `resp_body_raw()`:
-    #> ! Can not retrieve empty body
+    #> 
+
+    #> ── Medicare Specific Chronic Conditions API ────────────────────────────────────
+
+    #> URL:
+    #> <]8;;https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditionshttps://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions]8;;>
+
+    #> ✖ Found 0 results
 
 ``` r
 spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> gluedown::md_table()
 ```
 
-    #> Error in dplyr::select(spec, year, bene_age_lvl, bene_demo_desc:prvlnc): object 'spec' not found
+    #> Error in `dplyr::select()`:
+    #> ! Can't subset columns that don't exist.
+    #> ✖ Column `year` doesn't exist.
 
 <br><br>
 

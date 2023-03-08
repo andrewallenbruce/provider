@@ -17,12 +17,13 @@
 #' @note Update Frequency: **Quarterly**
 #'
 #' @param npi The provider’s National Provider Identifier
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
 #' missing_information(npi = 1134122013)
+#' missing_information(npi = 1386128379)
 #' @autoglobal
 #' @export
 
@@ -39,30 +40,47 @@ missing_information <- function(npi         = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   id     <- "63a83bb1-4c02-43b3-8ef4-e3d3c6cf62fa"
-  post   <- "/data?"
-  #post   <- "/data.json?"
+  #post   <- "/data?"
+  post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
+  # create request ----------------------------------------------------------
+  request <- httr2::request(url)
+
   # send request ------------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- request |> httr2::req_perform()
 
-  # parse response ----------------------------------------------------------
-  res <- tibble::tibble(httr2::resp_body_json(resp,
-         check_type = FALSE, simplifyVector = TRUE))
+  # check response status ---------------------------------------------------
+  httr2::resp_check_status(response)
 
-  if (isTRUE(is_empty_list2(res))) {
-    npi <- as.character(npi)
-    results <- tibble::tribble(
-      ~npi, ~last_name, ~first_name,
-       npi,  "NA",      "NA")
-    } else {
-      # separate provider_name into last & first cols -----------------------
-      results <- tidyr::separate(res, col = " Provider Name",
-                 into = c("last_name", "first_name"), sep = ",")
-      }
+  # no search results returns empty tibble ----------------------------------
+  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
 
+      noresults_cli(
+        "CMS Public Reporting of Missing Digital Contact Information API",
+        "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information")
+
+    return(tibble::tibble())
+
+  } else {
+
+    results <- tibble::tibble(httr2::resp_body_json(
+      response,
+      check_type = FALSE,
+      simplifyVector = TRUE))
+
+    # separate provider_name into last & first cols -----------------------
+    results <- tidyr::separate(results, col = " Provider Name",
+                               into = c("last_name", "first_name"), sep = ",")
+  }
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase)}
+
+  results_cli(
+    "CMS Public Reporting of Missing Digital Contact Information API",
+    "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information",
+    results = results)
 
   return(results)
 }

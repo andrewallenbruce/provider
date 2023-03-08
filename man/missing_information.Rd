@@ -12,7 +12,7 @@ missing_information(npi = NULL, clean_names = TRUE)
 \arguments{
 \item{npi}{The provider’s National Provider Identifier}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -39,4 +39,5 @@ Update Frequency: \strong{Quarterly}
 }
 \examples{
 missing_information(npi = 1134122013)
+missing_information(npi = 1386128379)
 }

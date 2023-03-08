@@ -19,7 +19,7 @@
 #' @param state Group or individual's state
 #' @param zip Group or individual's ZIP code (9 digits when available)
 #' @param offset offset; API pagination
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'

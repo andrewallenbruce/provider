@@ -18,7 +18,7 @@
 #' @param last_name Last name of provider
 #' @param first_name First name of provider
 #' @param type physician or non-physician
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -57,25 +57,59 @@ pending_applications <- function(npi         = NULL,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
+  #post   <- "/data?"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  # create request ----------------------------------------------------------
+  request <- httr2::request(url)
+
+  # send request ------------------------------------------------------------
+  response <- request |> httr2::req_perform()
+
+  # check response status ---------------------------------------------------
+  httr2::resp_check_status(response)
 
   # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(resp, "content-length")) == 0) {
-    results <- tibble::tibble("NPI" = NA,
-                              "LAST_NAME" = NA,
-                              "FIRST_NAME" = NA)
+  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
+
+    if (type == "physician") {
+
+    return(noresults_cli(
+      "Medicare Pending Initial Logging and Tracking Physicians API",
+      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians"))}
+
+    if (type == "non-physician") {
+
+    return(noresults_cli(
+      "Medicare Pending Initial Logging and Tracking Non-Physicians API",
+      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians"))}
+
   } else {
 
-    results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
+    results <- tibble::tibble(httr2::resp_body_json(response,
+                                                    check_type = FALSE,
                                                     simplifyVector = TRUE))
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+
+    results <- dplyr::rename_with(results, str_to_snakecase)}
+
+  if (type == "physician") {
+
+    results_cli(
+      "Medicare Pending Initial Logging and Tracking Physicians API",
+      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians",
+    results = results)}
+
+  if (type == "non-physician") {
+
+    results_cli(
+      "Medicare Pending Initial Logging and Tracking Non-Physicians API",
+      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians",
+      results = results)}
 
   return(results)
 }

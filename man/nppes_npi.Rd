@@ -95,7 +95,7 @@ the previous number; set in \code{limit}.}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{provider_nppes()} allows you to search the NPPES NPI
+\code{nppes_npi()} allows you to search the NPPES NPI
 Registry's public API by many of the parameters defined in the
 API's documentation.
 }

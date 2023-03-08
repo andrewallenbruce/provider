@@ -8,7 +8,7 @@ output: github_document
 knitr::opts_chunk$set(
   collapse  = FALSE,
   echo      = TRUE,
-  message   = FALSE, 
+  message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
@@ -183,6 +183,15 @@ npi_df |>
 
 <br><br>
 
+```{r}
+npi_df |> nppes_npi_multi()
+```
+
+
+```{r}
+nppes_npi_new(npi = 1710983663)
+```
+
 ### CMS Physician Facility Affiliations
 
 ```{r results='asis', echo=TRUE}
@@ -223,7 +232,7 @@ provider::facility_affiliations(first_name = "John",
 ### Hospital Enrollments
 
 ```{r results='asis', echo=TRUE}
-provider::hospital_enrollment(ccn = "060004") |> 
+provider::hospital_enrollment(facility_ccn = "060004") |> 
   tidyr::unite("address", address_line_1:address_line_2, 
                remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(address = campfin::normal_address(address),
@@ -301,7 +310,7 @@ provider::addl_phone_numbers(npi = 1407263999) |>
 <br><br>
 
 ```{r results='asis', echo=TRUE}
-addl_phone_numbers(provider_id = "0042100190") |> 
+addl_phone_numbers(pac_id_ind = "0042100190") |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
@@ -312,7 +321,7 @@ addl_phone_numbers(provider_id = "0042100190") |>
 <br><br>
 
 ```{r results='asis', echo=TRUE}
-addl_phone_numbers(org_pac_id = 6608028899) |> 
+addl_phone_numbers(pac_id_org = 6608028899) |> 
   dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
   tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
@@ -360,9 +369,9 @@ provider::opt_out(last_name = "Aaron") |>
 ```{r results='asis', echo=TRUE}
 provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
   dplyr::select(medicare_specialty_code, 
-                medicare_specialty_description = medicare_provider_supplier_type_description,
-                provider_taxonomy_code,
-                provider_taxonomy_description = provider_taxonomy_description_type_classification_specialization) |> 
+                medicare_specialty_description = "medicare_provider/supplier_type_description",
+                taxonomy_code = provider_taxonomy_code,
+                taxonomy_description = "provider_taxonomy_description:_type_classification_specialization") |> 
   gluedown::md_table()
 ```
 
@@ -556,7 +565,7 @@ months <- tibble::enframe(month.name) |>
 
 bene <- purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, 
                                                        geo_level = "State", 
-                                                       state = "Georgia", 
+                                                       state_abb = "GA", 
                                                        month = .x))
 
 bene |> dplyr::glimpse()

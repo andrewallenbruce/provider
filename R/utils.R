@@ -321,11 +321,39 @@ provider_progress <- function() {
 }
 
 
-#' provider_cli ------------------------------------------------------------
+#' noresults_cli ------------------------------------------------------------
+#' @param apiname Name of API
+#' @param url API url landing page
+noresults_cli <- function(apiname, url) {
+
+  res_cnt <- 0
+
+  if (as.numeric(res_cnt) == 0) {
+    cli::cli_h1("{.api {apiname}}")
+    cli::cli_text("URL: {.url {url}}")}
+    cli::cli_alert_danger("Found {res_cnt} result{?s}")
+
+}
+
+#' results_cli ------------------------------------------------------------
+#' @param apiname Name of API
+#' @param url API url landing page
+results_cli <- function(apiname, url, results) {
+
+  if (nrow(results) > 0) {
+    cli::cli_h1("{.api {apiname}}")
+    cli::cli_text("URL: {.url {url}}")}
+    cli::cli_alert_success("Found {nrow(results)} result{?s}")
+
+
+
+}
+
+#' provider_cli_2 ------------------------------------------------------------
 #' @param apiname Name of API
 #' @param resp httr2 response object
 #' @param size size of responses downloaded
-provider_cli <- function(apiname, resp, size) {
+provider_cli_2 <- function(apiname, resp, size) {
 
   res_cnt <- resp$result_count
 

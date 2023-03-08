@@ -22,7 +22,7 @@ Centers for Medicare & Medicaid Services
 cc_specific(
   year = 2018,
   geo_level = c("National", "State", "County"),
-  state = NULL,
+  state_abb = NULL,
   county = NULL,
   fips = NULL,
   age_level = NULL,
@@ -39,7 +39,7 @@ currently available.}
 \item{geo_level}{Geographic level of data; options are \code{National}, \code{State},
 and \code{County}}
 
-\item{state}{state}
+\item{state_abb}{state}
 
 \item{county}{county}
 
@@ -84,7 +84,7 @@ have a claim indicating that the beneficiary received a service or
 treatment for the specific condition. Beneficiaries may have more than
 one of the chronic conditions listed.}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -132,7 +132,7 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontrun{
-cc_specific(year = 2018, geo_level = "State", state = "CA")
-cc_specific(year = 2007, geo_level  = "National", demo_lvl = "Race")
+cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
+cc_specific(year = 2007, geo_level  = "National", demo_level = "Race")
 }
 }

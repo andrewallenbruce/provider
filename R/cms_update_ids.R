@@ -19,6 +19,7 @@
 #' @examples
 #' \dontrun{
 #' cms_update_ids(api = "Medicare Physician & Other Practitioners - by Provider")
+#' cms_update_ids(api = "Specific Chronic Conditions")
 #' }
 #' @autoglobal
 #' @noRd
@@ -93,4 +94,22 @@ cms_dataset_search <- function(search = NULL) {
     ids <- ids |> dplyr::filter(keyword == {{ search }})
   }
   return(ids)
+}
+
+#' Search CMS.gov API datasets by keyword
+#' @param api search api distribution dates
+#' @autoglobal
+#' @noRd
+cms_get_dates <- function(api = NULL) {
+
+  cms_update_ids(api = {{ api }}) |>
+    dplyr::select(distribution_title,
+                  distribution) |>
+    tidyr::separate_wider_delim(distribution_title,
+                                delim = " : ",
+                                names = c("title", "date"),
+                                cols_remove = TRUE) |>
+    dplyr::mutate(year = lubridate::year(date)) |>
+    dplyr::select(year, distribution)
+
 }

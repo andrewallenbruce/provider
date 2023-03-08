@@ -1,6 +1,6 @@
 #' Search the NPPES National Provider Identifier Registry API
 #'
-#' @description `provider_nppes()` allows you to search the NPPES NPI
+#' @description `nppes_npi()` allows you to search the NPPES NPI
 #'    Registry's public API by many of the parameters defined in the
 #'    API's documentation.
 #'
@@ -232,9 +232,7 @@ nppes_npi <- function(npi            = NULL,
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Weekly**
 #' @inheritParams nppes_npi
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#' @param tidy default is `TRUE`.
-#' @param verbose default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #' @autoglobal
 #' @export
 nppes_npi_new <- function(npi            = NULL,
@@ -249,15 +247,13 @@ nppes_npi_new <- function(npi            = NULL,
                           country        = NULL,
                           limit          = 200,
                           skip           = NULL,
-                          clean_names    = TRUE,
-                          tidy           = TRUE,
-                          verbose        = TRUE) {
+                          clean_names    = TRUE) {
 
   # base URL ---------------------------------------------------------------
   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
 
   # request and response ----------------------------------------------------
-  req <- httr2::request(url) |>
+  request <- httr2::request(url) |>
     httr2::req_url_query(number               = npi,
                          enumeration_type     = enum_type,
                          first_name           = first_name,
@@ -269,30 +265,36 @@ nppes_npi_new <- function(npi            = NULL,
                          postal_code          = zip,
                          country_code         = country,
                          limit                = limit,
-                         skip                 = skip
-    ) |>
+                         skip                 = skip) |>
     httr2::req_perform()
 
   # parse response ---------------------------------------------------------
-  resp <- httr2::resp_body_json(req, check_type = FALSE, simplifyVector = TRUE)
-  res_cnt <- resp$result_count
-  size <- as.numeric(httr2::resp_header(req, "content-length"))
-
-  if (isTRUE(verbose)) {provider_cli("NPPES NPI Registry", resp = resp, size = size)}
+  response <- httr2::resp_body_json(request,
+                                check_type = FALSE,
+                                simplifyVector = TRUE)
+  res_cnt <- response$result_count
 
   # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(req, "content-length")) == 0) {
+  if (as.numeric(httr2::resp_header(request, "content-length")) == 0) {
+
+    noresults_cli(
+      "NPPES NPI Registry API",
+      "https://npiregistry.cms.hhs.gov/api-page")
 
     return(tibble::tibble())
 
   } else if (as.numeric(res_cnt) == 0) {
+
+    noresults_cli(
+      "NPPES NPI Registry API",
+      "https://npiregistry.cms.hhs.gov/api-page")
 
     return(tibble::tibble())
 
   } else {
 
     # results -- unnest basic ------------------------------------------------
-    results <- resp$results |>
+    results <- response$results |>
       dplyr::mutate(npi = number,
                     number = NULL,
                     created_epoch = NULL,
@@ -305,20 +307,22 @@ nppes_npi_new <- function(npi            = NULL,
     results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
     # tidy options ---------------------------------------------------------
-    if (isTRUE(tidy)) {results <- results |>
+    results <- results |>
       dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
                     enumeration_date = lubridate::ymd(enumeration_date),
                     last_updated = lubridate::ymd(last_updated),
-                    #certification_date = anytime::anydate(certification_date),
-                    enumeration_age = lubridate::as.duration(lubridate::today() - enumeration_date)
-      )
-    }
+                    enumeration_age = lubridate::as.duration(lubridate::today() - enumeration_date))
     # clean names -------------------------------------------------------------
     if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   }
+
+  results_cli("NPPES NPI Registry API",
+              "https://npiregistry.cms.hhs.gov/api-page",
+              results = results)
+
   return(results)
 }
 

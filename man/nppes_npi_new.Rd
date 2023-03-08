@@ -20,9 +20,7 @@ nppes_npi_new(
   country = NULL,
   limit = 200,
   skip = NULL,
-  clean_names = TRUE,
-  tidy = TRUE,
-  verbose = TRUE
+  clean_names = TRUE
 )
 }
 \arguments{
@@ -94,11 +92,7 @@ default is 200, maximum is 1200.}
 \item{skip}{Number of results to skip after searching
 the previous number; set in \code{limit}.}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
-
-\item{tidy}{default is \code{TRUE}.}
-
-\item{verbose}{default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \description{
 \code{provider_nppes()} allows you to search the NPPES NPI

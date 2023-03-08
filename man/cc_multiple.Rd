@@ -70,12 +70,12 @@ Asian/Pacific Islander, Hispanic, and American Indian/Alaska Native. All
 the chronic condition reports use the variable RTI_RACE_CD, which is
 available on the Master Beneficiary Files in the CCW. For
 Bene_Demo_Lvl='Dual Status', beneficiaries can be classified as 'Medicare &
-Medicaid' or 'Medicare Only'. Beneficiares enrolled in both Medicare and
+Medicaid' or 'Medicare Only'. Beneficiaries enrolled in both Medicare and
 Medicaid are known as “dual eligibles.” Medicare beneficiaries are
 classified as dual eligibles if in any month in the given calendar year
 they were receiving full or partial Medicaid benefits.}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

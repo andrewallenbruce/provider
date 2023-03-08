@@ -24,7 +24,7 @@ pending_applications(
 
 \item{type}{physician or non-physician}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

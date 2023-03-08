@@ -49,11 +49,11 @@
 #'   the chronic condition reports use the variable RTI_RACE_CD, which is
 #'   available on the Master Beneficiary Files in the CCW. For
 #'   Bene_Demo_Lvl='Dual Status', beneficiaries can be classified as 'Medicare &
-#'   Medicaid' or 'Medicare Only'. Beneficiares enrolled in both Medicare and
+#'   Medicaid' or 'Medicare Only'. Beneficiaries enrolled in both Medicare and
 #'   Medicaid are known as “dual eligibles.” Medicare beneficiaries are
 #'   classified as dual eligibles if in any month in the given calendar year
 #'   they were receiving full or partial Medicaid benefits.
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @format ## In addition to the searchable columns:
 #' \describe{
@@ -74,7 +74,7 @@
 #' @export
 
 cc_multiple <- function(year         = 2018,
-                        geo_level   = c("National", "State", "County"),
+                        geo_level    = c("National", "State", "County"),
                         geo_desc     = NULL,
                         fips         = NULL,
                         age_level    = NULL,
@@ -117,16 +117,41 @@ cc_multiple <- function(year         = 2018,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  # create request ----------------------------------------------------------
+  request <- httr2::request(url)
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
-             simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
-             dplyr::relocate(Year)
+  # send request ------------------------------------------------------------
+  response <- request |> httr2::req_perform()
 
+  # check response status ---------------------------------------------------
+  httr2::resp_check_status(response)
+
+  # no search results returns empty tibble ----------------------------------
+  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
+
+    noresults_cli(
+      "Medicare Multiple Chronic Conditions API",
+      "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions")
+
+    return(tibble::tibble())
+
+  } else {
+
+    results <- tibble::tibble(httr2::resp_body_json(
+      response,
+      check_type = FALSE,
+      simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
+      dplyr::relocate(Year)
+
+  }
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase)}
+
+  results_cli(
+    "Medicare Multiple Chronic Conditions API",
+    "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions",
+    results = results)
 
   return(results)
 }

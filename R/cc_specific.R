@@ -41,7 +41,7 @@
 #'    currently available.
 #' @param geo_level Geographic level of data; options are `National`, `State`,
 #'    and `County`
-#' @param state state
+#' @param state_abb state
 #' @param county county
 #' @param fips FIPS state and/or county code where the Medicare beneficiary
 #'    resides. The Bene_Geo_Cd will be blank for data aggregated at the
@@ -79,7 +79,7 @@
 #'    have a claim indicating that the beneficiary received a service or
 #'    treatment for the specific condition. Beneficiaries may have more than
 #'    one of the chronic conditions listed.
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @format ## In addition to the searchable columns:
 #' \describe{
@@ -91,15 +91,15 @@
 #' }
 #' @examples
 #' \dontrun{
-#' cc_specific(year = 2018, geo_level = "State", state = "CA")
-#' cc_specific(year = 2007, geo_level  = "National", demo_lvl = "Race")
+#' cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
+#' cc_specific(year = 2007, geo_level  = "National", demo_level = "Race")
 #' }
 #' @autoglobal
 #' @export
 
 cc_specific <- function(year         = 2018,
                         geo_level    = c("National", "State", "County"),
-                        state        = NULL,
+                        state_abb    = NULL,
                         county       = NULL,
                         fips         = NULL,
                         age_level    = NULL,
@@ -108,15 +108,9 @@ cc_specific <- function(year         = 2018,
                         condition    = NULL,
                         clean_names  = TRUE) {
 
-  # arg_match ---------------------------------------------------------------
-  rlang::arg_match(geo_level)
-
-  if (is.null(fips)) {
-
-  fips <- dplyr::case_when(geo_level == "State" ~ fipio::as_fips(state),
-                           geo_level == "County" ~ fipio::as_fips(state, county),
-                           .default = NULL)
-  }
+  # match args ----------------------------------------------------
+  geo_level <- rlang::arg_match(geo_level)
+  state_abb <- rlang::arg_match(state_abb, values = state.abb)
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Specific Chronic Conditions")
@@ -153,16 +147,41 @@ cc_specific <- function(year         = 2018,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  # create request ----------------------------------------------------------
+  request <- httr2::request(url)
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
-             simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
-             dplyr::relocate(Year)
+  # send request ------------------------------------------------------------
+  response <- request |> httr2::req_perform()
 
+  # check response status ---------------------------------------------------
+  httr2::resp_check_status(response)
+
+  # no search results returns empty tibble ----------------------------------
+  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
+
+    noresults_cli(
+      "Medicare Specific Chronic Conditions API",
+      "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions")
+
+    return(tibble::tibble())
+
+  } else {
+
+    results <- tibble::tibble(httr2::resp_body_json(
+      response,
+      check_type = FALSE,
+      simplifyVector = TRUE)) |> dplyr::mutate(Year = year) |>
+      dplyr::relocate(Year)
+
+  }
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase)}
+
+  results_cli(
+    "Medicare Specific Chronic Conditions API",
+    "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions",
+    results = results)
 
   return(results)
 }

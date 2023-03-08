@@ -12,7 +12,7 @@ beneficiary_enrollment(
   month = "Year",
   geo_level = c("National", "State", "County"),
   state_abb = NULL,
-  state = NULL,
+  state_name = NULL,
   county = NULL,
   fips = NULL,
   clean_names = TRUE
@@ -22,8 +22,8 @@ beneficiary_enrollment(
 \item{year}{Calendar year of Medicare enrollment; current options are
 \code{2017 - 2022}}
 
-\item{month}{Timeframe of Medicare enrollment; options are \code{Year} or any
-month within the 12-month timespan of the month in the dataset's version
+\item{month}{Time frame of Medicare enrollment; options are \code{Year} or any
+month within the 12-month time span of the month in the data set's version
 name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
 
 \item{geo_level}{Geographic level of data; options are \code{National}, \code{State},
@@ -31,13 +31,13 @@ and \code{County}}
 
 \item{state_abb}{Two-letter state abbreviation of beneficiary residence}
 
-\item{state}{Full state name of beneficiary residence}
+\item{state_name}{Full state name of beneficiary residence}
 
 \item{county}{County of beneficiary residence}
 
 \item{fips}{FIPS code of beneficiary residence}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -74,7 +74,10 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-beneficiary_enrollment(month = "Year", geo_level = "County", state_abb = "AL", county = "Autauga")
+beneficiary_enrollment(month = "Year",
+                       geo_level = "County",
+                       state_abb = "AL",
+                       county = "Autauga")
 
 beneficiary_enrollment(year = 2021,
                        geo_level = "County",
@@ -83,7 +86,7 @@ beneficiary_enrollment(year = 2021,
 beneficiary_enrollment(year = 2022,
                        month = "July",
                        geo_level = "State",
-                       state = "Georgia")
+                       state_name = "Georgia")
 
 beneficiary_enrollment(geo_level = "State",
                        fips = "10")
