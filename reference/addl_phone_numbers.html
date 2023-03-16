@@ -198,36 +198,11 @@ than one phone number at a single practice address.</p><div class="section">
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">addl_phone_numbers</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   record_num…¹ prvdr…² frst_nm mid_nm lst_nm adrs_id adr_l…³ adr_l…⁴ cty   st   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 14684491     872920… ROBIN   A      AVERY  FL3302… 3810 H… Suite 2 HOLL… FL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 14684496     872920… ROBIN   A      AVERY  FL3313… 9999 N… SUITE … MIAM… FL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: zip &lt;chr&gt;, org_pac_id &lt;chr&gt;, phn_numbr &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   npi &lt;chr&gt;, and abbreviated variable names ¹​record_number, ²​prvdr_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​adr_ln_1, ⁴​adr_ln_2</span></span>
-<span class="r-in"><span><span class="fu">addl_phone_numbers</span><span class="op">(</span>pac_id_ind <span class="op">=</span> <span class="st">"0042100190"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   record_num…¹ prvdr…² frst_nm mid_nm lst_nm adrs_id adr_l…³ adr_l…⁴ cty   st   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 41           004210… JOHN    D      VERBR… MI4950… 100 MI… <span style="color: #BB0000;">NA</span>      GRAN… MI   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 46           004210… JOHN    D      VERBR… MI4950… 100 MI… <span style="color: #BB0000;">NA</span>      GRAN… MI   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 51           004210… JOHN    D      VERBR… MI4950… 1840 W… <span style="color: #BB0000;">NA</span>      GRAN… MI   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: zip &lt;chr&gt;, org_pac_id &lt;chr&gt;, phn_numbr &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   npi &lt;chr&gt;, and abbreviated variable names ¹​record_number, ²​prvdr_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​adr_ln_1, ⁴​adr_ln_2</span></span>
-<span class="r-in"><span><span class="fu">addl_phone_numbers</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">6608028899</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 14</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   record_num…¹ prvdr…² frst_nm mid_nm lst_nm adrs_id adr_l…³ adr_l…⁴ cty   st   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 6680871      397179… LAWREN… G      BROOKS FL3302… 3810 H… Suite 2 HOLL… FL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 14684491     872920… ROBIN   A      AVERY  FL3302… 3810 H… Suite 2 HOLL… FL   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 4 more variables: zip &lt;chr&gt;, org_pac_id &lt;chr&gt;, phn_numbr &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   npi &lt;chr&gt;, and abbreviated variable names ¹​record_number, ²​prvdr_id,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ³​adr_ln_1, ⁴​adr_ln_2</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#addl_phone_numbers(npi = 1407263999)</span></span></span>
+<span class="r-in"><span><span class="co">#addl_phone_numbers(pac_id_ind = "0042100190")</span></span></span>
+<span class="r-in"><span><span class="co">#addl_phone_numbers(pac_id_org = 6608028899)</span></span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">addl_phone_numbers</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">#addl_phone_numbers(city = "Atlanta")</span></span></span>
 <span class="r-in"><span><span class="fu">addl_phone_numbers</span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">303421606</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
