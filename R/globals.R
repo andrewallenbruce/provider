@@ -2,6 +2,7 @@
 
 utils::globalVariables(c(
   "Year", # <cc_multiple>
+  "state.abb", # <cc_specific>
   "Year", # <cc_specific>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>
@@ -17,6 +18,9 @@ utils::globalVariables(c(
   "keyword", # <cms_dataset_search>
   "identifier", # <cms_dataset_search>
   "description", # <cms_dataset_search>
+  "distribution_title", # <cms_get_dates>
+  "distribution", # <cms_get_dates>
+  "year", # <cms_get_dates>
   "data_lists", # <nppes_npi>
   "outcome", # <nppes_npi>
   "description", # <nppes_npi>
@@ -36,6 +40,9 @@ utils::globalVariables(c(
   "practiceLocations", # <nppes_npi_new>
   "enumeration_date", # <nppes_npi_new>
   "last_updated", # <nppes_npi_new>
+  "address_purpose", # <nppes_npi_new>
+  "npi_location", # <nppes_npi_new>
+  "addresses.y", # <nppes_npi_new>
   "program_year", # <open_payments>
   "contextual_information", # <open_payments>
   "number_of_payments_included_in_total_amount", # <open_payments>
@@ -88,6 +95,10 @@ utils::globalVariables(c(
   "hcpcs_desc", # <physician_by_service>
   "hcpcs_drug_ind", # <physician_by_service>
   "place_of_srvc", # <physician_by_service>
+  "provider_taxonomy_code", # <taxonomy_crosswalk>
+  "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
+  "medicare_specialty_code", # <taxonomy_crosswalk>
+  "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
   ":=", # <age_days>
   "int", # <days_today>
   "secs", # <days_today>

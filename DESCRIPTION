@@ -16,10 +16,8 @@ BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
     R (>= 2.10)
 Imports: 
-    attempt,
     cli,
     dplyr,
-    fipio,
     httr2,
     janitor,
     lubridate,

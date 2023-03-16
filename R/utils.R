@@ -215,11 +215,6 @@ full_address1 <- function(df, address_1, address_2, city, state, postal_code) {
 #' @noRd
 luhn_check <- function(npi = NULL) {
 
-  # Number of digits should be 10
-  attempt::stop_if_not(nchar(npi) == 10,
-  msg = c("NPIs must have 10 digits.
-  Provided NPI has ", nchar(npi), " digits."))
-
   # Return FALSE if not a number
   if (!grepl("^[[:digit:]]+$", npi)) {return(FALSE)}
 
@@ -296,80 +291,16 @@ sql_format <- function(param, arg) {
 str_to_snakecase <- function(string) {
 
   string |>
-    #stringr::str_split("(?=[[:upper:]])") |>
     purrr::map_chr(function(string) {
-
-      string |>
-        stringr::str_to_lower() |>
-        stringr::str_c(collapse = "_")}) |>
+      string |> stringr::str_to_lower() |>
+                stringr::str_c(collapse = "_")}) |>
     stringr::str_remove("^_") |>
-    stringr::str_replace_all(" ", "_") |>
-    stringr::str_replace_all("-", "") |>
-    stringr::str_replace_all("__", "_")
+    stringr::str_replace_all(c(" " = "_",
+                               "/" = "_",
+                               "-" = "_",
+                               "__" = "_",
+                               ":" = ""))
 }
-
-
-#' provider_progress ------------------------------------------------------
-provider_progress <- function() {
-  cli::cli_progress_bar("Searching")
-  while (TRUE) {
-    if (1 < 0.01) break
-    Sys.sleep(0.01)
-    cli::cli_progress_update()
-  }
-  cli::cli_progress_update(force = TRUE)
-}
-
-
-#' noresults_cli ------------------------------------------------------------
-#' @param apiname Name of API
-#' @param url API url landing page
-noresults_cli <- function(apiname, url) {
-
-  res_cnt <- 0
-
-  if (as.numeric(res_cnt) == 0) {
-    cli::cli_h1("{.api {apiname}}")
-    cli::cli_text("URL: {.url {url}}")}
-    cli::cli_alert_danger("Found {res_cnt} result{?s}")
-
-}
-
-#' results_cli ------------------------------------------------------------
-#' @param apiname Name of API
-#' @param url API url landing page
-results_cli <- function(apiname, url, results) {
-
-  if (nrow(results) > 0) {
-    cli::cli_h1("{.api {apiname}}")
-    cli::cli_text("URL: {.url {url}}")}
-    cli::cli_alert_success("Found {nrow(results)} result{?s}")
-
-
-
-}
-
-#' provider_cli_2 ------------------------------------------------------------
-#' @param apiname Name of API
-#' @param resp httr2 response object
-#' @param size size of responses downloaded
-provider_cli_2 <- function(apiname, resp, size) {
-
-  res_cnt <- resp$result_count
-
-  if (as.numeric(res_cnt) == 0) {
-    cli::cli_h2("Queried {.api {apiname}}")
-    cli::cli_alert_warning("Found {res_cnt} result{?s}")
-    cli::cli_alert_info("Downloaded {prettyunits::pretty_bytes(size)}")
-
-  } else {
-    cli::cli_h2("Queried {.api {apiname}}")
-    cli::cli_alert_success("Found {res_cnt} result{?s}")
-    cli::cli_alert_info("Downloaded {prettyunits::pretty_bytes(size)}")
-  }
-}
-
-
 
 #' is_empty_list -----------------------------------------------------------
 #' @param df data frame

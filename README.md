@@ -101,7 +101,7 @@ npi_1 |> dplyr::glimpse()
 
     #> Rows: 1
     #> Columns: 15
-    #> $ datetime          <dttm> 2023-03-08 08:08:16
+    #> $ datetime          <dttm> 2023-03-16 08:49:21
     #> $ outcome           <chr> "results"
     #> $ enumeration_type  <chr> "NPI-1"
     #> $ npi               <chr> "1710975040"
@@ -242,8 +242,10 @@ npi_1 |>
 <br><br>
 
 ``` r
-### Data frame of NPIs
 npi_df <- data.frame(npi = c(1710983663,
+                             1710975040,
+                             1659781227,
+                             1336413418,
                              1003026055,
                              1316405939,
                              1720392988,
@@ -261,359 +263,52 @@ npi_df <- data.frame(npi = c(1710983663,
                              1558364273,
                              1801899513
                              ))
-npi_df |>
-  tibble::deframe() |> 
-  as.list() |> 
-  purrr::map(nppes_npi_new) |> 
-  dplyr::bind_rows() |> 
-  dplyr::mutate(certification_date = anytime::anydate(certification_date))
+
+npi_list <- list(npi = c(1710983663,
+                             1710975040,
+                             1659781227,
+                             1336413418,
+                             1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860,
+                             1346243805,
+                             1679576722,
+                             1093718892,
+                             1477556405,
+                             1770586539,
+                             1871596692,
+                             1174526925, 
+                             1720081441,
+                             1558364273,
+                             1801899513
+                             ))
 ```
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✖ Found 0 results
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> # A tibble: 16 × 21
-    #>    npi        enumer…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enumerat…⁷
-    #>    <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <date>    
-    #>  1 1003026055 NPI-1    RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-05-22
-    #>  2 1316405939 NPI-1    JAENA   ABARZUA KAE     MC, LP… NO      F      2019-03-04
-    #>  3 1720392988 NPI-1    MUSTAFA ABAS    <NA>    M.D.,   NO      M      2010-07-29
-    #>  4 1518184605 NPI-1    DANIEL  AARON   LOUIS   M.D.    NO      M      2007-04-19
-    #>  5 1922056829 NPI-1    CYNTHIA AARON   K       M.D.    NO      F      2006-05-04
-    #>  6 1083879860 NPI-1    CHRIST… AARON   <NA>    <NA>    NO      M      2008-07-22
-    #>  7 1346243805 NPI-1    HIE     KIM     C       M.D.    NO      M      2005-05-27
-    #>  8 1679576722 NPI-1    DAVID   WIEBE   A       M.D.    NO      M      2005-05-23
-    #>  9 1093718892 NPI-1    DINESH  GOYAL   K       MD      NO      M      2005-05-24
-    #> 10 1477556405 NPI-1    CHARLES LINSEN… M       M.D.    NO      M      2005-05-23
-    #> 11 1770586539 NPI-1    SUSAN   LANGEV… <NA>    MS, RD… NO      F      2005-05-24
-    #> 12 1871596692 NPI-1    NOEMI   DOSOVA  S.      M.D.    NO      F      2005-05-24
-    #> 13 1174526925 NPI-1    AKULA   KRISHNA V       M.D.    NO      M      2005-05-24
-    #> 14 1720081441 NPI-1    KATHLE… STAUDI… M       MD      NO      F      2005-05-27
-    #> 15 1558364273 NPI-1    JOHN    BAXTER  C       MD      NO      M      2005-05-27
-    #> 16 1801899513 NPI-1    GEORGE  DAUWEL  C       d.c.    NO      M      2005-05-27
-    #> # … with 12 more variables: last_updated <date>, status <chr>,
-    #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
-    #> #   identifiers <list>, endpoints <list>, other_names <list>, addresses <list>,
-    #> #   practicelocations <lgl>, enumeration_age <Duration>,
-    #> #   certification_date <date>, and abbreviated variable names
-    #> #   ¹​enumeration_type, ²​first_name, ³​last_name, ⁴​middle_name, ⁵​credential,
-    #> #   ⁶​sole_proprietor, ⁷​enumeration_date
 
 <br><br>
 
 ``` r
-npi_df |> nppes_npi_multi()
+npi_c |> nppes_npi_multi()
 ```
 
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✖ Found 0 results
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✔ Found 1 result
-
-    #> # A tibble: 16 × 21
-    #>    npi        enumer…¹ first…² last_…³ middl…⁴ crede…⁵ sole_…⁶ gender enumerat…⁷
-    #>    <chr>      <chr>    <chr>   <chr>   <chr>   <chr>   <chr>   <chr>  <date>    
-    #>  1 1003026055 NPI-1    RADHIKA PHADKE  PUSHKAR M.D, P… NO      F      2007-05-22
-    #>  2 1316405939 NPI-1    JAENA   ABARZUA KAE     MC, LP… NO      F      2019-03-04
-    #>  3 1720392988 NPI-1    MUSTAFA ABAS    <NA>    M.D.,   NO      M      2010-07-29
-    #>  4 1518184605 NPI-1    DANIEL  AARON   LOUIS   M.D.    NO      M      2007-04-19
-    #>  5 1922056829 NPI-1    CYNTHIA AARON   K       M.D.    NO      F      2006-05-04
-    #>  6 1083879860 NPI-1    CHRIST… AARON   <NA>    <NA>    NO      M      2008-07-22
-    #>  7 1346243805 NPI-1    HIE     KIM     C       M.D.    NO      M      2005-05-27
-    #>  8 1679576722 NPI-1    DAVID   WIEBE   A       M.D.    NO      M      2005-05-23
-    #>  9 1093718892 NPI-1    DINESH  GOYAL   K       MD      NO      M      2005-05-24
-    #> 10 1477556405 NPI-1    CHARLES LINSEN… M       M.D.    NO      M      2005-05-23
-    #> 11 1770586539 NPI-1    SUSAN   LANGEV… <NA>    MS, RD… NO      F      2005-05-24
-    #> 12 1871596692 NPI-1    NOEMI   DOSOVA  S.      M.D.    NO      F      2005-05-24
-    #> 13 1174526925 NPI-1    AKULA   KRISHNA V       M.D.    NO      M      2005-05-24
-    #> 14 1720081441 NPI-1    KATHLE… STAUDI… M       MD      NO      F      2005-05-27
-    #> 15 1558364273 NPI-1    JOHN    BAXTER  C       MD      NO      M      2005-05-27
-    #> 16 1801899513 NPI-1    GEORGE  DAUWEL  C       d.c.    NO      M      2005-05-27
-    #> # … with 12 more variables: last_updated <date>, status <chr>,
-    #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
-    #> #   identifiers <list>, endpoints <list>, other_names <list>, addresses <list>,
-    #> #   practicelocations <lgl>, enumeration_age <Duration>,
-    #> #   certification_date <dttm>, and abbreviated variable names
-    #> #   ¹​enumeration_type, ²​first_name, ³​last_name, ⁴​middle_name, ⁵​credential,
-    #> #   ⁶​sole_proprietor, ⁷​enumeration_date
+    #> Error in tibble::deframe(df): object 'npi_c' not found
 
 ``` r
-nppes_npi_new(npi = 1710983663)
+nppes_npi_new(npi = 1316405939)
 ```
 
-    #> 
-
-    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
-
-    #> URL: <]8;;https://npiregistry.cms.hhs.gov/api-pagehttps://npiregistry.cms.hhs.gov/api-page]8;;>
-
-    #> ✖ Found 0 results
-
-    #> # A tibble: 0 × 0
+    #> # A tibble: 1 × 19
+    #>   npi        enumeratio…¹ pract…² first…³ last_…⁴ middl…⁵ crede…⁶ sole_…⁷ gender
+    #>   <chr>      <chr>        <lgl>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr> 
+    #> 1 1316405939 NPI-1        NA      JAENA   ABARZUA KAE     MC, LP… NO      F     
+    #> # … with 10 more variables: enumeration_date <date>, last_updated <date>,
+    #> #   certification_date <dttm>, status <chr>, taxonomies <list>,
+    #> #   identifiers <lgl>, endpoints <lgl>, other_names <list>,
+    #> #   enumeration_age <Duration>, addresses <list>, and abbreviated variable
+    #> #   names ¹​enumeration_type, ²​practice_locations, ³​first_name, ⁴​last_name,
+    #> #   ⁵​middle_name, ⁶​credential, ⁷​sole_proprietor
 
 ### CMS Physician Facility Affiliations
 
@@ -623,12 +318,8 @@ provider::facility_affiliations(npi = 1003019563) |>
   gluedown::md_table()
 ```
 
-| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | facility_type | facility_afl_ccn |
-|:-----------|:-----------|:-------|:--------|:-------|:--------------|:-----------------|
-| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060004           |
-| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060009           |
-| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060028           |
-| 1003019563 | 4688707060 | FRANK  | JOHN    | JOSEPH | Hospital      | 060116           |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -639,33 +330,8 @@ provider::facility_affiliations(facility_ccn = "060004") |>
   gluedown::md_table()
 ```
 
-| npi        | ind_pac_id | lst_nm         | frst_nm  | mid_nm  | facility_type | facility_afl_ccn |
-|:-----------|:-----------|:---------------|:---------|:--------|:--------------|:-----------------|
-| 1003002890 | 6002953973 | HAMMAN         | DANIEL   | RICHARD | Hospital      | 060004           |
-| 1003019563 | 4688707060 | FRANK          | JOHN     | JOSEPH  | Hospital      | 060004           |
-| 1003045022 | 5890926059 | DONAHUE        | ARTHUR   | H       | Hospital      | 060004           |
-| 1003105636 | 6507182847 | HIGHAM KESSLER | JAMES    | CHARLES | Hospital      | 060004           |
-| 1003845249 | 1254326994 | WEINER         | GARETH   | R       | Hospital      | 060004           |
-| 1003987124 | 5496905754 | KLIMA          | KATHRYN  | ANN     | Hospital      | 060004           |
-| 1013069566 | 7810096328 | HELZER         | AMITY    | D       | Hospital      | 060004           |
-| 1013115989 | 4385891712 | PYLE           | ASHLEY   | L       | Hospital      | 060004           |
-| 1013979566 | 1557374014 | MUWALLA        | FIRAS    | NA      | Hospital      | 060004           |
-| 1023261963 | 2860687431 | LUCCI          | CHAD     | MICHAEL | Hospital      | 060004           |
-| 1023365244 | 4284851650 | MCARTHUR       | HADLEY   | J       | Hospital      | 060004           |
-| 1033373410 | 6507902681 | FONTENOT       | JOHN     | C       | Hospital      | 060004           |
-| 1053897264 | 4385994623 | BROOKS         | ERIN     | NA      | Hospital      | 060004           |
-| 1063693646 | 8729208624 | PAN            | LORRAINE | Y       | Hospital      | 060004           |
-| 1063964096 | 4183903958 | HAYES          | SUSAN    | E       | Hospital      | 060004           |
-| 1073952412 | 2961796966 | JERANKO        | CHELSEA  | M       | Hospital      | 060004           |
-| 1083097976 | 3375876626 | CHMIELECKI     | DAVID    | NA      | Hospital      | 060004           |
-| 1083687362 | 3375435647 | RABOR          | DONALD   | A       | Hospital      | 060004           |
-| 1093949620 | 8325279615 | MANGELSON      | JOHN     | J.      | Hospital      | 060004           |
-| 1104224294 | 0648565150 | MCCOOL         | CANDICE  | NA      | Hospital      | 060004           |
-| 1114345576 | 3476772997 | MCNITT         | WILLIAM  | C       | Hospital      | 060004           |
-| 1114395688 | 7416379045 | VERAN-TAGUIBAO | SONIA    | GO      | Hospital      | 060004           |
-| 1124332978 | 9931393535 | LEWIS          | KRISTINA | NA      | Hospital      | 060004           |
-| 1124340583 | 3779612247 | OAKLEAF        | CAROL    | NA      | Hospital      | 060004           |
-| 1134104227 | 1254224231 | GILLILAND      | J        | D       | Hospital      | 060004           |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -675,19 +341,8 @@ provider::facility_affiliations(parent_ccn = 670055) |>
   gluedown::md_table()
 ```
 
-| npi        | ind_pac_id | lst_nm     | frst_nm | mid_nm  | facility_type                     | facility_afl_ccn |
-|:-----------|:-----------|:-----------|:--------|:--------|:----------------------------------|:-----------------|
-| 1083742829 | 5698833655 | FORNARIS   | RAFAEL  | JORGE   | Inpatient rehabilitation facility | 67T055           |
-| 1144429580 | 3577659580 | CURRY      | LYSA    | LEE     | Inpatient rehabilitation facility | 67T055           |
-| 1386840197 | 3274620216 | HAU        | HORACIO | G       | Inpatient rehabilitation facility | 67T055           |
-| 1427107028 | 1456328152 | CHANEY     | DENNIS  | M       | Inpatient rehabilitation facility | 67T055           |
-| 1518985373 | 8628026861 | GUERRA     | ANTONIO | F       | Inpatient rehabilitation facility | 67T055           |
-| 1558595660 | 8921241142 | ALFONSO    | JOHN    | D       | Inpatient rehabilitation facility | 67T055           |
-| 1609973650 | 0840373239 | WILCOX     | GEORGE  | KIMBELL | Inpatient rehabilitation facility | 67T055           |
-| 1710112370 | 9739337122 | VADDEMPUDI | VIDYA   | NA      | Inpatient rehabilitation facility | 67T055           |
-| 1720069859 | 7012947229 | JANES      | WILLIAM | WARREN  | Inpatient rehabilitation facility | 67T055           |
-| 1740577212 | 0345473773 | WEIKLE     | GEOFF   | R       | Inpatient rehabilitation facility | 67T055           |
-| 1912260464 | 5092036509 | MANSOOR    | SAAD    | MD      | Inpatient rehabilitation facility | 67T055           |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -699,16 +354,8 @@ provider::facility_affiliations(first_name = "John",
   gluedown::md_table()
 ```
 
-| npi        | ind_pac_id | lst_nm | frst_nm | mid_nm | suff | facility_type      | facility_afl_ccn |
-|:-----------|:-----------|:-------|:--------|:-------|:-----|:-------------------|:-----------------|
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117021           |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117036           |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117069           |
-| 1174587588 | 7214998079 | HILL   | JOHN    | C      | III  | Home health agency | 117125           |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107338           |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107408           |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107689           |
-| 1558380444 | 4789619362 | HILL   | JOHN    | M      | NA   | Home health agency | 107707           |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -724,43 +371,43 @@ provider::hospital_enrollment(facility_ccn = "060004") |>
   gluedown::md_table()
 ```
 
-| name                         | value                                                 |
-|:-----------------------------|:------------------------------------------------------|
-| enrollment_id                | O20070619000323                                       |
-| enrollment_state             | CO                                                    |
-| provider_type_code           | 00-09                                                 |
-| provider_type_text           | PART A PROVIDER - HOSPITAL                            |
-| npi                          | 1629071758                                            |
-| multiple_npi_flag            | FALSE                                                 |
-| ccn                          | 060004                                                |
-| associate_id                 | 1153213814                                            |
-| organization_name            | BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
-| doing_business_as_name       | PLATTE VALLEY MEDICAL CENTER                          |
-| incorporation_date           | 1958-08-18                                            |
-| incorporation_state          | CO                                                    |
-| organization_type_structure  | CORPORATION                                           |
-| organization_other_type_text | NA                                                    |
-| proprietary_nonprofit        | FALSE                                                 |
-| address                      | 1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
-| city                         | BRIGHTON                                              |
-| state                        | CO                                                    |
-| zip_code                     | 80601                                                 |
-| practice_location_type       | MAIN/PRIMARY HOSPITAL LOCATION                        |
-| location_other_type_text     | NA                                                    |
-| subgroup_general             | FALSE                                                 |
-| subgroup_acute_care          | TRUE                                                  |
-| subgroup_alcohol_drug        | FALSE                                                 |
-| subgroup_childrens           | FALSE                                                 |
-| subgroup_longterm            | FALSE                                                 |
-| subgroup_psychiatric         | FALSE                                                 |
-| subgroup_rehabilitation      | FALSE                                                 |
-| subgroup_shortterm           | FALSE                                                 |
-| subgroup_swingbed_approved   | FALSE                                                 |
-| subgroup_psychiatric_unit    | FALSE                                                 |
-| subgroup_rehabilitation_unit | FALSE                                                 |
-| subgroup_specialty_hospital  | FALSE                                                 |
-| subgroup_other               | FALSE                                                 |
-| subgroup_other_text          | NA                                                    |
+| name                            | value                                                 |
+|:--------------------------------|:------------------------------------------------------|
+| enrollment_id                   | O20070619000323                                       |
+| enrollment_state                | CO                                                    |
+| provider_type_code              | 00-09                                                 |
+| provider_type_text              | PART A PROVIDER - HOSPITAL                            |
+| npi                             | 1629071758                                            |
+| multiple_npi_flag               | FALSE                                                 |
+| ccn                             | 060004                                                |
+| associate_id                    | 1153213814                                            |
+| organization_name               | BRIGHTON COMMUNITY HOSPITAL ASSOCIATION               |
+| doing_business_as_name          | PLATTE VALLEY MEDICAL CENTER                          |
+| incorporation_date              | 1958-08-18                                            |
+| incorporation_state             | CO                                                    |
+| organization_type_structure     | CORPORATION                                           |
+| organization_other_type_text    | NA                                                    |
+| proprietary_nonprofit           | FALSE                                                 |
+| address                         | 1600 PRAIRIE CENTER PKWY PLATTE VALLEY MEDICAL CENTER |
+| city                            | BRIGHTON                                              |
+| state                           | CO                                                    |
+| zip_code                        | 80601                                                 |
+| practice_location_type          | MAIN/PRIMARY HOSPITAL LOCATION                        |
+| location_other_type_text        | NA                                                    |
+| subgroup\_\_general             | FALSE                                                 |
+| subgroup\_\_acute_care          | TRUE                                                  |
+| subgroup\_\_alcohol_drug        | FALSE                                                 |
+| subgroup\_\_childrens           | FALSE                                                 |
+| subgroup\_\_long_term           | FALSE                                                 |
+| subgroup\_\_psychiatric         | FALSE                                                 |
+| subgroup\_\_rehabilitation      | FALSE                                                 |
+| subgroup\_\_short_term          | FALSE                                                 |
+| subgroup\_\_swing_bed_approved  | FALSE                                                 |
+| subgroup\_\_psychiatric_unit    | FALSE                                                 |
+| subgroup\_\_rehabilitation_unit | FALSE                                                 |
+| subgroup\_\_specialty_hospital  | FALSE                                                 |
+| subgroup\_\_other               | FALSE                                                 |
+| subgroup\_\_other_text          | NA                                                    |
 
 <br><br>
 
@@ -781,33 +428,16 @@ dr_clin <- provider::doctors_and_clinicians(npi = 1407263999) |>
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
                 zip = campfin::normal_zip(zip),
                 address = campfin::normal_address(address))
+```
 
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
+
+``` r
 dr_clin |> dplyr::glimpse()
 ```
 
-    #> Rows: 2
-    #> Columns: 21
-    #> $ npi         <chr> "1407263999", "1407263999"
-    #> $ ind_pac_id  <chr> "8729208152", "8729208152"
-    #> $ ind_enrl_id <chr> "I20141006002245", "I20141006002245"
-    #> $ lst_nm      <chr> "AVERY", "AVERY"
-    #> $ frst_nm     <chr> "ROBIN", "ROBIN"
-    #> $ mid_nm      <chr> "A", "A"
-    #> $ gndr        <chr> "F", "F"
-    #> $ med_sch     <chr> "OTHER", "OTHER"
-    #> $ grd_yr      <chr> "1989", "1989"
-    #> $ pri_spec    <chr> "CLINICAL PSYCHOLOGIST", "CLINICAL PSYCHOLOGIST"
-    #> $ telehlth    <chr> "Y", "Y"
-    #> $ org_nm      <chr> NA, "LARRY BROOKS, PH.D., LLC"
-    #> $ org_pac_id  <chr> NA, "6608028899"
-    #> $ num_org_mem <chr> NA, "2"
-    #> $ address     <chr> "9999 NE 2ND AVE SUITE 209E", "3810 HOLLYWOOD BLVD SUITE 2"
-    #> $ cty         <chr> "MIAMI SHORES", "HOLLYWOOD"
-    #> $ st          <chr> "FL", "FL"
-    #> $ zip         <chr> "33138", "33021"
-    #> $ phn_numbr   <chr> NA, "(954) 962-3888"
-    #> $ ind_assgn   <chr> "Y", "Y"
-    #> $ grp_assgn   <chr> "M", "Y"
+    #> Error in dplyr::glimpse(dr_clin): object 'dr_clin' not found
 
 <br>
 
@@ -818,29 +448,7 @@ dr_clin |>
   gluedown::md_table()
 ```
 
-| name        | value                      |
-|:------------|:---------------------------|
-| npi         | 1407263999                 |
-| ind_pac_id  | 8729208152                 |
-| ind_enrl_id | I20141006002245            |
-| lst_nm      | AVERY                      |
-| frst_nm     | ROBIN                      |
-| mid_nm      | A                          |
-| gndr        | F                          |
-| med_sch     | OTHER                      |
-| grd_yr      | 1989                       |
-| pri_spec    | CLINICAL PSYCHOLOGIST      |
-| telehlth    | Y                          |
-| org_nm      | NA                         |
-| org_pac_id  | NA                         |
-| num_org_mem | NA                         |
-| address     | 9999 NE 2ND AVE SUITE 209E |
-| cty         | MIAMI SHORES               |
-| st          | FL                         |
-| zip         | 33138                      |
-| phn_numbr   | NA                         |
-| ind_assgn   | Y                          |
-| grp_assgn   | M                          |
+    #> Error in dplyr::slice_head(dr_clin): object 'dr_clin' not found
 
 <br>
 
@@ -851,29 +459,7 @@ dr_clin |>
   gluedown::md_table()
 ```
 
-| name        | value                       |
-|:------------|:----------------------------|
-| npi         | 1407263999                  |
-| ind_pac_id  | 8729208152                  |
-| ind_enrl_id | I20141006002245             |
-| lst_nm      | AVERY                       |
-| frst_nm     | ROBIN                       |
-| mid_nm      | A                           |
-| gndr        | F                           |
-| med_sch     | OTHER                       |
-| grd_yr      | 1989                        |
-| pri_spec    | CLINICAL PSYCHOLOGIST       |
-| telehlth    | Y                           |
-| org_nm      | LARRY BROOKS, PH.D., LLC    |
-| org_pac_id  | 6608028899                  |
-| num_org_mem | 2                           |
-| address     | 3810 HOLLYWOOD BLVD SUITE 2 |
-| cty         | HOLLYWOOD                   |
-| st          | FL                          |
-| zip         | 33021                       |
-| phn_numbr   | \(954\) 962-3888            |
-| ind_assgn   | Y                           |
-| grp_assgn   | Y                           |
+    #> Error in dplyr::slice_tail(dr_clin): object 'dr_clin' not found
 
 <br><br>
 
@@ -882,43 +468,11 @@ dr_clin |>
 provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                                  grad_year = 2003, 
                                  state = "FL") |> 
-  dplyr::glimpse()
+  gluedown::md_table()
 ```
 
-    #> Rows: 6
-    #> Columns: 32
-    #> $ record_number <chr> "2241611", "2241616", "4005191", "4586101", "6700176", "…
-    #> $ npi           <chr> "1497955652", "1497955652", "1497955652", "1801000963", …
-    #> $ ind_pac_id    <chr> "3476647330", "3476647330", "3476647330", "3577616598", …
-    #> $ ind_enrl_id   <chr> "I20070922000027", "I20070922000027", "I20070922000027",…
-    #> $ lst_nm        <chr> "CHIEN", "CHIEN", "CHIEN", "SCHETTINO", "GOLDBERG", "KAP…
-    #> $ frst_nm       <chr> "YUI", "YUI", "YUI", "CHRIS", "BRIAN", "KEVIN"
-    #> $ mid_nm        <chr> "F", "F", "F", "J", "KEITH", "M"
-    #> $ suff          <chr> NA, NA, NA, NA, NA, NA
-    #> $ gndr          <chr> "M", "M", "M", "M", "M", "M"
-    #> $ cred          <chr> NA, NA, NA, NA, NA, NA
-    #> $ med_sch       <chr> "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", "NEW YORK UNIV…
-    #> $ grd_yr        <chr> "2003", "2003", "2003", "2003", "2003", "2003"
-    #> $ pri_spec      <chr> "OPHTHALMOLOGY", "OPHTHALMOLOGY", "OPHTHALMOLOGY", "PEDI…
-    #> $ sec_spec_1    <chr> NA, NA, NA, "RADIATION ONCOLOGY", NA, "ORTHOPEDIC SURGER…
-    #> $ sec_spec_2    <chr> NA, NA, NA, NA, NA, NA
-    #> $ sec_spec_3    <chr> NA, NA, NA, NA, NA, NA
-    #> $ sec_spec_4    <chr> NA, NA, NA, NA, NA, NA
-    #> $ sec_spec_all  <chr> NA, NA, NA, "RADIATION ONCOLOGY", NA, "ORTHOPEDIC SURGER…
-    #> $ telehlth      <chr> NA, NA, NA, NA, NA, NA
-    #> $ org_nm        <chr> "EYE PHYSICIANS OF FLORIDA LLP", "EYE PHYSICIANS OF FLOR…
-    #> $ org_pac_id    <chr> "1254414675", "1254414675", "2860553724", "3274795109", …
-    #> $ num_org_mem   <chr> "49", "49", "3", "1646", "56", "111"
-    #> $ adr_ln_1      <chr> "1 SW 129TH AVE", "8051 W SUNRISE BLVD", "1400 NE MIAMI …
-    #> $ adr_ln_2      <chr> "209 CORRECTVISION LASER INSTITUTE LLC", NA, "SUITE 203"…
-    #> $ ln_2_sprs     <chr> NA, NA, NA, NA, NA, NA
-    #> $ cty           <chr> "PEMBROKE PINES", "PLANTATION", "NORTH MIAMI BEACH", "MI…
-    #> $ st            <chr> "FL", "FL", "FL", "FL", "FL", "FL"
-    #> $ zip           <chr> "330271717", "333224103", "331794844", "331361005", "347…
-    #> $ phn_numbr     <chr> "9544421133", "9544742900", "3059401500", "3052434000", …
-    #> $ ind_assgn     <chr> "Y", "Y", "Y", "Y", "Y", "Y"
-    #> $ grp_assgn     <chr> "Y", "Y", "Y", "Y", "Y", "Y"
-    #> $ adrs_id       <chr> "FL330271717PE1XXXXAVEX405", "FL333224103PL8051XBLVD400"…
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -934,10 +488,8 @@ provider::addl_phone_numbers(npi = 1407263999) |>
   gluedown::md_table()
 ```
 
-| prvdr_id   | frst_nm | lst_nm | address                     | cty          | st  | zip   | org_pac_id | phn_numbr        | npi        |
-|:-----------|:--------|:-------|:----------------------------|:-------------|:----|:------|:-----------|:-----------------|:-----------|
-| 8729208152 | ROBIN   | AVERY  | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD    | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1407263999 |
-| 8729208152 | ROBIN   | AVERY  | 9999 NE 2ND AVE SUITE 209E  | MIAMI SHORES | FL  | 33138 | NA         | \(786\) 615-4758 | 1407263999 |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -951,11 +503,8 @@ addl_phone_numbers(pac_id_ind = "0042100190") |>
   gluedown::md_table()
 ```
 
-| prvdr_id   | frst_nm | lst_nm    | address             | cty          | st  | zip   | org_pac_id | phn_numbr        | npi        |
-|:-----------|:--------|:----------|:--------------------|:-------------|:----|:------|:-----------|:-----------------|:-----------|
-| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN NE     | GRAND RAPIDS | MI  | 49503 | 1951404185 | \(616\) 391-1680 | 1154338044 |
-| 0042100190 | JOHN    | VERBRUGGE | 100 MICHIGAN AVE NE | GRAND RAPIDS | MI  | 49503 | 8628327384 | \(616\) 391-1680 | 1154338044 |
-| 0042100190 | JOHN    | VERBRUGGE | 1840 WEALTHY SE     | GRAND RAPIDS | MI  | 49506 | 1951404185 | \(616\) 774-7444 | 1154338044 |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -969,10 +518,8 @@ addl_phone_numbers(pac_id_org = 6608028899) |>
   gluedown::md_table()
 ```
 
-| prvdr_id   | frst_nm  | lst_nm | address                     | cty       | st  | zip   | org_pac_id | phn_numbr        | npi        |
-|:-----------|:---------|:-------|:----------------------------|:----------|:----|:------|:-----------|:-----------------|:-----------|
-| 3971798604 | LAWRENCE | BROOKS | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1548577034 |
-| 8729208152 | ROBIN    | AVERY  | 3810 HOLLYWOOD BLVD SUITE 2 | HOLLYWOOD | FL  | 33021 | 6608028899 | \(954\) 962-3888 | 1407263999 |
+    #> Error in `resp_abort()`:
+    #> ! HTTP 400 Bad Request.
 
 <br><br>
 
@@ -1003,8 +550,8 @@ provider::missing_information(npi = 1144224569) |> gluedown::md_table()
 provider::order_refer(npi = 1083879860) |> gluedown::md_table()
 ```
 
-|        npi | last_name | first_name  | partb | dme  | hha  | pmd  |
-|-----------:|:----------|:------------|:------|:-----|:-----|:-----|
+| npi        | last_name | first_name  | partb | dme  | hha  | pmd  |
+|:-----------|:----------|:------------|:------|:-----|:-----|:-----|
 | 1083879860 | AARON     | CHRISTOPHER | TRUE  | TRUE | TRUE | TRUE |
 
 <br><br>
@@ -1043,18 +590,35 @@ provider::opt_out(last_name = "Aaron") |>
 ### Medicare Provider and Supplier Taxonomy Crosswalk
 
 ``` r
-provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
-  dplyr::select(medicare_specialty_code, 
-                medicare_specialty_description = "medicare_provider/supplier_type_description",
-                taxonomy_code = provider_taxonomy_code,
-                taxonomy_description = "provider_taxonomy_description:_type_classification_specialization") |> 
-  gluedown::md_table()
+provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> gluedown::md_table()
 ```
 
-| medicare_specialty_code | medicare_specialty_description | taxonomy_code | taxonomy_description                                           |
-|:------------------------|:-------------------------------|:--------------|:---------------------------------------------------------------|
-| B4\[14\]                | Rehabilitation Agency          | 261QR0400X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation |
-| B4\[14\]                | Rehabilitation Agency          | 315D00000X    | Nursing & Custodial Care Facilities/Hospice Inpatient          |
+| taxonomy_code | taxonomy_desc                                                  | specialty_code | specialty_desc        |
+|:--------------|:---------------------------------------------------------------|:---------------|:----------------------|
+| 261QR0400X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation | B4\[14\]       | Rehabilitation Agency |
+| 315D00000X    | Nursing & Custodial Care Facilities/Hospice Inpatient          | B4\[14\]       | Rehabilitation Agency |
+
+<br><br>
+
+``` r
+provider::taxonomy_crosswalk(specialty_code = "B4[14]") |> gluedown::md_table()
+```
+
+| taxonomy_code | taxonomy_desc                                                                                                          | specialty_code | specialty_desc                                                             |
+|:--------------|:-----------------------------------------------------------------------------------------------------------------------|:---------------|:---------------------------------------------------------------------------|
+| 261QR0400X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation                                                         | B4\[14\]       | Rehabilitation Agency                                                      |
+| 335U00000X    | Suppliers/Organ Procurement Organization                                                                               | B4\[14\]       | Organ Procurement Organization                                             |
+| 261QM0801X    | Ambulatory Health Care Facilities/Clinic/Center Mental Health                                                          | B4\[14\]       | Community Mental Health Center                                             |
+| 261QR0401X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation Comprehensive Outpatient Rehabilitation Facility (CORF) | B4\[14\]       | Comprehensive Outpatient Rehabilitation Facility                           |
+| 261QE0700X    | Ambulatory Health Care Facilities/End-Stage Renal Disease (ESRD) Treatment                                             | B4\[14\]       | End-Stage Renal Disease Facility                                           |
+| 261QF0400X    | Ambulatory Health Care Facilities/Federally Qualified Health Center (FQHC)                                             | B4\[14\]       | Federally Qualified Health Center                                          |
+| 251G00000X    | Agencies/Hospice Care Community Based                                                                                  | B4\[14\]       | Hospice                                                                    |
+| 291U00000X    | Laboratories/Clinical Medical Laboratory                                                                               | B4\[14\]       | Histocompatibility Laboratory                                              |
+| 291900000X    | Laboratories/Military Clinical Medical Laboratory                                                                      | B4\[14\]       | NA                                                                         |
+| 261QR0400X    | Ambulatory Health Care Facilities/Clinic/Center Rehabilitation                                                         | B4\[14\]       | Outpatient Physical Therapy/Occupational Therapy/Speech Pathology Services |
+| 315D00000X    | Nursing & Custodial Care Facilities/Hospice Inpatient                                                                  | B4\[14\]       | Rehabilitation Agency                                                      |
+| 282J00000X    | Hospitals/Religious Non-medical Health Care Institution                                                                | B4\[14\]       | Religious Non-Medical Health Care Institution                              |
+| 261QR1300X    | Ambulatory Health Care Facilities/Clinic/Center Rural Health                                                           | B4\[14\]       | Rural Health Clinic                                                        |
 
 <br><br>
 
@@ -1096,14 +660,14 @@ provider::pending_applications(npi = 1487003984,
 
     #> ── Medicare Pending Initial Logging and Tracking Physicians API ────────────────
 
-    #> URL:
-    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians]8;;>
+    #> NPI:
+    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians
 
     #> ✖ Found 0 results
 
-| x              |
-|:---------------|
-| cli-102512-224 |
+| x             |
+|:--------------|
+| cli-102512-32 |
 
 <br><br>
 
@@ -1117,14 +681,14 @@ provider::pending_applications(npi = 1487003984,
 
     #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
 
-    #> URL:
-    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians]8;;>
+    #> NPI:
+    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians
 
     #> ✖ Found 0 results
 
-| x              |
-|:---------------|
-| cli-102512-230 |
+| x             |
+|:--------------|
+| cli-102512-37 |
 
 <br><br>
 
@@ -1138,14 +702,14 @@ provider::pending_applications(last_name = "Abbott",
 
     #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
 
-    #> URL:
-    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians]8;;>
+    #> NPI:
+    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians
 
     #> ✖ Found 0 results
 
-| x              |
-|:---------------|
-| cli-102512-236 |
+| x             |
+|:--------------|
+| cli-102512-42 |
 
 <br><br>
 
@@ -1162,7 +726,7 @@ pending_applications(first_name = "John",
     #> URL:
     #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians]8;;>
 
-    #> ✔ Found 33 results
+    #> ✔ Found 35 results
 
 | npi        | last_name     | first_name |
 |:-----------|:--------------|:-----------|
@@ -1174,29 +738,31 @@ pending_applications(first_name = "John",
 | 1306817531 | COMBS         | JOHN       |
 | 1730349580 | ECHEVARRIA    | JOHN       |
 | 1982680997 | EVERED        | JOHN       |
+| 1700440930 | FITZPATRICK   | JOHN       |
 | 1376571554 | FLYNN         | JOHN       |
 | 1689774804 | FREEMAN       | JOHN       |
 | 1386604080 | GIANNINI      | JOHN       |
-| 1427395326 | HAGGERTY      | JOHN       |
 | 1316239189 | HAMMONS       | JOHN       |
+| 1366452146 | HARTNETT      | JOHN       |
 | 1407832538 | HELLRUNG      | JOHN       |
-| 1649734195 | HILTON        | JOHN       |
 | 1992799001 | HOLLINGSWORTH | JOHN       |
 | 1407317084 | HURLEY        | JOHN       |
 | 1710905674 | JONES         | JOHN       |
 | 1679161996 | KLUBE         | JOHN       |
+| 1134119340 | LEWIS         | JOHN       |
 | 1851513428 | LOVEJOY III   | JOHN       |
 | 1023000163 | LUDU          | JOHN       |
 | 1144205394 | MAHANY        | JOHN       |
-| 1053763698 | MARINO        | JOHN       |
 | 1942307897 | MCGINNIS      | JOHN       |
 | 1669506580 | MCKEON        | JOHN       |
 | 1245970896 | MEISNER       | JOHN       |
 | 1275596066 | MUNROE        | JOHN       |
 | 1457370702 | PEDERSEN      | JOHN       |
 | 1851715767 | PETTYGROVE    | JOHN       |
+| 1669171880 | REER          | JOHN       |
 | 1568506368 | SMITH         | JOHN       |
 | 1548823594 | SUTTER        | JOHN       |
+| 1780231530 | TUPTA         | JOHN       |
 | 1366437204 | VARENHOLT     | JOHN       |
 | 1639191166 | VERVILLE      | JOHN       |
 
@@ -2316,7 +1882,7 @@ apyramid::age_pyramid(data = prov_age,
             )
 ```
 
-<img src="man/figures/README-unnamed-chunk-66-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-67-1.png" width="100%" />
 
 <br><br>
 
@@ -2422,8 +1988,8 @@ spec <- cc_specific(year = 2007, geo_level = "County", state = "GA", county = "L
 
     #> ── Medicare Specific Chronic Conditions API ────────────────────────────────────
 
-    #> URL:
-    #> <]8;;https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditionshttps://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions]8;;>
+    #> NPI:
+    #> https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions
 
     #> ✖ Found 0 results
 

@@ -69,8 +69,21 @@ taxonomy_crosswalk <- function(specialty_code = NULL,
   results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
                                                   simplifyVector = TRUE))
 
+  # tidy results ----------------------------------------------------------
+  results <- results |>
+    dplyr::mutate(
+    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+    dplyr::across(tidyselect::where(is.character), ~stringr::str_squish(.)))
+
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::select(
+        taxonomy_code = provider_taxonomy_code,
+        taxonomy_desc = provider_taxonomy_description_type_classification_specialization,
+        specialty_code = medicare_specialty_code,
+        specialty_desc = medicare_provider_supplier_type_description)
+    }
 
   return(results)
 }

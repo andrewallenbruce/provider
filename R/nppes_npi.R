@@ -277,18 +277,12 @@ nppes_npi_new <- function(npi            = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(request, "content-length")) == 0) {
 
-    noresults_cli(
-      "NPPES NPI Registry API",
-      "https://npiregistry.cms.hhs.gov/api-page")
-
+    noresults_cli("NPPES NPI Registry API", npi)
     return(tibble::tibble())
 
   } else if (as.numeric(res_cnt) == 0) {
 
-    noresults_cli(
-      "NPPES NPI Registry API",
-      "https://npiregistry.cms.hhs.gov/api-page")
-
+    noresults_cli("NPPES NPI Registry API", npi)
     return(tibble::tibble())
 
   } else {
@@ -300,28 +294,58 @@ nppes_npi_new <- function(npi            = NULL,
                     created_epoch = NULL,
                     last_updated_epoch = NULL) |>
       tidyr::unnest(basic) |>
-      dplyr::relocate(npi) |>
-      dplyr::relocate(addresses, practiceLocations, .after = dplyr::last_col())
+      dplyr::select(npi,
+                    dplyr::everything(),
+                    addresses,
+                    practice_locations = practiceLocations)
 
-    # replace empty lists with NA ------------------------------------------------
+    # replace empty lists with NA -------------------------------------------
     results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
-    # tidy options ---------------------------------------------------------
+    # tidy results ----------------------------------------------------------
     results <- results |>
       dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "--")),
                     enumeration_date = lubridate::ymd(enumeration_date),
                     last_updated = lubridate::ymd(last_updated),
                     enumeration_age = lubridate::as.duration(lubridate::today() - enumeration_date))
+
+    # addresses --------------------------------------------------------------
+    address <- results |>
+      dplyr::select(npi, addresses) |>
+      tidyr::unnest(addresses) |>
+      tidyr::unite("address",
+                   dplyr::any_of(c("address_1", "address_2")),
+                   remove = TRUE,
+                   na.rm = TRUE,
+                   sep = " ") |>
+      dplyr::mutate(address_purpose = tolower(address_purpose)) |>
+      tidyr::pivot_wider(names_from = address_purpose,
+                         values_from = dplyr::everything()) |>
+      dplyr::mutate(npi = npi_location,
+                    npi_location = NULL,
+                    npi_mailing = NULL) |>
+      tidyr::nest(addresses = dplyr::everything(), .by = npi)
+
+    results <- dplyr::left_join(results, address, dplyr::join_by(npi)) |>
+      dplyr::mutate(addresses = addresses.y,
+                    addresses.x = NULL,
+                    addresses.y = NULL)
+
+
+    # nest authorized official ------------------------------------------------
+
+    if (results$enumeration_type == "NPI-2") {
+      results <- results |>
+        tidyr::nest(authorized_official = dplyr::contains("authorized_official"))
+    }
+
     # clean names -------------------------------------------------------------
     if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
 
   }
-
-  results_cli("NPPES NPI Registry API",
-              "https://npiregistry.cms.hhs.gov/api-page",
-              results = results)
 
   return(results)
 }

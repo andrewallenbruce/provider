@@ -154,8 +154,10 @@ npi_1 |>
 
 
 ```{r}
-### Data frame of NPIs
 npi_df <- data.frame(npi = c(1710983663,
+                             1710975040,
+                             1659781227,
+                             1336413418,
                              1003026055,
                              1316405939,
                              1720392988,
@@ -173,23 +175,39 @@ npi_df <- data.frame(npi = c(1710983663,
                              1558364273,
                              1801899513
                              ))
-npi_df |>
-  tibble::deframe() |> 
-  as.list() |> 
-  purrr::map(nppes_npi_new) |> 
-  dplyr::bind_rows() |> 
-  dplyr::mutate(certification_date = anytime::anydate(certification_date))
+
+npi_list <- list(npi = c(1710983663,
+                             1710975040,
+                             1659781227,
+                             1336413418,
+                             1003026055,
+                             1316405939,
+                             1720392988,
+                             1518184605,
+                             1922056829,
+                             1083879860,
+                             1346243805,
+                             1679576722,
+                             1093718892,
+                             1477556405,
+                             1770586539,
+                             1871596692,
+                             1174526925, 
+                             1720081441,
+                             1558364273,
+                             1801899513
+                             ))
 ```
 
 <br><br>
 
 ```{r}
-npi_df |> nppes_npi_multi()
+npi_c |> nppes_npi_multi()
 ```
 
 
 ```{r}
-nppes_npi_new(npi = 1710983663)
+nppes_npi_new(npi = 1316405939)
 ```
 
 ### CMS Physician Facility Affiliations
@@ -285,12 +303,12 @@ dr_clin |>
 
 <br><br>
 
-```{r}
+```{r results='asis', echo=TRUE}
 # search by medical school and/or graduation year
 provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                                  grad_year = 2003, 
                                  state = "FL") |> 
-  dplyr::glimpse()
+  gluedown::md_table()
 ```
 
 
@@ -367,15 +385,18 @@ provider::opt_out(last_name = "Aaron") |>
 ### Medicare Provider and Supplier Taxonomy Crosswalk
 
 ```{r results='asis', echo=TRUE}
-provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> 
-  dplyr::select(medicare_specialty_code, 
-                medicare_specialty_description = "medicare_provider/supplier_type_description",
-                taxonomy_code = provider_taxonomy_code,
-                taxonomy_description = "provider_taxonomy_description:_type_classification_specialization") |> 
-  gluedown::md_table()
+provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> gluedown::md_table()
 ```
 
 <br><br>
+
+```{r results='asis', echo=TRUE}
+provider::taxonomy_crosswalk(specialty_code = "B4[14]") |> gluedown::md_table()
+```
+
+<br><br>
+
+
 
 ### Medicare Fee-For-Service Public Provider Enrollment
 

@@ -75,7 +75,7 @@ beneficiary_enrollment <- function(year        = 2021,
   # match args ----------------------------------------------------
   month <- rlang::arg_match(month, values = c("Year", month.name))
   geo_level <- rlang::arg_match(geo_level)
-  state_abb <- rlang::arg_match(state_abb, values = state.abb)
+  #state_abb <- rlang::arg_match(state_abb, values = state.abb)
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
