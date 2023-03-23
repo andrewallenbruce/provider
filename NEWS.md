@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# provider 0.0.0.9012 (2023-03-23)
+
+- Same as previous version.
+
+
 # provider 0.0.0.9011 (2023-02-27)
 
 * nppes_npi_new implementation
