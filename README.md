@@ -19,6 +19,8 @@ commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)
 [![Codecov test
 coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+![GitHub
+milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
 > Providing easy access to [healthcare
@@ -44,11 +46,9 @@ remotes::install_github("andrewallenbruce/provider")
 
 | Function                   | API                                                                                                                                                                                                                                   |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `addl_phone_numbers()`     | [Physician Additional Phone Numbers](https://data.cms.gov/provider-data/dataset/phys-phon)                                                                                                                                            |
 | `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
 | `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
 | `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
-| `clia_labs()`              | [Medicare Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)                                            |
 | `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
 | `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
 | `hospital_enrollment()`    | [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)                                                                                                             |
@@ -95,175 +95,6 @@ together.
 ### NPPES NPI Registry
 
 ``` r
-npi_1 <- provider::nppes_npi(npi = 1710975040) |> dplyr::rename(npi = number)
-npi_1 |> dplyr::glimpse()
-```
-
-    #> Rows: 1
-    #> Columns: 15
-    #> $ datetime          <dttm> 2023-03-16 08:49:21
-    #> $ outcome           <chr> "results"
-    #> $ enumeration_type  <chr> "NPI-1"
-    #> $ npi               <chr> "1710975040"
-    #> $ name              <chr> "JOHN HERRING"
-    #> $ city              <chr> "OLNEY"
-    #> $ state             <chr> "MD"
-    #> $ addresses         <list> [<data.frame[2 x 11]>]
-    #> $ practiceLocations <list> []
-    #> $ taxonomies        <list> [<data.frame[1 x 6]>]
-    #> $ identifiers       <list> [<data.frame[5 x 5]>]
-    #> $ endpoints         <list> []
-    #> $ other_names       <list> []
-    #> $ epochs            <list> [<tbl_df[1 x 2]>]
-    #> $ basic             <list> [<tbl_df[1 x 11]>]
-
-<br>
-
-``` r
-npi_1 |> 
-  dplyr::select(enumeration_type:state) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-| name             | value        |
-|:-----------------|:-------------|
-| enumeration_type | NPI-1        |
-| npi              | 1710975040   |
-| name             | JOHN HERRING |
-| city             | OLNEY        |
-| state            | MD           |
-
-<br>
-
-> Basic Information
-
-``` r
-npi_1 |> 
-  dplyr::select(basic) |> 
-  tidyr::unnest(basic) |> 
-  tidyr::pivot_longer(dplyr::everything()) |> 
-  gluedown::md_table()
-```
-
-| name                   | value      |
-|:-----------------------|:-----------|
-| basic_first_name       | JOHN       |
-| basic_last_name        | HERRING    |
-| basic_middle_name      | E          |
-| basic_credential       | MD         |
-| basic_sole_proprietor  | NO         |
-| basic_gender           | M          |
-| basic_enumeration_date | 2005-10-11 |
-| basic_last_updated     | 2007-07-08 |
-| basic_status           | A          |
-| basic_name_prefix      | –          |
-| basic_name_suffix      | –          |
-
-<br>
-
-> Taxonomies
-
-``` r
-npi_1 |> 
-  dplyr::select(taxonomies) |> 
-  tidyr::unnest(taxonomies) |> 
-  dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |> 
-  dplyr::left_join(nucc_taxonomy_230, by = "code") |> 
-  dplyr::select(!c(taxonomy_group, desc, specialization, definition, notes, display_name, section)) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-| name           | value                               |
-|:---------------|:------------------------------------|
-| code           | 207R00000X                          |
-| state          | MD                                  |
-| license        | D0030414                            |
-| primary        | TRUE                                |
-| grouping       | Allopathic & Osteopathic Physicians |
-| classification | Internal Medicine                   |
-
-<br>
-
-> Addresses
-
-``` r
-npi_1 |> 
-  dplyr::select(addresses) |> 
-  tidyr::unnest(addresses) |> 
-  tidyr::unite("address", 
-               address_1:address_2, 
-               remove = TRUE, 
-               na.rm = TRUE, 
-               sep = " ") |> 
-  dplyr::mutate(telephone_number = campfin::normal_phone(telephone_number),
-                fax_number = campfin::normal_phone(fax_number),
-                postal_code = campfin::normal_zip(postal_code),
-                address = campfin::normal_address(address)) |> 
-  tidyr::pivot_longer(!address_purpose) |> 
-  tidyr::pivot_wider(names_from = address_purpose, 
-                     values_from = value) |> 
-  gluedown::md_table()
-```
-
-| name             | MAILING                   | LOCATION               |
-|:-----------------|:--------------------------|:-----------------------|
-| country_code     | US                        | US                     |
-| country_name     | United States             | United States          |
-| address_type     | DOM                       | DOM                    |
-| address          | 1300 PICCARD DR SUITE 202 | 18101 PRINCE PHILIP DR |
-| city             | ROCKVILLE                 | OLNEY                  |
-| state            | MD                        | MD                     |
-| postal_code      | 20850                     | 20832                  |
-| telephone_number | \(310\) 921-7900          | \(301\) 774-8900       |
-| fax_number       | \(301\) 921-7915          | \(301\) 570-8574       |
-
-<br>
-
-> Identifiers
-
-``` r
-npi_1 |> 
-  dplyr::select(identifiers) |> 
-  tidyr::unnest(identifiers) |> 
-  gluedown::md_table()
-```
-
-| code | desc                         | issuer    | identifier | state |
-|:-----|:-----------------------------|:----------|:-----------|:------|
-| 05   | MEDICAID                     | NA        | 367151800  | MD    |
-| 01   | Other (non-Medicare)         | Carefirst | 367151810  | NA    |
-| 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | MD    |
-| 04   | MEDICARE ID-Type Unspecified | NA        | 647145E14  | VA    |
-| 02   | MEDICARE UPIN                | NA        | C59183     | NA    |
-
-<br><br>
-
-``` r
-npi_df <- data.frame(npi = c(1710983663,
-                             1710975040,
-                             1659781227,
-                             1336413418,
-                             1003026055,
-                             1316405939,
-                             1720392988,
-                             1518184605,
-                             1922056829,
-                             1083879860,
-                             1346243805,
-                             1679576722,
-                             1093718892,
-                             1477556405,
-                             1770586539,
-                             1871596692,
-                             1174526925, 
-                             1720081441,
-                             1558364273,
-                             1801899513
-                             ))
-
 npi_list <- list(npi = c(1710983663,
                              1710975040,
                              1659781227,
@@ -283,32 +114,72 @@ npi_list <- list(npi = c(1710983663,
                              1174526925, 
                              1720081441,
                              1558364273,
-                             1801899513
-                             ))
+                             1801899513))
 ```
 
 <br><br>
 
 ``` r
-npi_c |> nppes_npi_multi()
+npi_list |> nppes_npi_multi()
 ```
 
-    #> Error in tibble::deframe(df): object 'npi_c' not found
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> NPI: 1710983663
+
+    #> ✖ Found 0 results
+
+    #> 
+
+    #> ── NPPES NPI Registry API ──────────────────────────────────────────────────────
+
+    #> NPI: 1659781227
+
+    #> ✖ Found 0 results
+
+    #> # A tibble: 18 × 24
+    #>    npi      enumeration_type practice_locations first_name last_name middle_name
+    #>    <chr>    <chr>            <lgl>              <chr>      <chr>     <chr>      
+    #>  1 1710975… NPI-1            NA                 JOHN       HERRING   E          
+    #>  2 1336413… NPI-2            NA                 <NA>       <NA>      <NA>       
+    #>  3 1003026… NPI-1            NA                 RADHIKA    PHADKE    PUSHKAR    
+    #>  4 1316405… NPI-1            NA                 JAENA      ABARZUA   KAE        
+    #>  5 1720392… NPI-1            NA                 MUSTAFA    ABAS      <NA>       
+    #>  6 1518184… NPI-1            NA                 DANIEL     AARON     LOUIS      
+    #>  7 1922056… NPI-1            NA                 CYNTHIA    AARON     K          
+    #>  8 1083879… NPI-1            NA                 CHRISTOPH… AARON     <NA>       
+    #>  9 1346243… NPI-1            NA                 HIE        KIM       C          
+    #> 10 1679576… NPI-1            NA                 DAVID      WIEBE     A          
+    #> 11 1093718… NPI-1            NA                 DINESH     GOYAL     K          
+    #> 12 1477556… NPI-1            NA                 CHARLES    LINSENME… M          
+    #> 13 1770586… NPI-1            NA                 SUSAN      LANGEVIN  <NA>       
+    #> 14 1871596… NPI-1            NA                 NOEMI      DOSOVA    S.         
+    #> 15 1174526… NPI-1            NA                 AKULA      KRISHNA   V          
+    #> 16 1720081… NPI-1            NA                 KATHLEEN   STAUDING… M          
+    #> 17 1558364… NPI-1            NA                 JOHN       BAXTER    C          
+    #> 18 1801899… NPI-1            NA                 GEORGE     DAUWEL    C          
+    #> # ℹ 18 more variables: credential <chr>, sole_proprietor <chr>, gender <chr>,
+    #> #   enumeration_date <date>, last_updated <date>, status <chr>,
+    #> #   name_prefix <chr>, name_suffix <chr>, taxonomies <list>,
+    #> #   identifiers <list>, endpoints <list>, other_names <list>,
+    #> #   enumeration_age <Duration>, addresses <list>, organization_name <chr>,
+    #> #   organizational_subpart <chr>, certification_date <dttm>,
+    #> #   authorized_official <list>
 
 ``` r
 nppes_npi_new(npi = 1316405939)
 ```
 
     #> # A tibble: 1 × 19
-    #>   npi        enumeratio…¹ pract…² first…³ last_…⁴ middl…⁵ crede…⁶ sole_…⁷ gender
-    #>   <chr>      <chr>        <lgl>   <chr>   <chr>   <chr>   <chr>   <chr>   <chr> 
-    #> 1 1316405939 NPI-1        NA      JAENA   ABARZUA KAE     MC, LP… NO      F     
-    #> # … with 10 more variables: enumeration_date <date>, last_updated <date>,
-    #> #   certification_date <dttm>, status <chr>, taxonomies <list>,
-    #> #   identifiers <lgl>, endpoints <lgl>, other_names <list>,
-    #> #   enumeration_age <Duration>, addresses <list>, and abbreviated variable
-    #> #   names ¹​enumeration_type, ²​practice_locations, ³​first_name, ⁴​last_name,
-    #> #   ⁵​middle_name, ⁶​credential, ⁷​sole_proprietor
+    #>   npi       enumeration_type practice_locations first_name last_name middle_name
+    #>   <chr>     <chr>            <lgl>              <chr>      <chr>     <chr>      
+    #> 1 13164059… NPI-1            NA                 JAENA      ABARZUA   KAE        
+    #> # ℹ 13 more variables: credential <chr>, sole_proprietor <chr>, gender <chr>,
+    #> #   enumeration_date <date>, last_updated <date>, certification_date <dttm>,
+    #> #   status <chr>, taxonomies <list>, identifiers <lgl>, endpoints <lgl>,
+    #> #   other_names <list>, enumeration_age <Duration>, addresses <list>
 
 ### CMS Physician Facility Affiliations
 
@@ -428,16 +299,33 @@ dr_clin <- provider::doctors_and_clinicians(npi = 1407263999) |>
   dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
                 zip = campfin::normal_zip(zip),
                 address = campfin::normal_address(address))
-```
 
-    #> Error in `resp_abort()`:
-    #> ! HTTP 400 Bad Request.
-
-``` r
 dr_clin |> dplyr::glimpse()
 ```
 
-    #> Error in dplyr::glimpse(dr_clin): object 'dr_clin' not found
+    #> Rows: 2
+    #> Columns: 21
+    #> $ npi         <chr> "1407263999", "1407263999"
+    #> $ ind_pac_id  <chr> "8729208152", "8729208152"
+    #> $ ind_enrl_id <chr> "I20141006002245", "I20141006002245"
+    #> $ lst_nm      <chr> "AVERY", "AVERY"
+    #> $ frst_nm     <chr> "ROBIN", "ROBIN"
+    #> $ mid_nm      <chr> "A", "A"
+    #> $ gndr        <chr> "F", "F"
+    #> $ med_sch     <chr> "OTHER", "OTHER"
+    #> $ grd_yr      <chr> "1989", "1989"
+    #> $ pri_spec    <chr> "CLINICAL PSYCHOLOGIST", "CLINICAL PSYCHOLOGIST"
+    #> $ telehlth    <chr> "Y", "Y"
+    #> $ org_nm      <chr> NA, "LARRY BROOKS, PH.D., LLC"
+    #> $ org_pac_id  <chr> NA, "6608028899"
+    #> $ num_org_mem <chr> NA, "2"
+    #> $ address     <chr> "9999 NE 2ND AVE SUITE 209E", "3810 HOLLYWOOD BLVD SUITE 2"
+    #> $ cty         <chr> "MIAMI SHORES", "HOLLYWOOD"
+    #> $ st          <chr> "FL", "FL"
+    #> $ zip         <chr> "33138", "33021"
+    #> $ phn_numbr   <chr> NA, "(954) 962-3888"
+    #> $ ind_assgn   <chr> "Y", "Y"
+    #> $ grp_assgn   <chr> "M", "Y"
 
 <br>
 
@@ -448,7 +336,29 @@ dr_clin |>
   gluedown::md_table()
 ```
 
-    #> Error in dplyr::slice_head(dr_clin): object 'dr_clin' not found
+| name        | value                      |
+|:------------|:---------------------------|
+| npi         | 1407263999                 |
+| ind_pac_id  | 8729208152                 |
+| ind_enrl_id | I20141006002245            |
+| lst_nm      | AVERY                      |
+| frst_nm     | ROBIN                      |
+| mid_nm      | A                          |
+| gndr        | F                          |
+| med_sch     | OTHER                      |
+| grd_yr      | 1989                       |
+| pri_spec    | CLINICAL PSYCHOLOGIST      |
+| telehlth    | Y                          |
+| org_nm      | NA                         |
+| org_pac_id  | NA                         |
+| num_org_mem | NA                         |
+| address     | 9999 NE 2ND AVE SUITE 209E |
+| cty         | MIAMI SHORES               |
+| st          | FL                         |
+| zip         | 33138                      |
+| phn_numbr   | NA                         |
+| ind_assgn   | Y                          |
+| grp_assgn   | M                          |
 
 <br>
 
@@ -459,7 +369,29 @@ dr_clin |>
   gluedown::md_table()
 ```
 
-    #> Error in dplyr::slice_tail(dr_clin): object 'dr_clin' not found
+| name        | value                       |
+|:------------|:----------------------------|
+| npi         | 1407263999                  |
+| ind_pac_id  | 8729208152                  |
+| ind_enrl_id | I20141006002245             |
+| lst_nm      | AVERY                       |
+| frst_nm     | ROBIN                       |
+| mid_nm      | A                           |
+| gndr        | F                           |
+| med_sch     | OTHER                       |
+| grd_yr      | 1989                        |
+| pri_spec    | CLINICAL PSYCHOLOGIST       |
+| telehlth    | Y                           |
+| org_nm      | LARRY BROOKS, PH.D., LLC    |
+| org_pac_id  | 6608028899                  |
+| num_org_mem | 2                           |
+| address     | 3810 HOLLYWOOD BLVD SUITE 2 |
+| cty         | HOLLYWOOD                   |
+| st          | FL                          |
+| zip         | 33021                       |
+| phn_numbr   | \(954\) 962-3888            |
+| ind_assgn   | Y                           |
+| grp_assgn   | Y                           |
 
 <br><br>
 
@@ -471,55 +403,15 @@ provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICI
   gluedown::md_table()
 ```
 
-    #> Error in `resp_abort()`:
-    #> ! HTTP 400 Bad Request.
-
-<br><br>
-
-### Additional Phone Numbers
-
-``` r
-provider::addl_phone_numbers(npi = 1407263999) |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-
-    #> Error in `resp_abort()`:
-    #> ! HTTP 400 Bad Request.
-
-<br><br>
-
-``` r
-addl_phone_numbers(pac_id_ind = "0042100190") |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-
-    #> Error in `resp_abort()`:
-    #> ! HTTP 400 Bad Request.
-
-<br><br>
-
-``` r
-addl_phone_numbers(pac_id_org = 6608028899) |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-
-    #> Error in `resp_abort()`:
-    #> ! HTTP 400 Bad Request.
+| record_number | npi        | ind_pac_id | ind_enrl_id     | lst_nm    | frst_nm | mid_nm | suff | gndr | cred | med_sch                                | grd_yr | pri_spec                             | sec_spec_1         | sec_spec_2 | sec_spec_3 | sec_spec_4 | sec_spec_all       | telehlth | org_nm                                 | org_pac_id | num_org_mem | adr_ln_1                 | adr_ln_2                              | ln_2\_sprs | cty               | st  | zip       | phn_numbr  | ind_assgn | grp_assgn | adrs_id                   |
+|:--------------|:-----------|:-----------|:----------------|:----------|:--------|:-------|:-----|:-----|:-----|:---------------------------------------|:-------|:-------------------------------------|:-------------------|:-----------|:-----------|:-----------|:-------------------|:---------|:---------------------------------------|:-----------|:------------|:-------------------------|:--------------------------------------|:-----------|:------------------|:----|:----------|:-----------|:----------|:----------|:--------------------------|
+| 412326        | 1033237524 | 7618041781 | I20220614002174 | GOLDBERG  | BRIAN   | KEITH  | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | PHYSICAL MEDICINE AND REHABILITATION | NA                 | NA         | NA         | NA         | NA                 | NA       | ROTHMAN ORTHOPAEDICS OF FLORIDA,PLLC   | 4880009786 | 59          | 15502 STONEYBROOK W PKWY | SUITE 114                             | NA         | WINTER GARDEN     | FL  | 347874767 | 8444074070 | Y         | Y         | FL347874767WI15502PKWY403 |
+| 2037881       | 1164628830 | 5698811768 | I20091002000129 | KAPLAN    | KEVIN   | M      | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | SPORTS MEDICINE                      | ORTHOPEDIC SURGERY | NA         | NA         | NA         | ORTHOPEDIC SURGERY | NA       | JACKSONVILLE ORTHOPAEDIC INSTITUTE INC | 5193625499 | 109         | 1325 SAN MARCO BLVD      | SUITE 102                             | NA         | JACKSONVILLE      | FL  | 322078549 | 9048587045 | Y         | Y         | FL322078549JA1325XBLVD402 |
+| 3685921       | 1295895514 | 7113029984 | I20210701000265 | CHAUDHURI | JHUMA   | NA     | NA   | F    | MD   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | HOSPITALIST                          | INTERNAL MEDICINE  | NA         | NA         | NA         | INTERNAL MEDICINE  | NA       | EASTSIDE HOSPITALISTS INC              | 9436157831 | 158         | 703 N FLAMINGO RD        | MEMORIAL HOSPITAL WEST                | NA         | PEMBROKE PINES    | FL  | 330281006 | 9544365000 | Y         | Y         | FL330281006PE703XXRDXX402 |
+| 6168841       | 1497955652 | 3476647330 | I20070922000027 | CHIEN     | YUI     | F      | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | OPHTHALMOLOGY                        | NA                 | NA         | NA         | NA         | NA                 | NA       | EYE PHYSICIANS OF FLORIDA LLP          | 1254414675 | 48          | 1 SW 129TH AVE           | 209 CORRECTVISION LASER INSTITUTE LLC | NA         | PEMBROKE PINES    | FL  | 330271717 | 9544421133 | Y         | Y         | FL330271717PE1XXXXAVEX405 |
+| 6168846       | 1497955652 | 3476647330 | I20070922000027 | CHIEN     | YUI     | F      | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | OPHTHALMOLOGY                        | NA                 | NA         | NA         | NA         | NA                 | NA       | EYE PHYSICIANS OF FLORIDA LLP          | 1254414675 | 48          | 8051 W SUNRISE BLVD      | NA                                    | NA         | PLANTATION        | FL  | 333224103 | 9544742900 | Y         | Y         | FL333224103PL8051XBLVD400 |
+| 6168851       | 1497955652 | 3476647330 | I20070922000027 | CHIEN     | YUI     | F      | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | OPHTHALMOLOGY                        | NA                 | NA         | NA         | NA         | NA                 | NA       | OCEAN OPHTHALMOLOGY GROUP              | 2860553724 | 4           | 1400 NE MIAMI GARDENS DR | SUITE 203                             | NA         | NORTH MIAMI BEACH | FL  | 331794844 | 3059401500 | Y         | Y         | FL331794844NO1400XDRXX501 |
+| 9885131       | 1801000963 | 3577616598 | I20090807000530 | SCHETTINO | CHRIS   | NA     | NA   | M    | NA   | NEW YORK UNIVERSITY SCHOOL OF MEDICINE | 2003   | PEDIATRIC MEDICINE                   | RADIATION ONCOLOGY | NA         | NA         | NA         | RADIATION ONCOLOGY | NA       | UNIVERSITY OF MIAMI                    | 3274795109 | 1649        | 1611 NW 12TH AVE         | JMH                                   | NA         | MIAMI             | FL  | 331361005 | 3052434000 | Y         | Y         | FL331361005MI1611XAVEX429 |
 
 <br><br>
 
@@ -528,15 +420,6 @@ addl_phone_numbers(pac_id_org = 6608028899) |>
 ``` r
 provider::missing_information(npi = 1144224569) |> gluedown::md_table()
 ```
-
-    #> 
-
-    #> ── CMS Public Reporting of Missing Digital Contact Information API ─────────────
-
-    #> URL:
-    #> <]8;;https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-informationhttps://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information]8;;>
-
-    #> ✔ Found 1 result
 
 | npi        | last_name | first_name |
 |:-----------|:----------|:-----------|
@@ -583,7 +466,7 @@ provider::opt_out(last_name = "Aaron") |>
 | state_code                  | DC                     |
 | zip_code                    | 20009                  |
 | eligible_to_order_and_refer | FALSE                  |
-| last_updated                | 2023-01-16             |
+| last_updated                | 2023-02-16             |
 
 <br><br>
 
@@ -658,16 +541,15 @@ provider::pending_applications(npi = 1487003984,
 
     #> 
 
-    #> ── Medicare Pending Initial Logging and Tracking Physicians API ────────────────
+    #> ── Medicare Pending Initial Logging and Tracking API ───────────────────────────
 
-    #> NPI:
-    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians
+    #> NPI: 1487003984
 
     #> ✖ Found 0 results
 
 | x             |
 |:--------------|
-| cli-102512-32 |
+| cli-102512-26 |
 
 <br><br>
 
@@ -679,16 +561,15 @@ provider::pending_applications(npi = 1487003984,
 
     #> 
 
-    #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
+    #> ── Medicare Pending Initial Logging and Tracking API ───────────────────────────
 
-    #> NPI:
-    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians
+    #> NPI: 1487003984
 
     #> ✖ Found 0 results
 
 | x             |
 |:--------------|
-| cli-102512-37 |
+| cli-102512-31 |
 
 <br><br>
 
@@ -700,16 +581,15 @@ provider::pending_applications(last_name = "Abbott",
 
     #> 
 
-    #> ── Medicare Pending Initial Logging and Tracking Non-Physicians API ────────────
+    #> ── Medicare Pending Initial Logging and Tracking API ───────────────────────────
 
     #> NPI:
-    #> https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians
 
     #> ✖ Found 0 results
 
 | x             |
 |:--------------|
-| cli-102512-42 |
+| cli-102512-36 |
 
 <br><br>
 
@@ -718,15 +598,6 @@ pending_applications(first_name = "John",
                      type = "physician") |> 
   gluedown::md_table()
 ```
-
-    #> 
-
-    #> ── Medicare Pending Initial Logging and Tracking Physicians API ────────────────
-
-    #> URL:
-    #> <]8;;https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicianshttps://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians]8;;>
-
-    #> ✔ Found 35 results
 
 | npi        | last_name     | first_name |
 |:-----------|:--------------|:-----------|
@@ -1882,7 +1753,7 @@ apyramid::age_pyramid(data = prov_age,
             )
 ```
 
-<img src="man/figures/README-unnamed-chunk-67-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-58-1.png" width="100%" />
 
 <br><br>
 

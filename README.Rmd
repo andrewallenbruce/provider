@@ -29,6 +29,7 @@ knitr::opts_chunk$set(
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
+![GitHub milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
 <!-- badges: end -->
 
 > Providing easy access to [healthcare provider](https://en.wikipedia.org/wiki/Health_care_provider)-centric data through publicly available APIs & sources.
@@ -75,107 +76,8 @@ This package is primarily focused on accessing public API data that can be linke
 
 ### NPPES NPI Registry
 
-```{r}
-npi_1 <- provider::nppes_npi(npi = 1710975040) |> dplyr::rename(npi = number)
-npi_1 |> dplyr::glimpse()
-```
-<br>
-
-```{r results='asis', echo=TRUE}
-npi_1 |> 
-  dplyr::select(enumeration_type:state) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-<br>
-
-   > Basic Information
-
-```{r results='asis', echo=TRUE}
-npi_1 |> 
-  dplyr::select(basic) |> 
-  tidyr::unnest(basic) |> 
-  tidyr::pivot_longer(dplyr::everything()) |> 
-  gluedown::md_table()
-```
-<br>
-
-   > Taxonomies
-
-```{r results='asis', echo=TRUE}
-npi_1 |> 
-  dplyr::select(taxonomies) |> 
-  tidyr::unnest(taxonomies) |> 
-  dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |> 
-  dplyr::left_join(nucc_taxonomy_230, by = "code") |> 
-  dplyr::select(!c(taxonomy_group, desc, specialization, definition, notes, display_name, section)) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-
-<br>
-
-   > Addresses
-
-```{r results='asis', echo=TRUE}
-npi_1 |> 
-  dplyr::select(addresses) |> 
-  tidyr::unnest(addresses) |> 
-  tidyr::unite("address", 
-               address_1:address_2, 
-               remove = TRUE, 
-               na.rm = TRUE, 
-               sep = " ") |> 
-  dplyr::mutate(telephone_number = campfin::normal_phone(telephone_number),
-                fax_number = campfin::normal_phone(fax_number),
-                postal_code = campfin::normal_zip(postal_code),
-                address = campfin::normal_address(address)) |> 
-  tidyr::pivot_longer(!address_purpose) |> 
-  tidyr::pivot_wider(names_from = address_purpose, 
-                     values_from = value) |> 
-  gluedown::md_table()
-```
-
-
-<br>
-
-   > Identifiers
-
-```{r results='asis', echo=TRUE}
-npi_1 |> 
-  dplyr::select(identifiers) |> 
-  tidyr::unnest(identifiers) |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
 
 ```{r}
-npi_df <- data.frame(npi = c(1710983663,
-                             1710975040,
-                             1659781227,
-                             1336413418,
-                             1003026055,
-                             1316405939,
-                             1720392988,
-                             1518184605,
-                             1922056829,
-                             1083879860,
-                             1346243805,
-                             1679576722,
-                             1093718892,
-                             1477556405,
-                             1770586539,
-                             1871596692,
-                             1174526925, 
-                             1720081441,
-                             1558364273,
-                             1801899513
-                             ))
-
 npi_list <- list(npi = c(1710983663,
                              1710975040,
                              1659781227,
@@ -195,20 +97,21 @@ npi_list <- list(npi = c(1710983663,
                              1174526925, 
                              1720081441,
                              1558364273,
-                             1801899513
-                             ))
+                             1801899513))
 ```
 
 <br><br>
 
 ```{r}
-npi_c |> nppes_npi_multi()
+npi_list |> nppes_npi_multi()
 ```
 
 
 ```{r}
 nppes_npi_new(npi = 1316405939)
 ```
+
+
 
 ### CMS Physician Facility Affiliations
 
@@ -314,41 +217,7 @@ provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICI
 
 <br><br>
 
-### Additional Phone Numbers
 
-```{r results='asis', echo=TRUE}
-provider::addl_phone_numbers(npi = 1407263999) |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-<br><br>
-
-```{r results='asis', echo=TRUE}
-addl_phone_numbers(pac_id_ind = "0042100190") |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-<br><br>
-
-```{r results='asis', echo=TRUE}
-addl_phone_numbers(pac_id_org = 6608028899) |> 
-  dplyr::select(prvdr_id, frst_nm, lst_nm, adr_ln_1, adr_ln_2:npi) |> 
-  tidyr::unite("address", adr_ln_1:adr_ln_2, remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address)) |> 
-  gluedown::md_table()
-```
-
-<br><br>
 
 ### CMS Missing Contact Information
 

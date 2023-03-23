@@ -53,7 +53,7 @@
 #' @export
 
 doctors_and_clinicians <- function(npi           = NULL,
-                                   pac_id_ind        = NULL,
+                                   pac_id_ind    = NULL,
                                    enroll_id     = NULL,
                                    last_name     = NULL,
                                    first_name    = NULL,
@@ -92,7 +92,7 @@ doctors_and_clinicians <- function(npi           = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-  id <- "ed54fac3-f8ec-5713-9a0e-740b4cbd7ba4"
+  id <- "6fdc4567-4ae7-5d31-8adc-adeb7a629787"
 
   id_fmt <- paste0("[SELECT * FROM ", id, "]")
 

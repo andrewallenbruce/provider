@@ -1,5 +1,5 @@
 #' Search the CMS Physician - Additional Phone Numbers API
-#'
+#' #### Dataset API no longer available ##################
 #' @description Dataset of additional phone numbers when clinicians have more
 #'   than one phone number at a single practice address.
 #'
@@ -32,7 +32,7 @@
 #' addl_phone_numbers(zip = 303421606)
 #' }
 #' @autoglobal
-#' @export
+#' @noRd
 
 addl_phone_numbers <- function(npi           = NULL,
                                pac_id_ind   = NULL,

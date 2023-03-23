@@ -83,13 +83,13 @@ function_tbl    <- function() {
                                       rere_func,
                                       ccs_func,
                                       ccm_func,
-                                      clia_func,
+                                      #clia_func,
                                       tax_func,
                                       miss_func,
                                       pend_func,
                                       affil_func,
                                       drclin_func,
-                                      addph_func,
+                                      #addph_func,
                                       hspen_func
                                       ),
                           API      = c(nppes_link,
@@ -106,13 +106,13 @@ function_tbl    <- function() {
                                        rere_link,
                                        ccs_link,
                                        ccm_link,
-                                       clia_link,
+                                       #clia_link,
                                        tax_link,
                                        miss_link,
                                        pend_link,
                                        affil_link,
                                        drclin_link,
-                                       addph_link,
+                                       #addph_link,
                                        hspen_link
                                        ))
 

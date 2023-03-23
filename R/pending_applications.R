@@ -73,17 +73,8 @@ pending_applications <- function(npi         = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
 
-    if (type == "physician") {
+    return(noresults_cli("Medicare Pending Initial Logging and Tracking API", npi))
 
-    return(noresults_cli(
-      "Medicare Pending Initial Logging and Tracking Physicians API",
-      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians"))}
-
-    if (type == "non-physician") {
-
-    return(noresults_cli(
-      "Medicare Pending Initial Logging and Tracking Non-Physicians API",
-      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians"))}
 
   } else {
 
@@ -96,20 +87,6 @@ pending_applications <- function(npi         = NULL,
   if (isTRUE(clean_names)) {
 
     results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  if (type == "physician") {
-
-    results_cli(
-      "Medicare Pending Initial Logging and Tracking Physicians API",
-      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians",
-    results = results)}
-
-  if (type == "non-physician") {
-
-    results_cli(
-      "Medicare Pending Initial Logging and Tracking Non-Physicians API",
-      "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians",
-      results = results)}
 
   return(results)
 }

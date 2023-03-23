@@ -75,7 +75,7 @@ facility_affiliations <- function(npi           = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-  id <- "a9970163-ef6b-5a2e-b3f6-f18b0514e093"
+  id <- "789474cd-3d8d-5d83-b358-9b88f7d66df4"
 
   id_fmt <- paste0("[SELECT * FROM ", id, "]")
 

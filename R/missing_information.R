@@ -56,10 +56,7 @@ missing_information <- function(npi         = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
 
-      noresults_cli(
-        "CMS Public Reporting of Missing Digital Contact Information API",
-        "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information")
-
+    noresults_cli("CMS Public Reporting of Missing Digital Contact Information API", npi)
     return(tibble::tibble())
 
   } else {
@@ -70,17 +67,14 @@ missing_information <- function(npi         = NULL,
       simplifyVector = TRUE))
 
     # separate provider_name into last & first cols -----------------------
-    results <- tidyr::separate(results, col = " Provider Name",
-                               into = c("last_name", "first_name"), sep = ",")
+    results <- tidyr::separate(results,
+                               col = " Provider Name",
+                               into = c("last_name", "first_name"),
+                               sep = ",")
   }
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
     results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  results_cli(
-    "CMS Public Reporting of Missing Digital Contact Information API",
-    "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information",
-    results = results)
 
   return(results)
 }
