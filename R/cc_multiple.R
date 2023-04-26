@@ -129,10 +129,6 @@ cc_multiple <- function(year         = 2018,
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
 
-    noresults_cli(
-      "Medicare Multiple Chronic Conditions API",
-      "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions")
-
     return(tibble::tibble())
 
   } else {
@@ -147,11 +143,6 @@ cc_multiple <- function(year         = 2018,
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
     results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  results_cli(
-    "Medicare Multiple Chronic Conditions API",
-    "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions",
-    results = results)
 
   return(results)
 }

@@ -2,7 +2,6 @@
 
 utils::globalVariables(c(
   "Year", # <cc_multiple>
-  "state.abb", # <cc_specific>
   "Year", # <cc_specific>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>
@@ -62,6 +61,7 @@ utils::globalVariables(c(
   "modified", # <open_payments_update_ids>
   "distribution", # <open_payments_update_ids>
   "data", # <open_payments_update_ids>
+  "year", # <open_payments_update_ids>
   "identifier", # <open_payments_update_ids>
   "NPI", # <opt_out>
   "PARTB", # <order_refer>

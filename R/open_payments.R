@@ -123,18 +123,17 @@ open_payments <- function(recipient_npi          = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-
   # update distribution ids -------------------------------------------------
   ids <- open_payments_update_ids()
 
   id <- dplyr::case_when(
-    year == 2021 ~ ids$identifier[1],
-    year == 2020 ~ ids$identifier[2],
-    year == 2019 ~ ids$identifier[3],
-    year == 2018 ~ ids$identifier[4],
-    year == 2017 ~ ids$identifier[5],
-    year == 2016 ~ ids$identifier[6],
-    year == 2015 ~ ids$identifier[7])
+    year == ids$year[1] ~ ids$identifier[1],
+    year == ids$year[2] ~ ids$identifier[2],
+    year == ids$year[3] ~ ids$identifier[3],
+    year == ids$year[4] ~ ids$identifier[4],
+    year == ids$year[5] ~ ids$identifier[5],
+    year == ids$year[6] ~ ids$identifier[6],
+    year == ids$year[7] ~ ids$identifier[7])
 
   id_fmt <- paste0("[SELECT * FROM ", id, "]")
 
@@ -190,4 +189,37 @@ open_payments <- function(recipient_npi          = NULL,
                   teaching_hospital = dplyr::contains("teaching_hospital"))
   }
   return(results)
+}
+
+
+#' Update Open Payments API distribution IDs
+#'
+#' @description [open_payments_update_ids()] allows you to update the Open Payments
+#'    API's distribution IDs for each year's dataset.
+#'
+#' @return A [tibble][tibble::tibble-package] containing the updated ids.
+#'
+#' @examples
+#' open_payments_update_ids()
+#' @autoglobal
+#' @noRd
+open_payments_update_ids <- function() {
+
+  resp <- httr2::request("https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?show-reference-ids") |>
+    httr2::req_perform()
+
+  ids <- tibble::tibble(httr2::resp_body_json(resp,
+                                              check_type = FALSE, simplifyVector = TRUE))
+
+  ids <- ids |>
+    dplyr::select(title, modified, distribution) |>
+    tidyr::unnest(cols = distribution) |>
+    tidyr::unnest(cols = data, names_sep = "_") |>
+    dplyr::filter(stringr::str_detect(title, "General Payment")) |>
+    dplyr::arrange(dplyr::desc(title)) |>
+    dplyr::mutate(year = strex::str_before_first(title, " "), .before = 1) |>
+    dplyr::mutate(year = as.integer(year)) |>
+    dplyr::select(year, identifier)
+
+  return(ids)
 }

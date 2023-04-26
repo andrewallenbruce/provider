@@ -21,7 +21,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 cc_specific(
   year = 2018,
-  geo_level = c("National", "State", "County"),
+  geo_level = NULL,
   state_abb = NULL,
   county = NULL,
   fips = NULL,

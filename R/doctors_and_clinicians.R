@@ -92,7 +92,11 @@ doctors_and_clinicians <- function(npi           = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-  id <- "6fdc4567-4ae7-5d31-8adc-adeb7a629787"
+  id_res <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+
+  id <- id_res$distribution$identifier
 
   id_fmt <- paste0("[SELECT * FROM ", id, "]")
 

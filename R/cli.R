@@ -3,11 +3,14 @@
 #' @param npi Provider's npi
 #' @autoglobal
 #' @noRd
-noresults_cli <- function(apiname, npi = NULL) {
-    cli::cli_h1("{.api {apiname}}")
-    cli::cli_text("NPI: {.npi {npi}}")
-  cli::cli_alert_danger("Found 0 results")
+noresults_cli <- function(npi = NULL) {
+  cli::cli_alert_danger("NPI: {.npi {npi}}")
 }
+# noresults_cli <- function(apiname, npi = NULL) {
+#     cli::cli_h1("{.api {apiname}}")
+#     cli::cli_text("NPI: {.npi {npi}}")
+#   cli::cli_alert_danger("Found 0 results")
+# }
 
 #' results_cli ------------------------------------------------------------
 #' @param apiname Name of API

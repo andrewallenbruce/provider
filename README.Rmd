@@ -68,16 +68,13 @@ library(provider)
 
 The goal of `provider` is to make the experience of getting location data easier and more consistent across a wide variety of sources.
 
-This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key. The data tend to fall into (and sometimes between) one of two categories: informational/operational and analytical. It only gets interesting when you start to link them together.
+This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key.
 
 <br>
 
-## Information APIs
-
 ### NPPES NPI Registry
 
-
-```{r}
+```{r eval=FALSE, echo=FALSE}
 npi_list <- list(npi = c(1710983663,
                              1710975040,
                              1659781227,
@@ -98,14 +95,9 @@ npi_list <- list(npi = c(1710983663,
                              1720081441,
                              1558364273,
                              1801899513))
-```
 
-<br><br>
-
-```{r}
 npi_list |> nppes_npi_multi()
 ```
-
 
 ```{r}
 nppes_npi_new(npi = 1316405939)
@@ -115,476 +107,132 @@ nppes_npi_new(npi = 1316405939)
 
 ### CMS Physician Facility Affiliations
 
-```{r results='asis', echo=TRUE}
-provider::facility_affiliations(npi = 1003019563) |> 
-  dplyr::select(-record_number, -suff, -parent_ccn) |> 
-  gluedown::md_table()
+```{r}
+facility_affiliations(npi = 1003019563)
+facility_affiliations(facility_ccn = "060004")
+facility_affiliations(parent_ccn = 670055)
+facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
 ```
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::facility_affiliations(facility_ccn = "060004") |> 
-  dplyr::select(-record_number, -suff, -parent_ccn) |> 
-  head(n = 25) |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::facility_affiliations(parent_ccn = 670055) |> 
-  dplyr::select(-record_number, -suff, -parent_ccn) |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::facility_affiliations(first_name = "John", 
-                                last_name = "Hill", 
-                                facility_type = "Home Health Agency") |> 
-  dplyr::select(-record_number, -parent_ccn) |> 
-  gluedown::md_table()
-```
-
-
-<br><br>
 
 ### Hospital Enrollments
 
-```{r results='asis', echo=TRUE}
-provider::hospital_enrollment(facility_ccn = "060004") |> 
-  tidyr::unite("address", address_line_1:address_line_2, 
-               remove = TRUE, na.rm = TRUE, sep = " ") |> 
-  dplyr::mutate(address = campfin::normal_address(address),
-                zip_code = campfin::normal_zip(zip_code)) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
+```{r}
+hospital_enrollment(facility_ccn = "060004")
 ```
 
-
-<br><br>
 
 ### CMS Doctors and Clinicians National File
 
 ```{r}
-dr_clin <- provider::doctors_and_clinicians(npi = 1407263999) |> 
-  dplyr::select(!c(record_number, 
-                   suff, 
-                   cred, 
-                   sec_spec_1:sec_spec_all, 
-                   ln_2_sprs, adrs_id)) |> 
-  tidyr::unite("address", 
-               adr_ln_1:adr_ln_2, 
-               remove = TRUE, 
-               na.rm = TRUE, 
-               sep = " ") |> 
-  dplyr::mutate(phn_numbr = campfin::normal_phone(phn_numbr),
-                zip = campfin::normal_zip(zip),
-                address = campfin::normal_address(address))
-
-dr_clin |> dplyr::glimpse()
+doctors_and_clinicians(npi = 1407263999)
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", grad_year = 2003, state = "FL")
 ```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-dr_clin |> 
-  dplyr::slice_head() |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-dr_clin |> 
-  dplyr::slice_tail() |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-# search by medical school and/or graduation year
-provider::doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
-                                 grad_year = 2003, 
-                                 state = "FL") |> 
-  gluedown::md_table()
-```
-
-
-<br><br>
-
 
 
 ### CMS Missing Contact Information
 
-```{r results='asis', echo=TRUE}
-provider::missing_information(npi = 1144224569) |> gluedown::md_table()
+```{r}
+missing_information(npi = 1144224569)
 ```
-
-<br><br>
 
 ### Medicare Order and Referring
 
-```{r results='asis', echo=TRUE}
-provider::order_refer(npi = 1083879860) |> gluedown::md_table()
+```{r}
+order_refer(npi = 1083879860)
 ```
 
-<br><br>
 
 ### Medicare Opt-Out Affidavits
 
-```{r results='asis', echo=TRUE}
-provider::opt_out(last_name = "Aaron") |> 
-  tidyr::unite("address", first_line_street_address:second_line_street_address, 
-               remove = TRUE, 
-               na.rm = TRUE, 
-               sep = " ") |> 
-  dplyr::mutate(zip_code = campfin::normal_zip(zip_code),
-                address = campfin::normal_address(address)) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
+```{r}
+opt_out(last_name = "Aaron")
 ```
 
-<br><br>
 
 ### Medicare Provider and Supplier Taxonomy Crosswalk
 
-```{r results='asis', echo=TRUE}
-provider::taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency") |> gluedown::md_table()
+```{r}
+taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+taxonomy_crosswalk(specialty_code = "B4[14]")
 ```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::taxonomy_crosswalk(specialty_code = "B4[14]") |> gluedown::md_table()
-```
-
-<br><br>
-
 
 
 ### Medicare Fee-For-Service Public Provider Enrollment
 
-```{r results='asis', echo=TRUE}
-provider::provider_enrollment(npi = 1083879860) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
+```{r}
+provider_enrollment(npi = 1083879860)
 ```
 
-<br><br>
 
 ### Medicare Pending Initial Logging and Tracking
 
-<br>
-
-```{r results='asis', echo=TRUE}
-provider::pending_applications(npi = 1487003984, 
-                               type = "physician") |> 
-  gluedown::md_table()
+```{r}
+pending_applications(npi = 1487003984, type = "physician")
+pending_applications(npi = 1487003984, type = "non-physician")
+pending_applications(last_name = "Abbott", type = "non-physician")
+pending_applications(first_name = "John", type = "physician")
 ```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::pending_applications(npi = 1487003984, 
-                               type = "non-physician") |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
-provider::pending_applications(last_name = "Abbott", 
-                               type = "non-physician") |> 
-  gluedown::md_table()
-```
-<br><br>
-
-```{r results='asis', echo=TRUE}
-pending_applications(first_name = "John", 
-                     type = "physician") |> 
-  gluedown::md_table()
-```
-
-
-<br><br>
-
 
 ### Medicare Revalidation APIs
 
-   > Revalidation Due Date List
-
-```{r results='asis', echo=TRUE}
-date <- provider::revalidation_date(npi = 1710912209)
-date |> provider:::display_long() |> gluedown::md_table()
-```
-
-<br><br>
-
-   > Revalidation Reassignment List
-
 ```{r}
-reassign <- provider::revalidation_reassign(ind_npi = 1710912209)
-reassign |> dplyr::glimpse()
-```
-<br>
+# Revalidation Due Date List
+revalidation_date(npi = 1710912209)
 
-```{r results='asis', echo=TRUE}
-reassign |> 
-  dplyr::select(dplyr::contains("individual")) |> 
-  dplyr::slice_head() |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
+# Revalidation Reassignment List
+revalidation_reassign(ind_npi = 1710912209)
+
+# Revalidation Clinic Group Practice Reassignment
+revalidation_group(ind_npi = 1710912209)
 ```
 
-<br>
-
-```{r results='asis', echo=TRUE}
-reassign |> 
-  dplyr::select(dplyr::contains("group")) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-   > Revalidation Clinic Group Practice Reassignment
-
-```{r}
-group <- provider::revalidation_group(ind_npi = 1710912209)
-group |> dplyr::glimpse()
-```
-<br>
-
-```{r results='asis', echo=TRUE}
-group |> 
-  dplyr::select(dplyr::contains("individual")) |> 
-  dplyr::slice_head() |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-```{r results='asis', echo=TRUE}
-group |> 
-  dplyr::select(dplyr::contains("group")) |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br><br>
-
-## Analytical APIs
 
 ### CMS Open Payments API
 
 ```{r}
-op <- open_payments(recipient_npi = 1043218118)
-op |> dplyr::glimpse()
+open_payments(recipient_npi = 1043218118)
 ```
 
-<br>
-
-```{r results='asis', echo=TRUE}
-op |> 
-  tidyr::hoist(covered_recipient, 
-               recipient_npi = "covered_recipient_npi",
-               profile_id = "covered_recipient_profile_id",
-               first_name = "covered_recipient_first_name", 
-               last_name = "covered_recipient_last_name",
-               credential = "covered_recipient_primary_type_1",) |> 
-  tidyr::hoist(recipient_address, 
-               city = "recipient_city", 
-               state = "recipient_state") |> 
-  dplyr::select(program_year, 
-                recipient_npi, 
-                profile_id,
-                first_name,
-                last_name,
-                credential,
-                city,
-                state) |> 
-  dplyr::slice_head() |>
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-op_2 <- op |> 
-  tidyr::hoist(applicable_mfg_gpo, 
-               manufacturer_gpo_paying = "applicable_manufacturer_or_applicable_gpo_making_payment_name") |>
-  tidyr::hoist(associated_drug_device, 
-               type = "indicate_drug_or_biological_or_device_or_medical_supply_1",
-               therapeutic_category = "product_category_or_therapeutic_area_1",
-               name = "name_of_drug_or_biological_or_device_or_medical_supply_1") |> 
-  dplyr::select(payment_date = date_of_payment, 
-                manufacturer_gpo_paying,
-                type, 
-                name,
-                therapeutic_category,
-                payment_total = total_amount_of_payment_usdollars,
-                nature_of_payment = nature_of_payment_or_transfer_of_value) |> 
-  dplyr::arrange(payment_date)
-
-op_2 |> 
-  dplyr::group_by(manufacturer_gpo_paying, 
-                  nature_of_payment, 
-                  name) |> 
-  dplyr::summarise(n = dplyr::n(),
-                   payment_total = sum(payment_total), 
-                   .groups = "drop") |> 
-  dplyr::mutate(nature_of_payment = stringr::str_trunc(nature_of_payment, 20, "right")) |> 
-  dplyr::arrange(dplyr::desc(payment_total)) |> 
-  gluedown::md_table()
-```
-
-<br><br>
 
 ### Medicare Monthly Enrollment API
 
 ```{r}
-months <- tibble::enframe(month.name) |> 
-  dplyr::select(-name) |> 
-  dplyr::slice(1:7) |> 
-  tibble::deframe()
-
-bene <- purrr::map_dfr(months, ~beneficiary_enrollment(year = 2022, 
-                                                       geo_level = "State", 
-                                                       state_abb = "GA", 
-                                                       month = .x))
-
-bene |> dplyr::glimpse()
+beneficiary_enrollment(year = 2021, geo_level = "County", state_abb = "GA", month = NULL)
 ```
-<br>
-
-```{r results='asis', echo=TRUE}
-bene |> 
-  dplyr::select(state = bene_state_abrvtn,
-                month, 
-                tot_benes, 
-                orgnl_mdcr_benes, 
-                ma_and_oth_benes) |> 
-  dplyr::mutate(tot_change = tot_benes - dplyr::lag(tot_benes), .after = tot_benes) |>  
-  dplyr::mutate(orig_pct = round(orgnl_mdcr_benes / tot_benes, 2),
-                ma_other_pct = round(ma_and_oth_benes / tot_benes, 2)) |> 
-  gluedown::md_table()
-```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-bene |> 
-  dplyr::select(state = bene_state_abrvtn,
-                month, 
-                tot_benes, 
-                aged_tot_benes,
-                aged_esrd_benes,
-                aged_no_esrd_benes) |> 
-  dplyr::mutate(aged_pct_of_tot = round(aged_tot_benes / tot_benes, 2), .after = aged_tot_benes) |> 
-  dplyr::mutate(esrd_pct_of_aged = round(aged_esrd_benes / aged_tot_benes, 2), .after = aged_esrd_benes) |> 
-  gluedown::md_table()
-```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-bene |> 
-  dplyr::select(month, 
-                tot_benes,
-                tot_orig = orgnl_mdcr_benes, 
-                tot_ma_oth = ma_and_oth_benes,
-                ab_tot = a_b_tot_benes,
-                ab_orig = a_b_orgnl_mdcr_benes,
-                ab_ma_oth = a_b_ma_and_oth_benes) |> 
-  dplyr::mutate(tot_check = tot_orig + tot_ma_oth, .after = tot_benes) |> 
-  dplyr::mutate(ab_tot_check = ab_orig + ab_ma_oth, .after = ab_tot) |> 
-  dplyr::mutate(tot_ab_diff = tot_benes - ab_tot) |> 
-  gluedown::md_table()
-```
-
-<br><br>
 
 ### Medicare Physician & Other Practitioners APIs
 
-<br>
-
-> 1. by Provider and Service:
-
-<br>
-
 ```{r}
-pbs <- purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
-pbs |> dplyr::glimpse()
-```
+# by Provider and Service
+physician_by_service(npi = 1003000126)
 
-<br>
+# by Geography and Service
+physician_by_geography(geo_desc = "Maryland", year = 2020)
 
-```{r results='asis', echo=TRUE}
-pbs |> 
-  dplyr::select(rndrng_prvdr) |> 
-  tidyr::unnest(rndrng_prvdr) |> 
-  dplyr::slice_head() |> 
-  provider:::display_long() |> 
-  gluedown::md_table()
-```
-
-<br>
-
-```{r results='asis', echo=TRUE}
-pbs |> 
-  dplyr::select(year, totals_srvcs, hcpcs, averages) |> 
-  tidyr::unnest(c(totals_srvcs, hcpcs, averages)) |> 
-  dplyr::select(!c(hcpcs_desc:place_of_srvc, tot_bene_day_srvcs, avg_mdcr_stdzd_amt)) |> 
-  dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs)) |> 
-  gluedown::md_table()
+# by Provider
+physician_by_provider(npi = 1003000126, year = 2020)
 ```
 
 
-> 2. by Geography and Service API:
+```{r eval=FALSE, echo=FALSE}
+#purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x))
 
-<br>
-
-```{r results='asis', echo=TRUE}
 srvcs <- provider::physician_by_service(npi = 1003000126, year = 2020) |> 
          tidyr::unnest(cols = c(rndrng_prvdr, totals_srvcs, hcpcs, averages))
 
 ind <- srvcs |> 
   dplyr::mutate(level = "Individual") |> 
-  dplyr::select(year, 
-                level,
-                tot_benes:tot_srvcs, 
-                hcpcs_cd, 
+  dplyr::select(year, level, tot_benes:tot_srvcs, hcpcs_cd, 
                 avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
   dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs))
 
-ind |> gluedown::md_table()
-```
-
-<br>
-<br>
-
-```{r results='asis', echo=TRUE}
 state <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_desc = "Maryland", year = 2020, hcpcs_code = .x))
 
 state <- state |> 
   dplyr::filter(place_of_srvc == "F") |>  
-  dplyr::select(year, 
-                level = rndrng_prvdr_geo_lvl,
-                tot_benes:tot_srvcs,
-                hcpcs_cd, 
+  dplyr::select(year, level = rndrng_prvdr_geo_lvl, tot_benes:tot_srvcs, hcpcs_cd, 
                 avg_sbmtd_chrg:avg_mdcr_pymt_amt)
 
-state |> gluedown::md_table()
-```
-
-<br><br>
-
-```{r results='asis', echo=TRUE}
 nat <- purrr::map_dfr(srvcs$hcpcs_cd, ~physician_by_geography(geo_level = "National", year = 2020, hcpcs_code = .x))
 
 nat <- nat |> 
@@ -596,14 +244,6 @@ nat <- nat |>
                 avg_sbmtd_chrg:avg_mdcr_pymt_amt) |> 
   dplyr::arrange(dplyr::desc(year), dplyr::desc(tot_srvcs))
 
-nat |> gluedown::md_table()
-```
-
-<br>
-<br>
-
-
-```{r}
 ind_lng <- ind |> 
   dplyr::select(!c(year)) |> 
   tidyr::pivot_longer(!c(level, hcpcs_cd)) |> 
@@ -622,11 +262,7 @@ nat_lng <- nat |>
 join_2020 <- dplyr::full_join(ind_lng, st_lng, by = c("hcpcs_cd", "name", "level", "value")) |> 
   dplyr::full_join(nat_lng, by = c("hcpcs_cd", "name", "level", "value")) |> 
   dplyr::arrange(hcpcs_cd, name)
-```
 
-<br>
-
-```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_sbmtd_chrg") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -634,11 +270,7 @@ join_2020 |>
                      values_from = value) |> 
   dplyr::select(!c(name)) |> 
   gluedown::md_table()
-```
 
-<br>
-
-```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_mdcr_alowd_amt") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -646,11 +278,7 @@ join_2020 |>
                      values_from = value) |> 
   dplyr::select(!c(name)) |> 
   gluedown::md_table()
-```
 
-<br>
-
-```{r results='asis', echo=TRUE}
 join_2020 |> 
   dplyr::filter(name == "avg_mdcr_pymt_amt") |> 
   tidyr::pivot_wider(names_from = level, 
@@ -660,71 +288,35 @@ join_2020 |>
   gluedown::md_table()
 ```
 
-<br>
-<br>
-
-> 3. by Provider API:
-
-<br><br>
-
-```{r}
+```{r eval=FALSE, echo=FALSE}
 prov <- purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
-prov |> dplyr::glimpse()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(rndrng_npi, rndrng_prvdr) |> 
         tidyr::unnest(cols = c(rndrng_prvdr)) |> 
         dplyr::slice_head() |> 
         tidyr::pivot_longer(cols = dplyr::everything()) |> 
         gluedown::md_table()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(year, totals_srvcs) |> 
         tidyr::unnest(cols = c(totals_srvcs)) |> 
         gluedown::md_table()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(year, bene_age) |> 
         tidyr::unnest(cols = c(bene_age)) |> 
         gluedown::md_table()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(year, bene_sex, bene_status) |> 
         tidyr::unnest(cols = c(bene_sex, bene_status)) |> 
         gluedown::md_table()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(year, bene_race) |> 
         tidyr::unnest(cols = c(bene_race)) |> 
         gluedown::md_table()
-```
 
-<br><br>
-
-```{r results='asis', echo=TRUE}
 prov |> dplyr::select(year, bene_cc) |> 
      tidyr::unnest(cols = c(bene_cc)) |> 
      gluedown::md_table()
-```
 
-<br><br>
-
-```{r}
 prov <- purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
 
 prov_sex_count <- prov |> 
@@ -758,14 +350,8 @@ py1 + ggplot2::labs(title = "Fisher's *Iris* data set",
        x = "The x axis", y = "The y axis",
        caption = "Fisher's **Iris** data set") +
   tdcthemes::style_tdc(legend = TRUE) +
-  tdcthemes::scale_fill_tdc() 
-```
+  tdcthemes::scale_fill_tdc()
 
-
-
-<br>
-
-```{r}
 prov_age <- prov |> 
   dplyr::select(year, bene_age) |> 
   tidyr::unnest(cols = c(bene_age)) |> 
@@ -789,33 +375,16 @@ apyramid::age_pyramid(data = prov_age,
             )
 ```
 
-<br><br>
-
 ### Medicare Chronic Conditions APIs
 
-<br>
+```{r}
+# Multiple Chronic Conditions
+cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
 
- > Medicare Multiple Chronic Conditions API
-
-<br>
-
-```{r results='asis', echo=TRUE}
-mult <- cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
-mult |> dplyr::select(year, bene_age_lvl, bene_demo_desc:er_visits_per_1000_benes) |> gluedown::md_table()
+# Specific Chronic Conditions
+cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
 ```
 
-<br><br>
-
- > Medicare Specific Chronic Conditions API
-
-<br>
-
-```{r results='asis', echo=TRUE}
-spec <- cc_specific(year = 2007, geo_level = "County", state = "GA", county = "Lowndes", demo_level = "Race")
-spec |> dplyr::select(year, bene_age_lvl, bene_demo_desc:prvlnc) |> gluedown::md_table()
-```
-
-<br><br>
 
 ------------------------------------------------------------------------------
 

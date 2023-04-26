@@ -73,7 +73,7 @@ beneficiary_enrollment <- function(year        = 2021,
                                    clean_names = TRUE) {
 
   # match args ----------------------------------------------------
-  month <- rlang::arg_match(month, values = c("Year", month.name))
+  #month <- rlang::arg_match(month, values = c("Year", month.name))
   geo_level <- rlang::arg_match(geo_level)
   #state_abb <- rlang::arg_match(state_abb, values = state.abb)
 
@@ -109,13 +109,7 @@ beneficiary_enrollment <- function(year        = 2021,
 
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
-
-    noresults_cli(
-      "Medicare Monthly (Beneficiary) Enrollment API",
-      "https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment")
-
     return(tibble::tibble())
-
   } else {
 
     results <- tibble::tibble(httr2::resp_body_json(
@@ -127,11 +121,5 @@ beneficiary_enrollment <- function(year        = 2021,
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
     results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  results_cli(
-    "Medicare Monthly (Beneficiary) Enrollment API",
-    "https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment",
-    results = results)
-
   return(results)
 }

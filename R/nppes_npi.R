@@ -276,13 +276,9 @@ nppes_npi_new <- function(npi            = NULL,
 
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(request, "content-length")) == 0) {
-
-    noresults_cli("NPPES NPI Registry API", npi)
     return(tibble::tibble())
 
   } else if (as.numeric(res_cnt) == 0) {
-
-    noresults_cli("NPPES NPI Registry API", npi)
     return(tibble::tibble())
 
   } else {

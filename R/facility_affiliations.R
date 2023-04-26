@@ -75,7 +75,11 @@ facility_affiliations <- function(npi           = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-  id <- "789474cd-3d8d-5d83-b358-9b88f7d66df4"
+  id_res <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+
+  id <- id_res$distribution$identifier
 
   id_fmt <- paste0("[SELECT * FROM ", id, "]")
 

@@ -72,10 +72,7 @@ pending_applications <- function(npi         = NULL,
 
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
-
-    return(noresults_cli("Medicare Pending Initial Logging and Tracking API", npi))
-
-
+    return(cli::cli_alert_danger("NPI: {.npi {npi}}"))
   } else {
 
     results <- tibble::tibble(httr2::resp_body_json(response,

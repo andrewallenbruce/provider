@@ -55,8 +55,6 @@ missing_information <- function(npi         = NULL,
 
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
-
-    noresults_cli("CMS Public Reporting of Missing Digital Contact Information API", npi)
     return(tibble::tibble())
 
   } else {

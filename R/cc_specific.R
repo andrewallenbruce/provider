@@ -98,7 +98,7 @@
 #' @export
 
 cc_specific <- function(year         = 2018,
-                        geo_level    = c("National", "State", "County"),
+                        geo_level    = NULL,
                         state_abb    = NULL,
                         county       = NULL,
                         fips         = NULL,
@@ -109,8 +109,8 @@ cc_specific <- function(year         = 2018,
                         clean_names  = TRUE) {
 
   # match args ----------------------------------------------------
-  geo_level <- rlang::arg_match(geo_level)
-  state_abb <- rlang::arg_match(state_abb, values = state.abb)
+  #geo_level <- rlang::arg_match(geo_level)
+  #state_abb <- rlang::arg_match(state_abb, values = state.abb)
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Specific Chronic Conditions")
@@ -159,10 +159,6 @@ cc_specific <- function(year         = 2018,
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
 
-    noresults_cli(
-      "Medicare Specific Chronic Conditions API",
-      "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions")
-
     return(tibble::tibble())
 
   } else {
@@ -177,11 +173,6 @@ cc_specific <- function(year         = 2018,
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
     results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  results_cli(
-    "Medicare Specific Chronic Conditions API",
-    "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions",
-    results = results)
 
   return(results)
 }
