@@ -169,14 +169,13 @@ Registry.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi_new.html">nppes_npi_new</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
-<span><span class="co">#&gt;   npi       enume…¹ pract…² organ…³ organ…⁴ enumerat…⁵ last_upd…⁶ status taxon…⁷</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12856365… NPI-2   <span style="color: #BB0000;">NA</span>      MEDSTA… NO      2005-06-01 2022-07-21 A      &lt;df&gt;   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: identifiers &lt;list&gt;, endpoints &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;lgl&gt;, enumeration_age &lt;Duration&gt;, addresses &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official &lt;list&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​enumeration_type, ²​practice_locations, ³​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​organizational_subpart, ⁵​enumeration_date, ⁶​last_updated, ⁷​taxonomies</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi        enumeration_type practice_locations organization_name              </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1285636522 NPI-2            <span style="color: #BB0000;">NA</span>                 MEDSTAR GEORGETOWN MEDICAL CEN…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: organizational_subpart &lt;chr&gt;, enumeration_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_updated &lt;date&gt;, status &lt;chr&gt;, taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;lgl&gt;, other_names &lt;lgl&gt;, enumeration_age &lt;Duration&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addresses &lt;list&gt;, authorized_official &lt;list&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -192,16 +191,15 @@ NPI in one REST call, instead of sending NPI numbers one-by-one.</p>
 <code class="sourceCode R"><span><span class="va">list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1285636522</span>, <span class="fl">1730198755</span>, <span class="fl">1427145176</span><span class="op">)</span></span>
 <span><span class="va">list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi_new</span><span class="op">)</span> </span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 15</span></span></span>
-<span><span class="co">#&gt;   npi       enume…¹ pract…² organ…³ organ…⁴ enumerat…⁵ last_upd…⁶ status taxon…⁷</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 12856365… NPI-2   <span style="color: #BB0000;">NA</span>      MEDSTA… NO      2005-06-01 2022-07-21 A      &lt;df&gt;   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 17301987… NPI-2   <span style="color: #BB0000;">NA</span>      MEDSTA… NO      2006-08-07 2010-03-12 A      &lt;df&gt;   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 14271451… NPI-2   <span style="color: #BB0000;">NA</span>      MEDSTA… NO      2006-10-06 2012-10-09 A      &lt;df&gt;   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: identifiers &lt;list&gt;, endpoints &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;lgl&gt;, enumeration_age &lt;Duration&gt;, addresses &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official &lt;list&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​enumeration_type, ²​practice_locations, ³​organization_name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁴​organizational_subpart, ⁵​enumeration_date, ⁶​last_updated, ⁷​taxonomies</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi        enumeration_type practice_locations organization_name              </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1285636522 NPI-2            <span style="color: #BB0000;">NA</span>                 MEDSTAR GEORGETOWN MEDICAL CEN…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1730198755 NPI-2            <span style="color: #BB0000;">NA</span>                 MEDSTAR GEORGETOWN MEDICAL CEN…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1427145176 NPI-2            <span style="color: #BB0000;">NA</span>                 MEDSTAR - GEORGETOWN MEDICAL C…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: organizational_subpart &lt;chr&gt;, enumeration_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_updated &lt;date&gt;, status &lt;chr&gt;, taxonomies &lt;list&gt;, identifiers &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   endpoints &lt;lgl&gt;, other_names &lt;lgl&gt;, enumeration_age &lt;Duration&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   addresses &lt;list&gt;, authorized_official &lt;list&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
@@ -318,17 +316,17 @@ contains requested NPI number, status, and short status description.</p>
 <span>                                                replacement <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>NPI <span class="op">=</span> <span class="va">Npi</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in list2(...): object 'nppes_type_npi' not found</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_type_npi' not found</span></span>
 <span></span>
 <span><span class="va">optex_long</span> <span class="op">&lt;-</span> <span class="va">optex_final</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                              <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in dplyr::mutate(optex_final, dplyr::across(dplyr::everything(), : object 'optex_final' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_final' not found</span></span></code></pre></div>
 <p><br></p>
-<pre><code><span><span class="co">#&gt; Error in downloadthis::download_this(optex_long, output_name = "providercsv", : object 'optex_long' not found</span></span>
-<span><span class="co">#&gt; Error in downloadthis::download_this(optex_long, output_name = "providerxlsx", : object 'optex_long' not found</span></span></code></pre>
-<pre><code><span><span class="co">#&gt; Error in dplyr::group_vars(data): object 'optex_long' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span></code></pre>
 <hr>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -338,13 +336,13 @@ contains requested NPI number, status, and short status description.</p>
 <span><span class="co">#&gt; Error in provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL", : unused argument (prov_type_code = "00-85")</span></span>
 <span></span>
 <span><span class="va">eliz</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in terse::terse(eliz): object 'eliz' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'eliz' not found</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">nppes</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
 <span><span class="op">~</span><span class="va">fn</span>,         <span class="op">~</span><span class="va">params</span>,</span>
 <span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">eliz</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
 <span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">eliz</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in list2(...): object 'eliz' not found</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'eliz' not found</span></span>
 <span></span>
 <span><span class="va">eliz2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">nppes</span><span class="op">$</span><span class="va">fn</span>, <span class="va">nppes</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
 <span></span>
@@ -374,15 +372,27 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
 <span>                         <span class="op">}</span></span>
 <span>                     <span class="op">}</span></span>
 <span>                       <span class="op">)</span></span></code></pre></div>
-<div id="tyjjeibpej" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="odfcsvliye" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-html {
-  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+#odfcsvliye table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-#tyjjeibpej .gt_table {
+#odfcsvliye thead, #odfcsvliye tbody, #odfcsvliye tfoot, #odfcsvliye tr, #odfcsvliye td, #odfcsvliye th {
+  border-style: none;
+}
+
+#odfcsvliye p {
+  margin: 0;
+  padding: 0;
+}
+
+#odfcsvliye .gt_table {
   display: table;
   border-collapse: collapse;
+  line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
@@ -405,24 +415,12 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_heading {
-  background-color: #FDD4D0;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#tyjjeibpej .gt_caption {
+#odfcsvliye .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tyjjeibpej .gt_title {
+#odfcsvliye .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: bold;
@@ -434,25 +432,37 @@ html {
   border-bottom-width: 0;
 }
 
-#tyjjeibpej .gt_subtitle {
+#odfcsvliye .gt_subtitle {
   color: #333333;
   font-size: 14px;
   font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
+  padding-top: 3px;
+  padding-bottom: 5px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-color: #FFFFFF;
   border-top-width: 0;
 }
 
-#tyjjeibpej .gt_bottom_border {
+#odfcsvliye .gt_heading {
+  background-color: #FDD4D0;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#odfcsvliye .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_col_headings {
+#odfcsvliye .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #BEBEBE;
@@ -467,7 +477,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_col_heading {
+#odfcsvliye .gt_col_heading {
   color: #333333;
   background-color: #FDD4D0;
   font-size: 80%;
@@ -487,7 +497,7 @@ html {
   overflow-x: hidden;
 }
 
-#tyjjeibpej .gt_column_spanner_outer {
+#odfcsvliye .gt_column_spanner_outer {
   color: #333333;
   background-color: #FDD4D0;
   font-size: 80%;
@@ -499,15 +509,15 @@ html {
   padding-right: 4px;
 }
 
-#tyjjeibpej .gt_column_spanner_outer:first-child {
+#odfcsvliye .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tyjjeibpej .gt_column_spanner_outer:last-child {
+#odfcsvliye .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tyjjeibpej .gt_column_spanner {
+#odfcsvliye .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #440D0D;
@@ -519,7 +529,11 @@ html {
   width: 100%;
 }
 
-#tyjjeibpej .gt_group_heading {
+#odfcsvliye .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#odfcsvliye .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -545,7 +559,7 @@ html {
   text-align: left;
 }
 
-#tyjjeibpej .gt_empty_group_heading {
+#odfcsvliye .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -560,15 +574,15 @@ html {
   vertical-align: middle;
 }
 
-#tyjjeibpej .gt_from_md > :first-child {
+#odfcsvliye .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tyjjeibpej .gt_from_md > :last-child {
+#odfcsvliye .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tyjjeibpej .gt_row {
+#odfcsvliye .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -587,7 +601,7 @@ html {
   overflow-x: hidden;
 }
 
-#tyjjeibpej .gt_stub {
+#odfcsvliye .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -600,7 +614,7 @@ html {
   padding-right: 5px;
 }
 
-#tyjjeibpej .gt_stub_row_group {
+#odfcsvliye .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -614,11 +628,15 @@ html {
   vertical-align: top;
 }
 
-#tyjjeibpej .gt_row_group_first td {
+#odfcsvliye .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tyjjeibpej .gt_summary_row {
+#odfcsvliye .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#odfcsvliye .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -628,16 +646,16 @@ html {
   padding-right: 5px;
 }
 
-#tyjjeibpej .gt_first_summary_row {
+#odfcsvliye .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_first_summary_row.thick {
+#odfcsvliye .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tyjjeibpej .gt_last_summary_row {
+#odfcsvliye .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -647,7 +665,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_grand_summary_row {
+#odfcsvliye .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -657,7 +675,7 @@ html {
   padding-right: 5px;
 }
 
-#tyjjeibpej .gt_first_grand_summary_row {
+#odfcsvliye .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -667,11 +685,21 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_striped {
+#odfcsvliye .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#odfcsvliye .gt_striped {
   background-color: #FAFAFA;
 }
 
-#tyjjeibpej .gt_table_body {
+#odfcsvliye .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -680,7 +708,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_footnotes {
+#odfcsvliye .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -694,16 +722,16 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_footnote {
+#odfcsvliye .gt_footnote {
   margin: 0px;
   font-size: 12px;
-  padding-left: 3px;
-  padding-right: 3px;
+  padding-top: 3px;
+  padding-bottom: 3px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#tyjjeibpej .gt_sourcenotes {
+#odfcsvliye .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -717,7 +745,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#tyjjeibpej .gt_sourcenote {
+#odfcsvliye .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -725,80 +753,78 @@ html {
   padding-right: 5px;
 }
 
-#tyjjeibpej .gt_left {
+#odfcsvliye .gt_left {
   text-align: left;
 }
 
-#tyjjeibpej .gt_center {
+#odfcsvliye .gt_center {
   text-align: center;
 }
 
-#tyjjeibpej .gt_right {
+#odfcsvliye .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tyjjeibpej .gt_font_normal {
+#odfcsvliye .gt_font_normal {
   font-weight: normal;
 }
 
-#tyjjeibpej .gt_font_bold {
+#odfcsvliye .gt_font_bold {
   font-weight: bold;
 }
 
-#tyjjeibpej .gt_font_italic {
+#odfcsvliye .gt_font_italic {
   font-style: italic;
 }
 
-#tyjjeibpej .gt_super {
+#odfcsvliye .gt_super {
   font-size: 65%;
 }
 
-#tyjjeibpej .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
+#odfcsvliye .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
+  position: initial;
 }
 
-#tyjjeibpej .gt_asterisk {
+#odfcsvliye .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tyjjeibpej .gt_indent_1 {
+#odfcsvliye .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tyjjeibpej .gt_indent_2 {
+#odfcsvliye .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tyjjeibpej .gt_indent_3 {
+#odfcsvliye .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tyjjeibpej .gt_indent_4 {
+#odfcsvliye .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tyjjeibpej .gt_indent_5 {
+#odfcsvliye .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
-<table class="table gt_table">
-<thead class="gt_header">
-<tr>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
 <td colspan="7" class="gt_heading gt_title gt_font_normal" style>Provider Results for NPI 1083879860</td>
     </tr>
-<tr>
+<tr class="gt_heading">
 <td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>
 <div style="display:inline;vertical-align: top;">Report generated with</div>
 <div style="display:inline;margin-left:10px"><img src="https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png" style="height:25px;"></div>
 </td>
     </tr>
-</thead>
-<thead class="gt_col_headings"><tr>
+<tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last_name">last_name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first_name">first_name</th>
@@ -806,15 +832,16 @@ html {
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dme">dme</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="hha">hha</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="pmd">pmd</th>
-    </tr></thead>
+    </tr>
+</thead>
 <tbody class="gt_table_body"><tr>
 <td headers="npi" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">1083879860</td>
 <td headers="last_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">AARON</td>
 <td headers="first_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">CHRISTOPHER</td>
-<td headers="partb" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="dme" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="hha" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="pmd" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="partb" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
 </tr></tbody>
 </table>
 </div>
@@ -862,7 +889,7 @@ results, it’s time to update their NPPES contact information:</p>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA              </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">943033960       </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">T               </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2023-02-16      </span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2023-03-16      </span></span></span></code></pre></div>
 <p><br></p>
 <p>Using <code><a href="../reference/physician_by_service.html">physician_by_service()</a></code>, you can access
 <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and
@@ -886,9 +913,9 @@ long-term analysis of a provider’s Medicare data:</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
 <span>    Beneficiaries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_benes</span><span class="op">)</span>,</span>
 <span>    Services <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_srvcs</span><span class="op">)</span>,</span>
-<span>    Avg_Billed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_sbmtd_chrg</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>    Avg_Allowed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_alowd_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>    Avg_Payment <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    Avg_Billed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu">round_half_up</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_sbmtd_chrg</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    Avg_Allowed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu">round_half_up</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_alowd_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>    Avg_Payment <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu">round_half_up</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>HCPCS <span class="op">=</span> <span class="va">hcpcs_cd</span>, </span>
 <span>                Description <span class="op">=</span> <span class="va">hcpcs_desc</span>,</span>

@@ -377,196 +377,196 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 73 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9248756  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020         9248761  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020         9248766  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020         9248771  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020         9248776  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020         10170581 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020         10170586 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020         10170591 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         10170596 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         10170601 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 63 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9248756       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020         9248761       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020         9248766       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020         9248771       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020         9248776       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020         10170581      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020         10170586      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020         10170591      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         10170596      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         10170601      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 63 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         14968401 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2019         14968416 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2019         14968421 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2019         14968426 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2019         14968431 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2019         14968436 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2019         14968441 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2019         14968446 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         14968451 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         14968456 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      92058   104321…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         14968401      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2019         14968416      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2019         14968421      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2019         14968426      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2019         14968431      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2019         14968436      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2019         14968441      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2019         14968446      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         14968451      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         14968456      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 58 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_city <span class="op">=</span> <span class="st">"Jacksonville"</span>, recipient_state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         25646    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      107229… 158803…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         25761    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      104420… 119407…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         34446    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      106739… 188190…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         78726    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      108691… 172029…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         80201    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109312… 146769…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         83016    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      106190… 170001…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         83021    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      106190… 170001…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         83196    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      104903… 182138…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         83201    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      104903… 182138…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         83391    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      112256… 189112…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type                </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         25646         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         25761         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         34446         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         78726         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         80201         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         83016         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         83021         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         83196         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         83201         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         83391         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, offset <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55248441 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      131198  190200…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         55248451 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      4221736 157897…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         55248461 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         55248471 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         55248486 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         55248496 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         55248501 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         55248511 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      346385  162918…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55248521 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      168577  172021…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55248536 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      168577  172021…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55248441      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         55248451      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         55248461      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         55248471      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         55248486      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         55248496      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         55248501      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         55248511      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55248521      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55248536      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, offset <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55253511 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         55253526 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         55253536 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         55253556 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         55253566 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         55253571 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         55253581 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         55253591 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55253606 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55253616 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      237718  123528…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55253511      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         55253526      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         55253536      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         55253556      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         55253566      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         55253571      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         55253581      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         55253591      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55253606      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55253616      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9340966  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      583485  174035…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020         9341906  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      141692  111401…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020         9240916  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      962954  106341…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020         9298051  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      1319821 154853…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020         9270451  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      68761   152803…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020         9240931  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      279929  118463…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020         9325281  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      1337900 168996…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020         9276031  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      269961  196249…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         9243621  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      28253   163916…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         9248981  UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      243626  136641…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9340966       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020         9341906       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020         9240916       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020         9298051       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020         9270451       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020         9240931       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020         9325281       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020         9276031       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         9243621       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         9248981       UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="st">"100000151589"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         45257226 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      20507   146741…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2019         45257196 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      91550   102312…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2019         45257221 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      91550   102312…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2019         45257211 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      184244  107350…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2019         45257191 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      187783  115436…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2019         45257186 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      18987   140799…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2019         45257216 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      1388803 114459…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2019         45257181 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      26501   157865…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         45257206 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      414454  179074…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         45257201 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      22214   148775…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 490 more rows, 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         45257226      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2019         45257196      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2019         45257221      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2019         45257211      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2019         45257191      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2019         45257186      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2019         45257216      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2019         45257181      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         45257206      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         45257201      UNCHANGED   Covered Recipient Physician</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1346540572</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 92</span></span></span>
-<span><span class="co">#&gt;    program_year record…¹ chang…² cover…³ teach…⁴ teach…⁵ teach…⁶ cover…⁷ cover…⁸</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         11156    UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         16015026 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         17481356 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         17481371 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         17481376 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         17481381 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         17481386 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         17481391 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         17481396 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         17481401 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 2021         17481411 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 2021         17481416 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 2021         32843216 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 2021         37626276 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 2021         37626281 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 2021         37626286 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2021         37873006 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2021         40456961 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2021         56314646 UNCHAN… Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 2021         56881486 CHANGED Covere… <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      <span style="color: #BB0000;">NA</span>      109827… 134654…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 83 more variables: covered_recipient_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type                </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         11156         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021         16015026      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021         17481356      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021         17481371      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021         17481376      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021         17481381      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021         17481386      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021         17481391      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         17481396      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         17481401      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 2021         17481411      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 2021         17481416      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 2021         32843216      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 2021         37626276      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 2021         37626281      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 2021         37626286      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 2021         37873006      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2021         40456961      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2021         56314646      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 2021         56881486      CHANGED     Covered Recipient Non-Physician Pract…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, recipient_province &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="related-links">Related Links<a class="anchor" aria-label="anchor" href="#related-links"></a>

@@ -166,44 +166,40 @@ Ownership System (PECOS).</p><div class="section">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    taxonomy_code taxonomy_desc                                   speci…¹ speci…²</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 261QR0400X    Ambulatory Health Care Facilities/Clinic/Cente… B4[14]  Rehabi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 335U00000X    Suppliers/Organ Procurement Organization        B4[14]  Organ …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 261QM0801X    Ambulatory Health Care Facilities/Clinic/Cente… B4[14]  Commun…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 261QR0401X    Ambulatory Health Care Facilities/Clinic/Cente… B4[14]  Compre…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 261QE0700X    Ambulatory Health Care Facilities/End-Stage Re… B4[14]  End-St…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 261QF0400X    Ambulatory Health Care Facilities/Federally Qu… B4[14]  Federa…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 251G00000X    Agencies/Hospice Care Community Based           B4[14]  Hospice</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 291U00000X    Laboratories/Clinical Medical Laboratory        B4[14]  Histoc…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 291900000X    Laboratories/Military Clinical Medical Laborat… B4[14]  <span style="color: #BB0000;">NA</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 261QR0400X    Ambulatory Health Care Facilities/Clinic/Cente… B4[14]  Outpat…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 315D00000X    Nursing &amp; Custodial Care Facilities/Hospice In… B4[14]  Rehabi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 282J00000X    Hospitals/Religious Non-medical Health Care In… B4[14]  Religi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 261QR1300X    Ambulatory Health Care Facilities/Clinic/Cente… B4[14]  Rural …</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​specialty_code, ²​specialty_desc</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    taxonomy_code taxonomy_desc                     specialty_code specialty_desc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Rehabilitatio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 335U00000X    Suppliers/Organ Procurement Orga… B4[14]         Organ Procure…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 261QM0801X    Ambulatory Health Care Facilitie… B4[14]         Community Men…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 261QR0401X    Ambulatory Health Care Facilitie… B4[14]         Comprehensive…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 261QE0700X    Ambulatory Health Care Facilitie… B4[14]         End-Stage Ren…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 261QF0400X    Ambulatory Health Care Facilitie… B4[14]         Federally Qua…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 251G00000X    Agencies/Hospice Care Community … B4[14]         Hospice       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 291U00000X    Laboratories/Clinical Medical La… B4[14]         Histocompatib…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 291900000X    Laboratories/Military Clinical M… B4[14]         <span style="color: #BB0000;">NA</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Outpatient Ph…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 315D00000X    Nursing &amp; Custodial Care Facilit… B4[14]         Rehabilitatio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 282J00000X    Hospitals/Religious Non-medical … B4[14]         Religious Non…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 261QR1300X    Ambulatory Health Care Facilitie… B4[14]         Rural Health …</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                                    speci…¹ speci…²</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 261QR0400X    Ambulatory Health Care Facilities/Clinic/Center… B4[14]  Rehabi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 315D00000X    Nursing &amp; Custodial Care Facilities/Hospice Inp… B4[14]  Rehabi…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​specialty_code, ²​specialty_desc</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 261QR0400X    Ambulatory Health Care Facilities… B4[14]         Rehabilitatio…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 315D00000X    Nursing &amp; Custodial Care Faciliti… B4[14]         Rehabilitatio…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                                    speci…¹ speci…²</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2086S0102X    Allopathic &amp; Osteopathic Physicians/Surgery/Sur… 2       Physic…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable names ¹​specialty_code, ²​specialty_desc</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2086S0102X    Allopathic &amp; Osteopathic Physicia… 2              Physician/Gen…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_desc <span class="op">=</span> <span class="st">"Agencies/Hospice Care Community Based"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                         specialty_code specialty…¹</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 251G00000X    Agencies/Hospice Care Community Based B4[14]         Hospice    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with abbreviated variable name ¹​specialty_desc</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 251G00000X    Agencies/Hospice Care Community B… B4[14]         Hospice       </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
