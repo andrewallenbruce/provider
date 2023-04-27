@@ -170,45 +170,26 @@ get up to a maximum of 1,200 records over six requests.</p>
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">addresses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;   country_code  country_name address_purpose address_type</span></span>
-<span><span class="co">#&gt; 1           US United States        LOCATION          DOM</span></span>
-<span><span class="co">#&gt; 2           US United States         MAILING          DOM</span></span>
-<span><span class="co">#&gt;                address_1      city state postal_code telephone_number</span></span>
-<span><span class="co">#&gt; 1 5353 MISSION CENTER RD SAN DIEGO    CA   921081306     619-497-2836</span></span>
-<span><span class="co">#&gt; 2  1830 MARKET ST APT 19 SAN DIEGO    CA   921022851             &lt;NA&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">practiceLocations</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;   country_code  country_name address_purpose address_type      address_1</span></span>
-<span><span class="co">#&gt; 1           US United States        LOCATION          DOM 7440 RONSON RD</span></span>
-<span><span class="co">#&gt;        city state postal_code telephone_number</span></span>
-<span><span class="co">#&gt; 1 SAN DIEGO    CA   921111508     347-840-3256</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">taxonomies</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt;         code taxonomy_group               desc state license primary</span></span>
-<span><span class="co">#&gt; 1 225100000X                Physical Therapist    CA  295997    TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">endpoints</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; list()</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">other_names</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="co"># ONLY NPI-2</span></span>
-<span><span class="co">#&gt; list()</span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">basic</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">basic</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">addresses</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">$</span><span class="va">addresses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html" class="external-link">tibble</a></span><span class="op">(</span><span class="va">basic</span>, </span>
 <span>               <span class="va">addresses</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 19</span></span></span>
-<span><span class="co">#&gt;   basic_first_name basic_last_name basic_credential basic_sole_proprietor</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> DOMINICK         LOUDA           DPT              NO                   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> DOMINICK         LOUDA           DPT              NO                   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: basic_gender &lt;chr&gt;, basic_enumeration_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   basic_last_updated &lt;chr&gt;, basic_certification_date &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   basic_status &lt;chr&gt;, basic_name_prefix &lt;chr&gt;, country_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country_name &lt;chr&gt;, address_purpose &lt;chr&gt;, address_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address_1 &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, postal_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   telephone_number &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 0</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>This returns a <code>tibble</code> containing the NPI that was
 searched for (<code>search</code>), the <code>datetime</code> of the
@@ -275,79 +256,87 @@ NPPES by providers.</p>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome enumeration_type number     name       city  state</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-04-26 <span style="color: #949494;">05:51:31</span> results NPI-1            1528060837 JOHN SARG… ROCK… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: addresses &lt;list&gt;, practiceLocations &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 23</span></span></span>
+<span><span class="co">#&gt;   npi    enumeration_type enumeration_date enumeration_duration     last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 15280… NPI-1            2005-06-01       564969600s (~17.9 years) 2007-07-09  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### City, state, country</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 16</span></span></span>
-<span><span class="co">#&gt;    datetime            outcome enumeration_type number     name      city  state</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1881942746 1 ALLIAN… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1598140279 100 PERC… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1801411459 100 PERC… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1639793664 100 PERC… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1497497986 1230 ENT… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1487827390 14TH STR… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1265550859 180 RPM … ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1134508666 1ST ALLI… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1598279655 1ST CHOI… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-04-26 <span style="color: #949494;">05:51:32</span> results NPI-2            1356959407 2 NEXTLE… ATLA… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: addresses &lt;list&gt;, practiceLocations &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, epochs &lt;list&gt;, authorized_official &lt;list&gt;, basic &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 199 × 26</span></span></span>
+<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1881942746 NPI-2            2012-08-27       336528000s (~10.66 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1598140279 NPI-2            2015-07-23       244944000s (~7.76 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1801411459 NPI-2            2020-06-10       90806400s (~2.88 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1639793664 NPI-2            2020-06-05       91238400s (~2.89 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1497497986 NPI-2            2022-04-13       32745600s (~1.04 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1487827390 NPI-2            2008-04-11       474681600s (~15.04 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265550859 NPI-2            2007-03-26       507686400s (~16.09 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1134508666 NPI-2            2015-05-29       249696000s (~7.91 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1598279655 NPI-2            2017-11-28       170726400s (~5.41 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1356959407 NPI-2            2020-07-15       87782400s (~2.78 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 189 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### First name, city, state</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span>
 <span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 15</span></span></span>
-<span><span class="co">#&gt;    datetime            outcome enumeration_type number     name      city  state</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1700934569 JOHN ADK… BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1396825477 JOHN ADO… BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1033595855 JON ALGER BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1023436839 JOHN ALL… BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1265870406 JOHN AND… MIDD… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1891754826 JOHN AND… BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1437187960 JOHN ANT… BALT… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1750830170 JOHN BAC… ROSE… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1811336142 JONATHAN… UPPE… MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2023-04-26 <span style="color: #949494;">05:51:33</span> results NPI-1            1871804443 JONATHAN… BALT… MD   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 24</span></span></span>
+<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1700934569 NPI-1            2007-01-08       514339200s (~16.3 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1396825477 NPI-1            2006-10-16       521596800s (~16.53 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1033595855 NPI-1            2015-08-04       243907200s (~7.73 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1023436839 NPI-1            2014-03-31       286329600s (~9.07 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1265870406 NPI-1            2013-06-10       311731200s (~9.88 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891754826 NPI-1            2006-03-20       539740800s (~17.1 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1437187960 NPI-1            2006-06-30       530928000s (~16.82 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1750830170 NPI-1            2016-09-27       207619200s (~6.58 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1811336142 NPI-1            2013-06-20       310867200s (~9.85 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1871804443 NPI-1            2010-06-29       404784000s (~12.83 years)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: addresses &lt;list&gt;, practiceLocations &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome enumeration_type number     name       city  state</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-04-26 <span style="color: #949494;">05:51:34</span> results NPI-2            1336413418 LUMINUS D… TIFT… GA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: addresses &lt;list&gt;, practiceLocations &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, epochs &lt;list&gt;, authorized_official &lt;list&gt;, basic &lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 18</span></span></span>
+<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336… NPI-2            2012-03-07       351475200s (~11.14 years) 2020-01-07  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
-<span><span class="co">#&gt;   datetime            outcome enumeration_type number     name       city  state</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-04-26 <span style="color: #949494;">05:51:35</span> results NPI-1            1710975040 JOHN HERR… OLNEY MD   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: addresses &lt;list&gt;, practiceLocations &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   other_names &lt;list&gt;, epochs &lt;list&gt;, basic &lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 23</span></span></span>
+<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710… NPI-1            2005-10-11       553564800s (~17.54 years) 2007-07-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::filter()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `enumeration_type == "NPI-2"`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'enumeration_type' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 0</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### List of NPIs</span></span>
 <span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span>
@@ -361,12 +350,9 @@ NPPES by providers.</p>
 <span><span class="va">npi_list</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_split.html" class="external-link">group_split</a></span><span class="op">(</span><span class="va">outcome</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 2.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::filter()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `enumeration_type == "NPI-2"`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'enumeration_type' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `group_by()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must group by variables found in `.data`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `outcome` is not found.</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### Data frame of NPIs</span></span>
 <span><span class="va">npi_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1710983663</span>,</span>
@@ -379,12 +365,21 @@ NPPES by providers.</p>
 <span><span class="va">npi_df</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::filter()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `enumeration_type == "NPI-2"`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'enumeration_type' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 24</span></span></span>
+<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… NPI-1            2007-05-22       502761600s (~15.93 years) 2017-04-28  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1316… NPI-1            2019-03-04       130896000s (~4.15 years)  2023-04-06  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1720… NPI-1            2010-07-29       402192000s (~12.74 years) 2021-01-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1518… NPI-1            2007-04-19       505612800s (~16.02 years) 2020-10-27  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1922… NPI-1            2006-05-04       535852800s (~16.98 years) 2008-02-13  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1083… NPI-1            2008-07-22       465868800s (~14.76 years) 2021-03-25  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   certification_date &lt;date&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">###Tribble example</span></span>
 <span><span class="va">tribble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
@@ -396,12 +391,26 @@ NPPES by providers.</p>
 <span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map2()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 3.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `dplyr::filter()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `enumeration_type == "NPI-2"`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'enumeration_type' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 400 × 26</span></span></span>
+<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1336413418 NPI-2            2012-03-07       351475200s (~11.14 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1710975040 NPI-1            2005-10-11       553564800s (~17.54 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1700934569 NPI-1            2007-01-08       514339200s (~16.3 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396825477 NPI-1            2006-10-16       521596800s (~16.53 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1033595855 NPI-1            2015-08-04       243907200s (~7.73 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023436839 NPI-1            2014-03-31       286329600s (~9.07 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265870406 NPI-1            2013-06-10       311731200s (~9.88 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891754826 NPI-1            2006-03-20       539740800s (~17.1 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1437187960 NPI-1            2006-06-30       530928000s (~16.82 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750830170 NPI-1            2016-09-27       207619200s (~6.58 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 390 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
