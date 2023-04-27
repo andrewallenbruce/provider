@@ -19,6 +19,7 @@ Imports:
     cli,
     dplyr,
     httr2,
+    janitor,
     lubridate,
     purrr,
     rlang,

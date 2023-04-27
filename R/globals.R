@@ -20,28 +20,32 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
-  "data_lists", # <nppes_npi>
-  "outcome", # <nppes_npi>
-  "description", # <nppes_npi>
-  "field", # <nppes_npi>
+  "data_lists", # <nppes_npi_old>
+  "outcome", # <nppes_npi_old>
+  "description", # <nppes_npi_old>
+  "field", # <nppes_npi_old>
+  "number", # <nppes_npi_old>
+  "created_epoch", # <nppes_npi_old>
+  "last_updated_epoch", # <nppes_npi_old>
+  "enumeration_type", # <nppes_npi_old>
+  "basic", # <nppes_npi_old>
+  "basic_organization_name", # <nppes_npi_old>
+  "addresses", # <nppes_npi_old>
+  "basic_first_name", # <nppes_npi_old>
+  "basic_last_name", # <nppes_npi_old>
   "number", # <nppes_npi>
-  "created_epoch", # <nppes_npi>
-  "last_updated_epoch", # <nppes_npi>
   "enumeration_type", # <nppes_npi>
   "basic", # <nppes_npi>
-  "basic_organization_name", # <nppes_npi>
   "addresses", # <nppes_npi>
-  "basic_first_name", # <nppes_npi>
-  "basic_last_name", # <nppes_npi>
-  "number", # <nppes_npi_new>
-  "basic", # <nppes_npi_new>
-  "addresses", # <nppes_npi_new>
-  "practiceLocations", # <nppes_npi_new>
-  "enumeration_date", # <nppes_npi_new>
-  "last_updated", # <nppes_npi_new>
-  "address_purpose", # <nppes_npi_new>
-  "npi_location", # <nppes_npi_new>
-  "addresses.y", # <nppes_npi_new>
+  "taxonomies", # <nppes_npi>
+  "enumeration_date", # <nppes_npi>
+  "address_purpose", # <nppes_npi>
+  "country_name", # <nppes_npi>
+  "telephone_number", # <nppes_npi>
+  "postal_code", # <nppes_npi>
+  "taxonomy", # <nppes_npi>
+  "taxonomy_primary", # <nppes_npi>
+  "taxonomy_taxonomy_group", # <nppes_npi>
   "program_year", # <open_payments>
   "contextual_information", # <open_payments>
   "number_of_payments_included_in_total_amount", # <open_payments>

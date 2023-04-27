@@ -90,17 +90,59 @@ user account or API key.
 ### NPPES NPI Registry
 
 ``` r
-nppes_npi_new(npi = 1316405939)
+nppes_npi(npi = 1316405939)
 ```
 
-    #> # A tibble: 1 × 19
-    #>   npi       enumeration_type practice_locations first_name last_name middle_name
-    #>   <chr>     <chr>            <lgl>              <chr>      <chr>     <chr>      
-    #> 1 13164059… NPI-1            NA                 JAENA      ABARZUA   KAE        
-    #> # ℹ 13 more variables: credential <chr>, sole_proprietor <chr>, gender <chr>,
-    #> #   enumeration_date <date>, last_updated <date>, certification_date <dttm>,
-    #> #   status <chr>, taxonomies <list>, identifiers <lgl>, endpoints <lgl>,
-    #> #   other_names <list>, enumeration_age <Duration>, addresses <list>
+    #> # A tibble: 1 × 24
+    #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
+    #>   <chr>  <chr>            <date>           <Duration>               <date>      
+    #> 1 13164… NPI-1            2019-03-04       130896000s (~4.15 years) 2023-04-06  
+    #> # ℹ 19 more variables: certification_date <date>, status <chr>,
+    #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
+    #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
+    #> #   city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
+    #> #   fax_number <chr>, taxonomy_code <chr>, taxonomy_desc <chr>,
+    #> #   taxonomy_state <chr>, taxonomy_license <chr>
+
+``` r
+nppes <- c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
+           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
+           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
+           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
+           1316405939) |> 
+  purrr::map(nppes_npi) |>
+  dplyr::bind_rows()
+
+nppes
+```
+
+    #> # A tibble: 17 × 26
+    #>    npi        enumeration_type enumeration_date enumeration_duration     
+    #>    <chr>      <chr>            <date>           <Duration>               
+    #>  1 1710975040 NPI-1            2005-10-11       553564800s (~17.54 years)
+    #>  2 1336413418 NPI-2            2012-03-07       351475200s (~11.14 years)
+    #>  3 1003026055 NPI-1            2007-05-22       502761600s (~15.93 years)
+    #>  4 1316405939 NPI-1            2019-03-04       130896000s (~4.15 years) 
+    #>  5 1720392988 NPI-1            2010-07-29       402192000s (~12.74 years)
+    #>  6 1518184605 NPI-1            2007-04-19       505612800s (~16.02 years)
+    #>  7 1922056829 NPI-1            2006-05-04       535852800s (~16.98 years)
+    #>  8 1083879860 NPI-1            2008-07-22       465868800s (~14.76 years)
+    #>  9 1346243805 NPI-1            2005-05-27       565401600s (~17.92 years)
+    #> 10 1679576722 NPI-1            2005-05-23       565747200s (~17.93 years)
+    #> 11 1093718892 NPI-1            2005-05-24       565660800s (~17.92 years)
+    #> 12 1477556405 NPI-1            2005-05-23       565747200s (~17.93 years)
+    #> 13 1770586539 NPI-1            2005-05-24       565660800s (~17.92 years)
+    #> 14 1871596692 NPI-1            2005-05-24       565660800s (~17.92 years)
+    #> 15 1174526925 NPI-1            2005-05-24       565660800s (~17.92 years)
+    #> 16 1801899513 NPI-1            2005-05-27       565401600s (~17.92 years)
+    #> 17 1316405939 NPI-1            2019-03-04       130896000s (~4.15 years) 
+    #> # ℹ 22 more variables: last_updated <date>, status <chr>, first_name <chr>,
+    #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
+    #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
+    #> #   state <chr>, zipcode <chr>, phone_number <chr>, fax_number <chr>,
+    #> #   taxonomy_code <chr>, taxonomy_desc <chr>, taxonomy_state <chr>,
+    #> #   taxonomy_license <chr>, certification_date <date>, organization_name <chr>,
+    #> #   organizational_subpart <chr>
 
 ### CMS Physician Facility Affiliations
 
@@ -209,7 +251,9 @@ doctors_and_clinicians(npi = 1407263999)
     #> #   grp_assgn <chr>, adrs_id <chr>
 
 ``` r
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", grad_year = 2003, state = "FL")
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2003, 
+                       state = "FL")
 ```
 
     #> # A tibble: 7 × 32
@@ -410,10 +454,11 @@ revalidation_group(ind_npi = 1710912209)
 ### CMS Open Payments API
 
 ``` r
-open_payments(recipient_npi = 1043218118)
+open_payments(recipient_npi = 1043218118) |> 
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
-    #> # A tibble: 92 × 92
+    #> # A tibble: 92 × 52
     #>    program_year record_number change_type covered_recipient_type     
     #>    <chr>        <chr>         <chr>       <chr>                      
     #>  1 2021         1             UNCHANGED   Covered Recipient Physician
@@ -427,12 +472,12 @@ open_payments(recipient_npi = 1043218118)
     #>  9 2021         4624246       UNCHANGED   Covered Recipient Physician
     #> 10 2021         4766366       UNCHANGED   Covered Recipient Physician
     #> # ℹ 82 more rows
-    #> # ℹ 88 more variables: teaching_hospital_ccn <chr>, teaching_hospital_id <chr>,
-    #> #   teaching_hospital_name <chr>, covered_recipient_profile_id <chr>,
+    #> # ℹ 48 more variables: covered_recipient_profile_id <chr>,
     #> #   covered_recipient_npi <chr>, covered_recipient_first_name <chr>,
-    #> #   covered_recipient_middle_name <chr>, covered_recipient_last_name <chr>,
-    #> #   covered_recipient_name_suffix <chr>,
-    #> #   recipient_primary_business_street_address_line1 <chr>, …
+    #> #   covered_recipient_last_name <chr>,
+    #> #   recipient_primary_business_street_address_line1 <chr>,
+    #> #   recipient_city <chr>, recipient_state <chr>, recipient_zip_code <chr>,
+    #> #   recipient_country <chr>, covered_recipient_primary_type_1 <chr>, …
 
 ### Medicare Monthly Enrollment API
 

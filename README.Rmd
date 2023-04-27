@@ -74,33 +74,21 @@ This package is primarily focused on accessing public API data that can be linke
 
 ### NPPES NPI Registry
 
-```{r eval=FALSE, echo=FALSE}
-npi_list <- list(npi = c(1710983663,
-                             1710975040,
-                             1659781227,
-                             1336413418,
-                             1003026055,
-                             1316405939,
-                             1720392988,
-                             1518184605,
-                             1922056829,
-                             1083879860,
-                             1346243805,
-                             1679576722,
-                             1093718892,
-                             1477556405,
-                             1770586539,
-                             1871596692,
-                             1174526925, 
-                             1720081441,
-                             1558364273,
-                             1801899513))
-
-npi_list |> nppes_npi_multi()
+```{r}
+nppes_npi(npi = 1316405939)
 ```
 
+
 ```{r}
-nppes_npi_new(npi = 1316405939)
+nppes <- c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
+           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
+           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
+           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
+           1316405939) |> 
+  purrr::map(nppes_npi) |>
+  dplyr::bind_rows()
+
+nppes
 ```
 
 
@@ -125,7 +113,9 @@ hospital_enrollment(facility_ccn = "060004")
 
 ```{r}
 doctors_and_clinicians(npi = 1407263999)
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", grad_year = 2003, state = "FL")
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2003, 
+                       state = "FL")
 ```
 
 
@@ -190,7 +180,8 @@ revalidation_group(ind_npi = 1710912209)
 ### CMS Open Payments API
 
 ```{r}
-open_payments(recipient_npi = 1043218118)
+open_payments(recipient_npi = 1043218118) |> 
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
 
