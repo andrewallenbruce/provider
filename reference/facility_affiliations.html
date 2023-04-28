@@ -98,7 +98,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">facility_affiliations</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -120,7 +120,7 @@
 <dd><p>Unique clinician ID assigned by NPPES</p></dd>
 
 
-<dt>pac_id_ind</dt>
+<dt>pac_id</dt>
 <dd><p>Unique individual clinician ID assigned by PECOS</p></dd>
 
 
@@ -194,45 +194,43 @@ Agencies, Hospices, and/or Dialysis Facilities, in addition to hospitals.</p><di
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">facility_affiliations</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003019563</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2521          1003019563 4688707060 FRANK  JOHN    JOSEPH <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2526          1003019563 4688707060 FRANK  JOHN    JOSEPH <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2531          1003019563 4688707060 FRANK  JOHN    JOSEPH <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2536          1003019563 4688707060 FRANK  JOHN    JOSEPH <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: facility_afl_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac_id  first_name middle_name last_name facility_type facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060116      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060009      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060028      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060004      </span>
 <span class="r-in"><span><span class="fu">facility_affiliations</span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 188 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 351           1003002890 6002953973 HAMMAN DANIEL  RICHA… <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2536          1003019563 4688707060 FRANK  JOHN    JOSEPH <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 5411          1003045022 5890926059 DONAH… ARTHUR  H      <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 13031         1003105636 6507182847 HIGHA… JAMES   CHARL… <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 24626         1003234162 4284940248 MCDIA… MATTHEW <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 54431         1003845249 1254326994 WEINER GARETH  R      <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 85426         1013069566 7810096328 HELZER AMITY   D      <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 90441         1013115989 4385891712 PYLE   ASHLEY  L      <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 150336        1013979566 1557374014 MUWAL… FIRAS   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    Hospital     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 201096        1023261963 2860687431 LUCCI  CHAD    MICHA… <span style="color: #BB0000;">NA</span>    Hospital     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 188 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        pac_id first_name middle_name last_name facility_type facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1003002890 60029… DANIEL     RICHARD     HAMMAN    Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1003019563 46887… JOHN       JOSEPH      FRANK     Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1003045022 58909… ARTHUR     H           DONAHUE   Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1003105636 65071… JAMES      CHARLES     HIGHAM K… Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1003234162 42849… MATTHEW    <span style="color: #BB0000;">NA</span>          MCDIARMID Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1003845249 12543… GARETH     R           WEINER    Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1013069566 78100… AMITY      D           HELZER    Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1013115989 43858… ASHLEY     L           PYLE      Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1013979566 15573… FIRAS      <span style="color: #BB0000;">NA</span>          MUWALLA   Hospital      060004      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1023261963 28606… CHAD       MICHAEL     LUCCI     Hospital      060004      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 178 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: facility_afl_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">facility_affiliations</span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 675486        1083742829 5698833655 FORNA… RAFAEL  JORGE  <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1128701       1144429580 3577659580 CURRY  LYSA    LEE    <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 3309541       1427107028 1456328152 CHANEY DENNIS  M      <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 4350821       1558595660 8921241142 ALFON… JOHN    D      <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 4769311       1609973650 0840373239 WILCOX GEORGE  KIMBE… <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 5561756       1710112370 9739337122 VADDE… VIDYA   <span style="color: #BB0000;">NA</span>     <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 5646266       1720069859 7012947229 JANES  WILLIAM WARREN <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 5836046       1740577212 0345473773 WEIKLE GEOFF   R      <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 6079621       1770861742 5193940997 MYERS  AUSTON  J      <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 7129161       1912260464 5092036509 MANSO… SAAD    MD     <span style="color: #BB0000;">NA</span>    Inpatient re…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: facility_afl_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        pac_id first_name middle_name last_name facility_type facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1083742829 56988… RAFAEL     JORGE       FORNARIS  Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1144429580 35776… LYSA       LEE         CURRY     Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1427107028 14563… DENNIS     M           CHANEY    Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1558595660 89212… JOHN       D           ALFONSO   Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1609973650 08403… GEORGE     KIMBELL     WILCOX    Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1710112370 97393… VIDYA      <span style="color: #BB0000;">NA</span>          VADDEMPU… Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1720069859 70129… WILLIAM    WARREN      JANES     Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1740577212 03454… GEOFF      R           WEIKLE    Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1770861742 51939… AUSTON     J           MYERS     Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1912260464 50920… SAAD       MD          MANSOOR   Inpatient re… 67T055      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: parent_ccn &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">facility_affiliations</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">facility_affiliations</span><span class="op">(</span>facility_type <span class="op">=</span> <span class="st">"Home Health Agency"</span><span class="op">)</span></span></span>

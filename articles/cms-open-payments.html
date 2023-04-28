@@ -376,7 +376,7 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <p><br><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 73 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 73 × 48</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9248756       UNCHANGED   Covered Recipient Physician</span></span>
@@ -390,16 +390,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         10170596      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         10170601      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 63 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 44 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, covered_recipient_primary_type_1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 51</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         14968401      UNCHANGED   Covered Recipient Physician</span></span>
@@ -413,16 +413,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         14968451      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         14968456      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 58 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, covered_recipient_primary_type_1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_city <span class="op">=</span> <span class="st">"Jacksonville"</span>, recipient_state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 65</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type                </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         25646         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
@@ -436,16 +436,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         83201         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         83391         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, offset <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 52</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55248441      UNCHANGED   Covered Recipient Physician</span></span>
@@ -459,16 +459,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55248521      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55248536      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, offset <span class="op">=</span> <span class="fl">500</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 51</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         55253511      UNCHANGED   Covered Recipient Physician</span></span>
@@ -482,16 +482,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021         55253606      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021         55253616      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="fl">100000151589</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 65</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020         9340966       UNCHANGED   Covered Recipient Physician</span></span>
@@ -505,16 +505,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020         9243621       UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020         9248981       UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>manufacturer_gpo_id <span class="op">=</span> <span class="st">"100000151589"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 500 × 57</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019         45257226      UNCHANGED   Covered Recipient Physician</span></span>
@@ -528,16 +528,16 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019         45257206      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019         45257201      UNCHANGED   Covered Recipient Physician</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 490 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>recipient_npi <span class="op">=</span> <span class="fl">1346540572</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 92</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 54</span></span></span>
 <span><span class="co">#&gt;    program_year record_number change_type covered_recipient_type                </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021         11156         UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
@@ -560,13 +560,13 @@ categories in the rule. (See 42 CFR 403.902)</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 2021         40456961      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 2021         56314646      UNCHANGED   Covered Recipient Non-Physician Pract…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 2021         56881486      CHANGED     Covered Recipient Non-Physician Pract…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 88 more variables: teaching_hospital_ccn &lt;chr&gt;, teaching_hospital_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   teaching_hospital_name &lt;chr&gt;, covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 50 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_middle_name &lt;chr&gt;, covered_recipient_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   covered_recipient_name_suffix &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_primary_business_street_address_line2 &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   recipient_country &lt;chr&gt;, covered_recipient_primary_type_1 &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="related-links">Related Links<a class="anchor" aria-label="anchor" href="#related-links"></a>
