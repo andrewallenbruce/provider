@@ -42,7 +42,6 @@
 #'
 #' @examples
 #' doctors_and_clinicians(npi = 1407263999)
-#' doctors_and_clinicians(pac_id_ind = 4688974991)
 #' doctors_and_clinicians(enroll_id = "I20081002000549")
 #' \dontrun{
 #' doctors_and_clinicians(first_name = "John")
@@ -124,7 +123,38 @@ doctors_and_clinicians <- function(npi           = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      tidyr::unite("address",
+                   adr_ln_1:adr_ln_2,
+                   remove = TRUE, na.rm = TRUE) |>
+      dplyr::select(
+        npi,
+        pac_id = ind_pac_id,
+        enroll_id = ind_enrl_id,
+        first_name = frst_nm,
+        middle_name = mid_nm,
+        last_name = lst_nm,
+        suffix = suff,
+        gender = gndr,
+        credential = cred,
+        med_school = med_sch,
+        grad_year = grd_yr,
+        specialty_prim = pri_spec,
+        specialty_sec = sec_spec_all,
+        telehealth = telehlth,
+        org_name = org_nm,
+        org_pac_id,
+        org_members = num_org_mem,
+        address,
+        city = cty,
+        state = st,
+        zipcode = zip,
+        phone_number = phn_numbr,
+        ind_assign = ind_assgn,
+        group_assign = grp_assgn) |>
+      janitor::remove_empty(which = c("rows", "cols"))
+    }
 
   return(results)
 }

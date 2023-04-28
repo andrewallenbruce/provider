@@ -49,7 +49,7 @@
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param org_name Organizational provider name
-#' @param gender Individual provider gender;
+#' @param gender Individual provider gender:
 #'    `F` (female), `M` (male), `9` (unknown)
 #' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
@@ -138,7 +138,17 @@ provider_enrollment <- function(npi                = NULL,
                   dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::rename(pac_id         = pecos_asct_cntl_id,
+                    enroll_id      = enrlmt_id,
+                    specialty_cd   = provider_type_cd,
+                    specialty_desc = provider_type_desc,
+                    state          = state_cd,
+                    middle_name    = mdl_name,
+                    gender         = gndr_sw) |>
+      janitor::remove_empty(which = c("rows", "cols"))
+  }
 
   return(results)
 }

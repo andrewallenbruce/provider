@@ -132,7 +132,7 @@
 #' purrr::invoke_map_dfr(tribble$fn, tribble$params)
 #' }
 #' @autoglobal
-#' @export
+#' @noRd
 
 nppes_npi_old <- function(npi            = NULL,
                       enum_type      = NULL,

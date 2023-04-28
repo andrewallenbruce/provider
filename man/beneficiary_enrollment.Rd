@@ -10,8 +10,8 @@ Centers for Medicare & Medicaid Services
 beneficiary_enrollment(
   year = 2021,
   month = "Year",
-  geo_level = c("National", "State", "County"),
-  state_abb = NULL,
+  level = c("National", "State", "County"),
+  state = NULL,
   state_name = NULL,
   county = NULL,
   fips = NULL,
@@ -26,10 +26,10 @@ beneficiary_enrollment(
 month within the 12-month time span of the month in the data set's version
 name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
 
-\item{geo_level}{Geographic level of data; options are \code{National}, \code{State},
+\item{level}{Geographic level of data; options are \code{National}, \code{State},
 and \code{County}}
 
-\item{state_abb}{Two-letter state abbreviation of beneficiary residence}
+\item{state}{Two-letter state abbreviation of beneficiary residence}
 
 \item{state_name}{Full state name of beneficiary residence}
 
@@ -74,20 +74,21 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-beneficiary_enrollment(month = "Year",
-                       geo_level = "County",
-                       state_abb = "AL",
+beneficiary_enrollment(year = NULL,
+                       month = "Year",
+                       level = "County",
+                       state = "AL",
                        county = "Autauga")
 
 beneficiary_enrollment(year = 2021,
-                       geo_level = "County",
+                       level = "County",
                        fips = "01001")
 
 beneficiary_enrollment(year = 2022,
                        month = "July",
-                       geo_level = "State",
+                       level = "State",
                        state_name = "Georgia")
 
-beneficiary_enrollment(geo_level = "State",
+beneficiary_enrollment(level = "State",
                        fips = "10")
 }

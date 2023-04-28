@@ -158,7 +158,8 @@ open_payments <- function(recipient_npi          = NULL,
                     dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |>
-      dplyr::relocate(program_year)
+      dplyr::relocate(program_year) |>
+      janitor::remove_empty(which = c("rows", "cols"))
 
   }
 

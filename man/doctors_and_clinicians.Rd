@@ -91,7 +91,6 @@ Update Frequency: \strong{Monthly}
 }
 \examples{
 doctors_and_clinicians(npi = 1407263999)
-doctors_and_clinicians(pac_id_ind = 4688974991)
 doctors_and_clinicians(enroll_id = "I20081002000549")
 \dontrun{
 doctors_and_clinicians(first_name = "John")

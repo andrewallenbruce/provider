@@ -8,21 +8,21 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 taxonomy_crosswalk(
-  specialty_code = NULL,
-  specialty_desc = NULL,
   taxonomy_code = NULL,
   taxonomy_desc = NULL,
+  specialty_code = NULL,
+  specialty_desc = NULL,
   clean_names = TRUE
 )
 }
 \arguments{
-\item{specialty_code}{Code that corresponds to the listed Medicare specialty}
-
-\item{specialty_desc}{Description of the Medicare Provider/Supplier Type}
-
 \item{taxonomy_code}{The taxonomy codes the providers use}
 
 \item{taxonomy_desc}{The description of the taxonomy that the providers use}
+
+\item{specialty_code}{Code that corresponds to the listed Medicare specialty}
+
+\item{specialty_desc}{Description of the Medicare Provider/Supplier Type}
 
 \item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }

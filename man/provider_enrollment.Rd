@@ -65,7 +65,7 @@ ENRLMT_IDs and multiple STATE_CD values.}
 
 \item{org_name}{Organizational provider name}
 
-\item{gender}{Individual provider gender;
+\item{gender}{Individual provider gender:
 \code{F} (female), \code{M} (male), \code{9} (unknown)}
 
 \item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}

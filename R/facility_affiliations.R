@@ -15,7 +15,7 @@
 #' @note Update Frequency: **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
+#' @param pac_id Unique individual clinician ID assigned by PECOS
 #' @param last_name Individual clinician last name
 #' @param first_name Individual clinician first name
 #' @param middle_name Individual clinician middle name
@@ -50,7 +50,7 @@
 #' @export
 
 facility_affiliations <- function(npi           = NULL,
-                                  pac_id_ind        = NULL,
+                                  pac_id        = NULL,
                                   last_name     = NULL,
                                   first_name    = NULL,
                                   middle_name   = NULL,
@@ -63,7 +63,7 @@ facility_affiliations <- function(npi           = NULL,
   args <- tibble::tribble(
     ~x,                   ~y,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_id_ind,
+    "Ind_PAC_ID",         pac_id,
     "lst_nm",             last_name,
     "frst_nm",            first_name,
     "mid_nm",             middle_name,
@@ -107,7 +107,19 @@ facility_affiliations <- function(npi           = NULL,
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
-
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::select(
+        npi,
+        pac_id       = ind_pac_id,
+        first_name   = frst_nm,
+        middle_name  = mid_nm,
+        last_name    = lst_nm,
+        suffix       = suff,
+        facility_type,
+        facility_ccn = facility_afl_ccn,
+        parent_ccn) |>
+      janitor::remove_empty(which = c("rows", "cols"))
+    }
   return(results)
 }

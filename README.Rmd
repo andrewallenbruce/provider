@@ -50,14 +50,6 @@ devtools::install_github("andrewallenbruce/provider")
 remotes::install_github("andrewallenbruce/provider")
 ```
 
-```{r results='asis', echo=FALSE}
-provider:::function_tbl() |> 
-  dplyr::arrange(Function) |> 
-  gluedown::md_table()
-```
-
-<br>
-
 ## Motivation
 
 ```{r echo=TRUE}
@@ -66,50 +58,37 @@ library(provider)
 
 <br>
 
-The goal of `provider` is to make the experience of getting location data easier and more consistent across a wide variety of sources.
-
-This package is primarily focused on accessing public API data that can be linked together via a healthcare provider's National Provider Identifier (NPI). Thus far, none of the APIs require the creation of a user account or API key.
+The goal of `provider` is to make the experience of accessing publicly-available Medicare provider data easier and more consistent across a variety of CMS sources.
 
 <br>
 
-### NPPES NPI Registry
 
-```{r}
-nppes_npi(npi = 1316405939)
+```{r results='asis', echo=FALSE}
+provider:::function_tbl() |> 
+  dplyr::arrange(Function) |> 
+  gluedown::md_table()
 ```
 
+<br>
+
+### Beneficiary Enrollment
 
 ```{r}
-nppes <- c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
-           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
-           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
-           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
-           1316405939) |> 
-  purrr::map(nppes_npi) |>
-  dplyr::bind_rows()
-
-nppes
+beneficiary_enrollment(year = 2021, level = "County", state = "GA", month = NULL)
+beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "AL", county = "Autauga")
 ```
 
-
-
-### CMS Physician Facility Affiliations
+### Chronic Conditions
 
 ```{r}
-facility_affiliations(npi = 1003019563)
-facility_affiliations(facility_ccn = "060004")
-facility_affiliations(parent_ccn = 670055)
-facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
+# Multiple Chronic Conditions
+cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
+
+# Specific Chronic Conditions
+cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
 ```
 
-### Hospital Enrollments
-
-```{r}
-hospital_enrollment(facility_ccn = "060004")
-```
-
-
-### CMS Doctors and Clinicians National File
+### Doctors and Clinicians
 
 ```{r}
 doctors_and_clinicians(npi = 1407263999)
@@ -118,52 +97,88 @@ doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
                        state = "FL")
 ```
 
+### Facility Affiliations
 
-### CMS Missing Contact Information
+```{r}
+facility_affiliations(npi = 1003019563)
+facility_affiliations(facility_ccn = "060004")
+facility_affiliations(parent_ccn = 670055)
+facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
+```
+
+
+### Hospital Enrollments
+
+```{r}
+hospital_enrollment(facility_ccn = "060004")
+```
+
+
+### Missing Contact Information
 
 ```{r}
 missing_information(npi = 1144224569)
 ```
 
-### Medicare Order and Referring
+### NPI Registry
 
 ```{r}
-order_refer(npi = 1083879860)
+nppes_npi(npi = 1316405939)
+
+c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
+           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
+           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
+           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
+           1316405939) |> 
+  purrr::map(nppes_npi) |>
+  dplyr::bind_rows()
 ```
 
+### Open Payments
 
-### Medicare Opt-Out Affidavits
+```{r}
+open_payments(recipient_npi = 1043218118)
+```
+
+### Opt-Out Affidavits
 
 ```{r}
 opt_out(last_name = "Aaron")
 ```
 
-
-### Medicare Provider and Supplier Taxonomy Crosswalk
+### Order and Referring Privileges
 
 ```{r}
-taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
-taxonomy_crosswalk(specialty_code = "B4[14]")
+order_refer(npi = 1083879860)
 ```
 
+### Pending Applications
 
-### Medicare Fee-For-Service Public Provider Enrollment
+```{r}
+pending_applications(last_name = "Smith", type = "non-physician")
+pending_applications(first_name = "John", type = "physician")
+```
+
+### Physician & Other Practitioners
+
+```{r}
+# by Provider and Service
+physician_by_service(npi = 1003000126)
+
+# by Geography and Service
+physician_by_geography(geo_desc = "Maryland", year = 2020)
+
+# by Provider
+physician_by_provider(npi = 1003000126, year = 2020)
+```
+
+### Provider Enrollment
 
 ```{r}
 provider_enrollment(npi = 1083879860)
 ```
 
-
-### Medicare Pending Initial Logging and Tracking
-
-```{r}
-pending_applications(npi = 1487003984, type = "physician")
-pending_applications(npi = 1487003984, type = "non-physician")
-pending_applications(last_name = "Abbott", type = "non-physician")
-pending_applications(first_name = "John", type = "physician")
-```
-
-### Medicare Revalidation APIs
+### Revalidation Lists
 
 ```{r}
 # Revalidation Due Date List
@@ -176,32 +191,13 @@ revalidation_reassign(ind_npi = 1710912209)
 revalidation_group(ind_npi = 1710912209)
 ```
 
-
-### CMS Open Payments API
-
-```{r}
-open_payments(recipient_npi = 1043218118) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
-
-
-### Medicare Monthly Enrollment API
+### Taxonomy Crosswalk
 
 ```{r}
-beneficiary_enrollment(year = 2021, geo_level = "County", state_abb = "GA", month = NULL)
-```
-
-### Medicare Physician & Other Practitioners APIs
-
-```{r}
-# by Provider and Service
-physician_by_service(npi = 1003000126)
-
-# by Geography and Service
-physician_by_geography(geo_desc = "Maryland", year = 2020)
-
-# by Provider
-physician_by_provider(npi = 1003000126, year = 2020)
+taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+taxonomy_crosswalk(specialty_code = "B4[14]")
+taxonomy_crosswalk(specialty_code = "8")
+taxonomy_crosswalk(taxonomy_code = "207Q00000X")
 ```
 
 
@@ -365,17 +361,6 @@ apyramid::age_pyramid(data = prov_age,
             pyramid = TRUE
             )
 ```
-
-### Medicare Chronic Conditions APIs
-
-```{r}
-# Multiple Chronic Conditions
-cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
-
-# Specific Chronic Conditions
-cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
-```
-
 
 ------------------------------------------------------------------------------
 

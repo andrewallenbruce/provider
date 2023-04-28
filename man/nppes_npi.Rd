@@ -24,10 +24,81 @@ nppes_npi(
 )
 }
 \arguments{
+\item{npi}{10-digit National Provider Identifier (NPI).}
+
+\item{enum_type}{The Read API can be refined to retrieve only Individual
+Providers (\code{NPI-1} or Type 1) or Organizational Providers (\code{NPI-2} or
+Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
+returned. When using the Enumeration Type, it cannot be the only
+criteria entered. Additional criteria must also be entered as well.}
+
+\item{first_name}{Provider's first name. Applies to
+\strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered (e.g. "jo*" ).
+This field allows the following special characters: ampersand(\code{&}),
+apostrophe(\verb{,}), colon(\code{:}), comma(\verb{,}), forward slash(\code{/}),
+hyphen(\code{-}), left and right parentheses(\verb{()}), period(\code{.}),
+pound sign(\verb{#}), quotation mark(\verb{"}), and semi-colon(\verb{;}).}
+
+\item{last_name}{Provider's last name. Applies to
+\strong{Individual Providers (NPI-1)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered (e.g. "jo*" ).
+This field allows the following special characters: ampersand(\code{&}),
+apostrophe(\verb{,}), colon(\code{:}), comma(\verb{,}), forward slash(\code{/}),
+hyphen(\code{-}), left and right parentheses(\verb{()}), period(\code{.}),
+pound sign(\verb{#}), quotation mark(\verb{"}), and semi-colon(\verb{;}).}
+
+\item{org_name}{Healthcare organization's name. Applies to
+\strong{Organizational Providers (NPI-2)} only. Trailing wildcard entries are
+permitted requiring at least two characters to be entered. All types of
+Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
+NPI are examined for matching contents, therefore, the results might
+contain an organization name different from the one entered in the
+Organization Name criterion. This field allows the following special
+characters: ampersand, apostrophe, "at" sign, colon, comma, forward
+slash, hyphen, left and right parentheses, period, pound sign, quotation
+mark, and semi-colon.}
+
+\item{taxonomy_desc}{Search for providers by their taxonomy by entering the
+taxonomy description.}
+
+\item{city}{City associated with the provider's address. To search for a
+Military Address, enter either \code{APO} or \code{FPO} into the City field.
+This field allows the following special characters: ampersand,
+apostrophe, colon, comma, forward slash, hyphen, left and right
+parentheses, period, pound sign, quotation mark, and semi-colon.}
+
+\item{state}{State abbreviation associated with the provider's address.
+This field \strong{cannot} be used as the only input criterion. If this
+field is used, at least one other field, besides the \code{prov_type} and
+\code{country}, must be populated. Valid values for state abbreviations:
+\url{https://npiregistry.cms.hhs.gov/help-api/state}.}
+
+\item{zip}{The Postal Code associated with the provider's address
+identified in Address Purpose. If you enter a 5 digit postal code, it
+will match any appropriate 9 digit (zip+4) codes in the data. Trailing
+wildcard entries are permitted requiring at least two characters to be
+entered (e.g., "21*").}
+
+\item{country}{Country abbreviation associated with the provider's
+address. This field \strong{can} be used as the only input criterion, as long
+as the value selected \emph{is not} \strong{US} (United States). Valid values for
+country abbreviations:
+\url{https://npiregistry.cms.hhs.gov/help-api/country}.}
+
+\item{limit}{Maximum number of results to return;
+default is 200, maximum is 1200.}
+
+\item{skip}{Number of results to skip after searching
+the previous number; set in \code{limit}.}
+
 \item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
 }
+\value{
+A \link[tibble:tibble-package]{tibble} containing the search results.
+}
 \description{
-\code{provider_nppes()} allows you to search the NPPES NPI
+\code{nppes_npi()} allows you to search the NPPES NPI
 Registry's public API by many of the parameters defined in the
 API's documentation.
 }
@@ -51,4 +122,8 @@ to use the NPI Registry.
 }
 \note{
 Update Frequency: \strong{Weekly}
+}
+\examples{
+nppes_npi(npi = 1528060837)
+
 }

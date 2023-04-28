@@ -44,6 +44,20 @@ devtools::install_github("andrewallenbruce/provider")
 remotes::install_github("andrewallenbruce/provider")
 ```
 
+## Motivation
+
+``` r
+library(provider)
+```
+
+<br>
+
+The goal of `provider` is to make the experience of accessing
+publicly-available Medicare provider data easier and more consistent
+across a variety of CMS sources.
+
+<br>
+
 | Function                   | API                                                                                                                                                                                                                                   |
 |:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
@@ -69,150 +83,210 @@ remotes::install_github("andrewallenbruce/provider")
 
 <br>
 
-## Motivation
+### Beneficiary Enrollment
 
 ``` r
-library(provider)
+beneficiary_enrollment(year = 2021, level = "County", state = "GA", month = NULL)
 ```
 
-<br>
-
-The goal of `provider` is to make the experience of getting location
-data easier and more consistent across a wide variety of sources.
-
-This package is primarily focused on accessing public API data that can
-be linked together via a healthcare provider’s National Provider
-Identifier (NPI). Thus far, none of the APIs require the creation of a
-user account or API key.
-
-<br>
-
-### NPPES NPI Registry
+    #> # A tibble: 2,067 × 26
+    #>     year month level  state state_name county   fips  bene_total bene_orig
+    #>    <int> <chr> <chr>  <chr> <chr>      <chr>    <chr>      <int>     <int>
+    #>  1  2021 Year  County GA    Georgia    Appling  13001       3919      1919
+    #>  2  2021 Year  County GA    Georgia    Atkinson 13003       1376       648
+    #>  3  2021 Year  County GA    Georgia    Bacon    13005       2229      1216
+    #>  4  2021 Year  County GA    Georgia    Baker    13007        715       291
+    #>  5  2021 Year  County GA    Georgia    Baldwin  13009       9167      4041
+    #>  6  2021 Year  County GA    Georgia    Banks    13011       3735      1865
+    #>  7  2021 Year  County GA    Georgia    Barrow   13013      13950      7096
+    #>  8  2021 Year  County GA    Georgia    Bartow   13015      19436     10107
+    #>  9  2021 Year  County GA    Georgia    Ben Hill 13017       3830      1816
+    #> 10  2021 Year  County GA    Georgia    Berrien  13019       3813      2127
+    #> # ℹ 2,057 more rows
+    #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
+    #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
+    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
+    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
+    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
+    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>, …
 
 ``` r
-nppes_npi(npi = 1316405939)
+beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "AL", county = "Autauga")
 ```
 
-    #> # A tibble: 1 × 24
-    #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
-    #>   <chr>  <chr>            <date>           <Duration>               <date>      
-    #> 1 13164… NPI-1            2019-03-04       130896000s (~4.15 years) 2023-04-06  
-    #> # ℹ 19 more variables: certification_date <date>, status <chr>,
-    #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
-    #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
+    #> # A tibble: 10 × 26
+    #>     year month level  state state_name county  fips  bene_total bene_orig
+    #>    <int> <chr> <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
+    #>  1  2013 Year  County AL    Alabama    Autauga 01001       9323      6484
+    #>  2  2014 Year  County AL    Alabama    Autauga 01001       9589      6565
+    #>  3  2015 Year  County AL    Alabama    Autauga 01001       9938      6711
+    #>  4  2016 Year  County AL    Alabama    Autauga 01001      10214      6799
+    #>  5  2017 Year  County AL    Alabama    Autauga 01001      10510      5784
+    #>  6  2018 Year  County AL    Alabama    Autauga 01001      10645      5700
+    #>  7  2019 Year  County AL    Alabama    Autauga 01001      11059      5761
+    #>  8  2020 Year  County AL    Alabama    Autauga 01001      11251      5596
+    #>  9  2021 Year  County AL    Alabama    Autauga 01001      11396      5338
+    #> 10  2022 Year  County AL    Alabama    Autauga 01001      11578      5186
+    #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
+    #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
+    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
+    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
+    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
+    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>,
+    #> #   bene_rx_none <int>
+
+### Chronic Conditions
+
+``` r
+# Multiple Chronic Conditions
+cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
+```
+
+    #> # A tibble: 60 × 13
+    #>     year bene_geo_lvl bene_geo_desc bene_geo_cd bene_age_lvl bene_demo_lvl
+    #>    <dbl> <chr>        <chr>         <chr>       <chr>        <chr>        
+    #>  1  2007 National     National      ""          65+          Race         
+    #>  2  2007 National     National      ""          65+          Race         
+    #>  3  2007 National     National      ""          65+          Race         
+    #>  4  2007 National     National      ""          65+          Race         
+    #>  5  2007 National     National      ""          65+          Race         
+    #>  6  2007 National     National      ""          65+          Race         
+    #>  7  2007 National     National      ""          65+          Race         
+    #>  8  2007 National     National      ""          65+          Race         
+    #>  9  2007 National     National      ""          65+          Race         
+    #> 10  2007 National     National      ""          65+          Race         
+    #> # ℹ 50 more rows
+    #> # ℹ 7 more variables: bene_demo_desc <chr>, bene_mcc <chr>, prvlnc <dbl>,
+    #> #   tot_mdcr_stdzd_pymt_pc <dbl>, tot_mdcr_pymt_pc <dbl>,
+    #> #   hosp_readmsn_rate <dbl>, er_visits_per_1000_benes <dbl>
+
+``` r
+# Specific Chronic Conditions
+cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
+```
+
+    #> # A tibble: 34,020 × 13
+    #>     year bene_geo_lvl bene_geo_desc bene_geo_cd bene_age_lvl bene_demo_lvl
+    #>    <dbl> <chr>        <chr>         <chr>       <chr>        <chr>        
+    #>  1  2018 State        Alabama       01          All          All          
+    #>  2  2018 State        Alabama       01          65+          Dual Status  
+    #>  3  2018 State        Alabama       01          <65          Dual Status  
+    #>  4  2018 State        Alabama       01          All          Dual Status  
+    #>  5  2018 State        Alabama       01          65+          Dual Status  
+    #>  6  2018 State        Alabama       01          <65          Dual Status  
+    #>  7  2018 State        Alabama       01          All          Dual Status  
+    #>  8  2018 State        Alabama       01          65+          Sex          
+    #>  9  2018 State        Alabama       01          <65          Sex          
+    #> 10  2018 State        Alabama       01          All          Sex          
+    #> # ℹ 34,010 more rows
+    #> # ℹ 7 more variables: bene_demo_desc <chr>, bene_cond <chr>, prvlnc <chr>,
+    #> #   tot_mdcr_stdzd_pymt_pc <chr>, tot_mdcr_pymt_pc <chr>,
+    #> #   hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>
+
+### Doctors and Clinicians
+
+``` r
+doctors_and_clinicians(npi = 1407263999)
+```
+
+    #> # A tibble: 2 × 21
+    #>   npi        pac_id enroll_id first_name middle_name last_name gender med_school
+    #>   <chr>      <chr>  <chr>     <chr>      <chr>       <chr>     <chr>  <chr>     
+    #> 1 1407263999 87292… I2014100… ROBIN      A           AVERY     F      OTHER     
+    #> 2 1407263999 87292… I2014100… ROBIN      A           AVERY     F      OTHER     
+    #> # ℹ 13 more variables: grad_year <chr>, specialty_prim <chr>, telehealth <chr>,
+    #> #   org_name <chr>, org_pac_id <chr>, org_members <chr>, address <chr>,
     #> #   city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #> #   fax_number <chr>, taxonomy_code <chr>, taxonomy_desc <chr>,
-    #> #   taxonomy_state <chr>, taxonomy_license <chr>
+    #> #   ind_assign <chr>, group_assign <chr>
 
 ``` r
-nppes <- c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
-           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
-           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
-           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
-           1316405939) |> 
-  purrr::map(nppes_npi) |>
-  dplyr::bind_rows()
-
-nppes
+doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2003, 
+                       state = "FL")
 ```
 
-    #> # A tibble: 17 × 26
-    #>    npi        enumeration_type enumeration_date enumeration_duration     
-    #>    <chr>      <chr>            <date>           <Duration>               
-    #>  1 1710975040 NPI-1            2005-10-11       553564800s (~17.54 years)
-    #>  2 1336413418 NPI-2            2012-03-07       351475200s (~11.14 years)
-    #>  3 1003026055 NPI-1            2007-05-22       502761600s (~15.93 years)
-    #>  4 1316405939 NPI-1            2019-03-04       130896000s (~4.15 years) 
-    #>  5 1720392988 NPI-1            2010-07-29       402192000s (~12.74 years)
-    #>  6 1518184605 NPI-1            2007-04-19       505612800s (~16.02 years)
-    #>  7 1922056829 NPI-1            2006-05-04       535852800s (~16.98 years)
-    #>  8 1083879860 NPI-1            2008-07-22       465868800s (~14.76 years)
-    #>  9 1346243805 NPI-1            2005-05-27       565401600s (~17.92 years)
-    #> 10 1679576722 NPI-1            2005-05-23       565747200s (~17.93 years)
-    #> 11 1093718892 NPI-1            2005-05-24       565660800s (~17.92 years)
-    #> 12 1477556405 NPI-1            2005-05-23       565747200s (~17.93 years)
-    #> 13 1770586539 NPI-1            2005-05-24       565660800s (~17.92 years)
-    #> 14 1871596692 NPI-1            2005-05-24       565660800s (~17.92 years)
-    #> 15 1174526925 NPI-1            2005-05-24       565660800s (~17.92 years)
-    #> 16 1801899513 NPI-1            2005-05-27       565401600s (~17.92 years)
-    #> 17 1316405939 NPI-1            2019-03-04       130896000s (~4.15 years) 
-    #> # ℹ 22 more variables: last_updated <date>, status <chr>, first_name <chr>,
-    #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
-    #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
-    #> #   state <chr>, zipcode <chr>, phone_number <chr>, fax_number <chr>,
-    #> #   taxonomy_code <chr>, taxonomy_desc <chr>, taxonomy_state <chr>,
-    #> #   taxonomy_license <chr>, certification_date <date>, organization_name <chr>,
-    #> #   organizational_subpart <chr>
+    #> # A tibble: 7 × 22
+    #>   npi        pac_id enroll_id first_name middle_name last_name gender credential
+    #>   <chr>      <chr>  <chr>     <chr>      <chr>       <chr>     <chr>  <chr>     
+    #> 1 1033237524 76180… I2022061… BRIAN      KEITH       GOLDBERG  M      <NA>      
+    #> 2 1164628830 56988… I2009100… KEVIN      M           KAPLAN    M      <NA>      
+    #> 3 1295895514 71130… I2021070… JHUMA      <NA>        CHAUDHURI F      MD        
+    #> 4 1497955652 34766… I2007092… YUI        F           CHIEN     M      <NA>      
+    #> 5 1497955652 34766… I2007092… YUI        F           CHIEN     M      <NA>      
+    #> 6 1497955652 34766… I2007092… YUI        F           CHIEN     M      <NA>      
+    #> 7 1801000963 35776… I2009080… CHRIS      <NA>        SCHETTINO M      <NA>      
+    #> # ℹ 14 more variables: med_school <chr>, grad_year <chr>, specialty_prim <chr>,
+    #> #   specialty_sec <chr>, org_name <chr>, org_pac_id <chr>, org_members <chr>,
+    #> #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
+    #> #   ind_assign <chr>, group_assign <chr>
 
-### CMS Physician Facility Affiliations
+### Facility Affiliations
 
 ``` r
 facility_affiliations(npi = 1003019563)
 ```
 
-    #> # A tibble: 4 × 10
-    #>   record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type
-    #>   <chr>         <chr>      <chr>      <chr>  <chr>   <chr>  <chr> <chr>        
-    #> 1 2521          1003019563 4688707060 FRANK  JOHN    JOSEPH <NA>  Hospital     
-    #> 2 2526          1003019563 4688707060 FRANK  JOHN    JOSEPH <NA>  Hospital     
-    #> 3 2531          1003019563 4688707060 FRANK  JOHN    JOSEPH <NA>  Hospital     
-    #> 4 2536          1003019563 4688707060 FRANK  JOHN    JOSEPH <NA>  Hospital     
-    #> # ℹ 2 more variables: facility_afl_ccn <chr>, parent_ccn <chr>
+    #> # A tibble: 4 × 7
+    #>   npi        pac_id  first_name middle_name last_name facility_type facility_ccn
+    #>   <chr>      <chr>   <chr>      <chr>       <chr>     <chr>         <chr>       
+    #> 1 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060116      
+    #> 2 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060009      
+    #> 3 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060028      
+    #> 4 1003019563 468870… JOHN       JOSEPH      FRANK     Hospital      060004
 
 ``` r
 facility_affiliations(facility_ccn = "060004")
 ```
 
-    #> # A tibble: 188 × 10
-    #>    record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type
-    #>    <chr>         <chr>      <chr>      <chr>  <chr>   <chr>  <chr> <chr>        
-    #>  1 351           1003002890 6002953973 HAMMAN DANIEL  RICHA… <NA>  Hospital     
-    #>  2 2536          1003019563 4688707060 FRANK  JOHN    JOSEPH <NA>  Hospital     
-    #>  3 5411          1003045022 5890926059 DONAH… ARTHUR  H      <NA>  Hospital     
-    #>  4 13031         1003105636 6507182847 HIGHA… JAMES   CHARL… <NA>  Hospital     
-    #>  5 24626         1003234162 4284940248 MCDIA… MATTHEW <NA>   <NA>  Hospital     
-    #>  6 54431         1003845249 1254326994 WEINER GARETH  R      <NA>  Hospital     
-    #>  7 85426         1013069566 7810096328 HELZER AMITY   D      <NA>  Hospital     
-    #>  8 90441         1013115989 4385891712 PYLE   ASHLEY  L      <NA>  Hospital     
-    #>  9 150336        1013979566 1557374014 MUWAL… FIRAS   <NA>   <NA>  Hospital     
-    #> 10 201096        1023261963 2860687431 LUCCI  CHAD    MICHA… <NA>  Hospital     
+    #> # A tibble: 188 × 7
+    #>    npi        pac_id first_name middle_name last_name facility_type facility_ccn
+    #>    <chr>      <chr>  <chr>      <chr>       <chr>     <chr>         <chr>       
+    #>  1 1003002890 60029… DANIEL     RICHARD     HAMMAN    Hospital      060004      
+    #>  2 1003019563 46887… JOHN       JOSEPH      FRANK     Hospital      060004      
+    #>  3 1003045022 58909… ARTHUR     H           DONAHUE   Hospital      060004      
+    #>  4 1003105636 65071… JAMES      CHARLES     HIGHAM K… Hospital      060004      
+    #>  5 1003234162 42849… MATTHEW    <NA>        MCDIARMID Hospital      060004      
+    #>  6 1003845249 12543… GARETH     R           WEINER    Hospital      060004      
+    #>  7 1013069566 78100… AMITY      D           HELZER    Hospital      060004      
+    #>  8 1013115989 43858… ASHLEY     L           PYLE      Hospital      060004      
+    #>  9 1013979566 15573… FIRAS      <NA>        MUWALLA   Hospital      060004      
+    #> 10 1023261963 28606… CHAD       MICHAEL     LUCCI     Hospital      060004      
     #> # ℹ 178 more rows
-    #> # ℹ 2 more variables: facility_afl_ccn <chr>, parent_ccn <chr>
 
 ``` r
 facility_affiliations(parent_ccn = 670055)
 ```
 
-    #> # A tibble: 10 × 10
-    #>    record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type
-    #>    <chr>         <chr>      <chr>      <chr>  <chr>   <chr>  <chr> <chr>        
-    #>  1 675486        1083742829 5698833655 FORNA… RAFAEL  JORGE  <NA>  Inpatient re…
-    #>  2 1128701       1144429580 3577659580 CURRY  LYSA    LEE    <NA>  Inpatient re…
-    #>  3 3309541       1427107028 1456328152 CHANEY DENNIS  M      <NA>  Inpatient re…
-    #>  4 4350821       1558595660 8921241142 ALFON… JOHN    D      <NA>  Inpatient re…
-    #>  5 4769311       1609973650 0840373239 WILCOX GEORGE  KIMBE… <NA>  Inpatient re…
-    #>  6 5561756       1710112370 9739337122 VADDE… VIDYA   <NA>   <NA>  Inpatient re…
-    #>  7 5646266       1720069859 7012947229 JANES  WILLIAM WARREN <NA>  Inpatient re…
-    #>  8 5836046       1740577212 0345473773 WEIKLE GEOFF   R      <NA>  Inpatient re…
-    #>  9 6079621       1770861742 5193940997 MYERS  AUSTON  J      <NA>  Inpatient re…
-    #> 10 7129161       1912260464 5092036509 MANSO… SAAD    MD     <NA>  Inpatient re…
-    #> # ℹ 2 more variables: facility_afl_ccn <chr>, parent_ccn <chr>
+    #> # A tibble: 10 × 8
+    #>    npi        pac_id first_name middle_name last_name facility_type facility_ccn
+    #>    <chr>      <chr>  <chr>      <chr>       <chr>     <chr>         <chr>       
+    #>  1 1083742829 56988… RAFAEL     JORGE       FORNARIS  Inpatient re… 67T055      
+    #>  2 1144429580 35776… LYSA       LEE         CURRY     Inpatient re… 67T055      
+    #>  3 1427107028 14563… DENNIS     M           CHANEY    Inpatient re… 67T055      
+    #>  4 1558595660 89212… JOHN       D           ALFONSO   Inpatient re… 67T055      
+    #>  5 1609973650 08403… GEORGE     KIMBELL     WILCOX    Inpatient re… 67T055      
+    #>  6 1710112370 97393… VIDYA      <NA>        VADDEMPU… Inpatient re… 67T055      
+    #>  7 1720069859 70129… WILLIAM    WARREN      JANES     Inpatient re… 67T055      
+    #>  8 1740577212 03454… GEOFF      R           WEIKLE    Inpatient re… 67T055      
+    #>  9 1770861742 51939… AUSTON     J           MYERS     Inpatient re… 67T055      
+    #> 10 1912260464 50920… SAAD       MD          MANSOOR   Inpatient re… 67T055      
+    #> # ℹ 1 more variable: parent_ccn <chr>
 
 ``` r
 facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
 ```
 
-    #> # A tibble: 7 × 10
-    #>   record_number npi        ind_pac_id lst_nm frst_nm mid_nm suff  facility_type 
-    #>   <chr>         <chr>      <chr>      <chr>  <chr>   <chr>  <chr> <chr>         
-    #> 1 1360261       1174587588 7214998079 HILL   JOHN    C      III   Home health a…
-    #> 2 1360266       1174587588 7214998079 HILL   JOHN    C      III   Home health a…
-    #> 3 1360271       1174587588 7214998079 HILL   JOHN    C      III   Home health a…
-    #> 4 4326236       1558380444 4789619362 HILL   JOHN    M      <NA>  Home health a…
-    #> 5 4326241       1558380444 4789619362 HILL   JOHN    M      <NA>  Home health a…
-    #> 6 4326246       1558380444 4789619362 HILL   JOHN    M      <NA>  Home health a…
-    #> 7 4326251       1558380444 4789619362 HILL   JOHN    M      <NA>  Home health a…
-    #> # ℹ 2 more variables: facility_afl_ccn <chr>, parent_ccn <chr>
+    #> # A tibble: 7 × 8
+    #>   npi        pac_id     first_name middle_name last_name suffix facility_type   
+    #>   <chr>      <chr>      <chr>      <chr>       <chr>     <chr>  <chr>           
+    #> 1 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
+    #> 2 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
+    #> 3 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
+    #> 4 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
+    #> 5 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
+    #> 6 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
+    #> 7 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
+    #> # ℹ 1 more variable: facility_ccn <chr>
 
 ### Hospital Enrollments
 
@@ -232,48 +306,7 @@ hospital_enrollment(facility_ccn = "060004")
     #> #   city <chr>, state <chr>, zip_code <int>, practice_location_type <chr>,
     #> #   location_other_type_text <chr>, subgroup__general <lgl>, …
 
-### CMS Doctors and Clinicians National File
-
-``` r
-doctors_and_clinicians(npi = 1407263999)
-```
-
-    #> # A tibble: 2 × 32
-    #>   record_number npi     ind_pac_id ind_enrl_id lst_nm frst_nm mid_nm suff  gndr 
-    #>   <chr>         <chr>   <chr>      <chr>       <chr>  <chr>   <chr>  <chr> <chr>
-    #> 1 4995451       140726… 8729208152 I201410060… AVERY  ROBIN   A      <NA>  F    
-    #> 2 4995456       140726… 8729208152 I201410060… AVERY  ROBIN   A      <NA>  F    
-    #> # ℹ 23 more variables: cred <chr>, med_sch <chr>, grd_yr <chr>, pri_spec <chr>,
-    #> #   sec_spec_1 <chr>, sec_spec_2 <chr>, sec_spec_3 <chr>, sec_spec_4 <chr>,
-    #> #   sec_spec_all <chr>, telehlth <chr>, org_nm <chr>, org_pac_id <chr>,
-    #> #   num_org_mem <chr>, adr_ln_1 <chr>, adr_ln_2 <chr>, ln_2_sprs <chr>,
-    #> #   cty <chr>, st <chr>, zip <chr>, phn_numbr <chr>, ind_assgn <chr>,
-    #> #   grp_assgn <chr>, adrs_id <chr>
-
-``` r
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
-                       grad_year = 2003, 
-                       state = "FL")
-```
-
-    #> # A tibble: 7 × 32
-    #>   record_number npi     ind_pac_id ind_enrl_id lst_nm frst_nm mid_nm suff  gndr 
-    #>   <chr>         <chr>   <chr>      <chr>       <chr>  <chr>   <chr>  <chr> <chr>
-    #> 1 412556        103323… 7618041781 I202206140… GOLDB… BRIAN   KEITH  <NA>  M    
-    #> 2 2043441       116462… 5698811768 I200910020… KAPLAN KEVIN   M      <NA>  M    
-    #> 3 3701041       129589… 7113029984 I202107010… CHAUD… JHUMA   <NA>   <NA>  F    
-    #> 4 6190121       149795… 3476647330 I200709220… CHIEN  YUI     F      <NA>  M    
-    #> 5 6190126       149795… 3476647330 I200709220… CHIEN  YUI     F      <NA>  M    
-    #> 6 6190131       149795… 3476647330 I200709220… CHIEN  YUI     F      <NA>  M    
-    #> 7 9918516       180100… 3577616598 I200908070… SCHET… CHRIS   <NA>   <NA>  M    
-    #> # ℹ 23 more variables: cred <chr>, med_sch <chr>, grd_yr <chr>, pri_spec <chr>,
-    #> #   sec_spec_1 <chr>, sec_spec_2 <chr>, sec_spec_3 <chr>, sec_spec_4 <chr>,
-    #> #   sec_spec_all <chr>, telehlth <chr>, org_nm <chr>, org_pac_id <chr>,
-    #> #   num_org_mem <chr>, adr_ln_1 <chr>, adr_ln_2 <chr>, ln_2_sprs <chr>,
-    #> #   cty <chr>, st <chr>, zip <chr>, phn_numbr <chr>, ind_assgn <chr>,
-    #> #   grp_assgn <chr>, adrs_id <chr>
-
-### CMS Missing Contact Information
+### Missing Contact Information
 
 ``` r
 missing_information(npi = 1144224569)
@@ -284,18 +317,89 @@ missing_information(npi = 1144224569)
     #>   <chr>      <chr>     <chr>     
     #> 1 1144224569 Clouse    John
 
-### Medicare Order and Referring
+### NPI Registry
 
 ``` r
-order_refer(npi = 1083879860)
+nppes_npi(npi = 1316405939)
 ```
 
-    #> # A tibble: 1 × 7
-    #>   npi        last_name first_name  partb dme   hha   pmd  
-    #>   <chr>      <chr>     <chr>       <lgl> <lgl> <lgl> <lgl>
-    #> 1 1083879860 AARON     CHRISTOPHER TRUE  TRUE  TRUE  TRUE
+    #> # A tibble: 1 × 24
+    #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
+    #>   <chr>  <chr>            <date>           <Duration>               <date>      
+    #> 1 13164… NPI-1            2019-03-04       130982400s (~4.15 years) 2023-04-06  
+    #> # ℹ 19 more variables: certification_date <date>, status <chr>,
+    #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
+    #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
+    #> #   city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
+    #> #   fax_number <chr>, taxonomy_code <chr>, taxonomy_desc <chr>,
+    #> #   taxonomy_state <chr>, taxonomy_license <chr>
 
-### Medicare Opt-Out Affidavits
+``` r
+c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
+           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
+           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
+           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
+           1316405939) |> 
+  purrr::map(nppes_npi) |>
+  dplyr::bind_rows()
+```
+
+    #> # A tibble: 17 × 26
+    #>    npi        enumeration_type enumeration_date enumeration_duration     
+    #>    <chr>      <chr>            <date>           <Duration>               
+    #>  1 1710975040 NPI-1            2005-10-11       553651200s (~17.54 years)
+    #>  2 1336413418 NPI-2            2012-03-07       351561600s (~11.14 years)
+    #>  3 1003026055 NPI-1            2007-05-22       502848000s (~15.93 years)
+    #>  4 1316405939 NPI-1            2019-03-04       130982400s (~4.15 years) 
+    #>  5 1720392988 NPI-1            2010-07-29       402278400s (~12.75 years)
+    #>  6 1518184605 NPI-1            2007-04-19       505699200s (~16.02 years)
+    #>  7 1922056829 NPI-1            2006-05-04       535939200s (~16.98 years)
+    #>  8 1083879860 NPI-1            2008-07-22       465955200s (~14.77 years)
+    #>  9 1346243805 NPI-1            2005-05-27       565488000s (~17.92 years)
+    #> 10 1679576722 NPI-1            2005-05-23       565833600s (~17.93 years)
+    #> 11 1093718892 NPI-1            2005-05-24       565747200s (~17.93 years)
+    #> 12 1477556405 NPI-1            2005-05-23       565833600s (~17.93 years)
+    #> 13 1770586539 NPI-1            2005-05-24       565747200s (~17.93 years)
+    #> 14 1871596692 NPI-1            2005-05-24       565747200s (~17.93 years)
+    #> 15 1174526925 NPI-1            2005-05-24       565747200s (~17.93 years)
+    #> 16 1801899513 NPI-1            2005-05-27       565488000s (~17.92 years)
+    #> 17 1316405939 NPI-1            2019-03-04       130982400s (~4.15 years) 
+    #> # ℹ 22 more variables: last_updated <date>, status <chr>, first_name <chr>,
+    #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
+    #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
+    #> #   state <chr>, zipcode <chr>, phone_number <chr>, fax_number <chr>,
+    #> #   taxonomy_code <chr>, taxonomy_desc <chr>, taxonomy_state <chr>,
+    #> #   taxonomy_license <chr>, certification_date <date>, organization_name <chr>,
+    #> #   organizational_subpart <chr>
+
+### Open Payments
+
+``` r
+open_payments(recipient_npi = 1043218118)
+```
+
+    #> # A tibble: 92 × 52
+    #>    program_year record_number change_type covered_recipient_type     
+    #>    <chr>        <chr>         <chr>       <chr>                      
+    #>  1 2021         1             UNCHANGED   Covered Recipient Physician
+    #>  2 2021         692021        UNCHANGED   Covered Recipient Physician
+    #>  3 2021         4385936       UNCHANGED   Covered Recipient Physician
+    #>  4 2021         4385946       UNCHANGED   Covered Recipient Physician
+    #>  5 2021         4385951       UNCHANGED   Covered Recipient Physician
+    #>  6 2021         4385956       UNCHANGED   Covered Recipient Physician
+    #>  7 2021         4579206       UNCHANGED   Covered Recipient Physician
+    #>  8 2021         4579226       UNCHANGED   Covered Recipient Physician
+    #>  9 2021         4624246       UNCHANGED   Covered Recipient Physician
+    #> 10 2021         4766366       UNCHANGED   Covered Recipient Physician
+    #> # ℹ 82 more rows
+    #> # ℹ 48 more variables: covered_recipient_profile_id <chr>,
+    #> #   covered_recipient_npi <chr>, covered_recipient_first_name <chr>,
+    #> #   covered_recipient_last_name <chr>,
+    #> #   recipient_primary_business_street_address_line1 <chr>,
+    #> #   recipient_city <chr>, recipient_state <chr>, recipient_zip_code <chr>,
+    #> #   recipient_country <chr>, covered_recipient_primary_type_1 <chr>, …
+
+### Opt-Out Affidavits
 
 ``` r
 opt_out(last_name = "Aaron")
@@ -309,71 +413,37 @@ opt_out(last_name = "Aaron")
     #> #   second_line_street_address <chr>, city_name <chr>, state_code <chr>,
     #> #   zip_code <chr>, eligible_to_order_and_refer <lgl>, last_updated <dttm>
 
-### Medicare Provider and Supplier Taxonomy Crosswalk
+### Order and Referring Privileges
 
 ``` r
-taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+order_refer(npi = 1083879860)
 ```
 
-    #> # A tibble: 2 × 4
-    #>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc
-    #>   <chr>         <chr>                              <chr>          <chr>         
-    #> 1 261QR0400X    Ambulatory Health Care Facilities… B4[14]         Rehabilitatio…
-    #> 2 315D00000X    Nursing & Custodial Care Faciliti… B4[14]         Rehabilitatio…
+    #> # A tibble: 1 × 7
+    #>   npi        last_name first_name  partb dme   hha   pmd  
+    #>   <chr>      <chr>     <chr>       <lgl> <lgl> <lgl> <lgl>
+    #> 1 1083879860 AARON     CHRISTOPHER TRUE  TRUE  TRUE  TRUE
+
+### Pending Applications
 
 ``` r
-taxonomy_crosswalk(specialty_code = "B4[14]")
+pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    #> # A tibble: 13 × 4
-    #>    taxonomy_code taxonomy_desc                     specialty_code specialty_desc
-    #>    <chr>         <chr>                             <chr>          <chr>         
-    #>  1 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Rehabilitatio…
-    #>  2 335U00000X    Suppliers/Organ Procurement Orga… B4[14]         Organ Procure…
-    #>  3 261QM0801X    Ambulatory Health Care Facilitie… B4[14]         Community Men…
-    #>  4 261QR0401X    Ambulatory Health Care Facilitie… B4[14]         Comprehensive…
-    #>  5 261QE0700X    Ambulatory Health Care Facilitie… B4[14]         End-Stage Ren…
-    #>  6 261QF0400X    Ambulatory Health Care Facilitie… B4[14]         Federally Qua…
-    #>  7 251G00000X    Agencies/Hospice Care Community … B4[14]         Hospice       
-    #>  8 291U00000X    Laboratories/Clinical Medical La… B4[14]         Histocompatib…
-    #>  9 291900000X    Laboratories/Military Clinical M… B4[14]         <NA>          
-    #> 10 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Outpatient Ph…
-    #> 11 315D00000X    Nursing & Custodial Care Facilit… B4[14]         Rehabilitatio…
-    #> 12 282J00000X    Hospitals/Religious Non-medical … B4[14]         Religious Non…
-    #> 13 261QR1300X    Ambulatory Health Care Facilitie… B4[14]         Rural Health …
-
-### Medicare Fee-For-Service Public Provider Enrollment
-
-``` r
-provider_enrollment(npi = 1083879860)
-```
-
-    #> # A tibble: 1 × 11
-    #>   npi        pecos_asct_cntl_id enrlmt_id    provider_type_cd provider_type_desc
-    #>   <chr>      <chr>              <chr>        <chr>            <chr>             
-    #> 1 1083879860 8426328519         I2020061700… 14-08            PRACTITIONER - FA…
-    #> # ℹ 6 more variables: state_cd <chr>, first_name <chr>, mdl_name <chr>,
-    #> #   last_name <chr>, org_name <chr>, gndr_sw <chr>
-
-### Medicare Pending Initial Logging and Tracking
-
-``` r
-pending_applications(npi = 1487003984, type = "physician")
-```
-
-    #> ✖ NPI: 1487003984
-
-``` r
-pending_applications(npi = 1487003984, type = "non-physician")
-```
-
-    #> ✖ NPI: 1487003984
-
-``` r
-pending_applications(last_name = "Abbott", type = "non-physician")
-```
-
-    #> ✖ NPI:
+    #> # A tibble: 24 × 3
+    #>    npi        last_name first_name
+    #>    <chr>      <chr>     <chr>     
+    #>  1 1518672245 SMITH     ALEXANDRA 
+    #>  2 1700588621 SMITH     AMANDA    
+    #>  3 1073234282 SMITH     ANGELA    
+    #>  4 1790408185 SMITH     ARIELLE   
+    #>  5 1801992912 SMITH     BRIDGET   
+    #>  6 1558504688 SMITH     BRITTANY  
+    #>  7 1679235717 SMITH     BRITTNEY  
+    #>  8 1639635030 SMITH     COURTNEY  
+    #>  9 1043925035 SMITH     FULGENTIA 
+    #> 10 1902527641 SMITH     HEATHER   
+    #> # ℹ 14 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
@@ -394,7 +464,67 @@ pending_applications(first_name = "John", type = "physician")
     #> 10 1689774804 FREEMAN    JOHN      
     #> # ℹ 25 more rows
 
-### Medicare Revalidation APIs
+### Physician & Other Practitioners
+
+``` r
+# by Provider and Service
+physician_by_service(npi = 1003000126)
+```
+
+    #> # A tibble: 1 × 6
+    #>    year rndrng_npi rndrng_prvdr      totals_srvcs     hcpcs            averages
+    #>   <dbl> <chr>      <list>            <list>           <list>           <list>  
+    #> 1  2020 1003000126 <tibble [9 × 17]> <tibble [9 × 3]> <tibble [9 × 4]> <tibble>
+
+``` r
+# by Geography and Service
+physician_by_geography(geo_desc = "Maryland", year = 2020)
+```
+
+    #> # A tibble: 5,866 × 16
+    #>     year rndrng_prvdr_geo_lvl rndrng_prvdr_geo_cd rndrng_prvdr_geo_desc hcpcs_cd
+    #>    <dbl> <chr>                <chr>               <chr>                 <chr>   
+    #>  1  2020 State                24                  Maryland              0001A   
+    #>  2  2020 State                24                  Maryland              0002A   
+    #>  3  2020 State                24                  Maryland              00100   
+    #>  4  2020 State                24                  Maryland              00103   
+    #>  5  2020 State                24                  Maryland              00103   
+    #>  6  2020 State                24                  Maryland              00104   
+    #>  7  2020 State                24                  Maryland              0011A   
+    #>  8  2020 State                24                  Maryland              00120   
+    #>  9  2020 State                24                  Maryland              00126   
+    #> 10  2020 State                24                  Maryland              00140   
+    #> # ℹ 5,856 more rows
+    #> # ℹ 11 more variables: hcpcs_desc <chr>, hcpcs_drug_ind <chr>,
+    #> #   place_of_srvc <chr>, tot_rndrng_prvdrs <int>, tot_benes <int>,
+    #> #   tot_srvcs <dbl>, tot_bene_day_srvcs <int>, avg_sbmtd_chrg <dbl>,
+    #> #   avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>, avg_mdcr_stdzd_amt <dbl>
+
+``` r
+# by Provider
+physician_by_provider(npi = 1003000126, year = 2020)
+```
+
+    #> # A tibble: 1 × 11
+    #>    year rndrng_npi rndrng_prvdr      totals_srvcs drug_srvcs med_srvcs bene_age
+    #>   <dbl> <chr>      <list>            <list>       <list>     <list>    <list>  
+    #> 1  2020 1003000126 <tibble [1 × 17]> <tibble>     <tibble>   <tibble>  <tibble>
+    #> # ℹ 4 more variables: bene_sex <list>, bene_race <list>, bene_status <list>,
+    #> #   bene_cc <list>
+
+### Provider Enrollment
+
+``` r
+provider_enrollment(npi = 1083879860)
+```
+
+    #> # A tibble: 1 × 10
+    #>   npi        pac_id     enroll_id   specialty_cd specialty_desc state first_name
+    #>   <chr>      <chr>      <chr>       <chr>        <chr>          <chr> <chr>     
+    #> 1 1083879860 8426328519 I202006170… 14-08        PRACTITIONER … PA    CHRISTOPH…
+    #> # ℹ 3 more variables: middle_name <chr>, last_name <chr>, gender <chr>
+
+### Revalidation Lists
 
 ``` r
 # Revalidation Due Date List
@@ -451,156 +581,64 @@ revalidation_group(ind_npi = 1710912209)
     #> #   individual_state_code <chr>, individual_specialty_description <chr>,
     #> #   individual_due_date <chr>, individual_total_employer_associations <int>
 
-### CMS Open Payments API
+### Taxonomy Crosswalk
 
 ``` r
-open_payments(recipient_npi = 1043218118) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
+taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 ```
 
-    #> # A tibble: 92 × 52
-    #>    program_year record_number change_type covered_recipient_type     
-    #>    <chr>        <chr>         <chr>       <chr>                      
-    #>  1 2021         1             UNCHANGED   Covered Recipient Physician
-    #>  2 2021         692021        UNCHANGED   Covered Recipient Physician
-    #>  3 2021         4385936       UNCHANGED   Covered Recipient Physician
-    #>  4 2021         4385946       UNCHANGED   Covered Recipient Physician
-    #>  5 2021         4385951       UNCHANGED   Covered Recipient Physician
-    #>  6 2021         4385956       UNCHANGED   Covered Recipient Physician
-    #>  7 2021         4579206       UNCHANGED   Covered Recipient Physician
-    #>  8 2021         4579226       UNCHANGED   Covered Recipient Physician
-    #>  9 2021         4624246       UNCHANGED   Covered Recipient Physician
-    #> 10 2021         4766366       UNCHANGED   Covered Recipient Physician
-    #> # ℹ 82 more rows
-    #> # ℹ 48 more variables: covered_recipient_profile_id <chr>,
-    #> #   covered_recipient_npi <chr>, covered_recipient_first_name <chr>,
-    #> #   covered_recipient_last_name <chr>,
-    #> #   recipient_primary_business_street_address_line1 <chr>,
-    #> #   recipient_city <chr>, recipient_state <chr>, recipient_zip_code <chr>,
-    #> #   recipient_country <chr>, covered_recipient_primary_type_1 <chr>, …
-
-### Medicare Monthly Enrollment API
+    #> # A tibble: 2 × 4
+    #>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc
+    #>   <chr>         <chr>                              <chr>          <chr>         
+    #> 1 261QR0400X    Ambulatory Health Care Facilities… B4[14]         Rehabilitatio…
+    #> 2 315D00000X    Nursing & Custodial Care Faciliti… B4[14]         Rehabilitatio…
 
 ``` r
-beneficiary_enrollment(year = 2021, geo_level = "County", state_abb = "GA", month = NULL)
+taxonomy_crosswalk(specialty_code = "B4[14]")
 ```
 
-    #> # A tibble: 960 × 22
-    #>     year month bene_geo_lvl bene_state_abrvtn bene_state_desc bene_county_desc
-    #>    <int> <chr> <chr>        <chr>             <chr>           <chr>           
-    #>  1  2021 Year  County       GA                Georgia         Appling         
-    #>  2  2021 Year  County       GA                Georgia         Atkinson        
-    #>  3  2021 Year  County       GA                Georgia         Bacon           
-    #>  4  2021 Year  County       GA                Georgia         Baker           
-    #>  5  2021 Year  County       GA                Georgia         Baldwin         
-    #>  6  2021 Year  County       GA                Georgia         Banks           
-    #>  7  2021 Year  County       GA                Georgia         Barrow          
-    #>  8  2021 Year  County       GA                Georgia         Bartow          
-    #>  9  2021 Year  County       GA                Georgia         Ben Hill        
-    #> 10  2021 Year  County       GA                Georgia         Berrien         
-    #> # ℹ 950 more rows
-    #> # ℹ 16 more variables: bene_fips_cd <chr>, tot_benes <chr>,
-    #> #   orgnl_mdcr_benes <chr>, ma_and_oth_benes <chr>, aged_tot_benes <chr>,
-    #> #   aged_esrd_benes <chr>, aged_no_esrd_benes <chr>, dsbld_tot_benes <chr>,
-    #> #   dsbld_esrd_and_esrd_only_benes <chr>, dsbld_no_esrd_benes <chr>,
-    #> #   a_b_tot_benes <chr>, a_b_orgnl_mdcr_benes <chr>,
-    #> #   a_b_ma_and_oth_benes <chr>, prscrptn_drug_tot_benes <chr>, …
-
-### Medicare Physician & Other Practitioners APIs
+    #> # A tibble: 13 × 4
+    #>    taxonomy_code taxonomy_desc                     specialty_code specialty_desc
+    #>    <chr>         <chr>                             <chr>          <chr>         
+    #>  1 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Rehabilitatio…
+    #>  2 335U00000X    Suppliers/Organ Procurement Orga… B4[14]         Organ Procure…
+    #>  3 261QM0801X    Ambulatory Health Care Facilitie… B4[14]         Community Men…
+    #>  4 261QR0401X    Ambulatory Health Care Facilitie… B4[14]         Comprehensive…
+    #>  5 261QE0700X    Ambulatory Health Care Facilitie… B4[14]         End-Stage Ren…
+    #>  6 261QF0400X    Ambulatory Health Care Facilitie… B4[14]         Federally Qua…
+    #>  7 251G00000X    Agencies/Hospice Care Community … B4[14]         Hospice       
+    #>  8 291U00000X    Laboratories/Clinical Medical La… B4[14]         Histocompatib…
+    #>  9 291900000X    Laboratories/Military Clinical M… B4[14]         <NA>          
+    #> 10 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Outpatient Ph…
+    #> 11 315D00000X    Nursing & Custodial Care Facilit… B4[14]         Rehabilitatio…
+    #> 12 282J00000X    Hospitals/Religious Non-medical … B4[14]         Religious Non…
+    #> 13 261QR1300X    Ambulatory Health Care Facilitie… B4[14]         Rural Health …
 
 ``` r
-# by Provider and Service
-physician_by_service(npi = 1003000126)
+taxonomy_crosswalk(specialty_code = "8")
 ```
 
-    #> # A tibble: 1 × 6
-    #>    year rndrng_npi rndrng_prvdr      totals_srvcs     hcpcs            averages
-    #>   <dbl> <chr>      <list>            <list>           <list>           <list>  
-    #> 1  2020 1003000126 <tibble [9 × 17]> <tibble [9 × 3]> <tibble [9 × 4]> <tibble>
+    #> # A tibble: 9 × 4
+    #>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc
+    #>   <chr>         <chr>                              <chr>          <chr>         
+    #> 1 207Q00000X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 2 207QA0401X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 3 207QA0000X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 4 207QA0505X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 5 207QB0002X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 6 207QG0300X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 7 207QH0002X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 8 207QS0010X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
+    #> 9 207QS1201X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
 
 ``` r
-# by Geography and Service
-physician_by_geography(geo_desc = "Maryland", year = 2020)
+taxonomy_crosswalk(taxonomy_code = "207Q00000X")
 ```
 
-    #> # A tibble: 5,866 × 16
-    #>     year rndrng_prvdr_geo_lvl rndrng_prvdr_geo_cd rndrng_prvdr_geo_desc hcpcs_cd
-    #>    <dbl> <chr>                <chr>               <chr>                 <chr>   
-    #>  1  2020 State                24                  Maryland              0001A   
-    #>  2  2020 State                24                  Maryland              0002A   
-    #>  3  2020 State                24                  Maryland              00100   
-    #>  4  2020 State                24                  Maryland              00103   
-    #>  5  2020 State                24                  Maryland              00103   
-    #>  6  2020 State                24                  Maryland              00104   
-    #>  7  2020 State                24                  Maryland              0011A   
-    #>  8  2020 State                24                  Maryland              00120   
-    #>  9  2020 State                24                  Maryland              00126   
-    #> 10  2020 State                24                  Maryland              00140   
-    #> # ℹ 5,856 more rows
-    #> # ℹ 11 more variables: hcpcs_desc <chr>, hcpcs_drug_ind <chr>,
-    #> #   place_of_srvc <chr>, tot_rndrng_prvdrs <int>, tot_benes <int>,
-    #> #   tot_srvcs <dbl>, tot_bene_day_srvcs <int>, avg_sbmtd_chrg <dbl>,
-    #> #   avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>, avg_mdcr_stdzd_amt <dbl>
-
-``` r
-# by Provider
-physician_by_provider(npi = 1003000126, year = 2020)
-```
-
-    #> # A tibble: 1 × 11
-    #>    year rndrng_npi rndrng_prvdr      totals_srvcs drug_srvcs med_srvcs bene_age
-    #>   <dbl> <chr>      <list>            <list>       <list>     <list>    <list>  
-    #> 1  2020 1003000126 <tibble [1 × 17]> <tibble>     <tibble>   <tibble>  <tibble>
-    #> # ℹ 4 more variables: bene_sex <list>, bene_race <list>, bene_status <list>,
-    #> #   bene_cc <list>
-
-### Medicare Chronic Conditions APIs
-
-``` r
-# Multiple Chronic Conditions
-cc_multiple(year = 2007, geo_level = "National", demo_level = "Race")
-```
-
-    #> # A tibble: 60 × 13
-    #>     year bene_geo_lvl bene_geo_desc bene_geo_cd bene_age_lvl bene_demo_lvl
-    #>    <dbl> <chr>        <chr>         <chr>       <chr>        <chr>        
-    #>  1  2007 National     National      ""          65+          Race         
-    #>  2  2007 National     National      ""          65+          Race         
-    #>  3  2007 National     National      ""          65+          Race         
-    #>  4  2007 National     National      ""          65+          Race         
-    #>  5  2007 National     National      ""          65+          Race         
-    #>  6  2007 National     National      ""          65+          Race         
-    #>  7  2007 National     National      ""          65+          Race         
-    #>  8  2007 National     National      ""          65+          Race         
-    #>  9  2007 National     National      ""          65+          Race         
-    #> 10  2007 National     National      ""          65+          Race         
-    #> # ℹ 50 more rows
-    #> # ℹ 7 more variables: bene_demo_desc <chr>, bene_mcc <chr>, prvlnc <dbl>,
-    #> #   tot_mdcr_stdzd_pymt_pc <dbl>, tot_mdcr_pymt_pc <dbl>,
-    #> #   hosp_readmsn_rate <dbl>, er_visits_per_1000_benes <dbl>
-
-``` r
-# Specific Chronic Conditions
-cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
-```
-
-    #> # A tibble: 34,020 × 13
-    #>     year bene_geo_lvl bene_geo_desc bene_geo_cd bene_age_lvl bene_demo_lvl
-    #>    <dbl> <chr>        <chr>         <chr>       <chr>        <chr>        
-    #>  1  2018 State        Alabama       01          All          All          
-    #>  2  2018 State        Alabama       01          65+          Dual Status  
-    #>  3  2018 State        Alabama       01          <65          Dual Status  
-    #>  4  2018 State        Alabama       01          All          Dual Status  
-    #>  5  2018 State        Alabama       01          65+          Dual Status  
-    #>  6  2018 State        Alabama       01          <65          Dual Status  
-    #>  7  2018 State        Alabama       01          All          Dual Status  
-    #>  8  2018 State        Alabama       01          65+          Sex          
-    #>  9  2018 State        Alabama       01          <65          Sex          
-    #> 10  2018 State        Alabama       01          All          Sex          
-    #> # ℹ 34,010 more rows
-    #> # ℹ 7 more variables: bene_demo_desc <chr>, bene_cond <chr>, prvlnc <chr>,
-    #> #   tot_mdcr_stdzd_pymt_pc <chr>, tot_mdcr_pymt_pc <chr>,
-    #> #   hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>
+    #> # A tibble: 1 × 4
+    #>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc
+    #>   <chr>         <chr>                              <chr>          <chr>         
+    #> 1 207Q00000X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
 
 ------------------------------------------------------------------------
 

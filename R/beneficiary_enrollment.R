@@ -32,9 +32,9 @@
 #' @param month Time frame of Medicare enrollment; options are `Year` or any
 #'    month within the 12-month time span of the month in the data set's version
 #'    name (listed [here](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs))
-#' @param geo_level Geographic level of data; options are `National`, `State`,
+#' @param level Geographic level of data; options are `National`, `State`,
 #'    and `County`
-#' @param state_abb Two-letter state abbreviation of beneficiary residence
+#' @param state Two-letter state abbreviation of beneficiary residence
 #' @param state_name Full state name of beneficiary residence
 #' @param county County of beneficiary residence
 #' @param fips FIPS code of beneficiary residence
@@ -44,46 +44,45 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' beneficiary_enrollment(month = "Year",
-#'                        geo_level = "County",
-#'                        state_abb = "AL",
+#' beneficiary_enrollment(year = NULL,
+#'                        month = "Year",
+#'                        level = "County",
+#'                        state = "AL",
 #'                        county = "Autauga")
 #'
 #' beneficiary_enrollment(year = 2021,
-#'                        geo_level = "County",
+#'                        level = "County",
 #'                        fips = "01001")
 #'
 #' beneficiary_enrollment(year = 2022,
 #'                        month = "July",
-#'                        geo_level = "State",
+#'                        level = "State",
 #'                        state_name = "Georgia")
 #'
-#' beneficiary_enrollment(geo_level = "State",
+#' beneficiary_enrollment(level = "State",
 #'                        fips = "10")
 #' @autoglobal
 #' @export
 
 beneficiary_enrollment <- function(year        = 2021,
                                    month       = "Year",
-                                   geo_level   = c("National", "State", "County"),
-                                   state_abb   = NULL,
+                                   level       = c("National", "State", "County"),
+                                   state       = NULL,
                                    state_name  = NULL,
                                    county      = NULL,
                                    fips        = NULL,
                                    clean_names = TRUE) {
 
   # match args ----------------------------------------------------
-  #month <- rlang::arg_match(month, values = c("Year", month.name))
-  geo_level <- rlang::arg_match(geo_level)
-  #state_abb <- rlang::arg_match(state_abb, values = state.abb)
+  level <- rlang::arg_match(level)
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                      ~x,        ~y,
                  "YEAR",      year,
                 "MONTH",     month,
-         "BENE_GEO_LVL", geo_level,
-    "BENE_STATE_ABRVTN", state_abb,
+         "BENE_GEO_LVL",     level,
+    "BENE_STATE_ABRVTN",     state,
       "BENE_STATE_DESC",state_name,
      "BENE_COUNTY_DESC",    county,
          "BENE_FIPS_CD",      fips)
@@ -94,8 +93,10 @@ beneficiary_enrollment <- function(year        = 2021,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "30fe2d89-c56c-4a48-8e3a-3d07ad995c0b"
+  id     <- cms_update_ids("Medicare Monthly Enrollment")$distribution[2]
+  #id     <- "30fe2d89-c56c-4a48-8e3a-3d07ad995c0b"
   post   <- "/data.json?"
+  #post   <- "/data?"
   url    <- paste0(http, id, post, params_args)
 
   # create request ----------------------------------------------------------
@@ -112,14 +113,42 @@ beneficiary_enrollment <- function(year        = 2021,
     return(tibble::tibble())
   } else {
 
-    results <- tibble::tibble(httr2::resp_body_json(
-      response,
-      check_type = FALSE,
-      simplifyVector = TRUE))
+    results <- tibble::tibble(httr2::resp_body_json(response,
+      check_type = FALSE, simplifyVector = TRUE))
 
   }
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
-    results <- dplyr::rename_with(results, str_to_snakecase)}
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    dplyr::rename(level                       = bene_geo_lvl,
+                  state                       = bene_state_abrvtn,
+                  state_name                  = bene_state_desc,
+                  county                      = bene_county_desc,
+                  fips                        = bene_fips_cd,
+                  bene_total                  = tot_benes,
+                  bene_orig                   = orgnl_mdcr_benes,
+                  bene_ma_oth                 = ma_and_oth_benes,
+                  bene_aged_total             = aged_tot_benes,
+                  bene_aged_esrd              = aged_esrd_benes,
+                  bene_aged_no_esrd           = aged_no_esrd_benes,
+                  bene_dsb_total              = dsbld_tot_benes,
+                  bene_dsb_esrd_and_only_esrd = dsbld_esrd_and_esrd_only_benes,
+                  bene_dsb_no_esrd            = dsbld_no_esrd_benes,
+                  bene_ab_total               = a_b_tot_benes,
+                  bene_ab_orig                = a_b_orgnl_mdcr_benes,
+                  bene_ab_ma_oth              = a_b_ma_and_oth_benes,
+                  bene_rx_total               = prscrptn_drug_tot_benes,
+                  bene_rx_pdp                 = prscrptn_drug_pdp_benes,
+                  bene_rx_mapd                = prscrptn_drug_mapd_benes,
+                  bene_rx_elig = prscrptn_drug_deemed_eligible_full_lis_benes,
+                  bene_rx_full = prscrptn_drug_full_lis_benes,
+                  bene_rx_part = prscrptn_drug_partial_lis_benes,
+                  bene_rx_none = prscrptn_drug_no_lis_benes) |>
+    dplyr::mutate(fips = dplyr::na_if(fips, "")) |>
+    dplyr::filter(state != "UK") |>
+    dplyr::filter(county != "Unknown") |>
+    #dplyr::mutate(dplyr::across(dplyr::contains("bene"), ~dplyr::na_if(., "*"))) |>
+    dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
+  }
   return(results)
 }

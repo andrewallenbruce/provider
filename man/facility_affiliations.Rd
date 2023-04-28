@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 facility_affiliations(
   npi = NULL,
-  pac_id_ind = NULL,
+  pac_id = NULL,
   last_name = NULL,
   first_name = NULL,
   middle_name = NULL,
@@ -23,7 +23,7 @@ facility_affiliations(
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id}{Unique individual clinician ID assigned by PECOS}
 
 \item{last_name}{Individual clinician last name}
 
