@@ -86,29 +86,20 @@ across a variety of CMS sources.
 ### Beneficiary Enrollment
 
 ``` r
-beneficiary_enrollment(year = 2021, level = "County", state = "GA", month = NULL)
+beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "10")
 ```
 
-    #> # A tibble: 2,067 × 26
-    #>     year month level  state state_name county   fips  bene_total bene_orig
-    #>    <int> <chr> <chr>  <chr> <chr>      <chr>    <chr>      <int>     <int>
-    #>  1  2021 Year  County GA    Georgia    Appling  13001       3919      1919
-    #>  2  2021 Year  County GA    Georgia    Atkinson 13003       1376       648
-    #>  3  2021 Year  County GA    Georgia    Bacon    13005       2229      1216
-    #>  4  2021 Year  County GA    Georgia    Baker    13007        715       291
-    #>  5  2021 Year  County GA    Georgia    Baldwin  13009       9167      4041
-    #>  6  2021 Year  County GA    Georgia    Banks    13011       3735      1865
-    #>  7  2021 Year  County GA    Georgia    Barrow   13013      13950      7096
-    #>  8  2021 Year  County GA    Georgia    Bartow   13015      19436     10107
-    #>  9  2021 Year  County GA    Georgia    Ben Hill 13017       3830      1816
-    #> 10  2021 Year  County GA    Georgia    Berrien  13019       3813      2127
-    #> # ℹ 2,057 more rows
+    #> # A tibble: 1 × 26
+    #>    year month level state state_name county fips  bene_total bene_orig
+    #>   <int> <chr> <chr> <chr> <chr>      <chr>  <chr>      <int>     <int>
+    #> 1  2021 Year  State DE    Delaware   Total  10        222814    171134
     #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
     #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
     #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
     #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
-    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>, …
+    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>,
+    #> #   bene_rx_none <int>
 
 ``` r
 beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "AL", county = "Autauga")
@@ -134,6 +125,32 @@ beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "A
     #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
     #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>,
     #> #   bene_rx_none <int>
+
+``` r
+beneficiary_enrollment(year = 2021, level = "County", state = "GA") |> 
+  dplyr::filter(month %in% month.name)
+```
+
+    #> # A tibble: 1,908 × 26
+    #>     year month   level  state state_name county   fips  bene_total bene_orig
+    #>    <int> <chr>   <chr>  <chr> <chr>      <chr>    <chr>      <int>     <int>
+    #>  1  2021 January County GA    Georgia    Appling  13001       3909      1941
+    #>  2  2021 January County GA    Georgia    Atkinson 13003       1387       672
+    #>  3  2021 January County GA    Georgia    Bacon    13005       2255      1254
+    #>  4  2021 January County GA    Georgia    Baker    13007        715       301
+    #>  5  2021 January County GA    Georgia    Baldwin  13009       9175      4095
+    #>  6  2021 January County GA    Georgia    Banks    13011       3710      1886
+    #>  7  2021 January County GA    Georgia    Barrow   13013      13856      7122
+    #>  8  2021 January County GA    Georgia    Bartow   13015      19346     10154
+    #>  9  2021 January County GA    Georgia    Ben Hill 13017       3853      1866
+    #> 10  2021 January County GA    Georgia    Berrien  13019       3821      2190
+    #> # ℹ 1,898 more rows
+    #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
+    #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
+    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
+    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
+    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
+    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>, …
 
 ### Chronic Conditions
 
@@ -326,7 +343,7 @@ nppes_npi(npi = 1316405939)
     #> # A tibble: 1 × 24
     #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
     #>   <chr>  <chr>            <date>           <Duration>               <date>      
-    #> 1 13164… NPI-1            2019-03-04       130982400s (~4.15 years) 2023-04-06  
+    #> 1 13164… NPI-1            2019-03-04       131068800s (~4.15 years) 2023-04-06  
     #> # ℹ 19 more variables: certification_date <date>, status <chr>,
     #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
     #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
@@ -347,23 +364,23 @@ c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055,
     #> # A tibble: 17 × 26
     #>    npi        enumeration_type enumeration_date enumeration_duration     
     #>    <chr>      <chr>            <date>           <Duration>               
-    #>  1 1710975040 NPI-1            2005-10-11       553651200s (~17.54 years)
-    #>  2 1336413418 NPI-2            2012-03-07       351561600s (~11.14 years)
-    #>  3 1003026055 NPI-1            2007-05-22       502848000s (~15.93 years)
-    #>  4 1316405939 NPI-1            2019-03-04       130982400s (~4.15 years) 
-    #>  5 1720392988 NPI-1            2010-07-29       402278400s (~12.75 years)
-    #>  6 1518184605 NPI-1            2007-04-19       505699200s (~16.02 years)
-    #>  7 1922056829 NPI-1            2006-05-04       535939200s (~16.98 years)
-    #>  8 1083879860 NPI-1            2008-07-22       465955200s (~14.77 years)
-    #>  9 1346243805 NPI-1            2005-05-27       565488000s (~17.92 years)
-    #> 10 1679576722 NPI-1            2005-05-23       565833600s (~17.93 years)
-    #> 11 1093718892 NPI-1            2005-05-24       565747200s (~17.93 years)
-    #> 12 1477556405 NPI-1            2005-05-23       565833600s (~17.93 years)
-    #> 13 1770586539 NPI-1            2005-05-24       565747200s (~17.93 years)
-    #> 14 1871596692 NPI-1            2005-05-24       565747200s (~17.93 years)
-    #> 15 1174526925 NPI-1            2005-05-24       565747200s (~17.93 years)
-    #> 16 1801899513 NPI-1            2005-05-27       565488000s (~17.92 years)
-    #> 17 1316405939 NPI-1            2019-03-04       130982400s (~4.15 years) 
+    #>  1 1710975040 NPI-1            2005-10-11       553737600s (~17.55 years)
+    #>  2 1336413418 NPI-2            2012-03-07       351648000s (~11.14 years)
+    #>  3 1003026055 NPI-1            2007-05-22       502934400s (~15.94 years)
+    #>  4 1316405939 NPI-1            2019-03-04       131068800s (~4.15 years) 
+    #>  5 1720392988 NPI-1            2010-07-29       402364800s (~12.75 years)
+    #>  6 1518184605 NPI-1            2007-04-19       505785600s (~16.03 years)
+    #>  7 1922056829 NPI-1            2006-05-04       536025600s (~16.99 years)
+    #>  8 1083879860 NPI-1            2008-07-22       466041600s (~14.77 years)
+    #>  9 1346243805 NPI-1            2005-05-27       565574400s (~17.92 years)
+    #> 10 1679576722 NPI-1            2005-05-23       565920000s (~17.93 years)
+    #> 11 1093718892 NPI-1            2005-05-24       565833600s (~17.93 years)
+    #> 12 1477556405 NPI-1            2005-05-23       565920000s (~17.93 years)
+    #> 13 1770586539 NPI-1            2005-05-24       565833600s (~17.93 years)
+    #> 14 1871596692 NPI-1            2005-05-24       565833600s (~17.93 years)
+    #> 15 1174526925 NPI-1            2005-05-24       565833600s (~17.93 years)
+    #> 16 1801899513 NPI-1            2005-05-27       565574400s (~17.92 years)
+    #> 17 1316405939 NPI-1            2019-03-04       131068800s (~4.15 years) 
     #> # ℹ 22 more variables: last_updated <date>, status <chr>, first_name <chr>,
     #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
     #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,

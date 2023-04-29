@@ -24,10 +24,10 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
+#' \dontrun{
 #' #addl_phone_numbers(npi = 1407263999)
 #' #addl_phone_numbers(pac_id_ind = "0042100190")
 #' #addl_phone_numbers(pac_id_org = 6608028899)
-#' \dontrun{
 #' #addl_phone_numbers(city = "Atlanta")
 #' addl_phone_numbers(zip = 303421606)
 #' }

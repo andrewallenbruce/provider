@@ -51,14 +51,13 @@ missing_information <- function(npi         = NULL,
   response <- request |> httr2::req_perform()
 
   # check response status ---------------------------------------------------
-  httr2::resp_check_status(response)
+  if (httr2::resp_header(response, "content-length") == "0") {
+
+    return(cli::cli_alert_danger("No results for NPI: {.npi {npi}}"))
+
+  }
 
   # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
-    return(tibble::tibble())
-
-  } else {
-
     results <- tibble::tibble(httr2::resp_body_json(
       response,
       check_type = FALSE,
@@ -69,7 +68,6 @@ missing_information <- function(npi         = NULL,
                                col = " Provider Name",
                                into = c("last_name", "first_name"),
                                sep = ",")
-  }
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
     results <- dplyr::rename_with(results, str_to_snakecase)}

@@ -11,7 +11,7 @@ pending_applications(
   npi = NULL,
   last_name = NULL,
   first_name = NULL,
-  type = c("physician", "non-physician"),
+  type = NULL,
   clean_names = TRUE
 )
 }

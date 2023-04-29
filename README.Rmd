@@ -74,8 +74,10 @@ provider:::function_tbl() |>
 ### Beneficiary Enrollment
 
 ```{r}
-beneficiary_enrollment(year = 2021, level = "County", state = "GA", month = NULL)
+beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "10")
 beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "AL", county = "Autauga")
+beneficiary_enrollment(year = 2021, level = "County", state = "GA") |> 
+  dplyr::filter(month %in% month.name)
 ```
 
 ### Chronic Conditions

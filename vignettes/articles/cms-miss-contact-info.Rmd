@@ -50,127 +50,55 @@ row("Information on Providers That are Missing Digital Contact Information in th
 
 <br>
 
-Digital contact information, also known as [Endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html), provides a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses (for example, Direct address, FHIR server URL, query endpoint, or other digital contact information) of potential exchange partners to facilitate this information exchange.
+> Digital contact information, also known as [Endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html), 
+> provides a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. 
+> Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses 
+> (for example, Direct address, FHIR server URL, query endpoint, or other digital contact information) of potential exchange partners to 
+> facilitate this information exchange.
 
 <br>
-
-## `missing_information() != nppes_npi()`
 
 A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry.
 
-::: row
-::: col-md-6
 
-```{r eval=FALSE}
-missing_information(npi = 1144224569)
-```
-
-```{r echo=FALSE}
+```{r}
 missing_information(npi = 1144224569) |> 
-  kableExtra::kbl(col.names = c("NPI", "Last Name", "First Name")) |> 
-  kableExtra::kable_styling(full_width = FALSE)
+  gt::gt() |> 
+  gt::cols_label(npi = "NPI", last_name = "Last Name", first_name = "First Name") |> 
+  gt::tab_header(title = gt::md("`missing_information()`")) |>
+  gtExtras::gt_theme_nytimes()
 ```
 
-:::
+A provider that does not appear has entered Endpoint information into the NPPES NPI Registry.
 
-::: col-md-6
-
-```{r eval=FALSE}
-nppes_npi(npi = 1144224569)
-```
-
-```{r echo=FALSE}
-nppes_npi(npi = 1144224569) |> 
-  dplyr::select(npi = number, 
-                name, 
-                endpoints) |> 
-  dplyr::mutate(endpoints = NA) |> # empty list
-  kableExtra::kbl(col.names = c("NPI", "Name", "Endpoints")) |> 
-  kableExtra::kable_styling(full_width = FALSE)
-```
-
-:::
-:::
-
-<br>
-<br>
-
-## `nppes_npi() != missing_information()`
-
-A provider with Endpoint information in the NPPES will not appear in the Missing Information search results.
-
-::: row
-::: col-md-6
-
-```{r eval=FALSE}
-nppes_npi(npi = 1144224569)
-```
-
-```{r echo=FALSE}
-nppes_npi(1003000423) |> 
-  dplyr::select(number, 
-                name, 
-                endpoints) |> 
-  tidyr::unnest_wider(endpoints, 
-                      names_sep = NULL, 
-                      simplify = TRUE, 
-                      strict = TRUE) |> 
-  dplyr::select(NPI = number, 
-                dplyr::contains("endpoint")) |> 
-  tidyr::pivot_longer(cols = dplyr::contains("endpoint"), 
-                      names_to = "Description", 
-                      values_to = "Endpoint") |> 
-  dplyr::select(-Description) |> 
-  kableExtra::kbl() |> 
-  kableExtra::collapse_rows(columns = 1:2, valign = "top") |> 
-  kableExtra::kable_styling(full_width = FALSE)
-```
-
-:::
-
-::: col-md-6
-
-```{r eval=FALSE}
+```{r, message=TRUE}
 missing_information(npi = 1003000423)
 ```
 
 
-```{r echo=FALSE}
-missing_information(npi = 1003000423) |> 
-kableExtra::kbl(col.names = c("NPI", "Last Name", "First Name")) |> 
-  kableExtra::kable_styling(full_width = FALSE)
-```
-
-
-:::
-:::
-
 <br>
 
-### API Data Dictionary
+### Data Dictionary
 
 ```{r echo=FALSE}
 dd <- tibble::tibble(
-  Variable = c("`npi`", "`provider_name`"),
-  Description = c("National Provider Identifier", "Provider Name"),
+  Variable = c("`npi`", "`last_name`", "`first_name`"),
+  Description = c("National Provider Identifier", "Last Name", "First Name"),
   Definition = c("The provider's 10-digit National Provider Identifier.", 
-                 "Name of the provider. It consists of the legal last name 
-                 followed by the first name, separated by a comma."))
+                 "Last name of the provider.", "First name of the provider."))
 dd |> 
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
+  #gtExtras::gt_theme_nytimes() |> 
   gtExtras::gt_merge_stack(col1 = Description, 
                            col2 = Definition,
                            small_cap = FALSE,
                            font_size = c("16px", "14px"),
                            font_weight = c("bold", "normal"),
                            palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, 
-                  color = "gray", 
-                  add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "solid")
+  gt::opt_stylize(style = 6, color = "red", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |>
+  gt::opt_table_outline(style = "none")
 ```
 
 <br>

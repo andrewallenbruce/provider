@@ -8,9 +8,9 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 beneficiary_enrollment(
-  year = 2021,
-  month = "Year",
-  level = c("National", "State", "County"),
+  year = NULL,
+  month = NULL,
+  level = NULL,
   state = NULL,
   state_name = NULL,
   county = NULL,
@@ -80,15 +80,12 @@ beneficiary_enrollment(year = NULL,
                        state = "AL",
                        county = "Autauga")
 
-beneficiary_enrollment(year = 2021,
-                       level = "County",
-                       fips = "01001")
+beneficiary_enrollment(year = 2021, level = "County", fips = "01001")
 
 beneficiary_enrollment(year = 2022,
                        month = "July",
                        level = "State",
                        state_name = "Georgia")
 
-beneficiary_enrollment(level = "State",
-                       fips = "10")
+beneficiary_enrollment(level = "State", fips = "10")
 }

@@ -33,11 +33,11 @@
 pending_applications <- function(npi         = NULL,
                                  last_name   = NULL,
                                  first_name  = NULL,
-                                 type = c("physician", "non-physician"),
+                                 type        = NULL,
                                  clean_names = TRUE) {
 
   # match geo_level args ----------------------------------------------------
-  type <- rlang::arg_match(type)
+  type <- rlang::arg_match(type, c("physician", "non-physician"))
 
   # update distribution ids -------------------------------------------------
   id <- dplyr::case_when(
@@ -67,18 +67,16 @@ pending_applications <- function(npi         = NULL,
   # send request ------------------------------------------------------------
   response <- request |> httr2::req_perform()
 
-  # check response status ---------------------------------------------------
-  httr2::resp_check_status(response)
-
   # no search results returns empty tibble ----------------------------------
   if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
-    return(cli::cli_alert_danger("NPI: {.npi {npi}}"))
-  } else {
+
+    return(cli::cli_alert_danger("No results for NPI: {.npi {npi}}"))
+
+    }
 
     results <- tibble::tibble(httr2::resp_body_json(response,
                                                     check_type = FALSE,
                                                     simplifyVector = TRUE))
-  }
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
