@@ -117,7 +117,7 @@
 
 
 
-<script src="cms-miss-contact-info_files/kePrint-0.0.1/kePrint.js"></script><link href="cms-miss-contact-info_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>CMS Missing Digital Contact Information API</h1>
@@ -143,6 +143,7 @@
 <p><br></p>
 <div class="custom_note">Information on Providers That are Missing Digital Contact Information in the NPPES System</div>
 <p><br></p>
+<blockquote>
 <p>Digital contact information, also known as <a href="https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html" class="external-link">Endpoints</a>,
 provides a secure way for health care entities to send authenticated,
 encrypted health information to trusted recipients over the internet.
@@ -151,97 +152,37 @@ information exchange need accurate information about the electronic
 addresses (for example, Direct address, FHIR server URL, query endpoint,
 or other digital contact information) of potential exchange partners to
 facilitate this information exchange.</p>
+</blockquote>
 <p><br></p>
-<div class="section level2">
-<h2 id="missing_information-nppes_npi">
-<code>missing_information() != nppes_npi()</code><a class="anchor" aria-label="anchor" href="#missing_information-nppes_npi"></a>
-</h2>
 <p>A provider that appears in the search results of the Missing
 Information API has no Endpoints entered into the NPPES NPI
 Registry.</p>
-<div class="row">
-<div class="col-md-6">
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
-<table class="table table" style="width: auto !important; margin-left: auto; margin-right: auto;">
-<thead><tr>
-<th style="text-align:left;">
-NPI
-</th>
-<th style="text-align:left;">
-Last Name
-</th>
-<th style="text-align:left;">
-First Name
-</th>
-</tr></thead>
-<tbody><tr>
-<td style="text-align:left;">
-1144224569
-</td>
-<td style="text-align:left;">
-Clouse
-</td>
-<td style="text-align:left;">
-John
-</td>
-</tr></tbody>
-</table>
-</div>
-<div class="col-md-6">
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `number` doesn't exist.</span></span></code></pre>
-</div>
-</div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="nppes_npi-missing_information">
-<code>nppes_npi() != missing_information()</code><a class="anchor" aria-label="anchor" href="#nppes_npi-missing_information"></a>
-</h2>
-<p>A provider with Endpoint information in the NPPES will not appear in
-the Missing Information search results.</p>
-<div class="row">
-<div class="col-md-6">
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `number` doesn't exist.</span></span></code></pre>
-</div>
-<div class="col-md-6">
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in dimnames(x) &lt;- dn: length of 'dimnames' [2] not equal to array extent</span></span></code></pre>
-</div>
-</div>
-<p><br></p>
-<div class="section level3">
-<h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
-</h3>
-<div id="arzamodtwx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"NPI"</span>, last_name <span class="op">=</span> <span class="st">"Last Name"</span>, first_name <span class="op">=</span> <span class="st">"First Name"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"`missing_information()`"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_nytimes.html" class="external-link">gt_theme_nytimes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="cfqpkzvtqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#arzamodtwx table {
+#cfqpkzvtqt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#arzamodtwx thead, #arzamodtwx tbody, #arzamodtwx tfoot, #arzamodtwx tr, #arzamodtwx td, #arzamodtwx th {
+#cfqpkzvtqt thead, #cfqpkzvtqt tbody, #cfqpkzvtqt tfoot, #cfqpkzvtqt tr, #cfqpkzvtqt td, #cfqpkzvtqt th {
   border-style: none;
 }
 
-#arzamodtwx p {
+#cfqpkzvtqt p {
   margin: 0;
   padding: 0;
 }
 
-#arzamodtwx .gt_table {
+#cfqpkzvtqt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -253,26 +194,26 @@ the Missing Information search results.</p>
   font-style: normal;
   background-color: #FFFFFF;
   width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #D3D3D3;
-  border-right-style: solid;
-  border-right-width: 3px;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
   border-right-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: solid;
-  border-left-width: 3px;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_caption {
+#cfqpkzvtqt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#arzamodtwx .gt_title {
+#cfqpkzvtqt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -284,7 +225,7 @@ the Missing Information search results.</p>
   border-bottom-width: 0;
 }
 
-#arzamodtwx .gt_subtitle {
+#cfqpkzvtqt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -296,7 +237,7 @@ the Missing Information search results.</p>
   border-top-width: 0;
 }
 
-#arzamodtwx .gt_heading {
+#cfqpkzvtqt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -308,19 +249,19 @@ the Missing Information search results.</p>
   border-right-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_bottom_border {
-  border-bottom-style: solid;
+#cfqpkzvtqt .gt_bottom_border {
+  border-bottom-style: none;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_col_headings {
-  border-top-style: solid;
+#cfqpkzvtqt .gt_col_headings {
+  border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
-  border-bottom-style: solid;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
   border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #334422;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -329,9 +270,9 @@ the Missing Information search results.</p>
   border-right-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_col_heading {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
+#cfqpkzvtqt .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
   font-size: 12px;
   font-weight: normal;
   text-transform: inherit;
@@ -349,9 +290,9 @@ the Missing Information search results.</p>
   overflow-x: hidden;
 }
 
-#arzamodtwx .gt_column_spanner_outer {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
+#cfqpkzvtqt .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
   font-size: 12px;
   font-weight: normal;
   text-transform: inherit;
@@ -361,18 +302,18 @@ the Missing Information search results.</p>
   padding-right: 4px;
 }
 
-#arzamodtwx .gt_column_spanner_outer:first-child {
+#cfqpkzvtqt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#arzamodtwx .gt_column_spanner_outer:last-child {
+#cfqpkzvtqt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#arzamodtwx .gt_column_spanner {
-  border-bottom-style: solid;
+#cfqpkzvtqt .gt_column_spanner {
+  border-bottom-style: none;
   border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #334422;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -381,11 +322,11 @@ the Missing Information search results.</p>
   width: 100%;
 }
 
-#arzamodtwx .gt_spanner_row {
+#cfqpkzvtqt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#arzamodtwx .gt_group_heading {
+#cfqpkzvtqt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -397,10 +338,10 @@ the Missing Information search results.</p>
   text-transform: inherit;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -411,7 +352,7 @@ the Missing Information search results.</p>
   text-align: left;
 }
 
-#arzamodtwx .gt_empty_group_heading {
+#cfqpkzvtqt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -419,24 +360,491 @@ the Missing Information search results.</p>
   font-weight: initial;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #D3D3D3;
   vertical-align: middle;
 }
 
-#arzamodtwx .gt_from_md > :first-child {
+#cfqpkzvtqt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#arzamodtwx .gt_from_md > :last-child {
+#cfqpkzvtqt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#arzamodtwx .gt_row {
+#cfqpkzvtqt .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#cfqpkzvtqt .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfqpkzvtqt .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#cfqpkzvtqt .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#cfqpkzvtqt .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#cfqpkzvtqt .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfqpkzvtqt .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#cfqpkzvtqt .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfqpkzvtqt .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#cfqpkzvtqt .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#cfqpkzvtqt .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfqpkzvtqt .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#cfqpkzvtqt .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#cfqpkzvtqt .gt_left {
+  text-align: left;
+}
+
+#cfqpkzvtqt .gt_center {
+  text-align: center;
+}
+
+#cfqpkzvtqt .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#cfqpkzvtqt .gt_font_normal {
+  font-weight: normal;
+}
+
+#cfqpkzvtqt .gt_font_bold {
+  font-weight: bold;
+}
+
+#cfqpkzvtqt .gt_font_italic {
+  font-style: italic;
+}
+
+#cfqpkzvtqt .gt_super {
+  font-size: 65%;
+}
+
+#cfqpkzvtqt .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#cfqpkzvtqt .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#cfqpkzvtqt .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#cfqpkzvtqt .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#cfqpkzvtqt .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#cfqpkzvtqt .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#cfqpkzvtqt .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style="font-family: 'Libre Franklin'; font-weight: 800;"><code><a href="../reference/missing_information.html">missing_information()</a></code></td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="NPI">NPI</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Last Name">Last Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="First Name">First Name</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body"><tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">1144224569</td>
+<td headers="last_name" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">Clouse</td>
+<td headers="first_name" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">John</td>
+</tr></tbody>
+</table>
+</div>
+<p>A provider that does not appear has entered Endpoint information into
+the NPPES NPI Registry.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> No results for NPI: 1003000423</span></span></code></pre></div>
+<p><br></p>
+<div class="section level3">
+<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h3>
+<div id="paokpdfwpt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#paokpdfwpt table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#paokpdfwpt thead, #paokpdfwpt tbody, #paokpdfwpt tfoot, #paokpdfwpt tr, #paokpdfwpt td, #paokpdfwpt th {
+  border-style: none;
+}
+
+#paokpdfwpt p {
+  margin: 0;
+  padding: 0;
+}
+
+#paokpdfwpt .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#paokpdfwpt .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#paokpdfwpt .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#paokpdfwpt .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#paokpdfwpt .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#paokpdfwpt .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#paokpdfwpt .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#paokpdfwpt .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#paokpdfwpt .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#paokpdfwpt .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#paokpdfwpt .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#paokpdfwpt .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#paokpdfwpt .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#paokpdfwpt .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#paokpdfwpt .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: middle;
+}
+
+#paokpdfwpt .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#paokpdfwpt .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#paokpdfwpt .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -453,9 +861,9 @@ the Missing Information search results.</p>
   overflow-x: hidden;
 }
 
-#arzamodtwx .gt_stub {
-  color: #FFFFFF;
-  background-color: #929292;
+#paokpdfwpt .gt_stub {
+  color: #333333;
+  background-color: #FFCCC7;
   font-size: 100%;
   font-weight: initial;
   text-transform: inherit;
@@ -466,7 +874,7 @@ the Missing Information search results.</p>
   padding-right: 5px;
 }
 
-#arzamodtwx .gt_stub_row_group {
+#paokpdfwpt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -480,15 +888,15 @@ the Missing Information search results.</p>
   vertical-align: top;
 }
 
-#arzamodtwx .gt_row_group_first td {
+#paokpdfwpt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#arzamodtwx .gt_row_group_first th {
+#paokpdfwpt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#arzamodtwx .gt_summary_row {
+#paokpdfwpt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -498,28 +906,28 @@ the Missing Information search results.</p>
   padding-right: 5px;
 }
 
-#arzamodtwx .gt_first_summary_row {
+#paokpdfwpt .gt_first_summary_row {
   border-top-style: solid;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
 }
 
-#arzamodtwx .gt_first_summary_row.thick {
+#paokpdfwpt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#arzamodtwx .gt_last_summary_row {
+#paokpdfwpt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#arzamodtwx .gt_grand_summary_row {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
+#paokpdfwpt .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
   text-transform: inherit;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -527,40 +935,40 @@ the Missing Information search results.</p>
   padding-right: 5px;
 }
 
-#arzamodtwx .gt_first_grand_summary_row {
+#paokpdfwpt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-style: double;
   border-top-width: 6px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
 }
 
-#arzamodtwx .gt_last_grand_summary_row_top {
+#paokpdfwpt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: double;
   border-bottom-width: 6px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#arzamodtwx .gt_striped {
-  background-color: #F4F4F4;
+#paokpdfwpt .gt_striped {
+  background-color: #FEEDEC;
 }
 
-#arzamodtwx .gt_table_body {
+#paokpdfwpt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#arzamodtwx .gt_footnotes {
+#paokpdfwpt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -574,7 +982,7 @@ the Missing Information search results.</p>
   border-right-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_footnote {
+#paokpdfwpt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -583,7 +991,7 @@ the Missing Information search results.</p>
   padding-right: 5px;
 }
 
-#arzamodtwx .gt_sourcenotes {
+#paokpdfwpt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -597,7 +1005,7 @@ the Missing Information search results.</p>
   border-right-color: #D3D3D3;
 }
 
-#arzamodtwx .gt_sourcenote {
+#paokpdfwpt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -605,89 +1013,97 @@ the Missing Information search results.</p>
   padding-right: 5px;
 }
 
-#arzamodtwx .gt_left {
+#paokpdfwpt .gt_left {
   text-align: left;
 }
 
-#arzamodtwx .gt_center {
+#paokpdfwpt .gt_center {
   text-align: center;
 }
 
-#arzamodtwx .gt_right {
+#paokpdfwpt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#arzamodtwx .gt_font_normal {
+#paokpdfwpt .gt_font_normal {
   font-weight: normal;
 }
 
-#arzamodtwx .gt_font_bold {
+#paokpdfwpt .gt_font_bold {
   font-weight: bold;
 }
 
-#arzamodtwx .gt_font_italic {
+#paokpdfwpt .gt_font_italic {
   font-style: italic;
 }
 
-#arzamodtwx .gt_super {
+#paokpdfwpt .gt_super {
   font-size: 65%;
 }
 
-#arzamodtwx .gt_footnote_marks {
+#paokpdfwpt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#arzamodtwx .gt_asterisk {
+#paokpdfwpt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#arzamodtwx .gt_indent_1 {
+#paokpdfwpt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#arzamodtwx .gt_indent_2 {
+#paokpdfwpt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#arzamodtwx .gt_indent_3 {
+#paokpdfwpt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#arzamodtwx .gt_indent_4 {
+#paokpdfwpt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#arzamodtwx .gt_indent_5 {
+#paokpdfwpt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
+<td headers="Variable" class="gt_row gt_left"><div class="gt_from_md">
 <p><code>npi</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
+<td headers="Description" class="gt_row gt_left">
 <div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The provider's 10-digit National Provider Identifier.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>provider_name</code></p>
+<td headers="Variable" class="gt_row gt_left"><div class="gt_from_md">
+<p><code>last_name</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Name of the provider. It consists of the legal last name 
-                 followed by the first name, separated by a comma.</span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Last name of the provider.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left"><div class="gt_from_md">
+<p><code>first_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">First name of the provider.</span></div>
 </td>
 </tr>
 </tbody>
@@ -707,7 +1123,6 @@ Information</a></li>
 &amp; Policy</a></li>
 </ul>
 <p><br><br></p>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
