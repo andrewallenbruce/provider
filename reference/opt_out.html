@@ -100,16 +100,16 @@ of Medicare.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">opt_out</span><span class="op">(</span></span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zipcod <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  eligible <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -119,16 +119,16 @@ of Medicare.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>first_name</dt>
+    <dl><dt>npi</dt>
+<dd><p>National Provider Identifier (NPI) number of the Opt Out Provider</p></dd>
+
+
+<dt>first_name</dt>
 <dd><p>First Name of the Opt Out Provider</p></dd>
 
 
 <dt>last_name</dt>
 <dd><p>Last Name of the Opt Out Provider</p></dd>
-
-
-<dt>npi</dt>
-<dd><p>National Provider Identifier (NPI) number of the Opt Out Provider</p></dd>
 
 
 <dt>specialty</dt>
@@ -147,17 +147,17 @@ of Medicare.</p>
 <dd><p>Provider's State Abbreviation</p></dd>
 
 
+<dt>zipcode</dt>
+<dd><p>Provider's Zip Code</p></dd>
+
+
 <dt>eligible</dt>
 <dd><p>Flag indicating whether the Provider is eligible to
 Order and Refer</p></dd>
 
 
-<dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>zipcode</dt>
-<dd><p>Provider's Zip Code</p></dd>
+<dt>tidy</dt>
+<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -186,65 +186,65 @@ provider's NPI, specialty, address, and effective dates.</p><div class="section"
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zipcode <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   first_name last_name npi   specialty optout_effective_date optout_end_date    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Laura      Brenner   1235… Psychiat… 2006-05-01 <span style="color: #949494;">00:00:00</span>   2024-05-01 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Ruchi      Nadella   1356… Psychiat… 2016-03-30 <span style="color: #949494;">00:00:00</span>   2024-03-30 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Sireesha   Jathaved… 1508… Psychiat… 2018-01-22 <span style="color: #949494;">00:00:00</span>   2024-01-22 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: first_line_street_address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, last_updated &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name  specialty  optout_start_date optout_end_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1235359019 Laura      Brenner    Psychiatry 2006-05-01        2024-05-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1356579841 Ruchi      Nadella    Psychiatry 2016-03-30        2024-03-30     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1508023920 Sireesha   Jathavedam Psychiatry 2018-01-22        2024-01-22     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   first_name last_name npi   specialty optout_effective_date optout_end_date    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> David      Smith     1649… Maxillof… 2012-06-25 <span style="color: #949494;">00:00:00</span>   2024-06-25 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> David      Smith     1750… Oral Sur… 2013-05-07 <span style="color: #949494;">00:00:00</span>   2023-05-07 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> David      Smith     1114… Psychiat… 2014-08-15 <span style="color: #949494;">00:00:00</span>   2024-08-15 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> David      Smith     1023… Obstetri… 2012-10-01 <span style="color: #949494;">00:00:00</span>   2024-10-01 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> David      Smith     1790… Oral Sur… 2015-03-26 <span style="color: #949494;">00:00:00</span>   2025-03-26 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> David      Smith     1659… Dentist   2015-05-26 <span style="color: #949494;">00:00:00</span>   2023-05-26 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: first_line_street_address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, last_updated &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty    optout_start_date optout_end_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1649265760 David      Smith     Maxillofaci… 2012-06-25        2024-06-25     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1750565958 David      Smith     Oral Surgery 2013-05-07        2023-05-07     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1114058443 David      Smith     Psychiatry   2014-08-15        2024-08-15     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1023002375 David      Smith     Obstetrics/… 2012-10-01        2024-10-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1790853307 David      Smith     Oral Surgery 2015-03-26        2025-03-26     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 1659300077 David      Smith     Dentist      2015-05-26        2023-05-26     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   first_name last_name npi   specialty optout_effective_date optout_end_date    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> David      Altchek   1114… Orthoped… 2012-07-01 <span style="color: #949494;">00:00:00</span>   2024-07-01 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: first_line_street_address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, last_updated &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty    optout_start_date optout_end_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1114974490 David      Altchek   Orthopedic … 2012-07-01        2024-07-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, eligible <span class="op">=</span> <span class="st">"N"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 688 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    first_name last_name npi        specialty              optout_effective_date</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> Patrick    Mcgrath   1932284098 Psychiatry             2012-06-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> Stephen    Donovan   1942240130 Psychiatry             2012-05-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> William    Golden    1477606887 Clinical Psychologist  2012-07-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> Ursula     Ofman     1427221282 Clinical Psychologist  2015-10-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> Lori       Davis     1902827355 Clinical Psychologist  2012-07-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> Ronald     Hoffman   1679695159 General Practice       2012-04-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> Linda      Penn      1033322425 Clinical Psychologist  2012-05-21 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Paul       Geltner   1205031341 Clinical Social Worker 2016-04-01 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Katharine  Stratigos 1023220498 Psychiatry             2020-12-14 <span style="color: #949494;">00:00:00</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Marilyn    Oswald    1790018646 Clinical Social Worker 2012-07-19 <span style="color: #949494;">00:00:00</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        first_name last_name specialty   optout_start_date optout_end_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1932284098 Patrick    Mcgrath   Psychiatry  2012-06-01        2024-06-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1942240130 Stephen    Donovan   Psychiatry  2012-05-01        2024-05-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1477606887 William    Golden    Clinical P… 2012-07-01        2024-07-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1427221282 Ursula     Ofman     Clinical P… 2015-10-01        2023-10-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1902827355 Lori       Davis     Clinical P… 2012-07-01        2024-07-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1679695159 Ronald     Hoffman   General Pr… 2012-04-01        2024-04-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1033322425 Linda      Penn      Clinical P… 2012-05-21        2024-05-21     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1205031341 Paul       Geltner   Clinical S… 2016-04-01        2024-04-01     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1023220498 Katharine  Stratigos Psychiatry  2020-12-14        2024-12-14     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1790018646 Marilyn    Oswald    Clinical S… 2012-07-19        2024-07-19     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 678 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: optout_end_date &lt;dttm&gt;, first_line_street_address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, last_updated &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   first_name last_name npi   specialty optout_effective_date optout_end_date    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> Ned        Cowan     1649… Psychiat… 2012-12-30 <span style="color: #949494;">00:00:00</span>   2024-12-30 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> Geemee     Chung     1497… Infectio… 2016-04-20 <span style="color: #949494;">00:00:00</span>   2024-04-20 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> Genise     Fraiman   1598… Internal… 2016-10-13 <span style="color: #949494;">00:00:00</span>   2024-10-13 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> David      Salehani  1760… Oral Sur… 2022-04-06 <span style="color: #949494;">00:00:00</span>   2024-04-06 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> Colleen    Ryan      1952… Family P… 2022-09-21 <span style="color: #949494;">00:00:00</span>   2024-09-21 <span style="color: #949494;">00:00:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: first_line_street_address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   second_line_street_address &lt;chr&gt;, city_name &lt;chr&gt;, state_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip_code &lt;chr&gt;, eligible_to_order_and_refer &lt;lgl&gt;, last_updated &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty    optout_start_date optout_end_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1649484007 Ned        Cowan     Psychiatry   2012-12-30        2024-12-30     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1497783484 Geemee     Chung     Infectious … 2016-04-20        2024-04-20     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1598825309 Genise     Fraiman   Internal Me… 2016-10-13        2024-10-13     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1760448351 David      Salehani  Oral Surgery 2022-04-06        2024-04-06     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 1952408007 Colleen    Ryan      Family Prac… 2022-09-21        2024-09-21     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="co"># Returns empty list i.e., provider is not in the database</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1326011057</span><span class="op">)</span></span></span>

@@ -262,6 +262,9 @@ contains requested NPI number, status, and short status description.</p>
 <span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>opt_out_effective_date <span class="op">=</span> <span class="va">optout_effective_date</span>, </span>
 <span>                opt_out_end_date <span class="op">=</span> <span class="va">optout_end_date</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `optout_effective_date` doesn't exist.</span></span>
 <span>  </span>
 <span></span>
 <span><span class="va">optex_final</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">nppes_type_npi</span>, </span>
@@ -347,24 +350,24 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
 <span>                         <span class="op">}</span></span>
 <span>                     <span class="op">}</span></span>
 <span>                       <span class="op">)</span></span></code></pre></div>
-<div id="ujdvvzhmde" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lbkpjwcopx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ujdvvzhmde table {
+#lbkpjwcopx table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ujdvvzhmde thead, #ujdvvzhmde tbody, #ujdvvzhmde tfoot, #ujdvvzhmde tr, #ujdvvzhmde td, #ujdvvzhmde th {
+#lbkpjwcopx thead, #lbkpjwcopx tbody, #lbkpjwcopx tfoot, #lbkpjwcopx tr, #lbkpjwcopx td, #lbkpjwcopx th {
   border-style: none;
 }
 
-#ujdvvzhmde p {
+#lbkpjwcopx p {
   margin: 0;
   padding: 0;
 }
 
-#ujdvvzhmde .gt_table {
+#lbkpjwcopx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -390,12 +393,12 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-left-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_caption {
+#lbkpjwcopx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ujdvvzhmde .gt_title {
+#lbkpjwcopx .gt_title {
   color: #333333;
   font-size: 16px;
   font-weight: bold;
@@ -407,7 +410,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-width: 0;
 }
 
-#ujdvvzhmde .gt_subtitle {
+#lbkpjwcopx .gt_subtitle {
   color: #333333;
   font-size: 14px;
   font-weight: initial;
@@ -419,7 +422,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-width: 0;
 }
 
-#ujdvvzhmde .gt_heading {
+#lbkpjwcopx .gt_heading {
   background-color: #FDD4D0;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -431,13 +434,13 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_bottom_border {
+#lbkpjwcopx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_col_headings {
+#lbkpjwcopx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 3px;
   border-top-color: #BEBEBE;
@@ -452,7 +455,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_col_heading {
+#lbkpjwcopx .gt_col_heading {
   color: #333333;
   background-color: #FDD4D0;
   font-size: 80%;
@@ -472,7 +475,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#ujdvvzhmde .gt_column_spanner_outer {
+#lbkpjwcopx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FDD4D0;
   font-size: 80%;
@@ -484,15 +487,15 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 4px;
 }
 
-#ujdvvzhmde .gt_column_spanner_outer:first-child {
+#lbkpjwcopx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ujdvvzhmde .gt_column_spanner_outer:last-child {
+#lbkpjwcopx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ujdvvzhmde .gt_column_spanner {
+#lbkpjwcopx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 3px;
   border-bottom-color: #440D0D;
@@ -504,11 +507,11 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   width: 100%;
 }
 
-#ujdvvzhmde .gt_spanner_row {
+#lbkpjwcopx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ujdvvzhmde .gt_group_heading {
+#lbkpjwcopx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,7 +537,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   text-align: left;
 }
 
-#ujdvvzhmde .gt_empty_group_heading {
+#lbkpjwcopx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -549,15 +552,15 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   vertical-align: middle;
 }
 
-#ujdvvzhmde .gt_from_md > :first-child {
+#lbkpjwcopx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ujdvvzhmde .gt_from_md > :last-child {
+#lbkpjwcopx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ujdvvzhmde .gt_row {
+#lbkpjwcopx .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -576,7 +579,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#ujdvvzhmde .gt_stub {
+#lbkpjwcopx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -589,7 +592,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#ujdvvzhmde .gt_stub_row_group {
+#lbkpjwcopx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -603,15 +606,15 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   vertical-align: top;
 }
 
-#ujdvvzhmde .gt_row_group_first td {
+#lbkpjwcopx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ujdvvzhmde .gt_row_group_first th {
+#lbkpjwcopx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ujdvvzhmde .gt_summary_row {
+#lbkpjwcopx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -621,16 +624,16 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#ujdvvzhmde .gt_first_summary_row {
+#lbkpjwcopx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_first_summary_row.thick {
+#lbkpjwcopx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ujdvvzhmde .gt_last_summary_row {
+#lbkpjwcopx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -640,7 +643,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_grand_summary_row {
+#lbkpjwcopx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -650,7 +653,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#ujdvvzhmde .gt_first_grand_summary_row {
+#lbkpjwcopx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -660,7 +663,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_last_grand_summary_row_top {
+#lbkpjwcopx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -670,11 +673,11 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_striped {
+#lbkpjwcopx .gt_striped {
   background-color: #FAFAFA;
 }
 
-#ujdvvzhmde .gt_table_body {
+#lbkpjwcopx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -683,7 +686,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_footnotes {
+#lbkpjwcopx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -697,7 +700,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_footnote {
+#lbkpjwcopx .gt_footnote {
   margin: 0px;
   font-size: 12px;
   padding-top: 3px;
@@ -706,7 +709,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#ujdvvzhmde .gt_sourcenotes {
+#lbkpjwcopx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -720,7 +723,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#ujdvvzhmde .gt_sourcenote {
+#lbkpjwcopx .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -728,63 +731,63 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#ujdvvzhmde .gt_left {
+#lbkpjwcopx .gt_left {
   text-align: left;
 }
 
-#ujdvvzhmde .gt_center {
+#lbkpjwcopx .gt_center {
   text-align: center;
 }
 
-#ujdvvzhmde .gt_right {
+#lbkpjwcopx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ujdvvzhmde .gt_font_normal {
+#lbkpjwcopx .gt_font_normal {
   font-weight: normal;
 }
 
-#ujdvvzhmde .gt_font_bold {
+#lbkpjwcopx .gt_font_bold {
   font-weight: bold;
 }
 
-#ujdvvzhmde .gt_font_italic {
+#lbkpjwcopx .gt_font_italic {
   font-style: italic;
 }
 
-#ujdvvzhmde .gt_super {
+#lbkpjwcopx .gt_super {
   font-size: 65%;
 }
 
-#ujdvvzhmde .gt_footnote_marks {
+#lbkpjwcopx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ujdvvzhmde .gt_asterisk {
+#lbkpjwcopx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ujdvvzhmde .gt_indent_1 {
+#lbkpjwcopx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ujdvvzhmde .gt_indent_2 {
+#lbkpjwcopx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ujdvvzhmde .gt_indent_3 {
+#lbkpjwcopx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ujdvvzhmde .gt_indent_4 {
+#lbkpjwcopx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ujdvvzhmde .gt_indent_5 {
+#lbkpjwcopx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -852,19 +855,19 @@ results, it’s time to update their NPPES contact information:</p>
 <p><br></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David           </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Smith           </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi                         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443      </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Psychiatry      </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_effective_date       <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2014-08-15      </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date             <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2024-08-15      </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_line_street_address   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">3101 STELLING DR</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>second_line_street_address  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">NA              </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city_name                   <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">PALO ALTO       </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state_code                  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA              </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zip_code                    <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">943033960       </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>eligible_to_order_and_refer <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">T               </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated                <span style="color: #5FAF87;">p1</span> <span style="color: #3A3A3A;">2023-03-16      </span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David                 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Smith                 </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Psychiatry            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_start_date <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2014-08-15            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date   <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2024-08-15            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_duration   <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">315619200s (~10 years)</span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated      <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-03-16            </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>order_and_refer   <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">T                     </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>address           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">3101 STELLING DR      </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">PALO ALTO             </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA                    </span></span></span>
+<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zipcode           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">943033960             </span></span></span></code></pre></div>
 <p><br></p>
 <p>Using <code><a href="../reference/physician_by_service.html">physician_by_service()</a></code>, you can access
 <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and

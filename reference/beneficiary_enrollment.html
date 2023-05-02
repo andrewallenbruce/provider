@@ -110,7 +110,7 @@ drug coverage, available for several geographical areas.</p>
 <span>  state_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  county <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -152,8 +152,8 @@ and <code>County</code></p></dd>
 <dd><p>FIPS code of beneficiary residence</p></dd>
 
 
-<dt>clean_names</dt>
-<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
+<dt>tidy</dt>
+<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -213,11 +213,10 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>022 Year  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>578      <span style="text-decoration: underline;">5</span>186</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd_and_only_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_total &lt;int&gt;, bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_total &lt;int&gt;, bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_elig &lt;int&gt;, bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_none &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, level <span class="op">=</span> <span class="st">"County"</span>, fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 26</span></span>
@@ -238,11 +237,10 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 December  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>455      <span style="text-decoration: underline;">5</span>345</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd_and_only_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_total &lt;int&gt;, bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_total &lt;int&gt;, bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_elig &lt;int&gt;, bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_none &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>,</span></span>
 <span class="r-in"><span>                       month <span class="op">=</span> <span class="st">"July"</span>,</span></span>
@@ -254,11 +252,10 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>022 July  State GA    Georgia    Total  13       1<span style="text-decoration: underline;">850</span>422    <span style="text-decoration: underline;">915</span>890</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd_and_only_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_total &lt;int&gt;, bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_total &lt;int&gt;, bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_elig &lt;int&gt;, bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_none &lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">beneficiary_enrollment</span><span class="op">(</span>level <span class="op">=</span> <span class="st">"State"</span>, fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 131 × 26</span></span>
@@ -277,10 +274,10 @@ available from the CMS Chronic Conditions Data Warehouse.</p><div class="section
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 121 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd_and_only_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_total &lt;int&gt;, bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_total &lt;int&gt;, bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_elig &lt;int&gt;, bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, …</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
