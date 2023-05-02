@@ -10,9 +10,9 @@ Centers for Medicare & Medicaid Services
 facility_affiliations(
   npi = NULL,
   pac_id = NULL,
-  last_name = NULL,
   first_name = NULL,
   middle_name = NULL,
+  last_name = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
@@ -25,11 +25,11 @@ facility_affiliations(
 
 \item{pac_id}{Unique individual clinician ID assigned by PECOS}
 
-\item{last_name}{Individual clinician last name}
-
 \item{first_name}{Individual clinician first name}
 
 \item{middle_name}{Individual clinician middle name}
+
+\item{last_name}{Individual clinician last name}
 
 \item{facility_type}{Facilities can fall into the following type categories:
 Hospital, Long-term Care Hospital, Nursing Home, Inpatient

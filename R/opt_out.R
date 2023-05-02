@@ -20,7 +20,7 @@
 #' @param address Provider's Street Address
 #' @param city Provider's City
 #' @param state Provider's State Abbreviation
-#' @param zip Provider's Zip Code
+#' @param zipcode Provider's Zip Code
 #' @param eligible Flag indicating whether the Provider is eligible to
 #'    Order and Refer
 #' @param clean_names Convert column names to snakecase; default is `TRUE`.
@@ -28,7 +28,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' opt_out(specialty = "Psychiatry", zip = "07626")
+#' opt_out(specialty = "Psychiatry", zipcode = "07626")
 #' opt_out(first = "David", last = "Smith")
 #' opt_out(npi = 1114974490)
 #' opt_out(state = "NY", eligible = "N")
@@ -61,7 +61,7 @@ opt_out <- function(first_name   = NULL,
                     address      = NULL,
                     city         = NULL,
                     state        = NULL,
-                    zip          = NULL,
+                    zipcode      = NULL,
                     eligible     = NULL,
                     clean_names  = TRUE) {
   # args tribble ------------------------------------------------------------
@@ -74,7 +74,7 @@ opt_out <- function(first_name   = NULL,
        "First Line Street Address",      address,
                        "City Name",         city,
                       "State Code",        state,
-                        "Zip code",          zip,
+                        "Zip code",      zipcode,
      "Eligible to Order and Refer",     eligible)
 
   # map param_format and collapse -------------------------------------------

@@ -15,7 +15,7 @@ opt_out(
   address = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
+  zipcod = NULL,
   eligible = NULL,
   clean_names = TRUE
 )
@@ -35,12 +35,12 @@ opt_out(
 
 \item{state}{Provider's State Abbreviation}
 
-\item{zip}{Provider's Zip Code}
-
 \item{eligible}{Flag indicating whether the Provider is eligible to
 Order and Refer}
 
 \item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+
+\item{zipcode}{Provider's Zip Code}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -63,7 +63,7 @@ provider's NPI, specialty, address, and effective dates.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-opt_out(specialty = "Psychiatry", zip = "07626")
+opt_out(specialty = "Psychiatry", zipcode = "07626")
 opt_out(first = "David", last = "Smith")
 opt_out(npi = 1114974490)
 opt_out(state = "NY", eligible = "N")

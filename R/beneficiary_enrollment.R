@@ -121,7 +121,25 @@ beneficiary_enrollment <- function(year        = NULL,
   # no search results returns empty tibble ----------------------------------
   if (httr2::resp_header(response, "content-length") == "0") {
 
-    return(cli::cli_alert_danger("No results for {.val {args$y}}", wrap = TRUE))
+    cli_args <- tibble::tribble(
+      ~x,        ~y,
+      "year",      as.character(year),
+      "month",     month,
+      "level",     level,
+      "state",     state,
+      "state_name",state_name,
+      "county",    county,
+      "fips",      fips) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    return(cli::cli_alert_danger("No results for {.val {cli_args}}",
+                                 wrap = TRUE))
 
     }
 
@@ -171,8 +189,8 @@ beneficiary_enrollment <- function(year        = NULL,
     #
     # } else {
 
-      results <- results |>
-        dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
+      # results <- results |>
+      #   dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
     # }
   }
   return(results)

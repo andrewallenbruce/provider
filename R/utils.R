@@ -1,87 +1,3 @@
-#' Calculate Number of Days Between Two Dates ------------------------------
-#' Note: Calculation includes end date in the sum (see example)
-#' @param df data frame containing date columns
-#' @param start column containing date(s) prior to end_date column
-#' @param end column containing date(s) after start_date column
-#' @param colname desired column name of output; default is "age"
-#' @return A [tibble][tibble::tibble-package] with a named column
-#'    containing the calculated number of days.
-#' @examples
-#' date_ex <- tibble::tibble(x = seq.Date(as.Date("2021-01-01"),
-#'                           by = "month", length.out = 3),
-#'                           y = seq.Date(as.Date("2022-01-01"),
-#'                           by = "month", length.out = 3))
-#' age_days(df = date_ex,
-#'          start = x,
-#'          end = y)
-#'
-#' date_ex |>
-#' age_days(x, y, colname = "days_between_x_y")
-#'
-#' date_ex |>
-#' age_days(start = x,
-#' end = lubridate::today(),
-#' colname = "days_since_x")
-#'
-#' date_ex |>
-#' age_days(x, y, "days_between_x_y") |>
-#' age_days(x, lubridate::today(), "days_since_x") |>
-#' age_days(y, lubridate::today(), colname = "days_since_y")
-#' @autoglobal
-#' @noRd
-age_days <- function(df,
-                     start,
-                     end,
-                     colname = "age") {
-
-  results <- df |>
-    dplyr::mutate(start = as.Date({{ start }},
-                                  "%yyyy-%mm-%dd",
-                                  tz = "EST"),
-                  end = as.Date({{ end }},
-                                "%yyyy-%mm-%dd",
-                                tz = "EST")) |>
-    dplyr::mutate("{colname}" := ((as.numeric(
-      lubridate::days(end) - lubridate::days(start),
-      "hours") / 24) + 1)) |>
-    dplyr::select(!c(end, start))
-
-  return(results)
-}
-
-#' Calculate Number of Days Between a Date and Today -----------------------
-#' @param df data frame containing date columns
-#' @param start date column
-#' @param colname desired column name of output
-#' @return data frame with a column containing the number of days
-#'    calculated.
-#' @examples
-#' ex <- data.frame(x = c("1992-02-05",
-#'                        "2020-01-04",
-#'                        "1996-05-01",
-#'                        "2020-05-01",
-#'                        "1996-02-04"))
-#'
-#' days_today(df = ex, start = x)
-#'
-#' ex |> days_today(x)
-#' @autoglobal
-#' @noRd
-days_today <- function(df, start, colname = "age") {
-
-  results <- df |>
-  dplyr::mutate(int = lubridate::interval({{ start }},
-                      lubridate::today()),
-               secs = lubridate::int_length(int),
-               mins = secs/60,
-               hrs = mins/60,
-               "{colname}" := abs(hrs/24)) |>
-    dplyr::select(!c(int, secs, mins, hrs))
-
-  return(results)
-
-}
-
 #' Format US ZIP codes -----------------------------------------------------
 #' @param zip Nine-digit US ZIP code
 #' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
@@ -112,24 +28,6 @@ clean_credentials <- function(x) {
   out <- stringr::str_split(out, "[,\\s;]+", simplify = FALSE)
   return(out)
 }
-
-#' Create full address -----------------------------------------------------
-#' @param df data frame
-#' @param address_1 Quoted column containing first-street address
-#' @param address_2 Quoted column containing second-street address
-#' @param city Quoted column containing city
-#' @param state Quoted column containing two-letter state abbreviation
-#' @param postal_code Quoted column containing postal codes
-#' @return Character vector containing full one-line address
-#' @autoglobal
-#' @noRd
-full_address1 <- function(df, address_1, address_2, city, state, postal_code) {
-  stringr::str_c(stringr::str_trim(df[[address_1]], "both"),
-  ifelse(df[[address_2]] == "", "", " "),
-  stringr::str_trim(df[[address_2]], "both"), ", ",
-  stringr::str_trim(df[[city]], "both"), ", ",
-  stringr::str_trim(df[[state]], "both"), " ",
-  stringr::str_trim(df[[postal_code]], "both"))}
 
 #' luhn check npis ---------------------------------------------------------
 #' @description checks NPIs against the Luhn algorithm for
@@ -302,62 +200,6 @@ str_to_snakecase <- function(string) {
                                ":" = ""))
 }
 
-#' is_empty_list -----------------------------------------------------------
-#' @param df data frame
-#' @param col quoted list-column in data frame
-#' @return boolean, TRUE or FALSE
-#' @autoglobal
-#' @noRd
-is_empty_list <- function(df, col){list <- df[col][[1]][[1]]
-  if (is.list(list) == TRUE && length(list) == 0) {return(TRUE)}
-  else {return(FALSE)}}
-
-
-#' is_empty_list2 -----------------------------------------------------------
-#' @param df data frame
-#' @return boolean, TRUE or FALSE
-#' @autoglobal
-#' @noRd
-is_empty_list2 <- function(df){list <- df[[1]]
-if (is.list(list) == TRUE && length(list) == 0) {return(TRUE)}
-else {return(FALSE)}}
-
-#' re_nest -----------------------------------------------------------------
-#' @param df data frame
-#' @param col quoted list-column in data frame
-#' @return A [tibble][tibble::tibble-package]
-#' @autoglobal
-#' @noRd
-re_nest <- function(df, col){
-
-  if (isTRUE(is_empty_list(df, col))) {
-
-    results <- dplyr::mutate(df, "{col}" := NA)
-
-  } else {
-
-    nested <- df[col]
-    unnested <- tidyr::unnest(nested, cols = c({{ col }}))
-    colnames(unnested) <- paste0(col, "_", colnames(unnested))
-
-    bind <- dplyr::bind_cols(df, unnested)
-
-    results <- bind |>
-      dplyr::select(!{{ col }}) |>
-      tidyr::nest("{col}" := dplyr::contains({{ col }}))
-  }
-
-  return(results)
-}
-
-#' Calculate the percent difference between two values ----------------------
-#' @param x,y Values to determine the percent difference between.
-#' @autoglobal
-#' @noRd
-#' @examples
-#' pct_diff(265, 4701)
-pct_diff <- function(x, y) {abs(x - y) / mean(c(x, y))}
-
 #' Convert Y/N char values to logical ----------------------
 #' @param x vector
 #' @autoglobal
@@ -464,4 +306,126 @@ gt_check_xmark <- function(x) {
   }
   div_out <- htmltools::div(style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;", add_checkx), x)
   as.character(div_out) |> gt::html()
+}
+
+
+#' readme function table ---------------------------------------------------
+#' @autoglobal
+#' @noRd
+function_tbl    <- function() {
+  nppes_func    <- gluedown::md_code("nppes_npi()")
+  nppes_link    <- gluedown::md_link(
+    "NPPES National Provider Identifier (NPI) Registry" = "https://npiregistry.cms.hhs.gov/search")
+  open_func     <- gluedown::md_code("open_payments()")
+  open_link     <- gluedown::md_link(
+    "CMS Open Payments Program" = "https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202")
+  mppe_func     <- gluedown::md_code("provider_enrollment()")
+  mppe_link     <- gluedown::md_link(
+    "Medicare Fee-For-Service Public Provider Enrollment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment")
+  mme_func      <- gluedown::md_code("beneficiary_enrollment()")
+  mme_link      <- gluedown::md_link(
+    "Medicare Monthly Enrollment" = "https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment")
+  miss_func     <- gluedown::md_code("missing_information()")
+  miss_link     <- gluedown::md_link(
+    "CMS Public Reporting of Missing Digital Contact Information" = "https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information")
+  order_func    <- gluedown::md_code("order_refer()")
+  order_link    <- gluedown::md_link(
+    "Medicare Order and Referring" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring")
+  opt_func      <- gluedown::md_code("opt_out()")
+  opt_link      <- gluedown::md_link(
+    "Medicare Opt Out Affidavits" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits")
+  pbp_func      <- gluedown::md_code("physician_by_provider()")
+  pbp_link      <- gluedown::md_link(
+    "Medicare Physician & Other Practitioners: by Provider" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider")
+  pbs_func      <- gluedown::md_code("physician_by_service()")
+  pbs_link      <- gluedown::md_link(
+    "Medicare Physician & Other Practitioners: by Provider and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service")
+  pbg_func      <- gluedown::md_code("physician_by_geography()")
+  pbg_link      <- gluedown::md_link(
+    "Medicare Physician & Other Practitioners: by Geography and Service" = "https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service")
+  redd_func     <- gluedown::md_code("revalidation_date()")
+  redd_link     <- gluedown::md_link(
+    "Medicare Revalidation Due Date" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list")
+  rere_func     <- gluedown::md_code("revalidation_reassign()")
+  rere_link     <- gluedown::md_link(
+    "Medicare Revalidation Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list")
+  recl_func     <- gluedown::md_code("revalidation_group()")
+  recl_link     <- gluedown::md_link(
+    "Medicare Revalidation Clinic Group Practice Reassignment" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment")
+  ccs_func      <- gluedown::md_code("cc_specific()")
+  ccs_link      <- gluedown::md_link(
+    "Medicare Specific Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions")
+  ccm_func      <- gluedown::md_code("cc_multiple()")
+  ccm_link      <- gluedown::md_link(
+    "Medicare Multiple Chronic Conditions" = "https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions")
+  clia_func     <- gluedown::md_code("clia_labs()")
+  clia_link     <- gluedown::md_link(
+    "Medicare Provider of Services File - Clinical Laboratories" = "https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories")
+  tax_func      <- gluedown::md_code("taxonomy_crosswalk()")
+  tax_link      <- gluedown::md_link(
+    "Medicare Provider and Supplier Taxonomy Crosswalk" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk")
+  pend_func     <- gluedown::md_code("pending_applications()")
+  pend_link     <- gluedown::md_link(
+    "Medicare Pending Initial Logging and Tracking" = "https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians")
+  affil_func    <- gluedown::md_code("facility_affiliations()")
+  affil_link    <- gluedown::md_link(
+    "CMS Physician Facility Affiliations" = "https://data.cms.gov/provider-data/dataset/27ea-46a8")
+  drclin_func   <- gluedown::md_code("doctors_and_clinicians()")
+  drclin_link   <- gluedown::md_link(
+    "Doctors and Clinicians National Downloadable File" = "https://data.cms.gov/provider-data/dataset/mj5m-pzi6")
+  addph_func   <- gluedown::md_code("addl_phone_numbers()")
+  addph_link   <- gluedown::md_link(
+    "Physician Additional Phone Numbers" = "https://data.cms.gov/provider-data/dataset/phys-phon")
+  hspen_func   <- gluedown::md_code("hospital_enrollment()")
+  hspen_link   <- gluedown::md_link(
+    "Hospital Enrollments" = "https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments")
+
+  func_tbl <- data.frame(Function = c(nppes_func,
+                                      open_func,
+                                      mppe_func,
+                                      mme_func,
+                                      order_func,
+                                      opt_func,
+                                      pbp_func,
+                                      pbs_func,
+                                      pbg_func,
+                                      redd_func,
+                                      recl_func,
+                                      rere_func,
+                                      ccs_func,
+                                      ccm_func,
+                                      #clia_func,
+                                      tax_func,
+                                      miss_func,
+                                      pend_func,
+                                      affil_func,
+                                      drclin_func,
+                                      #addph_func,
+                                      hspen_func
+  ),
+  API      = c(nppes_link,
+               open_link,
+               mppe_link,
+               mme_link,
+               order_link,
+               opt_link,
+               pbp_link,
+               pbs_link,
+               pbg_link,
+               redd_link,
+               recl_link,
+               rere_link,
+               ccs_link,
+               ccm_link,
+               #clia_link,
+               tax_link,
+               miss_link,
+               pend_link,
+               affil_link,
+               drclin_link,
+               #addph_link,
+               hspen_link
+  ))
+
+  return(func_tbl)
 }

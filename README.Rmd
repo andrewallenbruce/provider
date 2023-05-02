@@ -27,6 +27,7 @@ knitr::opts_chunk$set(
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://choosealicense.com/licenses/mit/)
 [![code size](https://img.shields.io/github/languages/code-size/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider)
 [![last commit](https://img.shields.io/github/last-commit/andrewallenbruce/provider.svg)](https://github.com/andrewallenbruce/provider/commits/main)
+[![pkgdown](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml/badge.svg)](https://github.com/andrewallenbruce/provider/actions/workflows/pkgdown.yaml)
 [![Codecov test coverage](https://codecov.io/gh/andrewallenbruce/provider/branch/main/graph/badge.svg)](https://app.codecov.io/gh/andrewallenbruce/provider?branch=main)
 [![CodeFactor](https://www.codefactor.io/repository/github/andrewallenbruce/provider/badge)](https://www.codefactor.io/repository/github/andrewallenbruce/provider)
 ![GitHub milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/provider/1?color=white&logo=milestones)
@@ -74,8 +75,10 @@ provider:::function_tbl() |>
 ### Beneficiary Enrollment
 
 ```{r}
-beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "10")
-beneficiary_enrollment(year = NULL, month = "Year", level = "County", state = "AL", county = "Autauga")
+beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "01")
+
+beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = "Autauga")
+
 beneficiary_enrollment(year = 2021, level = "County", state = "GA") |> 
   dplyr::filter(month %in% month.name)
 ```
@@ -93,8 +96,9 @@ cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
 ### Doctors and Clinicians
 
 ```{r}
+doctors_and_clinicians(npi = 1720081441)
 doctors_and_clinicians(npi = 1407263999)
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2003, 
                        state = "FL")
 ```
@@ -102,7 +106,7 @@ doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
 ### Facility Affiliations
 
 ```{r}
-facility_affiliations(npi = 1003019563)
+facility_affiliations(npi = 1003019561)
 facility_affiliations(facility_ccn = "060004")
 facility_affiliations(parent_ccn = 670055)
 facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
@@ -127,14 +131,23 @@ missing_information(npi = 1144224569)
 ```{r}
 nppes_npi(npi = 1316405939)
 
-c(1710983663, 1710975040, 1659781227, 1336413418, 1003026055, 
-           1316405939, 1720392988, 1518184605, 1922056829, 1083879860, 
-           1346243805, 1679576722, 1093718892, 1477556405, 1770586539, 
-           1871596692, 1174526925, 1720081441, 1558364273, 1801899513, 
-           1316405939) |> 
+nppes_npi(npi = 1558364273)
+
+nppes_npi(1720081441)
+
+nppes_npi(1710983663)
+
+c(1710983663, 1710975040, 1659781227, 
+  1336413418, 1003026055, 1316405939, 
+  1720392988, 1518184605, 1922056829, 
+  1083879860, 1346243805, 1679576722, 
+  1093718892, 1477556405, 1770586539, 
+  1871596692, 1174526925, 1720081441, 
+  1558364273, 1801899513, 1316405939) |> 
   purrr::map(nppes_npi) |>
-  dplyr::bind_rows()
+  purrr::list_rbind()
 ```
+
 
 ### Open Payments
 

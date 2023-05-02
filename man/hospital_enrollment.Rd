@@ -18,7 +18,7 @@ hospital_enrollment(
   dba_name = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
+  zipcode = NULL,
   clean_names = TRUE
 )
 }
@@ -44,7 +44,7 @@ OSCAR Number}
 
 \item{state}{State of the hospital’s practice location address.}
 
-\item{zip}{Zip code of the hospital’s practice location address}
+\item{zipcode}{Zip code of the hospital’s practice location address}
 
 \item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
 }
@@ -74,6 +74,6 @@ hospital_enrollment(facility_ccn = "440058")
 hospital_enrollment(pac_id_org = 6103733050)
 \dontrun{
 hospital_enrollment(city = "Atlanta")
-hospital_enrollment(zip = 117771928)
+hospital_enrollment(zipcode = 117771928)
 }
 }

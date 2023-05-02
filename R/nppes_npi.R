@@ -64,7 +64,7 @@
 #'    field is used, at least one other field, besides the `prov_type` and
 #'    `country`, must be populated. Valid values for state abbreviations:
 #'    \url{https://npiregistry.cms.hhs.gov/help-api/state}.
-#' @param zip The Postal Code associated with the provider's address
+#' @param zipcode The Postal Code associated with the provider's address
 #'    identified in Address Purpose. If you enter a 5 digit postal code, it
 #'    will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 #'    wildcard entries are permitted requiring at least two characters to be
@@ -78,63 +78,14 @@
 #'    default is 200, maximum is 1200.
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
+#' @param clean_names Convert column names to snake case; default is `TRUE`.
+#' @examples
+#' nppes_npi(npi = 1528060837)
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
-#' @examples
-#' \dontrun{
-#' ### Single NPI
-#' nppes_npi(npi = 1528060837)
-#' nppes_npi(npi = 1336413418)
-#'
-#' ### City, state, country
-#' nppes_npi(city = "Atlanta",
-#'           state = "GA",
-#'           country = "US")
-#'
-#' ### First name, city, state
-#' nppes_npi(first_name = "John",
-#'           city = "Baltimore",
-#'           state = "MD")
-#'
-#' nppes_npi(npi = 1336413418) # NPI-2
-#' nppes_npi(npi = 1710975040) # NPI-1
-#' nppes_npi(npi = 1659781227) # Deactivated
-#'
-#' ### List of NPIs
-#' npi_list <- c(1003026055, 1710983663, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
-#'
-#' npi_list |>
-#' purrr::map_dfr(nppes_npi) |>
-#' dplyr::group_split(outcome)
-#'
-#' ### Data frame of NPIs
-#' npi_df <- data.frame(npi = c(1710983663,
-#'                              1003026055,
-#'                              1316405939,
-#'                              1720392988,
-#'                              1518184605,
-#'                              1922056829,
-#'                              1083879860))
-#' npi_df |>
-#' tibble::deframe() |>
-#' purrr::map_dfr(nppes_npi)
-#'
-#' ###Tribble example
-#' tribble <- tibble::tribble(
-#' ~fn,         ~params,
-#' "nppes_npi", list(1336413418),
-#' "nppes_npi", list(1710975040),
-#' "nppes_npi", list(1659781227),
-#' "nppes_npi", list(first_name = "John", city = "Baltimore", state = "MD"),
-#' "nppes_npi", list(first_name = "Andrew", city = "Atlanta", state = "GA"))
-#'
-#' purrr::invoke_map_dfr(tribble$fn, tribble$params)
-#' }
 #' @autoglobal
-#' @noRd
-
-nppes_npi_old <- function(npi            = NULL,
+#' @export
+nppes_npi <- function(npi            = NULL,
                       enum_type      = NULL,
                       first_name     = NULL,
                       last_name      = NULL,
@@ -142,72 +93,204 @@ nppes_npi_old <- function(npi            = NULL,
                       taxonomy_desc  = NULL,
                       city           = NULL,
                       state          = NULL,
-                      zip            = NULL,
+                      zipcode        = NULL,
                       country        = NULL,
-                      limit          = 200,
-                      skip           = NULL) {
-
-  # base URL ---------------------------------------------------------------
-  url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
+                      limit          = 1200,
+                      skip           = NULL,
+                      clean_names    = TRUE) {
 
   # request and response ----------------------------------------------------
-  resp <- httr2::request(url) |>
-          httr2::req_url_query(number               = npi,
-                               enumeration_type     = enum_type,
-                               first_name           = first_name,
-                               last_name            = last_name,
-                               organization_name    = org_name,
-                               taxonomy_description = taxonomy_desc,
-                               city                 = city,
-                               state                = state,
-                               postal_code          = zip,
-                               country_code         = country,
-                               limit                = limit,
-                               skip                 = skip) |>
-          httr2::req_perform()
+  request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
+    httr2::req_url_query(number               = npi,
+                         enumeration_type     = enum_type,
+                         first_name           = first_name,
+                         last_name            = last_name,
+                         organization_name    = org_name,
+                         taxonomy_description = taxonomy_desc,
+                         city                 = city,
+                         state                = state,
+                         postal_code          = zipcode,
+                         country_code         = country,
+                         limit                = limit,
+                         skip                 = skip) |>
+    httr2::req_perform()
 
-  res <- httr2::resp_body_json(resp,
-                               check_type = FALSE,
-                               simplifyVector = TRUE)
+  # parse response ---------------------------------------------------------
+  response <- httr2::resp_body_json(request,
+                                check_type = FALSE,
+                                simplifyVector = TRUE)
 
-  # Remove result_count header
-  res$result_count <- NULL
+  res_cnt <- response$result_count
 
-  # Convert to tibble
-  results <- tibble::enframe(res, name = "outcome", value = "data_lists") |>
-    dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1) |>
-    tidyr::unnest(cols = c(data_lists))
+  # return(response$results)
 
-  if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
-    results <- results |> tidyr::nest(errors = c(description, field, number))
-    return(results)
-    }
+  # no search results returns empty tibble ----------------------------------
+  if (is.null(res_cnt) | res_cnt == 0) {
 
-  if (nrow(dplyr::filter(results, outcome == "results")) >= 1) {
-    results <- results |> tidyr::nest(epochs = c(created_epoch, last_updated_epoch))}
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           as.character(npi),
+      "enum_type",     enum_type,
+      "first_name",    first_name,
+      "last_name",     last_name,
+      "org_name",      org_name,
+      "taxonomy_desc", taxonomy_desc,
+      "city",          city,
+      "state",         state,
+      "zipcode",       zipcode,
+      "country",       country) |>
+      tidyr::unnest(cols = c(y))
 
-  if (nrow(dplyr::filter(results, enumeration_type == "NPI-2")) >= 1) {
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(NULL)
+
+  }
+
+    # results -- unnest basic ------------------------------------------------
+    results <- response$results |>
+      dplyr::tibble() |>
+      dplyr::select(npi = number,
+                    enumeration_type,
+                    basic,
+                    addresses,
+                    taxonomy = taxonomies) |>
+      tidyr::unnest(basic)
+
+    # tidy results ----------------------------------------------------------
     results <- results |>
-      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
-      dplyr::mutate(name = basic_organization_name, .after = 4) |>
-      tidyr::nest(authorized_official = tidyr::contains("authorized"),
-                  basic = tidyr::contains("basic")) |>
-      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
-    return(results)
-    }
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "--")),
+                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
 
-  if (nrow(dplyr::filter(results, enumeration_type == "NPI-1")) >= 1) {
+    # replace empty lists with NA -------------------------------------------
+    results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+
+    # addresses --------------------------------------------------------------
+    address <- results |>
+      dplyr::select(npi, addresses) |>
+      tidyr::unnest(addresses) |>
+      tidyr::unite("street",
+                   dplyr::any_of(c("address_1", "address_2")),
+                   remove = TRUE,
+                   na.rm = TRUE,
+                   sep = " ") |>
+      dplyr::mutate(address_purpose = tolower(address_purpose),
+                    address_type = NULL,
+                    country_code = NULL) |>
+      dplyr::rename(country = country_name,
+                    phone_number = telephone_number,
+                    zipcode = postal_code) |>
+      dplyr::filter(address_purpose == "location") |>
+      dplyr::select(!address_purpose)
+
+      # tidyr::pivot_wider(id_cols = dplyr::any_of(c("npi", "country")),
+      #   names_from = address_purpose,
+      #                    values_from = dplyr::any_of(c("street", "city",
+      #                                                  "state", "zipcode",
+      #                                                  "phone", "fax")),
+      #                    names_glue = "{address_purpose}_{.value}")
+
     results <- results |>
-      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
-      dplyr::mutate(name = stringr::str_c(basic_first_name, basic_last_name, sep = " "), .after = 4) |>
-      tidyr::nest(basic = tidyr::contains("basic")) |>
-      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
-    return(results)
-    }
+      dplyr::select(!addresses) |>
+      dplyr::left_join(address, dplyr::join_by(npi))
 
-  #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+      ## Some taxonomies are all labelled
+      ## primary = FALSE nppes_npi(npi = 1558364273)
 
+      # tidyr::unnest(taxonomy, names_sep = "_") |>
+      # dplyr::filter(taxonomy_primary == TRUE) |>
+      # dplyr::select(!c(taxonomy_taxonomy_group, taxonomy_primary)) |>
+      # janitor::remove_empty(which = c("rows", "cols"))
+
+    valid_fields <- c("npi",
+                      "enumeration_type",
+                      "enumeration_date",
+                      "enumeration_duration",
+                      "last_updated",
+                      "certification_date",
+                      "status",
+                      "organization_name",
+                      "organizational_subpart",
+                      "first_name",
+                      "middle_name",
+                      "last_name",
+                      "credential",
+                      "gender",
+                      "sole_proprietor",
+                      "country",
+                      "street",
+                      "city",
+                      "state",
+                      "zipcode",
+                      "phone_number",
+                      "fax_number",
+                      "taxonomy_code",
+                      "taxonomy_desc",
+                      "taxonomy_state",
+                      "taxonomy_license")
+
+    results <- results |> dplyr::select(dplyr::any_of(valid_fields))
+
+    # clean names -------------------------------------------------------------
+    if (isTRUE(clean_names)) {
+
+      results <- dplyr::rename_with(results, str_to_snakecase)
+
+      }
+
+  return(results)
 }
+
+#' Search the NPPES National Provider Identifier Registry API
+#'
+#' @description `nppes_npi_multi()` allows you to search the NPPES NPI
+#'    Registry's public API by many of the parameters defined in the
+#'    API's documentation.
+#'
+#' @details The NPPES NPI Registry Public Search is a free directory of all
+#'    active National Provider Identifier (NPI) records. Healthcare providers
+#'    acquire their unique 10-digit NPIs to identify themselves in a standard
+#'    way throughout their industry. After CMS supplies an NPI, they publish
+#'    the parts of the NPI record that have public relevance, including the
+#'    provider’s name, taxonomy and practice address. It enables you to search
+#'    for providers in the NPPES (National Plan and Provider Enumeration
+#'    System.) All information produced by the NPI Registry is provided in
+#'    accordance with the NPPES Data Dissemination Notice. There is no charge
+#'    to use the NPI Registry.
+#'
+#' ## Links
+#' * [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
+#' * [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Weekly**
+#' @param df data frame, tibble
+#' @autoglobal
+#' @export
+nppes_npi_multi <- function(df) {
+
+  npis <- df |>
+    tibble::deframe() |>
+    as.list()
+
+  results <- npis |>
+    purrr::map(nppes_npi) |>
+    dplyr::bind_rows()
+
+  return(results)
+}
+
 
 #' Search the NPPES National Provider Identifier Registry API
 #'
@@ -289,35 +372,79 @@ nppes_npi_old <- function(npi            = NULL,
 #'    default is 200, maximum is 1200.
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
-#' @param clean_names Convert column names to snake case; default is `TRUE`.
-#' @examples
-#' nppes_npi(npi = 1528060837)
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @examples
+#' \dontrun{
+#' ### Single NPI
+#' nppes_npi(npi = 1528060837)
+#' nppes_npi(npi = 1336413418)
+#'
+#' ### City, state, country
+#' nppes_npi(city = "Atlanta",
+#'           state = "GA",
+#'           country = "US")
+#'
+#' ### First name, city, state
+#' nppes_npi(first_name = "John",
+#'           city = "Baltimore",
+#'           state = "MD")
+#'
+#' nppes_npi(npi = 1336413418) # NPI-2
+#' nppes_npi(npi = 1710975040) # NPI-1
+#' nppes_npi(npi = 1659781227) # Deactivated
+#'
+#' ### List of NPIs
+#' npi_list <- c(1003026055, 1710983663, 1316405939, 1720392988, 1518184605, 1922056829, 1083879860)
+#'
+#' npi_list |>
+#' purrr::map_dfr(nppes_npi) |>
+#' dplyr::group_split(outcome)
+#'
+#' ### Data frame of NPIs
+#' npi_df <- data.frame(npi = c(1710983663,
+#'                              1003026055,
+#'                              1316405939,
+#'                              1720392988,
+#'                              1518184605,
+#'                              1922056829,
+#'                              1083879860))
+#' npi_df |>
+#' tibble::deframe() |>
+#' purrr::map_dfr(nppes_npi)
+#'
+#' ###Tribble example
+#' tribble <- tibble::tribble(
+#' ~fn,         ~params,
+#' "nppes_npi", list(1336413418),
+#' "nppes_npi", list(1710975040),
+#' "nppes_npi", list(1659781227),
+#' "nppes_npi", list(first_name = "John", city = "Baltimore", state = "MD"),
+#' "nppes_npi", list(first_name = "Andrew", city = "Atlanta", state = "GA"))
+#'
+#' purrr::invoke_map_dfr(tribble$fn, tribble$params)
+#' }
 #' @autoglobal
-#' @export
-nppes_npi <- function(npi            = NULL,
-                      enum_type      = NULL,
-                      first_name     = NULL,
-                      last_name      = NULL,
-                      org_name       = NULL,
-                      taxonomy_desc  = NULL,
-                      city           = NULL,
-                      state          = NULL,
-                      zip            = NULL,
-                      country        = NULL,
-                      limit          = 200,
-                      skip           = NULL,
-                      clean_names    = TRUE) {
+#' @noRd
+nppes_npi_old <- function(npi            = NULL,
+                          enum_type      = NULL,
+                          first_name     = NULL,
+                          last_name      = NULL,
+                          org_name       = NULL,
+                          taxonomy_desc  = NULL,
+                          city           = NULL,
+                          state          = NULL,
+                          zip            = NULL,
+                          country        = NULL,
+                          limit          = 200,
+                          skip           = NULL) {
 
   # base URL ---------------------------------------------------------------
   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
 
   # request and response ----------------------------------------------------
-  request <- httr2::request(url) |>
-    httr2::req_url_query(number               = npi) |> httr2::req_perform()
-
-  request <- httr2::request(url) |>
+  resp <- httr2::request(url) |>
     httr2::req_url_query(number               = npi,
                          enumeration_type     = enum_type,
                          first_name           = first_name,
@@ -332,130 +459,45 @@ nppes_npi <- function(npi            = NULL,
                          skip                 = skip) |>
     httr2::req_perform()
 
-  # parse response ---------------------------------------------------------
-  response <- httr2::resp_body_json(request,
-                                check_type = FALSE,
-                                simplifyVector = TRUE)
-  res_cnt <- response$result_count
+  res <- httr2::resp_body_json(resp,
+                               check_type = FALSE,
+                               simplifyVector = TRUE)
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(request, "content-length")) == 0) {
-    return(tibble::tibble())
+  # Remove result_count header
+  res$result_count <- NULL
 
-  } else if (as.numeric(res_cnt) == 0) {
-    return(tibble::tibble())
+  # Convert to tibble
+  results <- tibble::enframe(res, name = "outcome", value = "data_lists") |>
+    dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1) |>
+    tidyr::unnest(cols = c(data_lists))
 
-  } else {
+  if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
+    results <- results |> tidyr::nest(errors = c(description, field, number))
+    return(results)
+  }
 
-    # results -- unnest basic ------------------------------------------------
-    results <- response$results |>
-      dplyr::tibble() |>
-      dplyr::select(npi = number,
-                    enumeration_type,
-                    basic,
-                    addresses,
-                    taxonomy = taxonomies) |>
-      tidyr::unnest(basic)
+  if (nrow(dplyr::filter(results, outcome == "results")) >= 1) {
+    results <- results |> tidyr::nest(epochs = c(created_epoch, last_updated_epoch))}
 
-    # tidy results ----------------------------------------------------------
+  if (nrow(dplyr::filter(results, enumeration_type == "NPI-2")) >= 1) {
     results <- results |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "--")),
-                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
+      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
+      dplyr::mutate(name = basic_organization_name, .after = 4) |>
+      tidyr::nest(authorized_official = tidyr::contains("authorized"),
+                  basic = tidyr::contains("basic")) |>
+      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
+    return(results)
+  }
 
-    # replace empty lists with NA -------------------------------------------
-    results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
-
-    # addresses --------------------------------------------------------------
-    address <- results |>
-      dplyr::select(npi, addresses) |>
-      tidyr::unnest(addresses) |>
-      tidyr::unite("street",
-                   dplyr::any_of(c("address_1", "address_2")),
-                   remove = TRUE,
-                   na.rm = TRUE,
-                   sep = " ") |>
-      dplyr::mutate(address_purpose = tolower(address_purpose),
-                    address_type = NULL,
-                    country_code = NULL) |>
-      dplyr::rename(country = country_name,
-                    phone_number = telephone_number, zipcode = postal_code) |>
-      dplyr::filter(address_purpose == "location") |>
-      dplyr::select(!address_purpose)
-
-      # tidyr::pivot_wider(id_cols = dplyr::any_of(c("npi", "country")),
-      #   names_from = address_purpose,
-      #                    values_from = dplyr::any_of(c("street", "city",
-      #                                                  "state", "zipcode",
-      #                                                  "phone", "fax")),
-      #                    names_glue = "{address_purpose}_{.value}")
-
+  if (nrow(dplyr::filter(results, enumeration_type == "NPI-1")) >= 1) {
     results <- results |>
-      dplyr::select(!addresses) |>
-      dplyr::left_join(address, dplyr::join_by(npi)) |>
-      tidyr::unnest(taxonomy, names_sep = "_") |>
-      dplyr::filter(taxonomy_primary == TRUE) |>
-      dplyr::select(!c(taxonomy_taxonomy_group, taxonomy_primary)) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+      tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
+      dplyr::mutate(name = stringr::str_c(basic_first_name, basic_last_name, sep = " "), .after = 4) |>
+      tidyr::nest(basic = tidyr::contains("basic")) |>
+      tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
+    return(results)
+  }
 
-    valid_fields <- c("npi", "enumeration_type", "enumeration_date",
-                      "enumeration_duration", "last_updated",
-                      "certification_date", "status",
-                      "organization_name", "organizational_subpart",
-                      "first_name", "middle_name", "last_name", "credential",
-                      "gender", "sole_proprietor", "country", "street", "city",
-                      "state", "zipcode", "phone_number", "fax_number",
-                      "taxonomy_code", "taxonomy_desc", "taxonomy_state",
-                      "taxonomy_license")
+  #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
-    results <- results |> dplyr::select(dplyr::any_of(valid_fields))
-
-    }
-
-    # clean names -------------------------------------------------------------
-    if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
-
-  return(results)
-}
-
-#' Search the NPPES National Provider Identifier Registry API
-#'
-#' @description `nppes_npi_multi()` allows you to search the NPPES NPI
-#'    Registry's public API by many of the parameters defined in the
-#'    API's documentation.
-#'
-#' @details The NPPES NPI Registry Public Search is a free directory of all
-#'    active National Provider Identifier (NPI) records. Healthcare providers
-#'    acquire their unique 10-digit NPIs to identify themselves in a standard
-#'    way throughout their industry. After CMS supplies an NPI, they publish
-#'    the parts of the NPI record that have public relevance, including the
-#'    provider’s name, taxonomy and practice address. It enables you to search
-#'    for providers in the NPPES (National Plan and Provider Enumeration
-#'    System.) All information produced by the NPI Registry is provided in
-#'    accordance with the NPPES Data Dissemination Notice. There is no charge
-#'    to use the NPI Registry.
-#'
-#' ## Links
-#' * [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
-#' * [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
-#'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Weekly**
-#' @param df data frame, tibble
-#' @autoglobal
-#' @export
-nppes_npi_multi <- function(df) {
-
-  npis <- df |>
-    tibble::deframe() |>
-    as.list()
-
-  results <- npis |>
-    purrr::map(nppes_npi) |>
-    dplyr::bind_rows()
-
-  return(results)
 }

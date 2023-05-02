@@ -9,18 +9,18 @@ Centers for Medicare & Medicaid Services
 \usage{
 doctors_and_clinicians(
   npi = NULL,
-  pac_id_ind = NULL,
+  pac_id = NULL,
   enroll_id = NULL,
-  last_name = NULL,
   first_name = NULL,
   middle_name = NULL,
+  last_name = NULL,
   gender = NULL,
-  med_sch = NULL,
+  school = NULL,
   grad_year = NULL,
-  prim_spec = NULL,
+  specialty = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
+  zipcode = NULL,
   ind_assign = NULL,
   group_assign = NULL,
   offset = 0,
@@ -30,31 +30,31 @@ doctors_and_clinicians(
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id}{Unique individual clinician ID assigned by PECOS}
 
 \item{enroll_id}{Unique ID for the clinician enrollment that is the source
 for the data in the observation}
-
-\item{last_name}{Individual clinician last name}
 
 \item{first_name}{Individual clinician first name}
 
 \item{middle_name}{Individual clinician middle name}
 
+\item{last_name}{Individual clinician last name}
+
 \item{gender}{Individual clinician gender}
 
-\item{med_sch}{Individual clinician’s medical school}
+\item{school}{Individual clinician’s medical school}
 
 \item{grad_year}{Individual clinician’s medical school graduation year}
 
-\item{prim_spec}{Primary medical specialty reported by the individual
+\item{specialty}{Primary medical specialty reported by the individual
 clinician in the selected enrollment}
 
 \item{city}{Group or individual's city}
 
 \item{state}{Group or individual's state}
 
-\item{zip}{Group or individual's ZIP code (9 digits when available)}
+\item{zipcode}{Group or individual's ZIP code (9 digits when available)}
 
 \item{ind_assign}{Indicator for whether clinician accepts Medicare approved
 amount as payment in full. \code{Y} = Clinician accepts Medicare approved amount
@@ -94,7 +94,7 @@ doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(enroll_id = "I20081002000549")
 \dontrun{
 doctors_and_clinicians(first_name = "John")
-doctors_and_clinicians(med_sch = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
+doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 doctors_and_clinicians(grad_year = 2003)
 }
 }

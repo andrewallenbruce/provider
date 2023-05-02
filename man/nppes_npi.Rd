@@ -16,9 +16,9 @@ nppes_npi(
   taxonomy_desc = NULL,
   city = NULL,
   state = NULL,
-  zip = NULL,
+  zipcode = NULL,
   country = NULL,
-  limit = 200,
+  limit = 1200,
   skip = NULL,
   clean_names = TRUE
 )
@@ -74,7 +74,7 @@ field is used, at least one other field, besides the \code{prov_type} and
 \code{country}, must be populated. Valid values for state abbreviations:
 \url{https://npiregistry.cms.hhs.gov/help-api/state}.}
 
-\item{zip}{The Postal Code associated with the provider's address
+\item{zipcode}{The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 wildcard entries are permitted requiring at least two characters to be

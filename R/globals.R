@@ -3,6 +3,7 @@
 utils::globalVariables(c(
   "state.abb", # <beneficiary_enrollment>
   "state.name", # <beneficiary_enrollment>
+  "y", # <beneficiary_enrollment>
   "bene_geo_lvl", # <beneficiary_enrollment>
   "bene_state_abrvtn", # <beneficiary_enrollment>
   "bene_state_desc", # <beneficiary_enrollment>
@@ -46,8 +47,12 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
+  "y", # <doctors_and_clinicians>
   "adr_ln_1", # <doctors_and_clinicians>
   "adr_ln_2", # <doctors_and_clinicians>
+  "num_org_mem", # <doctors_and_clinicians>
+  "grd_yr", # <doctors_and_clinicians>
+  "telehlth", # <doctors_and_clinicians>
   "ind_pac_id", # <doctors_and_clinicians>
   "ind_enrl_id", # <doctors_and_clinicians>
   "frst_nm", # <doctors_and_clinicians>
@@ -56,25 +61,36 @@ utils::globalVariables(c(
   "suff", # <doctors_and_clinicians>
   "gndr", # <doctors_and_clinicians>
   "cred", # <doctors_and_clinicians>
-  "grd_yr", # <doctors_and_clinicians>
+  "med_sch", # <doctors_and_clinicians>
   "pri_spec", # <doctors_and_clinicians>
   "sec_spec_all", # <doctors_and_clinicians>
-  "telehlth", # <doctors_and_clinicians>
   "org_nm", # <doctors_and_clinicians>
   "org_pac_id", # <doctors_and_clinicians>
-  "num_org_mem", # <doctors_and_clinicians>
   "address", # <doctors_and_clinicians>
   "cty", # <doctors_and_clinicians>
   "st", # <doctors_and_clinicians>
+  "zip", # <doctors_and_clinicians>
   "phn_numbr", # <doctors_and_clinicians>
   "ind_assgn", # <doctors_and_clinicians>
   "grp_assgn", # <doctors_and_clinicians>
+  "y", # <facility_affiliations>
   "ind_pac_id", # <facility_affiliations>
   "frst_nm", # <facility_affiliations>
   "mid_nm", # <facility_affiliations>
   "lst_nm", # <facility_affiliations>
   "suff", # <facility_affiliations>
   "facility_afl_ccn", # <facility_affiliations>
+  "y", # <nppes_npi>
+  "number", # <nppes_npi>
+  "enumeration_type", # <nppes_npi>
+  "basic", # <nppes_npi>
+  "addresses", # <nppes_npi>
+  "taxonomies", # <nppes_npi>
+  "enumeration_date", # <nppes_npi>
+  "address_purpose", # <nppes_npi>
+  "country_name", # <nppes_npi>
+  "telephone_number", # <nppes_npi>
+  "postal_code", # <nppes_npi>
   "data_lists", # <nppes_npi_old>
   "outcome", # <nppes_npi_old>
   "description", # <nppes_npi_old>
@@ -88,19 +104,6 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi_old>
   "basic_first_name", # <nppes_npi_old>
   "basic_last_name", # <nppes_npi_old>
-  "number", # <nppes_npi>
-  "enumeration_type", # <nppes_npi>
-  "basic", # <nppes_npi>
-  "addresses", # <nppes_npi>
-  "taxonomies", # <nppes_npi>
-  "enumeration_date", # <nppes_npi>
-  "address_purpose", # <nppes_npi>
-  "country_name", # <nppes_npi>
-  "telephone_number", # <nppes_npi>
-  "postal_code", # <nppes_npi>
-  "taxonomy", # <nppes_npi>
-  "taxonomy_primary", # <nppes_npi>
-  "taxonomy_taxonomy_group", # <nppes_npi>
   "program_year", # <open_payments>
   "contextual_information", # <open_payments>
   "number_of_payments_included_in_total_amount", # <open_payments>
@@ -122,6 +125,7 @@ utils::globalVariables(c(
   "data", # <open_payments_update_ids>
   "year", # <open_payments_update_ids>
   "identifier", # <open_payments_update_ids>
+  "zipcode", # <opt_out>
   "NPI", # <opt_out>
   "PARTB", # <order_refer>
   "HHA", # <order_refer>
@@ -165,12 +169,5 @@ utils::globalVariables(c(
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
-  ":=", # <age_days>
-  "int", # <days_today>
-  "secs", # <days_today>
-  "mins", # <days_today>
-  ":=", # <days_today>
-  "hrs", # <days_today>
-  ":=", # <re_nest>
   NULL
 ))

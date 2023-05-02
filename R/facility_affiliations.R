@@ -51,9 +51,9 @@
 
 facility_affiliations <- function(npi           = NULL,
                                   pac_id        = NULL,
-                                  last_name     = NULL,
                                   first_name    = NULL,
                                   middle_name   = NULL,
+                                  last_name     = NULL,
                                   facility_type = NULL,
                                   facility_ccn  = NULL,
                                   parent_ccn    = NULL,
@@ -64,9 +64,9 @@ facility_affiliations <- function(npi           = NULL,
     ~x,                   ~y,
     "NPI",                npi,
     "Ind_PAC_ID",         pac_id,
-    "lst_nm",             last_name,
     "frst_nm",            first_name,
     "mid_nm",             middle_name,
+    "lst_nm",             last_name,
     "facility_type",      facility_type,
     "facility_afl_ccn",   facility_ccn,
     "parent_ccn",         parent_ccn)
@@ -79,32 +79,48 @@ facility_affiliations <- function(npi           = NULL,
     httr2::req_perform() |>
     httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 
-  id <- id_res$distribution$identifier
-
-  id_fmt <- paste0("[SELECT * FROM ", id, "]")
+  id <- paste0("[SELECT * FROM ", id_res$distribution$identifier, "]")
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
   post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
-  url    <- paste0(http, id_fmt, params_args, post) |>
+  url    <- paste0(http, id, params_args, post) |>
     param_brackets() |> param_space()
 
   # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(resp, "content-length")) == 0) {
-    return(tibble::tibble())
-  } else {
+  if (httr2::resp_header(response, "content-length") == "28") {
 
-    # parse response ---------------------------------------------------------
-    results <- tibble::tibble(httr2::resp_body_json(resp,
-               check_type = FALSE, simplifyVector = TRUE)) |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           npi,
+      "pac_id",        pac_id,
+      "first_name",    first_name,
+      "middle_name",   middle_name,
+      "last_name",     last_name,
+      "facility_type", facility_type,
+      "facility_ccn",  facility_ccn,
+      "parent_ccn",    parent_ccn) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    return(cli::cli_alert_danger("No results for {.val {cli_args}}",
+                                 wrap = TRUE))
 
   }
+
+    # parse response ---------------------------------------------------------
+    results <- tibble::tibble(httr2::resp_body_json(response,
+               check_type = FALSE, simplifyVector = TRUE)) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")))
 
   # clean names -------------------------------------------------------------
   if (isTRUE(clean_names)) {
@@ -118,8 +134,7 @@ facility_affiliations <- function(npi           = NULL,
         suffix       = suff,
         facility_type,
         facility_ccn = facility_afl_ccn,
-        parent_ccn) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+        parent_ccn)
     }
   return(results)
 }

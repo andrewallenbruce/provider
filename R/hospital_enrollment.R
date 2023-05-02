@@ -24,7 +24,7 @@
 #' @param dba_name Hospital’s doing-business-as name
 #' @param city City of the hospital’s practice location address
 #' @param state State of the hospital’s practice location address.
-#' @param zip Zip code of the hospital’s practice location address
+#' @param zipcode Zip code of the hospital’s practice location address
 #' @param clean_names Convert column names to snakecase; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -35,22 +35,22 @@
 #' hospital_enrollment(pac_id_org = 6103733050)
 #' \dontrun{
 #' hospital_enrollment(city = "Atlanta")
-#' hospital_enrollment(zip = 117771928)
+#' hospital_enrollment(zipcode = 117771928)
 #' }
 #' @autoglobal
 #' @export
 
 hospital_enrollment <- function(npi            = NULL,
-                                facility_ccn            = NULL,
+                                facility_ccn   = NULL,
                                 enroll_id      = NULL,
                                 enroll_state   = NULL,
                                 specialty_code = NULL,
-                                pac_id_org         = NULL,
+                                pac_id_org     = NULL,
                                 org_name       = NULL,
                                 dba_name       = NULL,
                                 city           = NULL,
                                 state          = NULL,
-                                zip            = NULL,
+                                zipcode        = NULL,
                                 clean_names    = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -65,7 +65,7 @@ hospital_enrollment <- function(npi            = NULL,
     "DOING BUSINESS AS NAME", dba_name,
     "CITY",                   city,
     "STATE",                  state,
-    "ZIP CODE",               zip)
+    "ZIP CODE",               zipcode)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
@@ -89,13 +89,17 @@ hospital_enrollment <- function(npi            = NULL,
     results <- tibble::tibble(httr2::resp_body_json(resp,
               check_type = FALSE, simplifyVector = TRUE)) |>
       dplyr::mutate(dplyr::across(dplyr::contains(c("Flag", "Subgroup", "Proprietary")), yn_logical)) |>
-      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
 
   }
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (isTRUE(clean_names)) {
+    results <- dplyr::rename_with(results, str_to_snakecase)
+
+    }
 
   return(results)
 
