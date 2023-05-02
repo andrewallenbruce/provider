@@ -98,18 +98,18 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  med_sch <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  school <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  grad_year <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  prim_spec <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ind_assign <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  group_assign <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -127,17 +127,13 @@
 <dd><p>Unique clinician ID assigned by NPPES</p></dd>
 
 
-<dt>pac_id_ind</dt>
+<dt>pac_id</dt>
 <dd><p>Unique individual clinician ID assigned by PECOS</p></dd>
 
 
 <dt>enroll_id</dt>
 <dd><p>Unique ID for the clinician enrollment that is the source
 for the data in the observation</p></dd>
-
-
-<dt>last_name</dt>
-<dd><p>Individual clinician last name</p></dd>
 
 
 <dt>first_name</dt>
@@ -148,11 +144,15 @@ for the data in the observation</p></dd>
 <dd><p>Individual clinician middle name</p></dd>
 
 
+<dt>last_name</dt>
+<dd><p>Individual clinician last name</p></dd>
+
+
 <dt>gender</dt>
 <dd><p>Individual clinician gender</p></dd>
 
 
-<dt>med_sch</dt>
+<dt>school</dt>
 <dd><p>Individual clinician’s medical school</p></dd>
 
 
@@ -160,7 +160,7 @@ for the data in the observation</p></dd>
 <dd><p>Individual clinician’s medical school graduation year</p></dd>
 
 
-<dt>prim_spec</dt>
+<dt>specialty</dt>
 <dd><p>Primary medical specialty reported by the individual
 clinician in the selected enrollment</p></dd>
 
@@ -173,7 +173,7 @@ clinician in the selected enrollment</p></dd>
 <dd><p>Group or individual's state</p></dd>
 
 
-<dt>zip</dt>
+<dt>zipcode</dt>
 <dd><p>Group or individual's ZIP code (9 digits when available)</p></dd>
 
 
@@ -224,26 +224,29 @@ are listed on multiple lines.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 21</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac_id enroll_id first_name middle_name last_name gender med_school</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1407263999 87292… I2014100… ROBIN      A           AVERY     F      OTHER     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1407263999 87292… I2014100… ROBIN      A           AVERY     F      OTHER     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 13 more variables: grad_year &lt;chr&gt;, specialty_prim &lt;chr&gt;, telehealth &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ind_assign &lt;chr&gt;, group_assign &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1407263999 8729208152 I2014100… ROBIN      A           AVERY     <span style="color: #BB0000;">NA</span>     F     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1407263999 8729208152 I2014100… ROBIN      A           AVERY     <span style="color: #BB0000;">NA</span>     F     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;, telehealth &lt;lgl&gt;, org_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_pac_id &lt;chr&gt;, org_members &lt;int&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;, ind_assign &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   group_assign &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20081002000549"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac_id enroll_id first_name middle_name last_name gender med_school</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1407031495 80221… I2008100… DOROTHY    E           MCCURLEY  F      OTHER     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: grad_year &lt;chr&gt;, specialty_prim &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, ind_assign &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1407031495 8022186162 I2008100… DOROTHY    E           MCCURLEY  <span style="color: #BB0000;">NA</span>     F     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;, telehealth &lt;lgl&gt;, org_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   org_pac_id &lt;chr&gt;, org_members &lt;int&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;, ind_assign &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   group_assign &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>med_sch <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">doctors_and_clinicians</span><span class="op">(</span>grad_year <span class="op">=</span> <span class="fl">2003</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

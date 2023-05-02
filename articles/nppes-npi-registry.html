@@ -256,87 +256,84 @@ NPPES by providers.</p>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 23</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
 <span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565142400s (~17.91 years) 2007-07-09  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565401600s (~17.92 years) 2007-07-09  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### City, state, country</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 199 × 26</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 22</span></span></span>
 <span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1881942746 NPI-2            2012-08-27       336700800s (~10.67 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1598140279 NPI-2            2015-07-23       245116800s (~7.77 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1801411459 NPI-2            2020-06-10       90979200s (~2.88 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1639793664 NPI-2            2020-06-05       91411200s (~2.9 years)   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1497497986 NPI-2            2022-04-13       32918400s (~1.04 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1487827390 NPI-2            2008-04-11       474854400s (~15.05 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265550859 NPI-2            2007-03-26       507859200s (~16.09 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1134508666 NPI-2            2015-05-29       249868800s (~7.92 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1598279655 NPI-2            2017-11-28       170899200s (~5.42 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1356959407 NPI-2            2020-07-15       87955200s (~2.79 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 189 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1881942746 NPI-2            2012-08-27       336960000s (~10.68 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1598140279 NPI-2            2015-07-23       245376000s (~7.78 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1801411459 NPI-2            2020-06-10       91238400s (~2.89 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1639793664 NPI-2            2020-06-05       91670400s (~2.9 years)   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1497497986 NPI-2            2022-04-13       33177600s (~1.05 years)  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1487827390 NPI-2            2008-04-11       475113600s (~15.06 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265550859 NPI-2            2007-03-26       508118400s (~16.1 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1134508666 NPI-2            2015-05-29       250128000s (~7.93 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1598279655 NPI-2            2017-11-28       171158400s (~5.42 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1356959407 NPI-2            2020-07-15       88214400s (~2.8 years)   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### First name, city, state</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span>
 <span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 24</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 20</span></span></span>
 <span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1700934569 NPI-1            2007-01-08       514512000s (~16.3 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1396825477 NPI-1            2006-10-16       521769600s (~16.53 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1033595855 NPI-1            2015-08-04       244080000s (~7.73 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1023436839 NPI-1            2014-03-31       286502400s (~9.08 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1265870406 NPI-1            2013-06-10       311904000s (~9.88 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891754826 NPI-1            2006-03-20       539913600s (~17.11 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1437187960 NPI-1            2006-06-30       531100800s (~16.83 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1750830170 NPI-1            2016-09-27       207792000s (~6.58 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1811336142 NPI-1            2013-06-20       311040000s (~9.86 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1871804443 NPI-1            2010-06-29       404956800s (~12.83 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1700934569 NPI-1            2007-01-08       514771200s (~16.31 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1396825477 NPI-1            2006-10-16       522028800s (~16.54 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1033595855 NPI-1            2015-08-04       244339200s (~7.74 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1023436839 NPI-1            2014-03-31       286761600s (~9.09 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1265870406 NPI-1            2013-06-10       312163200s (~9.89 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891754826 NPI-1            2006-03-20       540172800s (~17.12 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1437187960 NPI-1            2006-06-30       531360000s (~16.84 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1750830170 NPI-1            2016-09-27       208051200s (~6.59 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1811336142 NPI-1            2013-06-20       311299200s (~9.86 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1871804443 NPI-1            2010-06-29       405216000s (~12.84 years)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 18</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
 <span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336… NPI-2            2012-03-07       351648000s (~11.14 years) 2020-01-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336… NPI-2            2012-03-07       351907200s (~11.15 years) 2020-01-07  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;, taxonomy_desc &lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 23</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
 <span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710… NPI-1            2005-10-11       553737600s (~17.55 years) 2007-07-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710… NPI-1            2005-10-11       553996800s (~17.56 years) 2007-07-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 0</span></span></span></code></pre></div>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### List of NPIs</span></span>
 <span><span class="va">npi_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span>
@@ -365,21 +362,19 @@ NPPES by providers.</p>
 <span><span class="va">npi_df</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 24</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 20</span></span></span>
 <span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… NPI-1            2007-05-22       502934400s (~15.94 years) 2017-04-28  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1316… NPI-1            2019-03-04       131068800s (~4.15 years)  2023-04-06  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1720… NPI-1            2010-07-29       402364800s (~12.75 years) 2021-01-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1518… NPI-1            2007-04-19       505785600s (~16.03 years) 2020-10-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1922… NPI-1            2006-05-04       536025600s (~16.99 years) 2008-02-13  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1083… NPI-1            2008-07-22       466041600s (~14.77 years) 2021-03-25  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… NPI-1            2007-05-22       503193600s (~15.95 years) 2017-04-28  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1316… NPI-1            2019-03-04       131328000s (~4.16 years)  2023-04-06  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1720… NPI-1            2010-07-29       402624000s (~12.76 years) 2021-01-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1518… NPI-1            2007-04-19       506044800s (~16.04 years) 2020-10-27  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1922… NPI-1            2006-05-04       536284800s (~16.99 years) 2008-02-13  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1083… NPI-1            2008-07-22       466300800s (~14.78 years) 2021-03-25  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   certification_date &lt;date&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, certification_date &lt;date&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">###Tribble example</span></span>
 <span><span class="va">tribble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
@@ -391,26 +386,25 @@ NPPES by providers.</p>
 <span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"Andrew"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 400 × 26</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 402 × 22</span></span></span>
 <span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1336413418 NPI-2            2012-03-07       351648000s (~11.14 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1710975040 NPI-1            2005-10-11       553737600s (~17.55 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1700934569 NPI-1            2007-01-08       514512000s (~16.3 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396825477 NPI-1            2006-10-16       521769600s (~16.53 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1033595855 NPI-1            2015-08-04       244080000s (~7.73 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023436839 NPI-1            2014-03-31       286502400s (~9.08 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265870406 NPI-1            2013-06-10       311904000s (~9.88 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891754826 NPI-1            2006-03-20       539913600s (~17.11 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1437187960 NPI-1            2006-06-30       531100800s (~16.83 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750830170 NPI-1            2016-09-27       207792000s (~6.58 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 390 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1336413418 NPI-2            2012-03-07       351907200s (~11.15 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1710975040 NPI-1            2005-10-11       553996800s (~17.56 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1700934569 NPI-1            2007-01-08       514771200s (~16.31 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396825477 NPI-1            2006-10-16       522028800s (~16.54 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1033595855 NPI-1            2015-08-04       244339200s (~7.74 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023436839 NPI-1            2014-03-31       286761600s (~9.09 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265870406 NPI-1            2013-06-10       312163200s (~9.89 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891754826 NPI-1            2006-03-20       540172800s (~17.12 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1437187960 NPI-1            2006-06-30       531360000s (~16.84 years)</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750830170 NPI-1            2016-09-27       208051200s (~6.59 years) </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 392 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">

@@ -111,9 +111,9 @@ API's documentation.</p>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">200</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fl">1200</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -191,7 +191,7 @@ field is used, at least one other field, besides the <code>prov_type</code> and
 <a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">https://npiregistry.cms.hhs.gov/help-api/state</a>.</p></dd>
 
 
-<dt>zip</dt>
+<dt>zipcode</dt>
 <dd><p>The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
@@ -254,15 +254,14 @@ to use the NPI Registry.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 19</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565142400s (~17.91 years) 2007-07-09  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 18 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565401600s (~17.92 years) 2007-07-09  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, taxonomy_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   taxonomy_desc &lt;chr&gt;, taxonomy_state &lt;chr&gt;, taxonomy_license &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

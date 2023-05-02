@@ -107,7 +107,7 @@
 <span>  dba_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -159,7 +159,7 @@ OSCAR Number</p></dd>
 <dd><p>State of the hospital’s practice location address.</p></dd>
 
 
-<dt>zip</dt>
+<dt>zipcode</dt>
 <dd><p>Zip code of the hospital’s practice location address</p></dd>
 
 
@@ -200,7 +200,7 @@ business as name, organization type and address.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> O20211109003440 ME               00-09              PART A PROVIDER - H… 1689…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 31 more variables: multiple_npi_flag &lt;lgl&gt;, ccn &lt;chr&gt;, associate_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_name &lt;chr&gt;, doing_business_as_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;chr&gt;, incorporation_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;dttm&gt;, incorporation_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_type_structure &lt;chr&gt;, organization_other_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proprietary_nonprofit &lt;lgl&gt;, address_line_1 &lt;chr&gt;, address_line_2 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip_code &lt;int&gt;, practice_location_type &lt;chr&gt;,</span></span>
@@ -212,7 +212,7 @@ business as name, organization type and address.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> O20020812000015 TN               00-09              PART A PROVIDER - H… 1467…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 31 more variables: multiple_npi_flag &lt;lgl&gt;, ccn &lt;chr&gt;, associate_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_name &lt;chr&gt;, doing_business_as_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;chr&gt;, incorporation_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;dttm&gt;, incorporation_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_type_structure &lt;chr&gt;, organization_other_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proprietary_nonprofit &lt;lgl&gt;, address_line_1 &lt;chr&gt;, address_line_2 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip_code &lt;int&gt;, practice_location_type &lt;chr&gt;,</span></span>
@@ -225,14 +225,14 @@ business as name, organization type and address.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> O20090408000323 NY               00-09              PART A PROVIDER - H… 1225…</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 31 more variables: multiple_npi_flag &lt;lgl&gt;, ccn &lt;chr&gt;, associate_id &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_name &lt;chr&gt;, doing_business_as_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;chr&gt;, incorporation_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_date &lt;dttm&gt;, incorporation_state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_type_structure &lt;chr&gt;, organization_other_type_text &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proprietary_nonprofit &lt;lgl&gt;, address_line_1 &lt;chr&gt;, address_line_2 &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip_code &lt;int&gt;, practice_location_type &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_other_type_text &lt;chr&gt;, subgroup__general &lt;lgl&gt;, …</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span><span class="fu">hospital_enrollment</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">hospital_enrollment</span><span class="op">(</span>zip <span class="op">=</span> <span class="fl">117771928</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">hospital_enrollment</span><span class="op">(</span>zipcode <span class="op">=</span> <span class="fl">117771928</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

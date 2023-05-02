@@ -107,7 +107,7 @@ of Medicare.</p>
 <span>  address <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcod <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  eligible <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -147,10 +147,6 @@ of Medicare.</p>
 <dd><p>Provider's State Abbreviation</p></dd>
 
 
-<dt>zip</dt>
-<dd><p>Provider's Zip Code</p></dd>
-
-
 <dt>eligible</dt>
 <dd><p>Flag indicating whether the Provider is eligible to
 Order and Refer</p></dd>
@@ -158,6 +154,10 @@ Order and Refer</p></dd>
 
 <dt>clean_names</dt>
 <dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>zipcode</dt>
+<dd><p>Provider's Zip Code</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -184,7 +184,7 @@ provider's NPI, specialty, address, and effective dates.</p><div class="section"
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zip <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zipcode <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 13</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   first_name last_name npi   specialty optout_effective_date optout_end_date    </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
