@@ -96,11 +96,10 @@ beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "01"
     #> 1  2021 Year  State AL    Alabama    Total  01       1070474    528983
     #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
-    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
-    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
-    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
-    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>,
-    #> #   bene_rx_none <int>
+    #> #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
+    #> #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
+    #> #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
+    #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ``` r
 beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = "Autauga")
@@ -121,11 +120,10 @@ beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = 
     #> 10  2022 Year  County AL    Alabama    Autauga 01001      11578      5186
     #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
-    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
-    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
-    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
-    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>,
-    #> #   bene_rx_none <int>
+    #> #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
+    #> #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
+    #> #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
+    #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ``` r
 beneficiary_enrollment(year = 2021, level = "County", state = "GA") |> 
@@ -148,10 +146,10 @@ beneficiary_enrollment(year = 2021, level = "County", state = "GA") |>
     #> # ℹ 1,898 more rows
     #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
-    #> #   bene_dsb_esrd_and_only_esrd <int>, bene_dsb_no_esrd <int>,
-    #> #   bene_ab_total <int>, bene_ab_orig <int>, bene_ab_ma_oth <int>,
-    #> #   bene_rx_total <int>, bene_rx_pdp <int>, bene_rx_mapd <int>,
-    #> #   bene_rx_elig <int>, bene_rx_full <int>, bene_rx_part <int>, …
+    #> #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
+    #> #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
+    #> #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
+    #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ### Chronic Conditions
 
@@ -208,6 +206,8 @@ doctors_and_clinicians(npi = 1720081441)
 ```
 
     #> ✖ No results for npi: 1720081441
+
+    #> NULL
 
 ``` r
 doctors_and_clinicians(npi = 1407263999)
@@ -316,16 +316,41 @@ hospital_enrollment(facility_ccn = "060004")
 ```
 
     #> # A tibble: 1 × 36
-    #>   enrollment_id   enrollment_state provider_type_code provider_type_text   npi  
-    #>   <chr>           <chr>            <chr>              <chr>                <chr>
-    #> 1 O20070619000323 CO               00-09              PART A PROVIDER - H… 1629…
-    #> # ℹ 31 more variables: multiple_npi_flag <lgl>, ccn <chr>, associate_id <chr>,
-    #> #   organization_name <chr>, doing_business_as_name <chr>,
-    #> #   incorporation_date <dttm>, incorporation_state <chr>,
-    #> #   organization_type_structure <chr>, organization_other_type_text <chr>,
-    #> #   proprietary_nonprofit <lgl>, address_line_1 <chr>, address_line_2 <chr>,
-    #> #   city <chr>, state <chr>, zip_code <int>, practice_location_type <chr>,
-    #> #   location_other_type_text <chr>, subgroup__general <lgl>, …
+    #>   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn
+    #>   <chr>      <chr>       <chr>        <chr>          <chr>          <chr>       
+    #> 1 1629071758 O200706190… CO           00-09          PART A PROVID… 060004      
+    #> # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
+    #> #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
+    #> #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
+    #> #   city <chr>, state <chr>, zipcode <int>, location_type <chr>,
+    #> #   location_other <chr>, multiple_npis <lgl>, proprietary_nonprofit <lgl>,
+    #> #   sg_general <lgl>, sg_acute_care <lgl>, sg_alcohol_drug <lgl>,
+    #> #   sg_childrens <lgl>, sg_long_term <lgl>, sg_short_term <lgl>, …
+
+``` r
+hospital_enrollment(enroll_state = "GA")
+```
+
+    #> # A tibble: 216 × 36
+    #>    npi        enroll_id  enroll_state specialty_code specialty_desc facility_ccn
+    #>    <chr>      <chr>      <chr>        <chr>          <chr>          <chr>       
+    #>  1 1588664007 O20020826… GA           00-09          PART A PROVID… 112011      
+    #>  2 1376574277 O20021108… GA           00-09          PART A PROVID… 110005      
+    #>  3 1912951963 O20030515… GA           00-09          PART A PROVID… 110177      
+    #>  4 1063406684 O20030925… GA           00-09          PART A PROVID… 110043      
+    #>  5 1447252044 O20040406… GA           00-09          PART A PROVID… 112016      
+    #>  6 1679543672 O20040513… GA           00-09          PART A PROVID… 114008      
+    #>  7 1508810565 O20040823… GA           00-09          PART A PROVID… 110168      
+    #>  8 1922178789 O20041013… GA           00-09          PART A PROVID… 113301      
+    #>  9 1194722389 O20041103… GA           00-09          PART A PROVID… 112013      
+    #> 10 1811940976 O20041109… GA           00-09          PART A PROVID… 110201      
+    #> # ℹ 206 more rows
+    #> # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
+    #> #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
+    #> #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
+    #> #   city <chr>, state <chr>, zipcode <int>, location_type <chr>,
+    #> #   location_other <chr>, multiple_npis <lgl>, proprietary_nonprofit <lgl>,
+    #> #   sg_general <lgl>, sg_acute_care <lgl>, sg_alcohol_drug <lgl>, …
 
 ### Missing Contact Information
 
@@ -463,16 +488,26 @@ open_payments(recipient_npi = 1043218118)
 ### Opt-Out Affidavits
 
 ``` r
-opt_out(last_name = "Aaron")
+opt_out(last_name = "Smith")
 ```
 
-    #> # A tibble: 1 × 13
-    #>   first_name last_name npi   specialty optout_effective_date optout_end_date    
-    #>   <chr>      <chr>     <chr> <chr>     <dttm>                <dttm>             
-    #> 1 Sheryl     Aaron     1427… Clinical… 2022-02-17 00:00:00   2024-02-17 00:00:00
-    #> # ℹ 7 more variables: first_line_street_address <chr>,
-    #> #   second_line_street_address <chr>, city_name <chr>, state_code <chr>,
-    #> #   zip_code <chr>, eligible_to_order_and_refer <lgl>, last_updated <dttm>
+    #> # A tibble: 175 × 13
+    #>    npi        first_name last_name specialty   optout_start_date optout_end_date
+    #>    <chr>      <chr>      <chr>     <chr>       <date>            <date>         
+    #>  1 1083899611 Harold     Smith     Internal M… 2004-04-01        2024-04-01     
+    #>  2 1649265760 David      Smith     Maxillofac… 2012-06-25        2024-06-25     
+    #>  3 1669688156 Kyle       Smith     Oral Surge… 2018-07-23        2024-07-23     
+    #>  4 1396031431 Lisa       Smith     Clinical P… 2012-10-01        2024-10-01     
+    #>  5 1295840825 Austin     Smith     Oral Surge… 2017-02-13        2025-02-13     
+    #>  6 1881761260 Joann      Smith     Psychiatry  2013-03-02        2025-03-02     
+    #>  7 1134383193 Ashley     Smith     Clinical P… 2011-02-01        2025-02-01     
+    #>  8 1154467504 Eric       Smith     Clinical P… 2017-07-01        2023-07-01     
+    #>  9 1518152768 Sally      Smith     Psychiatry  2017-07-05        2023-07-05     
+    #> 10 1952512188 Melissa    Smith     Clinical P… 2013-04-01        2025-04-01     
+    #> # ℹ 165 more rows
+    #> # ℹ 7 more variables: optout_duration <Duration>, last_updated <date>,
+    #> #   order_and_refer <lgl>, address <chr>, city <chr>, state <chr>,
+    #> #   zipcode <chr>
 
 ### Order and Referring Privileges
 

@@ -19,7 +19,7 @@ hospital_enrollment(
   city = NULL,
   state = NULL,
   zipcode = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -46,7 +46,7 @@ OSCAR Number}
 
 \item{zipcode}{Zip code of the hospital’s practice location address}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

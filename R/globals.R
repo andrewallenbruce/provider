@@ -80,6 +80,42 @@ utils::globalVariables(c(
   "lst_nm", # <facility_affiliations>
   "suff", # <facility_affiliations>
   "facility_afl_ccn", # <facility_affiliations>
+  "y", # <hospital_enrollment>
+  "incorporation_date", # <hospital_enrollment>
+  "address_line_1", # <hospital_enrollment>
+  "address_line_2", # <hospital_enrollment>
+  "enrollment_id", # <hospital_enrollment>
+  "enrollment_state", # <hospital_enrollment>
+  "provider_type_code", # <hospital_enrollment>
+  "provider_type_text", # <hospital_enrollment>
+  "ccn", # <hospital_enrollment>
+  "associate_id", # <hospital_enrollment>
+  "organization_name", # <hospital_enrollment>
+  "doing_business_as_name", # <hospital_enrollment>
+  "incorp_duration", # <hospital_enrollment>
+  "incorporation_state", # <hospital_enrollment>
+  "organization_type_structure", # <hospital_enrollment>
+  "organization_other_type_text", # <hospital_enrollment>
+  "address", # <hospital_enrollment>
+  "zip_code", # <hospital_enrollment>
+  "practice_location_type", # <hospital_enrollment>
+  "location_other_type_text", # <hospital_enrollment>
+  "multiple_npi_flag", # <hospital_enrollment>
+  "proprietary_nonprofit", # <hospital_enrollment>
+  "subgroup__general", # <hospital_enrollment>
+  "subgroup__acute_care", # <hospital_enrollment>
+  "subgroup__alcohol_drug", # <hospital_enrollment>
+  "subgroup__childrens", # <hospital_enrollment>
+  "subgroup__long_term", # <hospital_enrollment>
+  "subgroup__short_term", # <hospital_enrollment>
+  "subgroup__psychiatric", # <hospital_enrollment>
+  "subgroup__psychiatric_unit", # <hospital_enrollment>
+  "subgroup__rehabilitation", # <hospital_enrollment>
+  "subgroup__rehabilitation_unit", # <hospital_enrollment>
+  "subgroup__swing_bed_approved", # <hospital_enrollment>
+  "subgroup__specialty_hospital", # <hospital_enrollment>
+  "subgroup__other", # <hospital_enrollment>
+  "subgroup__other_text", # <hospital_enrollment>
   "y", # <nppes_npi>
   "number", # <nppes_npi>
   "enumeration_type", # <nppes_npi>
@@ -125,8 +161,15 @@ utils::globalVariables(c(
   "data", # <open_payments_update_ids>
   "year", # <open_payments_update_ids>
   "identifier", # <open_payments_update_ids>
-  "zipcode", # <opt_out>
-  "NPI", # <opt_out>
+  "y", # <opt_out>
+  "optout_end_date", # <opt_out>
+  "optout_effective_date", # <opt_out>
+  "optout_duration", # <opt_out>
+  "last_updated", # <opt_out>
+  "eligible_to_order_and_refer", # <opt_out>
+  "city_name", # <opt_out>
+  "state_code", # <opt_out>
+  "zip_code", # <opt_out>
   "PARTB", # <order_refer>
   "HHA", # <order_refer>
   "DME", # <order_refer>

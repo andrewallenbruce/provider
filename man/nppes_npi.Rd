@@ -20,7 +20,7 @@ nppes_npi(
   country = NULL,
   limit = 1200,
   skip = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -92,7 +92,7 @@ default is 200, maximum is 1200.}
 \item{skip}{Number of results to skip after searching
 the previous number; set in \code{limit}.}
 
-\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -125,5 +125,4 @@ Update Frequency: \strong{Weekly}
 }
 \examples{
 nppes_npi(npi = 1528060837)
-
 }

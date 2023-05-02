@@ -24,7 +24,7 @@ doctors_and_clinicians(
   ind_assign = NULL,
   group_assign = NULL,
   offset = 0,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -66,7 +66,7 @@ as payment in full. \code{M} = Clinician may accept Medicare Assignment.}
 
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

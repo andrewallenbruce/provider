@@ -23,7 +23,7 @@
 #' @param zipcode Provider's Zip Code
 #' @param eligible Flag indicating whether the Provider is eligible to
 #'    Order and Refer
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -54,22 +54,22 @@
 #' @autoglobal
 #' @export
 
-opt_out <- function(first_name   = NULL,
+opt_out <- function(npi          = NULL,
+                    first_name   = NULL,
                     last_name    = NULL,
-                    npi          = NULL,
                     specialty    = NULL,
                     address      = NULL,
                     city         = NULL,
                     state        = NULL,
                     zipcode      = NULL,
                     eligible     = NULL,
-                    clean_names  = TRUE) {
+                    tidy         = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                                 ~x,           ~y,
+                             "NPI",          npi,
                       "First Name",   first_name,
                        "Last Name",    last_name,
-                             "NPI",          npi,
                        "Specialty",    specialty,
        "First Line Street Address",      address,
                        "City Name",         city,
@@ -78,8 +78,10 @@ opt_out <- function(first_name   = NULL,
      "Eligible to Order and Refer",     eligible)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -88,41 +90,68 @@ opt_out <- function(first_name   = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
+  if (httr2::resp_header(response, "content-length") == "0") {
 
-    results <- tibble::tibble(date = as.Date(httr2::resp_date(resp)),
-                              last_updated = NA,
-                              first_name = NA,
-                              last_name = NA,
-                              npi = NA,
-                              specialty = NA,
-                              optout_effective_date = NA,
-                              optout_end_date = NA,
-                              first_line_street_address = NA,
-                              second_line_street_address = NA,
-                              city_name = NA,
-                              state_code = NA,
-                              zip_code = NA,
-                              eligible_to_order_and_refer = NA)
-    return(results)
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           npi,
+      "first_name",    first_name,
+      "last_name",     last_name,
+      "specialty",     specialty,
+      "address",       address,
+      "city",          city,
+      "state",         state,
+      "zipcode",       zipcode,
+      "eligible",     eligible) |>
+      tidyr::unnest(cols = c(y))
 
-  } else {
+    cli_args <- purrr::map2(cli_args$x,
+                            as.character(cli_args$y),
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
-            check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::mutate(NPI = as.character(NPI)) |>
-    dplyr::mutate(dplyr::across(dplyr::contains("Eligible"), yn_logical)) |>
-    dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(NULL)
+
   }
 
-  # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  # parse response ----------------------------------------------------------
+  results <- tibble::tibble(httr2::resp_body_json(response,
+            check_type = FALSE, simplifyVector = TRUE))
 
+  # clean names -------------------------------------------------------------
+  if (tidy) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(npi = as.character(npi),
+                    dplyr::across(dplyr::contains("eligible"), yn_logical),
+                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                    optout_duration = lubridate::as.duration(optout_end_date - optout_effective_date)) |>
+      tidyr::unite("address",
+                   dplyr::any_of(c("first_line_street_address",
+                                   "second_line_street_address")),
+                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+      dplyr::select(npi,
+                    first_name,
+                    last_name,
+                    specialty,
+                    optout_start_date = optout_effective_date,
+                    optout_end_date,
+                    optout_duration,
+                    last_updated,
+                    order_and_refer = eligible_to_order_and_refer,
+                    address,
+                    city = city_name,
+                    state = state_code,
+                    zipcode = zip_code)
+    }
   return(results)
 }

@@ -38,9 +38,7 @@
 #' @param state_name Full state name of beneficiary residence
 #' @param county County of beneficiary residence
 #' @param fips FIPS code of beneficiary residence
-#' @param clean_names Convert column names to snake case; default is `TRUE`.
-#'
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
@@ -68,7 +66,7 @@ beneficiary_enrollment <- function(year        = NULL,
                                    state_name  = NULL,
                                    county      = NULL,
                                    fips        = NULL,
-                                   clean_names = TRUE) {
+                                   tidy        = TRUE) {
 
   # if (period == "month")
   # if (period == "year")
@@ -112,18 +110,15 @@ beneficiary_enrollment <- function(year        = NULL,
   #post   <- "/data?"
   url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  request <- httr2::request(url)
-
-  # send request ------------------------------------------------------------
-  response <- request |> httr2::req_perform()
+  # response ----------------------------------------------------------
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
   if (httr2::resp_header(response, "content-length") == "0") {
 
     cli_args <- tibble::tribble(
       ~x,        ~y,
-      "year",      as.character(year),
+      "year",      year,
       "month",     month,
       "level",     level,
       "state",     state,
@@ -133,13 +128,15 @@ beneficiary_enrollment <- function(year        = NULL,
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
+                            as.character(cli_args$y),
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
 
-    return(cli::cli_alert_danger("No results for {.val {cli_args}}",
-                                 wrap = TRUE))
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(NULL)
 
     }
 
@@ -147,7 +144,7 @@ beneficiary_enrollment <- function(year        = NULL,
       check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {
+  if (tidy) {
 
     results <- dplyr::rename_with(results, str_to_snakecase) |>
     dplyr::rename(level                       = bene_geo_lvl,
@@ -162,7 +159,7 @@ beneficiary_enrollment <- function(year        = NULL,
                   bene_aged_esrd              = aged_esrd_benes,
                   bene_aged_no_esrd           = aged_no_esrd_benes,
                   bene_dsb_total              = dsbld_tot_benes,
-                  bene_dsb_esrd_and_only_esrd = dsbld_esrd_and_esrd_only_benes,
+                  bene_dsb_esrd      = dsbld_esrd_and_esrd_only_benes,
                   bene_dsb_no_esrd            = dsbld_no_esrd_benes,
                   bene_ab_total               = a_b_tot_benes,
                   bene_ab_orig                = a_b_orgnl_mdcr_benes,
@@ -183,15 +180,6 @@ beneficiary_enrollment <- function(year        = NULL,
     # if (!is.null(year) && level == "County") {
     # if (!is.null(year) && level == "County" && (is.null(month) || month == "Year")) {
 
-    #   results <- results |>
-    #     dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*"))) |>
-    #     dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
-    #
-    # } else {
-
-      # results <- results |>
-      #   dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
-    # }
   }
   return(results)
 }

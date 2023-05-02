@@ -8,24 +8,24 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 opt_out(
+  npi = NULL,
   first_name = NULL,
   last_name = NULL,
-  npi = NULL,
   specialty = NULL,
   address = NULL,
   city = NULL,
   state = NULL,
-  zipcod = NULL,
+  zipcode = NULL,
   eligible = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
+\item{npi}{National Provider Identifier (NPI) number of the Opt Out Provider}
+
 \item{first_name}{First Name of the Opt Out Provider}
 
 \item{last_name}{Last Name of the Opt Out Provider}
-
-\item{npi}{National Provider Identifier (NPI) number of the Opt Out Provider}
 
 \item{specialty}{Specialty of the Opt Out Provider}
 
@@ -35,12 +35,12 @@ opt_out(
 
 \item{state}{Provider's State Abbreviation}
 
+\item{zipcode}{Provider's Zip Code}
+
 \item{eligible}{Flag indicating whether the Provider is eligible to
 Order and Refer}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
-
-\item{zipcode}{Provider's Zip Code}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

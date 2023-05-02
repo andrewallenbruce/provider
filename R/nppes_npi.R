@@ -78,10 +78,9 @@
 #'    default is 200, maximum is 1200.
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
-#' @param clean_names Convert column names to snake case; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`.
 #' @examples
 #' nppes_npi(npi = 1528060837)
-#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @autoglobal
 #' @export
@@ -97,7 +96,7 @@ nppes_npi <- function(npi            = NULL,
                       country        = NULL,
                       limit          = 1200,
                       skip           = NULL,
-                      clean_names    = TRUE) {
+                      tidy           = TRUE) {
 
   # request and response ----------------------------------------------------
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
@@ -129,7 +128,7 @@ nppes_npi <- function(npi            = NULL,
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
+      "npi",           npi,
       "enum_type",     enum_type,
       "first_name",    first_name,
       "last_name",     last_name,
@@ -142,7 +141,7 @@ nppes_npi <- function(npi            = NULL,
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
+                            as.character(cli_args$y),
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
@@ -154,45 +153,48 @@ nppes_npi <- function(npi            = NULL,
 
   }
 
-    # results -- unnest basic ------------------------------------------------
-    results <- response$results |>
-      dplyr::tibble() |>
-      dplyr::select(npi = number,
-                    enumeration_type,
-                    basic,
-                    addresses,
-                    taxonomy = taxonomies) |>
-      tidyr::unnest(basic)
+  results <- response$results |> dplyr::tibble()
 
-    # tidy results ----------------------------------------------------------
-    results <- results |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "--")),
-                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
 
-    # replace empty lists with NA -------------------------------------------
-    results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
-    # addresses --------------------------------------------------------------
-    address <- results |>
-      dplyr::select(npi, addresses) |>
-      tidyr::unnest(addresses) |>
-      tidyr::unite("street",
-                   dplyr::any_of(c("address_1", "address_2")),
-                   remove = TRUE,
-                   na.rm = TRUE,
-                   sep = " ") |>
-      dplyr::mutate(address_purpose = tolower(address_purpose),
-                    address_type = NULL,
-                    country_code = NULL) |>
-      dplyr::rename(country = country_name,
-                    phone_number = telephone_number,
-                    zipcode = postal_code) |>
-      dplyr::filter(address_purpose == "location") |>
-      dplyr::select(!address_purpose)
+    # clean names -------------------------------------------------------------
+    if (tidy) {
+
+      results <- results |>
+        dplyr::select(npi = number,
+                      enumeration_type,
+                      basic,
+                      addresses,
+                      taxonomy = taxonomies) |>
+        tidyr::unnest(basic) |>
+        dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                      dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
+                      enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
+
+
+      # replace empty lists with NA -------------------------------------------
+      results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+
+      # addresses --------------------------------------------------------------
+      address <- results |>
+        dplyr::select(npi, addresses) |>
+        tidyr::unnest(addresses) |>
+        tidyr::unite("street",
+                     dplyr::any_of(c("address_1", "address_2")),
+                     remove = TRUE,
+                     na.rm = TRUE,
+                     sep = " ") |>
+        dplyr::mutate(address_purpose = tolower(address_purpose),
+                      address_type = NULL,
+                      country_code = NULL) |>
+        dplyr::rename(country = country_name,
+                      phone_number = telephone_number,
+                      zipcode = postal_code) |>
+        dplyr::filter(address_purpose == "location") |>
+        dplyr::select(!address_purpose)
 
       # tidyr::pivot_wider(id_cols = dplyr::any_of(c("npi", "country")),
       #   names_from = address_purpose,
@@ -201,9 +203,9 @@ nppes_npi <- function(npi            = NULL,
       #                                                  "phone", "fax")),
       #                    names_glue = "{address_purpose}_{.value}")
 
-    results <- results |>
-      dplyr::select(!addresses) |>
-      dplyr::left_join(address, dplyr::join_by(npi))
+      results <- results |>
+        dplyr::select(!addresses) |>
+        dplyr::left_join(address, dplyr::join_by(npi))
 
       ## Some taxonomies are all labelled
       ## primary = FALSE nppes_npi(npi = 1558364273)
@@ -213,39 +215,35 @@ nppes_npi <- function(npi            = NULL,
       # dplyr::select(!c(taxonomy_taxonomy_group, taxonomy_primary)) |>
       # janitor::remove_empty(which = c("rows", "cols"))
 
-    valid_fields <- c("npi",
-                      "enumeration_type",
-                      "enumeration_date",
-                      "enumeration_duration",
-                      "last_updated",
-                      "certification_date",
-                      "status",
-                      "organization_name",
-                      "organizational_subpart",
-                      "first_name",
-                      "middle_name",
-                      "last_name",
-                      "credential",
-                      "gender",
-                      "sole_proprietor",
-                      "country",
-                      "street",
-                      "city",
-                      "state",
-                      "zipcode",
-                      "phone_number",
-                      "fax_number",
-                      "taxonomy_code",
-                      "taxonomy_desc",
-                      "taxonomy_state",
-                      "taxonomy_license")
+      valid_fields <- c("npi",
+                        "enumeration_type",
+                        "enumeration_date",
+                        "enumeration_duration",
+                        "last_updated",
+                        "certification_date",
+                        "status",
+                        "organization_name",
+                        "organizational_subpart",
+                        "first_name",
+                        "middle_name",
+                        "last_name",
+                        "credential",
+                        "gender",
+                        "sole_proprietor",
+                        "country",
+                        "street",
+                        "city",
+                        "state",
+                        "zipcode",
+                        "phone_number",
+                        "fax_number",
+                        "taxonomy_code",
+                        "taxonomy_desc",
+                        "taxonomy_state",
+                        "taxonomy_license")
 
-    results <- results |> dplyr::select(dplyr::any_of(valid_fields))
-
-    # clean names -------------------------------------------------------------
-    if (isTRUE(clean_names)) {
-
-      results <- dplyr::rename_with(results, str_to_snakecase)
+      results <- results |>
+        dplyr::select(dplyr::any_of(valid_fields))
 
       }
 

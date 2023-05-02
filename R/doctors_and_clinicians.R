@@ -36,7 +36,7 @@
 #'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
 #'   as payment in full. `M` = Clinician may accept Medicare Assignment.
 #' @param offset offset; API pagination
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -67,7 +67,7 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    ind_assign    = NULL,
                                    group_assign  = NULL,
                                    offset        = 0,
-                                   clean_names   = TRUE) {
+                                   tidy          = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
@@ -111,15 +111,15 @@ doctors_and_clinicians <- function(npi           = NULL,
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
-      "pac_id",        as.character(pac_id),
+      "npi",           npi,
+      "pac_id",        pac_id,
       "enroll_id",     enroll_id,
       "first_name",    first_name,
       "middle_name",   middle_name,
       "last_name",     last_name,
       "gender",        gender,
       "school",        school,
-      "grad_year",     as.character(grad_year),
+      "grad_year",     grad_year,
       "specialty",     specialty,
       "city",          city,
       "state",         state,
@@ -129,13 +129,15 @@ doctors_and_clinicians <- function(npi           = NULL,
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
+                            as.character(cli_args$y),
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
 
-    return(cli::cli_alert_danger("No results for {.val {cli_args}}",
-                                 wrap = TRUE))
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(NULL)
 
   }
 
@@ -146,7 +148,7 @@ doctors_and_clinicians <- function(npi           = NULL,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {
+  if (tidy) {
     results <- dplyr::rename_with(results, str_to_snakecase) |>
       tidyr::unite("address",
                    adr_ln_1:adr_ln_2,
@@ -156,29 +158,29 @@ doctors_and_clinicians <- function(npi           = NULL,
                     telehlth = yn_logical(telehlth)) |>
       dplyr::select(
         npi,
-        pac_id = ind_pac_id,
-        enroll_id = ind_enrl_id,
-        first_name = frst_nm,
-        middle_name = mid_nm,
-        last_name = lst_nm,
-        suffix = suff,
-        gender = gndr,
-        credential = cred,
-        school = med_sch,
-        grad_year = grd_yr,
-        specialty = pri_spec,
+        pac_id        = ind_pac_id,
+        enroll_id     = ind_enrl_id,
+        first_name    = frst_nm,
+        middle_name   = mid_nm,
+        last_name     = lst_nm,
+        suffix        = suff,
+        gender        = gndr,
+        credential    = cred,
+        school        = med_sch,
+        grad_year     = grd_yr,
+        specialty     = pri_spec,
         specialty_sec = sec_spec_all,
-        telehealth = telehlth,
-        org_name = org_nm,
+        telehealth    = telehlth,
+        org_name      = org_nm,
         org_pac_id,
-        org_members = num_org_mem,
+        org_members   = num_org_mem,
         address,
-        city = cty,
-        state = st,
-        zipcode = zip,
-        phone_number = phn_numbr,
-        ind_assign = ind_assgn,
-        group_assign = grp_assgn)
+        city          = cty,
+        state         = st,
+        zipcode       = zip,
+        phone_number  = phn_numbr,
+        ind_assign    = ind_assgn,
+        group_assign  = grp_assgn)
     }
 
   return(results)

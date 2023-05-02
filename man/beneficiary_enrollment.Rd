@@ -15,7 +15,7 @@ beneficiary_enrollment(
   state_name = NULL,
   county = NULL,
   fips = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -37,7 +37,7 @@ and \code{County}}
 
 \item{fips}{FIPS code of beneficiary residence}
 
-\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
