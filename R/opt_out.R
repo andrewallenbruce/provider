@@ -21,19 +21,17 @@
 #' @param city Provider's City
 #' @param state Provider's State Abbreviation
 #' @param zipcode Provider's Zip Code
-#' @param eligible Flag indicating whether the Provider is eligible to
+#' @param order_and_refer Flag indicating whether the Provider is eligible to
 #'    Order and Refer
 #' @param tidy Tidy output; default is `TRUE`.
-#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
 #' opt_out(specialty = "Psychiatry", zipcode = "07626")
 #' opt_out(first = "David", last = "Smith")
 #' opt_out(npi = 1114974490)
-#' opt_out(state = "NY", eligible = "N")
 #' opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
 #' \dontrun{
+#' opt_out(state = "NY", order_and_refer = FALSE)
 #' # Returns empty list i.e., provider is not in the database
 #' opt_out(npi = 1326011057)
 #'
@@ -53,7 +51,6 @@
 #' }
 #' @autoglobal
 #' @export
-
 opt_out <- function(npi          = NULL,
                     first_name   = NULL,
                     last_name    = NULL,
@@ -62,9 +59,15 @@ opt_out <- function(npi          = NULL,
                     city         = NULL,
                     state        = NULL,
                     zipcode      = NULL,
-                    eligible     = NULL,
+                    order_and_refer = NULL,
                     tidy         = TRUE) {
   # args tribble ------------------------------------------------------------
+  if (!is.null(order_and_refer)) {
+    order_and_refer <- dplyr::case_when(
+      order_and_refer == TRUE ~ "Y",
+      order_and_refer == FALSE ~ "N",
+      .default = NULL)
+    }
   args <- tibble::tribble(
                                 ~x,           ~y,
                              "NPI",          npi,
@@ -75,7 +78,7 @@ opt_out <- function(npi          = NULL,
                        "City Name",         city,
                       "State Code",        state,
                         "Zip code",      zipcode,
-     "Eligible to Order and Refer",     eligible)
+     "Eligible to Order and Refer",     order_and_refer)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |>
@@ -93,23 +96,23 @@ opt_out <- function(npi          = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) == 0) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           npi,
+      "npi",           as.character(npi),
       "first_name",    first_name,
       "last_name",     last_name,
       "specialty",     specialty,
       "address",       address,
       "city",          city,
       "state",         state,
-      "zipcode",       zipcode,
-      "eligible",     eligible) |>
+      "zipcode",       as.character(zipcode),
+      "eligible",      as.character(order_and_refer)) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
+                            cli_args$y,
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")

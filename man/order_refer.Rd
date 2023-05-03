@@ -15,7 +15,7 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -33,7 +33,7 @@ order_refer(
 
 \item{pmd}{logical}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -116,6 +116,10 @@ utils::globalVariables(c(
   "subgroup__specialty_hospital", # <hospital_enrollment>
   "subgroup__other", # <hospital_enrollment>
   "subgroup__other_text", # <hospital_enrollment>
+  "y", # <missing_information>
+  "NPI", # <missing_information>
+  "last_name", # <missing_information>
+  "first_name", # <missing_information>
   "y", # <nppes_npi>
   "number", # <nppes_npi>
   "enumeration_type", # <nppes_npi>
@@ -170,10 +174,7 @@ utils::globalVariables(c(
   "city_name", # <opt_out>
   "state_code", # <opt_out>
   "zip_code", # <opt_out>
-  "PARTB", # <order_refer>
-  "HHA", # <order_refer>
-  "DME", # <order_refer>
-  "PMD", # <order_refer>
+  "y", # <order_refer>
   "Year", # <physician_by_geography>
   "Year", # <physician_by_provider>
   "Tot_HCPCS_Cds", # <physician_by_provider>

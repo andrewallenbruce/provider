@@ -117,18 +117,18 @@ beneficiary_enrollment <- function(year        = NULL,
   if (httr2::resp_header(response, "content-length") == "0") {
 
     cli_args <- tibble::tribble(
-      ~x,        ~y,
-      "year",      year,
-      "month",     month,
-      "level",     level,
-      "state",     state,
-      "state_name",state_name,
-      "county",    county,
-      "fips",      fips) |>
+      ~x,           ~y,
+      "year",       as.character(year),
+      "month",      month,
+      "level",      level,
+      "state",      state,
+      "state_name", state_name,
+      "county",     county,
+      "fips",       as.character(fips)) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
+                            cli_args$y,
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")

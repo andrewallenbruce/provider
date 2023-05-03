@@ -101,6 +101,7 @@ doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2003, 
                        state = "FL")
+doctors_and_clinicians(state = "GA")
 ```
 
 ### Facility Affiliations
@@ -125,6 +126,7 @@ hospital_enrollment(enroll_state = "GA")
 
 ```{r}
 missing_information(npi = 1144224569)
+missing_information(npi = 11111122222)
 ```
 
 ### NPI Registry
@@ -159,13 +161,16 @@ open_payments(recipient_npi = 1043218118)
 ### Opt-Out Affidavits
 
 ```{r}
-opt_out(last_name = "Smith")
+opt_out(first_name = "David", last_name = "Smith")
+opt_out(specialty = "Psychiatry", city = "BROOKLYN", state = "NY", order_and_refer = FALSE)
+opt_out(specialty = "Tsychiatry")
 ```
 
 ### Order and Referring Privileges
 
 ```{r}
 order_refer(npi = 1083879860)
+order_refer(last_name = "Smith", partb = FALSE, pmd = FALSE)
 ```
 
 ### Pending Applications

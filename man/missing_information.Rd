@@ -7,12 +7,12 @@
 Centers for Medicare & Medicaid Services
 }
 \usage{
-missing_information(npi = NULL, clean_names = TRUE)
+missing_information(npi = NULL, tidy = TRUE)
 }
 \arguments{
 \item{npi}{The provider’s National Provider Identifier}
 
-\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

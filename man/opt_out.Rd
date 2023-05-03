@@ -16,7 +16,7 @@ opt_out(
   city = NULL,
   state = NULL,
   zipcode = NULL,
-  eligible = NULL,
+  order_and_refer = NULL,
   tidy = TRUE
 )
 }
@@ -37,7 +37,7 @@ opt_out(
 
 \item{zipcode}{Provider's Zip Code}
 
-\item{eligible}{Flag indicating whether the Provider is eligible to
+\item{order_and_refer}{Flag indicating whether the Provider is eligible to
 Order and Refer}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
@@ -66,9 +66,9 @@ Update Frequency: \strong{Monthly}
 opt_out(specialty = "Psychiatry", zipcode = "07626")
 opt_out(first = "David", last = "Smith")
 opt_out(npi = 1114974490)
-opt_out(state = "NY", eligible = "N")
 opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
 \dontrun{
+opt_out(state = "NY", order_and_refer = FALSE)
 # Returns empty list i.e., provider is not in the database
 opt_out(npi = 1326011057)
 

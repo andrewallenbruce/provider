@@ -15,7 +15,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Weekly**
-#'
 #' @param npi 10-digit National Provider Identifier (NPI)
 #' @param first_name Provider's first name
 #' @param last_name Provider's last name
@@ -23,10 +22,8 @@
 #' @param dme logical
 #' @param hha logical
 #' @param pmd logical
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
 #' \dontrun{
 #' order_refer(npi = 1003026055)
@@ -58,15 +55,27 @@
 #' }
 #' @autoglobal
 #' @export
+order_refer <- function(npi          = NULL,
+                        first_name   = NULL,
+                        last_name    = NULL,
+                        partb        = NULL,
+                        dme          = NULL,
+                        hha          = NULL,
+                        pmd          = NULL,
+                        tidy         = TRUE) {
 
-order_refer <- function(npi              = NULL,
-                        first_name       = NULL,
-                        last_name        = NULL,
-                        partb            = NULL,
-                        dme              = NULL,
-                        hha              = NULL,
-                        pmd              = NULL,
-                        clean_names      = TRUE) {
+  if (!is.null(partb)) {partb <- dplyr::case_when(
+    partb == TRUE ~ "Y", partb == FALSE ~ "N", .default = NULL)}
+
+  if (!is.null(dme)) {dme <- dplyr::case_when(
+    dme == TRUE ~ "Y", dme == FALSE ~ "N", .default = NULL)}
+
+  if (!is.null(hha)) {hha <- dplyr::case_when(
+    hha == TRUE ~ "Y", hha == FALSE ~ "N", .default = NULL)}
+
+  if (!is.null(pmd)) {pmd <- dplyr::case_when(
+    pmd == TRUE ~ "Y", pmd == FALSE ~ "N", .default = NULL)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,           ~y,
@@ -79,8 +88,10 @@ order_refer <- function(npi              = NULL,
     "PMD",        pmd)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -89,34 +100,47 @@ order_refer <- function(npi              = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(resp, "content-length") |> as.numeric() == 0) {
+  if (as.integer(httr2::resp_header(response, "content-length")) == 0) {
 
-    results <- tibble::tibble(npi = NA,
-                              last_name = NA,
-                              first_name = NA,
-                              partb = NA,
-                              hha = NA,
-                              dme = NA,
-                              pmd = NA)
-    return(results)
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           as.character(npi),
+      "first_name",    first_name,
+      "last_name",     last_name,
+      "partb",         as.character(partb),
+      "dme",           as.character(dme),
+      "hha",           as.character(hha),
+      "pmd",           as.character(pmd)) |>
+      tidyr::unnest(cols = c(y))
 
-  } else {
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
-             check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::mutate(PARTB = yn_logical(PARTB),
-                  HHA = yn_logical(HHA),
-                  DME = yn_logical(DME),
-                  PMD = yn_logical(PMD))
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(NULL)
 
   }
 
-  # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  # parse response ----------------------------------------------------------
+  results <- tibble::tibble(httr2::resp_body_json(response,
+             check_type = FALSE, simplifyVector = TRUE))
 
-    return(results)
+  # clean names -------------------------------------------------------------
+  if (tidy) {
+    results <- results |>
+      dplyr::rename_with(str_to_snakecase) |>
+      dplyr::mutate(partb = yn_logical(partb),
+                    hha = yn_logical(hha),
+                    dme = yn_logical(dme),
+                    pmd = yn_logical(pmd))
+    }
+  return(results)
 }

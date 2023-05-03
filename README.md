@@ -246,6 +246,30 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
     #> #   state <chr>, zipcode <chr>, phone_number <chr>, ind_assign <chr>,
     #> #   group_assign <chr>
 
+``` r
+doctors_and_clinicians(state = "GA")
+```
+
+    #> # A tibble: 500 × 24
+    #>    npi        pac_id    enroll_id first_name middle_name last_name suffix gender
+    #>    <chr>      <chr>     <chr>     <chr>      <chr>       <chr>     <chr>  <chr> 
+    #>  1 1003001843 55977186… I2005030… INGE       C           LUECHING… <NA>   F     
+    #>  2 1003006115 93352239… I2008022… BENJAMIN   W           DURHAM    <NA>   M     
+    #>  3 1003006115 93352239… I2008022… BENJAMIN   W           DURHAM    <NA>   M     
+    #>  4 1003006115 93352239… I2008022… BENJAMIN   W           DURHAM    <NA>   M     
+    #>  5 1003006115 93352239… I2008022… BENJAMIN   W           DURHAM    <NA>   M     
+    #>  6 1003006115 93352239… I2008022… BENJAMIN   W           DURHAM    <NA>   M     
+    #>  7 1003008111 64060279… I2011091… MARIE      <NA>        EASTERLIN <NA>   F     
+    #>  8 1003009309 96382395… I2008112… DEBRA      L           BREWER    <NA>   F     
+    #>  9 1003012915 91332752… I2009091… JAYASHREE  S           JOHN      <NA>   F     
+    #> 10 1003012915 91332752… I2009091… JAYASHREE  S           JOHN      <NA>   F     
+    #> # ℹ 490 more rows
+    #> # ℹ 16 more variables: credential <chr>, school <chr>, grad_year <int>,
+    #> #   specialty <chr>, specialty_sec <chr>, telehealth <lgl>, org_name <chr>,
+    #> #   org_pac_id <chr>, org_members <int>, address <chr>, city <chr>,
+    #> #   state <chr>, zipcode <chr>, phone_number <chr>, ind_assign <chr>,
+    #> #   group_assign <chr>
+
 ### Facility Affiliations
 
 ``` r
@@ -363,6 +387,14 @@ missing_information(npi = 1144224569)
     #>   <chr>      <chr>     <chr>     
     #> 1 1144224569 Clouse    John
 
+``` r
+missing_information(npi = 11111122222)
+```
+
+    #> ✖ No results for npi: 11111122222
+
+    #> NULL
+
 ### NPI Registry
 
 ``` r
@@ -372,7 +404,7 @@ nppes_npi(npi = 1316405939)
     #> # A tibble: 1 × 20
     #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
     #>   <chr>  <chr>            <date>           <Duration>               <date>      
-    #> 1 13164… NPI-1            2019-03-04       131328000s (~4.16 years) 2023-04-06  
+    #> 1 13164… NPI-1            2019-03-04       131414400s (~4.16 years) 2023-04-06  
     #> # ℹ 15 more variables: certification_date <date>, status <chr>,
     #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
     #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
@@ -386,7 +418,7 @@ nppes_npi(npi = 1558364273)
     #> # A tibble: 1 × 19
     #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
     #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1558… NPI-1            2005-05-27       565833600s (~17.93 years) 2007-07-08  
+    #> 1 1558… NPI-1            2005-05-27       565920000s (~17.93 years) 2007-07-08  
     #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
     #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
     #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
@@ -399,7 +431,7 @@ nppes_npi(1720081441)
     #> # A tibble: 1 × 19
     #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
     #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1720… NPI-1            2005-05-27       565833600s (~17.93 years) 2007-07-08  
+    #> 1 1720… NPI-1            2005-05-27       565920000s (~17.93 years) 2007-07-08  
     #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
     #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
     #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
@@ -432,25 +464,25 @@ c(1710983663, 1710975040, 1659781227,
     #> # A tibble: 19 × 22
     #>    npi        enumeration_type enumeration_date enumeration_duration     
     #>    <chr>      <chr>            <date>           <Duration>               
-    #>  1 1710975040 NPI-1            2005-10-11       553996800s (~17.56 years)
-    #>  2 1336413418 NPI-2            2012-03-07       351907200s (~11.15 years)
-    #>  3 1003026055 NPI-1            2007-05-22       503193600s (~15.95 years)
-    #>  4 1316405939 NPI-1            2019-03-04       131328000s (~4.16 years) 
-    #>  5 1720392988 NPI-1            2010-07-29       402624000s (~12.76 years)
-    #>  6 1518184605 NPI-1            2007-04-19       506044800s (~16.04 years)
-    #>  7 1922056829 NPI-1            2006-05-04       536284800s (~16.99 years)
-    #>  8 1083879860 NPI-1            2008-07-22       466300800s (~14.78 years)
-    #>  9 1346243805 NPI-1            2005-05-27       565833600s (~17.93 years)
-    #> 10 1679576722 NPI-1            2005-05-23       566179200s (~17.94 years)
-    #> 11 1093718892 NPI-1            2005-05-24       566092800s (~17.94 years)
-    #> 12 1477556405 NPI-1            2005-05-23       566179200s (~17.94 years)
-    #> 13 1770586539 NPI-1            2005-05-24       566092800s (~17.94 years)
-    #> 14 1871596692 NPI-1            2005-05-24       566092800s (~17.94 years)
-    #> 15 1174526925 NPI-1            2005-05-24       566092800s (~17.94 years)
-    #> 16 1720081441 NPI-1            2005-05-27       565833600s (~17.93 years)
-    #> 17 1558364273 NPI-1            2005-05-27       565833600s (~17.93 years)
-    #> 18 1801899513 NPI-1            2005-05-27       565833600s (~17.93 years)
-    #> 19 1316405939 NPI-1            2019-03-04       131328000s (~4.16 years) 
+    #>  1 1710975040 NPI-1            2005-10-11       554083200s (~17.56 years)
+    #>  2 1336413418 NPI-2            2012-03-07       351993600s (~11.15 years)
+    #>  3 1003026055 NPI-1            2007-05-22       503280000s (~15.95 years)
+    #>  4 1316405939 NPI-1            2019-03-04       131414400s (~4.16 years) 
+    #>  5 1720392988 NPI-1            2010-07-29       402710400s (~12.76 years)
+    #>  6 1518184605 NPI-1            2007-04-19       506131200s (~16.04 years)
+    #>  7 1922056829 NPI-1            2006-05-04       536371200s (~17 years)   
+    #>  8 1083879860 NPI-1            2008-07-22       466387200s (~14.78 years)
+    #>  9 1346243805 NPI-1            2005-05-27       565920000s (~17.93 years)
+    #> 10 1679576722 NPI-1            2005-05-23       566265600s (~17.94 years)
+    #> 11 1093718892 NPI-1            2005-05-24       566179200s (~17.94 years)
+    #> 12 1477556405 NPI-1            2005-05-23       566265600s (~17.94 years)
+    #> 13 1770586539 NPI-1            2005-05-24       566179200s (~17.94 years)
+    #> 14 1871596692 NPI-1            2005-05-24       566179200s (~17.94 years)
+    #> 15 1174526925 NPI-1            2005-05-24       566179200s (~17.94 years)
+    #> 16 1720081441 NPI-1            2005-05-27       565920000s (~17.93 years)
+    #> 17 1558364273 NPI-1            2005-05-27       565920000s (~17.93 years)
+    #> 18 1801899513 NPI-1            2005-05-27       565920000s (~17.93 years)
+    #> 19 1316405939 NPI-1            2019-03-04       131414400s (~4.16 years) 
     #> # ℹ 18 more variables: last_updated <date>, status <chr>, first_name <chr>,
     #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
     #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
@@ -488,26 +520,44 @@ open_payments(recipient_npi = 1043218118)
 ### Opt-Out Affidavits
 
 ``` r
-opt_out(last_name = "Smith")
+opt_out(first_name = "David", last_name = "Smith")
 ```
 
-    #> # A tibble: 175 × 13
-    #>    npi        first_name last_name specialty   optout_start_date optout_end_date
-    #>    <chr>      <chr>      <chr>     <chr>       <date>            <date>         
-    #>  1 1083899611 Harold     Smith     Internal M… 2004-04-01        2024-04-01     
-    #>  2 1649265760 David      Smith     Maxillofac… 2012-06-25        2024-06-25     
-    #>  3 1669688156 Kyle       Smith     Oral Surge… 2018-07-23        2024-07-23     
-    #>  4 1396031431 Lisa       Smith     Clinical P… 2012-10-01        2024-10-01     
-    #>  5 1295840825 Austin     Smith     Oral Surge… 2017-02-13        2025-02-13     
-    #>  6 1881761260 Joann      Smith     Psychiatry  2013-03-02        2025-03-02     
-    #>  7 1134383193 Ashley     Smith     Clinical P… 2011-02-01        2025-02-01     
-    #>  8 1154467504 Eric       Smith     Clinical P… 2017-07-01        2023-07-01     
-    #>  9 1518152768 Sally      Smith     Psychiatry  2017-07-05        2023-07-05     
-    #> 10 1952512188 Melissa    Smith     Clinical P… 2013-04-01        2025-04-01     
-    #> # ℹ 165 more rows
+    #> # A tibble: 6 × 13
+    #>   npi        first_name last_name specialty    optout_start_date optout_end_date
+    #>   <chr>      <chr>      <chr>     <chr>        <date>            <date>         
+    #> 1 1649265760 David      Smith     Maxillofaci… 2012-06-25        2024-06-25     
+    #> 2 1750565958 David      Smith     Oral Surgery 2013-05-07        2023-05-07     
+    #> 3 1114058443 David      Smith     Psychiatry   2014-08-15        2024-08-15     
+    #> 4 1023002375 David      Smith     Obstetrics/… 2012-10-01        2024-10-01     
+    #> 5 1790853307 David      Smith     Oral Surgery 2015-03-26        2025-03-26     
+    #> 6 1659300077 David      Smith     Dentist      2015-05-26        2023-05-26     
     #> # ℹ 7 more variables: optout_duration <Duration>, last_updated <date>,
     #> #   order_and_refer <lgl>, address <chr>, city <chr>, state <chr>,
     #> #   zipcode <chr>
+
+``` r
+opt_out(specialty = "Psychiatry", city = "BROOKLYN", state = "NY", order_and_refer = FALSE)
+```
+
+    #> # A tibble: 4 × 13
+    #>   npi        first_name last_name specialty  optout_start_date optout_end_date
+    #>   <chr>      <chr>      <chr>     <chr>      <date>            <date>         
+    #> 1 1538251731 Robert     Katz      Psychiatry 2021-10-01        2023-10-01     
+    #> 2 1114239761 Adriel     Gerard    Psychiatry 2019-12-30        2023-12-30     
+    #> 3 1740635804 Joseph     Mouallem  Psychiatry 2020-07-22        2024-07-22     
+    #> 4 1932442191 Cecilia    Lipira    Psychiatry 2020-08-14        2024-08-14     
+    #> # ℹ 7 more variables: optout_duration <Duration>, last_updated <date>,
+    #> #   order_and_refer <lgl>, address <chr>, city <chr>, state <chr>,
+    #> #   zipcode <chr>
+
+``` r
+opt_out(specialty = "Tsychiatry")
+```
+
+    #> ✖ No results for specialty: Tsychiatry
+
+    #> NULL
 
 ### Order and Referring Privileges
 
@@ -519,6 +569,25 @@ order_refer(npi = 1083879860)
     #>   npi        last_name first_name  partb dme   hha   pmd  
     #>   <chr>      <chr>     <chr>       <lgl> <lgl> <lgl> <lgl>
     #> 1 1083879860 AARON     CHRISTOPHER TRUE  TRUE  TRUE  TRUE
+
+``` r
+order_refer(last_name = "Smith", partb = FALSE, pmd = FALSE)
+```
+
+    #> # A tibble: 148 × 7
+    #>    npi        last_name first_name partb dme   hha   pmd  
+    #>    <chr>      <chr>     <chr>      <lgl> <lgl> <lgl> <lgl>
+    #>  1 1063535672 SMITH     AARON      FALSE TRUE  FALSE FALSE
+    #>  2 1891210431 SMITH     ALAINA     FALSE TRUE  FALSE FALSE
+    #>  3 1962830570 SMITH     ALESHA     FALSE TRUE  FALSE FALSE
+    #>  4 1922655521 SMITH     ALLISON    FALSE TRUE  FALSE FALSE
+    #>  5 1942778188 SMITH     ALYSSA     FALSE TRUE  FALSE FALSE
+    #>  6 1467902791 SMITH     AMANDA     FALSE TRUE  FALSE FALSE
+    #>  7 1992203582 SMITH     AMANDA     FALSE TRUE  FALSE FALSE
+    #>  8 1023475761 SMITH     AMY        FALSE TRUE  FALSE FALSE
+    #>  9 1609219773 SMITH     AMY        FALSE TRUE  FALSE FALSE
+    #> 10 1659973295 SMITH     ANDREW     FALSE TRUE  FALSE FALSE
+    #> # ℹ 138 more rows
 
 ### Pending Applications
 
