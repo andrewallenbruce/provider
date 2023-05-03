@@ -99,7 +99,7 @@ in NPPES.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">missing_information</span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, clean_names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">missing_information</span><span class="op">(</span>npi <span class="op">=</span> <span class="cn">NULL</span>, tidy <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -112,8 +112,8 @@ in NPPES.</p>
 <dd><p>The provider’s National Provider Identifier</p></dd>
 
 
-<dt>clean_names</dt>
-<dd><p>Convert column names to snake case; default is <code>TRUE</code>.</p></dd>
+<dt>tidy</dt>
+<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -149,7 +149,8 @@ information in NPPES.</p><div class="section">
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1134122013 Henry     Timothy   </span>
 <span class="r-in"><span><span class="fu">missing_information</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1386128379</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> No results for NPI: 1386128379</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> No results for <span style="color: #0000BB;">npi: 1386128379</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> NULL</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

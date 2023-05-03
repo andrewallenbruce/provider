@@ -108,7 +108,7 @@ of Medicare.</p>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  eligible <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  order_and_refer <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -151,7 +151,7 @@ of Medicare.</p>
 <dd><p>Provider's Zip Code</p></dd>
 
 
-<dt>eligible</dt>
+<dt>order_and_refer</dt>
 <dd><p>Flag indicating whether the Provider is eligible to
 Order and Refer</p></dd>
 
@@ -215,24 +215,6 @@ provider's NPI, specialty, address, and effective dates.</p><div class="section"
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
-<span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, eligible <span class="op">=</span> <span class="st">"N"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 688 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        first_name last_name specialty   optout_start_date optout_end_date</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1932284098 Patrick    Mcgrath   Psychiatry  2012-06-01        2024-06-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1942240130 Stephen    Donovan   Psychiatry  2012-05-01        2024-05-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1477606887 William    Golden    Clinical P… 2012-07-01        2024-07-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1427221282 Ursula     Ofman     Clinical P… 2015-10-01        2023-10-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1902827355 Lori       Davis     Clinical P… 2012-07-01        2024-07-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1679695159 Ronald     Hoffman   General Pr… 2012-04-01        2024-04-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1033322425 Linda      Penn      Clinical P… 2012-05-21        2024-05-21     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1205031341 Paul       Geltner   Clinical S… 2016-04-01        2024-04-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1023220498 Katharine  Stratigos Psychiatry  2020-12-14        2024-12-14     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1790018646 Marilyn    Oswald    Clinical S… 2012-07-19        2024-07-19     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 678 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 13</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty    optout_start_date optout_end_date</span>
@@ -246,6 +228,7 @@ provider's NPI, specialty, address, and effective dates.</p><div class="section"
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zipcode &lt;chr&gt;</span></span>
 <span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, order_and_refer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># Returns empty list i.e., provider is not in the database</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1326011057</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
