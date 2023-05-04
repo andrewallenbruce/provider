@@ -9,32 +9,34 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 physician_by_geography(
-  geo_level = NULL,
+  year = 2020,
+  level = NULL,
+  sublevel = NULL,
   fips = NULL,
-  geo_desc = NULL,
   hcpcs_code = NULL,
   hcpcs_desc = NULL,
   hcpcs_drug = NULL,
   pos = NULL,
-  year = 2020,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
-\item{geo_level}{Identifies the level of geography by which the data in the
+\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
+
+\item{level}{Identifies the level of geography by which the data in the
 row has been aggregated. A value of 'State' indicates the data in the
 row is aggregated to a single state identified in the Rendering Provider
 State column for a given HCPCS Code Level. A value of 'National'
 indicates the data in the row is aggregated across all states for a
 given HCPCS Code Level.}
 
-\item{fips}{FIPS code of the referring provider state. This variable is
-blank when reported at the national level.}
-
-\item{geo_desc}{The state name where the provider is located, as reported
+\item{sublevel}{The state name where the provider is located, as reported
 in NPPES. The values include the 50 United States, District of Columbia,
 U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
 aggregated at the National level are identified by the word 'National'.}
+
+\item{fips}{FIPS code of the referring provider state. This variable is
+blank when reported at the national level.}
 
 \item{hcpcs_code}{HCPCS code used to identify the specific medical service
 furnished by the provider.}
@@ -52,18 +54,16 @@ restrictions, the CMS Level II descriptions have been truncated to
 256 bytes. As a result, the same HCPCS description can be associated
 with more than one HCPCS code.}
 
-\item{hcpcs_drug}{Identifies whether the HCPCS code for the specific
+\item{hcpcs_drug}{Flag that identifies whether the HCPCS code for the specific
 service furnished by the provider is a HCPCS listed on the Medicare Part
 B Drug Average Sales Price (ASP) File.}
 
 \item{pos}{Identifies whether the place of service submitted on the claims
-is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+is a facility (value of \code{F}) or non-facility (value of \code{O}). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.}
 
-\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
-
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -92,9 +92,8 @@ a drug as defined from the Medicare Part B Drug ASP list.
 Update Frequency: \strong{Annually}
 }
 \examples{
-physician_by_geography(hcpcs_code = "0002A",
-                       year = 2020)
 \dontrun{
+physician_by_geography(hcpcs_code = "0002A", year = 2020)
 service <- purrr::map_dfr(as.character(2013:2020),
            ~physician_by_service(npi = 1003000126, year = .x))
 

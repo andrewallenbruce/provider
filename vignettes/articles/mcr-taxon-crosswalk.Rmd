@@ -34,10 +34,15 @@ The Medicare Provider and Supplier Taxonomy Crosswalk dataset lists the provider
 <br>
 
 ```{r}
-taxonomy_crosswalk(taxonomy_code = "2086S0102X") |> terse::terse()
+taxonomy_crosswalk(taxonomy_code = "2086S0102X")
 ```
 
 <br><br>
+
+```{r}
+provider::nucc_taxonomy_230
+```
+
 
 
 ### API Data Dictionary

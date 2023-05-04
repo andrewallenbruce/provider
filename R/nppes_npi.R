@@ -120,15 +120,12 @@ nppes_npi <- function(npi            = NULL,
                                 simplifyVector = TRUE)
 
   res_cnt <- response$result_count
-
-  # return(response$results)
-
   # no search results returns empty tibble ----------------------------------
   if (is.null(res_cnt) | res_cnt == 0) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           npi,
+      "npi",           as.character(npi),
       "enum_type",     enum_type,
       "first_name",    first_name,
       "last_name",     last_name,
@@ -136,43 +133,38 @@ nppes_npi <- function(npi            = NULL,
       "taxonomy_desc", taxonomy_desc,
       "city",          city,
       "state",         state,
-      "zipcode",       zipcode,
+      "zipcode",       as.character(zipcode),
       "country",       country) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
+                            cli_args$y,
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-
-
-    return(NULL)
-
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
+    return(invisible(NULL))
   }
 
   results <- response$results |> dplyr::tibble()
 
+  if (tidy) {
 
-
-    # clean names -------------------------------------------------------------
-    if (tidy) {
-
-      results <- results |>
-        dplyr::select(npi = number,
-                      enumeration_type,
-                      basic,
-                      addresses,
-                      taxonomy = taxonomies) |>
-        tidyr::unnest(basic) |>
-        dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                      dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
-                      dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
-                      enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
+    results <- results |>
+      dplyr::select(npi = number,
+                    enumeration_type,
+                    basic,
+                    addresses,
+                    taxonomy = taxonomies) |>
+      tidyr::unnest(basic) |>
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
+                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
 
 
       # replace empty lists with NA -------------------------------------------

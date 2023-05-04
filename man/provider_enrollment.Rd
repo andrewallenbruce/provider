@@ -19,7 +19,7 @@ provider_enrollment(
   last_name = NULL,
   org_name = NULL,
   gender = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -65,10 +65,9 @@ ENRLMT_IDs and multiple STATE_CD values.}
 
 \item{org_name}{Organizational provider name}
 
-\item{gender}{Individual provider gender:
-\code{F} (female), \code{M} (male), \code{9} (unknown)}
+\item{gender}{Individual provider gender: \code{F} (female), \code{M} (male), \code{9} (unknown)}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -95,6 +94,7 @@ Transparency.
 Update Frequency: \strong{Quarterly}
 }
 \examples{
+\dontrun{
 provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 
 provider_enrollment(first_name = "DEBRA",
@@ -113,7 +113,6 @@ provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
 provider_enrollment(pac_id = 2860305554,
                     enroll_id = "I20031110000120",
                     gender = "9")
-\dontrun{
 prven <- tibble::tribble(
 ~fn,         ~params,
 "provider_enrollment", list(npi = 1083879860),

@@ -34,11 +34,14 @@ So, you have to find healthcare provider using just partial information. For ins
 <br>
 
 ```{r}
-nppes_npi_new(city = "Redmond", 
-              state = "WA", 
-              first_name = "Rania") |> 
-  tidyr::unnest(addresses) |> 
-  dplyr::filter(last_name == "MONTECILLO")
+nppes_npi(city = "Redmond", 
+          state = "WA", 
+          first_name = "Rania", 
+          last_name = "Montecillo") |> 
+  gt::gt() |> 
+  gt::cols_label_with(
+    fn = ~ janitor::make_clean_names(., case = "title")) |> 
+  gtExtras::gt_theme_espn()
 ```
 
 <br><br>
@@ -50,7 +53,7 @@ This is very common scenario. You need to get full replica of NPI record. Again,
 <br>
 
 ```{r}
-nppes_npi_new(npi = 1285636522)
+nppes_npi(npi = 1285636522)
 ```
 <br><br>
 
@@ -61,8 +64,9 @@ You may need to perform bulk search for performance optimization. The "getcodes"
 <br>
 
 ```{r}
-list <- c(1285636522, 1730198755, 1427145176)
-list |> purrr::map_dfr(nppes_npi_new) 
+c(1285636522, 1730198755, 1427145176) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind() 
 ```
 
 
@@ -75,111 +79,16 @@ Again, very common scenario. You just need to check NPI number status. It is sim
 <br>
 
 ```{r}
-nppes_npi_new(npi = 1285636522) |> 
+nppes_npi(npi = 1285636522) |> 
   dplyr::select(npi, status)
 ```
 
 
-```{r}
-nppes <- nppes_npi_new(npi = 1285636522)
 
-nppes_type_npi <- nppes |> 
-  dplyr::select(NPI = number, 
-                enumeration_type) |> 
-  dplyr::mutate(enumeration_type = dplyr::case_when(
-    enumeration_type == "NPI-1" ~ "Individual", 
-    enumeration_type == "NPI-2" ~ "Organization"))
-
-nppes_basic <- nppes$basic[[1]] |> 
-  dplyr::rename_with(~ stringr::str_remove_all(.x, 
-                              pattern = "basic_")) |> 
-  dplyr::select(name_prefix, 
-                first_name, 
-                middle_name, 
-                last_name, 
-                credential, 
-                gender, 
-                enumeration_date, 
-                certification_date, 
-                last_updated) |> 
-  dplyr::mutate(dplyr::across(dplyr::contains("name"), 
-                              stringr::str_to_title))
-
-nppes_tax <- nppes$taxonomies[[1]] |> 
-  dplyr::select(code, 
-                description = desc, 
-                license)
-
-nppes_add1 <- nppes$addresses[[1]] |> 
-  dplyr::select(!c(address_purpose, 
-                   address_1, 
-                   address_type, 
-                   country_code, 
-                   country_name)) |> 
-  dplyr::mutate(city = stringr::str_to_title(city),
-                state = stringr::str_to_title(campfin::expand_state(state)),
-                postal_code = campfin::normal_zip(postal_code),
-                telephone_number = campfin::normal_phone(telephone_number),
-                fax_number = campfin::normal_phone(fax_number)) |> 
-  dplyr::distinct(telephone_number, .keep_all = TRUE)
-
-nppes_add2 <- nppes$addresses[[1]] |> 
-  dplyr::select(address_purpose, 
-                address_1) |> 
-  dplyr::mutate(dplyr::across(dplyr::everything(), 
-                              stringr::str_to_title)) |> 
-  tidyr::pivot_wider(names_from = address_purpose, 
-                     values_from = address_1, 
-                     names_glue = "{address_purpose}_address") |> 
-  dplyr::rename_with(tolower)
-
-ord_ref <- order_refer(npi = 1114058443) |> 
-  dplyr::select(Refer_to_Part_B = partb, 
-                Refer_to_HHAs = hha, 
-                Order_DME = dme, 
-                Order_PMDs = pmd)
-
-opt <- opt_out(npi = 1114058443) |> 
-  dplyr::select(opt_out_effective_date = optout_effective_date, 
-                opt_out_end_date = optout_end_date)
-  
-
-optex_final <- dplyr::bind_cols(nppes_type_npi, 
-                                nppes_basic, 
-                                nppes_add1, 
-                                nppes_add2, 
-                                nppes_tax, 
-                                opt, 
-                                ord_ref) |> 
-  dplyr::mutate(dplyr::across(dplyr::contains("date"), 
-                              parsedate::parse_date)) |> 
-  dplyr::mutate(practice_duration = lubridate::as.duration(
-    lubridate::interval(enumeration_date, 
-                        lubridate::today())),
-                practice_length = as.numeric(practice_duration, 
-                                             "years"),
-                opt_out_duration = lubridate::as.duration(
-                  lubridate::interval(opt_out_effective_date, 
-                                      opt_out_end_date)),
-                opt_out_length = as.numeric(opt_out_duration, 
-                                            "years")) |> 
-  dplyr::select(!c(practice_duration, 
-                   opt_out_duration)) |> 
-  dplyr::rename_with(~ stringr::str_replace_all(.x, 
-                                                pattern = "_", 
-                                                replacement = " ")) |>
-  dplyr::rename_with(~ stringr::str_to_title(.x)) |> 
-  dplyr::rename(NPI = Npi)
-
-optex_long <- optex_final |> 
-  dplyr::mutate(dplyr::across(dplyr::everything(), 
-                              as.character)) |> 
-  tidyr::pivot_longer(cols = dplyr::everything())
-``` 
 
 <br>
 
-```{r echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 # CSV file
 attach_csv <- optex_long |> 
   downloadthis::download_this(
@@ -200,10 +109,7 @@ attach_excel <- optex_long |>
     has_icon = TRUE,
     icon = "fa fa-save"
   )
-```
 
-
-```{r echo=FALSE}
 optex_long |> 
   #dplyr::mutate(value = purrr::map(value, add_badge)) |>
   #dplyr::mutate(value = purrr::map(value, add_check_xmark)) |>
@@ -268,31 +174,6 @@ optex_long |>
 ```
 
 
------------------------------------------------
-
-<br>
-
-```{r}
-eliz <- provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
-                            state = "NY",
-                            prov_type_code = "00-85")
-
-eliz |> terse::terse()
-```
-
-
-```{r}
-nppes <- tibble::tribble(
-~fn,         ~params,
-"nppes_npi", list(npi = eliz$npi[[1]]),
-"nppes_npi", list(npi = eliz$npi[[2]]))
-
-eliz2 <- purrr::invoke_map_dfr(nppes$fn, nppes$params)
-
-eliz2 |> terse::terse()
-```
-
-
 <br>
 
 ## Medicare Order and Referring API
@@ -306,16 +187,17 @@ Is the provider currently eligible to make referrals to Medicare Part B or a Hom
 ```{r}
 order_refer(npi = 1083879860) |> 
   gt::gt() |> 
-  provider:::gt_theme_provider() |> 
-  gt::tab_header(title = "Provider Results for NPI 1083879860",
-    subtitle = gtExtras::add_text_img("Report generated with", url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", height = 25)) |> 
-  gt::text_transform(locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),
-                     fn = function(x) {
-                       if (x == as.character("TRUE")) {gt::html(fontawesome::fa("circle-check", prefer_type = "solid", fill = "green", height = "1.5em", width = "1.5em"))
-                         } else if (x == as.character("FALSE")) {gt::html(fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "red"))
-                         }
-                     }
-                       )
+  gt::tab_header(title = "Medicare Order and Referring API") |> 
+  gt::text_transform(
+    locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),
+    fn = function(x) {if (x == as.character("TRUE")) 
+      {gt::html(fontawesome::fa("circle-check", 
+                                prefer_type = "solid", 
+                                fill = "green", height = "1.5em", width = "1.5em"))
+      } else if (x == as.character("FALSE")) 
+      {gt::html(fontawesome::fa("circle-xmark", 
+                                  prefer_type = "solid", 
+                                fill = "red"))}})
 ```
 
 <br>

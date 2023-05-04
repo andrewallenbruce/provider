@@ -16,7 +16,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Quarterly**
-#'
 #' @param npi An NPI is a 10-digit unique numeric identifier that all providers
 #'    must obtain before enrolling in Medicare. It is assigned to health care
 #'    providers upon application through the National Plan and Provider
@@ -49,14 +48,11 @@
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param org_name Organizational provider name
-#' @param gender Individual provider gender:
-#'    `F` (female), `M` (male), `9` (unknown)
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#'
-#'
+#' @param gender Individual provider gender: `F` (female), `M` (male), `9` (unknown)
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
+#' \dontrun{
 #' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 #'
 #' provider_enrollment(first_name = "DEBRA",
@@ -75,7 +71,6 @@
 #' provider_enrollment(pac_id = 2860305554,
 #'                     enroll_id = "I20031110000120",
 #'                     gender = "9")
-#' \dontrun{
 #' prven <- tibble::tribble(
 #' ~fn,         ~params,
 #' "provider_enrollment", list(npi = 1083879860),
@@ -102,7 +97,7 @@ provider_enrollment <- function(npi                = NULL,
                                 last_name          = NULL,
                                 org_name           = NULL,
                                 gender             = NULL,
-                                clean_names        = TRUE) {
+                                tidy               = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                         ~x,  ~y,
@@ -119,8 +114,10 @@ provider_enrollment <- function(npi                = NULL,
                       "GNDR_SW", gender)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -129,25 +126,59 @@ provider_enrollment <- function(npi                = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ----------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
+
+  # no search results returns empty tibble ----------------------------------
+  if (as.integer(httr2::resp_header(response, "content-length")) == 0) {
+
+    cli_args <- tibble::tribble(
+      ~x,                 ~y,
+      "npi",              as.character(npi),
+      "pac_id",           as.character(pac_id),
+      "enroll_id",        as.character(enroll_id),
+      "specialty_code",   as.character(specialty_code),
+      "specialty_desc",   specialty_desc,
+      "state",            state,
+      "first_name",       first_name,
+      "middle_name",      middle_name,
+      "last_name",        last_name,
+      "org_name",         org_name,
+      "gender",           gender) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+
+
+    return(invisible(NULL))
+
+  }
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp, check_type = FALSE,
-                                                  simplifyVector = TRUE)) |>
-    dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+  results <- tibble::tibble(httr2::resp_body_json(response,
+                          check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {
+  if (tidy) {
     results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::rename(pac_id         = pecos_asct_cntl_id,
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+      dplyr::select(npi,
+                    pac_id         = pecos_asct_cntl_id,
                     enroll_id      = enrlmt_id,
-                    specialty_cd   = provider_type_cd,
+                    specialty_code = provider_type_cd,
                     specialty_desc = provider_type_desc,
                     state          = state_cd,
+                    org_name,
+                    first_name,
                     middle_name    = mdl_name,
-                    gender         = gndr_sw) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+                    last_name,
+                    gender         = gndr_sw)
   }
 
   return(results)

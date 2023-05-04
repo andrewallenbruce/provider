@@ -10,22 +10,16 @@
 #' ## Links
 #' * [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #' * [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
-#'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Weekly**
-#'
 #' @param npi National Provider Identifier (NPI) number
 #' @param last_name Last name of provider
 #' @param first_name First name of provider
 #' @param type physician or non-physician
-#' @param clean_names Convert column names to snake case; default is `TRUE`.
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
-#' pending_applications(npi = 1487003984, type = "physician")
-#' pending_applications(npi = 1487003984, type = "non-physician")
-#' pending_applications(last_name = "Abbott", type = "non-physician")
+#' pending_applications(last_name = "Smith", type = "non-physician")
 #' pending_applications(first_name = "John", type = "physician")
 #' @autoglobal
 #' @export
@@ -33,12 +27,9 @@
 pending_applications <- function(npi         = NULL,
                                  last_name   = NULL,
                                  first_name  = NULL,
-                                 type        = NULL,
-                                 clean_names = TRUE) {
-
-  # match geo_level args ----------------------------------------------------
-  type <- rlang::arg_match(type, c("physician", "non-physician"))
-
+                                 type        = c("physician", "non-physician"),
+                                 tidy        = TRUE) {
+  rlang::arg_match(type)
   # update distribution ids -------------------------------------------------
   id <- dplyr::case_when(
     type == "physician" ~ "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
@@ -52,8 +43,10 @@ pending_applications <- function(npi         = NULL,
     "FIRST_NAME", first_name)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -61,27 +54,40 @@ pending_applications <- function(npi         = NULL,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # create request ----------------------------------------------------------
-  request <- httr2::request(url)
-
-  # send request ------------------------------------------------------------
-  response <- request |> httr2::req_perform()
+  # response ----------------------------------------------------------
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (as.numeric(httr2::resp_header(response, "content-length")) == 0) {
+  if (httr2::resp_header(response, "content-length") == "0") {
 
-    return(cli::cli_alert_danger("No results for NPI: {.npi {npi}}"))
+    cli_args <- tibble::tribble(
+      ~x,               ~y,
+      "npi",            as.character(npi),
+      "last_name",      last_name,
+      "first_name",     first_name,
+      "type",           type) |>
+      tidyr::unnest(cols = c(y))
 
-    }
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
 
-    results <- tibble::tibble(httr2::resp_body_json(response,
-                                                    check_type = FALSE,
-                                                    simplifyVector = TRUE))
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
+
+    return(invisible(NULL))
+  }
+
+  results <- tibble::tibble(httr2::resp_body_json(response,
+              check_type = FALSE,
+              simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {
-
-    results <- dplyr::rename_with(results, str_to_snakecase)}
-
+  if (tidy) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(type = toupper(type))
+    }
   return(results)
 }

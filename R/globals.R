@@ -28,7 +28,24 @@ utils::globalVariables(c(
   "prscrptn_drug_full_lis_benes", # <beneficiary_enrollment>
   "prscrptn_drug_partial_lis_benes", # <beneficiary_enrollment>
   "prscrptn_drug_no_lis_benes", # <beneficiary_enrollment>
-  "Year", # <cc_multiple>
+  "y", # <cc_multiple>
+  "bene_geo_lvl", # <cc_multiple>
+  "bene_geo_desc", # <cc_multiple>
+  "bene_geo_cd", # <cc_multiple>
+  "bene_age_lvl", # <cc_multiple>
+  "bene_demo_lvl", # <cc_multiple>
+  "bene_demo_desc", # <cc_multiple>
+  "bene_mcc", # <cc_multiple>
+  "prvlnc", # <cc_multiple>
+  "tot_mdcr_stdzd_pymt_pc", # <cc_multiple>
+  "tot_mdcr_pymt_pc", # <cc_multiple>
+  "hosp_readmsn_rate", # <cc_multiple>
+  "er_visits_per_1000_benes", # <cc_multiple>
+  "prevalence", # <cc_multiple>
+  "tot_std_pymt_percap", # <cc_multiple>
+  "tot_pymt_percap", # <cc_multiple>
+  "er_visits_per_1k", # <cc_multiple>
+  "mcc", # <cc_multiple>
   "Year", # <cc_specific>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>
@@ -175,7 +192,22 @@ utils::globalVariables(c(
   "state_code", # <opt_out>
   "zip_code", # <opt_out>
   "y", # <order_refer>
-  "Year", # <physician_by_geography>
+  "y", # <pending_applications>
+  "y", # <physician_by_geography>
+  "rndrng_prvdr_geo_lvl", # <physician_by_geography>
+  "rndrng_prvdr_geo_desc", # <physician_by_geography>
+  "rndrng_prvdr_geo_cd", # <physician_by_geography>
+  "hcpcs_cd", # <physician_by_geography>
+  "hcpcs_drug_ind", # <physician_by_geography>
+  "place_of_srvc", # <physician_by_geography>
+  "tot_rndrng_prvdrs", # <physician_by_geography>
+  "tot_benes", # <physician_by_geography>
+  "tot_srvcs", # <physician_by_geography>
+  "tot_bene_day_srvcs", # <physician_by_geography>
+  "avg_sbmtd_chrg", # <physician_by_geography>
+  "avg_mdcr_alowd_amt", # <physician_by_geography>
+  "avg_mdcr_pymt_amt", # <physician_by_geography>
+  "avg_mdcr_stdzd_amt", # <physician_by_geography>
   "Year", # <physician_by_provider>
   "Tot_HCPCS_Cds", # <physician_by_provider>
   "Tot_Benes", # <physician_by_provider>
@@ -202,6 +234,7 @@ utils::globalVariables(c(
   "hcpcs_desc", # <physician_by_service>
   "hcpcs_drug_ind", # <physician_by_service>
   "place_of_srvc", # <physician_by_service>
+  "y", # <provider_enrollment>
   "pecos_asct_cntl_id", # <provider_enrollment>
   "enrlmt_id", # <provider_enrollment>
   "provider_type_cd", # <provider_enrollment>

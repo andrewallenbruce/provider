@@ -55,16 +55,15 @@ missing_information <- function(npi    = NULL,
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
+                            cli_args$y,
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
 
-
-    return(NULL)
-
+    return(invisible(NULL))
   }
 
   results <- tibble::tibble(httr2::resp_body_json(response,
@@ -73,13 +72,11 @@ missing_information <- function(npi    = NULL,
 
   # clean names -------------------------------------------------------------
   if (tidy) {
-
     results <- tidyr::separate(results,
                                col = " Provider Name",
                                into = c("last_name", "first_name"),
                                sep = ",") |>
       dplyr::select(npi = NPI, last_name, first_name)
-
     }
   return(results)
 }

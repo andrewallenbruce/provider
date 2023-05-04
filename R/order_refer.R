@@ -140,7 +140,8 @@ order_refer <- function(npi          = NULL,
       dplyr::mutate(partb = yn_logical(partb),
                     hha = yn_logical(hha),
                     dme = yn_logical(dme),
-                    pmd = yn_logical(pmd))
+                    pmd = yn_logical(pmd)) |>
+      dplyr::select(npi, first_name, last_name, partb, hha, dme, pmd)
     }
   return(results)
 }

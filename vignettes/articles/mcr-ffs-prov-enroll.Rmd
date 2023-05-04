@@ -36,7 +36,7 @@ These files are populated from PECOS and contain basic enrollment and provider i
 ## Example
 
 ```{r}
-provider_enrollment(npi = 1003026055) |> terse::terse()
+provider_enrollment(npi = 1003026055)
 ```
 
 
@@ -90,9 +90,10 @@ tibble::tibble(
 
 <br>
 
-#### Provider Type Code List
 
-```{r echo=FALSE}
+
+```{r echo=FALSE, eval=FALSE}
+#### Provider Type Code List
 cd <- tibble::tibble(
   Code = c(
     "`00-00`", "`00-01`", "`00-02`", "`00-03`", "`00-04`", "`00-05`",
@@ -341,7 +342,6 @@ cd |>
   gt::opt_table_outline(style = "none")
 ```
 
-<br>
 
 ### Related Links
 

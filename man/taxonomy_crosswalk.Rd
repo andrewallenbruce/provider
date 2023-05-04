@@ -12,7 +12,7 @@ taxonomy_crosswalk(
   taxonomy_desc = NULL,
   specialty_code = NULL,
   specialty_desc = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ taxonomy_crosswalk(
 
 \item{specialty_desc}{Description of the Medicare Provider/Supplier Type}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -54,10 +54,7 @@ Update Frequency: \strong{Weekly}
 }
 \examples{
 taxonomy_crosswalk(specialty_code = "B4[14]")
-
 taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
-
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
-
 taxonomy_crosswalk(taxonomy_desc = "Agencies/Hospice Care Community Based")
 }

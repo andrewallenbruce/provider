@@ -74,6 +74,7 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
+\dontrun{
 beneficiary_enrollment(year = NULL,
                        month = "Year",
                        level = "County",
@@ -88,4 +89,5 @@ beneficiary_enrollment(year = 2022,
                        state_name = "Georgia")
 
 beneficiary_enrollment(level = "State", fips = "10")
+}
 }

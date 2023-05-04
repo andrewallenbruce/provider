@@ -38,17 +38,17 @@ The Medicare Monthly Enrollment data provides current monthly information on the
 ```{r}
 beneficiary_enrollment(year = 2018,
                        month = "Year",
-                       geo_level = "County",
-                       state_abb = "AL",
-                       county = "Autauga") |> terse::terse()
+                       level = "County",
+                       state = "AL",
+                       county = "Autauga")
 ```
 
 <br>
 
 ```{r}
 beneficiary_enrollment(year = 2021,
-                       geo_level = "County",
-                       fips = "01001") |> terse::terse()
+                       level = "County",
+                       fips = "01001")
 ```
 
 <br>
@@ -56,16 +56,16 @@ beneficiary_enrollment(year = 2021,
 ```{r}
 beneficiary_enrollment(year = 2022,
                        month = "July",
-                       geo_level = "State",
-                       state = "Georgia") |> terse::terse()
+                       level = "State",
+                       state_name = "Georgia")
 ```
 
 <br>
 
 ```{r}
 beneficiary_enrollment(year = 2017,
-                       geo_level = "State",
-                       fips = "10") |> terse::terse()
+                       level = "State",
+                       fips = "10")
 ```
 
 <br>

@@ -26,7 +26,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param year Calendar year of Medicare enrollment; current options are
 #'    `2017 - 2022`
 #' @param month Time frame of Medicare enrollment; options are `Year` or any
@@ -40,8 +39,8 @@
 #' @param fips FIPS code of beneficiary residence
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
+#' \dontrun{
 #' beneficiary_enrollment(year = NULL,
 #'                        month = "Year",
 #'                        level = "County",
@@ -56,6 +55,7 @@
 #'                        state_name = "Georgia")
 #'
 #' beneficiary_enrollment(level = "State", fips = "10")
+#' }
 #' @autoglobal
 #' @export
 
@@ -72,18 +72,10 @@ beneficiary_enrollment <- function(year        = NULL,
   # if (period == "year")
 
   # match args ----------------------------------------------------
-  if (!is.null(month)) {
-    month <- rlang::arg_match(month, c("Year", month.name))
-    }
-  if (!is.null(level)) {
-    level <- rlang::arg_match(level, c("National", "State", "County"))
-    }
-  if (!is.null(state)) {
-    state <- rlang::arg_match(state, c(state.abb))
-    }
-  if (!is.null(state_name)) {
-    state_name <- rlang::arg_match(state_name, c(state.name))
-    }
+  if (!is.null(month)) {rlang::arg_match0(month, c("Year", month.name))}
+  if (!is.null(level)) {rlang::arg_match0(level, c("National", "State", "County"))}
+  if (!is.null(state)) {rlang::arg_match0(state, c(state.abb))}
+  if (!is.null(state_name)) {rlang::arg_match0(state_name, c(state.name))}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -133,11 +125,10 @@ beneficiary_enrollment <- function(year        = NULL,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
 
-
-    return(NULL)
-
+    return(invisible(NULL))
     }
 
     results <- tibble::tibble(httr2::resp_body_json(response,
@@ -182,4 +173,17 @@ beneficiary_enrollment <- function(year        = NULL,
 
   }
   return(results)
+}
+
+#' @noRd
+bene_enroll_years <- function() {
+  cms_update_ids(api = "Medicare Monthly Enrollment") |>
+    dplyr::select(distribution_title) |>
+    tidyr::separate_wider_delim(distribution_title,
+                                delim = " : ",
+                                names = c("title", "year")) |>
+    dplyr::mutate(year = lubridate::year(year), .keep = "used") |>
+    dplyr::distinct() |>
+    dplyr::arrange(year) |>
+    tibble::deframe()
 }

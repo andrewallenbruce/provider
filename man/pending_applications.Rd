@@ -11,8 +11,8 @@ pending_applications(
   npi = NULL,
   last_name = NULL,
   first_name = NULL,
-  type = NULL,
-  clean_names = TRUE
+  type = c("physician", "non-physician"),
+  tidy = TRUE
 )
 }
 \arguments{
@@ -24,7 +24,7 @@ pending_applications(
 
 \item{type}{physician or non-physician}
 
-\item{clean_names}{Convert column names to snake case; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -48,8 +48,6 @@ contractors.
 Update Frequency: \strong{Weekly}
 }
 \examples{
-pending_applications(npi = 1487003984, type = "physician")
-pending_applications(npi = 1487003984, type = "non-physician")
-pending_applications(last_name = "Abbott", type = "non-physician")
+pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 }
