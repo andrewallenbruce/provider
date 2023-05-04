@@ -145,229 +145,32 @@ DOCTORS, PLLC</strong>” where <em>Dr. Rania Montecillo</em> specified an
 owner.</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">nppes_npi_new</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Redmond"</span>, </span>
-<span>              state <span class="op">=</span> <span class="st">"WA"</span>, </span>
-<span>              first_name <span class="op">=</span> <span class="st">"Rania"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">addresses</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">last_name</span> <span class="op">==</span> <span class="st">"MONTECILLO"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes_npi_new(city = "Redmond", state = "WA", first_name = "Rania"): could not find function "nppes_npi_new"</span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number">You Need to Find Detailed Healthcare Provider Information Using
-Known NPI Number<a class="anchor" aria-label="anchor" href="#you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number"></a>
-</h2>
-<p>This is very common scenario. You need to get full replica of NPI
-record. Again, it simple. Just use code provided below. API response may
-contain single NPI record, or empty list in case NPI does not exist in
-the CMS National Plan and Provider Enumeration System (NPPES)
-Registry.</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">nppes_npi_new</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes_npi_new(npi = 1285636522): could not find function "nppes_npi_new"</span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers">You Need to Lookup Multiple Healthcare Providers Using A List of NPI
-Numbers<a class="anchor" aria-label="anchor" href="#you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers"></a>
-</h2>
-<p>You may need to perform bulk search for performance optimization. The
-“getcodes” operation allows you to decrease number of round trips in
-orders of magnitude. For instance you can get information about hundred
-NPI in one REST call, instead of sending NPI numbers one-by-one.</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1285636522</span>, <span class="fl">1730198755</span>, <span class="fl">1427145176</span><span class="op">)</span></span>
-<span><span class="va">list</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi_new</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_npi_new' not found</span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-check-npi-number-status">You Need to Check NPI Number Status<a class="anchor" aria-label="anchor" href="#you-need-to-check-npi-number-status"></a>
-</h2>
-<p>Again, very common scenario. You just need to check NPI number
-status. It is simple. Take a look at the code below. Expected result
-contains requested NPI number, status, and short status description.</p>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">nppes_npi_new</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">status</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes_npi_new(npi = 1285636522): could not find function "nppes_npi_new"</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes</span> <span class="op">&lt;-</span> <span class="fu">nppes_npi_new</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes_npi_new(npi = 1285636522): could not find function "nppes_npi_new"</span></span>
-<span></span>
-<span><span class="va">nppes_type_npi</span> <span class="op">&lt;-</span> <span class="va">nppes</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>NPI <span class="op">=</span> <span class="va">number</span>, </span>
-<span>                <span class="va">enumeration_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>enumeration_type <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
-<span>    <span class="va">enumeration_type</span> <span class="op">==</span> <span class="st">"NPI-1"</span> <span class="op">~</span> <span class="st">"Individual"</span>, </span>
-<span>    <span class="va">enumeration_type</span> <span class="op">==</span> <span class="st">"NPI-2"</span> <span class="op">~</span> <span class="st">"Organization"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">nppes_basic</span> <span class="op">&lt;-</span> <span class="va">nppes</span><span class="op">$</span><span class="va">basic</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_remove.html" class="external-link">str_remove_all</a></span><span class="op">(</span><span class="va">.x</span>, </span>
-<span>                              pattern <span class="op">=</span> <span class="st">"basic_"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name_prefix</span>, </span>
-<span>                <span class="va">first_name</span>, </span>
-<span>                <span class="va">middle_name</span>, </span>
-<span>                <span class="va">last_name</span>, </span>
-<span>                <span class="va">credential</span>, </span>
-<span>                <span class="va">gender</span>, </span>
-<span>                <span class="va">enumeration_date</span>, </span>
-<span>                <span class="va">certification_date</span>, </span>
-<span>                <span class="va">last_updated</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span>, </span>
-<span>                              <span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">nppes_tax</span> <span class="op">&lt;-</span> <span class="va">nppes</span><span class="op">$</span><span class="va">taxonomies</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">code</span>, </span>
-<span>                description <span class="op">=</span> <span class="va">desc</span>, </span>
-<span>                <span class="va">license</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">nppes_add1</span> <span class="op">&lt;-</span> <span class="va">nppes</span><span class="op">$</span><span class="va">addresses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">address_purpose</span>, </span>
-<span>                   <span class="va">address_1</span>, </span>
-<span>                   <span class="va">address_type</span>, </span>
-<span>                   <span class="va">country_code</span>, </span>
-<span>                   <span class="va">country_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>city <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="va">city</span><span class="op">)</span>,</span>
-<span>                state <span class="op">=</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/expand_state.html" class="external-link">expand_state</a></span><span class="op">(</span><span class="va">state</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                postal_code <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_zip.html" class="external-link">normal_zip</a></span><span class="op">(</span><span class="va">postal_code</span><span class="op">)</span>,</span>
-<span>                telephone_number <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_phone.html" class="external-link">normal_phone</a></span><span class="op">(</span><span class="va">telephone_number</span><span class="op">)</span>,</span>
-<span>                fax_number <span class="op">=</span> <span class="fu">campfin</span><span class="fu">::</span><span class="fu"><a href="https://irworkshop.github.io/campfin/reference/normal_phone.html" class="external-link">normal_phone</a></span><span class="op">(</span><span class="va">fax_number</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="va">telephone_number</span>, .keep_all <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">nppes_add2</span> <span class="op">&lt;-</span> <span class="va">nppes</span><span class="op">$</span><span class="va">addresses</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">address_purpose</span>, </span>
-<span>                <span class="va">address_1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>                              <span class="fu">stringr</span><span class="fu">::</span><span class="va"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">address_purpose</span>, </span>
-<span>                     values_from <span class="op">=</span> <span class="va">address_1</span>, </span>
-<span>                     names_glue <span class="op">=</span> <span class="st">"{address_purpose}_address"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="va">tolower</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">ord_ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>Refer_to_Part_B <span class="op">=</span> <span class="va">partb</span>, </span>
-<span>                Refer_to_HHAs <span class="op">=</span> <span class="va">hha</span>, </span>
-<span>                Order_DME <span class="op">=</span> <span class="va">dme</span>, </span>
-<span>                Order_PMDs <span class="op">=</span> <span class="va">pmd</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">opt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span>opt_out_effective_date <span class="op">=</span> <span class="va">optout_effective_date</span>, </span>
-<span>                opt_out_end_date <span class="op">=</span> <span class="va">optout_end_date</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `optout_effective_date` doesn't exist.</span></span>
-<span>  </span>
-<span></span>
-<span><span class="va">optex_final</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_cols.html" class="external-link">bind_cols</a></span><span class="op">(</span><span class="va">nppes_type_npi</span>, </span>
-<span>                                <span class="va">nppes_basic</span>, </span>
-<span>                                <span class="va">nppes_add1</span>, </span>
-<span>                                <span class="va">nppes_add2</span>, </span>
-<span>                                <span class="va">nppes_tax</span>, </span>
-<span>                                <span class="va">opt</span>, </span>
-<span>                                <span class="va">ord_ref</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span>, </span>
-<span>                              <span class="fu">parsedate</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html" class="external-link">parse_date</a></span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>practice_duration <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span></span>
-<span>    <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html" class="external-link">interval</a></span><span class="op">(</span><span class="va">enumeration_date</span>, </span>
-<span>                        <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/now.html" class="external-link">today</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                practice_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">practice_duration</span>, </span>
-<span>                                             <span class="st">"years"</span><span class="op">)</span>,</span>
-<span>                opt_out_duration <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/as.duration.html" class="external-link">as.duration</a></span><span class="op">(</span></span>
-<span>                  <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/interval.html" class="external-link">interval</a></span><span class="op">(</span><span class="va">opt_out_effective_date</span>, </span>
-<span>                                      <span class="va">opt_out_end_date</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                opt_out_length <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">opt_out_duration</span>, </span>
-<span>                                            <span class="st">"years"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">practice_duration</span>, </span>
-<span>                   <span class="va">opt_out_duration</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_replace.html" class="external-link">str_replace_all</a></span><span class="op">(</span><span class="va">.x</span>, </span>
-<span>                                                pattern <span class="op">=</span> <span class="st">"_"</span>, </span>
-<span>                                                replacement <span class="op">=</span> <span class="st">" "</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename_with</a></span><span class="op">(</span><span class="op">~</span> <span class="fu">stringr</span><span class="fu">::</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html" class="external-link">str_to_title</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>NPI <span class="op">=</span> <span class="va">Npi</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes_type_npi' not found</span></span>
-<span></span>
-<span><span class="va">optex_long</span> <span class="op">&lt;-</span> <span class="va">optex_final</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
-<span>                              <span class="va">as.character</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_final' not found</span></span></code></pre></div>
-<p><br></p>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span></code></pre>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'optex_long' not found</span></span></code></pre>
-<hr>
-<p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">eliz</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>org_name <span class="op">=</span> <span class="st">"ELIZABETHTOWN COMMUNITY HOSPITAL"</span>,</span>
-<span>                            state <span class="op">=</span> <span class="st">"NY"</span>,</span>
-<span>                            prov_type_code <span class="op">=</span> <span class="st">"00-85"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL", : unused argument (prov_type_code = "00-85")</span></span>
-<span></span>
-<span><span class="va">eliz</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'eliz' not found</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">nppes</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
-<span><span class="op">~</span><span class="va">fn</span>,         <span class="op">~</span><span class="va">params</span>,</span>
-<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">eliz</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
-<span><span class="st">"nppes_npi"</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">eliz</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'eliz' not found</span></span>
-<span></span>
-<span><span class="va">eliz2</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">nppes</span><span class="op">$</span><span class="va">fn</span>, <span class="va">nppes</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'nppes' not found</span></span>
-<span></span>
-<span><span class="va">eliz2</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'eliz2' not found</span></span></code></pre></div>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
-</h2>
-<p><br></p>
-<p>Is the provider currently eligible to make referrals to Medicare Part
-B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
-or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
-Referring API</strong> with <code>provider_moar()</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Redmond"</span>, </span>
+<span>          state <span class="op">=</span> <span class="st">"WA"</span>, </span>
+<span>          first_name <span class="op">=</span> <span class="st">"Rania"</span>, </span>
+<span>          last_name <span class="op">=</span> <span class="st">"Montecillo"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Provider Results for NPI 1083879860"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/add_text_img.html" class="external-link">add_text_img</a></span><span class="op">(</span><span class="st">"Report generated with"</span>, url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png"</span>, height <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span>locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>                       <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
-<span>                         <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
-<span>                         <span class="op">}</span></span>
-<span>                     <span class="op">}</span></span>
-<span>                       <span class="op">)</span></span></code></pre></div>
-<div id="qhtfwcafjh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qhtfwcafjh table {
-  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span></span>
+<span>    fn <span class="op">=</span> <span class="op">~</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/make_clean_names.html" class="external-link">make_clean_names</a></span><span class="op">(</span><span class="va">.</span>, case <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_espn.html" class="external-link">gt_theme_espn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="rijgzznnbk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#rijgzznnbk table {
+  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qhtfwcafjh thead, #qhtfwcafjh tbody, #qhtfwcafjh tfoot, #qhtfwcafjh tr, #qhtfwcafjh td, #qhtfwcafjh th {
+#rijgzznnbk thead, #rijgzznnbk tbody, #rijgzznnbk tfoot, #rijgzznnbk tr, #rijgzznnbk td, #rijgzznnbk th {
   border-style: none;
 }
 
-#qhtfwcafjh p {
+#rijgzznnbk p {
   margin: 0;
   padding: 0;
 }
 
-#qhtfwcafjh .gt_table {
+#rijgzznnbk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -381,27 +184,27 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   width: auto;
   border-top-style: solid;
   border-top-width: 3px;
-  border-top-color: #BEBEBE;
+  border-top-color: #FFFFFF;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_caption {
+#rijgzznnbk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qhtfwcafjh .gt_title {
+#rijgzznnbk .gt_title {
   color: #333333;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -410,9 +213,9 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-width: 0;
 }
 
-#qhtfwcafjh .gt_subtitle {
+#rijgzznnbk .gt_subtitle {
   color: #333333;
-  font-size: 14px;
+  font-size: 85%;
   font-weight: initial;
   padding-top: 3px;
   padding-bottom: 5px;
@@ -422,8 +225,8 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-width: 0;
 }
 
-#qhtfwcafjh .gt_heading {
-  background-color: #FDD4D0;
+#rijgzznnbk .gt_heading {
+  background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
@@ -434,19 +237,19 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_bottom_border {
+#rijgzznnbk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_col_headings {
+#rijgzznnbk .gt_col_headings {
   border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -455,9 +258,9 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_col_heading {
+#rijgzznnbk .gt_col_heading {
   color: #333333;
-  background-color: #FDD4D0;
+  background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
@@ -475,9 +278,9 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#qhtfwcafjh .gt_column_spanner_outer {
+#rijgzznnbk .gt_column_spanner_outer {
   color: #333333;
-  background-color: #FDD4D0;
+  background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
@@ -487,18 +290,18 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 4px;
 }
 
-#qhtfwcafjh .gt_column_spanner_outer:first-child {
+#rijgzznnbk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qhtfwcafjh .gt_column_spanner_outer:last-child {
+#rijgzznnbk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qhtfwcafjh .gt_column_spanner {
+#rijgzznnbk .gt_column_spanner {
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -507,11 +310,11 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   width: 100%;
 }
 
-#qhtfwcafjh .gt_spanner_row {
+#rijgzznnbk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qhtfwcafjh .gt_group_heading {
+#rijgzznnbk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -537,7 +340,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   text-align: left;
 }
 
-#qhtfwcafjh .gt_empty_group_heading {
+#rijgzznnbk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -552,17 +355,17 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   vertical-align: middle;
 }
 
-#qhtfwcafjh .gt_from_md > :first-child {
+#rijgzznnbk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qhtfwcafjh .gt_from_md > :last-child {
+#rijgzznnbk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qhtfwcafjh .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
+#rijgzznnbk .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -579,7 +382,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#qhtfwcafjh .gt_stub {
+#rijgzznnbk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -592,7 +395,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#qhtfwcafjh .gt_stub_row_group {
+#rijgzznnbk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,15 +409,15 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   vertical-align: top;
 }
 
-#qhtfwcafjh .gt_row_group_first td {
+#rijgzznnbk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qhtfwcafjh .gt_row_group_first th {
+#rijgzznnbk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qhtfwcafjh .gt_summary_row {
+#rijgzznnbk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -624,16 +427,16 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#qhtfwcafjh .gt_first_summary_row {
+#rijgzznnbk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_first_summary_row.thick {
+#rijgzznnbk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qhtfwcafjh .gt_last_summary_row {
+#rijgzznnbk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -643,7 +446,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_grand_summary_row {
+#rijgzznnbk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -653,7 +456,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#qhtfwcafjh .gt_first_grand_summary_row {
+#rijgzznnbk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,7 +466,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_last_grand_summary_row_top {
+#rijgzznnbk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -673,11 +476,11 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_striped {
+#rijgzznnbk .gt_striped {
   background-color: #FAFAFA;
 }
 
-#qhtfwcafjh .gt_table_body {
+#rijgzznnbk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -686,7 +489,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_footnotes {
+#rijgzznnbk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -700,21 +503,21 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_footnote {
+#rijgzznnbk .gt_footnote {
   margin: 0px;
-  font-size: 12px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#qhtfwcafjh .gt_sourcenotes {
+#rijgzznnbk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
@@ -723,7 +526,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#qhtfwcafjh .gt_sourcenote {
+#rijgzznnbk .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -731,95 +534,661 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#qhtfwcafjh .gt_left {
+#rijgzznnbk .gt_left {
   text-align: left;
 }
 
-#qhtfwcafjh .gt_center {
+#rijgzznnbk .gt_center {
   text-align: center;
 }
 
-#qhtfwcafjh .gt_right {
+#rijgzznnbk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qhtfwcafjh .gt_font_normal {
+#rijgzznnbk .gt_font_normal {
   font-weight: normal;
 }
 
-#qhtfwcafjh .gt_font_bold {
+#rijgzznnbk .gt_font_bold {
   font-weight: bold;
 }
 
-#qhtfwcafjh .gt_font_italic {
+#rijgzznnbk .gt_font_italic {
   font-style: italic;
 }
 
-#qhtfwcafjh .gt_super {
+#rijgzznnbk .gt_super {
   font-size: 65%;
 }
 
-#qhtfwcafjh .gt_footnote_marks {
+#rijgzznnbk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qhtfwcafjh .gt_asterisk {
+#rijgzznnbk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qhtfwcafjh .gt_indent_1 {
+#rijgzznnbk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qhtfwcafjh .gt_indent_2 {
+#rijgzznnbk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qhtfwcafjh .gt_indent_3 {
+#rijgzznnbk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qhtfwcafjh .gt_indent_4 {
+#rijgzznnbk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qhtfwcafjh .gt_indent_5 {
+#rijgzznnbk .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Npi">Npi</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Enumeration Type">Enumeration Type</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Enumeration Date">Enumeration Date</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Enumeration Duration">Enumeration Duration</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Last Updated">Last Updated</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Status">Status</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="First Name">First Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Middle Name">Middle Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Last Name">Last Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Credential">Credential</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gender">Gender</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Sole Proprietor">Sole Proprietor</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Country">Country</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Street">Street</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="City">City</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="State">State</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Zipcode">Zipcode</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Phone Number">Phone Number</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fax Number">Fax Number</th>
+    </tr></thead>
+<tbody class="gt_table_body"><tr>
+<td headers="npi" class="gt_row gt_right">1659320539</td>
+<td headers="enumeration_type" class="gt_row gt_left">NPI-1</td>
+<td headers="enumeration_date" class="gt_row gt_right">2006-05-09</td>
+<td headers="enumeration_duration" class="gt_row gt_center">536025600s (~16.99 years)</td>
+<td headers="last_updated" class="gt_row gt_right">2007-12-19</td>
+<td headers="status" class="gt_row gt_left">A</td>
+<td headers="first_name" class="gt_row gt_left">RANIA</td>
+<td headers="middle_name" class="gt_row gt_left">B</td>
+<td headers="last_name" class="gt_row gt_left">MONTECILLO</td>
+<td headers="credential" class="gt_row gt_left">od</td>
+<td headers="gender" class="gt_row gt_left">F</td>
+<td headers="sole_proprietor" class="gt_row gt_left">NO</td>
+<td headers="country" class="gt_row gt_left">United States</td>
+<td headers="street" class="gt_row gt_left">16375 NE 85TH ST SUITE 102</td>
+<td headers="city" class="gt_row gt_left">REDMOND</td>
+<td headers="state" class="gt_row gt_left">WA</td>
+<td headers="zipcode" class="gt_row gt_right">980523554</td>
+<td headers="phone_number" class="gt_row gt_right">425-885-7363</td>
+<td headers="fax_number" class="gt_row gt_right">425-861-5585</td>
+</tr></tbody>
+</table>
+</div>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number">You Need to Find Detailed Healthcare Provider Information Using
+Known NPI Number<a class="anchor" aria-label="anchor" href="#you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number"></a>
+</h2>
+<p>This is very common scenario. You need to get full replica of NPI
+record. Again, it simple. Just use code provided below. API response may
+contain single NPI record, or empty list in case NPI does not exist in
+the CMS National Plan and Provider Enumeration System (NPPES)
+Registry.</p>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 14</span></span></span>
+<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1285… NPI-2            2005-06-01       565574400s (~17.92 years) 2022-07-21  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 9 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers">You Need to Lookup Multiple Healthcare Providers Using A List of NPI
+Numbers<a class="anchor" aria-label="anchor" href="#you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers"></a>
+</h2>
+<p>You may need to perform bulk search for performance optimization. The
+“getcodes” operation allows you to decrease number of round trips in
+orders of magnitude. For instance you can get information about hundred
+NPI in one REST call, instead of sending NPI numbers one-by-one.</p>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1285636522</span>, <span class="fl">1730198755</span>, <span class="fl">1427145176</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 15</span></span></span>
+<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1285… NPI-2            2005-06-01       565574400s (~17.92 years) 2022-07-21  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1730… NPI-2            2006-08-07       528249600s (~16.74 years) 2010-03-12  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1427… NPI-2            2006-10-06       523065600s (~16.57 years) 2012-10-09  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 10 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+</div>
+<div class="section level2">
+<h2 id="you-need-to-check-npi-number-status">You Need to Check NPI Number Status<a class="anchor" aria-label="anchor" href="#you-need-to-check-npi-number-status"></a>
+</h2>
+<p>Again, very common scenario. You just need to check NPI number
+status. It is simple. Take a look at the code below. Expected result
+contains requested NPI number, status, and short status description.</p>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">status</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;   npi        status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1285636522 A</span></span></code></pre></div>
+<p><br></p>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
+</h2>
+<p><br></p>
+<p>Is the provider currently eligible to make referrals to Medicare Part
+B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
+or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
+Referring API</strong> with <code>provider_moar()</code>:</p>
+<p><br></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Medicare Order and Referring API"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span></span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> </span>
+<span>      <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, </span>
+<span>                                prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>                                fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
+<span>      <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> </span>
+<span>      <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, </span>
+<span>                                  prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>                                fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
+<div id="jggqjjqqfu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#jggqjjqqfu table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#jggqjjqqfu thead, #jggqjjqqfu tbody, #jggqjjqqfu tfoot, #jggqjjqqfu tr, #jggqjjqqfu td, #jggqjjqqfu th {
+  border-style: none;
+}
+
+#jggqjjqqfu p {
+  margin: 0;
+  padding: 0;
+}
+
+#jggqjjqqfu .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#jggqjjqqfu .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#jggqjjqqfu .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#jggqjjqqfu .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#jggqjjqqfu .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#jggqjjqqfu .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#jggqjjqqfu .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#jggqjjqqfu .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#jggqjjqqfu .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#jggqjjqqfu .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#jggqjjqqfu .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#jggqjjqqfu .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#jggqjjqqfu .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#jggqjjqqfu .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#jggqjjqqfu .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jggqjjqqfu .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#jggqjjqqfu .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#jggqjjqqfu .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#jggqjjqqfu .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jggqjjqqfu .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#jggqjjqqfu .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jggqjjqqfu .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#jggqjjqqfu .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jggqjjqqfu .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#jggqjjqqfu .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#jggqjjqqfu .gt_left {
+  text-align: left;
+}
+
+#jggqjjqqfu .gt_center {
+  text-align: center;
+}
+
+#jggqjjqqfu .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#jggqjjqqfu .gt_font_normal {
+  font-weight: normal;
+}
+
+#jggqjjqqfu .gt_font_bold {
+  font-weight: bold;
+}
+
+#jggqjjqqfu .gt_font_italic {
+  font-style: italic;
+}
+
+#jggqjjqqfu .gt_super {
+  font-size: 65%;
+}
+
+#jggqjjqqfu .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#jggqjjqqfu .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#jggqjjqqfu .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#jggqjjqqfu .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#jggqjjqqfu .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#jggqjjqqfu .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#jggqjjqqfu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Provider Results for NPI 1083879860</td>
-    </tr>
-<tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>
-<div style="display:inline;vertical-align: top;">Report generated with</div>
-<div style="display:inline;margin-left:10px"><img src="https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png" style="height:25px;"></div>
-</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Medicare Order and Referring API</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last_name">last_name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first_name">first_name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last_name">last_name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="partb">partb</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dme">dme</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="hha">hha</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dme">dme</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="pmd">pmd</th>
     </tr>
 </thead>
 <tbody class="gt_table_body"><tr>
-<td headers="npi" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">1083879860</td>
-<td headers="last_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">AARON</td>
-<td headers="first_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">CHRISTOPHER</td>
-<td headers="partb" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="dme" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="hha" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="pmd" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="npi" class="gt_row gt_right">1083879860</td>
+<td headers="first_name" class="gt_row gt_left">CHRISTOPHER</td>
+<td headers="last_name" class="gt_row gt_left">AARON</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
 </tr></tbody>
 </table>
 </div>
@@ -834,7 +1203,7 @@ taxonomies. Using the output from the NPPES search in the first example,
 you can search Medicare’s <strong>Provider and Supplier Taxonomy
 Crosswalk API</strong> with <code><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"282NC0060X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomy_code  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">282NC0060X                                           </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomy_desc  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Hospitals/General Acute Care Hospital Critical Access</span></span></span>
@@ -847,13 +1216,13 @@ of Missing Digital Contact Information API</strong> with
 <code><a href="../reference/missing_information.html">missing_information()</a></code>. If they appear in the search
 results, it’s time to update their NPPES contact information:</p>
 <p><br></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443</span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Smith     </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David     </span></span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443            </span></span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David                 </span></span></span>
@@ -873,7 +1242,7 @@ results, it’s time to update their NPPES contact information:</p>
 <strong>Medicare’s Physician &amp; Other Practitioners - by Provider and
 Service API</strong>:</p>
 <p><br></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year         <span style="color: #5FAF87;">i8</span> <span style="color: #3A3A3A;">2013      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2014      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2015      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2016      </span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">2017      </span> ...</span></span>
 <span><span class="co">#&gt; <span style="color: #DADADA;">$</span>rndrng_npi   <span style="color: #5FAF87;">c8</span> <span style="color: #3A3A3A;">1003000126</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1003000126</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1003000126</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1003000126</span><span style="color: #DADADA;">, </span><span style="color: #3A3A3A;">1003000126</span> ...</span></span>
@@ -885,7 +1254,7 @@ Service API</strong>:</p>
 <p>This API contains data going back to 2013, so you can perform a
 long-term analysis of a provider’s Medicare data:</p>
 <p><br></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hcpcs_cd</span>, <span class="va">hcpcs_desc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>

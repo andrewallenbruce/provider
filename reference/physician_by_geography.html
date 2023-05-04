@@ -109,15 +109,15 @@ aggregated by geography and service.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">physician_by_geography</span><span class="op">(</span></span>
-<span>  geo_level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
+<span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  sublevel <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  geo_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -127,7 +127,11 @@ aggregated by geography and service.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>geo_level</dt>
+    <dl><dt>year</dt>
+<dd><p>Year in YYYY format, between 2013-2020; default is 2020</p></dd>
+
+
+<dt>level</dt>
 <dd><p>Identifies the level of geography by which the data in the
 row has been aggregated. A value of 'State' indicates the data in the
 row is aggregated to a single state identified in the Rendering Provider
@@ -136,16 +140,16 @@ indicates the data in the row is aggregated across all states for a
 given HCPCS Code Level.</p></dd>
 
 
-<dt>fips</dt>
-<dd><p>FIPS code of the referring provider state. This variable is
-blank when reported at the national level.</p></dd>
-
-
-<dt>geo_desc</dt>
+<dt>sublevel</dt>
 <dd><p>The state name where the provider is located, as reported
 in NPPES. The values include the 50 United States, District of Columbia,
 U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data
 aggregated at the National level are identified by the word 'National'.</p></dd>
+
+
+<dt>fips</dt>
+<dd><p>FIPS code of the referring provider state. This variable is
+blank when reported at the national level.</p></dd>
 
 
 <dt>hcpcs_code</dt>
@@ -169,24 +173,20 @@ with more than one HCPCS code.</p></dd>
 
 
 <dt>hcpcs_drug</dt>
-<dd><p>Identifies whether the HCPCS code for the specific
+<dd><p>Flag that identifies whether the HCPCS code for the specific
 service furnished by the provider is a HCPCS listed on the Medicare Part
 B Drug Average Sales Price (ASP) File.</p></dd>
 
 
 <dt>pos</dt>
 <dd><p>Identifies whether the place of service submitted on the claims
-is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+is a facility (value of <code>F</code>) or non-facility (value of <code>O</code>). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.</p></dd>
 
 
-<dt>year</dt>
-<dd><p>Year in YYYY format, between 2013-2020; default is 2020</p></dd>
-
-
-<dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dt>tidy</dt>
+<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -217,25 +217,8 @@ a drug as defined from the Medicare Part B Drug ASP list.</p><div class="section
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">physician_by_geography</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>,</span></span>
-<span class="r-in"><span>                       year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 16</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    year rndrng_prvdr_geo_lvl rndrng_prvdr_geo_cd rndrng_prvdr_geo_desc hcpcs_cd</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 National             <span style="color: #949494;">""</span>                  National              0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>06<span style="color: #949494;">"</span>                California            0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>12<span style="color: #949494;">"</span>                Florida               0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>17<span style="color: #949494;">"</span>                Illinois              0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>23<span style="color: #949494;">"</span>                Maine                 0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>24<span style="color: #949494;">"</span>                Maryland              0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>25<span style="color: #949494;">"</span>                Massachusetts         0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>34<span style="color: #949494;">"</span>                New Jersey            0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State                <span style="color: #949494;">"</span>42<span style="color: #949494;">"</span>                Pennsylvania          0002A   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 11 more variables: hcpcs_desc &lt;chr&gt;, hcpcs_drug_ind &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   place_of_srvc &lt;chr&gt;, tot_rndrng_prvdrs &lt;int&gt;, tot_benes &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tot_srvcs &lt;int&gt;, tot_bene_day_srvcs &lt;int&gt;, avg_sbmtd_chrg &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   avg_mdcr_alowd_amt &lt;dbl&gt;, avg_mdcr_pymt_amt &lt;dbl&gt;, avg_mdcr_stdzd_amt &lt;dbl&gt;</span></span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">physician_by_geography</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">service</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>           <span class="op">~</span><span class="fu"><a href="physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>

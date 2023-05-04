@@ -159,54 +159,114 @@ Chronic Conditions Data Warehouse.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>,</span>
 <span>                       month <span class="op">=</span> <span class="st">"Year"</span>,</span>
-<span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span>
-<span>                       state_abb <span class="op">=</span> <span class="st">"AL"</span>,</span>
-<span>                       county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in beneficiary_enrollment(year = 2018, month = "Year", geo_level = "County", : unused arguments (geo_level = "County", state_abb = "AL")</span></span></code></pre></div>
+<span>                       level <span class="op">=</span> <span class="st">"County"</span>,</span>
+<span>                       state <span class="op">=</span> <span class="st">"AL"</span>,</span>
+<span>                       county <span class="op">=</span> <span class="st">"Autauga"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 26</span></span></span>
+<span><span class="co">#&gt;    year month level  state state_name county  fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 Year  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">10</span>645      <span style="text-decoration: underline;">5</span>700</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>,</span>
-<span>                       geo_level <span class="op">=</span> <span class="st">"County"</span>,</span>
-<span>                       fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in beneficiary_enrollment(year = 2021, geo_level = "County", fips = "01001"): unused argument (geo_level = "County")</span></span></code></pre></div>
+<span>                       level <span class="op">=</span> <span class="st">"County"</span>,</span>
+<span>                       fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 26</span></span></span>
+<span><span class="co">#&gt;     year month     level  state state_name county  fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 Year      County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>396      <span style="text-decoration: underline;">5</span>338</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 January   County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>371      <span style="text-decoration: underline;">5</span>368</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 February  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>356      <span style="text-decoration: underline;">5</span>355</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 March     County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>362      <span style="text-decoration: underline;">5</span>352</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 April     County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>366      <span style="text-decoration: underline;">5</span>329</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 May       County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>376      <span style="text-decoration: underline;">5</span>329</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 June      County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>372      <span style="text-decoration: underline;">5</span>332</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 July      County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>399      <span style="text-decoration: underline;">5</span>329</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 August    County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>416      <span style="text-decoration: underline;">5</span>322</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 September County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>410      <span style="text-decoration: underline;">5</span>329</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>021 October   County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>425      <span style="text-decoration: underline;">5</span>327</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>021 November  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>449      <span style="text-decoration: underline;">5</span>338</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 December  County AL    Alabama    Autauga 01001      <span style="text-decoration: underline;">11</span>455      <span style="text-decoration: underline;">5</span>345</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2022</span>,</span>
 <span>                       month <span class="op">=</span> <span class="st">"July"</span>,</span>
-<span>                       geo_level <span class="op">=</span> <span class="st">"State"</span>,</span>
-<span>                       state <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in beneficiary_enrollment(year = 2022, month = "July", geo_level = "State", : unused argument (geo_level = "State")</span></span></code></pre></div>
+<span>                       level <span class="op">=</span> <span class="st">"State"</span>,</span>
+<span>                       state_name <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 26</span></span></span>
+<span><span class="co">#&gt;    year month level state state_name county fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>022 July  State GA    Georgia    Total  13       1<span style="text-decoration: underline;">850</span>422    <span style="text-decoration: underline;">915</span>890</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2017</span>,</span>
-<span>                       geo_level <span class="op">=</span> <span class="st">"State"</span>,</span>
-<span>                       fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in beneficiary_enrollment(year = 2017, geo_level = "State", fips = "10"): unused argument (geo_level = "State")</span></span></code></pre></div>
+<span>                       level <span class="op">=</span> <span class="st">"State"</span>,</span>
+<span>                       fips <span class="op">=</span> <span class="st">"10"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 13 × 26</span></span></span>
+<span><span class="co">#&gt;     year month     level state state_name county fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>017 Year      State DE    Delaware   Total  10        <span style="text-decoration: underline;">193</span>585    <span style="text-decoration: underline;">171</span>150</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>017 January   State DE    Delaware   Total  10        <span style="text-decoration: underline;">191</span>515    <span style="text-decoration: underline;">169</span>538</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>017 February  State DE    Delaware   Total  10        <span style="text-decoration: underline;">191</span>777    <span style="text-decoration: underline;">169</span>776</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>017 March     State DE    Delaware   Total  10        <span style="text-decoration: underline;">192</span>164    <span style="text-decoration: underline;">170</span>068</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>017 April     State DE    Delaware   Total  10        <span style="text-decoration: underline;">192</span>449    <span style="text-decoration: underline;">170</span>240</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>017 May       State DE    Delaware   Total  10        <span style="text-decoration: underline;">192</span>846    <span style="text-decoration: underline;">170</span>542</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>017 June      State DE    Delaware   Total  10        <span style="text-decoration: underline;">193</span>384    <span style="text-decoration: underline;">170</span>976</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>017 July      State DE    Delaware   Total  10        <span style="text-decoration: underline;">193</span>953    <span style="text-decoration: underline;">171</span>441</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>017 August    State DE    Delaware   Total  10        <span style="text-decoration: underline;">194</span>400    <span style="text-decoration: underline;">171</span>828</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>017 September State DE    Delaware   Total  10        <span style="text-decoration: underline;">194</span>920    <span style="text-decoration: underline;">172</span>207</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>017 October   State DE    Delaware   Total  10        <span style="text-decoration: underline;">194</span>857    <span style="text-decoration: underline;">172</span>113</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>017 November  State DE    Delaware   Total  10        <span style="text-decoration: underline;">195</span>229    <span style="text-decoration: underline;">172</span>426</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>017 December  State DE    Delaware   Total  10        <span style="text-decoration: underline;">195</span>526    <span style="text-decoration: underline;">172</span>647</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="unvbmkejrj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jyokzzacsy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#unvbmkejrj table {
+#jyokzzacsy table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#unvbmkejrj thead, #unvbmkejrj tbody, #unvbmkejrj tfoot, #unvbmkejrj tr, #unvbmkejrj td, #unvbmkejrj th {
+#jyokzzacsy thead, #jyokzzacsy tbody, #jyokzzacsy tfoot, #jyokzzacsy tr, #jyokzzacsy td, #jyokzzacsy th {
   border-style: none;
 }
 
-#unvbmkejrj p {
+#jyokzzacsy p {
   margin: 0;
   padding: 0;
 }
 
-#unvbmkejrj .gt_table {
+#jyokzzacsy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -232,12 +292,12 @@ Chronic Conditions Data Warehouse.</p>
   border-left-color: #D3D3D3;
 }
 
-#unvbmkejrj .gt_caption {
+#jyokzzacsy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#unvbmkejrj .gt_title {
+#jyokzzacsy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -249,7 +309,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-width: 0;
 }
 
-#unvbmkejrj .gt_subtitle {
+#jyokzzacsy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -261,7 +321,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-width: 0;
 }
 
-#unvbmkejrj .gt_heading {
+#jyokzzacsy .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -273,13 +333,13 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#unvbmkejrj .gt_bottom_border {
+#jyokzzacsy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_col_headings {
+#jyokzzacsy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -294,7 +354,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#unvbmkejrj .gt_col_heading {
+#jyokzzacsy .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -314,7 +374,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#unvbmkejrj .gt_column_spanner_outer {
+#jyokzzacsy .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -326,15 +386,15 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 4px;
 }
 
-#unvbmkejrj .gt_column_spanner_outer:first-child {
+#jyokzzacsy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#unvbmkejrj .gt_column_spanner_outer:last-child {
+#jyokzzacsy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#unvbmkejrj .gt_column_spanner {
+#jyokzzacsy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -346,11 +406,11 @@ Chronic Conditions Data Warehouse.</p>
   width: 100%;
 }
 
-#unvbmkejrj .gt_spanner_row {
+#jyokzzacsy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#unvbmkejrj .gt_group_heading {
+#jyokzzacsy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -376,7 +436,7 @@ Chronic Conditions Data Warehouse.</p>
   text-align: left;
 }
 
-#unvbmkejrj .gt_empty_group_heading {
+#jyokzzacsy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -391,15 +451,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: middle;
 }
 
-#unvbmkejrj .gt_from_md > :first-child {
+#jyokzzacsy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#unvbmkejrj .gt_from_md > :last-child {
+#jyokzzacsy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#unvbmkejrj .gt_row {
+#jyokzzacsy .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -418,7 +478,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#unvbmkejrj .gt_stub {
+#jyokzzacsy .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -431,7 +491,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#unvbmkejrj .gt_stub_row_group {
+#jyokzzacsy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -445,15 +505,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: top;
 }
 
-#unvbmkejrj .gt_row_group_first td {
+#jyokzzacsy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#unvbmkejrj .gt_row_group_first th {
+#jyokzzacsy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#unvbmkejrj .gt_summary_row {
+#jyokzzacsy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -463,16 +523,16 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#unvbmkejrj .gt_first_summary_row {
+#jyokzzacsy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_first_summary_row.thick {
+#jyokzzacsy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#unvbmkejrj .gt_last_summary_row {
+#jyokzzacsy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -482,7 +542,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_grand_summary_row {
+#jyokzzacsy .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -492,7 +552,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#unvbmkejrj .gt_first_grand_summary_row {
+#jyokzzacsy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -502,7 +562,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_last_grand_summary_row_top {
+#jyokzzacsy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -512,11 +572,11 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_striped {
+#jyokzzacsy .gt_striped {
   background-color: #F4F4F4;
 }
 
-#unvbmkejrj .gt_table_body {
+#jyokzzacsy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -525,7 +585,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#unvbmkejrj .gt_footnotes {
+#jyokzzacsy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -539,7 +599,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#unvbmkejrj .gt_footnote {
+#jyokzzacsy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -548,7 +608,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#unvbmkejrj .gt_sourcenotes {
+#jyokzzacsy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -562,7 +622,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#unvbmkejrj .gt_sourcenote {
+#jyokzzacsy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -570,63 +630,63 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#unvbmkejrj .gt_left {
+#jyokzzacsy .gt_left {
   text-align: left;
 }
 
-#unvbmkejrj .gt_center {
+#jyokzzacsy .gt_center {
   text-align: center;
 }
 
-#unvbmkejrj .gt_right {
+#jyokzzacsy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#unvbmkejrj .gt_font_normal {
+#jyokzzacsy .gt_font_normal {
   font-weight: normal;
 }
 
-#unvbmkejrj .gt_font_bold {
+#jyokzzacsy .gt_font_bold {
   font-weight: bold;
 }
 
-#unvbmkejrj .gt_font_italic {
+#jyokzzacsy .gt_font_italic {
   font-style: italic;
 }
 
-#unvbmkejrj .gt_super {
+#jyokzzacsy .gt_super {
   font-size: 65%;
 }
 
-#unvbmkejrj .gt_footnote_marks {
+#jyokzzacsy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#unvbmkejrj .gt_asterisk {
+#jyokzzacsy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#unvbmkejrj .gt_indent_1 {
+#jyokzzacsy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#unvbmkejrj .gt_indent_2 {
+#jyokzzacsy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#unvbmkejrj .gt_indent_3 {
+#jyokzzacsy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#unvbmkejrj .gt_indent_4 {
+#jyokzzacsy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#unvbmkejrj .gt_indent_5 {
+#jyokzzacsy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
