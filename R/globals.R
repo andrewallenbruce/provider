@@ -28,6 +28,7 @@ utils::globalVariables(c(
   "prscrptn_drug_full_lis_benes", # <beneficiary_enrollment>
   "prscrptn_drug_partial_lis_benes", # <beneficiary_enrollment>
   "prscrptn_drug_no_lis_benes", # <beneficiary_enrollment>
+  "distro", # <cc_multiple>
   "y", # <cc_multiple>
   "bene_geo_lvl", # <cc_multiple>
   "bene_geo_desc", # <cc_multiple>
@@ -46,6 +47,7 @@ utils::globalVariables(c(
   "tot_pymt_percap", # <cc_multiple>
   "er_visits_per_1k", # <cc_multiple>
   "mcc", # <cc_multiple>
+  "distro", # <cc_specific>
   "y", # <cc_specific>
   "bene_geo_lvl", # <cc_specific>
   "bene_geo_desc", # <cc_specific>
@@ -63,11 +65,17 @@ utils::globalVariables(c(
   "tot_std_pymt_percap", # <cc_specific>
   "tot_pymt_percap", # <cc_specific>
   "er_visits_per_1k", # <cc_specific>
-  "distribution_title", # <cc_spec_help>
-  "distribution", # <cc_spec_help>
-  "year", # <cc_spec_help>
-  "id", # <cc_spec_help>
-  "distro", # <cc_spec_help>
+  "title", # <cms_update>
+  "modified", # <cms_update>
+  "distribution", # <cms_update>
+  "distribution_format", # <cms_update>
+  "distribution_title", # <cms_update>
+  "distribution_modified", # <cms_update>
+  "distribution_accessURL", # <cms_update>
+  "year", # <cms_update>
+  "id", # <cms_update>
+  "distro", # <cms_update>
+  "distro", # <cms_match>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>
   "distribution", # <cms_update_ids>
@@ -248,14 +256,35 @@ utils::globalVariables(c(
   "bene_ndual_cnt", # <physician_by_provider>
   "bene_cc_af_pct", # <physician_by_provider>
   "bene_avg_risk_scre", # <physician_by_provider>
-  "Year", # <physician_by_service>
-  "Tot_Benes", # <physician_by_service>
-  "Tot_Srvcs", # <physician_by_service>
-  "Tot_Bene_Day_Srvcs", # <physician_by_service>
+  "distro", # <physician_by_service>
+  "tot_benes", # <physician_by_service>
+  "tot_srvcs", # <physician_by_service>
+  "tot_bene_day_srvcs", # <physician_by_service>
+  "rndrng_npi", # <physician_by_service>
+  "rndrng_prvdr_first_name", # <physician_by_service>
+  "rndrng_prvdr_mi", # <physician_by_service>
+  "rndrng_prvdr_last_org_name", # <physician_by_service>
+  "rndrng_prvdr_crdntls", # <physician_by_service>
+  "rndrng_prvdr_gndr", # <physician_by_service>
+  "rndrng_prvdr_ent_cd", # <physician_by_service>
+  "street", # <physician_by_service>
+  "rndrng_prvdr_city", # <physician_by_service>
+  "rndrng_prvdr_state_abrvtn", # <physician_by_service>
+  "rndrng_prvdr_state_fips", # <physician_by_service>
+  "rndrng_prvdr_zip5", # <physician_by_service>
+  "rndrng_prvdr_ruca", # <physician_by_service>
+  "rndrng_prvdr_ruca_desc", # <physician_by_service>
+  "rndrng_prvdr_cntry", # <physician_by_service>
+  "rndrng_prvdr_type", # <physician_by_service>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_service>
   "hcpcs_cd", # <physician_by_service>
   "hcpcs_desc", # <physician_by_service>
   "hcpcs_drug_ind", # <physician_by_service>
   "place_of_srvc", # <physician_by_service>
+  "avg_sbmtd_chrg", # <physician_by_service>
+  "avg_mdcr_alowd_amt", # <physician_by_service>
+  "avg_mdcr_pymt_amt", # <physician_by_service>
+  "avg_mdcr_stdzd_amt", # <physician_by_service>
   "y", # <provider_enrollment>
   "pecos_asct_cntl_id", # <provider_enrollment>
   "enrlmt_id", # <provider_enrollment>

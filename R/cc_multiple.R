@@ -80,34 +80,19 @@ cc_multiple <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cc_mult_years())
+  rlang::arg_match(year, values = cms_update("Multiple Chronic Conditions", "years"))
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
 
-  #if (!is.null(sublevel)) {rlang::arg_match(sublevel,
-  #c("National", state.name))}
-  #if (!is.null(subdemo)) {rlang::arg_match(subdemo, c("All", "Medicare Only",
-  #"Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
-  #"Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
+  if (!is.null(subdemo)) {rlang::arg_match(subdemo, c("All", "Medicare Only",
+  "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
+  "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
 
   # update distribution ids -------------------------------------------------
-  ids <- cms_update_ids(api = "Multiple Chronic Conditions")
-
-  # dataset version ids by year ---------------------------------------------
-  year <- as.integer(year)
-  id <- dplyr::case_when(year == 2018 ~ ids$distribution[2],
-                         year == 2017 ~ ids$distribution[3],
-                         year == 2016 ~ ids$distribution[4],
-                         year == 2015 ~ ids$distribution[5],
-                         year == 2014 ~ ids$distribution[6],
-                         year == 2013 ~ ids$distribution[7],
-                         year == 2012 ~ ids$distribution[8],
-                         year == 2011 ~ ids$distribution[9],
-                         year == 2010 ~ ids$distribution[10],
-                         year == 2009 ~ ids$distribution[11],
-                         year == 2008 ~ ids$distribution[12],
-                         year == 2007 ~ ids$distribution[13])
+  id <- cms_update(api = "Multiple Chronic Conditions", check = "id") |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                 ~y,
@@ -187,18 +172,4 @@ cc_multiple <- function(year,
                     mcc = convert_breaks(mcc))
     }
   return(results)
-}
-
-#' @noRd
-cc_mult_years <- function() {
-  cms_update_ids(api = "Multiple Chronic Conditions") |>
-    dplyr::select(distribution_title) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c("title", "year")) |>
-    dplyr::mutate(year = lubridate::year(year), .keep = "used") |>
-    dplyr::distinct() |>
-    dplyr::arrange(year) |>
-    tibble::deframe() |>
-    as.character()
 }

@@ -687,7 +687,7 @@ pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    #> # A tibble: 35 × 4
+    #> # A tibble: 31 × 4
     #>    npi        last_name  first_name type     
     #>    <chr>      <chr>      <chr>      <chr>    
     #>  1 1881791739 ADAMS      JOHN       PHYSICIAN
@@ -697,10 +697,10 @@ pending_applications(first_name = "John", type = "physician")
     #>  5 1861142556 BURKE      JOHN       PHYSICIAN
     #>  6 1306817531 COMBS      JOHN       PHYSICIAN
     #>  7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    #>  8 1659074151 EUN        JOHN       PHYSICIAN
-    #>  9 1376571554 FLYNN      JOHN       PHYSICIAN
-    #> 10 1689774804 FREEMAN    JOHN       PHYSICIAN
-    #> # ℹ 25 more rows
+    #>  8 1376571554 FLYNN      JOHN       PHYSICIAN
+    #>  9 1689774804 FREEMAN    JOHN       PHYSICIAN
+    #> 10 1386604080 GIANNINI   JOHN       PHYSICIAN
+    #> # ℹ 21 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -745,13 +745,27 @@ physician_by_geography(sublevel = "Maryland", year = 2020)
 
 ``` r
 # by Provider and Service
-physician_by_service(npi = 1003000126)
+physician_by_service(year = 2020, npi = 1003000126)
 ```
 
-    #> # A tibble: 1 × 6
-    #>    year rndrng_npi rndrng_prvdr      totals_srvcs     hcpcs            averages
-    #>   <dbl> <chr>      <list>            <list>           <list>           <list>  
-    #> 1  2020 1003000126 <tibble [9 × 17]> <tibble [9 × 3]> <tibble [9 × 4]> <tibble>
+    #> # A tibble: 9 × 29
+    #>   year  npi        first_name middle_name last_name credential gender
+    #>   <chr> <chr>      <chr>      <chr>       <chr>     <chr>      <chr> 
+    #> 1 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 2 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 3 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 4 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 5 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 6 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 7 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 8 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> 9 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
+    #> # ℹ 22 more variables: rndrng_prvdr_ent_cd <chr>, street <chr>, city <chr>,
+    #> #   state <chr>, fips <chr>, zipcode <chr>, ruca <chr>, ruca_desc <chr>,
+    #> #   country <chr>, rndrng_prvdr_type <chr>, par <chr>, hcpcs_cd <chr>,
+    #> #   hcpcs_desc <chr>, hcpcs_drug <chr>, pos <chr>, tot_benes <int>,
+    #> #   tot_srvcs <int>, tot_bene_day_srvcs <int>, avg_sbmtd_chrg <dbl>,
+    #> #   avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>, avg_mdcr_stdzd_amt <dbl>
 
 ``` r
 # by Provider

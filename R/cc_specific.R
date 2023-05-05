@@ -107,28 +107,16 @@ cc_specific <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cc_spec_help(check = "years"))
+  rlang::arg_match(year, values = cms_update("Specific Chronic Conditions", "years"))
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
 
   # update distribution ids -------------------------------------------------
-  ids <- cms_update_ids(api = "Specific Chronic Conditions")
+  id <- cms_update(api = "Specific Chronic Conditions", check = "id") |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
 
-  # dataset version ids by year ---------------------------------------------
-  year <- as.integer(year)
-  id <- dplyr::case_when(year == 2018 ~ ids$distribution[2],
-                         year == 2017 ~ ids$distribution[3],
-                         year == 2016 ~ ids$distribution[4],
-                         year == 2015 ~ ids$distribution[5],
-                         year == 2014 ~ ids$distribution[6],
-                         year == 2013 ~ ids$distribution[7],
-                         year == 2012 ~ ids$distribution[8],
-                         year == 2011 ~ ids$distribution[9],
-                         year == 2010 ~ ids$distribution[10],
-                         year == 2009 ~ ids$distribution[11],
-                         year == 2008 ~ ids$distribution[12],
-                         year == 2007 ~ ids$distribution[13])
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                 ~y,
@@ -182,7 +170,6 @@ cc_specific <- function(year,
   results <- tibble::tibble(httr2::resp_body_json(response,
              check_type = FALSE, simplifyVector = TRUE))
 
-
   # clean names -------------------------------------------------------------
   if (tidy) {
 
@@ -211,44 +198,4 @@ cc_specific <- function(year,
 
   }
   return(results)
-}
-
-#' @noRd
-cc_spec_years <- function() {
-  cms_update_ids(api = "Specific Chronic Conditions") |>
-    dplyr::select(distribution_title) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c("title", "year")) |>
-    dplyr::mutate(year = lubridate::year(year), .keep = "used") |>
-    dplyr::distinct() |>
-    dplyr::arrange(year) |>
-    tibble::deframe() |>
-    as.character()
-}
-
-#' @noRd
-#' @autoglobal
-cc_spec_help <- function(check = c("id", "years")) {
-
-  results <- cms_update_ids(api = "Specific Chronic Conditions") |>
-    dplyr::select(distribution_title,
-                  distro = distribution) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c(NA, "year")) |>
-    dplyr::mutate(id = dplyr::row_number(),
-                  year = lubridate::year(year)) |>
-    dplyr::filter(id != 1) |>
-    dplyr::select(-id)
-
-  if (check == "id") {return(results)}
-
-  if (check == "years") {
-    return(results |>
-      dplyr::select(-distro) |>
-      dplyr::arrange(year) |>
-      tibble::deframe() |>
-      as.character())
-  }
 }

@@ -166,7 +166,6 @@ nppes_npi <- function(npi            = NULL,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
                     enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
 
-
       # replace empty lists with NA -------------------------------------------
       results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
@@ -238,7 +237,6 @@ nppes_npi <- function(npi            = NULL,
         dplyr::select(dplyr::any_of(valid_fields))
 
       }
-
   return(results)
 }
 

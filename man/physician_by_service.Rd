@@ -9,16 +9,17 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 physician_by_service(
+  year,
   npi = NULL,
-  last_org = NULL,
-  first = NULL,
-  cred = NULL,
+  last_name = NULL,
+  first_name = NULL,
+  credential = NULL,
   gender = NULL,
-  type = NULL,
+  enum_type = NULL,
   city = NULL,
   state = NULL,
+  zipcode = NULL,
   fips = NULL,
-  zip = NULL,
   ruca = NULL,
   country = NULL,
   specialty = NULL,
@@ -26,31 +27,29 @@ physician_by_service(
   hcpcs_code = NULL,
   hcpcs_drug = NULL,
   pos = NULL,
-  year = 2020,
-  clean_names = TRUE,
-  nest = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
+\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
+
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
 NPPES.}
 
-\item{last_org}{Last name/Organization name of the provider. When the
-provider is registered in NPPES as an individual (entity type code=’I’),
+\item{last_name}{Last name/Organization name of the provider. When the
+provider is registered in NPPES as an individual (entity type code = \code{I}),
 this is the provider’s last name. When the provider is registered as an
-organization (entity type code = ‘O’), this is the organization name.}
+organization (entity type code = \code{O}), this is the organization name.}
 
-\item{first}{An individual provider's (entity type code=’I’) first name.
-An organization's (entity type code = ‘O’) will be blank.}
+\item{first_name}{An individual provider's (entity type code = \code{I}) first name.
+An organization's (entity type code = \code{O}) will be blank.}
 
-\item{cred}{An individual provider's (entity type code=’I’) credentials.
-An organization's will be blank.}
+\item{credential}{An individual provider's (entity type code=’I’) credentials. An organization's will be blank.}
 
-\item{gender}{An individual provider's gender.
-An organization's will be blank.}
+\item{gender}{An individual provider's gender. An organization's will be blank.}
 
-\item{type}{Type of entity reported in NPPES. An entity code of ‘I’
+\item{enum_type}{Type of entity reported in NPPES. An entity code of ‘I’
 identifies providers registered as individuals while an entity type
 code of ‘O’ identifies providers registered as organizations.}
 
@@ -59,9 +58,9 @@ code of ‘O’ identifies providers registered as organizations.}
 \item{state}{The state where the provider is located, as reported
 in NPPES.}
 
-\item{fips}{FIPS code for the rendering provider's state.}
+\item{zipcode}{The provider’s zip code, as reported in NPPES.}
 
-\item{zip}{The provider’s zip code, as reported in NPPES.}
+\item{fips}{FIPS code for the rendering provider's state.}
 
 \item{ruca}{Rural-Urban Commuting Area Code (RUCA); a Census tract-based
 classification scheme that utilizes the standard Bureau of Census
@@ -81,7 +80,7 @@ of services.}
 
 \item{par_ind}{Identifies whether the provider participates in Medicare
 and/or accepts assignment of Medicare allowed amounts. The value will
-be ‘Y’ for any provider that had at least one claim identifying the
+be \code{Y} for any provider that had at least one claim identifying the
 provider as participating in Medicare or accepting assignment of
 Medicare allowed amounts within HCPCS code and place of service. A
 non-participating provider may elect to accept Medicare allowed amounts
@@ -101,15 +100,11 @@ Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 for additional information.}
 
 \item{pos}{Identifies whether the place of service submitted on the claims
-is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+is a facility (value of \code{F}) or non-facility (value of \code{O}). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.}
 
-\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
-
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
-
-\item{nest}{Nest related columns together; default is \code{TRUE}.}
+\item{tidy}{Convert column names to snakecase; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
