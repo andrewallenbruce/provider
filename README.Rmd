@@ -104,9 +104,9 @@ cc_specific(year = 2011, level = "County", fips = "01001")
 doctors_and_clinicians(npi = 1720081441)
 doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
-                       grad_year = 2003, 
+                       grad_year = 2000, 
                        state = "FL")
-doctors_and_clinicians(state = "GA")
+doctors_and_clinicians(state = "GA", city = "VALDOSTA")
 ```
 
 ### Facility Affiliations
@@ -123,7 +123,7 @@ facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "
 
 ```{r}
 hospital_enrollment(facility_ccn = "060004")
-hospital_enrollment(state = "GA")
+hospital_enrollment(state = "GA", city = "VALDOSTA")
 hospital_enrollment(enroll_state = "GA")
 hospital_enrollment(enroll_id = "O20030404000017")
 ```
@@ -140,11 +140,8 @@ missing_information(npi = 11111122222)
 
 ```{r}
 nppes_npi(npi = 1316405939)
-
 nppes_npi(npi = 1558364273)
-
 nppes_npi(1720081441)
-
 nppes_npi(1710983663)
 
 c(1710983663, 1710975040, 1659781227, 
@@ -171,6 +168,7 @@ open_payments(recipient_npi = 1043218118)
 opt_out(first_name = "David", last_name = "Smith")
 opt_out(specialty = "Psychiatry", city = "BROOKLYN", state = "NY", order_and_refer = FALSE)
 opt_out(specialty = "Tsychiatry")
+opt_out(city = "VALDOSTA", state = "GA")
 ```
 
 ### Order and Referring Privileges
@@ -195,16 +193,15 @@ pending_applications(npi = "1001001234",
 ### Physician & Other Practitioners
 
 ```{r}
-# by Provider and Service
-physician_by_service(npi = 1003000126)
-```
-
-
-```{r}
 # by Geography and Service
 physician_by_geography(sublevel = "Maryland", year = 2020)
 ```
 
+
+```{r}
+# by Provider and Service
+physician_by_service(npi = 1003000126)
+```
 
 ```{r}
 # by Provider

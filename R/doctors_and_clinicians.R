@@ -42,8 +42,8 @@
 #'
 #' @examples
 #' doctors_and_clinicians(npi = 1407263999)
-#' doctors_and_clinicians(enroll_id = "I20081002000549")
 #' \dontrun{
+#' doctors_and_clinicians(enroll_id = "I20081002000549")
 #' doctors_and_clinicians(first_name = "John")
 #' doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' doctors_and_clinicians(grad_year = 2003)
@@ -101,7 +101,8 @@ doctors_and_clinicians <- function(npi           = NULL,
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
   post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
   url    <- paste0(http, id, params_args, post) |>
-    param_brackets() |> param_space()
+    param_brackets() |>
+    param_space()
 
   # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
@@ -135,17 +136,12 @@ doctors_and_clinicians <- function(npi           = NULL,
                             collapse = "")
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-
-
-    return(NULL)
-
+    return(invisible(NULL))
   }
 
     # parse response ---------------------------------------------------------
     results <- tibble::tibble(httr2::resp_body_json(response,
-               check_type = FALSE, simplifyVector = TRUE)) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")))
+               check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
   if (tidy) {
@@ -153,9 +149,13 @@ doctors_and_clinicians <- function(npi           = NULL,
       tidyr::unite("address",
                    adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE) |>
-      dplyr::mutate(num_org_mem = as.integer(num_org_mem),
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                    num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
-                    telehlth = yn_logical(telehlth)) |>
+                    telehlth = yn_logical(telehlth),
+                    grad_duration = lubridate::as.duration(
+                      lubridate::today() - clock::date_build(year = grd_yr))) |>
       dplyr::select(
         npi,
         pac_id        = ind_pac_id,
@@ -168,6 +168,7 @@ doctors_and_clinicians <- function(npi           = NULL,
         credential    = cred,
         school        = med_sch,
         grad_year     = grd_yr,
+        grad_duration,
         specialty     = pri_spec,
         specialty_sec = sec_spec_all,
         telehealth    = telehlth,
@@ -182,7 +183,6 @@ doctors_and_clinicians <- function(npi           = NULL,
         ind_assign    = ind_assgn,
         group_assign  = grp_assgn)
     }
-
   return(results)
 }
 

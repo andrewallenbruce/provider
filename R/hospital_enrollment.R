@@ -104,9 +104,7 @@ hospital_enrollment <- function(npi            = NULL,
                             collapse = "")
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-
-
-    return(NULL)
+    return(invisible(NULL))
 
   }
 

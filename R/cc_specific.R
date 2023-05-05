@@ -175,9 +175,7 @@ cc_specific <- function(year,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
-
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 

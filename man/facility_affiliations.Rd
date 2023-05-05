@@ -17,7 +17,7 @@ facility_affiliations(
   facility_ccn = NULL,
   parent_ccn = NULL,
   offset = 0,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -50,7 +50,7 @@ services in a unit within the hospital.}
 
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -100,6 +100,7 @@ utils::globalVariables(c(
   "gndr", # <doctors_and_clinicians>
   "cred", # <doctors_and_clinicians>
   "med_sch", # <doctors_and_clinicians>
+  "grad_duration", # <doctors_and_clinicians>
   "pri_spec", # <doctors_and_clinicians>
   "sec_spec_all", # <doctors_and_clinicians>
   "org_nm", # <doctors_and_clinicians>

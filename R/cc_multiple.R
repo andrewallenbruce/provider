@@ -152,15 +152,12 @@ cc_multiple <- function(year,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
-
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
     results <- tibble::tibble(httr2::resp_body_json(response,
       check_type = FALSE, simplifyVector = TRUE))
-
 
   # clean names -------------------------------------------------------------
   if (tidy) {
@@ -188,7 +185,6 @@ cc_multiple <- function(year,
                                     er_visits_per_1k),
                                   as.double),
                     mcc = convert_breaks(mcc))
-
     }
   return(results)
 }

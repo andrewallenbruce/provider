@@ -13,7 +13,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param npi Unique clinician ID assigned by NPPES
 #' @param pac_id Unique individual clinician ID assigned by PECOS
 #' @param last_name Individual clinician last name
@@ -34,10 +33,8 @@
 #'    individual clinician provides service, should the clinician provide
 #'    services in a unit within the hospital.
 #' @param offset offset; API pagination
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
 #' facility_affiliations(npi = 1003019563)
 #' facility_affiliations(facility_ccn = "060004")
@@ -58,7 +55,7 @@ facility_affiliations <- function(npi           = NULL,
                                   facility_ccn  = NULL,
                                   parent_ccn    = NULL,
                                   offset        = 0,
-                                  clean_names   = TRUE) {
+                                  tidy   = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
@@ -73,7 +70,8 @@ facility_affiliations <- function(npi           = NULL,
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
-    unlist() |> stringr::str_flatten()
+    unlist() |>
+    stringr::str_flatten()
 
   id_res <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
     httr2::req_perform() |>
@@ -85,7 +83,8 @@ facility_affiliations <- function(npi           = NULL,
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
   post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
   url    <- paste0(http, id, params_args, post) |>
-    param_brackets() |> param_space()
+    param_brackets() |>
+    param_space()
 
   # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
@@ -95,14 +94,14 @@ facility_affiliations <- function(npi           = NULL,
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           npi,
-      "pac_id",        pac_id,
+      "npi",           as.character(npi),
+      "pac_id",        as.character(pac_id),
       "first_name",    first_name,
       "middle_name",   middle_name,
       "last_name",     last_name,
       "facility_type", facility_type,
-      "facility_ccn",  facility_ccn,
-      "parent_ccn",    parent_ccn) |>
+      "facility_ccn",  as.character(facility_ccn),
+      "parent_ccn",    as.character(parent_ccn)) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -111,20 +110,20 @@ facility_affiliations <- function(npi           = NULL,
                             sep = ": ",
                             collapse = "")
 
-    return(cli::cli_alert_danger("No results for {.val {cli_args}}",
-                                 wrap = TRUE))
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    return(invisible(NULL))
 
   }
 
     # parse response ---------------------------------------------------------
     results <- tibble::tibble(httr2::resp_body_json(response,
-               check_type = FALSE, simplifyVector = TRUE)) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")))
+               check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {
+  if (tidy) {
     results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
       dplyr::select(
         npi,
         pac_id       = ind_pac_id,
