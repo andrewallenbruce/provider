@@ -762,7 +762,7 @@
 <span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 14 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 35 × 4</span></span>
+<div class="sourceCode" id="cb75"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 31 × 4</span></span>
 <span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    npi        last_name  first_name type     </span></span>
 <span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;    </span></span>
 <span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 1881791739 ADAMS      JOHN       PHYSICIAN</span></span>
@@ -772,10 +772,10 @@
 <span id="cb75-8"><a href="#cb75-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 1861142556 BURKE      JOHN       PHYSICIAN</span></span>
 <span id="cb75-9"><a href="#cb75-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 1306817531 COMBS      JOHN       PHYSICIAN</span></span>
 <span id="cb75-10"><a href="#cb75-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 1730349580 ECHEVARRIA JOHN       PHYSICIAN</span></span>
-<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 1659074151 EUN        JOHN       PHYSICIAN</span></span>
-<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 1376571554 FLYNN      JOHN       PHYSICIAN</span></span>
-<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 1689774804 FREEMAN    JOHN       PHYSICIAN</span></span>
-<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 25 more rows</span></span></code></pre></div>
+<span id="cb75-11"><a href="#cb75-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 1376571554 FLYNN      JOHN       PHYSICIAN</span></span>
+<span id="cb75-12"><a href="#cb75-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 1689774804 FREEMAN    JOHN       PHYSICIAN</span></span>
+<span id="cb75-13"><a href="#cb75-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 1386604080 GIANNINI   JOHN       PHYSICIAN</span></span>
+<span id="cb75-14"><a href="#cb75-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 21 more rows</span></span></code></pre></div>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"dentist"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb77"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in `pending_applications()`:</span></span>
@@ -812,11 +812,25 @@
 <span id="cb81-16"><a href="#cb81-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   avg_charge &lt;dbl&gt;, avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># by Provider and Service</span></span>
-<span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb83"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 6</span></span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year rndrng_npi rndrng_prvdr      totals_srvcs     hcpcs            averages</span></span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;chr&gt;      &lt;list&gt;            &lt;list&gt;           &lt;list&gt;           &lt;list&gt;  </span></span>
-<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1  2020 1003000126 &lt;tibble [9 × 17]&gt; &lt;tibble [9 × 3]&gt; &lt;tibble [9 × 4]&gt; &lt;tibble&gt;</span></span></code></pre></div>
+<span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb83"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 9 × 29</span></span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   year  npi        first_name middle_name last_name credential gender</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt; </span></span>
+<span id="cb83-4"><a href="#cb83-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-5"><a href="#cb83-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-6"><a href="#cb83-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-7"><a href="#cb83-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-8"><a href="#cb83-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-9"><a href="#cb83-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-10"><a href="#cb83-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-11"><a href="#cb83-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 8 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-12"><a href="#cb83-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 9 2020  1003000126 Ardalan    &lt;NA&gt;        Enkeshafi M.D.       M     </span></span>
+<span id="cb83-13"><a href="#cb83-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 22 more variables: rndrng_prvdr_ent_cd &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span id="cb83-14"><a href="#cb83-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, ruca_desc &lt;chr&gt;,</span></span>
+<span id="cb83-15"><a href="#cb83-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   country &lt;chr&gt;, rndrng_prvdr_type &lt;chr&gt;, par &lt;chr&gt;, hcpcs_cd &lt;chr&gt;,</span></span>
+<span id="cb83-16"><a href="#cb83-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, pos &lt;chr&gt;, tot_benes &lt;int&gt;,</span></span>
+<span id="cb83-17"><a href="#cb83-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   tot_srvcs &lt;int&gt;, tot_bene_day_srvcs &lt;int&gt;, avg_sbmtd_chrg &lt;dbl&gt;,</span></span>
+<span id="cb83-18"><a href="#cb83-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   avg_mdcr_alowd_amt &lt;dbl&gt;, avg_mdcr_pymt_amt &lt;dbl&gt;, avg_mdcr_stdzd_amt &lt;dbl&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># by Provider</span></span>
 <span><span class="fu"><a href="reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></code></pre></div>

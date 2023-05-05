@@ -109,16 +109,17 @@ aggregated by provider and service.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">physician_by_service</span><span class="op">(</span></span>
+<span>  <span class="va">year</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  cred <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enum_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  ruca <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -126,9 +127,7 @@ aggregated by provider and service.</p>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  year <span class="op">=</span> <span class="fl">2020</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  nest <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -138,35 +137,37 @@ aggregated by provider and service.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>npi</dt>
+    <dl><dt>year</dt>
+<dd><p>Year in YYYY format, between 2013-2020; default is 2020</p></dd>
+
+
+<dt>npi</dt>
 <dd><p>National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
 NPPES.</p></dd>
 
 
-<dt>last_org</dt>
+<dt>last_name</dt>
 <dd><p>Last name/Organization name of the provider. When the
-provider is registered in NPPES as an individual (entity type code=’I’),
+provider is registered in NPPES as an individual (entity type code = <code>I</code>),
 this is the provider’s last name. When the provider is registered as an
-organization (entity type code = ‘O’), this is the organization name.</p></dd>
+organization (entity type code = <code>O</code>), this is the organization name.</p></dd>
 
 
-<dt>first</dt>
-<dd><p>An individual provider's (entity type code=’I’) first name.
-An organization's (entity type code = ‘O’) will be blank.</p></dd>
+<dt>first_name</dt>
+<dd><p>An individual provider's (entity type code = <code>I</code>) first name.
+An organization's (entity type code = <code>O</code>) will be blank.</p></dd>
 
 
-<dt>cred</dt>
-<dd><p>An individual provider's (entity type code=’I’) credentials.
-An organization's will be blank.</p></dd>
+<dt>credential</dt>
+<dd><p>An individual provider's (entity type code=’I’) credentials. An organization's will be blank.</p></dd>
 
 
 <dt>gender</dt>
-<dd><p>An individual provider's gender.
-An organization's will be blank.</p></dd>
+<dd><p>An individual provider's gender. An organization's will be blank.</p></dd>
 
 
-<dt>type</dt>
+<dt>enum_type</dt>
 <dd><p>Type of entity reported in NPPES. An entity code of ‘I’
 identifies providers registered as individuals while an entity type
 code of ‘O’ identifies providers registered as organizations.</p></dd>
@@ -181,12 +182,12 @@ code of ‘O’ identifies providers registered as organizations.</p></dd>
 in NPPES.</p></dd>
 
 
+<dt>zipcode</dt>
+<dd><p>The provider’s zip code, as reported in NPPES.</p></dd>
+
+
 <dt>fips</dt>
 <dd><p>FIPS code for the rendering provider's state.</p></dd>
-
-
-<dt>zip</dt>
-<dd><p>The provider’s zip code, as reported in NPPES.</p></dd>
 
 
 <dt>ruca</dt>
@@ -214,7 +215,7 @@ of services.</p></dd>
 <dt>par_ind</dt>
 <dd><p>Identifies whether the provider participates in Medicare
 and/or accepts assignment of Medicare allowed amounts. The value will
-be ‘Y’ for any provider that had at least one claim identifying the
+be <code>Y</code> for any provider that had at least one claim identifying the
 provider as participating in Medicare or accepting assignment of
 Medicare allowed amounts within HCPCS code and place of service. A
 non-participating provider may elect to accept Medicare allowed amounts
@@ -240,21 +241,13 @@ for additional information.</p></dd>
 
 <dt>pos</dt>
 <dd><p>Identifies whether the place of service submitted on the claims
-is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility
+is a facility (value of <code>F</code>) or non-facility (value of <code>O</code>). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.</p></dd>
 
 
-<dt>year</dt>
-<dd><p>Year in YYYY format, between 2013-2020; default is 2020</p></dd>
-
-
-<dt>clean_names</dt>
+<dt>tidy</dt>
 <dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
-
-
-<dt>nest</dt>
-<dd><p>Nest related columns together; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
