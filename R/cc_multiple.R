@@ -16,9 +16,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#'
-#' @param year integer, YYYY, calendar year of Medicare enrollment. 2007-2018 data is
-#'   currently available.
+#' @param year integer, YYYY, calendar year of Medicare enrollment. `2007-2018`
+#'   data is currently available.
 #' @param level Geographic level of data; options are `National`, `State`,
 #'   and `County`
 #' @param sublevel The state and/or county where the Medicare beneficiary

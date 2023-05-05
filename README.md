@@ -127,24 +127,10 @@ beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = 
 
 ``` r
 beneficiary_enrollment(year = 2017, level = "County", state = "GA") |> 
-  dplyr::filter(month %in% month.name) |> dplyr::count(month)
+  dplyr::filter(month %in% month.name)
 ```
 
-    #> # A tibble: 12 × 2
-    #>    month         n
-    #>    <chr>     <int>
-    #>  1 April       159
-    #>  2 August      159
-    #>  3 December    159
-    #>  4 February    159
-    #>  5 January     159
-    #>  6 July        159
-    #>  7 June        159
-    #>  8 March       159
-    #>  9 May         159
-    #> 10 November    159
-    #> 11 October     159
-    #> 12 September   159
+    #> Error in if (httr2::resp_header(response, "content-length") == "0") {: argument is of length zero
 
 ### Chronic Conditions
 
@@ -193,26 +179,46 @@ cc_multiple(year = 2018, level = "County", sublevel = "Alabama : Autauga", fips 
 
 ``` r
 # Specific Chronic Conditions
-cc_specific(year = 2018, geo_level = "State", state_abb = "CA")
+cc_specific(year = 2018, level = "State", sublevel = "California", demographic = "All")
 ```
 
-    #> # A tibble: 34,020 × 13
-    #>     year bene_geo_lvl bene_geo_desc bene_geo_cd bene_age_lvl bene_demo_lvl
-    #>    <dbl> <chr>        <chr>         <chr>       <chr>        <chr>        
-    #>  1  2018 State        Alabama       01          All          All          
-    #>  2  2018 State        Alabama       01          65+          Dual Status  
-    #>  3  2018 State        Alabama       01          <65          Dual Status  
-    #>  4  2018 State        Alabama       01          All          Dual Status  
-    #>  5  2018 State        Alabama       01          65+          Dual Status  
-    #>  6  2018 State        Alabama       01          <65          Dual Status  
-    #>  7  2018 State        Alabama       01          All          Dual Status  
-    #>  8  2018 State        Alabama       01          65+          Sex          
-    #>  9  2018 State        Alabama       01          <65          Sex          
-    #> 10  2018 State        Alabama       01          All          Sex          
-    #> # ℹ 34,010 more rows
-    #> # ℹ 7 more variables: bene_demo_desc <chr>, bene_cond <chr>, prvlnc <chr>,
-    #> #   tot_mdcr_stdzd_pymt_pc <chr>, tot_mdcr_pymt_pc <chr>,
-    #> #   hosp_readmsn_rate <chr>, er_visits_per_1000_benes <chr>
+    #> # A tibble: 63 × 13
+    #>     year level sublevel fips  age_group demographic subdemo condition prevalence
+    #>    <int> <chr> <chr>    <chr> <chr>     <chr>       <chr>   <chr>          <dbl>
+    #>  1  2018 State Califor… 06    All       All         All     Alcohol …     0.0215
+    #>  2  2018 State Califor… 06    All       All         All     Alzheime…     0.105 
+    #>  3  2018 State Califor… 06    All       All         All     Arthritis     0.312 
+    #>  4  2018 State Califor… 06    All       All         All     Asthma        0.053 
+    #>  5  2018 State Califor… 06    All       All         All     Atrial F…     0.0749
+    #>  6  2018 State Califor… 06    All       All         All     Autism S…     0.0022
+    #>  7  2018 State Califor… 06    All       All         All     COPD          0.0952
+    #>  8  2018 State Califor… 06    All       All         All     Cancer        0.0784
+    #>  9  2018 State Califor… 06    All       All         All     Chronic …     0.243 
+    #> 10  2018 State Califor… 06    All       All         All     Depressi…     0.162 
+    #> # ℹ 53 more rows
+    #> # ℹ 4 more variables: tot_std_pymt_percap <dbl>, tot_pymt_percap <dbl>,
+    #> #   hosp_readmsn_rate <dbl>, er_visits_per_1k <dbl>
+
+``` r
+cc_specific(year = 2011, level = "County", fips = "01001")
+```
+
+    #> # A tibble: 63 × 13
+    #>     year level sublevel fips  age_group demographic subdemo condition prevalence
+    #>    <int> <chr> <chr>    <chr> <chr>     <chr>       <chr>   <chr>          <dbl>
+    #>  1  2011 Coun… Alabama… 01001 All       All         All     Alcohol …     0.0116
+    #>  2  2011 Coun… Alabama… 01001 All       All         All     Alzheime…     0.100 
+    #>  3  2011 Coun… Alabama… 01001 All       All         All     Arthritis     0.274 
+    #>  4  2011 Coun… Alabama… 01001 All       All         All     Asthma        0.037 
+    #>  5  2011 Coun… Alabama… 01001 All       All         All     Atrial F…     0.0748
+    #>  6  2011 Coun… Alabama… 01001 All       All         All     Autism S…    NA     
+    #>  7  2011 Coun… Alabama… 01001 All       All         All     COPD          0.122 
+    #>  8  2011 Coun… Alabama… 01001 All       All         All     Cancer        0.0792
+    #>  9  2011 Coun… Alabama… 01001 All       All         All     Chronic …     0.137 
+    #> 10  2011 Coun… Alabama… 01001 All       All         All     Depressi…     0.134 
+    #> # ℹ 53 more rows
+    #> # ℹ 4 more variables: tot_std_pymt_percap <dbl>, tot_pymt_percap <dbl>,
+    #> #   hosp_readmsn_rate <dbl>, er_visits_per_1k <dbl>
 
 ### Doctors and Clinicians
 
@@ -416,12 +422,6 @@ hospital_enrollment(enroll_state = "GA")
     #> #   sg_general <lgl>, sg_acute_care <lgl>, sg_alcohol_drug <lgl>, …
 
 ``` r
-hospital_enrollment(incorp_state = "GA")
-```
-
-    #> Error in hospital_enrollment(incorp_state = "GA"): unused argument (incorp_state = "GA")
-
-``` r
 hospital_enrollment(enroll_id = "O20030404000017")
 ```
 
@@ -606,8 +606,6 @@ opt_out(specialty = "Tsychiatry")
 
     #> ✖ No results for specialty: Tsychiatry
 
-    #> NULL
-
 ### Order and Referring Privileges
 
 ``` r
@@ -663,7 +661,7 @@ pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    #> # A tibble: 35 × 4
+    #> # A tibble: 31 × 4
     #>    npi        last_name  first_name type     
     #>    <chr>      <chr>      <chr>      <chr>    
     #>  1 1881791739 ADAMS      JOHN       PHYSICIAN
@@ -673,10 +671,10 @@ pending_applications(first_name = "John", type = "physician")
     #>  5 1861142556 BURKE      JOHN       PHYSICIAN
     #>  6 1306817531 COMBS      JOHN       PHYSICIAN
     #>  7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    #>  8 1659074151 EUN        JOHN       PHYSICIAN
-    #>  9 1376571554 FLYNN      JOHN       PHYSICIAN
-    #> 10 1689774804 FREEMAN    JOHN       PHYSICIAN
-    #> # ℹ 25 more rows
+    #>  8 1376571554 FLYNN      JOHN       PHYSICIAN
+    #>  9 1689774804 FREEMAN    JOHN       PHYSICIAN
+    #> 10 1386604080 GIANNINI   JOHN       PHYSICIAN
+    #> # ℹ 21 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -709,10 +707,25 @@ physician_by_service(npi = 1003000126)
 
 ``` r
 # by Geography and Service
-physician_by_geography(geo_desc = "Maryland", year = 2020)
+physician_by_geography(sublevel = "Maryland", year = 2020)
 ```
 
-    #> Error in physician_by_geography(geo_desc = "Maryland", year = 2020): unused argument (geo_desc = "Maryland")
+    #> # A tibble: 5,866 × 16
+    #>     year level sublevel fips  hcpcs hcpcs_desc        hcpcs_drug pos   tot_provs
+    #>    <int> <chr> <chr>    <chr> <chr> <chr>             <lgl>      <chr>     <int>
+    #>  1  2020 State Maryland 24    0001A Adm sarscov2 30m… FALSE      O            31
+    #>  2  2020 State Maryland 24    0002A Adm sarscov2 30m… FALSE      O             3
+    #>  3  2020 State Maryland 24    00100 Anesthesia for p… FALSE      F           114
+    #>  4  2020 State Maryland 24    00103 Anesthesia for p… FALSE      F           256
+    #>  5  2020 State Maryland 24    00103 Anesthesia for p… FALSE      O             6
+    #>  6  2020 State Maryland 24    00104 Anesthesia for e… FALSE      F           105
+    #>  7  2020 State Maryland 24    0011A Adm sarscov2 100… FALSE      O             4
+    #>  8  2020 State Maryland 24    00120 Anesthesia for b… FALSE      F           135
+    #>  9  2020 State Maryland 24    00126 Anesthesia for i… FALSE      F            91
+    #> 10  2020 State Maryland 24    00140 Anesthesia for p… FALSE      F           401
+    #> # ℹ 5,856 more rows
+    #> # ℹ 7 more variables: tot_benes <int>, tot_srvcs <int>, tot_day <int>,
+    #> #   avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>, avg_std_pymt <dbl>
 
 ``` r
 # by Provider
@@ -816,6 +829,25 @@ revalidation_group(ind_npi = 1710912209)
     #> #   individual_state_code <chr>, individual_specialty_description <chr>,
     #> #   individual_due_date <chr>, individual_total_employer_associations <int>
 
+``` r
+revalidation_group(group_pac_id = 9436483807,
+                   group_enroll_id = "O20190619002165",
+                   group_bus_name = "1st Call Urgent Care",
+                   group_state = "FL",
+                   record_type = "Reassignment")
+```
+
+    #> # A tibble: 1 × 15
+    #>   group_pac_id group_enrollment_id group_legal_business_name group_state_code
+    #>          <dbl> <chr>               <chr>                     <chr>           
+    #> 1   9436483807 O20190619002165     1st Call Urgent Care      FL              
+    #> # ℹ 11 more variables: group_due_date <chr>,
+    #> #   group_reassignments_and_physician_assistants <int>, record_type <chr>,
+    #> #   individual_enrollment_id <chr>, individual_npi <int>,
+    #> #   individual_first_name <chr>, individual_last_name <chr>,
+    #> #   individual_state_code <chr>, individual_specialty_description <chr>,
+    #> #   individual_due_date <chr>, individual_total_employer_associations <int>
+
 ### Taxonomy Crosswalk
 
 ``` r
@@ -878,44 +910,25 @@ taxonomy_crosswalk(taxonomy_code = "207Q00000X")
 ``` r
 taxonomy_crosswalk() |> 
   dplyr::full_join(nucc_taxonomy_230, 
-  dplyr::join_by(taxonomy_code == code)) |> 
-  dplyr::count(grouping)
+  dplyr::join_by(taxonomy_code == code))
 ```
 
-    #> # A tibble: 30 × 2
-    #>    grouping                                         n
-    #>    <chr>                                        <int>
-    #>  1 Agencies                                        16
-    #>  2 Allopathic & Osteopathic Physicians            299
-    #>  3 Ambulatory Health Care Facilities               64
-    #>  4 Behavioral Health & Social Service Providers    41
-    #>  5 Chiropractic Providers                          12
-    #>  6 Dental Providers                                20
-    #>  7 Dietary & Nutritional Service Providers         14
-    #>  8 Emergency Medical Service Providers              4
-    #>  9 Eye and Vision Services Providers               17
-    #> 10 Group                                            2
-    #> # ℹ 20 more rows
-
-``` r
-nucc_taxonomy_230
-```
-
-    #> # A tibble: 873 × 8
-    #>    code     grouping classification specialization definition notes display_name
-    #>    <chr>    <chr>    <chr>          <chr>          <chr>      <chr> <chr>       
-    #>  1 1932000… Group    Multi-Special… <NA>           A busines… [7/1… Multi-Speci…
-    #>  2 1934000… Group    Single Specia… <NA>           A busines… [7/1… Single Spec…
-    #>  3 207K000… Allopat… Allergy & Imm… <NA>           An allerg… Sour… Allergy & I…
-    #>  4 207KA02… Allopat… Allergy & Imm… Allergy        A physici… Sour… Allergy Phy…
-    #>  5 207KI00… Allopat… Allergy & Imm… Clinical & La… An allerg… Sour… Clinical & …
-    #>  6 207L000… Allopat… Anesthesiology <NA>           An anesth… Sour… Anesthesiol…
-    #>  7 207LA04… Allopat… Anesthesiology Addiction Med… An anesth… Sour… Addiction M…
-    #>  8 207LC02… Allopat… Anesthesiology Critical Care… An anesth… Sour… Critical Ca…
-    #>  9 207LH00… Allopat… Anesthesiology Hospice and P… An anesth… Sour… Hospice and…
-    #> 10 207LP29… Allopat… Anesthesiology Pain Medicine  An anesth… Sour… Pain Medici…
-    #> # ℹ 863 more rows
-    #> # ℹ 1 more variable: section <chr>
+    #> # A tibble: 979 × 11
+    #>    taxonomy_code taxonomy_desc            specialty_code specialty_desc grouping
+    #>    <chr>         <chr>                    <chr>          <chr>          <chr>   
+    #>  1 208D00000X    Allopathic & Osteopathi… 1              Physician/Gen… Allopat…
+    #>  2 208600000X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  3 2086H0002X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  4 2086S0120X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  5 2086S0122X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  6 2086S0105X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  7 2086S0102X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  8 2086X0206X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #>  9 2086S0127X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #> 10 2086S0129X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
+    #> # ℹ 969 more rows
+    #> # ℹ 6 more variables: classification <chr>, specialization <chr>,
+    #> #   definition <chr>, notes <chr>, display_name <chr>, section <chr>
 
 ------------------------------------------------------------------------
 

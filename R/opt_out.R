@@ -12,7 +12,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param first_name First Name of the Opt Out Provider
 #' @param last_name Last Name of the Opt Out Provider
 #' @param npi National Provider Identifier (NPI) number of the Opt Out Provider
@@ -26,11 +25,12 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
+#' \dontrun{
 #' opt_out(specialty = "Psychiatry", zipcode = "07626")
 #' opt_out(first = "David", last = "Smith")
 #' opt_out(npi = 1114974490)
 #' opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
-#' \dontrun{
+#'
 #' opt_out(state = "NY", order_and_refer = FALSE)
 #' # Returns empty list i.e., provider is not in the database
 #' opt_out(npi = 1326011057)
@@ -51,21 +51,19 @@
 #' }
 #' @autoglobal
 #' @export
-opt_out <- function(npi          = NULL,
-                    first_name   = NULL,
-                    last_name    = NULL,
-                    specialty    = NULL,
-                    address      = NULL,
-                    city         = NULL,
-                    state        = NULL,
-                    zipcode      = NULL,
+opt_out <- function(npi             = NULL,
+                    first_name      = NULL,
+                    last_name       = NULL,
+                    specialty       = NULL,
+                    address         = NULL,
+                    city            = NULL,
+                    state           = NULL,
+                    zipcode         = NULL,
                     order_and_refer = NULL,
-                    tidy         = TRUE) {
+                    tidy            = TRUE) {
   # args tribble ------------------------------------------------------------
-  if (!is.null(order_and_refer)) {
-    order_and_refer <- dplyr::case_when(
-      order_and_refer == TRUE ~ "Y",
-      order_and_refer == FALSE ~ "N",
+  if (!is.null(order_and_refer)) {order_and_refer <- dplyr::case_when(
+      order_and_refer == TRUE ~ "Y", order_and_refer == FALSE ~ "N",
       .default = NULL)
     }
   args <- tibble::tribble(
@@ -119,8 +117,7 @@ opt_out <- function(npi          = NULL,
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
 
-
-    return(NULL)
+    return(invisible(NULL))
 
   }
 

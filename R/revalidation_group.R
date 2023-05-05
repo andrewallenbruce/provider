@@ -14,7 +14,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param group_pac_id PAC ID of provider who is receiving reassignment or is
 #'    the employer
 #' @param group_enroll_id Enrollment ID of provider who is receiving
@@ -37,11 +36,11 @@
 #'    benefits or is an employee
 #' @param ind_specialty Enrollment specialty of the provider who is
 #'    reassigning their benefits or is an employee
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
 #' @examples
+#' \dontrun{
 #' revalidation_group(ind_enroll_id = "I20200929003184",
 #'                    ind_npi = 1962026229,
 #'                    ind_first = "Rashadda",
@@ -54,6 +53,7 @@
 #'                    group_bus_name = "1st Call Urgent Care",
 #'                    group_state = "FL",
 #'                    record_type = "Reassignment")
+#' }
 #' @autoglobal
 #' @export
 revalidation_group <- function(group_pac_id    = NULL,
@@ -67,7 +67,7 @@ revalidation_group <- function(group_pac_id    = NULL,
                                ind_last        = NULL,
                                ind_state       = NULL,
                                ind_specialty   = NULL,
-                               clean_names     = TRUE) {
+                               tidy            = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                                    ~x,           ~y,
@@ -84,8 +84,10 @@ revalidation_group <- function(group_pac_id    = NULL,
    "Individual Specialty Description", ind_specialty)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -94,16 +96,17 @@ revalidation_group <- function(group_pac_id    = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
-         check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+  results <- tibble::tibble(httr2::resp_body_json(response,
+         check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
-
+  if (tidy) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")))
+    }
   return(results)
 }

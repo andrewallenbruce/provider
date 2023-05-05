@@ -32,8 +32,8 @@ cc_multiple(
 )
 }
 \arguments{
-\item{year}{integer, YYYY, calendar year of Medicare enrollment. 2007-2018 data is
-currently available.}
+\item{year}{integer, YYYY, calendar year of Medicare enrollment. \code{2007-2018}
+data is currently available.}
 
 \item{level}{Geographic level of data; options are \code{National}, \code{State},
 and \code{County}}

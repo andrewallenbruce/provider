@@ -79,7 +79,6 @@
 #' }
 #' @autoglobal
 #' @export
-
 physician_by_geography <- function(year        = 2020,
                                    level       = NULL,
                                    sublevel    = NULL,
@@ -88,7 +87,7 @@ physician_by_geography <- function(year        = 2020,
                                    hcpcs_desc  = NULL,
                                    hcpcs_drug  = NULL,
                                    pos         = NULL,
-                                   tidy = TRUE) {
+                                   tidy        = TRUE) {
 
   # update distribution ids -------------------------------------------------
   ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Geography and Service")
@@ -164,7 +163,7 @@ physician_by_geography <- function(year        = 2020,
   if (tidy) {
 
     results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(year = year) |>
+      dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
                     level = rndrng_prvdr_geo_lvl,
                     sublevel = rndrng_prvdr_geo_desc,
@@ -187,6 +186,5 @@ physician_by_geography <- function(year        = 2020,
                     dplyr::across(dplyr::contains("avg"), ~round(., digits = 2)))
 
   }
-
   return(results)
 }

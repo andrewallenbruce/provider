@@ -12,7 +12,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param npi Hospital’s National Provider Identifier (NPI)
 #' @param facility_ccn Hospital’s CMS Certification Number (CCN), formerly called an
 #'   OSCAR Number
@@ -28,10 +27,10 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
+#' \dontrun{
 #' hospital_enrollment(npi = 1689653487)
 #' hospital_enrollment(facility_ccn = "440058")
 #' hospital_enrollment(pac_id_org = 6103733050)
-#' \dontrun{
 #' hospital_enrollment(city = "Atlanta")
 #' hospital_enrollment(zipcode = 117771928)
 #' }

@@ -46,7 +46,28 @@ utils::globalVariables(c(
   "tot_pymt_percap", # <cc_multiple>
   "er_visits_per_1k", # <cc_multiple>
   "mcc", # <cc_multiple>
-  "Year", # <cc_specific>
+  "y", # <cc_specific>
+  "bene_geo_lvl", # <cc_specific>
+  "bene_geo_desc", # <cc_specific>
+  "bene_geo_cd", # <cc_specific>
+  "bene_age_lvl", # <cc_specific>
+  "bene_demo_lvl", # <cc_specific>
+  "bene_demo_desc", # <cc_specific>
+  "bene_cond", # <cc_specific>
+  "prvlnc", # <cc_specific>
+  "tot_mdcr_stdzd_pymt_pc", # <cc_specific>
+  "tot_mdcr_pymt_pc", # <cc_specific>
+  "hosp_readmsn_rate", # <cc_specific>
+  "er_visits_per_1000_benes", # <cc_specific>
+  "prevalence", # <cc_specific>
+  "tot_std_pymt_percap", # <cc_specific>
+  "tot_pymt_percap", # <cc_specific>
+  "er_visits_per_1k", # <cc_specific>
+  "distribution_title", # <cc_spec_help>
+  "distribution", # <cc_spec_help>
+  "year", # <cc_spec_help>
+  "id", # <cc_spec_help>
+  "distro", # <cc_spec_help>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>
   "distribution", # <cms_update_ids>

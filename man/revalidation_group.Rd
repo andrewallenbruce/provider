@@ -19,7 +19,7 @@ revalidation_group(
   ind_last = NULL,
   ind_state = NULL,
   ind_specialty = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
@@ -56,7 +56,7 @@ benefits or is an employee}
 \item{ind_specialty}{Enrollment specialty of the provider who is
 reassigning their benefits or is an employee}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -81,6 +81,7 @@ physician as well as the clinic group practice.
 Update Frequency: \strong{Monthly}
 }
 \examples{
+\dontrun{
 revalidation_group(ind_enroll_id = "I20200929003184",
                    ind_npi = 1962026229,
                    ind_first = "Rashadda",
@@ -93,4 +94,5 @@ revalidation_group(group_pac_id = 9436483807,
                    group_bus_name = "1st Call Urgent Care",
                    group_state = "FL",
                    record_type = "Reassignment")
+}
 }

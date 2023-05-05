@@ -63,11 +63,12 @@ provider's NPI, specialty, address, and effective dates.
 Update Frequency: \strong{Monthly}
 }
 \examples{
+\dontrun{
 opt_out(specialty = "Psychiatry", zipcode = "07626")
 opt_out(first = "David", last = "Smith")
 opt_out(npi = 1114974490)
 opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
-\dontrun{
+
 opt_out(state = "NY", order_and_refer = FALSE)
 # Returns empty list i.e., provider is not in the database
 opt_out(npi = 1326011057)
