@@ -200,7 +200,8 @@ physician_by_geography(sublevel = "Maryland", year = 2020)
 
 ```{r}
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1003000126)
+physician_by_service(year = 2020, npi = 1003000126) |> 
+  dplyr::mutate(credential = clean_credentials(credential))
 ```
 
 ```{r}

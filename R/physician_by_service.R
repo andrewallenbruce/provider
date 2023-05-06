@@ -65,7 +65,7 @@
 #'    claim. For providers that reported more than one specialty code on their
 #'    claims, this is the specialty code associated with the largest number
 #'    of services.
-#' @param par_ind Identifies whether the provider participates in Medicare
+#' @param par Identifies whether the provider participates in Medicare
 #'    and/or accepts assignment of Medicare allowed amounts. The value will
 #'    be `Y` for any provider that had at least one claim identifying the
 #'    provider as participating in Medicare or accepting assignment of
@@ -88,7 +88,7 @@
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
 #' @param year Year in YYYY format, between 2013-2020; default is 2020
-#' @param tidy Convert column names to snakecase; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
 #' \dontrun{
@@ -114,26 +114,25 @@
 #' }
 #' @autoglobal
 #' @export
-
 physician_by_service <- function(year,
-                                 npi  = NULL,
-                                 last_name = NULL,
+                                 npi        = NULL,
+                                 last_name  = NULL,
                                  first_name = NULL,
                                  credential = NULL,
-                                 gender = NULL,
+                                 gender     = NULL,
                                  enum_type  = NULL,
-                                 city  = NULL,
-                                 state = NULL,
-                                 zipcode = NULL,
-                                 fips   = NULL,
-                                 ruca  = NULL,
-                                 country = NULL,
-                                 specialty = NULL,
-                                 par_ind = NULL,
+                                 city       = NULL,
+                                 state      = NULL,
+                                 zipcode    = NULL,
+                                 fips       = NULL,
+                                 ruca       = NULL,
+                                 country    = NULL,
+                                 specialty  = NULL,
+                                 par        = NULL,
                                  hcpcs_code = NULL,
                                  hcpcs_drug = NULL,
-                                 pos = NULL,
-                                 tidy = TRUE) {
+                                 pos        = NULL,
+                                 tidy       = TRUE) {
 
   # match args ----------------------------------------------------
   rlang::check_required(year)
@@ -161,7 +160,7 @@ physician_by_service <- function(year,
               "Rndrng_Prvdr_RUCA",       ruca,
              "Rndrng_Prvdr_Cntry",    country,
               "Rndrng_Prvdr_Type",  specialty,
-  "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",    par_ind,
+  "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",    par,
                        "HCPCS_Cd", hcpcs_code,
                  "HCPCS_Drug_Ind", hcpcs_drug,
                   "Place_Of_Srvc",        pos)
@@ -180,16 +179,53 @@ physician_by_service <- function(year,
   # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
+  # no search results returns empty tibble ----------------------------------
+  if (httr2::resp_header(response, "content-length") == "0") {
+
+    cli_args <- tibble::tribble(
+      ~x,             ~y,
+      "year",         as.character(year),
+      "npi",          npi,
+      "last_name",    last_name,
+      "first_name",   first_name,
+      "credential",   credential,
+      "gender",       gender,
+      "enum_type",    enum_type,
+      "city",         city,
+      "state",        state,
+      "fips",         as.character(fips),
+      "zipcode",      zipcode,
+      "ruca",         ruca,
+      "country",      country,
+      "specialty",    specialty,
+      "par",          par,
+      "hcpcs_code",   as.character(hcpcs_code),
+      "hcpcs_drug",   as.character(hcpcs_drug),
+      "pos",          pos) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    return(invisible(NULL))
+  }
+
   # parse response ----------------------------------------------------------
   results <- tibble::tibble(httr2::resp_body_json(response,
     check_type = FALSE,
-    simplifyVector = TRUE)) |>
-    dplyr::mutate(Year = year)
+    simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
   if (tidy) {
     results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(dplyr::across(c(tot_benes, tot_srvcs, tot_bene_day_srvcs), ~as.integer(.)),
+      dplyr::mutate(year = as.integer(year),
+                    dplyr::across(c(tot_benes,
+                                    tot_srvcs,
+                                    tot_bene_day_srvcs), ~as.integer(.)),
                     dplyr::across(dplyr::ends_with(c("amt", "chrg")), ~as.double(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       tidyr::unite("street",
@@ -198,35 +234,35 @@ physician_by_service <- function(year,
                    na.rm = TRUE,
                    sep = " ") |>
       dplyr::select(year,
-                    npi = rndrng_npi,
-                    first_name = rndrng_prvdr_first_name,
+                    npi         = rndrng_npi,
+                    enum_type   = rndrng_prvdr_ent_cd,
+                    first_name  = rndrng_prvdr_first_name,
                     middle_name = rndrng_prvdr_mi,
-                    last_name = rndrng_prvdr_last_org_name,
-                    credential = rndrng_prvdr_crdntls,
-                    gender = rndrng_prvdr_gndr,
-                    rndrng_prvdr_ent_cd,
+                    last_name   = rndrng_prvdr_last_org_name,
+                    credential  = rndrng_prvdr_crdntls,
+                    gender      = rndrng_prvdr_gndr,
+                    specialty   = rndrng_prvdr_type,
                     street,
-                    city = rndrng_prvdr_city,
-                    state = rndrng_prvdr_state_abrvtn,
-                    fips = rndrng_prvdr_state_fips,
-                    zipcode = rndrng_prvdr_zip5,
-                    ruca = rndrng_prvdr_ruca,
-                    ruca_desc = rndrng_prvdr_ruca_desc,
-                    country = rndrng_prvdr_cntry,
-                    rndrng_prvdr_type,
-                    par = rndrng_prvdr_mdcr_prtcptg_ind,
+                    city        = rndrng_prvdr_city,
+                    state       = rndrng_prvdr_state_abrvtn,
+                    fips        = rndrng_prvdr_state_fips,
+                    zipcode     = rndrng_prvdr_zip5,
+                    ruca        = rndrng_prvdr_ruca,
+                    ruca_desc   = rndrng_prvdr_ruca_desc,
+                    country     = rndrng_prvdr_cntry,
+                    par         = rndrng_prvdr_mdcr_prtcptg_ind,
                     hcpcs_cd,
                     hcpcs_desc,
-                    hcpcs_drug = hcpcs_drug_ind,
-                    pos = place_of_srvc,
+                    hcpcs_drug  = hcpcs_drug_ind,
+                    pos         = place_of_srvc,
                     tot_benes,
                     tot_srvcs,
-                    tot_bene_day_srvcs,
-                    avg_sbmtd_chrg,
-                    avg_mdcr_alowd_amt,
-                    avg_mdcr_pymt_amt,
-                    avg_mdcr_stdzd_amt
-                    )
+                    tot_day     = tot_bene_day_srvcs,
+                    avg_charge  = avg_sbmtd_chrg,
+                    avg_allowed = avg_mdcr_alowd_amt,
+                    avg_payment = avg_mdcr_pymt_amt,
+                    avg_std_pymt = avg_mdcr_stdzd_amt) |>
+      dplyr::mutate(credential = clean_credentials(credential))
     }
   return(results)
 }

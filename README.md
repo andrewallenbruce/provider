@@ -467,7 +467,7 @@ nppes_npi(npi = 1316405939)
     #> # A tibble: 1 × 20
     #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
     #>   <chr>  <chr>            <date>           <Duration>               <date>      
-    #> 1 13164… NPI-1            2019-03-04       131587200s (~4.17 years) 2023-04-06  
+    #> 1 13164… NPI-1            2019-03-04       131673600s (~4.17 years) 2023-04-06  
     #> # ℹ 15 more variables: certification_date <date>, status <chr>,
     #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
     #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
@@ -481,7 +481,7 @@ nppes_npi(npi = 1558364273)
     #> # A tibble: 1 × 19
     #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
     #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1558… NPI-1            2005-05-27       566092800s (~17.94 years) 2007-07-08  
+    #> 1 1558… NPI-1            2005-05-27       566179200s (~17.94 years) 2007-07-08  
     #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
     #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
     #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
@@ -494,7 +494,7 @@ nppes_npi(1720081441)
     #> # A tibble: 1 × 19
     #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
     #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1720… NPI-1            2005-05-27       566092800s (~17.94 years) 2007-07-08  
+    #> 1 1720… NPI-1            2005-05-27       566179200s (~17.94 years) 2007-07-08  
     #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
     #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
     #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
@@ -525,25 +525,25 @@ c(1710983663, 1710975040, 1659781227,
     #> # A tibble: 19 × 22
     #>    npi        enumeration_type enumeration_date enumeration_duration     
     #>    <chr>      <chr>            <date>           <Duration>               
-    #>  1 1710975040 NPI-1            2005-10-11       554256000s (~17.56 years)
-    #>  2 1336413418 NPI-2            2012-03-07       352166400s (~11.16 years)
-    #>  3 1003026055 NPI-1            2007-05-22       503452800s (~15.95 years)
-    #>  4 1316405939 NPI-1            2019-03-04       131587200s (~4.17 years) 
-    #>  5 1720392988 NPI-1            2010-07-29       402883200s (~12.77 years)
-    #>  6 1518184605 NPI-1            2007-04-19       506304000s (~16.04 years)
-    #>  7 1922056829 NPI-1            2006-05-04       536544000s (~17 years)   
-    #>  8 1083879860 NPI-1            2008-07-22       466560000s (~14.78 years)
-    #>  9 1346243805 NPI-1            2005-05-27       566092800s (~17.94 years)
-    #> 10 1679576722 NPI-1            2005-05-23       566438400s (~17.95 years)
-    #> 11 1093718892 NPI-1            2005-05-24       566352000s (~17.95 years)
-    #> 12 1477556405 NPI-1            2005-05-23       566438400s (~17.95 years)
-    #> 13 1770586539 NPI-1            2005-05-24       566352000s (~17.95 years)
-    #> 14 1871596692 NPI-1            2005-05-24       566352000s (~17.95 years)
-    #> 15 1174526925 NPI-1            2005-05-24       566352000s (~17.95 years)
-    #> 16 1720081441 NPI-1            2005-05-27       566092800s (~17.94 years)
-    #> 17 1558364273 NPI-1            2005-05-27       566092800s (~17.94 years)
-    #> 18 1801899513 NPI-1            2005-05-27       566092800s (~17.94 years)
-    #> 19 1316405939 NPI-1            2019-03-04       131587200s (~4.17 years) 
+    #>  1 1710975040 NPI-1            2005-10-11       554342400s (~17.57 years)
+    #>  2 1336413418 NPI-2            2012-03-07       352252800s (~11.16 years)
+    #>  3 1003026055 NPI-1            2007-05-22       503539200s (~15.96 years)
+    #>  4 1316405939 NPI-1            2019-03-04       131673600s (~4.17 years) 
+    #>  5 1720392988 NPI-1            2010-07-29       402969600s (~12.77 years)
+    #>  6 1518184605 NPI-1            2007-04-19       506390400s (~16.05 years)
+    #>  7 1922056829 NPI-1            2006-05-04       536630400s (~17 years)   
+    #>  8 1083879860 NPI-1            2008-07-22       466646400s (~14.79 years)
+    #>  9 1346243805 NPI-1            2005-05-27       566179200s (~17.94 years)
+    #> 10 1679576722 NPI-1            2005-05-23       566524800s (~17.95 years)
+    #> 11 1093718892 NPI-1            2005-05-24       566438400s (~17.95 years)
+    #> 12 1477556405 NPI-1            2005-05-23       566524800s (~17.95 years)
+    #> 13 1770586539 NPI-1            2005-05-24       566438400s (~17.95 years)
+    #> 14 1871596692 NPI-1            2005-05-24       566438400s (~17.95 years)
+    #> 15 1174526925 NPI-1            2005-05-24       566438400s (~17.95 years)
+    #> 16 1720081441 NPI-1            2005-05-27       566179200s (~17.94 years)
+    #> 17 1558364273 NPI-1            2005-05-27       566179200s (~17.94 years)
+    #> 18 1801899513 NPI-1            2005-05-27       566179200s (~17.94 years)
+    #> 19 1316405939 NPI-1            2019-03-04       131673600s (~4.17 years) 
     #> # ℹ 18 more variables: last_updated <date>, status <chr>, first_name <chr>,
     #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
     #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
@@ -687,7 +687,7 @@ pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    #> # A tibble: 31 × 4
+    #> # A tibble: 35 × 4
     #>    npi        last_name  first_name type     
     #>    <chr>      <chr>      <chr>      <chr>    
     #>  1 1881791739 ADAMS      JOHN       PHYSICIAN
@@ -697,10 +697,10 @@ pending_applications(first_name = "John", type = "physician")
     #>  5 1861142556 BURKE      JOHN       PHYSICIAN
     #>  6 1306817531 COMBS      JOHN       PHYSICIAN
     #>  7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    #>  8 1376571554 FLYNN      JOHN       PHYSICIAN
-    #>  9 1689774804 FREEMAN    JOHN       PHYSICIAN
-    #> 10 1386604080 GIANNINI   JOHN       PHYSICIAN
-    #> # ℹ 21 more rows
+    #>  8 1659074151 EUN        JOHN       PHYSICIAN
+    #>  9 1376571554 FLYNN      JOHN       PHYSICIAN
+    #> 10 1689774804 FREEMAN    JOHN       PHYSICIAN
+    #> # ℹ 25 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -745,39 +745,31 @@ physician_by_geography(sublevel = "Maryland", year = 2020)
 
 ``` r
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1003000126)
+physician_by_service(year = 2020, npi = 1003000126) |> 
+  dplyr::mutate(credential = clean_credentials(credential))
 ```
 
-    #> # A tibble: 9 × 29
-    #>   year  npi        first_name middle_name last_name credential gender
-    #>   <chr> <chr>      <chr>      <chr>       <chr>     <chr>      <chr> 
-    #> 1 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 2 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 3 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 4 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 5 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 6 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 7 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 8 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> 9 2020  1003000126 Ardalan    <NA>        Enkeshafi M.D.       M     
-    #> # ℹ 22 more variables: rndrng_prvdr_ent_cd <chr>, street <chr>, city <chr>,
-    #> #   state <chr>, fips <chr>, zipcode <chr>, ruca <chr>, ruca_desc <chr>,
-    #> #   country <chr>, rndrng_prvdr_type <chr>, par <chr>, hcpcs_cd <chr>,
-    #> #   hcpcs_desc <chr>, hcpcs_drug <chr>, pos <chr>, tot_benes <int>,
-    #> #   tot_srvcs <int>, tot_bene_day_srvcs <int>, avg_sbmtd_chrg <dbl>,
-    #> #   avg_mdcr_alowd_amt <dbl>, avg_mdcr_pymt_amt <dbl>, avg_mdcr_stdzd_amt <dbl>
+    #> Error in `dplyr::mutate()`:
+    #> ℹ In argument: `credential = clean_credentials(credential)`.
+    #> Caused by error in `clean_credentials()`:
+    #> ! could not find function "clean_credentials"
 
 ``` r
 # by Provider
 physician_by_provider(npi = 1003000126, year = 2020)
 ```
 
-    #> # A tibble: 1 × 11
-    #>    year rndrng_npi rndrng_prvdr      totals_srvcs drug_srvcs med_srvcs bene_age
-    #>   <dbl> <chr>      <list>            <list>       <list>     <list>    <list>  
-    #> 1  2020 1003000126 <tibble [1 × 17]> <tibble>     <tibble>   <tibble>  <tibble>
-    #> # ℹ 4 more variables: bene_sex <list>, bene_race <list>, bene_status <list>,
-    #> #   bene_cc <list>
+    #> # A tibble: 1 × 72
+    #>    year npi        first_name middle_name last_name credential gender enum_type
+    #>   <int> <chr>      <chr>      <chr>       <chr>     <chr>      <chr>  <chr>    
+    #> 1  2020 1003000126 Ardalan    <NA>        Enkeshafi MD         M      I        
+    #> # ℹ 64 more variables: street <chr>, city <chr>, state <chr>, fips <chr>,
+    #> #   zipcode <chr>, ruca <chr>, country <chr>, specialty <chr>, par <chr>,
+    #> #   tot_hcpcs <int>, tot_benes <int>, tot_srvcs <int>, tot_charges <dbl>,
+    #> #   tot_allowed <dbl>, tot_payment <dbl>, tot_std_pymt <dbl>, drug_supp <chr>,
+    #> #   drug_hcpcs <int>, drug_benes <int>, drug_srvcs <int>, drug_charges <dbl>,
+    #> #   drug_allowed <dbl>, drug_payment <dbl>, drug_std_pymt <dbl>,
+    #> #   med_supp <chr>, med_hcpcs <int>, med_benes <int>, med_srvcs <int>, …
 
 ### Provider Enrollment
 

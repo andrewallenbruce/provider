@@ -23,7 +23,7 @@ physician_by_service(
   ruca = NULL,
   country = NULL,
   specialty = NULL,
-  par_ind = NULL,
+  par = NULL,
   hcpcs_code = NULL,
   hcpcs_drug = NULL,
   pos = NULL,
@@ -78,7 +78,7 @@ claim. For providers that reported more than one specialty code on their
 claims, this is the specialty code associated with the largest number
 of services.}
 
-\item{par_ind}{Identifies whether the provider participates in Medicare
+\item{par}{Identifies whether the provider participates in Medicare
 and/or accepts assignment of Medicare allowed amounts. The value will
 be \code{Y} for any provider that had at least one claim identifying the
 provider as participating in Medicare or accepting assignment of
@@ -104,7 +104,7 @@ is a facility (value of \code{F}) or non-facility (value of \code{O}). Non-facil
 is generally an office setting; however other entities are included
 in non-facility.}
 
-\item{tidy}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -9,27 +9,27 @@
 #'    The dataset contains prevalence, use and spending organized by
 #'    geography and distinct chronic conditions listed below.
 #'
-#'   • Alcohol Abuse Drug Abuse/ Substance Abuse
-#'   • Alzheimer’s Disease and Related Dementia
-#'   • Arthritis (Osteoarthritis and Rheumatoid)
-#'   • Asthma
-#'   • Atrial Fibrillation
-#'   • Autism Spectrum Disorders
-#'   • Cancer (Breast, Colorectal, Lung, and Prostate)
-#'   • Chronic Kidney Disease
-#'   • Chronic Obstructive Pulmonary Disease
-#'   • Depression
-#'   • Diabetes
-#'   • Drug Abuse/ Substance Abuse
-#'   • Heart Failure
-#'   • Hepatitis (Chronic Viral B & C)
-#'   • HIV/AIDS
-#'   • Hyperlipidemia (High cholesterol)
-#'   • Hypertension (High blood pressure)
-#'   • Ischemic Heart Disease
-#'   • Osteoporosis
-#'   • Schizophrenia and Other Psychotic Disorders
-#'   • Stroke
+#'   * Alcohol Abuse Drug Abuse/ Substance Abuse
+#'   * Alzheimer’s Disease and Related Dementia
+#'   * Arthritis (Osteoarthritis and Rheumatoid)
+#'   * Asthma
+#'   * Atrial Fibrillation
+#'   * Autism Spectrum Disorders
+#'   * Cancer (Breast, Colorectal, Lung, and Prostate)
+#'   * Chronic Kidney Disease
+#'   * Chronic Obstructive Pulmonary Disease
+#'   * Depression
+#'   * Diabetes
+#'   * Drug Abuse/ Substance Abuse
+#'   * Heart Failure
+#'   * Hepatitis (Chronic Viral B & C)
+#'   * HIV/AIDS
+#'   * Hyperlipidemia (High cholesterol)
+#'   * Hypertension (High blood pressure)
+#'   * Ischemic Heart Disease
+#'   * Osteoporosis
+#'   * Schizophrenia and Other Psychotic Disorders
+#'   * Stroke
 #'
 #' ## Links
 #' * [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)

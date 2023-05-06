@@ -9,45 +9,46 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 physician_by_provider(
+  year,
   npi = NULL,
-  last_org = NULL,
-  first = NULL,
-  cred = NULL,
+  first_name = NULL,
+  last_name = NULL,
+  credential = NULL,
   gender = NULL,
-  type = NULL,
+  enum_type = NULL,
   city = NULL,
   state = NULL,
+  zipcode = NULL,
   fips = NULL,
-  zip = NULL,
   ruca = NULL,
   country = NULL,
   specialty = NULL,
-  par_ind = NULL,
-  year = 2020,
-  clean_names = TRUE,
-  nest = TRUE
+  par = NULL,
+  tidy = TRUE
 )
 }
 \arguments{
+\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
+
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
 NPPES.}
 
-\item{last_org}{Last name/Organization name of the provider. When the
+\item{first_name}{An individual provider's (entity type code \code{I}) first name.
+An organization's (entity type code \code{O}) will be blank.}
+
+\item{last_name}{Last name/Organization name of the provider. When the
 provider is registered in NPPES as an individual (entity type code \code{I}),
 this is the provider’s last name. When the provider is registered as an
 organization (entity type code \code{O}), this is the organization name.}
 
-\item{first}{An individual provider's (entity type code \code{I}) first name.
-An organization's (entity type code \code{O}) will be blank.}
-
-\item{cred}{An individual provider's (entity type code \code{I}) credentials.
+\item{credential}{An individual provider's (entity type code \code{I}) credentials.
 An organization's will be blank.}
 
 \item{gender}{An individual provider's gender.
 An organization's will be blank.}
 
-\item{type}{Type of entity reported in NPPES. An entity code of \code{I}
+\item{enum_type}{Type of entity reported in NPPES. An entity code of \code{I}
 identifies providers registered as individuals while an entity type
 code of \code{O} identifies providers registered as organizations.}
 
@@ -55,9 +56,9 @@ code of \code{O} identifies providers registered as organizations.}
 
 \item{state}{The state where the provider is located, as reported in NPPES.}
 
-\item{fips}{FIPS code for the rendering provider's state.}
+\item{zipcode}{The provider’s zip code, as reported in NPPES.}
 
-\item{zip}{The provider’s zip code, as reported in NPPES.}
+\item{fips}{FIPS code for the rendering provider's state.}
 
 \item{ruca}{Rural-Urban Commuting Area Code (RUCA); a Census tract-based
 classification scheme that utilizes the standard Bureau of Census
@@ -75,7 +76,7 @@ claim. For providers that reported more than one specialty code on their
 claims, this is the specialty code associated with the largest number
 of services.}
 
-\item{par_ind}{Identifies whether the provider participates in Medicare
+\item{par}{Identifies whether the provider participates in Medicare
 and/or accepts assignment of Medicare allowed amounts. The value will
 be \code{Y} for any provider that had at least one claim identifying the
 provider as participating in Medicare or accepting assignment of
@@ -84,11 +85,7 @@ non-participating provider may elect to accept Medicare allowed amounts
 for some services and not accept Medicare allowed amounts for other
 services.}
 
-\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
-
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
-
-\item{nest}{Nest related columns together; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -113,6 +110,7 @@ organized by National Provider Identifier (NPI).
 Update Frequency: \strong{Annually}
 }
 \examples{
+\dontrun{
 physician_by_provider(npi = 1003000423,
                       year = 2020)
 
@@ -124,7 +122,7 @@ physician_by_provider(type = "I",
                       gender = "F",
                       cred = "M.D.",
                       specialty = "Anesthesiology")
-\dontrun{
-purrr::map_dfr(as.character(2013:2020), ~physician_by_provider(npi = 1003000126, year = .x))
+
+purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
 }
 }

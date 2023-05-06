@@ -79,7 +79,7 @@
 #' }
 #' @autoglobal
 #' @export
-physician_by_geography <- function(year        = 2020,
+physician_by_geography <- function(year,
                                    level       = NULL,
                                    sublevel    = NULL,
                                    fips        = NULL,
@@ -89,22 +89,19 @@ physician_by_geography <- function(year        = 2020,
                                    pos         = NULL,
                                    tidy        = TRUE) {
 
-  # update distribution ids -------------------------------------------------
-  ids <- cms_update_ids(api = "Medicare Physician & Other Practitioners - by Geography and Service")
+  # match args ----------------------------------------------------
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, values = cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
 
-  # dataset version ids by year ----------------------------------------------
-  id <- dplyr::case_when(year == 2020 ~ ids$distribution[2],
-                         year == 2019 ~ ids$distribution[3],
-                         year == 2018 ~ ids$distribution[4],
-                         year == 2017 ~ ids$distribution[5],
-                         year == 2016 ~ ids$distribution[6],
-                         year == 2015 ~ ids$distribution[7],
-                         year == 2014 ~ ids$distribution[8],
-                         year == 2013 ~ ids$distribution[9])
+  # update distribution ids -------------------------------------------------
+  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service", check = "id") |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
-                           ~x,                 ~y,
+                                ~x,            ~y,
             "Rndrng_Prvdr_Geo_Lvl",         level,
            "Rndrng_Prvdr_Geo_Desc",      sublevel,
              "Rndrng_Prvdr_Geo_Cd",          fips,
@@ -163,20 +160,20 @@ physician_by_geography <- function(year        = 2020,
     results <- dplyr::rename_with(results, str_to_snakecase) |>
       dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
-                    level = rndrng_prvdr_geo_lvl,
-                    sublevel = rndrng_prvdr_geo_desc,
-                    fips = rndrng_prvdr_geo_cd,
-                    hcpcs = hcpcs_cd,
+                    level        = rndrng_prvdr_geo_lvl,
+                    sublevel     = rndrng_prvdr_geo_desc,
+                    fips         = rndrng_prvdr_geo_cd,
+                    hcpcs        = hcpcs_cd,
                     hcpcs_desc,
-                    hcpcs_drug = hcpcs_drug_ind,
-                    pos = place_of_srvc,
-                    tot_provs = tot_rndrng_prvdrs,
+                    hcpcs_drug   = hcpcs_drug_ind,
+                    pos          = place_of_srvc,
+                    tot_provs    = tot_rndrng_prvdrs,
                     tot_benes,
                     tot_srvcs,
-                    tot_day = tot_bene_day_srvcs,
-                    avg_charge = avg_sbmtd_chrg,
-                    avg_allowed = avg_mdcr_alowd_amt,
-                    avg_payment = avg_mdcr_pymt_amt,
+                    tot_day      = tot_bene_day_srvcs,
+                    avg_charge   = avg_sbmtd_chrg,
+                    avg_allowed  = avg_mdcr_alowd_amt,
+                    avg_payment  = avg_mdcr_pymt_amt,
                     avg_std_pymt = avg_mdcr_stdzd_amt) |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     hcpcs_drug = yn_logical(hcpcs_drug),

@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 physician_by_geography(
-  year = 2020,
+  year,
   level = NULL,
   sublevel = NULL,
   fips = NULL,

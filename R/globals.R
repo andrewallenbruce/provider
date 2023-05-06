@@ -223,6 +223,7 @@ utils::globalVariables(c(
   "zip_code", # <opt_out>
   "y", # <order_refer>
   "y", # <pending_applications>
+  "distro", # <physician_by_geography>
   "y", # <physician_by_geography>
   "rndrng_prvdr_geo_lvl", # <physician_by_geography>
   "rndrng_prvdr_geo_desc", # <physician_by_geography>
@@ -238,35 +239,92 @@ utils::globalVariables(c(
   "avg_mdcr_alowd_amt", # <physician_by_geography>
   "avg_mdcr_pymt_amt", # <physician_by_geography>
   "avg_mdcr_stdzd_amt", # <physician_by_geography>
-  "Year", # <physician_by_provider>
-  "Tot_HCPCS_Cds", # <physician_by_provider>
-  "Tot_Benes", # <physician_by_provider>
-  "Tot_Srvcs", # <physician_by_provider>
-  "Drug_Tot_HCPCS_Cds", # <physician_by_provider>
-  "Drug_Tot_Benes", # <physician_by_provider>
-  "Drug_Tot_Srvcs", # <physician_by_provider>
-  "Med_Tot_HCPCS_Cds", # <physician_by_provider>
-  "Med_Tot_Benes", # <physician_by_provider>
-  "Med_Tot_Srvcs", # <physician_by_provider>
+  "distro", # <physician_by_provider>
+  "y", # <physician_by_provider>
+  "rndrng_prvdr_crdntls", # <physician_by_provider>
+  "rndrng_npi", # <physician_by_provider>
+  "rndrng_prvdr_first_name", # <physician_by_provider>
+  "rndrng_prvdr_mi", # <physician_by_provider>
+  "rndrng_prvdr_last_org_name", # <physician_by_provider>
+  "rndrng_prvdr_gndr", # <physician_by_provider>
+  "rndrng_prvdr_ent_cd", # <physician_by_provider>
+  "street", # <physician_by_provider>
+  "rndrng_prvdr_city", # <physician_by_provider>
+  "rndrng_prvdr_state_abrvtn", # <physician_by_provider>
+  "rndrng_prvdr_state_fips", # <physician_by_provider>
+  "rndrng_prvdr_zip5", # <physician_by_provider>
+  "rndrng_prvdr_ruca", # <physician_by_provider>
+  "rndrng_prvdr_cntry", # <physician_by_provider>
+  "rndrng_prvdr_type", # <physician_by_provider>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_provider>
+  "tot_hcpcs_cds", # <physician_by_provider>
+  "tot_benes", # <physician_by_provider>
+  "tot_srvcs", # <physician_by_provider>
+  "tot_sbmtd_chrg", # <physician_by_provider>
+  "tot_mdcr_alowd_amt", # <physician_by_provider>
+  "tot_mdcr_pymt_amt", # <physician_by_provider>
+  "tot_mdcr_stdzd_amt", # <physician_by_provider>
+  "drug_sprsn_ind", # <physician_by_provider>
+  "drug_tot_hcpcs_cds", # <physician_by_provider>
+  "drug_tot_benes", # <physician_by_provider>
+  "drug_tot_srvcs", # <physician_by_provider>
+  "drug_sbmtd_chrg", # <physician_by_provider>
+  "drug_mdcr_alowd_amt", # <physician_by_provider>
+  "drug_mdcr_pymt_amt", # <physician_by_provider>
+  "drug_mdcr_stdzd_amt", # <physician_by_provider>
+  "med_sprsn_ind", # <physician_by_provider>
+  "med_tot_hcpcs_cds", # <physician_by_provider>
+  "med_tot_benes", # <physician_by_provider>
+  "med_tot_srvcs", # <physician_by_provider>
+  "med_sbmtd_chrg", # <physician_by_provider>
+  "med_mdcr_alowd_amt", # <physician_by_provider>
+  "med_mdcr_pymt_amt", # <physician_by_provider>
+  "med_mdcr_stdzd_amt", # <physician_by_provider>
   "bene_avg_age", # <physician_by_provider>
+  "bene_age_lt_65_cnt", # <physician_by_provider>
+  "bene_age_65_74_cnt", # <physician_by_provider>
+  "bene_age_75_84_cnt", # <physician_by_provider>
   "bene_age_gt_84_cnt", # <physician_by_provider>
   "bene_feml_cnt", # <physician_by_provider>
   "bene_male_cnt", # <physician_by_provider>
+  "bene_race_wht_cnt", # <physician_by_provider>
+  "bene_race_black_cnt", # <physician_by_provider>
+  "bene_race_api_cnt", # <physician_by_provider>
+  "bene_race_hspnc_cnt", # <physician_by_provider>
+  "bene_race_natind_cnt", # <physician_by_provider>
+  "bene_race_othr_cnt", # <physician_by_provider>
   "bene_dual_cnt", # <physician_by_provider>
   "bene_ndual_cnt", # <physician_by_provider>
   "bene_cc_af_pct", # <physician_by_provider>
+  "bene_cc_alzhmr_pct", # <physician_by_provider>
+  "bene_cc_asthma_pct", # <physician_by_provider>
+  "bene_cc_cncr_pct", # <physician_by_provider>
+  "bene_cc_chf_pct", # <physician_by_provider>
+  "bene_cc_ckd_pct", # <physician_by_provider>
+  "bene_cc_copd_pct", # <physician_by_provider>
+  "bene_cc_dprssn_pct", # <physician_by_provider>
+  "bene_cc_dbts_pct", # <physician_by_provider>
+  "bene_cc_hyplpdma_pct", # <physician_by_provider>
+  "bene_cc_hyprtnsn_pct", # <physician_by_provider>
+  "bene_cc_ihd_pct", # <physician_by_provider>
+  "bene_cc_opo_pct", # <physician_by_provider>
+  "bene_cc_raoa_pct", # <physician_by_provider>
+  "bene_cc_sz_pct", # <physician_by_provider>
+  "bene_cc_strok_pct", # <physician_by_provider>
   "bene_avg_risk_scre", # <physician_by_provider>
   "distro", # <physician_by_service>
+  "y", # <physician_by_service>
   "tot_benes", # <physician_by_service>
   "tot_srvcs", # <physician_by_service>
   "tot_bene_day_srvcs", # <physician_by_service>
   "rndrng_npi", # <physician_by_service>
+  "rndrng_prvdr_ent_cd", # <physician_by_service>
   "rndrng_prvdr_first_name", # <physician_by_service>
   "rndrng_prvdr_mi", # <physician_by_service>
   "rndrng_prvdr_last_org_name", # <physician_by_service>
   "rndrng_prvdr_crdntls", # <physician_by_service>
   "rndrng_prvdr_gndr", # <physician_by_service>
-  "rndrng_prvdr_ent_cd", # <physician_by_service>
+  "rndrng_prvdr_type", # <physician_by_service>
   "street", # <physician_by_service>
   "rndrng_prvdr_city", # <physician_by_service>
   "rndrng_prvdr_state_abrvtn", # <physician_by_service>
@@ -275,7 +333,6 @@ utils::globalVariables(c(
   "rndrng_prvdr_ruca", # <physician_by_service>
   "rndrng_prvdr_ruca_desc", # <physician_by_service>
   "rndrng_prvdr_cntry", # <physician_by_service>
-  "rndrng_prvdr_type", # <physician_by_service>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_service>
   "hcpcs_cd", # <physician_by_service>
   "hcpcs_desc", # <physician_by_service>

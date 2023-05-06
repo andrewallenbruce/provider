@@ -96,28 +96,29 @@ The Select Chronic Conditions dataset provides information on
 21 selected chronic conditions among Original Medicare beneficiaries.
 The dataset contains prevalence, use and spending organized by
 geography and distinct chronic conditions listed below.
-
-• Alcohol Abuse Drug Abuse/ Substance Abuse
-• Alzheimer’s Disease and Related Dementia
-• Arthritis (Osteoarthritis and Rheumatoid)
-• Asthma
-• Atrial Fibrillation
-• Autism Spectrum Disorders
-• Cancer (Breast, Colorectal, Lung, and Prostate)
-• Chronic Kidney Disease
-• Chronic Obstructive Pulmonary Disease
-• Depression
-• Diabetes
-• Drug Abuse/ Substance Abuse
-• Heart Failure
-• Hepatitis (Chronic Viral B & C)
-• HIV/AIDS
-• Hyperlipidemia (High cholesterol)
-• Hypertension (High blood pressure)
-• Ischemic Heart Disease
-• Osteoporosis
-• Schizophrenia and Other Psychotic Disorders
-• Stroke
+\itemize{
+\item Alcohol Abuse Drug Abuse/ Substance Abuse
+\item Alzheimer’s Disease and Related Dementia
+\item Arthritis (Osteoarthritis and Rheumatoid)
+\item Asthma
+\item Atrial Fibrillation
+\item Autism Spectrum Disorders
+\item Cancer (Breast, Colorectal, Lung, and Prostate)
+\item Chronic Kidney Disease
+\item Chronic Obstructive Pulmonary Disease
+\item Depression
+\item Diabetes
+\item Drug Abuse/ Substance Abuse
+\item Heart Failure
+\item Hepatitis (Chronic Viral B & C)
+\item HIV/AIDS
+\item Hyperlipidemia (High cholesterol)
+\item Hypertension (High blood pressure)
+\item Ischemic Heart Disease
+\item Osteoporosis
+\item Schizophrenia and Other Psychotic Disorders
+\item Stroke
+}
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions}{Medicare Specific Chronic Conditions}

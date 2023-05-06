@@ -25,7 +25,7 @@ remove_null <- function(x) {Filter(Negate(is.null), x)}
 clean_credentials <- function(x) {
   if (!is.character(x)) {stop("x must be a character vector")}
   out <- gsub("\\.", "", x)
-  out <- stringr::str_split(out, "[,\\s;]+", simplify = FALSE)
+  #out <- stringr::str_split(out, "[,\\s;]+", simplify = FALSE)
   return(out)
 }
 
