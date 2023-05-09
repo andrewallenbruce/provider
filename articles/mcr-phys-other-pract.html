@@ -182,17 +182,17 @@ Services</strong>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 72</span></span></span>
-<span><span class="co">#&gt;    year npi        first_name middle_name last_name credential gender enum_type</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 1003000423 Jennifer   A           Velotta   MD         F      I        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 64 more variables: street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_hcpcs &lt;int&gt;, tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_allowed &lt;dbl&gt;, tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_supp &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;, drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_allowed &lt;dbl&gt;, drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   med_supp &lt;chr&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;, med_srvcs &lt;int&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 70</span></span></span>
+<span><span class="co">#&gt;    year npi     first_name middle_name last_name credential gender entype street</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>type <span class="op">=</span> <span class="st">"I"</span>, </span>
@@ -220,17 +220,17 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 16</span></span></span>
-<span><span class="co">#&gt;    year level    sublevel      fips  hcpcs hcpcs_desc hcpcs_drug pos   tot_provs</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 National National      <span style="color: #BB0000;">NA</span>    0002A Adm sarsc… FALSE      O            53</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State    California    06    0002A Adm sarsc… FALSE      O             3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State    Florida       12    0002A Adm sarsc… FALSE      O             5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State    Illinois      17    0002A Adm sarsc… FALSE      O             3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State    Maine         23    0002A Adm sarsc… FALSE      O             1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State    Maryland      24    0002A Adm sarsc… FALSE      O             3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State    Massachusetts 25    0002A Adm sarsc… FALSE      O             3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State    New Jersey    34    0002A Adm sarsc… FALSE      O             3</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State    Pennsylvania  42    0002A Adm sarsc… FALSE      O             4</span></span>
+<span><span class="co">#&gt;    year level sublevel fips  hcpcs hcpcs_desc hcpcs_drug place_of_srvc tot_provs</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 Nati… National <span style="color: #BB0000;">NA</span>    0002A Adm sarsc… FALSE      Office               53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State Califor… 06    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State Florida  12    0002A Adm sarsc… FALSE      Office                5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State Illinois 17    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State Maine    23    0002A Adm sarsc… FALSE      Office                1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State Maryland 24    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State Massach… 25    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State New Jer… 34    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State Pennsyl… 42    0002A Adm sarsc… FALSE      Office                4</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   avg_charge &lt;dbl&gt;, avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
@@ -271,32 +271,32 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Search by Last Name for 2019</span></span>
 <span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720392988</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 29</span></span></span>
-<span><span class="co">#&gt;     year npi        entype first_name middle_name last_name credential gender</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>  <span style="text-decoration: underline;">2</span>019 1720392988 I      Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, ruca_desc &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   par &lt;chr&gt;, hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, pos &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 28</span></span></span>
+<span><span class="co">#&gt;     year npi        entype    first_name middle_name last_name credential gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span>  <span style="text-decoration: underline;">2</span>019 1720392988 Individu… Mustafa    <span style="color: #BB0000;">NA</span>          Abas      MD,        M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, place_of_srvc &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;, avg_charge &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple NPIs</span></span>
@@ -315,49 +315,49 @@ service submitted on the claim is facility or non-facility.</p>
 <code class="sourceCode R"><span><span class="co"># Retrieve All Provider Data, 2013-2020</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>,</span>
 <span><span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 78 × 29</span></span></span>
-<span><span class="co">#&gt;     year npi        entype first_name middle_name last_name credential gender</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>013 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>014 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>014 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>014 1003000126 I      Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 78 × 28</span></span></span>
+<span><span class="co">#&gt;     year npi        entype    first_name middle_name last_name credential gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>013 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>014 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>014 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>014 1003000126 Individu… Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 68 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, ruca_desc &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   par &lt;chr&gt;, hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, pos &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, place_of_srvc &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;, avg_charge &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="provider-data-dictionary">Provider Data Dictionary<a class="anchor" aria-label="anchor" href="#provider-data-dictionary"></a>
 </h3>
-<div id="ohkcgnhrcc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wyeptdorho" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ohkcgnhrcc table {
+#wyeptdorho table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ohkcgnhrcc thead, #ohkcgnhrcc tbody, #ohkcgnhrcc tfoot, #ohkcgnhrcc tr, #ohkcgnhrcc td, #ohkcgnhrcc th {
+#wyeptdorho thead, #wyeptdorho tbody, #wyeptdorho tfoot, #wyeptdorho tr, #wyeptdorho td, #wyeptdorho th {
   border-style: none;
 }
 
-#ohkcgnhrcc p {
+#wyeptdorho p {
   margin: 0;
   padding: 0;
 }
 
-#ohkcgnhrcc .gt_table {
+#wyeptdorho .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -383,12 +383,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_caption {
+#wyeptdorho .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ohkcgnhrcc .gt_title {
+#wyeptdorho .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -400,7 +400,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#ohkcgnhrcc .gt_subtitle {
+#wyeptdorho .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -412,7 +412,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#ohkcgnhrcc .gt_heading {
+#wyeptdorho .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -424,13 +424,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#ohkcgnhrcc .gt_bottom_border {
+#wyeptdorho .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_col_headings {
+#wyeptdorho .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -445,7 +445,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#ohkcgnhrcc .gt_col_heading {
+#wyeptdorho .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -465,7 +465,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#ohkcgnhrcc .gt_column_spanner_outer {
+#wyeptdorho .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -477,15 +477,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#ohkcgnhrcc .gt_column_spanner_outer:first-child {
+#wyeptdorho .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ohkcgnhrcc .gt_column_spanner_outer:last-child {
+#wyeptdorho .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ohkcgnhrcc .gt_column_spanner {
+#wyeptdorho .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -497,11 +497,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#ohkcgnhrcc .gt_spanner_row {
+#wyeptdorho .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ohkcgnhrcc .gt_group_heading {
+#wyeptdorho .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -527,7 +527,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#ohkcgnhrcc .gt_empty_group_heading {
+#wyeptdorho .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -542,15 +542,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#ohkcgnhrcc .gt_from_md > :first-child {
+#wyeptdorho .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ohkcgnhrcc .gt_from_md > :last-child {
+#wyeptdorho .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ohkcgnhrcc .gt_row {
+#wyeptdorho .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -569,7 +569,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#ohkcgnhrcc .gt_stub {
+#wyeptdorho .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -582,7 +582,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#ohkcgnhrcc .gt_stub_row_group {
+#wyeptdorho .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -596,15 +596,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#ohkcgnhrcc .gt_row_group_first td {
+#wyeptdorho .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ohkcgnhrcc .gt_row_group_first th {
+#wyeptdorho .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ohkcgnhrcc .gt_summary_row {
+#wyeptdorho .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -614,16 +614,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#ohkcgnhrcc .gt_first_summary_row {
+#wyeptdorho .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_first_summary_row.thick {
+#wyeptdorho .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ohkcgnhrcc .gt_last_summary_row {
+#wyeptdorho .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -633,7 +633,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_grand_summary_row {
+#wyeptdorho .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -643,7 +643,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#ohkcgnhrcc .gt_first_grand_summary_row {
+#wyeptdorho .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -653,7 +653,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_last_grand_summary_row_top {
+#wyeptdorho .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -663,11 +663,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_striped {
+#wyeptdorho .gt_striped {
   background-color: #F4F4F4;
 }
 
-#ohkcgnhrcc .gt_table_body {
+#wyeptdorho .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -676,7 +676,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#ohkcgnhrcc .gt_footnotes {
+#wyeptdorho .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -690,7 +690,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#ohkcgnhrcc .gt_footnote {
+#wyeptdorho .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -699,7 +699,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#ohkcgnhrcc .gt_sourcenotes {
+#wyeptdorho .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -713,7 +713,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#ohkcgnhrcc .gt_sourcenote {
+#wyeptdorho .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -721,63 +721,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#ohkcgnhrcc .gt_left {
+#wyeptdorho .gt_left {
   text-align: left;
 }
 
-#ohkcgnhrcc .gt_center {
+#wyeptdorho .gt_center {
   text-align: center;
 }
 
-#ohkcgnhrcc .gt_right {
+#wyeptdorho .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ohkcgnhrcc .gt_font_normal {
+#wyeptdorho .gt_font_normal {
   font-weight: normal;
 }
 
-#ohkcgnhrcc .gt_font_bold {
+#wyeptdorho .gt_font_bold {
   font-weight: bold;
 }
 
-#ohkcgnhrcc .gt_font_italic {
+#wyeptdorho .gt_font_italic {
   font-style: italic;
 }
 
-#ohkcgnhrcc .gt_super {
+#wyeptdorho .gt_super {
   font-size: 65%;
 }
 
-#ohkcgnhrcc .gt_footnote_marks {
+#wyeptdorho .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ohkcgnhrcc .gt_asterisk {
+#wyeptdorho .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ohkcgnhrcc .gt_indent_1 {
+#wyeptdorho .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ohkcgnhrcc .gt_indent_2 {
+#wyeptdorho .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ohkcgnhrcc .gt_indent_3 {
+#wyeptdorho .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ohkcgnhrcc .gt_indent_4 {
+#wyeptdorho .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ohkcgnhrcc .gt_indent_5 {
+#wyeptdorho .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1451,26 +1451,26 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level3">
 <h3 id="geography-data-dictionary">Geography Data Dictionary<a class="anchor" aria-label="anchor" href="#geography-data-dictionary"></a>
 </h3>
-<div id="anakizjbnl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="scglvycfad" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#anakizjbnl table {
+#scglvycfad table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#anakizjbnl thead, #anakizjbnl tbody, #anakizjbnl tfoot, #anakizjbnl tr, #anakizjbnl td, #anakizjbnl th {
+#scglvycfad thead, #scglvycfad tbody, #scglvycfad tfoot, #scglvycfad tr, #scglvycfad td, #scglvycfad th {
   border-style: none;
 }
 
-#anakizjbnl p {
+#scglvycfad p {
   margin: 0;
   padding: 0;
 }
 
-#anakizjbnl .gt_table {
+#scglvycfad .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1496,12 +1496,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_caption {
+#scglvycfad .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#anakizjbnl .gt_title {
+#scglvycfad .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1513,7 +1513,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#anakizjbnl .gt_subtitle {
+#scglvycfad .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1525,7 +1525,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#anakizjbnl .gt_heading {
+#scglvycfad .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1537,13 +1537,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#anakizjbnl .gt_bottom_border {
+#scglvycfad .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_col_headings {
+#scglvycfad .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1558,7 +1558,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#anakizjbnl .gt_col_heading {
+#scglvycfad .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1578,7 +1578,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#anakizjbnl .gt_column_spanner_outer {
+#scglvycfad .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1590,15 +1590,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#anakizjbnl .gt_column_spanner_outer:first-child {
+#scglvycfad .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#anakizjbnl .gt_column_spanner_outer:last-child {
+#scglvycfad .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#anakizjbnl .gt_column_spanner {
+#scglvycfad .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -1610,11 +1610,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#anakizjbnl .gt_spanner_row {
+#scglvycfad .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#anakizjbnl .gt_group_heading {
+#scglvycfad .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1640,7 +1640,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#anakizjbnl .gt_empty_group_heading {
+#scglvycfad .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1655,15 +1655,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#anakizjbnl .gt_from_md > :first-child {
+#scglvycfad .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#anakizjbnl .gt_from_md > :last-child {
+#scglvycfad .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#anakizjbnl .gt_row {
+#scglvycfad .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1682,7 +1682,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#anakizjbnl .gt_stub {
+#scglvycfad .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1695,7 +1695,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#anakizjbnl .gt_stub_row_group {
+#scglvycfad .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1709,15 +1709,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#anakizjbnl .gt_row_group_first td {
+#scglvycfad .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#anakizjbnl .gt_row_group_first th {
+#scglvycfad .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#anakizjbnl .gt_summary_row {
+#scglvycfad .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1727,16 +1727,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#anakizjbnl .gt_first_summary_row {
+#scglvycfad .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_first_summary_row.thick {
+#scglvycfad .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#anakizjbnl .gt_last_summary_row {
+#scglvycfad .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1746,7 +1746,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_grand_summary_row {
+#scglvycfad .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -1756,7 +1756,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#anakizjbnl .gt_first_grand_summary_row {
+#scglvycfad .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1766,7 +1766,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_last_grand_summary_row_top {
+#scglvycfad .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1776,11 +1776,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_striped {
+#scglvycfad .gt_striped {
   background-color: #F4F4F4;
 }
 
-#anakizjbnl .gt_table_body {
+#scglvycfad .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1789,7 +1789,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#anakizjbnl .gt_footnotes {
+#scglvycfad .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1803,7 +1803,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#anakizjbnl .gt_footnote {
+#scglvycfad .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1812,7 +1812,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#anakizjbnl .gt_sourcenotes {
+#scglvycfad .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1826,7 +1826,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#anakizjbnl .gt_sourcenote {
+#scglvycfad .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1834,63 +1834,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#anakizjbnl .gt_left {
+#scglvycfad .gt_left {
   text-align: left;
 }
 
-#anakizjbnl .gt_center {
+#scglvycfad .gt_center {
   text-align: center;
 }
 
-#anakizjbnl .gt_right {
+#scglvycfad .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#anakizjbnl .gt_font_normal {
+#scglvycfad .gt_font_normal {
   font-weight: normal;
 }
 
-#anakizjbnl .gt_font_bold {
+#scglvycfad .gt_font_bold {
   font-weight: bold;
 }
 
-#anakizjbnl .gt_font_italic {
+#scglvycfad .gt_font_italic {
   font-style: italic;
 }
 
-#anakizjbnl .gt_super {
+#scglvycfad .gt_super {
   font-size: 65%;
 }
 
-#anakizjbnl .gt_footnote_marks {
+#scglvycfad .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#anakizjbnl .gt_asterisk {
+#scglvycfad .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#anakizjbnl .gt_indent_1 {
+#scglvycfad .gt_indent_1 {
   text-indent: 5px;
 }
 
-#anakizjbnl .gt_indent_2 {
+#scglvycfad .gt_indent_2 {
   text-indent: 10px;
 }
 
-#anakizjbnl .gt_indent_3 {
+#scglvycfad .gt_indent_3 {
   text-indent: 15px;
 }
 
-#anakizjbnl .gt_indent_4 {
+#scglvycfad .gt_indent_4 {
   text-indent: 20px;
 }
 
-#anakizjbnl .gt_indent_5 {
+#scglvycfad .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2042,26 +2042,26 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level3">
 <h3 id="service-data-dictionary">Service Data Dictionary<a class="anchor" aria-label="anchor" href="#service-data-dictionary"></a>
 </h3>
-<div id="fqrowgibpp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xibqdcvzfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fqrowgibpp table {
+#xibqdcvzfc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fqrowgibpp thead, #fqrowgibpp tbody, #fqrowgibpp tfoot, #fqrowgibpp tr, #fqrowgibpp td, #fqrowgibpp th {
+#xibqdcvzfc thead, #xibqdcvzfc tbody, #xibqdcvzfc tfoot, #xibqdcvzfc tr, #xibqdcvzfc td, #xibqdcvzfc th {
   border-style: none;
 }
 
-#fqrowgibpp p {
+#xibqdcvzfc p {
   margin: 0;
   padding: 0;
 }
 
-#fqrowgibpp .gt_table {
+#xibqdcvzfc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2087,12 +2087,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_caption {
+#xibqdcvzfc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fqrowgibpp .gt_title {
+#xibqdcvzfc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2104,7 +2104,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#fqrowgibpp .gt_subtitle {
+#xibqdcvzfc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2116,7 +2116,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#fqrowgibpp .gt_heading {
+#xibqdcvzfc .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2128,13 +2128,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#fqrowgibpp .gt_bottom_border {
+#xibqdcvzfc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_col_headings {
+#xibqdcvzfc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2149,7 +2149,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#fqrowgibpp .gt_col_heading {
+#xibqdcvzfc .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2169,7 +2169,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#fqrowgibpp .gt_column_spanner_outer {
+#xibqdcvzfc .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2181,15 +2181,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#fqrowgibpp .gt_column_spanner_outer:first-child {
+#xibqdcvzfc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fqrowgibpp .gt_column_spanner_outer:last-child {
+#xibqdcvzfc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fqrowgibpp .gt_column_spanner {
+#xibqdcvzfc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2201,11 +2201,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#fqrowgibpp .gt_spanner_row {
+#xibqdcvzfc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fqrowgibpp .gt_group_heading {
+#xibqdcvzfc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2231,7 +2231,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#fqrowgibpp .gt_empty_group_heading {
+#xibqdcvzfc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2246,15 +2246,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#fqrowgibpp .gt_from_md > :first-child {
+#xibqdcvzfc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fqrowgibpp .gt_from_md > :last-child {
+#xibqdcvzfc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fqrowgibpp .gt_row {
+#xibqdcvzfc .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2273,7 +2273,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#fqrowgibpp .gt_stub {
+#xibqdcvzfc .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2286,7 +2286,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#fqrowgibpp .gt_stub_row_group {
+#xibqdcvzfc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2300,15 +2300,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#fqrowgibpp .gt_row_group_first td {
+#xibqdcvzfc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fqrowgibpp .gt_row_group_first th {
+#xibqdcvzfc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fqrowgibpp .gt_summary_row {
+#xibqdcvzfc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2318,16 +2318,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#fqrowgibpp .gt_first_summary_row {
+#xibqdcvzfc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_first_summary_row.thick {
+#xibqdcvzfc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fqrowgibpp .gt_last_summary_row {
+#xibqdcvzfc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2337,7 +2337,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_grand_summary_row {
+#xibqdcvzfc .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2347,7 +2347,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#fqrowgibpp .gt_first_grand_summary_row {
+#xibqdcvzfc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2357,7 +2357,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_last_grand_summary_row_top {
+#xibqdcvzfc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2367,11 +2367,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_striped {
+#xibqdcvzfc .gt_striped {
   background-color: #F4F4F4;
 }
 
-#fqrowgibpp .gt_table_body {
+#xibqdcvzfc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2380,7 +2380,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#fqrowgibpp .gt_footnotes {
+#xibqdcvzfc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2394,7 +2394,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#fqrowgibpp .gt_footnote {
+#xibqdcvzfc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2403,7 +2403,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#fqrowgibpp .gt_sourcenotes {
+#xibqdcvzfc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2417,7 +2417,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#fqrowgibpp .gt_sourcenote {
+#xibqdcvzfc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2425,63 +2425,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#fqrowgibpp .gt_left {
+#xibqdcvzfc .gt_left {
   text-align: left;
 }
 
-#fqrowgibpp .gt_center {
+#xibqdcvzfc .gt_center {
   text-align: center;
 }
 
-#fqrowgibpp .gt_right {
+#xibqdcvzfc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fqrowgibpp .gt_font_normal {
+#xibqdcvzfc .gt_font_normal {
   font-weight: normal;
 }
 
-#fqrowgibpp .gt_font_bold {
+#xibqdcvzfc .gt_font_bold {
   font-weight: bold;
 }
 
-#fqrowgibpp .gt_font_italic {
+#xibqdcvzfc .gt_font_italic {
   font-style: italic;
 }
 
-#fqrowgibpp .gt_super {
+#xibqdcvzfc .gt_super {
   font-size: 65%;
 }
 
-#fqrowgibpp .gt_footnote_marks {
+#xibqdcvzfc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fqrowgibpp .gt_asterisk {
+#xibqdcvzfc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fqrowgibpp .gt_indent_1 {
+#xibqdcvzfc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fqrowgibpp .gt_indent_2 {
+#xibqdcvzfc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fqrowgibpp .gt_indent_3 {
+#xibqdcvzfc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fqrowgibpp .gt_indent_4 {
+#xibqdcvzfc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fqrowgibpp .gt_indent_5 {
+#xibqdcvzfc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
