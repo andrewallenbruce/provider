@@ -535,31 +535,29 @@ nppes_npi(1720081441)
 
 ``` r
 open_payments(npi = 1043218118, year = 2021) |> 
-  janitor::remove_empty()
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
-    #> value for "which" not specified, defaulting to c("rows", "cols")
-
-    #> # A tibble: 92 × 52
-    #>    program_year record_number change_type covered_recipient_type     
-    #>    <chr>        <chr>         <chr>       <chr>                      
-    #>  1 2021         1             UNCHANGED   Covered Recipient Physician
-    #>  2 2021         692021        UNCHANGED   Covered Recipient Physician
-    #>  3 2021         4385936       UNCHANGED   Covered Recipient Physician
-    #>  4 2021         4385946       UNCHANGED   Covered Recipient Physician
-    #>  5 2021         4385951       UNCHANGED   Covered Recipient Physician
-    #>  6 2021         4385956       UNCHANGED   Covered Recipient Physician
-    #>  7 2021         4579206       UNCHANGED   Covered Recipient Physician
-    #>  8 2021         4579226       UNCHANGED   Covered Recipient Physician
-    #>  9 2021         4624246       UNCHANGED   Covered Recipient Physician
-    #> 10 2021         4766366       UNCHANGED   Covered Recipient Physician
+    #> # A tibble: 92 × 50
+    #>    year  change_type covered_type  profile_id npi   first_name last_name address
+    #>    <chr> <chr>       <chr>         <chr>      <chr> <chr>      <chr>     <chr>  
+    #>  1 2021  UNCHANGED   Covered Reci… 92058      1043… Ahad       Mahootchi 6739 G…
+    #>  2 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  3 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  4 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  5 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  6 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  7 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  8 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #>  9 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    #> 10 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
     #> # ℹ 82 more rows
-    #> # ℹ 48 more variables: covered_recipient_profile_id <chr>,
-    #> #   covered_recipient_npi <chr>, covered_recipient_first_name <chr>,
-    #> #   covered_recipient_last_name <chr>,
-    #> #   recipient_primary_business_street_address_line1 <chr>,
-    #> #   recipient_city <chr>, recipient_state <chr>, recipient_zip_code <chr>,
-    #> #   recipient_country <chr>, covered_recipient_primary_type_1 <chr>, …
+    #> # ℹ 42 more variables: city <chr>, state <chr>, zipcode <chr>, country <chr>,
+    #> #   primary_type <chr>, specialty <chr>, license_state <chr>,
+    #> #   payer_submitting <chr>, payer_id <chr>, payer_name <chr>,
+    #> #   payer_state <chr>, payer_country <chr>, payment_total <chr>,
+    #> #   payment_date <date>, payment_count <chr>, payment_form <chr>,
+    #> #   payment_nature <chr>, physician_ownership <chr>, …
 
 ### Opt-Out Affidavits
 
@@ -582,7 +580,7 @@ opt_out(first_name = "David", last_name = "Smith")
 
 ``` r
 opt_out(specialty = "Psychiatry", 
-        city = "BROOKLYN", 
+        city = "Brooklyn", 
         state = "NY", 
         order_and_refer = FALSE)
 ```
@@ -605,7 +603,7 @@ opt_out(specialty = "Tsychiatry")
     #> ✖ No results for specialty: Tsychiatry
 
 ``` r
-opt_out(city = "VALDOSTA", state = "GA")
+opt_out(city = "Valdosta", state = "GA")
 ```
 
     #> # A tibble: 3 × 13
@@ -635,7 +633,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    #> # A tibble: 148 × 7
+    #> # A tibble: 150 × 7
     #>    npi        first_name last_name partb hha   dme   pmd  
     #>    <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
     #>  1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -648,7 +646,7 @@ order_refer(last_name = "Smith",
     #>  8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
     #>  9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
     #> 10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    #> # ℹ 138 more rows
+    #> # ℹ 140 more rows
 
 ### Pending Applications
 
@@ -837,14 +835,9 @@ revalidation_group(pac_id_group = 9436483807,
                    record_type = "Reassignment")
 ```
 
-    #> # A tibble: 1 × 15
-    #>   npi        enroll_id       first_name last_name state specialty   due_date_ind
-    #>   <chr>      <chr>           <chr>      <chr>     <chr> <chr>       <chr>       
-    #> 1 1326063900 I20190619002257 John       Kayoma    FL    Family Pra… TBD         
-    #> # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
-    #> #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
-    #> #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
-    #> #   record_type <chr>
+    #> ✖ No results for pac_id_group: 9436483807, enroll_id_group: O20190619002165,
+    #> business_name: 1st Call Urgent Care, state_group: FL, and record_type:
+    #> Reassignment
 
 ### Taxonomy Crosswalk
 

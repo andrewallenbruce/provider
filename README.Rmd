@@ -198,19 +198,31 @@ nppes_npi(1720081441)
 
 ```{r}
 open_payments(npi = 1043218118, year = 2021) |> 
-  janitor::remove_empty()
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
 ### Opt-Out Affidavits
 
 ```{r}
 opt_out(first_name = "David", last_name = "Smith")
+```
+
+
+```{r}
 opt_out(specialty = "Psychiatry", 
-        city = "BROOKLYN", 
+        city = "Brooklyn", 
         state = "NY", 
         order_and_refer = FALSE)
+```
+
+
+```{r}
 opt_out(specialty = "Tsychiatry")
-opt_out(city = "VALDOSTA", state = "GA")
+```
+
+
+```{r}
+opt_out(city = "Valdosta", state = "GA")
 ```
 
 ### Order and Referring Privileges
