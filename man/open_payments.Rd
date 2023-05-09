@@ -8,51 +8,52 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 open_payments(
-  recipient_npi = NULL,
-  recipient_type = NULL,
-  recipient_id = NULL,
-  recipient_first_name = NULL,
-  recipient_last_name = NULL,
-  recipient_city = NULL,
-  recipient_state = NULL,
-  recipient_zip_code = NULL,
-  teaching_hospital_name = NULL,
-  manufacturer_gpo_name = NULL,
-  manufacturer_gpo_id = NULL,
-  form_of_payment = NULL,
-  nature_of_payment = NULL,
-  year = 2021,
+  year,
+  npi = NULL,
+  profile_id = NULL,
+  covered_type = NULL,
+  first_name = NULL,
+  last_name = NULL,
+  city = NULL,
+  state = NULL,
+  zipcode = NULL,
+  teaching_hospital = NULL,
+  payer_name = NULL,
+  payer_id = NULL,
+  payment_form = NULL,
+  payment_nature = NULL,
   offset = 0,
-  clean_names = TRUE,
-  nest = FALSE
+  tidy = TRUE
 )
 }
 \arguments{
-\item{recipient_npi}{10-digit National Provider Identifier (NPI).}
+\item{year}{Reporting year, 2015-2021, default is \code{2021}}
 
-\item{recipient_type}{e.g.,
+\item{npi}{Covered recipient's National Provider Identifier (NPI).}
+
+\item{profile_id}{Covered recipient's  unique Open Payments ID}
+
+\item{covered_type}{Type of covered recipient, e.g.,
 \itemize{
 \item \verb{Covered Recipient Physician}
 \item \verb{Covered Recipient Non-Physician Practitioner}
 \item \verb{Covered Recipient Teaching Hospital}
 }}
 
-\item{recipient_id}{Payment recipient's unique Open Payments ID}
+\item{first_name}{Covered recipient's first name}
 
-\item{recipient_first_name}{Recipient's first name}
+\item{last_name}{Covered recipient's last name}
 
-\item{recipient_last_name}{Recipient's last name}
+\item{city}{City}
 
-\item{recipient_city}{City}
+\item{state}{State, abbreviation}
 
-\item{recipient_state}{State, abbreviation}
+\item{zipcode}{Zip code}
 
-\item{recipient_zip_code}{Zip code}
-
-\item{teaching_hospital_name}{Name of teaching hospital, e.g.
+\item{teaching_hospital}{Name of teaching hospital, e.g.
 \verb{Vanderbilt University Medical Center}}
 
-\item{manufacturer_gpo_name}{Paying entity's name. Examples:
+\item{payer_name}{Paying entity's name. Examples:
 \itemize{
 \item \verb{Pharmacosmos Therapeutics Inc.}
 \item \verb{Getinge USA Sales, LLC}
@@ -60,16 +61,16 @@ open_payments(
 \item \verb{OrthoScan, Inc.}
 }}
 
-\item{manufacturer_gpo_id}{Paying entity's unique Open Payments ID}
+\item{payer_id}{Paying entity's unique Open Payments ID}
 
-\item{form_of_payment}{Form of payment, examples:
+\item{payment_form}{Form of payment, examples:
 \itemize{
 \item \verb{Stock option}
 \item \verb{Cash or cash equivalent}
 \item \verb{In-kind items and services}
 }}
 
-\item{nature_of_payment}{Nature of payment or transfer of value, examples:
+\item{payment_nature}{Nature of payment or transfer of value, examples:
 \itemize{
 \item \verb{Royalty or License}
 \item \verb{Charitable Contribution}
@@ -77,13 +78,9 @@ open_payments(
 \item \verb{Food and Beverage}
 }}
 
-\item{year}{Reporting year, 2015-2021, default is \code{2021}}
-
 \item{offset}{offset; API pagination}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
-
-\item{nest}{Nest related columns together; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -133,11 +130,11 @@ speak directly to the health care provider for a better understanding.
 Update Frequency: \strong{Yearly}
 }
 \examples{
-\dontrun{
-open_payments(recipient_npi = 1043218118, year = 2021)
-open_payments(nature_of_payment = "Royalty or License")
-open_payments(form_of_payment = "Stock option")
-open_payments(manufacturer_gpo_name = "Adaptive Biotechnologies Corporation")
-open_payments(teaching_hospital_name = "Nyu Langone Hospitals")
-}
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+open_payments(npi = 1043218118, year = 2021)
+open_payments(payment_nature = "Royalty or License")
+open_payments(payment_form = "Stock option")
+open_payments(payer_name = "Adaptive Biotechnologies Corporation")
+open_payments(teaching_hospital = "Nyu Langone Hospitals")
+\dontshow{\}) # examplesIf}
 }

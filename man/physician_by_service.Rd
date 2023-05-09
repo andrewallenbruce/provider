@@ -15,7 +15,7 @@ physician_by_service(
   first_name = NULL,
   credential = NULL,
   gender = NULL,
-  enum_type = NULL,
+  entype = NULL,
   city = NULL,
   state = NULL,
   zipcode = NULL,
@@ -31,7 +31,7 @@ physician_by_service(
 )
 }
 \arguments{
-\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
+\item{year}{int (required); Year in YYYY format. Run \code{provider:::cms_update("Medicare Physician & Other Practitioners - by Provider and Service", "years")} to return a character vector of the years currently available.}
 
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
@@ -49,7 +49,7 @@ An organization's (entity type code = \code{O}) will be blank.}
 
 \item{gender}{An individual provider's gender. An organization's will be blank.}
 
-\item{enum_type}{Type of entity reported in NPPES. An entity code of ‘I’
+\item{entype}{Type of entity reported in NPPES. An entity code of ‘I’
 identifies providers registered as individuals while an entity type
 code of ‘O’ identifies providers registered as organizations.}
 
@@ -107,7 +107,36 @@ in non-facility.}
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} containing 29 columns:
+\item{year}{year}
+\item{npi}{year}
+\item{entype}{year}
+\item{first_name}{year}
+\item{middle_name}{year}
+\item{last_name}{year}
+\item{credential}{year}
+\item{gender}{year}
+\item{specialty}{year}
+\item{street}{year}
+\item{city}{year}
+\item{state}{year}
+\item{fips}{year}
+\item{zipcode}{year}
+\item{ruca}{year}
+\item{ruca_desc}{year}
+\item{country}{year}
+\item{par}{year}
+\item{hcpcs_cd}{year}
+\item{hcpcs_desc}{year}
+\item{hcpcs_drug}{year}
+\item{pos}{year}
+\item{tot_benes}{year}
+\item{tot_srvcs}{year}
+\item{tot_day}{year}
+\item{avg_charge}{year}
+\item{avg_allowed}{year}
+\item{avg_payment}{year}
+\item{avg_std_pymt}{year}
 }
 \description{
 Information on services and procedures provided to
@@ -138,35 +167,25 @@ distinct HCPCS codes that were billed and where the services were
 provided. Data have been aggregated based on the place of service
 because separate fee schedules apply depending on whether the place
 of service submitted on the claim is facility or non-facility.
-\subsection{Links}{
-\itemize{
-\item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}{Medicare Physician & Other Practitioners: by Provider and Service API}
-}
-}
 }
 \note{
 Update Frequency: \strong{Annually}
 }
 \examples{
-\dontrun{
-# Search by NPI
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 physician_by_service(npi = 1003000126)
 
-# Search by Last Name for 2019
-physician_by_service(last_org = "Enkeshafi", year = 2019)
+physician_by_service(year = 2019, last_name = "Enkeshafi")
 
-# Multiple NPIs
-npis <- c(1003026055,
-          1316405939,
-          1720392988,
-          1518184605,
-          1922056829,
-          1083879860)
-
-npis |> purrr::map_dfr(physician_by_service)
-
-# Retrieve All Provider Data, 2013-2020
+c(1003026055, 1316405939, 1720392988,
+  1518184605, 1922056829, 1083879860) |>
+  purrr::map(physician_by_service, year = 2020)
 purrr::map_dfr(as.character(2013:2020),
 ~physician_by_service(npi = 1003000126, year = .x))
+\dontshow{\}) # examplesIf}
+}
+\references{
+\itemize{
+\item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service}{Medicare Physician & Other Practitioners: by Provider and Service API}
 }
 }

@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 nppes_npi(
   npi = NULL,
-  enum_type = NULL,
+  entype = NULL,
   first_name = NULL,
   last_name = NULL,
   org_name = NULL,
@@ -26,7 +26,7 @@ nppes_npi(
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI).}
 
-\item{enum_type}{The Read API can be refined to retrieve only Individual
+\item{entype}{The Read API can be refined to retrieve only Individual
 Providers (\code{NPI-1} or Type 1) or Organizational Providers (\code{NPI-2} or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 returned. When using the Enumeration Type, it cannot be the only
@@ -124,5 +124,7 @@ to use the NPI Registry.
 Update Frequency: \strong{Weekly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes_npi(npi = 1528060837)
+\dontshow{\}) # examplesIf}
 }

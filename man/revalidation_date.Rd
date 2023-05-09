@@ -8,8 +8,8 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 revalidation_date(
-  enroll_id = NULL,
   npi = NULL,
+  enroll_id = NULL,
   first_name = NULL,
   last_name = NULL,
   org_name = NULL,
@@ -17,13 +17,13 @@ revalidation_date(
   type_code = NULL,
   prov_type = NULL,
   specialty = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
-\item{enroll_id}{Enrollment ID}
-
 \item{npi}{National Provider Identifier (NPI)}
+
+\item{enroll_id}{Enrollment ID}
 
 \item{first_name}{First name of individual provider}
 
@@ -40,7 +40,7 @@ revalidation_date(
 
 \item{specialty}{Enrollment specialty}
 
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -72,6 +72,7 @@ their providers.
 Update Frequency: \strong{Monthly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 revalidation_date(enroll_id = "I20031110000070",
                   npi = 1184699621)
 
@@ -87,4 +88,5 @@ revalidation_date(enroll_id = "O20110620000324",
                   state = "FL",
                   prov_type = "DME",
                   type_code = "2")
+\dontshow{\}) # examplesIf}
 }

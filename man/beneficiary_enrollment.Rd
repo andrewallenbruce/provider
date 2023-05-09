@@ -74,7 +74,7 @@ available from the CMS Chronic Conditions Data Warehouse.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 beneficiary_enrollment(year = NULL,
                        month = "Year",
                        level = "County",
@@ -89,5 +89,5 @@ beneficiary_enrollment(year = 2022,
                        state_name = "Georgia")
 
 beneficiary_enrollment(level = "State", fips = "10")
-}
+\dontshow{\}) # examplesIf}
 }

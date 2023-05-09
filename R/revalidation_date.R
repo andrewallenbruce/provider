@@ -21,9 +21,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
-#' @param enroll_id Enrollment ID
 #' @param npi National Provider Identifier (NPI)
+#' @param enroll_id Enrollment ID
 #' @param first_name First name of individual provider
 #' @param last_name Last name of individual provider
 #' @param org_name Legal business name of organizational provider
@@ -32,11 +31,9 @@
 #'    `2` if _DME_; `3` if _Non-DME Part B_)
 #' @param prov_type Provider type description
 #' @param specialty Enrollment specialty
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
-#' @examples
+#' @examplesIf interactive()
 #' revalidation_date(enroll_id = "I20031110000070",
 #'                   npi = 1184699621)
 #'
@@ -54,8 +51,8 @@
 #'                   type_code = "2")
 #' @autoglobal
 #' @export
-revalidation_date <- function(enroll_id        = NULL,
-                              npi              = NULL,
+revalidation_date <- function(npi              = NULL,
+                              enroll_id        = NULL,
                               first_name       = NULL,
                               last_name        = NULL,
                               org_name         = NULL,
@@ -63,12 +60,12 @@ revalidation_date <- function(enroll_id        = NULL,
                               type_code        = NULL,
                               prov_type        = NULL,
                               specialty        = NULL,
-                              clean_names      = TRUE) {
+                              tidy             = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                                 ~x,                ~y,
-                   "Enrollment ID",         enroll_id,
     "National Provider Identifier",               npi,
+                   "Enrollment ID",         enroll_id,
                       "First Name",        first_name,
                        "Last Name",         last_name,
                "Organization Name",          org_name,
@@ -78,8 +75,10 @@ revalidation_date <- function(enroll_id        = NULL,
             "Enrollment Specialty",         specialty)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -88,19 +87,58 @@ revalidation_date <- function(enroll_id        = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
+
+  # no search results returns empty tibble ----------------------------------
+  if (httr2::resp_header(response, "content-length") == "0") {
+
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           as.character(npi),
+      "enroll_id",     as.character(enroll_id),
+      "first_name",    first_name,
+      "last_name",     last_name,
+      "org_name",      org_name,
+      "state",         state,
+      "type_code",     as.character(type_code),
+      "specialty",     specialty) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
+    return(invisible(NULL))
+  }
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
-         check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::rename(NPI = "National Provider Identifier") |>
-    dplyr::mutate(dplyr::across(dplyr::contains("Eligible"), yn_logical)) |>
-    dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+  results <- tibble::tibble(httr2::resp_body_json(response,
+         check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
-
+  if (tidy) {
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
+                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+      dplyr::select(npi = national_provider_identifier,
+                    enroll_id = enrollment_id,
+                    first_name,
+                    last_name,
+                    org_name = organization_name,
+                    enroll_state = enrollment_state_code,
+                    enroll_type = enrollment_type,
+                    enroll_desc = provider_type_text,
+                    enroll_specialty = enrollment_specialty,
+                    revalidation_due_date,
+                    adjusted_due_date,
+                    individual_total_reassign_to,
+                    receiving_benefits_reassignment)
+    }
   return(results)
 }

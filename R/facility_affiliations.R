@@ -35,14 +35,12 @@
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
+#' @examplesIf interactive()
 #' facility_affiliations(npi = 1003019563)
 #' facility_affiliations(facility_ccn = "060004")
 #' facility_affiliations(parent_ccn = 670055)
-#' \dontrun{
 #' facility_affiliations(first_name = "John")
 #' facility_affiliations(facility_type = "Home Health Agency")
-#' }
 #' @autoglobal
 #' @export
 
@@ -55,7 +53,7 @@ facility_affiliations <- function(npi           = NULL,
                                   facility_ccn  = NULL,
                                   parent_ccn    = NULL,
                                   offset        = 0,
-                                  tidy   = TRUE) {
+                                  tidy          = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,

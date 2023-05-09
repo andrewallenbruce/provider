@@ -37,20 +37,15 @@
 #'   as payment in full. `M` = Clinician may accept Medicare Assignment.
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
-#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
-#' @examples
+#' @examplesIf interactive()
 #' doctors_and_clinicians(npi = 1407263999)
-#' \dontrun{
 #' doctors_and_clinicians(enroll_id = "I20081002000549")
 #' doctors_and_clinicians(first_name = "John")
 #' doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' doctors_and_clinicians(grad_year = 2003)
-#' }
 #' @autoglobal
 #' @export
-
 doctors_and_clinicians <- function(npi           = NULL,
                                    pac_id        = NULL,
                                    enroll_id     = NULL,
@@ -112,15 +107,15 @@ doctors_and_clinicians <- function(npi           = NULL,
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
-      "npi",           npi,
-      "pac_id",        pac_id,
-      "enroll_id",     enroll_id,
+      "npi",           as.character(npi),
+      "pac_id",        as.character(pac_id),
+      "enroll_id",     as.character(enroll_id),
       "first_name",    first_name,
       "middle_name",   middle_name,
       "last_name",     last_name,
       "gender",        gender,
       "school",        school,
-      "grad_year",     grad_year,
+      "grad_year",     as.character(grad_year),
       "specialty",     specialty,
       "city",          city,
       "state",         state,
@@ -130,12 +125,13 @@ doctors_and_clinicians <- function(npi           = NULL,
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
+                            cli_args$y,
                             stringr::str_c,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
     return(invisible(NULL))
   }
 

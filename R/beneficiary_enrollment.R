@@ -39,8 +39,7 @@
 #' @param fips FIPS code of beneficiary residence
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' beneficiary_enrollment(year = NULL,
 #'                        month = "Year",
 #'                        level = "County",
@@ -55,7 +54,6 @@
 #'                        state_name = "Georgia")
 #'
 #' beneficiary_enrollment(level = "State", fips = "10")
-#' }
 #' @autoglobal
 #' @export
 

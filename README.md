@@ -87,7 +87,10 @@ across a variety of CMS sources.
 ### Beneficiary Enrollment
 
 ``` r
-beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "01")
+beneficiary_enrollment(year = 2021, 
+                       month = "Year", 
+                       level = "State", 
+                       fips = "01")
 ```
 
     #> # A tibble: 1 × 26
@@ -102,7 +105,10 @@ beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "01"
     #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ``` r
-beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = "Autauga")
+beneficiary_enrollment(month = "Year", 
+                       level = "County", 
+                       state = "AL", 
+                       county = "Autauga")
 ```
 
     #> # A tibble: 10 × 26
@@ -126,24 +132,28 @@ beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = 
     #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ``` r
-beneficiary_enrollment(year = 2017, level = "County", state = "GA") |> 
-  dplyr::filter(month %in% month.name)
+beneficiary_enrollment(year = 2017, 
+                       level = "County", 
+                       state = "GA", 
+                       county = "Lowndes") 
 ```
 
-    #> # A tibble: 1,908 × 26
-    #>     year month   level  state state_name county   fips  bene_total bene_orig
-    #>    <int> <chr>   <chr>  <chr> <chr>      <chr>    <chr>      <int>     <int>
-    #>  1  2017 January County GA    Georgia    Appling  13001       3671      2561
-    #>  2  2017 January County GA    Georgia    Atkinson 13003       1351       929
-    #>  3  2017 January County GA    Georgia    Bacon    13005       2121      1470
-    #>  4  2017 January County GA    Georgia    Baker    13007        655       447
-    #>  5  2017 January County GA    Georgia    Baldwin  13009       8372      4729
-    #>  6  2017 January County GA    Georgia    Banks    13011       3581      2360
-    #>  7  2017 January County GA    Georgia    Barrow   13013      11613      7251
-    #>  8  2017 January County GA    Georgia    Bartow   13015      17429     11632
-    #>  9  2017 January County GA    Georgia    Ben Hill 13017       3623      2452
-    #> 10  2017 January County GA    Georgia    Berrien  13019       3723      2617
-    #> # ℹ 1,898 more rows
+    #> # A tibble: 13 × 26
+    #>     year month     level  state state_name county  fips  bene_total bene_orig
+    #>    <int> <chr>     <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
+    #>  1  2017 Year      County GA    Georgia    Lowndes 13185      17172     13007
+    #>  2  2017 January   County GA    Georgia    Lowndes 13185      17035     12940
+    #>  3  2017 February  County GA    Georgia    Lowndes 13185      17064     12952
+    #>  4  2017 March     County GA    Georgia    Lowndes 13185      17083     12961
+    #>  5  2017 April     County GA    Georgia    Lowndes 13185      17096     12963
+    #>  6  2017 May       County GA    Georgia    Lowndes 13185      17112     12968
+    #>  7  2017 June      County GA    Georgia    Lowndes 13185      17141     12978
+    #>  8  2017 July      County GA    Georgia    Lowndes 13185      17161     12990
+    #>  9  2017 August    County GA    Georgia    Lowndes 13185      17218     13039
+    #> 10  2017 September County GA    Georgia    Lowndes 13185      17272     13085
+    #> 11  2017 October   County GA    Georgia    Lowndes 13185      17258     13057
+    #> 12  2017 November  County GA    Georgia    Lowndes 13185      17293     13069
+    #> 13  2017 December  County GA    Georgia    Lowndes 13185      17333     13077
     #> # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #> #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
     #> #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
@@ -151,11 +161,18 @@ beneficiary_enrollment(year = 2017, level = "County", state = "GA") |>
     #> #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
     #> #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
+``` r
+# dplyr::filter(month %in% month.name)
+```
+
 ### Chronic Conditions
 
 ``` r
 # Multiple Chronic Conditions
-cc_multiple(year = 2018, level = "National", age_group = "All", demographic = "All")
+cc_multiple(year = 2018, 
+            level = "National", 
+            age_group = "All", 
+            demographic = "All")
 ```
 
     #> # A tibble: 4 × 13
@@ -169,7 +186,11 @@ cc_multiple(year = 2018, level = "National", age_group = "All", demographic = "A
     #> #   hosp_readmsn_rate <dbl>, er_visits_per_1k <dbl>
 
 ``` r
-cc_multiple(year = 2018, level = "State", sublevel = "Alabama", age_group = "All", demographic = "All")
+cc_multiple(year = 2018, 
+            level = "State", 
+            sublevel = "Alabama", 
+            age_group = "All", 
+            demographic = "All")
 ```
 
     #> # A tibble: 4 × 13
@@ -183,7 +204,12 @@ cc_multiple(year = 2018, level = "State", sublevel = "Alabama", age_group = "All
     #> #   hosp_readmsn_rate <dbl>, er_visits_per_1k <dbl>
 
 ``` r
-cc_multiple(year = 2018, level = "County", sublevel = "Alabama : Autauga", fips = "01001", age_group = "All", demographic = "All")
+cc_multiple(year = 2018, 
+            level = "County", 
+            sublevel = "Alabama : Autauga", 
+            fips = "01001", 
+            age_group = "All", 
+            demographic = "All")
 ```
 
     #> # A tibble: 4 × 13
@@ -198,7 +224,10 @@ cc_multiple(year = 2018, level = "County", sublevel = "Alabama : Autauga", fips 
 
 ``` r
 # Specific Chronic Conditions
-cc_specific(year = 2018, level = "State", sublevel = "California", demographic = "All")
+cc_specific(year = 2018, 
+            level = "State", 
+            sublevel = "California", 
+            demographic = "All")
 ```
 
     #> # A tibble: 63 × 13
@@ -219,7 +248,9 @@ cc_specific(year = 2018, level = "State", sublevel = "California", demographic =
     #> #   hosp_readmsn_rate <dbl>, er_visits_per_1k <dbl>
 
 ``` r
-cc_specific(year = 2011, level = "County", fips = "01001")
+cc_specific(year = 2011, 
+            level = "County", 
+            fips = "01001")
 ```
 
     #> # A tibble: 63 × 13
@@ -289,28 +320,8 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
     #> #   ind_assign <chr>, group_assign <chr>
 
 ``` r
-doctors_and_clinicians(state = "GA", city = "VALDOSTA")
+#doctors_and_clinicians(state = "GA", city = "VALDOSTA")
 ```
-
-    #> # A tibble: 500 × 25
-    #>    npi        pac_id    enroll_id first_name middle_name last_name suffix gender
-    #>    <chr>      <chr>     <chr>     <chr>      <chr>       <chr>     <chr>  <chr> 
-    #>  1 1003038720 06483608… I2007121… BARBARA    F           FRIER     <NA>   F     
-    #>  2 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <NA>   M     
-    #>  3 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <NA>   M     
-    #>  4 1003198268 18505427… I2012112… COLE       <NA>        BURGESS   <NA>   M     
-    #>  5 1003287533 60021732… I2017112… KACIE      PARRISH     JOHNSON   <NA>   F     
-    #>  6 1003315227 73153412… I2021081… WILLIAM    <NA>        HARTLEY   <NA>   M     
-    #>  7 1003445297 17597708… I2021111… VICKI      <NA>        WETTER    <NA>   F     
-    #>  8 1003816935 06483969… I2010092… MARY       <NA>        FULP-PYE  <NA>   F     
-    #>  9 1013250612 21636573… I2013102… HEATH      <NA>        FARMER    <NA>   M     
-    #> 10 1013250612 21636573… I2013102… HEATH      <NA>        FARMER    <NA>   M     
-    #> # ℹ 490 more rows
-    #> # ℹ 17 more variables: credential <chr>, school <chr>, grad_year <int>,
-    #> #   grad_duration <Duration>, specialty <chr>, specialty_sec <chr>,
-    #> #   telehealth <lgl>, org_name <chr>, org_pac_id <chr>, org_members <int>,
-    #> #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #> #   ind_assign <chr>, group_assign <chr>
 
 ### Facility Affiliations
 
@@ -359,7 +370,9 @@ facility_affiliations(parent_ccn = 670055)
     #> # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ``` r
-facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
+facility_affiliations(first_name = "John", 
+                      last_name = "Hill", 
+                      facility_type = "Home Health Agency")
 ```
 
     #> # A tibble: 7 × 9
@@ -465,9 +478,9 @@ nppes_npi(npi = 1316405939)
 ```
 
     #> # A tibble: 1 × 20
-    #>   npi    enumeration_type enumeration_date enumeration_duration     last_updated
-    #>   <chr>  <chr>            <date>           <Duration>               <date>      
-    #> 1 13164… NPI-1            2019-03-04       131673600s (~4.17 years) 2023-04-06  
+    #>   npi        entype     enumeration_date enumeration_duration     last_updated
+    #>   <chr>      <chr>      <date>           <Duration>               <date>      
+    #> 1 1316405939 Individual 2019-03-04       131932800s (~4.18 years) 2023-04-06  
     #> # ℹ 15 more variables: certification_date <date>, status <chr>,
     #> #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
     #> #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
@@ -479,83 +492,53 @@ nppes_npi(npi = 1558364273)
 ```
 
     #> # A tibble: 1 × 19
-    #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
-    #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1558… NPI-1            2005-05-27       566179200s (~17.94 years) 2007-07-08  
-    #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
-    #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
-    #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
-    #> #   phone_number <chr>, fax_number <chr>
+    #>   npi      entype enumeration_date enumeration_duration      last_updated status
+    #>   <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
+    #> 1 1558364… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
+    #> # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
+    #> #   credential <chr>, gender <chr>, sole_proprietor <chr>, country <chr>,
+    #> #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
+    #> #   fax_number <chr>
+
+``` r
+nppes_npi(1710983663) 
+```
+
+    #> ✖ No results for npi: 1710983663
 
 ``` r
 nppes_npi(1720081441)
 ```
 
     #> # A tibble: 1 × 19
-    #>   npi   enumeration_type enumeration_date enumeration_duration      last_updated
-    #>   <chr> <chr>            <date>           <Duration>                <date>      
-    #> 1 1720… NPI-1            2005-05-27       566179200s (~17.94 years) 2007-07-08  
-    #> # ℹ 14 more variables: status <chr>, first_name <chr>, middle_name <chr>,
-    #> #   last_name <chr>, credential <chr>, gender <chr>, sole_proprietor <chr>,
-    #> #   country <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
-    #> #   phone_number <chr>, fax_number <chr>
+    #>   npi      entype enumeration_date enumeration_duration      last_updated status
+    #>   <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
+    #> 1 1720081… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
+    #> # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
+    #> #   credential <chr>, gender <chr>, sole_proprietor <chr>, country <chr>,
+    #> #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
+    #> #   fax_number <chr>
 
 ``` r
-nppes_npi(1710983663)
+# c(1710983663, 1710975040, 1659781227, 
+#   1336413418, 1003026055, 1316405939, 
+#   1720392988, 1518184605, 1922056829, 
+#   1083879860, 1346243805, 1679576722, 
+#   1093718892, 1477556405, 1770586539, 
+#   1871596692, 1174526925, 1720081441, 
+#   1558364273, 1801899513, 1316405939) |> 
+#   purrr::map(nppes_npi) |>
+#   purrr::list_rbind()
 ```
-
-    #> ✖ No results for npi: 1710983663
-
-``` r
-c(1710983663, 1710975040, 1659781227, 
-  1336413418, 1003026055, 1316405939, 
-  1720392988, 1518184605, 1922056829, 
-  1083879860, 1346243805, 1679576722, 
-  1093718892, 1477556405, 1770586539, 
-  1871596692, 1174526925, 1720081441, 
-  1558364273, 1801899513, 1316405939) |> 
-  purrr::map(nppes_npi) |>
-  purrr::list_rbind()
-```
-
-    #> ✖ No results for npi: 1710983663
-
-    #> ✖ No results for npi: 1659781227
-
-    #> # A tibble: 19 × 22
-    #>    npi        enumeration_type enumeration_date enumeration_duration     
-    #>    <chr>      <chr>            <date>           <Duration>               
-    #>  1 1710975040 NPI-1            2005-10-11       554342400s (~17.57 years)
-    #>  2 1336413418 NPI-2            2012-03-07       352252800s (~11.16 years)
-    #>  3 1003026055 NPI-1            2007-05-22       503539200s (~15.96 years)
-    #>  4 1316405939 NPI-1            2019-03-04       131673600s (~4.17 years) 
-    #>  5 1720392988 NPI-1            2010-07-29       402969600s (~12.77 years)
-    #>  6 1518184605 NPI-1            2007-04-19       506390400s (~16.05 years)
-    #>  7 1922056829 NPI-1            2006-05-04       536630400s (~17 years)   
-    #>  8 1083879860 NPI-1            2008-07-22       466646400s (~14.79 years)
-    #>  9 1346243805 NPI-1            2005-05-27       566179200s (~17.94 years)
-    #> 10 1679576722 NPI-1            2005-05-23       566524800s (~17.95 years)
-    #> 11 1093718892 NPI-1            2005-05-24       566438400s (~17.95 years)
-    #> 12 1477556405 NPI-1            2005-05-23       566524800s (~17.95 years)
-    #> 13 1770586539 NPI-1            2005-05-24       566438400s (~17.95 years)
-    #> 14 1871596692 NPI-1            2005-05-24       566438400s (~17.95 years)
-    #> 15 1174526925 NPI-1            2005-05-24       566438400s (~17.95 years)
-    #> 16 1720081441 NPI-1            2005-05-27       566179200s (~17.94 years)
-    #> 17 1558364273 NPI-1            2005-05-27       566179200s (~17.94 years)
-    #> 18 1801899513 NPI-1            2005-05-27       566179200s (~17.94 years)
-    #> 19 1316405939 NPI-1            2019-03-04       131673600s (~4.17 years) 
-    #> # ℹ 18 more variables: last_updated <date>, status <chr>, first_name <chr>,
-    #> #   middle_name <chr>, last_name <chr>, credential <chr>, gender <chr>,
-    #> #   sole_proprietor <chr>, country <chr>, street <chr>, city <chr>,
-    #> #   state <chr>, zipcode <chr>, phone_number <chr>, fax_number <chr>,
-    #> #   certification_date <date>, organization_name <chr>,
-    #> #   organizational_subpart <chr>
 
 ### Open Payments
 
 ``` r
-open_payments(recipient_npi = 1043218118)
+open_payments(npi = 1043218118, year = 2021) |> 
+  janitor::remove_empty()
 ```
+
+    #> value for "which" not specified, defaulting to c("rows", "cols")
 
     #> # A tibble: 92 × 52
     #>    program_year record_number change_type covered_recipient_type     
@@ -598,7 +581,10 @@ opt_out(first_name = "David", last_name = "Smith")
     #> #   zipcode <chr>
 
 ``` r
-opt_out(specialty = "Psychiatry", city = "BROOKLYN", state = "NY", order_and_refer = FALSE)
+opt_out(specialty = "Psychiatry", 
+        city = "BROOKLYN", 
+        state = "NY", 
+        order_and_refer = FALSE)
 ```
 
     #> # A tibble: 4 × 13
@@ -644,7 +630,9 @@ order_refer(npi = 1083879860)
     #> 1 1083879860 CHRISTOPHER AARON     TRUE  TRUE  TRUE  TRUE
 
 ``` r
-order_refer(last_name = "Smith", partb = FALSE, pmd = FALSE)
+order_refer(last_name = "Smith", 
+            partb = FALSE, 
+            pmd = FALSE)
 ```
 
     #> # A tibble: 148 × 7
@@ -723,53 +711,39 @@ pending_applications(npi = "1001001234",
 
 ``` r
 # by Geography and Service
-physician_by_geography(sublevel = "Maryland", year = 2020)
+physician_by_geography(sublevel = "Georgia", year = 2020) |> 
+  dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    #> # A tibble: 5,866 × 16
+    #> # A tibble: 10 × 16
     #>     year level sublevel fips  hcpcs hcpcs_desc        hcpcs_drug pos   tot_provs
     #>    <int> <chr> <chr>    <chr> <chr> <chr>             <lgl>      <chr>     <int>
-    #>  1  2020 State Maryland 24    0001A Adm sarscov2 30m… FALSE      O            31
-    #>  2  2020 State Maryland 24    0002A Adm sarscov2 30m… FALSE      O             3
-    #>  3  2020 State Maryland 24    00100 Anesthesia for p… FALSE      F           114
-    #>  4  2020 State Maryland 24    00103 Anesthesia for p… FALSE      F           256
-    #>  5  2020 State Maryland 24    00103 Anesthesia for p… FALSE      O             6
-    #>  6  2020 State Maryland 24    00104 Anesthesia for e… FALSE      F           105
-    #>  7  2020 State Maryland 24    0011A Adm sarscov2 100… FALSE      O             4
-    #>  8  2020 State Maryland 24    00120 Anesthesia for b… FALSE      F           135
-    #>  9  2020 State Maryland 24    00126 Anesthesia for i… FALSE      F            91
-    #> 10  2020 State Maryland 24    00140 Anesthesia for p… FALSE      F           401
-    #> # ℹ 5,856 more rows
+    #>  1  2020 State Georgia  13    Q2043 Sipuleucel-t, mi… TRUE       O            26
+    #>  2  2020 State Georgia  13    37227 Removal of plaqu… FALSE      O            55
+    #>  3  2020 State Georgia  13    G2170 Percutaneous art… FALSE      F             6
+    #>  4  2020 State Georgia  13    37229 Removal of plaqu… FALSE      O            61
+    #>  5  2020 State Georgia  13    37231 Removal of plaqu… FALSE      O            11
+    #>  6  2020 State Georgia  13    37226 Insertion of ste… FALSE      O            42
+    #>  7  2020 State Georgia  13    37225 Removal of plaqu… FALSE      O            67
+    #>  8  2020 State Georgia  13    37230 Insertion of ste… FALSE      O             9
+    #>  9  2020 State Georgia  13    63685 Insertion of spi… FALSE      F           274
+    #> 10  2020 State Georgia  13    C9740 Cystourethroscop… FALSE      F            26
     #> # ℹ 7 more variables: tot_benes <int>, tot_srvcs <int>, tot_day <int>,
     #> #   avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>, avg_std_pymt <dbl>
 
 ``` r
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1003000126) |> 
-  dplyr::mutate(credential = clean_credentials(credential))
+physician_by_service(year = 2020, npi = 1285706879)
 ```
 
-    #> Error in `dplyr::mutate()`:
-    #> ℹ In argument: `credential = clean_credentials(credential)`.
-    #> Caused by error in `clean_credentials()`:
-    #> ! could not find function "clean_credentials"
+    #> ✖ No results for year: 2020 and npi: 1285706879
 
 ``` r
 # by Provider
-physician_by_provider(npi = 1003000126, year = 2020)
+physician_by_provider(npi = 1285706879, year = 2020)
 ```
 
-    #> # A tibble: 1 × 72
-    #>    year npi        first_name middle_name last_name credential gender enum_type
-    #>   <int> <chr>      <chr>      <chr>       <chr>     <chr>      <chr>  <chr>    
-    #> 1  2020 1003000126 Ardalan    <NA>        Enkeshafi MD         M      I        
-    #> # ℹ 64 more variables: street <chr>, city <chr>, state <chr>, fips <chr>,
-    #> #   zipcode <chr>, ruca <chr>, country <chr>, specialty <chr>, par <chr>,
-    #> #   tot_hcpcs <int>, tot_benes <int>, tot_srvcs <int>, tot_charges <dbl>,
-    #> #   tot_allowed <dbl>, tot_payment <dbl>, tot_std_pymt <dbl>, drug_supp <chr>,
-    #> #   drug_hcpcs <int>, drug_benes <int>, drug_srvcs <int>, drug_charges <dbl>,
-    #> #   drug_allowed <dbl>, drug_payment <dbl>, drug_std_pymt <dbl>,
-    #> #   med_supp <chr>, med_hcpcs <int>, med_benes <int>, med_srvcs <int>, …
+    #> ✖ No results for year: 2020 and npi: 1285706879
 
 ### Provider Enrollment
 
@@ -812,73 +786,65 @@ revalidation_date(npi = 1710912209)
 ```
 
     #> # A tibble: 1 × 13
-    #>   enrollment_id   npi        first_name last_name organization_name
-    #>   <chr>           <chr>      <chr>      <chr>     <chr>            
-    #> 1 I20040602001711 1710912209 Yelena     Voronova  <NA>             
-    #> # ℹ 8 more variables: enrollment_state_code <chr>, enrollment_type <chr>,
-    #> #   provider_type_text <chr>, enrollment_specialty <chr>,
+    #>   npi        enroll_id    first_name last_name org_name enroll_state enroll_type
+    #>   <chr>      <chr>        <chr>      <chr>     <chr>    <chr>        <chr>      
+    #> 1 1710912209 I2004060200… Yelena     Voronova  <NA>     NY           3          
+    #> # ℹ 6 more variables: enroll_desc <chr>, enroll_specialty <chr>,
     #> #   revalidation_due_date <dttm>, adjusted_due_date <dttm>,
     #> #   individual_total_reassign_to <chr>, receiving_benefits_reassignment <int>
 
 ``` r
 # Revalidation Reassignment List
-revalidation_reassign(ind_npi = 1710912209)
+revalidation_reassign(npi = 1710912209)
 ```
 
     #> # A tibble: 5 × 16
-    #>   group_pac_id group_enrollment_id group_legal_business_name    group_state_code
-    #>          <dbl> <chr>               <chr>                        <chr>           
-    #> 1   3678655222 O20080205000002     #1 Wise Podiatry Care P.C.   NY              
-    #> 2   9931511052 O20201215000955     Brighton Beach Podiatry Pllc NY              
-    #> 3   2062791411 O20161108001365     Fair Podiatry Practice Pllc  NY              
-    #> 4   8527313170 O20180622000028     New York Jewish American Po… NY              
-    #> 5   5193155174 O20200414003240     Podiatry Of Brooklyn Pllc    NY              
-    #> # ℹ 12 more variables: group_due_date <chr>,
-    #> #   group_reassignments_and_physician_assistants <int>, record_type <chr>,
-    #> #   individual_pac_id <dbl>, individual_enrollment_id <chr>,
-    #> #   individual_npi <int>, individual_first_name <chr>,
-    #> #   individual_last_name <chr>, individual_state_code <chr>,
-    #> #   individual_specialty_description <chr>, individual_due_date <chr>,
-    #> #   individual_total_employer_associations <int>
+    #>   npi        pac_id  enroll_id first_name last_name state specialty due_date_ind
+    #>   <chr>      <chr>   <chr>     <chr>      <chr>     <chr> <chr>     <chr>       
+    #> 1 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 2 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 3 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 4 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 5 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
+    #> #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
+    #> #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
+    #> #   record_type <chr>
 
 ``` r
 # Revalidation Clinic Group Practice Reassignment
-revalidation_group(ind_npi = 1710912209)
+revalidation_group(npi = 1710912209)
 ```
 
     #> # A tibble: 5 × 15
-    #>   group_pac_id group_enrollment_id group_legal_business_name    group_state_code
-    #>          <dbl> <chr>               <chr>                        <chr>           
-    #> 1   3678655222 O20080205000002     #1 Wise Podiatry Care P.C.   NY              
-    #> 2   9931511052 O20201215000955     Brighton Beach Podiatry Pllc NY              
-    #> 3   2062791411 O20161108001365     Fair Podiatry Practice Pllc  NY              
-    #> 4   8527313170 O20180622000028     New York Jewish American Po… NY              
-    #> 5   5193155174 O20200414003240     Podiatry Of Brooklyn Pllc    NY              
-    #> # ℹ 11 more variables: group_due_date <chr>,
-    #> #   group_reassignments_and_physician_assistants <int>, record_type <chr>,
-    #> #   individual_enrollment_id <chr>, individual_npi <int>,
-    #> #   individual_first_name <chr>, individual_last_name <chr>,
-    #> #   individual_state_code <chr>, individual_specialty_description <chr>,
-    #> #   individual_due_date <chr>, individual_total_employer_associations <int>
+    #>   npi        enroll_id       first_name last_name state specialty due_date_ind
+    #>   <chr>      <chr>           <chr>      <chr>     <chr> <chr>     <chr>       
+    #> 1 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 2 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 3 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 4 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> 5 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
+    #> # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
+    #> #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
+    #> #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
+    #> #   record_type <chr>
 
 ``` r
-revalidation_group(group_pac_id = 9436483807,
-                   group_enroll_id = "O20190619002165",
-                   group_bus_name = "1st Call Urgent Care",
-                   group_state = "FL",
+revalidation_group(pac_id_group = 9436483807,
+                   enroll_id_group = "O20190619002165",
+                   business_name = "1st Call Urgent Care",
+                   state_group = "FL",
                    record_type = "Reassignment")
 ```
 
     #> # A tibble: 1 × 15
-    #>   group_pac_id group_enrollment_id group_legal_business_name group_state_code
-    #>          <dbl> <chr>               <chr>                     <chr>           
-    #> 1   9436483807 O20190619002165     1st Call Urgent Care      FL              
-    #> # ℹ 11 more variables: group_due_date <chr>,
-    #> #   group_reassignments_and_physician_assistants <int>, record_type <chr>,
-    #> #   individual_enrollment_id <chr>, individual_npi <int>,
-    #> #   individual_first_name <chr>, individual_last_name <chr>,
-    #> #   individual_state_code <chr>, individual_specialty_description <chr>,
-    #> #   individual_due_date <chr>, individual_total_employer_associations <int>
+    #>   npi        enroll_id       first_name last_name state specialty   due_date_ind
+    #>   <chr>      <chr>           <chr>      <chr>     <chr> <chr>       <chr>       
+    #> 1 1326063900 I20190619002257 John       Kayoma    FL    Family Pra… TBD         
+    #> # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
+    #> #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
+    #> #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
+    #> #   record_type <chr>
 
 ### Taxonomy Crosswalk
 
@@ -940,27 +906,10 @@ taxonomy_crosswalk(taxonomy_code = "207Q00000X")
     #> 1 207Q00000X    Allopathic & Osteopathic Physicia… 8              Physician/Fam…
 
 ``` r
-taxonomy_crosswalk() |> 
-  dplyr::full_join(nucc_taxonomy_230, 
-  dplyr::join_by(taxonomy_code == code))
+# taxonomy_crosswalk() |> 
+#   dplyr::full_join(nucc_taxonomy_230, 
+#   dplyr::join_by(taxonomy_code == code))
 ```
-
-    #> # A tibble: 979 × 11
-    #>    taxonomy_code taxonomy_desc            specialty_code specialty_desc grouping
-    #>    <chr>         <chr>                    <chr>          <chr>          <chr>   
-    #>  1 208D00000X    Allopathic & Osteopathi… 1              Physician/Gen… Allopat…
-    #>  2 208600000X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  3 2086H0002X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  4 2086S0120X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  5 2086S0122X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  6 2086S0105X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  7 2086S0102X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  8 2086X0206X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #>  9 2086S0127X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #> 10 2086S0129X    Allopathic & Osteopathi… 2              Physician/Gen… Allopat…
-    #> # ℹ 969 more rows
-    #> # ℹ 6 more variables: classification <chr>, specialization <chr>,
-    #> #   definition <chr>, notes <chr>, display_name <chr>, section <chr>
 
 ------------------------------------------------------------------------
 

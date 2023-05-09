@@ -21,9 +21,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Weekly**
-#'
 #' @param npi 10-digit National Provider Identifier (NPI).
-#' @param enum_type The Read API can be refined to retrieve only Individual
+#' @param entype The Read API can be refined to retrieve only Individual
 #'    Providers (`NPI-1` or Type 1) or Organizational Providers (`NPI-2` or
 #'    Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
 #'    returned. When using the Enumeration Type, it cannot be the only
@@ -79,13 +78,13 @@
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
 #' @param tidy Tidy output; default is `TRUE`.
-#' @examples
+#' @examplesIf interactive()
 #' nppes_npi(npi = 1528060837)
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @autoglobal
 #' @export
 nppes_npi <- function(npi            = NULL,
-                      enum_type      = NULL,
+                      entype      = NULL,
                       first_name     = NULL,
                       last_name      = NULL,
                       org_name       = NULL,
@@ -101,7 +100,7 @@ nppes_npi <- function(npi            = NULL,
   # request and response ----------------------------------------------------
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,
-                         enumeration_type     = enum_type,
+                         enumeration_type     = entype,
                          first_name           = first_name,
                          last_name            = last_name,
                          organization_name    = org_name,
@@ -126,7 +125,7 @@ nppes_npi <- function(npi            = NULL,
     cli_args <- tibble::tribble(
       ~x,              ~y,
       "npi",           as.character(npi),
-      "enum_type",     enum_type,
+      "enum_type",     entype,
       "first_name",    first_name,
       "last_name",     last_name,
       "org_name",      org_name,
@@ -154,7 +153,7 @@ nppes_npi <- function(npi            = NULL,
 
     results <- results |>
       dplyr::select(npi = number,
-                    enumeration_type,
+                    entype = enumeration_type,
                     basic,
                     addresses,
                     taxonomy = taxonomies) |>
@@ -164,7 +163,9 @@ nppes_npi <- function(npi            = NULL,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
-                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date))
+                    dplyr::across(dplyr::where(is.character), ~clean_credentials(.)),
+                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date),
+                    entype = entype_char(entype))
 
       # replace empty lists with NA -------------------------------------------
       results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
@@ -207,7 +208,7 @@ nppes_npi <- function(npi            = NULL,
       # janitor::remove_empty(which = c("rows", "cols"))
 
       valid_fields <- c("npi",
-                        "enumeration_type",
+                        "entype",
                         "enumeration_date",
                         "enumeration_duration",
                         "last_updated",

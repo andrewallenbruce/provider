@@ -8,55 +8,54 @@ Centers for Medicare & Medicaid Services
 }
 \usage{
 revalidation_reassign(
-  group_pac_id = NULL,
-  group_enroll_id = NULL,
-  group_bus_name = NULL,
-  group_state = NULL,
+  npi = NULL,
+  enroll_id = NULL,
+  first_name = NULL,
+  last_name = NULL,
+  state = NULL,
+  specialty = NULL,
+  pac_id_group = NULL,
+  enroll_id_group = NULL,
+  business_name = NULL,
+  state_group = NULL,
   record_type = NULL,
-  ind_enroll_id = NULL,
-  ind_npi = NULL,
-  ind_first = NULL,
-  ind_last = NULL,
-  ind_state = NULL,
-  ind_specialty = NULL,
-  clean_names = TRUE
+  tidy = TRUE
 )
 }
 \arguments{
-\item{group_pac_id}{PAC ID of provider who is receiving reassignment or is
+\item{npi}{NPI of provider who is reassigning their benefits or is an
+employee}
+
+\item{enroll_id}{Enrollment ID of provider reassigning their benefits or is an employee}
+
+\item{first_name}{First name of provider who is reassigning their benefits
+or is an employee}
+
+\item{last_name}{Last name of provider who is reassigning their benefits or
+is an employee}
+
+\item{state}{Enrollment state of provider who is reassigning their
+benefits or is an employee}
+
+\item{specialty}{Enrollment specialty of the provider who is
+reassigning their benefits or is an employee}
+
+\item{pac_id_group}{PAC ID of provider who is receiving reassignment or is
 the employer}
 
-\item{group_enroll_id}{Enrollment ID of provider who is receiving
+\item{enroll_id_group}{Enrollment ID of provider who is receiving
 reassignment or is the employer}
 
-\item{group_bus_name}{Legal business name of provider who is receiving
+\item{business_name}{Legal business name of provider who is receiving
 reassignment or is the employer}
 
-\item{group_state}{Enrollment state of provider who is receiving
+\item{state_group}{Enrollment state of provider who is receiving
 reassignment or is the employer}
 
 \item{record_type}{Identifies whether the record is for a reassignment
 (\code{Reassignment}) or employment (\verb{Physician Assistant})}
 
-\item{ind_enroll_id}{Enrollment ID of provider who is reassigning their
-benefits or is an employee}
-
-\item{ind_npi}{NPI of provider who is reassigning their benefits or is an
-employee}
-
-\item{ind_first}{First name of provider who is reassigning their benefits
-or is an employee}
-
-\item{ind_last}{Last name of provider who is reassigning their benefits or
-is an employee}
-
-\item{ind_state}{Enrollment state of provider who is reassigning their
-benefits or is an employee}
-
-\item{ind_specialty}{Enrollment specialty of the provider who is
-reassigning their benefits or is an employee}
-
-\item{clean_names}{Convert column names to snakecase; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -77,16 +76,18 @@ reassignments of providers who are due for revalidation.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-revalidation_reassign(ind_enroll_id = "I20200929003184",
-                   ind_npi = 1962026229,
-                   ind_first = "Rashadda",
-                   ind_last = "Wong",
-                   ind_state = "CT",
-                   ind_specialty = "Physician Assistant")
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+revalidation_reassign(enroll_id = "I20200929003184",
+                   npi = 1962026229,
+                   first_name = "Rashadda",
+                   last_name = "Wong",
+                   state = "CT",
+                   specialty = "Physician Assistant")
 
-revalidation_reassign(group_pac_id = 9436483807,
-                   group_enroll_id = "O20190619002165",
-                   group_bus_name = "1st Call Urgent Care",
-                   group_state = "FL",
+revalidation_reassign(pac_id_group = 9436483807,
+                   enroll_id_group = "O20190619002165",
+                   business_name = "1st Call Urgent Care",
+                   state_group = "FL",
                    record_type = "Reassignment")
+\dontshow{\}) # examplesIf}
 }

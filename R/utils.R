@@ -211,6 +211,19 @@ yn_logical <- function(x){
     TRUE ~ NA)
 }
 
+#' Convert I/O char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
+entype_char <- function(x){
+  dplyr::case_when(
+    x == "NPI-1" ~ "Individual",
+    x == "I" ~ "Individual",
+    x == "NPI-2" ~ "Organization",
+    x == "O" ~ "Organization"
+    )
+}
+
 
 #' display_long ------------------------------------------------------------
 #' @param df data frame

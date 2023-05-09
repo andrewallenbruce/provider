@@ -10,78 +10,76 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
-#' @param group_pac_id PAC ID of provider who is receiving reassignment or is
+#' @param npi NPI of provider who is reassigning their benefits or is an
+#'    employee
+#' @param enroll_id Enrollment ID of provider reassigning their benefits or is an employee
+#' @param first_name First name of provider who is reassigning their benefits
+#'    or is an employee
+#' @param last_name Last name of provider who is reassigning their benefits or
+#'    is an employee
+#' @param state Enrollment state of provider who is reassigning their
+#'    benefits or is an employee
+#' @param specialty Enrollment specialty of the provider who is
+#'    reassigning their benefits or is an employee
+#' @param pac_id_group PAC ID of provider who is receiving reassignment or is
 #'    the employer
-#' @param group_enroll_id Enrollment ID of provider who is receiving
+#' @param enroll_id_group Enrollment ID of provider who is receiving
 #'    reassignment or is the employer
-#' @param group_bus_name Legal business name of provider who is receiving
+#' @param business_name Legal business name of provider who is receiving
 #'    reassignment or is the employer
-#' @param group_state Enrollment state of provider who is receiving
+#' @param state_group Enrollment state of provider who is receiving
 #'    reassignment or is the employer
 #' @param record_type Identifies whether the record is for a reassignment
 #'    (`Reassignment`) or employment (`Physician Assistant`)
-#' @param ind_enroll_id Enrollment ID of provider who is reassigning their
-#'    benefits or is an employee
-#' @param ind_npi NPI of provider who is reassigning their benefits or is an
-#'    employee
-#' @param ind_first First name of provider who is reassigning their benefits
-#'    or is an employee
-#' @param ind_last Last name of provider who is reassigning their benefits or
-#'    is an employee
-#' @param ind_state Enrollment state of provider who is reassigning their
-#'    benefits or is an employee
-#' @param ind_specialty Enrollment specialty of the provider who is
-#'    reassigning their benefits or is an employee
-#' @param clean_names Convert column names to snakecase; default is `TRUE`.
-#'
+#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf interactive()
+#' revalidation_reassign(enroll_id = "I20200929003184",
+#'                    npi = 1962026229,
+#'                    first_name = "Rashadda",
+#'                    last_name = "Wong",
+#'                    state = "CT",
+#'                    specialty = "Physician Assistant")
 #'
-#' @examples
-#' revalidation_reassign(ind_enroll_id = "I20200929003184",
-#'                    ind_npi = 1962026229,
-#'                    ind_first = "Rashadda",
-#'                    ind_last = "Wong",
-#'                    ind_state = "CT",
-#'                    ind_specialty = "Physician Assistant")
-#'
-#' revalidation_reassign(group_pac_id = 9436483807,
-#'                    group_enroll_id = "O20190619002165",
-#'                    group_bus_name = "1st Call Urgent Care",
-#'                    group_state = "FL",
+#' revalidation_reassign(pac_id_group = 9436483807,
+#'                    enroll_id_group = "O20190619002165",
+#'                    business_name = "1st Call Urgent Care",
+#'                    state_group = "FL",
 #'                    record_type = "Reassignment")
 #' @autoglobal
 #' @export
-revalidation_reassign <- function(group_pac_id    = NULL,
-                                  group_enroll_id = NULL,
-                                  group_bus_name  = NULL,
-                                  group_state     = NULL,
+revalidation_reassign <- function(npi             = NULL,
+                                  enroll_id       = NULL,
+                                  first_name      = NULL,
+                                  last_name       = NULL,
+                                  state           = NULL,
+                                  specialty       = NULL,
+                                  pac_id_group    = NULL,
+                                  enroll_id_group = NULL,
+                                  business_name   = NULL,
+                                  state_group     = NULL,
                                   record_type     = NULL,
-                                  ind_enroll_id   = NULL,
-                                  ind_npi         = NULL,
-                                  ind_first       = NULL,
-                                  ind_last        = NULL,
-                                  ind_state       = NULL,
-                                  ind_specialty   = NULL,
-                                  clean_names     = TRUE) {
+                                  tidy            = TRUE) {
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                                 ~y,
-    "Group PAC ID",                     group_pac_id,
-    "Group Enrollment ID",              group_enroll_id,
-    "Group Legal Business Name",        group_bus_name,
-    "Group State Code",                 group_state,
-    "Record Type",                      record_type,
-    "Individual Enrollment ID",         ind_enroll_id,
-    "Individual NPI",                   ind_npi,
-    "Individual First Name",            ind_first,
-    "Individual Last Name",             ind_last,
-    "Individual State Code",            ind_state,
-    "Individual Specialty Description", ind_specialty)
+    "Individual NPI",                   npi,
+    "Individual Enrollment ID",         enroll_id,
+    "Individual First Name",            first_name,
+    "Individual Last Name",             last_name,
+    "Individual State Code",            state,
+    "Individual Specialty Description", specialty,
+    "Group PAC ID",                     pac_id_group,
+    "Group Enrollment ID",              enroll_id_group,
+    "Group Legal Business Name",        business_name,
+    "Group State Code",                 state_group,
+    "Record Type",                      record_type)
 
   # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |> unlist() |>
-    stringr::str_c(collapse = "") |> param_space()
+  params_args <- purrr::map2(args$x, args$y, param_format) |>
+    unlist() |>
+    stringr::str_c(collapse = "") |>
+    param_space()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
@@ -90,16 +88,68 @@ revalidation_reassign <- function(group_pac_id    = NULL,
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------
-  resp <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(url) |> httr2::req_perform()
+
+  # no search results returns empty tibble ----------------------------------
+  if (httr2::resp_header(response, "content-length") == "0") {
+
+    cli_args <- tibble::tribble(
+      ~x,                 ~y,
+      "npi",              as.character(npi),
+      "enroll_id",        as.character(enroll_id),
+      "first_name",       first_name,
+      "last_name",        last_name,
+      "state",            state,
+      "specialty",        specialty,
+      "pac_id_group",     as.character(pac_id_group),
+      "enroll_id_group",  as.character(enroll_id_group),
+      "business_name",    business_name,
+      "state_group",      state_group,
+      "record_type",      record_type) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}",
+                          wrap = TRUE)
+    return(invisible(NULL))
+  }
 
   # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(resp,
-             check_type = FALSE, simplifyVector = TRUE)) |>
-    dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                  dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")))
+  results <- tibble::tibble(httr2::resp_body_json(response,
+             check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------
-  if (isTRUE(clean_names)) {results <- dplyr::rename_with(results, str_to_snakecase)}
+  if (tidy) {
 
+    results <- dplyr::rename_with(results, str_to_snakecase) |>
+      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+                    group_pac_id = as.character(group_pac_id),
+                    individual_pac_id = as.character(individual_pac_id),
+                    individual_npi = as.character(individual_npi)) |>
+      dplyr::select(
+        npi = individual_npi,
+        pac_id = individual_pac_id,
+        enroll_id = individual_enrollment_id,
+        first_name = individual_first_name,
+        last_name = individual_last_name,
+        state = individual_state_code,
+        specialty = individual_specialty_description,
+        due_date_ind = individual_due_date,
+        ind_tot_employer_associations = individual_total_employer_associations,
+        pac_id_group = group_pac_id,
+        enroll_id_group = group_enrollment_id,
+        business_name = group_legal_business_name,
+        state_group = group_state_code,
+        due_date_group = group_due_date,
+        group_reassignments_and_physician_assistants,
+        record_type)
+
+    }
   return(results)
 }

@@ -55,8 +55,7 @@
 #'    in non-facility.
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' physician_by_geography(hcpcs_code = "0002A", year = 2020)
 #' service <- purrr::map_dfr(as.character(2013:2020),
 #'            ~physician_by_service(npi = 1003000126, year = .x))
@@ -76,7 +75,6 @@
 #' # State Level
 #' purrr::map2_dfr(arg_cross$x, arg_cross$y,
 #' ~physician_by_geography(geo_level = "Georgia", year = .x, hcpcs_code = .y))
-#' }
 #' @autoglobal
 #' @export
 physician_by_geography <- function(year,
@@ -92,10 +90,13 @@ physician_by_geography <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
+  rlang::arg_match(year,
+                   values = cms_update("Medicare Physician & Other Practitioners - by Geography and Service",
+                                       "years"))
 
   # update distribution ids -------------------------------------------------
-  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service", check = "id") |>
+  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
+                   check = "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 

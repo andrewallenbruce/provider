@@ -74,11 +74,11 @@ Agencies, Hospices, and/or Dialysis Facilities, in addition to hospitals.
 Update Frequency: \strong{Monthly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 facility_affiliations(npi = 1003019563)
 facility_affiliations(facility_ccn = "060004")
 facility_affiliations(parent_ccn = 670055)
-\dontrun{
 facility_affiliations(first_name = "John")
 facility_affiliations(facility_type = "Home Health Agency")
-}
+\dontshow{\}) # examplesIf}
 }

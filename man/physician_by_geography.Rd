@@ -92,7 +92,7 @@ a drug as defined from the Medicare Part B Drug ASP list.
 Update Frequency: \strong{Annually}
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 physician_by_geography(hcpcs_code = "0002A", year = 2020)
 service <- purrr::map_dfr(as.character(2013:2020),
            ~physician_by_service(npi = 1003000126, year = .x))
@@ -112,5 +112,5 @@ purrr::map2_dfr(arg_cross$x, arg_cross$y,
 # State Level
 purrr::map2_dfr(arg_cross$x, arg_cross$y,
 ~physician_by_geography(geo_level = "Georgia", year = .x, hcpcs_code = .y))
-}
+\dontshow{\}) # examplesIf}
 }

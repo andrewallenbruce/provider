@@ -191,27 +191,16 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi_old>
   "basic_first_name", # <nppes_npi_old>
   "basic_last_name", # <nppes_npi_old>
+  "identifier", # <open_payments>
+  "y", # <open_payments>
   "program_year", # <open_payments>
-  "contextual_information", # <open_payments>
-  "number_of_payments_included_in_total_amount", # <open_payments>
-  "related_product_indicator", # <open_payments>
-  "physician_ownership_indicator", # <open_payments>
-  "third_party_payment_recipient_indicator", # <open_payments>
-  "name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc", # <open_payments>
-  "charity_indicator", # <open_payments>
-  "third_party_equals_covered_recipient_indicator", # <open_payments>
-  "city_of_travel", # <open_payments>
-  "state_of_travel", # <open_payments>
-  "country_of_travel", # <open_payments>
-  "payment_publication_date", # <open_payments>
-  "delay_in_publication_indicator", # <open_payments>
-  "dispute_status_for_publication", # <open_payments>
-  "title", # <open_payments_update_ids>
-  "modified", # <open_payments_update_ids>
-  "distribution", # <open_payments_update_ids>
-  "data", # <open_payments_update_ids>
-  "year", # <open_payments_update_ids>
-  "identifier", # <open_payments_update_ids>
+  "title", # <open_payments_ids>
+  "modified", # <open_payments_ids>
+  "distribution", # <open_payments_ids>
+  "data", # <open_payments_ids>
+  "year", # <open_payments_ids>
+  "set", # <open_payments_ids>
+  "identifier", # <open_payments_ids>
   "y", # <opt_out>
   "optout_end_date", # <opt_out>
   "optout_effective_date", # <opt_out>
@@ -350,6 +339,49 @@ utils::globalVariables(c(
   "state_cd", # <provider_enrollment>
   "mdl_name", # <provider_enrollment>
   "gndr_sw", # <provider_enrollment>
+  "y", # <revalidation_date>
+  "national_provider_identifier", # <revalidation_date>
+  "enrollment_id", # <revalidation_date>
+  "organization_name", # <revalidation_date>
+  "enrollment_state_code", # <revalidation_date>
+  "enrollment_type", # <revalidation_date>
+  "provider_type_text", # <revalidation_date>
+  "enrollment_specialty", # <revalidation_date>
+  "revalidation_due_date", # <revalidation_date>
+  "adjusted_due_date", # <revalidation_date>
+  "individual_total_reassign_to", # <revalidation_date>
+  "receiving_benefits_reassignment", # <revalidation_date>
+  "y", # <revalidation_group>
+  "group_pac_id", # <revalidation_group>
+  "individual_npi", # <revalidation_group>
+  "individual_enrollment_id", # <revalidation_group>
+  "individual_first_name", # <revalidation_group>
+  "individual_last_name", # <revalidation_group>
+  "individual_state_code", # <revalidation_group>
+  "individual_specialty_description", # <revalidation_group>
+  "individual_due_date", # <revalidation_group>
+  "individual_total_employer_associations", # <revalidation_group>
+  "group_enrollment_id", # <revalidation_group>
+  "group_legal_business_name", # <revalidation_group>
+  "group_state_code", # <revalidation_group>
+  "group_due_date", # <revalidation_group>
+  "group_reassignments_and_physician_assistants", # <revalidation_group>
+  "y", # <revalidation_reassign>
+  "group_pac_id", # <revalidation_reassign>
+  "individual_pac_id", # <revalidation_reassign>
+  "individual_npi", # <revalidation_reassign>
+  "individual_enrollment_id", # <revalidation_reassign>
+  "individual_first_name", # <revalidation_reassign>
+  "individual_last_name", # <revalidation_reassign>
+  "individual_state_code", # <revalidation_reassign>
+  "individual_specialty_description", # <revalidation_reassign>
+  "individual_due_date", # <revalidation_reassign>
+  "individual_total_employer_associations", # <revalidation_reassign>
+  "group_enrollment_id", # <revalidation_reassign>
+  "group_legal_business_name", # <revalidation_reassign>
+  "group_state_code", # <revalidation_reassign>
+  "group_due_date", # <revalidation_reassign>
+  "group_reassignments_and_physician_assistants", # <revalidation_reassign>
   "provider_taxonomy_code", # <taxonomy_crosswalk>
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>

@@ -75,10 +75,27 @@ provider:::function_tbl() |>
 ### Beneficiary Enrollment
 
 ```{r}
-beneficiary_enrollment(year = 2021, month = "Year", level = "State", fips = "01")
-beneficiary_enrollment(month = "Year", level = "County", state = "AL", county = "Autauga")
-beneficiary_enrollment(year = 2017, level = "County", state = "GA") |> 
-  dplyr::filter(month %in% month.name)
+beneficiary_enrollment(year = 2021, 
+                       month = "Year", 
+                       level = "State", 
+                       fips = "01")
+```
+
+
+```{r}
+beneficiary_enrollment(month = "Year", 
+                       level = "County", 
+                       state = "AL", 
+                       county = "Autauga")
+```
+
+
+```{r}
+beneficiary_enrollment(year = 2017, 
+                       level = "County", 
+                       state = "GA", 
+                       county = "Lowndes") 
+# dplyr::filter(month %in% month.name)
 ```
 
 
@@ -86,16 +103,36 @@ beneficiary_enrollment(year = 2017, level = "County", state = "GA") |>
 
 ```{r}
 # Multiple Chronic Conditions
-cc_multiple(year = 2018, level = "National", age_group = "All", demographic = "All")
-cc_multiple(year = 2018, level = "State", sublevel = "Alabama", age_group = "All", demographic = "All")
-cc_multiple(year = 2018, level = "County", sublevel = "Alabama : Autauga", fips = "01001", age_group = "All", demographic = "All")
+cc_multiple(year = 2018, 
+            level = "National", 
+            age_group = "All", 
+            demographic = "All")
+
+cc_multiple(year = 2018, 
+            level = "State", 
+            sublevel = "Alabama", 
+            age_group = "All", 
+            demographic = "All")
+
+cc_multiple(year = 2018, 
+            level = "County", 
+            sublevel = "Alabama : Autauga", 
+            fips = "01001", 
+            age_group = "All", 
+            demographic = "All")
 ```
 
 
 ```{r}
 # Specific Chronic Conditions
-cc_specific(year = 2018, level = "State", sublevel = "California", demographic = "All")
-cc_specific(year = 2011, level = "County", fips = "01001")
+cc_specific(year = 2018, 
+            level = "State", 
+            sublevel = "California", 
+            demographic = "All")
+
+cc_specific(year = 2011, 
+            level = "County", 
+            fips = "01001")
 ```
 
 ### Doctors and Clinicians
@@ -106,7 +143,7 @@ doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2000, 
                        state = "FL")
-doctors_and_clinicians(state = "GA", city = "VALDOSTA")
+#doctors_and_clinicians(state = "GA", city = "VALDOSTA")
 ```
 
 ### Facility Affiliations
@@ -115,7 +152,9 @@ doctors_and_clinicians(state = "GA", city = "VALDOSTA")
 facility_affiliations(npi = 1003019561)
 facility_affiliations(facility_ccn = "060004")
 facility_affiliations(parent_ccn = 670055)
-facility_affiliations(first_name = "John", last_name = "Hill", facility_type = "Home Health Agency")
+facility_affiliations(first_name = "John", 
+                      last_name = "Hill", 
+                      facility_type = "Home Health Agency")
 ```
 
 
@@ -141,32 +180,35 @@ missing_information(npi = 11111122222)
 ```{r}
 nppes_npi(npi = 1316405939)
 nppes_npi(npi = 1558364273)
+nppes_npi(1710983663) 
 nppes_npi(1720081441)
-nppes_npi(1710983663)
-
-c(1710983663, 1710975040, 1659781227, 
-  1336413418, 1003026055, 1316405939, 
-  1720392988, 1518184605, 1922056829, 
-  1083879860, 1346243805, 1679576722, 
-  1093718892, 1477556405, 1770586539, 
-  1871596692, 1174526925, 1720081441, 
-  1558364273, 1801899513, 1316405939) |> 
-  purrr::map(nppes_npi) |>
-  purrr::list_rbind()
+# c(1710983663, 1710975040, 1659781227, 
+#   1336413418, 1003026055, 1316405939, 
+#   1720392988, 1518184605, 1922056829, 
+#   1083879860, 1346243805, 1679576722, 
+#   1093718892, 1477556405, 1770586539, 
+#   1871596692, 1174526925, 1720081441, 
+#   1558364273, 1801899513, 1316405939) |> 
+#   purrr::map(nppes_npi) |>
+#   purrr::list_rbind()
 ```
 
 
 ### Open Payments
 
 ```{r}
-open_payments(recipient_npi = 1043218118)
+open_payments(npi = 1043218118, year = 2021) |> 
+  janitor::remove_empty()
 ```
 
 ### Opt-Out Affidavits
 
 ```{r}
 opt_out(first_name = "David", last_name = "Smith")
-opt_out(specialty = "Psychiatry", city = "BROOKLYN", state = "NY", order_and_refer = FALSE)
+opt_out(specialty = "Psychiatry", 
+        city = "BROOKLYN", 
+        state = "NY", 
+        order_and_refer = FALSE)
 opt_out(specialty = "Tsychiatry")
 opt_out(city = "VALDOSTA", state = "GA")
 ```
@@ -175,7 +217,9 @@ opt_out(city = "VALDOSTA", state = "GA")
 
 ```{r}
 order_refer(npi = 1083879860)
-order_refer(last_name = "Smith", partb = FALSE, pmd = FALSE)
+order_refer(last_name = "Smith", 
+            partb = FALSE, 
+            pmd = FALSE)
 ```
 
 ### Pending Applications
@@ -194,25 +238,29 @@ pending_applications(npi = "1001001234",
 
 ```{r}
 # by Geography and Service
-physician_by_geography(sublevel = "Maryland", year = 2020)
+physician_by_geography(sublevel = "Georgia", year = 2020) |> 
+  dplyr::slice_max(avg_payment, n = 10)
 ```
 
 
 ```{r}
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1003000126) |> 
-  dplyr::mutate(credential = clean_credentials(credential))
+physician_by_service(year = 2020, npi = 1285706879)
 ```
 
 ```{r}
 # by Provider
-physician_by_provider(npi = 1003000126, year = 2020)
+physician_by_provider(npi = 1285706879, year = 2020)
 ```
 
 ### Provider Enrollment
 
 ```{r}
 provider_enrollment(npi = 1083879860)
+```
+
+
+```{r}
 provider_enrollment(specialty_code = "00-17", state = "GA") # GA RHCs
 ```
 
@@ -221,16 +269,26 @@ provider_enrollment(specialty_code = "00-17", state = "GA") # GA RHCs
 ```{r}
 # Revalidation Due Date List
 revalidation_date(npi = 1710912209)
+```
 
+
+```{r}
 # Revalidation Reassignment List
-revalidation_reassign(ind_npi = 1710912209)
+revalidation_reassign(npi = 1710912209)
+```
 
+
+```{r}
 # Revalidation Clinic Group Practice Reassignment
-revalidation_group(ind_npi = 1710912209)
-revalidation_group(group_pac_id = 9436483807,
-                   group_enroll_id = "O20190619002165",
-                   group_bus_name = "1st Call Urgent Care",
-                   group_state = "FL",
+revalidation_group(npi = 1710912209)
+```
+
+
+```{r}
+revalidation_group(pac_id_group = 9436483807,
+                   enroll_id_group = "O20190619002165",
+                   business_name = "1st Call Urgent Care",
+                   state_group = "FL",
                    record_type = "Reassignment")
 ```
 
@@ -241,9 +299,9 @@ taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 taxonomy_crosswalk(specialty_code = "B4[14]")
 taxonomy_crosswalk(specialty_code = "8")
 taxonomy_crosswalk(taxonomy_code = "207Q00000X")
-taxonomy_crosswalk() |> 
-  dplyr::full_join(nucc_taxonomy_230, 
-  dplyr::join_by(taxonomy_code == code))
+# taxonomy_crosswalk() |> 
+#   dplyr::full_join(nucc_taxonomy_230, 
+#   dplyr::join_by(taxonomy_code == code))
 ```
 
 

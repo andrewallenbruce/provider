@@ -1,4 +1,4 @@
-#' Search the Medicare Physician & Other Practitioners API
+#' @title Search the Medicare Physician & Other Practitioners API
 #'    by **Provider and Service**
 #'
 #' @description Information on services and procedures provided to
@@ -28,11 +28,11 @@
 #'    because separate fee schedules apply depending on whether the place
 #'    of service submitted on the claim is facility or non-facility.
 #'
-#' ## Links
+#' @references
 #' * [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
-#'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
+#' @param year int (required); Year in YYYY format. Run `provider:::cms_update("Medicare Physician & Other Practitioners - by Provider and Service", "years")` to return a character vector of the years currently available.
 #' @param npi National Provider Identifier (NPI) for the rendering provider
 #'    on the claim. The provider NPI is the numeric identifier registered in
 #'    NPPES.
@@ -44,7 +44,7 @@
 #'    An organization's (entity type code = `O`) will be blank.
 #' @param credential An individual provider's (entity type code=’I’) credentials. An organization's will be blank.
 #' @param gender An individual provider's gender. An organization's will be blank.
-#' @param enum_type Type of entity reported in NPPES. An entity code of ‘I’
+#' @param entype Type of entity reported in NPPES. An entity code of ‘I’
 #'    identifies providers registered as individuals while an entity type
 #'    code of ‘O’ identifies providers registered as organizations.
 #' @param city The city where the provider is located, as reported in NPPES.
@@ -87,31 +87,48 @@
 #'    is a facility (value of `F`) or non-facility (value of `O`). Non-facility
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
-#' @param year Year in YYYY format, between 2013-2020; default is 2020
 #' @param tidy Tidy output; default is `TRUE`.
-#' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
-#' # Search by NPI
+#' @returns A [tibble][tibble::tibble-package] containing 29 columns:
+#'    \item{year}{year}
+#'    \item{npi}{year}
+#'    \item{entype}{year}
+#'    \item{first_name}{year}
+#'    \item{middle_name}{year}
+#'    \item{last_name}{year}
+#'    \item{credential}{year}
+#'    \item{gender}{year}
+#'    \item{specialty}{year}
+#'    \item{street}{year}
+#'    \item{city}{year}
+#'    \item{state}{year}
+#'    \item{fips}{year}
+#'    \item{zipcode}{year}
+#'    \item{ruca}{year}
+#'    \item{ruca_desc}{year}
+#'    \item{country}{year}
+#'    \item{par}{year}
+#'    \item{hcpcs_cd}{year}
+#'    \item{hcpcs_desc}{year}
+#'    \item{hcpcs_drug}{year}
+#'    \item{pos}{year}
+#'    \item{tot_benes}{year}
+#'    \item{tot_srvcs}{year}
+#'    \item{tot_day}{year}
+#'    \item{avg_charge}{year}
+#'    \item{avg_allowed}{year}
+#'    \item{avg_payment}{year}
+#'    \item{avg_std_pymt}{year}
+#' @examplesIf interactive()
 #' physician_by_service(npi = 1003000126)
 #'
-#' # Search by Last Name for 2019
-#' physician_by_service(last_org = "Enkeshafi", year = 2019)
+#' physician_by_service(year = 2019, last_name = "Enkeshafi")
 #'
-#' # Multiple NPIs
-#' npis <- c(1003026055,
-#'           1316405939,
-#'           1720392988,
-#'           1518184605,
-#'           1922056829,
-#'           1083879860)
-#'
-#' npis |> purrr::map_dfr(physician_by_service)
-#'
-#' # Retrieve All Provider Data, 2013-2020
+#' c(1003026055, 1316405939, 1720392988,
+#'   1518184605, 1922056829, 1083879860) |>
+#'   purrr::map(physician_by_service, year = 2020)
+
 #' purrr::map_dfr(as.character(2013:2020),
 #' ~physician_by_service(npi = 1003000126, year = .x))
-#' }
 #' @autoglobal
 #' @export
 physician_by_service <- function(year,
@@ -120,7 +137,7 @@ physician_by_service <- function(year,
                                  first_name = NULL,
                                  credential = NULL,
                                  gender     = NULL,
-                                 enum_type  = NULL,
+                                 entype     = NULL,
                                  city       = NULL,
                                  state      = NULL,
                                  zipcode    = NULL,
@@ -146,24 +163,24 @@ physician_by_service <- function(year,
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
-                               ~x,         ~y,
-                     "Rndrng_NPI",        npi,
+                               ~x,   ~y,
+                     "Rndrng_NPI",   npi,
      "Rndrng_Prvdr_Last_Org_Name",   last_name,
-        "Rndrng_Prvdr_First_Name",      first_name,
-           "Rndrng_Prvdr_Crdntls",       credential,
-              "Rndrng_Prvdr_Gndr",     gender,
-            "Rndrng_Prvdr_Ent_Cd",       enum_type,
-              "Rndrng_Prvdr_City",       city,
-      "Rndrng_Prvdr_State_Abrvtn",      state,
-        "Rndrng_Prvdr_State_FIPS",       fips,
-              "Rndrng_Prvdr_Zip5",        zipcode,
-              "Rndrng_Prvdr_RUCA",       ruca,
-             "Rndrng_Prvdr_Cntry",    country,
-              "Rndrng_Prvdr_Type",  specialty,
-  "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",    par,
-                       "HCPCS_Cd", hcpcs_code,
-                 "HCPCS_Drug_Ind", hcpcs_drug,
-                  "Place_Of_Srvc",        pos)
+        "Rndrng_Prvdr_First_Name",   first_name,
+           "Rndrng_Prvdr_Crdntls",   credential,
+              "Rndrng_Prvdr_Gndr",   gender,
+            "Rndrng_Prvdr_Ent_Cd",   entype,
+              "Rndrng_Prvdr_City",   city,
+      "Rndrng_Prvdr_State_Abrvtn",   state,
+        "Rndrng_Prvdr_State_FIPS",   fips,
+              "Rndrng_Prvdr_Zip5",   zipcode,
+              "Rndrng_Prvdr_RUCA",   ruca,
+             "Rndrng_Prvdr_Cntry",   country,
+              "Rndrng_Prvdr_Type",   specialty,
+  "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",   par,
+                       "HCPCS_Cd",   hcpcs_code,
+                 "HCPCS_Drug_Ind",   hcpcs_drug,
+                  "Place_Of_Srvc",   pos)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |>
@@ -185,12 +202,12 @@ physician_by_service <- function(year,
     cli_args <- tibble::tribble(
       ~x,             ~y,
       "year",         as.character(year),
-      "npi",          npi,
+      "npi",          as.character(npi),
       "last_name",    last_name,
       "first_name",   first_name,
       "credential",   credential,
       "gender",       gender,
-      "enum_type",    enum_type,
+      "entype",       entype,
       "city",         city,
       "state",        state,
       "fips",         as.character(fips),
@@ -235,7 +252,7 @@ physician_by_service <- function(year,
                    sep = " ") |>
       dplyr::select(year,
                     npi         = rndrng_npi,
-                    enum_type   = rndrng_prvdr_ent_cd,
+                    entype      = rndrng_prvdr_ent_cd,
                     first_name  = rndrng_prvdr_first_name,
                     middle_name = rndrng_prvdr_mi,
                     last_name   = rndrng_prvdr_last_org_name,
