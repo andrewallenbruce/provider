@@ -630,29 +630,27 @@
 </h3>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; value for "which" not specified, defaulting to c("rows", "cols")</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 92 × 52</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    program_year record_number change_type covered_recipient_type     </span></span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;        &lt;chr&gt;         &lt;chr&gt;       &lt;chr&gt;                      </span></span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 2021         1             UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 2021         692021        UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 2021         4385936       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 2021         4385946       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 2021         4385951       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 2021         4385956       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 2021         4579206       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 2021         4579226       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 2021         4624246       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2021         4766366       UNCHANGED   Covered Recipient Physician</span></span>
-<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 82 more rows</span></span>
-<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 48 more variables: covered_recipient_profile_id &lt;chr&gt;,</span></span>
-<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   covered_recipient_npi &lt;chr&gt;, covered_recipient_first_name &lt;chr&gt;,</span></span>
-<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   covered_recipient_last_name &lt;chr&gt;,</span></span>
-<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   recipient_primary_business_street_address_line1 &lt;chr&gt;,</span></span>
-<span id="cb58-21"><a href="#cb58-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   recipient_city &lt;chr&gt;, recipient_state &lt;chr&gt;, recipient_zip_code &lt;chr&gt;,</span></span>
-<span id="cb58-22"><a href="#cb58-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   recipient_country &lt;chr&gt;, covered_recipient_primary_type_1 &lt;chr&gt;, …</span></span></code></pre></div>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 92 × 50</span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    year  change_type covered_type  profile_id npi   first_name last_name address</span></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;  </span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 2021  UNCHANGED   Covered Reci… 92058      1043… Ahad       Mahootchi 6739 G…</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…</span></span>
+<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 82 more rows</span></span>
+<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 42 more variables: city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span>
+<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   primary_type &lt;chr&gt;, specialty &lt;chr&gt;, license_state &lt;chr&gt;,</span></span>
+<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   payer_submitting &lt;chr&gt;, payer_id &lt;chr&gt;, payer_name &lt;chr&gt;,</span></span>
+<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   payer_state &lt;chr&gt;, payer_country &lt;chr&gt;, payment_total &lt;chr&gt;,</span></span>
+<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   payment_date &lt;date&gt;, payment_count &lt;chr&gt;, payment_form &lt;chr&gt;,</span></span>
+<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   payment_nature &lt;chr&gt;, physician_ownership &lt;chr&gt;, …</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="opt-out-affidavits">Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#opt-out-affidavits"></a>
@@ -673,7 +671,7 @@
 <span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   zipcode &lt;chr&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, </span>
-<span>        city <span class="op">=</span> <span class="st">"BROOKLYN"</span>, </span>
+<span>        city <span class="op">=</span> <span class="st">"Brooklyn"</span>, </span>
 <span>        state <span class="op">=</span> <span class="st">"NY"</span>, </span>
 <span>        order_and_refer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb62"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 4 × 13</span></span>
@@ -690,7 +688,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Tsychiatry"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb64"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✖ No results for specialty: Tsychiatry</span></span></code></pre></div>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"VALDOSTA"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb66"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 3 × 13</span></span>
 <span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   npi        first_name last_name specialty    optout_start_date optout_end_date</span></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;        &lt;date&gt;            &lt;date&gt;         </span></span>
@@ -714,7 +712,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, </span>
 <span>            partb <span class="op">=</span> <span class="cn">FALSE</span>, </span>
 <span>            pmd <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 148 × 7</span></span>
+<div class="sourceCode" id="cb70"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 150 × 7</span></span>
 <span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    npi        first_name last_name partb hha   dme   pmd  </span></span>
 <span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt;     &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;</span></span>
 <span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE</span></span>
@@ -727,7 +725,7 @@
 <span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE</span></span>
 <span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE</span></span>
 <span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE</span></span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 138 more rows</span></span></code></pre></div>
+<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 140 more rows</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="pending-applications">Pending Applications<a class="anchor" aria-label="anchor" href="#pending-applications"></a>
@@ -885,14 +883,9 @@
 <span>                   business_name <span class="op">=</span> <span class="st">"1st Call Urgent Care"</span>,</span>
 <span>                   state_group <span class="op">=</span> <span class="st">"FL"</span>,</span>
 <span>                   record_type <span class="op">=</span> <span class="st">"Reassignment"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 1 × 15</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   npi        enroll_id       first_name last_name state specialty   due_date_ind</span></span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;       </span></span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 1326063900 I20190619002257 John       Kayoma    FL    Family Pra… </span><span class="al">TBD</span><span class="co">         </span></span>
-<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ℹ 8 more variables: ind_tot_employer_associations &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span>
-<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span>
-<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   due_date_group &lt;chr&gt;, group_reassignments_and_physician_assistants &lt;int&gt;,</span></span>
-<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; #   record_type &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; ✖ No results for pac_id_group: 9436483807, enroll_id_group: O20190619002165,</span></span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; business_name: 1st Call Urgent Care, state_group: FL, and record_type:</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Reassignment</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="taxonomy-crosswalk">Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#taxonomy-crosswalk"></a>
