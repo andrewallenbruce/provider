@@ -167,7 +167,7 @@ physician_by_geography <- function(year,
                     hcpcs        = hcpcs_cd,
                     hcpcs_desc,
                     hcpcs_drug   = hcpcs_drug_ind,
-                    pos          = place_of_srvc,
+                    place_of_srvc,
                     tot_provs    = tot_rndrng_prvdrs,
                     tot_benes,
                     tot_srvcs,
@@ -178,6 +178,7 @@ physician_by_geography <- function(year,
                     avg_std_pymt = avg_mdcr_stdzd_amt) |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     hcpcs_drug = yn_logical(hcpcs_drug),
+                    place_of_srvc = pos_char(place_of_srvc),
                     dplyr::across(dplyr::contains("tot"), as.integer),
                     dplyr::across(dplyr::contains("avg"), ~round(., digits = 2)))
 

@@ -124,8 +124,9 @@ revalidation_date <- function(npi              = NULL,
     results <- dplyr::rename_with(results, str_to_snakecase) |>
       dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
       dplyr::select(npi = national_provider_identifier,
                     enroll_id = enrollment_id,
                     first_name,
@@ -137,8 +138,8 @@ revalidation_date <- function(npi              = NULL,
                     enroll_specialty = enrollment_specialty,
                     revalidation_due_date,
                     adjusted_due_date,
-                    individual_total_reassign_to,
-                    receiving_benefits_reassignment)
+                    indiv_total_reassigned = individual_total_reassign_to,
+                    rec_bene_reassign = receiving_benefits_reassignment)
     }
   return(results)
 }

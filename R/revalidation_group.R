@@ -131,8 +131,10 @@ revalidation_group <- function(npi             = NULL,
   if (tidy) {
 
     results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(tidyselect::where(is.character), ~dplyr::na_if(., "N/A")),
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
                     group_pac_id = as.character(group_pac_id),
                     #individual_pac_id = as.character(individual_pac_id),
                     individual_npi = as.character(individual_npi)) |>
@@ -145,13 +147,13 @@ revalidation_group <- function(npi             = NULL,
         state = individual_state_code,
         specialty = individual_specialty_description,
         due_date_ind = individual_due_date,
-        ind_tot_employer_associations = individual_total_employer_associations,
+        ind_tot_emp_assn = individual_total_employer_associations,
         pac_id_group = group_pac_id,
         enroll_id_group = group_enrollment_id,
         business_name = group_legal_business_name,
         state_group = group_state_code,
         due_date_group = group_due_date,
-        group_reassignments_and_physician_assistants,
+        group_reassign_and_phys_assist = group_reassignments_and_physician_assistants,
         record_type)
 
   }

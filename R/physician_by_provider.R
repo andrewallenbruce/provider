@@ -176,8 +176,9 @@ physician_by_provider <- function(year,
   if (tidy) {
     results <- dplyr::rename_with(results, str_to_snakecase) |>
       dplyr::mutate(year = as.integer(year),
-                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
+                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
                     dplyr::across(dplyr::ends_with(c("_hcpcs_cds", "_benes", "_srvcs", "_cnt")), ~as.integer(.)),
                     dplyr::across(dplyr::ends_with(c("amt", "chrg", "pct")), ~as.double(.))) |>
       tidyr::unite("street",
@@ -192,7 +193,7 @@ physician_by_provider <- function(year,
                     last_name = rndrng_prvdr_last_org_name,
                     credential = rndrng_prvdr_crdntls,
                     gender = rndrng_prvdr_gndr,
-                    enum_type = rndrng_prvdr_ent_cd,
+                    entype = rndrng_prvdr_ent_cd,
                     street,
                     city = rndrng_prvdr_city,
                     state = rndrng_prvdr_state_abrvtn,
@@ -210,7 +211,7 @@ physician_by_provider <- function(year,
                     tot_allowed = tot_mdcr_alowd_amt,
                     tot_payment = tot_mdcr_pymt_amt,
                     tot_std_pymt = tot_mdcr_stdzd_amt,
-                    drug_supp = drug_sprsn_ind,
+                    #drug_supp = drug_sprsn_ind,
                     drug_hcpcs = drug_tot_hcpcs_cds,
                     drug_benes = drug_tot_benes,
                     drug_srvcs = drug_tot_srvcs,
@@ -218,7 +219,7 @@ physician_by_provider <- function(year,
                     drug_allowed = drug_mdcr_alowd_amt,
                     drug_payment = drug_mdcr_pymt_amt,
                     drug_std_pymt = drug_mdcr_stdzd_amt,
-                    med_supp = med_sprsn_ind,
+                    #med_supp = med_sprsn_ind,
                     med_hcpcs = med_tot_hcpcs_cds,
                     med_benes = med_tot_benes,
                     med_srvcs = med_tot_srvcs,
@@ -257,7 +258,9 @@ physician_by_provider <- function(year,
                     bene_cc_raoa = bene_cc_raoa_pct,
                     bene_cc_sz = bene_cc_sz_pct,
                     bene_cc_strk = bene_cc_strok_pct,
-                    bene_risk_avg = bene_avg_risk_scre)
+                    bene_risk_avg = bene_avg_risk_scre) |>
+      dplyr::mutate(credential = clean_credentials(credential),
+                    entype = entype_char(entype))
     }
   return(results)
 }

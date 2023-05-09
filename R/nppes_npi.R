@@ -165,7 +165,8 @@ nppes_npi <- function(npi            = NULL,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
                     dplyr::across(dplyr::where(is.character), ~clean_credentials(.)),
                     enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date),
-                    entype = entype_char(entype))
+                    entype = entype_char(entype),
+                    sole_proprietor = yn_logical(sole_proprietor))
 
       # replace empty lists with NA -------------------------------------------
       results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA

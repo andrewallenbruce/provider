@@ -174,6 +174,7 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi>
   "taxonomies", # <nppes_npi>
   "enumeration_date", # <nppes_npi>
+  "sole_proprietor", # <nppes_npi>
   "address_purpose", # <nppes_npi>
   "country_name", # <nppes_npi>
   "telephone_number", # <nppes_npi>
@@ -271,6 +272,7 @@ utils::globalVariables(c(
   "name_of_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
   "associated_drug_or_biological_ndc_5", # <open_payments>
   "associated_device_or_medical_supply_pdi_5", # <open_payments>
+  "changed", # <open_payments>
   "title", # <open_payments_ids>
   "modified", # <open_payments_ids>
   "distribution", # <open_payments_ids>
@@ -308,6 +310,7 @@ utils::globalVariables(c(
   "distro", # <physician_by_provider>
   "y", # <physician_by_provider>
   "rndrng_prvdr_crdntls", # <physician_by_provider>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_provider>
   "rndrng_npi", # <physician_by_provider>
   "rndrng_prvdr_first_name", # <physician_by_provider>
   "rndrng_prvdr_mi", # <physician_by_provider>
@@ -322,7 +325,6 @@ utils::globalVariables(c(
   "rndrng_prvdr_ruca", # <physician_by_provider>
   "rndrng_prvdr_cntry", # <physician_by_provider>
   "rndrng_prvdr_type", # <physician_by_provider>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_provider>
   "tot_hcpcs_cds", # <physician_by_provider>
   "tot_benes", # <physician_by_provider>
   "tot_srvcs", # <physician_by_provider>
@@ -330,7 +332,6 @@ utils::globalVariables(c(
   "tot_mdcr_alowd_amt", # <physician_by_provider>
   "tot_mdcr_pymt_amt", # <physician_by_provider>
   "tot_mdcr_stdzd_amt", # <physician_by_provider>
-  "drug_sprsn_ind", # <physician_by_provider>
   "drug_tot_hcpcs_cds", # <physician_by_provider>
   "drug_tot_benes", # <physician_by_provider>
   "drug_tot_srvcs", # <physician_by_provider>
@@ -338,7 +339,6 @@ utils::globalVariables(c(
   "drug_mdcr_alowd_amt", # <physician_by_provider>
   "drug_mdcr_pymt_amt", # <physician_by_provider>
   "drug_mdcr_stdzd_amt", # <physician_by_provider>
-  "med_sprsn_ind", # <physician_by_provider>
   "med_tot_hcpcs_cds", # <physician_by_provider>
   "med_tot_benes", # <physician_by_provider>
   "med_tot_srvcs", # <physician_by_provider>
@@ -378,6 +378,7 @@ utils::globalVariables(c(
   "bene_cc_sz_pct", # <physician_by_provider>
   "bene_cc_strok_pct", # <physician_by_provider>
   "bene_avg_risk_scre", # <physician_by_provider>
+  "entype", # <physician_by_provider>
   "distro", # <physician_by_service>
   "y", # <physician_by_service>
   "tot_benes", # <physician_by_service>
@@ -397,7 +398,6 @@ utils::globalVariables(c(
   "rndrng_prvdr_state_fips", # <physician_by_service>
   "rndrng_prvdr_zip5", # <physician_by_service>
   "rndrng_prvdr_ruca", # <physician_by_service>
-  "rndrng_prvdr_ruca_desc", # <physician_by_service>
   "rndrng_prvdr_cntry", # <physician_by_service>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <physician_by_service>
   "hcpcs_cd", # <physician_by_service>

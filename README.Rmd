@@ -149,7 +149,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
 ### Facility Affiliations
 
 ```{r}
-facility_affiliations(npi = 1003019561)
+facility_affiliations(npi = 1003019563)
 facility_affiliations(facility_ccn = "060004")
 facility_affiliations(parent_ccn = 670055)
 facility_affiliations(first_name = "John", 
@@ -257,12 +257,12 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
 
 ```{r}
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1285706879)
+physician_by_service(year = 2020, npi = 1083879860)
 ```
 
 ```{r}
 # by Provider
-physician_by_provider(npi = 1285706879, year = 2020)
+physician_by_provider(npi = 1083879860, year = 2020)
 ```
 
 ### Provider Enrollment
@@ -297,11 +297,7 @@ revalidation_group(npi = 1710912209)
 
 
 ```{r}
-revalidation_group(pac_id_group = 9436483807,
-                   enroll_id_group = "O20190619002165",
-                   business_name = "1st Call Urgent Care",
-                   state_group = "FL",
-                   record_type = "Reassignment")
+revalidation_group(enroll_id_group = "O20080205000002")
 ```
 
 ### Taxonomy Crosswalk

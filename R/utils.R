@@ -208,6 +208,8 @@ yn_logical <- function(x){
   dplyr::case_when(
     x == as.character("Y") ~ as.logical(TRUE),
     x == as.character("N") ~ as.logical(FALSE),
+    x == as.character("YES") ~ as.logical(TRUE),
+    x == as.character("NO") ~ as.logical(FALSE),
     TRUE ~ NA)
 }
 
@@ -222,6 +224,29 @@ entype_char <- function(x){
     x == "NPI-2" ~ "Organization",
     x == "O" ~ "Organization"
     )
+}
+
+#' Convert I/O char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
+pos_char <- function(x){
+  dplyr::case_when(
+    x == "F" ~ "Facility",
+    x == "O" ~ "Office"
+  )
+}
+
+#' Convert I/O char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
+changed_logical <- function(x){
+  dplyr::case_when(
+    x == "CHANGED" ~ as.logical(TRUE),
+    x == "UNCHANGED" ~ as.logical(FALSE),
+    TRUE ~ NA
+  )
 }
 
 

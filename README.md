@@ -326,10 +326,17 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
 ### Facility Affiliations
 
 ``` r
-facility_affiliations(npi = 1003019561)
+facility_affiliations(npi = 1003019563)
 ```
 
-    ✖ No results for npi: 1003019561
+    # A tibble: 4 × 9
+      npi        pac_id     first_name middle_name last_name suffix facility_type
+      <chr>      <chr>      <chr>      <chr>       <chr>     <chr>  <chr>        
+    1 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
+    2 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
+    3 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
+    4 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
+    # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ``` r
 facility_affiliations(facility_ccn = "060004")
@@ -483,7 +490,7 @@ nppes_npi(npi = 1316405939)
     1 1316405939 Individual 2019-03-04       131932800s (~4.18 years) 2023-04-06  
     # ℹ 15 more variables: certification_date <date>, status <chr>,
     #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
-    #   gender <chr>, sole_proprietor <chr>, country <chr>, street <chr>,
+    #   gender <chr>, sole_proprietor <lgl>, country <chr>, street <chr>,
     #   city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
     #   fax_number <chr>
 
@@ -496,7 +503,7 @@ nppes_npi(npi = 1558364273)
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
     1 1558364… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
     # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <chr>, country <chr>,
+    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, country <chr>,
     #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
     #   fax_number <chr>
 
@@ -515,7 +522,7 @@ nppes_npi(1720081441)
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
     1 1720081… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
     # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <chr>, country <chr>,
+    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, country <chr>,
     #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
     #   fax_number <chr>
 
@@ -539,18 +546,18 @@ open_payments(npi = 1043218118, year = 2021) |>
 ```
 
     # A tibble: 92 × 50
-       year  change_type covered_type  profile_id npi   first_name last_name address
-       <chr> <chr>       <chr>         <chr>      <chr> <chr>      <chr>     <chr>  
-     1 2021  UNCHANGED   Covered Reci… 92058      1043… Ahad       Mahootchi 6739 G…
-     2 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     3 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     4 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     5 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     6 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     7 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     8 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     9 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-    10 2021  UNCHANGED   Covered Reci… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+       year  changed covered_type      profile_id npi   first_name last_name address
+       <chr> <lgl>   <chr>             <chr>      <chr> <chr>      <chr>     <chr>  
+     1 2021  FALSE   Covered Recipien… 92058      1043… Ahad       Mahootchi 6739 G…
+     2 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     3 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     4 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     5 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     6 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     7 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     8 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+     9 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+    10 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
     # ℹ 82 more rows
     # ℹ 42 more variables: city <chr>, state <chr>, zipcode <chr>, country <chr>,
     #   primary_type <chr>, specialty <chr>, license_state <chr>,
@@ -633,7 +640,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    # A tibble: 150 × 7
+    # A tibble: 148 × 7
        npi        first_name last_name partb hha   dme   pmd  
        <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
      1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -646,7 +653,7 @@ order_refer(last_name = "Smith",
      8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
      9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
     10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    # ℹ 140 more rows
+    # ℹ 138 more rows
 
 ### Pending Applications
 
@@ -673,20 +680,20 @@ pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 35 × 4
+    # A tibble: 36 × 4
        npi        last_name  first_name type     
        <chr>      <chr>      <chr>      <chr>    
      1 1881791739 ADAMS      JOHN       PHYSICIAN
      2 1841280963 BIGBEE     JOHN       PHYSICIAN
      3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1588744569 BRUNO      JOHN       PHYSICIAN
-     5 1861142556 BURKE      JOHN       PHYSICIAN
-     6 1306817531 COMBS      JOHN       PHYSICIAN
-     7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-     8 1659074151 EUN        JOHN       PHYSICIAN
-     9 1376571554 FLYNN      JOHN       PHYSICIAN
-    10 1689774804 FREEMAN    JOHN       PHYSICIAN
-    # ℹ 25 more rows
+     4 1801545900 BRAZIL     JOHN       PHYSICIAN
+     5 1588744569 BRUNO      JOHN       PHYSICIAN
+     6 1861142556 BURKE      JOHN       PHYSICIAN
+     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
+     8 1306817531 COMBS      JOHN       PHYSICIAN
+     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
+    10 1376571554 FLYNN      JOHN       PHYSICIAN
+    # ℹ 26 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -714,34 +721,58 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
 ```
 
     # A tibble: 10 × 16
-        year level sublevel fips  hcpcs hcpcs_desc        hcpcs_drug pos   tot_provs
-       <int> <chr> <chr>    <chr> <chr> <chr>             <lgl>      <chr>     <int>
-     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mi… TRUE       O            26
-     2  2020 State Georgia  13    37227 Removal of plaqu… FALSE      O            55
-     3  2020 State Georgia  13    G2170 Percutaneous art… FALSE      F             6
-     4  2020 State Georgia  13    37229 Removal of plaqu… FALSE      O            61
-     5  2020 State Georgia  13    37231 Removal of plaqu… FALSE      O            11
-     6  2020 State Georgia  13    37226 Insertion of ste… FALSE      O            42
-     7  2020 State Georgia  13    37225 Removal of plaqu… FALSE      O            67
-     8  2020 State Georgia  13    37230 Insertion of ste… FALSE      O             9
-     9  2020 State Georgia  13    63685 Insertion of spi… FALSE      F           274
-    10  2020 State Georgia  13    C9740 Cystourethroscop… FALSE      F            26
-    # ℹ 7 more variables: tot_benes <int>, tot_srvcs <int>, tot_day <int>,
-    #   avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>, avg_std_pymt <dbl>
+        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
+       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
+     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
+     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
+     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
+     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
+     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
+     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
+     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
+     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
+     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
+    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
+    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
+    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
+    #   avg_std_pymt <dbl>
 
 ``` r
 # by Provider and Service
-physician_by_service(year = 2020, npi = 1285706879)
+physician_by_service(year = 2020, npi = 1083879860)
 ```
 
-    ✖ No results for year: 2020 and npi: 1285706879
+    # A tibble: 6 × 28
+       year npi        entype     first_name middle_name last_name credential gender
+      <int> <chr>      <chr>      <chr>      <chr>       <chr>     <chr>      <chr> 
+    1  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    2  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    3  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    4  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    5  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    6  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    # ℹ 20 more variables: specialty <chr>, street <chr>, city <chr>, state <chr>,
+    #   fips <chr>, zipcode <chr>, ruca <chr>, country <chr>, par <lgl>,
+    #   hcpcs_cd <chr>, hcpcs_desc <chr>, hcpcs_drug <chr>, place_of_srvc <chr>,
+    #   tot_benes <int>, tot_srvcs <int>, tot_day <int>, avg_charge <dbl>,
+    #   avg_allowed <dbl>, avg_payment <dbl>, avg_std_pymt <dbl>
 
 ``` r
 # by Provider
-physician_by_provider(npi = 1285706879, year = 2020)
+physician_by_provider(npi = 1083879860, year = 2020)
 ```
 
-    ✖ No results for year: 2020 and npi: 1285706879
+    # A tibble: 1 × 70
+       year npi     first_name middle_name last_name credential gender entype street
+      <int> <chr>   <chr>      <chr>       <chr>     <chr>      <chr>  <chr>  <chr> 
+    1  2020 108387… Christoph… <NA>        Aaron     <NA>       M      Indiv… 792 G…
+    # ℹ 61 more variables: city <chr>, state <chr>, fips <chr>, zipcode <chr>,
+    #   ruca <chr>, country <chr>, specialty <chr>, par <lgl>, tot_hcpcs <int>,
+    #   tot_benes <int>, tot_srvcs <int>, tot_charges <dbl>, tot_allowed <dbl>,
+    #   tot_payment <dbl>, tot_std_pymt <dbl>, drug_hcpcs <int>, drug_benes <int>,
+    #   drug_srvcs <int>, drug_charges <dbl>, drug_allowed <dbl>,
+    #   drug_payment <dbl>, drug_std_pymt <dbl>, med_hcpcs <int>, med_benes <int>,
+    #   med_srvcs <int>, med_charges <dbl>, med_allowed <dbl>, med_payment <dbl>, …
 
 ### Provider Enrollment
 
@@ -788,8 +819,8 @@ revalidation_date(npi = 1710912209)
       <chr>      <chr>        <chr>      <chr>     <chr>    <chr>        <chr>      
     1 1710912209 I2004060200… Yelena     Voronova  <NA>     NY           3          
     # ℹ 6 more variables: enroll_desc <chr>, enroll_specialty <chr>,
-    #   revalidation_due_date <dttm>, adjusted_due_date <dttm>,
-    #   individual_total_reassign_to <chr>, receiving_benefits_reassignment <int>
+    #   revalidation_due_date <date>, adjusted_due_date <date>,
+    #   indiv_total_reassigned <chr>, rec_bene_reassign <int>
 
 ``` r
 # Revalidation Reassignment List
@@ -798,15 +829,15 @@ revalidation_reassign(npi = 1710912209)
 
     # A tibble: 5 × 16
       npi        pac_id  enroll_id first_name last_name state specialty due_date_ind
-      <chr>      <chr>   <chr>     <chr>      <chr>     <chr> <chr>     <chr>       
-    1 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
-    2 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
-    3 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
-    4 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
-    5 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  10/31/2019  
-    # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
+      <chr>      <chr>   <chr>     <chr>      <chr>     <chr> <chr>     <date>      
+    1 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  2019-10-31  
+    2 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  2019-10-31  
+    3 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  2019-10-31  
+    4 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  2019-10-31  
+    5 1710912209 286047… I2004060… Yelena     Voronova  NY    Podiatry  2019-10-31  
+    # ℹ 8 more variables: ind_tot_emp_assn <int>, pac_id_group <chr>,
     #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
-    #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
+    #   due_date_group <date>, group_reassign_and_phys_assist <int>,
     #   record_type <chr>
 
 ``` r
@@ -816,28 +847,29 @@ revalidation_group(npi = 1710912209)
 
     # A tibble: 5 × 15
       npi        enroll_id       first_name last_name state specialty due_date_ind
-      <chr>      <chr>           <chr>      <chr>     <chr> <chr>     <chr>       
-    1 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
-    2 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
-    3 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
-    4 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
-    5 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  10/31/2019  
-    # ℹ 8 more variables: ind_tot_employer_associations <int>, pac_id_group <chr>,
+      <chr>      <chr>           <chr>      <chr>     <chr> <chr>     <date>      
+    1 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    2 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    3 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    4 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    5 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    # ℹ 8 more variables: ind_tot_emp_assn <int>, pac_id_group <chr>,
     #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
-    #   due_date_group <chr>, group_reassignments_and_physician_assistants <int>,
+    #   due_date_group <date>, group_reassign_and_phys_assist <int>,
     #   record_type <chr>
 
 ``` r
-revalidation_group(pac_id_group = 9436483807,
-                   enroll_id_group = "O20190619002165",
-                   business_name = "1st Call Urgent Care",
-                   state_group = "FL",
-                   record_type = "Reassignment")
+revalidation_group(enroll_id_group = "O20080205000002")
 ```
 
-    ✖ No results for pac_id_group: 9436483807, enroll_id_group: O20190619002165,
-    business_name: 1st Call Urgent Care, state_group: FL, and record_type:
-    Reassignment
+    # A tibble: 1 × 15
+      npi        enroll_id       first_name last_name state specialty due_date_ind
+      <chr>      <chr>           <chr>      <chr>     <chr> <chr>     <date>      
+    1 1710912209 I20040602001711 Yelena     Voronova  NY    Podiatry  2019-10-31  
+    # ℹ 8 more variables: ind_tot_emp_assn <int>, pac_id_group <chr>,
+    #   enroll_id_group <chr>, business_name <chr>, state_group <chr>,
+    #   due_date_group <date>, group_reassign_and_phys_assist <int>,
+    #   record_type <chr>
 
 ### Taxonomy Crosswalk
 

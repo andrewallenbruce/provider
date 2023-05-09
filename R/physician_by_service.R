@@ -265,13 +265,13 @@ physician_by_service <- function(year,
                     fips        = rndrng_prvdr_state_fips,
                     zipcode     = rndrng_prvdr_zip5,
                     ruca        = rndrng_prvdr_ruca,
-                    ruca_desc   = rndrng_prvdr_ruca_desc,
+                    #ruca_desc   = rndrng_prvdr_ruca_desc,
                     country     = rndrng_prvdr_cntry,
                     par         = rndrng_prvdr_mdcr_prtcptg_ind,
                     hcpcs_cd,
                     hcpcs_desc,
                     hcpcs_drug  = hcpcs_drug_ind,
-                    pos         = place_of_srvc,
+                    place_of_srvc,
                     tot_benes,
                     tot_srvcs,
                     tot_day     = tot_bene_day_srvcs,
@@ -279,7 +279,10 @@ physician_by_service <- function(year,
                     avg_allowed = avg_mdcr_alowd_amt,
                     avg_payment = avg_mdcr_pymt_amt,
                     avg_std_pymt = avg_mdcr_stdzd_amt) |>
-      dplyr::mutate(credential = clean_credentials(credential))
+      dplyr::mutate(credential = clean_credentials(credential),
+                    entype = entype_char(entype),
+                    place_of_srvc = pos_char(place_of_srvc),
+                    par = yn_logical(par))
     }
   return(results)
 }

@@ -197,7 +197,7 @@ open_payments <- function(year,
                    remove = TRUE, na.rm = TRUE, sep = ", ") |>
       dplyr::select(year = program_year,
                     #record_number,
-                    change_type,
+                    changed = change_type,
                     covered_type = covered_recipient_type,
                     teach_hosp_ccn = teaching_hospital_ccn,
                     teach_hosp_id = teaching_hospital_id,
@@ -279,7 +279,8 @@ open_payments <- function(year,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(dplyr::contains("dollars"), ~as.double(.)))
+                    dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
+                    changed = changed_logical(changed))
     }
   return(results)
 }
