@@ -115,7 +115,7 @@ aggregated by provider and service.</p>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enum_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -138,7 +138,7 @@ aggregated by provider and service.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
-<dd><p>Year in YYYY format, between 2013-2020; default is 2020</p></dd>
+<dd><p>int (required); Year in YYYY format. Run <code>provider:::cms_update("Medicare Physician &amp; Other Practitioners - by Provider and Service", "years")</code> to return a character vector of the years currently available.</p></dd>
 
 
 <dt>npi</dt>
@@ -167,7 +167,7 @@ An organization's (entity type code = <code>O</code>) will be blank.</p></dd>
 <dd><p>An individual provider's gender. An organization's will be blank.</p></dd>
 
 
-<dt>enum_type</dt>
+<dt>entype</dt>
 <dd><p>Type of entity reported in NPPES. An entity code of ‘I’
 identifies providers registered as individuals while an entity type
 code of ‘O’ identifies providers registered as organizations.</p></dd>
@@ -254,8 +254,95 @@ in non-facility.</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-    </div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing 29 columns:</p>
+<dl><dt>year</dt>
+<dd><p>year</p></dd>
+
+<dt>npi</dt>
+<dd><p>year</p></dd>
+
+<dt>entype</dt>
+<dd><p>year</p></dd>
+
+<dt>first_name</dt>
+<dd><p>year</p></dd>
+
+<dt>middle_name</dt>
+<dd><p>year</p></dd>
+
+<dt>last_name</dt>
+<dd><p>year</p></dd>
+
+<dt>credential</dt>
+<dd><p>year</p></dd>
+
+<dt>gender</dt>
+<dd><p>year</p></dd>
+
+<dt>specialty</dt>
+<dd><p>year</p></dd>
+
+<dt>street</dt>
+<dd><p>year</p></dd>
+
+<dt>city</dt>
+<dd><p>year</p></dd>
+
+<dt>state</dt>
+<dd><p>year</p></dd>
+
+<dt>fips</dt>
+<dd><p>year</p></dd>
+
+<dt>zipcode</dt>
+<dd><p>year</p></dd>
+
+<dt>ruca</dt>
+<dd><p>year</p></dd>
+
+<dt>ruca_desc</dt>
+<dd><p>year</p></dd>
+
+<dt>country</dt>
+<dd><p>year</p></dd>
+
+<dt>par</dt>
+<dd><p>year</p></dd>
+
+<dt>hcpcs_cd</dt>
+<dd><p>year</p></dd>
+
+<dt>hcpcs_desc</dt>
+<dd><p>year</p></dd>
+
+<dt>hcpcs_drug</dt>
+<dd><p>year</p></dd>
+
+<dt>pos</dt>
+<dd><p>year</p></dd>
+
+<dt>tot_benes</dt>
+<dd><p>year</p></dd>
+
+<dt>tot_srvcs</dt>
+<dd><p>year</p></dd>
+
+<dt>tot_day</dt>
+<dd><p>year</p></dd>
+
+<dt>avg_charge</dt>
+<dd><p>year</p></dd>
+
+<dt>avg_allowed</dt>
+<dd><p>year</p></dd>
+
+<dt>avg_payment</dt>
+<dd><p>year</p></dd>
+
+<dt>avg_std_pymt</dt>
+<dd><p>year</p></dd>
+
+</dl></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The <strong>Provider and Service</strong> dataset provides information on
@@ -273,38 +360,28 @@ to the following:</p><ol><li><p>the NPI for the performing provider,</p></li>
 distinct HCPCS codes that were billed and where the services were
 provided. Data have been aggregated based on the place of service
 because separate fee schedules apply depending on whether the place
-of service submitted on the claim is facility or non-facility.</p><div class="section">
-<h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
-
-<ul><li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider and Service API</a></p></li>
-</ul></div>
-
+of service submitted on the claim is facility or non-facility.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
     <p>Update Frequency: <strong>Annually</strong></p>
     </div>
+    <div class="section level2">
+    <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
+    
+<ul><li><p><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider and Service API</a></p></li>
+</ul></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="co"># Search by NPI</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Search by Last Name for 2019</span></span></span>
-<span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>last_org <span class="op">=</span> <span class="st">"Enkeshafi"</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, last_name <span class="op">=</span> <span class="st">"Enkeshafi"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Multiple NPIs</span></span></span>
-<span class="r-in"><span><span class="va">npis</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>,</span></span>
-<span class="r-in"><span>          <span class="fl">1316405939</span>,</span></span>
-<span class="r-in"><span>          <span class="fl">1720392988</span>,</span></span>
-<span class="r-in"><span>          <span class="fl">1518184605</span>,</span></span>
-<span class="r-in"><span>          <span class="fl">1922056829</span>,</span></span>
-<span class="r-in"><span>          <span class="fl">1083879860</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">npis</span> <span class="op">|&gt;</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">physician_by_service</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Retrieve All Provider Data, 2013-2020</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>,</span></span>
+<span class="r-in"><span>  <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">physician_by_service</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span><span class="op">~</span><span class="fu">physician_by_service</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

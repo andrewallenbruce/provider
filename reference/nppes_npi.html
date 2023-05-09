@@ -104,7 +104,7 @@ API's documentation.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">nppes_npi</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enum_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -129,7 +129,7 @@ API's documentation.</p>
 <dd><p>10-digit National Provider Identifier (NPI).</p></dd>
 
 
-<dt>enum_type</dt>
+<dt>entype</dt>
 <dd><p>The Read API can be refined to retrieve only Individual
 Providers (<code>NPI-1</code> or Type 1) or Organizational Providers (<code>NPI-2</code> or
 Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
@@ -253,15 +253,9 @@ to use the NPI Registry.</p><div class="section">
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 19</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565747200s (~17.93 years) 2007-07-09  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

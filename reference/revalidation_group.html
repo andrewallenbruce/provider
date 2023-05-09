@@ -100,17 +100,17 @@ enrollment.</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">revalidation_group</span><span class="op">(</span></span>
-<span>  group_pac_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_bus_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  group_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_id_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_id_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  business_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  state_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  record_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_first <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_last <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  ind_specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -121,22 +121,51 @@ enrollment.</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>group_pac_id</dt>
+    <dl><dt>npi</dt>
+<dd><p>NPI of provider who is reassigning their benefits or is an
+employee</p></dd>
+
+
+<dt>enroll_id</dt>
+<dd><p>Enrollment ID of provider reassigning their benefits or is an employee</p></dd>
+
+
+<dt>first_name</dt>
+<dd><p>First name of provider who is reassigning their benefits
+or is an employee</p></dd>
+
+
+<dt>last_name</dt>
+<dd><p>Last name of provider who is reassigning their benefits or
+is an employee</p></dd>
+
+
+<dt>state</dt>
+<dd><p>Enrollment state of provider who is reassigning their
+benefits or is an employee</p></dd>
+
+
+<dt>specialty</dt>
+<dd><p>Enrollment specialty of the provider who is
+reassigning their benefits or is an employee</p></dd>
+
+
+<dt>pac_id_group</dt>
 <dd><p>PAC ID of provider who is receiving reassignment or is
 the employer</p></dd>
 
 
-<dt>group_enroll_id</dt>
+<dt>enroll_id_group</dt>
 <dd><p>Enrollment ID of provider who is receiving
 reassignment or is the employer</p></dd>
 
 
-<dt>group_bus_name</dt>
+<dt>business_name</dt>
 <dd><p>Legal business name of provider who is receiving
 reassignment or is the employer</p></dd>
 
 
-<dt>group_state</dt>
+<dt>state_group</dt>
 <dd><p>Enrollment state of provider who is receiving
 reassignment or is the employer</p></dd>
 
@@ -144,36 +173,6 @@ reassignment or is the employer</p></dd>
 <dt>record_type</dt>
 <dd><p>Identifies whether the record is for a reassignment
 (<code>Reassignment</code>) or employment (<code>Physician Assistant</code>)</p></dd>
-
-
-<dt>ind_enroll_id</dt>
-<dd><p>Enrollment ID of provider who is reassigning their
-benefits or is an employee</p></dd>
-
-
-<dt>ind_npi</dt>
-<dd><p>NPI of provider who is reassigning their benefits or is an
-employee</p></dd>
-
-
-<dt>ind_first</dt>
-<dd><p>First name of provider who is reassigning their benefits
-or is an employee</p></dd>
-
-
-<dt>ind_last</dt>
-<dd><p>Last name of provider who is reassigning their benefits or
-is an employee</p></dd>
-
-
-<dt>ind_state</dt>
-<dd><p>Enrollment state of provider who is reassigning their
-benefits or is an employee</p></dd>
-
-
-<dt>ind_specialty</dt>
-<dd><p>Enrollment specialty of the provider who is
-reassigning their benefits or is an employee</p></dd>
 
 
 <dt>tidy</dt>
@@ -206,18 +205,18 @@ physician as well as the clinic group practice.</p><div class="section">
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_group</span><span class="op">(</span>ind_enroll_id <span class="op">=</span> <span class="st">"I20200929003184"</span>,</span></span>
-<span class="r-in"><span>                   ind_npi <span class="op">=</span> <span class="fl">1962026229</span>,</span></span>
-<span class="r-in"><span>                   ind_first <span class="op">=</span> <span class="st">"Rashadda"</span>,</span></span>
-<span class="r-in"><span>                   ind_last <span class="op">=</span> <span class="st">"Wong"</span>,</span></span>
-<span class="r-in"><span>                   ind_state <span class="op">=</span> <span class="st">"CT"</span>,</span></span>
-<span class="r-in"><span>                   ind_specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_group</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20200929003184"</span>,</span></span>
+<span class="r-in"><span>                   npi <span class="op">=</span> <span class="fl">1962026229</span>,</span></span>
+<span class="r-in"><span>                   first_name <span class="op">=</span> <span class="st">"Rashadda"</span>,</span></span>
+<span class="r-in"><span>                   last_name <span class="op">=</span> <span class="st">"Wong"</span>,</span></span>
+<span class="r-in"><span>                   state <span class="op">=</span> <span class="st">"CT"</span>,</span></span>
+<span class="r-in"><span>                   specialty <span class="op">=</span> <span class="st">"Physician Assistant"</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_group</span><span class="op">(</span>group_pac_id <span class="op">=</span> <span class="fl">9436483807</span>,</span></span>
-<span class="r-in"><span>                   group_enroll_id <span class="op">=</span> <span class="st">"O20190619002165"</span>,</span></span>
-<span class="r-in"><span>                   group_bus_name <span class="op">=</span> <span class="st">"1st Call Urgent Care"</span>,</span></span>
-<span class="r-in"><span>                   group_state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
+<span class="r-in"><span><span class="fu">revalidation_group</span><span class="op">(</span>pac_id_group <span class="op">=</span> <span class="fl">9436483807</span>,</span></span>
+<span class="r-in"><span>                   enroll_id_group <span class="op">=</span> <span class="st">"O20190619002165"</span>,</span></span>
+<span class="r-in"><span>                   business_name <span class="op">=</span> <span class="st">"1st Call Urgent Care"</span>,</span></span>
+<span class="r-in"><span>                   state_group <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
 <span class="r-in"><span>                   record_type <span class="op">=</span> <span class="st">"Reassignment"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

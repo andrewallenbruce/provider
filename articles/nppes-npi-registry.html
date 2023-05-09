@@ -257,81 +257,80 @@ NPPES by providers.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
-<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1528… NPI-1            2005-06-01       565747200s (~17.93 years) 2007-07-09  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1528060… Indiv… 2005-06-01       566006400s (~17.94 years) 2007-07-09   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### City, state, country</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Atlanta"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 22</span></span></span>
-<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1881942746 NPI-2            2012-08-27       337305600s (~10.69 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1598140279 NPI-2            2015-07-23       245721600s (~7.79 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1801411459 NPI-2            2020-06-10       91584000s (~2.9 years)   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1639793664 NPI-2            2020-06-05       92016000s (~2.92 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1497497986 NPI-2            2022-04-13       33523200s (~1.06 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1487827390 NPI-2            2008-04-11       475459200s (~15.07 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265550859 NPI-2            2007-03-26       508464000s (~16.11 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1134508666 NPI-2            2015-05-29       250473600s (~7.94 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1598279655 NPI-2            2017-11-28       171504000s (~5.43 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1356959407 NPI-2            2020-07-15       88560000s (~2.81 years)  </span></span>
+<span><span class="co">#&gt;    npi        entype     enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1881942746 Organizat… 2012-08-27       337564800s (~10.7 years)  2012-08-27  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1598140279 Organizat… 2015-07-23       245980800s (~7.79 years)  2016-12-03  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1801411459 Organizat… 2020-06-10       91843200s (~2.91 years)   2020-06-10  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1639793664 Organizat… 2020-06-05       92275200s (~2.92 years)   2020-06-05  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1497497986 Organizat… 2022-04-13       33782400s (~1.07 years)   2022-04-13  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1487827390 Organizat… 2008-04-11       475718400s (~15.07 years) 2008-04-11  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265550859 Organizat… 2007-03-26       508723200s (~16.12 years) 2009-07-14  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1134508666 Organizat… 2015-05-29       250732800s (~7.95 years)  2015-05-29  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1598279655 Organizat… 2017-11-28       171763200s (~5.44 years)  2017-11-28  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1356959407 Organizat… 2020-07-15       88819200s (~2.81 years)   2020-07-15  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;, first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### First name, city, state</span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>first <span class="op">=</span> <span class="st">"John"</span>,</span>
 <span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 200 × 20</span></span></span>
-<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1700934569 NPI-1            2007-01-08       515116800s (~16.32 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1396825477 NPI-1            2006-10-16       522374400s (~16.55 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1033595855 NPI-1            2015-08-04       244684800s (~7.75 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1023436839 NPI-1            2014-03-31       287107200s (~9.1 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1265870406 NPI-1            2013-06-10       312508800s (~9.9 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891754826 NPI-1            2006-03-20       540518400s (~17.13 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1437187960 NPI-1            2006-06-30       531705600s (~16.85 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1750830170 NPI-1            2016-09-27       208396800s (~6.6 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1811336142 NPI-1            2013-06-20       311644800s (~9.88 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1871804443 NPI-1            2010-06-29       405561600s (~12.85 years)</span></span>
+<span><span class="co">#&gt;    npi        entype     enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1700934569 Individual 2007-01-08       515376000s (~16.33 years) 2012-03-07  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1396825477 Individual 2006-10-16       522633600s (~16.56 years) 2007-07-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1033595855 Individual 2015-08-04       244944000s (~7.76 years)  2018-06-16  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1023436839 Individual 2014-03-31       287366400s (~9.11 years)  2021-11-30  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1265870406 Individual 2013-06-10       312768000s (~9.91 years)  2022-05-12  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1891754826 Individual 2006-03-20       540777600s (~17.14 years) 2010-07-26  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1437187960 Individual 2006-06-30       531964800s (~16.86 years) 2019-05-02  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1750830170 Individual 2016-09-27       208656000s (~6.61 years)  2018-09-12  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1811336142 Individual 2013-06-20       311904000s (~9.88 years)  2019-10-09  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1871804443 Individual 2010-06-29       405820800s (~12.86 years) 2019-10-22  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 190 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
-<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336… NPI-2            2012-03-07       352252800s (~11.16 years) 2020-01-07  </span></span>
+<span><span class="co">#&gt;   npi        entype      enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 Organizati… 2012-03-07       352512000s (~11.17 years) 2020-01-07  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 11 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
-<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710… NPI-1            2005-10-11       554342400s (~17.57 years) 2007-07-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710975… Indiv… 2005-10-11       554601600s (~17.57 years) 2007-07-08   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span></code></pre></div>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">### List of NPIs</span></span>
@@ -362,18 +361,18 @@ NPPES by providers.</p>
 <span><span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html" class="external-link">deframe</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 20</span></span></span>
-<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… NPI-1            2007-05-22       503539200s (~15.96 years) 2017-04-28  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1316… NPI-1            2019-03-04       131673600s (~4.17 years)  2023-04-06  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1720… NPI-1            2010-07-29       402969600s (~12.77 years) 2021-01-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1518… NPI-1            2007-04-19       506390400s (~16.05 years) 2020-10-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1922… NPI-1            2006-05-04       536630400s (~17 years)    2008-02-13  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1083… NPI-1            2008-07-22       466646400s (~14.79 years) 2021-03-25  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, certification_date &lt;date&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003026… Indiv… 2007-05-22       503798400s (~15.96 years) 2017-04-28   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1316405… Indiv… 2019-03-04       131932800s (~4.18 years)  2023-04-06   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1720392… Indiv… 2010-07-29       403228800s (~12.78 years) 2021-01-08   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1518184… Indiv… 2007-04-19       506649600s (~16.05 years) 2020-10-27   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1922056… Indiv… 2006-05-04       536889600s (~17.01 years) 2008-02-13   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1083879… Indiv… 2008-07-22       466905600s (~14.8 years)  2021-03-25   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, certification_date &lt;date&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">###Tribble example</span></span>
 <span><span class="va">tribble</span> <span class="op">&lt;-</span> <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html" class="external-link">tribble</a></span><span class="op">(</span></span>
@@ -386,24 +385,24 @@ NPPES by providers.</p>
 <span></span>
 <span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/invoke.html" class="external-link">invoke_map_dfr</a></span><span class="op">(</span><span class="va">tribble</span><span class="op">$</span><span class="va">fn</span>, <span class="va">tribble</span><span class="op">$</span><span class="va">params</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 402 × 22</span></span></span>
-<span><span class="co">#&gt;    npi        enumeration_type enumeration_date enumeration_duration     </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1336413418 NPI-2            2012-03-07       352252800s (~11.16 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1710975040 NPI-1            2005-10-11       554342400s (~17.57 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1700934569 NPI-1            2007-01-08       515116800s (~16.32 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396825477 NPI-1            2006-10-16       522374400s (~16.55 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1033595855 NPI-1            2015-08-04       244684800s (~7.75 years) </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023436839 NPI-1            2014-03-31       287107200s (~9.1 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265870406 NPI-1            2013-06-10       312508800s (~9.9 years)  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891754826 NPI-1            2006-03-20       540518400s (~17.13 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1437187960 NPI-1            2006-06-30       531705600s (~16.85 years)</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750830170 NPI-1            2016-09-27       208396800s (~6.6 years)  </span></span>
+<span><span class="co">#&gt;    npi        entype     enumeration_date enumeration_duration      last_updated</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1336413418 Organizat… 2012-03-07       352512000s (~11.17 years) 2020-01-07  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1710975040 Individual 2005-10-11       554601600s (~17.57 years) 2007-07-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1700934569 Individual 2007-01-08       515376000s (~16.33 years) 2012-03-07  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396825477 Individual 2006-10-16       522633600s (~16.56 years) 2007-07-08  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1033595855 Individual 2015-08-04       244944000s (~7.76 years)  2018-06-16  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1023436839 Individual 2014-03-31       287366400s (~9.11 years)  2021-11-30  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1265870406 Individual 2013-06-10       312768000s (~9.91 years)  2022-05-12  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891754826 Individual 2006-03-20       540777600s (~17.14 years) 2010-07-26  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1437187960 Individual 2006-06-30       531964800s (~16.86 years) 2019-05-02  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750830170 Individual 2016-09-27       208656000s (~6.61 years)  2018-09-12  </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 392 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: last_updated &lt;date&gt;, certification_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   status &lt;chr&gt;, organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">

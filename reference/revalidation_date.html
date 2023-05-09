@@ -115,8 +115,8 @@ dates are appended to the list</p>
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">revalidation_date</span><span class="op">(</span></span>
-<span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -124,7 +124,7 @@ dates are appended to the list</p>
 <span>  type_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  clean_names <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -134,12 +134,12 @@ dates are appended to the list</p>
     </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
-    <dl><dt>enroll_id</dt>
-<dd><p>Enrollment ID</p></dd>
-
-
-<dt>npi</dt>
+    <dl><dt>npi</dt>
 <dd><p>National Provider Identifier (NPI)</p></dd>
+
+
+<dt>enroll_id</dt>
+<dd><p>Enrollment ID</p></dd>
 
 
 <dt>first_name</dt>
@@ -171,8 +171,8 @@ dates are appended to the list</p>
 <dd><p>Enrollment specialty</p></dd>
 
 
-<dt>clean_names</dt>
-<dd><p>Convert column names to snakecase; default is <code>TRUE</code>.</p></dd>
+<dt>tidy</dt>
+<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -203,64 +203,23 @@ their providers.</p><div class="section">
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>,</span></span>
 <span class="r-in"><span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi        first_name last_name organization_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I20031110000070 1184699621 Eric       Byrd      <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: enrollment_state_code &lt;chr&gt;, enrollment_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_type_text &lt;chr&gt;, enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;dttm&gt;, adjusted_due_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>,</span></span>
 <span class="r-in"><span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi        first_name last_name organization_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> I20031110000070 1184699621 Eric       Byrd      <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> I20090128000461 1598792285 Eric       Byrd      <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: enrollment_state_code &lt;chr&gt;, enrollment_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_type_text &lt;chr&gt;, enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;dttm&gt;, adjusted_due_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;int&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
 <span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"3"</span>,</span></span>
 <span class="r-in"><span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,523 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    enrollment_id   npi        first_name last_name      organization_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> I20031104000582 1184693400 John       Abt            <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> I20031105000008 1356436786 Humberto   Fernandez Miro <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> I20031105000534 1467499285 Jorge      Santander      <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> I20031111000679 1104875178 Marianela  De La Portilla <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> I20031204000571 1437205796 Mohammad   Sheikh         <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> I20031209000730 1417063454 Richard    Rizzo          <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> I20031211000318 1689646440 Rene       Casanova       <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> I20031211001075 1265580146 Maria      Montealegre    <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> I20031215000276 1619943990 Ricardo    Dominguez      <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> I20031215000394 1033218821 Arles      Perdomo        <span style="color: #BB0000;">NA</span>               </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,513 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: enrollment_state_code &lt;chr&gt;, enrollment_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_type_text &lt;chr&gt;, enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;dttm&gt;, adjusted_due_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span>,</span></span>
 <span class="r-in"><span>                  org_name <span class="op">=</span> <span class="st">"Lee Memorial Health System"</span>,</span></span>
 <span class="r-in"><span>                  state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
 <span class="r-in"><span>                  prov_type <span class="op">=</span> <span class="st">"DME"</span>,</span></span>
 <span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 13</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   enrollment_id   npi        first_name last_name organization_name         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> O20110620000324 1801196266 <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>        Lee Memorial Health System</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: enrollment_state_code &lt;chr&gt;, enrollment_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   provider_type_text &lt;chr&gt;, enrollment_specialty &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   revalidation_due_date &lt;dttm&gt;, adjusted_due_date &lt;dttm&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   individual_total_reassign_to &lt;chr&gt;, receiving_benefits_reassignment &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

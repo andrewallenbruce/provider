@@ -143,13 +143,13 @@
 <span></span>
 <span><span class="va">geo_nppes</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 19</span></span></span>
-<span><span class="co">#&gt;   npi   enumeration_type enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1760… NPI-1            2005-05-27       566179200s (~17.94 years) 2012-12-04  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1760485… Indiv… 2005-05-27       566438400s (~17.95 years) 2012-12-04   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 13 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_add</span> <span class="op">&lt;-</span> <span class="va">geo_nppes</span> <span class="op">|&gt;</span> </span>
