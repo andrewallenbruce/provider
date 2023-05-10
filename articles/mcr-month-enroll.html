@@ -173,43 +173,52 @@ Chronic Conditions Data Warehouse.</p>
 <span><span class="va">yr_nat_base</span> <span class="op">&lt;-</span> <span class="va">national</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op">==</span> <span class="st">"Year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_total</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>bene_roll_avg <span class="op">=</span> <span class="fu">slider</span><span class="fu">::</span><span class="fu">slide_mean</span><span class="op">(</span><span class="va">bene_total</span>, before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="co">#dplyr::mutate(cummean = dplyr::cummean(bene_total)) |&gt; </span></span>
 <span>  <span class="fu">change_abs</span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">change_pct</span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">bene_total_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">bene_roll_avg</span>, .after <span class="op">=</span> <span class="va">bene_total</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in change_pct(change_abs(dplyr::mutate(dplyr::select(dplyr::filter(national, : could not find function "change_pct"</span></span>
+<span>  <span class="fu">change_pct</span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">bene_total_chg</span>, <span class="va">year</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in change_pct(change_abs(dplyr::select(dplyr::filter(national, month == : could not find function "change_pct"</span></span>
 <span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">yr_nat_base</span>, </span>
 <span>                 <span class="va">yr_nat_list</span>, </span>
 <span>                 by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span>   </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span>, </span>
-<span>                             <span class="va">bene_roll_avg</span><span class="op">)</span>, </span>
-<span>                             decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span></span>
+<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">bene_total_chg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total_chg</span><span class="op">)</span>, </span>
 <span>                 decimals <span class="op">=</span> <span class="fl">0</span>, </span>
 <span>                 force_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">bene_total_pct</span>, </span>
-<span>                  decimals <span class="op">=</span> <span class="fl">2</span>, </span>
+<span>                  decimals <span class="op">=</span> <span class="fl">1</span>, </span>
 <span>                  force_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/sub_missing.html" class="external-link">sub_missing</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
 <span>                  missing_text <span class="op">=</span> <span class="st">"--"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">bene_total_chg</span>, </span>
-<span>                       col_pct <span class="op">=</span> <span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>bene_total <span class="op">=</span> <span class="st">"Total"</span>, </span>
-<span>                 bene_roll_avg <span class="op">=</span> <span class="st">"Rolling Mean"</span>, </span>
+<span>  <span class="co"># gtExtras::gt_merge_stack(col1 = bene_total_chg, </span></span>
+<span>  <span class="co">#                          col2 = bene_total_pct) |&gt; </span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">bene_total_chg</span>,</span>
+<span>                       col_pct <span class="op">=</span> <span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>bene_total <span class="op">=</span> <span class="st">"Total"</span>,</span>
 <span>                 bene_total_chg <span class="op">=</span> <span class="st">"Yearly Change"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"bene_total_chg"</span><span class="op">)</span>, </span>
+<span>                           style <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>                           color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                           weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>                           include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_bar_stack.html" class="external-link">gt_plt_bar_stack</a></span><span class="op">(</span>column <span class="op">=</span> <span class="va">list_data</span>,</span>
-<span>                             width <span class="op">=</span> <span class="fl">80</span>,</span>
-<span>                             labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original Medicare "</span>, </span>
-<span>                                        <span class="st">" Medicare Advantage"</span><span class="op">)</span>,</span>
+<span>                             width <span class="op">=</span> <span class="fl">70</span>,</span>
+<span>                             labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, </span>
+<span>                                        <span class="st">" Advantage"</span><span class="op">)</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ff4343"</span>, </span>
-<span>                                         <span class="st">"#0a1c2b"</span><span class="op">)</span>,</span>
+<span>                                         <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>                             fmt_fn <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">0.01</span>, </span>
 <span>                                                            suffix <span class="op">=</span> <span class="st">" %"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span></span>
-<span>    <span class="st">"Medicare Beneficiary Enrollment: **2013 - 2022**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>    <span class="st">"Medicare Beneficiary Enrollment: **2013 - 2022**"</span><span class="op">)</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span></span>
+<span>    <span class="st">"National Totals, Year-Over-Year"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'yr_nat_base' not found</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -227,10 +236,10 @@ Chronic Conditions Data Warehouse.</p>
 <span><span class="va">mon_nat_base</span> <span class="op">&lt;-</span> <span class="va">national</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">month</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="va">month.name</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">month</span>, <span class="va">bene_total</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>bene_roll_avg <span class="op">=</span> <span class="fu">slider</span><span class="fu">::</span><span class="fu">slide_mean</span><span class="op">(</span><span class="va">bene_total</span>, before <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>cummean <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/cumall.html" class="external-link">cummean</a></span><span class="op">(</span><span class="va">bene_total</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">change_abs</span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">change_pct</span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">bene_total_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">bene_roll_avg</span>, .after <span class="op">=</span> <span class="va">bene_total</span><span class="op">)</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/relocate.html" class="external-link">relocate</a></span><span class="op">(</span><span class="va">cummean</span>, .after <span class="op">=</span> <span class="va">bene_total</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Error in change_pct(change_abs(dplyr::mutate(dplyr::select(dplyr::filter(national, : could not find function "change_pct"</span></span>
 <span></span>
 <span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span><span class="va">mon_nat_base</span>, </span>
@@ -238,7 +247,7 @@ Chronic Conditions Data Warehouse.</p>
 <span>                 by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">month</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span>  </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span>, </span>
-<span>                             <span class="va">bene_roll_avg</span><span class="op">)</span>, </span>
+<span>                             <span class="va">cummean</span><span class="op">)</span>, </span>
 <span>                             decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total_chg</span><span class="op">)</span>, </span>
 <span>                 decimals <span class="op">=</span> <span class="fl">0</span>, </span>
@@ -251,7 +260,7 @@ Chronic Conditions Data Warehouse.</p>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">bene_total_chg</span>, </span>
 <span>                       col_pct <span class="op">=</span> <span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>bene_total <span class="op">=</span> <span class="st">"Total"</span>, </span>
-<span>                 bene_roll_avg <span class="op">=</span> <span class="st">"Rolling Mean"</span>, </span>
+<span>                 cummean <span class="op">=</span> <span class="st">"Cum. Mean"</span>, </span>
 <span>                 bene_total_chg <span class="op">=</span> <span class="st">"Monthly Change"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_align.html" class="external-link">cols_align</a></span><span class="op">(</span>align <span class="op">=</span> <span class="st">"right"</span>, columns <span class="op">=</span> <span class="va">month</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_bar_stack.html" class="external-link">gt_plt_bar_stack</a></span><span class="op">(</span>column <span class="op">=</span> <span class="va">list_data</span>,</span>
@@ -314,26 +323,26 @@ Chronic Conditions Data Warehouse.</p>
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="btolxvqnvg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qbvbzlpefp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#btolxvqnvg table {
+#qbvbzlpefp table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#btolxvqnvg thead, #btolxvqnvg tbody, #btolxvqnvg tfoot, #btolxvqnvg tr, #btolxvqnvg td, #btolxvqnvg th {
+#qbvbzlpefp thead, #qbvbzlpefp tbody, #qbvbzlpefp tfoot, #qbvbzlpefp tr, #qbvbzlpefp td, #qbvbzlpefp th {
   border-style: none;
 }
 
-#btolxvqnvg p {
+#qbvbzlpefp p {
   margin: 0;
   padding: 0;
 }
 
-#btolxvqnvg .gt_table {
+#qbvbzlpefp .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -359,12 +368,12 @@ Chronic Conditions Data Warehouse.</p>
   border-left-color: #D3D3D3;
 }
 
-#btolxvqnvg .gt_caption {
+#qbvbzlpefp .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#btolxvqnvg .gt_title {
+#qbvbzlpefp .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -376,7 +385,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-width: 0;
 }
 
-#btolxvqnvg .gt_subtitle {
+#qbvbzlpefp .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -388,7 +397,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-width: 0;
 }
 
-#btolxvqnvg .gt_heading {
+#qbvbzlpefp .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -400,13 +409,13 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#btolxvqnvg .gt_bottom_border {
+#qbvbzlpefp .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_col_headings {
+#qbvbzlpefp .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -421,7 +430,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#btolxvqnvg .gt_col_heading {
+#qbvbzlpefp .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -441,7 +450,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#btolxvqnvg .gt_column_spanner_outer {
+#qbvbzlpefp .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -453,15 +462,15 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 4px;
 }
 
-#btolxvqnvg .gt_column_spanner_outer:first-child {
+#qbvbzlpefp .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#btolxvqnvg .gt_column_spanner_outer:last-child {
+#qbvbzlpefp .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#btolxvqnvg .gt_column_spanner {
+#qbvbzlpefp .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -473,11 +482,11 @@ Chronic Conditions Data Warehouse.</p>
   width: 100%;
 }
 
-#btolxvqnvg .gt_spanner_row {
+#qbvbzlpefp .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#btolxvqnvg .gt_group_heading {
+#qbvbzlpefp .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -503,7 +512,7 @@ Chronic Conditions Data Warehouse.</p>
   text-align: left;
 }
 
-#btolxvqnvg .gt_empty_group_heading {
+#qbvbzlpefp .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -518,15 +527,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: middle;
 }
 
-#btolxvqnvg .gt_from_md > :first-child {
+#qbvbzlpefp .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#btolxvqnvg .gt_from_md > :last-child {
+#qbvbzlpefp .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#btolxvqnvg .gt_row {
+#qbvbzlpefp .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -545,7 +554,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#btolxvqnvg .gt_stub {
+#qbvbzlpefp .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -558,7 +567,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#btolxvqnvg .gt_stub_row_group {
+#qbvbzlpefp .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -572,15 +581,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: top;
 }
 
-#btolxvqnvg .gt_row_group_first td {
+#qbvbzlpefp .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#btolxvqnvg .gt_row_group_first th {
+#qbvbzlpefp .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#btolxvqnvg .gt_summary_row {
+#qbvbzlpefp .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -590,16 +599,16 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#btolxvqnvg .gt_first_summary_row {
+#qbvbzlpefp .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_first_summary_row.thick {
+#qbvbzlpefp .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#btolxvqnvg .gt_last_summary_row {
+#qbvbzlpefp .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -609,7 +618,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_grand_summary_row {
+#qbvbzlpefp .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -619,7 +628,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#btolxvqnvg .gt_first_grand_summary_row {
+#qbvbzlpefp .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -629,7 +638,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_last_grand_summary_row_top {
+#qbvbzlpefp .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -639,11 +648,11 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_striped {
+#qbvbzlpefp .gt_striped {
   background-color: #F4F4F4;
 }
 
-#btolxvqnvg .gt_table_body {
+#qbvbzlpefp .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -652,7 +661,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#btolxvqnvg .gt_footnotes {
+#qbvbzlpefp .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -666,7 +675,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#btolxvqnvg .gt_footnote {
+#qbvbzlpefp .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -675,7 +684,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#btolxvqnvg .gt_sourcenotes {
+#qbvbzlpefp .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -689,7 +698,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#btolxvqnvg .gt_sourcenote {
+#qbvbzlpefp .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -697,63 +706,63 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#btolxvqnvg .gt_left {
+#qbvbzlpefp .gt_left {
   text-align: left;
 }
 
-#btolxvqnvg .gt_center {
+#qbvbzlpefp .gt_center {
   text-align: center;
 }
 
-#btolxvqnvg .gt_right {
+#qbvbzlpefp .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#btolxvqnvg .gt_font_normal {
+#qbvbzlpefp .gt_font_normal {
   font-weight: normal;
 }
 
-#btolxvqnvg .gt_font_bold {
+#qbvbzlpefp .gt_font_bold {
   font-weight: bold;
 }
 
-#btolxvqnvg .gt_font_italic {
+#qbvbzlpefp .gt_font_italic {
   font-style: italic;
 }
 
-#btolxvqnvg .gt_super {
+#qbvbzlpefp .gt_super {
   font-size: 65%;
 }
 
-#btolxvqnvg .gt_footnote_marks {
+#qbvbzlpefp .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#btolxvqnvg .gt_asterisk {
+#qbvbzlpefp .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#btolxvqnvg .gt_indent_1 {
+#qbvbzlpefp .gt_indent_1 {
   text-indent: 5px;
 }
 
-#btolxvqnvg .gt_indent_2 {
+#qbvbzlpefp .gt_indent_2 {
   text-indent: 10px;
 }
 
-#btolxvqnvg .gt_indent_3 {
+#qbvbzlpefp .gt_indent_3 {
   text-indent: 15px;
 }
 
-#btolxvqnvg .gt_indent_4 {
+#qbvbzlpefp .gt_indent_4 {
   text-indent: 20px;
 }
 
-#btolxvqnvg .gt_indent_5 {
+#qbvbzlpefp .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
