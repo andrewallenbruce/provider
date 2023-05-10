@@ -28,7 +28,7 @@
 #' @note Update Frequency: **Monthly**
 #' @param year Calendar year of Medicare enrollment; current options are
 #'    `2017 - 2022`
-#' @param month Time frame of Medicare enrollment; options are `Year` or any
+#' @param period Time frame of Medicare enrollment; options are `Year` or any
 #'    month within the 12-month time span of the month in the data set's version
 #'    name (listed [here](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs))
 #' @param level Geographic level of data; options are `National`, `State`,
@@ -41,7 +41,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
 #' beneficiary_enrollment(year = NULL,
-#'                        month = "Year",
+#'                        period = "Year",
 #'                        level = "County",
 #'                        state = "AL",
 #'                        county = "Autauga")
@@ -49,7 +49,7 @@
 #' beneficiary_enrollment(year = 2021, level = "County", fips = "01001")
 #'
 #' beneficiary_enrollment(year = 2022,
-#'                        month = "July",
+#'                        period = "July",
 #'                        level = "State",
 #'                        state_name = "Georgia")
 #'
@@ -57,7 +57,7 @@
 #' @autoglobal
 #' @export
 beneficiary_enrollment <- function(year        = NULL,
-                                   month       = NULL,
+                                   period      = NULL,
                                    level       = NULL,
                                    state       = NULL,
                                    state_name  = NULL,
@@ -65,11 +65,8 @@ beneficiary_enrollment <- function(year        = NULL,
                                    fips        = NULL,
                                    tidy        = TRUE) {
 
-  # if (period == "month")
-  # if (period == "year")
-
   # match args ----------------------------------------------------
-  if (!is.null(month)) {rlang::arg_match0(month, c("Year", month.name))}
+  if (!is.null(period)) {rlang::arg_match0(period, c("Year", month.name))}
   if (!is.null(level)) {rlang::arg_match0(level, c("National", "State", "County"))}
   if (!is.null(state)) {rlang::arg_match0(state, c(state.abb))}
   if (!is.null(state_name)) {rlang::arg_match0(state_name, c(state.name))}
@@ -78,7 +75,7 @@ beneficiary_enrollment <- function(year        = NULL,
   args <- tibble::tribble(
                      ~x,        ~y,
                  "YEAR",      year,
-                "MONTH",     month,
+                "MONTH",     period,
          "BENE_GEO_LVL",     level,
     "BENE_STATE_ABRVTN",     state,
       "BENE_STATE_DESC",state_name,
@@ -107,7 +104,7 @@ beneficiary_enrollment <- function(year        = NULL,
     cli_args <- tibble::tribble(
       ~x,           ~y,
       "year",       as.character(year),
-      "month",      month,
+      "period",      period,
       "level",      level,
       "state",      state,
       "state_name", state_name,
@@ -135,6 +132,7 @@ beneficiary_enrollment <- function(year        = NULL,
 
     results <- dplyr::rename_with(results, str_to_snakecase) |>
     dplyr::rename(level                       = bene_geo_lvl,
+                  period                      = month,
                   state                       = bene_state_abrvtn,
                   state_name                  = bene_state_desc,
                   county                      = bene_county_desc,
@@ -164,22 +162,6 @@ beneficiary_enrollment <- function(year        = NULL,
     dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*"))) |>
     dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
 
-    # if (!is.null(year) && level == "County") {
-    # if (!is.null(year) && level == "County" && (is.null(month) || month == "Year")) {
-
   }
   return(results)
-}
-
-#' @noRd
-bene_enroll_years <- function() {
-  cms_update_ids(api = "Medicare Monthly Enrollment") |>
-    dplyr::select(distribution_title) |>
-    tidyr::separate_wider_delim(distribution_title,
-                                delim = " : ",
-                                names = c("title", "year")) |>
-    dplyr::mutate(year = lubridate::year(year), .keep = "used") |>
-    dplyr::distinct() |>
-    dplyr::arrange(year) |>
-    tibble::deframe()
 }

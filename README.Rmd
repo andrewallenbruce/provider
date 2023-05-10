@@ -76,14 +76,14 @@ provider:::function_tbl() |>
 
 ```{r}
 beneficiary_enrollment(year = 2021, 
-                       month = "Year", 
+                       period = "Year", 
                        level = "State", 
                        fips = "01")
 ```
 
 
 ```{r}
-beneficiary_enrollment(month = "Year", 
+beneficiary_enrollment(period = "Year", 
                        level = "County", 
                        state = "AL", 
                        county = "Autauga")

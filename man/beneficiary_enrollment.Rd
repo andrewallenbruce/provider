@@ -9,7 +9,7 @@ Centers for Medicare & Medicaid Services
 \usage{
 beneficiary_enrollment(
   year = NULL,
-  month = NULL,
+  period = NULL,
   level = NULL,
   state = NULL,
   state_name = NULL,
@@ -22,7 +22,7 @@ beneficiary_enrollment(
 \item{year}{Calendar year of Medicare enrollment; current options are
 \code{2017 - 2022}}
 
-\item{month}{Time frame of Medicare enrollment; options are \code{Year} or any
+\item{period}{Time frame of Medicare enrollment; options are \code{Year} or any
 month within the 12-month time span of the month in the data set's version
 name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
 
@@ -76,7 +76,7 @@ Update Frequency: \strong{Monthly}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 beneficiary_enrollment(year = NULL,
-                       month = "Year",
+                       period = "Year",
                        level = "County",
                        state = "AL",
                        county = "Autauga")
@@ -84,7 +84,7 @@ beneficiary_enrollment(year = NULL,
 beneficiary_enrollment(year = 2021, level = "County", fips = "01001")
 
 beneficiary_enrollment(year = 2022,
-                       month = "July",
+                       period = "July",
                        level = "State",
                        state_name = "Georgia")
 

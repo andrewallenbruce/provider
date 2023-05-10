@@ -148,7 +148,7 @@ nppes_npi <- function(npi            = NULL,
   }
 
   results <- response$results |> dplyr::tibble()
-
+return(results)
   if (tidy) {
 
     results <- results |>

@@ -88,15 +88,15 @@ across a variety of CMS sources.
 
 ``` r
 beneficiary_enrollment(year = 2021, 
-                       month = "Year", 
+                       period = "Year", 
                        level = "State", 
                        fips = "01")
 ```
 
     # A tibble: 1 × 26
-       year month level state state_name county fips  bene_total bene_orig
-      <int> <chr> <chr> <chr> <chr>      <chr>  <chr>      <int>     <int>
-    1  2021 Year  State AL    Alabama    Total  01       1070474    528983
+       year period level state state_name county fips  bene_total bene_orig
+      <int> <chr>  <chr> <chr> <chr>      <chr>  <chr>      <int>     <int>
+    1  2021 Year   State AL    Alabama    Total  01       1070474    528983
     # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
     #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
@@ -105,25 +105,25 @@ beneficiary_enrollment(year = 2021,
     #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
 
 ``` r
-beneficiary_enrollment(month = "Year", 
+beneficiary_enrollment(period = "Year", 
                        level = "County", 
                        state = "AL", 
                        county = "Autauga")
 ```
 
     # A tibble: 10 × 26
-        year month level  state state_name county  fips  bene_total bene_orig
-       <int> <chr> <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
-     1  2013 Year  County AL    Alabama    Autauga 01001       9323      6484
-     2  2014 Year  County AL    Alabama    Autauga 01001       9589      6565
-     3  2015 Year  County AL    Alabama    Autauga 01001       9938      6711
-     4  2016 Year  County AL    Alabama    Autauga 01001      10214      6799
-     5  2017 Year  County AL    Alabama    Autauga 01001      10510      5784
-     6  2018 Year  County AL    Alabama    Autauga 01001      10645      5700
-     7  2019 Year  County AL    Alabama    Autauga 01001      11059      5761
-     8  2020 Year  County AL    Alabama    Autauga 01001      11251      5596
-     9  2021 Year  County AL    Alabama    Autauga 01001      11396      5338
-    10  2022 Year  County AL    Alabama    Autauga 01001      11578      5186
+        year period level  state state_name county  fips  bene_total bene_orig
+       <int> <chr>  <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
+     1  2013 Year   County AL    Alabama    Autauga 01001       9323      6484
+     2  2014 Year   County AL    Alabama    Autauga 01001       9589      6565
+     3  2015 Year   County AL    Alabama    Autauga 01001       9938      6711
+     4  2016 Year   County AL    Alabama    Autauga 01001      10214      6799
+     5  2017 Year   County AL    Alabama    Autauga 01001      10510      5784
+     6  2018 Year   County AL    Alabama    Autauga 01001      10645      5700
+     7  2019 Year   County AL    Alabama    Autauga 01001      11059      5761
+     8  2020 Year   County AL    Alabama    Autauga 01001      11251      5596
+     9  2021 Year   County AL    Alabama    Autauga 01001      11396      5338
+    10  2022 Year   County AL    Alabama    Autauga 01001      11578      5186
     # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
     #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
@@ -139,7 +139,7 @@ beneficiary_enrollment(year = 2017,
 ```
 
     # A tibble: 13 × 26
-        year month     level  state state_name county  fips  bene_total bene_orig
+        year period    level  state state_name county  fips  bene_total bene_orig
        <int> <chr>     <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
      1  2017 Year      County GA    Georgia    Lowndes 13185      17172     13007
      2  2017 January   County GA    Georgia    Lowndes 13185      17035     12940
@@ -484,28 +484,23 @@ missing_information(npi = 11111122222)
 nppes_npi(npi = 1316405939)
 ```
 
-    # A tibble: 1 × 20
-      npi        entype     enumeration_date enumeration_duration     last_updated
-      <chr>      <chr>      <date>           <Duration>               <date>      
-    1 1316405939 Individual 2019-03-04       131932800s (~4.18 years) 2023-04-06  
-    # ℹ 15 more variables: certification_date <date>, status <chr>,
-    #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
-    #   gender <chr>, sole_proprietor <lgl>, country <chr>, street <chr>,
-    #   city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #   fax_number <chr>
+    # A tibble: 1 × 11
+      created_epoch enumeration_type last_updated_epoch number     addresses    
+      <chr>         <chr>            <chr>              <chr>      <list>       
+    1 1551723416000 NPI-1            1680810827000      1316405939 <df [2 × 10]>
+    # ℹ 6 more variables: practiceLocations <list>, basic <df[,10]>,
+    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
 
 ``` r
 nppes_npi(npi = 1558364273)
 ```
 
-    # A tibble: 1 × 19
-      npi      entype enumeration_date enumeration_duration      last_updated status
-      <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1558364… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
-    # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, country <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #   fax_number <chr>
+    # A tibble: 1 × 11
+      created_epoch enumeration_type last_updated_epoch number     addresses    
+      <chr>         <chr>            <chr>              <chr>      <list>       
+    1 1117203529000 NPI-1            1183948145000      1558364273 <df [2 × 11]>
+    # ℹ 6 more variables: practiceLocations <list>, basic <df[,11]>,
+    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
 
 ``` r
 nppes_npi(1710983663) 
@@ -517,14 +512,12 @@ nppes_npi(1710983663)
 nppes_npi(1720081441)
 ```
 
-    # A tibble: 1 × 19
-      npi      entype enumeration_date enumeration_duration      last_updated status
-      <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1720081… Indiv… 2005-05-27       566438400s (~17.95 years) 2007-07-08   A     
-    # ℹ 13 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, country <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #   fax_number <chr>
+    # A tibble: 1 × 11
+      created_epoch enumeration_type last_updated_epoch number     addresses    
+      <chr>         <chr>            <chr>              <chr>      <list>       
+    1 1117203886000 NPI-1            1183948145000      1720081441 <df [2 × 10]>
+    # ℹ 6 more variables: practiceLocations <list>, basic <df[,11]>,
+    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
 
 ``` r
 # c(1710983663, 1710975040, 1659781227, 
@@ -680,20 +673,20 @@ pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 36 × 4
+    # A tibble: 35 × 4
        npi        last_name  first_name type     
        <chr>      <chr>      <chr>      <chr>    
      1 1881791739 ADAMS      JOHN       PHYSICIAN
      2 1841280963 BIGBEE     JOHN       PHYSICIAN
      3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1801545900 BRAZIL     JOHN       PHYSICIAN
-     5 1588744569 BRUNO      JOHN       PHYSICIAN
-     6 1861142556 BURKE      JOHN       PHYSICIAN
-     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
-     8 1306817531 COMBS      JOHN       PHYSICIAN
-     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    10 1376571554 FLYNN      JOHN       PHYSICIAN
-    # ℹ 26 more rows
+     4 1588744569 BRUNO      JOHN       PHYSICIAN
+     5 1861142556 BURKE      JOHN       PHYSICIAN
+     6 1306817531 COMBS      JOHN       PHYSICIAN
+     7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
+     8 1659074151 EUN        JOHN       PHYSICIAN
+     9 1376571554 FLYNN      JOHN       PHYSICIAN
+    10 1689774804 FREEMAN    JOHN       PHYSICIAN
+    # ℹ 25 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")

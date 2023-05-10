@@ -39,7 +39,7 @@ The Medicare Monthly Enrollment data provides current monthly information on the
 national <- beneficiary_enrollment(level = "National")
 
 yr_nat_list <- national |> 
-  dplyr::filter(month == "Year") |> 
+  dplyr::filter(period == "Year") |> 
   dplyr::select(year, bene_orig, bene_ma_oth) |> 
   dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
                 pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
@@ -50,11 +50,10 @@ yr_nat_list <- national |>
   dplyr::summarise(list_data = list(pct), .groups = "drop")
 
 yr_nat_base <- national |> 
-  dplyr::filter(month == "Year") |> 
+  dplyr::filter(period == "Year") |> 
   dplyr::select(year, bene_total) |> 
-  #dplyr::mutate(cummean = dplyr::cummean(bene_total)) |> 
-  change_abs(bene_total, year) |> 
-  change_pct(bene_total, bene_total_chg, year)
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year)
 
 dplyr::left_join(yr_nat_base, 
                  yr_nat_list, 
@@ -103,27 +102,27 @@ dplyr::left_join(yr_nat_base,
 
 ```{r}
 mon_nat_list <- national |> 
-  dplyr::filter(month %in% month.name) |> 
-  dplyr::select(year, month, bene_orig, bene_ma_oth) |> 
+  dplyr::filter(period %in% month.name) |> 
+  dplyr::select(year, period, bene_orig, bene_ma_oth) |> 
   dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
                 pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
   tidyr::pivot_longer(cols = c(pct_orig, pct_ma), 
                       names_to = "measure", 
                       values_to = "pct") |> 
-  dplyr::group_by(year, month) |> 
+  dplyr::group_by(year, period) |> 
   dplyr::summarise(list_data = list(pct), .groups = "drop")
 
 mon_nat_base <- national |> 
-  dplyr::filter(month %in% month.name) |> 
-  dplyr::select(year, month, bene_total) |> 
+  dplyr::filter(period %in% month.name) |> 
+  dplyr::select(year, period, bene_total) |> 
   dplyr::mutate(cummean = dplyr::cummean(bene_total)) |>
-  change_abs(bene_total, year) |> 
-  change_pct(bene_total, bene_total_chg, year) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year) |> 
   dplyr::relocate(cummean, .after = bene_total)
 
 dplyr::left_join(mon_nat_base, 
                  mon_nat_list, 
-                 by = dplyr::join_by(year, month)) |>  
+                 by = dplyr::join_by(year, period)) |>  
   gt::gt() |> 
   gt::fmt_number(columns = c(bene_total, 
                              cummean), 
@@ -141,7 +140,7 @@ dplyr::left_join(mon_nat_base,
   gt::cols_label(bene_total = "Total", 
                  cummean = "Cum. Mean", 
                  bene_total_chg = "Monthly Change") |> 
-  gt::cols_align(align = "right", columns = month) |> 
+  gt::cols_align(align = "right", columns = period) |> 
   gtExtras::gt_plt_bar_stack(column = list_data,
                              labels = c("Original  ", 
                                         "  Advantage"),
