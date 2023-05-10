@@ -55,47 +55,40 @@ yr_nat_base <- national |>
   provider:::change_abs(bene_total, year) |> 
   provider:::change_pct(bene_total, bene_total_chg, year)
 
-dplyr::left_join(yr_nat_base, 
-                 yr_nat_list, 
-                 by = dplyr::join_by(year)) |>   
+nat <- dplyr::left_join(yr_nat_base, yr_nat_list, by = dplyr::join_by(year))
+```
+
+
+```{r}
+nat |>   
   gt::gt() |> 
-  gt::tab_style(style = gt::cell_text(
-    font = c(gt::google_font(name = "Fira Code"), gt::default_fonts())),
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
     locations = gt::cells_body(columns = c(bene_total, bene_total_chg))) |> 
   gtExtras::gt_theme_538() |> 
-  gt::fmt_number(columns = c(bene_total), decimals = 0) |> 
-  gt::fmt_number(columns = c(bene_total_chg), 
-                 decimals = 0, 
-                 force_sign = TRUE) |> 
-  gt::fmt_percent(columns = bene_total_pct, 
-                  decimals = 1, 
-                  force_sign = TRUE) |> 
-  gt::sub_missing(columns = dplyr::everything(), 
-                  missing_text = "--") |> 
-  # gtExtras::gt_merge_stack(col1 = bene_total_chg, 
-  #                          col2 = bene_total_pct) |> 
+  gt::fmt_number(bene_total, suffixing = TRUE, decimals = 2) |> 
+  gt::fmt_number(bene_total_chg, suffixing = TRUE, force_sign = TRUE, decimals = 1) |> 
+  gt::fmt_percent(columns = bene_total_pct, decimals = 1, force_sign = TRUE) |> 
+  gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
   gt::cols_merge_n_pct(col_n = bene_total_chg,
                        col_pct = bene_total_pct) |>
   gt::cols_label(bene_total = "Total",
-                 bene_total_chg = "Yearly Change") |> 
+                 bene_total_chg = gt::md("Change (%)")) |> 
   gtExtras::gt_add_divider(columns = c("year", "bene_total_chg"), 
                            style = "solid",
                            color = "black",
-                           weight = gt::px(3),
+                           weight = gt::px(2),
                            include_labels = FALSE) |> 
-  gtExtras::gt_plt_bar_stack(column = list_data,
-                             width = 70,
-                             labels = c("Original  ", 
-                                        " Advantage"),
-                             palette = c("#ff4343", 
-                                         "black"),
-                             fmt_fn = scales::label_percent(accuracy = 0.01, 
+  gtExtras::gt_plt_bar_stack(column = list_data, width = 60,
+                             labels = c("Original  ", " Advantage"),
+                             palette = c("#ff4343", "black"),
+                             fmt_fn = scales::label_percent(accuracy = 0.1, 
                                                             suffix = " %")) |> 
-  gt::tab_header(title = gt::md(
-    "Medicare Beneficiary Enrollment: **2013 - 2022**"),
-    subtitle = gt::md(
-    "National Totals, Year-Over-Year")) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
+  gt::tab_header(title = gt::md("Medicare Beneficiary Enrollment: **2013 - 2022**"),
+    subtitle = gt::md("National Totals, Year-Over-Year")) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov") |> 
+  gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 <br>
@@ -115,41 +108,41 @@ mon_nat_list <- national |>
 mon_nat_base <- national |> 
   dplyr::filter(period %in% month.name) |> 
   dplyr::select(year, period, bene_total) |> 
-  dplyr::mutate(cummean = dplyr::cummean(bene_total)) |>
   provider:::change_abs(bene_total, year) |> 
-  provider:::change_pct(bene_total, bene_total_chg, year) |> 
-  dplyr::relocate(cummean, .after = bene_total)
+  provider:::change_pct(bene_total, bene_total_chg, year)
 
-dplyr::left_join(mon_nat_base, 
-                 mon_nat_list, 
-                 by = dplyr::join_by(year, period)) |>  
+mon <- dplyr::left_join(mon_nat_base, mon_nat_list, 
+                 by = dplyr::join_by(year, period))
+
+mon |> 
   gt::gt() |> 
-  gt::fmt_number(columns = c(bene_total, 
-                             cummean), 
-                             decimals = 0) |> 
-  gt::fmt_number(columns = c(bene_total_chg), 
-                 decimals = 0, 
-                 force_sign = TRUE) |> 
-  gt::fmt_percent(columns = bene_total_pct, 
-                  decimals = 2, 
-                  force_sign = TRUE) |> 
-  gt::sub_missing(columns = dplyr::everything(), 
-                  missing_text = "--") |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(bene_total, bene_total_chg))) |> 
+  gt::fmt_number(bene_total, suffixing = TRUE, decimals = 2) |> 
+  gt::fmt_number(bene_total_chg, suffixing = TRUE, force_sign = TRUE, decimals = 1) |> 
+  gt::fmt_percent(columns = bene_total_pct, decimals = 1, force_sign = TRUE) |> 
+  gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
   gt::cols_merge_n_pct(col_n = bene_total_chg, 
                        col_pct = bene_total_pct) |> 
-  gt::cols_label(bene_total = "Total", 
-                 cummean = "Cum. Mean", 
-                 bene_total_chg = "Monthly Change") |> 
   gt::cols_align(align = "right", columns = period) |> 
+  gt::cols_label(period = "Month", bene_total = "Total", 
+                 bene_total_chg = gt::md("Change (%)")) |> 
+  gtExtras::gt_add_divider(columns = c("period", "bene_total_chg"), 
+                           style = "solid",
+                           color = "black",
+                           weight = gt::px(2),
+                           include_labels = FALSE) |> 
   gtExtras::gt_plt_bar_stack(column = list_data,
-                             labels = c("Original  ", 
-                                        "  Advantage"),
-                             palette = c("#ff4343", 
-                                         "#0a1c2b"),
-                             fmt_fn = scales::label_percent(accuracy = 0.01, 
-                                                            suffix = " %")) |> 
+                             width = 40,
+                             labels = c("Original  ", "  Advantage"),
+                             palette = c("#ff4343", "black"),
+                             fmt_fn = scales::label_percent(suffix = " %")) |> 
   gt::tab_header(title = gt::md(
-    "Medicare Beneficiary Enrollment: **2013 - 2022**")) |>
+    "Medicare Beneficiary Enrollment: **2013 - 2022**"),
+    subtitle = gt::md("National Totals, Month-Over-Month")) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov") |>
   gtExtras::gt_theme_538()
 ```
 
@@ -157,13 +150,17 @@ dplyr::left_join(mon_nat_base,
 <br>
 
 ```{r}
-beneficiary_enrollment(level = "State", state = "GA")
+beneficiary_enrollment(level = "State", state = "GA") |> 
+  dplyr::filter(period == "Year") |> 
+  dplyr::select(year, state, bene_total:bene_aged_total, bene_ab_total:bene_rx_mapd)
 ```
 
 
 
 ```{r}
-beneficiary_enrollment(level = "County", state = "GA", county = "Lowndes")
+beneficiary_enrollment(level = "County", state = "GA", county = "Lowndes") |> 
+  dplyr::filter(period == "Year") |> 
+  dplyr::select(year, state, county, bene_total:bene_aged_total, bene_ab_total:bene_rx_mapd)
 ```
 
 

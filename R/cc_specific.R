@@ -36,8 +36,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year integer, YYYY, calendar year of Medicare enrollment. `2007-2018`
-#'   data is currently available.
+#' @param year integer, YYYY, calendar year of Medicare enrollment. Run the
+#'  helper function `years_ccspec()` to return a vector of currently available years.
 #' @param level Geographic level of data; options are `National`, `State`,
 #'   and `County`
 #' @param sublevel The state and/or county where the Medicare beneficiary
@@ -199,3 +199,11 @@ cc_specific <- function(year,
   }
   return(results)
 }
+
+#' Check the current years available for the Specific Chronic Conditions API
+#' @autoglobal
+#' @noRd
+years_ccspec <- function() {
+  cms_update("Specific Chronic Conditions", "years") |>
+    as.integer()
+  }

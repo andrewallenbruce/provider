@@ -39,7 +39,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Yearly**
-#' @param year Reporting year, 2015-2021, default is `2021`
+#' @param year Program reporting year. Run the helper function `years_openpay()`
+#'    to return a vector of currently available years.
 #' @param npi Covered recipient's National Provider Identifier (NPI).
 #' @param covered_type Type of covered recipient, e.g.,
 #'    * `Covered Recipient Physician`
@@ -80,21 +81,22 @@
 #' @autoglobal
 #' @export
 open_payments <- function(year,
-                          npi  = NULL,
-                          profile_id = NULL,
-                          covered_type = NULL,
-                          first_name = NULL,
-                          last_name = NULL,
-                          city  = NULL,
-                          state = NULL,
-                          zipcode = NULL,
+                          npi               = NULL,
+                          profile_id        = NULL,
+                          covered_type      = NULL,
+                          first_name        = NULL,
+                          last_name         = NULL,
+                          city              = NULL,
+                          state             = NULL,
+                          zipcode           = NULL,
                           teaching_hospital = NULL,
-                          payer_name = NULL,
-                          payer_id = NULL,
-                          payment_form  = NULL,
-                          payment_nature  = NULL,
-                          offset     = 0,
-                          tidy  = TRUE) {
+                          payer_name        = NULL,
+                          payer_id          = NULL,
+                          payment_form      = NULL,
+                          payment_nature    = NULL,
+                          offset            = 0,
+                          tidy              = TRUE) {
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,
@@ -198,7 +200,7 @@ open_payments <- function(year,
       dplyr::select(year = program_year,
                     #record_number,
                     changed = change_type,
-                    covered_type = covered_recipient_type,
+                    cov_type = covered_recipient_type,
                     teach_hosp_ccn = teaching_hospital_ccn,
                     teach_hosp_id = teaching_hospital_id,
                     teach_hosp_name = teaching_hospital_name,
@@ -221,28 +223,28 @@ open_payments <- function(year,
                     specialty_other,
                     license_state = covered_recipient_license_state_code1,
                     license_state_other,
-                    payer_submitting = submitting_applicable_manufacturer_or_applicable_gpo_name,
+                    payer_sub = submitting_applicable_manufacturer_or_applicable_gpo_name,
                     payer_id = applicable_manufacturer_or_applicable_gpo_making_payment_id,
                     payer_name = applicable_manufacturer_or_applicable_gpo_making_payment_name,
                     payer_state = applicable_manufacturer_or_applicable_gpo_making_payment_state,
                     payer_country = applicable_manufacturer_or_applicable_gpo_making_payment_country,
-                    payment_total = total_amount_of_payment_usdollars,
-                    payment_date = date_of_payment,
-                    payment_count = number_of_payments_included_in_total_amount,
-                    payment_form = form_of_payment_or_transfer_of_value,
-                    payment_nature = nature_of_payment_or_transfer_of_value,
+                    pay_total = total_amount_of_payment_usdollars,
+                    pay_date = date_of_payment,
+                    pay_count = number_of_payments_included_in_total_amount,
+                    pay_form = form_of_payment_or_transfer_of_value,
+                    pay_nature = nature_of_payment_or_transfer_of_value,
                     travel_city = city_of_travel,
                     travel_state = state_of_travel,
                     travel_country = country_of_travel,
-                    physician_ownership = physician_ownership_indicator,
-                    third_party_payment = third_party_payment_recipient_indicator,
-                    third_party_payment_name = name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc,
+                    phys_own = physician_ownership_indicator,
+                    third_par_pay = third_party_payment_recipient_indicator,
+                    third_par_name = name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc,
+                    third_par_cov = third_party_equals_covered_recipient_indicator,
                     charity = charity_indicator,
-                    third_party_is_cov_recip = third_party_equals_covered_recipient_indicator,
-                    contextual = contextual_information,
-                    publish_date = payment_publication_date,
-                    publish_delay = delay_in_publication_indicator,
-                    publish_dispute = dispute_status_for_publication,
+                    context = contextual_information,
+                    pub_date = payment_publication_date,
+                    pub_delay = delay_in_publication_indicator,
+                    pub_dispute = dispute_status_for_publication,
                     #record_id,
                     related_product = related_product_indicator,
                     cov_1 = covered_or_noncovered_indicator_1,
@@ -287,12 +289,7 @@ open_payments <- function(year,
 
 
 #' Update Open Payments API distribution IDs
-#' @description [open_payments_ids()] allows you to update the Open Payments
-#'    API's distribution IDs for each year's dataset.
 #' @param search term to search for in open payments database
-#' @return A [tibble][tibble::tibble-package] containing the updated ids.
-#' @examples
-#' open_payments_ids()
 #' @autoglobal
 #' @noRd
 open_payments_ids <- function(search) {
@@ -315,3 +312,14 @@ open_payments_ids <- function(search) {
 
   return(results)
 }
+
+
+#' Check the current years available for the Open Payments API
+#' @autoglobal
+#' @noRd
+years_openpay <- function() {
+  open_payments_ids("General Payment Data") |>
+    dplyr::pull(year)
+  }
+
+

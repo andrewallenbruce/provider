@@ -27,7 +27,8 @@ open_payments(
 )
 }
 \arguments{
-\item{year}{Reporting year, 2015-2021, default is \code{2021}}
+\item{year}{Program reporting year. Run the helper function \code{years_openpay()}
+to return a vector of currently available years.}
 
 \item{npi}{Covered recipient's National Provider Identifier (NPI).}
 

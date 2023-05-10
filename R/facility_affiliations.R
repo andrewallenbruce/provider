@@ -71,14 +71,9 @@ facility_affiliations <- function(npi           = NULL,
     unlist() |>
     stringr::str_flatten()
 
-  id_res <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
-
-  id <- paste0("[SELECT * FROM ", id_res$distribution$identifier, "]")
-
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
+  id     <- paste0("[SELECT * FROM ", fac_affil_id(), "]")
   post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
   url    <- paste0(http, id, params_args, post) |>
     param_brackets() |>
@@ -134,4 +129,15 @@ facility_affiliations <- function(npi           = NULL,
         parent_ccn)
     }
   return(results)
+}
+
+#' @autoglobal
+#' @noRd
+fac_affil_id <- function() {
+
+  response <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+
+  response$distribution |> dplyr::pull(identifier)
 }

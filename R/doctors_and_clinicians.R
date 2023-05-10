@@ -86,14 +86,9 @@ doctors_and_clinicians <- function(npi           = NULL,
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
     unlist() |> stringr::str_flatten()
 
-  id_res <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
-
-  id <- paste0("[SELECT * FROM ", id_res$distribution$identifier, "]")
-
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
+  id     <- paste0("[SELECT * FROM ", drs_clinics_id(), "]")
   post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
   url    <- paste0(http, id, params_args, post) |>
     param_brackets() |>
@@ -182,3 +177,13 @@ doctors_and_clinicians <- function(npi           = NULL,
   return(results)
 }
 
+#' @autoglobal
+#' @noRd
+drs_clinics_id <- function() {
+
+  response <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+
+  response$distribution |> dplyr::pull(identifier)
+}
