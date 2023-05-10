@@ -174,7 +174,6 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi>
   "taxonomies", # <nppes_npi>
   "enumeration_date", # <nppes_npi>
-  "sole_proprietor", # <nppes_npi>
   "address_purpose", # <nppes_npi>
   "country_name", # <nppes_npi>
   "telephone_number", # <nppes_npi>
@@ -463,5 +462,7 @@ utils::globalVariables(c(
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
+  ":=", # <change_abs>
+  ":=", # <change_pct>
   NULL
 ))
