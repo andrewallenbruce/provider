@@ -56,7 +56,6 @@
 #' beneficiary_enrollment(level = "State", fips = "10")
 #' @autoglobal
 #' @export
-
 beneficiary_enrollment <- function(year        = NULL,
                                    month       = NULL,
                                    level       = NULL,
@@ -94,9 +93,8 @@ beneficiary_enrollment <- function(year        = NULL,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- cms_update_ids("Medicare Monthly Enrollment")$distribution[2]
+  id     <- cms_update_ids("Medicare Monthly Enrollment")$distribution[1]
   post   <- "/data.json?"
-  #id     <- "30fe2d89-c56c-4a48-8e3a-3d07ad995c0b"
   #post   <- "/data?"
   url    <- paste0(http, id, post, params_args)
 

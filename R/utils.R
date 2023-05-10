@@ -260,6 +260,33 @@ display_long <- function(df){
         tidyr::pivot_longer(dplyr::everything())
 }
 
+#' Calculate year to year absolute change of a value
+#' @param df df
+#' @param col col
+#' @return A `tibble`
+#' @autoglobal
+#' @noRd
+change_abs <- function(df, col, by) {
+
+  df |> dplyr::mutate(
+    "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }}, order_by = {{ by }}),
+    .after = {{ col }})
+}
+
+#' Calculate year to year relative change of a value
+#' @param df df
+#' @param col col
+#' @param col_abs col_abs_chng
+#' @return A `tibble`
+#' @autoglobal
+#' @noRd
+change_pct <- function(df, col, col_abs, by) {
+
+  df |> dplyr::mutate(
+    "{{ col }}_pct" := {{ col_abs }} / dplyr::lag({{ col }}, order_by = {{ by }}),
+    .after = {{ col_abs }})
+}
+
 #' convert_breaks ------------------------------------------------------------
 #' @param x vector
 #' @param decimal TRUE or FALSE

@@ -1,0 +1,22 @@
+dd_beneficiary_enrollment <- tibble::tribble(
+  ~Description, ~Variable, ~Definition,
+  "Year",       "`Year`", "Indicates the calendar year of Medicare enrollment",
+  "Month",             "`Month`", "Indicates the month of Medicare enrollment",
+  "Beneficiary State", "`Bene_State`", "Area of beneficiary residence",
+  "Beneficiary County", "`Bene_County`", "County of beneficiary residence",
+  "Total Beneficiaries", "`Tot_Benes`", "Count of all Medicare beneficiaries",
+  "Original Medicare Beneficiaries", "`Orgnl_Mdcr_Benes`", "Count of all Original Medicare beneficiaries",
+  "Medicare Advantage and Other Health Plan Beneficiaries", "`MA_and_Oth_Benes`", "Count of all Medicare Advantage and Other Health Plan beneficiaries",
+  "Total Aged Beneficiaries", "`Aged_Tot_Benes`", "Count of Medicare aged beneficiaries",
+  "Aged ESRD Beneficiaries", "`Aged_ESRD_Benes`", "Count of Medicare aged beneficiaries with End Stage Renal Disease",
+  "Aged Beneficiaries Without ESRD", "`Aged_No_ESRD_Benes`", "Count of Medicare aged beneficiaries without End Stage Renal Disease",
+  "Total Disabled Beneficiaries", "`Dsbld_Tot_Benes`", "Count of Medicare disabled beneficiaries",
+  "Disabled Beneficiaries with ESRD and ESRD Only Beneficiaries", "`Dsbld_ESRD_and_ESRD_Only_Benes`", "Count of Medicare disabled beneficiaries with End Stage Renal Disease and beneficiaries with End Stage Renal Disease only",
+  "Disabled Beneficiaries Without ESRD", "`Dsbld_No_ESRD_Benes`", "Count of Medicare disabled beneficiaries without End Stage Renal Disease",
+  "Total Medicare Part A and Part B Beneficiaries", "`A_B_Tot_Benes`", "Count of Medicare beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
+  "Original Medicare Part A and Part B Beneficiaries", "`A_B_Orgnl_Mdcr_Benes`", "Count of Original Medicare beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
+  "Medicare Advantage and Other Health Plan Part A and Part B Beneficiaries", "`A_B_MA_and_Oth_Benes`", "Count of Medicare Advantage and Other Health Plan beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
+  "Total Medicare Part D beneficiaries", "`Prscrptn_Drug_Tot_Benes`", "Count of all Medicare Prescription Drug (or Part D) beneficiaries",
+  "Total Medicare Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_PDP_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Prescription Drug Plan",
+  "Total Medicare Advantage Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_MAPD_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Medicare Advantage Prescription Drug plan"
+) |> dplyr::tibble()
