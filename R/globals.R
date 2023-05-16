@@ -5,6 +5,7 @@ utils::globalVariables(c(
   "state.name", # <beneficiary_enrollment>
   "y", # <beneficiary_enrollment>
   "bene_geo_lvl", # <beneficiary_enrollment>
+  "month", # <beneficiary_enrollment>
   "bene_state_abrvtn", # <beneficiary_enrollment>
   "bene_state_desc", # <beneficiary_enrollment>
   "bene_county_desc", # <beneficiary_enrollment>
@@ -120,6 +121,7 @@ utils::globalVariables(c(
   "phn_numbr", # <doctors_and_clinicians>
   "ind_assgn", # <doctors_and_clinicians>
   "grp_assgn", # <doctors_and_clinicians>
+  "identifier", # <drs_clinics_id>
   "y", # <facility_affiliations>
   "ind_pac_id", # <facility_affiliations>
   "frst_nm", # <facility_affiliations>
@@ -127,6 +129,7 @@ utils::globalVariables(c(
   "lst_nm", # <facility_affiliations>
   "suff", # <facility_affiliations>
   "facility_afl_ccn", # <facility_affiliations>
+  "identifier", # <fac_affil_id>
   "y", # <hospital_enrollment>
   "incorporation_date", # <hospital_enrollment>
   "address_line_1", # <hospital_enrollment>
@@ -191,6 +194,26 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi_old>
   "basic_first_name", # <nppes_npi_old>
   "basic_last_name", # <nppes_npi_old>
+  "y", # <nppes_full>
+  "number", # <nppes_full>
+  "enumeration_type", # <nppes_full>
+  "addresses", # <nppes_full>
+  "taxonomies", # <nppes_full>
+  "practiceLocations", # <nppes_full>
+  "other_names", # <nppes_full>
+  "practice_locations", # <nppes_full>
+  "country_code", # <nppes_full>
+  "telephone_number", # <nppes_full>
+  "postal_code", # <nppes_full>
+  "address_purpose", # <nppes_full>
+  "purpose", # <nppes_full>
+  "code", # <nppes_full>
+  "desc", # <nppes_full>
+  "taxonomy_group", # <nppes_full>
+  "primary", # <nppes_full>
+  "issuer", # <nppes_full>
+  "identifier", # <nppes_full>
+  "enumeration_date", # <nppes_full>
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>
@@ -234,8 +257,8 @@ utils::globalVariables(c(
   "physician_ownership_indicator", # <open_payments>
   "third_party_payment_recipient_indicator", # <open_payments>
   "name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc", # <open_payments>
-  "charity_indicator", # <open_payments>
   "third_party_equals_covered_recipient_indicator", # <open_payments>
+  "charity_indicator", # <open_payments>
   "contextual_information", # <open_payments>
   "payment_publication_date", # <open_payments>
   "delay_in_publication_indicator", # <open_payments>
@@ -279,6 +302,7 @@ utils::globalVariables(c(
   "year", # <open_payments_ids>
   "set", # <open_payments_ids>
   "identifier", # <open_payments_ids>
+  "year", # <years_openpay>
   "y", # <opt_out>
   "optout_end_date", # <opt_out>
   "optout_effective_date", # <opt_out>
@@ -377,7 +401,6 @@ utils::globalVariables(c(
   "bene_cc_sz_pct", # <physician_by_provider>
   "bene_cc_strok_pct", # <physician_by_provider>
   "bene_avg_risk_scre", # <physician_by_provider>
-  "entype", # <physician_by_provider>
   "distro", # <physician_by_service>
   "y", # <physician_by_service>
   "tot_benes", # <physician_by_service>

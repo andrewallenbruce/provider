@@ -20,7 +20,7 @@ nppes_npi(
   country = NULL,
   limit = 1200,
   skip = NULL,
-  tidy = TRUE
+  tidy = FALSE
 )
 }
 \arguments{

@@ -21,8 +21,8 @@ doctors_and_clinicians(
   city = NULL,
   state = NULL,
   zipcode = NULL,
-  ind_assign = NULL,
-  group_assign = NULL,
+  ind_assn = NULL,
+  group_assn = NULL,
   offset = 0,
   tidy = TRUE
 )
@@ -56,11 +56,11 @@ clinician in the selected enrollment}
 
 \item{zipcode}{Group or individual's ZIP code (9 digits when available)}
 
-\item{ind_assign}{Indicator for whether clinician accepts Medicare approved
+\item{ind_assn}{Indicator for whether clinician accepts Medicare approved
 amount as payment in full. \code{Y} = Clinician accepts Medicare approved amount
 as payment in full. \code{M} = Clinician may accept Medicare Assignment.}
 
-\item{group_assign}{Indicator for whether group accepts Medicare approved
+\item{group_assn}{Indicator for whether group accepts Medicare approved
 amount as payment in full. \code{Y} = Clinician accepts Medicare approved amount
 as payment in full. \code{M} = Clinician may accept Medicare Assignment.}
 

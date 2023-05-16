@@ -31,7 +31,8 @@ physician_by_service(
 )
 }
 \arguments{
-\item{year}{int (required); Year in YYYY format. Run \code{provider:::cms_update("Medicare Physician & Other Practitioners - by Provider and Service", "years")} to return a character vector of the years currently available.}
+\item{year}{int (required); Year in YYYY format. Run \code{years_pbs()} to return
+a character vector of the years currently available.}
 
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
@@ -110,33 +111,32 @@ in non-facility.}
 A \link[tibble:tibble-package]{tibble} containing 29 columns:
 \item{year}{year}
 \item{npi}{year}
-\item{entype}{year}
+\item{entype}{Entity/Enumeration Type of the Provider}
 \item{first_name}{year}
 \item{middle_name}{year}
 \item{last_name}{year}
 \item{credential}{year}
 \item{gender}{year}
 \item{specialty}{year}
-\item{street}{year}
-\item{city}{year}
-\item{state}{year}
-\item{fips}{year}
-\item{zipcode}{year}
-\item{ruca}{year}
-\item{ruca_desc}{year}
-\item{country}{year}
-\item{par}{year}
-\item{hcpcs_cd}{year}
-\item{hcpcs_desc}{year}
-\item{hcpcs_drug}{year}
-\item{pos}{year}
-\item{tot_benes}{year}
-\item{tot_srvcs}{year}
-\item{tot_day}{year}
-\item{avg_charge}{year}
-\item{avg_allowed}{year}
-\item{avg_payment}{year}
-\item{avg_std_pymt}{year}
+\item{street}{ the provider’s street address}
+\item{city}{The city where the provider is located, as reported in NPPES.}
+\item{state}{State Abbreviation of the Provider}
+\item{fips}{State FIPS Code of the Provider}
+\item{zipcode}{Zip Code of the Provider}
+\item{ruca}{RUCA Code of the Provider}
+\item{country}{Country Code of the Provider}
+\item{par}{Medicare Participation Indicator}
+\item{hcpcs_cd}{HCPCS Code}
+\item{hcpcs_desc}{HCPCS Description}
+\item{hcpcs_drug}{HCPCS Drug Indicator}
+\item{pos}{Place of Service}
+\item{tot_benes}{Number of Medicare Beneficiaries}
+\item{tot_srvcs}{Number of Services}
+\item{tot_day}{Number of Distinct Medicare Beneficiary/Per Day Services}
+\item{avg_charge}{Average Submitted Charge Amount}
+\item{avg_allowed}{Average Medicare Allowed Amount}
+\item{avg_payment}{Average Medicare Payment Amount}
+\item{avg_std_pymt}{Average Medicare Standardized Payment Amount}
 }
 \description{
 Information on services and procedures provided to
@@ -174,9 +174,7 @@ Update Frequency: \strong{Annually}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 physician_by_service(npi = 1003000126)
-
 physician_by_service(year = 2019, last_name = "Enkeshafi")
-
 c(1003026055, 1316405939, 1720392988,
   1518184605, 1922056829, 1083879860) |>
   purrr::map(physician_by_service, year = 2020)

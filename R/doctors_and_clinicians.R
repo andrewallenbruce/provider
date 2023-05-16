@@ -13,7 +13,6 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Monthly**
-#'
 #' @param npi Unique clinician ID assigned by NPPES
 #' @param pac_id Unique individual clinician ID assigned by PECOS
 #' @param enroll_id Unique ID for the clinician enrollment that is the source
@@ -29,10 +28,10 @@
 #' @param city Group or individual's city
 #' @param state Group or individual's state
 #' @param zipcode Group or individual's ZIP code (9 digits when available)
-#' @param ind_assign Indicator for whether clinician accepts Medicare approved
+#' @param ind_assn Indicator for whether clinician accepts Medicare approved
 #'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
 #'   as payment in full. `M` = Clinician may accept Medicare Assignment.
-#' @param group_assign Indicator for whether group accepts Medicare approved
+#' @param group_assn Indicator for whether group accepts Medicare approved
 #'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
 #'   as payment in full. `M` = Clinician may accept Medicare Assignment.
 #' @param offset offset; API pagination
@@ -59,8 +58,8 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    city          = NULL,
                                    state         = NULL,
                                    zipcode       = NULL,
-                                   ind_assign    = NULL,
-                                   group_assign  = NULL,
+                                   ind_assn      = NULL,
+                                   group_assn    = NULL,
                                    offset        = 0,
                                    tidy          = TRUE) {
   # args tribble ------------------------------------------------------------
@@ -79,12 +78,13 @@ doctors_and_clinicians <- function(npi           = NULL,
     "cty",                city,
     "st",                 state,
     "zip",                zipcode,
-    "ind_assgn",          ind_assign,
-    "grp_assgn",          group_assign)
+    "ind_assgn",          ind_assn,
+    "grp_assgn",          group_assn)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
-    unlist() |> stringr::str_flatten()
+    unlist() |>
+    stringr::str_flatten()
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
@@ -115,8 +115,8 @@ doctors_and_clinicians <- function(npi           = NULL,
       "city",          city,
       "state",         state,
       "zipcode",       zipcode,
-      "ind_assign",    ind_assign,
-      "group_assign",  group_assign) |>
+      "ind_assn",      ind_assn,
+      "group_assn",    group_assn) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -146,7 +146,7 @@ doctors_and_clinicians <- function(npi           = NULL,
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth),
                     grad_duration = lubridate::as.duration(
-                      lubridate::today() - clock::date_build(year = grd_yr))) |>
+                    lubridate::today() - clock::date_build(year = grd_yr))) |>
       dplyr::select(
         npi,
         pac_id        = ind_pac_id,
@@ -170,9 +170,9 @@ doctors_and_clinicians <- function(npi           = NULL,
         city          = cty,
         state         = st,
         zipcode       = zip,
-        phone_number  = phn_numbr,
-        ind_assign    = ind_assgn,
-        group_assign  = grp_assgn)
+        phone         = phn_numbr,
+        ind_assn      = ind_assgn,
+        group_assn    = grp_assgn)
     }
   return(results)
 }

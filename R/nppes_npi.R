@@ -84,7 +84,7 @@
 #' @autoglobal
 #' @export
 nppes_npi <- function(npi            = NULL,
-                      entype      = NULL,
+                      entype         = NULL,
                       first_name     = NULL,
                       last_name      = NULL,
                       org_name       = NULL,
@@ -95,7 +95,7 @@ nppes_npi <- function(npi            = NULL,
                       country        = NULL,
                       limit          = 1200,
                       skip           = NULL,
-                      tidy           = TRUE) {
+                      tidy           = FALSE) {
 
   # request and response ----------------------------------------------------
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
@@ -114,18 +114,17 @@ nppes_npi <- function(npi            = NULL,
     httr2::req_perform()
 
   # parse response ---------------------------------------------------------
-  response <- httr2::resp_body_json(request,
-                                check_type = FALSE,
-                                simplifyVector = TRUE)
+  response <- httr2::resp_body_json(request, check_type = FALSE, simplifyVector = TRUE)
 
   res_cnt <- response$result_count
+
   # no search results returns empty tibble ----------------------------------
   if (is.null(res_cnt) | res_cnt == 0) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
       "npi",           as.character(npi),
-      "enum_type",     entype,
+      "entype",        entype,
       "first_name",    first_name,
       "last_name",     last_name,
       "org_name",      org_name,
@@ -142,14 +141,15 @@ nppes_npi <- function(npi            = NULL,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
   results <- response$results |> dplyr::tibble()
-return(results)
-  if (tidy) {
+
+    if (tidy) {
+
+      # basic ------------------------------------------------------------------
 
     results <- results |>
       dplyr::select(npi = number,
@@ -168,8 +168,8 @@ return(results)
                     entype = entype_char(entype),
                     dplyr::across(dplyr::any_of(c("sole_proprietor", "organizational_subpart")), ~yn_logical(.)))
 
-      # replace empty lists with NA -------------------------------------------
-      results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+    # replace empty lists with NA -------------------------------------------
+    results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
       # addresses --------------------------------------------------------------
       address <- results |>
@@ -490,4 +490,283 @@ nppes_npi_old <- function(npi            = NULL,
 
   #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
+}
+
+#' @autoglobal
+#' @noRd
+nppes_full <- function(npi           = NULL,
+                      entype         = NULL,
+                      first_name     = NULL,
+                      last_name      = NULL,
+                      org_name       = NULL,
+                      taxonomy_desc  = NULL,
+                      city           = NULL,
+                      state          = NULL,
+                      zipcode        = NULL,
+                      country        = NULL,
+                      limit          = 1200,
+                      skip           = NULL,
+                      tidy           = TRUE) {
+
+  # request and response ----------------------------------------------------
+  request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
+    httr2::req_url_query(number               = npi,
+                         enumeration_type     = entype,
+                         first_name           = first_name,
+                         last_name            = last_name,
+                         organization_name    = org_name,
+                         taxonomy_description = taxonomy_desc,
+                         city                 = city,
+                         state                = state,
+                         postal_code          = zipcode,
+                         country_code         = country,
+                         limit                = limit,
+                         skip                 = skip) |>
+    httr2::req_perform()
+
+  # parse response ---------------------------------------------------------
+  response <- httr2::resp_body_json(request, check_type = FALSE, simplifyVector = TRUE)
+
+  res_cnt <- response$result_count
+
+  # no search results returns empty tibble ----------------------------------
+  if (is.null(res_cnt) | res_cnt == 0) {
+
+    cli_args <- tibble::tribble(
+      ~x,              ~y,
+      "npi",           as.character(npi),
+      "entype",        entype,
+      "first_name",    first_name,
+      "last_name",     last_name,
+      "org_name",      org_name,
+      "taxonomy_desc", taxonomy_desc,
+      "city",          city,
+      "state",         state,
+      "zipcode",       as.character(zipcode),
+      "country",       country) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            cli_args$y,
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    return(invisible(NULL))
+  }
+
+  results <- response$results |>
+    dplyr::tibble() |>
+    dplyr::select(npi = number,
+                  entype = enumeration_type,
+                  basic,
+                  addresses,
+                  taxonomy = taxonomies,
+                  identifiers,
+                  endpoints,
+                  practice_locations = practiceLocations,
+                  other_names) |>
+    tidyr::unnest(c(basic))
+
+  # replace empty lists with NA -------------------------------------------
+  results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
+
+  if (tidy) {
+
+    key <- dplyr::join_by(npi)
+
+    # basic ------------------------------------------------------------------
+    basic <- results |>
+      dplyr::select(!c(addresses,
+                       taxonomy,
+                       identifiers,
+                       endpoints,
+                       practice_locations,
+                       other_names))
+
+    # addresses --------------------------------------------------------------
+    address <- results |>
+      dplyr::select(npi, addresses) |>
+      tidyr::unnest(c(addresses)) |>
+      tidyr::unite("street",
+                   dplyr::any_of(c("address_1", "address_2")),
+                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+      dplyr::mutate(address_type = NULL,
+                    country_name = NULL) |>
+      dplyr::rename(country      = country_code,
+                    phone_number = telephone_number,
+                    zipcode      = postal_code,
+                    purpose      = address_purpose) |>
+      dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose))
+
+
+    # practice locations ------------------------------------------------------
+    pracloc <- results |>
+      dplyr::select(npi, practice_locations) |>
+      tidyr::unnest(c(practice_locations))
+
+    if (ncol(pracloc) > 2) {
+
+      pracloc <- pracloc |>
+        tidyr::unite("street",
+                     dplyr::any_of(c("address_1",
+                                     "address_2")),
+                     remove = TRUE,
+                     na.rm = TRUE,
+                     sep = " ") |>
+        dplyr::mutate(address_type = NULL,
+                      country_name = NULL) |>
+        dplyr::rename(country      = country_code,
+                      phone_number = telephone_number,
+                      zipcode      = postal_code,
+                      purpose      = address_purpose)
+
+      address <- dplyr::bind_rows(address, pracloc)
+      }
+
+    final <- dplyr::left_join(basic, address, key)
+
+    # taxonomy ----------------------------------------------------------------
+    taxonomy <- results |>
+      dplyr::select(npi, taxonomy) |>
+      tidyr::unnest(c(taxonomy))
+
+    if (ncol(taxonomy) > 2) {
+
+      taxonomy <- taxonomy |>
+        dplyr::select(npi,
+                      tx_code = code,
+                      tx_desc = desc,
+                      tx_group = taxonomy_group,
+                      tx_state = state,
+                      tx_license = license,
+                      tx_primary = primary)
+
+      final <- dplyr::left_join(final, taxonomy, key)
+    }
+
+    # identifiers -------------------------------------------------------------
+    identifiers <- results |>
+        dplyr::select(npi, identifiers) |>
+        tidyr::unnest(c(identifiers))
+
+      if (ncol(identifiers) > 2) {
+
+        identifiers <- identifiers |>
+          dplyr::mutate(desc = gsub("Other ", "", desc)) |>
+          tidyr::unite("issuer",
+                       dplyr::any_of(c("issuer", "desc")),
+                       remove = TRUE,
+                       na.rm = TRUE,
+                       sep = " ") |>
+          dplyr::select(npi,
+                        id_issuer = issuer,
+                        id_identifier = identifier,
+                        id_state = state)
+
+        final <- dplyr::left_join(final, identifiers, key)
+      }
+
+    # endpoints ---------------------------------------------------------------
+    endpoints <- results |>
+      dplyr::select(npi, endpoints) |>
+      tidyr::unnest(c(endpoints))
+
+    if (ncol(endpoints) > 2) {
+
+      endpoints <- endpoints |>
+        tidyr::unite("street",
+                     dplyr::any_of(c("address_1", "address_2")),
+                     remove = TRUE,
+                     na.rm = TRUE,
+                     sep = " ") |>
+        datawizard::data_addprefix("end_", exclude = npi)
+        # dplyr::select(npi,
+        #               end_point = endpoint,
+        #               end_type = endpointTypeDescription,
+        #               end_aff = affiliation,
+        #               end_affname = affiliationName,
+        #               end_use = useDescription,
+        #               end_content = contentTypeDescription,
+        #               end_street,
+        #               end_city = city,
+        #               end_state = state,
+        #               end_zip = postal_code)
+
+      final <- dplyr::left_join(final, endpoints, key)
+    }
+
+    # other names -------------------------------------------------------------
+    other <- results |>
+      dplyr::select(npi, other_names) |>
+      tidyr::unnest(c(other_names))
+
+    if (ncol(other) > 2) {
+
+      other <- other |>
+        datawizard::data_addprefix("other_", exclude = npi)
+
+      final <- dplyr::left_join(final, other, key)
+    }
+
+    # final post-join cleaning logic -----------------------------------------
+    results <- final |>
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
+                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
+                    dplyr::across(dplyr::where(is.character), ~clean_credentials(.)),
+                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date),
+                    entype = entype_char(entype),
+                    dplyr::across(dplyr::any_of(c("sole_proprietor", "organizational_subpart")), ~yn_logical(.)))
+
+    valid_fields <- c("npi",
+                      "entype",
+                      "enumeration_date",
+                      "enumeration_duration",
+                      "last_updated",
+                      "certification_date",
+                      "status",
+                      "organization_name",
+                      "first_name",
+                      "middle_name",
+                      "last_name",
+                      "credential",
+                      "gender",
+                      "organizational_subpart",
+                      "sole_proprietor",
+                      "purpose",
+                      "street",
+                      "city",
+                      "state",
+                      "zipcode",
+                      "country",
+                      "phone_number",
+                      "fax_number",
+                      "authorized_official_first_name",
+                      "authorized_official_middle_name",
+                      "authorized_official_last_name",
+                      "authorized_official_title_or_position",
+                      "authorized_official_telephone_number",
+                      "authorized_official_credential",
+                      "parent_organization_legal_business_name",
+                      "tx_code",
+                      "tx_desc",
+                      "tx_group",
+                      "tx_state",
+                      "tx_license",
+                      "tx_primary",
+                      "id_issuer",
+                      "id_identifier",
+                      "id_state")
+
+    results <- results |>
+      dplyr::select(dplyr::any_of(valid_fields),
+                    dplyr::starts_with("end_"),
+                    dplyr::starts_with("other_"))
+
+  }
+  return(results)
 }

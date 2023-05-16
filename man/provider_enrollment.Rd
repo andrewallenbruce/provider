@@ -94,7 +94,7 @@ Transparency.
 Update Frequency: \strong{Quarterly}
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 
 provider_enrollment(first_name = "DEBRA",
@@ -124,5 +124,5 @@ prven <- tibble::tribble(
                             state = "GA"))
 
 purrr::invoke_map_dfr(prven$fn, prven$params)
-}
+\dontshow{\}) # examplesIf}
 }

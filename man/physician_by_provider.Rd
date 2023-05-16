@@ -15,7 +15,7 @@ physician_by_provider(
   last_name = NULL,
   credential = NULL,
   gender = NULL,
-  enum_type = NULL,
+  entype = NULL,
   city = NULL,
   state = NULL,
   zipcode = NULL,
@@ -28,7 +28,8 @@ physician_by_provider(
 )
 }
 \arguments{
-\item{year}{Year in YYYY format, between 2013-2020; default is 2020}
+\item{year}{Year in YYYY format. Run the helper function \code{years_pbp()} to
+return a vector of currently available years.}
 
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in
@@ -45,10 +46,9 @@ organization (entity type code \code{O}), this is the organization name.}
 \item{credential}{An individual provider's (entity type code \code{I}) credentials.
 An organization's will be blank.}
 
-\item{gender}{An individual provider's gender.
-An organization's will be blank.}
+\item{gender}{An individual provider's gender. An organization's will be blank.}
 
-\item{enum_type}{Type of entity reported in NPPES. An entity code of \code{I}
+\item{entype}{Type of entity reported in NPPES. An entity code of \code{I}
 identifies providers registered as individuals while an entity type
 code of \code{O} identifies providers registered as organizations.}
 
@@ -107,20 +107,20 @@ organized by National Provider Identifier (NPI).
 }
 }
 \note{
-Update Frequency: \strong{Annually}
+Update Frequency: *\emph{Annually}
 }
 \examples{
 \dontrun{
 physician_by_provider(npi = 1003000423,
                       year = 2020)
 
-physician_by_provider(type = "I",
+physician_by_provider(entype = "I",
                       city = "Hershey",
                       state = "PA",
                       fips = 42,
-                      ruca =1,
+                      ruca = 1,
                       gender = "F",
-                      cred = "M.D.",
+                      cred = "MD",
                       specialty = "Anesthesiology")
 
 purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))

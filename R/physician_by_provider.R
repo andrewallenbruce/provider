@@ -14,7 +14,9 @@
 #' * [Medicare Physician & Other Practitioners: by Provider API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)
 #'
 #' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
+#' @note Update Frequency: **Annually*
+#' @param year Year in YYYY format. Run the helper function `years_pbp()` to
+#'    return a vector of currently available years.
 #' @param npi National Provider Identifier (NPI) for the rendering provider
 #'    on the claim. The provider NPI is the numeric identifier registered in
 #'    NPPES.
@@ -26,9 +28,8 @@
 #'    An organization's (entity type code `O`) will be blank.
 #' @param credential An individual provider's (entity type code `I`) credentials.
 #'    An organization's will be blank.
-#' @param gender An individual provider's gender.
-#'    An organization's will be blank.
-#' @param enum_type Type of entity reported in NPPES. An entity code of `I`
+#' @param gender An individual provider's gender. An organization's will be blank.
+#' @param entype Type of entity reported in NPPES. An entity code of `I`
 #'    identifies providers registered as individuals while an entity type
 #'    code of `O` identifies providers registered as organizations.
 #' @param city The city where the provider is located, as reported in NPPES.
@@ -56,7 +57,6 @@
 #'    non-participating provider may elect to accept Medicare allowed amounts
 #'    for some services and not accept Medicare allowed amounts for other
 #'    services.
-#' @param year Year in YYYY format, between 2013-2020; default is 2020
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examples
@@ -64,13 +64,13 @@
 #' physician_by_provider(npi = 1003000423,
 #'                       year = 2020)
 #'
-#' physician_by_provider(type = "I",
+#' physician_by_provider(entype = "I",
 #'                       city = "Hershey",
 #'                       state = "PA",
 #'                       fips = 42,
-#'                       ruca =1,
+#'                       ruca = 1,
 #'                       gender = "F",
-#'                       cred = "M.D.",
+#'                       cred = "MD",
 #'                       specialty = "Anesthesiology")
 #'
 #' purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
@@ -83,7 +83,7 @@ physician_by_provider <- function(year,
                                   last_name   = NULL,
                                   credential  = NULL,
                                   gender      = NULL,
-                                  enum_type   = NULL,
+                                  entype      = NULL,
                                   city        = NULL,
                                   state       = NULL,
                                   zipcode     = NULL,
@@ -112,7 +112,7 @@ physician_by_provider <- function(year,
        "Rndrng_Prvdr_First_Name",  first_name,
           "Rndrng_Prvdr_Crdntls",  credential,
              "Rndrng_Prvdr_Gndr",  gender,
-           "Rndrng_Prvdr_Ent_Cd",  enum_type,
+           "Rndrng_Prvdr_Ent_Cd",  entype,
              "Rndrng_Prvdr_City",  city,
      "Rndrng_Prvdr_State_Abrvtn",  state,
        "Rndrng_Prvdr_State_FIPS",  fips,
@@ -147,7 +147,7 @@ physician_by_provider <- function(year,
       "first_name",   first_name,
       "credential",   credential,
       "gender",       gender,
-      "enum_type",    enum_type,
+      "entype",       entype,
       "city",         city,
       "state",        state,
       "fips",         as.character(fips),
@@ -155,7 +155,7 @@ physician_by_provider <- function(year,
       "ruca",         as.character(ruca),
       "country",      country,
       "specialty",    specialty,
-      "par",          par) |>
+      "par",          as.character(par)) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -187,80 +187,88 @@ physician_by_provider <- function(year,
                    na.rm = TRUE,
                    sep = " ") |>
       dplyr::select(year,
-                    npi = rndrng_npi,
-                    first_name = rndrng_prvdr_first_name,
-                    middle_name = rndrng_prvdr_mi,
-                    last_name = rndrng_prvdr_last_org_name,
-                    credential = rndrng_prvdr_crdntls,
-                    gender = rndrng_prvdr_gndr,
-                    entype = rndrng_prvdr_ent_cd,
+                    npi            = rndrng_npi,
+                    first_name     = rndrng_prvdr_first_name,
+                    middle_name    = rndrng_prvdr_mi,
+                    last_name      = rndrng_prvdr_last_org_name,
+                    credential     = rndrng_prvdr_crdntls,
+                    gender         = rndrng_prvdr_gndr,
+                    entype         = rndrng_prvdr_ent_cd,
                     street,
-                    city = rndrng_prvdr_city,
-                    state = rndrng_prvdr_state_abrvtn,
-                    fips = rndrng_prvdr_state_fips,
-                    zipcode = rndrng_prvdr_zip5,
-                    ruca = rndrng_prvdr_ruca,
-                    #ruca_desc = rndrng_prvdr_ruca_desc,
-                    country = rndrng_prvdr_cntry,
-                    specialty = rndrng_prvdr_type,
-                    par = rndrng_prvdr_mdcr_prtcptg_ind,
-                    tot_hcpcs = tot_hcpcs_cds,
+                    city           = rndrng_prvdr_city,
+                    state          = rndrng_prvdr_state_abrvtn,
+                    fips           = rndrng_prvdr_state_fips,
+                    zipcode        = rndrng_prvdr_zip5,
+                    ruca           = rndrng_prvdr_ruca,
+                    #ruca_desc     = rndrng_prvdr_ruca_desc,
+                    country        = rndrng_prvdr_cntry,
+                    specialty      = rndrng_prvdr_type,
+                    par            = rndrng_prvdr_mdcr_prtcptg_ind,
+                    tot_hcpcs      = tot_hcpcs_cds,
                     tot_benes,
                     tot_srvcs,
-                    tot_charges = tot_sbmtd_chrg,
-                    tot_allowed = tot_mdcr_alowd_amt,
-                    tot_payment = tot_mdcr_pymt_amt,
-                    tot_std_pymt = tot_mdcr_stdzd_amt,
-                    #drug_supp = drug_sprsn_ind,
-                    drug_hcpcs = drug_tot_hcpcs_cds,
-                    drug_benes = drug_tot_benes,
-                    drug_srvcs = drug_tot_srvcs,
-                    drug_charges = drug_sbmtd_chrg,
-                    drug_allowed = drug_mdcr_alowd_amt,
-                    drug_payment = drug_mdcr_pymt_amt,
-                    drug_std_pymt = drug_mdcr_stdzd_amt,
-                    #med_supp = med_sprsn_ind,
-                    med_hcpcs = med_tot_hcpcs_cds,
-                    med_benes = med_tot_benes,
-                    med_srvcs = med_tot_srvcs,
-                    med_charges = med_sbmtd_chrg,
-                    med_allowed = med_mdcr_alowd_amt,
-                    med_payment = med_mdcr_pymt_amt,
-                    med_std_pymt = med_mdcr_stdzd_amt,
-                    bene_age_avg = bene_avg_age,
-                    bene_age_lt65 = bene_age_lt_65_cnt,
+                    tot_charges    = tot_sbmtd_chrg,
+                    tot_allowed    = tot_mdcr_alowd_amt,
+                    tot_payment    = tot_mdcr_pymt_amt,
+                    tot_std_pymt   = tot_mdcr_stdzd_amt,
+                    #drug_supp     = drug_sprsn_ind,
+                    drug_hcpcs     = drug_tot_hcpcs_cds,
+                    drug_benes     = drug_tot_benes,
+                    drug_srvcs     = drug_tot_srvcs,
+                    drug_charges   = drug_sbmtd_chrg,
+                    drug_allowed   = drug_mdcr_alowd_amt,
+                    drug_payment   = drug_mdcr_pymt_amt,
+                    drug_std_pymt  = drug_mdcr_stdzd_amt,
+                    #med_supp      = med_sprsn_ind,
+                    med_hcpcs      = med_tot_hcpcs_cds,
+                    med_benes      = med_tot_benes,
+                    med_srvcs      = med_tot_srvcs,
+                    med_charges    = med_sbmtd_chrg,
+                    med_allowed    = med_mdcr_alowd_amt,
+                    med_payment    = med_mdcr_pymt_amt,
+                    med_std_pymt   = med_mdcr_stdzd_amt,
+                    bene_age_avg   = bene_avg_age,
+                    bene_age_lt65  = bene_age_lt_65_cnt,
                     bene_age_65_74 = bene_age_65_74_cnt,
                     bene_age_75_84 = bene_age_75_84_cnt,
-                    bene_age_gt84 = bene_age_gt_84_cnt,
-                    bene_female = bene_feml_cnt,
-                    bene_male = bene_male_cnt,
-                    bene_race_wht = bene_race_wht_cnt,
-                    bene_race_blk = bene_race_black_cnt,
-                    bene_race_api = bene_race_api_cnt,
+                    bene_age_gt84  = bene_age_gt_84_cnt,
+                    bene_female    = bene_feml_cnt,
+                    bene_male      = bene_male_cnt,
+                    bene_race_wht  = bene_race_wht_cnt,
+                    bene_race_blk  = bene_race_black_cnt,
+                    bene_race_api  = bene_race_api_cnt,
                     bene_race_span = bene_race_hspnc_cnt,
-                    bene_race_nat = bene_race_natind_cnt,
-                    bene_race_oth = bene_race_othr_cnt,
-                    bene_dual = bene_dual_cnt,
-                    bene_ndual = bene_ndual_cnt,
-                    bene_cc_af = bene_cc_af_pct,
-                    bene_cc_alz = bene_cc_alzhmr_pct,
-                    bene_cc_asth = bene_cc_asthma_pct,
-                    bene_cc_canc = bene_cc_cncr_pct,
-                    bene_cc_chf = bene_cc_chf_pct,
-                    bene_cc_ckd = bene_cc_ckd_pct,
-                    bene_cc_copd = bene_cc_copd_pct,
-                    bene_cc_dep = bene_cc_dprssn_pct,
-                    bene_cc_diab = bene_cc_dbts_pct,
-                    bene_cc_hplip = bene_cc_hyplpdma_pct,
-                    bene_cc_hpten = bene_cc_hyprtnsn_pct,
-                    bene_cc_ihd = bene_cc_ihd_pct,
-                    bene_cc_opo = bene_cc_opo_pct,
-                    bene_cc_raoa = bene_cc_raoa_pct,
-                    bene_cc_sz = bene_cc_sz_pct,
-                    bene_cc_strk = bene_cc_strok_pct,
-                    bene_risk_avg = bene_avg_risk_scre) |>
-      dplyr::mutate(credential = clean_credentials(credential),
-                    entype = entype_char(entype))
+                    bene_race_nat  = bene_race_natind_cnt,
+                    bene_race_oth  = bene_race_othr_cnt,
+                    bene_dual      = bene_dual_cnt,
+                    bene_ndual     = bene_ndual_cnt,
+                    bene_cc_af     = bene_cc_af_pct,
+                    bene_cc_alz    = bene_cc_alzhmr_pct,
+                    bene_cc_asth   = bene_cc_asthma_pct,
+                    bene_cc_canc   = bene_cc_cncr_pct,
+                    bene_cc_chf    = bene_cc_chf_pct,
+                    bene_cc_ckd    = bene_cc_ckd_pct,
+                    bene_cc_copd   = bene_cc_copd_pct,
+                    bene_cc_dep    = bene_cc_dprssn_pct,
+                    bene_cc_diab   = bene_cc_dbts_pct,
+                    bene_cc_hplip  = bene_cc_hyplpdma_pct,
+                    bene_cc_hpten  = bene_cc_hyprtnsn_pct,
+                    bene_cc_ihd    = bene_cc_ihd_pct,
+                    bene_cc_opo    = bene_cc_opo_pct,
+                    bene_cc_raoa   = bene_cc_raoa_pct,
+                    bene_cc_sz     = bene_cc_sz_pct,
+                    bene_cc_strk   = bene_cc_strok_pct,
+                    bene_risk_avg  = bene_avg_risk_scre) |>
+      dplyr::mutate(credential     = clean_credentials(credential),
+                    entype         = entype_char(entype))
     }
   return(results)
+}
+
+#' Check the current years available for the Physician & Other Practitioners by Provider API
+#' @autoglobal
+#' @noRd
+years_pbp <- function() {
+  cms_update("Medicare Physician & Other Practitioners - by Provider", "years") |>
+    as.integer()
 }

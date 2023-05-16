@@ -174,20 +174,20 @@ cc_specific <- function(year,
   if (tidy) {
 
     results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(year = as.integer(year)) |>
+      dplyr::mutate(year                = as.integer(year)) |>
       dplyr::select(year,
-                    level = bene_geo_lvl,
-                    sublevel = bene_geo_desc,
-                    fips = bene_geo_cd,
-                    age_group = bene_age_lvl,
-                    demographic = bene_demo_lvl,
-                    subdemo = bene_demo_desc,
-                    condition = bene_cond,
-                    prevalence = prvlnc,
+                    level               = bene_geo_lvl,
+                    sublevel            = bene_geo_desc,
+                    fips                = bene_geo_cd,
+                    age_group           = bene_age_lvl,
+                    demographic         = bene_demo_lvl,
+                    subdemo             = bene_demo_desc,
+                    condition           = bene_cond,
+                    prevalence          = prvlnc,
                     tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
-                    tot_pymt_percap = tot_mdcr_pymt_pc,
+                    tot_pymt_percap     = tot_mdcr_pymt_pc,
                     hosp_readmsn_rate,
-                    er_visits_per_1k = er_visits_per_1000_benes) |>
+                    er_visits_per_1k    = er_visits_per_1000_benes) |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(c(prevalence,
                                     tot_std_pymt_percap,

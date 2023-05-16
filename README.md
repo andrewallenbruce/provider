@@ -290,8 +290,8 @@ doctors_and_clinicians(npi = 1407263999)
     # ℹ 17 more variables: credential <chr>, school <chr>, grad_year <int>,
     #   grad_duration <Duration>, specialty <chr>, specialty_sec <chr>,
     #   telehealth <lgl>, org_name <chr>, org_pac_id <chr>, org_members <int>,
-    #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #   ind_assign <chr>, group_assign <chr>
+    #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone <chr>,
+    #   ind_assn <chr>, group_assn <chr>
 
 ``` r
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
@@ -316,8 +316,8 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
     # ℹ 17 more variables: credential <chr>, school <chr>, grad_year <int>,
     #   grad_duration <Duration>, specialty <chr>, specialty_sec <chr>,
     #   telehealth <lgl>, org_name <chr>, org_pac_id <chr>, org_members <int>,
-    #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone_number <chr>,
-    #   ind_assign <chr>, group_assign <chr>
+    #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone <chr>,
+    #   ind_assn <chr>, group_assn <chr>
 
 ``` r
 #doctors_and_clinicians(state = "GA", city = "VALDOSTA")
@@ -459,7 +459,8 @@ hospital_enrollment(enroll_state = "GA")
 hospital_enrollment(enroll_id = "O20030404000017")
 ```
 
-    ✖ No results for enroll_id: O20030404000017
+    Error in `resp_body_raw()`:
+    ! Can not retrieve empty body
 
 ### Missing Contact Information
 
@@ -481,55 +482,28 @@ missing_information(npi = 11111122222)
 ### NPI Registry
 
 ``` r
-nppes_npi(npi = 1316405939)
+nppes_full(npi = 1316405939)
 ```
 
-    # A tibble: 1 × 11
-      created_epoch enumeration_type last_updated_epoch number     addresses    
-      <chr>         <chr>            <chr>              <chr>      <list>       
-    1 1551723416000 NPI-1            1680810827000      1316405939 <df [2 × 10]>
-    # ℹ 6 more variables: practiceLocations <list>, basic <df[,10]>,
-    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
+    Error in nppes_full(npi = 1316405939): could not find function "nppes_full"
 
 ``` r
-nppes_npi(npi = 1558364273)
+nppes_full(npi = 1558364273)
 ```
 
-    # A tibble: 1 × 11
-      created_epoch enumeration_type last_updated_epoch number     addresses    
-      <chr>         <chr>            <chr>              <chr>      <list>       
-    1 1117203529000 NPI-1            1183948145000      1558364273 <df [2 × 11]>
-    # ℹ 6 more variables: practiceLocations <list>, basic <df[,11]>,
-    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
+    Error in nppes_full(npi = 1558364273): could not find function "nppes_full"
 
 ``` r
-nppes_npi(1710983663) 
+nppes_full(1710983663) 
 ```
 
-    ✖ No results for npi: 1710983663
+    Error in nppes_full(1710983663): could not find function "nppes_full"
 
 ``` r
-nppes_npi(1720081441)
+nppes_full(1720081441)
 ```
 
-    # A tibble: 1 × 11
-      created_epoch enumeration_type last_updated_epoch number     addresses    
-      <chr>         <chr>            <chr>              <chr>      <list>       
-    1 1117203886000 NPI-1            1183948145000      1720081441 <df [2 × 10]>
-    # ℹ 6 more variables: practiceLocations <list>, basic <df[,11]>,
-    #   taxonomies <list>, identifiers <list>, endpoints <list>, other_names <list>
-
-``` r
-# c(1710983663, 1710975040, 1659781227, 
-#   1336413418, 1003026055, 1316405939, 
-#   1720392988, 1518184605, 1922056829, 
-#   1083879860, 1346243805, 1679576722, 
-#   1093718892, 1477556405, 1770586539, 
-#   1871596692, 1174526925, 1720081441, 
-#   1558364273, 1801899513, 1316405939) |> 
-#   purrr::map(nppes_npi) |>
-#   purrr::list_rbind()
-```
+    Error in nppes_full(1720081441): could not find function "nppes_full"
 
 ### Open Payments
 
@@ -539,25 +513,25 @@ open_payments(npi = 1043218118, year = 2021) |>
 ```
 
     # A tibble: 92 × 50
-       year  changed covered_type      profile_id npi   first_name last_name address
-       <chr> <lgl>   <chr>             <chr>      <chr> <chr>      <chr>     <chr>  
-     1 2021  FALSE   Covered Recipien… 92058      1043… Ahad       Mahootchi 6739 G…
-     2 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     3 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     4 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     5 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     6 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     7 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     8 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-     9 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
-    10 2021  FALSE   Covered Recipien… 92058      1043… AHAD       MAHOOTCHI 6739 G…
+       year  changed cov_type    profile_id npi   first_name last_name address city 
+       <chr> <lgl>   <chr>       <chr>      <chr> <chr>      <chr>     <chr>   <chr>
+     1 2021  FALSE   Covered Re… 92058      1043… Ahad       Mahootchi 6739 G… Zeph…
+     2 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     3 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     4 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     5 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     6 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     7 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     8 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     9 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
+    10 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
     # ℹ 82 more rows
-    # ℹ 42 more variables: city <chr>, state <chr>, zipcode <chr>, country <chr>,
-    #   primary_type <chr>, specialty <chr>, license_state <chr>,
-    #   payer_submitting <chr>, payer_id <chr>, payer_name <chr>,
-    #   payer_state <chr>, payer_country <chr>, payment_total <chr>,
-    #   payment_date <date>, payment_count <chr>, payment_form <chr>,
-    #   payment_nature <chr>, physician_ownership <chr>, …
+    # ℹ 41 more variables: state <chr>, zipcode <chr>, country <chr>,
+    #   primary_type <chr>, specialty <chr>, license_state <chr>, payer_sub <chr>,
+    #   payer_id <chr>, payer_name <chr>, payer_state <chr>, payer_country <chr>,
+    #   pay_total <chr>, pay_date <date>, pay_count <chr>, pay_form <chr>,
+    #   pay_nature <chr>, phys_own <chr>, third_par_pay <chr>, charity <chr>,
+    #   pub_date <date>, pub_delay <chr>, pub_dispute <chr>, …
 
 ### Opt-Out Affidavits
 
@@ -600,7 +574,8 @@ opt_out(specialty = "Psychiatry",
 opt_out(specialty = "Tsychiatry")
 ```
 
-    ✖ No results for specialty: Tsychiatry
+    Error in `resp_body_raw()`:
+    ! Can not retrieve empty body
 
 ``` r
 opt_out(city = "Valdosta", state = "GA")
@@ -633,7 +608,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    # A tibble: 148 × 7
+    # A tibble: 150 × 7
        npi        first_name last_name partb hha   dme   pmd  
        <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
      1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -646,7 +621,7 @@ order_refer(last_name = "Smith",
      8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
      9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
     10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    # ℹ 138 more rows
+    # ℹ 140 more rows
 
 ### Pending Applications
 
@@ -654,39 +629,44 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    # A tibble: 24 × 4
+    # A tibble: 16 × 4
        npi        last_name first_name type         
        <chr>      <chr>     <chr>      <chr>        
-     1 1518672245 SMITH     ALEXANDRA  NON-PHYSICIAN
-     2 1700588621 SMITH     AMANDA     NON-PHYSICIAN
-     3 1073234282 SMITH     ANGELA     NON-PHYSICIAN
-     4 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
-     5 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
-     6 1558504688 SMITH     BRITTANY   NON-PHYSICIAN
-     7 1679235717 SMITH     BRITTNEY   NON-PHYSICIAN
-     8 1639635030 SMITH     COURTNEY   NON-PHYSICIAN
-     9 1043925035 SMITH     FULGENTIA  NON-PHYSICIAN
-    10 1902527641 SMITH     HEATHER    NON-PHYSICIAN
-    # ℹ 14 more rows
+     1 1700588621 SMITH     AMANDA     NON-PHYSICIAN
+     2 1073234282 SMITH     ANGELA     NON-PHYSICIAN
+     3 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
+     4 1548969413 SMITH     ASHLEY     NON-PHYSICIAN
+     5 1659967966 SMITH     ASHLEY     NON-PHYSICIAN
+     6 1952009805 SMITH     BALEY      NON-PHYSICIAN
+     7 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
+     8 1902527641 SMITH     HEATHER    NON-PHYSICIAN
+     9 1356079727 SMITH     JARED      NON-PHYSICIAN
+    10 1891169751 SMITH     JEANA      NON-PHYSICIAN
+    11 1033538152 SMITH     JOANNA     NON-PHYSICIAN
+    12 1851916803 SMITH     KENZIE     NON-PHYSICIAN
+    13 1467159426 SMITH     PATRICE    NON-PHYSICIAN
+    14 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
+    15 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
+    16 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 35 × 4
+    # A tibble: 36 × 4
        npi        last_name  first_name type     
        <chr>      <chr>      <chr>      <chr>    
      1 1881791739 ADAMS      JOHN       PHYSICIAN
      2 1841280963 BIGBEE     JOHN       PHYSICIAN
      3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1588744569 BRUNO      JOHN       PHYSICIAN
-     5 1861142556 BURKE      JOHN       PHYSICIAN
-     6 1306817531 COMBS      JOHN       PHYSICIAN
-     7 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-     8 1659074151 EUN        JOHN       PHYSICIAN
-     9 1376571554 FLYNN      JOHN       PHYSICIAN
-    10 1689774804 FREEMAN    JOHN       PHYSICIAN
-    # ℹ 25 more rows
+     4 1801545900 BRAZIL     JOHN       PHYSICIAN
+     5 1588744569 BRUNO      JOHN       PHYSICIAN
+     6 1861142556 BURKE      JOHN       PHYSICIAN
+     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
+     8 1306817531 COMBS      JOHN       PHYSICIAN
+     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
+    10 1376571554 FLYNN      JOHN       PHYSICIAN
+    # ℹ 26 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -702,8 +682,8 @@ pending_applications(npi = "1001001234",
                      type = "physician")
 ```
 
-    ✖ No results for npi: 1001001234, last_name: Garlic, first_name: Gaelic, and
-    type: physician
+    Error in `resp_body_raw()`:
+    ! Can not retrieve empty body
 
 ### Physician & Other Practitioners
 

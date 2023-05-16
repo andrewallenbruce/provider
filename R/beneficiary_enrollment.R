@@ -156,11 +156,11 @@ beneficiary_enrollment <- function(year        = NULL,
                   bene_rx_full = prscrptn_drug_full_lis_benes,
                   bene_rx_part = prscrptn_drug_partial_lis_benes,
                   bene_rx_none = prscrptn_drug_no_lis_benes) |>
-    dplyr::mutate(fips = dplyr::na_if(fips, "")) |>
     dplyr::filter(state != "UK") |>
     dplyr::filter(county != "Unknown") |>
-    dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*"))) |>
-    dplyr::mutate(dplyr::across(dplyr::contains("bene"), as.integer))
+    dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                  dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*")),
+                  dplyr::across(dplyr::contains("bene"), as.integer))
 
   }
   return(results)

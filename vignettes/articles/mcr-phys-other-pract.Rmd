@@ -62,32 +62,26 @@ The **Provider** data subset provides information on use, payments, submitted ch
 ### Examples
 
 ```{r}
-physician_by_provider(npi = 1003000423, year = 2020)
+2013:2021 |> 
+  purrr::map(\(year) physician_by_provider(year, npi = 1003000423)) |> 
+  purrr::list_rbind()
 ```
 
 <br>
 
 ```{r}
-physician_by_provider(type = "I", 
+physician_by_provider(year = 2021, 
+                      entype = "I", 
                       city = "Hershey", 
                       state = "PA", 
                       fips = 42, 
                       ruca = 1, 
                       gender = "F", 
-                      cred = "M.D.", 
+                      credential = "MD", 
                       specialty = "Anesthesiology")
 ```
 
 
-```{r}
-x <- purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
-```
-
-
-
-
-<br>
-<br>
 
 ## Physician & Other Practitioners: **by Geography and Service**
 
@@ -141,7 +135,7 @@ physician_by_service(npi = 1720392988, year = 2019)
 
 ```{r}
 # Multiple NPIs
-#npis <- c(1003026055,
+c(1003026055,
           1720392988,
           1518184605,
           1922056829,

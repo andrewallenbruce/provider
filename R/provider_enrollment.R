@@ -51,8 +51,7 @@
 #' @param gender Individual provider gender: `F` (female), `M` (male), `9` (unknown)
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 #'
 #' provider_enrollment(first_name = "DEBRA",
@@ -82,10 +81,8 @@
 #'                             state = "GA"))
 #'
 #' purrr::invoke_map_dfr(prven$fn, prven$params)
-#' }
 #' @autoglobal
 #' @export
-
 provider_enrollment <- function(npi                = NULL,
                                 pac_id             = NULL,
                                 enroll_id          = NULL,
@@ -180,6 +177,5 @@ provider_enrollment <- function(npi                = NULL,
                     last_name,
                     gender         = gndr_sw)
   }
-
   return(results)
 }
