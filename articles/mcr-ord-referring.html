@@ -166,40 +166,99 @@ will then apply when ordering or certifying:</p>
 </ul>
 <p><br></p>
 <div class="section level2">
-<h2 id="order_refer">
-<code>order_refer()</code><a class="anchor" aria-label="anchor" href="#order_refer"></a>
+<h2 id="example-searchs">Example Searchs<a class="anchor" aria-label="anchor" href="#example-searchs"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Provider Results for NPI 1083879860"</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/add_text_img.html" class="external-link">add_text_img</a></span><span class="op">(</span><span class="st">"Report generated with"</span>, url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png"</span>, height <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span>locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>                     fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span></span>
-<span>                       <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
-<span>                         <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, prefer_type <span class="op">=</span> <span class="st">"solid"</span>, fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span></span>
-<span>                         <span class="op">}</span></span>
-<span>                     <span class="op">}</span></span>
-<span>                       <span class="op">)</span></span></code></pre></div>
-<div id="tdngzaklgv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tdngzaklgv table {
-  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;   npi        first_name  last_name partb hha   dme   pmd  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1083879860 CHRISTOPHER AARON     TRUE  TRUE  TRUE  TRUE</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, </span>
+<span>            partb <span class="op">=</span> <span class="cn">FALSE</span>, </span>
+<span>            pmd <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 150 × 7</span></span></span>
+<span><span class="co">#&gt;    npi        first_name last_name partb hha   dme   pmd  </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1891210431 ALAINA     SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1962830570 ALESHA     SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1922655521 ALLISON    SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1942778188 ALYSSA     SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1467902791 AMANDA     SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1992203582 AMANDA     SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1063878056 ANNA       SMITH     FALSE FALSE TRUE  FALSE</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 140 more rows</span></span></span></code></pre></div>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="visualizations">Visualizations<a class="anchor" aria-label="anchor" href="#visualizations"></a>
+</h2>
+<details><summary>
+Code for table
+</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gt_oref</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, first_name <span class="op">=</span> <span class="st">"Aaron"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
+<span>    style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
+<span>      <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_case_when.html" class="external-link">text_case_when</a></span><span class="op">(</span></span>
+<span>    <span class="va">x</span> <span class="op">==</span> <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, </span>
+<span>                               prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>                               fill <span class="op">=</span> <span class="st">"black"</span>, </span>
+<span>                               height <span class="op">=</span> <span class="st">"1.75em"</span>, </span>
+<span>                               width <span class="op">=</span> <span class="st">"1.75em"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="va">x</span> <span class="op">==</span> <span class="cn">FALSE</span> <span class="op">~</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, </span>
+<span>                                   prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
+<span>                                   fill <span class="op">=</span> <span class="st">"red"</span>, </span>
+<span>                               height <span class="op">=</span> <span class="st">"1.75em"</span>, </span>
+<span>                               width <span class="op">=</span> <span class="st">"1.75em"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    .default <span class="op">=</span> <span class="st">""</span>, .locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span></span>
+<span>      columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"First Name"</span>, </span>
+<span>                 last_name <span class="op">=</span> <span class="st">"Last Name"</span>,</span>
+<span>                 partb <span class="op">=</span> <span class="st">"Part B"</span>, </span>
+<span>                 dme <span class="op">=</span> <span class="st">"DME"</span>, </span>
+<span>                 hha <span class="op">=</span> <span class="st">"HHA"</span>, </span>
+<span>                 pmd <span class="op">=</span> <span class="st">"PMD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"last_name"</span><span class="op">)</span>, </span>
+<span>                           style <span class="op">=</span> <span class="st">"solid"</span>,</span>
+<span>                           color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>                           weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>                           include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Order &amp; Referring Eligibility"</span><span class="op">)</span>,</span>
+<span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider Eligibility to Refer Patients to **Medicare Part B**, **Home Health Agencies**, **Durable Medical Equipment Suppliers**, and **Powered Mobility Devices**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Karla"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</details><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gt_oref</span></span></code></pre></div>
+<div id="reajxiiwzu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#reajxiiwzu table {
+  font-family: Karla, Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tdngzaklgv thead, #tdngzaklgv tbody, #tdngzaklgv tfoot, #tdngzaklgv tr, #tdngzaklgv td, #tdngzaklgv th {
+#reajxiiwzu thead, #reajxiiwzu tbody, #reajxiiwzu tfoot, #reajxiiwzu tr, #reajxiiwzu td, #reajxiiwzu th {
   border-style: none;
 }
 
-#tdngzaklgv p {
+#reajxiiwzu p {
   margin: 0;
   padding: 0;
 }
 
-#tdngzaklgv .gt_table {
+#reajxiiwzu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -207,33 +266,33 @@ will then apply when ordering or certifying:</p>
   margin-right: auto;
   color: #333333;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
   background-color: #FFFFFF;
   width: auto;
-  border-top-style: solid;
+  border-top-style: none;
   border-top-width: 3px;
-  border-top-color: #BEBEBE;
+  border-top-color: #A8A8A8;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #BEBEBE;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_caption {
+#reajxiiwzu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tdngzaklgv .gt_title {
+#reajxiiwzu .gt_title {
   color: #333333;
-  font-size: 16px;
-  font-weight: bold;
+  font-size: 125%;
+  font-weight: initial;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
@@ -242,9 +301,9 @@ will then apply when ordering or certifying:</p>
   border-bottom-width: 0;
 }
 
-#tdngzaklgv .gt_subtitle {
+#reajxiiwzu .gt_subtitle {
   color: #333333;
-  font-size: 14px;
+  font-size: 85%;
   font-weight: initial;
   padding-top: 3px;
   padding-bottom: 5px;
@@ -254,8 +313,8 @@ will then apply when ordering or certifying:</p>
   border-top-width: 0;
 }
 
-#tdngzaklgv .gt_heading {
-  background-color: #FDD4D0;
+#reajxiiwzu .gt_heading {
+  background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
@@ -266,19 +325,19 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_bottom_border {
-  border-bottom-style: solid;
+#reajxiiwzu .gt_bottom_border {
+  border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #BEBEBE;
+#reajxiiwzu .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -287,11 +346,11 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_col_heading {
+#reajxiiwzu .gt_col_heading {
   color: #333333;
-  background-color: #FDD4D0;
+  background-color: #FFFFFF;
   font-size: 80%;
-  font-weight: bolder;
+  font-weight: normal;
   text-transform: uppercase;
   border-left-style: none;
   border-left-width: 1px;
@@ -307,11 +366,11 @@ will then apply when ordering or certifying:</p>
   overflow-x: hidden;
 }
 
-#tdngzaklgv .gt_column_spanner_outer {
+#reajxiiwzu .gt_column_spanner_outer {
   color: #333333;
-  background-color: #FDD4D0;
+  background-color: #FFFFFF;
   font-size: 80%;
-  font-weight: bolder;
+  font-weight: normal;
   text-transform: uppercase;
   padding-top: 0;
   padding-bottom: 0;
@@ -319,18 +378,18 @@ will then apply when ordering or certifying:</p>
   padding-right: 4px;
 }
 
-#tdngzaklgv .gt_column_spanner_outer:first-child {
+#reajxiiwzu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tdngzaklgv .gt_column_spanner_outer:last-child {
+#reajxiiwzu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tdngzaklgv .gt_column_spanner {
+#reajxiiwzu .gt_column_spanner {
   border-bottom-style: solid;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -339,11 +398,11 @@ will then apply when ordering or certifying:</p>
   width: 100%;
 }
 
-#tdngzaklgv .gt_spanner_row {
+#reajxiiwzu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tdngzaklgv .gt_group_heading {
+#reajxiiwzu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -353,12 +412,12 @@ will then apply when ordering or certifying:</p>
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
-  border-top-style: solid;
+  border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-color: #000000;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -369,30 +428,30 @@ will then apply when ordering or certifying:</p>
   text-align: left;
 }
 
-#tdngzaklgv .gt_empty_group_heading {
+#reajxiiwzu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
-  border-top-style: solid;
+  border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-color: #000000;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
   vertical-align: middle;
 }
 
-#tdngzaklgv .gt_from_md > :first-child {
+#reajxiiwzu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tdngzaklgv .gt_from_md > :last-child {
+#reajxiiwzu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tdngzaklgv .gt_row {
+#reajxiiwzu .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -400,7 +459,7 @@ will then apply when ordering or certifying:</p>
   margin: 10px;
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #F6F7F7;
+  border-top-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -411,20 +470,20 @@ will then apply when ordering or certifying:</p>
   overflow-x: hidden;
 }
 
-#tdngzaklgv .gt_stub {
+#reajxiiwzu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
   font-weight: bolder;
   text-transform: uppercase;
   border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#tdngzaklgv .gt_stub_row_group {
+#reajxiiwzu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -438,15 +497,15 @@ will then apply when ordering or certifying:</p>
   vertical-align: top;
 }
 
-#tdngzaklgv .gt_row_group_first td {
+#reajxiiwzu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tdngzaklgv .gt_row_group_first th {
+#reajxiiwzu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tdngzaklgv .gt_summary_row {
+#reajxiiwzu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -456,16 +515,16 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#tdngzaklgv .gt_first_summary_row {
+#reajxiiwzu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_first_summary_row.thick {
+#reajxiiwzu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tdngzaklgv .gt_last_summary_row {
+#reajxiiwzu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -475,7 +534,7 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_grand_summary_row {
+#reajxiiwzu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -485,7 +544,7 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#tdngzaklgv .gt_first_grand_summary_row {
+#reajxiiwzu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -495,7 +554,7 @@ will then apply when ordering or certifying:</p>
   border-top-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_last_grand_summary_row_top {
+#reajxiiwzu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -505,11 +564,11 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_striped {
-  background-color: #FAFAFA;
+#reajxiiwzu .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tdngzaklgv .gt_table_body {
+#reajxiiwzu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -518,7 +577,7 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_footnotes {
+#reajxiiwzu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -532,21 +591,21 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_footnote {
+#reajxiiwzu .gt_footnote {
   margin: 0px;
-  font-size: 12px;
-  padding-top: 3px;
-  padding-bottom: 3px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#tdngzaklgv .gt_sourcenotes {
+#reajxiiwzu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #440D0D;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
@@ -555,7 +614,7 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#tdngzaklgv .gt_sourcenote {
+#reajxiiwzu .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -563,122 +622,372 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#tdngzaklgv .gt_left {
+#reajxiiwzu .gt_left {
   text-align: left;
 }
 
-#tdngzaklgv .gt_center {
+#reajxiiwzu .gt_center {
   text-align: center;
 }
 
-#tdngzaklgv .gt_right {
+#reajxiiwzu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tdngzaklgv .gt_font_normal {
+#reajxiiwzu .gt_font_normal {
   font-weight: normal;
 }
 
-#tdngzaklgv .gt_font_bold {
+#reajxiiwzu .gt_font_bold {
   font-weight: bold;
 }
 
-#tdngzaklgv .gt_font_italic {
+#reajxiiwzu .gt_font_italic {
   font-style: italic;
 }
 
-#tdngzaklgv .gt_super {
+#reajxiiwzu .gt_super {
   font-size: 65%;
 }
 
-#tdngzaklgv .gt_footnote_marks {
+#reajxiiwzu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tdngzaklgv .gt_asterisk {
+#reajxiiwzu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tdngzaklgv .gt_indent_1 {
+#reajxiiwzu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tdngzaklgv .gt_indent_2 {
+#reajxiiwzu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tdngzaklgv .gt_indent_3 {
+#reajxiiwzu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tdngzaklgv .gt_indent_4 {
+#reajxiiwzu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tdngzaklgv .gt_indent_5 {
+#reajxiiwzu .gt_indent_5 {
   text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Provider Results for NPI 1083879860</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Medicare Order &amp; Referring Eligibility</td>
     </tr>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>
-<div style="display:inline;vertical-align: top;">Report generated with</div>
-<div style="display:inline;margin-left:10px"><img src="https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png" style="height:25px;"></div>
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Provider Eligibility to Refer Patients to <strong>Medicare Part B</strong>, <strong>Home Health Agencies</strong>, <strong>Durable Medical Equipment Suppliers</strong>, and <strong>Powered Mobility Devices</strong>
 </td>
     </tr>
 <tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first_name">first_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last_name">last_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="partb">partb</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="hha">hha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dme">dme</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="pmd">pmd</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="npi">npi</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="First Name">First Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Last Name">Last Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Part B">Part B</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="HHA">HHA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="DME">DME</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="PMD">PMD</th>
     </tr>
 </thead>
-<tbody class="gt_table_body"><tr>
-<td headers="npi" class="gt_row gt_right" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">1003026055</td>
-<td headers="first_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">RADHIKA</td>
-<td headers="last_name" class="gt_row gt_left" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;">PHADKE</td>
-<td headers="partb" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="hha" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="dme" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="pmd" class="gt_row gt_center" style="border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: transparent;"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-</tr></tbody>
+<tbody class="gt_table_body">
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1013342567</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1023540655</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1033614821</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1053714196</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1063535672</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1104200609</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1134834948</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1245673557</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1285157347</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1346644812</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1417159625</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1497109037</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1598242018</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1649998667</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1659582005</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1659650166</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1679758346</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1689124802</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1700383007</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1710563317</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1740785922</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1760018618</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1780028993</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1780079459</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1780099481</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:red;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1851753537</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1871614149</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+<tr>
+<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1942314885</td>
+<td headers="first_name" class="gt_row gt_left">AARON</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">SMITH</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="7">Source: data.cms.gov</td>
+    </tr></tfoot>
 </table>
 </div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="apgygxygbr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="uhwcbiqncx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#apgygxygbr table {
+#uhwcbiqncx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#apgygxygbr thead, #apgygxygbr tbody, #apgygxygbr tfoot, #apgygxygbr tr, #apgygxygbr td, #apgygxygbr th {
+#uhwcbiqncx thead, #uhwcbiqncx tbody, #uhwcbiqncx tfoot, #uhwcbiqncx tr, #uhwcbiqncx td, #uhwcbiqncx th {
   border-style: none;
 }
 
-#apgygxygbr p {
+#uhwcbiqncx p {
   margin: 0;
   padding: 0;
 }
 
-#apgygxygbr .gt_table {
+#uhwcbiqncx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -704,12 +1013,12 @@ will then apply when ordering or certifying:</p>
   border-left-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_caption {
+#uhwcbiqncx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#apgygxygbr .gt_title {
+#uhwcbiqncx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -721,7 +1030,7 @@ will then apply when ordering or certifying:</p>
   border-bottom-width: 0;
 }
 
-#apgygxygbr .gt_subtitle {
+#uhwcbiqncx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -733,7 +1042,7 @@ will then apply when ordering or certifying:</p>
   border-top-width: 0;
 }
 
-#apgygxygbr .gt_heading {
+#uhwcbiqncx .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -745,13 +1054,13 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#apgygxygbr .gt_bottom_border {
+#uhwcbiqncx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_col_headings {
+#uhwcbiqncx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -766,7 +1075,7 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#apgygxygbr .gt_col_heading {
+#uhwcbiqncx .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -786,7 +1095,7 @@ will then apply when ordering or certifying:</p>
   overflow-x: hidden;
 }
 
-#apgygxygbr .gt_column_spanner_outer {
+#uhwcbiqncx .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -798,15 +1107,15 @@ will then apply when ordering or certifying:</p>
   padding-right: 4px;
 }
 
-#apgygxygbr .gt_column_spanner_outer:first-child {
+#uhwcbiqncx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#apgygxygbr .gt_column_spanner_outer:last-child {
+#uhwcbiqncx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#apgygxygbr .gt_column_spanner {
+#uhwcbiqncx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -818,11 +1127,11 @@ will then apply when ordering or certifying:</p>
   width: 100%;
 }
 
-#apgygxygbr .gt_spanner_row {
+#uhwcbiqncx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#apgygxygbr .gt_group_heading {
+#uhwcbiqncx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -848,7 +1157,7 @@ will then apply when ordering or certifying:</p>
   text-align: left;
 }
 
-#apgygxygbr .gt_empty_group_heading {
+#uhwcbiqncx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -863,15 +1172,15 @@ will then apply when ordering or certifying:</p>
   vertical-align: middle;
 }
 
-#apgygxygbr .gt_from_md > :first-child {
+#uhwcbiqncx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#apgygxygbr .gt_from_md > :last-child {
+#uhwcbiqncx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#apgygxygbr .gt_row {
+#uhwcbiqncx .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -890,7 +1199,7 @@ will then apply when ordering or certifying:</p>
   overflow-x: hidden;
 }
 
-#apgygxygbr .gt_stub {
+#uhwcbiqncx .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -903,7 +1212,7 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#apgygxygbr .gt_stub_row_group {
+#uhwcbiqncx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -917,15 +1226,15 @@ will then apply when ordering or certifying:</p>
   vertical-align: top;
 }
 
-#apgygxygbr .gt_row_group_first td {
+#uhwcbiqncx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#apgygxygbr .gt_row_group_first th {
+#uhwcbiqncx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#apgygxygbr .gt_summary_row {
+#uhwcbiqncx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -935,16 +1244,16 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#apgygxygbr .gt_first_summary_row {
+#uhwcbiqncx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_first_summary_row.thick {
+#uhwcbiqncx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#apgygxygbr .gt_last_summary_row {
+#uhwcbiqncx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -954,7 +1263,7 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_grand_summary_row {
+#uhwcbiqncx .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -964,7 +1273,7 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#apgygxygbr .gt_first_grand_summary_row {
+#uhwcbiqncx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -974,7 +1283,7 @@ will then apply when ordering or certifying:</p>
   border-top-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_last_grand_summary_row_top {
+#uhwcbiqncx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -984,11 +1293,11 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_striped {
+#uhwcbiqncx .gt_striped {
   background-color: #F4F4F4;
 }
 
-#apgygxygbr .gt_table_body {
+#uhwcbiqncx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -997,7 +1306,7 @@ will then apply when ordering or certifying:</p>
   border-bottom-color: #D5D5D5;
 }
 
-#apgygxygbr .gt_footnotes {
+#uhwcbiqncx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1011,7 +1320,7 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#apgygxygbr .gt_footnote {
+#uhwcbiqncx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1020,7 +1329,7 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#apgygxygbr .gt_sourcenotes {
+#uhwcbiqncx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1034,7 +1343,7 @@ will then apply when ordering or certifying:</p>
   border-right-color: #D3D3D3;
 }
 
-#apgygxygbr .gt_sourcenote {
+#uhwcbiqncx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1042,63 +1351,63 @@ will then apply when ordering or certifying:</p>
   padding-right: 5px;
 }
 
-#apgygxygbr .gt_left {
+#uhwcbiqncx .gt_left {
   text-align: left;
 }
 
-#apgygxygbr .gt_center {
+#uhwcbiqncx .gt_center {
   text-align: center;
 }
 
-#apgygxygbr .gt_right {
+#uhwcbiqncx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#apgygxygbr .gt_font_normal {
+#uhwcbiqncx .gt_font_normal {
   font-weight: normal;
 }
 
-#apgygxygbr .gt_font_bold {
+#uhwcbiqncx .gt_font_bold {
   font-weight: bold;
 }
 
-#apgygxygbr .gt_font_italic {
+#uhwcbiqncx .gt_font_italic {
   font-style: italic;
 }
 
-#apgygxygbr .gt_super {
+#uhwcbiqncx .gt_super {
   font-size: 65%;
 }
 
-#apgygxygbr .gt_footnote_marks {
+#uhwcbiqncx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#apgygxygbr .gt_asterisk {
+#uhwcbiqncx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#apgygxygbr .gt_indent_1 {
+#uhwcbiqncx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#apgygxygbr .gt_indent_2 {
+#uhwcbiqncx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#apgygxygbr .gt_indent_3 {
+#uhwcbiqncx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#apgygxygbr .gt_indent_4 {
+#uhwcbiqncx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#apgygxygbr .gt_indent_5 {
+#uhwcbiqncx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

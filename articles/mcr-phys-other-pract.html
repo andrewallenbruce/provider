@@ -253,7 +253,20 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in physician_by_geography(hcpcs_code = "0002A", year = 2020): object 'npi' not found</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 16</span></span></span>
+<span><span class="co">#&gt;    year level sublevel fips  hcpcs hcpcs_desc hcpcs_drug place_of_srvc tot_provs</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 Nati… National <span style="color: #BB0000;">NA</span>    0002A Adm sarsc… FALSE      Office               53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State Califor… 06    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State Florida  12    0002A Adm sarsc… FALSE      Office                5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State Illinois 17    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State Maine    23    0002A Adm sarsc… FALSE      Office                1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State Maryland 24    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State Massach… 25    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State New Jer… 34    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State Pennsyl… 42    0002A Adm sarsc… FALSE      Office                4</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_charge &lt;dbl&gt;, avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">service</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -357,26 +370,26 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level3">
 <h3 id="provider-data-dictionary">Provider Data Dictionary<a class="anchor" aria-label="anchor" href="#provider-data-dictionary"></a>
 </h3>
-<div id="pcpoggpngz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="sckismmecf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pcpoggpngz table {
+#sckismmecf table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pcpoggpngz thead, #pcpoggpngz tbody, #pcpoggpngz tfoot, #pcpoggpngz tr, #pcpoggpngz td, #pcpoggpngz th {
+#sckismmecf thead, #sckismmecf tbody, #sckismmecf tfoot, #sckismmecf tr, #sckismmecf td, #sckismmecf th {
   border-style: none;
 }
 
-#pcpoggpngz p {
+#sckismmecf p {
   margin: 0;
   padding: 0;
 }
 
-#pcpoggpngz .gt_table {
+#sckismmecf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -402,12 +415,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_caption {
+#sckismmecf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pcpoggpngz .gt_title {
+#sckismmecf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -419,7 +432,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#pcpoggpngz .gt_subtitle {
+#sckismmecf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -431,7 +444,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#pcpoggpngz .gt_heading {
+#sckismmecf .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -443,13 +456,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pcpoggpngz .gt_bottom_border {
+#sckismmecf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_col_headings {
+#sckismmecf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -464,7 +477,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pcpoggpngz .gt_col_heading {
+#sckismmecf .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -484,7 +497,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#pcpoggpngz .gt_column_spanner_outer {
+#sckismmecf .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -496,15 +509,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#pcpoggpngz .gt_column_spanner_outer:first-child {
+#sckismmecf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pcpoggpngz .gt_column_spanner_outer:last-child {
+#sckismmecf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pcpoggpngz .gt_column_spanner {
+#sckismmecf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -516,11 +529,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#pcpoggpngz .gt_spanner_row {
+#sckismmecf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pcpoggpngz .gt_group_heading {
+#sckismmecf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +559,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#pcpoggpngz .gt_empty_group_heading {
+#sckismmecf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -561,15 +574,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#pcpoggpngz .gt_from_md > :first-child {
+#sckismmecf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pcpoggpngz .gt_from_md > :last-child {
+#sckismmecf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pcpoggpngz .gt_row {
+#sckismmecf .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -588,7 +601,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#pcpoggpngz .gt_stub {
+#sckismmecf .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -601,7 +614,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pcpoggpngz .gt_stub_row_group {
+#sckismmecf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -615,15 +628,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#pcpoggpngz .gt_row_group_first td {
+#sckismmecf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pcpoggpngz .gt_row_group_first th {
+#sckismmecf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pcpoggpngz .gt_summary_row {
+#sckismmecf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -633,16 +646,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pcpoggpngz .gt_first_summary_row {
+#sckismmecf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_first_summary_row.thick {
+#sckismmecf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pcpoggpngz .gt_last_summary_row {
+#sckismmecf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,7 +665,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_grand_summary_row {
+#sckismmecf .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -662,7 +675,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pcpoggpngz .gt_first_grand_summary_row {
+#sckismmecf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -672,7 +685,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_last_grand_summary_row_top {
+#sckismmecf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,11 +695,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_striped {
+#sckismmecf .gt_striped {
   background-color: #F4F4F4;
 }
 
-#pcpoggpngz .gt_table_body {
+#sckismmecf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -695,7 +708,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pcpoggpngz .gt_footnotes {
+#sckismmecf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -709,7 +722,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pcpoggpngz .gt_footnote {
+#sckismmecf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -718,7 +731,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pcpoggpngz .gt_sourcenotes {
+#sckismmecf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -732,7 +745,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pcpoggpngz .gt_sourcenote {
+#sckismmecf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -740,63 +753,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pcpoggpngz .gt_left {
+#sckismmecf .gt_left {
   text-align: left;
 }
 
-#pcpoggpngz .gt_center {
+#sckismmecf .gt_center {
   text-align: center;
 }
 
-#pcpoggpngz .gt_right {
+#sckismmecf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pcpoggpngz .gt_font_normal {
+#sckismmecf .gt_font_normal {
   font-weight: normal;
 }
 
-#pcpoggpngz .gt_font_bold {
+#sckismmecf .gt_font_bold {
   font-weight: bold;
 }
 
-#pcpoggpngz .gt_font_italic {
+#sckismmecf .gt_font_italic {
   font-style: italic;
 }
 
-#pcpoggpngz .gt_super {
+#sckismmecf .gt_super {
   font-size: 65%;
 }
 
-#pcpoggpngz .gt_footnote_marks {
+#sckismmecf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pcpoggpngz .gt_asterisk {
+#sckismmecf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pcpoggpngz .gt_indent_1 {
+#sckismmecf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pcpoggpngz .gt_indent_2 {
+#sckismmecf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pcpoggpngz .gt_indent_3 {
+#sckismmecf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pcpoggpngz .gt_indent_4 {
+#sckismmecf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pcpoggpngz .gt_indent_5 {
+#sckismmecf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1470,26 +1483,26 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level3">
 <h3 id="geography-data-dictionary">Geography Data Dictionary<a class="anchor" aria-label="anchor" href="#geography-data-dictionary"></a>
 </h3>
-<div id="pnbknkrefb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mjkpssvpza" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pnbknkrefb table {
+#mjkpssvpza table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pnbknkrefb thead, #pnbknkrefb tbody, #pnbknkrefb tfoot, #pnbknkrefb tr, #pnbknkrefb td, #pnbknkrefb th {
+#mjkpssvpza thead, #mjkpssvpza tbody, #mjkpssvpza tfoot, #mjkpssvpza tr, #mjkpssvpza td, #mjkpssvpza th {
   border-style: none;
 }
 
-#pnbknkrefb p {
+#mjkpssvpza p {
   margin: 0;
   padding: 0;
 }
 
-#pnbknkrefb .gt_table {
+#mjkpssvpza .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1515,12 +1528,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_caption {
+#mjkpssvpza .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pnbknkrefb .gt_title {
+#mjkpssvpza .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1532,7 +1545,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#pnbknkrefb .gt_subtitle {
+#mjkpssvpza .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1544,7 +1557,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#pnbknkrefb .gt_heading {
+#mjkpssvpza .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1556,13 +1569,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pnbknkrefb .gt_bottom_border {
+#mjkpssvpza .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_col_headings {
+#mjkpssvpza .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1577,7 +1590,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pnbknkrefb .gt_col_heading {
+#mjkpssvpza .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1597,7 +1610,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#pnbknkrefb .gt_column_spanner_outer {
+#mjkpssvpza .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -1609,15 +1622,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#pnbknkrefb .gt_column_spanner_outer:first-child {
+#mjkpssvpza .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pnbknkrefb .gt_column_spanner_outer:last-child {
+#mjkpssvpza .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pnbknkrefb .gt_column_spanner {
+#mjkpssvpza .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -1629,11 +1642,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#pnbknkrefb .gt_spanner_row {
+#mjkpssvpza .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pnbknkrefb .gt_group_heading {
+#mjkpssvpza .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1659,7 +1672,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#pnbknkrefb .gt_empty_group_heading {
+#mjkpssvpza .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1674,15 +1687,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#pnbknkrefb .gt_from_md > :first-child {
+#mjkpssvpza .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pnbknkrefb .gt_from_md > :last-child {
+#mjkpssvpza .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pnbknkrefb .gt_row {
+#mjkpssvpza .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -1701,7 +1714,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#pnbknkrefb .gt_stub {
+#mjkpssvpza .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -1714,7 +1727,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pnbknkrefb .gt_stub_row_group {
+#mjkpssvpza .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1728,15 +1741,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#pnbknkrefb .gt_row_group_first td {
+#mjkpssvpza .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pnbknkrefb .gt_row_group_first th {
+#mjkpssvpza .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pnbknkrefb .gt_summary_row {
+#mjkpssvpza .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1746,16 +1759,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pnbknkrefb .gt_first_summary_row {
+#mjkpssvpza .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_first_summary_row.thick {
+#mjkpssvpza .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pnbknkrefb .gt_last_summary_row {
+#mjkpssvpza .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1765,7 +1778,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_grand_summary_row {
+#mjkpssvpza .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -1775,7 +1788,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pnbknkrefb .gt_first_grand_summary_row {
+#mjkpssvpza .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1785,7 +1798,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_last_grand_summary_row_top {
+#mjkpssvpza .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1795,11 +1808,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_striped {
+#mjkpssvpza .gt_striped {
   background-color: #F4F4F4;
 }
 
-#pnbknkrefb .gt_table_body {
+#mjkpssvpza .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -1808,7 +1821,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#pnbknkrefb .gt_footnotes {
+#mjkpssvpza .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1822,7 +1835,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pnbknkrefb .gt_footnote {
+#mjkpssvpza .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1831,7 +1844,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pnbknkrefb .gt_sourcenotes {
+#mjkpssvpza .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1845,7 +1858,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#pnbknkrefb .gt_sourcenote {
+#mjkpssvpza .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1853,63 +1866,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#pnbknkrefb .gt_left {
+#mjkpssvpza .gt_left {
   text-align: left;
 }
 
-#pnbknkrefb .gt_center {
+#mjkpssvpza .gt_center {
   text-align: center;
 }
 
-#pnbknkrefb .gt_right {
+#mjkpssvpza .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pnbknkrefb .gt_font_normal {
+#mjkpssvpza .gt_font_normal {
   font-weight: normal;
 }
 
-#pnbknkrefb .gt_font_bold {
+#mjkpssvpza .gt_font_bold {
   font-weight: bold;
 }
 
-#pnbknkrefb .gt_font_italic {
+#mjkpssvpza .gt_font_italic {
   font-style: italic;
 }
 
-#pnbknkrefb .gt_super {
+#mjkpssvpza .gt_super {
   font-size: 65%;
 }
 
-#pnbknkrefb .gt_footnote_marks {
+#mjkpssvpza .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pnbknkrefb .gt_asterisk {
+#mjkpssvpza .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pnbknkrefb .gt_indent_1 {
+#mjkpssvpza .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pnbknkrefb .gt_indent_2 {
+#mjkpssvpza .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pnbknkrefb .gt_indent_3 {
+#mjkpssvpza .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pnbknkrefb .gt_indent_4 {
+#mjkpssvpza .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pnbknkrefb .gt_indent_5 {
+#mjkpssvpza .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2061,26 +2074,26 @@ service submitted on the claim is facility or non-facility.</p>
 <div class="section level3">
 <h3 id="service-data-dictionary">Service Data Dictionary<a class="anchor" aria-label="anchor" href="#service-data-dictionary"></a>
 </h3>
-<div id="vesgurpcam" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qkxenyddgd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vesgurpcam table {
+#qkxenyddgd table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vesgurpcam thead, #vesgurpcam tbody, #vesgurpcam tfoot, #vesgurpcam tr, #vesgurpcam td, #vesgurpcam th {
+#qkxenyddgd thead, #qkxenyddgd tbody, #qkxenyddgd tfoot, #qkxenyddgd tr, #qkxenyddgd td, #qkxenyddgd th {
   border-style: none;
 }
 
-#vesgurpcam p {
+#qkxenyddgd p {
   margin: 0;
   padding: 0;
 }
 
-#vesgurpcam .gt_table {
+#qkxenyddgd .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2106,12 +2119,12 @@ service submitted on the claim is facility or non-facility.</p>
   border-left-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_caption {
+#qkxenyddgd .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vesgurpcam .gt_title {
+#qkxenyddgd .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2123,7 +2136,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-width: 0;
 }
 
-#vesgurpcam .gt_subtitle {
+#qkxenyddgd .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2135,7 +2148,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-width: 0;
 }
 
-#vesgurpcam .gt_heading {
+#qkxenyddgd .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2147,13 +2160,13 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#vesgurpcam .gt_bottom_border {
+#qkxenyddgd .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_col_headings {
+#qkxenyddgd .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2168,7 +2181,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#vesgurpcam .gt_col_heading {
+#qkxenyddgd .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2188,7 +2201,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#vesgurpcam .gt_column_spanner_outer {
+#qkxenyddgd .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2200,15 +2213,15 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 4px;
 }
 
-#vesgurpcam .gt_column_spanner_outer:first-child {
+#qkxenyddgd .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vesgurpcam .gt_column_spanner_outer:last-child {
+#qkxenyddgd .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vesgurpcam .gt_column_spanner {
+#qkxenyddgd .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2220,11 +2233,11 @@ service submitted on the claim is facility or non-facility.</p>
   width: 100%;
 }
 
-#vesgurpcam .gt_spanner_row {
+#qkxenyddgd .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vesgurpcam .gt_group_heading {
+#qkxenyddgd .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2250,7 +2263,7 @@ service submitted on the claim is facility or non-facility.</p>
   text-align: left;
 }
 
-#vesgurpcam .gt_empty_group_heading {
+#qkxenyddgd .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2265,15 +2278,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: middle;
 }
 
-#vesgurpcam .gt_from_md > :first-child {
+#qkxenyddgd .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vesgurpcam .gt_from_md > :last-child {
+#qkxenyddgd .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vesgurpcam .gt_row {
+#qkxenyddgd .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2292,7 +2305,7 @@ service submitted on the claim is facility or non-facility.</p>
   overflow-x: hidden;
 }
 
-#vesgurpcam .gt_stub {
+#qkxenyddgd .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2305,7 +2318,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#vesgurpcam .gt_stub_row_group {
+#qkxenyddgd .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2319,15 +2332,15 @@ service submitted on the claim is facility or non-facility.</p>
   vertical-align: top;
 }
 
-#vesgurpcam .gt_row_group_first td {
+#qkxenyddgd .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vesgurpcam .gt_row_group_first th {
+#qkxenyddgd .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vesgurpcam .gt_summary_row {
+#qkxenyddgd .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2337,16 +2350,16 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#vesgurpcam .gt_first_summary_row {
+#qkxenyddgd .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_first_summary_row.thick {
+#qkxenyddgd .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vesgurpcam .gt_last_summary_row {
+#qkxenyddgd .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2356,7 +2369,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_grand_summary_row {
+#qkxenyddgd .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2366,7 +2379,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#vesgurpcam .gt_first_grand_summary_row {
+#qkxenyddgd .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2376,7 +2389,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-top-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_last_grand_summary_row_top {
+#qkxenyddgd .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2386,11 +2399,11 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_striped {
+#qkxenyddgd .gt_striped {
   background-color: #F4F4F4;
 }
 
-#vesgurpcam .gt_table_body {
+#qkxenyddgd .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2399,7 +2412,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#vesgurpcam .gt_footnotes {
+#qkxenyddgd .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2413,7 +2426,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#vesgurpcam .gt_footnote {
+#qkxenyddgd .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2422,7 +2435,7 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#vesgurpcam .gt_sourcenotes {
+#qkxenyddgd .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2436,7 +2449,7 @@ service submitted on the claim is facility or non-facility.</p>
   border-right-color: #D3D3D3;
 }
 
-#vesgurpcam .gt_sourcenote {
+#qkxenyddgd .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2444,63 +2457,63 @@ service submitted on the claim is facility or non-facility.</p>
   padding-right: 5px;
 }
 
-#vesgurpcam .gt_left {
+#qkxenyddgd .gt_left {
   text-align: left;
 }
 
-#vesgurpcam .gt_center {
+#qkxenyddgd .gt_center {
   text-align: center;
 }
 
-#vesgurpcam .gt_right {
+#qkxenyddgd .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vesgurpcam .gt_font_normal {
+#qkxenyddgd .gt_font_normal {
   font-weight: normal;
 }
 
-#vesgurpcam .gt_font_bold {
+#qkxenyddgd .gt_font_bold {
   font-weight: bold;
 }
 
-#vesgurpcam .gt_font_italic {
+#qkxenyddgd .gt_font_italic {
   font-style: italic;
 }
 
-#vesgurpcam .gt_super {
+#qkxenyddgd .gt_super {
   font-size: 65%;
 }
 
-#vesgurpcam .gt_footnote_marks {
+#qkxenyddgd .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vesgurpcam .gt_asterisk {
+#qkxenyddgd .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vesgurpcam .gt_indent_1 {
+#qkxenyddgd .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vesgurpcam .gt_indent_2 {
+#qkxenyddgd .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vesgurpcam .gt_indent_3 {
+#qkxenyddgd .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vesgurpcam .gt_indent_4 {
+#qkxenyddgd .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vesgurpcam .gt_indent_5 {
+#qkxenyddgd .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

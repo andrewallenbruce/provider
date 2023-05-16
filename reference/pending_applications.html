@@ -160,19 +160,42 @@ contractors.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> https://data.cms.gov/data-api/v1/dataset/261b83b6-b89f-43ad-ae7b-0d419a3bc24b/data.json?filter[LAST_NAME]=Smith&amp;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (1490 bytes)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 18 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        last_name first_name type         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1700588621 SMITH     AMANDA     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1073234282 SMITH     ANGELA     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1790408185 SMITH     ARIELLE    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1548969413 SMITH     ASHLEY     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1659967966 SMITH     ASHLEY     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1952009805 SMITH     BALEY      NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1962889709 SMITH     BRANDY     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1801992912 SMITH     BRIDGET    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1194005306 SMITH     EVELYN     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1902527641 SMITH     HEATHER    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 1407550668 SMITH     JACQUITA   NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 1356079727 SMITH     JARED      NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 1891169751 SMITH     JEANA      NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 1033538152 SMITH     JOANNA     NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 1790774081 SMITH     SHERIEE    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">17</span> 1649967704 SMITH     TYPHANI    NON-PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 1063126522 SMITH     ZACHARY    NON-PHYSICIAN</span>
 <span class="r-in"><span><span class="fu">pending_applications</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #0000BB;">&lt;httr2_response&gt;</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">GET</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> https://data.cms.gov/data-api/v1/dataset/6bd6b1dd-208c-4f9c-88b8-b15fec6db548/data.json?filter[FIRST_NAME]=John&amp;</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Status</span>: 200 OK</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Content-Type</span>: application/json</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BB00;">Body</span>: In memory (2296 bytes)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 32 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    npi        last_name  first_name type     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1881791739 ADAMS      JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 1841280963 BIGBEE     JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 1619996378 BODDEN     JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 1588744569 BRUNO      JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 1861142556 BURKE      JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 1306817531 COMBS      JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 1730349580 ECHEVARRIA JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 1376571554 FLYNN      JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 1689774804 FREEMAN    JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 1386604080 GIANNINI   JOHN       PHYSICIAN</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more rows</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
