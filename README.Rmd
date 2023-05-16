@@ -182,6 +182,7 @@ nppes_full(npi = 1316405939)
 nppes_full(npi = 1558364273)
 nppes_full(1710983663) 
 nppes_full(1720081441)
+nppes_full(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
 ```
 
 

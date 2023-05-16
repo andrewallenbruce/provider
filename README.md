@@ -485,25 +485,93 @@ missing_information(npi = 11111122222)
 nppes_full(npi = 1316405939)
 ```
 
-    Error in nppes_full(npi = 1316405939): could not find function "nppes_full"
+    # A tibble: 4 × 33
+      npi        entype     enumeration_date enumeration_duration    last_updated
+      <chr>      <chr>      <date>           <Duration>              <date>      
+    1 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
+    2 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
+    3 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
+    4 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
+    # ℹ 28 more variables: certification_date <date>, status <chr>,
+    #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
+    #   gender <chr>, sole_proprietor <lgl>, purpose <chr>, street <chr>,
+    #   city <chr>, state <chr>, zipcode <chr>, country <chr>, phone_number <chr>,
+    #   fax_number <chr>, tx_code <chr>, tx_desc <chr>, tx_group <chr>,
+    #   tx_state <chr>, tx_license <chr>, tx_primary <lgl>, other_type <chr>,
+    #   other_code <chr>, other_credential <chr>, other_first_name <chr>, …
 
 ``` r
 nppes_full(npi = 1558364273)
 ```
 
-    Error in nppes_full(npi = 1558364273): could not find function "nppes_full"
+    # A tibble: 52 × 29
+       npi     entype enumeration_date enumeration_duration      last_updated status
+       <chr>   <chr>  <date>           <Duration>                <date>       <chr> 
+     1 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     2 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     3 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     4 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     5 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     6 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     7 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     8 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     9 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+    10 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+    # ℹ 42 more rows
+    # ℹ 23 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
+    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, purpose <chr>,
+    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
+    #   phone_number <chr>, fax_number <chr>, tx_code <chr>, tx_desc <chr>,
+    #   tx_group <chr>, tx_state <chr>, tx_license <chr>, tx_primary <lgl>,
+    #   id_issuer <chr>, id_identifier <chr>, id_state <chr>
 
 ``` r
 nppes_full(1710983663) 
 ```
 
-    Error in nppes_full(1710983663): could not find function "nppes_full"
+    ✖ No results for npi: 1710983663
 
 ``` r
 nppes_full(1720081441)
 ```
 
-    Error in nppes_full(1720081441): could not find function "nppes_full"
+    # A tibble: 78 × 29
+       npi     entype enumeration_date enumeration_duration      last_updated status
+       <chr>   <chr>  <date>           <Duration>                <date>       <chr> 
+     1 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     2 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     3 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     4 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     5 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     6 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     7 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     8 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+     9 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+    10 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
+    # ℹ 68 more rows
+    # ℹ 23 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
+    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, purpose <chr>,
+    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
+    #   phone_number <chr>, fax_number <chr>, tx_code <chr>, tx_desc <chr>,
+    #   tx_group <chr>, tx_state <chr>, tx_license <chr>, tx_primary <lgl>,
+    #   id_issuer <chr>, id_identifier <chr>, id_state <chr>
+
+``` r
+nppes_full(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+```
+
+    # A tibble: 2 × 28
+      npi      entype enumeration_date enumeration_duration      last_updated status
+      <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
+    1 1730354… Organ… 2008-04-30       474595200s (~15.04 years) 2013-11-21   A     
+    2 1730354… Organ… 2008-04-30       474595200s (~15.04 years) 2013-11-21   A     
+    # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
+    #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
+    #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
+    #   authorized_official_last_name <chr>,
+    #   authorized_official_title_or_position <chr>,
+    #   authorized_official_telephone_number <chr>, tx_code <chr>, tx_desc <chr>,
+    #   tx_group <chr>, tx_state <lgl>, tx_license <lgl>, tx_primary <lgl>, …
 
 ### Open Payments
 
@@ -608,7 +676,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    # A tibble: 150 × 7
+    # A tibble: 148 × 7
        npi        first_name last_name partb hha   dme   pmd  
        <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
      1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -621,7 +689,7 @@ order_refer(last_name = "Smith",
      8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
      9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
     10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    # ℹ 140 more rows
+    # ℹ 138 more rows
 
 ### Pending Applications
 
