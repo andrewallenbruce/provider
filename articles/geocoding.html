@@ -142,12 +142,19 @@
 <code class="sourceCode R"><span><span class="va">geo_nppes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1760485387</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">geo_nppes</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   created_epoch enumeration_type last_updated_epoch number     addresses    </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1117219216000 NPI-1            1354659522000      1760485387 <span style="color: #949494;">&lt;df [2 × 10]&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: practiceLocations &lt;list&gt;, basic &lt;df[,11]&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   taxonomies &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;list&gt;, other_names &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 29</span></span></span>
+<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1760485… Ind    2005-05-27       567043200s (~17.97 years) 2012-12-04   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1760485… Ind    2005-05-27       567043200s (~17.97 years) 2012-12-04   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1760485… Ind    2005-05-27       567043200s (~17.97 years) 2012-12-04   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1760485… Ind    2005-05-27       567043200s (~17.97 years) 2012-12-04   A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geo_add</span> <span class="op">&lt;-</span> <span class="va">geo_nppes</span> <span class="op">|&gt;</span> </span>

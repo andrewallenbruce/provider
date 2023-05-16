@@ -115,7 +115,7 @@ API's documentation.</p>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">1200</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -130,44 +130,31 @@ API's documentation.</p>
 
 
 <dt>entype</dt>
-<dd><p>The Read API can be refined to retrieve only Individual
-Providers (<code>NPI-1</code> or Type 1) or Organizational Providers (<code>NPI-2</code> or
-Type 2.) When not specified, both Type 1 and Type 2 NPIs will be
-returned. When using the Enumeration Type, it cannot be the only
-criteria entered. Additional criteria must also be entered as well.</p></dd>
+<dd><p>Choices are either <code>I</code> for an Individual provider (NPI-1 or
+Type 1) or <code>O</code> for an Organizational provider (NPI-2 or Type 2.). When
+not specified, both Type 1 and Type 2 NPIs will be returned. Entype
+cannot be the only criteria entered.</p></dd>
 
 
 <dt>first_name</dt>
-<dd><p>Provider's first name. Applies to
-<strong>Individual Providers (NPI-1)</strong> only. Trailing wildcard entries are
-permitted requiring at least two characters to be entered (e.g. "jo*" ).
-This field allows the following special characters: ampersand(<code>&amp;</code>),
-apostrophe(<code>,</code>), colon(<code>:</code>), comma(<code>,</code>), forward slash(<code>/</code>),
-hyphen(<code>-</code>), left and right parentheses(<code>()</code>), period(<code>.</code>),
-pound sign(<code>#</code>), quotation mark(<code>"</code>), and semi-colon(<code>;</code>).</p></dd>
+<dd><p>Individual provider's (NPI-1) first name. Trailing wildcard
+entries are permitted requiring at least two characters to be entered
+(e.g. <code>jo*</code> ).</p></dd>
 
 
 <dt>last_name</dt>
-<dd><p>Provider's last name. Applies to
-<strong>Individual Providers (NPI-1)</strong> only. Trailing wildcard entries are
-permitted requiring at least two characters to be entered (e.g. "jo*" ).
-This field allows the following special characters: ampersand(<code>&amp;</code>),
-apostrophe(<code>,</code>), colon(<code>:</code>), comma(<code>,</code>), forward slash(<code>/</code>),
-hyphen(<code>-</code>), left and right parentheses(<code>()</code>), period(<code>.</code>),
-pound sign(<code>#</code>), quotation mark(<code>"</code>), and semi-colon(<code>;</code>).</p></dd>
+<dd><p>Individual provider's (NPI-1) last name. Trailing wildcard
+entries are permitted requiring at least two characters to be entered
+(e.g. <code>jo*</code> ).</p></dd>
 
 
 <dt>org_name</dt>
-<dd><p>Healthcare organization's name. Applies to
-<strong>Organizational Providers (NPI-2)</strong> only. Trailing wildcard entries are
+<dd><p>Healthcare organization's name (NPI-2). Trailing wildcard entries are
 permitted requiring at least two characters to be entered. All types of
 Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
 NPI are examined for matching contents, therefore, the results might
 contain an organization name different from the one entered in the
-Organization Name criterion. This field allows the following special
-characters: ampersand, apostrophe, "at" sign, colon, comma, forward
-slash, hyphen, left and right parentheses, period, pound sign, quotation
-mark, and semi-colon.</p></dd>
+Organization Name criterion.</p></dd>
 
 
 <dt>taxonomy_desc</dt>
@@ -177,18 +164,14 @@ taxonomy description.</p></dd>
 
 <dt>city</dt>
 <dd><p>City associated with the provider's address. To search for a
-Military Address, enter either <code>APO</code> or <code>FPO</code> into the City field.
-This field allows the following special characters: ampersand,
-apostrophe, colon, comma, forward slash, hyphen, left and right
-parentheses, period, pound sign, quotation mark, and semi-colon.</p></dd>
+Military Address, enter either <code>APO</code> or <code>FPO</code>.</p></dd>
 
 
 <dt>state</dt>
-<dd><p>State abbreviation associated with the provider's address.
-This field <strong>cannot</strong> be used as the only input criterion. If this
-field is used, at least one other field, besides the <code>prov_type</code> and
+<dd><p>State abbreviation associated with the provider's address. If
+this field is used, at least one other field, besides the <code>entype</code> and
 <code>country</code>, must be populated. Valid values for state abbreviations:
-<a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">https://npiregistry.cms.hhs.gov/help-api/state</a>.</p></dd>
+<a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">State Abbreviations</a>.</p></dd>
 
 
 <dt>zipcode</dt>
@@ -196,7 +179,7 @@ field is used, at least one other field, besides the <code>prov_type</code> and
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 wildcard entries are permitted requiring at least two characters to be
-entered (e.g., "21*").</p></dd>
+entered (e.g., <code>21*</code>).</p></dd>
 
 
 <dt>country</dt>
@@ -204,12 +187,11 @@ entered (e.g., "21*").</p></dd>
 address. This field <strong>can</strong> be used as the only input criterion, as long
 as the value selected <em>is not</em> <strong>US</strong> (United States). Valid values for
 country abbreviations:
-<a href="https://npiregistry.cms.hhs.gov/help-api/country" class="external-link">https://npiregistry.cms.hhs.gov/help-api/country</a>.</p></dd>
+<a href="https://npiregistry.cms.hhs.gov/help-api/country" class="external-link">Country Abbreviations</a>.</p></dd>
 
 
 <dt>limit</dt>
-<dd><p>Maximum number of results to return;
-default is 200, maximum is 1200.</p></dd>
+<dd><p>Maximum number of results to return; default is 1200.</p></dd>
 
 
 <dt>skip</dt>
@@ -254,7 +236,7 @@ to use the NPI Registry.</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">nppes_full</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
