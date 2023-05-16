@@ -49,6 +49,9 @@ hospital_enrollment <- function(npi            = NULL,
                                 state          = NULL,
                                 zipcode        = NULL,
                                 tidy           = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                       ~y,
@@ -80,13 +83,13 @@ hospital_enrollment <- function(npi            = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,               ~y,
-      "npi",            npi,
-      "facility_ccn",   facility_ccn,
-      "enroll_id",      enroll_id,
+      "npi",            as.character(npi),
+      "facility_ccn",   as.character(facility_ccn),
+      "enroll_id",      as.character(enroll_id),
       "enroll_state",   enroll_state,
       "specialty_code", specialty_code,
       "pac_id_org",     pac_id_org,
@@ -125,41 +128,41 @@ hospital_enrollment <- function(npi            = NULL,
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
       dplyr::select(npi,
-                    enroll_id = enrollment_id,
-                    enroll_state = enrollment_state,
-                    specialty_code = provider_type_code,
-                    specialty_desc = provider_type_text,
-                    facility_ccn = ccn,
-                    pac_id_org = associate_id,
-                    org_name = organization_name,
-                    doing_business_as = doing_business_as_name,
-                    incorp_date = incorporation_date,
+                    enroll_id              = enrollment_id,
+                    enroll_state           = enrollment_state,
+                    specialty_code         = provider_type_code,
+                    specialty_desc         = provider_type_text,
+                    facility_ccn           = ccn,
+                    pac_id_org             = associate_id,
+                    org_name               = organization_name,
+                    doing_business_as      = doing_business_as_name,
+                    incorp_date            = incorporation_date,
                     incorp_duration,
-                    incorp_state = incorporation_state,
-                    org_structure = organization_type_structure,
-                    org_other = organization_other_type_text,
+                    incorp_state           = incorporation_state,
+                    org_structure          = organization_type_structure,
+                    org_other              = organization_other_type_text,
                     address,
                     city,
                     state,
-                    zipcode = zip_code,
-                    location_type = practice_location_type,
-                    location_other = location_other_type_text,
-                    multiple_npis = multiple_npi_flag,
+                    zipcode                = zip_code,
+                    location_type          = practice_location_type,
+                    location_other         = location_other_type_text,
+                    multiple_npis          = multiple_npi_flag,
                     proprietary_nonprofit,
-                    sg_general = subgroup__general,
-                    sg_acute_care = subgroup__acute_care,
-                    sg_alcohol_drug = subgroup__alcohol_drug,
-                    sg_childrens = subgroup__childrens,
-                    sg_long_term = subgroup__long_term,
-                    sg_short_term = subgroup__short_term,
-                    sg_psychiatric = subgroup__psychiatric,
-                    sg_psychiatric_unit = subgroup__psychiatric_unit,
-                    sg_rehabilitation = subgroup__rehabilitation,
+                    sg_general             = subgroup__general,
+                    sg_acute_care          = subgroup__acute_care,
+                    sg_alcohol_drug        = subgroup__alcohol_drug,
+                    sg_childrens           = subgroup__childrens,
+                    sg_long_term           = subgroup__long_term,
+                    sg_short_term          = subgroup__short_term,
+                    sg_psychiatric         = subgroup__psychiatric,
+                    sg_psychiatric_unit    = subgroup__psychiatric_unit,
+                    sg_rehabilitation      = subgroup__rehabilitation,
                     sg_rehabilitation_unit = subgroup__rehabilitation_unit,
-                    sg_swing_bed_approved = subgroup__swing_bed_approved,
-                    sg_specialty_hospital = subgroup__specialty_hospital,
-                    sg_other = subgroup__other,
-                    sg_other_text = subgroup__other_text)
+                    sg_swing_bed_approved  = subgroup__swing_bed_approved,
+                    sg_specialty_hospital  = subgroup__specialty_hospital,
+                    sg_other               = subgroup__other,
+                    sg_other_text          = subgroup__other_text)
 
     }
   return(results)

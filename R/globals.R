@@ -173,14 +173,34 @@ utils::globalVariables(c(
   "y", # <nppes_npi>
   "number", # <nppes_npi>
   "enumeration_type", # <nppes_npi>
-  "basic", # <nppes_npi>
   "addresses", # <nppes_npi>
   "taxonomies", # <nppes_npi>
-  "enumeration_date", # <nppes_npi>
-  "address_purpose", # <nppes_npi>
-  "country_name", # <nppes_npi>
+  "practiceLocations", # <nppes_npi>
+  "other_names", # <nppes_npi>
+  "practice_locations", # <nppes_npi>
+  "country_code", # <nppes_npi>
   "telephone_number", # <nppes_npi>
   "postal_code", # <nppes_npi>
+  "address_purpose", # <nppes_npi>
+  "purpose", # <nppes_npi>
+  "code", # <nppes_npi>
+  "desc", # <nppes_npi>
+  "taxonomy_group", # <nppes_npi>
+  "primary", # <nppes_npi>
+  "issuer", # <nppes_npi>
+  "identifier", # <nppes_npi>
+  "enumeration_date", # <nppes_npi>
+  "y", # <nppes_summary>
+  "number", # <nppes_summary>
+  "enumeration_type", # <nppes_summary>
+  "basic", # <nppes_summary>
+  "addresses", # <nppes_summary>
+  "taxonomies", # <nppes_summary>
+  "enumeration_date", # <nppes_summary>
+  "address_purpose", # <nppes_summary>
+  "country_name", # <nppes_summary>
+  "telephone_number", # <nppes_summary>
+  "postal_code", # <nppes_summary>
   "data_lists", # <nppes_npi_old>
   "outcome", # <nppes_npi_old>
   "description", # <nppes_npi_old>
@@ -194,26 +214,6 @@ utils::globalVariables(c(
   "addresses", # <nppes_npi_old>
   "basic_first_name", # <nppes_npi_old>
   "basic_last_name", # <nppes_npi_old>
-  "y", # <nppes_full>
-  "number", # <nppes_full>
-  "enumeration_type", # <nppes_full>
-  "addresses", # <nppes_full>
-  "taxonomies", # <nppes_full>
-  "practiceLocations", # <nppes_full>
-  "other_names", # <nppes_full>
-  "practice_locations", # <nppes_full>
-  "country_code", # <nppes_full>
-  "telephone_number", # <nppes_full>
-  "postal_code", # <nppes_full>
-  "address_purpose", # <nppes_full>
-  "purpose", # <nppes_full>
-  "code", # <nppes_full>
-  "desc", # <nppes_full>
-  "taxonomy_group", # <nppes_full>
-  "primary", # <nppes_full>
-  "issuer", # <nppes_full>
-  "identifier", # <nppes_full>
-  "enumeration_date", # <nppes_full>
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>
@@ -314,6 +314,7 @@ utils::globalVariables(c(
   "zip_code", # <opt_out>
   "y", # <order_refer>
   "y", # <pending_applications>
+  "npi", # <physician_by_geography>
   "distro", # <physician_by_geography>
   "y", # <physician_by_geography>
   "rndrng_prvdr_geo_lvl", # <physician_by_geography>

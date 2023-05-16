@@ -25,7 +25,6 @@ remove_null <- function(x) {Filter(Negate(is.null), x)}
 clean_credentials <- function(x) {
   if (!is.character(x)) {stop("x must be a character vector")}
   out <- gsub("\\.", "", x)
-  #out <- stringr::str_split(out, "[,\\s;]+", simplify = FALSE)
   return(out)
 }
 
@@ -111,31 +110,52 @@ clean_credentials <- function(x) {
 #' }
 #' @autoglobal
 #' @noRd
-luhn_check <- function(npi = NULL) {
+npi_check <- function(npi = NULL) {
+
+  # Must be 10 char length
+  if (nchar(npi) != 10L) {
+    cli::cli_abort(c(
+      "NPI may be incorrect or invalid",
+      "i" = "NPIs are 10 characters long.",
+      "x" = "NPI: {.val {npi}} is {.val {nchar(npi)}} characters long."
+      ))
+    }
 
   # Return FALSE if not a number
-  if (!grepl("^[[:digit:]]+$", npi)) {return(FALSE)}
+  if (grepl("^[[:digit:]]+$", npi) == FALSE) {
+    cli::cli_abort(c(
+      "NPI may be incorrect or invalid",
+      "i" = "NPIs must be numeric.",
+      "x" = "NPI: {.val {npi}} has non-numeric characters."
+      ))
+    }
 
   # Strip whitespace
-  npi <- gsub(pattern = " ", replacement = "", npi)
+  npi_luhn <- gsub(pattern = " ", replacement = "", npi)
 
   # Paste 80840 to each NPI number, per CMS documentation
-  npi <- paste0("80840", npi)
+  npi_luhn <- paste0("80840", npi_luhn)
 
   # Split string, Convert to list and reverse
-  npi <- unlist(strsplit(npi, ""))
-  npi <- npi[length(npi):1]
-  to_replace <- seq(2, length(npi), 2)
-  npi[to_replace] <- as.numeric(npi[to_replace]) * 2
+  npi_luhn <- unlist(strsplit(npi_luhn, ""))
+  npi_luhn <- npi_luhn[length(npi_luhn):1]
+  to_replace <- seq(2, length(npi_luhn), 2)
+  npi_luhn[to_replace] <- as.numeric(npi_luhn[to_replace]) * 2
 
   # Convert to numeric
-  npi <- as.numeric(npi)
+  npi_luhn <- as.numeric(npi_luhn)
 
   # Must be a single digit, any that are > 9, subtract 9
-  npi <- ifelse(npi > 9, npi - 9, npi)
+  npi_luhn <- ifelse(npi_luhn > 9, npi_luhn - 9, npi_luhn)
 
   # Check if the sum divides by 10
-  ((sum(npi) %% 10) == 0)
+  if ((sum(npi_luhn) %% 10) != 0) {
+    cli::cli_abort(c(
+      "NPI may be incorrect or invalid",
+      "i" = "NPIs must pass {.emph Luhn algorithm}.",
+      "x" = "NPI {.val {npi}} {.strong fails} Luhn check."
+    ))
+  }
 }
 
 #' param_format ------------------------------------------------------------
@@ -219,11 +239,25 @@ yn_logical <- function(x){
 #' @noRd
 entype_char <- function(x){
   dplyr::case_when(
-    x == "NPI-1" ~ "Individual",
-    x == "I" ~ "Individual",
-    x == "NPI-2" ~ "Organization",
-    x == "O" ~ "Organization"
+    x == "NPI-1" ~ "Ind",
+    x == "I" ~ "Ind",
+    x == "NPI-2" ~ "Org",
+    x == "O" ~ "Org"
     )
+}
+
+#' Convert I/O char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
+entype_arg <- function(x){
+  dplyr::case_when(
+    x == "I" ~ "NPI-1",
+    x == "i" ~ "NPI-1",
+    x == "O" ~ "NPI-2",
+    x == "o" ~ "NPI-2",
+    .default = NULL
+  )
 }
 
 #' Convert I/O char values to logical ----------------------

@@ -61,6 +61,9 @@ revalidation_date <- function(npi              = NULL,
                               prov_type        = NULL,
                               specialty        = NULL,
                               tidy             = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                                 ~x,                ~y,

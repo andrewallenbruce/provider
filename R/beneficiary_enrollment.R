@@ -104,7 +104,7 @@ beneficiary_enrollment <- function(year        = NULL,
     cli_args <- tibble::tribble(
       ~x,           ~y,
       "year",       as.character(year),
-      "period",      period,
+      "period",     period,
       "level",      level,
       "state",      state,
       "state_name", state_name,

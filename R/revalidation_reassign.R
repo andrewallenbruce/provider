@@ -60,6 +60,9 @@ revalidation_reassign <- function(npi             = NULL,
                                   state_group     = NULL,
                                   record_type     = NULL,
                                   tidy            = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                                 ~y,

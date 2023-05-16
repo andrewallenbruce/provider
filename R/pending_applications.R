@@ -29,6 +29,8 @@ pending_applications <- function(npi         = NULL,
                                  first_name  = NULL,
                                  type        = c("physician", "non-physician"),
                                  tidy        = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
   rlang::arg_match(type)
   # update distribution ids -------------------------------------------------
   id <- dplyr::case_when(
@@ -56,9 +58,10 @@ pending_applications <- function(npi         = NULL,
 
   # response ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
+  return(response)
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,               ~y,

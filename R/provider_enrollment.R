@@ -95,6 +95,9 @@ provider_enrollment <- function(npi                = NULL,
                                 org_name           = NULL,
                                 gender             = NULL,
                                 tidy               = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
                         ~x,  ~y,

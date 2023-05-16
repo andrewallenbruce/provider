@@ -459,8 +459,7 @@ hospital_enrollment(enroll_state = "GA")
 hospital_enrollment(enroll_id = "O20030404000017")
 ```
 
-    Error in `resp_body_raw()`:
-    ! Can not retrieve empty body
+    ✖ No results for enroll_id: O20030404000017
 
 ### Missing Contact Information
 
@@ -477,94 +476,55 @@ missing_information(npi = 1144224569)
 missing_information(npi = 11111122222)
 ```
 
-    ✖ No results for npi: 11111122222
+    Error in `npi_check()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs are 10 characters long.
+    ✖ NPI: 11111122222 is 11 characters long.
 
 ### NPI Registry
 
 ``` r
-nppes_full(npi = 1316405939)
+nppes_npi(npi = 13164059391)
 ```
 
-    # A tibble: 4 × 33
-      npi        entype     enumeration_date enumeration_duration    last_updated
-      <chr>      <chr>      <date>           <Duration>              <date>      
-    1 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
-    2 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
-    3 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
-    4 1316405939 Individual 2019-03-04       132451200s (~4.2 years) 2023-04-06  
-    # ℹ 28 more variables: certification_date <date>, status <chr>,
-    #   first_name <chr>, middle_name <chr>, last_name <chr>, credential <chr>,
-    #   gender <chr>, sole_proprietor <lgl>, purpose <chr>, street <chr>,
-    #   city <chr>, state <chr>, zipcode <chr>, country <chr>, phone_number <chr>,
-    #   fax_number <chr>, tx_code <chr>, tx_desc <chr>, tx_group <chr>,
-    #   tx_state <chr>, tx_license <chr>, tx_primary <lgl>, other_type <chr>,
-    #   other_code <chr>, other_credential <chr>, other_first_name <chr>, …
+    Error in `npi_check()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs are 10 characters long.
+    ✖ NPI: 13164059391 is 11 characters long.
 
 ``` r
-nppes_full(npi = 1558364273)
+nppes_npi(npi = "155836427a")
 ```
 
-    # A tibble: 52 × 29
-       npi     entype enumeration_date enumeration_duration      last_updated status
-       <chr>   <chr>  <date>           <Duration>                <date>       <chr> 
-     1 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     2 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     3 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     4 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     5 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     6 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     7 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     8 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     9 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-    10 155836… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-    # ℹ 42 more rows
-    # ℹ 23 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, purpose <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
-    #   phone_number <chr>, fax_number <chr>, tx_code <chr>, tx_desc <chr>,
-    #   tx_group <chr>, tx_state <chr>, tx_license <chr>, tx_primary <lgl>,
-    #   id_issuer <chr>, id_identifier <chr>, id_state <chr>
+    Error in `npi_check()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs must be numeric.
+    ✖ NPI: "155836427a" has non-numeric characters.
 
 ``` r
-nppes_full(1710983663) 
+nppes_npi(1720081442)
+```
+
+    Error in `npi_check()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs must pass Luhn algorithm.
+    ✖ NPI 1720081442 fails Luhn check.
+
+``` r
+nppes_npi(1710983663) 
 ```
 
     ✖ No results for npi: 1710983663
 
 ``` r
-nppes_full(1720081441)
-```
-
-    # A tibble: 78 × 29
-       npi     entype enumeration_date enumeration_duration      last_updated status
-       <chr>   <chr>  <date>           <Duration>                <date>       <chr> 
-     1 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     2 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     3 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     4 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     5 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     6 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     7 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     8 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-     9 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-    10 172008… Indiv… 2005-05-27       566956800s (~17.97 years) 2007-07-08   A     
-    # ℹ 68 more rows
-    # ℹ 23 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
-    #   credential <chr>, gender <chr>, sole_proprietor <lgl>, purpose <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
-    #   phone_number <chr>, fax_number <chr>, tx_code <chr>, tx_desc <chr>,
-    #   tx_group <chr>, tx_state <chr>, tx_license <chr>, tx_primary <lgl>,
-    #   id_issuer <chr>, id_identifier <chr>, id_state <chr>
-
-``` r
-nppes_full(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
 ```
 
     # A tibble: 2 × 28
       npi      entype enumeration_date enumeration_duration      last_updated status
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1730354… Organ… 2008-04-30       474595200s (~15.04 years) 2013-11-21   A     
-    2 1730354… Organ… 2008-04-30       474595200s (~15.04 years) 2013-11-21   A     
+    1 1730354… Org    2008-04-30       474681600s (~15.04 years) 2013-11-21   A     
+    2 1730354… Org    2008-04-30       474681600s (~15.04 years) 2013-11-21   A     
     # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
     #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
     #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
@@ -572,6 +532,89 @@ nppes_full(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
     #   authorized_official_title_or_position <chr>,
     #   authorized_official_telephone_number <chr>, tx_code <chr>, tx_desc <chr>,
     #   tx_group <chr>, tx_state <lgl>, tx_license <lgl>, tx_primary <lgl>, …
+
+``` r
+provider_enrollment(specialty_code = "00-17", state = "GA") |> 
+  dplyr::pull(npi) |> 
+  purrr::map(nppes_npi, .progress = TRUE) |> 
+  purrr::list_rbind()
+```
+
+    ■■ 2% | ETA: 45s
+
+    ■■ 3% | ETA: 40s ■■ 4% | ETA: 38s ■■■ 5% | ETA: 35s ■■■ 7% | ETA: 35s ■■■ 8% |
+    ETA: 34s ■■■■ 9% | ETA: 33s ■■■■ 10% | ETA: 32s ■■■■ 11% | ETA: 32s ■■■■■ 12% |
+    ETA: 31s ■■■■■ 13% | ETA: 30s ■■■■■ 14% | ETA: 29s ■■■■■■ 15% | ETA: 28s ■■■■■■
+    16% | ETA: 28s ■■■■■■ 17% | ETA: 27s ■■■■■■■ 18% | ETA: 27s ■■■■■■■ 20% | ETA:
+    26s ■■■■■■■ 21% | ETA: 25s ■■■■■■■■ 22% | ETA: 25s ■■■■■■■■ 23% | ETA: 24s
+    ■■■■■■■■ 24% | ETA: 24s ■■■■■■■■■ 25% | ETA: 23s ■■■■■■■■■ 26% | ETA: 23s
+    ■■■■■■■■■ 27% | ETA: 23s ■■■■■■■■■ 28% | ETA: 22s ■■■■■■■■■■ 29% | ETA: 22s
+    ■■■■■■■■■■ 30% | ETA: 21s ■■■■■■■■■■ 32% | ETA: 21s ■■■■■■■■■■■ 33% | ETA: 21s
+    ■■■■■■■■■■■ 34% | ETA: 20s ■■■■■■■■■■■ 35% | ETA: 20s ■■■■■■■■■■■■ 36% | ETA:
+    19s ■■■■■■■■■■■■ 37% | ETA: 19s ■■■■■■■■■■■■ 38% | ETA: 19s ■■■■■■■■■■■■■ 39% |
+    ETA: 18s ■■■■■■■■■■■■■ 40% | ETA: 18s ■■■■■■■■■■■■■ 41% | ETA: 18s
+    ■■■■■■■■■■■■■■ 42% | ETA: 17s ■■■■■■■■■■■■■■ 43% | ETA: 17s ■■■■■■■■■■■■■■ 45%
+    | ETA: 16s ■■■■■■■■■■■■■■■ 46% | ETA: 16s ■■■■■■■■■■■■■■■ 47% | ETA: 16s
+    ■■■■■■■■■■■■■■■ 48% | ETA: 16s ■■■■■■■■■■■■■■■■ 49% | ETA: 15s ■■■■■■■■■■■■■■■■
+    50% | ETA: 15s ■■■■■■■■■■■■■■■■ 51% | ETA: 14s ■■■■■■■■■■■■■■■■■ 52% | ETA: 14s
+    ■■■■■■■■■■■■■■■■■ 53% | ETA: 14s ■■■■■■■■■■■■■■■■■ 54% | ETA: 13s
+    ■■■■■■■■■■■■■■■■■■ 55% | ETA: 13s ■■■■■■■■■■■■■■■■■■ 57% | ETA: 13s
+    ■■■■■■■■■■■■■■■■■■ 58% | ETA: 12s ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 12s
+    ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 12s ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 11s
+    ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 11s
+    ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 10s
+    ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 9s
+    ■■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 9s
+    ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 8s
+    ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 8s
+    ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 7s
+    ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 6s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 6s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■ 82% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA:
+    5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 84% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% |
+    ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    87% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 4s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
+    ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 3s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93% |
+    ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 2s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96% | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97%
+    | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 1s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 99% | ETA: 0s
+
+    # A tibble: 424 × 36
+       npi        entype enumeration_date enumeration_duration      last_updated
+       <chr>      <chr>  <date>           <Duration>                <date>      
+     1 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     2 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     3 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     4 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     5 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     6 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     7 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     8 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+     9 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+    10 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+    # ℹ 414 more rows
+    # ℹ 31 more variables: certification_date <date>, status <chr>,
+    #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
+    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
+    #   phone_number <chr>, fax_number <chr>, authorized_official_first_name <chr>,
+    #   authorized_official_last_name <chr>,
+    #   authorized_official_title_or_position <chr>, …
+
+``` r
+c(13164059391, 1558364273) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind()
+```
+
+    Error in `purrr::map()`:
+    ℹ In index: 1.
+    Caused by error in `npi_check()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs are 10 characters long.
+    ✖ NPI: 13164059391 is 11 characters long.
 
 ### Open Payments
 
@@ -642,8 +685,7 @@ opt_out(specialty = "Psychiatry",
 opt_out(specialty = "Tsychiatry")
 ```
 
-    Error in `resp_body_raw()`:
-    ! Can not retrieve empty body
+    ✖ No results for specialty: Tsychiatry
 
 ``` r
 opt_out(city = "Valdosta", state = "GA")
@@ -697,44 +739,31 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    # A tibble: 16 × 4
-       npi        last_name first_name type         
-       <chr>      <chr>     <chr>      <chr>        
-     1 1700588621 SMITH     AMANDA     NON-PHYSICIAN
-     2 1073234282 SMITH     ANGELA     NON-PHYSICIAN
-     3 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
-     4 1548969413 SMITH     ASHLEY     NON-PHYSICIAN
-     5 1659967966 SMITH     ASHLEY     NON-PHYSICIAN
-     6 1952009805 SMITH     BALEY      NON-PHYSICIAN
-     7 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
-     8 1902527641 SMITH     HEATHER    NON-PHYSICIAN
-     9 1356079727 SMITH     JARED      NON-PHYSICIAN
-    10 1891169751 SMITH     JEANA      NON-PHYSICIAN
-    11 1033538152 SMITH     JOANNA     NON-PHYSICIAN
-    12 1851916803 SMITH     KENZIE     NON-PHYSICIAN
-    13 1467159426 SMITH     PATRICE    NON-PHYSICIAN
-    14 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
-    15 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
-    16 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
+    <httr2_response>
+
+    GET
+    https://data.cms.gov/data-api/v1/dataset/261b83b6-b89f-43ad-ae7b-0d419a3bc24b/data.json?filter[LAST_NAME]=Smith&
+
+    Status: 200 OK
+
+    Content-Type: application/json
+
+    Body: In memory (1029 bytes)
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 36 × 4
-       npi        last_name  first_name type     
-       <chr>      <chr>      <chr>      <chr>    
-     1 1881791739 ADAMS      JOHN       PHYSICIAN
-     2 1841280963 BIGBEE     JOHN       PHYSICIAN
-     3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1801545900 BRAZIL     JOHN       PHYSICIAN
-     5 1588744569 BRUNO      JOHN       PHYSICIAN
-     6 1861142556 BURKE      JOHN       PHYSICIAN
-     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
-     8 1306817531 COMBS      JOHN       PHYSICIAN
-     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    10 1376571554 FLYNN      JOHN       PHYSICIAN
-    # ℹ 26 more rows
+    <httr2_response>
+
+    GET
+    https://data.cms.gov/data-api/v1/dataset/6bd6b1dd-208c-4f9c-88b8-b15fec6db548/data.json?filter[FIRST_NAME]=John&
+
+    Status: 200 OK
+
+    Content-Type: application/json
+
+    Body: In memory (2296 bytes)
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -744,14 +773,22 @@ pending_applications(first_name = "John", type = "dentist")
     ! `type` must be one of "physician" or "non-physician", not "dentist".
 
 ``` r
-pending_applications(npi = "1001001234", 
+pending_applications(npi = "1083879860", 
                      first_name = "Gaelic", 
                      last_name = "Garlic",
                      type = "physician")
 ```
 
-    Error in `resp_body_raw()`:
-    ! Can not retrieve empty body
+    <httr2_response>
+
+    GET
+    https://data.cms.gov/data-api/v1/dataset/6bd6b1dd-208c-4f9c-88b8-b15fec6db548/data.json?filter[NPI]=1083879860&filter[LAST_NAME]=Garlic&filter[FIRST_NAME]=Gaelic&
+
+    Status: 200 OK
+
+    Content-Type: application/json
+
+    Body: Empty
 
 ### Physician & Other Practitioners
 
@@ -761,22 +798,7 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
   dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    # A tibble: 10 × 16
-        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
-       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
-     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
-     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
-     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
-     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
-     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
-     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
-     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
-     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
-     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
-    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
-    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
-    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
-    #   avg_std_pymt <dbl>
+    Error in physician_by_geography(sublevel = "Georgia", year = 2020): object 'npi' not found
 
 ``` r
 # by Provider and Service
@@ -784,14 +806,14 @@ physician_by_service(year = 2020, npi = 1083879860)
 ```
 
     # A tibble: 6 × 28
-       year npi        entype     first_name middle_name last_name credential gender
-      <int> <chr>      <chr>      <chr>      <chr>       <chr>     <chr>      <chr> 
-    1  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
-    2  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
-    3  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
-    4  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
-    5  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
-    6  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+       year npi        entype first_name  middle_name last_name credential gender
+      <int> <chr>      <chr>  <chr>       <chr>       <chr>     <chr>      <chr> 
+    1  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+    2  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+    3  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+    4  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+    5  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+    6  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
     # ℹ 20 more variables: specialty <chr>, street <chr>, city <chr>, state <chr>,
     #   fips <chr>, zipcode <chr>, ruca <chr>, country <chr>, par <lgl>,
     #   hcpcs_cd <chr>, hcpcs_desc <chr>, hcpcs_drug <chr>, place_of_srvc <chr>,
@@ -806,7 +828,7 @@ physician_by_provider(npi = 1083879860, year = 2020)
     # A tibble: 1 × 70
        year npi     first_name middle_name last_name credential gender entype street
       <int> <chr>   <chr>      <chr>       <chr>     <chr>      <chr>  <chr>  <chr> 
-    1  2020 108387… Christoph… <NA>        Aaron     <NA>       M      Indiv… 792 G…
+    1  2020 108387… Christoph… <NA>        Aaron     <NA>       M      Ind    792 G…
     # ℹ 61 more variables: city <chr>, state <chr>, fips <chr>, zipcode <chr>,
     #   ruca <chr>, country <chr>, specialty <chr>, par <lgl>, tot_hcpcs <int>,
     #   tot_benes <int>, tot_srvcs <int>, tot_charges <dbl>, tot_allowed <dbl>,

@@ -54,6 +54,9 @@ facility_affiliations <- function(npi           = NULL,
                                   parent_ccn    = NULL,
                                   offset        = 0,
                                   tidy          = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
@@ -83,7 +86,7 @@ facility_affiliations <- function(npi           = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "28") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,

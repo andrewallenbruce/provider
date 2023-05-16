@@ -64,6 +64,8 @@ order_refer <- function(npi          = NULL,
                         pmd          = NULL,
                         tidy         = TRUE) {
 
+  if (!is.null(npi)) {npi_check(npi)}
+
   if (!is.null(partb)) {partb <- dplyr::case_when(
     partb == TRUE ~ "Y", partb == FALSE ~ "N", .default = NULL)}
 

@@ -62,6 +62,9 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    group_assn    = NULL,
                                    offset        = 0,
                                    tidy          = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,

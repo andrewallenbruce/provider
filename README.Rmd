@@ -178,11 +178,20 @@ missing_information(npi = 11111122222)
 ### NPI Registry
 
 ```{r}
-nppes_full(npi = 1316405939)
-nppes_full(npi = 1558364273)
-nppes_full(1710983663) 
-nppes_full(1720081441)
-nppes_full(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+nppes_npi(npi = 13164059391)
+nppes_npi(npi = "155836427a")
+nppes_npi(1720081442)
+nppes_npi(1710983663) 
+nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+
+provider_enrollment(specialty_code = "00-17", state = "GA") |> 
+  dplyr::pull(npi) |> 
+  purrr::map(nppes_npi, .progress = TRUE) |> 
+  purrr::list_rbind()
+
+c(13164059391, 1558364273) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind()
 ```
 
 
@@ -232,7 +241,7 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
 pending_applications(first_name = "John", type = "dentist")
-pending_applications(npi = "1001001234", 
+pending_applications(npi = "1083879860", 
                      first_name = "Gaelic", 
                      last_name = "Garlic",
                      type = "physician")

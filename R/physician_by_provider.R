@@ -94,6 +94,8 @@ physician_by_provider <- function(year,
                                   par         = NULL,
                                   tidy        = TRUE) {
 
+  if (!is.null(npi)) {npi_check(npi)}
+
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)

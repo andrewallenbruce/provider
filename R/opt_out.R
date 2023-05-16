@@ -61,6 +61,9 @@ opt_out <- function(npi             = NULL,
                     zipcode         = NULL,
                     order_and_refer = NULL,
                     tidy            = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   if (!is.null(order_and_refer)) {order_and_refer <- dplyr::case_when(
       order_and_refer == TRUE ~ "Y", order_and_refer == FALSE ~ "N",
@@ -94,7 +97,7 @@ opt_out <- function(npi             = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) == 0) {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,

@@ -97,6 +97,8 @@ open_payments <- function(year,
                           offset            = 0,
                           tidy              = TRUE) {
 
+  if (!is.null(npi)) {npi_check(npi)}
+
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                              ~y,

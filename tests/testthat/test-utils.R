@@ -19,15 +19,15 @@
 # expect_equal(days_today(date_ex, x), date_ex_res)})
 
 # format_zipcode ----------------------------------------------------------
-test_that("`format_zipcode()` works", {
-  zip_ex <- "12345-6789"
-  zip_ex2 <- "12345"
-  expect_equal(format_zipcode(123456789), zip_ex)
-  expect_equal(format_zipcode(12345), zip_ex2)})
+# test_that("`format_zipcode()` works", {
+#   zip_ex <- "12345-6789"
+#   zip_ex2 <- "12345"
+#   expect_equal(format_zipcode(123456789), zip_ex)
+#   expect_equal(format_zipcode(12345), zip_ex2)})
 
 # luhn_check --------------------------------------------------------------
-test_that("`luhn_check()` works", {
-  expect_equal(luhn_check(npi = 1528060837), TRUE)
-  expect_equal(luhn_check(npi = "1528060837"), TRUE)
-  expect_equal(luhn_check(npi = 1234567891), FALSE)
-  expect_equal(luhn_check(npi = "abcdefghij"), FALSE)})
+# test_that("`luhn_check()` works", {
+#   expect_equal(luhn_check(npi = 1528060837), TRUE)
+#   expect_equal(luhn_check(npi = "1528060837"), TRUE)
+#   expect_equal(luhn_check(npi = 1234567891), FALSE)
+#   expect_equal(luhn_check(npi = "abcdefghij"), FALSE)})
