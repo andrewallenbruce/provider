@@ -135,7 +135,7 @@ beneficiary_enrollment(period = "Year",
 beneficiary_enrollment(year = 2017, 
                        level = "County", 
                        state = "GA", 
-                       county = "Lowndes") 
+                       county = "Lowndes")
 ```
 
     # A tibble: 13 × 26
@@ -160,10 +160,6 @@ beneficiary_enrollment(year = 2017,
     #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
     #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
     #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
-
-``` r
-# dplyr::filter(month %in% month.name)
-```
 
 ### Chronic Conditions
 
@@ -540,39 +536,39 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
   purrr::list_rbind()
 ```
 
-    ■■ 2% | ETA: 45s
+    ■■ 2% | ETA: 1m
 
-    ■■ 3% | ETA: 40s ■■ 4% | ETA: 38s ■■■ 5% | ETA: 35s ■■■ 7% | ETA: 35s ■■■ 8% |
-    ETA: 34s ■■■■ 9% | ETA: 33s ■■■■ 10% | ETA: 32s ■■■■ 11% | ETA: 32s ■■■■■ 12% |
-    ETA: 31s ■■■■■ 13% | ETA: 30s ■■■■■ 14% | ETA: 29s ■■■■■■ 15% | ETA: 28s ■■■■■■
-    16% | ETA: 28s ■■■■■■ 17% | ETA: 27s ■■■■■■■ 18% | ETA: 27s ■■■■■■■ 20% | ETA:
-    26s ■■■■■■■ 21% | ETA: 25s ■■■■■■■■ 22% | ETA: 25s ■■■■■■■■ 23% | ETA: 24s
-    ■■■■■■■■ 24% | ETA: 24s ■■■■■■■■■ 25% | ETA: 23s ■■■■■■■■■ 26% | ETA: 23s
-    ■■■■■■■■■ 27% | ETA: 23s ■■■■■■■■■ 28% | ETA: 22s ■■■■■■■■■■ 29% | ETA: 22s
-    ■■■■■■■■■■ 30% | ETA: 21s ■■■■■■■■■■ 32% | ETA: 21s ■■■■■■■■■■■ 33% | ETA: 21s
-    ■■■■■■■■■■■ 34% | ETA: 20s ■■■■■■■■■■■ 35% | ETA: 20s ■■■■■■■■■■■■ 36% | ETA:
-    19s ■■■■■■■■■■■■ 37% | ETA: 19s ■■■■■■■■■■■■ 38% | ETA: 19s ■■■■■■■■■■■■■ 39% |
-    ETA: 18s ■■■■■■■■■■■■■ 40% | ETA: 18s ■■■■■■■■■■■■■ 41% | ETA: 18s
-    ■■■■■■■■■■■■■■ 42% | ETA: 17s ■■■■■■■■■■■■■■ 43% | ETA: 17s ■■■■■■■■■■■■■■ 45%
-    | ETA: 16s ■■■■■■■■■■■■■■■ 46% | ETA: 16s ■■■■■■■■■■■■■■■ 47% | ETA: 16s
-    ■■■■■■■■■■■■■■■ 48% | ETA: 16s ■■■■■■■■■■■■■■■■ 49% | ETA: 15s ■■■■■■■■■■■■■■■■
-    50% | ETA: 15s ■■■■■■■■■■■■■■■■ 51% | ETA: 14s ■■■■■■■■■■■■■■■■■ 52% | ETA: 14s
-    ■■■■■■■■■■■■■■■■■ 53% | ETA: 14s ■■■■■■■■■■■■■■■■■ 54% | ETA: 13s
-    ■■■■■■■■■■■■■■■■■■ 55% | ETA: 13s ■■■■■■■■■■■■■■■■■■ 57% | ETA: 13s
-    ■■■■■■■■■■■■■■■■■■ 58% | ETA: 12s ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 12s
-    ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 12s ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 11s
-    ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 11s
-    ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 10s
-    ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 9s
-    ■■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 9s
-    ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 8s
-    ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 8s
-    ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 7s
-    ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 6s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 6s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■ 82% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA:
-    5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 84% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% |
-    ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■
+    ■■ 3% | ETA: 46s ■■ 4% | ETA: 43s ■■■ 5% | ETA: 41s ■■■ 7% | ETA: 40s ■■■ 8% |
+    ETA: 39s ■■■■ 9% | ETA: 39s ■■■■ 10% | ETA: 39s ■■■■ 11% | ETA: 38s ■■■■■ 12% |
+    ETA: 36s ■■■■■ 13% | ETA: 35s ■■■■■ 14% | ETA: 34s ■■■■■■ 15% | ETA: 34s ■■■■■■
+    16% | ETA: 33s ■■■■■■ 17% | ETA: 32s ■■■■■■■ 18% | ETA: 32s ■■■■■■■ 20% | ETA:
+    31s ■■■■■■■ 21% | ETA: 30s ■■■■■■■■ 22% | ETA: 29s ■■■■■■■■ 23% | ETA: 29s
+    ■■■■■■■■ 24% | ETA: 28s ■■■■■■■■■ 25% | ETA: 28s ■■■■■■■■■ 26% | ETA: 27s
+    ■■■■■■■■■ 27% | ETA: 26s ■■■■■■■■■ 28% | ETA: 26s ■■■■■■■■■■ 29% | ETA: 25s
+    ■■■■■■■■■■ 30% | ETA: 25s ■■■■■■■■■■ 32% | ETA: 24s ■■■■■■■■■■■ 33% | ETA: 24s
+    ■■■■■■■■■■■ 34% | ETA: 23s ■■■■■■■■■■■ 35% | ETA: 23s ■■■■■■■■■■■■ 36% | ETA:
+    22s ■■■■■■■■■■■■ 37% | ETA: 22s ■■■■■■■■■■■■ 38% | ETA: 21s ■■■■■■■■■■■■■ 39% |
+    ETA: 21s ■■■■■■■■■■■■■ 40% | ETA: 21s ■■■■■■■■■■■■■ 41% | ETA: 20s
+    ■■■■■■■■■■■■■■ 42% | ETA: 20s ■■■■■■■■■■■■■■ 43% | ETA: 19s ■■■■■■■■■■■■■■ 45%
+    | ETA: 19s ■■■■■■■■■■■■■■■ 46% | ETA: 18s ■■■■■■■■■■■■■■■ 47% | ETA: 18s
+    ■■■■■■■■■■■■■■■ 48% | ETA: 18s ■■■■■■■■■■■■■■■■ 49% | ETA: 17s ■■■■■■■■■■■■■■■■
+    50% | ETA: 17s ■■■■■■■■■■■■■■■■ 51% | ETA: 16s ■■■■■■■■■■■■■■■■■ 52% | ETA: 16s
+    ■■■■■■■■■■■■■■■■■ 53% | ETA: 16s ■■■■■■■■■■■■■■■■■ 54% | ETA: 15s
+    ■■■■■■■■■■■■■■■■■■ 55% | ETA: 15s ■■■■■■■■■■■■■■■■■■ 57% | ETA: 14s
+    ■■■■■■■■■■■■■■■■■■ 58% | ETA: 14s ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 14s
+    ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 13s ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 13s
+    ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 12s ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 12s
+    ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 12s ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 11s
+    ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 11s
+    ■■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 10s
+    ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 9s
+    ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 8s
+    ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 8s
+    ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 7s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 6s
+    ■■■■■■■■■■■■■■■■■■■■■■■■■ 82% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA:
+    6s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 84% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% |
+    ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■
     87% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 4s
     ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
     ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 3s
@@ -718,7 +714,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    # A tibble: 148 × 7
+    # A tibble: 150 × 7
        npi        first_name last_name partb hha   dme   pmd  
        <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
      1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -731,7 +727,7 @@ order_refer(last_name = "Smith",
      8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
      9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
     10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    # ℹ 138 more rows
+    # ℹ 140 more rows
 
 ### Pending Applications
 
@@ -739,31 +735,44 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    <httr2_response>
-
-    GET
-    https://data.cms.gov/data-api/v1/dataset/261b83b6-b89f-43ad-ae7b-0d419a3bc24b/data.json?filter[LAST_NAME]=Smith&
-
-    Status: 200 OK
-
-    Content-Type: application/json
-
-    Body: In memory (1029 bytes)
+    # A tibble: 16 × 4
+       npi        last_name first_name type         
+       <chr>      <chr>     <chr>      <chr>        
+     1 1700588621 SMITH     AMANDA     NON-PHYSICIAN
+     2 1073234282 SMITH     ANGELA     NON-PHYSICIAN
+     3 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
+     4 1548969413 SMITH     ASHLEY     NON-PHYSICIAN
+     5 1659967966 SMITH     ASHLEY     NON-PHYSICIAN
+     6 1952009805 SMITH     BALEY      NON-PHYSICIAN
+     7 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
+     8 1902527641 SMITH     HEATHER    NON-PHYSICIAN
+     9 1356079727 SMITH     JARED      NON-PHYSICIAN
+    10 1891169751 SMITH     JEANA      NON-PHYSICIAN
+    11 1033538152 SMITH     JOANNA     NON-PHYSICIAN
+    12 1851916803 SMITH     KENZIE     NON-PHYSICIAN
+    13 1467159426 SMITH     PATRICE    NON-PHYSICIAN
+    14 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
+    15 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
+    16 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    <httr2_response>
-
-    GET
-    https://data.cms.gov/data-api/v1/dataset/6bd6b1dd-208c-4f9c-88b8-b15fec6db548/data.json?filter[FIRST_NAME]=John&
-
-    Status: 200 OK
-
-    Content-Type: application/json
-
-    Body: In memory (2296 bytes)
+    # A tibble: 36 × 4
+       npi        last_name  first_name type     
+       <chr>      <chr>      <chr>      <chr>    
+     1 1881791739 ADAMS      JOHN       PHYSICIAN
+     2 1841280963 BIGBEE     JOHN       PHYSICIAN
+     3 1619996378 BODDEN     JOHN       PHYSICIAN
+     4 1801545900 BRAZIL     JOHN       PHYSICIAN
+     5 1588744569 BRUNO      JOHN       PHYSICIAN
+     6 1861142556 BURKE      JOHN       PHYSICIAN
+     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
+     8 1306817531 COMBS      JOHN       PHYSICIAN
+     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
+    10 1376571554 FLYNN      JOHN       PHYSICIAN
+    # ℹ 26 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -779,16 +788,8 @@ pending_applications(npi = "1083879860",
                      type = "physician")
 ```
 
-    <httr2_response>
-
-    GET
-    https://data.cms.gov/data-api/v1/dataset/6bd6b1dd-208c-4f9c-88b8-b15fec6db548/data.json?filter[NPI]=1083879860&filter[LAST_NAME]=Garlic&filter[FIRST_NAME]=Gaelic&
-
-    Status: 200 OK
-
-    Content-Type: application/json
-
-    Body: Empty
+    ✖ No results for npi: 1083879860, last_name: Garlic, first_name: Gaelic, and
+    type: physician
 
 ### Physician & Other Practitioners
 
@@ -798,7 +799,22 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
   dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    Error in physician_by_geography(sublevel = "Georgia", year = 2020): object 'npi' not found
+    # A tibble: 10 × 16
+        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
+       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
+     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
+     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
+     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
+     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
+     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
+     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
+     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
+     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
+     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
+    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
+    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
+    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
+    #   avg_std_pymt <dbl>
 
 ``` r
 # by Provider and Service

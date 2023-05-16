@@ -94,8 +94,7 @@ beneficiary_enrollment(period = "Year",
 beneficiary_enrollment(year = 2017, 
                        level = "County", 
                        state = "GA", 
-                       county = "Lowndes") 
-# dplyr::filter(month %in% month.name)
+                       county = "Lowndes")
 ```
 
 

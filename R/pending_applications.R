@@ -58,7 +58,6 @@ pending_applications <- function(npi         = NULL,
 
   # response ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
-  return(response)
 
   # no search results returns empty tibble ----------------------------------
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {

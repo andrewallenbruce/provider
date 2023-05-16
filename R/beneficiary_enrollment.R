@@ -159,6 +159,7 @@ beneficiary_enrollment <- function(year        = NULL,
     dplyr::filter(state != "UK") |>
     dplyr::filter(county != "Unknown") |>
     dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                  dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                   dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*")),
                   dplyr::across(dplyr::contains("bene"), as.integer))
 

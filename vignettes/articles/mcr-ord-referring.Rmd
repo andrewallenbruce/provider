@@ -41,21 +41,68 @@ In the event a provider does not want to bill Medicare for their services, they 
 
 <br>
 
-## `order_refer()`
+## Example Searchs
 
 ```{r}
-order_refer(npi = 1003026055) |> 
-gt::gt() |> 
-  provider:::gt_theme_provider() |> 
-  gt::tab_header(title = "Provider Results for NPI 1083879860",
-    subtitle = gtExtras::add_text_img("Report generated with", url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", height = 25)) |> 
-  gt::text_transform(locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),
-                     fn = function(x) {
-                       if (x == as.character("TRUE")) {gt::html(fontawesome::fa("circle-check", prefer_type = "solid", fill = "green", height = "1.5em", width = "1.5em"))
-                         } else if (x == as.character("FALSE")) {gt::html(fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "red"))
-                         }
-                     }
-                       )
+order_refer(npi = 1083879860)
+```
+<br>
+
+```{r}
+order_refer(last_name = "Smith", 
+            partb = FALSE, 
+            pmd = FALSE)
+```
+
+<br>
+
+## Visualizations
+
+<details><summary>Code for table</summary>
+
+```{r}
+gt_oref <- order_refer(last_name = "Smith", first_name = "Aaron") |> 
+  gt::gt() |> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(
+      gt::google_font(name = "Fira Code"), 
+      gt::default_fonts())),
+    locations = gt::cells_body(columns = c(npi))) |> 
+  gt::text_case_when(
+    x == TRUE ~ gt::html(fontawesome::fa("circle-check", 
+                               prefer_type = "solid", 
+                               fill = "black", 
+                               height = "1.75em", 
+                               width = "1.75em")),
+    x == FALSE ~ gt::html(fontawesome::fa("circle-xmark", 
+                                   prefer_type = "solid", 
+                                   fill = "red", 
+                               height = "1.75em", 
+                               width = "1.75em")),
+    .default = "", .locations = gt::cells_body(
+      columns = c(partb, dme, hha, pmd))) |> 
+  gt::cols_label(first_name = "First Name", 
+                 last_name = "Last Name",
+                 partb = "Part B", 
+                 dme = "DME", 
+                 hha = "HHA", 
+                 pmd = "PMD") |> 
+  gtExtras::gt_add_divider(columns = c("last_name"), 
+                           style = "solid",
+                           color = "black",
+                           weight = gt::px(3),
+                           include_labels = FALSE) |> 
+  gt::tab_header(title = gt::md("Medicare Order & Referring Eligibility"),
+    subtitle = gt::md("Provider Eligibility to Refer Patients to **Medicare Part B**, **Home Health Agencies**, **Durable Medical Equipment Suppliers**, and **Powered Mobility Devices**")) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov") |> 
+  gt::opt_table_font(font = gt::google_font(name = "Karla"))
+```
+
+</details>
+
+```{r}
+gt_oref
 ```
 
 

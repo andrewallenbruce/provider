@@ -56,7 +56,7 @@ Contact your Medicare Administrative Contractor (MAC) (PDF) to see what informat
 
 <br>
 
-## Examples
+## Search Examples
 
 ```{r}
 opt_out(last = "Aaron")

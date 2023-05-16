@@ -15,25 +15,6 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
-
-options(knitr.table.format = "html")
-library(htmltools)
-
-row <- function(...) {
-  div(
-    class = "custom_note",
-    ...
-  )
-}
-```
-
-```{css, echo=FALSE}
-.custom_note {
-  border-left: solid 5px hsl(0, 100%, 30%);
-  background-color: hsl(0, 100%, 95%);
-  padding: 5px;
-  margin-bottom: 10px
-}
 ```
 
 <br>
@@ -44,116 +25,43 @@ library(provider)
 
 <br>
 
-```{r echo=FALSE, warning=FALSE}
-row("Find Health Care Providers by Name, Location, NPI number, or Specialty")
-```
+ > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
 
 <br>
 
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. After CMS supplies an NPI, they publish the parts of the NPI record that have public relevance, including the provider's name, specialty (taxonomy) and practice address. It enables you to search for providers in the NPPES (National Plan and Provider Enumeration System.) All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
-
-The NPPES *Application Programming Interface* (API) is a faster alternative to the [downloadable NPPES data files](https://www.cms.gov/Regulations-and-Guidance/Administrative-Simplification/NationalProvIdentStand/DataDissemination.html). It allows systems to access NPPES public data in real-time, rather than through batched uploads. The API retrieves data from NPPES daily. An API query will return a maximum of 200 results per request. The *Skip* field in the API will let you skip up to 1000 records. By using these two fields with your search criteria, you can get up to a maximum of 1,200 records over six requests.
+The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 
 <br>
 
-## Examples
+## Search Examples
 
 ```{r}
-x <- nppes_npi(npi = 1114499340)
+nppes_npi(npi = 1114499340)
 ```
-
-```{r}
-x$addresses[[1]]
-```
-
-```{r}
-x$practiceLocations[[1]]
-```
-
-```{r}
-x$taxonomies[[1]]
-```
-
-```{r}
-x$endpoints[[1]]
-```
-
-```{r}
-x$other_names[[1]] # ONLY NPI-2
-```
-
-
-
-```{r}
-basic <- x$basic[[1]] |> tibble::tibble()
-addresses <- x$addresses[[1]] |> tibble::tibble()
-
-tibble::tibble(basic, 
-               addresses)
-```
-
-
-<br><br>
-
-This returns a `tibble` containing the NPI that was searched for (`search`), the `datetime` of the query, an `outcome` status column and `data_lists`, a list-column containing a collection of variables and nested data frames:
 
 <br>
-
-The **variables** returned are as follows:
-
-<br>
-
- * `created_epoch`: date when the NPI was issued
- * `enumeration_type`: NPI Entity Type, either NPI-1(individual) or NPI-2(organizational)
- * `last_updated_epoch`: date when the information was last updated by the provider
- * `number`: provider's NPI, as listed in the NPPES
-
-<br>
-
-> Note: `last_updated_epoch` / `created_epoch` are dates in [Unix time](https://www.epochconverter.com/). They are repeated in the `basic` list as `last_updated` and `enumeration_date`, respectively.
-
-<br>
-
-The **list-columns** returned are as follows:
-
-<br>
-
- * `basic`: Basic information
- * `other_names`: Other names used by type 2 (organization) providers only
- * `addresses`: Primary location and mailing addresses
- * `taxonomies`: Specialty classification and related information
- * `identifiers`: Various other identifiers such as payer-specific IDs, CLIA numbers, etc.
- * `practice_locations`: Provider's practice locations
- * `endpoints`: Information regarding the provider's endpoints for Health Information Exchange (HIE)
-
-<br><br>
- 
-> Note: All list-columns may not be available for every provider. This depends on factors such as NPI type, incorporated individual status, subpart delegation, and, quite simply, the information provided to the NPPES by providers.
-
-<br>
-
-## Examples
 
 ```{r}
 nppes_npi(npi = 1528060837)
 ```
 
+<br>
 
 ```{r}
-### City, state, country
+# City, state, country
 nppes_npi(city = "Atlanta",
           state = "GA",
           country = "US")
 ```
-
+<br>
 
 ```{r}
-### First name, city, state
+# First name, city, state
 nppes_npi(first = "John",
           city = "Baltimore",
           state = "MD")
 ```
-
+<br>
 
 ```{r}
 nppes_npi(npi = 1336413418) # NPI-2
@@ -161,64 +69,45 @@ nppes_npi(npi = 1710975040) # NPI-1
 nppes_npi(npi = 1659781227) # Deactivated
 ```
 
+# Advanced Usage
 
 ```{r}
-### List of NPIs
-npi_list <- c(1003026055,
-              1710983663,
-              1316405939,
-              1720392988,
-              1518184605,
-              1922056829,
-              1083879860)
-
-npi_list |>
-purrr::map_dfr(nppes_npi) |>
-dplyr::group_split(outcome)
+# Vector of NPIs
+c(1003026055, 
+  1316405939, 
+  1720392988) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind()
 ```
 
+<br>
 
 ```{r}
-### Data frame of NPIs
-npi_df <- data.frame(npi = c(1710983663,
-                             1003026055,
-                             1316405939,
-                             1720392988,
-                             1518184605,
-                             1922056829,
-                             1083879860))
-npi_df |>
-tibble::deframe() |>
-purrr::map_dfr(nppes_npi)
+# List of NPIs
+list(1003026055, 
+     1316405939, 
+     1720392988) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind()
 ```
 
+<br>
 
 ```{r}
-###Tribble example
-tribble <- tibble::tribble(
-~fn,         ~params,
-"nppes_npi", list(1336413418),
-"nppes_npi", list(1710975040),
-"nppes_npi", list(1659781227),
-"nppes_npi", list(first = "John", city = "Baltimore", state = "MD"),
-"nppes_npi", list(first = "Andrew", city = "Atlanta", state = "GA"))
-
-purrr::invoke_map_dfr(tribble$fn, tribble$params)
+# Data frame of NPIs
+data.frame(npi = c(1003026055, 
+                   1316405939, 
+                   1720392988)) |> 
+  dplyr::pull(npi) |> 
+  purrr::map(nppes_npi) |> 
+  purrr::list_rbind()
 ```
 
 <br><br>
 
-# API Documentation Overview
+------------------------------------------------------------------------------
 
-<br>
-
-This section outlines the NPPES API's documentation, going over valid search inputs, constraints to those inputs, and descriptions of the many possible outputs.
-
-<br>
-
-## Terminology Notes
-
-<br>
+# API Documentation
 
 ### Enumeration Type
 
