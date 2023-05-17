@@ -1,5 +1,5 @@
 ---
-title: "CMS Missing Digital Contact Information API"
+title: "Missing Information"
 output: html_document
 ---
 
@@ -15,28 +15,7 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
-
-options(knitr.table.format = "html")
-library(htmltools)
-
-row <- function(...) {
-  div(
-    class = "custom_note",
-    ...
-  )
-}
 ```
-
-```{css, echo=FALSE}
-.custom_note {
-  border-left: solid 5px hsl(0, 100%, 30%);
-  background-color: hsl(0, 100%, 95%);
-  padding: 5px;
-  margin-bottom: 10px
-}
-```
-
-<br>
 
 ```{r setup}
 library(provider)
@@ -44,9 +23,7 @@ library(provider)
 
 <br>
 
-```{r echo=FALSE, warning=FALSE}
-row("Information on Providers That are Missing Digital Contact Information in the NPPES System")
-```
+  > *Information on Providers That are Missing Digital Contact Information in the NPPES System*
 
 <br>
 
@@ -58,16 +35,54 @@ row("Information on Providers That are Missing Digital Contact Information in th
 
 <br>
 
-A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry.
+A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry. For instance, John Clouse (NPI: 1144224569), appears:
 
 
 ```{r}
 missing_information(npi = 1144224569) |> 
   gt::gt() |> 
-  gt::cols_label(npi = "NPI", last_name = "Last Name", first_name = "First Name") |> 
-  gt::tab_header(title = gt::md("`missing_information()`")) |>
-  gtExtras::gt_theme_nytimes()
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(npi))) |> 
+  gt::cols_label(npi = "NPI", 
+                 last_name = "Last Name", 
+                 first_name = "First Name") |> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_options(table.width = gt::pct(100)) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov")
 ```
+
+<br>
+
+Searching for him in the NPPES shows that he has identifiers but no endpoint information:
+
+```{r}
+nppes_npi(npi = 1144224569) |> 
+  dplyr::select(npi, 
+                first_name, 
+                last_name, 
+                id_identifier, 
+                id_issuer, 
+                id_state) |> 
+  dplyr::filter(dplyr::row_number() %in% c(1, 2)) |> 
+  gt::gt() |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(npi, id_identifier))) |> 
+  gt::cols_label(npi = "NPI", 
+                 last_name = "Last Name", 
+                 first_name = "First Name",
+                 id_issuer = "Issuer",
+                 id_identifier = "Identifier",
+                 id_state = "State")|> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_options(table.width = gt::pct(100)) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov")
+```
+
+<br>
 
 A provider that does not appear has entered Endpoint information into the NPPES NPI Registry.
 
@@ -78,27 +93,69 @@ missing_information(npi = 1003000423)
 
 <br>
 
+```{r}
+nppes_npi(npi = 1003000423) |> 
+  dplyr::select(npi, 
+                first_name, 
+                last_name, 
+                end_endpoint,
+                end_endpointTypeDescription,
+                end_endpointDescription,
+                end_contentOtherDescription) |> 
+  dplyr::filter(dplyr::row_number() %in% c(1)) |> 
+  gt::gt() |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(npi))) |> 
+  gt::cols_label(npi = "NPI", 
+                 last_name = "Last Name", 
+                 first_name = "First Name",
+                 end_endpoint = "Endpoint",
+                 end_endpointTypeDescription = "Type",
+                 end_endpointDescription = "Description",
+                 end_contentOtherDescription = "Content")|> 
+  gtExtras::gt_theme_538() |> 
+  gt::tab_options(table.width = gt::pct(100)) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov")
+```
+
+
 ### Data Dictionary
 
 ```{r echo=FALSE}
 dd <- tibble::tibble(
-  Variable = c("`npi`", "`last_name`", "`first_name`"),
-  Description = c("National Provider Identifier", "Last Name", "First Name"),
+  Variable = c("`npi`", 
+               "`last_name`", 
+               "`first_name`"),
+  Description = c("National Provider Identifier", 
+                  "Last Name", 
+                  "First Name"),
   Definition = c("The provider's 10-digit National Provider Identifier.", 
-                 "Last name of the provider.", "First name of the provider."))
+                 "Last name of the provider.", 
+                 "First name of the provider."))
 dd |> 
   gt::gt() |> 
   gt::fmt_markdown(columns = Variable) |> 
-  #gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_add_divider(
+    columns = c("Variable"), 
+    style = "solid",
+    color = "gray",
+    weight = gt::px(2),
+    include_labels = FALSE) |> 
   gtExtras::gt_merge_stack(col1 = Description, 
                            col2 = Definition,
                            small_cap = FALSE,
                            font_size = c("16px", "14px"),
                            font_weight = c("bold", "normal"),
                            palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 6, color = "red", add_row_striping = FALSE) |> 
+  gt::opt_stylize(style = 6, 
+                  color = "red", 
+                  add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |>
-  gt::opt_table_outline(style = "none")
+  gt::opt_table_outline(style = "none") |> 
+  gt::opt_table_font(font = gt::google_font(name = "Karla")) |> 
+  gt::tab_options(table.width = gt::pct(100))
 ```
 
 <br>

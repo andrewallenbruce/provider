@@ -1,0 +1,389 @@
+---
+title: "Physician by Provider"
+output: html_document
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+ > *Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.*
+
+<br>
+
+The Centers for Medicare & Medicaid Services (CMS) has prepared a public data set, the Provider Utilization and Payment Data Physician and Other Practitioners Dataset, with information on services and procedures provided to Medicare beneficiaries by physicians and other healthcare professionals. The Physician and Other Practitioners Dataset contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. The data in the Physician and Other Practitioners dataset contains 100% final-action (i.e., all claim adjustments have been resolved) physician/supplier Part B non-institutional line items for the Medicare fee-for-service (FFS) population. Claims processed by Durable Medical Equipment, Prosthetic, Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC) are not included in the Physician and Other Practitioners Dataset.
+
+<br>
+
+## Physician & Other Practitioners: **by Provider**
+
+<br>
+
+The **Provider** data subset provides information on use, payments, submitted charges and beneficiary demographic and health characteristics organized by National Provider Identifier (NPI). This dataset is based on information gathered from CMS administrative claims data for Original Medicare Part B beneficiaries available from the CMS Chronic Conditions Data Warehouse.
+
+  * Data update frequency: **Annually**
+  * Data source: **Centers for Medicare & Medicaid Services**
+  
+  
+### Search Examples
+
+```{r}
+sh <- 2014:2021 |> 
+  purrr::map(\(year) physician_by_provider(year, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
+
+
+```{r}
+sh |> 
+  dplyr::select(npi:par) |> 
+  dplyr::filter(dplyr::row_number() %in% c(8)) |> 
+  provider:::display_long() |> 
+  gt::gt() |> 
+  gtExtras::gt_theme_538()
+```
+
+
+```{r}
+sh |> 
+  dplyr::select(year, 
+                tot_hcpcs:tot_payment) |> 
+  change_abs(tot_benes, year) |> 
+  change_pct(tot_benes, tot_benes_chg, year) |> 
+  change_abs(tot_srvcs, year) |> 
+  change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
+  change_abs(tot_charges, year) |> 
+  change_pct(tot_charges, tot_charges_chg, year) |> 
+  change_abs(tot_allowed, year) |> 
+  change_pct(tot_allowed, tot_allowed_chg, year) |> 
+  change_abs(tot_payment, year) |> 
+  change_pct(tot_payment, tot_payment_chg, year) |> 
+  gt::gt() |> 
+  gtExtras::gt_theme_538() |> 
+  gt::fmt_percent(columns = dplyr::contains("pct"), decimals = 1) |> 
+  #gt::fmt_percent(columns = c(total_pct_chg), decimals = 1, force_sign = TRUE) |> 
+  gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
+  gt::cols_merge_n_pct(col_n = bene_total_chg,
+                       col_pct = bene_total_pct)
+```
+
+
+```{r}
+sh |> 
+  dplyr::select(year, tot_benes, 
+                bene_age_avg:bene_age_gt84) |> 
+  dplyr::mutate(pct_lt65 = bene_age_lt65 / tot_benes,
+                pct_6574 = bene_age_65_74 / tot_benes,
+                pct_7584 = bene_age_75_84 / tot_benes,
+                pct_gt84 = bene_age_gt84 / tot_benes)
+```
+
+
+```{r}
+sh |> dplyr::select(year, tot_benes, bene_female:bene_male)
+```
+
+
+```{r}
+sh |> dplyr::select(year, tot_benes, bene_race_wht:bene_race_oth)
+```
+
+
+```{r}
+sh |> dplyr::select(year, tot_benes, bene_dual:bene_ndual)
+```
+
+   * bene_cc_af: Atrial Fibrillation
+   * bene_cc_alz: Alzheimer’s Disease or Dementia
+   * bene_cc_asth: Asthma
+   * bene_cc_canc: Cancer
+   * bene_cc_chf: Heart Failure
+   * bene_cc_ckd: Chronic Kidney Disease
+   * bene_cc_copd: Chronic Obstructive Pulmonary Disease
+   * bene_cc_dep: Depression
+   * bene_cc_diab: Diabetes
+   * bene_cc_hplip: Hyperlipidemia
+   * bene_cc_hpten: Hypertension
+   * bene_cc_ihd: Ischemic Heart Disease
+   * bene_cc_opo: Osteoporosis
+   * bene_cc_raoa: Rheumatoid Arthritis / Osteoarthritis
+   * bene_cc_sz: Schizophrenia / Other Psychotic Disorders
+   * bene_cc_strk: Stroke
+
+
+```{r}
+sh |> dplyr::select(year, tot_benes, bene_cc_af:bene_risk_avg) |> 
+  dplyr::mutate(
+    tot_af = round(tot_benes * bene_cc_af),
+    tot_alz = round(tot_benes * bene_cc_alz),
+    tot_asth = round(tot_benes * bene_cc_asth),
+    tot_canc = round(tot_benes * bene_cc_canc),
+    tot_chf = round(tot_benes * bene_cc_chf),
+    tot_ckd = round(tot_benes * bene_cc_ckd),
+    tot_copd = round(tot_benes * bene_cc_copd),
+    tot_dep = round(tot_benes * bene_cc_dep),
+    tot_diab = round(tot_benes * bene_cc_diab),
+    tot_hplip = round(tot_benes * bene_cc_hplip),
+    tot_hpten = round(tot_benes * bene_cc_hpten),
+    tot_ihd = round(tot_benes * bene_cc_ihd),
+    tot_opo = round(tot_benes * bene_cc_opo),
+    tot_raoa = round(tot_benes * bene_cc_raoa),
+    tot_sz = round(tot_benes * bene_cc_sz),
+    tot_strk = round(tot_benes * bene_cc_strk))
+```
+
+
+<br><br>
+
+```{r}
+physician_by_provider(year = 2021, 
+                      entype = "I", 
+                      city = "Hershey", 
+                      state = "PA", 
+                      fips = 42, 
+                      ruca = 1, 
+                      gender = "F", 
+                      credential = "MD")
+```
+
+
+### Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`npi`", 
+    "`last_name`", 
+    "`first_name`",
+    "`middle_name`", 
+    "`credential`", 
+    "`gender`",
+    "`entype`", 
+    "`street`",
+    "`city`", 
+    "`state`", 
+    "`fips`",
+    "`zipcode`", 
+    "`ruca`", 
+    "`ruca_desc`",
+    "`country`", 
+    "`specialty`", 
+    "`par`",
+    "`tot_hcpcs`", 
+    "`tot_benes`", 
+    "`tot_srvcs`", 
+    "`tot_charges`",
+    "`tot_allowed`", 
+    "`tot_payment`", 
+    "`tot_std_pymt`",
+    "`drug_hcpcs`", 
+    "`drug_benes`",
+    "`drug_srvcs`", 
+    "`drug_charges`", 
+    "`drug_allowed`",
+    "`drug_payment`", 
+    "`drug_std_pymt`", 
+    "`med_hcpcs`", 
+    "`med_benes`", 
+    "`med_srvcs`",
+    "`med_charges`", 
+    "`med_allowed`", 
+    "`med_payment`",
+    "`med_std_pymt`", 
+    "`bene_avg_age`", 
+    "`bene_age_lt65`",
+    "`bene_age_65_74`", 
+    "`bene_age_75_84`", 
+    "`bene_age_gt84`",
+    "`bene_female`", 
+    "`bene_male`", 
+    "`bene_race_wht`",
+    "`bene_race_blk`", 
+    "`bene_race_api`", 
+    "`bene_race_hsp`",
+    "`bene_race_nat`", 
+    "`bene_race_oth`", 
+    "`bene_dual`",
+    "`bene_ndual`", 
+    "`bene_cc_af`", 
+    "`bene_cc_alz`",
+    "`bene_cc_asth`", 
+    "`bene_cc_canc`", 
+    "`bene_cc_chf`",
+    "`bene_cc_ckd`", 
+    "`bene_cc_copd`", 
+    "`bene_cc_dep`",
+    "`bene_cc_diab`", 
+    "`bene_cc_hplp`", 
+    "`bene_cc_hpten`",
+    "`bene_cc_ihd`", 
+    "`bene_cc_opo`", 
+    "`bene_cc_raoa`",
+    "`bene_cc_sz`", 
+    "`bene_cc_strk`", 
+    "`bene_risk_avg`"),
+  Description = c(
+    "National Provider Identifier", 
+    "Last Name/Organization Name of the Provider",
+    "First Name of the Provider", 
+    "Middle Initial of the Provider",
+    "Credentials of the Provider", 
+    "Gender of the Provider", 
+    "Entity Type of the Provider",
+    "Street Address of the Provider",
+    "City of the Provider", 
+    "State Abbreviation of the Provider",
+    "State FIPS Code of the Provider", 
+    "Zip Code of the Provider",
+    "RUCA Code of the Provider", 
+    "RUCA Description", 
+    "Country Code of the Provider",
+    "Provider Type of the Provider", 
+    "Medicare Participation Indicator",
+    "Number of HCPCS", 
+    "Number of Medicare Beneficiaries", 
+    "Number of Services",
+    "Total Submitted Charge Amount", 
+    "Total Medicare Allowed Amount",
+    "Total Medicare Payment Amount", 
+    "Total Medicare Standardized Payment Amount",
+    "Number of HCPCS Associated With Drug Services",
+    "Number of Medicare Beneficiaries With Drug Services", 
+    "Number of Drug Services",
+    "Total Drug Submitted Charge Amount", 
+    "Total Drug Medicare Allowed Amount",
+    "Total Drug Medicare Payment Amount", 
+    "Total Drug Medicare Standardized Payment Amount",
+    "Number of HCPCS Associated With Medical Services",
+    "Number of Medicare Beneficiaries With Medical Services", 
+    "Number of Medical Services",
+    "Total Medical Submitted Charge Amount", 
+    "Total Medical Medicare Allowed Amount",
+    "Total Medical Medicare Payment Amount", 
+    "Total Medical Medicare Standardized Payment Amount",
+    "Average Age of Beneficiaries", 
+    "Number of Beneficiaries Age Less 65",
+    "Number of Beneficiaries Age 65 to 74", 
+    "Number of Beneficiaries Age 75 to 84",
+    "Number of Beneficiaries Age Greater 84", 
+    "Number of Female Beneficiaries",
+    "Number of Male Beneficiaries", 
+    "Number of Non-Hispanic White Beneficiaries",
+    "Number of Black or African American Beneficiaries", 
+    "Number of Asian Pacific Islander Beneficiaries",
+    "Number of Hispanic Beneficiaries", 
+    "Number of American Indian/Alaska Native Beneficiaries",
+    "Number of Beneficiaries With Race Not Elsewhere Classified",
+    "Number of Beneficiaries With Medicare & Medicaid Entitlement",
+    "Number of Beneficiaries With Medicare Only Entitlement", 
+    "Percent (%) of Beneficiaries Identified With Atrial Fibrillation",
+    "Percent (%) of Beneficiaries Identified With Alzheimer’s Disease or Dementia",
+    "Percent (%) of Beneficiaries Identified With Asthma", 
+    "Percent (%) of Beneficiaries Identified With Cancer",
+    "Percent (%) of Beneficiaries Identified With Heart Failure",
+    "Percent (%) of Beneficiaries Identified With Chronic Kidney Disease",
+    "Percent (%) of Beneficiaries Identified With Chronic Obstructive Pulmonary Disease",
+    "Percent (%) of Beneficiaries Identified With Depression", 
+    "Percent (%) of Beneficiaries Identified With Diabetes",
+    "Percent (%) of Beneficiaries Identified With Hyperlipidemia",
+    "Percent (%) of Beneficiaries Identified With Hypertension",
+    "Percent (%) of Beneficiaries Identified With Ischemic Heart Disease",
+    "Percent (%) of Beneficiaries Identified With Osteoporosis",
+    "Percent (%) of Beneficiaries Identified With Rheumatoid Arthritis / Osteoarthritis",
+    "Percent (%) of Beneficiaries Identified With Schizophrenia / Other Psychotic Disorders",
+    "Percent (%) of Beneficiaries Identified With Stroke", 
+    "Average HCC Risk Score of Beneficiaries"
+  ),
+  Definition = c(
+    "National Provider Identifier (NPI) for the rendering provider on the claim. The provider NPI is the numeric identifier registered in NPPES.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s last name. When the provider is registered as an organization (entity type code = ‘O’), this is the organization name.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s first name. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s middle initial. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), these are the provider’s credentials. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s gender. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "Type of entity reported in NPPES. An entity code of ‘I’ identifies providers registered as individuals and an entity type code of ‘O’ identifies providers registered as organizations.",
+    "The provider’s street address, as reported in NPPES.",
+    "The city where the provider is located, as reported in NPPES.",
+    "The state where the provider is located, as reported in NPPES. The fifty U.S. states and the District of Columbia are reported by the state postal abbreviation. The following values are used for all other areas:",
+    "FIPS code for rendering provider's state.", "The provider’s zip code, as reported in NPPES.",
+    "Rural-Urban Commuting Area Codes (RUCAs), are a Census tract-based classification scheme that utilizes the standard Bureau of Census Urbanized Area and Urban Cluster definitions in combination with work commuting information to characterize all of the nation's Census tracts regarding their rural and urban status and relationships. The Referring Provider ZIP code was cross walked to the United States Department of Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.",
+    "Description of Rural-Urban Commuting Area (RUCA) Code", "The country where the provider is located, as reported in NPPES. The country code will be ‘US’ for any state or U.S. possession. For foreign countries (i.e., state values of ‘ZZ’), the provider country values include the following:",
+    "Derived from the provider specialty code reported on the claim. For providers that reported more than one specialty code on their claims, this is the specialty code associated with the largest number of services.",
+    "Identifies whether the provider participates in Medicare and/or accepts assignment of Medicare allowed amounts. The value will be ‘Y’ for any provider that had at least one claim identifying the provider as participating in Medicare or accepting assignment of Medicare allowed amounts within HCPCS code and place of service. A non-participating provider may elect to accept Medicare allowed amounts for some services and not accept Medicare allowed amounts for other services.",
+    "Total number of unique HCPCS codes.", "Total Medicare beneficiaries receiving services from the provider. The beneficiary counts reported in the demographic sub-groups (i.e., age, sex, race and entitlement) may not aggregate to the ‘Number of Unique Beneficiaries’ due to the suppression of beneficiaries fewer than 11 within the demographic sub-groups. In addition, a small percentage of beneficiaries are reflected in the “Number of Unique Beneficiaries” but are not reflected in the beneficiary demographic information due to the lack of demographic information available at the time of reporting.",
+    "Total provider services.", "The total charges that the provider submitted for all services.",
+    "The Medicare allowed amount for all provider services. This figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for all the provider's line item services.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care.",
+    "Total number of HCPCS codes for drug services, as defined from the Medicare Part B Drug ASP File.",
+    "Total Medicare beneficiaries receiving drug services, as defined from the Medicare Part B Drug ASP File.",
+    "Total drug services, as defined from the Medicare Part B Drug ASP File.",
+    "The total charges that the provider submitted for drug services, as defined from the Medicare Part B Drug ASP File.",
+    "The Medicare allowed amount for drug services, as defined from the Medicare Part B Drug ASP File. This figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for all the provider's line item drug services, as defined from the Medicare Part B Drug ASP File.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item drug service, as defined from the Medicare Part B Drug ASP File and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care.",
+    "Total number of HCPCS codes associated with medical (non-ASP) services.",
+    "Total Medicare beneficiaries receiving medical (non-ASP) services.",
+    "Total medical (non-ASP) services.", "The total charges that the provider submitted for medical (non-ASP) services.",
+    "The Medicare allowed amount for medical (non-ASP) services. This figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for all of the provider's line item medical (non-ASP) services.",
+    "Total amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item medical (non-ASP) service, as defined from the Medicare Part B Drug ASP File and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care.",
+    "Average age of beneficiaries. Beneficiary age is calculated at the end of the calendar year or at the time of death.",
+    "Number of beneficiaries under the age of 65. Beneficiary age is calculated at the end of the calendar year or at the time of death.",
+    "Number of beneficiaries between the ages of 65 and 74. Beneficiary age is calculated at the end of the calendar year or at the time of death.",
+    "Number of beneficiaries between the ages of 75 and 84. Beneficiary age is calculated at the end of the calendar year or at the time of death.",
+    "Number of beneficiaries over the age of 84. Beneficiary age is calculated at the end of the calendar year or at the time of death.",
+    "Number of female beneficiaries.", "Number of male beneficiaries.",
+    "Number of non-Hispanic white beneficiaries. Race/ethnicity information is based on the variable RTI_RACE_CD from the CMS CCW enrollment database. The RTI_RACE_CD variable is based upon a validated algorithm that uses Census surname lists and geography to improve the accuracy of race/ethnicity classification, particularly for those who are Hispanic or Asian/Pacific Islanders.",
+    "Number of non-Hispanic black or African American beneficiaries. Race/ethnicity information is based on the variable RTI_RACE_CD from the CMS CCW enrollment database. The RTI_RACE_CD variable is based upon a validated algorithm that uses Census surname lists and geography to improve the accuracy of race/ethnicity classification, particularly for those who are Hispanic or Asian/Pacific Islanders.",
+    "Number of Asian Pacific Islander beneficiaries. Race/ethnicity information is based on the variable RTI_RACE_CD from the CMS CCW enrollment database. The RTI_RACE_CD variable is based upon a validated algorithm that uses Census surname lists and geography to improve the accuracy of race/ethnicity classification, particularly for those who are Hispanic or Asian/Pacific Islanders.",
+    "Number of Hispanic beneficiaries. Race/ethnicity information is based on the variable RTI_RACE_CD from the CMS CCW enrollment database. The RTI_RACE_CD variable is based upon a validated algorithm that uses Census surname lists and geography to improve the accuracy of race/ethnicity classification, particularly for those who are Hispanic or Asian/Pacific Islanders.",
+    "Number of American Indian or Alaska Native beneficiaries. Race/ethnicity information is based on the variable RTI_RACE_CD from the CMS CCW enrollment database. The RTI_RACE_CD variable is based upon a validated algorithm that uses Census surname lists and geography to improve the accuracy of race/ethnicity classification, particularly for those who are Hispanic or Asian/Pacific Islanders.",
+    "Number of beneficiaries with race not elsewhere classified.",
+    "Number of Medicare beneficiaries qualified to receive Medicare and Medicaid benefits. Beneficiaries are classified as Medicare and Medicaid entitlement if in any month in the given calendar year they were receiving full or partial Medicaid benefits.",
+    "Number of Medicare beneficiaries qualified to receive Medicare only benefits. Beneficiaries are classified as Medicare only entitlement if they received zero months of any Medicaid benefits (full or partial) in the given calendar year.",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for atrial fibrillation. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for Alzheimer’s, related disorders, or dementia. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for Asthma. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithms for cancer. Includes breast cancer, colorectal cancer, lung cancer and prostate cancer. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for heart failure. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for chronic kidney disease.To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for chronic obstructive pulmonary disease. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for depression. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for diabetes. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for hyperlipidemia. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for hypertension. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for ischemic heart disease. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for osteoporosis. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for rheumatoid arthritis/osteoarthritis. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for schizophrenia and other psychotic disorders. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Percent of beneficiaries meeting the CCW chronic condition algorithm for stroke. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
+    "Average Hierarchical Condition Category (HCC) risk score of beneficiaries."
+  )) |> 
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
+```

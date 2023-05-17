@@ -503,5 +503,6 @@ utils::globalVariables(c(
   "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
   ":=", # <change_abs>
   ":=", # <change_pct>
+  ":=", # <change_year>
   NULL
 ))

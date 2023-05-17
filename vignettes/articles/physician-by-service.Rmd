@@ -1,0 +1,187 @@
+---
+title: "Physician by Service"
+output: html_document
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+ > *Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.*
+
+<br>
+
+The Centers for Medicare & Medicaid Services (CMS) has prepared a public data set, the Provider Utilization and Payment Data Physician and Other Practitioners Dataset, with information on services and procedures provided to Medicare beneficiaries by physicians and other healthcare professionals. The Physician and Other Practitioners Dataset contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. The data in the Physician and Other Practitioners dataset contains 100% final-action (i.e., all claim adjustments have been resolved) physician/supplier Part B non-institutional line items for the Medicare fee-for-service (FFS) population. Claims processed by Durable Medical Equipment, Prosthetic, Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC) are not included in the Physician and Other Practitioners Dataset.
+
+<br>
+
+## Physician & Other Practitioners: **by Provider**
+
+<br>
+
+The **Provider** data subset provides information on use, payments, submitted charges and beneficiary demographic and health characteristics organized by National Provider Identifier (NPI). This dataset is based on information gathered from CMS administrative claims data for Original Medicare Part B beneficiaries available from the CMS Chronic Conditions Data Warehouse.
+
+  * Data update frequency: **Annually**
+  * Data source: **Centers for Medicare & Medicaid Services**
+  
+  
+### Examples
+
+```{r}
+2013:2021 |> 
+  purrr::map(\(year) physician_by_provider(year, npi = 1003000423)) |> 
+  purrr::list_rbind()
+```
+
+<br>
+
+```{r}
+physician_by_provider(year = 2021, 
+                      entype = "I", 
+                      city = "Hershey", 
+                      state = "PA", 
+                      fips = 42, 
+                      ruca = 1, 
+                      gender = "F", 
+                      credential = "MD", 
+                      specialty = "Anesthesiology")
+```
+
+
+## Physician & Other Practitioners: **by Provider and Service**
+
+<br>
+
+The spending and utilization data in the Physician and Other Practitioners by Provider and Service Dataset are aggregated to the following:
+
+<br>
+
+  1. the NPI for the performing provider,
+  2. the Healthcare Common Procedure Coding System (HCPCS) code, and
+  3. the place of service (either facility or non-facility).
+
+<br>
+
+There can be multiple records for a given NPI based on the number of distinct HCPCS codes that were billed and where the services were provided. Data have been aggregated based on the place of service because separate fee schedules apply depending on whether the place of service submitted on the claim is facility or non-facility.
+
+<br>
+
+### Examples
+
+```{r}
+# Search by NPI
+physician_by_service(npi = 1003000126)
+```
+
+
+```{r}
+# Search by Last Name for 2019
+physician_by_service(npi = 1720392988, year = 2019)
+```
+
+
+```{r}
+# Multiple NPIs
+c(1003026055,
+          1720392988,
+          1518184605,
+          1922056829,
+          1083879860)
+
+#npis |> purrr::map_dfr(physician_by_service)
+```
+
+
+```{r}
+# Retrieve All Provider Data, 2013-2020
+purrr::map_dfr(as.character(2013:2020),
+~physician_by_service(npi = 1003000126, year = .x))
+```
+
+### Service Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`rndrng_npi`", "`rndrng_prvdr_last_org_name`", "`rndrng_prvdr_first_name`",
+    "`rndrng_prvdr_mi`", "`rndrng_prvdr_crdntls`", "`rndrng_prvdr_gndr`",
+    "`rndrng_prvdr_ent_cd`", "`rndrng_prvdr_st1`", "`rndrng_prvdr_st2`",
+    "`rndrng_prvdr_city`", "`rndrng_prvdr_state_abrvtn`", "`rndrng_prvdr_state_fips`",
+    "`rndrng_prvdr_zip5`", "`rndrng_prvdr_ruca`", "`rndrng_prvdr_ruca_desc`",
+    "`rndrng_prvdr_cntry`", "`rndrng_prvdr_type`", "`rndrng_prvdr_mdcr_prtcptg_ind`",
+    "`hcpcs_cd`", "`hcpcs_desc`", "`hcpcs_drug_ind`", "`place_of_srvc`",
+    "`tot_benes`", "`tot_srvcs`", "`tot_bene_day_srvcs`", "`avg_sbmtd_chrg`",
+    "`avg_mdcr_alowd_amt`", "`avg_mdcr_pymt_amt`", "`avg_mdcr_stdzd_amt`"
+  ),
+  Description = c(
+    "National Provider Identifier", "Last Name/Organization Name of the Provider",
+    "First Name of the Provider", "Middle Initial of the Provider",
+    "Credentials of the Provider", "Gender of the Provider", "Entity Type of the Provider",
+    "Street Address 1 of the Provider", "Street Address 2 of the Provider",
+    "City of the Provider", "State Abbreviation of the Provider",
+    "State FIPS Code of the Provider", "Zip Code of the Provider",
+    "RUCA Code of the Provider", "RUCA Description", "Country Code of the Provider",
+    "Provider Type of the Provider", "Medicare Participation Indicator",
+    "HCPCS Code", "HCPCS Description", "HCPCS Drug Indicator", "Place of Service",
+    "Number of Medicare Beneficiaries", "Number of Services", "Number of Distinct Medicare Beneficiary/Per Day Services",
+    "Average Submitted Charge Amount", "Average Medicare Allowed Amount",
+    "Average Medicare Payment Amount", "Average Medicare Standardized Payment Amount"
+  ),
+  Definition = c(
+    "National Provider Identifier (NPI) for the rendering provider on the claim. The provider NPI is the numeric identifier registered in NPPES.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s last name. When the provider is registered as an organization (entity type code = ‘O’), this is the organization name.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s first name. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s middle initial. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), these are the provider’s credentials. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "When the provider is registered in NPPES as an individual (entity type code=’I’), this is the provider’s gender. When the provider is registered as an organization (entity type code = ‘O’), this will be blank.",
+    "Type of entity reported in NPPES. An entity code of ‘I’ identifies providers registered as individuals and an entity type code of ‘O’ identifies providers registered as organizations.",
+    "The first line of the provider’s street address, as reported in NPPES.",
+    "The second line of the provider’s street address, as reported in NPPES.",
+    "The city where the provider is located, as reported in NPPES.",
+    "The state where the provider is located, as reported in NPPES. The fifty U.S. states and the District of Columbia are reported by the state postal abbreviation. The following values are used for all other areas:",
+    "FIPS code for rendering provider's state.", "The provider’s zip code, as reported in NPPES.",
+    "Rural-Urban Commuting Area Codes (RUCAs), are a Census tract-based classification scheme that utilizes the standard Bureau of Census Urbanized Area and Urban Cluster definitions in combination with work commuting information to characterize all of the nation's Census tracts regarding their rural and urban status and relationships. The Referring Provider ZIP code was cross walked to the United States Department of Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.",
+    "Description of Rural-Urban Commuting Area (RUCA) Code", "The country where the provider is located, as reported in NPPES. The country code will be ‘US’ for any state or U.S. possession. For foreign countries (i.e., state values of ‘ZZ’), the provider country values include the following:",
+    "Derived from the provider specialty code reported on the claim. For providers that reported more than one specialty code on their claims, this is the specialty code associated with the largest number of services.",
+    "Identifies whether the provider participates in Medicare and/or accepts assignment of Medicare allowed amounts. The value will be ‘Y’ for any provider that had at least one claim identifying the provider as participating in Medicare or accepting assignment of Medicare allowed amounts within HCPCS code and place of service. A non-participating provider may elect to accept Medicare allowed amounts for some services and not accept Medicare allowed amounts for other services.",
+    "HCPCS code used to identify the specific medical service furnished by the provider. HCPCS codes include two levels. Level I codes are the Current Procedural Terminology (CPT) codes that are maintained by the American Medical Association and Level II codes are created by CMS to identify products, supplies and services not covered by the CPT codes (such as ambulance services). CPT codes, descriptions and other data only are copyright 2016 American Medical Association. All rights reserved. CPT is a registered trademark of the American Medical Association (AMA). Please review the complete CMS AMA CPT License agreement which is presented to users when accessing the data. For additional information on HCPCS codes, visit the HCPCS general information page.",
+    "Description of the HCPCS code for the specific medical service furnished by the provider. HCPCS descriptions associated with CPT codes are consumer friendly descriptions provided by the AMA. CPT Consumer Friendly Descriptors are lay synonyms for CPT descriptors that are intended to help healthcare consumers who are not medical professionals understand clinical procedures on bills and patient portals. CPT Consumer Friendly Descriptors should not be used for clinical coding or documentation. All other descriptions are CMS Level II descriptions provided in long form. Due to variable length restrictions, the CMS Level II descriptions have been truncated to 256 bytes. As a result, the same HCPCS description can be associated with more than one HCPCS code. For complete CMS Level II descriptions, please visit the HCPCS Release Code Sets page.",
+    "Identifies whether the HCPCS code for the specific service furnished by the provider is a HCPCS listed on the Medicare Part B Drug Average Sales Price (ASP) File. Please visit the ASP drug pricing page for additional information.",
+    "Identifies whether the place of service submitted on the claims is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility is generally an office setting; however other entities are included in non-facility. The following values are entities included in facility and non-facility:",
+    "Number of distinct Medicare beneficiaries receiving the service for each Rndrng_NPI, HCPCS_Cd, and Place_Of_Srvc.",
+    "Number of services provided; note that the metrics used to count the number provided can vary from service to service.",
+    "Number of distinct Medicare beneficiary/per day services. Since a given beneficiary may receive multiple services of the same type (e.g., single vs. multiple cardiac stents) on a single day, this metric removes double-counting from the line service count to identify whether a unique service occurred.",
+    "Average of the charges that the provider submitted for the service.",
+    "Average of the Medicare allowed amount for the service; this figure is the sum of the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
+    "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service. Note: In general, Medicare FFS claims with dates-of-service or dates-of-discharge on or after April 1, 2013, incurred a 2 percent reduction in Medicare payment. This is in response to mandatory across-the-board reductions in Federal spending, also known as sequestration.",
+    "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Note: This variable is available starting with the calendar year 2014 data. Please refer to the “Additional Information” section of this document for more details on the standardization of Medicare payments."
+  )) |> 
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
+```
+
+<br><br>

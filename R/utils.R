@@ -325,6 +325,21 @@ change_pct <- function(df, col, col_abs, by) {
     .after = {{ col_abs }})
 }
 
+#' @param df df
+#' @param col col
+#' @param by by
+#' @return A `tibble`
+#' @autoglobal
+#' @noRd
+change_year <- function(df, col, by) {
+
+  df |>
+    dplyr::mutate(
+      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }}, order_by = {{ by }}),
+      "{{ col }}_pct" := "{{ col }}_chg" / dplyr::lag({{ col }}, order_by = {{ by }}),
+      .after = {{ col }})
+}
+
 #' convert_breaks ------------------------------------------------------------
 #' @param x vector
 #' @param decimal TRUE or FALSE

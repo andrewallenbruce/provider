@@ -376,10 +376,13 @@ mon |>
   gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
   gt::cols_merge_n_pct(col_n = bene_total_chg, 
                        col_pct = bene_total_pct) |> 
-  gt::cols_align(align = "right", columns = period) |> 
-  gt::cols_label(period = "Month", bene_total = "Total", 
+  gt::cols_align(align = "right", 
+                 columns = period) |> 
+  gt::cols_label(period = "Month", 
+                 bene_total = "Total", 
                  bene_total_chg = gt::md("Change (%)")) |> 
-  gtExtras::gt_add_divider(columns = c("period", "bene_total_chg"), 
+  gtExtras::gt_add_divider(columns = c("period", 
+                                       "bene_total_chg"), 
                            style = "solid",
                            color = "black",
                            weight = gt::px(2),
@@ -435,7 +438,6 @@ tibble::tribble(
   gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
   gt::opt_table_lines(extent = "default") |> 
   gt::opt_table_outline(style = "none")
-
 ```
 
 

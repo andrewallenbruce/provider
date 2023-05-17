@@ -1,0 +1,103 @@
+---
+title: "Physician by Geography"
+output: html_document
+---
+
+```{r include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(provider)
+```
+
+ > *Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.*
+
+<br>
+
+The Centers for Medicare & Medicaid Services (CMS) has prepared a public data set, the Provider Utilization and Payment Data Physician and Other Practitioners Dataset, with information on services and procedures provided to Medicare beneficiaries by physicians and other healthcare professionals. The Physician and Other Practitioners Dataset contains information on utilization, payment (allowed amount and Medicare payment), and submitted charges organized by National Provider Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS) code, and place of service. The data in the Physician and Other Practitioners dataset contains 100% final-action (i.e., all claim adjustments have been resolved) physician/supplier Part B non-institutional line items for the Medicare fee-for-service (FFS) population. Claims processed by Durable Medical Equipment, Prosthetic, Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC) are not included in the Physician and Other Practitioners Dataset.
+
+<br>
+
+## Physician & Other Practitioners: **by Geography and Service**
+
+<br>
+
+### Examples
+
+```{r}
+physician_by_geography(hcpcs_code = "0002A", year = 2020)
+```
+
+<br><br>
+
+```{r}
+service <- purrr::map_dfr(as.character(2013:2020), ~physician_by_service(npi = 1003000126, year = .x))
+```
+
+<br><br>
+
+
+
+
+
+### Geography Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`rndrng_prvdr_geo_lvl`", "`rndrng_prvdr_geo_cd`", "`rndrng_prvdr_geo_desc`",
+    "`hcpcs_cd`", "`hcpcs_desc`", "`hcpcs_drug_ind`", "`place_of_srvc`",
+    "`tot_rndrng_prvdrs`", "`tot_srvcs`", "`tot_benes`", "`tot_bene_day_srvcs`",
+    "`avg_sbmtd_chrg`", "`avg_mdcr_alowd_amt`", "`avg_mdcr_pymt_amt`",
+    "`avg_mdcr_stdzd_amt`"
+  ),
+  Description = c(
+    "Geography Level", "Rendering Provider Geography Code", "Rendering Provider Geography Description",
+    "HCPCS Code", "HCPCS Description", "HCPCS Drug Indicator", "Place of Service",
+    "Number of Providers", "Number of Services", "Number of Medicare Beneficiaries",
+    "Number of Distinct Medicare Beneficiary/Per Day Services", "Average Submitted Charge Amount",
+    "Average Medicare Allowed Amount", "Average Medicare Payment Amount",
+    "Average Medicare Standardized Payment Amount"
+  ),
+  Definition = c(
+    "Identifies the level of geography that the data in the row has been aggregated. A value of 'State' indicates the data in the row is aggregated to a single state identified in the Rendering Provider State column for a given HCPCS Code Level. A value of 'National' indicates the data in the row is aggregated across all states for a given HCPCS Code Level.",
+    "FIPS code of the referring provider state. This variable is blank when reported at the national level.",
+    "The state name where the provider is located, as reported in NPPES. The values include the 50 United States, District of Columbia, U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data aggregated at the National level are identified by the word 'National'.",
+    "HCPCS code used to identify the specific medical service furnished by the provider. HCPCS codes include two levels. Level I codes are the Current Procedural Terminology (CPT) codes that are maintained by the American Medical Association and Level II codes are created by CMS to identify products, supplies and services not covered by the CPT codes (such as ambulance services). CPT codes, descriptions and other data only are copyright 2016 American Medical Association. All rights reserved. CPT is a registered trademark of the American Medical Association (AMA). Please review the complete CMS AMA CPT License agreement which is presented to users when accessing the data. For additional information on HCPCS codes, visit the HCPCS general information page.",
+    "Description of the HCPCS code for the specific medical service furnished by the provider. HCPCS descriptions associated with CPT codes are consumer friendly descriptions provided by the AMA. CPT Consumer Friendly Descriptors are lay synonyms for CPT descriptors that are intended to help healthcare consumers who are not medical professionals understand clinical procedures on bills and patient portals. CPT Consumer Friendly Descriptors should not be used for clinical coding or documentation. All other descriptions are CMS Level II descriptions provided in long form. Due to variable length restrictions, the CMS Level II descriptions have been truncated to 256 bytes. As a result, the same HCPCS description can be associated with more than one HCPCS code. For complete CMS Level II descriptions, please visit the HCPCS Release Code Sets page.",
+    "Identifies whether the HCPCS code for the specific service furnished by the provider is a HCPCS listed on the Medicare Part B Drug Average Sales Price (ASP) File. Please visit the ASP drug pricing page for additional information.",
+    "Identifies whether the place of service submitted on the claims is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility is generally an office setting; however other entities are included in non-facility. The following values are entities included in facility and non-facility:",
+    "Number of providers within HCPCS code and place of service.",
+    "Number of services provided; note that the metrics used to count the number provided can vary from service to service.",
+    "Number of distinct Medicare beneficiaries receiving the service for each Rndrng_Prvdr_Geo_Desc and HCPCS_Cd, Place_Of_Srvc.",
+    "Number of distinct Medicare beneficiary/per day services. Since a given beneficiary may receive multiple services of the same type (e.g., single vs. multiple cardiac stents) on a single day, this metric removes double-counting from the line service count to identify whether a unique service occurred.",
+    "Average of the charges that providers submit for the service.",
+    "Average of the Medicare allowed amount for the service. Medicare allowed amounts includes the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.",
+    "Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.",
+    "Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Additional information on the standardization of Medicare payments can be found in the “Geographic Variation Public Use File: Technical Supplement on Standardization.”"
+  )) |> 
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
+```
+
