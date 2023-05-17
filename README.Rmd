@@ -182,12 +182,18 @@ nppes_npi(npi = "155836427a")
 nppes_npi(1720081442)
 nppes_npi(1710983663) 
 nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+```
 
+
+```{r}
 provider_enrollment(specialty_code = "00-17", state = "GA") |> 
   dplyr::pull(npi) |> 
-  purrr::map(nppes_npi, .progress = TRUE) |> 
+  purrr::map(nppes_npi) |> 
   purrr::list_rbind()
+```
 
+
+```{r}
 c(13164059391, 1558364273) |> 
   purrr::map(nppes_npi) |> 
   purrr::list_rbind()
@@ -198,6 +204,7 @@ c(13164059391, 1558364273) |>
 
 ```{r}
 open_payments(npi = 1043218118, year = 2021) |> 
+  dplyr::filter(!is.na(covered)) |> 
   janitor::remove_empty(which = c("rows", "cols"))
 ```
 

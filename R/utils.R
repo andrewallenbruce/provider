@@ -230,7 +230,9 @@ yn_logical <- function(x){
     x == as.character("N") ~ as.logical(FALSE),
     x == as.character("YES") ~ as.logical(TRUE),
     x == as.character("NO") ~ as.logical(FALSE),
-    TRUE ~ NA)
+    x == as.character("Yes") ~ as.logical(TRUE),
+    x == as.character("No") ~ as.logical(FALSE),
+    .default = NA)
 }
 
 #' Convert I/O char values to logical ----------------------

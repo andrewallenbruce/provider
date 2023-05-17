@@ -65,7 +65,15 @@ nppes_npi(first = "John",
 
 ```{r}
 nppes_npi(npi = 1336413418) # NPI-2
+```
+
+
+```{r}
 nppes_npi(npi = 1710975040) # NPI-1
+```
+
+
+```{r}
 nppes_npi(npi = 1659781227) # Deactivated
 ```
 

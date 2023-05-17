@@ -43,10 +43,14 @@ In the event a provider does not want to bill Medicare for their services, they 
 
 ## Example Searchs
 
+By NPI:
+
 ```{r}
 order_refer(npi = 1083879860)
 ```
 <br>
+
+By Name, as well as filtering for certain privileges:
 
 ```{r}
 order_refer(last_name = "Smith", 
@@ -57,11 +61,13 @@ order_refer(last_name = "Smith",
 <br>
 
 ## Visualizations
+<br>
 
 <details><summary>Code for table</summary>
 
 ```{r}
-gt_oref <- order_refer(last_name = "Smith", first_name = "Aaron") |> 
+gt_oref <- order_refer(last_name = "Smith", 
+                       first_name = "Aaron") |> 
   gt::gt() |> 
   gtExtras::gt_theme_538() |> 
   gt::tab_style(
@@ -94,14 +100,17 @@ gt_oref <- order_refer(last_name = "Smith", first_name = "Aaron") |>
                            weight = gt::px(3),
                            include_labels = FALSE) |> 
   gt::tab_header(title = gt::md("Medicare Order & Referring Eligibility"),
-    subtitle = gt::md("Provider Eligibility to Refer Patients to **Medicare Part B**, **Home Health Agencies**, **Durable Medical Equipment Suppliers**, and **Powered Mobility Devices**")) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov") |> 
-  gt::opt_table_font(font = gt::google_font(name = "Karla"))
+    subtitle = gt::md("Provider Eligibility to Refer Patients to **Medicare Part B**, 
+                      **Home Health Agencies**, **Durable Medical Equipment Suppliers**, 
+                      and **Powered Mobility Devices**")) |> 
+  gt::tab_source_note(source_note = "Source: data.cms.gov")
+
+#|> gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 </details>
 
-```{r}
+```{r, echo=FALSE, eval=TRUE}
 gt_oref
 ```
 

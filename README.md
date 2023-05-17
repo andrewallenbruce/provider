@@ -519,8 +519,8 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
     # A tibble: 2 × 28
       npi      entype enumeration_date enumeration_duration      last_updated status
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1730354… Org    2008-04-30       474681600s (~15.04 years) 2013-11-21   A     
-    2 1730354… Org    2008-04-30       474681600s (~15.04 years) 2013-11-21   A     
+    1 1730354… Org    2008-04-30       474768000s (~15.04 years) 2013-11-21   A     
+    2 1730354… Org    2008-04-30       474768000s (~15.04 years) 2013-11-21   A     
     # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
     #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
     #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
@@ -532,65 +532,23 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
 ``` r
 provider_enrollment(specialty_code = "00-17", state = "GA") |> 
   dplyr::pull(npi) |> 
-  purrr::map(nppes_npi, .progress = TRUE) |> 
+  purrr::map(nppes_npi) |> 
   purrr::list_rbind()
 ```
 
-    ■■ 2% | ETA: 1m
-
-    ■■ 3% | ETA: 46s ■■ 4% | ETA: 43s ■■■ 5% | ETA: 41s ■■■ 7% | ETA: 40s ■■■ 8% |
-    ETA: 39s ■■■■ 9% | ETA: 39s ■■■■ 10% | ETA: 39s ■■■■ 11% | ETA: 38s ■■■■■ 12% |
-    ETA: 36s ■■■■■ 13% | ETA: 35s ■■■■■ 14% | ETA: 34s ■■■■■■ 15% | ETA: 34s ■■■■■■
-    16% | ETA: 33s ■■■■■■ 17% | ETA: 32s ■■■■■■■ 18% | ETA: 32s ■■■■■■■ 20% | ETA:
-    31s ■■■■■■■ 21% | ETA: 30s ■■■■■■■■ 22% | ETA: 29s ■■■■■■■■ 23% | ETA: 29s
-    ■■■■■■■■ 24% | ETA: 28s ■■■■■■■■■ 25% | ETA: 28s ■■■■■■■■■ 26% | ETA: 27s
-    ■■■■■■■■■ 27% | ETA: 26s ■■■■■■■■■ 28% | ETA: 26s ■■■■■■■■■■ 29% | ETA: 25s
-    ■■■■■■■■■■ 30% | ETA: 25s ■■■■■■■■■■ 32% | ETA: 24s ■■■■■■■■■■■ 33% | ETA: 24s
-    ■■■■■■■■■■■ 34% | ETA: 23s ■■■■■■■■■■■ 35% | ETA: 23s ■■■■■■■■■■■■ 36% | ETA:
-    22s ■■■■■■■■■■■■ 37% | ETA: 22s ■■■■■■■■■■■■ 38% | ETA: 21s ■■■■■■■■■■■■■ 39% |
-    ETA: 21s ■■■■■■■■■■■■■ 40% | ETA: 21s ■■■■■■■■■■■■■ 41% | ETA: 20s
-    ■■■■■■■■■■■■■■ 42% | ETA: 20s ■■■■■■■■■■■■■■ 43% | ETA: 19s ■■■■■■■■■■■■■■ 45%
-    | ETA: 19s ■■■■■■■■■■■■■■■ 46% | ETA: 18s ■■■■■■■■■■■■■■■ 47% | ETA: 18s
-    ■■■■■■■■■■■■■■■ 48% | ETA: 18s ■■■■■■■■■■■■■■■■ 49% | ETA: 17s ■■■■■■■■■■■■■■■■
-    50% | ETA: 17s ■■■■■■■■■■■■■■■■ 51% | ETA: 16s ■■■■■■■■■■■■■■■■■ 52% | ETA: 16s
-    ■■■■■■■■■■■■■■■■■ 53% | ETA: 16s ■■■■■■■■■■■■■■■■■ 54% | ETA: 15s
-    ■■■■■■■■■■■■■■■■■■ 55% | ETA: 15s ■■■■■■■■■■■■■■■■■■ 57% | ETA: 14s
-    ■■■■■■■■■■■■■■■■■■ 58% | ETA: 14s ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 14s
-    ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 13s ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 13s
-    ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 12s ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 12s
-    ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 12s ■■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 11s
-    ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 11s ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 11s
-    ■■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 10s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 10s
-    ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 9s
-    ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 9s ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 8s
-    ■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 8s
-    ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 7s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 6s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■ 82% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA:
-    6s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 84% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% |
-    ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■
-    87% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 4s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |
-    ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 91% | ETA: 3s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93% |
-    ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 2s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96% | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97%
-    | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 1s
-    ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 99% | ETA: 0s
-
     # A tibble: 424 × 36
-       npi        entype enumeration_date enumeration_duration      last_updated
-       <chr>      <chr>  <date>           <Duration>                <date>      
-     1 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     2 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     3 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     4 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     5 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     6 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     7 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     8 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-     9 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
-    10 1992710610 Org    2006-07-30       529977600s (~16.79 years) 2021-04-28  
+       npi        entype enumeration_date enumeration_duration     last_updated
+       <chr>      <chr>  <date>           <Duration>               <date>      
+     1 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     2 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     3 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     4 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     5 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     6 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     7 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     8 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+     9 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+    10 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
     # ℹ 414 more rows
     # ℹ 31 more variables: certification_date <date>, status <chr>,
     #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
@@ -616,29 +574,30 @@ c(13164059391, 1558364273) |>
 
 ``` r
 open_payments(npi = 1043218118, year = 2021) |> 
+  dplyr::filter(!is.na(covered)) |> 
   janitor::remove_empty(which = c("rows", "cols"))
 ```
 
-    # A tibble: 92 × 50
-       year  changed cov_type    profile_id npi   first_name last_name address city 
-       <chr> <lgl>   <chr>       <chr>      <chr> <chr>      <chr>     <chr>   <chr>
-     1 2021  FALSE   Covered Re… 92058      1043… Ahad       Mahootchi 6739 G… Zeph…
-     2 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     3 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     4 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     5 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     6 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     7 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     8 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-     9 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-    10 2021  FALSE   Covered Re… 92058      1043… AHAD       MAHOOTCHI 6739 G… ZEPH…
-    # ℹ 82 more rows
-    # ℹ 41 more variables: state <chr>, zipcode <chr>, country <chr>,
-    #   primary_type <chr>, specialty <chr>, license_state <chr>, payer_sub <chr>,
-    #   payer_id <chr>, payer_name <chr>, payer_state <chr>, payer_country <chr>,
-    #   pay_total <chr>, pay_date <date>, pay_count <chr>, pay_form <chr>,
-    #   pay_nature <chr>, phys_own <chr>, third_par_pay <chr>, charity <chr>,
-    #   pub_date <date>, pub_delay <chr>, pub_dispute <chr>, …
+    # A tibble: 105 × 42
+       year  npi      profile_id changed cov_type first_name last_name address city 
+       <chr> <chr>    <chr>      <lgl>   <chr>    <chr>      <chr>     <chr>   <chr>
+     1 2021  1043218… 92058      FALSE   Physici… Ahad       Mahootchi 6739 G… Zeph…
+     2 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     3 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     4 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     5 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     6 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     7 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     8 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+     9 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+    10 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…
+    # ℹ 95 more rows
+    # ℹ 33 more variables: state <chr>, zipcode <chr>, country <chr>,
+    #   primary_type <chr>, primary_other <chr>, specialty <chr>,
+    #   specialty_other <chr>, license_state <chr>, license_state_other <chr>,
+    #   payer_id <chr>, payer_sub <chr>, payer_name <chr>, payer_state <chr>,
+    #   payer_country <chr>, pay_total <dbl>, pay_date <date>, pay_count <chr>,
+    #   pay_form <chr>, pay_nature <chr>, phys_ownship <lgl>, third_pay <chr>, …
 
 ### Opt-Out Affidavits
 

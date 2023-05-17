@@ -217,13 +217,13 @@ utils::globalVariables(c(
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>
+  "covered_recipient_npi", # <open_payments>
+  "covered_recipient_profile_id", # <open_payments>
   "change_type", # <open_payments>
   "covered_recipient_type", # <open_payments>
   "teaching_hospital_ccn", # <open_payments>
   "teaching_hospital_id", # <open_payments>
   "teaching_hospital_name", # <open_payments>
-  "covered_recipient_profile_id", # <open_payments>
-  "covered_recipient_npi", # <open_payments>
   "covered_recipient_first_name", # <open_payments>
   "covered_recipient_middle_name", # <open_payments>
   "covered_recipient_last_name", # <open_payments>
@@ -241,8 +241,8 @@ utils::globalVariables(c(
   "specialty_other", # <open_payments>
   "covered_recipient_license_state_code1", # <open_payments>
   "license_state_other", # <open_payments>
-  "submitting_applicable_manufacturer_or_applicable_gpo_name", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_id", # <open_payments>
+  "submitting_applicable_manufacturer_or_applicable_gpo_name", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_name", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_state", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_country", # <open_payments>
@@ -264,37 +264,53 @@ utils::globalVariables(c(
   "delay_in_publication_indicator", # <open_payments>
   "dispute_status_for_publication", # <open_payments>
   "related_product_indicator", # <open_payments>
+  "name_of_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
   "covered_or_noncovered_indicator_1", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
   "product_category_or_therapeutic_area_1", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
   "associated_drug_or_biological_ndc_1", # <open_payments>
   "associated_device_or_medical_supply_pdi_1", # <open_payments>
+  "name_of_drug_or_biological_or_device_or_medical_supply_2", # <open_payments>
   "covered_or_noncovered_indicator_2", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_2", # <open_payments>
   "product_category_or_therapeutic_area_2", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_2", # <open_payments>
   "associated_drug_or_biological_ndc_2", # <open_payments>
   "associated_device_or_medical_supply_pdi_2", # <open_payments>
+  "name_of_drug_or_biological_or_device_or_medical_supply_3", # <open_payments>
   "covered_or_noncovered_indicator_3", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_3", # <open_payments>
   "product_category_or_therapeutic_area_3", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_3", # <open_payments>
   "associated_drug_or_biological_ndc_3", # <open_payments>
   "associated_device_or_medical_supply_pdi_3", # <open_payments>
+  "name_of_drug_or_biological_or_device_or_medical_supply_4", # <open_payments>
   "covered_or_noncovered_indicator_4", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_4", # <open_payments>
   "product_category_or_therapeutic_area_4", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_4", # <open_payments>
   "associated_drug_or_biological_ndc_4", # <open_payments>
   "associated_device_or_medical_supply_pdi_4", # <open_payments>
+  "name_of_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
   "covered_or_noncovered_indicator_5", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
   "product_category_or_therapeutic_area_5", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
   "associated_drug_or_biological_ndc_5", # <open_payments>
   "associated_device_or_medical_supply_pdi_5", # <open_payments>
   "changed", # <open_payments>
+  "phys_ownship", # <open_payments>
+  "charity", # <open_payments>
+  "pub_delay", # <open_payments>
+  "pub_dispute", # <open_payments>
+  "related_product", # <open_payments>
+  "third_cov", # <open_payments>
+  "cov_type", # <open_payments>
+  "pay_nature", # <open_payments>
+  "name_1", # <open_payments>
+  "pdi_5", # <open_payments>
+  "val", # <open_payments>
+  "name", # <open_payments>
+  "type", # <open_payments>
+  "category", # <open_payments>
+  "ndc", # <open_payments>
+  "pdi", # <open_payments>
   "title", # <open_payments_ids>
   "modified", # <open_payments_ids>
   "distribution", # <open_payments_ids>
@@ -314,7 +330,6 @@ utils::globalVariables(c(
   "zip_code", # <opt_out>
   "y", # <order_refer>
   "y", # <pending_applications>
-  "npi", # <physician_by_geography>
   "distro", # <physician_by_geography>
   "y", # <physician_by_geography>
   "rndrng_prvdr_geo_lvl", # <physician_by_geography>
