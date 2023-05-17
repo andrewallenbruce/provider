@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="provider">
-<title>Medicare Public Provider Enrollment API • provider</title>
+<title>Physician by Geography • provider</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png">
@@ -20,7 +20,7 @@
 <link href="../deps/Roboto_Slab-0.4.6/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Medicare Public Provider Enrollment API">
+<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Physician by Geography">
 <meta property="og:description" content="provider">
 <meta property="og:image" content="https://andrewallenbruce.github.io/provider/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -51,7 +51,7 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="active nav-item dropdown">
+<li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
@@ -120,70 +120,91 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.svg" class="logo" alt=""><h1>Medicare Public Provider Enrollment API</h1>
+      <img src="../logo.svg" class="logo" alt=""><h1>Physician by Geography</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/mcr-ffs-prov-enroll.Rmd" class="external-link"><code>vignettes/articles/mcr-ffs-prov-enroll.Rmd</code></a></small>
-      <div class="d-none name"><code>mcr-ffs-prov-enroll.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/andrewallenbruce/provider/blob/HEAD/vignettes/articles/physician-by-geography.Rmd" class="external-link"><code>vignettes/articles/physician-by-geography.Rmd</code></a></small>
+      <div class="d-none name"><code>physician-by-geography.Rmd</code></div>
     </div>
 
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
 <blockquote>
-<p><em>Information on a point-in-time snapshot of enrollment-level data
-for Providers actively enrolled in Medicare.</em></p>
+<p><em>Information on services and procedures provided to Original
+Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by
+physicians and other healthcare professionals.</em></p>
 </blockquote>
 <p><br></p>
-<p>The Medicare Fee-For-Service Public Provider Enrollment dataset
-includes information on providers who are actively approved to bill
-Medicare or have completed the 855O at the time the data was pulled from
-the <a href="https://pecos.cms.hhs.gov" class="external-link">Provider Enrollment and Chain
-Ownership System</a> (PECOS).</p>
-<p>These files are populated from PECOS and contain basic enrollment and
-provider information, reassignment of benefits information and practice
-location city, state and zip. These files are not intended to be used as
-real time reporting as the data changes from day to day and the files
-are updated only on a quarterly basis. This data does not include
-information on opt-out providers. Information is redacted where
-necessary to protect Medicare provider privacy.</p>
+<p>The Centers for Medicare &amp; Medicaid Services (CMS) has prepared a
+public data set, the Provider Utilization and Payment Data Physician and
+Other Practitioners Dataset, with information on services and procedures
+provided to Medicare beneficiaries by physicians and other healthcare
+professionals. The Physician and Other Practitioners Dataset contains
+information on utilization, payment (allowed amount and Medicare
+payment), and submitted charges organized by National Provider
+Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS)
+code, and place of service. The data in the Physician and Other
+Practitioners dataset contains 100% final-action (i.e., all claim
+adjustments have been resolved) physician/supplier Part B
+non-institutional line items for the Medicare fee-for-service (FFS)
+population. Claims processed by Durable Medical Equipment, Prosthetic,
+Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC)
+are not included in the Physician and Other Practitioners Dataset.</p>
 <p><br></p>
 <div class="section level2">
-<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+<h2 id="physician-other-practitioners-by-geography-and-service">Physician &amp; Other Practitioners: <strong>by Geography and
+Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-geography-and-service"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   npi   pac_id enroll_id specialty_code specialty_desc state org_name first_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… 44868… I2017040… 14-46          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>       RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
-<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
-<div id="hyxdmldena" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 16</span></span></span>
+<span><span class="co">#&gt;    year level sublevel fips  hcpcs hcpcs_desc hcpcs_drug place_of_srvc tot_provs</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 Nati… National <span style="color: #BB0000;">NA</span>    0002A Adm sarsc… FALSE      Office               53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State Califor… 06    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State Florida  12    0002A Adm sarsc… FALSE      Office                5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State Illinois 17    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State Maine    23    0002A Adm sarsc… FALSE      Office                1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State Maryland 24    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State Massach… 25    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State New Jer… 34    0002A Adm sarsc… FALSE      Office                3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State Pennsyl… 42    0002A Adm sarsc… FALSE      Office                4</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_charge &lt;dbl&gt;, avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">service</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><br><br></p>
+</div>
+<div class="section level3">
+<h3 id="geography-data-dictionary">Geography Data Dictionary<a class="anchor" aria-label="anchor" href="#geography-data-dictionary"></a>
+</h3>
+<div id="eaoapiuhbz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#hyxdmldena table {
+#eaoapiuhbz table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hyxdmldena thead, #hyxdmldena tbody, #hyxdmldena tfoot, #hyxdmldena tr, #hyxdmldena td, #hyxdmldena th {
+#eaoapiuhbz thead, #eaoapiuhbz tbody, #eaoapiuhbz tfoot, #eaoapiuhbz tr, #eaoapiuhbz td, #eaoapiuhbz th {
   border-style: none;
 }
 
-#hyxdmldena p {
+#eaoapiuhbz p {
   margin: 0;
   padding: 0;
 }
 
-#hyxdmldena .gt_table {
+#eaoapiuhbz .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -209,12 +230,12 @@ necessary to protect Medicare provider privacy.</p>
   border-left-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_caption {
+#eaoapiuhbz .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hyxdmldena .gt_title {
+#eaoapiuhbz .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -226,7 +247,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-width: 0;
 }
 
-#hyxdmldena .gt_subtitle {
+#eaoapiuhbz .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -238,7 +259,7 @@ necessary to protect Medicare provider privacy.</p>
   border-top-width: 0;
 }
 
-#hyxdmldena .gt_heading {
+#eaoapiuhbz .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -250,13 +271,13 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#hyxdmldena .gt_bottom_border {
+#eaoapiuhbz .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_col_headings {
+#eaoapiuhbz .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -271,7 +292,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#hyxdmldena .gt_col_heading {
+#eaoapiuhbz .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -291,7 +312,7 @@ necessary to protect Medicare provider privacy.</p>
   overflow-x: hidden;
 }
 
-#hyxdmldena .gt_column_spanner_outer {
+#eaoapiuhbz .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -303,15 +324,15 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 4px;
 }
 
-#hyxdmldena .gt_column_spanner_outer:first-child {
+#eaoapiuhbz .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hyxdmldena .gt_column_spanner_outer:last-child {
+#eaoapiuhbz .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hyxdmldena .gt_column_spanner {
+#eaoapiuhbz .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -323,11 +344,11 @@ necessary to protect Medicare provider privacy.</p>
   width: 100%;
 }
 
-#hyxdmldena .gt_spanner_row {
+#eaoapiuhbz .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hyxdmldena .gt_group_heading {
+#eaoapiuhbz .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -353,7 +374,7 @@ necessary to protect Medicare provider privacy.</p>
   text-align: left;
 }
 
-#hyxdmldena .gt_empty_group_heading {
+#eaoapiuhbz .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -368,15 +389,15 @@ necessary to protect Medicare provider privacy.</p>
   vertical-align: middle;
 }
 
-#hyxdmldena .gt_from_md > :first-child {
+#eaoapiuhbz .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hyxdmldena .gt_from_md > :last-child {
+#eaoapiuhbz .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hyxdmldena .gt_row {
+#eaoapiuhbz .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -395,7 +416,7 @@ necessary to protect Medicare provider privacy.</p>
   overflow-x: hidden;
 }
 
-#hyxdmldena .gt_stub {
+#eaoapiuhbz .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -408,7 +429,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#hyxdmldena .gt_stub_row_group {
+#eaoapiuhbz .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -422,15 +443,15 @@ necessary to protect Medicare provider privacy.</p>
   vertical-align: top;
 }
 
-#hyxdmldena .gt_row_group_first td {
+#eaoapiuhbz .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hyxdmldena .gt_row_group_first th {
+#eaoapiuhbz .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hyxdmldena .gt_summary_row {
+#eaoapiuhbz .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -440,16 +461,16 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#hyxdmldena .gt_first_summary_row {
+#eaoapiuhbz .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_first_summary_row.thick {
+#eaoapiuhbz .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hyxdmldena .gt_last_summary_row {
+#eaoapiuhbz .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -459,7 +480,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_grand_summary_row {
+#eaoapiuhbz .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -469,7 +490,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#hyxdmldena .gt_first_grand_summary_row {
+#eaoapiuhbz .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -479,7 +500,7 @@ necessary to protect Medicare provider privacy.</p>
   border-top-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_last_grand_summary_row_top {
+#eaoapiuhbz .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,11 +510,11 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_striped {
+#eaoapiuhbz .gt_striped {
   background-color: #F4F4F4;
 }
 
-#hyxdmldena .gt_table_body {
+#eaoapiuhbz .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -502,7 +523,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #D5D5D5;
 }
 
-#hyxdmldena .gt_footnotes {
+#eaoapiuhbz .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -516,7 +537,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#hyxdmldena .gt_footnote {
+#eaoapiuhbz .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -525,7 +546,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#hyxdmldena .gt_sourcenotes {
+#eaoapiuhbz .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -539,7 +560,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#hyxdmldena .gt_sourcenote {
+#eaoapiuhbz .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -547,63 +568,63 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#hyxdmldena .gt_left {
+#eaoapiuhbz .gt_left {
   text-align: left;
 }
 
-#hyxdmldena .gt_center {
+#eaoapiuhbz .gt_center {
   text-align: center;
 }
 
-#hyxdmldena .gt_right {
+#eaoapiuhbz .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hyxdmldena .gt_font_normal {
+#eaoapiuhbz .gt_font_normal {
   font-weight: normal;
 }
 
-#hyxdmldena .gt_font_bold {
+#eaoapiuhbz .gt_font_bold {
   font-weight: bold;
 }
 
-#hyxdmldena .gt_font_italic {
+#eaoapiuhbz .gt_font_italic {
   font-style: italic;
 }
 
-#hyxdmldena .gt_super {
+#eaoapiuhbz .gt_super {
   font-size: 65%;
 }
 
-#hyxdmldena .gt_footnote_marks {
+#eaoapiuhbz .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hyxdmldena .gt_asterisk {
+#eaoapiuhbz .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hyxdmldena .gt_indent_1 {
+#eaoapiuhbz .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hyxdmldena .gt_indent_2 {
+#eaoapiuhbz .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hyxdmldena .gt_indent_3 {
+#eaoapiuhbz .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hyxdmldena .gt_indent_4 {
+#eaoapiuhbz .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hyxdmldena .gt_indent_5 {
+#eaoapiuhbz .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -615,156 +636,142 @@ necessary to protect Medicare provider privacy.</p>
 <tbody class="gt_table_body">
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>npi</code></p>
+<p><code>rndrng_prvdr_geo_lvl</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">An NPI is a 10-digit unique numeric identifier that all providers must obtain before enrolling in Medicare. It is assigned to health care providers upon application through the National Plan and Provider Enumeration System (NPPES).</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Geography Level</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies the level of geography that the data in the row has been aggregated. A value of 'State' indicates the data in the row is aggregated to a single state identified in the Rendering Provider State column for a given HCPCS Code Level. A value of 'National' indicates the data in the row is aggregated across all states for a given HCPCS Code Level.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>pecos_asct_cntl_id</code></p>
+<p><code>rndrng_prvdr_geo_cd</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">PECOS Associate Control ID</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider associate level variable (PAC ID) from PECOS database used to link across tables. A PAC ID is a 10-digit unique numeric identifier that is assigned to each individual or organization in PECOS. All entity-level information (e.g., tax identification numbers and organizational names) is linked through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs if the individual or organization enrolled multiple times under different circumstances.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Rendering Provider Geography Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">FIPS code of the referring provider state. This variable is blank when reported at the national level.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>enrlmt_id</code></p>
+<p><code>rndrng_prvdr_geo_desc</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Enrollment ID</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider enrollment ID from PECOS database used to link across tables. An Enrollment ID is a 15-digit unique alphanumeric identifier that is assigned to each new provider enrollment application. All enrollment-level information (e.g., enrollment type, enrollment state, provider specialty and reassignment of benefits) is linked through the Enrollment ID.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Rendering Provider Geography Description</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The state name where the provider is located, as reported in NPPES. The values include the 50 United States, District of Columbia, U.S. territories, Armed Forces areas, Unknown and Foreign Country. Data aggregated at the National level are identified by the word 'National'.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>provider_type_cd</code></p>
+<p><code>hcpcs_cd</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Type Code</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider enrollment application and enrollment specialty type, see PROVIDER_TYPE_CD - Reference for description of values. This field shows the provider’s primary specialty code. For practitioners and DME suppliers, please see the Secondary Specialty file for a list of secondary specialties (when applicable). Only about 20% of practitioners and DME suppliers have at least one secondary specialty.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">HCPCS Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">HCPCS code used to identify the specific medical service furnished by the provider. HCPCS codes include two levels. Level I codes are the Current Procedural Terminology (CPT) codes that are maintained by the American Medical Association and Level II codes are created by CMS to identify products, supplies and services not covered by the CPT codes (such as ambulance services). CPT codes, descriptions and other data only are copyright 2016 American Medical Association. All rights reserved. CPT is a registered trademark of the American Medical Association (AMA). Please review the complete CMS AMA CPT License agreement which is presented to users when accessing the data. For additional information on HCPCS codes, visit the HCPCS general information page.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>provider_type_desc</code></p>
+<p><code>hcpcs_desc</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Type Description</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider enrollment application and enrollment specialty type description, see PROVIDER_TYPE_CD - Reference for description of values.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">HCPCS Description</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Description of the HCPCS code for the specific medical service furnished by the provider. HCPCS descriptions associated with CPT codes are consumer friendly descriptions provided by the AMA. CPT Consumer Friendly Descriptors are lay synonyms for CPT descriptors that are intended to help healthcare consumers who are not medical professionals understand clinical procedures on bills and patient portals. CPT Consumer Friendly Descriptors should not be used for clinical coding or documentation. All other descriptions are CMS Level II descriptions provided in long form. Due to variable length restrictions, the CMS Level II descriptions have been truncated to 256 bytes. As a result, the same HCPCS description can be associated with more than one HCPCS code. For complete CMS Level II descriptions, please visit the HCPCS Release Code Sets page.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>state_cd</code></p>
+<p><code>hcpcs_drug_ind</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">State Code</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider enrollment state, abbreviated location, see STATE_CD - Reference tab for description of values. Providers enroll at the state level, so one PAC ID may be associated with multiple ENRLMT_IDs and multiple STATE_CD values.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">HCPCS Drug Indicator</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies whether the HCPCS code for the specific service furnished by the provider is a HCPCS listed on the Medicare Part B Drug Average Sales Price (ASP) File. Please visit the ASP drug pricing page for additional information.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>first_name</code></p>
+<p><code>place_of_srvc</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual provider first name.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Place of Service</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies whether the place of service submitted on the claims is a facility (value of ‘F’) or non-facility (value of ‘O’). Non-facility is generally an office setting; however other entities are included in non-facility. The following values are entities included in facility and non-facility:</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>mdl_name</code></p>
+<p><code>tot_rndrng_prvdrs</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Middle Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual provider middle name.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Number of Providers</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of providers within HCPCS code and place of service.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>last_name</code></p>
+<p><code>tot_srvcs</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual provider last name.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Number of Services</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of services provided; note that the metrics used to count the number provided can vary from service to service.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>org_name</code></p>
+<p><code>tot_benes</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Organization Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Organizational provider name.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Number of Medicare Beneficiaries</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of distinct Medicare beneficiaries receiving the service for each Rndrng_Prvdr_Geo_Desc and HCPCS_Cd, Place_Of_Srvc.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>gndr_sw</code></p>
+<p><code>tot_bene_day_srvcs</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Gender</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual provider gender, see GNDR_SW - Reference for description of values.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Number of Distinct Medicare Beneficiary/Per Day Services</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Number of distinct Medicare beneficiary/per day services. Since a given beneficiary may receive multiple services of the same type (e.g., single vs. multiple cardiac stents) on a single day, this metric removes double-counting from the line service count to identify whether a unique service occurred.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>reasgn_bnft_enrlmt_id</code></p>
+<p><code>avg_sbmtd_chrg</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Reassigning Benefits Enrollment ID</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment ID of the provider reassigning benefits to bill to Medicare. To find enrollment information for providers reassigning their benefits to bill to Medicare, link REASGN_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Average Submitted Charge Amount</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Average of the charges that providers submit for the service.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>rcv_bnft_enrlmt_id</code></p>
+<p><code>avg_mdcr_alowd_amt</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Receiving Benefits Enrollment ID</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Enrollment ID of the provider receiving reassignment benefits to bill to Medicare. To find enrollment information for providers receiving reassignment benefits to bill to Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Average Medicare Allowed Amount</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Average of the Medicare allowed amount for the service. Medicare allowed amounts includes the amount Medicare pays, the deductible and coinsurance amounts that the beneficiary is responsible for paying, and any amounts that a third party is responsible for paying.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>city_name</code></p>
+<p><code>avg_mdcr_pymt_amt</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">City Name</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider practice location city. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Average Medicare Payment Amount</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Average amount that Medicare paid after deductible and coinsurance amounts have been deducted for the line item service.</span></div>
 </td>
 </tr>
 <tr>
 <td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>zip_cd</code></p>
+<p><code>avg_mdcr_stdzd_amt</code></p>
 </div></td>
 <td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Zip Code</span></div>
-<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Provider practice location zip code. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider.</span></div>
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Average Medicare Standardized Payment Amount</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Average amount that Medicare paid after beneficiary deductible and coinsurance amounts have been deducted for the line item service and after standardization of the Medicare payment has been applied. Standardization removes geographic differences in payment rates for individual services, such as those that account for local wages or input prices and makes Medicare payments across geographic areas comparable, so that differences reflect variation in factors such as physicians’ practice patterns and beneficiaries’ ability and willingness to obtain care. Additional information on the standardization of Medicare payments can be found in the “Geographic Variation Public Use File: Technical Supplement on Standardization.”</span></div>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><br></p>
-</div>
-<div class="section level3">
-<h3 id="related-links">Related Links<a class="anchor" aria-label="anchor" href="#related-links"></a>
-</h3>
-<ul>
-<li><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare
-Fee-For-Service Public Provider Enrollment API</a></li>
-<li><a href="https://data.cms.gov/sites/default/files/2022-07/adb9dd34-73da-4488-855f-f091a648f87c/Medicare%20Fee-For-Service%20Public%20Provider%20Enrollment%20Data%20Dictionary.pdf" class="external-link">Medicare
-Fee-For-Service Public Provider Enrollment - Data Dictionary</a></li>
-<li><a href="https://data.cms.gov/resources/fee-for-service-public-provider-enrollment-methodology" class="external-link">Fee-For-Service
-Public Provider Enrollment Methodology</a></li>
-</ul>
-<p><br><br></p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
