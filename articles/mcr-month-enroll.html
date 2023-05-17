@@ -212,26 +212,7 @@ state:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"Year"</span>, </span>
 <span>                       level <span class="op">=</span> <span class="st">"State"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">period</span><span class="op">:</span><span class="va">state</span>, <span class="va">county</span><span class="op">:</span><span class="va">fips</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 570 × 21</span></span></span>
-<span><span class="co">#&gt;     year state_name           bene_total bene_orig bene_ma_oth bene_aged_total</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>013 Alabama                  <span style="text-decoration: underline;">921</span>477    <span style="text-decoration: underline;">711</span>448      <span style="text-decoration: underline;">210</span>029          <span style="text-decoration: underline;">698</span>720</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>013 Alaska                    <span style="text-decoration: underline;">76</span>224     <span style="text-decoration: underline;">75</span>676         549           <span style="text-decoration: underline;">63</span>712</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>013 Arizona                 1<span style="text-decoration: underline;">050</span>128    <span style="text-decoration: underline;">658</span>948      <span style="text-decoration: underline;">391</span>180          <span style="text-decoration: underline;">898</span>705</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>013 Arkansas                 <span style="text-decoration: underline;">572</span>713    <span style="text-decoration: underline;">467</span>399      <span style="text-decoration: underline;">105</span>315          <span style="text-decoration: underline;">438</span>855</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>013 California              5<span style="text-decoration: underline;">300</span>177   3<span style="text-decoration: underline;">318</span>396     1<span style="text-decoration: underline;">981</span>781         4<span style="text-decoration: underline;">582</span>391</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>013 Colorado                 <span style="text-decoration: underline;">721</span>035    <span style="text-decoration: underline;">468</span>492      <span style="text-decoration: underline;">252</span>542          <span style="text-decoration: underline;">620</span>821</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>013 Connecticut              <span style="text-decoration: underline;">608</span>512    <span style="text-decoration: underline;">467</span>291      <span style="text-decoration: underline;">141</span>221          <span style="text-decoration: underline;">526</span>964</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>013 Delaware                 <span style="text-decoration: underline;">167</span>686    <span style="text-decoration: underline;">155</span>803       <span style="text-decoration: underline;">11</span>883          <span style="text-decoration: underline;">141</span>355</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>013 District of Columbia      <span style="text-decoration: underline;">83</span>964     <span style="text-decoration: underline;">74</span>946        <span style="text-decoration: underline;">9</span>018           <span style="text-decoration: underline;">69</span>193</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>013 Florida                 3<span style="text-decoration: underline;">753</span>454   2<span style="text-decoration: underline;">402</span>926     1<span style="text-decoration: underline;">350</span>528         3<span style="text-decoration: underline;">239</span>566</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 560 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 15 more variables: bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_total &lt;int&gt;, bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_total &lt;int&gt;, bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_total &lt;int&gt;, bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_elig &lt;int&gt;, bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; Error in if (httr2::resp_header(response, "content-length") == "0") {: argument is of length zero</span></span></code></pre></div>
 <p><br></p>
 <p>Select a particular state:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -392,28 +373,27 @@ Code for table
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Beneficiaries: **2013 - 2022**"</span><span class="op">)</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"National, State, &amp; County Percentage Comparisons for **Valdosta, Georgia**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Karla"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div id="ejglyuxzaw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span>
+<span><span class="co">#|&gt; gt::opt_table_font(font = gt::google_font(name = "Karla"))</span></span></code></pre></div>
+</details><div id="pqczkgramw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ejglyuxzaw table {
-  font-family: Karla, Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+#pqczkgramw table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ejglyuxzaw thead, #ejglyuxzaw tbody, #ejglyuxzaw tfoot, #ejglyuxzaw tr, #ejglyuxzaw td, #ejglyuxzaw th {
+#pqczkgramw thead, #pqczkgramw tbody, #pqczkgramw tfoot, #pqczkgramw tr, #pqczkgramw td, #pqczkgramw th {
   border-style: none;
 }
 
-#ejglyuxzaw p {
+#pqczkgramw p {
   margin: 0;
   padding: 0;
 }
 
-#ejglyuxzaw .gt_table {
+#pqczkgramw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -424,7 +404,7 @@ Code for table
   font-weight: 300;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: none;
   border-top-width: 3px;
   border-top-color: #A8A8A8;
@@ -439,12 +419,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_caption {
+#pqczkgramw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ejglyuxzaw .gt_title {
+#pqczkgramw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -456,7 +436,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#ejglyuxzaw .gt_subtitle {
+#pqczkgramw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -468,7 +448,7 @@ Code for table
   border-top-width: 0;
 }
 
-#ejglyuxzaw .gt_heading {
+#pqczkgramw .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -480,13 +460,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_bottom_border {
+#pqczkgramw .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_col_headings {
+#pqczkgramw .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -501,7 +481,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_col_heading {
+#pqczkgramw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -521,7 +501,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ejglyuxzaw .gt_column_spanner_outer {
+#pqczkgramw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -533,15 +513,15 @@ Code for table
   padding-right: 4px;
 }
 
-#ejglyuxzaw .gt_column_spanner_outer:first-child {
+#pqczkgramw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ejglyuxzaw .gt_column_spanner_outer:last-child {
+#pqczkgramw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ejglyuxzaw .gt_column_spanner {
+#pqczkgramw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -553,11 +533,11 @@ Code for table
   width: 100%;
 }
 
-#ejglyuxzaw .gt_spanner_row {
+#pqczkgramw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ejglyuxzaw .gt_group_heading {
+#pqczkgramw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -583,7 +563,7 @@ Code for table
   text-align: left;
 }
 
-#ejglyuxzaw .gt_empty_group_heading {
+#pqczkgramw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -598,15 +578,15 @@ Code for table
   vertical-align: middle;
 }
 
-#ejglyuxzaw .gt_from_md > :first-child {
+#pqczkgramw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ejglyuxzaw .gt_from_md > :last-child {
+#pqczkgramw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ejglyuxzaw .gt_row {
+#pqczkgramw .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -625,7 +605,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ejglyuxzaw .gt_stub {
+#pqczkgramw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -638,7 +618,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ejglyuxzaw .gt_stub_row_group {
+#pqczkgramw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -652,15 +632,15 @@ Code for table
   vertical-align: top;
 }
 
-#ejglyuxzaw .gt_row_group_first td {
+#pqczkgramw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ejglyuxzaw .gt_row_group_first th {
+#pqczkgramw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ejglyuxzaw .gt_summary_row {
+#pqczkgramw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -670,16 +650,16 @@ Code for table
   padding-right: 5px;
 }
 
-#ejglyuxzaw .gt_first_summary_row {
+#pqczkgramw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_first_summary_row.thick {
+#pqczkgramw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ejglyuxzaw .gt_last_summary_row {
+#pqczkgramw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -689,7 +669,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_grand_summary_row {
+#pqczkgramw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -699,7 +679,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ejglyuxzaw .gt_first_grand_summary_row {
+#pqczkgramw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -709,7 +689,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_last_grand_summary_row_top {
+#pqczkgramw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -719,11 +699,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_striped {
+#pqczkgramw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ejglyuxzaw .gt_table_body {
+#pqczkgramw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -732,7 +712,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_footnotes {
+#pqczkgramw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -746,7 +726,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_footnote {
+#pqczkgramw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -755,7 +735,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ejglyuxzaw .gt_sourcenotes {
+#pqczkgramw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -769,7 +749,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ejglyuxzaw .gt_sourcenote {
+#pqczkgramw .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -777,63 +757,63 @@ Code for table
   padding-right: 5px;
 }
 
-#ejglyuxzaw .gt_left {
+#pqczkgramw .gt_left {
   text-align: left;
 }
 
-#ejglyuxzaw .gt_center {
+#pqczkgramw .gt_center {
   text-align: center;
 }
 
-#ejglyuxzaw .gt_right {
+#pqczkgramw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ejglyuxzaw .gt_font_normal {
+#pqczkgramw .gt_font_normal {
   font-weight: normal;
 }
 
-#ejglyuxzaw .gt_font_bold {
+#pqczkgramw .gt_font_bold {
   font-weight: bold;
 }
 
-#ejglyuxzaw .gt_font_italic {
+#pqczkgramw .gt_font_italic {
   font-style: italic;
 }
 
-#ejglyuxzaw .gt_super {
+#pqczkgramw .gt_super {
   font-size: 65%;
 }
 
-#ejglyuxzaw .gt_footnote_marks {
+#pqczkgramw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ejglyuxzaw .gt_asterisk {
+#pqczkgramw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ejglyuxzaw .gt_indent_1 {
+#pqczkgramw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ejglyuxzaw .gt_indent_2 {
+#pqczkgramw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ejglyuxzaw .gt_indent_3 {
+#pqczkgramw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ejglyuxzaw .gt_indent_4 {
+#pqczkgramw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ejglyuxzaw .gt_indent_5 {
+#pqczkgramw .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1230,50 +1210,62 @@ Code for table
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
 <span>    style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
 <span>                                   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span>, <span class="va">bene_total_chg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_total</span>, </span>
+<span>                                           <span class="va">bene_total_chg</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span><span class="va">bene_total</span>, suffixing <span class="op">=</span> <span class="cn">TRUE</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span><span class="va">bene_total_chg</span>, suffixing <span class="op">=</span> <span class="cn">TRUE</span>, force_sign <span class="op">=</span> <span class="cn">TRUE</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">bene_total_pct</span>, decimals <span class="op">=</span> <span class="fl">1</span>, force_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/sub_missing.html" class="external-link">sub_missing</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, missing_text <span class="op">=</span> <span class="st">"--"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span><span class="va">bene_total</span>, </span>
+<span>                 suffixing <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                 decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html" class="external-link">fmt_number</a></span><span class="op">(</span><span class="va">bene_total_chg</span>, </span>
+<span>                 suffixing <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                 force_sign <span class="op">=</span> <span class="cn">TRUE</span>, </span>
+<span>                 decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">bene_total_pct</span>, </span>
+<span>                  decimals <span class="op">=</span> <span class="fl">1</span>, </span>
+<span>                  force_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/sub_missing.html" class="external-link">sub_missing</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, </span>
+<span>                  missing_text <span class="op">=</span> <span class="st">"--"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">bene_total_chg</span>,</span>
 <span>                       col_pct <span class="op">=</span> <span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>bene_total <span class="op">=</span> <span class="st">"Total"</span>,</span>
 <span>                 bene_total_chg <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Change (%)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"bene_total_chg"</span><span class="op">)</span>, </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, </span>
+<span>                                       <span class="st">"bene_total_chg"</span><span class="op">)</span>, </span>
 <span>                           style <span class="op">=</span> <span class="st">"solid"</span>,</span>
 <span>                           color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>                           weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>,</span>
 <span>                           include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_bar_stack.html" class="external-link">gt_plt_bar_stack</a></span><span class="op">(</span>column <span class="op">=</span> <span class="va">list_data</span>, width <span class="op">=</span> <span class="fl">60</span>,</span>
-<span>                             labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, <span class="st">" Advantage"</span><span class="op">)</span>,</span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_plt_bar_stack.html" class="external-link">gt_plt_bar_stack</a></span><span class="op">(</span>column <span class="op">=</span> <span class="va">list_data</span>, </span>
+<span>                             width <span class="op">=</span> <span class="fl">80</span>,</span>
+<span>                             labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, </span>
+<span>                                        <span class="st">" Advantage"</span><span class="op">)</span>,</span>
 <span>                             palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ff4343"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>                             fmt_fn <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">0.1</span>, </span>
 <span>                                                            suffix <span class="op">=</span> <span class="st">" %"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Beneficiary Enrollment: **2013 - 2022**"</span><span class="op">)</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"National Totals, Year-Over-Year"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Karla"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div id="oknebtrehw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co">#|&gt; gt::opt_table_font(font = gt::google_font(name = "Karla"))</span></span></code></pre></div>
+</details><div id="uevyfagxqq" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#oknebtrehw table {
-  font-family: Karla, Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+#uevyfagxqq table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#oknebtrehw thead, #oknebtrehw tbody, #oknebtrehw tfoot, #oknebtrehw tr, #oknebtrehw td, #oknebtrehw th {
+#uevyfagxqq thead, #uevyfagxqq tbody, #uevyfagxqq tfoot, #uevyfagxqq tr, #uevyfagxqq td, #uevyfagxqq th {
   border-style: none;
 }
 
-#oknebtrehw p {
+#uevyfagxqq p {
   margin: 0;
   padding: 0;
 }
 
-#oknebtrehw .gt_table {
+#uevyfagxqq .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1284,7 +1276,7 @@ Code for table
   font-weight: 300;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: none;
   border-top-width: 3px;
   border-top-color: #A8A8A8;
@@ -1299,12 +1291,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_caption {
+#uevyfagxqq .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#oknebtrehw .gt_title {
+#uevyfagxqq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1316,7 +1308,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#oknebtrehw .gt_subtitle {
+#uevyfagxqq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1328,7 +1320,7 @@ Code for table
   border-top-width: 0;
 }
 
-#oknebtrehw .gt_heading {
+#uevyfagxqq .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1340,13 +1332,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_bottom_border {
+#uevyfagxqq .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_col_headings {
+#uevyfagxqq .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1361,7 +1353,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_col_heading {
+#uevyfagxqq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1381,7 +1373,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#oknebtrehw .gt_column_spanner_outer {
+#uevyfagxqq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1393,15 +1385,15 @@ Code for table
   padding-right: 4px;
 }
 
-#oknebtrehw .gt_column_spanner_outer:first-child {
+#uevyfagxqq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#oknebtrehw .gt_column_spanner_outer:last-child {
+#uevyfagxqq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#oknebtrehw .gt_column_spanner {
+#uevyfagxqq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1413,11 +1405,11 @@ Code for table
   width: 100%;
 }
 
-#oknebtrehw .gt_spanner_row {
+#uevyfagxqq .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#oknebtrehw .gt_group_heading {
+#uevyfagxqq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1443,7 +1435,7 @@ Code for table
   text-align: left;
 }
 
-#oknebtrehw .gt_empty_group_heading {
+#uevyfagxqq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1458,15 +1450,15 @@ Code for table
   vertical-align: middle;
 }
 
-#oknebtrehw .gt_from_md > :first-child {
+#uevyfagxqq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#oknebtrehw .gt_from_md > :last-child {
+#uevyfagxqq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#oknebtrehw .gt_row {
+#uevyfagxqq .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1485,7 +1477,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#oknebtrehw .gt_stub {
+#uevyfagxqq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1498,7 +1490,7 @@ Code for table
   padding-right: 5px;
 }
 
-#oknebtrehw .gt_stub_row_group {
+#uevyfagxqq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1512,15 +1504,15 @@ Code for table
   vertical-align: top;
 }
 
-#oknebtrehw .gt_row_group_first td {
+#uevyfagxqq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#oknebtrehw .gt_row_group_first th {
+#uevyfagxqq .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#oknebtrehw .gt_summary_row {
+#uevyfagxqq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1530,16 +1522,16 @@ Code for table
   padding-right: 5px;
 }
 
-#oknebtrehw .gt_first_summary_row {
+#uevyfagxqq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_first_summary_row.thick {
+#uevyfagxqq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#oknebtrehw .gt_last_summary_row {
+#uevyfagxqq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1549,7 +1541,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_grand_summary_row {
+#uevyfagxqq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1559,7 +1551,7 @@ Code for table
   padding-right: 5px;
 }
 
-#oknebtrehw .gt_first_grand_summary_row {
+#uevyfagxqq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1569,7 +1561,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_last_grand_summary_row_top {
+#uevyfagxqq .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1579,11 +1571,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_striped {
+#uevyfagxqq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#oknebtrehw .gt_table_body {
+#uevyfagxqq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1592,7 +1584,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_footnotes {
+#uevyfagxqq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1606,7 +1598,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_footnote {
+#uevyfagxqq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1615,7 +1607,7 @@ Code for table
   padding-right: 5px;
 }
 
-#oknebtrehw .gt_sourcenotes {
+#uevyfagxqq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1629,7 +1621,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#oknebtrehw .gt_sourcenote {
+#uevyfagxqq .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1637,63 +1629,63 @@ Code for table
   padding-right: 5px;
 }
 
-#oknebtrehw .gt_left {
+#uevyfagxqq .gt_left {
   text-align: left;
 }
 
-#oknebtrehw .gt_center {
+#uevyfagxqq .gt_center {
   text-align: center;
 }
 
-#oknebtrehw .gt_right {
+#uevyfagxqq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#oknebtrehw .gt_font_normal {
+#uevyfagxqq .gt_font_normal {
   font-weight: normal;
 }
 
-#oknebtrehw .gt_font_bold {
+#uevyfagxqq .gt_font_bold {
   font-weight: bold;
 }
 
-#oknebtrehw .gt_font_italic {
+#uevyfagxqq .gt_font_italic {
   font-style: italic;
 }
 
-#oknebtrehw .gt_super {
+#uevyfagxqq .gt_super {
   font-size: 65%;
 }
 
-#oknebtrehw .gt_footnote_marks {
+#uevyfagxqq .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#oknebtrehw .gt_asterisk {
+#uevyfagxqq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#oknebtrehw .gt_indent_1 {
+#uevyfagxqq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#oknebtrehw .gt_indent_2 {
+#uevyfagxqq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#oknebtrehw .gt_indent_3 {
+#uevyfagxqq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#oknebtrehw .gt_indent_4 {
+#uevyfagxqq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#oknebtrehw .gt_indent_5 {
+#uevyfagxqq .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1725,7 +1717,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">52.43M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">–</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="122.02" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="122.02" y="0.0000000000000018" width="48.05" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="61.01" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">71.7 %</text><text x="146.05" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">28.3 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="162.70" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="162.70" y="0.0000000000000018" width="64.07" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="81.35" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">71.7 %</text><text x="194.74" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">28.3 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1733,7 +1725,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">54.01M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.6M (+3.0%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="119.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="119.00" y="0.0000000000000018" width="51.08" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="59.50" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">70.0 %</text><text x="144.54" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">30.0 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="158.66" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="158.66" y="0.0000000000000018" width="68.11" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="79.33" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">70.0 %</text><text x="192.72" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">30.0 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1741,7 +1733,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">55.50M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.5M (+2.7%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="116.54" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="116.54" y="0.0000000000000018" width="53.54" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="58.27" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">68.5 %</text><text x="143.31" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">31.5 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="155.38" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="155.38" y="0.0000000000000018" width="71.39" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="77.69" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">68.5 %</text><text x="191.08" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">31.5 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1749,7 +1741,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">56.98M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.5M (+2.7%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="115.25" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="115.25" y="0.0000000000000018" width="54.83" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="57.62" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">67.8 %</text><text x="142.66" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">32.2 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="153.66" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="153.66" y="0.0000000000000018" width="73.11" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="76.83" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">67.8 %</text><text x="190.22" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">32.2 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1757,7 +1749,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">58.46M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.5M (+2.6%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="112.50" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="112.50" y="0.0000000000000018" width="57.58" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="56.25" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">66.1 %</text><text x="141.29" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">33.9 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="150.00" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="150.00" y="0.0000000000000018" width="76.77" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="75.00" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">66.1 %</text><text x="188.39" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">33.9 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1765,7 +1757,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">59.99M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.5M (+2.6%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="109.62" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="109.62" y="0.0000000000000018" width="60.46" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="54.81" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">64.5 %</text><text x="139.85" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">35.5 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="146.16" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="146.16" y="0.0000000000000018" width="80.61" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="73.08" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">64.5 %</text><text x="186.47" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">35.5 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1773,7 +1765,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">61.51M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.5M (+2.5%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="106.66" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="106.66" y="0.0000000000000018" width="63.42" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="53.33" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">62.7 %</text><text x="138.37" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">37.3 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="142.21" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="142.21" y="0.0000000000000018" width="84.56" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="71.11" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">62.7 %</text><text x="184.49" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">37.3 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1781,7 +1773,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">62.84M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.3M (+2.2%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="102.24" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="102.24" y="0.0000000000000018" width="67.84" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="51.12" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">60.1 %</text><text x="136.16" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">39.9 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="136.32" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="136.32" y="0.0000000000000018" width="90.45" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="68.16" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">60.1 %</text><text x="181.55" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">39.9 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1789,7 +1781,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">63.89M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.1M (+1.7%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="96.78" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="96.78" y="0.0000000000000018" width="73.30" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="48.39" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">56.9 %</text><text x="133.43" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">43.1 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="129.04" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="129.04" y="0.0000000000000018" width="97.73" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="64.52" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">56.9 %</text><text x="177.90" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">43.1 %</text></g></svg>
 </td>
 </tr>
 <tr>
@@ -1797,7 +1789,7 @@ tbody tr:last-child {
 <td headers="bene_total" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">65.03M</td>
 <td headers="bene_total_chg" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 2px; border-right-style: solid; border-right-color: black;">+1.1M (+1.8%)</td>
 <td headers="list_data" class="gt_row gt_center">
-<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="170.08pt" height="14.17pt" viewbox="0 0 170.08 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="170.08" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwxNzAuMDh8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="92.06" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="92.06" y="0.0000000000000018" width="78.02" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="46.03" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">54.1 %</text><text x="131.07" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">45.9 %</text></g></svg>
+<?xml version='1.0' encoding='UTF-8' ?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="svglite" width="226.77pt" height="14.17pt" viewbox="0 0 226.77 14.17"><defs><style type="text/css"><![CDATA[    .svglite line, .svglite polyline, .svglite polygon, .svglite path, .svglite rect, .svglite circle {      fill: none;      stroke: #000000;      stroke-linecap: round;      stroke-linejoin: round;      stroke-miterlimit: 10.00;    }    .svglite text {      white-space: pre;    }  ]]></style></defs><rect width="100%" height="100%" style="stroke: none; fill: none;"></rect><defs><clippath id="cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw=="><rect x="0.00" y="0.00" width="226.77" height="14.17"></rect></clippath></defs><g clip-path="url(#cpMC4wMHwyMjYuNzd8MC4wMHwxNC4xNw==)"><rect x="0.00" y="0.0000000000000018" width="122.74" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #FF4343;"></rect><rect x="122.74" y="0.0000000000000018" width="104.03" height="14.17" style="stroke-width: 1.07; stroke: #FFFFFF; stroke-linecap: butt; stroke-linejoin: miter; fill: #000000;"></rect><text x="61.37" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">54.1 %</text><text x="174.76" y="10.20" text-anchor="middle" style='font-size: 8.54px;fill: #FFFFFF; font-family: "Nimbus Mono PS";' textlength="30.80px" lengthadjust="spacingAndGlyphs">45.9 %</text></g></svg>
 </td>
 </tr>
 </tbody>
@@ -1854,25 +1846,25 @@ Code for table
 <span>    <span class="st">"Medicare Beneficiary Enrollment: **2013 - 2022**"</span><span class="op">)</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"National Totals, Month-Over-Month"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-</details><div id="ghnyneajnp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="valdjuzrma" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ghnyneajnp table {
+#valdjuzrma table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ghnyneajnp thead, #ghnyneajnp tbody, #ghnyneajnp tfoot, #ghnyneajnp tr, #ghnyneajnp td, #ghnyneajnp th {
+#valdjuzrma thead, #valdjuzrma tbody, #valdjuzrma tfoot, #valdjuzrma tr, #valdjuzrma td, #valdjuzrma th {
   border-style: none;
 }
 
-#ghnyneajnp p {
+#valdjuzrma p {
   margin: 0;
   padding: 0;
 }
 
-#ghnyneajnp .gt_table {
+#valdjuzrma .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1898,12 +1890,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_caption {
+#valdjuzrma .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ghnyneajnp .gt_title {
+#valdjuzrma .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1915,7 +1907,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#ghnyneajnp .gt_subtitle {
+#valdjuzrma .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1927,7 +1919,7 @@ Code for table
   border-top-width: 0;
 }
 
-#ghnyneajnp .gt_heading {
+#valdjuzrma .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1939,13 +1931,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_bottom_border {
+#valdjuzrma .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_col_headings {
+#valdjuzrma .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1960,7 +1952,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_col_heading {
+#valdjuzrma .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1980,7 +1972,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ghnyneajnp .gt_column_spanner_outer {
+#valdjuzrma .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1992,15 +1984,15 @@ Code for table
   padding-right: 4px;
 }
 
-#ghnyneajnp .gt_column_spanner_outer:first-child {
+#valdjuzrma .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ghnyneajnp .gt_column_spanner_outer:last-child {
+#valdjuzrma .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ghnyneajnp .gt_column_spanner {
+#valdjuzrma .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -2012,11 +2004,11 @@ Code for table
   width: 100%;
 }
 
-#ghnyneajnp .gt_spanner_row {
+#valdjuzrma .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ghnyneajnp .gt_group_heading {
+#valdjuzrma .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2042,7 +2034,7 @@ Code for table
   text-align: left;
 }
 
-#ghnyneajnp .gt_empty_group_heading {
+#valdjuzrma .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2057,15 +2049,15 @@ Code for table
   vertical-align: middle;
 }
 
-#ghnyneajnp .gt_from_md > :first-child {
+#valdjuzrma .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ghnyneajnp .gt_from_md > :last-child {
+#valdjuzrma .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ghnyneajnp .gt_row {
+#valdjuzrma .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2084,7 +2076,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ghnyneajnp .gt_stub {
+#valdjuzrma .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2097,7 +2089,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ghnyneajnp .gt_stub_row_group {
+#valdjuzrma .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2111,15 +2103,15 @@ Code for table
   vertical-align: top;
 }
 
-#ghnyneajnp .gt_row_group_first td {
+#valdjuzrma .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ghnyneajnp .gt_row_group_first th {
+#valdjuzrma .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ghnyneajnp .gt_summary_row {
+#valdjuzrma .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2129,16 +2121,16 @@ Code for table
   padding-right: 5px;
 }
 
-#ghnyneajnp .gt_first_summary_row {
+#valdjuzrma .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_first_summary_row.thick {
+#valdjuzrma .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ghnyneajnp .gt_last_summary_row {
+#valdjuzrma .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2148,7 +2140,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_grand_summary_row {
+#valdjuzrma .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2158,7 +2150,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ghnyneajnp .gt_first_grand_summary_row {
+#valdjuzrma .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2168,7 +2160,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_last_grand_summary_row_top {
+#valdjuzrma .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2178,11 +2170,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_striped {
+#valdjuzrma .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ghnyneajnp .gt_table_body {
+#valdjuzrma .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2191,7 +2183,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_footnotes {
+#valdjuzrma .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2205,7 +2197,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_footnote {
+#valdjuzrma .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2214,7 +2206,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ghnyneajnp .gt_sourcenotes {
+#valdjuzrma .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2228,7 +2220,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ghnyneajnp .gt_sourcenote {
+#valdjuzrma .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2236,63 +2228,63 @@ Code for table
   padding-right: 5px;
 }
 
-#ghnyneajnp .gt_left {
+#valdjuzrma .gt_left {
   text-align: left;
 }
 
-#ghnyneajnp .gt_center {
+#valdjuzrma .gt_center {
   text-align: center;
 }
 
-#ghnyneajnp .gt_right {
+#valdjuzrma .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ghnyneajnp .gt_font_normal {
+#valdjuzrma .gt_font_normal {
   font-weight: normal;
 }
 
-#ghnyneajnp .gt_font_bold {
+#valdjuzrma .gt_font_bold {
   font-weight: bold;
 }
 
-#ghnyneajnp .gt_font_italic {
+#valdjuzrma .gt_font_italic {
   font-style: italic;
 }
 
-#ghnyneajnp .gt_super {
+#valdjuzrma .gt_super {
   font-size: 65%;
 }
 
-#ghnyneajnp .gt_footnote_marks {
+#valdjuzrma .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ghnyneajnp .gt_asterisk {
+#valdjuzrma .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ghnyneajnp .gt_indent_1 {
+#valdjuzrma .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ghnyneajnp .gt_indent_2 {
+#valdjuzrma .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ghnyneajnp .gt_indent_3 {
+#valdjuzrma .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ghnyneajnp .gt_indent_4 {
+#valdjuzrma .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ghnyneajnp .gt_indent_5 {
+#valdjuzrma .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -2601,26 +2593,26 @@ tbody tr:last-child {
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="tserecahbl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="htxbousglh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tserecahbl table {
+#htxbousglh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tserecahbl thead, #tserecahbl tbody, #tserecahbl tfoot, #tserecahbl tr, #tserecahbl td, #tserecahbl th {
+#htxbousglh thead, #htxbousglh tbody, #htxbousglh tfoot, #htxbousglh tr, #htxbousglh td, #htxbousglh th {
   border-style: none;
 }
 
-#tserecahbl p {
+#htxbousglh p {
   margin: 0;
   padding: 0;
 }
 
-#tserecahbl .gt_table {
+#htxbousglh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2646,12 +2638,12 @@ tbody tr:last-child {
   border-left-color: #D5D5D5;
 }
 
-#tserecahbl .gt_caption {
+#htxbousglh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tserecahbl .gt_title {
+#htxbousglh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2663,7 +2655,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#tserecahbl .gt_subtitle {
+#htxbousglh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2675,7 +2667,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#tserecahbl .gt_heading {
+#htxbousglh .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2687,13 +2679,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tserecahbl .gt_bottom_border {
+#htxbousglh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#tserecahbl .gt_col_headings {
+#htxbousglh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2708,7 +2700,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tserecahbl .gt_col_heading {
+#htxbousglh .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2728,7 +2720,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#tserecahbl .gt_column_spanner_outer {
+#htxbousglh .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -2740,15 +2732,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#tserecahbl .gt_column_spanner_outer:first-child {
+#htxbousglh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tserecahbl .gt_column_spanner_outer:last-child {
+#htxbousglh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tserecahbl .gt_column_spanner {
+#htxbousglh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -2760,11 +2752,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#tserecahbl .gt_spanner_row {
+#htxbousglh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tserecahbl .gt_group_heading {
+#htxbousglh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2790,7 +2782,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#tserecahbl .gt_empty_group_heading {
+#htxbousglh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2805,15 +2797,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#tserecahbl .gt_from_md > :first-child {
+#htxbousglh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tserecahbl .gt_from_md > :last-child {
+#htxbousglh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tserecahbl .gt_row {
+#htxbousglh .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -2832,7 +2824,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#tserecahbl .gt_stub {
+#htxbousglh .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -2845,7 +2837,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tserecahbl .gt_stub_row_group {
+#htxbousglh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2859,15 +2851,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#tserecahbl .gt_row_group_first td {
+#htxbousglh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tserecahbl .gt_row_group_first th {
+#htxbousglh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tserecahbl .gt_summary_row {
+#htxbousglh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2877,16 +2869,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tserecahbl .gt_first_summary_row {
+#htxbousglh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#tserecahbl .gt_first_summary_row.thick {
+#htxbousglh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tserecahbl .gt_last_summary_row {
+#htxbousglh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2896,7 +2888,7 @@ tbody tr:last-child {
   border-bottom-color: #D5D5D5;
 }
 
-#tserecahbl .gt_grand_summary_row {
+#htxbousglh .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -2906,7 +2898,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tserecahbl .gt_first_grand_summary_row {
+#htxbousglh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2916,7 +2908,7 @@ tbody tr:last-child {
   border-top-color: #D5D5D5;
 }
 
-#tserecahbl .gt_last_grand_summary_row_top {
+#htxbousglh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2926,11 +2918,11 @@ tbody tr:last-child {
   border-bottom-color: #D5D5D5;
 }
 
-#tserecahbl .gt_striped {
+#htxbousglh .gt_striped {
   background-color: #F4F4F4;
 }
 
-#tserecahbl .gt_table_body {
+#htxbousglh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -2939,7 +2931,7 @@ tbody tr:last-child {
   border-bottom-color: #D5D5D5;
 }
 
-#tserecahbl .gt_footnotes {
+#htxbousglh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2953,7 +2945,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tserecahbl .gt_footnote {
+#htxbousglh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2962,7 +2954,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tserecahbl .gt_sourcenotes {
+#htxbousglh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2976,7 +2968,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tserecahbl .gt_sourcenote {
+#htxbousglh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2984,63 +2976,63 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tserecahbl .gt_left {
+#htxbousglh .gt_left {
   text-align: left;
 }
 
-#tserecahbl .gt_center {
+#htxbousglh .gt_center {
   text-align: center;
 }
 
-#tserecahbl .gt_right {
+#htxbousglh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tserecahbl .gt_font_normal {
+#htxbousglh .gt_font_normal {
   font-weight: normal;
 }
 
-#tserecahbl .gt_font_bold {
+#htxbousglh .gt_font_bold {
   font-weight: bold;
 }
 
-#tserecahbl .gt_font_italic {
+#htxbousglh .gt_font_italic {
   font-style: italic;
 }
 
-#tserecahbl .gt_super {
+#htxbousglh .gt_super {
   font-size: 65%;
 }
 
-#tserecahbl .gt_footnote_marks {
+#htxbousglh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tserecahbl .gt_asterisk {
+#htxbousglh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tserecahbl .gt_indent_1 {
+#htxbousglh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tserecahbl .gt_indent_2 {
+#htxbousglh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tserecahbl .gt_indent_3 {
+#htxbousglh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tserecahbl .gt_indent_4 {
+#htxbousglh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tserecahbl .gt_indent_5 {
+#htxbousglh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
