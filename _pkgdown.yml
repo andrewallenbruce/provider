@@ -58,6 +58,8 @@ navbar:
         href: articles/mcr-ord-referring.html
       - text: Medicare Physicians & Practitioners
         href: articles/mcr-phys-other-pract.html
+      - text: Physician by Provider
+        href: articles/physician-by-provider.html
       - text: Medicare Revalidation Dates
         href: articles/mcr-revalidation.html
       - text: Medicare Taxonomy Crosswalk
