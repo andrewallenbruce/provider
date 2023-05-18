@@ -67,16 +67,16 @@ sh |>
 ```{r}
 gt_1 <- sh |> 
   dplyr::select(year, tot_benes:tot_payment) |> 
-  change_abs(tot_benes, year) |> 
-  change_pct(tot_benes, tot_benes_chg, year) |> 
-  change_abs(tot_srvcs, year) |> 
-  change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
-  change_abs(tot_charges, year) |> 
-  change_pct(tot_charges, tot_charges_chg, year) |> 
-  change_abs(tot_allowed, year) |> 
-  change_pct(tot_allowed, tot_allowed_chg, year) |> 
-  change_abs(tot_payment, year) |> 
-  change_pct(tot_payment, tot_payment_chg, year) |> 
+  provider:::change_abs(tot_benes, year) |> 
+  provider:::change_pct(tot_benes, tot_benes_chg, year) |> 
+  provider:::change_abs(tot_srvcs, year) |> 
+  provider:::change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
+  provider:::change_abs(tot_charges, year) |> 
+  provider:::change_pct(tot_charges, tot_charges_chg, year) |> 
+  provider:::change_abs(tot_allowed, year) |> 
+  provider:::change_pct(tot_allowed, tot_allowed_chg, year) |> 
+  provider:::change_abs(tot_payment, year) |> 
+  provider:::change_pct(tot_payment, tot_payment_chg, year) |> 
   gt::gt() |> 
   gtExtras::gt_theme_538() |> 
   gt::fmt_currency(
