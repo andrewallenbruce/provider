@@ -60,6 +60,10 @@ navbar:
         href: articles/mcr-phys-other-pract.html
       - text: Physician by Provider
         href: articles/physician-by-provider.html
+      - text: Physician by Geography
+        href: articles/physician-by-geography.html
+      - text: Physician by Service
+        href: articles/physician-by-service.html
       - text: Medicare Revalidation Dates
         href: articles/mcr-revalidation.html
       - text: Medicare Taxonomy Crosswalk

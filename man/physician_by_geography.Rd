@@ -16,7 +16,7 @@ physician_by_geography(
   hcpcs_code = NULL,
   hcpcs_desc = NULL,
   hcpcs_drug = NULL,
-  pos = NULL,
+  place_of_srvc = NULL,
   tidy = TRUE
 )
 }
@@ -59,8 +59,8 @@ with more than one HCPCS code.}
 service furnished by the provider is a HCPCS listed on the Medicare Part
 B Drug Average Sales Price (ASP) File.}
 
-\item{pos}{Identifies whether the place of service submitted on the claims
-is a facility (value of \code{F}) or non-facility (value of \code{O}). Non-facility
+\item{place_of_srvc}{Identifies whether the place of service submitted on the claims
+is a facility (\code{facility}) or non-facility (\code{office}). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.}
 

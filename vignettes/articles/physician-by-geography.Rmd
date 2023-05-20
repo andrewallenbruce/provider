@@ -41,35 +41,43 @@ physician_by_geography(hcpcs_code = "0002A", year = 2020)
 
 <br><br>
 
-```{r}
-service <- purrr::map_dfr(as.character(2013:2020), ~physician_by_service(npi = 1003000126, year = .x))
-```
 
-<br><br>
-
-
-
-
-
-### Geography Data Dictionary
+### Data Dictionary
 
 ```{r echo=FALSE}
 tibble::tibble(
   Variable = c(
-    "`rndrng_prvdr_geo_lvl`", "`rndrng_prvdr_geo_cd`", "`rndrng_prvdr_geo_desc`",
-    "`hcpcs_cd`", "`hcpcs_desc`", "`hcpcs_drug_ind`", "`place_of_srvc`",
-    "`tot_rndrng_prvdrs`", "`tot_srvcs`", "`tot_benes`", "`tot_bene_day_srvcs`",
-    "`avg_sbmtd_chrg`", "`avg_mdcr_alowd_amt`", "`avg_mdcr_pymt_amt`",
-    "`avg_mdcr_stdzd_amt`"
-  ),
+    "`level`", 
+    "`fips`", 
+    "`sublevel`",
+    "`hcpcs_cd`", 
+    "`hcpcs_desc`", 
+    "`hcpcs_drug`", 
+    "`place_of_srvc`",
+    "`tot_provs`", 
+    "`tot_srvcs`", 
+    "`tot_benes`", 
+    "`tot_day`",
+    "`avg_charge`", 
+    "`avg_allowed`", 
+    "`avg_payment`",
+    "`avg_std_pymt`"),
   Description = c(
-    "Geography Level", "Rendering Provider Geography Code", "Rendering Provider Geography Description",
-    "HCPCS Code", "HCPCS Description", "HCPCS Drug Indicator", "Place of Service",
-    "Number of Providers", "Number of Services", "Number of Medicare Beneficiaries",
-    "Number of Distinct Medicare Beneficiary/Per Day Services", "Average Submitted Charge Amount",
-    "Average Medicare Allowed Amount", "Average Medicare Payment Amount",
-    "Average Medicare Standardized Payment Amount"
-  ),
+    "Geography Level", 
+    "Rendering Provider Geography Code", 
+    "Rendering Provider Geography Description",
+    "HCPCS Code", 
+    "HCPCS Description", 
+    "HCPCS Drug Indicator", 
+    "Place of Service",
+    "Number of Providers", 
+    "Number of Services", 
+    "Number of Medicare Beneficiaries",
+    "Number of Distinct Medicare Beneficiary/Per Day Services", 
+    "Average Submitted Charge Amount",
+    "Average Medicare Allowed Amount", 
+    "Average Medicare Payment Amount",
+    "Average Medicare Standardized Payment Amount"),
   Definition = c(
     "Identifies the level of geography that the data in the row has been aggregated. A value of 'State' indicates the data in the row is aggregated to a single state identified in the Rendering Provider State column for a given HCPCS Code Level. A value of 'National' indicates the data in the row is aggregated across all states for a given HCPCS Code Level.",
     "FIPS code of the referring provider state. This variable is blank when reported at the national level.",

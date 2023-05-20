@@ -50,8 +50,8 @@
 #' @param hcpcs_drug Flag that identifies whether the HCPCS code for the specific
 #'    service furnished by the provider is a HCPCS listed on the Medicare Part
 #'    B Drug Average Sales Price (ASP) File.
-#' @param pos Identifies whether the place of service submitted on the claims
-#'    is a facility (value of `F`) or non-facility (value of `O`). Non-facility
+#' @param place_of_srvc Identifies whether the place of service submitted on the claims
+#'    is a facility (`facility`) or non-facility (`office`). Non-facility
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
 #' @param tidy Tidy output; default is `TRUE`.
@@ -79,14 +79,23 @@
 #' @autoglobal
 #' @export
 physician_by_geography <- function(year,
-                                   level       = NULL,
-                                   sublevel    = NULL,
-                                   fips        = NULL,
-                                   hcpcs_code  = NULL,
-                                   hcpcs_desc  = NULL,
-                                   hcpcs_drug  = NULL,
-                                   pos         = NULL,
-                                   tidy        = TRUE) {
+                                   level         = NULL,
+                                   sublevel      = NULL,
+                                   fips          = NULL,
+                                   hcpcs_code    = NULL,
+                                   hcpcs_desc    = NULL,
+                                   hcpcs_drug    = NULL,
+                                   place_of_srvc = NULL,
+                                   tidy          = TRUE) {
+
+  if (!is.null(place_of_srvc)) {
+    place_of_srvc <- dplyr::case_when(
+      place_of_srvc == "facility" ~ "F",
+      place_of_srvc == "Facility" ~ "F",
+      place_of_srvc == "office" ~ "O",
+      place_of_srvc == "Office" ~ "O",
+      .default = NULL)
+  }
 
   # match args ----------------------------------------------------
   rlang::check_required(year)
@@ -101,14 +110,14 @@ physician_by_geography <- function(year,
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
-                                ~x,            ~y,
-            "Rndrng_Prvdr_Geo_Lvl",         level,
-           "Rndrng_Prvdr_Geo_Desc",      sublevel,
-             "Rndrng_Prvdr_Geo_Cd",          fips,
-                        "HCPCS_Cd",    hcpcs_code,
-                      "HCPCS_Desc",    hcpcs_desc,
-                  "HCPCS_Drug_Ind",    hcpcs_drug,
-                   "Place_Of_Srvc",           pos)
+                                ~x,               ~y,
+            "Rndrng_Prvdr_Geo_Lvl",            level,
+           "Rndrng_Prvdr_Geo_Desc",         sublevel,
+             "Rndrng_Prvdr_Geo_Cd",             fips,
+                        "HCPCS_Cd",       hcpcs_code,
+                      "HCPCS_Desc",       hcpcs_desc,
+                  "HCPCS_Drug_Ind",       hcpcs_drug,
+                   "Place_Of_Srvc",    place_of_srvc)
 
 
   # map param_format and collapse -------------------------------------------
@@ -137,7 +146,7 @@ physician_by_geography <- function(year,
       "hcpcs_code",   as.character(hcpcs_code),
       "hcpcs_desc",   hcpcs_desc,
       "hcpcs_drug",   as.character(hcpcs_drug),
-      "pos",          pos) |>
+      "pos",          place_of_srvc) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
