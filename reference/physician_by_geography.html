@@ -46,6 +46,8 @@ aggregated by geography and service."><meta property="og:image" content="https:/
     <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
     <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
+    <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
+    <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
     <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
     <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
     <a class="dropdown-item" href="../articles/mcr-chron-cond.html">Medicare Chronic Conditions</a>
@@ -117,7 +119,7 @@ aggregated by geography and service.</p>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  place_of_srvc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -180,9 +182,9 @@ service furnished by the provider is a HCPCS listed on the Medicare Part
 B Drug Average Sales Price (ASP) File.</p></dd>
 
 
-<dt>pos</dt>
+<dt>place_of_srvc</dt>
 <dd><p>Identifies whether the place of service submitted on the claims
-is a facility (value of <code>F</code>) or non-facility (value of <code>O</code>). Non-facility
+is a facility (<code>facility</code>) or non-facility (<code>office</code>). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.</p></dd>
 
