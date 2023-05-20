@@ -94,14 +94,15 @@ pbs <- 2013:2021 |>
 pbs |> 
   dplyr::select(year:zipcode) |> 
   dplyr::filter(dplyr::row_number() %in% c(1, 70)) |> 
-  janitor::remove_empty()
+  janitor::remove_empty(c("rows", "cols"))
 ```
 
 <br>
 
+<details><summary>Code for table</summary>
 
 ```{r, warning=FALSE, message=FALSE}
-pbs |> 
+gt1 <- pbs |> 
   dplyr::select(year, hcpcs_cd:avg_std_pymt) |> 
   dplyr::group_by(year) |> 
   dplyr::summarise(unique_hcpcs = dplyr::n(),
@@ -142,8 +143,18 @@ pbs |>
   gt::tab_header(
     title = gt::md("Medicare Provider Summary: **2013 - 2021**"),
     subtitle = gt::md("Provider: Ardalan Enkeshafi, MD (NPI: 1003000126)")) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
+  gt::tab_source_note(source_note = "Source: data.cms.gov") |> 
+  gt::tab_options(table.width = gt::pct(100))
 ```
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+gt1
+```
+
+
+<br>
 
 <details><summary>Code for table</summary>
 
@@ -217,14 +228,8 @@ national <- national |>
                       place_of_srvc == place_of_srvc))
 
 bind <- dplyr::bind_rows(individual, state, national)
-```
 
-</details>
-
-<br>
-
-```{r, echo=FALSE, eval=TRUE}
-bind |> 
+gt2 <- bind |> 
   dplyr::arrange(year, hcpcs) |> 
   dplyr::select(!place_of_srvc) |> 
   gt::gt(groupname_col = "year", rowname_col = "sublevel") |> 
@@ -269,6 +274,14 @@ bind |>
     title = gt::md("Medicare Provider Summary: **2013 - 2021**"),
     subtitle = gt::md("Provider: Ardalan Enkeshafi, MD (NPI: 1003000126)")) |> 
   gt::tab_source_note(source_note = "Source: data.cms.gov")
+```
+
+</details>
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+gt2
 ```
 
 

@@ -21,6 +21,8 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
+<br>
+
  > *Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.*
 
 <br>
@@ -90,37 +92,38 @@ gt_1 <- sh |>
     currency = "USD", 
     suffixing = TRUE, 
     sep_mark = ",", 
-    incl_space = TRUE) |> 
+    incl_space = FALSE) |> 
+  gt::cols_hide(columns = c(dplyr::contains("chg"))) |> 
   gt::cols_label(tot_benes = "Beneficiaries",
-                 tot_benes_chg = "Change",
+                 tot_benes_pct = "Change",
                  tot_srvcs = "Procedures",
-                 tot_srvcs_chg = "Change",
+                 tot_srvcs_pct = "Change",
                  tot_charges = "Charges",
-                 tot_charges_chg = "Change",
+                 tot_charges_pct = "Change",
                  tot_allowed = "Allowed",
-                 tot_allowed_chg = "Change",
+                 tot_allowed_pct = "Change",
                  tot_payment = "Payment",
-                 tot_payment_chg = "Change") |> 
+                 tot_payment_pct = "Change") |> 
   gt::fmt_percent(columns = dplyr::contains("pct"), decimals = 0, force_sign = TRUE) |> 
   gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
-  gt::cols_merge_n_pct(col_n = tot_benes_chg,
-                       col_pct = tot_benes_pct) |> 
-  gt::cols_merge_n_pct(col_n = tot_srvcs_chg,
-                       col_pct = tot_srvcs_pct) |> 
-  gt::cols_merge_n_pct(col_n = tot_charges_chg,
-                       col_pct = tot_charges_pct) |> 
-  gt::cols_merge_n_pct(col_n = tot_allowed_chg,
-                       col_pct = tot_allowed_pct) |> 
-  gt::cols_merge_n_pct(col_n = tot_payment_chg,
-                       col_pct = tot_payment_pct) |> 
+  gt::cols_merge_n_pct(col_n = tot_benes,
+                       col_pct = tot_benes_pct) |>
+  gt::cols_merge_n_pct(col_n = tot_srvcs,
+                       col_pct = tot_srvcs_pct) |>
+  gt::cols_merge_n_pct(col_n = tot_charges,
+                       col_pct = tot_charges_pct) |>
+  gt::cols_merge_n_pct(col_n = tot_allowed,
+                       col_pct = tot_allowed_pct) |>
+  gt::cols_merge_n_pct(col_n = tot_payment,
+                       col_pct = tot_payment_pct) |>
   gt::tab_style(style = gt::cell_text(
     font = c(gt::google_font(name = "Fira Code"), gt::default_fonts())),
-    locations = gt::cells_body(columns = dplyr::contains(c("pct", "chg")))) |> 
+    locations = gt::cells_body(columns = dplyr::contains(c("tot")))) |> 
   gtExtras::gt_add_divider(
-    columns = c("tot_benes_chg", 
-                "tot_srvcs_chg", 
-                "tot_charges_chg", 
-                "tot_allowed_chg"), 
+    columns = c("year", "tot_benes", 
+                "tot_srvcs", 
+                "tot_charges", 
+                "tot_allowed"), 
     style = "solid",
     color = "black",
     weight = gt::px(3),

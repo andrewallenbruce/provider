@@ -38,8 +38,7 @@ The Open Payments program is a national disclosure program that promotes a more 
 ```{r}
 open_payments(npi = 1043218118, year = 2021) |> 
   dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols")) |> 
-  knitr::kable()
+  janitor::remove_empty(which = c("rows", "cols"))
 ```
 
 <br><br>
