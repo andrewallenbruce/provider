@@ -51,26 +51,29 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
     <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
-    <a class="dropdown-item" href="../articles/cms-open-payments.html">CMS Open Payments</a>
-    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">Missing Info</a>
+    <a class="dropdown-item" href="../articles/cms-open-payments.html">Open Payments Program</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Beneficiary Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/hospital-enrollment.html">Hospital Enrollment</a>
+    <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
+    <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
+    <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Order &amp; Referring Eligibility</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
     <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
     <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
     <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Taxonomy Crosswalk</a>
     <a class="dropdown-item" href="../articles/mcr-chron-cond.html">Medicare Chronic Conditions</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
   </div>
 </li>
       </ul>
@@ -134,25 +137,755 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><em>Find Health Care Providers by Name, Location, NPI, or Specialty
-in the <strong>NPPES</strong> (National Plan and Provider Enumeration
-System.)</em></p>
-</blockquote>
 <p><br></p>
-<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
-Public Search</a> is a free directory of all active <strong>National
-Provider Identifier</strong> (NPI) records. Healthcare providers acquire
-their unique 10-digit NPIs to identify themselves in a standard way
-throughout their industry. All information produced by the NPI Registry
-is provided in accordance with the NPPES Data Dissemination Notice.
-There is no charge to use the NPI Registry.</p>
+<p>The Doctors and Clinicians national downloadable file is organized
+such that each line is unique at the clinician/enrollment
+record/group/address level. Clinicians with multiple Medicare enrollment
+records and/or single enrollments linking to multiple practice locations
+are listed on multiple lines.</p>
 <p><br></p>
 <div class="section level2">
 <h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
 </h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720081441</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> No results for <span style="color: #0000BB;">npi: 1720081441</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1407263999 8729208152 I2014100… ROBIN      A           AVERY     <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1407263999 8729208152 I2014100… ROBIN      A           AVERY     <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
+<span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
+<span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 78 × 25</span></span></span>
+<span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1073575403 86280744… I2006101… DANIEL     J           GASSERT   <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 68 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">501</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, </span>
+<span>                                         city <span class="op">=</span> <span class="st">"Valdosta"</span>, </span>
+<span>                                         offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 720 × 25</span></span></span>
+<span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003038720 06483608… I2007121… BARBARA    F           FRIER     <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003198268 18505427… I2012112… COLE       <span style="color: #BB0000;">NA</span>          BURGESS   <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1003287533 60021732… I2017112… KACIE      PARRISH     JOHNSON   <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003315227 73153412… I2021081… WILLIAM    <span style="color: #BB0000;">NA</span>          HARTLEY   <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1003445297 17597708… I2021111… VICKI      <span style="color: #BB0000;">NA</span>          WETTER    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1003816935 06483969… I2010092… MARY       <span style="color: #BB0000;">NA</span>          FULP-PYE  <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 710 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
+<div class="section level3">
+<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h3>
+<div id="kikpaaqcio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#kikpaaqcio table {
+  font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#kikpaaqcio thead, #kikpaaqcio tbody, #kikpaaqcio tfoot, #kikpaaqcio tr, #kikpaaqcio td, #kikpaaqcio th {
+  border-style: none;
+}
+
+#kikpaaqcio p {
+  margin: 0;
+  padding: 0;
+}
+
+#kikpaaqcio .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#kikpaaqcio .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#kikpaaqcio .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#kikpaaqcio .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#kikpaaqcio .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kikpaaqcio .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#kikpaaqcio .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#kikpaaqcio .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#kikpaaqcio .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#kikpaaqcio .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#kikpaaqcio .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#kikpaaqcio .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#kikpaaqcio .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#kikpaaqcio .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: middle;
+}
+
+#kikpaaqcio .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#kikpaaqcio .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#kikpaaqcio .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D5D5D5;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D5D5D5;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D5D5D5;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#kikpaaqcio .gt_stub {
+  color: #333333;
+  background-color: #FFCCC7;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D5D5D5;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kikpaaqcio .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#kikpaaqcio .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#kikpaaqcio .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#kikpaaqcio .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kikpaaqcio .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#kikpaaqcio .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kikpaaqcio .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_striped {
+  background-color: #FEEDEC;
+}
+
+#kikpaaqcio .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#kikpaaqcio .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kikpaaqcio .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kikpaaqcio .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#kikpaaqcio .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#kikpaaqcio .gt_left {
+  text-align: left;
+}
+
+#kikpaaqcio .gt_center {
+  text-align: center;
+}
+
+#kikpaaqcio .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#kikpaaqcio .gt_font_normal {
+  font-weight: normal;
+}
+
+#kikpaaqcio .gt_font_bold {
+  font-weight: bold;
+}
+
+#kikpaaqcio .gt_font_italic {
+  font-style: italic;
+}
+
+#kikpaaqcio .gt_super {
+  font-size: 65%;
+}
+
+#kikpaaqcio .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#kikpaaqcio .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#kikpaaqcio .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#kikpaaqcio .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#kikpaaqcio .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#kikpaaqcio .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#kikpaaqcio .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>npi</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique clinician ID assigned by NPPES.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>pac_id</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">PAC ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique individual clinician ID assigned by PECOS.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>enroll_id</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Clinician Enrollment ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique ID for the clinician enrollment that is the source for the data in the observation.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>first_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician first name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>middle_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Middle Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician middle name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>last_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician last name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>suffix</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Suffix</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician suffix.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>gender</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Gender</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician gender.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>credential</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Credential</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Medical credential such as MD, DO, DPM, etc.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>school</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Medical school name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician’s medical school.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>grad_year</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Graduation year</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician’s medical school graduation year.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>specialty</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Primary specialty</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Primary medical specialty reported by the individual clinician in the selected enrollment.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>specialty_sec</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Secondary specialties</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">All secondary medical specialty reported by the individual clinician in the selected enrollment.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>telehealth</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Telehealth</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicator for whether clinician offers telehealth services over video and/or audio.  `Y` = Medicare fee-for-service claims indicate that clinician offers telehealth services.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>org_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Organization legal name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Legal name of the group that the individual clinician works with – will be blank if the address is not linked to a group.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>org_pac_id</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group PAC ID</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique group ID assigned by PECOS to the group that the individual clinician works with – will be blank if the address is not linked to a group.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>org_members</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Number of group members</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Total number of individual clinicians affiliated with the group based on Group Practice PAC ID.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>address</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Address</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Group or individual's address.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>city</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">City</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Group or individual's city.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>state</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">State</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Group or individual's state.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>zipcode</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Zip Code</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Group or individual's zip code (9 digits when available).</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>phone</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Phone Number</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Group or individual's phone number. Phone number is listed only when there is a single phone number available for the address.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>ind_assn</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Clinician accepts Medicare Assignment</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicator for whether clinician accepts Medicare approved amount as payment in full. `Y` = Clinician accepts Medicare approved amount as payment in full.  `M` = Clinician may accept Medicare Assignment.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>group_assn</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Group accepts Medicare Assignment</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Indicator for whether group accepts Medicare approved amount as payment in full. `Y` = Group accepts Medicare approved amount as payment in full.  `M` = Group may accept Medicare Assignment.</span></div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-  </main>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 

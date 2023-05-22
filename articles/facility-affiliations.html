@@ -51,26 +51,29 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
     <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
-    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">CMS Missing Contact Info</a>
-    <a class="dropdown-item" href="../articles/cms-open-payments.html">CMS Open Payments</a>
-    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Medicare Monthly Enrollment</a>
-    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Medicare Provider Enrollment</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Medicare Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Medicare Order &amp; Referring</a>
-    <a class="dropdown-item" href="../articles/mcr-phys-other-pract.html">Medicare Physicians &amp; Practitioners</a>
+    <a class="dropdown-item" href="../articles/cms-miss-contact-info.html">Missing Info</a>
+    <a class="dropdown-item" href="../articles/cms-open-payments.html">Open Payments Program</a>
+    <a class="dropdown-item" href="../articles/mcr-month-enroll.html">Beneficiary Enrollment</a>
+    <a class="dropdown-item" href="../articles/mcr-ffs-prov-enroll.html">Provider Enrollment</a>
+    <a class="dropdown-item" href="../articles/hospital-enrollment.html">Hospital Enrollment</a>
+    <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
+    <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
+    <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
+    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Order &amp; Referring Eligibility</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
     <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
     <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
     <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Medicare Taxonomy Crosswalk</a>
+    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Taxonomy Crosswalk</a>
     <a class="dropdown-item" href="../articles/mcr-chron-cond.html">Medicare Chronic Conditions</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Public Registry</a>
+    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
   </div>
 </li>
       </ul>
@@ -134,25 +137,612 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><em>Find Health Care Providers by Name, Location, NPI, or Specialty
-in the <strong>NPPES</strong> (National Plan and Provider Enumeration
-System.)</em></p>
-</blockquote>
 <p><br></p>
-<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
-Public Search</a> is a free directory of all active <strong>National
-Provider Identifier</strong> (NPI) records. Healthcare providers acquire
-their unique 10-digit NPIs to identify themselves in a standard way
-throughout their industry. All information produced by the NPI Registry
-is provided in accordance with the NPPES Data Dissemination Notice.
-There is no charge to use the NPI Registry.</p>
+<p>Facility affiliations data publicly reported in the Provider Data
+Catalog.</p>
 <p><br></p>
 <div class="section level2">
 <h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
 </h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003019563</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 9</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name suffix facility_type</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 182 × 9</span></span></span>
+<span><span class="co">#&gt;    npi        pac_id     first_name middle_name last_name   suffix facility_type</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003002890 6002953973 DANIEL     RICHARD     HAMMAN      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003045022 5890926059 ARTHUR     H           DONAHUE     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003105636 6507182847 JAMES      CHARLES     HIGHAM KES… <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1003234162 4284940248 MATTHEW    <span style="color: #BB0000;">NA</span>          MCDIARMID   <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003845249 1254326994 GARETH     R           WEINER      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1013069566 7810096328 AMITY      D           HELZER      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013115989 4385891712 ASHLEY     L           PYLE        <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013979566 1557374014 FIRAS      <span style="color: #BB0000;">NA</span>          MUWALLA     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1023261963 2860687431 CHAD       MICHAEL     LUCCI       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 172 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 9</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name  suffix facility_type  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1083742829 5698833655 RAFAEL     JORGE       FORNARIS   <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1144429580 3577659580 LYSA       LEE         CURRY      <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1558595660 8921241142 JOHN       D           ALFONSO    <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1609973650 0840373239 GEORGE     KIMBELL     WILCOX     <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1710112370 9739337122 VIDYA      <span style="color: #BB0000;">NA</span>          VADDEMPUDI <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1720069859 7012947229 WILLIAM    WARREN      JANES      <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1740577212 0345473773 GEOFF      R           WEIKLE     <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1770861742 5193940997 AUSTON     J           MYERS      <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1912260464 5092036509 SAAD       MD          MANSOOR    <span style="color: #BB0000;">NA</span>     Inpatient reha…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, </span>
+<span>                      last_name <span class="op">=</span> <span class="st">"Hill"</span>, </span>
+<span>                      facility_type <span class="op">=</span> <span class="st">"Home Health Agency"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 9</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name suffix facility_type   </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
+<div class="section level3">
+<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
+</h3>
+<div id="uepphzpugb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#uepphzpugb table {
+  font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#uepphzpugb thead, #uepphzpugb tbody, #uepphzpugb tfoot, #uepphzpugb tr, #uepphzpugb td, #uepphzpugb th {
+  border-style: none;
+}
+
+#uepphzpugb p {
+  margin: 0;
+  padding: 0;
+}
+
+#uepphzpugb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#uepphzpugb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#uepphzpugb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#uepphzpugb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#uepphzpugb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uepphzpugb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#uepphzpugb .gt_col_heading {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#uepphzpugb .gt_column_spanner_outer {
+  color: #FFFFFF;
+  background-color: #E4220C;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#uepphzpugb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#uepphzpugb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#uepphzpugb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#uepphzpugb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#uepphzpugb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#uepphzpugb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+  vertical-align: middle;
+}
+
+#uepphzpugb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#uepphzpugb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#uepphzpugb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D5D5D5;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D5D5D5;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D5D5D5;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#uepphzpugb .gt_stub {
+  color: #333333;
+  background-color: #FFCCC7;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D5D5D5;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uepphzpugb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#uepphzpugb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#uepphzpugb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#uepphzpugb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uepphzpugb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#uepphzpugb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uepphzpugb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_striped {
+  background-color: #FEEDEC;
+}
+
+#uepphzpugb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
+}
+
+#uepphzpugb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uepphzpugb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uepphzpugb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#uepphzpugb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#uepphzpugb .gt_left {
+  text-align: left;
+}
+
+#uepphzpugb .gt_center {
+  text-align: center;
+}
+
+#uepphzpugb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#uepphzpugb .gt_font_normal {
+  font-weight: normal;
+}
+
+#uepphzpugb .gt_font_bold {
+  font-weight: bold;
+}
+
+#uepphzpugb .gt_font_italic {
+  font-style: italic;
+}
+
+#uepphzpugb .gt_super {
+  font-size: 65%;
+}
+
+#uepphzpugb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#uepphzpugb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#uepphzpugb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#uepphzpugb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#uepphzpugb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#uepphzpugb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#uepphzpugb .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>npi</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">National Provider Identifier</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique clinician ID assigned by NPPES.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>pac_id</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Provider Associate Level ID (PAC ID)</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Unique individual clinician ID assigned by PECOS.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>first_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">First Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician first name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>middle_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Middle Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician middle name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>last_name</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Last Name</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician last name.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>suffix</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Suffix</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Individual clinician suffix.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>facility_type</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Facility Type</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Facilities can fall into the following type categories: Hospital, Long-term Care Hospital, Nursing Home, Inpatient Rehabilitation Facility, Home Health Agency, Hospice, and Dialysis Facility.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>facility_ccn</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Facility Affiliations CCN</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Medicare CCN of facility type or unit within hospital where an individual clinician provides service.</span></div>
+</td>
+</tr>
+<tr>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>parent_ccn</code></p>
+</div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Facility Affiliations Parent CCN</span></div>
+<div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital.</span></div>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
-  </main>
+</div>
+</div>
+  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+    </nav></aside>
 </div>
 
 
