@@ -148,10 +148,6 @@ are listed on multiple lines.</p>
 <h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720081441</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> No results for <span style="color: #0000BB;">npi: 1720081441</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 25</span></span></span>
 <span><span class="co">#&gt;   npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span></span>
@@ -164,7 +160,7 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
 <span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
 <span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
@@ -188,11 +184,9 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">501</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, </span>
-<span>                                         city <span class="op">=</span> <span class="st">"Valdosta"</span>, </span>
-<span>                                         offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 720 × 25</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
@@ -216,24 +210,24 @@ are listed on multiple lines.</p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="kikpaaqcio" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nakfjyuqaj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kikpaaqcio table {
+#nakfjyuqaj table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kikpaaqcio thead, #kikpaaqcio tbody, #kikpaaqcio tfoot, #kikpaaqcio tr, #kikpaaqcio td, #kikpaaqcio th {
+#nakfjyuqaj thead, #nakfjyuqaj tbody, #nakfjyuqaj tfoot, #nakfjyuqaj tr, #nakfjyuqaj td, #nakfjyuqaj th {
   border-style: none;
 }
 
-#kikpaaqcio p {
+#nakfjyuqaj p {
   margin: 0;
   padding: 0;
 }
 
-#kikpaaqcio .gt_table {
+#nakfjyuqaj .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -259,12 +253,12 @@ are listed on multiple lines.</p>
   border-left-color: #D3D3D3;
 }
 
-#kikpaaqcio .gt_caption {
+#nakfjyuqaj .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kikpaaqcio .gt_title {
+#nakfjyuqaj .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -276,7 +270,7 @@ are listed on multiple lines.</p>
   border-bottom-width: 0;
 }
 
-#kikpaaqcio .gt_subtitle {
+#nakfjyuqaj .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -288,7 +282,7 @@ are listed on multiple lines.</p>
   border-top-width: 0;
 }
 
-#kikpaaqcio .gt_heading {
+#nakfjyuqaj .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -300,13 +294,13 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#kikpaaqcio .gt_bottom_border {
+#nakfjyuqaj .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_col_headings {
+#nakfjyuqaj .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -321,7 +315,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#kikpaaqcio .gt_col_heading {
+#nakfjyuqaj .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -341,7 +335,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#kikpaaqcio .gt_column_spanner_outer {
+#nakfjyuqaj .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -353,15 +347,15 @@ are listed on multiple lines.</p>
   padding-right: 4px;
 }
 
-#kikpaaqcio .gt_column_spanner_outer:first-child {
+#nakfjyuqaj .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kikpaaqcio .gt_column_spanner_outer:last-child {
+#nakfjyuqaj .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kikpaaqcio .gt_column_spanner {
+#nakfjyuqaj .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -373,11 +367,11 @@ are listed on multiple lines.</p>
   width: 100%;
 }
 
-#kikpaaqcio .gt_spanner_row {
+#nakfjyuqaj .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kikpaaqcio .gt_group_heading {
+#nakfjyuqaj .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -403,7 +397,7 @@ are listed on multiple lines.</p>
   text-align: left;
 }
 
-#kikpaaqcio .gt_empty_group_heading {
+#nakfjyuqaj .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -418,15 +412,15 @@ are listed on multiple lines.</p>
   vertical-align: middle;
 }
 
-#kikpaaqcio .gt_from_md > :first-child {
+#nakfjyuqaj .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kikpaaqcio .gt_from_md > :last-child {
+#nakfjyuqaj .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kikpaaqcio .gt_row {
+#nakfjyuqaj .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -445,7 +439,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#kikpaaqcio .gt_stub {
+#nakfjyuqaj .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -458,7 +452,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#kikpaaqcio .gt_stub_row_group {
+#nakfjyuqaj .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -472,15 +466,15 @@ are listed on multiple lines.</p>
   vertical-align: top;
 }
 
-#kikpaaqcio .gt_row_group_first td {
+#nakfjyuqaj .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kikpaaqcio .gt_row_group_first th {
+#nakfjyuqaj .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kikpaaqcio .gt_summary_row {
+#nakfjyuqaj .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -490,16 +484,16 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#kikpaaqcio .gt_first_summary_row {
+#nakfjyuqaj .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_first_summary_row.thick {
+#nakfjyuqaj .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kikpaaqcio .gt_last_summary_row {
+#nakfjyuqaj .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +503,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_grand_summary_row {
+#nakfjyuqaj .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -519,7 +513,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#kikpaaqcio .gt_first_grand_summary_row {
+#nakfjyuqaj .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -529,7 +523,7 @@ are listed on multiple lines.</p>
   border-top-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_last_grand_summary_row_top {
+#nakfjyuqaj .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -539,11 +533,11 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_striped {
+#nakfjyuqaj .gt_striped {
   background-color: #FEEDEC;
 }
 
-#kikpaaqcio .gt_table_body {
+#nakfjyuqaj .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -552,7 +546,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#kikpaaqcio .gt_footnotes {
+#nakfjyuqaj .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -566,7 +560,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#kikpaaqcio .gt_footnote {
+#nakfjyuqaj .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -575,7 +569,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#kikpaaqcio .gt_sourcenotes {
+#nakfjyuqaj .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -589,7 +583,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#kikpaaqcio .gt_sourcenote {
+#nakfjyuqaj .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -597,63 +591,63 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#kikpaaqcio .gt_left {
+#nakfjyuqaj .gt_left {
   text-align: left;
 }
 
-#kikpaaqcio .gt_center {
+#nakfjyuqaj .gt_center {
   text-align: center;
 }
 
-#kikpaaqcio .gt_right {
+#nakfjyuqaj .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kikpaaqcio .gt_font_normal {
+#nakfjyuqaj .gt_font_normal {
   font-weight: normal;
 }
 
-#kikpaaqcio .gt_font_bold {
+#nakfjyuqaj .gt_font_bold {
   font-weight: bold;
 }
 
-#kikpaaqcio .gt_font_italic {
+#nakfjyuqaj .gt_font_italic {
   font-style: italic;
 }
 
-#kikpaaqcio .gt_super {
+#nakfjyuqaj .gt_super {
   font-size: 65%;
 }
 
-#kikpaaqcio .gt_footnote_marks {
+#nakfjyuqaj .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kikpaaqcio .gt_asterisk {
+#nakfjyuqaj .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kikpaaqcio .gt_indent_1 {
+#nakfjyuqaj .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kikpaaqcio .gt_indent_2 {
+#nakfjyuqaj .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kikpaaqcio .gt_indent_3 {
+#nakfjyuqaj .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kikpaaqcio .gt_indent_4 {
+#nakfjyuqaj .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kikpaaqcio .gt_indent_5 {
+#nakfjyuqaj .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

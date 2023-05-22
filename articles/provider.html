@@ -139,44 +139,94 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
 <div class="section level2">
-<h2 id="you-need-to-find-a-healthcare-provider-using-only-partial-information">You Need to Find A Healthcare Provider Using Only Partial
-Information<a class="anchor" aria-label="anchor" href="#you-need-to-find-a-healthcare-provider-using-only-partial-information"></a>
+<h2 id="general-information">General Information<a class="anchor" aria-label="anchor" href="#general-information"></a>
 </h2>
-<p>So, you have to find healthcare provider using just partial
-information. For instance all you have is “<strong>EYE doctor RANIA in
-REDMOND</strong>”. Strictly speaking, it is necessary to perform a
-search with minimum information and the maximum level of relevance of
-the result. The second result in the list is “<strong>REDMOND EYE
-DOCTORS, PLLC</strong>” where <em>Dr. Rania Montecillo</em> specified an
-owner.</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Redmond"</span>, </span>
-<span>          state <span class="op">=</span> <span class="st">"WA"</span>, </span>
-<span>          first_name <span class="op">=</span> <span class="st">"Rania"</span>, </span>
-<span>          last_name <span class="op">=</span> <span class="st">"Montecillo"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span></span>
-<span>    fn <span class="op">=</span> <span class="op">~</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/make_clean_names.html" class="external-link">make_clean_names</a></span><span class="op">(</span><span class="va">.</span>, case <span class="op">=</span> <span class="st">"title"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_espn.html" class="external-link">gt_theme_espn</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="laaqqnljcr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#laaqqnljcr table {
-  font-family: Lato, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+<code class="sourceCode R"><span><span class="va">info</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<details><summary>
+Code for table
+</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">info_1</span> <span class="op">&lt;-</span> <span class="va">info</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">entype</span>, </span>
+<span>                <span class="va">enumeration_duration</span>, </span>
+<span>                <span class="va">first_name</span><span class="op">:</span><span class="va">phone_number</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"Source: NPPES NPI Public Registry."</span>, </span>
+<span>                     checkmark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sole_proprietor"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"General Information for: "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">first_name</span>, <span class="st">" "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">middle_name</span>, <span class="st">". "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">last_name</span>, <span class="st">", "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">credential</span><span class="op">)</span>,</span>
+<span>                 subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Practice Location at: "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">street</span>, <span class="st">" "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">city</span>, <span class="st">", "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">state</span>, <span class="st">" "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">zipcode</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_hide.html" class="external-link">cols_hide</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">first_name</span>, </span>
+<span>                            <span class="va">middle_name</span>, </span>
+<span>                            <span class="va">last_name</span>, </span>
+<span>                            <span class="va">credential</span>,</span>
+<span>                            <span class="va">street</span>,</span>
+<span>                            <span class="va">city</span>,</span>
+<span>                            <span class="va">state</span>,</span>
+<span>                            <span class="va">zipcode</span>,</span>
+<span>                            <span class="va">purpose</span>,</span>
+<span>                            <span class="va">country</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'info_1' not found</span></span></code></pre></div>
+</details><pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'info_1' not found</span></span></code></pre>
+<p><br><br></p>
+<details><summary>
+Code for table
+</summary><div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">info_2</span> <span class="op">&lt;-</span> <span class="va">info</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_head</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">tx_code</span><span class="op">:</span><span class="va">tx_desc</span>, <span class="va">tx_state</span><span class="op">:</span><span class="va">tx_primary</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"Source: NPPES NPI Public Registry."</span>, </span>
+<span>                     checkmark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tx_primary"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Taxonomy Information: "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">first_name</span>, <span class="st">" "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">middle_name</span>, <span class="st">". "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">last_name</span>, <span class="st">", "</span>, </span>
+<span>                                <span class="va">info_1</span><span class="op">$</span><span class="va">credential</span><span class="op">)</span>,</span>
+<span>                 subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"Practice Location at: "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">street</span>, <span class="st">" "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">city</span>, <span class="st">", "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">state</span>, <span class="st">" "</span>,</span>
+<span>                                   <span class="va">info_1</span><span class="op">$</span><span class="va">zipcode</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>tx_code <span class="op">=</span> <span class="st">"Taxonomy"</span>,</span>
+<span>                 tx_desc <span class="op">=</span> <span class="st">"Description"</span>,</span>
+<span>                 tx_state <span class="op">=</span> <span class="st">"State"</span>,</span>
+<span>                 tx_license <span class="op">=</span> <span class="st">"License"</span>,</span>
+<span>                 tx_primary <span class="op">=</span> <span class="st">"Primary"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'info_1' not found</span></span></code></pre></div>
+</details><pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'info_2' not found</span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"last_name"</span><span class="op">)</span>, </span>
+<span>                     checkmark <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"partb"</span>, <span class="st">"dme"</span>, <span class="st">"hha"</span>, <span class="st">"pmd"</span><span class="op">)</span>,</span>
+<span>                     title <span class="op">=</span> <span class="st">"Medicare Order &amp; Referring Eligibility"</span>,</span>
+<span>                     source <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
+<div id="rpywhfuoyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#rpywhfuoyh table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#laaqqnljcr thead, #laaqqnljcr tbody, #laaqqnljcr tfoot, #laaqqnljcr tr, #laaqqnljcr td, #laaqqnljcr th {
+#rpywhfuoyh thead, #rpywhfuoyh tbody, #rpywhfuoyh tfoot, #rpywhfuoyh tr, #rpywhfuoyh td, #rpywhfuoyh th {
   border-style: none;
 }
 
-#laaqqnljcr p {
+#rpywhfuoyh p {
   margin: 0;
   padding: 0;
 }
 
-#laaqqnljcr .gt_table {
+#rpywhfuoyh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -184,670 +234,17 @@ owner.</p>
   margin-right: auto;
   color: #333333;
   font-size: 16px;
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 3px;
-  border-top-color: #FFFFFF;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#laaqqnljcr .gt_title {
-  color: #333333;
-  font-size: 24px;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#laaqqnljcr .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#laaqqnljcr .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#laaqqnljcr .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#laaqqnljcr .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#laaqqnljcr .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#laaqqnljcr .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
   width: 100%;
-}
-
-#laaqqnljcr .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#laaqqnljcr .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#laaqqnljcr .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#laaqqnljcr .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#laaqqnljcr .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#laaqqnljcr .gt_row {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #F6F7F7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#laaqqnljcr .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#laaqqnljcr .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#laaqqnljcr .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#laaqqnljcr .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#laaqqnljcr .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#laaqqnljcr .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#laaqqnljcr .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#laaqqnljcr .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_striped {
-  background-color: #FAFAFA;
-}
-
-#laaqqnljcr .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#laaqqnljcr .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#laaqqnljcr .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#laaqqnljcr .gt_left {
-  text-align: left;
-}
-
-#laaqqnljcr .gt_center {
-  text-align: center;
-}
-
-#laaqqnljcr .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#laaqqnljcr .gt_font_normal {
-  font-weight: normal;
-}
-
-#laaqqnljcr .gt_font_bold {
-  font-weight: bold;
-}
-
-#laaqqnljcr .gt_font_italic {
-  font-style: italic;
-}
-
-#laaqqnljcr .gt_super {
-  font-size: 65%;
-}
-
-#laaqqnljcr .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#laaqqnljcr .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#laaqqnljcr .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#laaqqnljcr .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#laaqqnljcr .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#laaqqnljcr .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#laaqqnljcr .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Npi">Npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Entype">Entype</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Enumeration Date">Enumeration Date</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Enumeration Duration">Enumeration Duration</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Last Updated">Last Updated</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Status">Status</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="First Name">First Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Middle Name">Middle Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Last Name">Last Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Credential">Credential</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Gender">Gender</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Sole Proprietor">Sole Proprietor</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Purpose">Purpose</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Street">Street</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="City">City</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="State">State</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Zipcode">Zipcode</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Country">Country</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Phone Number">Phone Number</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Fax Number">Fax Number</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Tx Code">Tx Code</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Tx Desc">Tx Desc</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Tx Group">Tx Group</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Tx State">Tx State</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Tx License">Tx License</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Tx Primary">Tx Primary</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="npi" class="gt_row gt_right">1659320539</td>
-<td headers="entype" class="gt_row gt_left">Ind</td>
-<td headers="enumeration_date" class="gt_row gt_right">2006-05-09</td>
-<td headers="enumeration_duration" class="gt_row gt_center">537580800s (~17.03 years)</td>
-<td headers="last_updated" class="gt_row gt_right">2007-12-19</td>
-<td headers="status" class="gt_row gt_left">A</td>
-<td headers="first_name" class="gt_row gt_left">RANIA</td>
-<td headers="middle_name" class="gt_row gt_left">B</td>
-<td headers="last_name" class="gt_row gt_left">MONTECILLO</td>
-<td headers="credential" class="gt_row gt_left">od</td>
-<td headers="gender" class="gt_row gt_left">F</td>
-<td headers="sole_proprietor" class="gt_row gt_center">FALSE</td>
-<td headers="purpose" class="gt_row gt_left">MAILING</td>
-<td headers="street" class="gt_row gt_left">16375 NE 85TH ST SUITE 102</td>
-<td headers="city" class="gt_row gt_left">REDMOND</td>
-<td headers="state" class="gt_row gt_left">WA</td>
-<td headers="zipcode" class="gt_row gt_right">980523554</td>
-<td headers="country" class="gt_row gt_left">US</td>
-<td headers="phone_number" class="gt_row gt_right">425-885-7363</td>
-<td headers="fax_number" class="gt_row gt_right">425-861-5585</td>
-<td headers="tx_code" class="gt_row gt_left">152W00000X</td>
-<td headers="tx_desc" class="gt_row gt_left">Optometrist</td>
-<td headers="tx_group" class="gt_row gt_left">NA</td>
-<td headers="tx_state" class="gt_row gt_left">WA</td>
-<td headers="tx_license" class="gt_row gt_right">3680</td>
-<td headers="tx_primary" class="gt_row gt_center">TRUE</td>
-</tr>
-<tr>
-<td headers="npi" class="gt_row gt_right gt_striped">1659320539</td>
-<td headers="entype" class="gt_row gt_left gt_striped">Ind</td>
-<td headers="enumeration_date" class="gt_row gt_right gt_striped">2006-05-09</td>
-<td headers="enumeration_duration" class="gt_row gt_center gt_striped">537580800s (~17.03 years)</td>
-<td headers="last_updated" class="gt_row gt_right gt_striped">2007-12-19</td>
-<td headers="status" class="gt_row gt_left gt_striped">A</td>
-<td headers="first_name" class="gt_row gt_left gt_striped">RANIA</td>
-<td headers="middle_name" class="gt_row gt_left gt_striped">B</td>
-<td headers="last_name" class="gt_row gt_left gt_striped">MONTECILLO</td>
-<td headers="credential" class="gt_row gt_left gt_striped">od</td>
-<td headers="gender" class="gt_row gt_left gt_striped">F</td>
-<td headers="sole_proprietor" class="gt_row gt_center gt_striped">FALSE</td>
-<td headers="purpose" class="gt_row gt_left gt_striped">PRACTICE</td>
-<td headers="street" class="gt_row gt_left gt_striped">16375 NE 85TH ST SUITE 102</td>
-<td headers="city" class="gt_row gt_left gt_striped">REDMOND</td>
-<td headers="state" class="gt_row gt_left gt_striped">WA</td>
-<td headers="zipcode" class="gt_row gt_right gt_striped">980523554</td>
-<td headers="country" class="gt_row gt_left gt_striped">US</td>
-<td headers="phone_number" class="gt_row gt_right gt_striped">425-885-7363</td>
-<td headers="fax_number" class="gt_row gt_right gt_striped">425-861-5585</td>
-<td headers="tx_code" class="gt_row gt_left gt_striped">152W00000X</td>
-<td headers="tx_desc" class="gt_row gt_left gt_striped">Optometrist</td>
-<td headers="tx_group" class="gt_row gt_left gt_striped">NA</td>
-<td headers="tx_state" class="gt_row gt_left gt_striped">WA</td>
-<td headers="tx_license" class="gt_row gt_right gt_striped">3680</td>
-<td headers="tx_primary" class="gt_row gt_center gt_striped">TRUE</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number">You Need to Find Detailed Healthcare Provider Information Using
-Known NPI Number<a class="anchor" aria-label="anchor" href="#you-need-to-find-detailed-healthcare-provider-information-using-known-npi-number"></a>
-</h2>
-<p>This is very common scenario. You need to get full replica of NPI
-record. Again, it simple. Just use code provided below. API response may
-contain single NPI record, or empty list in case NPI does not exist in
-the CMS National Plan and Provider Enumeration System (NPPES)
-Registry.</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 28</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: organization_name &lt;chr&gt;, organizational_subpart &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;lgl&gt;, tx_primary &lt;lgl&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers">You Need to Lookup Multiple Healthcare Providers Using A List of NPI
-Numbers<a class="anchor" aria-label="anchor" href="#you-need-to-lookup-multiple-healthcare-providers-using-a-list-of-npi-numbers"></a>
-</h2>
-<p>You may need to perform bulk search for performance optimization. The
-“getcodes” operation allows you to decrease number of round trips in
-orders of magnitude. For instance you can get information about hundred
-NPI in one REST call, instead of sending NPI numbers one-by-one.</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1285636522</span>, <span class="fl">1730198755</span>, <span class="fl">1427145176</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> </span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 26 × 30</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 128563… Org    2005-06-01       567129600s (~17.97 years) 2022-07-21   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 24 more variables: organization_name &lt;chr&gt;, organizational_subpart &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
-</div>
-<div class="section level2">
-<h2 id="you-need-to-check-npi-number-status">You Need to Check NPI Number Status<a class="anchor" aria-label="anchor" href="#you-need-to-check-npi-number-status"></a>
-</h2>
-<p>Again, very common scenario. You just need to check NPI number
-status. It is simple. Take a look at the code below. Expected result
-contains requested NPI number, status, and short status description.</p>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1285636522</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">status</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 2</span></span></span>
-<span><span class="co">#&gt;    npi        status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1285636522 A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1285636522 A</span></span></code></pre></div>
-<p><br></p>
-<p><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-order-and-referring-api">Medicare Order and Referring API<a class="anchor" aria-label="anchor" href="#medicare-order-and-referring-api"></a>
-</h2>
-<p><br></p>
-<p>Is the provider currently eligible to make referrals to Medicare Part
-B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME)
-or Power Mobility Devices (PMDs)? Search Medicare’s <strong>Order and
-Referring API</strong> with <code>provider_moar()</code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Medicare Order and Referring API"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/text_transform.html" class="external-link">text_transform</a></span><span class="op">(</span></span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">partb</span>, <span class="va">dme</span>, <span class="va">hha</span>, <span class="va">pmd</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    fn <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span><span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"TRUE"</span><span class="op">)</span><span class="op">)</span> </span>
-<span>      <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-check"</span>, </span>
-<span>                                prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
-<span>                                fill <span class="op">=</span> <span class="st">"green"</span>, height <span class="op">=</span> <span class="st">"1.5em"</span>, width <span class="op">=</span> <span class="st">"1.5em"</span><span class="op">)</span><span class="op">)</span></span>
-<span>      <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">x</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="st">"FALSE"</span><span class="op">)</span><span class="op">)</span> </span>
-<span>      <span class="op">{</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/html.html" class="external-link">html</a></span><span class="op">(</span><span class="fu">fontawesome</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/fontawesome/reference/fa.html" class="external-link">fa</a></span><span class="op">(</span><span class="st">"circle-xmark"</span>, </span>
-<span>                                  prefer_type <span class="op">=</span> <span class="st">"solid"</span>, </span>
-<span>                                fill <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span><span class="op">)</span><span class="op">}</span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<div id="vydacvyxez" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#vydacvyxez table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#vydacvyxez thead, #vydacvyxez tbody, #vydacvyxez tfoot, #vydacvyxez tr, #vydacvyxez td, #vydacvyxez th {
-  border-style: none;
-}
-
-#vydacvyxez p {
-  margin: 0;
-  padding: 0;
-}
-
-#vydacvyxez .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
+  border-top-style: none;
+  border-top-width: 3px;
   border-top-color: #A8A8A8;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
-  border-bottom-style: solid;
+  border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #A8A8A8;
   border-left-style: none;
@@ -855,12 +252,12 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-left-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_caption {
+#rpywhfuoyh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vydacvyxez .gt_title {
+#rpywhfuoyh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -872,7 +269,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-width: 0;
 }
 
-#vydacvyxez .gt_subtitle {
+#rpywhfuoyh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -884,9 +281,9 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-width: 0;
 }
 
-#vydacvyxez .gt_heading {
+#rpywhfuoyh .gt_heading {
   background-color: #FFFFFF;
-  text-align: center;
+  text-align: left;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
@@ -896,19 +293,19 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_bottom_border {
-  border-bottom-style: solid;
+#rpywhfuoyh .gt_bottom_border {
+  border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_col_headings {
-  border-top-style: solid;
+#rpywhfuoyh .gt_col_headings {
+  border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #000000;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -917,12 +314,12 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_col_heading {
+#rpywhfuoyh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
-  font-size: 100%;
+  font-size: 80%;
   font-weight: normal;
-  text-transform: inherit;
+  text-transform: uppercase;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -937,30 +334,30 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#vydacvyxez .gt_column_spanner_outer {
+#rpywhfuoyh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
-  font-size: 100%;
+  font-size: 80%;
   font-weight: normal;
-  text-transform: inherit;
+  text-transform: uppercase;
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 4px;
   padding-right: 4px;
 }
 
-#vydacvyxez .gt_column_spanner_outer:first-child {
+#rpywhfuoyh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vydacvyxez .gt_column_spanner_outer:last-child {
+#rpywhfuoyh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vydacvyxez .gt_column_spanner {
+#rpywhfuoyh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #000000;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -969,26 +366,26 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   width: 100%;
 }
 
-#vydacvyxez .gt_spanner_row {
+#rpywhfuoyh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vydacvyxez .gt_group_heading {
+#rpywhfuoyh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   color: #333333;
   background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-color: #000000;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -999,32 +396,32 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   text-align: left;
 }
 
-#vydacvyxez .gt_empty_group_heading {
+#rpywhfuoyh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-color: #000000;
   border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
   vertical-align: middle;
 }
 
-#vydacvyxez .gt_from_md > :first-child {
+#rpywhfuoyh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vydacvyxez .gt_from_md > :last-child {
+#rpywhfuoyh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vydacvyxez .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
+#rpywhfuoyh .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -1041,20 +438,20 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   overflow-x: hidden;
 }
 
-#vydacvyxez .gt_stub {
+#rpywhfuoyh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
   border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#vydacvyxez .gt_stub_row_group {
+#rpywhfuoyh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1068,15 +465,15 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   vertical-align: top;
 }
 
-#vydacvyxez .gt_row_group_first td {
+#rpywhfuoyh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vydacvyxez .gt_row_group_first th {
+#rpywhfuoyh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vydacvyxez .gt_summary_row {
+#rpywhfuoyh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1086,16 +483,16 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#vydacvyxez .gt_first_summary_row {
+#rpywhfuoyh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_first_summary_row.thick {
+#rpywhfuoyh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vydacvyxez .gt_last_summary_row {
+#rpywhfuoyh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1105,7 +502,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_grand_summary_row {
+#rpywhfuoyh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1115,7 +512,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#vydacvyxez .gt_first_grand_summary_row {
+#rpywhfuoyh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1125,7 +522,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-top-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_last_grand_summary_row_top {
+#rpywhfuoyh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1135,11 +532,11 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_striped {
+#rpywhfuoyh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vydacvyxez .gt_table_body {
+#rpywhfuoyh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1148,7 +545,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_footnotes {
+#rpywhfuoyh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +559,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_footnote {
+#rpywhfuoyh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1171,7 +568,7 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   padding-right: 5px;
 }
 
-#vydacvyxez .gt_sourcenotes {
+#rpywhfuoyh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1185,233 +582,255 @@ Referring API</strong> with <code>provider_moar()</code>:</p>
   border-right-color: #D3D3D3;
 }
 
-#vydacvyxez .gt_sourcenote {
-  font-size: 90%;
+#rpywhfuoyh .gt_sourcenote {
+  font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#vydacvyxez .gt_left {
+#rpywhfuoyh .gt_left {
   text-align: left;
 }
 
-#vydacvyxez .gt_center {
+#rpywhfuoyh .gt_center {
   text-align: center;
 }
 
-#vydacvyxez .gt_right {
+#rpywhfuoyh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vydacvyxez .gt_font_normal {
+#rpywhfuoyh .gt_font_normal {
   font-weight: normal;
 }
 
-#vydacvyxez .gt_font_bold {
+#rpywhfuoyh .gt_font_bold {
   font-weight: bold;
 }
 
-#vydacvyxez .gt_font_italic {
+#rpywhfuoyh .gt_font_italic {
   font-style: italic;
 }
 
-#vydacvyxez .gt_super {
+#rpywhfuoyh .gt_super {
   font-size: 65%;
 }
 
-#vydacvyxez .gt_footnote_marks {
+#rpywhfuoyh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vydacvyxez .gt_asterisk {
+#rpywhfuoyh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vydacvyxez .gt_indent_1 {
+#rpywhfuoyh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vydacvyxez .gt_indent_2 {
+#rpywhfuoyh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vydacvyxez .gt_indent_3 {
+#rpywhfuoyh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vydacvyxez .gt_indent_4 {
+#rpywhfuoyh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vydacvyxez .gt_indent_5 {
+#rpywhfuoyh .gt_indent_5 {
   text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Medicare Order and Referring API</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>Medicare Order &amp; Referring Eligibility</td>
     </tr>
 <tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="npi">npi</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="first_name">first_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="last_name">last_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="partb">partb</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="hha">hha</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="dme">dme</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="pmd">pmd</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Npi">Npi</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="First Name">First Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Last Name">Last Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Partb">Partb</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Hha">Hha</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Dme">Dme</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Pmd">Pmd</th>
     </tr>
 </thead>
 <tbody class="gt_table_body"><tr>
-<td headers="npi" class="gt_row gt_right">1083879860</td>
-<td headers="first_name" class="gt_row gt_left">CHRISTOPHER</td>
-<td headers="last_name" class="gt_row gt_left">AARON</td>
-<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
-<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.5em;width:1.5em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:green;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="npi" class="gt_row gt_right">1043477615</td>
+<td headers="first_name" class="gt_row gt_left">SARAH</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">HUSSAIN</td>
+<td headers="partb" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="hha" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="dme" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
+<td headers="pmd" class="gt_row gt_center"><svg preserveaspectratio="none" aria-hidden="true" role="img" viewbox="0 0 512 512" style="height:1.75em;width:1.75em;vertical-align:-0.125em;margin-left:auto;margin-right:auto;font-size:inherit;fill:black;overflow:visible;position:relative;"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"></path></svg></td>
 </tr></tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="7">Source: data.cms.gov</td>
+    </tr></tfoot>
 </table>
 </div>
 <p><br></p>
-</div>
-<div class="section level2">
-<h2 id="medicare-provider-and-supplier-taxonomy-crosswalk-api">Medicare Provider and Supplier Taxonomy Crosswalk API<a class="anchor" aria-label="anchor" href="#medicare-provider-and-supplier-taxonomy-crosswalk-api"></a>
-</h2>
-<p><br></p>
-<p>You may need to find Medicare’s specialty codes for this provider’s
-taxonomies. Using the output from the NPPES search in the first example,
-you can search Medicare’s <strong>Provider and Supplier Taxonomy
-Crosswalk API</strong> with <code><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>:</p>
-<p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"282NC0060X"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomy_code  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">282NC0060X                                           </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>taxonomy_desc  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Hospitals/General Acute Care Hospital Critical Access</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty_code <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">A0[7]                                                </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty_desc <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Critical Access Hospital                             </span></span></span></code></pre></div>
-<p><br></p>
-<p>Providers may need to update their digital contact information in the
-NPPES system. To check, you can access the <strong>CMS Public Reporting
-of Missing Digital Contact Information API</strong> with
-<code><a href="../reference/missing_information.html">missing_information()</a></code>. If they appear in the search
-results, it’s time to update their NPPES contact information:</p>
-<p><br></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name  <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Smith     </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David     </span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 25</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 9739318551 I2014090… SARAH      K           HUSSAIN   <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114058443</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi               <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">1114058443            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name        <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">David                 </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Smith                 </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty         <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">Psychiatry            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_start_date <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2014-08-15            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_end_date   <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2024-08-15            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>optout_duration   <span style="color: #5FAF87;">d1</span> <span style="color: #3A3A3A;">315619200s (~10 years)</span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_updated      <span style="color: #5FAF87;">D1</span> <span style="color: #3A3A3A;">2023-04-14            </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>order_and_refer   <span style="color: #5FAF87;">l1</span> <span style="color: #3A3A3A;">T                     </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>address           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">3101 STELLING DR      </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city              <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">PALO ALTO             </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state             <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">CA                    </span></span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zipcode           <span style="color: #5FAF87;">c1</span> <span style="color: #3A3A3A;">943033960             </span></span></span></code></pre></div>
-<p><br></p>
-<p>Using <code><a href="../reference/physician_by_service.html">physician_by_service()</a></code>, you can access
-<strong>Medicare’s Physician &amp; Other Practitioners - by Provider and
-Service API</strong>:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name suffix facility_type</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 9739318551 SARAH      K           HUSSAIN   <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 9739318551 SARAH      K           HUSSAIN   <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 9739318551 SARAH      K           HUSSAIN   <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">terse</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/terse/man/terse.html" class="external-link">terse</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>year          <span style="color: #5FAF87;">i78</span> <span style="color: #3A3A3A;">2013                                                    </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>npi           <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">1003000126                                              </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>entype        <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Ind                                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>first_name    <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Ardalan                                                 </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>middle_name   <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">NA                                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>last_name     <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Enkeshafi                                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>credential    <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">MD                                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>gender        <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">M                                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>specialty     <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Internal Medicine                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>street        <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">900 Seton Dr                                            </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>city          <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Cumberland                                              </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>state         <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">MD                                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>fips          <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">24                                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>zipcode       <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">21502                                                   </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>ruca          <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">1                                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>country       <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">US                                                      </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>par           <span style="color: #5FAF87;">l78</span> <span style="color: #3A3A3A;">T                                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>hcpcs_cd      <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">99222                                                   </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>hcpcs_desc    <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Initial hospital inpatient care, typically 50 minutes pe</span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>hcpcs_drug    <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">N                                                       </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>place_of_srvc <span style="color: #5FAF87;">c78</span> <span style="color: #3A3A3A;">Facility                                                </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_benes     <span style="color: #5FAF87;">i78</span> <span style="color: #3A3A3A;">138                                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_srvcs     <span style="color: #5FAF87;">i78</span> <span style="color: #3A3A3A;">142                                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>tot_day       <span style="color: #5FAF87;">i78</span> <span style="color: #3A3A3A;">142                                                     </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>avg_charge    <span style="color: #5FAF87;">d78</span> <span style="color: #3A3A3A;">368.62676                                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>avg_allowed   <span style="color: #5FAF87;">d78</span> <span style="color: #3A3A3A;">132.17007                                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>avg_payment   <span style="color: #5FAF87;">d78</span> <span style="color: #3A3A3A;">104.29972                                               </span> ...</span></span>
-<span><span class="co">#&gt; <span style="color: #DADADA;">$</span>avg_std_pymt  <span style="color: #5FAF87;">d78</span> <span style="color: #3A3A3A;">107.21113                                               </span> ...</span></span></code></pre></div>
-<p><br></p>
-<p>This API contains data going back to 2013, so you can perform a
-long-term analysis of a provider’s Medicare data:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 36</span></span></span>
+<span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1902804552 O200712100… PA           00-09          PART A PROVID… 390151      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1407813603 O200712040… PA           00-09          PART A PROVID… 390067      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_duration &lt;Duration&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">hcpcs_cd</span>, <span class="va">hcpcs_desc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span></span>
-<span>    Beneficiaries <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_benes</span><span class="op">)</span>,</span>
-<span>    Services <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_srvcs</span><span class="op">)</span>,</span>
-<span>    Avg_Billed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_sbmtd_chrg</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>    Avg_Allowed <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_alowd_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
-<span>    Avg_Payment <span class="op">=</span> <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/round_half_up.html" class="external-link">round_half_up</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_mdcr_pymt_amt</span><span class="op">)</span>, digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>HCPCS <span class="op">=</span> <span class="va">hcpcs_cd</span>, </span>
-<span>                Description <span class="op">=</span> <span class="va">hcpcs_desc</span>,</span>
-<span>                <span class="st">"Avg Charge"</span> <span class="op">=</span> <span class="va">Avg_Billed</span>,</span>
-<span>                <span class="st">"Avg Allowed"</span> <span class="op">=</span> <span class="va">Avg_Allowed</span>,</span>
-<span>                <span class="st">"Avg Payment"</span> <span class="op">=</span> <span class="va">Avg_Payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">Services</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="st">"HCPCS"</span>, style <span class="op">=</span> <span class="st">"dotted"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html" class="external-link">gt_merge_stack</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="va">HCPCS</span>, </span>
-<span>                           col2 <span class="op">=</span> <span class="va">Description</span>,</span>
-<span>                           small_cap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                           font_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"16px"</span>, <span class="st">"14px"</span><span class="op">)</span>,</span>
-<span>                           font_weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"normal"</span><span class="op">)</span>,</span>
-<span>                           palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"darkgray"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_fill.html" class="external-link">cell_fill</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"#F54444"</span><span class="op">)</span>, </span>
-<span>                             <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"white"</span>, </span>
-<span>                                           weight <span class="op">=</span> <span class="st">"bold"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>                locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_row_groups.html" class="external-link">cells_row_groups</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="st">"Provider Results for NPI 1114058443"</span>,</span>
-<span>  subtitle <span class="op">=</span> <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/add_text_img.html" class="external-link">add_text_img</a></span><span class="op">(</span><span class="st">"Report generated with"</span>, </span>
-<span>  url <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png"</span>, </span>
-<span>  height <span class="op">=</span> <span class="fl">25</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::summarise()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In argument: `Avg_Billed =</span></span>
-<span><span class="co">#&gt;   janitor::round_half_up(mean(avg_sbmtd_chrg), digits = 2)`.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In group 1: `hcpcs_cd = "99217"`, `hcpcs_desc = "Hospital observation care</span></span>
-<span><span class="co">#&gt;   discharge"`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> object 'avg_sbmtd_chrg' not found</span></span></code></pre></div>
-<p>Using packages like {gt} &amp; {ggplot2}, you can create tables and
-graphs for reporting purposes:</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
+<span><span class="co">#&gt;   npi        enroll_id    first_name last_name org_name enroll_state enroll_type</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 I2014090500… Sarah      Hussain   <span style="color: #BB0000;">NA</span>       PA           3          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: enroll_desc &lt;chr&gt;, enroll_specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;date&gt;, adjusted_due_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   indiv_total_reassigned &lt;chr&gt;, rec_bene_reassign &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
-<details><summary>
-Click for Table Code
-</summary></details><p><br><br></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 16</span></span></span>
+<span><span class="co">#&gt;   npi        pac_id  enroll_id first_name last_name state specialty due_date_ind</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 973931… I2014090… Sarah      Hussain   PA    Cardiac … 2019-08-31  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: ind_tot_emp_assn &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   due_date_group &lt;date&gt;, group_reassign_and_phys_assist &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   record_type &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 15</span></span></span>
+<span><span class="co">#&gt;   npi        enroll_id       first_name last_name state specialty   due_date_ind</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 I20140905002053 Sarah      Hussain   PA    Cardiac El… 2019-08-31  </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: ind_tot_emp_assn &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   due_date_group &lt;date&gt;, group_reassign_and_phys_assist &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   record_type &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
+<span><span class="co">#&gt;   npi   pac_id enroll_id specialty_code specialty_desc state org_name first_name</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043… 97393… I2014090… 14-21          PRACTITIONER … PA    <span style="color: #BB0000;">NA</span>       SARAH     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"207RC0000X"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
+<span><span class="co">#&gt;   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 207RC0000X    Allopathic &amp; Osteopathic Physicia… 6              Physician/Car…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 207RC0000X    Allopathic &amp; Osteopathic Physicia… 11             Physician/Int…</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;   npi        last_name first_name</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 Hussain   Sarah</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/opt_out.html">opt_out</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">2014</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 130 × 28</span></span></span>
+<span><span class="co">#&gt;     year npi        entype first_name middle_name last_name credential gender</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>014 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>014 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>014 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>014 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>014 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>015 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>015 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>015 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>015 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>015 1043477615 Ind    Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 120 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hcpcs_cd &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, place_of_srvc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;, avg_charge &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fl">2014</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 70</span></span></span>
+<span><span class="co">#&gt;    year npi     first_name middle_name last_name credential gender entype street</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>014 104347… Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>015 104347… Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>016 104347… Sarah      <span style="color: #BB0000;">NA</span>          Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>017 104347… Sarah      K           Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>018 104347… Sarah      K           Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>019 104347… Sarah      K           Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 104347… Sarah      K           Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>021 104347… Sarah      K           Hussain   MD         F      Ind    500 U…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></span></code></pre></div>
+<p><br></p>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
-    </nav></aside>
+  </main>
 </div>
 
 

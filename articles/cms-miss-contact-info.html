@@ -159,36 +159,25 @@ Information API has no Endpoints entered into the NPPES NPI Registry.
 For instance, John Clouse (NPI: 1144224569), appears:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
-<span>                                   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"NPI"</span>, </span>
-<span>                 last_name <span class="op">=</span> <span class="st">"Last Name"</span>, </span>
-<span>                 first_name <span class="op">=</span> <span class="st">"First Name"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-<div id="wjibexvqoi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
+<div id="cvsgkdctmt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wjibexvqoi table {
+#cvsgkdctmt table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wjibexvqoi thead, #wjibexvqoi tbody, #wjibexvqoi tfoot, #wjibexvqoi tr, #wjibexvqoi td, #wjibexvqoi th {
+#cvsgkdctmt thead, #cvsgkdctmt tbody, #cvsgkdctmt tfoot, #cvsgkdctmt tr, #cvsgkdctmt td, #cvsgkdctmt th {
   border-style: none;
 }
 
-#wjibexvqoi p {
+#cvsgkdctmt p {
   margin: 0;
   padding: 0;
 }
 
-#wjibexvqoi .gt_table {
+#cvsgkdctmt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -214,12 +203,12 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-left-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_caption {
+#cvsgkdctmt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wjibexvqoi .gt_title {
+#cvsgkdctmt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -231,7 +220,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-bottom-width: 0;
 }
 
-#wjibexvqoi .gt_subtitle {
+#cvsgkdctmt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -243,7 +232,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-top-width: 0;
 }
 
-#wjibexvqoi .gt_heading {
+#cvsgkdctmt .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -255,13 +244,13 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-right-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_bottom_border {
+#cvsgkdctmt .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_col_headings {
+#cvsgkdctmt .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -276,7 +265,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-right-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_col_heading {
+#cvsgkdctmt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -296,7 +285,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   overflow-x: hidden;
 }
 
-#wjibexvqoi .gt_column_spanner_outer {
+#cvsgkdctmt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -308,15 +297,15 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 4px;
 }
 
-#wjibexvqoi .gt_column_spanner_outer:first-child {
+#cvsgkdctmt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wjibexvqoi .gt_column_spanner_outer:last-child {
+#cvsgkdctmt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wjibexvqoi .gt_column_spanner {
+#cvsgkdctmt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -328,11 +317,11 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   width: 100%;
 }
 
-#wjibexvqoi .gt_spanner_row {
+#cvsgkdctmt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wjibexvqoi .gt_group_heading {
+#cvsgkdctmt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -358,7 +347,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   text-align: left;
 }
 
-#wjibexvqoi .gt_empty_group_heading {
+#cvsgkdctmt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -373,15 +362,15 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   vertical-align: middle;
 }
 
-#wjibexvqoi .gt_from_md > :first-child {
+#cvsgkdctmt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wjibexvqoi .gt_from_md > :last-child {
+#cvsgkdctmt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wjibexvqoi .gt_row {
+#cvsgkdctmt .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -400,7 +389,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   overflow-x: hidden;
 }
 
-#wjibexvqoi .gt_stub {
+#cvsgkdctmt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -413,7 +402,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 5px;
 }
 
-#wjibexvqoi .gt_stub_row_group {
+#cvsgkdctmt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -427,15 +416,15 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   vertical-align: top;
 }
 
-#wjibexvqoi .gt_row_group_first td {
+#cvsgkdctmt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wjibexvqoi .gt_row_group_first th {
+#cvsgkdctmt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wjibexvqoi .gt_summary_row {
+#cvsgkdctmt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -445,16 +434,16 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 5px;
 }
 
-#wjibexvqoi .gt_first_summary_row {
+#cvsgkdctmt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_first_summary_row.thick {
+#cvsgkdctmt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wjibexvqoi .gt_last_summary_row {
+#cvsgkdctmt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -464,7 +453,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_grand_summary_row {
+#cvsgkdctmt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -474,7 +463,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 5px;
 }
 
-#wjibexvqoi .gt_first_grand_summary_row {
+#cvsgkdctmt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -484,7 +473,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-top-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_last_grand_summary_row_top {
+#cvsgkdctmt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,11 +483,11 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_striped {
+#cvsgkdctmt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#wjibexvqoi .gt_table_body {
+#cvsgkdctmt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -507,7 +496,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_footnotes {
+#cvsgkdctmt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -521,7 +510,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-right-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_footnote {
+#cvsgkdctmt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -530,7 +519,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 5px;
 }
 
-#wjibexvqoi .gt_sourcenotes {
+#cvsgkdctmt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -544,7 +533,7 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   border-right-color: #D3D3D3;
 }
 
-#wjibexvqoi .gt_sourcenote {
+#cvsgkdctmt .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -552,63 +541,63 @@ For instance, John Clouse (NPI: 1144224569), appears:</p>
   padding-right: 5px;
 }
 
-#wjibexvqoi .gt_left {
+#cvsgkdctmt .gt_left {
   text-align: left;
 }
 
-#wjibexvqoi .gt_center {
+#cvsgkdctmt .gt_center {
   text-align: center;
 }
 
-#wjibexvqoi .gt_right {
+#cvsgkdctmt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wjibexvqoi .gt_font_normal {
+#cvsgkdctmt .gt_font_normal {
   font-weight: normal;
 }
 
-#wjibexvqoi .gt_font_bold {
+#cvsgkdctmt .gt_font_bold {
   font-weight: bold;
 }
 
-#wjibexvqoi .gt_font_italic {
+#cvsgkdctmt .gt_font_italic {
   font-style: italic;
 }
 
-#wjibexvqoi .gt_super {
+#cvsgkdctmt .gt_super {
   font-size: 65%;
 }
 
-#wjibexvqoi .gt_footnote_marks {
+#cvsgkdctmt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wjibexvqoi .gt_asterisk {
+#cvsgkdctmt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wjibexvqoi .gt_indent_1 {
+#cvsgkdctmt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wjibexvqoi .gt_indent_2 {
+#cvsgkdctmt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wjibexvqoi .gt_indent_3 {
+#cvsgkdctmt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wjibexvqoi .gt_indent_4 {
+#cvsgkdctmt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wjibexvqoi .gt_indent_5 {
+#cvsgkdctmt .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -618,12 +607,12 @@ tbody tr:last-child {
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="NPI">NPI</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Npi">Npi</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Last Name">Last Name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="First Name">First Name</th>
     </tr></thead>
 <tbody class="gt_table_body"><tr>
-<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1144224569</td>
+<td headers="npi" class="gt_row gt_right">1144224569</td>
 <td headers="last_name" class="gt_row gt_left">Clouse</td>
 <td headers="first_name" class="gt_row gt_left">John</td>
 </tr></tbody>
@@ -632,9 +621,9 @@ tbody tr:last-child {
     </tr></tfoot>
 </table>
 </div>
-<p><br></p>
-<p>Searching for him in the NPPES shows that he has identifiers but no
-endpoint information:</p>
+<p><br><br></p>
+<p>Searching for him in the NPPES shows that he has Identifiers, but no
+Endpoint information:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, </span>
@@ -644,39 +633,26 @@ endpoint information:</p>
 <span>                <span class="va">id_issuer</span>, </span>
 <span>                <span class="va">id_state</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
-<span>                                   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">id_identifier</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"NPI"</span>, </span>
-<span>                 last_name <span class="op">=</span> <span class="st">"Last Name"</span>, </span>
-<span>                 first_name <span class="op">=</span> <span class="st">"First Name"</span>,</span>
-<span>                 id_issuer <span class="op">=</span> <span class="st">"Issuer"</span>,</span>
-<span>                 id_identifier <span class="op">=</span> <span class="st">"Identifier"</span>,</span>
-<span>                 id_state <span class="op">=</span> <span class="st">"State"</span><span class="op">)</span><span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-<div id="owwpmhurbh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span>, </span>
+<span>                     divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"last_name"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="ztvijyypys" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#owwpmhurbh table {
+#ztvijyypys table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#owwpmhurbh thead, #owwpmhurbh tbody, #owwpmhurbh tfoot, #owwpmhurbh tr, #owwpmhurbh td, #owwpmhurbh th {
+#ztvijyypys thead, #ztvijyypys tbody, #ztvijyypys tfoot, #ztvijyypys tr, #ztvijyypys td, #ztvijyypys th {
   border-style: none;
 }
 
-#owwpmhurbh p {
+#ztvijyypys p {
   margin: 0;
   padding: 0;
 }
 
-#owwpmhurbh .gt_table {
+#ztvijyypys .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -702,12 +678,12 @@ endpoint information:</p>
   border-left-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_caption {
+#ztvijyypys .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#owwpmhurbh .gt_title {
+#ztvijyypys .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -719,7 +695,7 @@ endpoint information:</p>
   border-bottom-width: 0;
 }
 
-#owwpmhurbh .gt_subtitle {
+#ztvijyypys .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -731,7 +707,7 @@ endpoint information:</p>
   border-top-width: 0;
 }
 
-#owwpmhurbh .gt_heading {
+#ztvijyypys .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -743,13 +719,13 @@ endpoint information:</p>
   border-right-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_bottom_border {
+#ztvijyypys .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_col_headings {
+#ztvijyypys .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -764,7 +740,7 @@ endpoint information:</p>
   border-right-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_col_heading {
+#ztvijyypys .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -784,7 +760,7 @@ endpoint information:</p>
   overflow-x: hidden;
 }
 
-#owwpmhurbh .gt_column_spanner_outer {
+#ztvijyypys .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -796,15 +772,15 @@ endpoint information:</p>
   padding-right: 4px;
 }
 
-#owwpmhurbh .gt_column_spanner_outer:first-child {
+#ztvijyypys .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#owwpmhurbh .gt_column_spanner_outer:last-child {
+#ztvijyypys .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#owwpmhurbh .gt_column_spanner {
+#ztvijyypys .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -816,11 +792,11 @@ endpoint information:</p>
   width: 100%;
 }
 
-#owwpmhurbh .gt_spanner_row {
+#ztvijyypys .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#owwpmhurbh .gt_group_heading {
+#ztvijyypys .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -846,7 +822,7 @@ endpoint information:</p>
   text-align: left;
 }
 
-#owwpmhurbh .gt_empty_group_heading {
+#ztvijyypys .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -861,15 +837,15 @@ endpoint information:</p>
   vertical-align: middle;
 }
 
-#owwpmhurbh .gt_from_md > :first-child {
+#ztvijyypys .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#owwpmhurbh .gt_from_md > :last-child {
+#ztvijyypys .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#owwpmhurbh .gt_row {
+#ztvijyypys .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -888,7 +864,7 @@ endpoint information:</p>
   overflow-x: hidden;
 }
 
-#owwpmhurbh .gt_stub {
+#ztvijyypys .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -901,7 +877,7 @@ endpoint information:</p>
   padding-right: 5px;
 }
 
-#owwpmhurbh .gt_stub_row_group {
+#ztvijyypys .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -915,15 +891,15 @@ endpoint information:</p>
   vertical-align: top;
 }
 
-#owwpmhurbh .gt_row_group_first td {
+#ztvijyypys .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#owwpmhurbh .gt_row_group_first th {
+#ztvijyypys .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#owwpmhurbh .gt_summary_row {
+#ztvijyypys .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -933,16 +909,16 @@ endpoint information:</p>
   padding-right: 5px;
 }
 
-#owwpmhurbh .gt_first_summary_row {
+#ztvijyypys .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_first_summary_row.thick {
+#ztvijyypys .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#owwpmhurbh .gt_last_summary_row {
+#ztvijyypys .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -952,7 +928,7 @@ endpoint information:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_grand_summary_row {
+#ztvijyypys .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -962,7 +938,7 @@ endpoint information:</p>
   padding-right: 5px;
 }
 
-#owwpmhurbh .gt_first_grand_summary_row {
+#ztvijyypys .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -972,7 +948,7 @@ endpoint information:</p>
   border-top-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_last_grand_summary_row_top {
+#ztvijyypys .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -982,11 +958,11 @@ endpoint information:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_striped {
+#ztvijyypys .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#owwpmhurbh .gt_table_body {
+#ztvijyypys .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -995,7 +971,7 @@ endpoint information:</p>
   border-bottom-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_footnotes {
+#ztvijyypys .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1009,7 +985,7 @@ endpoint information:</p>
   border-right-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_footnote {
+#ztvijyypys .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1018,7 +994,7 @@ endpoint information:</p>
   padding-right: 5px;
 }
 
-#owwpmhurbh .gt_sourcenotes {
+#ztvijyypys .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1032,7 +1008,7 @@ endpoint information:</p>
   border-right-color: #D3D3D3;
 }
 
-#owwpmhurbh .gt_sourcenote {
+#ztvijyypys .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1040,63 +1016,63 @@ endpoint information:</p>
   padding-right: 5px;
 }
 
-#owwpmhurbh .gt_left {
+#ztvijyypys .gt_left {
   text-align: left;
 }
 
-#owwpmhurbh .gt_center {
+#ztvijyypys .gt_center {
   text-align: center;
 }
 
-#owwpmhurbh .gt_right {
+#ztvijyypys .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#owwpmhurbh .gt_font_normal {
+#ztvijyypys .gt_font_normal {
   font-weight: normal;
 }
 
-#owwpmhurbh .gt_font_bold {
+#ztvijyypys .gt_font_bold {
   font-weight: bold;
 }
 
-#owwpmhurbh .gt_font_italic {
+#ztvijyypys .gt_font_italic {
   font-style: italic;
 }
 
-#owwpmhurbh .gt_super {
+#ztvijyypys .gt_super {
   font-size: 65%;
 }
 
-#owwpmhurbh .gt_footnote_marks {
+#ztvijyypys .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#owwpmhurbh .gt_asterisk {
+#ztvijyypys .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#owwpmhurbh .gt_indent_1 {
+#ztvijyypys .gt_indent_1 {
   text-indent: 5px;
 }
 
-#owwpmhurbh .gt_indent_2 {
+#ztvijyypys .gt_indent_2 {
   text-indent: 10px;
 }
 
-#owwpmhurbh .gt_indent_3 {
+#ztvijyypys .gt_indent_3 {
   text-indent: 15px;
 }
 
-#owwpmhurbh .gt_indent_4 {
+#ztvijyypys .gt_indent_4 {
   text-indent: 20px;
 }
 
-#owwpmhurbh .gt_indent_5 {
+#ztvijyypys .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1106,27 +1082,27 @@ tbody tr:last-child {
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="NPI">NPI</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Npi">Npi</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="First Name">First Name</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Last Name">Last Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Identifier">Identifier</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Issuer">Issuer</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="State">State</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Id Identifier">Id Identifier</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Id Issuer">Id Issuer</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Id State">Id State</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1144224569</td>
+<td headers="npi" class="gt_row gt_right">1144224569</td>
 <td headers="first_name" class="gt_row gt_left">JOHN</td>
-<td headers="last_name" class="gt_row gt_left">CLOUSE</td>
-<td headers="id_identifier" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">148380071</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">CLOUSE</td>
+<td headers="id_identifier" class="gt_row gt_right">148380071</td>
 <td headers="id_issuer" class="gt_row gt_left">Medicare PTAN (non-Medicare)</td>
 <td headers="id_state" class="gt_row gt_left">MO</td>
 </tr>
 <tr>
-<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1144224569</td>
+<td headers="npi" class="gt_row gt_right">1144224569</td>
 <td headers="first_name" class="gt_row gt_left">JOHN</td>
-<td headers="last_name" class="gt_row gt_left">CLOUSE</td>
-<td headers="id_identifier" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">201574423</td>
+<td headers="last_name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">CLOUSE</td>
+<td headers="id_identifier" class="gt_row gt_right">201574423</td>
 <td headers="id_issuer" class="gt_row gt_left">MEDICAID</td>
 <td headers="id_state" class="gt_row gt_left">MO</td>
 </tr>
@@ -1136,58 +1112,46 @@ tbody tr:last-child {
     </tr></tfoot>
 </table>
 </div>
-<p><br></p>
-<p>A provider that does not appear has entered Endpoint information into
+<p><br><br></p>
+<p>On the other hand, a provider that does not appear in the Missing
+Information API results should have Endpoint information entered into
 the NPPES NPI Registry.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> No results for <span style="color: #0000BB;">npi: 1003000423</span></span></span></code></pre></div>
-<p><br></p>
+<p><br><br></p>
+<p>And checking the NPPES, we see that she does have Enpoint
+information:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, </span>
-<span>                <span class="va">first_name</span>, </span>
-<span>                <span class="va">last_name</span>, </span>
-<span>                <span class="va">end_endpoint</span>,</span>
-<span>                <span class="va">end_endpointTypeDescription</span>,</span>
-<span>                <span class="va">end_endpointDescription</span>,</span>
-<span>                <span class="va">end_contentOtherDescription</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="co">#provider:::display_long() |&gt; </span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="st">"NPI"</span> <span class="op">=</span> <span class="va">npi</span>, </span>
+<span>                <span class="st">"First Name"</span> <span class="op">=</span> <span class="va">first_name</span>, </span>
+<span>                <span class="st">"Last Name"</span> <span class="op">=</span> <span class="va">last_name</span>, </span>
+<span>                Endpoint <span class="op">=</span> <span class="va">end_endpoint</span>,</span>
+<span>                Type <span class="op">=</span> <span class="va">end_endpointTypeDescription</span>,</span>
+<span>                Description <span class="op">=</span> <span class="va">end_endpointDescription</span>,</span>
+<span>                Content <span class="op">=</span> <span class="va">end_contentOtherDescription</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span></span>
-<span>    style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
-<span>                                   <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"NPI"</span>, </span>
-<span>                 last_name <span class="op">=</span> <span class="st">"Last Name"</span>, </span>
-<span>                 first_name <span class="op">=</span> <span class="st">"First Name"</span>,</span>
-<span>                 end_endpoint <span class="op">=</span> <span class="st">"Endpoint"</span>,</span>
-<span>                 end_endpointTypeDescription <span class="op">=</span> <span class="st">"Type"</span>,</span>
-<span>                 end_endpointDescription <span class="op">=</span> <span class="st">"Description"</span>,</span>
-<span>                 end_contentOtherDescription <span class="op">=</span> <span class="st">"Content"</span><span class="op">)</span><span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-<div id="noowoqglpe" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span>, divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="gzpkapluao" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#noowoqglpe table {
+#gzpkapluao table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#noowoqglpe thead, #noowoqglpe tbody, #noowoqglpe tfoot, #noowoqglpe tr, #noowoqglpe td, #noowoqglpe th {
+#gzpkapluao thead, #gzpkapluao tbody, #gzpkapluao tfoot, #gzpkapluao tr, #gzpkapluao td, #gzpkapluao th {
   border-style: none;
 }
 
-#noowoqglpe p {
+#gzpkapluao p {
   margin: 0;
   padding: 0;
 }
 
-#noowoqglpe .gt_table {
+#gzpkapluao .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1213,12 +1177,12 @@ the NPPES NPI Registry.</p>
   border-left-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_caption {
+#gzpkapluao .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#noowoqglpe .gt_title {
+#gzpkapluao .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1230,7 +1194,7 @@ the NPPES NPI Registry.</p>
   border-bottom-width: 0;
 }
 
-#noowoqglpe .gt_subtitle {
+#gzpkapluao .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1242,7 +1206,7 @@ the NPPES NPI Registry.</p>
   border-top-width: 0;
 }
 
-#noowoqglpe .gt_heading {
+#gzpkapluao .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1254,13 +1218,13 @@ the NPPES NPI Registry.</p>
   border-right-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_bottom_border {
+#gzpkapluao .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_col_headings {
+#gzpkapluao .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1275,7 +1239,7 @@ the NPPES NPI Registry.</p>
   border-right-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_col_heading {
+#gzpkapluao .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1295,7 +1259,7 @@ the NPPES NPI Registry.</p>
   overflow-x: hidden;
 }
 
-#noowoqglpe .gt_column_spanner_outer {
+#gzpkapluao .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1307,15 +1271,15 @@ the NPPES NPI Registry.</p>
   padding-right: 4px;
 }
 
-#noowoqglpe .gt_column_spanner_outer:first-child {
+#gzpkapluao .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#noowoqglpe .gt_column_spanner_outer:last-child {
+#gzpkapluao .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#noowoqglpe .gt_column_spanner {
+#gzpkapluao .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1327,11 +1291,11 @@ the NPPES NPI Registry.</p>
   width: 100%;
 }
 
-#noowoqglpe .gt_spanner_row {
+#gzpkapluao .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#noowoqglpe .gt_group_heading {
+#gzpkapluao .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1357,7 +1321,7 @@ the NPPES NPI Registry.</p>
   text-align: left;
 }
 
-#noowoqglpe .gt_empty_group_heading {
+#gzpkapluao .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1372,15 +1336,15 @@ the NPPES NPI Registry.</p>
   vertical-align: middle;
 }
 
-#noowoqglpe .gt_from_md > :first-child {
+#gzpkapluao .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#noowoqglpe .gt_from_md > :last-child {
+#gzpkapluao .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#noowoqglpe .gt_row {
+#gzpkapluao .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1399,7 +1363,7 @@ the NPPES NPI Registry.</p>
   overflow-x: hidden;
 }
 
-#noowoqglpe .gt_stub {
+#gzpkapluao .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1412,7 +1376,7 @@ the NPPES NPI Registry.</p>
   padding-right: 5px;
 }
 
-#noowoqglpe .gt_stub_row_group {
+#gzpkapluao .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1426,15 +1390,15 @@ the NPPES NPI Registry.</p>
   vertical-align: top;
 }
 
-#noowoqglpe .gt_row_group_first td {
+#gzpkapluao .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#noowoqglpe .gt_row_group_first th {
+#gzpkapluao .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#noowoqglpe .gt_summary_row {
+#gzpkapluao .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1444,16 +1408,16 @@ the NPPES NPI Registry.</p>
   padding-right: 5px;
 }
 
-#noowoqglpe .gt_first_summary_row {
+#gzpkapluao .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_first_summary_row.thick {
+#gzpkapluao .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#noowoqglpe .gt_last_summary_row {
+#gzpkapluao .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1463,7 +1427,7 @@ the NPPES NPI Registry.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_grand_summary_row {
+#gzpkapluao .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1473,7 +1437,7 @@ the NPPES NPI Registry.</p>
   padding-right: 5px;
 }
 
-#noowoqglpe .gt_first_grand_summary_row {
+#gzpkapluao .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1483,7 +1447,7 @@ the NPPES NPI Registry.</p>
   border-top-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_last_grand_summary_row_top {
+#gzpkapluao .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1493,11 +1457,11 @@ the NPPES NPI Registry.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_striped {
+#gzpkapluao .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#noowoqglpe .gt_table_body {
+#gzpkapluao .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1506,7 +1470,7 @@ the NPPES NPI Registry.</p>
   border-bottom-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_footnotes {
+#gzpkapluao .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1520,7 +1484,7 @@ the NPPES NPI Registry.</p>
   border-right-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_footnote {
+#gzpkapluao .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1529,7 +1493,7 @@ the NPPES NPI Registry.</p>
   padding-right: 5px;
 }
 
-#noowoqglpe .gt_sourcenotes {
+#gzpkapluao .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1543,7 +1507,7 @@ the NPPES NPI Registry.</p>
   border-right-color: #D3D3D3;
 }
 
-#noowoqglpe .gt_sourcenote {
+#gzpkapluao .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1551,63 +1515,63 @@ the NPPES NPI Registry.</p>
   padding-right: 5px;
 }
 
-#noowoqglpe .gt_left {
+#gzpkapluao .gt_left {
   text-align: left;
 }
 
-#noowoqglpe .gt_center {
+#gzpkapluao .gt_center {
   text-align: center;
 }
 
-#noowoqglpe .gt_right {
+#gzpkapluao .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#noowoqglpe .gt_font_normal {
+#gzpkapluao .gt_font_normal {
   font-weight: normal;
 }
 
-#noowoqglpe .gt_font_bold {
+#gzpkapluao .gt_font_bold {
   font-weight: bold;
 }
 
-#noowoqglpe .gt_font_italic {
+#gzpkapluao .gt_font_italic {
   font-style: italic;
 }
 
-#noowoqglpe .gt_super {
+#gzpkapluao .gt_super {
   font-size: 65%;
 }
 
-#noowoqglpe .gt_footnote_marks {
+#gzpkapluao .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#noowoqglpe .gt_asterisk {
+#gzpkapluao .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#noowoqglpe .gt_indent_1 {
+#gzpkapluao .gt_indent_1 {
   text-indent: 5px;
 }
 
-#noowoqglpe .gt_indent_2 {
+#gzpkapluao .gt_indent_2 {
   text-indent: 10px;
 }
 
-#noowoqglpe .gt_indent_3 {
+#gzpkapluao .gt_indent_3 {
   text-indent: 15px;
 }
 
-#noowoqglpe .gt_indent_4 {
+#gzpkapluao .gt_indent_4 {
   text-indent: 20px;
 }
 
-#noowoqglpe .gt_indent_5 {
+#gzpkapluao .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1617,25 +1581,41 @@ tbody tr:last-child {
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="NPI">NPI</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="First Name">First Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Last Name">Last Name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Endpoint">Endpoint</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Type">Type</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Description">Description</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Content">Content</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Name">Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Value">Value</th>
     </tr></thead>
-<tbody class="gt_table_body"><tr>
-<td headers="npi" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1003000423</td>
-<td headers="first_name" class="gt_row gt_left">JENNIFER</td>
-<td headers="last_name" class="gt_row gt_left">VELOTTA</td>
-<td headers="end_endpoint" class="gt_row gt_left">Jennifervelotta@logeclinicaldirectpluscom</td>
-<td headers="end_endpointTypeDescription" class="gt_row gt_left">Direct Messaging Address</td>
-<td headers="end_endpointDescription" class="gt_row gt_left">eclinicaldirectplus</td>
-<td headers="end_contentOtherDescription" class="gt_row gt_left">CCDA</td>
-</tr></tbody>
+<tbody class="gt_table_body">
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">NPI</td>
+<td headers="value" class="gt_row gt_left">1003000423</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">First Name</td>
+<td headers="value" class="gt_row gt_left">JENNIFER</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Last Name</td>
+<td headers="value" class="gt_row gt_left">VELOTTA</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Endpoint</td>
+<td headers="value" class="gt_row gt_left">Jennifervelotta@logeclinicaldirectpluscom</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Type</td>
+<td headers="value" class="gt_row gt_left">Direct Messaging Address</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Description</td>
+<td headers="value" class="gt_row gt_left">eclinicaldirectplus</td>
+</tr>
+<tr>
+<td headers="name" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Content</td>
+<td headers="value" class="gt_row gt_left">CCDA</td>
+</tr>
+</tbody>
 <tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="7">Source: data.cms.gov</td>
+<td class="gt_sourcenote" colspan="2">Source: data.cms.gov</td>
     </tr></tfoot>
 </table>
 </div>
@@ -1643,24 +1623,24 @@ tbody tr:last-child {
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="kplscznoag" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="oymlutebnb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#kplscznoag table {
+#oymlutebnb table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kplscznoag thead, #kplscznoag tbody, #kplscznoag tfoot, #kplscznoag tr, #kplscznoag td, #kplscznoag th {
+#oymlutebnb thead, #oymlutebnb tbody, #oymlutebnb tfoot, #oymlutebnb tr, #oymlutebnb td, #oymlutebnb th {
   border-style: none;
 }
 
-#kplscznoag p {
+#oymlutebnb p {
   margin: 0;
   padding: 0;
 }
 
-#kplscznoag .gt_table {
+#oymlutebnb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1686,12 +1666,12 @@ tbody tr:last-child {
   border-left-color: #D3D3D3;
 }
 
-#kplscznoag .gt_caption {
+#oymlutebnb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kplscznoag .gt_title {
+#oymlutebnb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1703,7 +1683,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#kplscznoag .gt_subtitle {
+#oymlutebnb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1715,7 +1695,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#kplscznoag .gt_heading {
+#oymlutebnb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1727,13 +1707,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kplscznoag .gt_bottom_border {
+#oymlutebnb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#kplscznoag .gt_col_headings {
+#oymlutebnb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -1748,7 +1728,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kplscznoag .gt_col_heading {
+#oymlutebnb .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -1768,7 +1748,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#kplscznoag .gt_column_spanner_outer {
+#oymlutebnb .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -1780,15 +1760,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#kplscznoag .gt_column_spanner_outer:first-child {
+#oymlutebnb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kplscznoag .gt_column_spanner_outer:last-child {
+#oymlutebnb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kplscznoag .gt_column_spanner {
+#oymlutebnb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -1800,11 +1780,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#kplscznoag .gt_spanner_row {
+#oymlutebnb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kplscznoag .gt_group_heading {
+#oymlutebnb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1830,7 +1810,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#kplscznoag .gt_empty_group_heading {
+#oymlutebnb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1845,15 +1825,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#kplscznoag .gt_from_md > :first-child {
+#oymlutebnb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kplscznoag .gt_from_md > :last-child {
+#oymlutebnb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kplscznoag .gt_row {
+#oymlutebnb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1872,7 +1852,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#kplscznoag .gt_stub {
+#oymlutebnb .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -1885,7 +1865,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kplscznoag .gt_stub_row_group {
+#oymlutebnb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1899,15 +1879,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#kplscznoag .gt_row_group_first td {
+#oymlutebnb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kplscznoag .gt_row_group_first th {
+#oymlutebnb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kplscznoag .gt_summary_row {
+#oymlutebnb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1917,16 +1897,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kplscznoag .gt_first_summary_row {
+#oymlutebnb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#kplscznoag .gt_first_summary_row.thick {
+#oymlutebnb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kplscznoag .gt_last_summary_row {
+#oymlutebnb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1936,7 +1916,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#kplscznoag .gt_grand_summary_row {
+#oymlutebnb .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -1946,7 +1926,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kplscznoag .gt_first_grand_summary_row {
+#oymlutebnb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1956,7 +1936,7 @@ tbody tr:last-child {
   border-top-color: #5F5F5F;
 }
 
-#kplscznoag .gt_last_grand_summary_row_top {
+#oymlutebnb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1966,11 +1946,11 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#kplscznoag .gt_striped {
+#oymlutebnb .gt_striped {
   background-color: #FEEDEC;
 }
 
-#kplscznoag .gt_table_body {
+#oymlutebnb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -1979,7 +1959,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#kplscznoag .gt_footnotes {
+#oymlutebnb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1993,7 +1973,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kplscznoag .gt_footnote {
+#oymlutebnb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2002,7 +1982,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kplscznoag .gt_sourcenotes {
+#oymlutebnb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2016,7 +1996,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#kplscznoag .gt_sourcenote {
+#oymlutebnb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2024,63 +2004,63 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#kplscznoag .gt_left {
+#oymlutebnb .gt_left {
   text-align: left;
 }
 
-#kplscznoag .gt_center {
+#oymlutebnb .gt_center {
   text-align: center;
 }
 
-#kplscznoag .gt_right {
+#oymlutebnb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kplscznoag .gt_font_normal {
+#oymlutebnb .gt_font_normal {
   font-weight: normal;
 }
 
-#kplscznoag .gt_font_bold {
+#oymlutebnb .gt_font_bold {
   font-weight: bold;
 }
 
-#kplscznoag .gt_font_italic {
+#oymlutebnb .gt_font_italic {
   font-style: italic;
 }
 
-#kplscznoag .gt_super {
+#oymlutebnb .gt_super {
   font-size: 65%;
 }
 
-#kplscznoag .gt_footnote_marks {
+#oymlutebnb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kplscznoag .gt_asterisk {
+#oymlutebnb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kplscznoag .gt_indent_1 {
+#oymlutebnb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kplscznoag .gt_indent_2 {
+#oymlutebnb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kplscznoag .gt_indent_3 {
+#oymlutebnb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kplscznoag .gt_indent_4 {
+#oymlutebnb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kplscznoag .gt_indent_5 {
+#oymlutebnb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

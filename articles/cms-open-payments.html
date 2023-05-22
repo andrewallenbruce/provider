@@ -154,30 +154,34 @@ covered recipients like physicians.</p>
 <h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 105 × 42</span></span></span>
+<code class="sourceCode R"><span><span class="va">overall</span> <span class="op">&lt;-</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">primary_other</span>, <span class="va">specialty_other</span>, <span class="va">license_state_other</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">overall</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 353 × 45</span></span></span>
 <span><span class="co">#&gt;    year  npi      profile_id changed cov_type first_name last_name address city </span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021  1043218… 92058      FALSE   Physici… Ahad       Mahootchi 6739 G… Zeph…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 95 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 33 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   primary_type &lt;chr&gt;, primary_other &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_other &lt;chr&gt;, license_state &lt;chr&gt;, license_state_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, phys_ownship &lt;lgl&gt;, third_pay &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI PO BOX… ZEPH…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 343 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 36 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   primary_type &lt;chr&gt;, specialty &lt;chr&gt;, license_state &lt;chr&gt;, payer_id &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;, payer_country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;, pay_form &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pay_nature &lt;chr&gt;, travel_city &lt;chr&gt;, travel_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   travel_country &lt;chr&gt;, phys_ownship &lt;lgl&gt;, third_pay &lt;chr&gt;, …</span></span></span></code></pre></div>
 <details><summary>
 Code for table
 </summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -185,7 +189,6 @@ Code for table
 <span>                       year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">year</span>, </span>
 <span>                  <span class="va">payer_name</span>,</span>
 <span>                  <span class="va">pay_nature</span>,</span>
@@ -220,27 +223,26 @@ Code for table
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider Eligibility to Refer Patients to **Medicare Part B**, </span></span>
 <span><span class="st">                      **Home Health Agencies**, **Durable Medical Equipment Suppliers**, </span></span>
 <span><span class="st">                      and **Powered Mobility Devices**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: www.cms.gov/OpenPayments"</span><span class="op">)</span></span>
-<span><span class="co">#|&gt; gt::opt_table_font(font = gt::google_font(name = "Karla"))</span></span></code></pre></div>
-</details><div id="itfazoxyau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: www.cms.gov/OpenPayments"</span><span class="op">)</span></span></code></pre></div>
+</details><div id="qxcbedhzst" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#itfazoxyau table {
+#qxcbedhzst table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#itfazoxyau thead, #itfazoxyau tbody, #itfazoxyau tfoot, #itfazoxyau tr, #itfazoxyau td, #itfazoxyau th {
+#qxcbedhzst thead, #qxcbedhzst tbody, #qxcbedhzst tfoot, #qxcbedhzst tr, #qxcbedhzst td, #qxcbedhzst th {
   border-style: none;
 }
 
-#itfazoxyau p {
+#qxcbedhzst p {
   margin: 0;
   padding: 0;
 }
 
-#itfazoxyau .gt_table {
+#qxcbedhzst .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -266,12 +268,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_caption {
+#qxcbedhzst .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#itfazoxyau .gt_title {
+#qxcbedhzst .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -283,7 +285,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#itfazoxyau .gt_subtitle {
+#qxcbedhzst .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -295,7 +297,7 @@ Code for table
   border-top-width: 0;
 }
 
-#itfazoxyau .gt_heading {
+#qxcbedhzst .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -307,13 +309,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_bottom_border {
+#qxcbedhzst .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_col_headings {
+#qxcbedhzst .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -328,7 +330,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_col_heading {
+#qxcbedhzst .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -348,7 +350,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#itfazoxyau .gt_column_spanner_outer {
+#qxcbedhzst .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -360,15 +362,15 @@ Code for table
   padding-right: 4px;
 }
 
-#itfazoxyau .gt_column_spanner_outer:first-child {
+#qxcbedhzst .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#itfazoxyau .gt_column_spanner_outer:last-child {
+#qxcbedhzst .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#itfazoxyau .gt_column_spanner {
+#qxcbedhzst .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -380,11 +382,11 @@ Code for table
   width: 100%;
 }
 
-#itfazoxyau .gt_spanner_row {
+#qxcbedhzst .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#itfazoxyau .gt_group_heading {
+#qxcbedhzst .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -410,7 +412,7 @@ Code for table
   text-align: left;
 }
 
-#itfazoxyau .gt_empty_group_heading {
+#qxcbedhzst .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -425,15 +427,15 @@ Code for table
   vertical-align: middle;
 }
 
-#itfazoxyau .gt_from_md > :first-child {
+#qxcbedhzst .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#itfazoxyau .gt_from_md > :last-child {
+#qxcbedhzst .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#itfazoxyau .gt_row {
+#qxcbedhzst .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -452,7 +454,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#itfazoxyau .gt_stub {
+#qxcbedhzst .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -465,7 +467,7 @@ Code for table
   padding-right: 5px;
 }
 
-#itfazoxyau .gt_stub_row_group {
+#qxcbedhzst .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -479,15 +481,15 @@ Code for table
   vertical-align: top;
 }
 
-#itfazoxyau .gt_row_group_first td {
+#qxcbedhzst .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#itfazoxyau .gt_row_group_first th {
+#qxcbedhzst .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#itfazoxyau .gt_summary_row {
+#qxcbedhzst .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -497,16 +499,16 @@ Code for table
   padding-right: 5px;
 }
 
-#itfazoxyau .gt_first_summary_row {
+#qxcbedhzst .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_first_summary_row.thick {
+#qxcbedhzst .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#itfazoxyau .gt_last_summary_row {
+#qxcbedhzst .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -516,7 +518,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_grand_summary_row {
+#qxcbedhzst .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -526,7 +528,7 @@ Code for table
   padding-right: 5px;
 }
 
-#itfazoxyau .gt_first_grand_summary_row {
+#qxcbedhzst .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -536,7 +538,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_last_grand_summary_row_top {
+#qxcbedhzst .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,11 +548,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_striped {
+#qxcbedhzst .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#itfazoxyau .gt_table_body {
+#qxcbedhzst .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -559,7 +561,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_footnotes {
+#qxcbedhzst .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -573,7 +575,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_footnote {
+#qxcbedhzst .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -582,7 +584,7 @@ Code for table
   padding-right: 5px;
 }
 
-#itfazoxyau .gt_sourcenotes {
+#qxcbedhzst .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -596,7 +598,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#itfazoxyau .gt_sourcenote {
+#qxcbedhzst .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -604,63 +606,63 @@ Code for table
   padding-right: 5px;
 }
 
-#itfazoxyau .gt_left {
+#qxcbedhzst .gt_left {
   text-align: left;
 }
 
-#itfazoxyau .gt_center {
+#qxcbedhzst .gt_center {
   text-align: center;
 }
 
-#itfazoxyau .gt_right {
+#qxcbedhzst .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#itfazoxyau .gt_font_normal {
+#qxcbedhzst .gt_font_normal {
   font-weight: normal;
 }
 
-#itfazoxyau .gt_font_bold {
+#qxcbedhzst .gt_font_bold {
   font-weight: bold;
 }
 
-#itfazoxyau .gt_font_italic {
+#qxcbedhzst .gt_font_italic {
   font-style: italic;
 }
 
-#itfazoxyau .gt_super {
+#qxcbedhzst .gt_super {
   font-size: 65%;
 }
 
-#itfazoxyau .gt_footnote_marks {
+#qxcbedhzst .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#itfazoxyau .gt_asterisk {
+#qxcbedhzst .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#itfazoxyau .gt_indent_1 {
+#qxcbedhzst .gt_indent_1 {
   text-indent: 5px;
 }
 
-#itfazoxyau .gt_indent_2 {
+#qxcbedhzst .gt_indent_2 {
   text-indent: 10px;
 }
 
-#itfazoxyau .gt_indent_3 {
+#qxcbedhzst .gt_indent_3 {
   text-indent: 15px;
 }
 
-#itfazoxyau .gt_indent_4 {
+#qxcbedhzst .gt_indent_4 {
   text-indent: 20px;
 }
 
-#itfazoxyau .gt_indent_5 {
+#qxcbedhzst .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -710,7 +712,7 @@ and <strong>Powered Mobility Devices</strong>
 <td headers="pay_nature" class="gt_row gt_left">Consulting Fee</td>
 <td headers="pay_form" class="gt_row gt_left">Cash or cash equivalent</td>
 <td headers="category" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Ophthalmology</td>
-<td headers="payments" class="gt_row gt_right">1</td>
+<td headers="payments" class="gt_row gt_right">3</td>
 <td headers="amount" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">3000.00</td>
 </tr>
 <tr>
@@ -758,7 +760,7 @@ and <strong>Powered Mobility Devices</strong>
 <td headers="pay_nature" class="gt_row gt_left">Food and Beverage</td>
 <td headers="pay_form" class="gt_row gt_left">In-kind items and services</td>
 <td headers="category" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Ophthalmology</td>
-<td headers="payments" class="gt_row gt_right">5</td>
+<td headers="payments" class="gt_row gt_right">6</td>
 <td headers="amount" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">250.27</td>
 </tr>
 <tr>
@@ -766,7 +768,7 @@ and <strong>Powered Mobility Devices</strong>
 <td headers="pay_nature" class="gt_row gt_left">Food and Beverage</td>
 <td headers="pay_form" class="gt_row gt_left">In-kind items and services</td>
 <td headers="category" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Ophthalmology</td>
-<td headers="payments" class="gt_row gt_right">5</td>
+<td headers="payments" class="gt_row gt_right">10</td>
 <td headers="amount" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">175.53</td>
 </tr>
 <tr>
@@ -782,7 +784,7 @@ and <strong>Powered Mobility Devices</strong>
 <td headers="pay_nature" class="gt_row gt_left">Food and Beverage</td>
 <td headers="pay_form" class="gt_row gt_left">Cash or cash equivalent</td>
 <td headers="category" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Ophthalmology</td>
-<td headers="payments" class="gt_row gt_right">2</td>
+<td headers="payments" class="gt_row gt_right">4</td>
 <td headers="amount" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">156.86</td>
 </tr>
 <tr>
@@ -790,7 +792,7 @@ and <strong>Powered Mobility Devices</strong>
 <td headers="pay_nature" class="gt_row gt_left">Food and Beverage</td>
 <td headers="pay_form" class="gt_row gt_left">In-kind items and services</td>
 <td headers="category" class="gt_row gt_left" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">Ocular</td>
-<td headers="payments" class="gt_row gt_right">7</td>
+<td headers="payments" class="gt_row gt_right">14</td>
 <td headers="amount" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">138.46</td>
 </tr>
 <tr>
