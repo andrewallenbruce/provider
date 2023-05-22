@@ -32,6 +32,25 @@ The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a fr
 ## Search Examples
 
 ```{r}
+hospital_enrollment(facility_ccn = "060004")
+```
+<br>
 
+```{r}
+hospital_enrollment(state = "GA", city = "VALDOSTA")
 ```
 
+<br>
+
+```{r}
+hospital_enrollment(enroll_state = "GA")
+```
+<br>
+
+```{r, message=TRUE}
+hospital_enrollment(enroll_id = "O20030404000017")
+```
+
+<br><br>
+
+### Data Dictionary

@@ -7,7 +7,7 @@ output: html_document
 knitr::opts_chunk$set(
   collapse  = TRUE,
   echo      = TRUE, 
-  message   = FALSE, 
+  message   = TRUE, 
   warning   = FALSE,
   error     = TRUE,
   comment   = "#>",
@@ -21,17 +21,28 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
- > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
-
 <br>
 
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+The Pending Initial Logging and Tracking (L & T) dataset provides a list of pending applications that have not been processed by CMS contractors.
 
 <br>
 
 ## Search Examples
 
 ```{r}
-
+pending_applications(last_name = "Bruce", type = "physician")
 ```
 
+<br>
+
+```{r}
+pending_applications(last_name = "Bruce", type = "non-physician")
+```
+
+<br>
+
+
+### Links
+
+   * [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
+   * [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)

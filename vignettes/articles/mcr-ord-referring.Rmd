@@ -75,19 +75,7 @@ gt_oref <- order_refer(last_name = "Smith",
       gt::google_font(name = "Fira Code"), 
       gt::default_fonts())),
     locations = gt::cells_body(columns = c(npi))) |> 
-  gt::text_case_when(
-    x == TRUE ~ gt::html(fontawesome::fa("circle-check", 
-                               prefer_type = "solid", 
-                               fill = "black", 
-                               height = "1.75em", 
-                               width = "1.75em")),
-    x == FALSE ~ gt::html(fontawesome::fa("circle-xmark", 
-                                   prefer_type = "solid", 
-                                   fill = "red", 
-                               height = "1.75em", 
-                               width = "1.75em")),
-    .default = "", .locations = gt::cells_body(
-      columns = c(partb, dme, hha, pmd))) |> 
+  provider:::gt_check_xmark(cols = c(partb, dme, hha, pmd)) |> 
   gt::cols_label(first_name = "First Name", 
                  last_name = "Last Name",
                  partb = "Part B", 
@@ -104,8 +92,6 @@ gt_oref <- order_refer(last_name = "Smith",
                       **Home Health Agencies**, **Durable Medical Equipment Suppliers**, 
                       and **Powered Mobility Devices**")) |> 
   gt::tab_source_note(source_note = "Source: data.cms.gov")
-
-#|> gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 </details>
@@ -122,10 +108,21 @@ gt_oref
 ```{r echo=FALSE}
 tibble::tibble(
   Variable = c(
-    "`npi`", "`last_name`", "`first_name`", "`partb`", "`dme`",
-    "`hha`", "`pmd`"
-  ),
-  Description = c("NPI", "Last Name", "First Name", "Part B", "DME", "HHA", "PMD"),
+    "`npi`", 
+    "`last_name`", 
+    "`first_name`", 
+    "`partb`", 
+    "`dme`",
+    "`hha`", 
+    "`pmd`"),
+  Description = c(
+    "NPI", 
+    "Last Name", 
+    "First Name", 
+    "Part B", 
+    "DME", 
+    "HHA", 
+    "PMD"),
   Definition = c(
     "National Provider Identifier (NPI) of the Order and Referring Provider",
     "Last Name of the Order and Referring Provider", 
@@ -133,20 +130,8 @@ tibble::tibble(
     "Indicates if Provider can refer to Medicare Part B", 
     "Indicates if Provider can order Durable Medical Equipment (DME)",
     "Indicates if Provider can refer to a Home Health Agency (HHA)", 
-    "Indicates if Provider can order Power Mobility Devices (PMDs)"
-  )) |>
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+    "Indicates if Provider can order Power Mobility Devices (PMDs)")) |>
+  provider:::gt_datadict()
 ```
 
 <br>

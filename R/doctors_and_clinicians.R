@@ -142,7 +142,7 @@ doctors_and_clinicians <- function(npi           = NULL,
     results <- dplyr::rename_with(results, str_to_snakecase) |>
       tidyr::unite("address",
                    adr_ln_1:adr_ln_2,
-                   remove = TRUE, na.rm = TRUE) |>
+                   remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     num_org_mem = as.integer(num_org_mem),

@@ -44,20 +44,26 @@ navbar:
       - text: Geocoding
         href: articles/geocoding.html
       - text: API Overviews
-      - text: CMS Missing Contact Info
+      - text: Missing Info
         href: articles/cms-miss-contact-info.html
-      - text: CMS Open Payments
+      - text: Open Payments Program
         href: articles/cms-open-payments.html
-      - text: Medicare Monthly Enrollment
+      - text: Beneficiary Enrollment
         href: articles/mcr-month-enroll.html
-      - text: Medicare Provider Enrollment
+      - text: Provider Enrollment
         href: articles/mcr-ffs-prov-enroll.html
-      - text: Medicare Opt Out Affidavits
+      - text: Hospital Enrollment
+        href: articles/hospital-enrollment.html
+      - text: Facility Affiliations
+        href: articles/facility-affiliations.html
+      - text: Doctors and Clinicians
+        href: articles/doctors-and-clinicians.html
+      - text: Pending Applications
+        href: articles/pending-applications.html
+      - text: Opt Out Affidavits
         href: articles/mcr-opt-out-affid.html
-      - text: Medicare Order & Referring
+      - text: Order & Referring Eligibility
         href: articles/mcr-ord-referring.html
-      - text: Medicare Physicians & Practitioners
-        href: articles/mcr-phys-other-pract.html
       - text: Physician by Provider
         href: articles/physician-by-provider.html
       - text: Physician by Geography
@@ -66,11 +72,11 @@ navbar:
         href: articles/physician-by-service.html
       - text: Medicare Revalidation Dates
         href: articles/mcr-revalidation.html
-      - text: Medicare Taxonomy Crosswalk
+      - text: Taxonomy Crosswalk
         href: articles/mcr-taxon-crosswalk.html
       - text: Medicare Chronic Conditions
         href: articles/mcr-chron-cond.html
-      - text: NPPES NPI Public Registry
+      - text: NPPES NPI Registry
         href: articles/nppes-npi-registry.html
     news:
       icon: far fa-newspaper fa-lg

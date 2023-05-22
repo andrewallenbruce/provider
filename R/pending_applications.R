@@ -27,11 +27,11 @@
 pending_applications <- function(npi         = NULL,
                                  last_name   = NULL,
                                  first_name  = NULL,
-                                 type        = c("physician", "non-physician"),
+                                 type,
                                  tidy        = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
-  rlang::arg_match(type)
+  rlang::arg_match(type, c("physician", "non-physician"))
   # update distribution ids -------------------------------------------------
   id <- dplyr::case_when(
     type == "physician" ~ "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",

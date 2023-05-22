@@ -102,6 +102,7 @@ nppes_npi(npi = 1003000423) |>
                 end_endpointTypeDescription,
                 end_endpointDescription,
                 end_contentOtherDescription) |> 
+  #provider:::display_long() |> 
   dplyr::filter(dplyr::row_number() %in% c(1)) |> 
   gt::gt() |> 
   gt::tab_style(
@@ -120,42 +121,25 @@ nppes_npi(npi = 1003000423) |>
   gt::tab_source_note(source_note = "Source: data.cms.gov")
 ```
 
+<br><br>
 
 ### Data Dictionary
 
 ```{r echo=FALSE}
-dd <- tibble::tibble(
-  Variable = c("`npi`", 
-               "`last_name`", 
-               "`first_name`"),
-  Description = c("National Provider Identifier", 
-                  "Last Name", 
-                  "First Name"),
-  Definition = c("The provider's 10-digit National Provider Identifier.", 
-                 "Last name of the provider.", 
-                 "First name of the provider."))
-dd |> 
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_add_divider(
-    columns = c("Variable"), 
-    style = "solid",
-    color = "gray",
-    weight = gt::px(2),
-    include_labels = FALSE) |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 6, 
-                  color = "red", 
-                  add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |>
-  gt::opt_table_outline(style = "none") |> 
-  gt::opt_table_font(font = gt::google_font(name = "Karla")) |> 
-  gt::tab_options(table.width = gt::pct(100))
+tibble::tibble(
+  Variable = c(
+    "`npi`", 
+    "`last_name`", 
+    "`first_name`"),
+  Description = c(
+    "National Provider Identifier", 
+    "Last Name", 
+    "First Name"),
+  Definition = c(
+    "The provider's 10-digit National Provider Identifier.", 
+    "Last name of the provider.", 
+    "First name of the provider.")) |> 
+  provider:::gt_datadict()
 ```
 
 <br>

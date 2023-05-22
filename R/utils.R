@@ -262,7 +262,7 @@ entype_arg <- function(x){
   )
 }
 
-#' Convert I/O char values to logical ----------------------
+#' Convert Place of Service values ----------------------
 #' @param x vector
 #' @autoglobal
 #' @noRd
@@ -273,7 +273,7 @@ pos_char <- function(x){
   )
 }
 
-#' Convert I/O char values to logical ----------------------
+#' Convert Open Payments Changed col to logical ----------------------
 #' @param x vector
 #' @autoglobal
 #' @noRd
@@ -420,6 +420,7 @@ convert_breaks <- function(x, decimal = FALSE) {
 #' @autoglobal
 #' @noRd
 gt_theme_provider <- function(data,...){
+
   data |>
     gt::opt_all_caps() |>
     gt::opt_row_striping() |>
@@ -474,31 +475,78 @@ gt_theme_provider <- function(data,...){
       ...)
 }
 
+#' @param x column
+#' @autoglobal
 #' @noRd
-gt_add_badge <- function(x){
+gt_entype_badge <- function(x) {
   add_color <- if (x == "Individual") {
     "background: hsl(116, 60%, 90%); color: hsl(116, 30%, 25%);"
   } else if (x == "Organization") {
     "background: hsl(350, 70%, 90%); color: hsl(350, 45%, 30%);"
-  } else if (x != "Individual" | x != "Organization") { x
-  }
-  div_out <- htmltools::div(
-    style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;", add_color), x)
-  as.character(div_out) |> gt::html()
-}
-
-#' @noRd
-gt_check_xmark <- function(x) {
-  add_checkx <- if (x == TRUE) {
-    fontawesome::fa("circle-check", prefer_type = "solid", fill = "#F24141", height = "1.5em", width = "1.5em")
-  } else if (x == "FALSE") {
-    fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "#F54444")
   } else if (x != "Individual" | x != "Organization") {
     x
   }
-  div_out <- htmltools::div(style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;", add_checkx), x)
-  as.character(div_out) |> gt::html()
+  div_out <- htmltools::div(
+    style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;",
+                  add_color), x)
+  as.character(div_out) |>
+    gt::html()
 }
+
+#' @param gt_tbl gt_tbl object
+#' @param cols columns in data frame
+#' @autoglobal
+#' @noRd
+gt_check_xmark <- function(gt_tbl, cols) {
+
+  gt_tbl |>
+    gt::text_case_when(
+      x == TRUE ~ gt::html(
+        fontawesome::fa("circle-check",
+                      prefer_type = "solid",
+                      fill = "black",
+                      height = "1.75em",
+                      width = "1.75em")),
+    x == FALSE ~ gt::html(
+      fontawesome::fa("circle-xmark",
+                      prefer_type = "solid",
+                      fill = "red",
+                      height = "1.75em",
+                      width = "1.75em")),
+    .default = NA,
+    .locations = gt::cells_body(
+      columns = {{ cols }}))
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+gt_datadict <- function(df) {
+
+  df |>
+    gt::gt() |>
+    gt::fmt_markdown(columns = Variable) |>
+    gtExtras::gt_add_divider(
+      columns = c("Variable"),
+      style = "solid",
+      color = "gray",
+      weight = gt::px(2),
+      include_labels = FALSE) |>
+    gtExtras::gt_merge_stack(col1 = Description,
+                             col2 = Definition,
+                             small_cap = FALSE,
+                             font_size = c("16px", "14px"),
+                             font_weight = c("bold", "normal"),
+                             palette = c("black", "darkgray")) |>
+    gt::opt_stylize(style = 6,
+                    color = "red",
+                    add_row_striping = FALSE) |>
+    gt::opt_table_lines(extent = "default") |>
+    gt::opt_table_outline(style = "none") |>
+    gt::opt_table_font(font = gt::google_font(name = "Karla")) |>
+    gt::tab_options(table.width = gt::pct(100))
+
+  }
 
 
 #' readme function table ---------------------------------------------------

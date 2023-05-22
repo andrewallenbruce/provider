@@ -21,17 +21,77 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
- > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
 
 <br>
 
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+Facility affiliations data publicly reported in the Provider Data Catalog.
 
 <br>
 
 ## Search Examples
 
 ```{r}
-
+facility_affiliations(npi = 1003019563)
 ```
 
+<br>
+
+```{r}
+facility_affiliations(facility_ccn = "060004")
+```
+
+<br>
+
+```{r}
+facility_affiliations(parent_ccn = 670055)
+```
+
+<br>
+
+```{r}
+facility_affiliations(first_name = "John", 
+                      last_name = "Hill", 
+                      facility_type = "Home Health Agency")
+```
+
+<br><br>
+
+### Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`npi`",
+    "`pac_id`",
+    "`first_name`",
+    "`middle_name`",
+    "`last_name`",
+    "`suffix`",
+    "`facility_type`",
+    "`facility_ccn`",
+    "`parent_ccn`"
+    ),
+  Description = c(
+    "National Provider Identifier", 
+    "Provider Associate Level ID (PAC ID)",
+    "First Name",
+    "Middle Name",
+    "Last Name", 
+    "Suffix",
+    "Facility Type",
+    "Facility Affiliations CCN",
+    "Facility Affiliations Parent CCN"
+    ),
+  Definition = c(
+    "Unique clinician ID assigned by NPPES.", 
+    "Unique individual clinician ID assigned by PECOS.",
+    "Individual clinician first name.",
+    "Individual clinician middle name.",
+    "Individual clinician last name.",
+    "Individual clinician suffix.",
+    "Facilities can fall into the following type categories: Hospital, Long-term Care Hospital, Nursing Home, Inpatient Rehabilitation Facility, Home Health Agency, Hospice, and Dialysis Facility.",
+    "Medicare CCN of facility type or unit within hospital where an individual clinician provides service.",
+    "Medicare CCN of the primary hospital where individual clinician provides service, should the clinician provide services in a unit within the hospital."
+    )) |> 
+  provider:::gt_datadict()
+```

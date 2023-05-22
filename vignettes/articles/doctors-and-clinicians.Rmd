@@ -17,21 +17,128 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r}
 library(provider)
 ```
 
- > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
-
 <br>
 
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
+The Doctors and Clinicians national downloadable file is organized such that each line is unique at the clinician/enrollment record/group/address level. Clinicians with multiple Medicare enrollment records and/or single enrollments linking to multiple practice locations are listed on multiple lines.
 
 <br>
 
 ## Search Examples
 
-```{r}
-
+```{r, message=TRUE}
+doctors_and_clinicians(npi = 1720081441)
 ```
 
+<br>
+
+```{r}
+doctors_and_clinicians(npi = 1407263999)
+```
+
+<br>
+
+```{r}
+doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
+                       grad_year = 2000, 
+                       state = "FL")
+```
+
+<br>
+
+```{r}
+c(0, 501) |> 
+  purrr::map(\(x) doctors_and_clinicians(state = "GA", 
+                                         city = "Valdosta", 
+                                         offset = x)) |> 
+  purrr::list_rbind()
+```
+
+
+### Data Dictionary
+
+```{r echo=FALSE}
+tibble::tibble(
+  Variable = c(
+    "`npi`",
+    "`pac_id`",
+    "`enroll_id`",
+    "`first_name`",
+    "`middle_name`",
+    "`last_name`",
+    "`suffix`",
+    "`gender`",
+    "`credential`",
+    "`school`",
+    "`grad_year`",
+    "`specialty`",
+    "`specialty_sec`",
+    "`telehealth`",
+    "`org_name`",
+    "`org_pac_id`",
+    "`org_members`",
+    "`address`",
+    "`city`",
+    "`state`",
+    "`zipcode`",
+    "`phone`",
+    "`ind_assn`",
+    "`group_assn`"
+    ),
+  Description = c(
+    "National Provider Identifier",
+    "PAC ID",
+    "Clinician Enrollment ID",
+    "First Name",
+    "Middle Name",
+    "Last Name", 
+    "Suffix",
+    "Gender",
+    "Credential",
+    "Medical school name",
+    "Graduation year",
+    "Primary specialty",
+    "Secondary specialties",
+    "Telehealth",
+    "Organization legal name",
+    "Group PAC ID",
+    "Number of group members",
+    "Address",
+    "City",
+    "State",
+    "Zip Code",
+    "Phone Number",
+    "Clinician accepts Medicare Assignment",
+    "Group accepts Medicare Assignment"
+    ),
+  Definition = c(
+    "Unique clinician ID assigned by NPPES.", 
+    "Unique individual clinician ID assigned by PECOS.", 
+    "Unique ID for the clinician enrollment that is the source for the data in the observation.",
+    "Individual clinician first name.",
+    "Individual clinician middle name.",
+    "Individual clinician last name.",
+    "Individual clinician suffix.",
+    "Individual clinician gender.",
+    "Medical credential such as MD, DO, DPM, etc.",
+    "Individual clinician’s medical school.",
+    "Individual clinician’s medical school graduation year.",
+    "Primary medical specialty reported by the individual clinician in the selected enrollment.",
+    "All secondary medical specialty reported by the individual clinician in the selected enrollment.",
+    "Indicator for whether clinician offers telehealth services over video and/or audio.  `Y` = Medicare fee-for-service claims indicate that clinician offers telehealth services.",
+    "Legal name of the group that the individual clinician works with – will be blank if the address is not linked to a group.",
+    "Unique group ID assigned by PECOS to the group that the individual clinician works with – will be blank if the address is not linked to a group.",
+    "Total number of individual clinicians affiliated with the group based on Group Practice PAC ID.",
+    "Group or individual's address.",
+    "Group or individual's city.",
+    "Group or individual's state.",
+    "Group or individual's zip code (9 digits when available).",
+    "Group or individual's phone number. Phone number is listed only when there is a single phone number available for the address.",
+    "Indicator for whether clinician accepts Medicare approved amount as payment in full. `Y` = Clinician accepts Medicare approved amount as payment in full.  `M` = Clinician may accept Medicare Assignment.",
+    "Indicator for whether group accepts Medicare approved amount as payment in full. `Y` = Group accepts Medicare approved amount as payment in full.  `M` = Group may accept Medicare Assignment."
+    )) |> 
+  provider:::gt_datadict()
+```
