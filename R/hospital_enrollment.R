@@ -26,17 +26,14 @@
 #' @param zipcode Zip code of the hospital’s practice location address
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' hospital_enrollment(npi = 1689653487)
 #' hospital_enrollment(facility_ccn = "440058")
 #' hospital_enrollment(pac_id_org = 6103733050)
 #' hospital_enrollment(city = "Atlanta")
 #' hospital_enrollment(zipcode = 117771928)
-#' }
 #' @autoglobal
 #' @export
-
 hospital_enrollment <- function(npi            = NULL,
                                 facility_ccn   = NULL,
                                 enroll_id      = NULL,

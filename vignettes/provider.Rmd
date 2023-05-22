@@ -27,270 +27,178 @@ library(provider)
 
 <br>
 
-## You Need to Find A Healthcare Provider Using Only Partial Information
-
-So, you have to find healthcare provider using just partial information. For instance all you have is "**EYE doctor RANIA in REDMOND**". Strictly speaking, it is necessary to perform a search with minimum information and the maximum level of relevance of the result. The second result in the list is "**REDMOND EYE DOCTORS, PLLC**" where *Dr. Rania Montecillo* specified an owner.
+## General Information
 
 <br>
 
 ```{r}
-nppes_npi(city = "Redmond", 
-          state = "WA", 
-          first_name = "Rania", 
-          last_name = "Montecillo") |> 
-  gt::gt() |> 
-  gt::cols_label_with(
-    fn = ~ janitor::make_clean_names(., case = "title")) |> 
-  gtExtras::gt_theme_espn()
+info <- nppes_npi(npi = 1043477615)
 ```
+
+<details><summary>Code for table</summary>
+
+```{r}
+info_1 <- info |> 
+  dplyr::slice_head() |> 
+  dplyr::select(npi:entype, 
+                enumeration_duration, 
+                first_name:phone_number) |> 
+  provider:::gt_prov(source = "Source: NPPES NPI Public Registry.", 
+                     checkmark = c("sole_proprietor")) |> 
+  gt::tab_header(title = paste0("General Information for: ", 
+                                info_1$first_name, " ", 
+                                info_1$middle_name, ". ", 
+                                info_1$last_name, ", ", 
+                                info_1$credential),
+                 subtitle = paste0("Practice Location at: ",
+                                   info_1$street, " ",
+                                   info_1$city, ", ",
+                                   info_1$state, " ",
+                                   info_1$zipcode)) |> 
+  gt::cols_hide(columns = c(first_name, 
+                            middle_name, 
+                            last_name, 
+                            credential,
+                            street,
+                            city,
+                            state,
+                            zipcode,
+                            purpose,
+                            country))
+```
+
+</details>
+
+
+```{r, echo=FALSE, eval=TRUE}
+info_1
+```
+
 
 <br><br>
 
-## You Need to Find Detailed Healthcare Provider Information Using Known NPI Number
+<details><summary>Code for table</summary>
 
-This is very common scenario. You need to get full replica of NPI record. Again, it simple. Just use code provided below. API response may contain single NPI record, or empty list in case NPI does not exist in the CMS National Plan and Provider Enumeration System (NPPES) Registry.
-
-<br>
 
 ```{r}
-nppes_npi(npi = 1285636522)
-```
-<br><br>
-
-## You Need to Lookup Multiple Healthcare Providers Using A List of NPI Numbers
-
-You may need to perform bulk search for performance optimization. The "getcodes" operation allows you to decrease number of round trips in orders of magnitude. For instance you can get information about hundred NPI in one REST call, instead of sending NPI numbers one-by-one.
-
-<br>
-
-```{r}
-c(1285636522, 1730198755, 1427145176) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind() 
-```
-
-
-<br><br>
-
-## You Need to Check NPI Number Status
-
-Again, very common scenario. You just need to check NPI number status. It is simple. Take a look at the code below. Expected result contains requested NPI number, status, and short status description.
-
-<br>
-
-```{r}
-nppes_npi(npi = 1285636522) |> 
-  dplyr::select(npi, status)
+info_2 <- info |> 
+  dplyr::slice_head(n = 3) |> 
+  dplyr::select(tx_code:tx_desc, tx_state:tx_primary) |> 
+  provider:::gt_prov(source = "Source: NPPES NPI Public Registry.", 
+                     checkmark = c("tx_primary")) |> 
+  gt::tab_header(title = paste0("Taxonomy Information: ", 
+                                info_1$first_name, " ", 
+                                info_1$middle_name, ". ", 
+                                info_1$last_name, ", ", 
+                                info_1$credential),
+                 subtitle = paste0("Practice Location at: ",
+                                   info_1$street, " ",
+                                   info_1$city, ", ",
+                                   info_1$state, " ",
+                                   info_1$zipcode)) |> 
+  gt::cols_label(tx_code = "Taxonomy",
+                 tx_desc = "Description",
+                 tx_state = "State",
+                 tx_license = "License",
+                 tx_primary = "Primary")
 ```
 
 
+</details>
 
-
-<br>
-
-```{r echo=FALSE, eval=FALSE}
-# CSV file
-attach_csv <- optex_long |> 
-  downloadthis::download_this(
-    output_name = "providercsv",
-    output_extension = ".csv",
-    button_label = "Download CSV",
-    button_type = "default",
-    has_icon = TRUE,
-    icon = "fa fa-save"
-  )
-# Excel file
-attach_excel <- optex_long |> 
-  downloadthis::download_this(
-    output_name = "providerxlsx",
-    output_extension = ".xlsx",
-    button_label = "Download Excel",
-    button_type = "primary",
-    has_icon = TRUE,
-    icon = "fa fa-save"
-  )
-
-optex_long |> 
-  #dplyr::mutate(value = purrr::map(value, add_badge)) |>
-  #dplyr::mutate(value = purrr::map(value, add_check_xmark)) |>
-  gt::gt() |> 
-  gtExtras::gt_add_divider(columns = "name", style = "dotted") |> 
-  gt::cols_label(name = "Label", value = "Value") |> 
-  gt::tab_row_group(group = "Important Dates", 
-                    rows = name %in% c("Enumeration Date", 
-                                       "Certification Date", 
-                                       "Last Updated", 
-                                       "Opt Out Effective Date", 
-                                       "Opt Out End Date",
-                                       "Practice Length",
-                                       "Opt Out Length")) |> 
-  gt::tab_row_group(group = "Order & Referral Eligibility", 
-                    rows = name %in% c("Refer To Part B", 
-                                       "Refer To Hhas", 
-                                       "Order Dme", 
-                                       "Order Pmds")) |> 
-  gt::tab_row_group(group = "Taxonomy", 
-                    rows = name %in% c("Code", 
-                                       "Description", 
-                                       "License")) |> 
-  gt::tab_row_group(group = "Address", 
-                    rows = name %in% c("Location Address", 
-                                       "Mailing Address", 
-                                       "City", 
-                                       "State", 
-                                       "Postal Code", 
-                                       "Telephone Number", 
-                                       "Fax Number")) |> 
-  gt::tab_row_group(group = "Basic Information", 
-                    rows = name %in% c("NPI", 
-                                       "Enumeration Type", 
-                                       "Name Prefix", 
-                                       "First Name", 
-                                       "Middle Name", 
-                                       "Last Name", 
-                                       "Credential", 
-                                       "Gender")) |> 
-  gt::tab_style(style = list(gt::cell_fill(color = "#F54444"), 
-                             gt::cell_text(color = "white", 
-                                           weight = "bold")), 
-                locations = gt::cells_row_groups()) |> 
-  provider:::gt_theme_provider() |> 
-  gt::tab_header(title = "Provider Results for NPI 1114058443",
-  subtitle = gtExtras::add_text_img("Report generated with", 
-  url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", 
-  height = 25)) |> 
-  gt::tab_options(column_labels.hidden = TRUE) |> 
-  #gt::fmt_date(columns = c(value), rows = dplyr::contains("date"), date_style = 5) |> 
-  #gtExtras::gt_badge(value, palette = c("Individual" = "red")) |> 
-  gt::tab_source_note(attach_csv) |> 
-  gt::tab_source_note(attach_excel)
-#   gt::text_transform(locations = gt::cells_body(columns = 2, rows = 19),
-#                      fn = function(x) {
-#                        if (x == as.character("TRUE")) {gt::html(fontawesome::fa("circle-check", prefer_type = "solid", fill = "green", height = "1.5em", width = "1.5em"))
-#                          } else if (x == as.character("FALSE")) {gt::html(fontawesome::fa("circle-xmark", prefer_type = "solid", fill = "red"))
-#                          }
-#                      }
-#                        )
+```{r, echo=FALSE, eval=TRUE}
+info_2
 ```
 
 
 <br>
 
-## Medicare Order and Referring API
-
-<br>
-
-Is the provider currently eligible to make referrals to Medicare Part B or a Home Health Agency (HHA)? Order Durable Medical Equipment (DME) or Power Mobility Devices (PMDs)? Search Medicare's **Order and Referring API** with `provider_moar()`:
-
-<br>
 
 ```{r}
-order_refer(npi = 1083879860) |> 
-  gt::gt() |> 
-  gt::tab_header(title = "Medicare Order and Referring API") |> 
-  gt::text_transform(
-    locations = gt::cells_body(columns = c(partb, dme, hha, pmd)),
-    fn = function(x) {if (x == as.character("TRUE")) 
-      {gt::html(fontawesome::fa("circle-check", 
-                                prefer_type = "solid", 
-                                fill = "green", height = "1.5em", width = "1.5em"))
-      } else if (x == as.character("FALSE")) 
-      {gt::html(fontawesome::fa("circle-xmark", 
-                                  prefer_type = "solid", 
-                                fill = "red"))}})
+order_refer(npi = 1043477615) |> 
+  provider:::gt_prov(divider = c("last_name"), 
+                     checkmark = c("partb", "dme", "hha", "pmd"),
+                     title = "Medicare Order & Referring Eligibility",
+                     source = "Source: data.cms.gov")
 ```
 
-<br>
-
-## Medicare Provider and Supplier Taxonomy Crosswalk API
-
-<br>
-
-You may need to find Medicare's specialty codes for this provider's taxonomies. Using the output from the NPPES search in the first example, you can search Medicare's **Provider and Supplier Taxonomy Crosswalk API** with `taxonomy_crosswalk()`:
 
 <br>
 
 ```{r}
-taxonomy_crosswalk(taxonomy_code = "282NC0060X") |> terse::terse()
-```
-
-<br>
-
-Providers may need to update their digital contact information in the NPPES system. To check, you can access the **CMS Public Reporting of Missing Digital Contact Information API** with `missing_information()`. If they appear in the search results, it's time to update their NPPES contact information:
-
-<br>
-
-```{r}
-missing_information(npi = 1114058443) |> terse::terse()
+doctors_and_clinicians(npi = 1043477615)
 ```
 
 <br>
 
 ```{r}
-opt_out(npi = 1114058443) |> terse::terse()
+facility_affiliations(npi = 1043477615)
 ```
-
-<br>
-
-Using `physician_by_service()`, you can access **Medicare's Physician & Other Practitioners - by Provider and Service API**:
 
 <br>
 
 ```{r}
-purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> terse::terse()
+facility_affiliations(npi = 1043477615) |> 
+  dplyr::pull(facility_ccn) |> 
+  purrr::map(\(x) hospital_enrollment(facility_ccn = x)) |> 
+  purrr::list_rbind()
 ```
-
-
-<br>
-
-This API contains data going back to 2013, so you can perform a long-term analysis of a provider's Medicare data:
 
 <br>
 
 ```{r}
-purrr::map_dfr(2013:2020, ~physician_by_service(npi = 1003000126, year = .x)) |> 
-  dplyr::group_by(hcpcs_cd, hcpcs_desc) |> 
-  dplyr::summarise(
-    Beneficiaries = sum(tot_benes),
-    Services = sum(tot_srvcs),
-    Avg_Billed = janitor::round_half_up(mean(avg_sbmtd_chrg), digits = 2),
-    Avg_Allowed = janitor::round_half_up(mean(avg_mdcr_alowd_amt), digits = 2),
-    Avg_Payment = janitor::round_half_up(mean(avg_mdcr_pymt_amt), digits = 2)) |> 
-  dplyr::ungroup() |> 
-  dplyr::rename(HCPCS = hcpcs_cd, 
-                Description = hcpcs_desc,
-                "Avg Charge" = Avg_Billed,
-                "Avg Allowed" = Avg_Allowed,
-                "Avg Payment" = Avg_Payment) |> 
-  dplyr::arrange(dplyr::desc(Services)) |> 
-  gt::gt() |> 
-  gtExtras::gt_add_divider(columns = "HCPCS", style = "dotted") |> 
-  gtExtras::gt_merge_stack(col1 = HCPCS, 
-                           col2 = Description,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::tab_style(style = list(gt::cell_fill(color = "#F54444"), 
-                             gt::cell_text(color = "white", 
-                                           weight = "bold")), 
-                locations = gt::cells_row_groups()) |> 
-  provider:::gt_theme_provider() |> 
-  gt::tab_header(title = "Provider Results for NPI 1114058443",
-  subtitle = gtExtras::add_text_img("Report generated with", 
-  url = "https://raw.githubusercontent.com/andrewallenbruce/provider/main/pkgdown/favicon/apple-touch-icon-180x180.png", 
-  height = 25))
+revalidation_date(npi = 1043477615)
 ```
+<br>
 
+```{r}
+revalidation_reassign(npi = 1043477615)
+```
+<br>
 
-
-Using packages like {gt} & {ggplot2}, you can create tables and graphs for reporting purposes:
+```{r}
+revalidation_group(npi = 1043477615)
+```
 
 <br>
 
-<details>
+```{r}
+provider_enrollment(npi = 1043477615)
+```
 
-<summary>Click for Table Code</summary>
+<br>
+
+```{r}
+taxonomy_crosswalk(taxonomy_code = "207RC0000X")
+```
+
+<br>
+
+```{r}
+missing_information(npi = 1043477615)
+```
+
+<br>
+
+```{r, message=FALSE}
+opt_out(npi = 1043477615)
+```
+
+<br>
+
+```{r}
+2014:2021 |> 
+  purrr::map(\(x) physician_by_service(year = x, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
+
+<br>
+
+```{r}
+2014:2021 |> 
+  purrr::map(\(x) physician_by_provider(year = x, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
 
 
 ```{r echo=FALSE, eval=FALSE, include=FALSE}
@@ -483,11 +391,6 @@ gt_output <- gt_table |>
   gtExtras::gt_color_rows(columns = pay_mean, 
                           palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$pay_mean)) |> 
   gt::opt_vertical_padding(scale = 1.5)
-
-#gt::gtsave(gt_output, filename = "gt_provider3.png", expand = 20, zoom = 2, vwidth = 1500)
 ```
 
-</details>
-
-<br>
 <br>

@@ -30,13 +30,17 @@ The Pending Initial Logging and Tracking (L & T) dataset provides a list of pend
 ## Search Examples
 
 ```{r}
-pending_applications(last_name = "Bruce", type = "physician")
+pending_applications(last_name = "Smith", 
+                     type = "physician") |> 
+  provider:::gt_prov()
 ```
 
 <br>
 
 ```{r}
-pending_applications(last_name = "Bruce", type = "non-physician")
+pending_applications(last_name = "Bruce", 
+                     type = "non-physician") |> 
+  provider:::gt_prov()
 ```
 
 <br>

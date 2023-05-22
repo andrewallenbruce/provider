@@ -98,7 +98,7 @@ revalidation_group <- function(npi             = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,                 ~y,

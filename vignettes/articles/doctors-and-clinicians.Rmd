@@ -29,11 +29,6 @@ The Doctors and Clinicians national downloadable file is organized such that eac
 
 ## Search Examples
 
-```{r, message=TRUE}
-doctors_and_clinicians(npi = 1720081441)
-```
-
-<br>
 
 ```{r}
 doctors_and_clinicians(npi = 1407263999)
@@ -51,9 +46,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
 
 ```{r}
 c(0, 501) |> 
-  purrr::map(\(x) doctors_and_clinicians(state = "GA", 
-                                         city = "Valdosta", 
-                                         offset = x)) |> 
+  purrr::map(\(x) doctors_and_clinicians(state = "GA", city = "Valdosta", offset = x)) |> 
   purrr::list_rbind()
 ```
 

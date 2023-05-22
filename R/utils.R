@@ -110,24 +110,24 @@ clean_credentials <- function(x) {
 #' }
 #' @autoglobal
 #' @noRd
-npi_check <- function(npi = NULL) {
-
-  # Must be 10 char length
-  if (nchar(npi) != 10L) {
-    cli::cli_abort(c(
-      "NPI may be incorrect or invalid",
-      "i" = "NPIs are 10 characters long.",
-      "x" = "NPI: {.val {npi}} is {.val {nchar(npi)}} characters long."
-      ))
-    }
+npi_check <- function(npi,
+                      arg = rlang::caller_arg(npi),
+                      call = rlang::caller_env()) {
 
   # Return FALSE if not a number
   if (grepl("^[[:digit:]]+$", npi) == FALSE) {
     cli::cli_abort(c(
       "NPI may be incorrect or invalid",
       "i" = "NPIs must be numeric.",
-      "x" = "NPI: {.val {npi}} has non-numeric characters."
-      ))
+      "x" = "NPI: {.val {npi}} has non-numeric characters."), call = call)
+  }
+
+  # Must be 10 char length
+  if (nchar(npi) != 10L) {
+    cli::cli_abort(c(
+      "NPI may be incorrect or invalid",
+      "i" = "NPIs are 10 characters long.",
+      "x" = "NPI: {.val {npi}} is {.val {nchar(npi)}} characters long."), call = call)
     }
 
   # Strip whitespace
@@ -153,8 +153,7 @@ npi_check <- function(npi = NULL) {
     cli::cli_abort(c(
       "NPI may be incorrect or invalid",
       "i" = "NPIs must pass {.emph Luhn algorithm}.",
-      "x" = "NPI {.val {npi}} {.strong fails} Luhn check."
-    ))
+      "x" = "NPI {.val {npi}} {.strong fails} Luhn check."), call = call)
   }
 }
 
@@ -547,6 +546,46 @@ gt_datadict <- function(df) {
     gt::tab_options(table.width = gt::pct(100))
 
   }
+
+#' @param df data frame
+#' @param divider description
+#' @param title description
+#' @param source description
+#' @autoglobal
+#' @noRd
+gt_prov <- function(df,
+                    divider  = NULL,
+                    title    = NULL,
+                    source   = NULL,
+                    checkmark = NULL) {
+
+  results <- df |>
+    gt::gt() |>
+    gtExtras::gt_theme_538() |>
+    gt::cols_label_with(fn = ~ janitor::make_clean_names(., case = "title")) |>
+    gt::tab_options(table.width = gt::pct(100))
+
+  if (!is.null(divider)) {
+    results <- results |>
+      gtExtras::gt_add_divider(
+        columns = {{ divider }},
+        style = "solid",
+        color = "black",
+        weight = gt::px(3),
+        include_labels = FALSE)
+    }
+
+    if (!is.null(title)) {
+      results <- results |> gt::tab_header(title = gt::md(title))}
+
+    if (!is.null(source)) {
+      results <- results |> gt::tab_source_note(source_note = source)}
+
+    if (!is.null(checkmark)) {
+      results <- results |> gt_check_xmark(cols = checkmark)}
+
+  return(results)
+}
 
 
 #' readme function table ---------------------------------------------------

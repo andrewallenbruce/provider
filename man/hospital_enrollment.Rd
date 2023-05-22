@@ -69,11 +69,11 @@ business as name, organization type and address.
 Update Frequency: \strong{Monthly}
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 hospital_enrollment(npi = 1689653487)
 hospital_enrollment(facility_ccn = "440058")
 hospital_enrollment(pac_id_org = 6103733050)
 hospital_enrollment(city = "Atlanta")
 hospital_enrollment(zipcode = 117771928)
-}
+\dontshow{\}) # examplesIf}
 }

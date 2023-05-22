@@ -101,7 +101,7 @@ doctors_and_clinicians <- function(npi           = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "28") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,

@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r}
 library(provider)
 ```
 
@@ -47,9 +47,13 @@ hospital_enrollment(enroll_state = "GA")
 ```
 <br>
 
-```{r, message=TRUE}
-hospital_enrollment(enroll_id = "O20030404000017")
+```{r}
+hospital_enrollment(pac_id_org = 6002723947)
 ```
+
+
+<br>
+
 
 <br><br>
 

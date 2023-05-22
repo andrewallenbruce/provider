@@ -40,22 +40,12 @@ A provider that appears in the search results of the Missing Information API has
 
 ```{r}
 missing_information(npi = 1144224569) |> 
-  gt::gt() |> 
-  gt::tab_style(
-    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
-                                   gt::default_fonts())),
-    locations = gt::cells_body(columns = c(npi))) |> 
-  gt::cols_label(npi = "NPI", 
-                 last_name = "Last Name", 
-                 first_name = "First Name") |> 
-  gtExtras::gt_theme_538() |> 
-  gt::tab_options(table.width = gt::pct(100)) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
+  provider:::gt_prov(source = "Source: data.cms.gov")
 ```
 
-<br>
+<br><br>
 
-Searching for him in the NPPES shows that he has identifiers but no endpoint information:
+Searching for him in the NPPES shows that he has Identifiers, but no Endpoint information:
 
 ```{r}
 nppes_npi(npi = 1144224569) |> 
@@ -66,59 +56,35 @@ nppes_npi(npi = 1144224569) |>
                 id_issuer, 
                 id_state) |> 
   dplyr::filter(dplyr::row_number() %in% c(1, 2)) |> 
-  gt::gt() |> 
-  gt::tab_style(
-    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
-                                   gt::default_fonts())),
-    locations = gt::cells_body(columns = c(npi, id_identifier))) |> 
-  gt::cols_label(npi = "NPI", 
-                 last_name = "Last Name", 
-                 first_name = "First Name",
-                 id_issuer = "Issuer",
-                 id_identifier = "Identifier",
-                 id_state = "State")|> 
-  gtExtras::gt_theme_538() |> 
-  gt::tab_options(table.width = gt::pct(100)) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
+  provider:::gt_prov(source = "Source: data.cms.gov", 
+                     divider = c("last_name"))
 ```
 
-<br>
+<br><br>
 
-A provider that does not appear has entered Endpoint information into the NPPES NPI Registry.
+On the other hand, a provider that does not appear in the Missing Information API results should have Endpoint information entered into the NPPES NPI Registry.
 
 ```{r, message=TRUE}
 missing_information(npi = 1003000423)
 ```
 
 
-<br>
+<br><br>
+
+And checking the NPPES, we see that she does have Enpoint information:
 
 ```{r}
 nppes_npi(npi = 1003000423) |> 
-  dplyr::select(npi, 
-                first_name, 
-                last_name, 
-                end_endpoint,
-                end_endpointTypeDescription,
-                end_endpointDescription,
-                end_contentOtherDescription) |> 
-  #provider:::display_long() |> 
+  dplyr::select("NPI" = npi, 
+                "First Name" = first_name, 
+                "Last Name" = last_name, 
+                Endpoint = end_endpoint,
+                Type = end_endpointTypeDescription,
+                Description = end_endpointDescription,
+                Content = end_contentOtherDescription) |> 
   dplyr::filter(dplyr::row_number() %in% c(1)) |> 
-  gt::gt() |> 
-  gt::tab_style(
-    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
-                                   gt::default_fonts())),
-    locations = gt::cells_body(columns = c(npi))) |> 
-  gt::cols_label(npi = "NPI", 
-                 last_name = "Last Name", 
-                 first_name = "First Name",
-                 end_endpoint = "Endpoint",
-                 end_endpointTypeDescription = "Type",
-                 end_endpointDescription = "Description",
-                 end_contentOtherDescription = "Content")|> 
-  gtExtras::gt_theme_538() |> 
-  gt::tab_options(table.width = gt::pct(100)) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
+  provider:::display_long() |> 
+  provider:::gt_prov(source = "Source: data.cms.gov", divider = c("name"))
 ```
 
 <br><br>

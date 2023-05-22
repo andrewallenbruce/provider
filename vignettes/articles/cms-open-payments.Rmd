@@ -36,12 +36,16 @@ The Open Payments program is a national disclosure program that promotes a more 
 ## Search Examples
 
 ```{r}
-open_payments(npi = 1043218118, year = 2021) |> 
-  dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
+overall <- 2016:2021 |> 
+  purrr::map(\(x) open_payments(year = x, npi = 1043218118)) |> 
+  purrr::list_rbind() |> 
+  janitor::remove_empty(which = c("rows", "cols")) |> 
+  dplyr::select(!c(primary_other, specialty_other, license_state_other))
+
+overall |> 
+  dplyr::filter(group == "1")
 ```
 
-<br><br>
 
 <details><summary>Code for table</summary>
 
@@ -50,7 +54,6 @@ gt_ex <- open_payments(npi = 1043218118,
                        year = 2021) |> 
   dplyr::filter(!is.na(covered)) |> 
   janitor::remove_empty(which = c("rows", "cols")) |> 
-  dplyr::filter(group == "1") |> 
   dplyr::group_by(year, 
                   payer_name,
                   pay_nature,
@@ -86,7 +89,6 @@ gt_ex <- gt_ex |>
                       **Home Health Agencies**, **Durable Medical Equipment Suppliers**, 
                       and **Powered Mobility Devices**")) |> 
   gt::tab_source_note(source_note = "Source: www.cms.gov/OpenPayments")
-#|> gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 </details>

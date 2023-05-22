@@ -24,35 +24,24 @@
 #' @param pmd logical
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
+#' @examplesIf interactive()
 #' order_refer(npi = 1003026055)
 #'
-#' order_refer(last = "phadke",
-#'             first = "radhika")
+#' order_refer(last_name = "phadke",
+#'             first_name = "radhika")
 #'
 #' # Unnamed List of NPIs
-#' npi_list <- c(1003026055,
-#'               1316405939,
-#'               1720392988,
-#'               1518184605,
-#'               1922056829,
-#'               1083879860)
-#'
-#' npi_list |>
-#' purrr::map_dfr(order_refer)
+#' c(1003026055, 1316405939, 1720392988,
+#'   1518184605, 1922056829, 1083879860) |>
+#'   purrr::map(order_refer) |>
+#'   purrr::list_rbind()
 #'
 #' # Data frame of NPIs
-#' npi_df <- data.frame(npi = c(1003026055,
-#'                              1316405939,
-#'                              1720392988,
-#'                              1518184605,
-#'                              1922056829,
-#'                              1083879860))
-#' npi_df |>
-#' tibble::deframe() |>
-#' purrr::map_dfr(order_refer)
-#' }
+#' data.frame(npi = c(1003026055, 1316405939, 1720392988,
+#'                    1518184605, 1922056829, 1083879860)) |>
+#'                    dplyr::pull(npi) |>
+#'                    purrr::map(order_refer) |>
+#'                    purrr::list_rbind()
 #' @autoglobal
 #' @export
 order_refer <- function(npi          = NULL,
@@ -105,7 +94,7 @@ order_refer <- function(npi          = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) == 0) {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
       ~x,              ~y,
@@ -125,9 +114,7 @@ order_refer <- function(npi          = NULL,
                             collapse = "")
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-
-
-    return(NULL)
+    return(invisible(NULL))
 
   }
 

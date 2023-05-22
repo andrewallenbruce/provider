@@ -146,7 +146,7 @@ open_payments <- function(year,
     httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
 
     cli_args <- tibble::tribble(
       ~x,               ~y,
@@ -319,7 +319,8 @@ open_payments <- function(year,
       tidyr::unnest(cols = c(name, type, category, ndc, pdi)) |>
       dplyr::mutate(covered = dplyr::case_when(covered == "Covered" ~ TRUE,
                                                covered == "Non-Covered" ~ FALSE,
-                                               .default = NA))
+                                               .default = NA),
+                    pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
     }
   return(results)
 }
