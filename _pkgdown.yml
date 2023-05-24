@@ -45,13 +45,13 @@ navbar:
         href: articles/geocoding.html
       - text: API Overviews
       - text: Missing Info
-        href: articles/cms-miss-contact-info.html
+        href: articles/missing-info.html
       - text: Open Payments Program
         href: articles/cms-open-payments.html
       - text: Beneficiary Enrollment
-        href: articles/mcr-month-enroll.html
+        href: articles/beneficiary-enrollment.html
       - text: Provider Enrollment
-        href: articles/mcr-ffs-prov-enroll.html
+        href: articles/provider-enrollment.html
       - text: Hospital Enrollment
         href: articles/hospital-enrollment.html
       - text: Facility Affiliations

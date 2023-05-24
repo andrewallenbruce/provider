@@ -109,7 +109,7 @@ info_3 <- info |>
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
-info_2
+info_3
 ```
 
 
@@ -182,15 +182,11 @@ missing_information(npi = 1043477615)
 
 <br>
 
-```{r, message=FALSE}
+```{r, message=TRUE}
 opt_out(npi = 1043477615)
 ```
 
-<br>
 
-```{r, message=FALSE}
-order_refer(npi = 1043477615)
-```
 
 <br>
 

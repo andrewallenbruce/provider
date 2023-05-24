@@ -21,12 +21,6 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br>
-
-  > *Information on Providers That are Missing Digital Contact Information in the NPPES System*
-
-<br>
-
 > Digital contact information, also known as [Endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html), 
 > provides a secure way for health care entities to send authenticated, encrypted health information to trusted recipients over the internet. 
 > Health care organizations seeking to engage in electronic health information exchange need accurate information about the electronic addresses 
@@ -35,12 +29,13 @@ library(provider)
 
 <br>
 
-A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry. For instance, John Clouse (NPI: 1144224569), appears:
+## Examples
 
+A provider that appears in the search results of the Missing Information API has no Endpoints entered into the NPPES NPI Registry. For instance, John Clouse (NPI: 1144224569), appears:
 
 ```{r}
 missing_information(npi = 1144224569) |> 
-  provider:::gt_prov(source = "Source: data.cms.gov")
+  provider:::gt_prov(source = gt::md("Source: [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)"))
 ```
 
 <br><br>
@@ -56,8 +51,8 @@ nppes_npi(npi = 1144224569) |>
                 id_issuer, 
                 id_state) |> 
   dplyr::filter(dplyr::row_number() %in% c(1, 2)) |> 
-  provider:::gt_prov(source = "Source: data.cms.gov", 
-                     divider = c("last_name"))
+  provider:::gt_prov(divider = c("last_name"),
+                     source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"))
 ```
 
 <br><br>
@@ -84,7 +79,8 @@ nppes_npi(npi = 1003000423) |>
                 Content = end_contentOtherDescription) |> 
   dplyr::filter(dplyr::row_number() %in% c(1)) |> 
   provider:::display_long() |> 
-  provider:::gt_prov(source = "Source: data.cms.gov", divider = c("name"))
+  provider:::gt_prov(divider = c("name"),
+                     source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"))
 ```
 
 <br><br>

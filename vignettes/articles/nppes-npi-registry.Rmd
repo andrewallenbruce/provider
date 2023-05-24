@@ -1,5 +1,5 @@
 ---
-title: "NPPES NPI Registry API"
+title: "NPPES NPI Registry"
 output: html_document
 ---
 
@@ -17,23 +17,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-<br>
-
-```{r setup}
+```{r}
 library(provider)
 ```
 
-<br>
+ > Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.) The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 
- > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
-
-<br>
-
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
-
-<br>
-
-## Search Examples
+## Searching
 
 ```{r}
 nppes_npi(npi = 1114499340)
@@ -51,15 +41,17 @@ nppes_npi(npi = 1528060837)
 # City, state, country
 nppes_npi(city = "Atlanta",
           state = "GA",
-          country = "US")
+          country = "US") |> 
+  head()
 ```
 <br>
 
 ```{r}
 # First name, city, state
-nppes_npi(first = "John",
+nppes_npi(first_name = "John",
           city = "Baltimore",
-          state = "MD")
+          state = "MD") |> 
+  head()
 ```
 <br>
 
@@ -73,7 +65,7 @@ nppes_npi(npi = 1710975040) # NPI-1
 ```
 
 
-```{r}
+```{r, message=TRUE}
 nppes_npi(npi = 1659781227) # Deactivated
 ```
 
@@ -115,7 +107,7 @@ data.frame(npi = c(1003026055,
 
 ------------------------------------------------------------------------------
 
-# API Documentation
+# NPI Notes
 
 ### Enumeration Type
 
@@ -161,3 +153,9 @@ An appointed official (e.g., chief executive officer, chief financial officer, g
 
 <br><br>
 
+## Related Links
+
+   - [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
+   - [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
+
+<br><br>

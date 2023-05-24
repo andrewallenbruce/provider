@@ -87,7 +87,7 @@ across a variety of CMS sources.
 ### Beneficiary Enrollment
 
 ``` r
-beneficiary_enrollment(year = 2021, 
+beneficiary_enrollment(year = 2020, 
                        period = "Year", 
                        level = "State", 
                        fips = "01")
@@ -96,64 +96,7 @@ beneficiary_enrollment(year = 2021,
     # A tibble: 1 × 26
        year period level state state_name county fips  bene_total bene_orig
       <int> <chr>  <chr> <chr> <chr>      <chr>  <chr>      <int>     <int>
-    1  2021 Year   State AL    Alabama    Total  01       1070474    528983
-    # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
-    #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
-    #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
-    #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
-    #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
-    #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
-
-``` r
-beneficiary_enrollment(period = "Year", 
-                       level = "County", 
-                       state = "AL", 
-                       county = "Autauga")
-```
-
-    # A tibble: 10 × 26
-        year period level  state state_name county  fips  bene_total bene_orig
-       <int> <chr>  <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
-     1  2013 Year   County AL    Alabama    Autauga 01001       9323      6484
-     2  2014 Year   County AL    Alabama    Autauga 01001       9589      6565
-     3  2015 Year   County AL    Alabama    Autauga 01001       9938      6711
-     4  2016 Year   County AL    Alabama    Autauga 01001      10214      6799
-     5  2017 Year   County AL    Alabama    Autauga 01001      10510      5784
-     6  2018 Year   County AL    Alabama    Autauga 01001      10645      5700
-     7  2019 Year   County AL    Alabama    Autauga 01001      11059      5761
-     8  2020 Year   County AL    Alabama    Autauga 01001      11251      5596
-     9  2021 Year   County AL    Alabama    Autauga 01001      11396      5338
-    10  2022 Year   County AL    Alabama    Autauga 01001      11578      5186
-    # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
-    #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
-    #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
-    #   bene_ab_orig <int>, bene_ab_ma_oth <int>, bene_rx_total <int>,
-    #   bene_rx_pdp <int>, bene_rx_mapd <int>, bene_rx_elig <int>,
-    #   bene_rx_full <int>, bene_rx_part <int>, bene_rx_none <int>
-
-``` r
-beneficiary_enrollment(year = 2017, 
-                       level = "County", 
-                       state = "GA", 
-                       county = "Lowndes")
-```
-
-    # A tibble: 13 × 26
-        year period    level  state state_name county  fips  bene_total bene_orig
-       <int> <chr>     <chr>  <chr> <chr>      <chr>   <chr>      <int>     <int>
-     1  2017 Year      County GA    Georgia    Lowndes 13185      17172     13007
-     2  2017 January   County GA    Georgia    Lowndes 13185      17035     12940
-     3  2017 February  County GA    Georgia    Lowndes 13185      17064     12952
-     4  2017 March     County GA    Georgia    Lowndes 13185      17083     12961
-     5  2017 April     County GA    Georgia    Lowndes 13185      17096     12963
-     6  2017 May       County GA    Georgia    Lowndes 13185      17112     12968
-     7  2017 June      County GA    Georgia    Lowndes 13185      17141     12978
-     8  2017 July      County GA    Georgia    Lowndes 13185      17161     12990
-     9  2017 August    County GA    Georgia    Lowndes 13185      17218     13039
-    10  2017 September County GA    Georgia    Lowndes 13185      17272     13085
-    11  2017 October   County GA    Georgia    Lowndes 13185      17258     13057
-    12  2017 November  County GA    Georgia    Lowndes 13185      17293     13069
-    13  2017 December  County GA    Georgia    Lowndes 13185      17333     13077
+    1  2020 Year   State AL    Alabama    Total  01       1062565    576690
     # ℹ 17 more variables: bene_ma_oth <int>, bene_aged_total <int>,
     #   bene_aged_esrd <int>, bene_aged_no_esrd <int>, bene_dsb_total <int>,
     #   bene_dsb_esrd <int>, bene_dsb_no_esrd <int>, bene_ab_total <int>,
@@ -295,7 +238,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
                        state = "FL")
 ```
 
-    # A tibble: 68 × 25
+    # A tibble: 78 × 25
        npi        pac_id    enroll_id first_name middle_name last_name suffix gender
        <chr>      <chr>     <chr>     <chr>      <chr>       <chr>     <chr>  <chr> 
      1 1043312556 83250900… I2010011… NICOLE     <NA>        IOVINE    <NA>   F     
@@ -308,37 +251,29 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
      8 1073549895 24664809… I2007112… ALAN       B           BENNIE    <NA>   M     
      9 1073549895 24664809… I2007112… ALAN       B           BENNIE    <NA>   M     
     10 1073575403 86280744… I2006101… DANIEL     J           GASSERT   <NA>   M     
-    # ℹ 58 more rows
+    # ℹ 68 more rows
     # ℹ 17 more variables: credential <chr>, school <chr>, grad_year <int>,
     #   grad_duration <Duration>, specialty <chr>, specialty_sec <chr>,
     #   telehealth <lgl>, org_name <chr>, org_pac_id <chr>, org_members <int>,
     #   address <chr>, city <chr>, state <chr>, zipcode <chr>, phone <chr>,
     #   ind_assn <chr>, group_assn <chr>
 
-``` r
-#doctors_and_clinicians(state = "GA", city = "VALDOSTA")
-```
-
 ### Facility Affiliations
 
 ``` r
-facility_affiliations(npi = 1003019563)
+facility_affiliations(npi = 10030195634)
 ```
 
-    # A tibble: 4 × 9
-      npi        pac_id     first_name middle_name last_name suffix facility_type
-      <chr>      <chr>      <chr>      <chr>       <chr>     <chr>  <chr>        
-    1 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
-    2 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
-    3 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
-    4 1003019563 4688707060 JOHN       JOSEPH      FRANK     <NA>   Hospital     
-    # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
+    Error in `facility_affiliations()`:
+    ! NPI may be incorrect or invalid
+    ℹ NPIs are 10 characters long.
+    ✖ NPI: 10030195634 is 11 characters long.
 
 ``` r
 facility_affiliations(facility_ccn = "060004")
 ```
 
-    # A tibble: 188 × 9
+    # A tibble: 182 × 9
        npi        pac_id     first_name middle_name last_name   suffix facility_type
        <chr>      <chr>      <chr>      <chr>       <chr>       <chr>  <chr>        
      1 1003002890 6002953973 DANIEL     RICHARD     HAMMAN      <NA>   Hospital     
@@ -351,7 +286,7 @@ facility_affiliations(facility_ccn = "060004")
      8 1013115989 4385891712 ASHLEY     L           PYLE        <NA>   Hospital     
      9 1013979566 1557374014 FIRAS      <NA>        MUWALLA     <NA>   Hospital     
     10 1023261963 2860687431 CHAD       MICHAEL     LUCCI       <NA>   Hospital     
-    # ℹ 178 more rows
+    # ℹ 172 more rows
     # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ``` r
@@ -370,24 +305,6 @@ facility_affiliations(parent_ccn = 670055)
     7 1740577212 0345473773 GEOFF      R           WEIKLE     <NA>   Inpatient reha…
     8 1770861742 5193940997 AUSTON     J           MYERS      <NA>   Inpatient reha…
     9 1912260464 5092036509 SAAD       MD          MANSOOR    <NA>   Inpatient reha…
-    # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
-
-``` r
-facility_affiliations(first_name = "John", 
-                      last_name = "Hill", 
-                      facility_type = "Home Health Agency")
-```
-
-    # A tibble: 7 × 9
-      npi        pac_id     first_name middle_name last_name suffix facility_type   
-      <chr>      <chr>      <chr>      <chr>       <chr>     <chr>  <chr>           
-    1 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
-    2 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
-    3 1174587588 7214998079 JOHN       C           HILL      III    Home health age…
-    4 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
-    5 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
-    6 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
-    7 1558380444 4789619362 JOHN       M           HILL      <NA>   Home health age…
     # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ### Hospital Enrollments
@@ -430,7 +347,7 @@ hospital_enrollment(state = "GA", city = "VALDOSTA")
 hospital_enrollment(enroll_state = "GA")
 ```
 
-    # A tibble: 216 × 36
+    # A tibble: 214 × 36
        npi        enroll_id  enroll_state specialty_code specialty_desc facility_ccn
        <chr>      <chr>      <chr>        <chr>          <chr>          <chr>       
      1 1588664007 O20020826… GA           00-09          PART A PROVID… 112011      
@@ -443,7 +360,7 @@ hospital_enrollment(enroll_state = "GA")
      8 1922178789 O20041013… GA           00-09          PART A PROVID… 113301      
      9 1194722389 O20041103… GA           00-09          PART A PROVID… 112013      
     10 1811940976 O20041109… GA           00-09          PART A PROVID… 110201      
-    # ℹ 206 more rows
+    # ℹ 204 more rows
     # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
     #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
     #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
@@ -472,7 +389,7 @@ missing_information(npi = 1144224569)
 missing_information(npi = 11111122222)
 ```
 
-    Error in `npi_check()`:
+    Error in `missing_information()`:
     ! NPI may be incorrect or invalid
     ℹ NPIs are 10 characters long.
     ✖ NPI: 11111122222 is 11 characters long.
@@ -483,7 +400,7 @@ missing_information(npi = 11111122222)
 nppes_npi(npi = 13164059391)
 ```
 
-    Error in `npi_check()`:
+    Error in `nppes_npi()`:
     ! NPI may be incorrect or invalid
     ℹ NPIs are 10 characters long.
     ✖ NPI: 13164059391 is 11 characters long.
@@ -492,7 +409,7 @@ nppes_npi(npi = 13164059391)
 nppes_npi(npi = "155836427a")
 ```
 
-    Error in `npi_check()`:
+    Error in `nppes_npi()`:
     ! NPI may be incorrect or invalid
     ℹ NPIs must be numeric.
     ✖ NPI: "155836427a" has non-numeric characters.
@@ -501,7 +418,7 @@ nppes_npi(npi = "155836427a")
 nppes_npi(1720081442)
 ```
 
-    Error in `npi_check()`:
+    Error in `nppes_npi()`:
     ! NPI may be incorrect or invalid
     ℹ NPIs must pass Luhn algorithm.
     ✖ NPI 1720081442 fails Luhn check.
@@ -519,8 +436,8 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
     # A tibble: 2 × 28
       npi      entype enumeration_date enumeration_duration      last_updated status
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1730354… Org    2008-04-30       474768000s (~15.04 years) 2013-11-21   A     
-    2 1730354… Org    2008-04-30       474768000s (~15.04 years) 2013-11-21   A     
+    1 1730354… Org    2008-04-30       475372800s (~15.06 years) 2013-11-21   A     
+    2 1730354… Org    2008-04-30       475372800s (~15.06 years) 2013-11-21   A     
     # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
     #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
     #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
@@ -537,18 +454,18 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
 ```
 
     # A tibble: 424 × 36
-       npi        entype enumeration_date enumeration_duration     last_updated
-       <chr>      <chr>  <date>           <Duration>               <date>      
-     1 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     2 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     3 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     4 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     5 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     6 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     7 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     8 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-     9 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
-    10 1992710610 Org    2006-07-30       530064000s (~16.8 years) 2021-04-28  
+       npi        entype enumeration_date enumeration_duration      last_updated
+       <chr>      <chr>  <date>           <Duration>                <date>      
+     1 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     2 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     3 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     4 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     5 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     6 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     7 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     8 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     9 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+    10 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
     # ℹ 414 more rows
     # ℹ 31 more variables: certification_date <date>, status <chr>,
     #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
@@ -556,19 +473,6 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
     #   phone_number <chr>, fax_number <chr>, authorized_official_first_name <chr>,
     #   authorized_official_last_name <chr>,
     #   authorized_official_title_or_position <chr>, …
-
-``` r
-c(13164059391, 1558364273) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind()
-```
-
-    Error in `purrr::map()`:
-    ℹ In index: 1.
-    Caused by error in `npi_check()`:
-    ! NPI may be incorrect or invalid
-    ℹ NPIs are 10 characters long.
-    ✖ NPI: 13164059391 is 11 characters long.
 
 ### Open Payments
 
@@ -642,20 +546,6 @@ opt_out(specialty = "Tsychiatry")
 
     ✖ No results for specialty: Tsychiatry
 
-``` r
-opt_out(city = "Valdosta", state = "GA")
-```
-
-    # A tibble: 3 × 13
-      npi        first_name last_name specialty    optout_start_date optout_end_date
-      <chr>      <chr>      <chr>     <chr>        <date>            <date>         
-    1 1992848659 Jeffery    Wood      Maxillofaci… 2016-01-11        2024-01-11     
-    2 1073632659 Fernando   Alvarado  Oral Surgery 2017-07-01        2023-07-01     
-    3 1811005655 Sonya      Merriman  Plastic And… 2022-01-01        2024-01-01     
-    # ℹ 7 more variables: optout_duration <Duration>, last_updated <date>,
-    #   order_and_refer <lgl>, address <chr>, city <chr>, state <chr>,
-    #   zipcode <chr>
-
 ### Order and Referring Privileges
 
 ``` r
@@ -673,7 +563,7 @@ order_refer(last_name = "Smith",
             pmd = FALSE)
 ```
 
-    # A tibble: 150 × 7
+    # A tibble: 151 × 7
        npi        first_name last_name partb hha   dme   pmd  
        <chr>      <chr>      <chr>     <lgl> <lgl> <lgl> <lgl>
      1 1063535672 AARON      SMITH     FALSE FALSE TRUE  FALSE
@@ -685,8 +575,8 @@ order_refer(last_name = "Smith",
      7 1992203582 AMANDA     SMITH     FALSE FALSE TRUE  FALSE
      8 1023475761 AMY        SMITH     FALSE FALSE TRUE  FALSE
      9 1609219773 AMY        SMITH     FALSE FALSE TRUE  FALSE
-    10 1659973295 ANDREW     SMITH     FALSE FALSE TRUE  FALSE
-    # ℹ 140 more rows
+    10 1063878056 ANNA       SMITH     FALSE FALSE TRUE  FALSE
+    # ℹ 141 more rows
 
 ### Pending Applications
 
@@ -694,44 +584,43 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    # A tibble: 16 × 4
+    # A tibble: 15 × 4
        npi        last_name first_name type         
        <chr>      <chr>     <chr>      <chr>        
-     1 1700588621 SMITH     AMANDA     NON-PHYSICIAN
-     2 1073234282 SMITH     ANGELA     NON-PHYSICIAN
-     3 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
-     4 1548969413 SMITH     ASHLEY     NON-PHYSICIAN
-     5 1659967966 SMITH     ASHLEY     NON-PHYSICIAN
-     6 1952009805 SMITH     BALEY      NON-PHYSICIAN
-     7 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
-     8 1902527641 SMITH     HEATHER    NON-PHYSICIAN
-     9 1356079727 SMITH     JARED      NON-PHYSICIAN
-    10 1891169751 SMITH     JEANA      NON-PHYSICIAN
-    11 1033538152 SMITH     JOANNA     NON-PHYSICIAN
-    12 1851916803 SMITH     KENZIE     NON-PHYSICIAN
-    13 1467159426 SMITH     PATRICE    NON-PHYSICIAN
-    14 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
-    15 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
-    16 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
+     1 1073234282 SMITH     ANGELA     NON-PHYSICIAN
+     2 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
+     3 1861062531 SMITH     ASHLEY     NON-PHYSICIAN
+     4 1952009805 SMITH     BALEY      NON-PHYSICIAN
+     5 1962889709 SMITH     BRANDY     NON-PHYSICIAN
+     6 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
+     7 1902527641 SMITH     HEATHER    NON-PHYSICIAN
+     8 1356079727 SMITH     JARED      NON-PHYSICIAN
+     9 1891169751 SMITH     JEANA      NON-PHYSICIAN
+    10 1518444512 SMITH     JODI       NON-PHYSICIAN
+    11 1942939749 SMITH     KIMBERLY   NON-PHYSICIAN
+    12 1578172540 SMITH     NAOMI      NON-PHYSICIAN
+    13 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
+    14 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
+    15 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 36 × 4
+    # A tibble: 43 × 4
        npi        last_name  first_name type     
        <chr>      <chr>      <chr>      <chr>    
      1 1881791739 ADAMS      JOHN       PHYSICIAN
      2 1841280963 BIGBEE     JOHN       PHYSICIAN
      3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1801545900 BRAZIL     JOHN       PHYSICIAN
+     4 1154079499 BRODERICK  JOHN       PHYSICIAN
      5 1588744569 BRUNO      JOHN       PHYSICIAN
      6 1861142556 BURKE      JOHN       PHYSICIAN
-     7 1942863451 CASNOVSKY  JOHN       PHYSICIAN
-     8 1306817531 COMBS      JOHN       PHYSICIAN
-     9 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    10 1376571554 FLYNN      JOHN       PHYSICIAN
-    # ℹ 26 more rows
+     7 1306817531 COMBS      JOHN       PHYSICIAN
+     8 1649890864 CRESENZO   JOHN       PHYSICIAN
+     9 1932632775 DEIS       JOHN       PHYSICIAN
+    10 1730349580 ECHEVARRIA JOHN       PHYSICIAN
+    # ℹ 33 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -758,22 +647,7 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
   dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    # A tibble: 10 × 16
-        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
-       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
-     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
-     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
-     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
-     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
-     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
-     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
-     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
-     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
-     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
-    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
-    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
-    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
-    #   avg_std_pymt <dbl>
+    Error in if (httr2::resp_header(response, "content-length") == "0") {: argument is of length zero
 
 ``` r
 # by Provider and Service

@@ -75,26 +75,10 @@ provider:::function_tbl() |>
 ### Beneficiary Enrollment
 
 ```{r}
-beneficiary_enrollment(year = 2021, 
+beneficiary_enrollment(year = 2020, 
                        period = "Year", 
                        level = "State", 
                        fips = "01")
-```
-
-
-```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "County", 
-                       state = "AL", 
-                       county = "Autauga")
-```
-
-
-```{r}
-beneficiary_enrollment(year = 2017, 
-                       level = "County", 
-                       state = "GA", 
-                       county = "Lowndes")
 ```
 
 
@@ -142,18 +126,14 @@ doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
                        grad_year = 2000, 
                        state = "FL")
-#doctors_and_clinicians(state = "GA", city = "VALDOSTA")
 ```
 
 ### Facility Affiliations
 
 ```{r}
-facility_affiliations(npi = 1003019563)
+facility_affiliations(npi = 10030195634)
 facility_affiliations(facility_ccn = "060004")
 facility_affiliations(parent_ccn = 670055)
-facility_affiliations(first_name = "John", 
-                      last_name = "Hill", 
-                      facility_type = "Home Health Agency")
 ```
 
 
@@ -193,13 +173,6 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
 ```
 
 
-```{r}
-c(13164059391, 1558364273) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind()
-```
-
-
 ### Open Payments
 
 ```{r}
@@ -225,11 +198,6 @@ opt_out(specialty = "Psychiatry",
 
 ```{r}
 opt_out(specialty = "Tsychiatry")
-```
-
-
-```{r}
-opt_out(city = "Valdosta", state = "GA")
 ```
 
 ### Order and Referring Privileges

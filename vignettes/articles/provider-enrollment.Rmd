@@ -21,24 +21,34 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br>
-
-> *Information on a point-in-time snapshot of enrollment-level data for Providers actively enrolled in Medicare.*
+> The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare. These files are populated from [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS) and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
 
 <br>
 
-The Medicare Fee-For-Service Public Provider Enrollment dataset includes information on providers who are actively approved to bill Medicare or have completed the 855O at the time the data was pulled from the [Provider Enrollment and Chain Ownership System](https://pecos.cms.hhs.gov) (PECOS). 
-
-These files are populated from PECOS and contain basic enrollment and provider information, reassignment of benefits information and practice location city, state and zip. These files are not intended to be used as real time reporting as the data changes from day to day and the files are updated only on a quarterly basis. This data does not include information on opt-out providers. Information is redacted where necessary to protect Medicare provider privacy.
-
-<br>
-
-## Example
+## Examples
 
 ```{r}
 provider_enrollment(npi = 1003026055)
 ```
 
+<br>
+
+```{r}
+provider_enrollment(first_name = "Matthew", 
+                    last_name = "Smith",
+                    state = "FL")
+```
+
+<br>
+
+```{r, message=TRUE}
+provider_enrollment(first_name = "Matthew", 
+                    last_name = "Smith",
+                    state = "FL") |> 
+  dplyr::pull(enroll_id) |> 
+  purrr::map(\(x) doctors_and_clinicians(enroll_id = x)) |> 
+  purrr::list_rbind()
+```
 
 <br>
 
@@ -47,45 +57,48 @@ provider_enrollment(npi = 1003026055)
 ```{r echo=FALSE}
 tibble::tibble(
   Variable = c(
-    "`npi`", "`pecos_asct_cntl_id`", "`enrlmt_id`", "`provider_type_cd`",
-    "`provider_type_desc`", "`state_cd`", "`first_name`", "`mdl_name`",
-    "`last_name`", "`org_name`", "`gndr_sw`", "`reasgn_bnft_enrlmt_id`",
-    "`rcv_bnft_enrlmt_id`", "`city_name`", "`zip_cd`"
-  ),
+    "`npi`", 
+    "`pac_id`", 
+    "`enroll_id`", 
+    "`specialty_cd`",
+    "`specialty_desc`", 
+    "`state`", 
+    "`first_name`", 
+    "`middle_name`",
+    "`last_name`", 
+    "`gender`"),
+  
   Description = c(
-    "National Provider Identifier", "PECOS Associate Control ID",
-    "Enrollment ID", "Provider Type Code", "Provider Type Description",
-    "State Code", "First Name", "Middle Name", "Last Name", "Organization Name",
-    "Gender", "Reassigning Benefits Enrollment ID", "Receiving Benefits Enrollment ID",
-    "City Name", "Zip Code"
-  ),
+    "National Provider Identifier", 
+    "PECOS Associate Control ID",
+    "Enrollment ID", 
+    "Provider Type Code", 
+    "Provider Type Description",
+    "State Code", 
+    "First Name", 
+    "Middle Name", 
+    "Last Name", 
+    "Gender"),
+  
   Definition = c(
     "An NPI is a 10-digit unique numeric identifier that all providers must obtain before enrolling in Medicare. It is assigned to health care providers upon application through the National Plan and Provider Enumeration System (NPPES).",
+    
     "Provider associate level variable (PAC ID) from PECOS database used to link across tables. A PAC ID is a 10-digit unique numeric identifier that is assigned to each individual or organization in PECOS. All entity-level information (e.g., tax identification numbers and organizational names) is linked through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs if the individual or organization enrolled multiple times under different circumstances.",
+    
     "Provider enrollment ID from PECOS database used to link across tables. An Enrollment ID is a 15-digit unique alphanumeric identifier that is assigned to each new provider enrollment application. All enrollment-level information (e.g., enrollment type, enrollment state, provider specialty and reassignment of benefits) is linked through the Enrollment ID.",
-    "Provider enrollment application and enrollment specialty type, see PROVIDER_TYPE_CD - Reference for description of values. This field shows the provider’s primary specialty code. For practitioners and DME suppliers, please see the Secondary Specialty file for a list of secondary specialties (when applicable). Only about 20% of practitioners and DME suppliers have at least one secondary specialty.",
+    
+    "Provider enrollment application and enrollment specialty type. This field shows the provider’s primary specialty code. For practitioners and DME suppliers, please see the Secondary Specialty file for a list of secondary specialties (when applicable). Only about 20% of practitioners and DME suppliers have at least one secondary specialty.",
+    
     "Provider enrollment application and enrollment specialty type description, see PROVIDER_TYPE_CD - Reference for description of values.",
-    "Provider enrollment state, abbreviated location, see STATE_CD - Reference tab for description of values. Providers enroll at the state level, so one PAC ID may be associated with multiple ENRLMT_IDs and multiple STATE_CD values.",
-    "Individual provider first name.", "Individual provider middle name.",
-    "Individual provider last name.", "Organizational provider name.",
-    "Individual provider gender, see GNDR_SW - Reference for description of values.",
-    "Enrollment ID of the provider reassigning benefits to bill to Medicare. To find enrollment information for providers reassigning their benefits to bill to Medicare, link REASGN_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.",
-    "Enrollment ID of the provider receiving reassignment benefits to bill to Medicare. To find enrollment information for providers receiving reassignment benefits to bill to Medicare, link RCV_BNFT_ENRLMT_ID to ENRLMT_ID in the Enrollment file.",
-    "Provider practice location city. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider.",
-    "Provider practice location zip code. Each practice location is linked to an Enrollment ID. If any other provider reassigns benefits to an Enrollment ID listed in the Practice Location file, the practice location is also associated with that other provider."
+    
+    "Provider enrollment state, abbreviated location. Providers enroll at the state level, so one PAC ID may be associated with multiple ENRLMT_IDs and multiple STATE_CD values.",
+    
+    "Individual provider first name.", 
+    "Individual provider middle name.",
+    "Individual provider last name.",
+    "Individual provider gender."
   )) |>
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  provider:::gt_datadict()
 ```
 
 <br>
