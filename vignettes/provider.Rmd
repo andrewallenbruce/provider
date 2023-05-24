@@ -42,7 +42,9 @@ info_1 <- info |>
   dplyr::slice_head() |> 
   dplyr::select(npi:entype, 
                 enumeration_duration, 
-                first_name:phone_number) |> 
+                first_name:phone_number)
+
+info_2 <- info_1 |> 
   provider:::gt_prov(source = "Source: NPPES NPI Public Registry.", 
                      checkmark = c("sole_proprietor")) |> 
   gt::tab_header(title = paste0("General Information for: ", 
@@ -71,7 +73,7 @@ info_1 <- info |>
 
 
 ```{r, echo=FALSE, eval=TRUE}
-info_1
+info_2
 ```
 
 
@@ -81,7 +83,7 @@ info_1
 
 
 ```{r}
-info_2 <- info |> 
+info_3 <- info |> 
   dplyr::slice_head(n = 3) |> 
   dplyr::select(tx_code:tx_desc, tx_state:tx_primary) |> 
   provider:::gt_prov(source = "Source: NPPES NPI Public Registry.", 
@@ -182,6 +184,12 @@ missing_information(npi = 1043477615)
 
 ```{r, message=FALSE}
 opt_out(npi = 1043477615)
+```
+
+<br>
+
+```{r, message=FALSE}
+order_refer(npi = 1043477615)
 ```
 
 <br>

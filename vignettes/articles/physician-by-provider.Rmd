@@ -21,8 +21,6 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br>
-
  > *Information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals.*
 
 <br>
@@ -150,39 +148,23 @@ sh |>
   dplyr::mutate(pct_lt65 = bene_age_lt65 / tot_benes,
                 pct_6574 = bene_age_65_74 / tot_benes,
                 pct_7584 = bene_age_75_84 / tot_benes,
-                pct_gt84 = bene_age_gt84 / tot_benes) |> 
-  gt::gt() |> 
-  gtExtras::gt_theme_538() |> 
-  gt::fmt_percent(columns = dplyr::contains("pct"), 
-                  decimals = 1, 
-                  force_sign = FALSE) |> 
-  gt::cols_hide(columns = tot_benes) |> 
-  gt::cols_label(bene_age_avg = "Avg.",
-                 bene_age_lt65 = "> 65",
-                 bene_age_65_74 = "65 - 74",
-                 bene_age_75_84 = "75 - 84",
-                 bene_age_gt84 = "> 84")
+                pct_gt84 = bene_age_gt84 / tot_benes)
 ```
 
-<br>
 
 ```{r}
 sh |> dplyr::select(year, tot_benes, bene_female:bene_male)
 ```
 
-<br>
 
 ```{r}
 sh |> dplyr::select(year, tot_benes, bene_race_wht:bene_race_oth)
 ```
 
-<br>
 
 ```{r}
 sh |> dplyr::select(year, tot_benes, bene_dual:bene_ndual)
 ```
-
-<br>
 
    * bene_cc_af: Atrial Fibrillation
    * bene_cc_alz: Alzheimer’s Disease or Dementia
@@ -203,30 +185,24 @@ sh |> dplyr::select(year, tot_benes, bene_dual:bene_ndual)
 
 
 ```{r}
-sh |> dplyr::select(year, bene_risk_avg, bene_cc_af:bene_cc_strk) |> 
-  gt::gt() |> 
-  gtExtras::gt_theme_538() |> 
-  gt::fmt_percent(columns = dplyr::contains("cc"), 
-                  decimals = 0, 
-                  force_sign = FALSE) |> 
-  gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |> 
-  gt::cols_label(bene_cc_af = "AFib",
-                 bene_cc_alz = "Alz",
-                 bene_cc_asth = "Asthma",
-                 bene_cc_canc = "Cancer",
-                 bene_cc_chf = "CHF",
-                 bene_cc_ckd = "CKD",
-                 bene_cc_copd = "COPD",
-                 bene_cc_dep = "Depression",
-                 bene_cc_diab = "Diabetes",
-                 bene_cc_hplip = "Hyperlipidemia",
-                 bene_cc_hpten = "Hypertension",
-                 bene_cc_ihd = "IHD",
-                 bene_cc_opo = "Osteoporosis",
-                 bene_cc_raoa = "RA / OA",
-                 bene_cc_sz = "Schizophrenia",
-                 bene_cc_strk = "Stroke",
-                 bene_risk_avg = "Avg. Risk Score")
+sh |> dplyr::select(year, tot_benes, bene_cc_af:bene_risk_avg) |> 
+  dplyr::mutate(
+    tot_af = round(tot_benes * bene_cc_af),
+    tot_alz = round(tot_benes * bene_cc_alz),
+    tot_asth = round(tot_benes * bene_cc_asth),
+    tot_canc = round(tot_benes * bene_cc_canc),
+    tot_chf = round(tot_benes * bene_cc_chf),
+    tot_ckd = round(tot_benes * bene_cc_ckd),
+    tot_copd = round(tot_benes * bene_cc_copd),
+    tot_dep = round(tot_benes * bene_cc_dep),
+    tot_diab = round(tot_benes * bene_cc_diab),
+    tot_hplip = round(tot_benes * bene_cc_hplip),
+    tot_hpten = round(tot_benes * bene_cc_hpten),
+    tot_ihd = round(tot_benes * bene_cc_ihd),
+    tot_opo = round(tot_benes * bene_cc_opo),
+    tot_raoa = round(tot_benes * bene_cc_raoa),
+    tot_sz = round(tot_benes * bene_cc_sz),
+    tot_strk = round(tot_benes * bene_cc_strk))
 ```
 
 
@@ -243,7 +219,6 @@ physician_by_provider(year = 2021,
                       credential = "MD")
 ```
 
-<br><br>
 
 ### Data Dictionary
 
@@ -458,5 +433,16 @@ tibble::tibble(
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for stroke. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Average Hierarchical Condition Category (HCC) risk score of beneficiaries."
   )) |> 
-  provider:::gt_datadict()
+  gt::gt() |> 
+  gt::fmt_markdown(columns = Variable) |> 
+  gtExtras::gt_theme_nytimes() |> 
+  gtExtras::gt_merge_stack(col1 = Description, 
+                           col2 = Definition,
+                           small_cap = FALSE,
+                           font_size = c("16px", "14px"),
+                           font_weight = c("bold", "normal"),
+                           palette = c("black", "darkgray")) |> 
+  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
+  gt::opt_table_lines(extent = "default") |> 
+  gt::opt_table_outline(style = "none")
 ```
