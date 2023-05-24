@@ -2,27 +2,27 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  cms-miss-contact-info: cms-miss-contact-info.html
+  beneficiary-enrollment: beneficiary-enrollment.html
   cms-open-payments: cms-open-payments.html
   doctors-and-clinicians: doctors-and-clinicians.html
   facility-affiliations: facility-affiliations.html
   geocoding: geocoding.html
   hospital-enrollment: hospital-enrollment.html
   mcr-chron-cond: mcr-chron-cond.html
-  mcr-ffs-prov-enroll: mcr-ffs-prov-enroll.html
-  mcr-month-enroll: mcr-month-enroll.html
   mcr-opt-out-affid: mcr-opt-out-affid.html
   mcr-ord-referring: mcr-ord-referring.html
   mcr-phys-other-pract: mcr-phys-other-pract.html
   mcr-revalidation: mcr-revalidation.html
   mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
+  missing-info: missing-info.html
   nppes-npi-registry: nppes-npi-registry.html
   pending-applications: pending-applications.html
   physician-by-geography: physician-by-geography.html
   physician-by-provider: physician-by-provider.html
   physician-by-service: physician-by-service.html
+  provider-enrollment: provider-enrollment.html
   provider: provider.html
-last_built: 2023-05-24T17:50Z
+last_built: 2023-05-24T21:56Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles
