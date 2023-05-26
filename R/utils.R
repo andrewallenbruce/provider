@@ -5,10 +5,8 @@
 #' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
 #' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
 #' @param arr column to arrange data by, i.e. `cost`
-#' @return A `tidytable` containing the summary stats
+#' @return A `tibble` containing the summary stats
 #' @examplesIf interactive()
-#' download_datasets(specialty = "vascular surgery") |>
-#' tidytable::slice_head(n = 10) |>
 #' summary_stats(condition = patient == "new",
 #'               group_vars = c(specialty, state, hcpcs, cost),
 #'               summary_vars = c(min, max, mode, range),
@@ -28,7 +26,7 @@ summary_stats <- function(df,
        list(median = \(x) stats::median(x, na.rm = TRUE),
             mean = \(x) mean(x, na.rm = TRUE)),
        .names = "{.fn}_{.col}"),
-       n = dplyr::n.(),
+       n = dplyr::n(),
        .by = ({{ group_vars }}) ) |>
     dplyr::arrange(dplyr::desc({{ arr }}))
 
