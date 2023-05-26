@@ -59,10 +59,8 @@
 #'    services.
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
-#' \dontrun{
-#' physician_by_provider(npi = 1003000423,
-#'                       year = 2020)
+#' @examplesIf interactive()
+#' physician_by_provider(npi = 1003000423, year = 2020)
 #'
 #' physician_by_provider(entype = "I",
 #'                       city = "Hershey",
@@ -72,9 +70,6 @@
 #'                       gender = "F",
 #'                       cred = "MD",
 #'                       specialty = "Anesthesiology")
-#'
-#' purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
-#' }
 #' @autoglobal
 #' @export
 physician_by_provider <- function(year,

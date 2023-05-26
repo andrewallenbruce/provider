@@ -32,6 +32,11 @@
 #' @param last_name Individual provider's (NPI-1) last name. Trailing wildcard
 #'    entries are permitted requiring at least two characters to be entered
 #'    (e.g. `jo*` ).
+#' @param purpose_name Refers to whether the name information entered pertains
+#'    to an Authorized Official's name or a Provider's name. When not specified,
+#'    the results will search against a provider's first and last name. AO will
+#'    only search against Authorized Official names. While PROVIDER will only
+#'    search against Provider name. Valid values are: `AO` and `Provider.`
 #' @param org_name Healthcare organization's name (NPI-2). Trailing wildcard entries are
 #'    permitted requiring at least two characters to be entered. All types of
 #'    Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
@@ -70,6 +75,7 @@ nppes_npi <- function(npi            = NULL,
                       first_name     = NULL,
                       last_name      = NULL,
                       org_name       = NULL,
+                      purpose_name   = NULL,
                       taxonomy_desc  = NULL,
                       city           = NULL,
                       state          = NULL,
@@ -81,6 +87,7 @@ nppes_npi <- function(npi            = NULL,
 
   if (!is.null(npi)) {npi_check(npi)}
   if (!is.null(entype)) {entype <- entype_arg(entype)}
+  if (!is.null(purpose_name)) {rlang::arg_match(purpose_name, c("AO", "Provider"))}
 
   # request and response ----------------------------------------------------
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
@@ -88,6 +95,7 @@ nppes_npi <- function(npi            = NULL,
                          enumeration_type     = entype,
                          first_name           = first_name,
                          last_name            = last_name,
+                         name_purpose         = purpose_name,
                          organization_name    = org_name,
                          taxonomy_description = taxonomy_desc,
                          city                 = city,
@@ -99,7 +107,8 @@ nppes_npi <- function(npi            = NULL,
     httr2::req_perform()
 
   # parse response ---------------------------------------------------------
-  response <- httr2::resp_body_json(request, check_type = FALSE, simplifyVector = TRUE)
+  response <- httr2::resp_body_json(request, check_type = FALSE,
+                                    simplifyVector = TRUE)
 
   res_cnt <- response$result_count
 
@@ -112,6 +121,7 @@ nppes_npi <- function(npi            = NULL,
       "entype",        entype,
       "first_name",    first_name,
       "last_name",     last_name,
+      "purpose_name",  purpose_name,
       "org_name",      org_name,
       "taxonomy_desc", taxonomy_desc,
       "city",          city,

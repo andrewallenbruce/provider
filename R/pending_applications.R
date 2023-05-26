@@ -18,12 +18,11 @@
 #' @param type physician or non-physician
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examples
+#' @examplesIf interactive()
 #' pending_applications(last_name = "Smith", type = "non-physician")
 #' pending_applications(first_name = "John", type = "physician")
 #' @autoglobal
 #' @export
-
 pending_applications <- function(npi         = NULL,
                                  last_name   = NULL,
                                  first_name  = NULL,

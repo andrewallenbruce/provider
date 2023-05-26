@@ -84,7 +84,7 @@
 #'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 #'    Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 #'    for additional information.
-#' @param pos Identifies whether the place of service submitted on the claims
+#' @param place_of_srvc Identifies whether the place of service submitted on the claims
 #'    is a facility (value of `F`) or non-facility (value of `O`). Non-facility
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
@@ -121,34 +121,41 @@
 #' @examplesIf interactive()
 #' physician_by_service(npi = 1003000126)
 #' physician_by_service(year = 2019, last_name = "Enkeshafi")
-#' c(1003026055, 1316405939, 1720392988,
-#'   1518184605, 1922056829, 1083879860) |>
-#'   purrr::map(physician_by_service, year = 2020)
-#' purrr::map_dfr(as.character(2013:2020),
-#' ~physician_by_service(npi = 1003000126, year = .x))
+#' c(1003026055, 1316405939, 1720392988) |>
+#'   purrr::map(physician_by_service, year = 2020) |>
+#'   purrr::list_rbind()
 #' @autoglobal
 #' @export
 physician_by_service <- function(year,
-                                 npi        = NULL,
-                                 last_name  = NULL,
-                                 first_name = NULL,
-                                 credential = NULL,
-                                 gender     = NULL,
-                                 entype     = NULL,
-                                 city       = NULL,
-                                 state      = NULL,
-                                 zipcode    = NULL,
-                                 fips       = NULL,
-                                 ruca       = NULL,
-                                 country    = NULL,
-                                 specialty  = NULL,
-                                 par        = NULL,
-                                 hcpcs_code = NULL,
-                                 hcpcs_drug = NULL,
-                                 pos        = NULL,
-                                 tidy       = TRUE) {
+                                 npi           = NULL,
+                                 last_name     = NULL,
+                                 first_name    = NULL,
+                                 credential    = NULL,
+                                 gender        = NULL,
+                                 entype        = NULL,
+                                 city          = NULL,
+                                 state         = NULL,
+                                 zipcode       = NULL,
+                                 fips          = NULL,
+                                 ruca          = NULL,
+                                 country       = NULL,
+                                 specialty     = NULL,
+                                 par           = NULL,
+                                 hcpcs_code    = NULL,
+                                 hcpcs_drug    = NULL,
+                                 place_of_srvc = NULL,
+                                 tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+
+  if (!is.null(place_of_srvc)) {
+    place_of_srvc <- dplyr::case_when(
+      place_of_srvc == "facility" ~ "F",
+      place_of_srvc == "Facility" ~ "F",
+      place_of_srvc == "office" ~ "O",
+      place_of_srvc == "Office" ~ "O",
+      .default = NULL)
+  }
 
   # match args ----------------------------------------------------
   rlang::check_required(year)
@@ -179,7 +186,7 @@ physician_by_service <- function(year,
   "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",   par,
                        "HCPCS_Cd",   hcpcs_code,
                  "HCPCS_Drug_Ind",   hcpcs_drug,
-                  "Place_Of_Srvc",   pos)
+                  "Place_Of_Srvc",   place_of_srvc)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |>
@@ -196,7 +203,7 @@ physician_by_service <- function(year,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
 
     cli_args <- tibble::tribble(
       ~x,             ~y,
@@ -217,7 +224,7 @@ physician_by_service <- function(year,
       "par",          par,
       "hcpcs_code",   as.character(hcpcs_code),
       "hcpcs_drug",   as.character(hcpcs_drug),
-      "pos",          pos) |>
+      "place_of_srvc",          place_of_srvc) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,

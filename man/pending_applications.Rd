@@ -48,6 +48,8 @@ contractors.
 Update Frequency: \strong{Weekly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pending_applications(last_name = "Smith", type = "non-physician")
 pending_applications(first_name = "John", type = "physician")
+\dontshow{\}) # examplesIf}
 }

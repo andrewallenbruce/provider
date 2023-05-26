@@ -61,9 +61,9 @@ navbar:
       - text: Pending Applications
         href: articles/pending-applications.html
       - text: Opt Out Affidavits
-        href: articles/mcr-opt-out-affid.html
+        href: articles/opt-out.html
       - text: Order & Referring Eligibility
-        href: articles/mcr-ord-referring.html
+        href: articles/order-refer.html
       - text: Physician by Provider
         href: articles/physician-by-provider.html
       - text: Physician by Geography

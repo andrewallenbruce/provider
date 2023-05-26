@@ -91,12 +91,12 @@ nppes_npi(npi = 1003000423) |>
 tibble::tibble(
   Variable = c(
     "`npi`", 
-    "`last_name`", 
-    "`first_name`"),
+    "`first_name`",
+    "`last_name`"),
   Description = c(
     "National Provider Identifier", 
-    "Last Name", 
-    "First Name"),
+    "First Name",
+    "Last Name"),
   Definition = c(
     "The provider's 10-digit National Provider Identifier.", 
     "Last name of the provider.", 

@@ -26,7 +26,7 @@ physician_by_service(
   par = NULL,
   hcpcs_code = NULL,
   hcpcs_drug = NULL,
-  pos = NULL,
+  place_of_srvc = NULL,
   tidy = TRUE
 )
 }
@@ -100,7 +100,7 @@ furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 for additional information.}
 
-\item{pos}{Identifies whether the place of service submitted on the claims
+\item{place_of_srvc}{Identifies whether the place of service submitted on the claims
 is a facility (value of \code{F}) or non-facility (value of \code{O}). Non-facility
 is generally an office setting; however other entities are included
 in non-facility.}
@@ -175,11 +175,9 @@ Update Frequency: \strong{Annually}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 physician_by_service(npi = 1003000126)
 physician_by_service(year = 2019, last_name = "Enkeshafi")
-c(1003026055, 1316405939, 1720392988,
-  1518184605, 1922056829, 1083879860) |>
-  purrr::map(physician_by_service, year = 2020)
-purrr::map_dfr(as.character(2013:2020),
-~physician_by_service(npi = 1003000126, year = .x))
+c(1003026055, 1316405939, 1720392988) |>
+  purrr::map(physician_by_service, year = 2020) |>
+  purrr::list_rbind()
 \dontshow{\}) # examplesIf}
 }
 \references{

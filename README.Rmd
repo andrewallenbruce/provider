@@ -162,6 +162,8 @@ nppes_npi(npi = "155836427a")
 nppes_npi(1720081442)
 nppes_npi(1710983663) 
 nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
+nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
+nppes_npi(last_name = "Smith", purpose_name = "Accounts", city = "Atlanta")
 ```
 
 

@@ -110,9 +110,8 @@ organized by National Provider Identifier (NPI).
 Update Frequency: *\emph{Annually}
 }
 \examples{
-\dontrun{
-physician_by_provider(npi = 1003000423,
-                      year = 2020)
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+physician_by_provider(npi = 1003000423, year = 2020)
 
 physician_by_provider(entype = "I",
                       city = "Hershey",
@@ -122,7 +121,5 @@ physician_by_provider(entype = "I",
                       gender = "F",
                       cred = "MD",
                       specialty = "Anesthesiology")
-
-purrr::map_dfr(2013:2020, ~physician_by_provider(npi = 1003000126, year = .x))
-}
+\dontshow{\}) # examplesIf}
 }

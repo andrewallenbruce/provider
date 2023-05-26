@@ -1,5 +1,5 @@
 ---
-title: "Medicare Order and Referring API"
+title: "Order and Referring Eligibility"
 output: html_document
 ---
 
@@ -21,16 +21,7 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
-<br>
-
-> *Providers That are Legally Eligible to Order and Refer in the Medicare Program and Have Current Enrollment Records in Medicare.*
-
-<br>
-
-
-The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS).
-
-Ordering providers can order non-physician services for patients. Referring providers can request items or services which Medicare may reimburse on behalf of Medicare beneficiaries. To qualify as an ordering and certifying/referring provider, a provider must have an individual National Provider Identifier (NPI), be enrolled in Medicare in either an “approved” or an “opt-out” status, and be of an eligible specialty type. Providers currently enrolled as a Medicare Part B provider can already order and certifyand do not need to re-enroll in Medicare.
+> The Order and Referring dataset provides information on all physicians and non-physician practitioners, by their National Provider Identifier (NPI), who are of a type/specialty that is legally eligible to order and refer in the Medicare program and who have current enrollment records in Medicare. This dataset is based on information gathered from the Provider Enrollment, Chain and Ownership System (PECOS). Ordering providers can order non-physician services for patients. Referring providers can request items or services which Medicare may reimburse on behalf of Medicare beneficiaries. To qualify as an ordering and certifying/referring provider, a provider must have an individual National Provider Identifier (NPI), be enrolled in Medicare in either an “approved” or an “opt-out” status, and be of an eligible specialty type. Providers currently enrolled as a Medicare Part B provider can already order and certifyand do not need to re-enroll in Medicare.
 
 In the event a provider does not want to bill Medicare for their services, they can still order and refer/certify by opting out of Medicare or enrolling solely to order and certify. Medicare coverage will then apply when ordering or certifying:
 
@@ -41,7 +32,7 @@ In the event a provider does not want to bill Medicare for their services, they 
 
 <br>
 
-## Example Searchs
+## Example Searches
 
 By NPI:
 

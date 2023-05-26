@@ -1,3 +1,40 @@
+#' Returns a tidytable of summary stats
+#' @description Returns a tidy table of summary stats
+#' @param df data frame
+#' @param condition filter condition, i.e. `patient == "new"`
+#' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
+#' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
+#' @param arr column to arrange data by, i.e. `cost`
+#' @return A `tidytable` containing the summary stats
+#' @examplesIf interactive()
+#' download_datasets(specialty = "vascular surgery") |>
+#' tidytable::slice_head(n = 10) |>
+#' summary_stats(condition = patient == "new",
+#'               group_vars = c(specialty, state, hcpcs, cost),
+#'               summary_vars = c(min, max, mode, range),
+#'               arr = cost)
+#' @autoglobal
+#' @export
+summary_stats <- function(df,
+                          condition = NULL,
+                          group_vars = NULL,
+                          summary_vars = NULL,
+                          arr = NULL) {
+
+  results <- df |>
+    dplyr::filter({{ condition }}) |>
+    dplyr::summarise(
+      dplyr::across({{ summary_vars }},
+       list(median = \(x) stats::median(x, na.rm = TRUE),
+            mean = \(x) mean(x, na.rm = TRUE)),
+       .names = "{.fn}_{.col}"),
+       n = dplyr::n.(),
+       .by = ({{ group_vars }}) ) |>
+    dplyr::arrange(dplyr::desc({{ arr }}))
+
+  return(results)
+}
+
 #' Format US ZIP codes -----------------------------------------------------
 #' @param zip Nine-digit US ZIP code
 #' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
@@ -478,18 +515,25 @@ gt_theme_provider <- function(data,...){
 #' @autoglobal
 #' @noRd
 gt_entype_badge <- function(x) {
-  add_color <- if (x == "Individual") {
+
+  add_color <- if (x == "Ind") {
+
     "background: hsl(116, 60%, 90%); color: hsl(116, 30%, 25%);"
-  } else if (x == "Organization") {
-    "background: hsl(350, 70%, 90%); color: hsl(350, 45%, 30%);"
-  } else if (x != "Individual" | x != "Organization") {
-    x
-  }
+
+    } else if (x == "Org") {
+
+      "background: hsl(350, 70%, 90%); color: hsl(350, 45%, 30%);"
+
+      } else if (x != "Ind" | x != "Org") {
+        x
+        }
+
   div_out <- htmltools::div(
     style = paste("display: inline-block; padding: 2px 12px; border-radius: 15px; font-weight: 600; font-size: 16px;",
-                  add_color), x)
-  as.character(div_out) |>
-    gt::html()
+                  add_color),
+    x)
+
+  as.character(div_out) |> gt::html()
 }
 
 #' @param gt_tbl gt_tbl object
@@ -515,6 +559,37 @@ gt_check_xmark <- function(gt_tbl, cols) {
     .default = NA,
     .locations = gt::cells_body(
       columns = {{ cols }}))
+}
+
+#' @param gt_tbl gt_tbl object
+#' @param cols columns in data frame
+#' @autoglobal
+#' @noRd
+gt_qmark <- function(gt_tbl, cols) {
+
+  gt_tbl |>
+    gt::text_case_when(
+      x == "Y" ~ gt::html(
+        fontawesome::fa("circle-check",
+                        prefer_type = "solid",
+                        fill = "black",
+                        height = "1.75em",
+                        width = "1.75em")),
+      x == "N" ~ gt::html(
+        fontawesome::fa("circle-xmark",
+                        prefer_type = "solid",
+                        fill = "red",
+                        height = "1.75em",
+                        width = "1.75em")),
+      x == "M" ~ gt::html(
+        fontawesome::fa("circle-question",
+                        prefer_type = "solid",
+                        fill = "red",
+                        height = "1.75em",
+                        width = "1.75em")),
+      .default = "",
+      .locations = gt::cells_body(
+        columns = {{ cols }}))
 }
 
 #' @param df data frame
@@ -550,20 +625,37 @@ gt_datadict <- function(df) {
 #' @param df data frame
 #' @param divider description
 #' @param title description
+#' @param subtitle description
 #' @param source description
+#' @param checkmark description
+#' @param qmark description
+#' @param dollars description
+#' @param pct description
+#' @param pctchg description
 #' @autoglobal
 #' @noRd
 gt_prov <- function(df,
-                    divider  = NULL,
-                    title    = NULL,
-                    source   = NULL,
-                    checkmark = NULL) {
+                    divider   = NULL,
+                    title     = NULL,
+                    subtitle  = NULL,
+                    source    = NULL,
+                    checkmark = NULL,
+                    qmark     = NULL,
+                    dollars   = NULL,
+                    pct       = NULL,
+                    pctchg    = NULL,
+                    clean     = TRUE) {
 
   results <- df |>
     gt::gt() |>
     gtExtras::gt_theme_538() |>
-    gt::cols_label_with(fn = ~ janitor::make_clean_names(., case = "title")) |>
+    gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |>
     gt::tab_options(table.width = gt::pct(100))
+
+  if (clean) {
+    results <- results |>
+      gt::cols_label_with(fn = ~ janitor::make_clean_names(., case = "title"))
+    }
 
   if (!is.null(divider)) {
     results <- results |>
@@ -575,15 +667,49 @@ gt_prov <- function(df,
         include_labels = FALSE)
     }
 
-    if (!is.null(title)) {
-      results <- results |> gt::tab_header(title = gt::md(title))}
+  if (!is.null(title)) {
+    results <- results |>
+      gt::tab_header(title = title)
+    }
 
-    if (!is.null(source)) {
-      results <- results |> gt::tab_source_note(source_note = source)}
+  if (!is.null(subtitle)) {
+    results <- results |>
+      gt::tab_header(title = title, subtitle = subtitle)
+    }
 
-    if (!is.null(checkmark)) {
-      results <- results |> gt_check_xmark(cols = checkmark)}
+  if (!is.null(source)) {
+    results <- results |> gt::tab_source_note(source_note = source)
+    }
 
+  if (!is.null(checkmark)) {
+    results <- results |> gt_check_xmark(cols = checkmark)
+    }
+
+  if (!is.null(qmark)) {
+    results <- results |> gt_qmark(cols = qmark)
+    }
+
+  if (!is.null(dollars)) {
+    results <- results |>
+      gt::fmt_currency(columns = {{ dollars }},
+                       currency = "USD",
+                       suffixing = TRUE,
+                       sep_mark = ",",
+                       incl_space = TRUE)
+    }
+
+  if (!is.null(pct)) {
+    results <- results |>
+      gt::fmt_percent(columns = {{ pct }},
+                      decimals = 0)
+  }
+
+  if (!is.null(pctchg)) {
+    results <- results |>
+      gt::fmt_percent(columns = {{ pctchg }},
+                      decimals = 1,
+                      force_sign = TRUE)
+  }
   return(results)
 }
 

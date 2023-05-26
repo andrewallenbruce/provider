@@ -13,6 +13,7 @@ nppes_npi(
   first_name = NULL,
   last_name = NULL,
   org_name = NULL,
+  purpose_name = NULL,
   taxonomy_desc = NULL,
   city = NULL,
   state = NULL,
@@ -45,6 +46,12 @@ Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
 NPI are examined for matching contents, therefore, the results might
 contain an organization name different from the one entered in the
 Organization Name criterion.}
+
+\item{purpose_name}{Refers to whether the name information entered pertains
+to an Authorized Official's name or a Provider's name. When not specified,
+the results will search against a provider's first and last name. AO will
+only search against Authorized Official names. While PROVIDER will only
+search against Provider name. Valid values are: \code{AO} and \code{Provider.}}
 
 \item{taxonomy_desc}{Search for providers by their taxonomy by entering the
 taxonomy description.}

@@ -436,8 +436,8 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
     # A tibble: 2 × 28
       npi      entype enumeration_date enumeration_duration      last_updated status
       <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1730354… Org    2008-04-30       475372800s (~15.06 years) 2013-11-21   A     
-    2 1730354… Org    2008-04-30       475372800s (~15.06 years) 2013-11-21   A     
+    1 1730354… Org    2008-04-30       475545600s (~15.07 years) 2013-11-21   A     
+    2 1730354… Org    2008-04-30       475545600s (~15.07 years) 2013-11-21   A     
     # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
     #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
     #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
@@ -445,6 +445,38 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
     #   authorized_official_title_or_position <chr>,
     #   authorized_official_telephone_number <chr>, tx_code <chr>, tx_desc <chr>,
     #   tx_group <chr>, tx_state <lgl>, tx_license <lgl>, tx_primary <lgl>, …
+
+``` r
+nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
+```
+
+    # A tibble: 236 × 36
+       npi        entype enumeration_date enumeration_duration      last_updated
+       <chr>      <chr>  <date>           <Duration>                <date>      
+     1 1477605202 Org    2007-01-18       515980800s (~16.35 years) 2020-08-22  
+     2 1477605202 Org    2007-01-18       515980800s (~16.35 years) 2020-08-22  
+     3 1972882389 Org    2011-08-16       371606400s (~11.78 years) 2016-09-08  
+     4 1972882389 Org    2011-08-16       371606400s (~11.78 years) 2016-09-08  
+     5 1679724413 Org    2008-10-09       461548800s (~14.63 years) 2008-10-09  
+     6 1679724413 Org    2008-10-09       461548800s (~14.63 years) 2008-10-09  
+     7 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
+     8 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
+     9 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
+    10 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
+    # ℹ 226 more rows
+    # ℹ 31 more variables: certification_date <date>, status <chr>,
+    #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
+    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
+    #   phone_number <chr>, fax_number <chr>, authorized_official_first_name <chr>,
+    #   authorized_official_middle_name <chr>, authorized_official_last_name <chr>,
+    #   authorized_official_title_or_position <chr>, …
+
+``` r
+nppes_npi(last_name = "Smith", purpose_name = "Accounts", city = "Atlanta")
+```
+
+    Error in `nppes_npi()`:
+    ! `purpose_name` must be one of "AO" or "Provider", not "Accounts".
 
 ``` r
 provider_enrollment(specialty_code = "00-17", state = "GA") |> 
@@ -456,16 +488,16 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
     # A tibble: 424 × 36
        npi        entype enumeration_date enumeration_duration      last_updated
        <chr>      <chr>  <date>           <Duration>                <date>      
-     1 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     2 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     3 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     4 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     5 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     6 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     7 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     8 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-     9 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
-    10 1992710610 Org    2006-07-30       530668800s (~16.82 years) 2021-04-28  
+     1 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     2 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     3 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     4 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     5 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     6 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     7 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     8 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+     9 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+    10 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
     # ℹ 414 more rows
     # ℹ 31 more variables: certification_date <date>, status <chr>,
     #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
@@ -647,7 +679,22 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
   dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    Error in if (httr2::resp_header(response, "content-length") == "0") {: argument is of length zero
+    # A tibble: 10 × 16
+        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
+       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
+     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
+     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
+     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
+     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
+     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
+     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
+     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
+     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
+     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
+    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
+    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
+    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
+    #   avg_std_pymt <dbl>
 
 ``` r
 # by Provider and Service

@@ -450,7 +450,6 @@ utils::globalVariables(c(
   "hcpcs_cd", # <physician_by_service>
   "hcpcs_desc", # <physician_by_service>
   "hcpcs_drug_ind", # <physician_by_service>
-  "place_of_srvc", # <physician_by_service>
   "avg_sbmtd_chrg", # <physician_by_service>
   "avg_mdcr_alowd_amt", # <physician_by_service>
   "avg_mdcr_pymt_amt", # <physician_by_service>

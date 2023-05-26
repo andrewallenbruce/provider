@@ -433,16 +433,5 @@ tibble::tibble(
     "Percent of beneficiaries meeting the CCW chronic condition algorithm for stroke. To protect the privacy of Medicare beneficiaries, the number of beneficiaries fewer than 11 have been suppressed and the percent of beneficiaries between 75% and 100% have been top-coded at 75%. Information on source data is available from the CMS Chronic Conditions Warehouse (CCW).",
     "Average Hierarchical Condition Category (HCC) risk score of beneficiaries."
   )) |> 
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  provider:::gt_datadict()
 ```
