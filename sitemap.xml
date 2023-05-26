@@ -37,12 +37,6 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/mcr-opt-out-affid.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/mcr-ord-referring.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-phys-other-pract.html</loc>
   </url>
   <url>
@@ -56,6 +50,12 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/opt-out.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/articles/order-refer.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/pending-applications.html</loc>
@@ -149,6 +149,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_reassign.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/summary_stats.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>

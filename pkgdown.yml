@@ -9,20 +9,20 @@ articles:
   geocoding: geocoding.html
   hospital-enrollment: hospital-enrollment.html
   mcr-chron-cond: mcr-chron-cond.html
-  mcr-opt-out-affid: mcr-opt-out-affid.html
-  mcr-ord-referring: mcr-ord-referring.html
   mcr-phys-other-pract: mcr-phys-other-pract.html
   mcr-revalidation: mcr-revalidation.html
   mcr-taxon-crosswalk: mcr-taxon-crosswalk.html
   missing-info: missing-info.html
   nppes-npi-registry: nppes-npi-registry.html
+  opt-out: opt-out.html
+  order-refer: order-refer.html
   pending-applications: pending-applications.html
   physician-by-geography: physician-by-geography.html
   physician-by-provider: physician-by-provider.html
   physician-by-service: physician-by-service.html
   provider-enrollment: provider-enrollment.html
   provider: provider.html
-last_built: 2023-05-24T21:56Z
+last_built: 2023-05-26T14:29Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles

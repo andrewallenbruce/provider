@@ -40,8 +40,8 @@ of Medicare."><meta property="og:image" content="https://andrewallenbruce.github
     <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
     <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
     <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Order &amp; Referring Eligibility</a>
+    <a class="dropdown-item" href="../articles/opt-out.html">Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/order-refer.html">Order &amp; Referring Eligibility</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
     <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
     <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
@@ -190,29 +190,13 @@ provider's NPI, specialty, address, and effective dates.</p><div class="section"
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, zipcode <span class="op">=</span> <span class="st">"07626"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>first <span class="op">=</span> <span class="st">"David"</span>, last <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114974490</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Los Angeles"</span>, address <span class="op">=</span> <span class="st">"9201 W SUNSET BLVD"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"NY"</span>, order_and_refer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="co"># Returns empty list i.e., provider is not in the database</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1326011057</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Example of possible data cleaning</span></span></span>
-<span class="r-in"><span><span class="va">psych</span> <span class="op">&lt;-</span> <span class="fu">opt_out</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">psych</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>last_updated <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu">parsedate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html" class="external-link">parse_date</a></span><span class="op">(</span><span class="va">last_updated</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>optout_effective_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu">parsedate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html" class="external-link">parse_date</a></span><span class="op">(</span><span class="va">optout_effective_date</span><span class="op">)</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>optout_end_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></span><span class="op">(</span><span class="fu">parsedate</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/parsedate/man/parse_date.html" class="external-link">parse_date</a></span><span class="op">(</span><span class="va">optout_end_date</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">date</span>, <span class="va">optout_end_date</span>, colname <span class="op">=</span> <span class="st">"days_until_end"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">last_updated</span>, <span class="va">date</span>, colname <span class="op">=</span> <span class="st">"days_since_update"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">age_days</span><span class="op">(</span><span class="va">optout_effective_date</span>, <span class="va">date</span>, colname <span class="op">=</span> <span class="st">"days_since_optout"</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>zip_code <span class="op">=</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map_chr</a></span><span class="op">(</span><span class="va">zip_code</span>, <span class="va">format_zipcode</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>address_full <span class="op">=</span> <span class="fu">full_address</span><span class="op">(</span><span class="va">.data</span>, <span class="st">"first_line_street_address"</span>,</span></span>
-<span class="r-in"><span><span class="st">"second_line_street_address"</span>, <span class="st">"city_name"</span>, <span class="st">"state_code"</span>,<span class="st">"zip_code"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

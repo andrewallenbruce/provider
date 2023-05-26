@@ -46,8 +46,8 @@ aggregated by provider and service."><meta property="og:image" content="https://
     <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
     <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
     <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Order &amp; Referring Eligibility</a>
+    <a class="dropdown-item" href="../articles/opt-out.html">Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/order-refer.html">Order &amp; Referring Eligibility</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
     <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
     <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
@@ -132,7 +132,7 @@ aggregated by provider and service.</p>
 <span>  par <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  hcpcs_drug <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pos <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  place_of_srvc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -246,7 +246,7 @@ Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 for additional information.</p></dd>
 
 
-<dt>pos</dt>
+<dt>place_of_srvc</dt>
 <dd><p>Identifies whether the place of service submitted on the claims
 is a facility (value of <code>F</code>) or non-facility (value of <code>O</code>). Non-facility
 is generally an office setting; however other entities are included
@@ -381,11 +381,9 @@ of service submitted on the claim is facility or non-facility.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, last_name <span class="op">=</span> <span class="st">"Enkeshafi"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span>,</span></span>
-<span class="r-in"><span>  <span class="fl">1518184605</span>, <span class="fl">1922056829</span>, <span class="fl">1083879860</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">physician_by_service</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="fl">2013</span><span class="op">:</span><span class="fl">2020</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span><span class="op">~</span><span class="fu">physician_by_service</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1003026055</span>, <span class="fl">1316405939</span>, <span class="fl">1720392988</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">physician_by_service</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

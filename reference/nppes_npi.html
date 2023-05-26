@@ -42,8 +42,8 @@ API's documentation."><meta property="og:image" content="https://andrewallenbruc
     <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
     <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
     <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
-    <a class="dropdown-item" href="../articles/mcr-opt-out-affid.html">Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/mcr-ord-referring.html">Order &amp; Referring Eligibility</a>
+    <a class="dropdown-item" href="../articles/opt-out.html">Opt Out Affidavits</a>
+    <a class="dropdown-item" href="../articles/order-refer.html">Order &amp; Referring Eligibility</a>
     <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
     <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
     <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
@@ -114,6 +114,7 @@ API's documentation.</p>
 <span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  purpose_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -161,6 +162,14 @@ Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
 NPI are examined for matching contents, therefore, the results might
 contain an organization name different from the one entered in the
 Organization Name criterion.</p></dd>
+
+
+<dt>purpose_name</dt>
+<dd><p>Refers to whether the name information entered pertains
+to an Authorized Official's name or a Provider's name. When not specified,
+the results will search against a provider's first and last name. AO will
+only search against Authorized Official names. While PROVIDER will only
+search against Provider name. Valid values are: <code>AO</code> and <code>Provider.</code></p></dd>
 
 
 <dt>taxonomy_desc</dt>
