@@ -220,9 +220,14 @@ dcli_2 <- dcli |>
 
 ```{r, echo=FALSE, eval=TRUE}
 dcli_1
-dcli_2
 ```
 
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+dcli_2
+```
 
 <br>
 
@@ -251,7 +256,7 @@ hosp_1 <- fac_hosp |>
     facility_ccn,
     enroll_id,
     specialty_desc,
-    specialty_code,
+    #specialty_code,
     multiple_npis) |> 
   provider:::gt_prov(checkmark = c("multiple_npis"),
     source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)")) |> 
@@ -259,7 +264,7 @@ hosp_1 <- fac_hosp |>
                  pac_id_org = "PAC ID",
                  facility_ccn = "CCN",
                  enroll_id = "Enrollment ID",
-                 specialty_code = "Code",
+                 #specialty_code = "Code",
                  specialty_desc = "Specialty",
                  multiple_npis = "Multiple NPIs")
 
@@ -287,58 +292,48 @@ hosp_2 <- fac_hosp |>
 hosp_3 <- fac_hosp |> 
   dplyr::select(
     org_name,
-    sg_general,
-    sg_acute_care,
-    sg_alcohol_drug,
-    sg_childrens,
-    sg_long_term,
-    sg_short_term,
-    sg_psychiatric,
-    sg_psychiatric_unit,
-    sg_rehabilitation,
-    sg_rehabilitation_unit,
-    sg_swing_bed_approved,
-    sg_specialty_hospital,
-    sg_other) |> 
-  provider:::gt_prov(divider = c("org_name"),
-                     checkmark = c("sg_general",
-                                   "sg_acute_care",
-                                   "sg_alcohol_drug",
-                                   "sg_childrens",
-                                   "sg_long_term",
-                                   "sg_short_term",
-                                   "sg_psychiatric",
-                                   "sg_psychiatric_unit",
-                                   "sg_rehabilitation",
-                                   "sg_rehabilitation_unit",
-                                   "sg_swing_bed_approved",
-                                   "sg_specialty_hospital",
-                                   "sg_other"),
-    source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)")) |> 
-  gt::cols_label(org_name = "Organization Name",
-                 sg_general = "General",
-                 sg_acute_care = "Acute Care",
-                 sg_alcohol_drug = "Alcohol/Drug",
-                 sg_childrens = "Childrens",
-                 sg_long_term = "Long-Term",
-                 sg_short_term = "Short-Term",
-                 sg_psychiatric = "Psych",
-                 sg_psychiatric_unit = "Psych Unit",
-                 sg_rehabilitation = "Rehab",
-                 sg_rehabilitation_unit = "Rehab Unit",
-                 sg_swing_bed_approved = "Swing Bed",
-                 sg_specialty_hospital = "Specialty",
-                 sg_other = "Other")
+    "General" = sg_general,
+    "Acute Care" = sg_acute_care,
+    "Alcohol/Drug" = sg_alcohol_drug,
+    "Childrens" = sg_childrens,
+    "Long-Term" = sg_long_term,
+    "Short-Term" = sg_short_term,
+    "Psychiatric" = sg_psychiatric,
+    "Psych Unit" = sg_psychiatric_unit,
+    "Rehabilitation" = sg_rehabilitation,
+    "Rehab Unit" = sg_rehabilitation_unit,
+    "Swing Bed Approved" = sg_swing_bed_approved,
+    "Specialty Hospital" = sg_specialty_hospital,
+    "Other" = sg_other) |> 
+  tidyr::pivot_longer(cols = !org_name, 
+                      names_to = "subgroup", 
+                      values_to = "value") |> 
+  tidyr::pivot_wider(names_from = org_name, 
+                     values_from = value) |> 
+  provider:::gt_prov(divider = c("subgroup"),
+                     checkmark = c("THE CHAMBERSBURG HOSPITAL",
+                                   "UPMC PINNACLE HOSPITALS"),
+    source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)"))
 ```
 
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
 hosp_1
-hosp_2
-hosp_3
 ```
 
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+hosp_2
+```
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
+hosp_3
+```
 
 <br>
 
@@ -384,12 +379,24 @@ re_assign <- revalidation_reassign(npi = 1043477615) |>
 
 ```{r, echo=FALSE, eval=TRUE}
 re_date
+```
+
+<br>
+
+```{r, echo=FALSE, eval=TRUE}
 re_assign
 ```
 
 <br>
 
 ## Physician & Other Practitioners
+
+```r
+2014:2021 |> 
+  furrr::future_map(\(x) physician_by_provider(year = x, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
+<details><summary>Code</summary>
 
 ```{r}
 provider <- 2014:2021 |> 
@@ -476,7 +483,7 @@ provider_2 <- provider_2 |>
   gtExtras::gt_plt_bar_stack(column = demo_age, 
                              width = 60,
                              labels = c("< 65  ", " 65-84 ", " > 84"),
-                             palette = c("grey", "black", "#ff4343")) |> 
+                             palette = c("#ff4343", "black", "#ff4343")) |> 
   gtExtras::gt_plt_bar_stack(column = demo_sex, 
                              width = 40,
                              labels = c("Female ", " Male"),
@@ -520,12 +527,46 @@ provider_3 <- provider |>
                      clean = FALSE)
 ```
 
+</details>
 
-```{r}
+```{r, echo=FALSE, eval=FALSE}
 provider_1
+```
+
+<br>
+
+```{r, echo=FALSE, eval=FALSE}
 provider_2
+```
+
+<br>
+
+```{r, echo=FALSE, eval=FALSE}
 provider_3
 ```
+
+<br>
+
+```{r}
+cc_nat <- 2014:2018 |> 
+  furrr::future_map(\(x) cc_specific(year = x, level = "National", demographic = "All", age_group = "All")) |> 
+  purrr::list_rbind() |> 
+  dplyr::select(year, level, condition, prevalence)
+
+cc_state <- 2014:2018 |> 
+  furrr::future_map(\(x) cc_specific(year = x, level = "State", sublevel = "Pennsylvania", demographic = "All", age_group = "All")) |> 
+  purrr::list_rbind() |> 
+  dplyr::select(year, level, condition, prevalence)
+```
+
+
+```r
+2014:2021 |> 
+  furrr::future_map(\(x) physician_by_service(year = x, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
+
+<details><summary>Code</summary>
 
 
 
@@ -545,6 +586,22 @@ service |>
                 avg_allowed,
                 avg_payment)
 ```
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+service |> 
+  dplyr::select(year, 
+                hcpcs_cd,
+                place_of_srvc,
+                hcpcs_desc,
+                tot_benes,
+                tot_srvcs,
+                avg_charge,
+                avg_allowed,
+                avg_payment)
+```
+
 
 <br>
 
