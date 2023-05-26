@@ -22,20 +22,21 @@ Imports:
     httr2,
     janitor,
     datawizard,
-    furrr,
     lubridate,
     purrr,
     rlang,
     strex,
     tibble,
     tidyr,
-    tidyselect
+    tidyselect,
+    tidytable
 Suggests: 
     covr,
     campfin,
     kableExtra,
     downloadthis,
     fontawesome,
+    furrr,
     htmltools,
     glue,
     gluedown,

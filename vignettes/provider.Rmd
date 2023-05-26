@@ -498,10 +498,10 @@ provider_3 <- provider |>
   dplyr::select(year,
                 #"HCC Average Risk Score" = bene_risk_avg,
                 "Atrial Fibrillation" = bene_cc_af,
-                "Alzheimer’s / Dementia" = bene_cc_alz,
+                "Alzheimer’s Disease/Dementia" = bene_cc_alz,
                 "Asthma" = bene_cc_asth,
                 "Cancer" = bene_cc_canc,
-                "Heart Failure (CHF)" = bene_cc_chf,
+                "Heart Failure" = bene_cc_chf,
                 "Chronic Kidney Disease" = bene_cc_ckd,
                 "COPD" = bene_cc_copd,
                 "Depression" = bene_cc_dep,
@@ -514,49 +514,104 @@ provider_3 <- provider |>
                 "Schizophrenia / Other Psych" = bene_cc_sz,
                 "Stroke" = bene_cc_strk) |> 
   tidyr::pivot_longer(cols = !year, 
-                      names_to = "stat", 
+                      names_to = "condition", 
                       values_to = "value") |> 
   tidyr::pivot_wider(names_from = year, 
                      values_from = value) |> 
+  dplyr::arrange(condition) |> 
   provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
                                      API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
                      title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
                      subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("stat"), 
+                     divider = c("condition"), 
                      pct = c("2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"),
                      clean = FALSE)
 ```
 
 </details>
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 provider_1
 ```
 
 <br>
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 provider_2
 ```
 
 <br>
 
-```{r, echo=FALSE, eval=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 provider_3
 ```
 
 <br>
 
+<details><summary>Code</summary>
+
 ```{r}
+cc_prov <- provider |> 
+  dplyr::select(year,
+                "Atrial Fibrillation" = bene_cc_af,
+                "Alzheimer's Disease/Dementia" = bene_cc_alz,
+                "Asthma" = bene_cc_asth,
+                "Cancer" = bene_cc_canc,
+                "Heart Failure" = bene_cc_chf,
+                "Chronic Kidney Disease" = bene_cc_ckd,
+                "COPD" = bene_cc_copd,
+                "Depression" = bene_cc_dep,
+                "Diabetes" = bene_cc_diab,
+                "Hyperlipidemia" = bene_cc_hplip,
+                "Hypertension" = bene_cc_hpten,
+                "Ischemic Heart Disease" = bene_cc_ihd,
+                "Osteoporosis" = bene_cc_opo,
+                "Rheumatoid / Osteoarthritis" = bene_cc_raoa,
+                "Schizophrenia and Other Psychotic Disorders" = bene_cc_sz,
+                "Stroke" = bene_cc_strk) |> 
+  tidyr::pivot_longer(cols = !year, 
+                      names_to = "stat", 
+                      values_to = "value") |> 
+  tidyr::pivot_wider(names_from = year, 
+                     values_from = value) |> 
+  dplyr::pull(stat)
+
 cc_nat <- 2014:2018 |> 
   furrr::future_map(\(x) cc_specific(year = x, level = "National", demographic = "All", age_group = "All")) |> 
   purrr::list_rbind() |> 
-  dplyr::select(year, level, condition, prevalence)
+  dplyr::select(year, level, condition, prevalence) |> 
+  dplyr::filter(condition %in% cc_prov)
 
 cc_state <- 2014:2018 |> 
   furrr::future_map(\(x) cc_specific(year = x, level = "State", sublevel = "Pennsylvania", demographic = "All", age_group = "All")) |> 
   purrr::list_rbind() |> 
-  dplyr::select(year, level, condition, prevalence)
+  dplyr::select(year, level, condition, prevalence) |> 
+  dplyr::filter(condition %in% cc_prov)
+
+cc_nat <- cc_nat |> 
+  tidyr::pivot_wider(names_from = year, 
+                     values_from = prevalence)
+
+cc_state <- cc_state |> 
+  tidyr::pivot_wider(names_from = year, 
+                     values_from = prevalence)
+
+cc_all <- dplyr::bind_rows(cc_nat, cc_state) |> 
+  provider:::gt_prov(source = gt::md("Source: [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)"),
+                     title = gt::md("Medicare Chronic Conditions: **2014 - 2018**"),
+                     subtitle = gt::md("National and State Level"),
+                     divider = c("condition"), 
+                     pct = c("2014", "2015", "2016", "2017", "2018"),
+                     clean = FALSE) |> 
+  gt::tab_row_group(label = gt::md("**NATIONAL**"), rows = level == "National") |> 
+  gt::tab_row_group(label = gt::md("**STATE**"), rows = level == "State") |> 
+  gt::cols_hide(columns = c(level))
+```
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+cc_all
 ```
 
 
@@ -569,22 +624,10 @@ cc_state <- 2014:2018 |>
 <details><summary>Code</summary>
 
 
-
 ```{r}
 service <- 2014:2021 |> 
   furrr::future_map(\(x) physician_by_service(year = x, npi = 1043477615)) |> 
   purrr::list_rbind()
-
-service |> 
-  dplyr::select(year, 
-                hcpcs_cd,
-                place_of_srvc,
-                hcpcs_desc,
-                tot_benes,
-                tot_srvcs,
-                avg_charge,
-                avg_allowed,
-                avg_payment)
 ```
 
 </details>
@@ -606,28 +649,19 @@ service |>
 <br>
 
 
+```{r}
+srvc <- service |> 
+  dplyr::select(year, 
+                hcpcs_code = hcpcs_cd,
+                place_of_srvc) |> 
+  dplyr::mutate(place_of_srvc = dplyr::if_else(place_of_srvc == "Facility", "F", "O"))
+
+# furrr::future_pmap(srvc, physician_by_geography, level = "National") |> 
+#   purrr::list_rbind()
+```
+
+
 ```{r echo=FALSE, eval=FALSE, include=FALSE}
-# First row of data
-mpop_ex_2020_row1 <- mpop_ex_2020 |> dplyr::filter(dplyr::row_number() %in% 1)
-
-# First, last, credentials
-mpop_ex_name_cred <- stringr::str_c(
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_first_name, "both"), " ",
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_last_org_name, "both"), ", ",
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_crdntls, "both"))
-
-# NPI
-mpop_ex_npi <- stringr::str_c(stringr::str_trim(mpop_ex_2020_row1$rndrng_npi, "both"), "")
-
-# Address
-mpop_ex_address <- stringr::str_c(
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_st1, "both"), " ",
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_city, "both"), ", ",
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_state_abrvtn, "both"), " ",
-  stringr::str_trim(mpop_ex_2020_row1$rndrng_prvdr_zip5, "both"))
-
-
-
 gt_table <- mpop_13_20 |>
   dplyr::select(year,
                 hcpcs     = hcpcs_cd,
