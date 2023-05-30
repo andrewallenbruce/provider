@@ -22,83 +22,241 @@ options(scipen = 999)
 library(provider)
 ```
 
-<br>
-
-> *Current information on the number of Medicare beneficiaries with hospital/medical and prescription drug coverage, available for several geographical areas.*
-
-<br>
-
-The Medicare Monthly Enrollment data provides current monthly information on the number of Medicare beneficiaries with hospital/medical coverage and prescription drug coverage, available for several geographic areas including national, state/territory, and county. 
-
-The hospital/medical coverage data can be broken down further by health care delivery (Original Medicare versus Medicare Advantage and Other Health Plans) and the prescription drug coverage data can be examined by those enrolled in stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage Prescription Drug plans. 
-
-The dataset includes enrollee counts on a rolling 12 month basis and also provides information on yearly trends. 
-
-<br>
+> The **Medicare Monthly Enrollment** dataset provides current monthly information on the number of Medicare beneficiaries with hospital/medical/prescription drug coverage, available for several geographic areas including national, state/territory, and county. The data can be further broken down by health care delivery (e.g. *Original Medicare* vs. *Medicare Advantage*) and includes enrollee counts on a rolling 12-month basis, providing information on yearly trends as well.
 
 ## Search Examples
 
-Set the `level` argument to "National" and the `period` argument to "Year" to return year-by-year national data:
+The `level` argument has three options: `National`, `State`, and `County`. 
+
+Setting it to `National` will return yearly and monthly national totals:
 
 ```{r}
-beneficiary_enrollment(level = "National", 
-                       period = "Year") |> 
-  dplyr::select(!c(period:fips))
+beneficiary_enrollment(level = "National") |> head(10)
 ```
 
-<br>
-
-Or set just the `level` argument to include month-by-month data as well:
+Setting `level` to `National` and the `period` argument to `Year` will return yearly national totals only:
 
 ```{r}
-beneficiary_enrollment(level = "National") |> 
-  dplyr::select(!c(level:fips)) |> 
-  dplyr::filter(period %in% month.name)
+beneficiary_enrollment(level = "National", period = "Year") |> head(10)
 ```
 
-<br>
-
-Setting the `level` to "State" will return data for each state:
+Setting `level` to `State` and `period` to `Year` will return yearly totals for each state:
 
 ```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "State") |> 
-  dplyr::select(!c(period:state, county:fips))
+beneficiary_enrollment(level = "State", period = "Year") |> head(10)
 ```
-<br>
+
+
+
+```{r}
+beneficiary_enrollment(level = "State", period = "Monthly") |> head(10)
+```
+
+
+### `state` & `county`
 
 Select a particular state:
 
 ```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "State",
-                       state = "GA")
+beneficiary_enrollment(period = "Year", level = "State", state = "GA") |> head(10)
 ```
 
-<br>
 
 Each county in that state:
 
 ```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "County",
-                       state = "GA")
+beneficiary_enrollment(period = "Year", level = "County", state_name = "Georgia") |> head(10)
 ```
-
-<br>
 
 Or a particular county:
 
 ```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "County",
-                       state = "GA",
-                       county = "Lowndes")
+beneficiary_enrollment(period = "Year", level = "County", state = "GA", county = "Lowndes") |> head(10)
 ```
 
 <br><br>
 
 ## Visualizations
+
+<details><summary>Code for table</summary>
+
+```{r}
+national <- beneficiary_enrollment(period = "Year", level = "National")
+
+national_bars <- national |> 
+  dplyr::select(year, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
+                pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
+  tidyr::pivot_longer(cols = c(pct_orig, pct_ma), 
+                      names_to = "measure", 
+                      values_to = "pct") |> 
+  dplyr::group_by(year) |> 
+  dplyr::summarise(list_data = list(pct), .groups = "drop")
+
+national_base <- national |> 
+  dplyr::select(year, bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year)
+
+national <- dplyr::left_join(national_bars, national_base, 
+                             by = dplyr::join_by(year)) |> 
+  dplyr::relocate(list_data, .after = bene_total_pct)
+
+national_gt <- national |>
+  provider:::gt_prov(divider = c("year", "bene_total_chg"),
+                     title = gt::md("**National** Medicare Beneficiary Enrollment: **2013 - 2022**"),
+                     subtitle = gt::md("National Totals, Year-Over-Year"),
+                     source = gt::md("Source: [Medicare Monthly Enrollment API](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)")) |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(bene_total, 
+                                           bene_total_chg))) |> 
+  gt::fmt_number(bene_total, suffixing = TRUE, decimals = 2) |> 
+  gt::fmt_number(bene_total_chg, suffixing = TRUE, force_sign = TRUE, decimals = 1) |> 
+  gt::fmt_percent(columns = bene_total_pct, decimals = 1, force_sign = TRUE) |> 
+  gt::cols_merge_n_pct(col_n = bene_total_chg,
+                       col_pct = bene_total_pct) |>
+  gt::cols_label(bene_total = "Total",
+                 bene_total_chg = gt::md("Change (%)")) |> 
+  gtExtras::gt_plt_bar_stack(column = list_data, 
+                             width = 80,
+                             labels = c("Original  ", 
+                                        " Advantage"),
+                             palette = c("#ff4343", "black"),
+                             fmt_fn = scales::label_percent(accuracy = 0.1, 
+                                                            suffix = " %"))
+```
+
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+national_gt
+```
+
+
+<br>
+
+<details><summary>Code for table</summary>
+
+```{r}
+state <- beneficiary_enrollment(period = "Year", level = "State", state = "GA")
+
+state_bars <- state |> 
+  dplyr::select(year, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
+                pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
+  tidyr::pivot_longer(cols = c(pct_orig, pct_ma), 
+                      names_to = "measure", 
+                      values_to = "pct") |> 
+  dplyr::group_by(year) |> 
+  dplyr::summarise(list_data = list(pct), .groups = "drop")
+
+state_base <- state |> 
+  dplyr::select(year, bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year)
+
+state <- dplyr::left_join(state_bars, state_base, 
+                          by = dplyr::join_by(year)) |> 
+  dplyr::relocate(list_data, .after = bene_total_pct)
+
+state_gt <- state |>
+  provider:::gt_prov(divider = c("year", "bene_total_chg"),
+                     title = gt::md("**Georgia** Medicare Beneficiary Enrollment: **2013 - 2022**"),
+                     subtitle = gt::md("State Totals, Year-Over-Year"),
+                     source = gt::md("Source: [Medicare Monthly Enrollment API](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)")) |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(bene_total, 
+                                           bene_total_chg))) |> 
+  gt::fmt_number(bene_total, suffixing = TRUE, decimals = 2) |> 
+  gt::fmt_number(bene_total_chg, suffixing = TRUE, force_sign = TRUE, decimals = 1) |> 
+  gt::fmt_percent(columns = bene_total_pct, decimals = 1, force_sign = TRUE) |> 
+  gt::cols_merge_n_pct(col_n = bene_total_chg,
+                       col_pct = bene_total_pct) |>
+  gt::cols_label(bene_total = "Total",
+                 bene_total_chg = gt::md("Change (%)")) |> 
+  gtExtras::gt_plt_bar_stack(column = list_data, 
+                             width = 80,
+                             labels = c("Original  ", 
+                                        " Advantage"),
+                             palette = c("#ff4343", "black"),
+                             fmt_fn = scales::label_percent(accuracy = 0.1, 
+                                                            suffix = " %"))
+```
+
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+state_gt
+```
+
+
+<br>
+
+<details><summary>Code for table</summary>
+
+```{r}
+county <- beneficiary_enrollment(period = "Year", level = "County", state = "GA", county = "Lowndes")
+
+county_bars <- county |> 
+  dplyr::select(year, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
+                pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
+  tidyr::pivot_longer(cols = c(pct_orig, pct_ma), 
+                      names_to = "measure", 
+                      values_to = "pct") |> 
+  dplyr::group_by(year) |> 
+  dplyr::summarise(list_data = list(pct), .groups = "drop")
+
+county_base <- county |> 
+  dplyr::select(year, bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year)
+
+county <- dplyr::left_join(county_bars, county_base, 
+                          by = dplyr::join_by(year)) |> 
+  dplyr::relocate(list_data, .after = bene_total_pct)
+
+county_gt <- county |>
+  provider:::gt_prov(divider = c("year", "bene_total_chg"),
+                     title = gt::md("**Lowndes County, Georgia** Medicare Beneficiary Enrollment: **2013 - 2022**"),
+                     subtitle = gt::md("County Totals, Year-Over-Year"),
+                     source = gt::md("Source: [Medicare Monthly Enrollment API](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)")) |> 
+  gt::tab_style(
+    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
+                                   gt::default_fonts())),
+    locations = gt::cells_body(columns = c(bene_total, 
+                                           bene_total_chg))) |> 
+  gt::fmt_number(bene_total, suffixing = TRUE, decimals = 2) |> 
+  gt::fmt_number(bene_total_chg, suffixing = TRUE, force_sign = TRUE, decimals = 1) |> 
+  gt::fmt_percent(columns = bene_total_pct, decimals = 1, force_sign = TRUE) |> 
+  gt::cols_merge_n_pct(col_n = bene_total_chg,
+                       col_pct = bene_total_pct) |>
+  gt::cols_label(bene_total = "Total",
+                 bene_total_chg = gt::md("Change (%)")) |> 
+  gtExtras::gt_plt_bar_stack(column = list_data, 
+                             width = 80,
+                             labels = c("Original  ", 
+                                        " Advantage"),
+                             palette = c("#ff4343", "black"),
+                             fmt_fn = scales::label_percent(accuracy = 0.1, 
+                                                            suffix = " %"))
+```
+
+
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+county_gt
+```
+
+
+<br>
 
 <details><summary>Code for table</summary>
 
@@ -145,10 +303,7 @@ tot_county <- beneficiary_enrollment(level = "County",
                 partD = bene_rx_total) |> 
   dplyr::rename(level = county)
 # Bind together, calculate stats
-final <- dplyr::bind_rows(
-  tot_nation, 
-  tot_state, 
-  tot_county) |> 
+final <- dplyr::bind_rows(tot_nation, tot_state, tot_county) |> 
   dplyr::group_by(level) |> 
   provider:::change_abs(total, year) |> 
   provider:::change_pct(total, total_chg, year) |> 
@@ -209,81 +364,7 @@ gt_pct
 
 <br>
 
-<details><summary>Code for table</summary>
 
-```{r}
-national <- beneficiary_enrollment(level = "National")
-
-yr_nat_list <- national |> 
-  dplyr::filter(period == "Year") |> 
-  dplyr::select(year, bene_orig, bene_ma_oth) |> 
-  dplyr::mutate(pct_orig = bene_orig / (bene_orig + bene_ma_oth),
-                pct_ma = bene_ma_oth / (bene_orig + bene_ma_oth)) |> 
-  tidyr::pivot_longer(cols = c(pct_orig, pct_ma), 
-                      names_to = "measure", 
-                      values_to = "pct") |> 
-  dplyr::group_by(year) |> 
-  dplyr::summarise(list_data = list(pct), .groups = "drop")
-
-yr_nat_base <- national |> 
-  dplyr::filter(period == "Year") |> 
-  dplyr::select(year, bene_total) |> 
-  provider:::change_abs(bene_total, year) |> 
-  provider:::change_pct(bene_total, bene_total_chg, year)
-
-nat <- dplyr::left_join(yr_nat_base, yr_nat_list, by = dplyr::join_by(year))
-
-gt_nat <- nat |>   
-  gt::gt() |> 
-  gt::tab_style(
-    style = gt::cell_text(font = c(gt::google_font(name = "Fira Code"), 
-                                   gt::default_fonts())),
-    locations = gt::cells_body(columns = c(bene_total, 
-                                           bene_total_chg))) |> 
-  gtExtras::gt_theme_538() |> 
-  gt::fmt_number(bene_total, 
-                 suffixing = TRUE, 
-                 decimals = 2) |> 
-  gt::fmt_number(bene_total_chg, 
-                 suffixing = TRUE, 
-                 force_sign = TRUE, 
-                 decimals = 1) |> 
-  gt::fmt_percent(columns = bene_total_pct, 
-                  decimals = 1, 
-                  force_sign = TRUE) |> 
-  gt::sub_missing(columns = dplyr::everything(), 
-                  missing_text = "--") |> 
-  gt::cols_merge_n_pct(col_n = bene_total_chg,
-                       col_pct = bene_total_pct) |>
-  gt::cols_label(bene_total = "Total",
-                 bene_total_chg = gt::md("Change (%)")) |> 
-  gtExtras::gt_add_divider(columns = c("year", 
-                                       "bene_total_chg"), 
-                           style = "solid",
-                           color = "black",
-                           weight = gt::px(2),
-                           include_labels = FALSE) |> 
-  gtExtras::gt_plt_bar_stack(column = list_data, 
-                             width = 80,
-                             labels = c("Original  ", 
-                                        " Advantage"),
-                             palette = c("#ff4343", "black"),
-                             fmt_fn = scales::label_percent(accuracy = 0.1, 
-                                                            suffix = " %")) |> 
-  gt::tab_header(title = gt::md("Medicare Beneficiary Enrollment: **2013 - 2022**"),
-    subtitle = gt::md("National Totals, Year-Over-Year")) |> 
-  gt::tab_source_note(source_note = "Source: data.cms.gov")
-```
-
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-gt_nat
-```
-
-
-<br>
 
 <details><summary>Code for table</summary>
 
