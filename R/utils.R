@@ -276,6 +276,17 @@ str_to_snakecase <- function(string) {
 #' @param x vector
 #' @autoglobal
 #' @noRd
+tf_logical <- function(x){
+  dplyr::case_when(
+    x == "True" ~ as.logical(TRUE),
+    x == "False" ~ as.logical(FALSE),
+    .default = NA)
+}
+
+#' Convert Y/N char values to logical ----------------------
+#' @param x vector
+#' @autoglobal
+#' @noRd
 yn_logical <- function(x){
   dplyr::case_when(
     x == as.character("Y") ~ as.logical(TRUE),
