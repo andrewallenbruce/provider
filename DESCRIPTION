@@ -35,6 +35,7 @@ Suggests:
     campfin,
     kableExtra,
     downloadthis,
+    epoxy,
     fontawesome,
     furrr,
     htmltools,

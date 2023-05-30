@@ -17,6 +17,8 @@ qpp_experience(
 )
 }
 \arguments{
+\item{year}{year}
+
 \item{npi}{NPI of the Provider}
 
 \item{state}{State where the provider is enrolled}

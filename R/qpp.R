@@ -18,6 +18,7 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
+#' @param year year
 #' @param npi NPI of the Provider
 #' @param state State where the provider is enrolled
 #' @param specialty Type of enrollment - ASC to Hospital OR IFED
@@ -29,11 +30,11 @@
 #' @autoglobal
 #' @export
 qpp_experience <- function(year,
-                           npi = NULL,
-                           state = NULL,
+                           npi       = NULL,
+                           state     = NULL,
                            specialty = NULL,
                            part_type = NULL,
-                           tidy = TRUE) {
+                           tidy      = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 
@@ -75,6 +76,7 @@ qpp_experience <- function(year,
 
     cli_args <- tibble::tribble(
       ~x,                               ~y,
+      "year",                           as.character(year),
       "npi",                            as.character(npi),
       "practice state or us territory", state,
       "clinician specialty",            specialty,
@@ -126,7 +128,39 @@ qpp_experience <- function(year,
                                                   "extreme_hardship_ia",
                                                   "ia_study",
                                                   "extreme_hardship_cost")),
-                                  tf_logical))
+                                  tf_logical)) |>
+      dplyr::mutate(year = as.integer(year)) |>
+      dplyr::select(year,
+                    npi,
+                    provider_key,
+                    state = practice_state_or_us_territory,
+                    practice_size,
+                    specialty = clinician_specialty,
+                    med_yrs = years_in_medicare,
+                    part_type = participation_type,
+                    beneficiaries = medicare_patients,
+                    allowed_charges,
+                    services,
+                    final_score,
+                    pmt_adj_pct = payment_adjustment_percentage,
+                    complex_patient_bonus,
+                    quality_category_score,
+                    quality_improvement_bonus,
+                    quality_bonus,
+                    engaged,
+                    opted_into_mips,
+                    small_practitioner,
+                    rural_clinician,
+                    hpsa_clinician,
+                    asc = ambulatory_surgical_center,
+                    hospital_based = hospital_based_clinician,
+                    non_patient_facing,
+                    facility_based,
+                    extreme_hardship,
+                    extreme_hardship_quality,
+                    quality_measure_id_1,
+                    quality_measure_score_1,
+                    dplyr::everything())
   }
   return(results)
 }
