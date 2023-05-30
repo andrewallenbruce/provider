@@ -49,7 +49,7 @@ beneficiary_enrollment(level = "State", period = "Year") |> head(10)
 
 
 ```{r}
-beneficiary_enrollment(level = "State", period = "Monthly") |> head(10)
+beneficiary_enrollment(level = "State", period = "Month") |> head(10)
 ```
 
 
@@ -119,13 +119,12 @@ national_gt <- national |>
                        col_pct = bene_total_pct) |>
   gt::cols_label(bene_total = "Total",
                  bene_total_chg = gt::md("Change (%)")) |> 
-  gtExtras::gt_plt_bar_stack(column = list_data, 
-                             width = 80,
-                             labels = c("Original  ", 
-                                        " Advantage"),
-                             palette = c("#ff4343", "black"),
-                             fmt_fn = scales::label_percent(accuracy = 0.1, 
-                                                            suffix = " %"))
+  gtExtras::gt_plt_bar_stack(
+    column = list_data, 
+    width = 80,
+    labels = c("Original  ", " Advantage"),
+    palette = c("#ff4343", "black"),
+    fmt_fn = scales::label_percent(accuracy = 0.1, suffix = " %"))
 ```
 
 
@@ -179,13 +178,12 @@ state_gt <- state |>
                        col_pct = bene_total_pct) |>
   gt::cols_label(bene_total = "Total",
                  bene_total_chg = gt::md("Change (%)")) |> 
-  gtExtras::gt_plt_bar_stack(column = list_data, 
-                             width = 80,
-                             labels = c("Original  ", 
-                                        " Advantage"),
-                             palette = c("#ff4343", "black"),
-                             fmt_fn = scales::label_percent(accuracy = 0.1, 
-                                                            suffix = " %"))
+  gtExtras::gt_plt_bar_stack(
+    column = list_data, 
+    width = 80,
+    labels = c("Original  ", " Advantage"),
+    palette = c("#ff4343", "black"),
+    fmt_fn = scales::label_percent(accuracy = 0.1, suffix = " %"))
 ```
 
 
@@ -239,13 +237,12 @@ county_gt <- county |>
                        col_pct = bene_total_pct) |>
   gt::cols_label(bene_total = "Total",
                  bene_total_chg = gt::md("Change (%)")) |> 
-  gtExtras::gt_plt_bar_stack(column = list_data, 
-                             width = 80,
-                             labels = c("Original  ", 
-                                        " Advantage"),
-                             palette = c("#ff4343", "black"),
-                             fmt_fn = scales::label_percent(accuracy = 0.1, 
-                                                            suffix = " %"))
+  gtExtras::gt_plt_bar_stack(
+    column = list_data, 
+    width = 80,
+    labels = c("Original  ", " Advantage"),
+    palette = c("#ff4343", "black"),
+    fmt_fn = scales::label_percent(accuracy = 0.1, suffix = " %"))
 ```
 
 

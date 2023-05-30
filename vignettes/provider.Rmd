@@ -68,7 +68,13 @@ nppes_2 <- nppes_1 |>
                             zipcode,
                             purpose,
                             country)) |> 
-  gt::cols_label(entype = "Type")
+  gt::cols_label(entype = "Type") |> 
+  gt::tab_options(
+    table_body.hlines.style = "none",
+    column_labels.border.top.color = "black",
+    column_labels.border.bottom.color = "black",
+    table_body.border.bottom.color = "black"
+  )
 ```
 
 </details>
@@ -103,7 +109,13 @@ nppes_3 <- nppes |>
                  tx_desc = "Description",
                  tx_state = "State",
                  tx_license = "License",
-                 tx_primary = "Primary")
+                 tx_primary = "Primary") |> 
+  gt::tab_options(
+    #table_body.hlines.style = "none",
+    column_labels.border.top.color = "black",
+    column_labels.border.bottom.color = "black",
+    table_body.border.bottom.color = "black"
+  )
 ```
 
 
@@ -482,7 +494,7 @@ provider_2 <- provider_2 |>
   gt::cols_label(bene_age_avg = "Avg. Age") |> 
   gtExtras::gt_plt_bar_stack(column = demo_age, 
                              width = 60,
-                             labels = c("< 65  ", " 65-84 ", " > 84"),
+                             labels = c("[< 65]  ", " [65-84] ", " [> 84]"),
                              palette = c("#ff4343", "black", "#ff4343")) |> 
   gtExtras::gt_plt_bar_stack(column = demo_sex, 
                              width = 40,
@@ -496,7 +508,7 @@ provider_2 <- provider_2 |>
 
 provider_3 <- provider |> 
   dplyr::select(year,
-                #"HCC Average Risk Score" = bene_risk_avg,
+                "HCC Average Risk Score" = bene_risk_avg,
                 "Atrial Fibrillation" = bene_cc_af,
                 "Alzheimer’s Disease/Dementia" = bene_cc_alz,
                 "Asthma" = bene_cc_asth,
@@ -525,7 +537,8 @@ provider_3 <- provider |>
                      subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
                      divider = c("condition"), 
                      pct = c("2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"),
-                     clean = FALSE)
+                     clean = FALSE) |> 
+  gt::data_color(columns = !condition, direction = "row", palette = "ggsci::red_material", na_color = "black")
 ```
 
 </details>

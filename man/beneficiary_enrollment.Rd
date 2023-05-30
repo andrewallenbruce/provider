@@ -22,12 +22,12 @@ beneficiary_enrollment(
 \item{year}{Calendar year of Medicare enrollment; current options are
 \code{2017 - 2022}}
 
-\item{period}{Time frame of Medicare enrollment; options are \code{Year} or any
+\item{period}{Time frame of Medicare enrollment; options are \code{Year}, \code{Month} or any
 month within the 12-month time span of the month in the data set's version
 name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
 
 \item{level}{Geographic level of data; options are \code{National}, \code{State},
-and \code{County}}
+or \code{County}}
 
 \item{state}{Two-letter state abbreviation of beneficiary residence}
 

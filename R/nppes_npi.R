@@ -173,15 +173,16 @@ nppes_npi <- function(npi            = NULL,
     address <- results |>
       dplyr::select(npi, addresses) |>
       tidyr::unnest(c(addresses)) |>
-      tidyr::unite("street",
-                   dplyr::any_of(c("address_1", "address_2")),
-                   remove = TRUE, na.rm = TRUE, sep = " ") |>
+      # tidyr::unite("street",
+      #              dplyr::any_of(c("address_1", "address_2")),
+      #              remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::mutate(address_type = NULL,
                     country_name = NULL) |>
       dplyr::rename(country      = country_code,
                     phone_number = telephone_number,
                     zipcode      = postal_code,
-                    purpose      = address_purpose) |>
+                    purpose      = address_purpose,
+                    street       = address_1) |>
       dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose))
 
 
@@ -193,18 +194,16 @@ nppes_npi <- function(npi            = NULL,
     if (ncol(pracloc) > 2) {
 
       pracloc <- pracloc |>
-        tidyr::unite("street",
-                     dplyr::any_of(c("address_1",
-                                     "address_2")),
-                     remove = TRUE,
-                     na.rm = TRUE,
-                     sep = " ") |>
+        # tidyr::unite("street",
+        #              dplyr::any_of(c("address_1", "address_2")),
+        #              remove = TRUE, na.rm = TRUE, sep = " ") |>
         dplyr::mutate(address_type = NULL,
                       country_name = NULL) |>
         dplyr::rename(country      = country_code,
                       phone_number = telephone_number,
                       zipcode      = postal_code,
-                      purpose      = address_purpose)
+                      purpose      = address_purpose,
+                      street       = address_1)
 
       address <- dplyr::bind_rows(address, pracloc)
     }

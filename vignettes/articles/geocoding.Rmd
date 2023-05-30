@@ -31,34 +31,21 @@ library(leaflet)
 <br>
 
 ```{r}
-geo_nppes <- nppes_npi(npi = 1760485387)
-
-geo_nppes
-```
-
-<br>
-
-```{r}
-geo_add <- geo_nppes |> 
-  dplyr::select(address_1, city, state, postal_code) |>
+address <- nppes_npi(npi = 1760485387) |> 
+  dplyr::select(street, city, state, zipcode) |>
   dplyr::filter(dplyr::row_number() %in% 1) |> 
-  dplyr::mutate(address_1 = stringr::str_remove_all(address_1, "\\."))
+  dplyr::mutate(street = stringr::str_remove_all(street, "\\."),
+                street = stringr::str_replace(street, "CTY", "COUNTY")) |> 
+  tidyr::unite("addr", street:zipcode, sep = ", ", remove = TRUE) |> 
+  tidygeocoder::geocode(addr, 
+                        method = "osm", 
+                        lat = latitude, 
+                        long = longitude, 
+                        full_results = TRUE)
 
-geo_add
-```
-
-<br>
-
-```{r}
-geo_ltlg <- geo_add |> tidygeocoder::geocode(street = address_1,
-                                             city = city,
-                                             state = state,
-                                             postalcode = postal_code,
-                                             method = "census",
-                                             lat = latitude, 
-                                             long = longitude, 
-                                             full_results = TRUE)
-geo_ltlg
+address |> 
+  dplyr::select(addr, latitude, longitude, display_name, type) |> 
+  dplyr::glimpse()
 ```
 
 <br>
@@ -66,43 +53,47 @@ geo_ltlg
 ```{r}
 leaflet::leaflet() |> 
   leaflet::addTiles() |> 
-  leaflet::addMarkers(lng = geo_ltlg$longitude, 
-                      lat = geo_ltlg$latitude)
+  leaflet::addMarkers(lng = address$longitude, 
+                      lat = address$latitude, 
+                      popup = address$display_name)
 ```
 
-<br><br>
 
-```{r eval=FALSE, include=FALSE}
-# prov_address <- prov_2013_2020 |> 
-#   dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |> 
-#   dplyr::filter(dplyr::row_number() %in% 1) |> 
-#   dplyr::mutate(rndrng_prvdr_st1 = gsub("[.]", "", as.character(rndrng_prvdr_st1))) |> 
-#   tidyr::unite("addr", rndrng_prvdr_st1:rndrng_prvdr_state_abrvtn, sep = ", ", remove = TRUE) |> 
-#   tidyr::unite("prov_addr", addr:rndrng_prvdr_zip5, sep = " ", remove = TRUE)
+```{r}
+orgs |> 
+  dplyr::mutate(weeks_passed = round(difftime(lubridate::today(), enumeration_date, units = "weeks")),
+                years_passed = round(as.double(weeks_passed) / 52), .after = enumeration_duration)
+```
 
-prov_address <- mpop20 |> 
-  dplyr::select(rndrng_prvdr_st1, rndrng_prvdr_city:rndrng_prvdr_state_abrvtn, rndrng_prvdr_zip5) |> 
-  dplyr::filter(dplyr::row_number() %in% 1) |> 
-  dplyr::mutate(rndrng_prvdr_st1 = "4570 County Hwy 61") |> 
-  tidyr::unite("addr", rndrng_prvdr_st1:rndrng_prvdr_state_abrvtn, sep = ", ", remove = TRUE) |> 
-  tidyr::unite("prov_addr", addr:rndrng_prvdr_zip5, sep = " ", remove = TRUE)
-  
 
-prov_geocode <- prov_address |> 
-  tidygeocoder::geocode(prov_addr, 
+## Organizational Provider Locations
+
+```{r}
+orgs <- nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
+
+orgs_add <- orgs |> 
+  dplyr::filter(purpose %in% c("PRACTICE", "LOCATION")) |> 
+  dplyr::select(street, city, state, zipcode) |> 
+  dplyr::mutate(zipcode = campfin::normal_zip(zipcode)) |> 
+  tidyr::unite("addr", street:zipcode, sep = ", ", remove = TRUE) |> 
+  tidygeocoder::geocode(addr, 
                         method = "osm", 
                         lat = latitude, 
                         long = longitude, 
                         full_results = TRUE)
+org <- orgs_add |> 
+  dplyr::filter(!is.na(latitude))
 
-prov_geocode
+orgs_add |> 
+  dplyr::filter(is.na(latitude))
 ```
 
-```{r eval=FALSE, include=FALSE}
-map <- leaflet::leaflet() |> 
-       leaflet::addTiles() |> 
-       leaflet::addMarkers(lng = prov_geocode$longitude, lat = prov_geocode$latitude, popup = prov_geocode$display_name)
+<br>
 
-map
+```{r}
+leaflet::leaflet() |> 
+  leaflet::addTiles() |> 
+  leaflet::addMarkers(lng = org$longitude, 
+                      lat = org$latitude, 
+                      popup = org$display_name)
 ```
-

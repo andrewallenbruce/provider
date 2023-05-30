@@ -28,11 +28,11 @@
 #' @note Update Frequency: **Monthly**
 #' @param year Calendar year of Medicare enrollment; current options are
 #'    `2017 - 2022`
-#' @param period Time frame of Medicare enrollment; options are `Year` or any
+#' @param period Time frame of Medicare enrollment; options are `Year`, `Month` or any
 #'    month within the 12-month time span of the month in the data set's version
 #'    name (listed [here](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs))
 #' @param level Geographic level of data; options are `National`, `State`,
-#'    and `County`
+#'    or `County`
 #' @param state Two-letter state abbreviation of beneficiary residence
 #' @param state_name Full state name of beneficiary residence
 #' @param county County of beneficiary residence
@@ -66,7 +66,7 @@ beneficiary_enrollment <- function(year        = NULL,
                                    tidy        = TRUE) {
 
   # match args ----------------------------------------------------
-  if (!is.null(period)) {rlang::arg_match0(period, c("Year", "Monthly", month.name))}
+  if (!is.null(period)) {rlang::arg_match0(period, c("Year", "Month", month.name))}
   if (!is.null(level)) {rlang::arg_match0(level, c("National", "State", "County"))}
   if (!is.null(state)) {rlang::arg_match0(state, c(state.abb))}
   if (!is.null(state_name)) {rlang::arg_match0(state_name, c(state.name))}
@@ -82,7 +82,7 @@ beneficiary_enrollment <- function(year        = NULL,
      "BENE_COUNTY_DESC",     county,
          "BENE_FIPS_CD",       fips)
 
-  if (period == "Monthly") {
+  if (!is.null(period) && period == "Month") {
     args <- args |>
       tidyr::unnest(y) |>
       dplyr::filter(x != "MONTH")
@@ -170,7 +170,7 @@ beneficiary_enrollment <- function(year        = NULL,
                   dplyr::across(dplyr::contains("bene"), as.integer))
 
   }
-    if (period == "Monthly") {
+    if (!is.null(period) && period == "Month") {
       results <- results |>
         dplyr::filter(period %in% month.name)
     }
