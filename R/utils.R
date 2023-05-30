@@ -41,10 +41,19 @@ summary_stats <- function(df,
 #' format_zipcode(12345)
 #' @autoglobal
 #' @noRd
-format_zipcode <- function(zip) {zip <- as.character(zip)
+format_zipcode <- function(zip) {
+  zip <- as.character(zip)
+
   if (stringr::str_detect(zip, "^[[:digit:]]{9}$") == TRUE) {
-  zip <- paste0(stringr::str_sub(zip, 1, 5), "-", stringr::str_sub(zip, 6, 9))
-  return(zip)} else {return(zip)}}
+
+    zip <- paste0(stringr::str_sub(zip, 1, 5), "-", stringr::str_sub(zip, 6, 9))
+
+    return(zip)
+
+    } else {
+      return(zip)
+    }
+  }
 
 #' Remove NULL elements from vector ----------------------------------------
 #' @autoglobal
@@ -58,8 +67,11 @@ remove_null <- function(x) {Filter(Negate(is.null), x)}
 #' @autoglobal
 #' @noRd
 clean_credentials <- function(x) {
+
   if (!is.character(x)) {stop("x must be a character vector")}
+
   out <- gsub("\\.", "", x)
+
   return(out)
 }
 
@@ -198,8 +210,14 @@ npi_check <- function(npi,
 #' @return formatted API filters
 #' @autoglobal
 #' @noRd
-param_format <- function(param, arg) {if (is.null(arg)) {param <- NULL}
-  else {paste0("filter[", param, "]=", arg, "&")}}
+param_format <- function(param, arg) {
+
+  if (is.null(arg)) {
+    param <- NULL
+  } else {
+      paste0("filter[", param, "]=", arg, "&")
+    }
+  }
 
 #' param_space --------------------------------------------------------------
 #' Some API parameters have spaces, these must be converted to "%20".
@@ -275,10 +293,10 @@ yn_logical <- function(x){
 #' @noRd
 entype_char <- function(x){
   dplyr::case_when(
-    x == "NPI-1" ~ "Ind",
-    x == "I" ~ "Ind",
-    x == "NPI-2" ~ "Org",
-    x == "O" ~ "Org"
+    x == "NPI-1" ~ "Individual",
+    x == "I" ~ "Individual",
+    x == "NPI-2" ~ "Organization",
+    x == "O" ~ "Organization"
     )
 }
 
@@ -302,9 +320,15 @@ entype_arg <- function(x){
 #' @noRd
 pos_char <- function(x){
   dplyr::case_when(
-    x == "F" ~ "Facility",
-    x == "O" ~ "Office"
-  )
+    x == "facility" ~ "F",
+    x == "Facility" ~ "F",
+    x == "F" ~ "F",
+    x == "f" ~ "F",
+    x == "office" ~ "O",
+    x == "Office" ~ "O",
+    x == "O" ~ "O",
+    x == "o" ~ "O",
+    .default = NULL)
 }
 
 #' Convert Open Payments Changed col to logical ----------------------
@@ -319,7 +343,6 @@ changed_logical <- function(x){
   )
 }
 
-
 #' display_long ------------------------------------------------------------
 #' @param df data frame
 #' @autoglobal
@@ -329,7 +352,6 @@ display_long <- function(df){
   df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
         tidyr::pivot_longer(dplyr::everything())
 }
-
 
 #' @param df df
 #' @param col col
@@ -343,7 +365,6 @@ change_abs <- function(df, col, by) {
     "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }}, order_by = {{ by }}),
     .after = {{ col }})
 }
-
 
 #' @param df df
 #' @param col col
@@ -710,7 +731,6 @@ gt_prov <- function(df,
   }
   return(results)
 }
-
 
 #' readme function table ---------------------------------------------------
 #' @autoglobal

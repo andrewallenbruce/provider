@@ -19,8 +19,8 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year Year in YYYY format.  Run the helper function `years_pbg()` to
-#'    return a vector of currently available years.
+#' @param year Year in YYYY format.  Run the internal helper function
+#'    `provider:::years_pbg()` to return a vector of currently available years.
 #' @param level Identifies the level of geography by which the data in the
 #'    row has been aggregated. A value of 'State' indicates the data in the
 #'    row is aggregated to a single state identified in the Rendering Provider
@@ -88,14 +88,7 @@ physician_by_geography <- function(year,
                                    place_of_srvc = NULL,
                                    tidy          = TRUE) {
 
-  if (!is.null(place_of_srvc)) {
-    place_of_srvc <- dplyr::case_when(
-      place_of_srvc == "facility" ~ "F",
-      place_of_srvc == "Facility" ~ "F",
-      place_of_srvc == "office" ~ "O",
-      place_of_srvc == "Office" ~ "O",
-      .default = NULL)
-  }
+  if (!is.null(place_of_srvc)) {place_of_srvc <- pos_char(place_of_srvc)}
 
   # match args ----------------------------------------------------
   rlang::check_required(year)
@@ -138,15 +131,15 @@ physician_by_geography <- function(year,
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
 
     cli_args <- tibble::tribble(
-      ~x,             ~y,
-      "year",         as.character(year),
-      "level",        level,
-      "sublevel",     sublevel,
-      "fips",         as.character(fips),
-      "hcpcs_code",   as.character(hcpcs_code),
-      "hcpcs_desc",   hcpcs_desc,
-      "hcpcs_drug",   as.character(hcpcs_drug),
-      "pos",          place_of_srvc) |>
+      ~x,               ~y,
+      "year",           as.character(year),
+      "level",          level,
+      "sublevel",       sublevel,
+      "fips",           as.character(fips),
+      "hcpcs_code",     as.character(hcpcs_code),
+      "hcpcs_desc",     hcpcs_desc,
+      "hcpcs_drug",     as.character(hcpcs_drug),
+      "place_of_srvc",  place_of_srvc) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -172,7 +165,7 @@ physician_by_geography <- function(year,
                     level        = rndrng_prvdr_geo_lvl,
                     sublevel     = rndrng_prvdr_geo_desc,
                     fips         = rndrng_prvdr_geo_cd,
-                    hcpcs        = hcpcs_cd,
+                    hcpcs_code   = hcpcs_cd,
                     hcpcs_desc,
                     hcpcs_drug   = hcpcs_drug_ind,
                     place_of_srvc,
@@ -180,7 +173,7 @@ physician_by_geography <- function(year,
                     tot_benes,
                     tot_srvcs,
                     tot_day      = tot_bene_day_srvcs,
-                    avg_charge   = avg_sbmtd_chrg,
+                    avg_charges  = avg_sbmtd_chrg,
                     avg_allowed  = avg_mdcr_alowd_amt,
                     avg_payment  = avg_mdcr_pymt_amt,
                     avg_std_pymt = avg_mdcr_stdzd_amt) |>

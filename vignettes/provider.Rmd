@@ -628,36 +628,86 @@ cc_all
 service <- 2014:2021 |> 
   furrr::future_map(\(x) physician_by_service(year = x, npi = 1043477615)) |> 
   purrr::list_rbind()
+
+srvc_ind <- service |> 
+  dplyr::select(year, 
+                hcpcs_code,
+                hcpcs_desc,
+                place_of_srvc,
+                tot_benes,
+                tot_srvcs,
+                avg_charges,
+                avg_allowed,
+                avg_payment) |> 
+  dplyr::mutate(sublevel = "Individual", .after = year)
+
+srvc <- service |> 
+  dplyr::select(year, 
+                hcpcs_code,
+                place_of_srvc)
+
+srvc_nat <- furrr::future_pmap(srvc, 
+                               physician_by_geography, 
+                               level = "National") |>
+  purrr::list_rbind() |> 
+  dplyr::select(year, 
+                sublevel,
+                hcpcs_code,
+                hcpcs_desc,
+                place_of_srvc,
+                tot_benes,
+                tot_srvcs,
+                avg_charges,
+                avg_allowed,
+                avg_payment)
+
+srvc_state <- furrr::future_pmap(srvc, 
+                                 physician_by_geography, 
+                                 level = "State", 
+                                 sublevel = "Pennsylvania") |>
+  purrr::list_rbind() |> 
+  dplyr::select(year, 
+                sublevel,
+                hcpcs_code,
+                hcpcs_desc,
+                place_of_srvc,
+                tot_benes,
+                tot_srvcs,
+                avg_charges,
+                avg_allowed,
+                avg_payment)
+
+gt_sum <- dplyr::bind_rows(srvc_ind, 
+                           srvc_state, 
+                           srvc_nat) |> 
+  tidyr::unite("hcpcs", 
+               c(hcpcs_code, place_of_srvc), 
+               remove = TRUE, 
+               sep = " : ") |> 
+  dplyr::group_by(sublevel, hcpcs) |> 
+  dplyr::summarize(avg_charges = mean(avg_charges),
+                   avg_allowed = mean(avg_allowed),
+                   avg_payment = mean(avg_payment),
+                   .groups = "drop") |> 
+  tidyr::pivot_longer(cols = dplyr::contains("avg_"), 
+                      names_to = "type", 
+                      values_to = "amount") |> 
+  tidyr::pivot_wider(names_from = sublevel, 
+                     values_from = amount) |> 
+  dplyr::mutate(type = stringr::str_remove(type, "avg_")) |> 
+  dplyr::arrange(hcpcs) |> 
+  provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)"),
+                     title = gt::md("Medicare Provider Summary: **2014 - 2018**"),
+                     subtitle = gt::md("Comparing HCPCS Reimbursement Data at the **National**, **State**, and **Individual** Level"),
+                     divider = c("hcpcs"),
+                     dollars = c("Individual", "National", "Pennsylvania"))
 ```
 
 </details>
 
+
 ```{r, echo=FALSE, eval=TRUE}
-service |> 
-  dplyr::select(year, 
-                hcpcs_cd,
-                place_of_srvc,
-                hcpcs_desc,
-                tot_benes,
-                tot_srvcs,
-                avg_charge,
-                avg_allowed,
-                avg_payment)
-```
-
-
-<br>
-
-
-```{r}
-srvc <- service |> 
-  dplyr::select(year, 
-                hcpcs_code = hcpcs_cd,
-                place_of_srvc) |> 
-  dplyr::mutate(place_of_srvc = dplyr::if_else(place_of_srvc == "Facility", "F", "O"))
-
-# furrr::future_pmap(srvc, physician_by_geography, level = "National") |> 
-#   purrr::list_rbind()
+gt_sum
 ```
 
 
@@ -832,4 +882,3 @@ gt_output <- gt_table |>
   gt::opt_vertical_padding(scale = 1.5)
 ```
 
-<br>

@@ -204,7 +204,7 @@ gt_pct <- final |>
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
-gt_pct |> gt::tab_options(table.width = gt::pct(100))
+gt_pct
 ```
 
 <br>
@@ -273,15 +273,13 @@ gt_nat <- nat |>
   gt::tab_header(title = gt::md("Medicare Beneficiary Enrollment: **2013 - 2022**"),
     subtitle = gt::md("National Totals, Year-Over-Year")) |> 
   gt::tab_source_note(source_note = "Source: data.cms.gov")
-
-#|> gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
-gt_nat |> gt::tab_options(table.width = gt::pct(100))
+gt_nat
 ```
 
 
@@ -410,7 +408,7 @@ beneficiary_enrollment(period = "Year",
 
 ```{r echo=FALSE}
 tibble::tribble(
-  ~Description,                                                          ~Variable,         ~Definition,
+  ~Description,                                                   ~Variable,         ~Definition,
   "Year",                                                          "`year`",          "Indicates the calendar year of Medicare enrollment",
   "Month",                                                         "`month`",           "Indicates the month of Medicare enrollment",
   "Beneficiary State",                                             "`state`",       "Area of beneficiary residence",
@@ -427,9 +425,9 @@ tibble::tribble(
   "Total Medicare Part A and Part B Beneficiaries",               "`bene_ab_total`", "Count of Medicare beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
         "Original Medicare Part A and Part B Beneficiaries", "`bene_ab_orig`", "Count of Original Medicare beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
         "Medicare Advantage and Other Health Plan Part A and Part B Beneficiaries", "`bene_ab_ma_oth`", "Count of Medicare Advantage and Other Health Plan beneficiaries enrolled in Hospital Insurance (or Part A) and Supplementary Medical Insurance (or Part B)",
-        "Total Medicare Part D beneficiaries", "`Prscrptn_Drug_Tot_Benes`", "Count of all Medicare Prescription Drug (or Part D) beneficiaries",
-        "Total Medicare Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_PDP_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Prescription Drug Plan",
-        "Total Medicare Advantage Prescription Drug Plan beneficiaries", "`Prscrptn_Drug_MAPD_Benes`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Medicare Advantage Prescription Drug plan") |> 
+        "Total Medicare Part D beneficiaries", "`bene_rx_total`", "Count of all Medicare Prescription Drug (or Part D) beneficiaries",
+        "Total Medicare Prescription Drug Plan beneficiaries", "`bene_rx_pdp`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Prescription Drug Plan",
+        "Total Medicare Advantage Prescription Drug Plan beneficiaries", "`bene_rx_mapd`", "Count of Medicare Prescription Drug (or Part D) beneficiaries enrolled in a Medicare Advantage Prescription Drug plan") |> 
   dplyr::select(Variable, Description, Definition) |> 
   provider:::gt_datadict()
 ```

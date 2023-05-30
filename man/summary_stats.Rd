@@ -24,15 +24,13 @@ summary_stats(
 \item{arr}{column to arrange data by, i.e. \code{cost}}
 }
 \value{
-A \code{tidytable} containing the summary stats
+A \code{tibble} containing the summary stats
 }
 \description{
 Returns a tidy table of summary stats
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-download_datasets(specialty = "vascular surgery") |>
-tidytable::slice_head(n = 10) |>
 summary_stats(condition = patient == "new",
               group_vars = c(specialty, state, hcpcs, cost),
               summary_vars = c(min, max, mode, range),
