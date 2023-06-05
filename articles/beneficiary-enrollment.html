@@ -376,7 +376,7 @@ Code for plots
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_total_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">bene_total_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu">gghighlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">bene_total_pct</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
 <span>                           line_label_type <span class="op">=</span> <span class="st">"sec_axis"</span>, </span>
 <span>                           label_key <span class="op">=</span> <span class="va">level</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.y.right <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -386,17 +386,17 @@ Code for plots
 <span>  <span class="co">#ggplot2::facet_wrap(~level, ncol = 1) +</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'gghighlight'</span></span>
 <span></span>
 <span><span class="va">orig</span> <span class="op">&lt;-</span> <span class="va">enrollment</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">level</span>, </span>
 <span>                               fill <span class="op">=</span> <span class="va">level</span>, </span>
 <span>                               color <span class="op">=</span> <span class="va">level</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_orig</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fl">21</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span>, stroke <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_orig</span><span class="op">)</span>, </span>
+<span>                      shape <span class="op">=</span> <span class="fl">21</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span>, stroke <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_orig</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="co">#ggplot2::scale_y_reverse() +</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu">gghighlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">pct_orig</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">pct_orig</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
 <span>                           line_label_type <span class="op">=</span> <span class="st">"sec_axis"</span>, </span>
 <span>                           label_key <span class="op">=</span> <span class="va">level</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.y.right <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -406,16 +406,16 @@ Code for plots
 <span>  <span class="co">#ggplot2::ggtitle("Percentage of Medicare Beneficiaries with Original Medicare") +</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> </span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'gghighlight'</span></span>
 <span></span>
 <span><span class="va">ma</span> <span class="op">&lt;-</span> <span class="va">enrollment</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>group <span class="op">=</span> <span class="va">level</span>, </span>
 <span>                               fill <span class="op">=</span> <span class="va">level</span>, </span>
 <span>                               color <span class="op">=</span> <span class="va">level</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_ma</span><span class="op">)</span>, shape <span class="op">=</span> <span class="fl">21</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span>, stroke <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_ma</span><span class="op">)</span>, </span>
+<span>                      shape <span class="op">=</span> <span class="fl">21</span>, colour <span class="op">=</span> <span class="st">"black"</span>, fill <span class="op">=</span> <span class="st">"white"</span>, size <span class="op">=</span> <span class="fl">1</span>, stroke <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">pct_ma</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html" class="external-link">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu">gghighlight</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">pct_ma</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
+<span>  <span class="fu">gghighlight</span><span class="fu">::</span><span class="fu"><a href="https://yutannihilation.github.io/gghighlight/reference/gghighlight.html" class="external-link">gghighlight</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">pct_ma</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span>, </span>
 <span>                           line_label_type <span class="op">=</span> <span class="st">"sec_axis"</span>, </span>
 <span>                           label_key <span class="op">=</span> <span class="va">level</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>axis.text.y.right <span class="op">=</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_text</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -424,19 +424,16 @@ Code for plots
 <span>  <span class="co">#himni::gg_theme() +</span></span>
 <span>  <span class="co">#ggplot2::ggtitle("Percentage of Medicare Beneficiaries with Medicare Advantage") +</span></span>
 <span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span> </span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in loadNamespace(x): there is no package called 'gghighlight'</span></span></code></pre></div>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span>label <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
 </details><div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://patchwork.data-imaginist.com" class="external-link">patchwork</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in library(patchwork): there is no package called 'patchwork'</span></span>
 <span><span class="va">patchwork</span> <span class="op">&lt;-</span> <span class="va">total</span> <span class="op">/</span> <span class="op">(</span><span class="va">orig</span> <span class="op">+</span> <span class="va">ma</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'total' not found</span></span>
 <span><span class="va">patchwork</span> <span class="op">+</span> </span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'patchwork' not found</span></span></code></pre></div>
+<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-10-1.png" width="100%"></p>
 <p><br></p>
 <details><summary>
-Code for tables
+Code
 </summary><div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">national</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"Year"</span>, level <span class="op">=</span> <span class="st">"National"</span><span class="op">)</span></span>
 <span></span>
@@ -482,25 +479,25 @@ Code for tables
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, <span class="st">" Advantage"</span><span class="op">)</span>,</span>
 <span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ff4343"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    fmt_fn <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">0.1</span>, suffix <span class="op">=</span> <span class="st">" %"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div id="bxwsafcwwr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="rdqegrcrrs" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bxwsafcwwr table {
+#rdqegrcrrs table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bxwsafcwwr thead, #bxwsafcwwr tbody, #bxwsafcwwr tfoot, #bxwsafcwwr tr, #bxwsafcwwr td, #bxwsafcwwr th {
+#rdqegrcrrs thead, #rdqegrcrrs tbody, #rdqegrcrrs tfoot, #rdqegrcrrs tr, #rdqegrcrrs td, #rdqegrcrrs th {
   border-style: none;
 }
 
-#bxwsafcwwr p {
+#rdqegrcrrs p {
   margin: 0;
   padding: 0;
 }
 
-#bxwsafcwwr .gt_table {
+#rdqegrcrrs .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -526,12 +523,12 @@ Code for tables
   border-left-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_caption {
+#rdqegrcrrs .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bxwsafcwwr .gt_title {
+#rdqegrcrrs .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -543,7 +540,7 @@ Code for tables
   border-bottom-width: 0;
 }
 
-#bxwsafcwwr .gt_subtitle {
+#rdqegrcrrs .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -555,7 +552,7 @@ Code for tables
   border-top-width: 0;
 }
 
-#bxwsafcwwr .gt_heading {
+#rdqegrcrrs .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -567,13 +564,13 @@ Code for tables
   border-right-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_bottom_border {
+#rdqegrcrrs .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_col_headings {
+#rdqegrcrrs .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #FFFFFF;
@@ -588,7 +585,7 @@ Code for tables
   border-right-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_col_heading {
+#rdqegrcrrs .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -608,7 +605,7 @@ Code for tables
   overflow-x: hidden;
 }
 
-#bxwsafcwwr .gt_column_spanner_outer {
+#rdqegrcrrs .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -620,15 +617,15 @@ Code for tables
   padding-right: 4px;
 }
 
-#bxwsafcwwr .gt_column_spanner_outer:first-child {
+#rdqegrcrrs .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bxwsafcwwr .gt_column_spanner_outer:last-child {
+#rdqegrcrrs .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bxwsafcwwr .gt_column_spanner {
+#rdqegrcrrs .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -640,11 +637,11 @@ Code for tables
   width: 100%;
 }
 
-#bxwsafcwwr .gt_spanner_row {
+#rdqegrcrrs .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bxwsafcwwr .gt_group_heading {
+#rdqegrcrrs .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -670,7 +667,7 @@ Code for tables
   text-align: left;
 }
 
-#bxwsafcwwr .gt_empty_group_heading {
+#rdqegrcrrs .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -685,15 +682,15 @@ Code for tables
   vertical-align: middle;
 }
 
-#bxwsafcwwr .gt_from_md > :first-child {
+#rdqegrcrrs .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bxwsafcwwr .gt_from_md > :last-child {
+#rdqegrcrrs .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bxwsafcwwr .gt_row {
+#rdqegrcrrs .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -712,7 +709,7 @@ Code for tables
   overflow-x: hidden;
 }
 
-#bxwsafcwwr .gt_stub {
+#rdqegrcrrs .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -725,7 +722,7 @@ Code for tables
   padding-right: 5px;
 }
 
-#bxwsafcwwr .gt_stub_row_group {
+#rdqegrcrrs .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -739,15 +736,15 @@ Code for tables
   vertical-align: top;
 }
 
-#bxwsafcwwr .gt_row_group_first td {
+#rdqegrcrrs .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bxwsafcwwr .gt_row_group_first th {
+#rdqegrcrrs .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bxwsafcwwr .gt_summary_row {
+#rdqegrcrrs .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -757,16 +754,16 @@ Code for tables
   padding-right: 5px;
 }
 
-#bxwsafcwwr .gt_first_summary_row {
+#rdqegrcrrs .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_first_summary_row.thick {
+#rdqegrcrrs .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bxwsafcwwr .gt_last_summary_row {
+#rdqegrcrrs .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -776,7 +773,7 @@ Code for tables
   border-bottom-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_grand_summary_row {
+#rdqegrcrrs .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -786,7 +783,7 @@ Code for tables
   padding-right: 5px;
 }
 
-#bxwsafcwwr .gt_first_grand_summary_row {
+#rdqegrcrrs .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -796,7 +793,7 @@ Code for tables
   border-top-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_last_grand_summary_row_top {
+#rdqegrcrrs .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -806,11 +803,11 @@ Code for tables
   border-bottom-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_striped {
+#rdqegrcrrs .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bxwsafcwwr .gt_table_body {
+#rdqegrcrrs .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -819,7 +816,7 @@ Code for tables
   border-bottom-color: #000000;
 }
 
-#bxwsafcwwr .gt_footnotes {
+#rdqegrcrrs .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -833,7 +830,7 @@ Code for tables
   border-right-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_footnote {
+#rdqegrcrrs .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -842,7 +839,7 @@ Code for tables
   padding-right: 5px;
 }
 
-#bxwsafcwwr .gt_sourcenotes {
+#rdqegrcrrs .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -856,7 +853,7 @@ Code for tables
   border-right-color: #D3D3D3;
 }
 
-#bxwsafcwwr .gt_sourcenote {
+#rdqegrcrrs .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -864,63 +861,63 @@ Code for tables
   padding-right: 5px;
 }
 
-#bxwsafcwwr .gt_left {
+#rdqegrcrrs .gt_left {
   text-align: left;
 }
 
-#bxwsafcwwr .gt_center {
+#rdqegrcrrs .gt_center {
   text-align: center;
 }
 
-#bxwsafcwwr .gt_right {
+#rdqegrcrrs .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bxwsafcwwr .gt_font_normal {
+#rdqegrcrrs .gt_font_normal {
   font-weight: normal;
 }
 
-#bxwsafcwwr .gt_font_bold {
+#rdqegrcrrs .gt_font_bold {
   font-weight: bold;
 }
 
-#bxwsafcwwr .gt_font_italic {
+#rdqegrcrrs .gt_font_italic {
   font-style: italic;
 }
 
-#bxwsafcwwr .gt_super {
+#rdqegrcrrs .gt_super {
   font-size: 65%;
 }
 
-#bxwsafcwwr .gt_footnote_marks {
+#rdqegrcrrs .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bxwsafcwwr .gt_asterisk {
+#rdqegrcrrs .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bxwsafcwwr .gt_indent_1 {
+#rdqegrcrrs .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bxwsafcwwr .gt_indent_2 {
+#rdqegrcrrs .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bxwsafcwwr .gt_indent_3 {
+#rdqegrcrrs .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bxwsafcwwr .gt_indent_4 {
+#rdqegrcrrs .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bxwsafcwwr .gt_indent_5 {
+#rdqegrcrrs .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1037,7 +1034,7 @@ tbody tr:last-child {
 </div>
 <p><br></p>
 <details><summary>
-Code for table
+Code
 </summary><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"Year"</span>, level <span class="op">=</span> <span class="st">"State"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span>
 <span></span>
@@ -1083,25 +1080,25 @@ Code for table
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, <span class="st">" Advantage"</span><span class="op">)</span>,</span>
 <span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ff4343"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    fmt_fn <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">0.1</span>, suffix <span class="op">=</span> <span class="st">" %"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div id="cwuxmtfjzo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="pimvyrnmlr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#cwuxmtfjzo table {
+#pimvyrnmlr table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cwuxmtfjzo thead, #cwuxmtfjzo tbody, #cwuxmtfjzo tfoot, #cwuxmtfjzo tr, #cwuxmtfjzo td, #cwuxmtfjzo th {
+#pimvyrnmlr thead, #pimvyrnmlr tbody, #pimvyrnmlr tfoot, #pimvyrnmlr tr, #pimvyrnmlr td, #pimvyrnmlr th {
   border-style: none;
 }
 
-#cwuxmtfjzo p {
+#pimvyrnmlr p {
   margin: 0;
   padding: 0;
 }
 
-#cwuxmtfjzo .gt_table {
+#pimvyrnmlr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1127,12 +1124,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_caption {
+#pimvyrnmlr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cwuxmtfjzo .gt_title {
+#pimvyrnmlr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1144,7 +1141,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#cwuxmtfjzo .gt_subtitle {
+#pimvyrnmlr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1156,7 +1153,7 @@ Code for table
   border-top-width: 0;
 }
 
-#cwuxmtfjzo .gt_heading {
+#pimvyrnmlr .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1168,13 +1165,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_bottom_border {
+#pimvyrnmlr .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_col_headings {
+#pimvyrnmlr .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #FFFFFF;
@@ -1189,7 +1186,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_col_heading {
+#pimvyrnmlr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1209,7 +1206,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#cwuxmtfjzo .gt_column_spanner_outer {
+#pimvyrnmlr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1221,15 +1218,15 @@ Code for table
   padding-right: 4px;
 }
 
-#cwuxmtfjzo .gt_column_spanner_outer:first-child {
+#pimvyrnmlr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cwuxmtfjzo .gt_column_spanner_outer:last-child {
+#pimvyrnmlr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cwuxmtfjzo .gt_column_spanner {
+#pimvyrnmlr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1241,11 +1238,11 @@ Code for table
   width: 100%;
 }
 
-#cwuxmtfjzo .gt_spanner_row {
+#pimvyrnmlr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cwuxmtfjzo .gt_group_heading {
+#pimvyrnmlr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1271,7 +1268,7 @@ Code for table
   text-align: left;
 }
 
-#cwuxmtfjzo .gt_empty_group_heading {
+#pimvyrnmlr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1286,15 +1283,15 @@ Code for table
   vertical-align: middle;
 }
 
-#cwuxmtfjzo .gt_from_md > :first-child {
+#pimvyrnmlr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cwuxmtfjzo .gt_from_md > :last-child {
+#pimvyrnmlr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cwuxmtfjzo .gt_row {
+#pimvyrnmlr .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1313,7 +1310,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#cwuxmtfjzo .gt_stub {
+#pimvyrnmlr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1326,7 +1323,7 @@ Code for table
   padding-right: 5px;
 }
 
-#cwuxmtfjzo .gt_stub_row_group {
+#pimvyrnmlr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1340,15 +1337,15 @@ Code for table
   vertical-align: top;
 }
 
-#cwuxmtfjzo .gt_row_group_first td {
+#pimvyrnmlr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cwuxmtfjzo .gt_row_group_first th {
+#pimvyrnmlr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cwuxmtfjzo .gt_summary_row {
+#pimvyrnmlr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1358,16 +1355,16 @@ Code for table
   padding-right: 5px;
 }
 
-#cwuxmtfjzo .gt_first_summary_row {
+#pimvyrnmlr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_first_summary_row.thick {
+#pimvyrnmlr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cwuxmtfjzo .gt_last_summary_row {
+#pimvyrnmlr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1377,7 +1374,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_grand_summary_row {
+#pimvyrnmlr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1387,7 +1384,7 @@ Code for table
   padding-right: 5px;
 }
 
-#cwuxmtfjzo .gt_first_grand_summary_row {
+#pimvyrnmlr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1397,7 +1394,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_last_grand_summary_row_top {
+#pimvyrnmlr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1407,11 +1404,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_striped {
+#pimvyrnmlr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cwuxmtfjzo .gt_table_body {
+#pimvyrnmlr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1420,7 +1417,7 @@ Code for table
   border-bottom-color: #000000;
 }
 
-#cwuxmtfjzo .gt_footnotes {
+#pimvyrnmlr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1434,7 +1431,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_footnote {
+#pimvyrnmlr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1443,7 +1440,7 @@ Code for table
   padding-right: 5px;
 }
 
-#cwuxmtfjzo .gt_sourcenotes {
+#pimvyrnmlr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1457,7 +1454,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#cwuxmtfjzo .gt_sourcenote {
+#pimvyrnmlr .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1465,63 +1462,63 @@ Code for table
   padding-right: 5px;
 }
 
-#cwuxmtfjzo .gt_left {
+#pimvyrnmlr .gt_left {
   text-align: left;
 }
 
-#cwuxmtfjzo .gt_center {
+#pimvyrnmlr .gt_center {
   text-align: center;
 }
 
-#cwuxmtfjzo .gt_right {
+#pimvyrnmlr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cwuxmtfjzo .gt_font_normal {
+#pimvyrnmlr .gt_font_normal {
   font-weight: normal;
 }
 
-#cwuxmtfjzo .gt_font_bold {
+#pimvyrnmlr .gt_font_bold {
   font-weight: bold;
 }
 
-#cwuxmtfjzo .gt_font_italic {
+#pimvyrnmlr .gt_font_italic {
   font-style: italic;
 }
 
-#cwuxmtfjzo .gt_super {
+#pimvyrnmlr .gt_super {
   font-size: 65%;
 }
 
-#cwuxmtfjzo .gt_footnote_marks {
+#pimvyrnmlr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cwuxmtfjzo .gt_asterisk {
+#pimvyrnmlr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cwuxmtfjzo .gt_indent_1 {
+#pimvyrnmlr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cwuxmtfjzo .gt_indent_2 {
+#pimvyrnmlr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cwuxmtfjzo .gt_indent_3 {
+#pimvyrnmlr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cwuxmtfjzo .gt_indent_4 {
+#pimvyrnmlr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cwuxmtfjzo .gt_indent_5 {
+#pimvyrnmlr .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1638,7 +1635,7 @@ tbody tr:last-child {
 </div>
 <p><br></p>
 <details><summary>
-Code for table
+Code
 </summary><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">county</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"Year"</span>, level <span class="op">=</span> <span class="st">"County"</span>, state <span class="op">=</span> <span class="st">"GA"</span>, county <span class="op">=</span> <span class="st">"Lowndes"</span><span class="op">)</span></span>
 <span></span>
@@ -1684,25 +1681,25 @@ Code for table
 <span>    labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Original  "</span>, <span class="st">" Advantage"</span><span class="op">)</span>,</span>
 <span>    palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"#ff4343"</span>, <span class="st">"black"</span><span class="op">)</span>,</span>
 <span>    fmt_fn <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/label_percent.html" class="external-link">label_percent</a></span><span class="op">(</span>accuracy <span class="op">=</span> <span class="fl">0.1</span>, suffix <span class="op">=</span> <span class="st">" %"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-</details><div id="ctkhvenoiu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="dgjapdsgic" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ctkhvenoiu table {
+#dgjapdsgic table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ctkhvenoiu thead, #ctkhvenoiu tbody, #ctkhvenoiu tfoot, #ctkhvenoiu tr, #ctkhvenoiu td, #ctkhvenoiu th {
+#dgjapdsgic thead, #dgjapdsgic tbody, #dgjapdsgic tfoot, #dgjapdsgic tr, #dgjapdsgic td, #dgjapdsgic th {
   border-style: none;
 }
 
-#ctkhvenoiu p {
+#dgjapdsgic p {
   margin: 0;
   padding: 0;
 }
 
-#ctkhvenoiu .gt_table {
+#dgjapdsgic .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1728,12 +1725,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_caption {
+#dgjapdsgic .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ctkhvenoiu .gt_title {
+#dgjapdsgic .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1745,7 +1742,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#ctkhvenoiu .gt_subtitle {
+#dgjapdsgic .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1757,7 +1754,7 @@ Code for table
   border-top-width: 0;
 }
 
-#ctkhvenoiu .gt_heading {
+#dgjapdsgic .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1769,13 +1766,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_bottom_border {
+#dgjapdsgic .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_col_headings {
+#dgjapdsgic .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #FFFFFF;
@@ -1790,7 +1787,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_col_heading {
+#dgjapdsgic .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1810,7 +1807,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ctkhvenoiu .gt_column_spanner_outer {
+#dgjapdsgic .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1822,15 +1819,15 @@ Code for table
   padding-right: 4px;
 }
 
-#ctkhvenoiu .gt_column_spanner_outer:first-child {
+#dgjapdsgic .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ctkhvenoiu .gt_column_spanner_outer:last-child {
+#dgjapdsgic .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ctkhvenoiu .gt_column_spanner {
+#dgjapdsgic .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -1842,11 +1839,11 @@ Code for table
   width: 100%;
 }
 
-#ctkhvenoiu .gt_spanner_row {
+#dgjapdsgic .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ctkhvenoiu .gt_group_heading {
+#dgjapdsgic .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1872,7 +1869,7 @@ Code for table
   text-align: left;
 }
 
-#ctkhvenoiu .gt_empty_group_heading {
+#dgjapdsgic .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1887,15 +1884,15 @@ Code for table
   vertical-align: middle;
 }
 
-#ctkhvenoiu .gt_from_md > :first-child {
+#dgjapdsgic .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ctkhvenoiu .gt_from_md > :last-child {
+#dgjapdsgic .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ctkhvenoiu .gt_row {
+#dgjapdsgic .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1914,7 +1911,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#ctkhvenoiu .gt_stub {
+#dgjapdsgic .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1927,7 +1924,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ctkhvenoiu .gt_stub_row_group {
+#dgjapdsgic .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1941,15 +1938,15 @@ Code for table
   vertical-align: top;
 }
 
-#ctkhvenoiu .gt_row_group_first td {
+#dgjapdsgic .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ctkhvenoiu .gt_row_group_first th {
+#dgjapdsgic .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ctkhvenoiu .gt_summary_row {
+#dgjapdsgic .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1959,16 +1956,16 @@ Code for table
   padding-right: 5px;
 }
 
-#ctkhvenoiu .gt_first_summary_row {
+#dgjapdsgic .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_first_summary_row.thick {
+#dgjapdsgic .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ctkhvenoiu .gt_last_summary_row {
+#dgjapdsgic .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1978,7 +1975,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_grand_summary_row {
+#dgjapdsgic .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1988,7 +1985,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ctkhvenoiu .gt_first_grand_summary_row {
+#dgjapdsgic .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1998,7 +1995,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_last_grand_summary_row_top {
+#dgjapdsgic .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2008,11 +2005,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_striped {
+#dgjapdsgic .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ctkhvenoiu .gt_table_body {
+#dgjapdsgic .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2021,7 +2018,7 @@ Code for table
   border-bottom-color: #000000;
 }
 
-#ctkhvenoiu .gt_footnotes {
+#dgjapdsgic .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2035,7 +2032,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_footnote {
+#dgjapdsgic .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2044,7 +2041,7 @@ Code for table
   padding-right: 5px;
 }
 
-#ctkhvenoiu .gt_sourcenotes {
+#dgjapdsgic .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2058,7 +2055,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#ctkhvenoiu .gt_sourcenote {
+#dgjapdsgic .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2066,63 +2063,63 @@ Code for table
   padding-right: 5px;
 }
 
-#ctkhvenoiu .gt_left {
+#dgjapdsgic .gt_left {
   text-align: left;
 }
 
-#ctkhvenoiu .gt_center {
+#dgjapdsgic .gt_center {
   text-align: center;
 }
 
-#ctkhvenoiu .gt_right {
+#dgjapdsgic .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ctkhvenoiu .gt_font_normal {
+#dgjapdsgic .gt_font_normal {
   font-weight: normal;
 }
 
-#ctkhvenoiu .gt_font_bold {
+#dgjapdsgic .gt_font_bold {
   font-weight: bold;
 }
 
-#ctkhvenoiu .gt_font_italic {
+#dgjapdsgic .gt_font_italic {
   font-style: italic;
 }
 
-#ctkhvenoiu .gt_super {
+#dgjapdsgic .gt_super {
   font-size: 65%;
 }
 
-#ctkhvenoiu .gt_footnote_marks {
+#dgjapdsgic .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ctkhvenoiu .gt_asterisk {
+#dgjapdsgic .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ctkhvenoiu .gt_indent_1 {
+#dgjapdsgic .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ctkhvenoiu .gt_indent_2 {
+#dgjapdsgic .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ctkhvenoiu .gt_indent_3 {
+#dgjapdsgic .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ctkhvenoiu .gt_indent_4 {
+#dgjapdsgic .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ctkhvenoiu .gt_indent_5 {
+#dgjapdsgic .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -2239,7 +2236,7 @@ tbody tr:last-child {
 </div>
 <p><br></p>
 <details><summary>
-Code for table
+Code
 </summary><div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># National by Year</span></span>
 <span><span class="va">tot_nation</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"National"</span>, </span>
@@ -2332,27 +2329,26 @@ Code for table
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
 <span>    title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Beneficiaries: **2013 - 2022**"</span><span class="op">)</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"National, State, &amp; County Percentage Comparisons for **Valdosta, Georgia**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span>
-<span><span class="co">#|&gt; gt::opt_table_font(font = gt::google_font(name = "Karla"))</span></span></code></pre></div>
-</details><div id="gipzklzmqf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
+</details><div id="isiadkapor" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gipzklzmqf table {
+#isiadkapor table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gipzklzmqf thead, #gipzklzmqf tbody, #gipzklzmqf tfoot, #gipzklzmqf tr, #gipzklzmqf td, #gipzklzmqf th {
+#isiadkapor thead, #isiadkapor tbody, #isiadkapor tfoot, #isiadkapor tr, #isiadkapor td, #isiadkapor th {
   border-style: none;
 }
 
-#gipzklzmqf p {
+#isiadkapor p {
   margin: 0;
   padding: 0;
 }
 
-#gipzklzmqf .gt_table {
+#isiadkapor .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2378,12 +2374,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_caption {
+#isiadkapor .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gipzklzmqf .gt_title {
+#isiadkapor .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2395,7 +2391,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#gipzklzmqf .gt_subtitle {
+#isiadkapor .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2407,7 +2403,7 @@ Code for table
   border-top-width: 0;
 }
 
-#gipzklzmqf .gt_heading {
+#isiadkapor .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2419,13 +2415,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_bottom_border {
+#isiadkapor .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_col_headings {
+#isiadkapor .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2440,7 +2436,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_col_heading {
+#isiadkapor .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2460,7 +2456,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#gipzklzmqf .gt_column_spanner_outer {
+#isiadkapor .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2472,15 +2468,15 @@ Code for table
   padding-right: 4px;
 }
 
-#gipzklzmqf .gt_column_spanner_outer:first-child {
+#isiadkapor .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gipzklzmqf .gt_column_spanner_outer:last-child {
+#isiadkapor .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gipzklzmqf .gt_column_spanner {
+#isiadkapor .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -2492,11 +2488,11 @@ Code for table
   width: 100%;
 }
 
-#gipzklzmqf .gt_spanner_row {
+#isiadkapor .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gipzklzmqf .gt_group_heading {
+#isiadkapor .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2522,7 +2518,7 @@ Code for table
   text-align: left;
 }
 
-#gipzklzmqf .gt_empty_group_heading {
+#isiadkapor .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2537,15 +2533,15 @@ Code for table
   vertical-align: middle;
 }
 
-#gipzklzmqf .gt_from_md > :first-child {
+#isiadkapor .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gipzklzmqf .gt_from_md > :last-child {
+#isiadkapor .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gipzklzmqf .gt_row {
+#isiadkapor .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -2564,7 +2560,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#gipzklzmqf .gt_stub {
+#isiadkapor .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -2577,7 +2573,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gipzklzmqf .gt_stub_row_group {
+#isiadkapor .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2591,15 +2587,15 @@ Code for table
   vertical-align: top;
 }
 
-#gipzklzmqf .gt_row_group_first td {
+#isiadkapor .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gipzklzmqf .gt_row_group_first th {
+#isiadkapor .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gipzklzmqf .gt_summary_row {
+#isiadkapor .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2609,16 +2605,16 @@ Code for table
   padding-right: 5px;
 }
 
-#gipzklzmqf .gt_first_summary_row {
+#isiadkapor .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_first_summary_row.thick {
+#isiadkapor .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gipzklzmqf .gt_last_summary_row {
+#isiadkapor .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2628,7 +2624,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_grand_summary_row {
+#isiadkapor .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2638,7 +2634,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gipzklzmqf .gt_first_grand_summary_row {
+#isiadkapor .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2648,7 +2644,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_last_grand_summary_row_top {
+#isiadkapor .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2658,11 +2654,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_striped {
+#isiadkapor .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gipzklzmqf .gt_table_body {
+#isiadkapor .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2671,7 +2667,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_footnotes {
+#isiadkapor .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2685,7 +2681,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_footnote {
+#isiadkapor .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2694,7 +2690,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gipzklzmqf .gt_sourcenotes {
+#isiadkapor .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2708,7 +2704,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gipzklzmqf .gt_sourcenote {
+#isiadkapor .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2716,63 +2712,63 @@ Code for table
   padding-right: 5px;
 }
 
-#gipzklzmqf .gt_left {
+#isiadkapor .gt_left {
   text-align: left;
 }
 
-#gipzklzmqf .gt_center {
+#isiadkapor .gt_center {
   text-align: center;
 }
 
-#gipzklzmqf .gt_right {
+#isiadkapor .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gipzklzmqf .gt_font_normal {
+#isiadkapor .gt_font_normal {
   font-weight: normal;
 }
 
-#gipzklzmqf .gt_font_bold {
+#isiadkapor .gt_font_bold {
   font-weight: bold;
 }
 
-#gipzklzmqf .gt_font_italic {
+#isiadkapor .gt_font_italic {
   font-style: italic;
 }
 
-#gipzklzmqf .gt_super {
+#isiadkapor .gt_super {
   font-size: 65%;
 }
 
-#gipzklzmqf .gt_footnote_marks {
+#isiadkapor .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gipzklzmqf .gt_asterisk {
+#isiadkapor .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gipzklzmqf .gt_indent_1 {
+#isiadkapor .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gipzklzmqf .gt_indent_2 {
+#isiadkapor .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gipzklzmqf .gt_indent_3 {
+#isiadkapor .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gipzklzmqf .gt_indent_4 {
+#isiadkapor .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gipzklzmqf .gt_indent_5 {
+#isiadkapor .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -3141,7 +3137,7 @@ tbody tr:last-child {
 </div>
 <p><br></p>
 <details><summary>
-Code for table
+Code
 </summary><div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"National"</span>, </span>
 <span>                                  period <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3187,25 +3183,25 @@ Code for table
 <span>    <span class="st">"Medicare Beneficiary Enrollment: **2013 - 2022**"</span><span class="op">)</span>,</span>
 <span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"National Totals, Month-Over-Month"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-</details><div id="seaorvmhqt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="wolmetwfkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#seaorvmhqt table {
+#wolmetwfkr table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#seaorvmhqt thead, #seaorvmhqt tbody, #seaorvmhqt tfoot, #seaorvmhqt tr, #seaorvmhqt td, #seaorvmhqt th {
+#wolmetwfkr thead, #wolmetwfkr tbody, #wolmetwfkr tfoot, #wolmetwfkr tr, #wolmetwfkr td, #wolmetwfkr th {
   border-style: none;
 }
 
-#seaorvmhqt p {
+#wolmetwfkr p {
   margin: 0;
   padding: 0;
 }
 
-#seaorvmhqt .gt_table {
+#wolmetwfkr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3231,12 +3227,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_caption {
+#wolmetwfkr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#seaorvmhqt .gt_title {
+#wolmetwfkr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3248,7 +3244,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#seaorvmhqt .gt_subtitle {
+#wolmetwfkr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3260,7 +3256,7 @@ Code for table
   border-top-width: 0;
 }
 
-#seaorvmhqt .gt_heading {
+#wolmetwfkr .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3272,13 +3268,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_bottom_border {
+#wolmetwfkr .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_col_headings {
+#wolmetwfkr .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3293,7 +3289,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_col_heading {
+#wolmetwfkr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3313,7 +3309,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#seaorvmhqt .gt_column_spanner_outer {
+#wolmetwfkr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3325,15 +3321,15 @@ Code for table
   padding-right: 4px;
 }
 
-#seaorvmhqt .gt_column_spanner_outer:first-child {
+#wolmetwfkr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#seaorvmhqt .gt_column_spanner_outer:last-child {
+#wolmetwfkr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#seaorvmhqt .gt_column_spanner {
+#wolmetwfkr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -3345,11 +3341,11 @@ Code for table
   width: 100%;
 }
 
-#seaorvmhqt .gt_spanner_row {
+#wolmetwfkr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#seaorvmhqt .gt_group_heading {
+#wolmetwfkr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3375,7 +3371,7 @@ Code for table
   text-align: left;
 }
 
-#seaorvmhqt .gt_empty_group_heading {
+#wolmetwfkr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3390,15 +3386,15 @@ Code for table
   vertical-align: middle;
 }
 
-#seaorvmhqt .gt_from_md > :first-child {
+#wolmetwfkr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#seaorvmhqt .gt_from_md > :last-child {
+#wolmetwfkr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#seaorvmhqt .gt_row {
+#wolmetwfkr .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3417,7 +3413,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#seaorvmhqt .gt_stub {
+#wolmetwfkr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3430,7 +3426,7 @@ Code for table
   padding-right: 5px;
 }
 
-#seaorvmhqt .gt_stub_row_group {
+#wolmetwfkr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3444,15 +3440,15 @@ Code for table
   vertical-align: top;
 }
 
-#seaorvmhqt .gt_row_group_first td {
+#wolmetwfkr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#seaorvmhqt .gt_row_group_first th {
+#wolmetwfkr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#seaorvmhqt .gt_summary_row {
+#wolmetwfkr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3462,16 +3458,16 @@ Code for table
   padding-right: 5px;
 }
 
-#seaorvmhqt .gt_first_summary_row {
+#wolmetwfkr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_first_summary_row.thick {
+#wolmetwfkr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#seaorvmhqt .gt_last_summary_row {
+#wolmetwfkr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3481,7 +3477,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_grand_summary_row {
+#wolmetwfkr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3491,7 +3487,7 @@ Code for table
   padding-right: 5px;
 }
 
-#seaorvmhqt .gt_first_grand_summary_row {
+#wolmetwfkr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3501,7 +3497,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_last_grand_summary_row_top {
+#wolmetwfkr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3511,11 +3507,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_striped {
+#wolmetwfkr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#seaorvmhqt .gt_table_body {
+#wolmetwfkr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3524,7 +3520,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_footnotes {
+#wolmetwfkr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3538,7 +3534,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_footnote {
+#wolmetwfkr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3547,7 +3543,7 @@ Code for table
   padding-right: 5px;
 }
 
-#seaorvmhqt .gt_sourcenotes {
+#wolmetwfkr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3561,7 +3557,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#seaorvmhqt .gt_sourcenote {
+#wolmetwfkr .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3569,63 +3565,63 @@ Code for table
   padding-right: 5px;
 }
 
-#seaorvmhqt .gt_left {
+#wolmetwfkr .gt_left {
   text-align: left;
 }
 
-#seaorvmhqt .gt_center {
+#wolmetwfkr .gt_center {
   text-align: center;
 }
 
-#seaorvmhqt .gt_right {
+#wolmetwfkr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#seaorvmhqt .gt_font_normal {
+#wolmetwfkr .gt_font_normal {
   font-weight: normal;
 }
 
-#seaorvmhqt .gt_font_bold {
+#wolmetwfkr .gt_font_bold {
   font-weight: bold;
 }
 
-#seaorvmhqt .gt_font_italic {
+#wolmetwfkr .gt_font_italic {
   font-style: italic;
 }
 
-#seaorvmhqt .gt_super {
+#wolmetwfkr .gt_super {
   font-size: 65%;
 }
 
-#seaorvmhqt .gt_footnote_marks {
+#wolmetwfkr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#seaorvmhqt .gt_asterisk {
+#wolmetwfkr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#seaorvmhqt .gt_indent_1 {
+#wolmetwfkr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#seaorvmhqt .gt_indent_2 {
+#wolmetwfkr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#seaorvmhqt .gt_indent_3 {
+#wolmetwfkr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#seaorvmhqt .gt_indent_4 {
+#wolmetwfkr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#seaorvmhqt .gt_indent_5 {
+#wolmetwfkr .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -3934,37 +3930,24 @@ tbody tr:last-child {
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>period <span class="op">=</span> <span class="st">"Year"</span>, </span>
-<span>                       level <span class="op">=</span> <span class="st">"State"</span>,</span>
-<span>                       state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "year"              "period"            "level"            </span></span>
-<span><span class="co">#&gt;  [4] "state"             "state_name"        "county"           </span></span>
-<span><span class="co">#&gt;  [7] "fips"              "bene_total"        "bene_orig"        </span></span>
-<span><span class="co">#&gt; [10] "bene_ma_oth"       "bene_aged_total"   "bene_aged_esrd"   </span></span>
-<span><span class="co">#&gt; [13] "bene_aged_no_esrd" "bene_dsb_total"    "bene_dsb_esrd"    </span></span>
-<span><span class="co">#&gt; [16] "bene_dsb_no_esrd"  "bene_ab_total"     "bene_ab_orig"     </span></span>
-<span><span class="co">#&gt; [19] "bene_ab_ma_oth"    "bene_rx_total"     "bene_rx_pdp"      </span></span>
-<span><span class="co">#&gt; [22] "bene_rx_mapd"      "bene_rx_elig"      "bene_rx_full"     </span></span>
-<span><span class="co">#&gt; [25] "bene_rx_part"      "bene_rx_none"</span></span></code></pre></div>
-<div id="sjyzoqjvpn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="squcdyutes" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#sjyzoqjvpn table {
+#squcdyutes table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#sjyzoqjvpn thead, #sjyzoqjvpn tbody, #sjyzoqjvpn tfoot, #sjyzoqjvpn tr, #sjyzoqjvpn td, #sjyzoqjvpn th {
+#squcdyutes thead, #squcdyutes tbody, #squcdyutes tfoot, #squcdyutes tr, #squcdyutes td, #squcdyutes th {
   border-style: none;
 }
 
-#sjyzoqjvpn p {
+#squcdyutes p {
   margin: 0;
   padding: 0;
 }
 
-#sjyzoqjvpn .gt_table {
+#squcdyutes .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3990,12 +3973,12 @@ tbody tr:last-child {
   border-left-color: #D3D3D3;
 }
 
-#sjyzoqjvpn .gt_caption {
+#squcdyutes .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#sjyzoqjvpn .gt_title {
+#squcdyutes .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4007,7 +3990,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#sjyzoqjvpn .gt_subtitle {
+#squcdyutes .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4019,7 +4002,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#sjyzoqjvpn .gt_heading {
+#squcdyutes .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -4031,13 +4014,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#sjyzoqjvpn .gt_bottom_border {
+#squcdyutes .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_col_headings {
+#squcdyutes .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -4052,7 +4035,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#sjyzoqjvpn .gt_col_heading {
+#squcdyutes .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -4072,7 +4055,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#sjyzoqjvpn .gt_column_spanner_outer {
+#squcdyutes .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -4084,15 +4067,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#sjyzoqjvpn .gt_column_spanner_outer:first-child {
+#squcdyutes .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sjyzoqjvpn .gt_column_spanner_outer:last-child {
+#squcdyutes .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sjyzoqjvpn .gt_column_spanner {
+#squcdyutes .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -4104,11 +4087,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#sjyzoqjvpn .gt_spanner_row {
+#squcdyutes .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#sjyzoqjvpn .gt_group_heading {
+#squcdyutes .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4134,7 +4117,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#sjyzoqjvpn .gt_empty_group_heading {
+#squcdyutes .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4149,15 +4132,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#sjyzoqjvpn .gt_from_md > :first-child {
+#squcdyutes .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sjyzoqjvpn .gt_from_md > :last-child {
+#squcdyutes .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sjyzoqjvpn .gt_row {
+#squcdyutes .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4176,7 +4159,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#sjyzoqjvpn .gt_stub {
+#squcdyutes .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -4189,7 +4172,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#sjyzoqjvpn .gt_stub_row_group {
+#squcdyutes .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4203,15 +4186,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#sjyzoqjvpn .gt_row_group_first td {
+#squcdyutes .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sjyzoqjvpn .gt_row_group_first th {
+#squcdyutes .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#sjyzoqjvpn .gt_summary_row {
+#squcdyutes .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4221,16 +4204,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#sjyzoqjvpn .gt_first_summary_row {
+#squcdyutes .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_first_summary_row.thick {
+#squcdyutes .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sjyzoqjvpn .gt_last_summary_row {
+#squcdyutes .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4240,7 +4223,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_grand_summary_row {
+#squcdyutes .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -4250,7 +4233,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#sjyzoqjvpn .gt_first_grand_summary_row {
+#squcdyutes .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4260,7 +4243,7 @@ tbody tr:last-child {
   border-top-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_last_grand_summary_row_top {
+#squcdyutes .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4270,11 +4253,11 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_striped {
+#squcdyutes .gt_striped {
   background-color: #FEEDEC;
 }
 
-#sjyzoqjvpn .gt_table_body {
+#squcdyutes .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -4283,7 +4266,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#sjyzoqjvpn .gt_footnotes {
+#squcdyutes .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4297,7 +4280,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#sjyzoqjvpn .gt_footnote {
+#squcdyutes .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -4306,7 +4289,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#sjyzoqjvpn .gt_sourcenotes {
+#squcdyutes .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4320,7 +4303,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#sjyzoqjvpn .gt_sourcenote {
+#squcdyutes .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4328,63 +4311,63 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#sjyzoqjvpn .gt_left {
+#squcdyutes .gt_left {
   text-align: left;
 }
 
-#sjyzoqjvpn .gt_center {
+#squcdyutes .gt_center {
   text-align: center;
 }
 
-#sjyzoqjvpn .gt_right {
+#squcdyutes .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sjyzoqjvpn .gt_font_normal {
+#squcdyutes .gt_font_normal {
   font-weight: normal;
 }
 
-#sjyzoqjvpn .gt_font_bold {
+#squcdyutes .gt_font_bold {
   font-weight: bold;
 }
 
-#sjyzoqjvpn .gt_font_italic {
+#squcdyutes .gt_font_italic {
   font-style: italic;
 }
 
-#sjyzoqjvpn .gt_super {
+#squcdyutes .gt_super {
   font-size: 65%;
 }
 
-#sjyzoqjvpn .gt_footnote_marks {
+#squcdyutes .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#sjyzoqjvpn .gt_asterisk {
+#squcdyutes .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sjyzoqjvpn .gt_indent_1 {
+#squcdyutes .gt_indent_1 {
   text-indent: 5px;
 }
 
-#sjyzoqjvpn .gt_indent_2 {
+#squcdyutes .gt_indent_2 {
   text-indent: 10px;
 }
 
-#sjyzoqjvpn .gt_indent_3 {
+#squcdyutes .gt_indent_3 {
   text-indent: 15px;
 }
 
-#sjyzoqjvpn .gt_indent_4 {
+#squcdyutes .gt_indent_4 {
   text-indent: 20px;
 }
 
-#sjyzoqjvpn .gt_indent_5 {
+#squcdyutes .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
