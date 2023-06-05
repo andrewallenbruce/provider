@@ -253,6 +253,16 @@ provider_enrollment(npi = 1083879860)
 provider_enrollment(specialty_code = "00-17", state = "GA") # GA RHCs
 ```
 
+### Quality Payment Program
+
+```{r}
+2017:2020 |> 
+  furrr::future_map(\(x) quality_payment(year = x, npi = 1144544834)) |> 
+  purrr::list_rbind() |> 
+  janitor::remove_empty(which = c("rows", "cols"))
+```
+
+
 ### Revalidation Lists
 
 ```{r}

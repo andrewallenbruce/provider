@@ -284,8 +284,7 @@ hos <- fac |>
 
 
 ```{r}
-fac
-hosp_1 <- fac_hosp |> 
+hosp_1 <- hos |> 
   dplyr::select(
     org_name,
     npi, 
@@ -305,7 +304,7 @@ hosp_1 <- fac_hosp |>
                  specialty_desc = "Specialty",
                  multiple_npis = "Multiple NPIs")
 
-hosp_2 <- fac_hosp |> 
+hosp_2 <- hos |> 
   dplyr::select(
     org_name,
     incorp_date,
@@ -326,7 +325,7 @@ hosp_2 <- fac_hosp |>
                  incorp_duration = "Years Incorporated",
                  proprietary_nonprofit = "Nonprofit")
 
-hosp_3 <- fac_hosp |> 
+hosp_3 <- hos |> 
   dplyr::select(
     org_name,
     "General" = sg_general,

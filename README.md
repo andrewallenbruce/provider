@@ -238,7 +238,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
                        state = "FL")
 ```
 
-    # A tibble: 78 × 25
+    # A tibble: 79 × 25
        npi        pac_id    enroll_id first_name middle_name last_name suffix gender
        <chr>      <chr>     <chr>     <chr>      <chr>       <chr>     <chr>  <chr> 
      1 1043312556 83250900… I2010011… NICOLE     <NA>        IOVINE    <NA>   F     
@@ -251,7 +251,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
      8 1073549895 24664809… I2007112… ALAN       B           BENNIE    <NA>   M     
      9 1073549895 24664809… I2007112… ALAN       B           BENNIE    <NA>   M     
     10 1073575403 86280744… I2006101… DANIEL     J           GASSERT   <NA>   M     
-    # ℹ 68 more rows
+    # ℹ 69 more rows
     # ℹ 17 more variables: credential <chr>, school <chr>, grad_year <int>,
     #   grad_duration <Duration>, specialty <chr>, specialty_sec <chr>,
     #   telehealth <lgl>, org_name <chr>, org_pac_id <chr>, org_members <int>,
@@ -273,7 +273,7 @@ facility_affiliations(npi = 10030195634)
 facility_affiliations(facility_ccn = "060004")
 ```
 
-    # A tibble: 182 × 9
+    # A tibble: 181 × 9
        npi        pac_id     first_name middle_name last_name   suffix facility_type
        <chr>      <chr>      <chr>      <chr>       <chr>       <chr>  <chr>        
      1 1003002890 6002953973 DANIEL     RICHARD     HAMMAN      <NA>   Hospital     
@@ -286,7 +286,7 @@ facility_affiliations(facility_ccn = "060004")
      8 1013115989 4385891712 ASHLEY     L           PYLE        <NA>   Hospital     
      9 1013979566 1557374014 FIRAS      <NA>        MUWALLA     <NA>   Hospital     
     10 1023261963 2860687431 CHAD       MICHAEL     LUCCI       <NA>   Hospital     
-    # ℹ 172 more rows
+    # ℹ 171 more rows
     # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ``` r
@@ -294,17 +294,17 @@ facility_affiliations(parent_ccn = 670055)
 ```
 
     # A tibble: 9 × 9
-      npi        pac_id     first_name middle_name last_name  suffix facility_type  
-      <chr>      <chr>      <chr>      <chr>       <chr>      <chr>  <chr>          
-    1 1083742829 5698833655 RAFAEL     JORGE       FORNARIS   <NA>   Inpatient reha…
-    2 1144429580 3577659580 LYSA       LEE         CURRY      <NA>   Inpatient reha…
-    3 1558595660 8921241142 JOHN       D           ALFONSO    <NA>   Inpatient reha…
-    4 1609973650 0840373239 GEORGE     KIMBELL     WILCOX     <NA>   Inpatient reha…
-    5 1710112370 9739337122 VIDYA      <NA>        VADDEMPUDI <NA>   Inpatient reha…
-    6 1720069859 7012947229 WILLIAM    WARREN      JANES      <NA>   Inpatient reha…
-    7 1740577212 0345473773 GEOFF      R           WEIKLE     <NA>   Inpatient reha…
-    8 1770861742 5193940997 AUSTON     J           MYERS      <NA>   Inpatient reha…
-    9 1912260464 5092036509 SAAD       MD          MANSOOR    <NA>   Inpatient reha…
+      npi        pac_id     first_name middle_name last_name suffix facility_type   
+      <chr>      <chr>      <chr>      <chr>       <chr>     <chr>  <chr>           
+    1 1083742829 5698833655 RAFAEL     JORGE       FORNARIS  <NA>   Inpatient rehab…
+    2 1144429580 3577659580 LYSA       LEE         CURRY     <NA>   Inpatient rehab…
+    3 1558595660 8921241142 JOHN       D           ALFONSO   <NA>   Inpatient rehab…
+    4 1609973650 0840373239 GEORGE     KIMBELL     WILCOX    <NA>   Inpatient rehab…
+    5 1710112370 9739337122 VIDYA      <NA>        AMARANENI <NA>   Inpatient rehab…
+    6 1720069859 7012947229 WILLIAM    WARREN      JANES     <NA>   Inpatient rehab…
+    7 1740577212 0345473773 GEOFF      R           WEIKLE    <NA>   Inpatient rehab…
+    8 1770861742 5193940997 AUSTON     J           MYERS     <NA>   Inpatient rehab…
+    9 1912260464 5092036509 SAAD       MD          MANSOOR   <NA>   Inpatient rehab…
     # ℹ 2 more variables: facility_ccn <chr>, parent_ccn <chr>
 
 ### Hospital Enrollments
@@ -318,7 +318,7 @@ hospital_enrollment(facility_ccn = "060004")
       <chr>      <chr>       <chr>        <chr>          <chr>          <chr>       
     1 1629071758 O200706190… CO           00-09          PART A PROVID… 060004      
     # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
-    #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
+    #   doing_business_as <chr>, incorp_date <date>, incorp_length <dbl>,
     #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
     #   city <chr>, state <chr>, zipcode <int>, location_type <chr>,
     #   location_other <chr>, multiple_npis <lgl>, proprietary_nonprofit <lgl>,
@@ -336,7 +336,7 @@ hospital_enrollment(state = "GA", city = "VALDOSTA")
     2 1467404046 O200803130… GA           00-09          PART A PROVID… 11T122      
     3 1538417753 O201212130… GA           00-09          PART A PROVID… 114036      
     # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
-    #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
+    #   doing_business_as <chr>, incorp_date <date>, incorp_length <dbl>,
     #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
     #   city <chr>, state <chr>, zipcode <int>, location_type <chr>,
     #   location_other <chr>, multiple_npis <lgl>, proprietary_nonprofit <lgl>,
@@ -362,7 +362,7 @@ hospital_enrollment(enroll_state = "GA")
     10 1811940976 O20041109… GA           00-09          PART A PROVID… 110201      
     # ℹ 204 more rows
     # ℹ 30 more variables: pac_id_org <chr>, org_name <chr>,
-    #   doing_business_as <chr>, incorp_date <date>, incorp_duration <Duration>,
+    #   doing_business_as <chr>, incorp_date <date>, incorp_length <dbl>,
     #   incorp_state <chr>, org_structure <chr>, org_other <chr>, address <chr>,
     #   city <chr>, state <chr>, zipcode <int>, location_type <chr>,
     #   location_other <chr>, multiple_npis <lgl>, proprietary_nonprofit <lgl>,
@@ -434,10 +434,10 @@ nppes_npi(city = "Valdosta", org_name = "AIRPORT CLINIC INC")
 ```
 
     # A tibble: 2 × 28
-      npi      entype enumeration_date enumeration_duration      last_updated status
-      <chr>    <chr>  <date>           <Duration>                <date>       <chr> 
-    1 1730354… Org    2008-04-30       475545600s (~15.07 years) 2013-11-21   A     
-    2 1730354… Org    2008-04-30       475545600s (~15.07 years) 2013-11-21   A     
+      npi        entype       enumeration_date years_passed last_updated status
+      <chr>      <chr>        <date>                  <dbl> <date>       <chr> 
+    1 1730354739 Organization 2008-04-30               15.1 2013-11-21   A     
+    2 1730354739 Organization 2008-04-30               15.1 2013-11-21   A     
     # ℹ 22 more variables: organization_name <chr>, organizational_subpart <lgl>,
     #   purpose <chr>, street <chr>, city <chr>, state <chr>, zipcode <chr>,
     #   country <chr>, phone_number <chr>, authorized_official_first_name <chr>,
@@ -451,23 +451,23 @@ nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
 ```
 
     # A tibble: 236 × 36
-       npi        entype enumeration_date enumeration_duration      last_updated
-       <chr>      <chr>  <date>           <Duration>                <date>      
-     1 1477605202 Org    2007-01-18       515980800s (~16.35 years) 2020-08-22  
-     2 1477605202 Org    2007-01-18       515980800s (~16.35 years) 2020-08-22  
-     3 1972882389 Org    2011-08-16       371606400s (~11.78 years) 2016-09-08  
-     4 1972882389 Org    2011-08-16       371606400s (~11.78 years) 2016-09-08  
-     5 1679724413 Org    2008-10-09       461548800s (~14.63 years) 2008-10-09  
-     6 1679724413 Org    2008-10-09       461548800s (~14.63 years) 2008-10-09  
-     7 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
-     8 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
-     9 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
-    10 1306357470 Org    2017-10-17       176860800s (~5.6 years)   2018-05-23  
+       npi      entype enumeration_date years_passed last_updated certification_date
+       <chr>    <chr>  <date>                  <dbl> <date>       <date>            
+     1 1477605… Organ… 2007-01-18              16.4  2020-08-22   NA                
+     2 1477605… Organ… 2007-01-18              16.4  2020-08-22   NA                
+     3 1972882… Organ… 2011-08-16              11.8  2016-09-08   NA                
+     4 1972882… Organ… 2011-08-16              11.8  2016-09-08   NA                
+     5 1679724… Organ… 2008-10-09              14.6  2008-10-09   NA                
+     6 1679724… Organ… 2008-10-09              14.6  2008-10-09   NA                
+     7 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
+     8 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
+     9 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
+    10 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
     # ℹ 226 more rows
-    # ℹ 31 more variables: certification_date <date>, status <chr>,
-    #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
-    #   phone_number <chr>, fax_number <chr>, authorized_official_first_name <chr>,
+    # ℹ 30 more variables: status <chr>, organization_name <chr>,
+    #   organizational_subpart <lgl>, purpose <chr>, street <chr>, city <chr>,
+    #   state <chr>, zipcode <chr>, country <chr>, phone_number <chr>,
+    #   fax_number <chr>, authorized_official_first_name <chr>,
     #   authorized_official_middle_name <chr>, authorized_official_last_name <chr>,
     #   authorized_official_title_or_position <chr>, …
 
@@ -486,23 +486,23 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
 ```
 
     # A tibble: 424 × 36
-       npi        entype enumeration_date enumeration_duration      last_updated
-       <chr>      <chr>  <date>           <Duration>                <date>      
-     1 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     2 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     3 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     4 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     5 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     6 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     7 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     8 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-     9 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
-    10 1992710610 Org    2006-07-30       530841600s (~16.82 years) 2021-04-28  
+       npi      entype enumeration_date years_passed last_updated certification_date
+       <chr>    <chr>  <date>                  <dbl> <date>       <date>            
+     1 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     2 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     3 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     4 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     5 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     6 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     7 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     8 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     9 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+    10 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
     # ℹ 414 more rows
-    # ℹ 31 more variables: certification_date <date>, status <chr>,
-    #   organization_name <chr>, organizational_subpart <lgl>, purpose <chr>,
-    #   street <chr>, city <chr>, state <chr>, zipcode <chr>, country <chr>,
-    #   phone_number <chr>, fax_number <chr>, authorized_official_first_name <chr>,
+    # ℹ 30 more variables: status <chr>, organization_name <chr>,
+    #   organizational_subpart <lgl>, purpose <chr>, street <chr>, city <chr>,
+    #   state <chr>, zipcode <chr>, country <chr>, phone_number <chr>,
+    #   fax_number <chr>, authorized_official_first_name <chr>,
     #   authorized_official_last_name <chr>,
     #   authorized_official_title_or_position <chr>, …
 
@@ -616,43 +616,39 @@ order_refer(last_name = "Smith",
 pending_applications(last_name = "Smith", type = "non-physician")
 ```
 
-    # A tibble: 15 × 4
+    # A tibble: 21 × 4
        npi        last_name first_name type         
        <chr>      <chr>     <chr>      <chr>        
-     1 1073234282 SMITH     ANGELA     NON-PHYSICIAN
-     2 1790408185 SMITH     ARIELLE    NON-PHYSICIAN
-     3 1861062531 SMITH     ASHLEY     NON-PHYSICIAN
-     4 1952009805 SMITH     BALEY      NON-PHYSICIAN
-     5 1962889709 SMITH     BRANDY     NON-PHYSICIAN
-     6 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
+     1 1750870218 SMITH     ASHLEY     NON-PHYSICIAN
+     2 1861062531 SMITH     ASHLEY     NON-PHYSICIAN
+     3 1427639202 SMITH     BRANDON    NON-PHYSICIAN
+     4 1801992912 SMITH     BRIDGET    NON-PHYSICIAN
+     5 1407553340 SMITH     CAMILLE    NON-PHYSICIAN
+     6 1811270325 SMITH     FRANCESCA  NON-PHYSICIAN
      7 1902527641 SMITH     HEATHER    NON-PHYSICIAN
-     8 1356079727 SMITH     JARED      NON-PHYSICIAN
-     9 1891169751 SMITH     JEANA      NON-PHYSICIAN
-    10 1518444512 SMITH     JODI       NON-PHYSICIAN
-    11 1942939749 SMITH     KIMBERLY   NON-PHYSICIAN
-    12 1578172540 SMITH     NAOMI      NON-PHYSICIAN
-    13 1730741174 SMITH     TIMOTHY    NON-PHYSICIAN
-    14 1649967704 SMITH     TYPHANI    NON-PHYSICIAN
-    15 1063126522 SMITH     ZACHARY    NON-PHYSICIAN
+     8 1386906386 SMITH     JANET      NON-PHYSICIAN
+     9 1356079727 SMITH     JARED      NON-PHYSICIAN
+    10 1891169751 SMITH     JEANA      NON-PHYSICIAN
+    # ℹ 11 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "physician")
 ```
 
-    # A tibble: 43 × 4
-       npi        last_name  first_name type     
-       <chr>      <chr>      <chr>      <chr>    
-     1 1881791739 ADAMS      JOHN       PHYSICIAN
-     2 1841280963 BIGBEE     JOHN       PHYSICIAN
-     3 1619996378 BODDEN     JOHN       PHYSICIAN
-     4 1154079499 BRODERICK  JOHN       PHYSICIAN
-     5 1588744569 BRUNO      JOHN       PHYSICIAN
-     6 1861142556 BURKE      JOHN       PHYSICIAN
-     7 1306817531 COMBS      JOHN       PHYSICIAN
-     8 1649890864 CRESENZO   JOHN       PHYSICIAN
-     9 1932632775 DEIS       JOHN       PHYSICIAN
-    10 1730349580 ECHEVARRIA JOHN       PHYSICIAN
-    # ℹ 33 more rows
+    # A tibble: 50 × 4
+       npi        last_name first_name type     
+       <chr>      <chr>     <chr>      <chr>    
+     1 1881791739 ADAMS     JOHN       PHYSICIAN
+     2 1275235814 ADENT     JOHN       PHYSICIAN
+     3 1699397141 AHERN     JOHN       PHYSICIAN
+     4 1861020240 BALTZ     JOHN       PHYSICIAN
+     5 1841280963 BIGBEE    JOHN       PHYSICIAN
+     6 1619996378 BODDEN    JOHN       PHYSICIAN
+     7 1588744569 BRUNO     JOHN       PHYSICIAN
+     8 1023591427 BRYAN     JOHN       PHYSICIAN
+     9 1861142556 BURKE     JOHN       PHYSICIAN
+    10 1306817531 COMBS     JOHN       PHYSICIAN
+    # ℹ 40 more rows
 
 ``` r
 pending_applications(first_name = "John", type = "dentist")
@@ -680,20 +676,20 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
 ```
 
     # A tibble: 10 × 16
-        year level sublevel fips  hcpcs hcpcs_desc          hcpcs_drug place_of_srvc
-       <int> <chr> <chr>    <chr> <chr> <chr>               <lgl>      <chr>        
-     1  2020 State Georgia  13    Q2043 Sipuleucel-t, mini… TRUE       Office       
-     2  2020 State Georgia  13    37227 Removal of plaque … FALSE      Office       
-     3  2020 State Georgia  13    G2170 Percutaneous arter… FALSE      Facility     
-     4  2020 State Georgia  13    37229 Removal of plaque … FALSE      Office       
-     5  2020 State Georgia  13    37231 Removal of plaque … FALSE      Office       
-     6  2020 State Georgia  13    37226 Insertion of stent… FALSE      Office       
-     7  2020 State Georgia  13    37225 Removal of plaque … FALSE      Office       
-     8  2020 State Georgia  13    37230 Insertion of stent… FALSE      Office       
-     9  2020 State Georgia  13    63685 Insertion of spina… FALSE      Facility     
-    10  2020 State Georgia  13    C9740 Cystourethroscopy,… FALSE      Facility     
+        year level sublevel fips  hcpcs_code hcpcs_desc     hcpcs_drug place_of_srvc
+       <int> <chr> <chr>    <chr> <chr>      <chr>          <lgl>      <chr>        
+     1  2020 State Georgia  13    Q2043      Sipuleucel-t,… TRUE       O            
+     2  2020 State Georgia  13    37227      Removal of pl… FALSE      O            
+     3  2020 State Georgia  13    G2170      Percutaneous … FALSE      F            
+     4  2020 State Georgia  13    37229      Removal of pl… FALSE      O            
+     5  2020 State Georgia  13    37231      Removal of pl… FALSE      O            
+     6  2020 State Georgia  13    37226      Insertion of … FALSE      O            
+     7  2020 State Georgia  13    37225      Removal of pl… FALSE      O            
+     8  2020 State Georgia  13    37230      Insertion of … FALSE      O            
+     9  2020 State Georgia  13    63685      Insertion of … FALSE      F            
+    10  2020 State Georgia  13    C9740      Cystourethros… FALSE      F            
     # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
-    #   tot_day <int>, avg_charge <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
+    #   tot_day <int>, avg_charges <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
     #   avg_std_pymt <dbl>
 
 ``` r
@@ -702,18 +698,18 @@ physician_by_service(year = 2020, npi = 1083879860)
 ```
 
     # A tibble: 6 × 28
-       year npi        entype first_name  middle_name last_name credential gender
-      <int> <chr>      <chr>  <chr>       <chr>       <chr>     <chr>      <chr> 
-    1  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
-    2  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
-    3  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
-    4  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
-    5  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
-    6  2020 1083879860 Ind    Christopher <NA>        Aaron     <NA>       M     
+       year npi        entype     first_name middle_name last_name credential gender
+      <int> <chr>      <chr>      <chr>      <chr>       <chr>     <chr>      <chr> 
+    1  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    2  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    3  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    4  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    5  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
+    6  2020 1083879860 Individual Christoph… <NA>        Aaron     <NA>       M     
     # ℹ 20 more variables: specialty <chr>, street <chr>, city <chr>, state <chr>,
     #   fips <chr>, zipcode <chr>, ruca <chr>, country <chr>, par <lgl>,
-    #   hcpcs_cd <chr>, hcpcs_desc <chr>, hcpcs_drug <chr>, place_of_srvc <chr>,
-    #   tot_benes <int>, tot_srvcs <int>, tot_day <int>, avg_charge <dbl>,
+    #   hcpcs_code <chr>, hcpcs_desc <chr>, hcpcs_drug <chr>, place_of_srvc <chr>,
+    #   tot_benes <int>, tot_srvcs <int>, tot_day <int>, avg_charges <dbl>,
     #   avg_allowed <dbl>, avg_payment <dbl>, avg_std_pymt <dbl>
 
 ``` r
@@ -724,7 +720,7 @@ physician_by_provider(npi = 1083879860, year = 2020)
     # A tibble: 1 × 70
        year npi     first_name middle_name last_name credential gender entype street
       <int> <chr>   <chr>      <chr>       <chr>     <chr>      <chr>  <chr>  <chr> 
-    1  2020 108387… Christoph… <NA>        Aaron     <NA>       M      Ind    792 G…
+    1  2020 108387… Christoph… <NA>        Aaron     <NA>       M      Indiv… 792 G…
     # ℹ 61 more variables: city <chr>, state <chr>, fips <chr>, zipcode <chr>,
     #   ruca <chr>, country <chr>, specialty <chr>, par <lgl>, tot_hcpcs <int>,
     #   tot_benes <int>, tot_srvcs <int>, tot_charges <dbl>, tot_allowed <dbl>,
@@ -765,6 +761,31 @@ provider_enrollment(specialty_code = "00-17", state = "GA") # GA RHCs
     # ℹ 82 more rows
     # ℹ 4 more variables: first_name <chr>, middle_name <chr>, last_name <chr>,
     #   gender <chr>
+
+### Quality Payment Program
+
+``` r
+2017:2020 |> 
+  furrr::future_map(\(x) quality_payment(year = x, npi = 1144544834)) |> 
+  purrr::list_rbind() |> 
+  janitor::remove_empty(which = c("rows", "cols"))
+```
+
+    # A tibble: 5 × 56
+       year npi        provider_key state practice_size specialty  med_yrs part_type
+      <int> <chr>      <chr>        <chr>         <int> <chr>        <int> <chr>    
+    1  2017 1144544834 000865909    GA                8 Physician…       8 Group    
+    2  2018 1144544834 000047522    GA                8 Physician…       8 Group    
+    3  2018 1144544834 000117740    GA               12 Physician…       8 Group    
+    4  2019 1144544834 000659906    GA               13 Physician…       9 Group    
+    5  2020 1144544834 000000310    GA               13 Physician…      10 Group    
+    # ℹ 48 more variables: beneficiaries <int>, allowed_charges <int>,
+    #   services <int>, final_score <chr>, pmt_adj_pct <chr>,
+    #   complex_patient_bonus <chr>, quality_category_score <chr>,
+    #   quality_improvement_bonus <chr>, quality_bonus <lgl>, engaged <lgl>,
+    #   opted_into_mips <lgl>, small_practitioner <lgl>, rural_clinician <lgl>,
+    #   hpsa_clinician <lgl>, asc <lgl>, hospital_based <lgl>,
+    #   non_patient_facing <lgl>, facility_based <lgl>, extreme_hardship <lgl>, …
 
 ### Revalidation Lists
 

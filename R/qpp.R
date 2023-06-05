@@ -26,15 +26,15 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#' qpp_experience(year = 2020, state = "GA")
+#' quality_payment(year = 2020, state = "GA")
 #' @autoglobal
 #' @export
-qpp_experience <- function(year,
-                           npi       = NULL,
-                           state     = NULL,
-                           specialty = NULL,
-                           part_type = NULL,
-                           tidy      = TRUE) {
+quality_payment <- function(year,
+                            npi       = NULL,
+                            state     = NULL,
+                            specialty = NULL,
+                            part_type = NULL,
+                            tidy      = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 

@@ -149,7 +149,8 @@ orig <- enrollment |>
   ggplot2::ggplot(ggplot2::aes(group = level, 
                                fill = level, 
                                color = level)) +
-  ggplot2::geom_point(ggplot2::aes(year, pct_orig), shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
+  ggplot2::geom_point(ggplot2::aes(year, pct_orig), 
+                      shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
   ggplot2::geom_line(ggplot2::aes(year, pct_orig)) +
   #ggplot2::scale_y_reverse() +
   ggplot2::scale_y_continuous(labels = scales::label_percent()) +
@@ -168,7 +169,8 @@ ma <- enrollment |>
   ggplot2::ggplot(ggplot2::aes(group = level, 
                                fill = level, 
                                color = level)) +
-  ggplot2::geom_point(ggplot2::aes(year, pct_ma), shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
+  ggplot2::geom_point(ggplot2::aes(year, pct_ma), 
+                      shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
   ggplot2::geom_line(ggplot2::aes(year, pct_ma)) +
   ggplot2::scale_y_continuous(labels = scales::label_percent()) +
   gghighlight::gghighlight(max(pct_ma) > 0, 
@@ -196,7 +198,7 @@ patchwork +
 
 <br>
 
-<details><summary>Code for tables</summary>
+<details><summary>Code</summary>
 
 ```{r}
 national <- beneficiary_enrollment(period = "Year", level = "National")
@@ -255,7 +257,7 @@ national_gt
 
 <br>
 
-<details><summary>Code for table</summary>
+<details><summary>Code</summary>
 
 ```{r}
 state <- beneficiary_enrollment(period = "Year", level = "State", state = "GA")
@@ -314,7 +316,7 @@ state_gt
 
 <br>
 
-<details><summary>Code for table</summary>
+<details><summary>Code</summary>
 
 ```{r}
 county <- beneficiary_enrollment(period = "Year", level = "County", state = "GA", county = "Lowndes")
@@ -373,7 +375,7 @@ county_gt
 
 <br>
 
-<details><summary>Code for table</summary>
+<details><summary>Code</summary>
 
 ```{r}
 # National by Year
@@ -468,7 +470,6 @@ gt_pct <- final |>
     title = gt::md("Medicare Beneficiaries: **2013 - 2022**"),
     subtitle = gt::md("National, State, & County Percentage Comparisons for **Valdosta, Georgia**")) |> 
   gt::tab_source_note(source_note = "Source: data.cms.gov")
-#|> gt::opt_table_font(font = gt::google_font(name = "Karla"))
 ```
 
 </details>
@@ -481,7 +482,7 @@ gt_pct
 
 
 
-<details><summary>Code for table</summary>
+<details><summary>Code</summary>
 
 ```{r}
 gt_comp <- beneficiary_enrollment(level = "National", 
@@ -595,12 +596,6 @@ mon |>
 
 
 ## Data Dictionary
-
-```{r}
-beneficiary_enrollment(period = "Year", 
-                       level = "State",
-                       state = "GA") |> names()
-```
 
 ```{r echo=FALSE}
 tibble::tribble(
