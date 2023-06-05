@@ -37,19 +37,25 @@ beneficiary_enrollment(level = "National") |> head(10)
 Setting `level` to `National` and the `period` argument to `Year` will return yearly national totals only:
 
 ```{r}
-beneficiary_enrollment(level = "National", period = "Year") |> head(10)
+beneficiary_enrollment(level = "National", 
+                       period = "Year") |> 
+  head(10)
 ```
 
 Setting `level` to `State` and `period` to `Year` will return yearly totals for each state:
 
 ```{r}
-beneficiary_enrollment(level = "State", period = "Year") |> head(10)
+beneficiary_enrollment(level = "State", 
+                       period = "Year") |> 
+  head(10)
 ```
 
 
 
 ```{r}
-beneficiary_enrollment(level = "State", period = "Month") |> head(10)
+beneficiary_enrollment(level = "State", 
+                       period = "Month") |> 
+  head(10)
 ```
 
 
@@ -58,27 +64,139 @@ beneficiary_enrollment(level = "State", period = "Month") |> head(10)
 Select a particular state:
 
 ```{r}
-beneficiary_enrollment(period = "Year", level = "State", state = "GA") |> head(10)
+beneficiary_enrollment(period = "Year", 
+                       level = "State", 
+                       state = "GA") |> 
+  head(10)
 ```
 
 
 Each county in that state:
 
 ```{r}
-beneficiary_enrollment(period = "Year", level = "County", state_name = "Georgia") |> head(10)
+beneficiary_enrollment(period = "Year", 
+                       level = "County", 
+                       state_name = "Georgia") |> 
+  head(10)
 ```
 
 Or a particular county:
 
 ```{r}
-beneficiary_enrollment(period = "Year", level = "County", state = "GA", county = "Lowndes") |> head(10)
+beneficiary_enrollment(period = "Year", 
+                       level = "County", 
+                       state = "GA", 
+                       county = "Lowndes") |> 
+  head(10)
 ```
 
 <br><br>
 
 ## Visualizations
 
-<details><summary>Code for table</summary>
+<details><summary>Code for plots</summary>
+
+```{r}
+national <- beneficiary_enrollment(period = "Year", level = "National") |> 
+  dplyr::select(year, level, bene_total, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / bene_total,
+                pct_ma = bene_ma_oth / bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year) |> 
+  dplyr::select(year, level, dplyr::contains("pct"))
+
+state <- beneficiary_enrollment(period = "Year", level = "State", state = "GA") |> 
+  dplyr::select(year, level, bene_total, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / bene_total,
+                pct_ma = bene_ma_oth / bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year) |> 
+  dplyr::select(year, level, dplyr::contains("pct"))
+
+county <- beneficiary_enrollment(period = "Year", level = "County", state = "GA", county = "Lowndes") |> 
+  dplyr::select(year, level, bene_total, bene_orig, bene_ma_oth) |> 
+  dplyr::mutate(pct_orig = bene_orig / bene_total,
+                pct_ma = bene_ma_oth / bene_total) |> 
+  provider:::change_abs(bene_total, year) |> 
+  provider:::change_pct(bene_total, bene_total_chg, year) |> 
+  dplyr::select(year, level, dplyr::contains("pct"))
+
+enrollment <- dplyr::bind_rows(national, state, county)
+
+### PLOTS
+
+total <- enrollment |> 
+  dplyr::select(year, level, bene_total_pct) |> 
+  dplyr::filter(!is.na(bene_total_pct)) |> 
+  ggplot2::ggplot(ggplot2::aes(group = level, 
+                               fill = level, 
+                               color = level)) +
+  ggplot2::geom_point(ggplot2::aes(year, bene_total_pct)) +
+  ggplot2::geom_line(ggplot2::aes(year, bene_total_pct)) +
+  ggplot2::scale_y_continuous(labels = scales::label_percent()) +
+  gghighlight::gghighlight(max(bene_total_pct) > 0, 
+                           line_label_type = "sec_axis", 
+                           label_key = level) +
+  ggplot2::theme(axis.text.y.right = ggplot2::element_text(size = 10)) +
+  ggplot2::scale_x_continuous(n.breaks = 9) +
+  #himni::gg_theme() +
+  #ggplot2::ggtitle("Yearly Percentage Change of Total Medicare Beneficiaries") +
+  #ggplot2::facet_wrap(~level, ncol = 1) +
+  ggplot2::xlab(label = NULL) + 
+  ggplot2::ylab(label = NULL)
+
+orig <- enrollment |> 
+  ggplot2::ggplot(ggplot2::aes(group = level, 
+                               fill = level, 
+                               color = level)) +
+  ggplot2::geom_point(ggplot2::aes(year, pct_orig), shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
+  ggplot2::geom_line(ggplot2::aes(year, pct_orig)) +
+  #ggplot2::scale_y_reverse() +
+  ggplot2::scale_y_continuous(labels = scales::label_percent()) +
+  gghighlight::gghighlight(max(pct_orig) > 0, 
+                           line_label_type = "sec_axis", 
+                           label_key = level) +
+  ggplot2::theme(axis.text.y.right = ggplot2::element_text(size = 10)) +
+  ggplot2::scale_x_continuous(n.breaks = 10) +
+  ggplot2::coord_flip() +
+  #himni::gg_theme() +
+  #ggplot2::ggtitle("Percentage of Medicare Beneficiaries with Original Medicare") +
+  ggplot2::xlab(label = NULL) + 
+  ggplot2::ylab(label = NULL)
+
+ma <- enrollment |> 
+  ggplot2::ggplot(ggplot2::aes(group = level, 
+                               fill = level, 
+                               color = level)) +
+  ggplot2::geom_point(ggplot2::aes(year, pct_ma), shape = 21, colour = "black", fill = "white", size = 1, stroke = 0.5) +
+  ggplot2::geom_line(ggplot2::aes(year, pct_ma)) +
+  ggplot2::scale_y_continuous(labels = scales::label_percent()) +
+  gghighlight::gghighlight(max(pct_ma) > 0, 
+                           line_label_type = "sec_axis", 
+                           label_key = level) +
+  ggplot2::theme(axis.text.y.right = ggplot2::element_text(size = 10)) +
+  ggplot2::scale_x_continuous(n.breaks = 10) +
+  ggplot2::coord_flip() +
+  #himni::gg_theme() +
+  #ggplot2::ggtitle("Percentage of Medicare Beneficiaries with Medicare Advantage") +
+  ggplot2::xlab(label = NULL) + 
+  ggplot2::ylab(label = NULL)
+```
+
+
+</details>
+
+
+```{r, fig.height=7}
+library(patchwork)
+patchwork <- total / (orig + ma)
+patchwork + 
+  ggplot2::theme_minimal()
+```
+
+<br>
+
+<details><summary>Code for tables</summary>
 
 ```{r}
 national <- beneficiary_enrollment(period = "Year", level = "National")

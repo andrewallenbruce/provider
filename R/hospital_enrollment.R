@@ -119,8 +119,8 @@ hospital_enrollment <- function(npi            = NULL,
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
-                    incorp_duration = lubridate::as.duration(lubridate::today() - incorporation_date)) |>
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+      years_passed(incorporation_date) |>
       tidyr::unite("address",
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
@@ -134,7 +134,7 @@ hospital_enrollment <- function(npi            = NULL,
                     org_name               = organization_name,
                     doing_business_as      = doing_business_as_name,
                     incorp_date            = incorporation_date,
-                    incorp_duration,
+                    incorp_length          = years_passed,
                     incorp_state           = incorporation_state,
                     org_structure          = organization_type_structure,
                     org_other              = organization_other_type_text,

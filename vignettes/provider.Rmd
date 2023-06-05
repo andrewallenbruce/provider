@@ -273,12 +273,18 @@ facility_affiliations(npi = 1043477615) |>
 <details><summary>Code</summary>
 
 ```{r, message=TRUE}
-fac_hosp <- facility_affiliations(npi = 1043477615) |> 
+fac <- facility_affiliations(npi = 1043477615)
+
+hos <- fac |> 
   dplyr::pull(facility_ccn) |> 
   furrr::future_map(\(x) hospital_enrollment(facility_ccn = x)) |>
   purrr::list_rbind() |> 
   janitor::remove_empty(which = c("rows", "cols"))
+```
 
+
+```{r}
+fac
 hosp_1 <- fac_hosp |> 
   dplyr::select(
     org_name,
