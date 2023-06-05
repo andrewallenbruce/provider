@@ -154,45 +154,44 @@ Notice. There is no charge to use the NPI Registry.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 25</span></span></span>
-<span><span class="co">#&gt;   npi        entype     enumeration_date enumeration_duration     last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 Individual 2018-12-28       139449600s (~4.42 years) 2020-06-15  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1114499340 Individual 2018-12-28       139449600s (~4.42 years) 2020-06-15  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1114499340 Individual 2018-12-28       139449600s (~4.42 years) 2020-06-15  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;, tx_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 11144993… Indiv… 2018-12-28               4.44 2020-06-15   2020-06-15        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 11144993… Indiv… 2018-12-28               4.44 2020-06-15   2020-06-15        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 11144993… Indiv… 2018-12-28               4.44 2020-06-15   2020-06-15        </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 29</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 152806… Indiv… 2005-06-01       567820800s (~17.99 years) 2007-07-09   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># City, state, country</span></span>
@@ -201,21 +200,21 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 66</span></span></span>
-<span><span class="co">#&gt;   npi        entype      enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1881942746 Organizati… 2012-08-27       339379200s (~10.75 years) 2012-08-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1881942746 Organizati… 2012-08-27       339379200s (~10.75 years) 2012-08-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1881942746 Organizati… 2012-08-27       339379200s (~10.75 years) 2012-08-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1881942746 Organizati… 2012-08-27       339379200s (~10.75 years) 2012-08-27  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1598140279 Organizati… 2015-07-23       247795200s (~7.85 years)  2016-12-03  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1598140279 Organizati… 2015-07-23       247795200s (~7.85 years)  2016-12-03  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 15981402… Organ… 2015-07-23               7.87 2016-12-03   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 15981402… Organ… 2015-07-23               7.87 2016-12-03   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;, first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;lgl&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;, authorized_official_last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># First name, city, state</span></span>
@@ -224,51 +223,51 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 53</span></span></span>
-<span><span class="co">#&gt;   npi        entype     enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1700934569 Individual 2007-01-08       517190400s (~16.39 years) 2012-03-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1700934569 Individual 2007-01-08       517190400s (~16.39 years) 2012-03-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1700934569 Individual 2007-01-08       517190400s (~16.39 years) 2012-03-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1700934569 Individual 2007-01-08       517190400s (~16.39 years) 2012-03-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1396825477 Individual 2006-10-16       524448000s (~16.62 years) 2007-07-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1396825477 Individual 2006-10-16       524448000s (~16.62 years) 2007-07-08  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 48 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, end_endpointType &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 13968254… Indiv… 2006-10-16               16.6 2007-07-08   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 13968254… Indiv… 2006-10-16               16.6 2007-07-08   <span style="color: #BB0000;">NA</span>                </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   end_endpointType &lt;chr&gt;, end_endpointTypeDescription &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 28</span></span></span>
-<span><span class="co">#&gt;   npi        entype      enumeration_date enumeration_duration      last_updated</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 Organizati… 2012-03-07       354326400s (~11.23 years) 2020-01-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1336413418 Organizati… 2012-03-07       354326400s (~11.23 years) 2020-01-07  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more variables: certification_date &lt;date&gt;, status &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   organization_name &lt;chr&gt;, organizational_subpart &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 13364134… Organ… 2012-03-07               11.2 2020-01-07   2020-01-07        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 13364134… Organ… 2012-03-07               11.2 2020-01-07   2020-01-07        </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;, authorized_official_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 29</span></span></span>
-<span><span class="co">#&gt;   npi      entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710975… Indiv… 2005-10-11       556416000s (~17.63 years) 2007-07-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975… Indiv… 2005-10-11       556416000s (~17.63 years) 2007-07-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1710975… Indiv… 2005-10-11       556416000s (~17.63 years) 2007-07-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1710975… Indiv… 2005-10-11       556416000s (~17.63 years) 2007-07-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 23 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi        entype enumeration_date years_passed last_updated status first_name</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710975040 Indiv… 2005-10-11               17.6 2007-07-08   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 Indiv… 2005-10-11               17.6 2007-07-08   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1710975040 Indiv… 2005-10-11               17.6 2007-07-08   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1710975040 Indiv… 2005-10-11               17.6 2007-07-08   A      JOHN      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1659781227</span><span class="op">)</span> <span class="co"># Deactivated</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> No results for <span style="color: #0000BB;">npi: 1659781227</span></span></span></code></pre></div>
@@ -284,27 +283,27 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 43 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   certification_date &lt;date&gt;, other_type &lt;chr&gt;, other_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   other_type &lt;chr&gt;, other_code &lt;chr&gt;, other_credential &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># List of NPIs</span></span>
@@ -314,27 +313,27 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 43 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   certification_date &lt;date&gt;, other_type &lt;chr&gt;, other_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   other_type &lt;chr&gt;, other_code &lt;chr&gt;, other_credential &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Data frame of NPIs</span></span>
@@ -345,27 +344,27 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi     entype enumeration_date enumeration_duration      last_updated status</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;Duration&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 100302… Indiv… 2007-05-22       505612800s (~16.02 years) 2017-04-28   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 131640… Indiv… 2019-03-04       133747200s (~4.24 years)  2023-04-06   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 172039… Indiv… 2010-07-29       405043200s (~12.84 years) 2021-01-08   A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 43 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   certification_date &lt;date&gt;, other_type &lt;chr&gt;, other_code &lt;chr&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.0  2017-04-28   A      RADHIKA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.25 2023-04-06   A      JAENA     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.8  2021-01-08   A      MUSTAFA   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   other_type &lt;chr&gt;, other_code &lt;chr&gt;, other_credential &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <hr>
 </div>

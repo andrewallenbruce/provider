@@ -164,7 +164,7 @@ are listed on multiple lines.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
 <span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
 <span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 78 × 25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 79 × 25</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
@@ -177,7 +177,7 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1073575403 86280744… I2006101… DANIEL     J           GASSERT   <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 68 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 69 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
@@ -188,7 +188,7 @@ are listed on multiple lines.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">501</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 720 × 25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 728 × 25</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003038720 06483608… I2007121… BARBARA    F           FRIER     <span style="color: #BB0000;">NA</span>     F     </span></span>
@@ -196,12 +196,12 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003198268 18505427… I2012112… COLE       <span style="color: #BB0000;">NA</span>          BURGESS   <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1003287533 60021732… I2017112… KACIE      PARRISH     JOHNSON   <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003315227 73153412… I2021081… WILLIAM    <span style="color: #BB0000;">NA</span>          HARTLEY   <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1003445297 17597708… I2021111… VICKI      <span style="color: #BB0000;">NA</span>          WETTER    <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1003816935 06483969… I2010092… MARY       <span style="color: #BB0000;">NA</span>          FULP-PYE  <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003445297 17597708… I2021111… VICKI      <span style="color: #BB0000;">NA</span>          WETTER    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1003816935 06483969… I2010092… MARY       <span style="color: #BB0000;">NA</span>          FULP-PYE  <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 710 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1013294966 63050682… I2014111… LYNDI      <span style="color: #BB0000;">NA</span>          FARNAM    <span style="color: #BB0000;">NA</span>     F     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 718 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
@@ -210,24 +210,24 @@ are listed on multiple lines.</p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="wkwsixepvl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="cbvhajhxci" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wkwsixepvl table {
+#cbvhajhxci table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wkwsixepvl thead, #wkwsixepvl tbody, #wkwsixepvl tfoot, #wkwsixepvl tr, #wkwsixepvl td, #wkwsixepvl th {
+#cbvhajhxci thead, #cbvhajhxci tbody, #cbvhajhxci tfoot, #cbvhajhxci tr, #cbvhajhxci td, #cbvhajhxci th {
   border-style: none;
 }
 
-#wkwsixepvl p {
+#cbvhajhxci p {
   margin: 0;
   padding: 0;
 }
 
-#wkwsixepvl .gt_table {
+#cbvhajhxci .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -253,12 +253,12 @@ are listed on multiple lines.</p>
   border-left-color: #D3D3D3;
 }
 
-#wkwsixepvl .gt_caption {
+#cbvhajhxci .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wkwsixepvl .gt_title {
+#cbvhajhxci .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -270,7 +270,7 @@ are listed on multiple lines.</p>
   border-bottom-width: 0;
 }
 
-#wkwsixepvl .gt_subtitle {
+#cbvhajhxci .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -282,7 +282,7 @@ are listed on multiple lines.</p>
   border-top-width: 0;
 }
 
-#wkwsixepvl .gt_heading {
+#cbvhajhxci .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -294,13 +294,13 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#wkwsixepvl .gt_bottom_border {
+#cbvhajhxci .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_col_headings {
+#cbvhajhxci .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -315,7 +315,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#wkwsixepvl .gt_col_heading {
+#cbvhajhxci .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -335,7 +335,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#wkwsixepvl .gt_column_spanner_outer {
+#cbvhajhxci .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -347,15 +347,15 @@ are listed on multiple lines.</p>
   padding-right: 4px;
 }
 
-#wkwsixepvl .gt_column_spanner_outer:first-child {
+#cbvhajhxci .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wkwsixepvl .gt_column_spanner_outer:last-child {
+#cbvhajhxci .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wkwsixepvl .gt_column_spanner {
+#cbvhajhxci .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -367,11 +367,11 @@ are listed on multiple lines.</p>
   width: 100%;
 }
 
-#wkwsixepvl .gt_spanner_row {
+#cbvhajhxci .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wkwsixepvl .gt_group_heading {
+#cbvhajhxci .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -397,7 +397,7 @@ are listed on multiple lines.</p>
   text-align: left;
 }
 
-#wkwsixepvl .gt_empty_group_heading {
+#cbvhajhxci .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -412,15 +412,15 @@ are listed on multiple lines.</p>
   vertical-align: middle;
 }
 
-#wkwsixepvl .gt_from_md > :first-child {
+#cbvhajhxci .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wkwsixepvl .gt_from_md > :last-child {
+#cbvhajhxci .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wkwsixepvl .gt_row {
+#cbvhajhxci .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -439,7 +439,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#wkwsixepvl .gt_stub {
+#cbvhajhxci .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -452,7 +452,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#wkwsixepvl .gt_stub_row_group {
+#cbvhajhxci .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -466,15 +466,15 @@ are listed on multiple lines.</p>
   vertical-align: top;
 }
 
-#wkwsixepvl .gt_row_group_first td {
+#cbvhajhxci .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wkwsixepvl .gt_row_group_first th {
+#cbvhajhxci .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wkwsixepvl .gt_summary_row {
+#cbvhajhxci .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -484,16 +484,16 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#wkwsixepvl .gt_first_summary_row {
+#cbvhajhxci .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_first_summary_row.thick {
+#cbvhajhxci .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wkwsixepvl .gt_last_summary_row {
+#cbvhajhxci .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -503,7 +503,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_grand_summary_row {
+#cbvhajhxci .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -513,7 +513,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#wkwsixepvl .gt_first_grand_summary_row {
+#cbvhajhxci .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -523,7 +523,7 @@ are listed on multiple lines.</p>
   border-top-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_last_grand_summary_row_top {
+#cbvhajhxci .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -533,11 +533,11 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_striped {
+#cbvhajhxci .gt_striped {
   background-color: #FEEDEC;
 }
 
-#wkwsixepvl .gt_table_body {
+#cbvhajhxci .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -546,7 +546,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wkwsixepvl .gt_footnotes {
+#cbvhajhxci .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -560,7 +560,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#wkwsixepvl .gt_footnote {
+#cbvhajhxci .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -569,7 +569,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#wkwsixepvl .gt_sourcenotes {
+#cbvhajhxci .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -583,7 +583,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#wkwsixepvl .gt_sourcenote {
+#cbvhajhxci .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -591,63 +591,63 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#wkwsixepvl .gt_left {
+#cbvhajhxci .gt_left {
   text-align: left;
 }
 
-#wkwsixepvl .gt_center {
+#cbvhajhxci .gt_center {
   text-align: center;
 }
 
-#wkwsixepvl .gt_right {
+#cbvhajhxci .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wkwsixepvl .gt_font_normal {
+#cbvhajhxci .gt_font_normal {
   font-weight: normal;
 }
 
-#wkwsixepvl .gt_font_bold {
+#cbvhajhxci .gt_font_bold {
   font-weight: bold;
 }
 
-#wkwsixepvl .gt_font_italic {
+#cbvhajhxci .gt_font_italic {
   font-style: italic;
 }
 
-#wkwsixepvl .gt_super {
+#cbvhajhxci .gt_super {
   font-size: 65%;
 }
 
-#wkwsixepvl .gt_footnote_marks {
+#cbvhajhxci .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wkwsixepvl .gt_asterisk {
+#cbvhajhxci .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wkwsixepvl .gt_indent_1 {
+#cbvhajhxci .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wkwsixepvl .gt_indent_2 {
+#cbvhajhxci .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wkwsixepvl .gt_indent_3 {
+#cbvhajhxci .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wkwsixepvl .gt_indent_4 {
+#cbvhajhxci .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wkwsixepvl .gt_indent_5 {
+#cbvhajhxci .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
