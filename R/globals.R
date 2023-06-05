@@ -12,6 +12,7 @@ utils::globalVariables(c(
   "state.abb", # <beneficiary_enrollment>
   "state.name", # <beneficiary_enrollment>
   "y", # <beneficiary_enrollment>
+  "x", # <beneficiary_enrollment>
   "bene_geo_lvl", # <beneficiary_enrollment>
   "month", # <beneficiary_enrollment>
   "bene_state_abrvtn", # <beneficiary_enrollment>
@@ -190,6 +191,7 @@ utils::globalVariables(c(
   "telephone_number", # <nppes_npi>
   "postal_code", # <nppes_npi>
   "address_purpose", # <nppes_npi>
+  "address_1", # <nppes_npi>
   "purpose", # <nppes_npi>
   "code", # <nppes_npi>
   "desc", # <nppes_npi>
@@ -462,6 +464,36 @@ utils::globalVariables(c(
   "state_cd", # <provider_enrollment>
   "mdl_name", # <provider_enrollment>
   "gndr_sw", # <provider_enrollment>
+  "distro", # <qpp_experience>
+  "y", # <qpp_experience>
+  "provider_key", # <qpp_experience>
+  "practice_state_or_us_territory", # <qpp_experience>
+  "practice_size", # <qpp_experience>
+  "clinician_specialty", # <qpp_experience>
+  "years_in_medicare", # <qpp_experience>
+  "participation_type", # <qpp_experience>
+  "medicare_patients", # <qpp_experience>
+  "allowed_charges", # <qpp_experience>
+  "services", # <qpp_experience>
+  "final_score", # <qpp_experience>
+  "payment_adjustment_percentage", # <qpp_experience>
+  "complex_patient_bonus", # <qpp_experience>
+  "quality_category_score", # <qpp_experience>
+  "quality_improvement_bonus", # <qpp_experience>
+  "quality_bonus", # <qpp_experience>
+  "engaged", # <qpp_experience>
+  "opted_into_mips", # <qpp_experience>
+  "small_practitioner", # <qpp_experience>
+  "rural_clinician", # <qpp_experience>
+  "hpsa_clinician", # <qpp_experience>
+  "ambulatory_surgical_center", # <qpp_experience>
+  "hospital_based_clinician", # <qpp_experience>
+  "non_patient_facing", # <qpp_experience>
+  "facility_based", # <qpp_experience>
+  "extreme_hardship", # <qpp_experience>
+  "extreme_hardship_quality", # <qpp_experience>
+  "quality_measure_id_1", # <qpp_experience>
+  "quality_measure_score_1", # <qpp_experience>
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>

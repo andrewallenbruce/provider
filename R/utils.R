@@ -75,6 +75,23 @@ clean_credentials <- function(x) {
   return(out)
 }
 
+#' Calculate number of years since today's date -----------------------------------------------------
+#' @param df data frame
+#' @param date_col date column
+#' @return number of years since today's date
+#' @autoglobal
+#' @noRd
+years_passed <- function(df, date_col) {
+
+  df |>
+    dplyr::mutate(
+      years_passed = round(as.double(difftime(lubridate::today(),
+                                              {{ date_col }},
+                                              units = "weeks",
+                                  tz = "UTC")) / 52.17857, 2),
+      .after = {{ date_col }})
+}
+
 #' luhn check npis ---------------------------------------------------------
 #' @description checks NPIs against the Luhn algorithm for
 #' compliance with the CMS requirements stated in the linked PDF below.
@@ -680,7 +697,14 @@ gt_prov <- function(df,
     gt::gt() |>
     gtExtras::gt_theme_538() |>
     gt::sub_missing(columns = dplyr::everything(), missing_text = "--") |>
-    gt::tab_options(table.width = gt::pct(100))
+    gt::tab_options(table.width = gt::pct(100),
+                    column_labels.background.color = "white",
+                    column_labels.font.weight = "bolder",
+                    heading.background.color = "white",
+                    #table_body.hlines.style = "none",
+                    column_labels.border.top.color = "white",
+                    column_labels.border.bottom.color = "black",
+                    table_body.border.bottom.color = "black")
 
   if (clean) {
     results <- results |>

@@ -59,13 +59,6 @@ leaflet::leaflet() |>
 ```
 
 
-```{r}
-orgs |> 
-  dplyr::mutate(weeks_passed = round(difftime(lubridate::today(), enumeration_date, units = "weeks")),
-                years_passed = round(as.double(weeks_passed) / 52), .after = enumeration_duration)
-```
-
-
 ## Organizational Provider Locations
 
 ```{r}

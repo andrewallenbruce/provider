@@ -28,14 +28,11 @@ Imports:
     strex,
     tibble,
     tidyr,
-    tidyselect,
-    tidytable
+    tidyselect
 Suggests: 
     covr,
     campfin,
     kableExtra,
-    downloadthis,
-    epoxy,
     fontawesome,
     furrr,
     htmltools,

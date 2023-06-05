@@ -23,12 +23,11 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(provider)
-library(epoxy)
 ```
 
 <br>
 
-## NPPES NPI Registry
+## Starting with the NPPES Registry
 
 ```r
 nppes_npi(npi = 1043477615)
@@ -39,97 +38,95 @@ nppes_npi(npi = 1043477615)
 ```{r}
 nppes <- nppes_npi(npi = 1043477615)
 
-nppes_1 <- nppes |> 
+nppes_basic <- nppes |> 
+  dplyr::select(npi:years_passed, 
+                status,
+                sole_proprietor,
+                gender) |> 
   dplyr::slice_head() |> 
-  dplyr::select(npi:entype, 
-                enumeration_duration, 
-                first_name:phone_number)
-
-nppes_2 <- nppes_1 |> 
+  dplyr::mutate(status = dplyr::if_else(status == "A", "Active", status),
+                gender = dplyr::if_else(gender == "F", "Female", "Male")) |> 
   provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
-                     checkmark = c("sole_proprietor")) |> 
-  gt::tab_header(title = paste0("General Information for: ", 
-                                nppes_1$first_name, " ", 
-                                nppes_1$middle_name, ". ", 
-                                nppes_1$last_name, ", ", 
-                                nppes_1$credential),
-                 subtitle = paste0("Practice Location: ",
-                                   nppes_1$street, " ",
-                                   nppes_1$city, ", ",
-                                   nppes_1$state, " ",
-                                   nppes_1$zipcode)) |> 
-  gt::cols_hide(columns = c(first_name, 
-                            middle_name, 
-                            last_name, 
-                            credential,
-                            gender,
-                            street,
-                            city,
-                            state,
-                            zipcode,
-                            purpose,
-                            country)) |> 
-  gt::cols_label(entype = "Type") |> 
-  gt::tab_options(
-    table_body.hlines.style = "none",
-    column_labels.border.top.color = "black",
-    column_labels.border.bottom.color = "black",
-    table_body.border.bottom.color = "black"
-  )
-```
+                     checkmark = c("sole_proprietor"),
+                     title = gt::md("NPPES **Basic Information**"),
+                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
+                                           first = nppes$first_name[[1]], 
+                                           middle = nppes$middle_name[[1]],
+                                           last = nppes$last_name[[1]],
+                                           cred = nppes$credential[[1]])) |> 
+  gt::cols_label(entype = "Type", 
+                 enumeration_date = "Date",
+                 years_passed = "Years") |> 
+  gt::tab_spanner(label = "ENUMERATION", 
+                  columns = c(enumeration_date, 
+                              years_passed,
+                              status))
 
-</details>
-
-
-```{r, echo=FALSE, eval=TRUE}
-nppes_2
-```
-
-
-<br>
-
-<details><summary>Code</summary>
-
-```{r}
-nppes_3 <- nppes |> 
-  dplyr::slice_head(n = 3) |> 
-  dplyr::select(tx_code, tx_primary, tx_desc, tx_state, tx_license) |> 
+nppes_location <- nppes |> 
+  dplyr::select(purpose,
+                street:zipcode,
+                phone_number) |> 
+  dplyr::distinct_all() |> 
+  dplyr::mutate(zipcode = campfin::normal_zip(zipcode),
+                state = campfin::expand_state(state),
+                phone_number = campfin::normal_phone(phone_number)) |> 
   provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
-                     checkmark = c("tx_primary")) |> 
-  gt::tab_header(title = paste0("Taxonomy Information: ", 
-                                nppes_1$first_name, " ", 
-                                nppes_1$middle_name, ". ", 
-                                nppes_1$last_name, ", ", 
-                                nppes_1$credential),
-                 subtitle = paste0("Practice Location: ",
-                                   nppes_1$street, " ",
-                                   nppes_1$city, ", ",
-                                   nppes_1$state, " ",
-                                   nppes_1$zipcode)) |> 
+                     divider = c("purpose"),
+                     title = gt::md("NPPES **Location Information**"),
+                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
+                                           first = nppes$first_name[[1]], 
+                                           middle = nppes$middle_name[[1]],
+                                           last = nppes$last_name[[1]],
+                                           cred = nppes$credential[[1]])) |> 
+  gt::cols_label(zipcode = "Zip Code")
+
+nppes_taxonomy <- nppes |> 
+  dplyr::select(tx_code, 
+                tx_primary, 
+                tx_desc, 
+                tx_state, 
+                tx_license) |> 
+  dplyr::distinct_all() |> 
+  provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
+                     checkmark = c("tx_primary"),
+                     title = gt::md("NPPES **Taxonomy Information**"),
+                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
+                                           first = nppes$first_name[[1]], 
+                                           middle = nppes$middle_name[[1]],
+                                           last = nppes$last_name[[1]],
+                                           cred = nppes$credential[[1]])) |> 
   gt::cols_label(tx_code = "Taxonomy",
                  tx_desc = "Description",
                  tx_state = "State",
                  tx_license = "License",
                  tx_primary = "Primary") |> 
-  gt::tab_options(
-    #table_body.hlines.style = "none",
-    column_labels.border.top.color = "black",
-    column_labels.border.bottom.color = "black",
-    table_body.border.bottom.color = "black"
-  )
+  gtExtras::gt_highlight_rows(
+     rows = tx_primary == TRUE,
+     fill = "#FAFAD2",
+     bold_target_only = FALSE,
+     target_col = tx_primary,
+     font_color = "black",
+     font_weight = "bold"
+   )
 ```
-
 
 </details>
 
+
 ```{r, echo=FALSE, eval=TRUE}
-nppes_3
+nppes_basic
 ```
 
 
-<br>
+```{r, echo=FALSE, eval=TRUE}
+nppes_location
+```
 
-## Order & Referring Eligibility
+```{r, echo=FALSE, eval=TRUE}
+nppes_taxonomy
+```
+
+<br>
 
 
 ```r
@@ -139,23 +136,33 @@ order_refer(npi = 1043477615)
 <details><summary>Code</summary>
 
 ```{r}
-oar_1 <- order_refer(npi = 1043477615) |> 
-  provider:::gt_prov(divider = c("last_name"), 
-                     checkmark = c("partb", "dme", "hha", "pmd"),
+oar <- order_refer(npi = 1043477615)
+
+oar_gt <- oar |> 
+  dplyr::select(
+    "Medicare Part B" = partb, 
+    "Home Health (HHA)" = hha, 
+    "Durable Medical Equipment (DME)" = dme, 
+    "Power Mobility Devices (PMD)" = pmd) |> 
+  provider:::display_long() |> 
+  dplyr::select(service = name, 
+                eligible = value) |> 
+  provider:::gt_prov(checkmark = c("eligible"),
                      title = "Medicare Order & Referring Eligibility",
-                     source = gt::md("Source: [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)")) |> 
-  gt::cols_label(partb = "Part B")
+                     subtitle = glue::glue("Provider: {first} {last}. NPI: {npi}.", 
+                                           first = oar$first_name[[1]], 
+                                           last = oar$last_name[[1]],
+                                           npi = oar$npi[[1]]),
+                     source = gt::md("Source: [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)"))
 ```
 
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
-oar_1
+oar_gt
 ```
 
 <br>
-
-## Provider Enrollment
 
 ```r
 provider_enrollment(npi = 1043477615)
@@ -163,22 +170,33 @@ provider_enrollment(npi = 1043477615)
 <details><summary>Code</summary>
 
 ```{r}
-pro_en <- provider_enrollment(npi = 1043477615) |> 
-  dplyr::select(pac_id, 
-                enroll_id, 
-                specialty_code, 
-                specialty_desc) |> 
-  provider:::gt_prov(title = "Medicare Enrollment Information",
-    source = gt::md("Source: [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)")) |> 
-  gt::cols_label(pac_id = "PAC ID", 
-                 enroll_id = "Enrollment ID", 
-                 specialty_desc = "Specialty Description")
+pro <- provider_enrollment(npi = 1043477615)
+
+pro_gt <- pro |> 
+  dplyr::mutate(state = campfin::expand_state(state)) |> 
+  dplyr::select("PECOS Associate Control (PAC) ID" = pac_id, 
+                "Enrollment ID" = enroll_id, 
+                "Specialty Code" = specialty_code, 
+                "Specialty Description" = specialty_desc,
+                State = state, 
+                "Organization Name" = org_name) |> 
+  provider:::display_long() |> 
+  dplyr::select(item = name, 
+                result = value) |> 
+  provider:::gt_prov(title = "Medicare Provider Enrollment Information",
+                     divider = c("item"),
+                     source = gt::md("Source: [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)"),
+                     subtitle = glue::glue("Provider: {first} {middle}. {last}. NPI: {npi}", 
+                                           first = pro$first_name[[1]], 
+                                           middle = pro$middle_name[[1]],
+                                           last = pro$last_name[[1]],
+                                           npi = pro$npi[[1]]))
 ```
 
 </details>
 
 ```{r, echo=FALSE, eval=TRUE}
-pro_en
+pro_gt
 ```
 
 
@@ -192,9 +210,9 @@ doctors_and_clinicians(npi = 1043477615)
 <details><summary>Code</summary>
 
 ```{r}
-dcli <- doctors_and_clinicians(npi = 1043477615)
+drc <- doctors_and_clinicians(npi = 1043477615)
 
-dcli_1 <- dcli |> 
+dcli_1 <- drc |> 
   dplyr::select(school, 
                 grad_year, 
                 grad_duration, 
@@ -207,7 +225,7 @@ dcli_1 <- dcli |>
                  grad_year = "Graduated", 
                  ind_assn = "Accepts Assignment")
 
-dcli_2 <- dcli |> 
+dcli_2 <- drc |> 
   dplyr::select(org_name, 
                 org_pac_id, 
                 org_members, 

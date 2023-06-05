@@ -183,7 +183,9 @@ nppes_npi <- function(npi            = NULL,
                     zipcode      = postal_code,
                     purpose      = address_purpose,
                     street       = address_1) |>
-      dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION", "PRACTICE", purpose))
+      dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION",
+                                             "PRACTICE",
+                                             purpose))
 
 
     # practice locations ------------------------------------------------------
@@ -301,14 +303,17 @@ nppes_npi <- function(npi            = NULL,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
                     dplyr::across(dplyr::where(is.character), ~clean_credentials(.)),
-                    enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date),
+                    #enumeration_duration = lubridate::as.duration(lubridate::today() - enumeration_date),
                     entype = entype_char(entype),
-                    dplyr::across(dplyr::any_of(c("sole_proprietor", "organizational_subpart")), ~yn_logical(.)))
+                    dplyr::across(dplyr::any_of(c("sole_proprietor",
+                                                  "organizational_subpart")),
+                                  ~yn_logical(.))) |>
+      years_passed(enumeration_date)
 
     valid_fields <- c("npi",
                       "entype",
                       "enumeration_date",
-                      "enumeration_duration",
+                      "years_passed",
                       "last_updated",
                       "certification_date",
                       "status",
