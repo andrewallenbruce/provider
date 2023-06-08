@@ -19,13 +19,20 @@ quality_payment(
 \arguments{
 \item{year}{year}
 
-\item{npi}{NPI of the Provider}
+\item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.
+Multiple rows for the same NPI indicate multiple TIN/NPI combinations.}
 
-\item{state}{State where the provider is enrolled}
+\item{state}{The State or United States (US) territory code location of the
+TIN associated with the clinician.}
 
-\item{specialty}{Type of enrollment - ASC to Hospital OR IFED}
+\item{specialty}{The specialty description is an identifier corresponding to
+the type of service that the clinician submitted most on their Medicare
+Part B claims for this TIN/NPI combination.}
 
-\item{part_type}{Organizational name of the enrolled provider}
+\item{part_type}{Indicates the level at which performance data was
+collected, submitted or reported for the final score attributed to the
+clinician. This information drives the data displayed for most of the
+remaining fields in this report.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }

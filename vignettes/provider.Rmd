@@ -438,7 +438,10 @@ re_assign
 provider <- 2014:2021 |> 
   furrr::future_map(\(x) physician_by_provider(year = x, npi = 1043477615)) |> 
   purrr::list_rbind()
+```
 
+
+```{r}
 provider_1 <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
@@ -446,27 +449,35 @@ provider_1 <- provider |>
                 tot_charges,
                 tot_allowed,
                 tot_payment) |> 
+  dplyr::mutate(rep_benes = tot_srvcs - tot_benes, .after = tot_srvcs) |> 
   provider:::change_abs(tot_benes, year) |> 
   provider:::change_pct(tot_benes, tot_benes_chg, year) |> 
   provider:::change_abs(tot_srvcs, year) |> 
   provider:::change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
-  dplyr::select(!c(tot_benes_chg, tot_srvcs_chg)) |> 
+  provider:::change_abs(rep_benes, year) |> 
+  provider:::change_pct(rep_benes, rep_benes_chg, year) |> 
+  dplyr::select(!c(tot_benes_chg, tot_srvcs_chg, rep_benes_chg)) |> 
   provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
                                      API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
                      title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
                      subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("year", "tot_srvcs"),
+                     divider = c("year", "rep_benes"),
                      dollars = c("tot_charges", "tot_allowed", "tot_payment"),
-                     pctchg = c("tot_benes_pct", "tot_srvcs_pct")) |>
+                     pctchg = c("tot_benes_pct", "tot_srvcs_pct", "rep_benes_pct")) |>
   gt::cols_label(tot_benes = "Beneficiaries", 
                  tot_srvcs = "Services",
+                 rep_benes = "Repeat Beneficiaries",
                  tot_charges = "Charges",
                  tot_allowed = "Allowed",
                  tot_payment = "Payment") |> 
   gt::cols_merge_n_pct(tot_benes, tot_benes_pct) |> 
   gt::cols_merge_n_pct(tot_srvcs, tot_srvcs_pct) |> 
+  gt::cols_merge_n_pct(rep_benes, rep_benes_pct) |> 
   gtExtras::gt_color_rows(columns = c("tot_charges", "tot_allowed", "tot_payment"))
+```
 
+
+```{r}
 provider_2 <- provider |> 
   dplyr::select(year, bene_age_avg)
 
@@ -917,5 +928,65 @@ gt_output <- gt_table |>
   gtExtras::gt_color_rows(columns = pay_mean, 
                           palette = "RColorBrewer::Oranges", pal_type = "continuous", domain = range(gt_table$pay_mean)) |> 
   gt::opt_vertical_padding(scale = 1.5)
+```
+
+## Quality Payment Program
+
+```{r}
+qpp <- 2017:2020 |> 
+  furrr::future_map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
+  purrr::list_rbind()
+```
+
+
+```{r}
+qpp |> 
+  dplyr::select(year, 
+                final_score,
+                pmt_adj_pct,
+                complex_patient_bonus,
+                quality_category_score,
+                quality_improvement_bonus,
+                pi_category_score,
+                ia_score,
+                cost_score) |> 
+  provider:::gt_prov()
+```
+
+
+```{r}
+qpp |> 
+  dplyr::select(year, 
+                "Engaged" = engaged,
+                "Opted Into MIPS" = opted_into_mips,
+                "Small Practitioner" = small_practitioner,
+                "Rural Clinician" = rural,
+                "HPSA Clinician" = hpsa,
+                "Ambulatory Surgical Center" = asc,
+                "Hospital-Based" = hospital_based,
+                "Non-Patient Facing" = non_patient_facing,
+                "Facility-Based" = facility_based,
+                "Performance Extreme Hardship" = extreme_hardship,
+                "Quality Performance Bonus" = quality_bonus,
+                "Quality Performance Extreme Hardship" = extreme_hardship_quality, 
+                "Promoting Interoperability Hardship" = pi_hardship,
+                "Promoting Interoperability Extreme Hardship" = extreme_hardship_pi,
+                "Promoting Interoperability Reweighting" = pi_reweighting,
+                "Promoting Interoperability Bonus" = pi_bonus, 
+                "Improvement Activities Extreme Hardship" = extreme_hardship_ia, 
+                "Improvement Activities Study" = ia_study, 
+                "Cost Performance Extreme Hardship" = extreme_hardship_cost) |> 
+  tidyr::pivot_longer(cols = !year, 
+                      names_to = "status", 
+                      values_to = "value") |> 
+  tidyr::pivot_wider(names_from = year, 
+                     values_from = value) |> 
+  provider:::gt_prov(clean = FALSE, 
+                     divider = c("status"),
+                     checkmark = c("2017", 
+                                   "2018", 
+                                   "2019", 
+                                   "2020"))
+
 ```
 

@@ -19,10 +19,17 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
 #' @param year year
-#' @param npi NPI of the Provider
-#' @param state State where the provider is enrolled
-#' @param specialty Type of enrollment - ASC to Hospital OR IFED
-#' @param part_type Organizational name of the enrolled provider
+#' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
+#'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
+#' @param state The State or United States (US) territory code location of the
+#'    TIN associated with the clinician.
+#' @param specialty The specialty description is an identifier corresponding to
+#'    the type of service that the clinician submitted most on their Medicare
+#'    Part B claims for this TIN/NPI combination.
+#' @param part_type Indicates the level at which performance data was
+#'    collected, submitted or reported for the final score attributed to the
+#'    clinician. This information drives the data displayed for most of the
+#'    remaining fields in this report.
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
@@ -106,9 +113,19 @@ quality_payment <- function(year,
                     dplyr::across(dplyr::any_of(c("practice_size",
                                                   "years_in_medicare",
                                                   "medicare_patients",
-                                                  "allowed_charges",
-                                                  "services")),
-                                  as.integer),
+                                                  "services")), as.integer),
+                    dplyr::across(dplyr::any_of(c("allowed_charges",
+                                                  "final_score",
+                                                  "payment_adjustment_percentage",
+                                                  "complex_patient_bonus",
+                                                  "quality_category_score",
+                                                  "quality_improvement_bonus",
+                                                  "ia_score",
+                                                  "cost_score",
+                                                  dplyr::contains("quality_measure_score"),
+                                                  dplyr::contains("pi_measure_score"),
+                                                  dplyr::contains("ia_measure_score"),
+                                                  dplyr::contains("cost_measure_score"))), as.double),
                     dplyr::across(dplyr::any_of(c("engaged",
                                                   "opted_into_mips",
                                                   "small_practitioner",
@@ -127,8 +144,7 @@ quality_payment <- function(year,
                                                   "pi_bonus",
                                                   "extreme_hardship_ia",
                                                   "ia_study",
-                                                  "extreme_hardship_cost")),
-                                  tf_logical)) |>
+                                                  "extreme_hardship_cost")), tf_logical)) |>
       dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
                     npi,
@@ -150,16 +166,29 @@ quality_payment <- function(year,
                     engaged,
                     opted_into_mips,
                     small_practitioner,
-                    rural_clinician,
-                    hpsa_clinician,
+                    rural = rural_clinician,
+                    hpsa = hpsa_clinician,
                     asc = ambulatory_surgical_center,
                     hospital_based = hospital_based_clinician,
                     non_patient_facing,
                     facility_based,
                     extreme_hardship,
                     extreme_hardship_quality,
-                    quality_measure_id_1,
-                    quality_measure_score_1,
+                    dplyr::contains("quality_measure_"),
+                    pi_category_score = "promoting_interoperability_(pi)_category_score",
+                    extreme_hardship_pi,
+                    pi_hardship,
+                    pi_reweighting,
+                    pi_bonus,
+                    pi_cehrt_id,
+                    dplyr::contains("pi_measure_"),
+                    ia_score,
+                    extreme_hardship_ia,
+                    ia_study,
+                    dplyr::contains("ia_measure_"),
+                    cost_score,
+                    extreme_hardship_cost,
+                    dplyr::contains("cost_measure_"),
                     dplyr::everything())
   }
   return(results)

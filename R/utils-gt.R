@@ -201,7 +201,6 @@ gt_prov <- function(df,
                     column_labels.background.color = "white",
                     column_labels.font.weight = "bolder",
                     heading.background.color = "white",
-                    #table_body.hlines.style = "none",
                     column_labels.border.top.color = "white",
                     column_labels.border.bottom.color = "black",
                     table_body.border.bottom.color = "black")
@@ -222,13 +221,11 @@ gt_prov <- function(df,
   }
 
   if (!is.null(title)) {
-    results <- results |>
-      gt::tab_header(title = title)
+    results <- results |> gt::tab_header(title = title)
   }
 
   if (!is.null(subtitle)) {
-    results <- results |>
-      gt::tab_header(title = title, subtitle = subtitle)
+    results <- results |> gt::tab_header(title = title, subtitle = subtitle)
   }
 
   if (!is.null(source)) {
@@ -253,9 +250,7 @@ gt_prov <- function(df,
   }
 
   if (!is.null(pct)) {
-    results <- results |>
-      gt::fmt_percent(columns = {{ pct }},
-                      decimals = 0)
+    results <- results |> gt::fmt_percent(columns = {{ pct }}, decimals = 0)
   }
 
   if (!is.null(pctchg)) {

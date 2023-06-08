@@ -189,7 +189,7 @@ ma <- enrollment |>
 </details>
 
 
-```{r, fig.height=7}
+```{r, fig.height=4, fig.width=4}
 library(patchwork)
 patchwork <- total / (orig + ma)
 patchwork + 
