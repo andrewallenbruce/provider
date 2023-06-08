@@ -138,666 +138,115 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
 <blockquote>
-<p><em>Information on services and procedures provided to Original
-Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by
-physicians and other healthcare professionals.</em></p>
+<p>The <strong>Provider Utilization and Payment Data Physician and Other
+Practitioners Dataset</strong> provides information on services and
+procedures provided to Original Medicare (fee-for-service) Part B
+(Medical Insurance) beneficiaries by physicians and other healthcare
+professionals. The <strong>Provider</strong> data subset provides
+information on use, payments, submitted charges and beneficiary
+demographic and health characteristics organized by NPI.</p>
 </blockquote>
-<p><br></p>
-<p>The Centers for Medicare &amp; Medicaid Services (CMS) has prepared a
-public data set, the Provider Utilization and Payment Data Physician and
-Other Practitioners Dataset, with information on services and procedures
-provided to Medicare beneficiaries by physicians and other healthcare
-professionals. The Physician and Other Practitioners Dataset contains
-information on utilization, payment (allowed amount and Medicare
-payment), and submitted charges organized by National Provider
-Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS)
-code, and place of service. The data in the Physician and Other
-Practitioners dataset contains 100% final-action (i.e., all claim
-adjustments have been resolved) physician/supplier Part B
-non-institutional line items for the Medicare fee-for-service (FFS)
-population. Claims processed by Durable Medical Equipment, Prosthetic,
-Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC)
-are not included in the Physician and Other Practitioners Dataset.</p>
-<p><br></p>
-<div class="section level2">
-<h2 id="physician-other-practitioners-by-provider">Physician &amp; Other Practitioners: <strong>by
-Provider</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-provider"></a>
-</h2>
-<p><br></p>
-<p>The <strong>Provider</strong> data subset provides information on
-use, payments, submitted charges and beneficiary demographic and health
-characteristics organized by National Provider Identifier (NPI). This
-dataset is based on information gathered from CMS administrative claims
-data for Original Medicare Part B beneficiaries available from the CMS
-Chronic Conditions Data Warehouse.</p>
-<ul>
-<li>Data update frequency: <strong>Annually</strong>
-</li>
-<li>Data source: <strong>Centers for Medicare &amp; Medicaid
-Services</strong>
-</li>
-</ul>
 <div class="section level3">
-<h3 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">&lt;-</span> <span class="fl">2014</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span><span class="va">year</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">&lt;-</span> <span class="fl">2014</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">par</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="iqngmfafgj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#iqngmfafgj table {
-  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#iqngmfafgj thead, #iqngmfafgj tbody, #iqngmfafgj tfoot, #iqngmfafgj tr, #iqngmfafgj td, #iqngmfafgj th {
-  border-style: none;
-}
-
-#iqngmfafgj p {
-  margin: 0;
-  padding: 0;
-}
-
-#iqngmfafgj .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: 300;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: none;
-  border-top-width: 3px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#iqngmfafgj .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#iqngmfafgj .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#iqngmfafgj .gt_heading {
-  background-color: #FFFFFF;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_bottom_border {
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_col_headings {
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: normal;
-  text-transform: uppercase;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#iqngmfafgj .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: normal;
-  text-transform: uppercase;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#iqngmfafgj .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#iqngmfafgj .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#iqngmfafgj .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #000000;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#iqngmfafgj .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#iqngmfafgj .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#iqngmfafgj .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  border-top-style: none;
-  border-top-width: 2px;
-  border-top-color: #000000;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #FFFFFF;
-  vertical-align: middle;
-}
-
-#iqngmfafgj .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#iqngmfafgj .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#iqngmfafgj .gt_row {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#iqngmfafgj .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 80%;
-  font-weight: bolder;
-  text-transform: uppercase;
-  border-right-style: solid;
-  border-right-width: 0px;
-  border-right-color: #FFFFFF;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iqngmfafgj .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#iqngmfafgj .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#iqngmfafgj .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#iqngmfafgj .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iqngmfafgj .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#iqngmfafgj .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iqngmfafgj .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#iqngmfafgj .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iqngmfafgj .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iqngmfafgj .gt_sourcenote {
-  font-size: 12px;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iqngmfafgj .gt_left {
-  text-align: left;
-}
-
-#iqngmfafgj .gt_center {
-  text-align: center;
-}
-
-#iqngmfafgj .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#iqngmfafgj .gt_font_normal {
-  font-weight: normal;
-}
-
-#iqngmfafgj .gt_font_bold {
-  font-weight: bold;
-}
-
-#iqngmfafgj .gt_font_italic {
-  font-style: italic;
-}
-
-#iqngmfafgj .gt_super {
-  font-size: 65%;
-}
-
-#iqngmfafgj .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#iqngmfafgj .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#iqngmfafgj .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#iqngmfafgj .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#iqngmfafgj .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#iqngmfafgj .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#iqngmfafgj .gt_indent_5 {
-  text-indent: 25px;
-}
-
-tbody tr:last-child {
-  border-bottom: 2px solid #ffffff00;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="name">name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="value">value</th>
-    </tr></thead>
-<tbody class="gt_table_body">
-<tr>
-<td headers="name" class="gt_row gt_left">npi</td>
-<td headers="value" class="gt_row gt_left">1043477615</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">first_name</td>
-<td headers="value" class="gt_row gt_left">Sarah</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">middle_name</td>
-<td headers="value" class="gt_row gt_left">K</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">last_name</td>
-<td headers="value" class="gt_row gt_left">Hussain</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">credential</td>
-<td headers="value" class="gt_row gt_left">MD</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">gender</td>
-<td headers="value" class="gt_row gt_left">F</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">entype</td>
-<td headers="value" class="gt_row gt_left">Individual</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">street</td>
-<td headers="value" class="gt_row gt_left">500 University Dr</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">city</td>
-<td headers="value" class="gt_row gt_left">Hershey</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">state</td>
-<td headers="value" class="gt_row gt_left">PA</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">fips</td>
-<td headers="value" class="gt_row gt_left">42</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">zipcode</td>
-<td headers="value" class="gt_row gt_left">17033</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">ruca</td>
-<td headers="value" class="gt_row gt_left">1</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">country</td>
-<td headers="value" class="gt_row gt_left">US</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">specialty</td>
-<td headers="value" class="gt_row gt_left">Clinical Cardiac Electrophysiology</td>
-</tr>
-<tr>
-<td headers="name" class="gt_row gt_left">par</td>
-<td headers="value" class="gt_row gt_left">TRUE</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
-<details><summary>
-Code for table
-</summary><div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gt_1</span> <span class="op">&lt;-</span> <span class="va">sh</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span><span class="op">:</span><span class="va">tot_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<br><details><summary>
+Code
+</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                <span class="va">tot_benes</span>, </span>
+<span>                <span class="va">tot_srvcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>rep_benes <span class="op">=</span> <span class="va">tot_srvcs</span> <span class="op">-</span> <span class="va">tot_benes</span>, .after <span class="op">=</span> <span class="va">tot_srvcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">tot_benes</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">tot_benes</span>, <span class="va">tot_benes_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">tot_srvcs</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">tot_srvcs</span>, <span class="va">tot_srvcs_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">rep_benes</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">rep_benes</span>, <span class="va">rep_benes_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_benes_chg</span>, <span class="va">tot_srvcs_chg</span>, <span class="va">rep_benes_chg</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Summary: **2014 - 2021**"</span><span class="op">)</span>,</span>
+<span>                     divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"tot_benes_pct"</span>, <span class="st">"tot_srvcs_pct"</span><span class="op">)</span>,</span>
+<span>                     pctchg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_benes_pct"</span>, <span class="st">"tot_srvcs_pct"</span>, <span class="st">"rep_benes_pct"</span><span class="op">)</span>,</span>
+<span>                     subtitle <span class="op">=</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"Provider: {first} {last}. (NPI: {npi})."</span>, </span>
+<span>                                           first <span class="op">=</span> <span class="va">provider</span><span class="op">$</span><span class="va">first_name</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, </span>
+<span>                                           last <span class="op">=</span> <span class="va">provider</span><span class="op">$</span><span class="va">last_name</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>,</span>
+<span>                                           npi <span class="op">=</span> <span class="va">provider</span><span class="op">$</span><span class="va">npi</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>                     source <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Source: [Medicare Physician &amp; Other Practitioners: by Provider</span></span>
+<span><span class="st">                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>tot_benes <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_benes_pct <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_srvcs <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_srvcs_pct <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 rep_benes <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 rep_benes_pct <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span></span>
+<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
+<span>             <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_benes</span>, <span class="va">tot_srvcs</span>, <span class="va">rep_benes</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"BENEFICIARIES"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_benes</span>, <span class="va">tot_benes_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"SERVICES"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_srvcs</span>, <span class="va">tot_srvcs_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"REPEAT BENEFICIARIES"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">rep_benes</span>, <span class="va">rep_benes_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_integer.html" class="external-link">fmt_integer</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_benes</span>, <span class="va">tot_srvcs</span>, <span class="va">rep_benes</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html" class="external-link">data_color</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_benes_pct"</span>, <span class="st">"tot_srvcs_pct"</span>, <span class="st">"rep_benes_pct"</span><span class="op">)</span>,</span>
+<span>                 palette <span class="op">=</span> <span class="st">"ggsci::red_material"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
+<span>                <span class="va">tot_charges</span>,</span>
+<span>                <span class="va">tot_allowed</span>,</span>
+<span>                <span class="va">tot_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">tot_charges</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">tot_charges</span>, <span class="va">tot_charges_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">tot_allowed</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">tot_allowed</span>, <span class="va">tot_allowed_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_abs</span><span class="op">(</span><span class="va">tot_payment</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">change_pct</span><span class="op">(</span><span class="va">tot_payment</span>, <span class="va">tot_payment_chg</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="va">tot_charges</span>, </span>
-<span>    <span class="va">tot_charges_chg</span>,</span>
-<span>    <span class="va">tot_allowed</span>,</span>
-<span>    <span class="va">tot_allowed_chg</span>,</span>
-<span>    <span class="va">tot_payment</span>,</span>
-<span>    <span class="va">tot_payment_chg</span><span class="op">)</span>, </span>
-<span>    currency <span class="op">=</span> <span class="st">"USD"</span>, </span>
-<span>    suffixing <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>    sep_mark <span class="op">=</span> <span class="st">","</span>, </span>
-<span>    incl_space <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_hide.html" class="external-link">cols_hide</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"chg"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>tot_benes <span class="op">=</span> <span class="st">"Beneficiaries"</span>,</span>
-<span>                 tot_benes_pct <span class="op">=</span> <span class="st">"Change"</span>,</span>
-<span>                 tot_srvcs <span class="op">=</span> <span class="st">"Procedures"</span>,</span>
-<span>                 tot_srvcs_pct <span class="op">=</span> <span class="st">"Change"</span>,</span>
-<span>                 tot_charges <span class="op">=</span> <span class="st">"Charges"</span>,</span>
-<span>                 tot_charges_pct <span class="op">=</span> <span class="st">"Change"</span>,</span>
-<span>                 tot_allowed <span class="op">=</span> <span class="st">"Allowed"</span>,</span>
-<span>                 tot_allowed_pct <span class="op">=</span> <span class="st">"Change"</span>,</span>
-<span>                 tot_payment <span class="op">=</span> <span class="st">"Payment"</span>,</span>
-<span>                 tot_payment_pct <span class="op">=</span> <span class="st">"Change"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"pct"</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span>, force_sign <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/sub_missing.html" class="external-link">sub_missing</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/everything.html" class="external-link">everything</a></span><span class="op">(</span><span class="op">)</span>, missing_text <span class="op">=</span> <span class="st">"--"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">tot_benes</span>,</span>
-<span>                       col_pct <span class="op">=</span> <span class="va">tot_benes_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
-<span>                       col_pct <span class="op">=</span> <span class="va">tot_srvcs_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">tot_charges</span>,</span>
-<span>                       col_pct <span class="op">=</span> <span class="va">tot_charges_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">tot_allowed</span>,</span>
-<span>                       col_pct <span class="op">=</span> <span class="va">tot_allowed_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span>col_n <span class="op">=</span> <span class="va">tot_payment</span>,</span>
-<span>                       col_pct <span class="op">=</span> <span class="va">tot_payment_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_charges_chg</span>, <span class="va">tot_allowed_chg</span>, <span class="va">tot_payment_chg</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Summary: **2014 - 2021**"</span><span class="op">)</span>,</span>
+<span>                     subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider: **SARAH K. HUSSAIN, MD**"</span><span class="op">)</span>,</span>
+<span>                     divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span>,</span>
+<span>                     dollars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_charges"</span>, <span class="st">"tot_allowed"</span>, <span class="st">"tot_payment"</span><span class="op">)</span>,</span>
+<span>                     pctchg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_charges_pct"</span>, <span class="st">"tot_allowed_pct"</span>, <span class="st">"tot_payment_pct"</span><span class="op">)</span>,</span>
+<span>                     source <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Source: [Medicare Physician &amp; Other Practitioners: by Provider</span></span>
+<span><span class="st">                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>tot_charges <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_charges_pct <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_allowed <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_allowed_pct <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_payment <span class="op">=</span> <span class="st">""</span>,</span>
+<span>                 tot_payment_pct <span class="op">=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span></span>
-<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, <span class="st">"tot_benes"</span>, </span>
-<span>                <span class="st">"tot_srvcs"</span>, </span>
-<span>                <span class="st">"tot_charges"</span>, </span>
-<span>                <span class="st">"tot_allowed"</span><span class="op">)</span>, </span>
-<span>    style <span class="op">=</span> <span class="st">"solid"</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>    weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>    include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Summary: **2014 - 2021**"</span><span class="op">)</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider: Sarah K. Hussein, MD (NPI: 1043477615)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span></code></pre></div>
-</details><div id="pfrukpizcd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, </span>
+<span>             <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_charges"</span>, <span class="st">"tot_allowed"</span>, <span class="st">"tot_payment"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"SUBMITTED CHARGES"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_charges</span>, <span class="va">tot_charges_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"ALLOWED AMOUNTS"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_allowed</span>, <span class="va">tot_allowed_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"PAYMENT RECEIVED"</span>, columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tot_payment</span>, <span class="va">tot_payment_pct</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html" class="external-link">data_color</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"tot_charges_pct"</span>, <span class="st">"tot_allowed_pct"</span>, <span class="st">"tot_payment_pct"</span><span class="op">)</span>,</span>
+<span>                 palette <span class="op">=</span> <span class="st">"ggsci::red_material"</span><span class="op">)</span></span></code></pre></div>
+</details><div id="hbkeavwzyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pfrukpizcd table {
+#hbkeavwzyn table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pfrukpizcd thead, #pfrukpizcd tbody, #pfrukpizcd tfoot, #pfrukpizcd tr, #pfrukpizcd td, #pfrukpizcd th {
+#hbkeavwzyn thead, #hbkeavwzyn tbody, #hbkeavwzyn tfoot, #hbkeavwzyn tr, #hbkeavwzyn td, #hbkeavwzyn th {
   border-style: none;
 }
 
-#pfrukpizcd p {
+#hbkeavwzyn p {
   margin: 0;
   padding: 0;
 }
 
-#pfrukpizcd .gt_table {
+#hbkeavwzyn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -808,7 +257,7 @@ Code for table
   font-weight: 300;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: none;
   border-top-width: 3px;
   border-top-color: #A8A8A8;
@@ -823,12 +272,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_caption {
+#hbkeavwzyn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pfrukpizcd .gt_title {
+#hbkeavwzyn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -840,7 +289,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#pfrukpizcd .gt_subtitle {
+#hbkeavwzyn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -852,7 +301,7 @@ Code for table
   border-top-width: 0;
 }
 
-#pfrukpizcd .gt_heading {
+#hbkeavwzyn .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -864,16 +313,16 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_bottom_border {
+#hbkeavwzyn .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_col_headings {
+#hbkeavwzyn .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
-  border-top-color: #D3D3D3;
+  border-top-color: #FFFFFF;
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -885,11 +334,11 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_col_heading {
+#hbkeavwzyn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
-  font-weight: normal;
+  font-weight: bolder;
   text-transform: uppercase;
   border-left-style: none;
   border-left-width: 1px;
@@ -905,11 +354,11 @@ Code for table
   overflow-x: hidden;
 }
 
-#pfrukpizcd .gt_column_spanner_outer {
+#hbkeavwzyn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
-  font-weight: normal;
+  font-weight: bolder;
   text-transform: uppercase;
   padding-top: 0;
   padding-bottom: 0;
@@ -917,15 +366,15 @@ Code for table
   padding-right: 4px;
 }
 
-#pfrukpizcd .gt_column_spanner_outer:first-child {
+#hbkeavwzyn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pfrukpizcd .gt_column_spanner_outer:last-child {
+#hbkeavwzyn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pfrukpizcd .gt_column_spanner {
+#hbkeavwzyn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -937,11 +386,11 @@ Code for table
   width: 100%;
 }
 
-#pfrukpizcd .gt_spanner_row {
+#hbkeavwzyn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pfrukpizcd .gt_group_heading {
+#hbkeavwzyn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -967,7 +416,7 @@ Code for table
   text-align: left;
 }
 
-#pfrukpizcd .gt_empty_group_heading {
+#hbkeavwzyn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -982,15 +431,15 @@ Code for table
   vertical-align: middle;
 }
 
-#pfrukpizcd .gt_from_md > :first-child {
+#hbkeavwzyn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pfrukpizcd .gt_from_md > :last-child {
+#hbkeavwzyn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pfrukpizcd .gt_row {
+#hbkeavwzyn .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -1009,7 +458,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#pfrukpizcd .gt_stub {
+#hbkeavwzyn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -1022,7 +471,7 @@ Code for table
   padding-right: 5px;
 }
 
-#pfrukpizcd .gt_stub_row_group {
+#hbkeavwzyn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1036,15 +485,15 @@ Code for table
   vertical-align: top;
 }
 
-#pfrukpizcd .gt_row_group_first td {
+#hbkeavwzyn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pfrukpizcd .gt_row_group_first th {
+#hbkeavwzyn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pfrukpizcd .gt_summary_row {
+#hbkeavwzyn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1054,16 +503,16 @@ Code for table
   padding-right: 5px;
 }
 
-#pfrukpizcd .gt_first_summary_row {
+#hbkeavwzyn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_first_summary_row.thick {
+#hbkeavwzyn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pfrukpizcd .gt_last_summary_row {
+#hbkeavwzyn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1073,7 +522,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_grand_summary_row {
+#hbkeavwzyn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1083,7 +532,7 @@ Code for table
   padding-right: 5px;
 }
 
-#pfrukpizcd .gt_first_grand_summary_row {
+#hbkeavwzyn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1093,7 +542,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_last_grand_summary_row_top {
+#hbkeavwzyn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1103,20 +552,20 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_striped {
+#hbkeavwzyn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pfrukpizcd .gt_table_body {
+#hbkeavwzyn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
+  border-bottom-color: #000000;
 }
 
-#pfrukpizcd .gt_footnotes {
+#hbkeavwzyn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1130,7 +579,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_footnote {
+#hbkeavwzyn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1139,7 +588,7 @@ Code for table
   padding-right: 5px;
 }
 
-#pfrukpizcd .gt_sourcenotes {
+#hbkeavwzyn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1153,7 +602,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#pfrukpizcd .gt_sourcenote {
+#hbkeavwzyn .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1161,63 +610,63 @@ Code for table
   padding-right: 5px;
 }
 
-#pfrukpizcd .gt_left {
+#hbkeavwzyn .gt_left {
   text-align: left;
 }
 
-#pfrukpizcd .gt_center {
+#hbkeavwzyn .gt_center {
   text-align: center;
 }
 
-#pfrukpizcd .gt_right {
+#hbkeavwzyn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pfrukpizcd .gt_font_normal {
+#hbkeavwzyn .gt_font_normal {
   font-weight: normal;
 }
 
-#pfrukpizcd .gt_font_bold {
+#hbkeavwzyn .gt_font_bold {
   font-weight: bold;
 }
 
-#pfrukpizcd .gt_font_italic {
+#hbkeavwzyn .gt_font_italic {
   font-style: italic;
 }
 
-#pfrukpizcd .gt_super {
+#hbkeavwzyn .gt_super {
   font-size: 65%;
 }
 
-#pfrukpizcd .gt_footnote_marks {
+#hbkeavwzyn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pfrukpizcd .gt_asterisk {
+#hbkeavwzyn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pfrukpizcd .gt_indent_1 {
+#hbkeavwzyn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pfrukpizcd .gt_indent_2 {
+#hbkeavwzyn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pfrukpizcd .gt_indent_3 {
+#hbkeavwzyn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pfrukpizcd .gt_indent_4 {
+#hbkeavwzyn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pfrukpizcd .gt_indent_5 {
+#hbkeavwzyn .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -1228,116 +677,1237 @@ tbody tr:last-child {
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="6" class="gt_heading gt_title gt_font_normal" style>Medicare Provider Summary: <strong>2014 - 2021</strong>
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Medicare Provider Summary: <strong>2014 - 2021</strong>
 </td>
     </tr>
 <tr class="gt_heading">
-<td colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Provider: Sarah K. Hussein, MD (NPI: 1043477615)</td>
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Provider: Sarah Hussain. (NPI: 1043477615).</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Year">Year</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="BENEFICIARIES">
+        <span class="gt_column_spanner">BENEFICIARIES</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="SERVICES">
+        <span class="gt_column_spanner">SERVICES</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="REPEAT BENEFICIARIES">
+        <span class="gt_column_spanner">REPEAT BENEFICIARIES</span>
+      </th>
     </tr>
 <tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Beneficiaries">Beneficiaries</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Procedures">Procedures</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Charges">Charges</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Allowed">Allowed</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Payment">Payment</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2014</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">598</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">823</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$319.40K</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$42.43K</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$33.77K</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">598</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #808080; color: #FFFFFF;">–</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">823</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #808080; color: #FFFFFF;">–</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">225</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #808080; color: #FFFFFF;">–</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2015</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1042 (+74%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1449 (+76%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$551.63K (+73%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$82.73K (+95%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$64.72K (+92%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,042</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #B71C1C; color: #FFFFFF;">+74.2%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,449</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #B71C1C; color: #FFFFFF;">+76.1%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">407</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #B71C1C; color: #FFFFFF;">+80.9%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2016</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">619 (−41%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1000 (−31%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$653.52K (+18%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$111.28K (+35%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$87.14K (+35%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">619</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #FFEBEE; color: #000000;">−40.6%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,000</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #FFEBEE; color: #000000;">−31.0%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">381</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #FFD2D7; color: #000000;">−6.4%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2017</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">606 (−2%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">972 (−3%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$460.68K (−30%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$88.16K (−21%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$68.17K (−22%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">606</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #E57372; color: #FFFFFF;">−2.1%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">972</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #EC8C8B; color: #000000;">−2.8%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">366</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #FECACE; color: #000000;">−3.9%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2018</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">505 (−17%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1034 (+6%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$504.64K (+10%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$102.86K (+17%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$80.08K (+17%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">505</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #F1A0A1; color: #000000;">−16.7%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,034</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #E76F6E; color: #FFFFFF;">+6.4%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">529</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #EB3D35; color: #FFFFFF;">+44.5%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2019</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">532 (+5%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1252 (+21%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$617.80K (+22%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$134.10K (+30%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$104.99K (+31%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">532</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #EC615E; color: #FFFFFF;">+5.3%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,252</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #F14D46; color: #FFFFFF;">+21.1%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">720</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #F3463B; color: #FFFFFF;">+36.1%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2020</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">650 (+22%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1260 (+1%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$482.49K (−22%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$106.51K (−21%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$81.87K (−22%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">650</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #F44438; color: #FFFFFF;">+22.2%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,260</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #E98180; color: #FFFFFF;">+0.6%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">610</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #FFEBEE; color: #000000;">−15.3%</td>
 </tr>
 <tr>
 <td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2021</td>
-<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">748 (+15%)</td>
-<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">1369 (+9%)</td>
-<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$444.67K (−8%)</td>
-<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; border-right-width: 3px; border-right-style: solid; border-right-color: black;">$97.16K (−9%)</td>
-<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$75.29K (−8%)</td>
+<td headers="tot_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">748</td>
+<td headers="tot_benes_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #F14E47; color: #FFFFFF;">+15.1%</td>
+<td headers="tot_srvcs" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">1,369</td>
+<td headers="tot_srvcs_pct" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black; background-color: #E96967; color: #FFFFFF;">+8.7%</td>
+<td headers="rep_benes" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">621</td>
+<td headers="rep_benes_pct" class="gt_row gt_right" style="background-color: #F6AEB0; color: #000000;">+1.8%</td>
 </tr>
 </tbody>
 <tfoot class="gt_sourcenotes"><tr>
-<td class="gt_sourcenote" colspan="6">Source: data.cms.gov</td>
+<td class="gt_sourcenote" colspan="7">Source: <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider
+API</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+<div id="vypbrooyqp" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#vypbrooyqp table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vypbrooyqp thead, #vypbrooyqp tbody, #vypbrooyqp tfoot, #vypbrooyqp tr, #vypbrooyqp td, #vypbrooyqp th {
+  border-style: none;
+}
+
+#vypbrooyqp p {
+  margin: 0;
+  padding: 0;
+}
+
+#vypbrooyqp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vypbrooyqp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vypbrooyqp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vypbrooyqp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #FFFFFF;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vypbrooyqp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vypbrooyqp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vypbrooyqp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vypbrooyqp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vypbrooyqp .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vypbrooyqp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vypbrooyqp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#vypbrooyqp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vypbrooyqp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vypbrooyqp .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vypbrooyqp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypbrooyqp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vypbrooyqp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vypbrooyqp .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vypbrooyqp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypbrooyqp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vypbrooyqp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypbrooyqp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vypbrooyqp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+}
+
+#vypbrooyqp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypbrooyqp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vypbrooyqp .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vypbrooyqp .gt_left {
+  text-align: left;
+}
+
+#vypbrooyqp .gt_center {
+  text-align: center;
+}
+
+#vypbrooyqp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vypbrooyqp .gt_font_normal {
+  font-weight: normal;
+}
+
+#vypbrooyqp .gt_font_bold {
+  font-weight: bold;
+}
+
+#vypbrooyqp .gt_font_italic {
+  font-style: italic;
+}
+
+#vypbrooyqp .gt_super {
+  font-size: 65%;
+}
+
+#vypbrooyqp .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vypbrooyqp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vypbrooyqp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vypbrooyqp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vypbrooyqp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vypbrooyqp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vypbrooyqp .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Medicare Provider Summary: <strong>2014 - 2021</strong>
+</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Provider: <strong>SARAH K. HUSSAIN, MD</strong>
+</td>
+    </tr>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Year">Year</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="SUBMITTED CHARGES">
+        <span class="gt_column_spanner">SUBMITTED CHARGES</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="ALLOWED AMOUNTS">
+        <span class="gt_column_spanner">ALLOWED AMOUNTS</span>
+      </th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="PAYMENT RECEIVED">
+        <span class="gt_column_spanner">PAYMENT RECEIVED</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id=""></th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2014</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 319.40K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #808080; color: #FFFFFF;">–</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 42.43K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #808080; color: #FFFFFF;">–</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 33.77K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #808080; color: #FFFFFF;">–</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2015</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 551.63K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #B71C1C; color: #FFFFFF;">+72.7%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 82.73K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #B71C1C; color: #FFFFFF;">+95.0%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 64.72K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #B71C1C; color: #FFFFFF;">+91.6%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2016</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 653.52K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #F0504A; color: #FFFFFF;">+18.5%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 111.28K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #F14F48; color: #FFFFFF;">+34.5%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 87.14K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #F24C43; color: #FFFFFF;">+34.6%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2017</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 460.68K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #FFEBEE; color: #000000;">−29.5%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 88.16K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #FFEBEE; color: #000000;">−20.8%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 68.17K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #FFEAED; color: #000000;">−21.8%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2018</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 504.64K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #EA6664; color: #FFFFFF;">+9.5%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 102.86K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #E67776; color: #FFFFFF;">+16.7%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 80.08K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #E76F6F; color: #FFFFFF;">+17.5%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2019</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 617.80K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #F24A41; color: #FFFFFF;">+22.4%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 134.10K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #EF5451; color: #FFFFFF;">+30.4%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 104.99K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #F0504B; color: #FFFFFF;">+31.1%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2020</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 482.49K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #FFD7DB; color: #000000;">−21.9%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 106.51K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #FFEBEE; color: #000000;">−20.6%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 81.87K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #FFEBEE; color: #000000;">−22.0%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2021</td>
+<td headers="tot_charges" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 444.67K</td>
+<td headers="tot_charges_pct" class="gt_row gt_right" style="background-color: #F19F9F; color: #000000;">−7.8%</td>
+<td headers="tot_allowed" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 97.16K</td>
+<td headers="tot_allowed_pct" class="gt_row gt_right" style="background-color: #FFCFD4; color: #000000;">−8.8%</td>
+<td headers="tot_payment" class="gt_row gt_right" style="font-family: 'Fira Code', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';">$ 75.29K</td>
+<td headers="tot_payment_pct" class="gt_row gt_right" style="background-color: #FEC7CC; color: #000000;">−8.0%</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="7">Source: <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider
+API</a>
+</td>
     </tr></tfoot>
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, </span>
-<span>                <span class="va">bene_age_avg</span><span class="op">:</span><span class="va">bene_age_gt84</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                <span class="va">tot_benes</span>, </span>
+<span>                <span class="va">bene_age_avg</span>, </span>
+<span>                <span class="va">bene_age_lt65</span>,</span>
+<span>                <span class="va">bene_age_65_74</span>,</span>
+<span>                <span class="va">bene_age_75_84</span>,</span>
+<span>                <span class="va">bene_age_gt84</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>pct_lt65 <span class="op">=</span> <span class="va">bene_age_lt65</span> <span class="op">/</span> <span class="va">tot_benes</span>,</span>
 <span>                pct_6574 <span class="op">=</span> <span class="va">bene_age_65_74</span> <span class="op">/</span> <span class="va">tot_benes</span>,</span>
 <span>                pct_7584 <span class="op">=</span> <span class="va">bene_age_75_84</span> <span class="op">/</span> <span class="va">tot_benes</span>,</span>
-<span>                pct_gt84 <span class="op">=</span> <span class="va">bene_age_gt84</span> <span class="op">/</span> <span class="va">tot_benes</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 11</span></span></span>
-<span><span class="co">#&gt;    year tot_benes bene_age_avg bene_age_lt65 bene_age_65_74 bene_age_75_84</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>014       598           73            92            231            183</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>015      <span style="text-decoration: underline;">1</span>042           72           191            398            313</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>016       619           73            95            235            211</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>017       606           73            85            246            179</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>018       505           74            63            206            167</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>019       532           74            59            222            173</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020       650           75            65            270            205</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>021       748           75            57            333            232</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: bene_age_gt84 &lt;int&gt;, pct_lt65 &lt;dbl&gt;, pct_6574 &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pct_7584 &lt;dbl&gt;, pct_gt84 &lt;dbl&gt;</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">bene_female</span><span class="op">:</span><span class="va">bene_male</span><span class="op">)</span></span>
+<span>                pct_gt84 <span class="op">=</span> <span class="va">bene_age_gt84</span> <span class="op">/</span> <span class="va">tot_benes</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,</span>
+<span>                <span class="va">bene_age_avg</span>, </span>
+<span>                <span class="va">pct_lt65</span>,</span>
+<span>                <span class="va">pct_6574</span>,</span>
+<span>                <span class="va">pct_7584</span>,</span>
+<span>                <span class="va">pct_gt84</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_prov</span><span class="op">(</span>title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Age Demographics: **2014 - 2021**"</span><span class="op">)</span>,</span>
+<span>                     subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider: **SARAH K. HUSSAIN, MD**"</span><span class="op">)</span>,</span>
+<span>                     divider <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span><span class="op">)</span>,</span>
+<span>                     pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pct_lt65"</span>, <span class="st">"pct_6574"</span>, <span class="st">"pct_7584"</span>, <span class="st">"pct_gt84"</span><span class="op">)</span>,</span>
+<span>                     source <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Source: [Medicare Physician &amp; Other Practitioners: by Provider</span></span>
+<span><span class="st">                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<div id="wfousfmdjz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#wfousfmdjz table {
+  font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#wfousfmdjz thead, #wfousfmdjz tbody, #wfousfmdjz tfoot, #wfousfmdjz tr, #wfousfmdjz td, #wfousfmdjz th {
+  border-style: none;
+}
+
+#wfousfmdjz p {
+  margin: 0;
+  padding: 0;
+}
+
+#wfousfmdjz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#wfousfmdjz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#wfousfmdjz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#wfousfmdjz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #FFFFFF;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#wfousfmdjz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#wfousfmdjz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#wfousfmdjz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#wfousfmdjz .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#wfousfmdjz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#wfousfmdjz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#wfousfmdjz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#wfousfmdjz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#wfousfmdjz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#wfousfmdjz .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#wfousfmdjz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfousfmdjz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#wfousfmdjz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#wfousfmdjz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#wfousfmdjz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfousfmdjz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#wfousfmdjz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfousfmdjz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#wfousfmdjz .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+}
+
+#wfousfmdjz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfousfmdjz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#wfousfmdjz .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#wfousfmdjz .gt_left {
+  text-align: left;
+}
+
+#wfousfmdjz .gt_center {
+  text-align: center;
+}
+
+#wfousfmdjz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#wfousfmdjz .gt_font_normal {
+  font-weight: normal;
+}
+
+#wfousfmdjz .gt_font_bold {
+  font-weight: bold;
+}
+
+#wfousfmdjz .gt_font_italic {
+  font-style: italic;
+}
+
+#wfousfmdjz .gt_super {
+  font-size: 65%;
+}
+
+#wfousfmdjz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#wfousfmdjz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#wfousfmdjz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#wfousfmdjz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#wfousfmdjz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#wfousfmdjz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#wfousfmdjz .gt_indent_5 {
+  text-indent: 25px;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_heading">
+<td colspan="6" class="gt_heading gt_title gt_font_normal" style>Medicare Provider Age Demographics: <strong>2014 - 2021</strong>
+</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="6" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Provider: <strong>SARAH K. HUSSAIN, MD</strong>
+</td>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Year">Year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Bene Age Avg">Bene Age Avg</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Pct Lt65">Pct Lt65</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Pct 6574">Pct 6574</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Pct 7584">Pct 7584</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;" scope="col" id="Pct Gt84">Pct Gt84</th>
+    </tr>
+</thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2014</td>
+<td headers="bene_age_avg" class="gt_row gt_right">73</td>
+<td headers="pct_lt65" class="gt_row gt_right">15%</td>
+<td headers="pct_6574" class="gt_row gt_right">39%</td>
+<td headers="pct_7584" class="gt_row gt_right">31%</td>
+<td headers="pct_gt84" class="gt_row gt_right">15%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2015</td>
+<td headers="bene_age_avg" class="gt_row gt_right">72</td>
+<td headers="pct_lt65" class="gt_row gt_right">18%</td>
+<td headers="pct_6574" class="gt_row gt_right">38%</td>
+<td headers="pct_7584" class="gt_row gt_right">30%</td>
+<td headers="pct_gt84" class="gt_row gt_right">13%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2016</td>
+<td headers="bene_age_avg" class="gt_row gt_right">73</td>
+<td headers="pct_lt65" class="gt_row gt_right">15%</td>
+<td headers="pct_6574" class="gt_row gt_right">38%</td>
+<td headers="pct_7584" class="gt_row gt_right">34%</td>
+<td headers="pct_gt84" class="gt_row gt_right">13%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2017</td>
+<td headers="bene_age_avg" class="gt_row gt_right">73</td>
+<td headers="pct_lt65" class="gt_row gt_right">14%</td>
+<td headers="pct_6574" class="gt_row gt_right">41%</td>
+<td headers="pct_7584" class="gt_row gt_right">30%</td>
+<td headers="pct_gt84" class="gt_row gt_right">16%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2018</td>
+<td headers="bene_age_avg" class="gt_row gt_right">74</td>
+<td headers="pct_lt65" class="gt_row gt_right">12%</td>
+<td headers="pct_6574" class="gt_row gt_right">41%</td>
+<td headers="pct_7584" class="gt_row gt_right">33%</td>
+<td headers="pct_gt84" class="gt_row gt_right">14%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2019</td>
+<td headers="bene_age_avg" class="gt_row gt_right">74</td>
+<td headers="pct_lt65" class="gt_row gt_right">11%</td>
+<td headers="pct_6574" class="gt_row gt_right">42%</td>
+<td headers="pct_7584" class="gt_row gt_right">33%</td>
+<td headers="pct_gt84" class="gt_row gt_right">15%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2020</td>
+<td headers="bene_age_avg" class="gt_row gt_right">75</td>
+<td headers="pct_lt65" class="gt_row gt_right">10%</td>
+<td headers="pct_6574" class="gt_row gt_right">42%</td>
+<td headers="pct_7584" class="gt_row gt_right">32%</td>
+<td headers="pct_gt84" class="gt_row gt_right">17%</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="border-right-width: 3px; border-right-style: solid; border-right-color: black;">2021</td>
+<td headers="bene_age_avg" class="gt_row gt_right">75</td>
+<td headers="pct_lt65" class="gt_row gt_right">8%</td>
+<td headers="pct_6574" class="gt_row gt_right">45%</td>
+<td headers="pct_7584" class="gt_row gt_right">31%</td>
+<td headers="pct_gt84" class="gt_row gt_right">17%</td>
+</tr>
+</tbody>
+<tfoot class="gt_sourcenotes"><tr>
+<td class="gt_sourcenote" colspan="6">Source: <a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider
+API</a>
+</td>
+    </tr></tfoot>
+</table>
+</div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">bene_female</span><span class="op">:</span><span class="va">bene_male</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 4</span></span></span>
 <span><span class="co">#&gt;    year tot_benes bene_female bene_male</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -1349,8 +1919,11 @@ tbody tr:last-child {
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>019       532         226       306</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020       650         278       372</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>021       748         343       405</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">bene_race_wht</span><span class="op">:</span><span class="va">bene_race_oth</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                <span class="va">tot_benes</span>, </span>
+<span>                <span class="va">bene_race_wht</span><span class="op">:</span><span class="va">bene_race_oth</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 8</span></span></span>
 <span><span class="co">#&gt;    year tot_benes bene_race_wht bene_race_blk bene_race_api bene_race_span</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -1363,8 +1936,11 @@ tbody tr:last-child {
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020       650           611            13            <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>021       748           692            17            <span style="color: #BB0000;">NA</span>             <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: bene_race_nat &lt;int&gt;, bene_race_oth &lt;int&gt;</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">bene_dual</span><span class="op">:</span><span class="va">bene_ndual</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                <span class="va">tot_benes</span>, </span>
+<span>                <span class="va">bene_dual</span><span class="op">:</span><span class="va">bene_ndual</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 8 × 4</span></span></span>
 <span><span class="co">#&gt;    year tot_benes bene_dual bene_ndual</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -1394,8 +1970,11 @@ tbody tr:last-child {
 <li>bene_cc_sz: Schizophrenia / Other Psychotic Disorders</li>
 <li>bene_cc_strk: Stroke</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">sh</span> <span class="op">|&gt;</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">tot_benes</span>, <span class="va">bene_cc_af</span><span class="op">:</span><span class="va">bene_risk_avg</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">provider</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>                <span class="va">tot_benes</span>, </span>
+<span>                <span class="va">bene_cc_af</span><span class="op">:</span><span class="va">bene_risk_avg</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    tot_af <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">tot_benes</span> <span class="op">*</span> <span class="va">bene_cc_af</span><span class="op">)</span>,</span>
 <span>    tot_alz <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">tot_benes</span> <span class="op">*</span> <span class="va">bene_cc_alz</span><span class="op">)</span>,</span>
@@ -1432,57 +2011,28 @@ tbody tr:last-child {
 <span><span class="co">#&gt; <span style="color: #949494;">#   tot_canc &lt;dbl&gt;, tot_chf &lt;dbl&gt;, tot_ckd &lt;dbl&gt;, tot_copd &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tot_dep &lt;dbl&gt;, tot_diab &lt;dbl&gt;, tot_hplip &lt;dbl&gt;, tot_hpten &lt;dbl&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
-<span>                      entype <span class="op">=</span> <span class="st">"I"</span>, </span>
-<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>, </span>
-<span>                      state <span class="op">=</span> <span class="st">"PA"</span>, </span>
-<span>                      fips <span class="op">=</span> <span class="fl">42</span>, </span>
-<span>                      ruca <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                      gender <span class="op">=</span> <span class="st">"F"</span>, </span>
-<span>                      credential <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 139 × 70</span></span></span>
-<span><span class="co">#&gt;     year npi    first_name middle_name last_name credential gender entype street</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 10030… Kristin    A           Riley     MD         F      Indiv… 35 Ho…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 10030… Hiroko     <span style="color: #BB0000;">NA</span>          Shike     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 10039… Rebecca    <span style="color: #BB0000;">NA</span>          Phaeton   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 10039… Karen      L           Krok      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 10133… Rashmi     <span style="color: #BB0000;">NA</span>          Banjade   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 10232… Melissa    L           Coleman   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 10334… Sheila     P           Nguyen    MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 10434… Sarah      K           Hussain   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 10533… Shelley    R           Hankins   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 10536… Maria      C           Castello… MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 129 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, …</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="tocwrelwzz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ielbscpdfm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tocwrelwzz table {
+#ielbscpdfm table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tocwrelwzz thead, #tocwrelwzz tbody, #tocwrelwzz tfoot, #tocwrelwzz tr, #tocwrelwzz td, #tocwrelwzz th {
+#ielbscpdfm thead, #ielbscpdfm tbody, #ielbscpdfm tfoot, #ielbscpdfm tr, #ielbscpdfm td, #ielbscpdfm th {
   border-style: none;
 }
 
-#tocwrelwzz p {
+#ielbscpdfm p {
   margin: 0;
   padding: 0;
 }
 
-#tocwrelwzz .gt_table {
+#ielbscpdfm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1508,12 +2058,12 @@ tbody tr:last-child {
   border-left-color: #D3D3D3;
 }
 
-#tocwrelwzz .gt_caption {
+#ielbscpdfm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tocwrelwzz .gt_title {
+#ielbscpdfm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1525,7 +2075,7 @@ tbody tr:last-child {
   border-bottom-width: 0;
 }
 
-#tocwrelwzz .gt_subtitle {
+#ielbscpdfm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1537,7 +2087,7 @@ tbody tr:last-child {
   border-top-width: 0;
 }
 
-#tocwrelwzz .gt_heading {
+#ielbscpdfm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1549,13 +2099,13 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tocwrelwzz .gt_bottom_border {
+#ielbscpdfm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_col_headings {
+#ielbscpdfm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -1570,7 +2120,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tocwrelwzz .gt_col_heading {
+#ielbscpdfm .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -1590,7 +2140,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#tocwrelwzz .gt_column_spanner_outer {
+#ielbscpdfm .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -1602,15 +2152,15 @@ tbody tr:last-child {
   padding-right: 4px;
 }
 
-#tocwrelwzz .gt_column_spanner_outer:first-child {
+#ielbscpdfm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tocwrelwzz .gt_column_spanner_outer:last-child {
+#ielbscpdfm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tocwrelwzz .gt_column_spanner {
+#ielbscpdfm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -1622,11 +2172,11 @@ tbody tr:last-child {
   width: 100%;
 }
 
-#tocwrelwzz .gt_spanner_row {
+#ielbscpdfm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tocwrelwzz .gt_group_heading {
+#ielbscpdfm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1652,7 +2202,7 @@ tbody tr:last-child {
   text-align: left;
 }
 
-#tocwrelwzz .gt_empty_group_heading {
+#ielbscpdfm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1667,15 +2217,15 @@ tbody tr:last-child {
   vertical-align: middle;
 }
 
-#tocwrelwzz .gt_from_md > :first-child {
+#ielbscpdfm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tocwrelwzz .gt_from_md > :last-child {
+#ielbscpdfm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tocwrelwzz .gt_row {
+#ielbscpdfm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1694,7 +2244,7 @@ tbody tr:last-child {
   overflow-x: hidden;
 }
 
-#tocwrelwzz .gt_stub {
+#ielbscpdfm .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -1707,7 +2257,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tocwrelwzz .gt_stub_row_group {
+#ielbscpdfm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1721,15 +2271,15 @@ tbody tr:last-child {
   vertical-align: top;
 }
 
-#tocwrelwzz .gt_row_group_first td {
+#ielbscpdfm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tocwrelwzz .gt_row_group_first th {
+#ielbscpdfm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tocwrelwzz .gt_summary_row {
+#ielbscpdfm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1739,16 +2289,16 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tocwrelwzz .gt_first_summary_row {
+#ielbscpdfm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_first_summary_row.thick {
+#ielbscpdfm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tocwrelwzz .gt_last_summary_row {
+#ielbscpdfm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1758,7 +2308,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_grand_summary_row {
+#ielbscpdfm .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -1768,7 +2318,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tocwrelwzz .gt_first_grand_summary_row {
+#ielbscpdfm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1778,7 +2328,7 @@ tbody tr:last-child {
   border-top-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_last_grand_summary_row_top {
+#ielbscpdfm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1788,11 +2338,11 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_striped {
+#ielbscpdfm .gt_striped {
   background-color: #FEEDEC;
 }
 
-#tocwrelwzz .gt_table_body {
+#ielbscpdfm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -1801,7 +2351,7 @@ tbody tr:last-child {
   border-bottom-color: #5F5F5F;
 }
 
-#tocwrelwzz .gt_footnotes {
+#ielbscpdfm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1815,7 +2365,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tocwrelwzz .gt_footnote {
+#ielbscpdfm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1824,7 +2374,7 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tocwrelwzz .gt_sourcenotes {
+#ielbscpdfm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1838,7 +2388,7 @@ tbody tr:last-child {
   border-right-color: #D3D3D3;
 }
 
-#tocwrelwzz .gt_sourcenote {
+#ielbscpdfm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1846,63 +2396,63 @@ tbody tr:last-child {
   padding-right: 5px;
 }
 
-#tocwrelwzz .gt_left {
+#ielbscpdfm .gt_left {
   text-align: left;
 }
 
-#tocwrelwzz .gt_center {
+#ielbscpdfm .gt_center {
   text-align: center;
 }
 
-#tocwrelwzz .gt_right {
+#ielbscpdfm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tocwrelwzz .gt_font_normal {
+#ielbscpdfm .gt_font_normal {
   font-weight: normal;
 }
 
-#tocwrelwzz .gt_font_bold {
+#ielbscpdfm .gt_font_bold {
   font-weight: bold;
 }
 
-#tocwrelwzz .gt_font_italic {
+#ielbscpdfm .gt_font_italic {
   font-style: italic;
 }
 
-#tocwrelwzz .gt_super {
+#ielbscpdfm .gt_super {
   font-size: 65%;
 }
 
-#tocwrelwzz .gt_footnote_marks {
+#ielbscpdfm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tocwrelwzz .gt_asterisk {
+#ielbscpdfm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tocwrelwzz .gt_indent_1 {
+#ielbscpdfm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tocwrelwzz .gt_indent_2 {
+#ielbscpdfm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tocwrelwzz .gt_indent_3 {
+#ielbscpdfm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tocwrelwzz .gt_indent_4 {
+#ielbscpdfm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tocwrelwzz .gt_indent_5 {
+#ielbscpdfm .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2544,7 +3094,6 @@ tbody tr:last-child {
 </tr>
 </tbody>
 </table>
-</div>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
