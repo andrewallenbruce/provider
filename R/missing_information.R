@@ -50,7 +50,7 @@ missing_information <- function(npi    = NULL,
   response <- httr2::request(url) |> httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 22) {
+  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
 
     cli_args <- tibble::tribble(
       ~x,            ~y,

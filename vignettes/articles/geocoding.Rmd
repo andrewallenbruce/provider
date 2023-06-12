@@ -30,7 +30,7 @@ library(leaflet)
 
 <br>
 
-```{r}
+```{r, eval=FALSE}
 address <- nppes_npi(npi = 1760485387) |> 
   dplyr::select(street, city, state, zipcode) |>
   dplyr::filter(dplyr::row_number() %in% 1) |> 
@@ -50,7 +50,7 @@ address |>
 
 <br>
 
-```{r}
+```{r, eval=FALSE}
 leaflet::leaflet() |> 
   leaflet::addTiles() |> 
   leaflet::addMarkers(lng = address$longitude, 
@@ -61,7 +61,7 @@ leaflet::leaflet() |>
 
 ## Organizational Provider Locations
 
-```{r}
+```{r, eval=FALSE}
 orgs <- nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
 
 orgs_add <- orgs |> 
@@ -83,7 +83,7 @@ orgs_add |>
 
 <br>
 
-```{r}
+```{r, eval=FALSE}
 leaflet::leaflet() |> 
   leaflet::addTiles() |> 
   leaflet::addMarkers(lng = org$longitude, 

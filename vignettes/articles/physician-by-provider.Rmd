@@ -123,11 +123,13 @@ p2
 
 <br>
 
+<br>
+<details><summary>Code</summary>
+
 ```{r}
-provider |> 
+age <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
-                bene_age_avg, 
                 bene_age_lt65,
                 bene_age_65_74,
                 bene_age_75_84,
@@ -137,80 +139,245 @@ provider |>
                 pct_7584 = bene_age_75_84 / tot_benes,
                 pct_gt84 = bene_age_gt84 / tot_benes) |> 
   dplyr::select(year,
-                bene_age_avg, 
-                pct_lt65,
-                pct_6574,
-                pct_7584,
-                pct_gt84) |> 
-  provider:::gt_prov(title = gt::md("Medicare Provider Age Demographics: **2014 - 2021**"),
-                     subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("year"),
-                     pct = c("pct_lt65", "pct_6574", "pct_7584", "pct_gt84"),
-                     source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
-                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"))
+                "< 65" = pct_lt65,
+                "65 - 74" = pct_6574,
+                "75 - 84" = pct_7584,
+                "> 84" = pct_gt84) |> 
+  tidyr::pivot_longer(!year, 
+                      names_to = "group", 
+                      values_to = "percentage") |> 
+  dplyr::mutate(percent_labels = scales::percent(percentage, accuracy = 1),
+                group = factor(group, levels = c("< 65", "65 - 74", "75 - 84", "> 84"))) |> 
+  ggplot2::ggplot(ggplot2::aes(x = year, y = percentage, 
+                               fill = forcats::fct_rev(group))) +
+  ggplot2::geom_col() +
+  ggplot2::geom_text(
+    ggplot2::aes(label = percent_labels), 
+    position = ggplot2::position_stack(vjust = 0.5), 
+    col = "white",
+    fontface = "bold") +
+  ggplot2::scale_fill_manual(values = c("< 65" = "#0072B2", 
+                                        "65 - 74" = "red", 
+                                        "75 - 84" = "darkblue", 
+                                        "> 84" = "black")) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(),
+                              expand = ggplot2::expansion(mult = c(0, 0.01))) +
+  ggplot2::scale_x_continuous(n.breaks = 8) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(), 
+                 panel.grid.minor.y = ggplot2::element_blank(),
+                 axis.text.x = ggplot2::element_blank(),
+                 legend.position = "top",
+                 legend.title = ggplot2::element_blank()) +
+  ggplot2::geom_hline(yintercept = 0) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(), 
+    y = ggplot2::element_blank(),
+    #caption = "Source: Medicare Physician & Other Practitioners: by Provider",
+    title = "Age"
+    ) +
+  ggplot2::coord_flip()
 ```
 
+</details>
 
-```{r}
-provider |> dplyr::select(year, tot_benes, bene_female:bene_male)
+```{r, echo=FALSE, eval=TRUE}
+age
 ```
 
+<br>
+<details><summary>Code</summary>
 
 ```{r}
-provider |> 
+sex <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
-                bene_race_wht:bene_race_oth)
+                bene_female,
+                bene_male) |> 
+  dplyr::mutate(pct_female = bene_female / tot_benes,
+                pct_male = bene_male / tot_benes) |> 
+  dplyr::select(year,
+                Female = pct_female,
+                Male = pct_male) |> 
+  tidyr::pivot_longer(!year, 
+                      names_to = "group", 
+                      values_to = "percentage") |> 
+  dplyr::mutate(percent_labels = scales::percent(percentage, accuracy = 0.01),
+                group = factor(group)) |> 
+  ggplot2::ggplot(ggplot2::aes(x = year, y = percentage, 
+                               fill = group)) +
+  ggplot2::geom_col() +
+  ggplot2::geom_text(
+    ggplot2::aes(label = percent_labels), 
+    position = ggplot2::position_stack(vjust = 0.5), 
+    col = "white",
+    fontface = "bold") +
+  ggplot2::scale_fill_manual(values = c("Female" = "red", 
+                                        "Male" = "black")) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(),
+                              expand = ggplot2::expansion(mult = c(0, 0.01))) +
+  ggplot2::scale_x_continuous(n.breaks = 8) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(), 
+                 panel.grid.minor.y = ggplot2::element_blank(),
+                 axis.text.x = ggplot2::element_blank(),
+                 legend.position = "top",
+                 legend.title = ggplot2::element_blank()) +
+  ggplot2::geom_hline(yintercept = 0) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(), 
+    y = ggplot2::element_blank(),
+    title = "Sex") +
+  ggplot2::coord_flip()
 ```
 
+</details>
 
-```{r}
-provider |> 
-  dplyr::select(year, 
-                tot_benes, 
-                bene_dual:bene_ndual)
+```{r, echo=FALSE, eval=TRUE}
+sex
 ```
 
-   * bene_cc_af: Atrial Fibrillation
-   * bene_cc_alz: Alzheimer’s Disease or Dementia
-   * bene_cc_asth: Asthma
-   * bene_cc_canc: Cancer
-   * bene_cc_chf: Heart Failure
-   * bene_cc_ckd: Chronic Kidney Disease
-   * bene_cc_copd: Chronic Obstructive Pulmonary Disease
-   * bene_cc_dep: Depression
-   * bene_cc_diab: Diabetes
-   * bene_cc_hplip: Hyperlipidemia
-   * bene_cc_hpten: Hypertension
-   * bene_cc_ihd: Ischemic Heart Disease
-   * bene_cc_opo: Osteoporosis
-   * bene_cc_raoa: Rheumatoid Arthritis / Osteoarthritis
-   * bene_cc_sz: Schizophrenia / Other Psychotic Disorders
-   * bene_cc_strk: Stroke
-
+<br>
+<details><summary>Code</summary>
 
 ```{r}
-provider |> 
+dual <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
-                bene_cc_af:bene_risk_avg) |> 
+                bene_dual,
+                bene_ndual) |> 
+  dplyr::mutate(pct_dual = bene_dual / tot_benes,
+                pct_ndual = bene_ndual / tot_benes) |> 
+  dplyr::select(year,
+                Dual = pct_dual,
+                "Non-Dual" = pct_ndual) |> 
+  tidyr::pivot_longer(!year, 
+                      names_to = "group", 
+                      values_to = "percentage") |> 
+  dplyr::mutate(percent_labels = scales::percent(percentage, accuracy = 0.1),
+                group = factor(group)) |> 
+  ggplot2::ggplot(ggplot2::aes(x = year, y = percentage, 
+                               fill = group)) +
+  ggplot2::geom_col() +
+  ggplot2::geom_text(
+    ggplot2::aes(label = percent_labels), 
+    position = ggplot2::position_stack(vjust = 0.5), 
+    col = "white",
+    fontface = "bold") +
+  ggplot2::scale_fill_manual(values = c("Non-Dual" = "red", 
+                                        "Dual" = "black")) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(),
+                              expand = ggplot2::expansion(mult = c(0, 0.1))) +
+  ggplot2::scale_x_continuous(n.breaks = 8) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(), 
+                 panel.grid.minor.y = ggplot2::element_blank(),
+                 axis.text.x = ggplot2::element_blank(),
+                 legend.position = "top",
+                 legend.title = ggplot2::element_blank()) +
+  ggplot2::geom_hline(yintercept = 0) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(), 
+    y = ggplot2::element_blank(),
+    title = "Dual/Non-Dual") +
+  ggplot2::coord_flip()
+```
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+dual
+```
+
+<br>
+<details><summary>Code</summary>
+
+```{r}
+race <- provider |> 
+  dplyr::select(year, 
+                tot_benes,
+                dplyr::contains("bene_race_")) |> 
   dplyr::mutate(
-    tot_af = round(tot_benes * bene_cc_af),
-    tot_alz = round(tot_benes * bene_cc_alz),
-    tot_asth = round(tot_benes * bene_cc_asth),
-    tot_canc = round(tot_benes * bene_cc_canc),
-    tot_chf = round(tot_benes * bene_cc_chf),
-    tot_ckd = round(tot_benes * bene_cc_ckd),
-    tot_copd = round(tot_benes * bene_cc_copd),
-    tot_dep = round(tot_benes * bene_cc_dep),
-    tot_diab = round(tot_benes * bene_cc_diab),
-    tot_hplip = round(tot_benes * bene_cc_hplip),
-    tot_hpten = round(tot_benes * bene_cc_hpten),
-    tot_ihd = round(tot_benes * bene_cc_ihd),
-    tot_opo = round(tot_benes * bene_cc_opo),
-    tot_raoa = round(tot_benes * bene_cc_raoa),
-    tot_sz = round(tot_benes * bene_cc_sz),
-    tot_strk = round(tot_benes * bene_cc_strk))
+    bene_race_blk = dplyr::if_else(is.na(bene_race_blk), 0L, bene_race_blk),
+    bene_race_api = dplyr::if_else(is.na(bene_race_api), 0L, bene_race_api),
+    bene_race_span = dplyr::if_else(is.na(bene_race_span), 0L, bene_race_span),
+    bene_race_nat = dplyr::if_else(is.na(bene_race_nat), 0L, bene_race_nat),
+    bene_race_oth = dplyr::if_else(is.na(bene_race_oth), 0L, bene_race_oth),
+    tot_check = bene_race_wht + bene_race_blk + bene_race_api + bene_race_span + bene_race_nat + bene_race_oth,
+    unaccounted = tot_benes - tot_check) |> 
+  janitor::remove_constant() |> 
+  dplyr::mutate(Other = bene_race_oth + unaccounted + bene_race_blk + bene_race_span) |> 
+  dplyr::select(year, 
+                tot_benes,
+                White = bene_race_wht,
+                Other) |> 
+  dplyr::mutate(White = White / tot_benes,
+                Other = Other / tot_benes,
+                tot_benes = NULL) |> 
+  tidyr::pivot_longer(!year, 
+                      names_to = "race", 
+                      values_to = "percentage") |> 
+  dplyr::mutate(percent_labels = scales::percent(percentage, accuracy = 1),
+                race = factor(race)) |> 
+  ggplot2::ggplot(ggplot2::aes(x = year, y = percentage, 
+                               fill = race)) +
+  ggplot2::geom_col() +
+  ggplot2::geom_text(
+    ggplot2::aes(label = percent_labels), 
+    position = ggplot2::position_stack(vjust = 0.5), 
+    col = "white",
+    fontface = "bold") +
+  ggplot2::scale_fill_manual(values = c("White" = "red",
+                                        "Other" = "black")) +
+  ggplot2::scale_y_continuous(labels = scales::percent_format(),
+                              expand = ggplot2::expansion(mult = c(0, 0.1))) +
+  ggplot2::scale_x_continuous(n.breaks = 8) +
+  ggplot2::theme_minimal(base_size = 14) +
+  ggplot2::theme(panel.grid.major.y = ggplot2::element_blank(), 
+                 panel.grid.minor.y = ggplot2::element_blank(),
+                 axis.text.x = ggplot2::element_blank(),
+                 legend.position = "top",
+                 legend.title = ggplot2::element_blank()) +
+  ggplot2::geom_hline(yintercept = 0) +
+  ggplot2::labs(
+    x = ggplot2::element_blank(), 
+    y = ggplot2::element_blank(),
+    title = "Race") +
+  ggplot2::coord_flip()
+```
+</details>
+
+```{r, echo=FALSE, eval=TRUE}
+race
+```
+
+<br>
+
+```{r}
+provider |> 
+  dplyr::select(year, 
+                bene_risk_avg,
+                dplyr::contains("bene_cc_")) |> 
+  dplyr::rename(
+    hcc_risk_avg = bene_risk_avg,
+    atrial_fibrillation = bene_cc_af,
+    alzheimers_dementia = bene_cc_alz,
+    asthma = bene_cc_asth,
+    cancer = bene_cc_canc,
+    heart_failure = bene_cc_chf,
+    chronic_kidney_disease = bene_cc_ckd,
+    copd = bene_cc_copd,
+    depression = bene_cc_dep,
+    diabetes = bene_cc_diab,
+    hyperlipidemia = bene_cc_hplip,
+    hypertension = bene_cc_hpten,
+    heart_disease = bene_cc_ihd,
+    osteoporosis = bene_cc_opo,
+    arthritis = bene_cc_raoa,
+    schizophrenia_psychotic = bene_cc_sz,
+    stroke = bene_cc_strk) |> 
+  tidyr::pivot_longer(!year, 
+                      names_to = "group", 
+                      values_to = "percentage")
 ```
 
 

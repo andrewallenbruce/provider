@@ -96,7 +96,7 @@ beneficiary_enrollment(period = "Year",
 
 <details><summary>Code for plots</summary>
 
-```{r}
+```{r, eval=FALSE}
 national <- beneficiary_enrollment(period = "Year", level = "National") |> 
   dplyr::select(year, level, bene_total, bene_orig, bene_ma_oth) |> 
   dplyr::mutate(pct_orig = bene_orig / bene_total,
@@ -189,7 +189,7 @@ ma <- enrollment |>
 </details>
 
 
-```{r, fig.height=4, fig.width=4}
+```{r, eval=FALSE, echo=FALSE}
 library(patchwork)
 patchwork <- total / (orig + ma)
 patchwork + 
