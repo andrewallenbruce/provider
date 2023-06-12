@@ -51,29 +51,12 @@
 <li class="nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
-<li class="active nav-item dropdown">
+<li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <h6 class="dropdown-header" data-toc-skip>Use Cases</h6>
+    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
-    <h6 class="dropdown-header" data-toc-skip>API Overviews</h6>
-    <a class="dropdown-item" href="../articles/missing-info.html">Missing Info</a>
-    <a class="dropdown-item" href="../articles/cms-open-payments.html">Open Payments Program</a>
-    <a class="dropdown-item" href="../articles/beneficiary-enrollment.html">Beneficiary Enrollment</a>
-    <a class="dropdown-item" href="../articles/provider-enrollment.html">Provider Enrollment</a>
-    <a class="dropdown-item" href="../articles/hospital-enrollment.html">Hospital Enrollment</a>
-    <a class="dropdown-item" href="../articles/facility-affiliations.html">Facility Affiliations</a>
-    <a class="dropdown-item" href="../articles/doctors-and-clinicians.html">Doctors and Clinicians</a>
-    <a class="dropdown-item" href="../articles/pending-applications.html">Pending Applications</a>
-    <a class="dropdown-item" href="../articles/opt-out.html">Opt Out Affidavits</a>
-    <a class="dropdown-item" href="../articles/order-refer.html">Order &amp; Referring Eligibility</a>
-    <a class="dropdown-item" href="../articles/physician-by-provider.html">Physician by Provider</a>
-    <a class="dropdown-item" href="../articles/physician-by-geography.html">Physician by Geography</a>
-    <a class="dropdown-item" href="../articles/physician-by-service.html">Physician by Service</a>
-    <a class="dropdown-item" href="../articles/mcr-revalidation.html">Medicare Revalidation Dates</a>
-    <a class="dropdown-item" href="../articles/mcr-taxon-crosswalk.html">Taxonomy Crosswalk</a>
-    <a class="dropdown-item" href="../articles/mcr-chron-cond.html">Medicare Chronic Conditions</a>
-    <a class="dropdown-item" href="../articles/nppes-npi-registry.html">NPPES NPI Registry</a>
+    <a class="dropdown-item" href="../articles/api_overviews.html">API Overviews</a>
   </div>
 </li>
       </ul>
@@ -156,7 +139,10 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt; : missing value where TRUE/FALSE needed</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2086S0102X    Allopathic &amp; Osteopathic Physicia… 2              Physician/Gen…</span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="va"><a href="../reference/nucc_taxonomy_230.html">nucc_taxonomy_230</a></span></span>
@@ -179,26 +165,26 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 <h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="ytnypfeenj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fttscluctu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ytnypfeenj table {
+#fttscluctu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ytnypfeenj thead, #ytnypfeenj tbody, #ytnypfeenj tfoot, #ytnypfeenj tr, #ytnypfeenj td, #ytnypfeenj th {
+#fttscluctu thead, #fttscluctu tbody, #fttscluctu tfoot, #fttscluctu tr, #fttscluctu td, #fttscluctu th {
   border-style: none;
 }
 
-#ytnypfeenj p {
+#fttscluctu p {
   margin: 0;
   padding: 0;
 }
 
-#ytnypfeenj .gt_table {
+#fttscluctu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -224,12 +210,12 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-left-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_caption {
+#fttscluctu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ytnypfeenj .gt_title {
+#fttscluctu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -241,7 +227,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-width: 0;
 }
 
-#ytnypfeenj .gt_subtitle {
+#fttscluctu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -253,7 +239,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-top-width: 0;
 }
 
-#ytnypfeenj .gt_heading {
+#fttscluctu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -265,13 +251,13 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ytnypfeenj .gt_bottom_border {
+#fttscluctu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_col_headings {
+#fttscluctu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -286,7 +272,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ytnypfeenj .gt_col_heading {
+#fttscluctu .gt_col_heading {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -306,7 +292,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   overflow-x: hidden;
 }
 
-#ytnypfeenj .gt_column_spanner_outer {
+#fttscluctu .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 12px;
@@ -318,15 +304,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 4px;
 }
 
-#ytnypfeenj .gt_column_spanner_outer:first-child {
+#fttscluctu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ytnypfeenj .gt_column_spanner_outer:last-child {
+#fttscluctu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ytnypfeenj .gt_column_spanner {
+#fttscluctu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   border-bottom-color: #D5D5D5;
@@ -338,11 +324,11 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   width: 100%;
 }
 
-#ytnypfeenj .gt_spanner_row {
+#fttscluctu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ytnypfeenj .gt_group_heading {
+#fttscluctu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -368,7 +354,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   text-align: left;
 }
 
-#ytnypfeenj .gt_empty_group_heading {
+#fttscluctu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -383,15 +369,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   vertical-align: middle;
 }
 
-#ytnypfeenj .gt_from_md > :first-child {
+#fttscluctu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ytnypfeenj .gt_from_md > :last-child {
+#fttscluctu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ytnypfeenj .gt_row {
+#fttscluctu .gt_row {
   padding-top: 7px;
   padding-bottom: 7px;
   padding-left: 5px;
@@ -410,7 +396,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   overflow-x: hidden;
 }
 
-#ytnypfeenj .gt_stub {
+#fttscluctu .gt_stub {
   color: #FFFFFF;
   background-color: #929292;
   font-size: 100%;
@@ -423,7 +409,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ytnypfeenj .gt_stub_row_group {
+#fttscluctu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -437,15 +423,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   vertical-align: top;
 }
 
-#ytnypfeenj .gt_row_group_first td {
+#fttscluctu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ytnypfeenj .gt_row_group_first th {
+#fttscluctu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ytnypfeenj .gt_summary_row {
+#fttscluctu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -455,16 +441,16 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ytnypfeenj .gt_first_summary_row {
+#fttscluctu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_first_summary_row.thick {
+#fttscluctu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ytnypfeenj .gt_last_summary_row {
+#fttscluctu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -474,7 +460,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_grand_summary_row {
+#fttscluctu .gt_grand_summary_row {
   color: #FFFFFF;
   background-color: #5F5F5F;
   text-transform: inherit;
@@ -484,7 +470,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ytnypfeenj .gt_first_grand_summary_row {
+#fttscluctu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +480,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-top-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_last_grand_summary_row_top {
+#fttscluctu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -504,11 +490,11 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_striped {
+#fttscluctu .gt_striped {
   background-color: #F4F4F4;
 }
 
-#ytnypfeenj .gt_table_body {
+#fttscluctu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D5D5D5;
@@ -517,7 +503,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #D5D5D5;
 }
 
-#ytnypfeenj .gt_footnotes {
+#fttscluctu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -531,7 +517,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ytnypfeenj .gt_footnote {
+#fttscluctu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -540,7 +526,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ytnypfeenj .gt_sourcenotes {
+#fttscluctu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -554,7 +540,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ytnypfeenj .gt_sourcenote {
+#fttscluctu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -562,63 +548,63 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ytnypfeenj .gt_left {
+#fttscluctu .gt_left {
   text-align: left;
 }
 
-#ytnypfeenj .gt_center {
+#fttscluctu .gt_center {
   text-align: center;
 }
 
-#ytnypfeenj .gt_right {
+#fttscluctu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ytnypfeenj .gt_font_normal {
+#fttscluctu .gt_font_normal {
   font-weight: normal;
 }
 
-#ytnypfeenj .gt_font_bold {
+#fttscluctu .gt_font_bold {
   font-weight: bold;
 }
 
-#ytnypfeenj .gt_font_italic {
+#fttscluctu .gt_font_italic {
   font-style: italic;
 }
 
-#ytnypfeenj .gt_super {
+#fttscluctu .gt_super {
   font-size: 65%;
 }
 
-#ytnypfeenj .gt_footnote_marks {
+#fttscluctu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ytnypfeenj .gt_asterisk {
+#fttscluctu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ytnypfeenj .gt_indent_1 {
+#fttscluctu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ytnypfeenj .gt_indent_2 {
+#fttscluctu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ytnypfeenj .gt_indent_3 {
+#fttscluctu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ytnypfeenj .gt_indent_4 {
+#fttscluctu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ytnypfeenj .gt_indent_5 {
+#fttscluctu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
