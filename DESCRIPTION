@@ -34,6 +34,7 @@ Suggests:
     campfin,
     kableExtra,
     fontawesome,
+    forcats,
     furrr,
     htmltools,
     ggplot2,
