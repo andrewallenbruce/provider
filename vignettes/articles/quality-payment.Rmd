@@ -1,0 +1,56 @@
+---
+title: "Quality Payment Program"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = TRUE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r}
+library(provider)
+```
+
+<br>
+
+> The Quality Payment Program (QPP) Experience dataset provides participation and performance information in the Merit-based Incentive Payment System (MIPS) during each performance year. They cover eligibility and participation, performance categories, and final score and payment adjustments. The dataset provides additional details at the TIN/NPI level on what was published in the previous performance year. You can sort the data by variables like clinician type, practice size, scores, and payment adjustments.
+
+<br>
+
+```{r}
+quality_payment(year = 2020, state = "GA") |> 
+  dplyr::group_by(part_type) |> 
+  dplyr::summarise(n = dplyr::n(),
+                   avg_yrs = mean(med_yrs, na.rm = TRUE),
+                   avg_beneficiaries = mean(beneficiaries, na.rm = TRUE),
+                   avg_charges = mean(allowed_charges, na.rm = TRUE),
+                   avg_services = mean(services, na.rm = TRUE),
+                   avg_score = mean(final_score, na.rm = TRUE))
+```
+
+
+```{r}
+qpp_ga <- 2017:2020 |> 
+  furrr::future_map(\(x) quality_payment(year = x, state = "GA")) |> 
+  purrr::list_rbind()
+
+qpp_ga |> 
+  dplyr::group_by(part_type) |> 
+  dplyr::summarise(n = dplyr::n(),
+                   avg_yrs = mean(med_yrs, na.rm = TRUE),
+                   avg_beneficiaries = mean(beneficiaries, na.rm = TRUE),
+                   avg_charges = mean(allowed_charges, na.rm = TRUE),
+                   avg_services = mean(services, na.rm = TRUE),
+                   avg_score = mean(final_score, na.rm = TRUE))
+```
+

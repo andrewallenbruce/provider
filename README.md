@@ -45,6 +45,11 @@ devtools::install_github("andrewallenbruce/provider")
 remotes::install_github("andrewallenbruce/provider")
 ```
 
+``` r
+# install.packages("pak")
+pak::pak("andrewallenbruce/provider")
+```
+
 ## Motivation
 
 ``` r
@@ -59,28 +64,29 @@ across a variety of CMS sources.
 
 <br>
 
-| Function                   | API                                                                                                                                                                                                                                   |
-|:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
-| `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
-| `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
-| `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
-| `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
-| `hospital_enrollment()`    | [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)                                                                                                             |
-| `missing_information()`    | [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)                                                                       |
-| `nppes_npi()`              | [NPPES National Provider Identifier (NPI) Registry](https://npiregistry.cms.hhs.gov/search)                                                                                                                                           |
-| `open_payments()`          | [CMS Open Payments Program](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)                                                                                                                            |
-| `opt_out()`                | [Medicare Opt Out Affidavits](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)                                                                                                 |
-| `order_refer()`            | [Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)                                                                                               |
-| `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
-| `physician_by_geography()` | [Medicare Physician & Other Practitioners: by Geography and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service) |
-| `physician_by_provider()`  | [Medicare Physician & Other Practitioners: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)                           |
-| `physician_by_service()`   | [Medicare Physician & Other Practitioners: by Provider and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)   |
-| `provider_enrollment()`    | [Medicare Fee-For-Service Public Provider Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)                                        |
-| `revalidation_date()`      | [Medicare Revalidation Due Date](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)                                                                                      |
-| `revalidation_group()`     | [Medicare Revalidation Clinic Group Practice Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)                                       |
-| `revalidation_reassign()`  | [Medicare Revalidation Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)                                                                              |
-| `taxonomy_crosswalk()`     | [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)                                            |
+|  \# | Function                   | API                                                                                                                                                                                                                                   |
+|----:|:---------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|   1 | `beneficiary_enrollment()` | [Medicare Monthly Enrollment](https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment)                                                                            |
+|   2 | `cc_multiple()`            | [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)                                                                                                                  |
+|   3 | `cc_specific()`            | [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)                                                                                                                  |
+|   4 | `doctors_and_clinicians()` | [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)                                                                                                                             |
+|   5 | `facility_affiliations()`  | [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)                                                                                                                                           |
+|   6 | `hospital_enrollment()`    | [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)                                                                                                             |
+|   7 | `missing_information()`    | [CMS Public Reporting of Missing Digital Contact Information](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)                                                                       |
+|   8 | `nppes_npi()`              | [NPPES National Provider Identifier (NPI) Registry](https://npiregistry.cms.hhs.gov/search)                                                                                                                                           |
+|   9 | `open_payments()`          | [CMS Open Payments Program](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)                                                                                                                            |
+|  10 | `opt_out()`                | [Medicare Opt Out Affidavits](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)                                                                                                 |
+|  11 | `order_refer()`            | [Medicare Order and Referring](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)                                                                                               |
+|  12 | `pending_applications()`   | [Medicare Pending Initial Logging and Tracking](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)                                                  |
+|  13 | `physician_by_geography()` | [Medicare Physician & Other Practitioners: by Geography and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service) |
+|  14 | `physician_by_provider()`  | [Medicare Physician & Other Practitioners: by Provider](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)                           |
+|  15 | `physician_by_service()`   | [Medicare Physician & Other Practitioners: by Provider and Service](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)   |
+|  16 | `provider_enrollment()`    | [Medicare Fee-For-Service Public Provider Enrollment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)                                        |
+|  17 | `quality_payment()`        | [CMS Quality Payment Program](https://data.cms.gov/quality-of-care/quality-payment-program-experience)                                                                                                                                |
+|  18 | `revalidation_date()`      | [Medicare Revalidation Due Date](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)                                                                                      |
+|  19 | `revalidation_group()`     | [Medicare Revalidation Clinic Group Practice Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment)                                       |
+|  20 | `revalidation_reassign()`  | [Medicare Revalidation Reassignment](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)                                                                              |
+|  21 | `taxonomy_crosswalk()`     | [Medicare Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)                                            |
 
 <br>
 
@@ -457,12 +463,12 @@ nppes_npi(last_name = "Smith", purpose_name = "AO", city = "Atlanta")
      2 1477605… Organ… 2007-01-18              16.4  2020-08-22   NA                
      3 1972882… Organ… 2011-08-16              11.8  2016-09-08   NA                
      4 1972882… Organ… 2011-08-16              11.8  2016-09-08   NA                
-     5 1679724… Organ… 2008-10-09              14.6  2008-10-09   NA                
-     6 1679724… Organ… 2008-10-09              14.6  2008-10-09   NA                
-     7 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
-     8 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
-     9 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
-    10 1306357… Organ… 2017-10-17               5.63 2018-05-23   NA                
+     5 1679724… Organ… 2008-10-09              14.7  2008-10-09   NA                
+     6 1679724… Organ… 2008-10-09              14.7  2008-10-09   NA                
+     7 1306357… Organ… 2017-10-17               5.65 2018-05-23   NA                
+     8 1306357… Organ… 2017-10-17               5.65 2018-05-23   NA                
+     9 1306357… Organ… 2017-10-17               5.65 2018-05-23   NA                
+    10 1306357… Organ… 2017-10-17               5.65 2018-05-23   NA                
     # ℹ 226 more rows
     # ℹ 30 more variables: status <chr>, organization_name <chr>,
     #   organizational_subpart <lgl>, purpose <chr>, street <chr>, city <chr>,
@@ -488,16 +494,16 @@ provider_enrollment(specialty_code = "00-17", state = "GA") |>
     # A tibble: 424 × 36
        npi      entype enumeration_date years_passed last_updated certification_date
        <chr>    <chr>  <date>                  <dbl> <date>       <date>            
-     1 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     2 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     3 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     4 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     5 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     6 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     7 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     8 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-     9 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
-    10 1992710… Organ… 2006-07-30               16.8 2021-04-28   2021-04-28        
+     1 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     2 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     3 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     4 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     5 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     6 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     7 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     8 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+     9 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
+    10 1992710… Organ… 2006-07-30               16.9 2021-04-28   2021-04-28        
     # ℹ 414 more rows
     # ℹ 30 more variables: status <chr>, organization_name <chr>,
     #   organizational_subpart <lgl>, purpose <chr>, street <chr>, city <chr>,
@@ -675,22 +681,7 @@ physician_by_geography(sublevel = "Georgia", year = 2020) |>
   dplyr::slice_max(avg_payment, n = 10)
 ```
 
-    # A tibble: 10 × 16
-        year level sublevel fips  hcpcs_code hcpcs_desc     hcpcs_drug place_of_srvc
-       <int> <chr> <chr>    <chr> <chr>      <chr>          <lgl>      <chr>        
-     1  2020 State Georgia  13    Q2043      Sipuleucel-t,… TRUE       O            
-     2  2020 State Georgia  13    37227      Removal of pl… FALSE      O            
-     3  2020 State Georgia  13    G2170      Percutaneous … FALSE      F            
-     4  2020 State Georgia  13    37229      Removal of pl… FALSE      O            
-     5  2020 State Georgia  13    37231      Removal of pl… FALSE      O            
-     6  2020 State Georgia  13    37226      Insertion of … FALSE      O            
-     7  2020 State Georgia  13    37225      Removal of pl… FALSE      O            
-     8  2020 State Georgia  13    37230      Insertion of … FALSE      O            
-     9  2020 State Georgia  13    63685      Insertion of … FALSE      F            
-    10  2020 State Georgia  13    C9740      Cystourethros… FALSE      F            
-    # ℹ 8 more variables: tot_provs <int>, tot_benes <int>, tot_srvcs <int>,
-    #   tot_day <int>, avg_charges <dbl>, avg_allowed <dbl>, avg_payment <dbl>,
-    #   avg_std_pymt <dbl>
+    Error in if (as.integer(httr2::resp_header(response, "content-length")) <= : argument is of length zero
 
 ``` r
 # by Provider and Service
@@ -779,13 +770,13 @@ provider_enrollment(specialty_code = "00-17", state = "GA") # GA RHCs
     3  2018 1144544834 000117740    GA               12 Physician…       8 Group    
     4  2019 1144544834 000659906    GA               13 Physician…       9 Group    
     5  2020 1144544834 000000310    GA               13 Physician…      10 Group    
-    # ℹ 48 more variables: beneficiaries <int>, allowed_charges <int>,
-    #   services <int>, final_score <chr>, pmt_adj_pct <chr>,
-    #   complex_patient_bonus <chr>, quality_category_score <chr>,
-    #   quality_improvement_bonus <chr>, quality_bonus <lgl>, engaged <lgl>,
-    #   opted_into_mips <lgl>, small_practitioner <lgl>, rural_clinician <lgl>,
-    #   hpsa_clinician <lgl>, asc <lgl>, hospital_based <lgl>,
-    #   non_patient_facing <lgl>, facility_based <lgl>, extreme_hardship <lgl>, …
+    # ℹ 48 more variables: beneficiaries <int>, allowed_charges <dbl>,
+    #   services <int>, final_score <dbl>, pmt_adj_pct <dbl>,
+    #   complex_patient_bonus <dbl>, quality_category_score <dbl>,
+    #   quality_improvement_bonus <dbl>, quality_bonus <lgl>, engaged <lgl>,
+    #   opted_into_mips <lgl>, small_practitioner <lgl>, rural <lgl>, hpsa <lgl>,
+    #   asc <lgl>, hospital_based <lgl>, non_patient_facing <lgl>,
+    #   facility_based <lgl>, extreme_hardship <lgl>, …
 
 ### Revalidation Lists
 

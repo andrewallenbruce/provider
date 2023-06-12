@@ -50,6 +50,10 @@ devtools::install_github("andrewallenbruce/provider")
 # install.packages("remotes")
 remotes::install_github("andrewallenbruce/provider")
 ```
+``` r
+# install.packages("pak")
+pak::pak("andrewallenbruce/provider")
+```
 
 ## Motivation
 
@@ -67,6 +71,7 @@ The goal of `provider` is to make the experience of accessing publicly-available
 ```{r results='asis', echo=FALSE}
 provider:::function_tbl() |> 
   dplyr::arrange(Function) |> 
+  dplyr::mutate("#" = dplyr::row_number(), .before = Function) |> 
   gluedown::md_table()
 ```
 

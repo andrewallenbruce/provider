@@ -322,7 +322,7 @@ hosp_2 <- hos |>
     source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)")) |> 
   gt::cols_label(org_name = "Organization Name", 
                  incorp_date = "Date Incorporated",
-                 incorp_duration = "Years Incorporated",
+                 incorp_length = "Years Incorporated",
                  proprietary_nonprofit = "Nonprofit")
 
 hosp_3 <- hos |> 

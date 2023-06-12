@@ -40,44 +40,11 @@ navbar:
     articles:
       text: Articles
       menu:
-      - text: Use Cases
+      - text: Case Studies
       - text: Geocoding
         href: articles/geocoding.html
       - text: API Overviews
-      - text: Missing Info
-        href: articles/missing-info.html
-      - text: Open Payments Program
-        href: articles/cms-open-payments.html
-      - text: Beneficiary Enrollment
-        href: articles/beneficiary-enrollment.html
-      - text: Provider Enrollment
-        href: articles/provider-enrollment.html
-      - text: Hospital Enrollment
-        href: articles/hospital-enrollment.html
-      - text: Facility Affiliations
-        href: articles/facility-affiliations.html
-      - text: Doctors and Clinicians
-        href: articles/doctors-and-clinicians.html
-      - text: Pending Applications
-        href: articles/pending-applications.html
-      - text: Opt Out Affidavits
-        href: articles/opt-out.html
-      - text: Order & Referring Eligibility
-        href: articles/order-refer.html
-      - text: Physician by Provider
-        href: articles/physician-by-provider.html
-      - text: Physician by Geography
-        href: articles/physician-by-geography.html
-      - text: Physician by Service
-        href: articles/physician-by-service.html
-      - text: Medicare Revalidation Dates
-        href: articles/mcr-revalidation.html
-      - text: Taxonomy Crosswalk
-        href: articles/mcr-taxon-crosswalk.html
-      - text: Medicare Chronic Conditions
-        href: articles/mcr-chron-cond.html
-      - text: NPPES NPI Registry
-        href: articles/nppes-npi-registry.html
+        href: articles/api_overviews.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html

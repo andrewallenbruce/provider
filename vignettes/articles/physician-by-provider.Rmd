@@ -126,7 +126,7 @@ p2
 <br>
 <details><summary>Code</summary>
 
-```{r}
+```{r eval=FALSE}
 age <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
@@ -172,23 +172,11 @@ age <- provider |>
   ggplot2::geom_hline(yintercept = 0) +
   ggplot2::labs(
     x = ggplot2::element_blank(), 
-    y = ggplot2::element_blank(),
-    #caption = "Source: Medicare Physician & Other Practitioners: by Provider",
-    title = "Age"
-    ) +
+    y = ggplot2::element_blank()) +
   ggplot2::coord_flip()
 ```
 
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-age
-```
-
-<br>
-<details><summary>Code</summary>
-
-```{r}
+```{r eval=FALSE}
 sex <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
@@ -226,21 +214,11 @@ sex <- provider |>
   ggplot2::geom_hline(yintercept = 0) +
   ggplot2::labs(
     x = ggplot2::element_blank(), 
-    y = ggplot2::element_blank(),
-    title = "Sex") +
+    y = ggplot2::element_blank()) +
   ggplot2::coord_flip()
 ```
 
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-sex
-```
-
-<br>
-<details><summary>Code</summary>
-
-```{r}
+```{r eval=FALSE}
 dual <- provider |> 
   dplyr::select(year, 
                 tot_benes, 
@@ -278,20 +256,12 @@ dual <- provider |>
   ggplot2::geom_hline(yintercept = 0) +
   ggplot2::labs(
     x = ggplot2::element_blank(), 
-    y = ggplot2::element_blank(),
-    title = "Dual/Non-Dual") +
+    y = ggplot2::element_blank()) +
   ggplot2::coord_flip()
 ```
-</details>
 
-```{r, echo=FALSE, eval=TRUE}
-dual
-```
 
-<br>
-<details><summary>Code</summary>
-
-```{r}
+```{r eval=FALSE}
 race <- provider |> 
   dplyr::select(year, 
                 tot_benes,
@@ -340,15 +310,20 @@ race <- provider |>
   ggplot2::geom_hline(yintercept = 0) +
   ggplot2::labs(
     x = ggplot2::element_blank(), 
-    y = ggplot2::element_blank(),
-    title = "Race") +
+    y = ggplot2::element_blank()) +
   ggplot2::coord_flip()
-```
-</details>
 
-```{r, echo=FALSE, eval=TRUE}
-race
+patchwork <- patchwork::wrap_plots(age, sex, race, dual) +
+  patchwork::plot_annotation(
+    title = 'Medicare Provider Demographics Overview: 2014 - 2021',
+    caption = 'Source: Medicare',
+    theme = ggplot2::theme(plot.title = ggplot2::element_text(size = 16)))
+
+patchfile <- fs::path(knitr::fig_path(), "patchwork_prov.png")
+ragg::agg_png(patchfile, width = 60, height = 36, units = "cm", res = 300, scaling = 3)
 ```
+
+</details>
 
 <br>
 
