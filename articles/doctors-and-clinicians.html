@@ -54,9 +54,9 @@
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
     <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
-    <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
   </div>
 </li>
       </ul>
@@ -147,7 +147,7 @@ are listed on multiple lines.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
 <span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
 <span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 79 × 25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 90 × 25</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1043312556 83250900… I2010011… NICOLE     <span style="color: #BB0000;">NA</span>          IOVINE    <span style="color: #BB0000;">NA</span>     F     </span></span>
@@ -160,7 +160,7 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1073549895 24664809… I2007112… ALAN       B           BENNIE    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1073575403 86280744… I2006101… DANIEL     J           GASSERT   <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 69 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 80 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
@@ -171,7 +171,7 @@ are listed on multiple lines.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">501</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 728 × 25</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 733 × 25</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003038720 06483608… I2007121… BARBARA    F           FRIER     <span style="color: #BB0000;">NA</span>     F     </span></span>
@@ -184,7 +184,7 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1013294966 63050682… I2014111… LYNDI      <span style="color: #BB0000;">NA</span>          FARNAM    <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 718 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 723 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
@@ -193,24 +193,24 @@ are listed on multiple lines.</p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="plckyhwhjt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wascbkvind" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#plckyhwhjt table {
+#wascbkvind table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#plckyhwhjt thead, #plckyhwhjt tbody, #plckyhwhjt tfoot, #plckyhwhjt tr, #plckyhwhjt td, #plckyhwhjt th {
+#wascbkvind thead, #wascbkvind tbody, #wascbkvind tfoot, #wascbkvind tr, #wascbkvind td, #wascbkvind th {
   border-style: none;
 }
 
-#plckyhwhjt p {
+#wascbkvind p {
   margin: 0;
   padding: 0;
 }
 
-#plckyhwhjt .gt_table {
+#wascbkvind .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -236,12 +236,12 @@ are listed on multiple lines.</p>
   border-left-color: #D3D3D3;
 }
 
-#plckyhwhjt .gt_caption {
+#wascbkvind .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#plckyhwhjt .gt_title {
+#wascbkvind .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -253,7 +253,7 @@ are listed on multiple lines.</p>
   border-bottom-width: 0;
 }
 
-#plckyhwhjt .gt_subtitle {
+#wascbkvind .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -265,7 +265,7 @@ are listed on multiple lines.</p>
   border-top-width: 0;
 }
 
-#plckyhwhjt .gt_heading {
+#wascbkvind .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -277,13 +277,13 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#plckyhwhjt .gt_bottom_border {
+#wascbkvind .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_col_headings {
+#wascbkvind .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -298,7 +298,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#plckyhwhjt .gt_col_heading {
+#wascbkvind .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -318,7 +318,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#plckyhwhjt .gt_column_spanner_outer {
+#wascbkvind .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -330,15 +330,15 @@ are listed on multiple lines.</p>
   padding-right: 4px;
 }
 
-#plckyhwhjt .gt_column_spanner_outer:first-child {
+#wascbkvind .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#plckyhwhjt .gt_column_spanner_outer:last-child {
+#wascbkvind .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#plckyhwhjt .gt_column_spanner {
+#wascbkvind .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -350,11 +350,11 @@ are listed on multiple lines.</p>
   width: 100%;
 }
 
-#plckyhwhjt .gt_spanner_row {
+#wascbkvind .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#plckyhwhjt .gt_group_heading {
+#wascbkvind .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -380,7 +380,7 @@ are listed on multiple lines.</p>
   text-align: left;
 }
 
-#plckyhwhjt .gt_empty_group_heading {
+#wascbkvind .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -395,15 +395,15 @@ are listed on multiple lines.</p>
   vertical-align: middle;
 }
 
-#plckyhwhjt .gt_from_md > :first-child {
+#wascbkvind .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#plckyhwhjt .gt_from_md > :last-child {
+#wascbkvind .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#plckyhwhjt .gt_row {
+#wascbkvind .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -422,7 +422,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#plckyhwhjt .gt_stub {
+#wascbkvind .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -435,7 +435,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#plckyhwhjt .gt_stub_row_group {
+#wascbkvind .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,15 +449,15 @@ are listed on multiple lines.</p>
   vertical-align: top;
 }
 
-#plckyhwhjt .gt_row_group_first td {
+#wascbkvind .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#plckyhwhjt .gt_row_group_first th {
+#wascbkvind .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#plckyhwhjt .gt_summary_row {
+#wascbkvind .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -467,16 +467,16 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#plckyhwhjt .gt_first_summary_row {
+#wascbkvind .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_first_summary_row.thick {
+#wascbkvind .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#plckyhwhjt .gt_last_summary_row {
+#wascbkvind .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,7 +486,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_grand_summary_row {
+#wascbkvind .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -496,7 +496,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#plckyhwhjt .gt_first_grand_summary_row {
+#wascbkvind .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -506,7 +506,7 @@ are listed on multiple lines.</p>
   border-top-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_last_grand_summary_row_top {
+#wascbkvind .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -516,11 +516,11 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_striped {
+#wascbkvind .gt_striped {
   background-color: #FEEDEC;
 }
 
-#plckyhwhjt .gt_table_body {
+#wascbkvind .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -529,7 +529,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#plckyhwhjt .gt_footnotes {
+#wascbkvind .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,7 +543,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#plckyhwhjt .gt_footnote {
+#wascbkvind .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -552,7 +552,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#plckyhwhjt .gt_sourcenotes {
+#wascbkvind .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -566,7 +566,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#plckyhwhjt .gt_sourcenote {
+#wascbkvind .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -574,63 +574,63 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#plckyhwhjt .gt_left {
+#wascbkvind .gt_left {
   text-align: left;
 }
 
-#plckyhwhjt .gt_center {
+#wascbkvind .gt_center {
   text-align: center;
 }
 
-#plckyhwhjt .gt_right {
+#wascbkvind .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#plckyhwhjt .gt_font_normal {
+#wascbkvind .gt_font_normal {
   font-weight: normal;
 }
 
-#plckyhwhjt .gt_font_bold {
+#wascbkvind .gt_font_bold {
   font-weight: bold;
 }
 
-#plckyhwhjt .gt_font_italic {
+#wascbkvind .gt_font_italic {
   font-style: italic;
 }
 
-#plckyhwhjt .gt_super {
+#wascbkvind .gt_super {
   font-size: 65%;
 }
 
-#plckyhwhjt .gt_footnote_marks {
+#wascbkvind .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#plckyhwhjt .gt_asterisk {
+#wascbkvind .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#plckyhwhjt .gt_indent_1 {
+#wascbkvind .gt_indent_1 {
   text-indent: 5px;
 }
 
-#plckyhwhjt .gt_indent_2 {
+#wascbkvind .gt_indent_2 {
   text-indent: 10px;
 }
 
-#plckyhwhjt .gt_indent_3 {
+#wascbkvind .gt_indent_3 {
   text-indent: 15px;
 }
 
-#plckyhwhjt .gt_indent_4 {
+#wascbkvind .gt_indent_4 {
   text-indent: 20px;
 }
 
-#plckyhwhjt .gt_indent_5 {
+#wascbkvind .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

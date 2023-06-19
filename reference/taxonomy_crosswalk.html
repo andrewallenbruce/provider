@@ -29,9 +29,9 @@ proper taxonomy code eligible for medicare programs."><meta property="og:image" 
 <li class="nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
     <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
-    <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -154,38 +154,13 @@ Ownership System (PECOS).</p><div class="section">
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 13 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    taxonomy_code taxonomy_desc                     specialty_code specialty_desc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Rehabilitatio…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 335U00000X    Suppliers/Organ Procurement Orga… B4[14]         Organ Procure…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 261QM0801X    Ambulatory Health Care Facilitie… B4[14]         Community Men…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 261QR0401X    Ambulatory Health Care Facilitie… B4[14]         Comprehensive…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 261QE0700X    Ambulatory Health Care Facilitie… B4[14]         End-Stage Ren…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 261QF0400X    Ambulatory Health Care Facilitie… B4[14]         Federally Qua…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 251G00000X    Agencies/Hospice Care Community … B4[14]         Hospice       </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 291U00000X    Laboratories/Clinical Medical La… B4[14]         Histocompatib…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 291900000X    Laboratories/Military Clinical M… B4[14]         <span style="color: #BB0000;">NA</span>            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[14]         Outpatient Ph…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> 315D00000X    Nursing &amp; Custodial Care Facilit… B4[14]         Rehabilitatio…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> 282J00000X    Hospitals/Religious Non-medical … B4[14]         Religious Non…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> 261QR1300X    Ambulatory Health Care Facilitie… B4[14]         Rural Health …</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 261QR0400X    Ambulatory Health Care Facilities… B4[14]         Rehabilitatio…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 315D00000X    Nursing &amp; Custodial Care Faciliti… B4[14]         Rehabilitatio…</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2086S0102X    Allopathic &amp; Osteopathic Physicia… 2              Physician/Gen…</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_desc <span class="op">=</span> <span class="st">"Agencies/Hospice Care Community Based"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 251G00000X    Agencies/Hospice Care Community B… B4[14]         Hospice       </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
