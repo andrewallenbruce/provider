@@ -260,7 +260,6 @@ dual <- provider |>
   ggplot2::coord_flip()
 ```
 
-
 ```{r eval=FALSE}
 race <- provider |> 
   dplyr::select(year, 

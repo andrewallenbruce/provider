@@ -23,34 +23,34 @@ library(provider)
 
 <br>
 
-> The Quality Payment Program (QPP) Experience dataset provides participation and performance information in the Merit-based Incentive Payment System (MIPS) during each performance year. They cover eligibility and participation, performance categories, and final score and payment adjustments. The dataset provides additional details at the TIN/NPI level on what was published in the previous performance year. You can sort the data by variables like clinician type, practice size, scores, and payment adjustments.
+> The **Quality Payment Program (QPP) Experience** dataset provides participation and performance information in the Merit-based Incentive Payment System (MIPS) during each performance year. They cover eligibility and participation, performance categories, and final score and payment adjustments. The dataset provides additional details at the TIN/NPI level on what was published in the previous performance year. You can sort the data by variables like clinician type, practice size, scores, and payment adjustments.
 
 <br>
 
+
 ```{r}
-quality_payment(year = 2020, state = "GA") |> 
-  dplyr::group_by(part_type) |> 
-  dplyr::summarise(n = dplyr::n(),
-                   avg_yrs = mean(med_yrs, na.rm = TRUE),
-                   avg_beneficiaries = mean(beneficiaries, na.rm = TRUE),
-                   avg_charges = mean(allowed_charges, na.rm = TRUE),
-                   avg_services = mean(services, na.rm = TRUE),
-                   avg_score = mean(final_score, na.rm = TRUE))
+qpp_ga <- 2017:2021 |> 
+  furrr::future_map(\(x) quality_payment(year = x, 
+                                         state = "GA", 
+                                         specialty = "Internal Medicine", 
+                                         part_type = "Individual")) |> 
+  purrr::list_rbind()
 ```
 
 
 ```{r}
-qpp_ga <- 2017:2020 |> 
-  furrr::future_map(\(x) quality_payment(year = x, state = "GA")) |> 
-  purrr::list_rbind()
-
 qpp_ga |> 
-  dplyr::group_by(part_type) |> 
+  dplyr::group_by(year) |> 
   dplyr::summarise(n = dplyr::n(),
                    avg_yrs = mean(med_yrs, na.rm = TRUE),
-                   avg_beneficiaries = mean(beneficiaries, na.rm = TRUE),
-                   avg_charges = mean(allowed_charges, na.rm = TRUE),
+                   med_size = median(practice_size, na.rm = TRUE),
+                   avg_size = mean(practice_size, na.rm = TRUE),
+                   avg_benes = mean(beneficiaries, na.rm = TRUE),
                    avg_services = mean(services, na.rm = TRUE),
-                   avg_score = mean(final_score, na.rm = TRUE))
+                   avg_charges = mean(allowed_charges, na.rm = TRUE),
+                   avg_score = mean(final_score, na.rm = TRUE), 
+                   avg_pmt_adj = mean(pmt_adj_pct, na.rm = TRUE),
+                   n_opted_into_mips = sum(opted_into_mips, na.rm = TRUE),
+                   .groups = "drop")
 ```
 

@@ -40,11 +40,11 @@ navbar:
     articles:
       text: Articles
       menu:
+      - text: API Overviews
+        href: articles/api-overviews.html
       - text: Case Studies
       - text: Geocoding
         href: articles/geocoding.html
-      - text: API Overviews
-        href: articles/api-overviews.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
