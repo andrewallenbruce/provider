@@ -48,7 +48,11 @@ quality_payment <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(cms_update("Quality Payment Program Experience", "years")))
+  rlang::arg_match(year,
+                   values = as.character(
+                     cms_update(
+                       "Quality Payment Program Experience",
+                       "years")))
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -152,13 +156,13 @@ quality_payment <- function(year,
                     state = practice_state_or_us_territory,
                     practice_size,
                     specialty = clinician_specialty,
-                    med_yrs = years_in_medicare,
-                    part_type = participation_type,
+                    years_in_medicare,
+                    participation_type,
                     beneficiaries = medicare_patients,
                     allowed_charges,
                     services,
                     final_score,
-                    pmt_adj_pct = payment_adjustment_percentage,
+                    payment_adjustment = payment_adjustment_percentage,
                     complex_patient_bonus,
                     quality_category_score,
                     quality_improvement_bonus,
@@ -192,4 +196,166 @@ quality_payment <- function(year,
                     dplyr::everything())
   }
   return(results)
+}
+
+#' Check the current years available for the Quality Payments API
+#' @autoglobal
+#' @internal
+years_qualpay <- function() {
+  as.integer(cms_update("Quality Payment Program Experience", "years"))
+}
+
+#' Search the CMS Quality Payment Program Eligibility API
+#'
+#' @description Data pulled from across CMS that is used to create an
+#'    eligibility determination for a clinician. Using what CMS knows about a
+#'    clinician from their billing patterns and enrollments, eligibility is
+#'    "calculated" multiple times before and during the performance year.
+#'
+#' @details The Quality Payment Program (QPP) Eligibility System pulls together
+#'    data from across the Centers for Medicare and Medicaid Services (CMS) to
+#'    create an eligibility determination for every clinician in the system.
+#'    Using what CMS knows about a clinician from their billing patterns and
+#'    enrollments, eligibility is "calculated" multiple times before and during
+#'    the performance year. Information can be obtained primarily by the
+#'    Clinician type. You can query the Clinician type by passing in an National
+#'    Provider Identifier, or NPI. This number is a unique 10-digit
+#'    identification number issued to health care providers in the United
+#'    States by CMS. The information contained in these endpoints includes
+#'    basic enrollment information, associated organizations, information
+#'    about those organizations, individual and group special status
+#'    information, and in the future, any available Alternative Payment Model
+#'    (APM) affiliations.
+#'
+#'   ## Links
+#'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Annually**
+#' @param year year
+#' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
+#' @param tidy Tidy output; default is `TRUE`.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf interactive()
+#' quality_payment(year = 2020, state = "GA")
+#' @autoglobal
+#' @export
+quality_eligibility <- function(year,
+                                npi,
+                                tidy = TRUE) {
+
+  url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
+
+  error_body <- function(resp) {
+    httr2::resp_body_json(resp)$error$message
+  }
+
+  resp <- httr2::request(url) |>
+    httr2::req_error(body = error_body) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(simplifyVector = TRUE)
+
+  # Isolate & remove Organization
+  org <- resp$data$organizations |> janitor::clean_names()
+
+  resp$data$organizations <- NULL
+
+  # Convert top level to tibble
+  top <- resp$data |>
+    purrr::compact() |>
+    purrr::list_flatten() |>
+    purrr::list_flatten() |>
+    as.data.frame() |>
+    dplyr::tibble() |>
+    dplyr::mutate(year = year, .before = 1) |>
+    janitor::clean_names()
+
+  results <- dplyr::bind_cols(top, org)
+
+  # clean names -------------------------------------------------------------
+  if (tidy) {
+
+    results <- results |>
+      tidyr::unnest_wider(c(apms,
+                            individual_scenario,
+                            group_scenario), names_sep = ".") |>
+      tidyr::unnest_wider(c(apms.extremeHardshipReasons,
+                            apms.qpPatientScores,
+                            apms.qpPaymentScores,
+                            individual_scenario.extremeHardshipReasons,
+                            individual_scenario.lowVolumeStatusReasons,
+                            individual_scenario.specialty,
+                            individual_scenario.isEligible,
+                            group_scenario.extremeHardshipReasons,
+                            group_scenario.lowVolumeStatusReasons,
+                            group_scenario.isEligible), names_sep = "_") |>
+      tidyr::unnest_wider(c(individual_scenario.lowVolumeStatusReasons_1,
+                            group_scenario.lowVolumeStatusReasons_1),
+                          names_sep = ".") |>
+      # remove_empty(which = c("rows", "cols")) |>
+      janitor::clean_names()
+  }
+  return(results)
+}
+
+
+#' Retrieve Program-Wide Statistics from CMS' Quality Payment Program Eligibility API
+#'
+#' @description Data pulled from across CMS that is used to create an
+#'    eligibility determination for a clinician. Using what CMS knows about a
+#'    clinician from their billing patterns and enrollments, eligibility is
+#'    "calculated" multiple times before and during the performance year.
+#'
+#' @details The Quality Payment Program (QPP) Eligibility System pulls together
+#'    data from across the Centers for Medicare and Medicaid Services (CMS) to
+#'    create an eligibility determination for every clinician in the system.
+#'    Using what CMS knows about a clinician from their billing patterns and
+#'    enrollments, eligibility is "calculated" multiple times before and during
+#'    the performance year. Information can be obtained primarily by the
+#'    Clinician type. You can query the Clinician type by passing in an National
+#'    Provider Identifier, or NPI. This number is a unique 10-digit
+#'    identification number issued to health care providers in the United
+#'    States by CMS. The information contained in these endpoints includes
+#'    basic enrollment information, associated organizations, information
+#'    about those organizations, individual and group special status
+#'    information, and in the future, any available Alternative Payment Model
+#'    (APM) affiliations.
+#'
+#'   ## Links
+#'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#'
+#' @source Centers for Medicare & Medicaid Services
+#' @note Update Frequency: **Annually**
+#' @param year year
+#' @param tidy Tidy output; default is `TRUE`.
+#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @examplesIf interactive()
+#' quality_stats(year = 2020)
+#' @autoglobal
+#' @export
+quality_stats <- function(year) {
+
+  url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
+
+  error_body <- function(resp) {httr2::resp_body_json(resp)$error$message}
+
+  resp <- httr2::request(url) |>
+    httr2::req_error(body = error_body) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(simplifyVector = TRUE)
+
+  return(dplyr::tibble(
+    year = as.integer(year),
+    type = c("Individual",
+             "Individual",
+             "Group",
+             "Group"),
+    stat = c("HCC Risk Score Average",
+             "Dual Eligibility Average",
+             "HCC Risk Score Average",
+             "Dual Eligibility Average"),
+    value = c(resp$data$individual$hccRiskScoreAverage,
+              resp$data$individual$dualEligibilityAverage,
+              resp$data$group$hccRiskScoreAverage,
+              resp$data$group$dualEligibilityAverage)))
 }

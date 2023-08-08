@@ -60,7 +60,7 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    zipcode       = NULL,
                                    ind_assn      = NULL,
                                    group_assn    = NULL,
-                                   offset        = 0,
+                                   offset        = 0L,
                                    tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}

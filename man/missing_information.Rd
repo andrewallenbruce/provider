@@ -7,10 +7,12 @@
 Centers for Medicare & Medicaid Services
 }
 \usage{
-missing_information(npi = NULL, tidy = TRUE)
+missing_information(npi = NULL, name = NULL, tidy = TRUE)
 }
 \arguments{
 \item{npi}{The provider’s National Provider Identifier}
+
+\item{name}{Provider's full name, without spaces, in the form "Last,First"}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -39,5 +41,5 @@ Update Frequency: \strong{Quarterly}
 }
 \examples{
 missing_information(npi = 1134122013)
-missing_information(npi = 1386128379)
+missing_information(name = "Henry,Timothy")
 }

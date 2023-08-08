@@ -23,7 +23,7 @@ doctors_and_clinicians(
   zipcode = NULL,
   ind_assn = NULL,
   group_assn = NULL,
-  offset = 0,
+  offset = 0L,
   tidy = TRUE
 )
 }

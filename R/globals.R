@@ -151,7 +151,6 @@ utils::globalVariables(c(
   "associate_id", # <hospital_enrollment>
   "organization_name", # <hospital_enrollment>
   "doing_business_as_name", # <hospital_enrollment>
-  "incorp_duration", # <hospital_enrollment>
   "incorporation_state", # <hospital_enrollment>
   "organization_type_structure", # <hospital_enrollment>
   "organization_other_type_text", # <hospital_enrollment>
@@ -464,36 +463,60 @@ utils::globalVariables(c(
   "state_cd", # <provider_enrollment>
   "mdl_name", # <provider_enrollment>
   "gndr_sw", # <provider_enrollment>
-  "distro", # <qpp_experience>
-  "y", # <qpp_experience>
-  "provider_key", # <qpp_experience>
-  "practice_state_or_us_territory", # <qpp_experience>
-  "practice_size", # <qpp_experience>
-  "clinician_specialty", # <qpp_experience>
-  "years_in_medicare", # <qpp_experience>
-  "participation_type", # <qpp_experience>
-  "medicare_patients", # <qpp_experience>
-  "allowed_charges", # <qpp_experience>
-  "services", # <qpp_experience>
-  "final_score", # <qpp_experience>
-  "payment_adjustment_percentage", # <qpp_experience>
-  "complex_patient_bonus", # <qpp_experience>
-  "quality_category_score", # <qpp_experience>
-  "quality_improvement_bonus", # <qpp_experience>
-  "quality_bonus", # <qpp_experience>
-  "engaged", # <qpp_experience>
-  "opted_into_mips", # <qpp_experience>
-  "small_practitioner", # <qpp_experience>
-  "rural_clinician", # <qpp_experience>
-  "hpsa_clinician", # <qpp_experience>
-  "ambulatory_surgical_center", # <qpp_experience>
-  "hospital_based_clinician", # <qpp_experience>
-  "non_patient_facing", # <qpp_experience>
-  "facility_based", # <qpp_experience>
-  "extreme_hardship", # <qpp_experience>
-  "extreme_hardship_quality", # <qpp_experience>
-  "quality_measure_id_1", # <qpp_experience>
-  "quality_measure_score_1", # <qpp_experience>
+  "distro", # <quality_payment>
+  "y", # <quality_payment>
+  "provider_key", # <quality_payment>
+  "practice_state_or_us_territory", # <quality_payment>
+  "practice_size", # <quality_payment>
+  "clinician_specialty", # <quality_payment>
+  "years_in_medicare", # <quality_payment>
+  "participation_type", # <quality_payment>
+  "medicare_patients", # <quality_payment>
+  "allowed_charges", # <quality_payment>
+  "services", # <quality_payment>
+  "final_score", # <quality_payment>
+  "payment_adjustment_percentage", # <quality_payment>
+  "complex_patient_bonus", # <quality_payment>
+  "quality_category_score", # <quality_payment>
+  "quality_improvement_bonus", # <quality_payment>
+  "quality_bonus", # <quality_payment>
+  "engaged", # <quality_payment>
+  "opted_into_mips", # <quality_payment>
+  "small_practitioner", # <quality_payment>
+  "rural_clinician", # <quality_payment>
+  "hpsa_clinician", # <quality_payment>
+  "ambulatory_surgical_center", # <quality_payment>
+  "hospital_based_clinician", # <quality_payment>
+  "non_patient_facing", # <quality_payment>
+  "facility_based", # <quality_payment>
+  "extreme_hardship", # <quality_payment>
+  "extreme_hardship_quality", # <quality_payment>
+  "extreme_hardship_pi", # <quality_payment>
+  "pi_hardship", # <quality_payment>
+  "pi_reweighting", # <quality_payment>
+  "pi_bonus", # <quality_payment>
+  "pi_cehrt_id", # <quality_payment>
+  "ia_score", # <quality_payment>
+  "extreme_hardship_ia", # <quality_payment>
+  "ia_study", # <quality_payment>
+  "cost_score", # <quality_payment>
+  "extreme_hardship_cost", # <quality_payment>
+  "tidy", # <quality_eligibility>
+  "apms", # <quality_eligibility>
+  "individual_scenario", # <quality_eligibility>
+  "group_scenario", # <quality_eligibility>
+  "apms.extremeHardshipReasons", # <quality_eligibility>
+  "apms.qpPatientScores", # <quality_eligibility>
+  "apms.qpPaymentScores", # <quality_eligibility>
+  "individual_scenario.extremeHardshipReasons", # <quality_eligibility>
+  "individual_scenario.lowVolumeStatusReasons", # <quality_eligibility>
+  "individual_scenario.specialty", # <quality_eligibility>
+  "individual_scenario.isEligible", # <quality_eligibility>
+  "group_scenario.extremeHardshipReasons", # <quality_eligibility>
+  "group_scenario.lowVolumeStatusReasons", # <quality_eligibility>
+  "group_scenario.isEligible", # <quality_eligibility>
+  "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
+  "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>
@@ -541,11 +564,11 @@ utils::globalVariables(c(
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
-  ":=", # <change_abs>
-  ":=", # <change_pct>
-  ":=", # <change_year>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>
+  ":=", # <change_abs>
+  ":=", # <change_pct>
+  ":=", # <change_year>
   NULL
 ))

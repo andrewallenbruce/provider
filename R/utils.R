@@ -92,6 +92,16 @@ years_passed <- function(df, date_col) {
       .after = {{ date_col }})
 }
 
+years <- function(date_col) {
+  round(
+    as.double(
+      difftime(
+        lubridate::today(),
+        date_col,
+        units = "weeks",
+        tz = "UTC")) / 52.17857, 2)
+}
+
 #' luhn check npis ---------------------------------------------------------
 #' @description checks NPIs against the Luhn algorithm for
 #' compliance with the CMS requirements stated in the linked PDF below.
@@ -332,12 +342,12 @@ entype_char <- function(x){
 #' @param x vector
 #' @autoglobal
 #' @noRd
-entype_arg <- function(x){
-  dplyr::case_when(
-    x == "I" ~ "NPI-1",
-    x == "i" ~ "NPI-1",
-    x == "O" ~ "NPI-2",
-    x == "o" ~ "NPI-2",
+entype_arg <- function(x) {
+  x <- if (is.numeric(x)) as.character(x)
+  dplyr::case_match(
+    x,
+    c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+    c("O", "o", "Org", "org", "2") ~ "NPI-2",
     .default = NULL
   )
 }
