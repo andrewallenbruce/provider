@@ -148,7 +148,13 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/provider_enrollment.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/quality_eligibility.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/quality_payment.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/quality_stats.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/revalidation_date.html</loc>
@@ -164,5 +170,8 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/years_qualpay.html</loc>
   </url>
 </urlset>

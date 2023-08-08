@@ -15,9 +15,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.6/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.6/font.css" rel="stylesheet">
-<link href="../deps/Roboto_Slab-0.4.6/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/Roboto_Slab-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Facility Affiliations">
@@ -140,7 +140,7 @@ Catalog.</p>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 181 × 9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 171 × 9</span></span></span>
 <span><span class="co">#&gt;    npi        pac_id     first_name middle_name last_name   suffix facility_type</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003002890 6002953973 DANIEL     RICHARD     HAMMAN      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
@@ -153,62 +153,64 @@ Catalog.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013115989 4385891712 ASHLEY     L           PYLE        <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013979566 1557374014 FIRAS      <span style="color: #BB0000;">NA</span>          MUWALLA     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1023261963 2860687431 CHAD       MICHAEL     LUCCI       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 171 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 161 more rows</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 9</span></span></span>
-<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name suffix facility_type   </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1083742829 5698833655 RAFAEL     JORGE       FORNARIS  <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1144429580 3577659580 LYSA       LEE         CURRY     <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1558595660 8921241142 JOHN       D           ALFONSO   <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1609973650 0840373239 GEORGE     KIMBELL     WILCOX    <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1710112370 9739337122 VIDYA      <span style="color: #BB0000;">NA</span>          AMARANENI <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1720069859 7012947229 WILLIAM    WARREN      JANES     <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1740577212 0345473773 GEOFF      R           WEIKLE    <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1770861742 5193940997 AUSTON     J           MYERS     <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1912260464 5092036509 SAAD       MD          MANSOOR   <span style="color: #BB0000;">NA</span>     Inpatient rehab…</span></span>
+<span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name    suffix facility_type</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1083742829 5698833655 RAFAEL     JORGE       FORNARIS     <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1144429580 3577659580 LYSA       LEE         CURRY        <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1558595660 8921241142 JOHN       D           ALFONSO      <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1619231826 5597044024 FELIX      MARIA       RODRIGUEZ V… <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1710112370 9739337122 VIDYA      <span style="color: #BB0000;">NA</span>          AMARANENI    <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1720069859 7012947229 WILLIAM    WARREN      JANES        <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1740577212 0345473773 GEOFF      R           WEIKLE       <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1770861742 5193940997 AUSTON     J           MYERS        <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1912260464 5092036509 SAAD       MD          MANSOOR      <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, </span>
 <span>                      last_name <span class="op">=</span> <span class="st">"Hill"</span>, </span>
 <span>                      facility_type <span class="op">=</span> <span class="st">"Home Health Agency"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 9</span></span></span>
 <span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name suffix facility_type   </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1174587588 7214998079 JOHN       C           HILL      III    Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1558380444 4789619362 JOHN       M           HILL      <span style="color: #BB0000;">NA</span>     Home health age…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="tsyuwuamke" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="xblzdqcuyr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#tsyuwuamke table {
+#xblzdqcuyr table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#tsyuwuamke thead, #tsyuwuamke tbody, #tsyuwuamke tfoot, #tsyuwuamke tr, #tsyuwuamke td, #tsyuwuamke th {
+#xblzdqcuyr thead, #xblzdqcuyr tbody, #xblzdqcuyr tfoot, #xblzdqcuyr tr, #xblzdqcuyr td, #xblzdqcuyr th {
   border-style: none;
 }
 
-#tsyuwuamke p {
+#xblzdqcuyr p {
   margin: 0;
   padding: 0;
 }
 
-#tsyuwuamke .gt_table {
+#xblzdqcuyr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -234,12 +236,12 @@ Catalog.</p>
   border-left-color: #D3D3D3;
 }
 
-#tsyuwuamke .gt_caption {
+#xblzdqcuyr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#tsyuwuamke .gt_title {
+#xblzdqcuyr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -251,7 +253,7 @@ Catalog.</p>
   border-bottom-width: 0;
 }
 
-#tsyuwuamke .gt_subtitle {
+#xblzdqcuyr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -263,7 +265,7 @@ Catalog.</p>
   border-top-width: 0;
 }
 
-#tsyuwuamke .gt_heading {
+#xblzdqcuyr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -275,13 +277,13 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#tsyuwuamke .gt_bottom_border {
+#xblzdqcuyr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_col_headings {
+#xblzdqcuyr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -296,7 +298,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#tsyuwuamke .gt_col_heading {
+#xblzdqcuyr .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -316,7 +318,7 @@ Catalog.</p>
   overflow-x: hidden;
 }
 
-#tsyuwuamke .gt_column_spanner_outer {
+#xblzdqcuyr .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -328,15 +330,15 @@ Catalog.</p>
   padding-right: 4px;
 }
 
-#tsyuwuamke .gt_column_spanner_outer:first-child {
+#xblzdqcuyr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tsyuwuamke .gt_column_spanner_outer:last-child {
+#xblzdqcuyr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tsyuwuamke .gt_column_spanner {
+#xblzdqcuyr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -348,11 +350,11 @@ Catalog.</p>
   width: 100%;
 }
 
-#tsyuwuamke .gt_spanner_row {
+#xblzdqcuyr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#tsyuwuamke .gt_group_heading {
+#xblzdqcuyr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -378,7 +380,7 @@ Catalog.</p>
   text-align: left;
 }
 
-#tsyuwuamke .gt_empty_group_heading {
+#xblzdqcuyr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -393,15 +395,15 @@ Catalog.</p>
   vertical-align: middle;
 }
 
-#tsyuwuamke .gt_from_md > :first-child {
+#xblzdqcuyr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tsyuwuamke .gt_from_md > :last-child {
+#xblzdqcuyr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tsyuwuamke .gt_row {
+#xblzdqcuyr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -420,7 +422,7 @@ Catalog.</p>
   overflow-x: hidden;
 }
 
-#tsyuwuamke .gt_stub {
+#xblzdqcuyr .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -433,7 +435,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#tsyuwuamke .gt_stub_row_group {
+#xblzdqcuyr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -447,15 +449,15 @@ Catalog.</p>
   vertical-align: top;
 }
 
-#tsyuwuamke .gt_row_group_first td {
+#xblzdqcuyr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tsyuwuamke .gt_row_group_first th {
+#xblzdqcuyr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#tsyuwuamke .gt_summary_row {
+#xblzdqcuyr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -465,16 +467,16 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#tsyuwuamke .gt_first_summary_row {
+#xblzdqcuyr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_first_summary_row.thick {
+#xblzdqcuyr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tsyuwuamke .gt_last_summary_row {
+#xblzdqcuyr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -484,7 +486,7 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_grand_summary_row {
+#xblzdqcuyr .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -494,7 +496,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#tsyuwuamke .gt_first_grand_summary_row {
+#xblzdqcuyr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -504,7 +506,7 @@ Catalog.</p>
   border-top-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_last_grand_summary_row_top {
+#xblzdqcuyr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,11 +516,11 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_striped {
+#xblzdqcuyr .gt_striped {
   background-color: #FEEDEC;
 }
 
-#tsyuwuamke .gt_table_body {
+#xblzdqcuyr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -527,7 +529,7 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#tsyuwuamke .gt_footnotes {
+#xblzdqcuyr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -541,7 +543,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#tsyuwuamke .gt_footnote {
+#xblzdqcuyr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -550,7 +552,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#tsyuwuamke .gt_sourcenotes {
+#xblzdqcuyr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -564,7 +566,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#tsyuwuamke .gt_sourcenote {
+#xblzdqcuyr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -572,63 +574,63 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#tsyuwuamke .gt_left {
+#xblzdqcuyr .gt_left {
   text-align: left;
 }
 
-#tsyuwuamke .gt_center {
+#xblzdqcuyr .gt_center {
   text-align: center;
 }
 
-#tsyuwuamke .gt_right {
+#xblzdqcuyr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tsyuwuamke .gt_font_normal {
+#xblzdqcuyr .gt_font_normal {
   font-weight: normal;
 }
 
-#tsyuwuamke .gt_font_bold {
+#xblzdqcuyr .gt_font_bold {
   font-weight: bold;
 }
 
-#tsyuwuamke .gt_font_italic {
+#xblzdqcuyr .gt_font_italic {
   font-style: italic;
 }
 
-#tsyuwuamke .gt_super {
+#xblzdqcuyr .gt_super {
   font-size: 65%;
 }
 
-#tsyuwuamke .gt_footnote_marks {
+#xblzdqcuyr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#tsyuwuamke .gt_asterisk {
+#xblzdqcuyr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tsyuwuamke .gt_indent_1 {
+#xblzdqcuyr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tsyuwuamke .gt_indent_2 {
+#xblzdqcuyr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tsyuwuamke .gt_indent_3 {
+#xblzdqcuyr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tsyuwuamke .gt_indent_4 {
+#xblzdqcuyr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tsyuwuamke .gt_indent_5 {
+#xblzdqcuyr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

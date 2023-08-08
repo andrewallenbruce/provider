@@ -15,9 +15,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.6/font.css" rel="stylesheet">
-<link href="../deps/JetBrains_Mono-0.4.6/font.css" rel="stylesheet">
-<link href="../deps/Roboto_Slab-0.4.6/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Roboto-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/JetBrains_Mono-0.4.7/font.css" rel="stylesheet">
+<link href="../deps/Roboto_Slab-0.4.7/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="NPPES NPI Registry">
@@ -136,42 +136,42 @@ Notice. There is no charge to use the NPI Registry.</p>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 25</span></span></span>
-<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 11144993… Indiv… 2018-12-28               4.47 2020-06-15   2020-06-15        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 11144993… Indiv… 2018-12-28               4.47 2020-06-15   2020-06-15        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 11144993… Indiv… 2018-12-28               4.47 2020-06-15   2020-06-15        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 19 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 24</span></span></span>
+<span><span class="co">#&gt;   npi        entype     enumeration_date last_updated certification_date status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: first_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;, tx_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 29</span></span></span>
-<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 15280608… Indiv… 2005-06-01               18.0 2007-07-09   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 28</span></span></span>
+<span><span class="co">#&gt;    npi        entype enumeration_date last_updated status first_name middle_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
@@ -182,16 +182,16 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>          state <span class="op">=</span> <span class="st">"GA"</span>,</span>
 <span>          country <span class="op">=</span> <span class="st">"US"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 66</span></span></span>
-<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 18819427… Organ… 2012-08-27              10.8  2012-08-27   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 15981402… Organ… 2015-07-23               7.91 2016-12-03   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 15981402… Organ… 2015-07-23               7.91 2016-12-03   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 60 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;, first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 65</span></span></span>
+<span><span class="co">#&gt;   npi        entype      enumeration_date last_updated certification_date status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1881942746 Organizati… 2012-08-27       2012-08-27   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1881942746 Organizati… 2012-08-27       2012-08-27   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1881942746 Organizati… 2012-08-27       2012-08-27   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1881942746 Organizati… 2012-08-27       2012-08-27   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1598140279 Organizati… 2015-07-23       2016-12-03   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1598140279 Organizati… 2015-07-23       2016-12-03   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 59 more variables: organization_name &lt;chr&gt;, first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;lgl&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
@@ -205,49 +205,49 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>          city <span class="op">=</span> <span class="st">"Baltimore"</span>,</span>
 <span>          state <span class="op">=</span> <span class="st">"MD"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 53</span></span></span>
-<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 17009345… Indiv… 2007-01-08               16.4 2012-03-07   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 13968254… Indiv… 2006-10-16               16.7 2007-07-08   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 13968254… Indiv… 2006-10-16               16.7 2007-07-08   <span style="color: #BB0000;">NA</span>                </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 47 more variables: status &lt;chr&gt;, first_name &lt;chr&gt;, middle_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 52</span></span></span>
+<span><span class="co">#&gt;   npi        entype     enumeration_date last_updated certification_date status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1700934569 Individual 2007-01-08       2012-03-07   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1700934569 Individual 2007-01-08       2012-03-07   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1700934569 Individual 2007-01-08       2012-03-07   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1700934569 Individual 2007-01-08       2012-03-07   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1396825477 Individual 2006-10-16       2007-07-08   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 1396825477 Individual 2006-10-16       2007-07-08   <span style="color: #BB0000;">NA</span>                 A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 46 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   credential &lt;chr&gt;, gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   phone_number &lt;chr&gt;, fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tx_group &lt;chr&gt;, tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   end_endpointType &lt;chr&gt;, end_endpointTypeDescription &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1336413418</span><span class="op">)</span> <span class="co"># NPI-2</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 28</span></span></span>
-<span><span class="co">#&gt;   npi       entype enumeration_date years_passed last_updated certification_date</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 13364134… Organ… 2012-03-07               11.3 2020-01-07   2020-01-07        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 13364134… Organ… 2012-03-07               11.3 2020-01-07   2020-01-07        </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   organizational_subpart &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 27</span></span></span>
+<span><span class="co">#&gt;   npi        entype      enumeration_date last_updated certification_date status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1336413418 Organizati… 2012-03-07       2020-01-07   2020-01-07         A     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1336413418 Organizati… 2012-03-07       2020-01-07   2020-01-07         A     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: organization_name &lt;chr&gt;, organizational_subpart &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, fax_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_middle_name &lt;chr&gt;, authorized_official_last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_title_or_position &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   authorized_official_telephone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, …</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710975040</span><span class="op">)</span> <span class="co"># NPI-1</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 29</span></span></span>
-<span><span class="co">#&gt;   npi        entype enumeration_date years_passed last_updated status first_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710975040 Indiv… 2005-10-11               17.7 2007-07-08   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 Indiv… 2005-10-11               17.7 2007-07-08   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1710975040 Indiv… 2005-10-11               17.7 2007-07-08   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1710975040 Indiv… 2005-10-11               17.7 2007-07-08   A      JOHN      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 22 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 28</span></span></span>
+<span><span class="co">#&gt;   npi        entype  enumeration_date last_updated status first_name middle_name</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1710975040 Indivi… 2005-10-11       2007-07-08   A      JOHN       E          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1710975040 Indivi… 2005-10-11       2007-07-08   A      JOHN       E          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1710975040 Indivi… 2005-10-11       2007-07-08   A      JOHN       E          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1710975040 Indivi… 2005-10-11       2007-07-08   A      JOHN       E          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
@@ -265,24 +265,24 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>  <span class="fl">1720392988</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 48</span></span></span>
+<span><span class="co">#&gt;    npi        entype enumeration_date last_updated status first_name middle_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 41 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
@@ -295,24 +295,24 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>     <span class="fl">1720392988</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 48</span></span></span>
+<span><span class="co">#&gt;    npi        entype enumeration_date last_updated status first_name middle_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 41 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
@@ -326,24 +326,24 @@ Notice. There is no charge to use the NPI Registry.</p>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 49</span></span></span>
-<span><span class="co">#&gt;    npi       entype enumeration_date years_passed last_updated status first_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 10030260… Indiv… 2007-05-22              16.1  2017-04-28   A      RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 13164059… Indiv… 2019-03-04               4.29 2023-04-06   A      JAENA     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 17203929… Indiv… 2010-07-29              12.9  2021-01-08   A      MUSTAFA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 42 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 12 × 48</span></span></span>
+<span><span class="co">#&gt;    npi        entype enumeration_date last_updated status first_name middle_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003026055 Indiv… 2007-05-22       2017-04-28   A      RADHIKA    PUSHKAR    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1316405939 Indiv… 2019-03-04       2023-04-06   A      JAENA      KAE        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1720392988 Indiv… 2010-07-29       2021-01-08   A      MUSTAFA    <span style="color: #BB0000;">NA</span>         </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 41 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, certification_date &lt;date&gt;,</span></span></span>
