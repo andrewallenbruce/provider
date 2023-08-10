@@ -23,7 +23,7 @@ library(provider)
 
  > Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.) The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
 
-## Searching
+## Examples
 
 ```{r}
 nppes_npi(npi = 1114499340)
@@ -35,73 +35,9 @@ nppes_npi(npi = 1114499340)
 nppes_npi(npi = 1528060837)
 ```
 
-<br>
-
-```{r}
-# City, state, country
-nppes_npi(city = "Atlanta",
-          state = "GA",
-          country = "US") |> 
-  head()
-```
-<br>
-
-```{r}
-# First name, city, state
-nppes_npi(first_name = "John",
-          city = "Baltimore",
-          state = "MD") |> 
-  head()
-```
-<br>
-
-```{r}
-nppes_npi(npi = 1336413418) # NPI-2
-```
 
 
-```{r}
-nppes_npi(npi = 1710975040) # NPI-1
-```
 
-
-```{r, message=TRUE}
-nppes_npi(npi = 1659781227) # Deactivated
-```
-
-# Advanced Usage
-
-```{r}
-# Vector of NPIs
-c(1003026055, 
-  1316405939, 
-  1720392988) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind()
-```
-
-<br>
-
-```{r}
-# List of NPIs
-list(1003026055, 
-     1316405939, 
-     1720392988) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind()
-```
-
-<br>
-
-```{r}
-# Data frame of NPIs
-data.frame(npi = c(1003026055, 
-                   1316405939, 
-                   1720392988)) |> 
-  dplyr::pull(npi) |> 
-  purrr::map(nppes_npi) |> 
-  purrr::list_rbind()
-```
 
 <br><br>
 

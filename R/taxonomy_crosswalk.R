@@ -6,7 +6,7 @@
 #' @details The Medicare Provider and Supplier Taxonomy Crosswalk dataset
 #'    lists the providers and suppliers eligible to enroll in Medicare
 #'    programs with the proper healthcare provider taxonomy code. This data
-#'    includes the Medicare speciality codes, if available, provider/supplier
+#'    includes the Medicare specialty codes, if available, provider/supplier
 #'    type description, taxonomy code, and the taxonomy description. This
 #'    dataset is derived from information gathered from National Plan and
 #'    Provider Enumerator System (NPPES) and Provider Enrollment, Chain and
@@ -24,8 +24,7 @@
 #' @param specialty_desc Description of the Medicare Provider/Supplier Type
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#'
-#' @examples
+#' @examplesIf interactive()
 #' taxonomy_crosswalk(specialty_code = "B4[14]")
 #' taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 #' taxonomy_crosswalk(taxonomy_code = "2086S0102X")

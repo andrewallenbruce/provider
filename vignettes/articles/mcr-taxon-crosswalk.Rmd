@@ -52,30 +52,25 @@ provider::nucc_taxonomy_230
 ```{r echo=FALSE}
 tibble::tibble(
   Variable = c(
-    "`medicare_specialty_code`", "`medicare_provider_supplier_type_description`",
-    "`provider_taxonomy_code`", "`provider_taxonomy_description_type_classification_specialization`"
+    "`specialty_code`", 
+    "`specialty_desc`",
+    "`taxonomy_code`", 
+    "`taxonomy_description`"
   ),
   Description = c(
-    "Medicare Specialty Code", "Medicare Provider/Supplier Type Description",
-    "Provider Taxonomy Code", "Provider Taxonomy Description"
+    "Medicare Specialty Code", 
+    "Medicare Provider/Supplier Type Description",
+    "Provider Taxonomy Code", 
+    "Provider Taxonomy Description"
   ),
   Definition = c(
     "Specialty code that corresponds to the listed Medicare specialty",
-    "The description of the Medicare Provider/Supplier Type", "The taxonomy codes the Providers use",
+    "The description of the Medicare Provider/Supplier Type", 
+    "The taxonomy codes the Providers use",
     "The description of the taxonomy that the Providers use"
-  )) |>
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  )) |> 
+  dplyr::select(Variable, Description, Definition) |> 
+  provider:::gt_datadict()
 ```
 
 <br>

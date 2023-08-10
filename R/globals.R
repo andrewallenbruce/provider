@@ -198,7 +198,6 @@ utils::globalVariables(c(
   "primary", # <nppes_npi>
   "issuer", # <nppes_npi>
   "identifier", # <nppes_npi>
-  "enumeration_date", # <nppes_npi>
   "y", # <nppes_summary>
   "number", # <nppes_summary>
   "enumeration_type", # <nppes_summary>
@@ -501,7 +500,6 @@ utils::globalVariables(c(
   "ia_study", # <quality_payment>
   "cost_score", # <quality_payment>
   "extreme_hardship_cost", # <quality_payment>
-  "tidy", # <quality_eligibility>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
   "group_scenario", # <quality_eligibility>

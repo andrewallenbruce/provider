@@ -21,15 +21,8 @@ knitr::opts_chunk$set(
 library(provider)
 ```
 
- > *Find Health Care Providers by Name, Location, NPI, or Specialty in the **NPPES** (National Plan and Provider Enumeration System.)*
 
-<br>
-
-The [NPPES NPI Registry Public Search](https://npiregistry.cms.hhs.gov/) is a free directory of all active **National Provider Identifier** (NPI) records. Healthcare providers acquire their unique 10-digit NPIs to identify themselves in a standard way throughout their industry. All information produced by the NPI Registry is provided in accordance with the NPPES Data Dissemination Notice. There is no charge to use the NPI Registry.
-
-<br>
-
-## Search Examples
+## Examples
 
 ```{r}
 hospital_enrollment(facility_ccn = "060004")
@@ -43,18 +36,7 @@ hospital_enrollment(state = "GA", city = "VALDOSTA")
 <br>
 
 ```{r}
-hospital_enrollment(enroll_state = "GA")
-```
-<br>
-
-```{r}
 hospital_enrollment(pac_id_org = 6002723947)
 ```
 
 
-<br>
-
-
-<br><br>
-
-### Data Dictionary

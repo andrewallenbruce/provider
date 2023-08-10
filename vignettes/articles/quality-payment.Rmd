@@ -27,30 +27,22 @@ library(provider)
 
 <br>
 
+## Examples
 
 ```{r}
-qpp_ga <- 2017:2021 |> 
-  furrr::future_map(\(x) quality_payment(year = x, 
-                                         state = "GA", 
-                                         specialty = "Internal Medicine", 
-                                         part_type = "Individual")) |> 
-  purrr::list_rbind()
+quality_payment(year = 2018, npi = 1578508776)
 ```
+
+<br><br>
 
 
 ```{r}
-qpp_ga |> 
-  dplyr::group_by(year) |> 
-  dplyr::summarise(n = dplyr::n(),
-                   avg_yrs = mean(med_yrs, na.rm = TRUE),
-                   med_size = median(practice_size, na.rm = TRUE),
-                   avg_size = mean(practice_size, na.rm = TRUE),
-                   avg_benes = mean(beneficiaries, na.rm = TRUE),
-                   avg_services = mean(services, na.rm = TRUE),
-                   avg_charges = mean(allowed_charges, na.rm = TRUE),
-                   avg_score = mean(final_score, na.rm = TRUE), 
-                   avg_pmt_adj = mean(pmt_adj_pct, na.rm = TRUE),
-                   n_opted_into_mips = sum(opted_into_mips, na.rm = TRUE),
-                   .groups = "drop")
+quality_eligibility(year = 2018, npi = 1578508776, tidy = FALSE)
+```
+<br><br>
+
+```{r}
+quality_stats(year = 2018)
 ```
 
+<br><br>

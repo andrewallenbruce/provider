@@ -41,14 +41,14 @@ The Revalidation Due Date List dataset contains revalidation due dates for Medic
 
 ```{r}
 revalidation_date(enroll_id = "I20031110000070", 
-                  npi = 1184699621) |> terse::terse()
+                  npi = 1184699621)
 ```
 
 <br>
 
 ```{r}
 revalidation_date(first_name = "Eric", 
-                  last_name = "Byrd") |> terse::terse()
+                  last_name = "Byrd")
 ```
 
 <br>
@@ -56,7 +56,7 @@ revalidation_date(first_name = "Eric",
 ```{r}
 revalidation_date(state = "FL", 
                   type_code = "3", 
-                  specialty = "General Practice") |> terse::terse()
+                  specialty = "General Practice")
 ```
 
 <br>
@@ -87,18 +87,8 @@ tibble::tibble(
     "Provider type description", "Enrollment specialty", "Previously assigned revalidation due date (blank if not previously assigned a due date)",
     "Next revalidation due date (blank if not yet assigned)", "Number of individual enrollment associations that are reassigning benefits to or are employed by the organizational provider",
     "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by")) |> 
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  dplyr::select(Variable, Description, Definition) |> 
+  provider:::gt_datadict()
 ```
 
 <br>
@@ -111,7 +101,7 @@ revalidation_group(ind_enroll_id = "I20200929003184",
                    ind_first = "Rashadda",
                    ind_last = "Wong",
                    ind_state = "CT",
-                   ind_specialty = "Physician Assistant") |> terse::terse()
+                   ind_specialty = "Physician Assistant")
 ```
 
 
@@ -122,7 +112,7 @@ revalidation_group(group_pac_id = 9436483807,
                    group_enroll_id = "O20190619002165",
                    group_bus_name = "1st Call Urgent Care",
                    group_state = "FL",
-                   record_type = "Reassignment") |> terse::terse()
+                   record_type = "Reassignment")
 ```
 
 <br>
@@ -162,19 +152,9 @@ tibble::tibble(
     "Enrollment specialty of the provider who is reassigning their benefits or is an employee",
     "Revalidation due date of the provider who is reassigning their benefits or is an employee (TBD if yet to be assigned)",
     "Number of organizational enrollment associations to which the individual provider reassigns benefits or is employed by"
-  ))  |>
-  gt::gt() |> 
-  gt::fmt_markdown(columns = Variable) |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  )) |> 
+  dplyr::select(Variable, Description, Definition) |> 
+  provider:::gt_datadict()
 ```
 
 <br>
@@ -197,12 +177,8 @@ revalidation_reassign(ind_enroll_id = "I20200929003184",
                     ind_first = "Rashadda",
                     ind_last = "Wong",
                     ind_state = "CT",
-                    ind_specialty = "Physician Assistant") |> terse::terse()
+                    ind_specialty = "Physician Assistant")
 ```
-
-<br>
-
-### Data Dictionary
 
 <br>
 

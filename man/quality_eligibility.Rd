@@ -51,6 +51,6 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-quality_payment(year = 2020, state = "GA")
+quality_eligibility(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
 }

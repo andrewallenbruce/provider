@@ -31,7 +31,7 @@ library(provider)
 provider_enrollment(npi = 1003026055)
 ```
 
-<br>
+<br><br>
 
 ```{r}
 provider_enrollment(first_name = "Matthew", 
@@ -39,18 +39,7 @@ provider_enrollment(first_name = "Matthew",
                     state = "FL")
 ```
 
-<br>
-
-```{r, message=TRUE}
-provider_enrollment(first_name = "Matthew", 
-                    last_name = "Smith",
-                    state = "FL") |> 
-  dplyr::pull(enroll_id) |> 
-  purrr::map(\(x) doctors_and_clinicians(enroll_id = x)) |> 
-  purrr::list_rbind()
-```
-
-<br>
+<br><br>
 
 ### Data Dictionary
 
@@ -107,7 +96,7 @@ tibble::tibble(
 
 ```{r echo=FALSE, eval=FALSE}
 #### Provider Type Code List
-cd <- tibble::tibble(
+tibble::tibble(
   Code = c(
     "`00-00`", "`00-01`", "`00-02`", "`00-03`", "`00-04`", "`00-05`",
     "`00-06`", "`00-07`", "`00-08`", "`00-09`", "`00-10`", "`00-13`",
@@ -338,9 +327,7 @@ cd <- tibble::tibble(
     "Radiation Oncology", "Emergency Medicine", "Interventional Radiology",
     "Physician Assistant", "Gynecological Oncology", "Other (Physician)",
     "Sleep Laboratory/Medicine", "Interventional Cardiology", "In-Person MDPP Supplier"
-  ))
-
-cd |>
+  )) |>
   gt::gt() |> 
   gt::fmt_markdown(columns = Code) |> 
   gtExtras::gt_theme_nytimes() |> 
@@ -350,9 +337,13 @@ cd |>
                            font_size = c("16px", "14px"),
                            font_weight = c("bold", "normal"),
                            palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  gt::opt_stylize(style = 6,
+                    color = "red",
+                    add_row_striping = FALSE) |>
+    gt::opt_table_lines(extent = "default") |>
+    gt::opt_table_outline(style = "none") |>
+    gt::opt_table_font(font = gt::google_font(name = "Karla")) |>
+    gt::tab_options(table.width = gt::pct(100))
 ```
 
 

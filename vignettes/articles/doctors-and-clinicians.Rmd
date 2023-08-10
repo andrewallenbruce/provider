@@ -27,14 +27,14 @@ The Doctors and Clinicians national downloadable file is organized such that eac
 
 <br>
 
-## Search Examples
+## Examples
 
 
 ```{r}
 doctors_and_clinicians(npi = 1407263999)
 ```
 
-<br>
+<br><br>
 
 ```{r}
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE", 
@@ -42,14 +42,7 @@ doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE",
                        state = "FL")
 ```
 
-<br>
-
-```{r}
-c(0, 501) |> 
-  purrr::map(\(x) doctors_and_clinicians(state = "GA", city = "Valdosta", offset = x)) |> 
-  purrr::list_rbind()
-```
-
+<br><br>
 
 ### Data Dictionary
 

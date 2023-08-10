@@ -12,7 +12,7 @@
 #'               summary_vars = c(min, max, mode, range),
 #'               arr = cost)
 #' @autoglobal
-#' @export
+#' @noRd
 summary_stats <- function(df,
                           condition = NULL,
                           group_vars = NULL,

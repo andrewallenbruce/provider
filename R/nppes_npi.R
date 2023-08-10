@@ -306,13 +306,12 @@ nppes_npi <- function(npi            = NULL,
                     entype = entype_char(entype),
                     dplyr::across(dplyr::any_of(c("sole_proprietor",
                                                   "organizational_subpart")),
-                                  ~yn_logical(.)),
-                    enum_years = years(enumeration_date))
+                                  ~yn_logical(.)))
 
     valid_fields <- c("npi",
                       "entype",
                       "enumeration_date",
-                      "years_passed",
+                      #"enum_years",
                       "last_updated",
                       "certification_date",
                       "status",

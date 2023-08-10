@@ -32,7 +32,7 @@ In the event a provider does not want to bill Medicare for their services, they 
 
 <br>
 
-## Example Searches
+## Examples
 
 By NPI:
 
@@ -43,38 +43,13 @@ order_refer(npi = 1083879860)
 
 By Name, as well as filtering for certain privileges:
 
-```{r, message=TRUE}
-order_refer(last_name = "Smith", 
-            partb = FALSE,
-            hha = TRUE,
-            pmd = FALSE)
-```
-
-<br>
-
 ```{r}
-order_refer(last_name = "Smith", 
+order_refer(first_name = "Amy",
+            last_name = "Smith", 
             partb = FALSE,
             hha = FALSE,
             pmd = FALSE)
 ```
-
-<br>
-
-## Visualizations
-
-```{r}
-order_refer(last_name = "Smith", 
-            first_name = "Aaron") |> 
-  provider:::gt_prov(divider = c("last_name"), 
-                     checkmark = c("partb", 
-                                   "dme", 
-                                   "hha", 
-                                   "pmd"),
-                     title = "Medicare Order & Referring Eligibility",
-                     source = "Source: data.cms.gov")
-```
-
 
 
 <br>

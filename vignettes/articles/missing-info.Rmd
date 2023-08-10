@@ -66,7 +66,7 @@ missing_information(npi = 1003000423)
 
 <br><br>
 
-And checking the NPPES, we see that she does have Enpoint information:
+And checking the NPPES, we see that she does have Endpoint information:
 
 ```{r}
 nppes_npi(npi = 1003000423) |> 

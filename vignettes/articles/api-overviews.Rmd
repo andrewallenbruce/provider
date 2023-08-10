@@ -44,7 +44,7 @@ tax_art <- gluedown::md_link("Taxonomy Crosswalk" = "https://andrewallenbruce.gi
 ```
 
 ```{r results='asis', echo=FALSE, eval=TRUE}
-gluedown::md_order(c(ben_art, 
+gluedown::md_bullet(c(ben_art, 
                      ccm_art,
                      ccs_art,
                      drs_art,

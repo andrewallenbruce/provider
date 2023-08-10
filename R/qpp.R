@@ -237,7 +237,7 @@ years_qualpay <- function() {
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#' quality_payment(year = 2020, state = "GA")
+#' quality_eligibility(year = 2020, npi = 1144544834)
 #' @autoglobal
 #' @export
 quality_eligibility <- function(year,
@@ -327,7 +327,6 @@ quality_eligibility <- function(year,
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
 #' @param year year
-#' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
 #' quality_stats(year = 2020)

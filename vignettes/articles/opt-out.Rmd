@@ -61,27 +61,8 @@ Contact your Medicare Administrative Contractor (MAC) (PDF) to see what informat
 ```{r}
 opt_out(last = "Aaron")
 ```
-<br>
-
-```{r}
-opt_out(specialty = "Psychiatry", zip = "07626")
-```
-<br>
-
-```{r}
-opt_out(first = "David", last = "Smith")
-```
-<br>
-
-```{r}
-opt_out(npi = 1114974490)
-```
-<br>
 
 
-```{r}
-opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
-```
 
 <br>
 

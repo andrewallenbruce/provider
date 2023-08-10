@@ -36,28 +36,29 @@ The Multiple Chronic Conditions dataset provides information on the number of ch
 ### Examples
 
 ```{r}
+# Multiple Chronic Conditions
 cc_multiple(year = 2018, 
-            geo_lvl = "State", 
-            geo_desc = "California") |> 
-  dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
-  gt::gt() |> 
-  gt::gt_preview() |> 
-  provider:::gt_theme_provider()
+            level = "National", 
+            age_group = "All", 
+            demographic = "All")
+
+cc_multiple(year = 2018, 
+            level = "State", 
+            sublevel = "Alabama", 
+            age_group = "All", 
+            demographic = "All")
+
+cc_multiple(year = 2018, 
+            level = "County", 
+            sublevel = "Alabama : Autauga", 
+            fips = "01001", 
+            age_group = "All", 
+            demographic = "All")
 ```
 
-<br>
 
-```{r}
-cc_multiple(year = 2007, 
-            geo_lvl = "National", 
-            demo_lvl = "Race") |> 
-  dplyr::select(!c(bene_geo_desc, bene_geo_cd)) |> 
-  gt::gt() |> 
-  gt::gt_preview() |> 
-  provider:::gt_theme_provider()
-```
+<br><br>
 
-<br>
 
 ## Medicare Specific Chronic Conditions API
 
@@ -90,46 +91,36 @@ The Select Chronic Conditions dataset provides information on 21 selected chroni
 ### Examples
 
 ```{r}
+# Specific Chronic Conditions
 cc_specific(year = 2018, 
-            geo_lvl = "State", 
-            geo_desc = "California") |> 
-  dplyr::select(!c(bene_geo_lvl, bene_geo_cd)) |> 
-  dplyr::arrange(dplyr::desc(bene_age_lvl), bene_demo_lvl) |> 
-  gt::gt() |> 
-  gt::gt_preview() |> 
-  provider:::gt_theme_provider()
+            level = "State", 
+            sublevel = "California", 
+            demographic = "All")
+
+cc_specific(year = 2011, 
+            level = "County", 
+            fips = "01001")
 ```
 
-<br>
-
-```{r}
-cc_specific(year = 2007, 
-            geo_lvl = "National", 
-            demo_lvl = "Race") |> 
-  gt::gt() |> 
-  gt::gt_preview() |> 
-  provider:::gt_theme_provider()
-```
-
-<br>
+<br><br>
 
 ### Data Dictionary
 
 ```{r echo=FALSE}
 tibble::tibble(
-  Variable = c("`Bene_Geo_Lvl`",	
-               "`Bene_Geo_Desc`",	
-               "`Bene_Geo_Cd`",	
-               "`Bene_Age_Lvl`",	
-               "`Bene_Demo_Lvl`",	
-               "`Bene_Demo_Desc`",	
-               "`Bene_MCC`",
-               "`Bene_Cond`",	
-               "`Prvlnc`",	
-               "`Tot_Mdcr_Stdzd_Pymt_PC`",	
-               "`Tot_Mdcr_Pymt_PC`",
-               "`Hosp_Readmsn_Rate`",	
-               "`ER_Visits_Per_1000_Benes`"),
+  Variable = c("`level`",	
+               "`sublevel`",	
+               "`fips`",	
+               "`age_group`",	
+               "`demographic`",	
+               "`subdemo`",	
+               "`mcc`",
+               "`condition`",	
+               "`prevalence`",	
+               "`tot_std_pymt_percap`",	
+               "`tot_pymt_percap`",
+               "`hosp_readmn_rate`",	
+               "`er_vs_per_1k`"),
   Description = c("Beneficiary Geographic Level", 
                   "Beneficiary Geographic Description", 
                   "Beneficiary Geographic Code", 
@@ -197,21 +188,9 @@ tibble::tibble(
                  
                  "Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was 
                  released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.")) |>
-  gt::gt() |> 
-  gt::fmt_markdown(columns = dplyr::everything()) |> 
-  #gt_theme_provider() |> 
-  gtExtras::gt_theme_nytimes() |> 
-  gtExtras::gt_merge_stack(col1 = Description, 
-                           col2 = Definition,
-                           small_cap = FALSE,
-                           font_size = c("16px", "14px"),
-                           font_weight = c("bold", "normal"),
-                           palette = c("black", "darkgray")) |> 
-  gt::opt_stylize(style = 4, color = "gray", add_row_striping = FALSE) |> 
-  gt::tab_footnote(footnote = "This information should not be used to attribute utilization or payments strictly to the specific condition selected, as beneficiaries with any of the specific conditions presented may have other health conditions that contribute to their Medicare utilization and spending amounts.", 
-                   locations = gt::cells_body(columns = Variable, rows = 10:13)) |> 
-  gt::opt_table_lines(extent = "default") |> 
-  gt::opt_table_outline(style = "none")
+  dplyr::select(Variable, Description, Definition) |> 
+  provider:::gt_datadict() |> 
+  gt::tab_footnote(footnote = "This information should not be used to attribute utilization or payments strictly to the specific condition selected, as beneficiaries with any of the specific conditions presented may have other health conditions that contribute to their Medicare utilization and spending amounts.", locations = gt::cells_body(columns = Variable, rows = 10:13))
 ```
 
 <br>

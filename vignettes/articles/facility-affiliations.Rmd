@@ -34,11 +34,7 @@ Facility affiliations data publicly reported in the Provider Data Catalog.
 facility_affiliations(npi = 1003019563)
 ```
 
-<br>
 
-```{r}
-facility_affiliations(facility_ccn = "060004")
-```
 
 <br>
 

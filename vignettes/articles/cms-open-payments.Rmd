@@ -33,21 +33,12 @@ The Open Payments program is a national disclosure program that promotes a more 
 
 <br>
 
-## Search Examples
-
-```{r}
-overall <- 2016:2021 |> 
-  purrr::map(\(x) open_payments(year = x, npi = 1043218118)) |> 
-  purrr::list_rbind() |> 
-  janitor::remove_empty(which = c("rows", "cols")) |> 
-  dplyr::select(!c(primary_other, specialty_other, license_state_other))
-
-overall |> 
-  dplyr::filter(group == "1")
-```
+## Examples
 
 
-<details><summary>Code for table</summary>
+
+
+<details><summary>Code</summary>
 
 ```{r}
 gt_ex <- open_payments(npi = 1043218118, 
@@ -97,40 +88,6 @@ gt_ex <- gt_ex |>
 gt_ex |> gt::tab_options(table.width = gt::pct(100))
 ```
 
-<br><br>
-
-```{r}
-ex <- 2016:2021 |>  
-  purrr::map(open_payments, npi = 1043218118) |> 
-  purrr::list_rbind()
-ex |> 
-  dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
-
-<br><br>
-
-```{r}
-open_payments(npi = 1043218118, year = 2019) |> 
-  dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
-
-<br><br>
-
-```{r}
-open_payments(city = "Jacksonville", state = "FL", year = 2020) |> 
-  dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
-
-<br><br>
-
-```{r}
-open_payments(payer_id = 100000151589, year = 2020) |> 
-  dplyr::filter(!is.na(covered)) |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
 
 <br><br>
 
