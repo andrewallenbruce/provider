@@ -139,24 +139,6 @@ Catalog.</p>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 171 × 9</span></span></span>
-<span><span class="co">#&gt;    npi        pac_id     first_name middle_name last_name   suffix facility_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003002890 6002953973 DANIEL     RICHARD     HAMMAN      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003019563 4688707060 JOHN       JOSEPH      FRANK       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003045022 5890926059 ARTHUR     H           DONAHUE     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003105636 6507182847 JAMES      CHARLES     HIGHAM KES… <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1003234162 4284940248 MATTHEW    <span style="color: #BB0000;">NA</span>          MCDIARMID   <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003845249 1254326994 GARETH     R           WEINER      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1013069566 7810096328 AMITY      D           HELZER      <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013115989 4385891712 ASHLEY     L           PYLE        <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013979566 1557374014 FIRAS      <span style="color: #BB0000;">NA</span>          MUWALLA     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1023261963 2860687431 CHAD       MICHAEL     LUCCI       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 161 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 9</span></span></span>
 <span><span class="co">#&gt;   npi        pac_id     first_name middle_name last_name    suffix facility_type</span></span>
@@ -172,7 +154,7 @@ Catalog.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 1912260464 5092036509 SAAD       MD          MANSOOR      <span style="color: #BB0000;">NA</span>     Inpatient re…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, </span>
 <span>                      last_name <span class="op">=</span> <span class="st">"Hill"</span>, </span>
 <span>                      facility_type <span class="op">=</span> <span class="st">"Home Health Agency"</span><span class="op">)</span></span>
@@ -193,24 +175,24 @@ Catalog.</p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="xblzdqcuyr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="vwltopihyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#xblzdqcuyr table {
+#vwltopihyf table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xblzdqcuyr thead, #xblzdqcuyr tbody, #xblzdqcuyr tfoot, #xblzdqcuyr tr, #xblzdqcuyr td, #xblzdqcuyr th {
+#vwltopihyf thead, #vwltopihyf tbody, #vwltopihyf tfoot, #vwltopihyf tr, #vwltopihyf td, #vwltopihyf th {
   border-style: none;
 }
 
-#xblzdqcuyr p {
+#vwltopihyf p {
   margin: 0;
   padding: 0;
 }
 
-#xblzdqcuyr .gt_table {
+#vwltopihyf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -236,12 +218,12 @@ Catalog.</p>
   border-left-color: #D3D3D3;
 }
 
-#xblzdqcuyr .gt_caption {
+#vwltopihyf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xblzdqcuyr .gt_title {
+#vwltopihyf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -253,7 +235,7 @@ Catalog.</p>
   border-bottom-width: 0;
 }
 
-#xblzdqcuyr .gt_subtitle {
+#vwltopihyf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -265,7 +247,7 @@ Catalog.</p>
   border-top-width: 0;
 }
 
-#xblzdqcuyr .gt_heading {
+#vwltopihyf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -277,13 +259,13 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#xblzdqcuyr .gt_bottom_border {
+#vwltopihyf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_col_headings {
+#vwltopihyf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -298,7 +280,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#xblzdqcuyr .gt_col_heading {
+#vwltopihyf .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -318,7 +300,7 @@ Catalog.</p>
   overflow-x: hidden;
 }
 
-#xblzdqcuyr .gt_column_spanner_outer {
+#vwltopihyf .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -330,15 +312,15 @@ Catalog.</p>
   padding-right: 4px;
 }
 
-#xblzdqcuyr .gt_column_spanner_outer:first-child {
+#vwltopihyf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xblzdqcuyr .gt_column_spanner_outer:last-child {
+#vwltopihyf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xblzdqcuyr .gt_column_spanner {
+#vwltopihyf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -350,11 +332,11 @@ Catalog.</p>
   width: 100%;
 }
 
-#xblzdqcuyr .gt_spanner_row {
+#vwltopihyf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xblzdqcuyr .gt_group_heading {
+#vwltopihyf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -380,7 +362,7 @@ Catalog.</p>
   text-align: left;
 }
 
-#xblzdqcuyr .gt_empty_group_heading {
+#vwltopihyf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -395,15 +377,15 @@ Catalog.</p>
   vertical-align: middle;
 }
 
-#xblzdqcuyr .gt_from_md > :first-child {
+#vwltopihyf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xblzdqcuyr .gt_from_md > :last-child {
+#vwltopihyf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xblzdqcuyr .gt_row {
+#vwltopihyf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -422,7 +404,7 @@ Catalog.</p>
   overflow-x: hidden;
 }
 
-#xblzdqcuyr .gt_stub {
+#vwltopihyf .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -435,7 +417,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#xblzdqcuyr .gt_stub_row_group {
+#vwltopihyf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,15 +431,15 @@ Catalog.</p>
   vertical-align: top;
 }
 
-#xblzdqcuyr .gt_row_group_first td {
+#vwltopihyf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xblzdqcuyr .gt_row_group_first th {
+#vwltopihyf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xblzdqcuyr .gt_summary_row {
+#vwltopihyf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -467,16 +449,16 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#xblzdqcuyr .gt_first_summary_row {
+#vwltopihyf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_first_summary_row.thick {
+#vwltopihyf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xblzdqcuyr .gt_last_summary_row {
+#vwltopihyf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,7 +468,7 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_grand_summary_row {
+#vwltopihyf .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -496,7 +478,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#xblzdqcuyr .gt_first_grand_summary_row {
+#vwltopihyf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -506,7 +488,7 @@ Catalog.</p>
   border-top-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_last_grand_summary_row_top {
+#vwltopihyf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -516,11 +498,11 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_striped {
+#vwltopihyf .gt_striped {
   background-color: #FEEDEC;
 }
 
-#xblzdqcuyr .gt_table_body {
+#vwltopihyf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -529,7 +511,7 @@ Catalog.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xblzdqcuyr .gt_footnotes {
+#vwltopihyf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,7 +525,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#xblzdqcuyr .gt_footnote {
+#vwltopihyf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -552,7 +534,7 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#xblzdqcuyr .gt_sourcenotes {
+#vwltopihyf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -566,7 +548,7 @@ Catalog.</p>
   border-right-color: #D3D3D3;
 }
 
-#xblzdqcuyr .gt_sourcenote {
+#vwltopihyf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -574,63 +556,63 @@ Catalog.</p>
   padding-right: 5px;
 }
 
-#xblzdqcuyr .gt_left {
+#vwltopihyf .gt_left {
   text-align: left;
 }
 
-#xblzdqcuyr .gt_center {
+#vwltopihyf .gt_center {
   text-align: center;
 }
 
-#xblzdqcuyr .gt_right {
+#vwltopihyf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xblzdqcuyr .gt_font_normal {
+#vwltopihyf .gt_font_normal {
   font-weight: normal;
 }
 
-#xblzdqcuyr .gt_font_bold {
+#vwltopihyf .gt_font_bold {
   font-weight: bold;
 }
 
-#xblzdqcuyr .gt_font_italic {
+#vwltopihyf .gt_font_italic {
   font-style: italic;
 }
 
-#xblzdqcuyr .gt_super {
+#vwltopihyf .gt_super {
   font-size: 65%;
 }
 
-#xblzdqcuyr .gt_footnote_marks {
+#vwltopihyf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xblzdqcuyr .gt_asterisk {
+#vwltopihyf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xblzdqcuyr .gt_indent_1 {
+#vwltopihyf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xblzdqcuyr .gt_indent_2 {
+#vwltopihyf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xblzdqcuyr .gt_indent_3 {
+#vwltopihyf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xblzdqcuyr .gt_indent_4 {
+#vwltopihyf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xblzdqcuyr .gt_indent_5 {
+#vwltopihyf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

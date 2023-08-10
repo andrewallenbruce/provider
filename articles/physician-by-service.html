@@ -126,114 +126,9 @@ Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by
 physicians and other healthcare professionals.</em></p>
 </blockquote>
 <p><br></p>
-<p>The Centers for Medicare &amp; Medicaid Services (CMS) has prepared a
-public data set, the Provider Utilization and Payment Data Physician and
-Other Practitioners Dataset, with information on services and procedures
-provided to Medicare beneficiaries by physicians and other healthcare
-professionals. The Physician and Other Practitioners Dataset contains
-information on utilization, payment (allowed amount and Medicare
-payment), and submitted charges organized by National Provider
-Identifier (NPI), Healthcare Common Procedure Coding System (HCPCS)
-code, and place of service. The data in the Physician and Other
-Practitioners dataset contains 100% final-action (i.e., all claim
-adjustments have been resolved) physician/supplier Part B
-non-institutional line items for the Medicare fee-for-service (FFS)
-population. Claims processed by Durable Medical Equipment, Prosthetic,
-Orthotics and Supplies (DMEPOS) Medicare Administrative Contractor (MAC)
-are not included in the Physician and Other Practitioners Dataset.</p>
-<p><br></p>
-<div class="section level2">
-<h2 id="physician-other-practitioners-by-provider">Physician &amp; Other Practitioners: <strong>by
-Provider</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-provider"></a>
-</h2>
-<p><br></p>
-<p>The <strong>Provider</strong> data subset provides information on
-use, payments, submitted charges and beneficiary demographic and health
-characteristics organized by National Provider Identifier (NPI). This
-dataset is based on information gathered from CMS administrative claims
-data for Original Medicare Part B beneficiaries available from the CMS
-Chronic Conditions Data Warehouse.</p>
-<ul>
-<li>Data update frequency: <strong>Annually</strong>
-</li>
-<li>Data source: <strong>Centers for Medicare &amp; Medicaid
-Services</strong>
-</li>
-</ul>
-<div class="section level3">
-<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fl">2013</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span><span class="va">year</span>, npi <span class="op">=</span> <span class="fl">1003000423</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 70</span></span></span>
-<span><span class="co">#&gt;    year npi     first_name middle_name last_name credential gender entype street</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>013 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>014 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>015 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>016 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>017 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>018 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>019 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>021 100300… Jennifer   A           Velotta   MD         F      Indiv… 11100…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
-<span>                      entype <span class="op">=</span> <span class="st">"I"</span>, </span>
-<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>, </span>
-<span>                      state <span class="op">=</span> <span class="st">"PA"</span>, </span>
-<span>                      fips <span class="op">=</span> <span class="fl">42</span>, </span>
-<span>                      ruca <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                      gender <span class="op">=</span> <span class="st">"F"</span>, </span>
-<span>                      credential <span class="op">=</span> <span class="st">"MD"</span>, </span>
-<span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 70</span></span></span>
-<span><span class="co">#&gt;     year npi    first_name middle_name last_name credential gender entype street</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 10232… Melissa    L           Coleman   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 10634… Padmani    <span style="color: #BB0000;">NA</span>          Dhar      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 11240… To-Nhu     <span style="color: #BB0000;">NA</span>          Vu        MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 12159… Cathy      D           Paige     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 13062… Eileen     M           Micaroni  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 14473… Anita      <span style="color: #BB0000;">NA</span>          Malhotra  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 15482… Sonia      J           Vaida     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 15583… Priti      G           Dalal     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 16090… Zoulfira   <span style="color: #BB0000;">NA</span>          Nisnevit… MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 17503… Niraja     <span style="color: #BB0000;">NA</span>          Rajan     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>021 18010… Sharon     <span style="color: #BB0000;">NA</span>          Lee       MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>021 18018… Jansie     <span style="color: #BB0000;">NA</span>          Prozesky  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 18514… Kelly      S           Gidusko   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>021 18717… Rochelle   <span style="color: #BB0000;">NA</span>          Sims      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>021 18917… Elizabeth  H           Sinz      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>021 19222… Kristin    B           Brennan   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>021 19628… Sadie      E           Smith     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></span></code></pre></div>
-</div>
-</div>
-<div class="section level2">
-<h2 id="physician-other-practitioners-by-provider-and-service">Physician &amp; Other Practitioners: <strong>by Provider and
-Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-practitioners-by-provider-and-service"></a>
-</h2>
-<p><br></p>
 <p>The spending and utilization data in the Physician and Other
-Practitioners by Provider and Service Dataset are aggregated to the
-following:</p>
+Practitioners <strong>by Provider and Service</strong> Dataset are
+aggregated to the following:</p>
 <p><br></p>
 <ol style="list-style-type: decimal">
 <li>the NPI for the performing provider,</li>
@@ -248,231 +143,50 @@ because separate fee schedules apply depending on whether the place of
 service submitted on the claim is facility or non-facility.</p>
 <p><br></p>
 <div class="section level3">
-<h3 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pbs</span> <span class="op">&lt;-</span> <span class="fl">2013</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span><span class="va">year</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">pbs</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">zipcode</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html" class="external-link">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">70</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 13</span></span></span>
-<span><span class="co">#&gt;    year npi       entype first_name last_name credential gender specialty street</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>013 10030001… Indiv… Ardalan    Enkeshafi MD         M      Internal… 900 S…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 10030001… Indiv… Ardalan    Enkeshafi MD         M      Internal… 6410 …</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;</span></span></span></code></pre></div>
-<p><br></p>
-<details><summary>
-Code for table
-</summary><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">gt1</span> <span class="op">&lt;-</span> <span class="va">pbs</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">hcpcs_cd</span><span class="op">:</span><span class="va">avg_std_pymt</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarise</a></span><span class="op">(</span>unique_hcpcs <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html" class="external-link">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>                   tot_benes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_benes</span><span class="op">)</span>,</span>
-<span>                   tot_srvcs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_srvcs</span><span class="op">)</span>,</span>
-<span>                   tot_benes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">tot_benes</span><span class="op">)</span>,</span>
-<span>                   avg_charge <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_charge</span><span class="op">)</span>,</span>
-<span>                   avg_allowed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_allowed</span><span class="op">)</span>,</span>
-<span>                   avg_payment <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">avg_payment</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="va">avg_charge</span>, </span>
-<span>    <span class="va">avg_allowed</span>,</span>
-<span>    <span class="va">avg_payment</span><span class="op">)</span>, </span>
-<span>    currency <span class="op">=</span> <span class="st">"USD"</span>, </span>
-<span>    suffixing <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>    sep_mark <span class="op">=</span> <span class="st">","</span>, </span>
-<span>    incl_space <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>unique_hcpcs <span class="op">=</span> <span class="st">"Unique HCPCS"</span>,</span>
-<span>                 tot_benes <span class="op">=</span> <span class="st">"Beneficiaries"</span>,</span>
-<span>                 tot_srvcs <span class="op">=</span> <span class="st">"Services"</span>,</span>
-<span>                 avg_charge <span class="op">=</span> <span class="st">"Avg. Charge"</span>,</span>
-<span>                 avg_allowed <span class="op">=</span> <span class="st">"Avg. Allowed"</span>,</span>
-<span>                 avg_payment <span class="op">=</span> <span class="st">"Avg. Payment"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"avg"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span></span>
-<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"avg"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, </span>
-<span>                <span class="st">"tot_srvcs"</span><span class="op">)</span>, </span>
-<span>    style <span class="op">=</span> <span class="st">"solid"</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>    weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>    include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Summary: **2013 - 2021**"</span><span class="op">)</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider: Ardalan Enkeshafi, MD (NPI: 1003000126)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `hcpcs_cd` doesn't exist.</span></span></code></pre></div>
-</details><pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'gt1' not found</span></span></code></pre>
-<p><br></p>
-<details><summary>
-Code for table
-</summary><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="va">pbs</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                <span class="va">hcpcs_cd</span>,</span>
-<span>                <span class="va">place_of_srvc</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `hcpcs_cd` doesn't exist.</span></span>
-<span></span>
-<span><span class="co"># Individual level</span></span>
-<span><span class="va">individual</span> <span class="op">&lt;-</span> <span class="va">pbs</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                <span class="va">hcpcs_cd</span><span class="op">:</span><span class="va">avg_std_pymt</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `hcpcs_cd` doesn't exist.</span></span>
-<span></span>
-<span><span class="va">individual</span> <span class="op">&lt;-</span> <span class="va">individual</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                hcpcs <span class="op">=</span> <span class="va">hcpcs_cd</span>, </span>
-<span>                <span class="va">hcpcs_desc</span>, </span>
-<span>                <span class="va">place_of_srvc</span>, </span>
-<span>                <span class="va">avg_charge</span>, </span>
-<span>                <span class="va">avg_allowed</span>, </span>
-<span>                <span class="va">avg_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>sublevel <span class="op">=</span> <span class="st">"Individual"</span>, </span>
-<span>                .after <span class="op">=</span> <span class="va">year</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'individual' not found</span></span>
-<span>  </span>
-<span></span>
-<span><span class="co"># State level</span></span>
-<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map2_dfr</a></span><span class="op">(</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">year</span>, </span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>sublevel <span class="op">=</span> <span class="st">"Maryland"</span>, </span>
-<span>                                       year <span class="op">=</span> <span class="va">.x</span>, </span>
-<span>                                       hcpcs_code <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in df$year: object of type 'closure' is not subsettable</span></span>
-<span></span>
-<span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">state</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>                <span class="va">sublevel</span>, </span>
-<span>                <span class="va">hcpcs</span>, </span>
-<span>                <span class="va">hcpcs_desc</span>, </span>
-<span>                <span class="va">place_of_srvc</span>, </span>
-<span>                <span class="va">avg_charge</span>, </span>
-<span>                <span class="va">avg_allowed</span>, </span>
-<span>                <span class="va">avg_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">df</span>, </span>
-<span>                    by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span></span>
-<span>                      <span class="va">year</span> <span class="op">==</span> <span class="va">year</span>, </span>
-<span>                      <span class="va">hcpcs</span> <span class="op">==</span> <span class="va">hcpcs_cd</span>, </span>
-<span>                      <span class="va">place_of_srvc</span> <span class="op">==</span> <span class="va">place_of_srvc</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>level <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'state' not found</span></span>
-<span></span>
-<span><span class="co"># National level</span></span>
-<span><span class="va">national</span> <span class="op">&lt;-</span> <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map2_dfr</a></span><span class="op">(</span></span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">year</span>, </span>
-<span>  <span class="va">df</span><span class="op">$</span><span class="va">hcpcs_cd</span>, <span class="op">~</span><span class="fu"><a href="../reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>sublevel <span class="op">=</span> <span class="st">"National"</span>, </span>
-<span>                                       year <span class="op">=</span> <span class="va">.x</span>, </span>
-<span>                                       hcpcs_code <span class="op">=</span> <span class="va">.y</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in df$year: object of type 'closure' is not subsettable</span></span>
-<span></span>
-<span><span class="va">national</span> <span class="op">&lt;-</span> <span class="va">national</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,  </span>
-<span>                <span class="va">sublevel</span>, </span>
-<span>                <span class="va">hcpcs</span>, </span>
-<span>                <span class="va">hcpcs_desc</span>, </span>
-<span>                <span class="va">place_of_srvc</span>, </span>
-<span>                <span class="va">avg_charge</span>, </span>
-<span>                <span class="va">avg_allowed</span>, </span>
-<span>                <span class="va">avg_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">right_join</a></span><span class="op">(</span><span class="va">df</span>, </span>
-<span>                    by <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/join_by.html" class="external-link">join_by</a></span><span class="op">(</span></span>
-<span>                      <span class="va">year</span> <span class="op">==</span> <span class="va">year</span>, </span>
-<span>                      <span class="va">hcpcs</span> <span class="op">==</span> <span class="va">hcpcs_cd</span>, </span>
-<span>                      <span class="va">place_of_srvc</span> <span class="op">==</span> <span class="va">place_of_srvc</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'national' not found</span></span>
-<span></span>
-<span><span class="va">bind</span> <span class="op">&lt;-</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span><span class="va">individual</span>, <span class="va">state</span>, <span class="va">national</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'individual' not found</span></span>
-<span></span>
-<span><span class="va">gt2</span> <span class="op">&lt;-</span> <span class="va">bind</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">hcpcs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">place_of_srvc</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"year"</span>, rowname_col <span class="op">=</span> <span class="st">"sublevel"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_merge_stack.html" class="external-link">gt_merge_stack</a></span><span class="op">(</span>col1 <span class="op">=</span> <span class="va">hcpcs</span>, </span>
-<span>                           col2 <span class="op">=</span> <span class="va">hcpcs_desc</span>,</span>
-<span>                           small_cap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>                           font_size <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"16px"</span>, <span class="st">"14px"</span><span class="op">)</span>,</span>
-<span>                           font_weight <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bold"</span>, <span class="st">"normal"</span><span class="op">)</span>,</span>
-<span>                           palette <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"darkgray"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_538.html" class="external-link">gt_theme_538</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="va">avg_charge</span>, </span>
-<span>    <span class="va">avg_allowed</span>,</span>
-<span>    <span class="va">avg_payment</span><span class="op">)</span>, </span>
-<span>    currency <span class="op">=</span> <span class="st">"USD"</span>, </span>
-<span>    suffixing <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>    sep_mark <span class="op">=</span> <span class="st">","</span>, </span>
-<span>    incl_space <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_width.html" class="external-link">cols_width</a></span><span class="op">(</span><span class="va">hcpcs</span> <span class="op">~</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span></span>
-<span>    <span class="co">#sublevel = "Level",</span></span>
-<span>                 hcpcs <span class="op">=</span> <span class="st">"HCPCS Code"</span>,</span>
-<span>                 <span class="co">#place_of_srvc = "POS",</span></span>
-<span>                 avg_charge <span class="op">=</span> <span class="st">"Avg. Charge"</span>,</span>
-<span>                 avg_allowed <span class="op">=</span> <span class="st">"Avg. Allowed"</span>,</span>
-<span>                 avg_payment <span class="op">=</span> <span class="st">"Avg. Payment"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>,</span>
-<span>                  data_row.padding <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_color_rows.html" class="external-link">gt_color_rows</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"avg"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_style.html" class="external-link">tab_style</a></span><span class="op">(</span>style <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cell_text.html" class="external-link">cell_text</a></span><span class="op">(</span></span>
-<span>    font <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"Fira Code"</span><span class="op">)</span>, <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/default_fonts.html" class="external-link">default_fonts</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    locations <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cells_body.html" class="external-link">cells_body</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"avg"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_add_divider.html" class="external-link">gt_add_divider</a></span><span class="op">(</span></span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"year"</span>, </span>
-<span>                <span class="st">"hcpcs"</span><span class="op">)</span>, </span>
-<span>    style <span class="op">=</span> <span class="st">"solid"</span>,</span>
-<span>    color <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>    weight <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/px.html" class="external-link">px</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>    include_labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span></span>
-<span>    title <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Medicare Provider Summary: **2013 - 2021**"</span><span class="op">)</span>,</span>
-<span>    subtitle <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Provider: Ardalan Enkeshafi, MD (NPI: 1003000126)"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: data.cms.gov"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'bind' not found</span></span></code></pre></div>
-</details><p><br></p>
-<pre><code><span><span class="co">#&gt; Error in eval(expr, envir, enclos): object 'gt2' not found</span></span></code></pre>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 28</span></span></span>
+<span><span class="co">#&gt;    year npi        entype     first_name middle_name last_name credential gender</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 1003000126 Individual Ardalan    <span style="color: #BB0000;">NA</span>          Enkeshafi MD         M     </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hcpcs_code &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, place_of_srvc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;, avg_charges &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="fofeesjesg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pogybnqjyc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fofeesjesg table {
+#pogybnqjyc table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fofeesjesg thead, #fofeesjesg tbody, #fofeesjesg tfoot, #fofeesjesg tr, #fofeesjesg td, #fofeesjesg th {
+#pogybnqjyc thead, #pogybnqjyc tbody, #pogybnqjyc tfoot, #pogybnqjyc tr, #pogybnqjyc td, #pogybnqjyc th {
   border-style: none;
 }
 
-#fofeesjesg p {
+#pogybnqjyc p {
   margin: 0;
   padding: 0;
 }
 
-#fofeesjesg .gt_table {
+#pogybnqjyc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -498,12 +212,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#fofeesjesg .gt_caption {
+#pogybnqjyc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fofeesjesg .gt_title {
+#pogybnqjyc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -515,7 +229,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#fofeesjesg .gt_subtitle {
+#pogybnqjyc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -527,7 +241,7 @@ Code for table
   border-top-width: 0;
 }
 
-#fofeesjesg .gt_heading {
+#pogybnqjyc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -539,13 +253,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#fofeesjesg .gt_bottom_border {
+#pogybnqjyc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_col_headings {
+#pogybnqjyc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -560,7 +274,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#fofeesjesg .gt_col_heading {
+#pogybnqjyc .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -580,7 +294,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#fofeesjesg .gt_column_spanner_outer {
+#pogybnqjyc .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -592,15 +306,15 @@ Code for table
   padding-right: 4px;
 }
 
-#fofeesjesg .gt_column_spanner_outer:first-child {
+#pogybnqjyc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fofeesjesg .gt_column_spanner_outer:last-child {
+#pogybnqjyc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fofeesjesg .gt_column_spanner {
+#pogybnqjyc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -612,11 +326,11 @@ Code for table
   width: 100%;
 }
 
-#fofeesjesg .gt_spanner_row {
+#pogybnqjyc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fofeesjesg .gt_group_heading {
+#pogybnqjyc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -642,7 +356,7 @@ Code for table
   text-align: left;
 }
 
-#fofeesjesg .gt_empty_group_heading {
+#pogybnqjyc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -657,15 +371,15 @@ Code for table
   vertical-align: middle;
 }
 
-#fofeesjesg .gt_from_md > :first-child {
+#pogybnqjyc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fofeesjesg .gt_from_md > :last-child {
+#pogybnqjyc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fofeesjesg .gt_row {
+#pogybnqjyc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -684,7 +398,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#fofeesjesg .gt_stub {
+#pogybnqjyc .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -697,7 +411,7 @@ Code for table
   padding-right: 5px;
 }
 
-#fofeesjesg .gt_stub_row_group {
+#pogybnqjyc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,15 +425,15 @@ Code for table
   vertical-align: top;
 }
 
-#fofeesjesg .gt_row_group_first td {
+#pogybnqjyc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fofeesjesg .gt_row_group_first th {
+#pogybnqjyc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fofeesjesg .gt_summary_row {
+#pogybnqjyc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -729,16 +443,16 @@ Code for table
   padding-right: 5px;
 }
 
-#fofeesjesg .gt_first_summary_row {
+#pogybnqjyc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_first_summary_row.thick {
+#pogybnqjyc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fofeesjesg .gt_last_summary_row {
+#pogybnqjyc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -748,7 +462,7 @@ Code for table
   border-bottom-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_grand_summary_row {
+#pogybnqjyc .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -758,7 +472,7 @@ Code for table
   padding-right: 5px;
 }
 
-#fofeesjesg .gt_first_grand_summary_row {
+#pogybnqjyc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -768,7 +482,7 @@ Code for table
   border-top-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_last_grand_summary_row_top {
+#pogybnqjyc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -778,11 +492,11 @@ Code for table
   border-bottom-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_striped {
+#pogybnqjyc .gt_striped {
   background-color: #FEEDEC;
 }
 
-#fofeesjesg .gt_table_body {
+#pogybnqjyc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -791,7 +505,7 @@ Code for table
   border-bottom-color: #5F5F5F;
 }
 
-#fofeesjesg .gt_footnotes {
+#pogybnqjyc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -805,7 +519,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#fofeesjesg .gt_footnote {
+#pogybnqjyc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -814,7 +528,7 @@ Code for table
   padding-right: 5px;
 }
 
-#fofeesjesg .gt_sourcenotes {
+#pogybnqjyc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -828,7 +542,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#fofeesjesg .gt_sourcenote {
+#pogybnqjyc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -836,63 +550,63 @@ Code for table
   padding-right: 5px;
 }
 
-#fofeesjesg .gt_left {
+#pogybnqjyc .gt_left {
   text-align: left;
 }
 
-#fofeesjesg .gt_center {
+#pogybnqjyc .gt_center {
   text-align: center;
 }
 
-#fofeesjesg .gt_right {
+#pogybnqjyc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fofeesjesg .gt_font_normal {
+#pogybnqjyc .gt_font_normal {
   font-weight: normal;
 }
 
-#fofeesjesg .gt_font_bold {
+#pogybnqjyc .gt_font_bold {
   font-weight: bold;
 }
 
-#fofeesjesg .gt_font_italic {
+#pogybnqjyc .gt_font_italic {
   font-style: italic;
 }
 
-#fofeesjesg .gt_super {
+#pogybnqjyc .gt_super {
   font-size: 65%;
 }
 
-#fofeesjesg .gt_footnote_marks {
+#pogybnqjyc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fofeesjesg .gt_asterisk {
+#pogybnqjyc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fofeesjesg .gt_indent_1 {
+#pogybnqjyc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fofeesjesg .gt_indent_2 {
+#pogybnqjyc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fofeesjesg .gt_indent_3 {
+#pogybnqjyc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fofeesjesg .gt_indent_4 {
+#pogybnqjyc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fofeesjesg .gt_indent_5 {
+#pogybnqjyc .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1171,7 +885,6 @@ Code for table
 </table>
 </div>
 <p><br><br></p>
-</div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>

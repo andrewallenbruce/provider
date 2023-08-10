@@ -141,25 +141,52 @@ conditions. The count of conditions is grouped into four categories
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            geo_lvl <span class="op">=</span> <span class="st">"State"</span>, </span>
-<span>            geo_desc <span class="op">=</span> <span class="st">"California"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_geo_lvl</span>, <span class="va">bene_geo_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in cc_multiple(year = 2018, geo_lvl = "State", geo_desc = "California"): unused arguments (geo_lvl = "State", geo_desc = "California")</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, </span>
-<span>            geo_lvl <span class="op">=</span> <span class="st">"National"</span>, </span>
-<span>            demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_geo_desc</span>, <span class="va">bene_geo_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in cc_multiple(year = 2007, geo_lvl = "National", demo_lvl = "Race"): unused arguments (geo_lvl = "National", demo_lvl = "Race")</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="co"># Multiple Chronic Conditions</span></span>
+<span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
+<span>            level <span class="op">=</span> <span class="st">"National"</span>, </span>
+<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
+<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level    sublevel fips  age_group demographic subdemo mcc     prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [0,1]        0.311</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [2,3]        0.291</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [4,5]        0.221</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [6, In…      0.177</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
+<span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
+<span>            sublevel <span class="op">=</span> <span class="st">"Alabama"</span>, </span>
+<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
+<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level sublevel fips  age_group demographic subdemo mcc      prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [0,1]         0.258</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [2,3]         0.285</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [4,5]         0.250</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [6, Inf)      0.207</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
+<span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
+<span>            sublevel <span class="op">=</span> <span class="st">"Alabama : Autauga"</span>, </span>
+<span>            fips <span class="op">=</span> <span class="st">"01001"</span>, </span>
+<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
+<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level  sublevel     fips  age_group demographic subdemo mcc   prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [0,1]      0.266</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [2,3]      0.281</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [4,5]      0.248</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [6, …      0.205</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
 </div>
 </div>
 <div class="section level2">
@@ -196,50 +223,71 @@ distinct chronic conditions listed below.</p>
 <div class="section level3">
 <h3 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
 </h3>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            geo_lvl <span class="op">=</span> <span class="st">"State"</span>, </span>
-<span>            geo_desc <span class="op">=</span> <span class="st">"California"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">bene_geo_lvl</span>, <span class="va">bene_geo_cd</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">bene_age_lvl</span><span class="op">)</span>, <span class="va">bene_demo_lvl</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in cc_specific(year = 2018, geo_lvl = "State", geo_desc = "California"): unused arguments (geo_lvl = "State", geo_desc = "California")</span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, </span>
-<span>            geo_lvl <span class="op">=</span> <span class="st">"National"</span>, </span>
-<span>            demo_lvl <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt_preview.html" class="external-link">gt_preview</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">gt_theme_provider</span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in cc_specific(year = 2007, geo_lvl = "National", demo_lvl = "Race"): unused arguments (geo_lvl = "National", demo_lvl = "Race")</span></span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Specific Chronic Conditions</span></span>
+<span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
+<span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
+<span>            sublevel <span class="op">=</span> <span class="st">"California"</span>, </span>
+<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 13</span></span></span>
+<span><span class="co">#&gt;     year level sublevel fips  age_group demographic subdemo condition prevalence</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Alcohol …     0.021<span style="text-decoration: underline;">5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Alzheime…     0.105 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Arthritis     0.312 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Asthma        0.053 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Atrial F…     0.074<span style="text-decoration: underline;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Autism S…     0.002<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     COPD          0.095<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Cancer        0.078<span style="text-decoration: underline;">4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Chronic …     0.243 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Depressi…     0.162 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2011</span>, </span>
+<span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
+<span>            fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 13</span></span></span>
+<span><span class="co">#&gt;     year level sublevel fips  age_group demographic subdemo condition prevalence</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Alcohol …     0.011<span style="text-decoration: underline;">6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Alzheime…     0.100 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Arthritis     0.274 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Asthma        0.037 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Atrial F…     0.074<span style="text-decoration: underline;">8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Autism S…    <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     COPD          0.122 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Cancer        0.079<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Chronic …     0.137 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Depressi…     0.134 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="mbyaghteif" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mbyaghteif table {
-  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+<div id="hcwjcchrsn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#hcwjcchrsn table {
+  font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mbyaghteif thead, #mbyaghteif tbody, #mbyaghteif tfoot, #mbyaghteif tr, #mbyaghteif td, #mbyaghteif th {
+#hcwjcchrsn thead, #hcwjcchrsn tbody, #hcwjcchrsn tfoot, #hcwjcchrsn tr, #hcwjcchrsn td, #hcwjcchrsn th {
   border-style: none;
 }
 
-#mbyaghteif p {
+#hcwjcchrsn p {
   margin: 0;
   padding: 0;
 }
 
-#mbyaghteif .gt_table {
+#hcwjcchrsn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -250,27 +298,27 @@ distinct chronic conditions listed below.</p>
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
-  width: auto;
+  width: 100%;
   border-top-style: none;
-  border-top-width: 3px;
-  border-top-color: #D5D5D5;
+  border-top-width: 2px;
+  border-top-color: #5F5F5F;
   border-right-style: none;
-  border-right-width: 3px;
-  border-right-color: #D5D5D5;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
   border-bottom-style: none;
-  border-bottom-width: 3px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
   border-left-style: none;
-  border-left-width: 3px;
-  border-left-color: #D5D5D5;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
 }
 
-#mbyaghteif .gt_caption {
+#hcwjcchrsn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mbyaghteif .gt_title {
+#hcwjcchrsn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -282,7 +330,7 @@ distinct chronic conditions listed below.</p>
   border-bottom-width: 0;
 }
 
-#mbyaghteif .gt_subtitle {
+#hcwjcchrsn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -294,9 +342,9 @@ distinct chronic conditions listed below.</p>
   border-top-width: 0;
 }
 
-#mbyaghteif .gt_heading {
+#hcwjcchrsn .gt_heading {
   background-color: #FFFFFF;
-  text-align: left;
+  text-align: center;
   border-bottom-color: #FFFFFF;
   border-left-style: none;
   border-left-width: 1px;
@@ -306,19 +354,19 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#mbyaghteif .gt_bottom_border {
+#hcwjcchrsn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_col_headings {
+#hcwjcchrsn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
   border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -327,10 +375,10 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#mbyaghteif .gt_col_heading {
+#hcwjcchrsn .gt_col_heading {
   color: #FFFFFF;
-  background-color: #5F5F5F;
-  font-size: 12px;
+  background-color: #E4220C;
+  font-size: 100%;
   font-weight: normal;
   text-transform: inherit;
   border-left-style: none;
@@ -347,10 +395,10 @@ distinct chronic conditions listed below.</p>
   overflow-x: hidden;
 }
 
-#mbyaghteif .gt_column_spanner_outer {
+#hcwjcchrsn .gt_column_spanner_outer {
   color: #FFFFFF;
-  background-color: #5F5F5F;
-  font-size: 12px;
+  background-color: #E4220C;
+  font-size: 100%;
   font-weight: normal;
   text-transform: inherit;
   padding-top: 0;
@@ -359,18 +407,18 @@ distinct chronic conditions listed below.</p>
   padding-right: 4px;
 }
 
-#mbyaghteif .gt_column_spanner_outer:first-child {
+#hcwjcchrsn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mbyaghteif .gt_column_spanner_outer:last-child {
+#hcwjcchrsn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mbyaghteif .gt_column_spanner {
+#hcwjcchrsn .gt_column_spanner {
   border-bottom-style: solid;
-  border-bottom-width: 1px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-width: 2px;
+  border-bottom-color: #5F5F5F;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -379,11 +427,11 @@ distinct chronic conditions listed below.</p>
   width: 100%;
 }
 
-#mbyaghteif .gt_spanner_row {
+#hcwjcchrsn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mbyaghteif .gt_group_heading {
+#hcwjcchrsn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -395,10 +443,10 @@ distinct chronic conditions listed below.</p>
   text-transform: inherit;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -409,7 +457,7 @@ distinct chronic conditions listed below.</p>
   text-align: left;
 }
 
-#mbyaghteif .gt_empty_group_heading {
+#hcwjcchrsn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -417,24 +465,24 @@ distinct chronic conditions listed below.</p>
   font-weight: initial;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
   vertical-align: middle;
 }
 
-#mbyaghteif .gt_from_md > :first-child {
+#hcwjcchrsn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mbyaghteif .gt_from_md > :last-child {
+#hcwjcchrsn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mbyaghteif .gt_row {
-  padding-top: 7px;
-  padding-bottom: 7px;
+#hcwjcchrsn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   margin: 10px;
@@ -451,9 +499,9 @@ distinct chronic conditions listed below.</p>
   overflow-x: hidden;
 }
 
-#mbyaghteif .gt_stub {
-  color: #FFFFFF;
-  background-color: #929292;
+#hcwjcchrsn .gt_stub {
+  color: #333333;
+  background-color: #FFCCC7;
   font-size: 100%;
   font-weight: initial;
   text-transform: inherit;
@@ -464,7 +512,7 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#mbyaghteif .gt_stub_row_group {
+#hcwjcchrsn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -478,15 +526,15 @@ distinct chronic conditions listed below.</p>
   vertical-align: top;
 }
 
-#mbyaghteif .gt_row_group_first td {
+#hcwjcchrsn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mbyaghteif .gt_row_group_first th {
+#hcwjcchrsn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mbyaghteif .gt_summary_row {
+#hcwjcchrsn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -496,28 +544,28 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#mbyaghteif .gt_first_summary_row {
+#hcwjcchrsn .gt_first_summary_row {
   border-top-style: solid;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_first_summary_row.thick {
+#hcwjcchrsn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mbyaghteif .gt_last_summary_row {
+#hcwjcchrsn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_grand_summary_row {
-  color: #FFFFFF;
-  background-color: #5F5F5F;
+#hcwjcchrsn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #D5D5D5;
   text-transform: inherit;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -525,40 +573,40 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#mbyaghteif .gt_first_grand_summary_row {
+#hcwjcchrsn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-style: double;
   border-top-width: 6px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_last_grand_summary_row_top {
+#hcwjcchrsn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: double;
   border-bottom-width: 6px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_striped {
-  background-color: #F4F4F4;
+#hcwjcchrsn .gt_striped {
+  background-color: #FEEDEC;
 }
 
-#mbyaghteif .gt_table_body {
+#hcwjcchrsn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #D5D5D5;
+  border-top-color: #5F5F5F;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #D5D5D5;
+  border-bottom-color: #5F5F5F;
 }
 
-#mbyaghteif .gt_footnotes {
+#hcwjcchrsn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -572,7 +620,7 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#mbyaghteif .gt_footnote {
+#hcwjcchrsn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -581,7 +629,7 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#mbyaghteif .gt_sourcenotes {
+#hcwjcchrsn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -595,7 +643,7 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#mbyaghteif .gt_sourcenote {
+#hcwjcchrsn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -603,80 +651,78 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#mbyaghteif .gt_left {
+#hcwjcchrsn .gt_left {
   text-align: left;
 }
 
-#mbyaghteif .gt_center {
+#hcwjcchrsn .gt_center {
   text-align: center;
 }
 
-#mbyaghteif .gt_right {
+#hcwjcchrsn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mbyaghteif .gt_font_normal {
+#hcwjcchrsn .gt_font_normal {
   font-weight: normal;
 }
 
-#mbyaghteif .gt_font_bold {
+#hcwjcchrsn .gt_font_bold {
   font-weight: bold;
 }
 
-#mbyaghteif .gt_font_italic {
+#hcwjcchrsn .gt_font_italic {
   font-style: italic;
 }
 
-#mbyaghteif .gt_super {
+#hcwjcchrsn .gt_super {
   font-size: 65%;
 }
 
-#mbyaghteif .gt_footnote_marks {
+#hcwjcchrsn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mbyaghteif .gt_asterisk {
+#hcwjcchrsn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mbyaghteif .gt_indent_1 {
+#hcwjcchrsn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mbyaghteif .gt_indent_2 {
+#hcwjcchrsn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mbyaghteif .gt_indent_3 {
+#hcwjcchrsn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mbyaghteif .gt_indent_4 {
+#hcwjcchrsn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mbyaghteif .gt_indent_5 {
+#hcwjcchrsn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Variable">Variable</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="Description">Description</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Variable">Variable</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Description">Description</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Geo_Lvl</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>level</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Geographic Level</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Geographic Level</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies the level of geography that the data in the row has been aggregated. 
                  A value of 'County' indicates the data in the row is aggregated to the county level 
                  and identifies a Medicare beneficiary’s geographic place of residence. A value of 'State' 
@@ -686,50 +732,42 @@ distinct chronic conditions listed below.</p>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Geo_Desc</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>sublevel</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Geographic Description</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Geographic Description</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">The state and/or county where the Medicare beneficiary resides. The values include the 50 United States, 
                  District of Columbia, Puerto Rico or U.S. Virgin Islands. Data aggregated at the National level are identified by 'National'.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Geo_Cd</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>fips</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Geographic Code</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Geographic Code</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">FIPS state and/or county code where the Medicare beneficiary resides. The `Bene_Geo_Cd` 
                  will be blank for data aggregated at the National level or for Puerto Rico and Virgin Islands.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Age_Lvl</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>age_group</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Age Level</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Age Level</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies the age level of the population that the data has been aggregated. A value of 'All' 
                  indicates the data in the row represents all Fee-for-Service Medicare Beneficiaries. A value of 
                  '</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Demo_Lvl</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>demographic</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Demographic Level</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Demographic Level</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies the demographic level of the population that the data has been aggregated. A value of 'All' 
                  indicates the data in the row is represents all Fee-for-Service Medicare beneficiaries. A value of 'Sex' 
                  indicates that the data has been aggregated by the Medicare beneficiary's sex. A value of 'Race' indicates 
@@ -738,13 +776,11 @@ distinct chronic conditions listed below.</p>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Demo_Desc</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>subdemo</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Demographic Description</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Demographic Description</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">For Bene_Demo_Lvl = 'Sex', a beneficiary’s sex is classified as Male or Female and is identified using 
                  information from the CMS enrollment database. For Bene_Demo_Lvl = 'Race', the race/ethnicity classifications 
                  are: Non-Hispanic White, Black or African American, Asian/Pacific Islander, Hispanic, and American Indian/Alaska Native. 
@@ -755,13 +791,11 @@ distinct chronic conditions listed below.</p>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_MCC</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>mcc</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Chronic Condition</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Chronic Condition</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Identifies the chronic condition for which the prevalence and utilization is compiled. There are 21 chronic conditions 
                  identified using Medicare administrative claims. A Medicare beneficiary is considered to have a chronic condition if the 
                  CMS administrative data have a claim indicating that the beneficiary received a service or treatment for the specific condition. 
@@ -769,65 +803,53 @@ distinct chronic conditions listed below.</p>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Bene_Cond</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>condition</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Beneficiary Multiple Chronic Condition Group</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Beneficiary Multiple Chronic Condition Group</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">To classify MCC for each Medicare beneficiary, the 21 chronic conditions are counted and grouped into four categories (0-1, 2-3, 4-5 and 6 or more).</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md">
-<p><code>Prvlnc</code></p>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md">
+<p><code>prevalence</code></p>
 </div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Prevalence</p>
-</div></span></div>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Prevalence</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Prevalence estimates are calculated by taking the beneficiaries with a particular condition divided by the total number of 
                  beneficiaries in our fee-for-service population, expressed as a percentage.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md"><p><code>Tot_Mdcr_Stdzd_Pymt_PC</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Total Medicare Standardized Per Capita Spending</p>
-</div></span></div>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md"><p><code>tot_std_pymt_percap</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Total Medicare Standardized Per Capita Spending</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per 
                  beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care 
                  use among beneficiaries.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md"><p><code>Tot_Mdcr_Pymt_PC</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Total Medicare Per Capita Spending</p>
-</div></span></div>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md"><p><code>tot_pymt_percap</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Total Medicare Per Capita Spending</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Medicare spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita).</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md"><p><code>Hosp_Readmsn_Rate</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Hospital Readmission Rate</p>
-</div></span></div>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md"><p><code>hosp_readmn_rate</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Hospital Readmission Rate</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to 
                  an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is
                  classified as an index admission, a readmission, or both.</span></div>
 </td>
 </tr>
 <tr>
-<td headers="Variable" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;"><div class="gt_from_md"><p><code>ER_Visits_Per_1000_Benes</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
-<td headers="Description" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">
-<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px"><div class="gt_from_md">
-<p>Emergency Room Visits per 1,000 Beneficiaries</p>
-</div></span></div>
+<td headers="Variable" class="gt_row gt_left" style="border-right-width: 2px; border-right-style: solid; border-right-color: gray;"><div class="gt_from_md"><p><code>er_vs_per_1k</code><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;"><sup>1</sup></span></p></div></td>
+<td headers="Description" class="gt_row gt_left">
+<div style="line-height:16px"><span style="font-weight:bold;font-variant:normal;color:#000000;font-size:16px">Emergency Room Visits per 1,000 Beneficiaries</span></div>
 <div style="line-height:14px"><span style="font-weight:normal;color:#A9A9A9;font-size:14px">Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was 
                  released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.</span></div>
 </td>

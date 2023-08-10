@@ -128,7 +128,7 @@ records and/or single enrollments linking to multiple practice locations
 are listed on multiple lines.</p>
 <p><br></p>
 <div class="section level2">
-<h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span>
@@ -142,7 +142,7 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
-<p><br></p>
+<p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
 <span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
@@ -166,51 +166,28 @@ are listed on multiple lines.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">501</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"Valdosta"</span>, offset <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 716 × 25</span></span></span>
-<span><span class="co">#&gt;    npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003038720 06483608… I2007121… BARBARA    F           FRIER     <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1003125238 12545244… I2015110… JEREMY     STEPHEN     COLYER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1003198268 18505427… I2012112… COLE       <span style="color: #BB0000;">NA</span>          BURGESS   <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1003287533 60021732… I2017112… KACIE      PARRISH     JOHNSON   <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1003445297 17597708… I2021111… VICKI      <span style="color: #BB0000;">NA</span>          WETTER    <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1003816935 06483969… I2010092… MARY       <span style="color: #BB0000;">NA</span>          FULP-PYE  <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1013250612 21636573… I2013102… HEATH      <span style="color: #BB0000;">NA</span>          FARMER    <span style="color: #BB0000;">NA</span>     M     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1013294966 63050682… I2014111… LYNDI      <span style="color: #BB0000;">NA</span>          FARNAM    <span style="color: #BB0000;">NA</span>     F     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 706 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></span></code></pre></div>
+<p><br><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="dwkqjdoxig" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="yxoblksiyw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#dwkqjdoxig table {
+#yxoblksiyw table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#dwkqjdoxig thead, #dwkqjdoxig tbody, #dwkqjdoxig tfoot, #dwkqjdoxig tr, #dwkqjdoxig td, #dwkqjdoxig th {
+#yxoblksiyw thead, #yxoblksiyw tbody, #yxoblksiyw tfoot, #yxoblksiyw tr, #yxoblksiyw td, #yxoblksiyw th {
   border-style: none;
 }
 
-#dwkqjdoxig p {
+#yxoblksiyw p {
   margin: 0;
   padding: 0;
 }
 
-#dwkqjdoxig .gt_table {
+#yxoblksiyw .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -236,12 +213,12 @@ are listed on multiple lines.</p>
   border-left-color: #D3D3D3;
 }
 
-#dwkqjdoxig .gt_caption {
+#yxoblksiyw .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#dwkqjdoxig .gt_title {
+#yxoblksiyw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -253,7 +230,7 @@ are listed on multiple lines.</p>
   border-bottom-width: 0;
 }
 
-#dwkqjdoxig .gt_subtitle {
+#yxoblksiyw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -265,7 +242,7 @@ are listed on multiple lines.</p>
   border-top-width: 0;
 }
 
-#dwkqjdoxig .gt_heading {
+#yxoblksiyw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -277,13 +254,13 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#dwkqjdoxig .gt_bottom_border {
+#yxoblksiyw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_col_headings {
+#yxoblksiyw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -298,7 +275,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#dwkqjdoxig .gt_col_heading {
+#yxoblksiyw .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -318,7 +295,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#dwkqjdoxig .gt_column_spanner_outer {
+#yxoblksiyw .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -330,15 +307,15 @@ are listed on multiple lines.</p>
   padding-right: 4px;
 }
 
-#dwkqjdoxig .gt_column_spanner_outer:first-child {
+#yxoblksiyw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#dwkqjdoxig .gt_column_spanner_outer:last-child {
+#yxoblksiyw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#dwkqjdoxig .gt_column_spanner {
+#yxoblksiyw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -350,11 +327,11 @@ are listed on multiple lines.</p>
   width: 100%;
 }
 
-#dwkqjdoxig .gt_spanner_row {
+#yxoblksiyw .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#dwkqjdoxig .gt_group_heading {
+#yxoblksiyw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -380,7 +357,7 @@ are listed on multiple lines.</p>
   text-align: left;
 }
 
-#dwkqjdoxig .gt_empty_group_heading {
+#yxoblksiyw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -395,15 +372,15 @@ are listed on multiple lines.</p>
   vertical-align: middle;
 }
 
-#dwkqjdoxig .gt_from_md > :first-child {
+#yxoblksiyw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#dwkqjdoxig .gt_from_md > :last-child {
+#yxoblksiyw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#dwkqjdoxig .gt_row {
+#yxoblksiyw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -422,7 +399,7 @@ are listed on multiple lines.</p>
   overflow-x: hidden;
 }
 
-#dwkqjdoxig .gt_stub {
+#yxoblksiyw .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -435,7 +412,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#dwkqjdoxig .gt_stub_row_group {
+#yxoblksiyw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,15 +426,15 @@ are listed on multiple lines.</p>
   vertical-align: top;
 }
 
-#dwkqjdoxig .gt_row_group_first td {
+#yxoblksiyw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#dwkqjdoxig .gt_row_group_first th {
+#yxoblksiyw .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#dwkqjdoxig .gt_summary_row {
+#yxoblksiyw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -467,16 +444,16 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#dwkqjdoxig .gt_first_summary_row {
+#yxoblksiyw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_first_summary_row.thick {
+#yxoblksiyw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#dwkqjdoxig .gt_last_summary_row {
+#yxoblksiyw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,7 +463,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_grand_summary_row {
+#yxoblksiyw .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -496,7 +473,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#dwkqjdoxig .gt_first_grand_summary_row {
+#yxoblksiyw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -506,7 +483,7 @@ are listed on multiple lines.</p>
   border-top-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_last_grand_summary_row_top {
+#yxoblksiyw .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -516,11 +493,11 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_striped {
+#yxoblksiyw .gt_striped {
   background-color: #FEEDEC;
 }
 
-#dwkqjdoxig .gt_table_body {
+#yxoblksiyw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -529,7 +506,7 @@ are listed on multiple lines.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#dwkqjdoxig .gt_footnotes {
+#yxoblksiyw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -543,7 +520,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#dwkqjdoxig .gt_footnote {
+#yxoblksiyw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -552,7 +529,7 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#dwkqjdoxig .gt_sourcenotes {
+#yxoblksiyw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -566,7 +543,7 @@ are listed on multiple lines.</p>
   border-right-color: #D3D3D3;
 }
 
-#dwkqjdoxig .gt_sourcenote {
+#yxoblksiyw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -574,63 +551,63 @@ are listed on multiple lines.</p>
   padding-right: 5px;
 }
 
-#dwkqjdoxig .gt_left {
+#yxoblksiyw .gt_left {
   text-align: left;
 }
 
-#dwkqjdoxig .gt_center {
+#yxoblksiyw .gt_center {
   text-align: center;
 }
 
-#dwkqjdoxig .gt_right {
+#yxoblksiyw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#dwkqjdoxig .gt_font_normal {
+#yxoblksiyw .gt_font_normal {
   font-weight: normal;
 }
 
-#dwkqjdoxig .gt_font_bold {
+#yxoblksiyw .gt_font_bold {
   font-weight: bold;
 }
 
-#dwkqjdoxig .gt_font_italic {
+#yxoblksiyw .gt_font_italic {
   font-style: italic;
 }
 
-#dwkqjdoxig .gt_super {
+#yxoblksiyw .gt_super {
   font-size: 65%;
 }
 
-#dwkqjdoxig .gt_footnote_marks {
+#yxoblksiyw .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#dwkqjdoxig .gt_asterisk {
+#yxoblksiyw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#dwkqjdoxig .gt_indent_1 {
+#yxoblksiyw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#dwkqjdoxig .gt_indent_2 {
+#yxoblksiyw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#dwkqjdoxig .gt_indent_3 {
+#yxoblksiyw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#dwkqjdoxig .gt_indent_4 {
+#yxoblksiyw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#dwkqjdoxig .gt_indent_5 {
+#yxoblksiyw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

@@ -120,22 +120,8 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p><em>Find Health Care Providers by Name, Location, NPI, or Specialty
-in the <strong>NPPES</strong> (National Plan and Provider Enumeration
-System.)</em></p>
-</blockquote>
-<p><br></p>
-<p>The <a href="https://npiregistry.cms.hhs.gov/" class="external-link">NPPES NPI Registry
-Public Search</a> is a free directory of all active <strong>National
-Provider Identifier</strong> (NPI) records. Healthcare providers acquire
-their unique 10-digit NPIs to identify themselves in a standard way
-throughout their industry. All information produced by the NPI Registry
-is provided in accordance with the NPPES Data Dissemination Notice.
-There is no charge to use the NPI Registry.</p>
-<p><br></p>
 <div class="section level2">
-<h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span>
@@ -168,29 +154,6 @@ There is no charge to use the NPI Registry.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>enroll_state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 277 × 36</span></span></span>
-<span><span class="co">#&gt;    npi        enroll_id  enroll_state specialty_code specialty_desc facility_ccn</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1588664007 O20020826… GA           00-09          PART A PROVID… 112011      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1376574277 O20021108… GA           00-09          PART A PROVID… 110005      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1912951963 O20030515… GA           00-09          PART A PROVID… 110177      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1063406684 O20030925… GA           00-09          PART A PROVID… 110043      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1447252044 O20040406… GA           00-09          PART A PROVID… 112016      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1679543672 O20040513… GA           00-09          PART A PROVID… 114008      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1508810565 O20040823… GA           00-09          PART A PROVID… 110168      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1922178789 O20041013… GA           00-09          PART A PROVID… 113301      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1194722389 O20041103… GA           00-09          PART A PROVID… 112013      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1811940976 O20041109… GA           00-09          PART A PROVID… 110201      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 267 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;, …</span></span></span></code></pre></div>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">6002723947</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 36</span></span></span>
 <span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
@@ -203,15 +166,8 @@ There is no charge to use the NPI Registry.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
-<p><br></p>
-<p><br><br></p>
-<div class="section level3">
-<h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
-</h3>
 </div>
-</div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
-    </nav></aside>
+  </main>
 </div>
 
 

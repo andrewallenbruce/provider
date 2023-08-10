@@ -134,40 +134,11 @@ reporting entities, including drug and medical device companies, make to
 covered recipients like physicians.</p>
 <p><br></p>
 <div class="section level2">
-<h2 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">overall</span> <span class="op">&lt;-</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">primary_other</span>, <span class="va">specialty_other</span>, <span class="va">license_state_other</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">overall</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">group</span> <span class="op">==</span> <span class="st">"1"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 353 × 45</span></span></span>
-<span><span class="co">#&gt;    year  npi      profile_id changed cov_type first_name last_name address city </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI PO BOX… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 343 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 36 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   primary_type &lt;chr&gt;, specialty &lt;chr&gt;, license_state &lt;chr&gt;, payer_id &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;, payer_country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;, pay_form &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_nature &lt;chr&gt;, travel_city &lt;chr&gt;, travel_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   travel_country &lt;chr&gt;, phys_ownship &lt;lgl&gt;, third_pay &lt;chr&gt;, …</span></span></span></code></pre></div>
 <details><summary>
-Code for table
-</summary><div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+Code
+</summary><div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gt_ex</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span>, </span>
 <span>                       year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -207,25 +178,25 @@ Code for table
 <span><span class="st">                      **Home Health Agencies**, **Durable Medical Equipment Suppliers**, </span></span>
 <span><span class="st">                      and **Powered Mobility Devices**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_source_note.html" class="external-link">tab_source_note</a></span><span class="op">(</span>source_note <span class="op">=</span> <span class="st">"Source: www.cms.gov/OpenPayments"</span><span class="op">)</span></span></code></pre></div>
-</details><div id="gvzuonmgdo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+</details><div id="piutjhlwut" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#gvzuonmgdo table {
+#piutjhlwut table {
   font-family: Chivo, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#gvzuonmgdo thead, #gvzuonmgdo tbody, #gvzuonmgdo tfoot, #gvzuonmgdo tr, #gvzuonmgdo td, #gvzuonmgdo th {
+#piutjhlwut thead, #piutjhlwut tbody, #piutjhlwut tfoot, #piutjhlwut tr, #piutjhlwut td, #piutjhlwut th {
   border-style: none;
 }
 
-#gvzuonmgdo p {
+#piutjhlwut p {
   margin: 0;
   padding: 0;
 }
 
-#gvzuonmgdo .gt_table {
+#piutjhlwut .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -251,12 +222,12 @@ Code for table
   border-left-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_caption {
+#piutjhlwut .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#gvzuonmgdo .gt_title {
+#piutjhlwut .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -268,7 +239,7 @@ Code for table
   border-bottom-width: 0;
 }
 
-#gvzuonmgdo .gt_subtitle {
+#piutjhlwut .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -280,7 +251,7 @@ Code for table
   border-top-width: 0;
 }
 
-#gvzuonmgdo .gt_heading {
+#piutjhlwut .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -292,13 +263,13 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_bottom_border {
+#piutjhlwut .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_col_headings {
+#piutjhlwut .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -313,7 +284,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_col_heading {
+#piutjhlwut .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -333,7 +304,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#gvzuonmgdo .gt_column_spanner_outer {
+#piutjhlwut .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -345,15 +316,15 @@ Code for table
   padding-right: 4px;
 }
 
-#gvzuonmgdo .gt_column_spanner_outer:first-child {
+#piutjhlwut .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gvzuonmgdo .gt_column_spanner_outer:last-child {
+#piutjhlwut .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gvzuonmgdo .gt_column_spanner {
+#piutjhlwut .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -365,11 +336,11 @@ Code for table
   width: 100%;
 }
 
-#gvzuonmgdo .gt_spanner_row {
+#piutjhlwut .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#gvzuonmgdo .gt_group_heading {
+#piutjhlwut .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -395,7 +366,7 @@ Code for table
   text-align: left;
 }
 
-#gvzuonmgdo .gt_empty_group_heading {
+#piutjhlwut .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -410,15 +381,15 @@ Code for table
   vertical-align: middle;
 }
 
-#gvzuonmgdo .gt_from_md > :first-child {
+#piutjhlwut .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gvzuonmgdo .gt_from_md > :last-child {
+#piutjhlwut .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gvzuonmgdo .gt_row {
+#piutjhlwut .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -437,7 +408,7 @@ Code for table
   overflow-x: hidden;
 }
 
-#gvzuonmgdo .gt_stub {
+#piutjhlwut .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -450,7 +421,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gvzuonmgdo .gt_stub_row_group {
+#piutjhlwut .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -464,15 +435,15 @@ Code for table
   vertical-align: top;
 }
 
-#gvzuonmgdo .gt_row_group_first td {
+#piutjhlwut .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gvzuonmgdo .gt_row_group_first th {
+#piutjhlwut .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#gvzuonmgdo .gt_summary_row {
+#piutjhlwut .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -482,16 +453,16 @@ Code for table
   padding-right: 5px;
 }
 
-#gvzuonmgdo .gt_first_summary_row {
+#piutjhlwut .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_first_summary_row.thick {
+#piutjhlwut .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gvzuonmgdo .gt_last_summary_row {
+#piutjhlwut .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -501,7 +472,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_grand_summary_row {
+#piutjhlwut .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -511,7 +482,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gvzuonmgdo .gt_first_grand_summary_row {
+#piutjhlwut .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -521,7 +492,7 @@ Code for table
   border-top-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_last_grand_summary_row_top {
+#piutjhlwut .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -531,11 +502,11 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_striped {
+#piutjhlwut .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gvzuonmgdo .gt_table_body {
+#piutjhlwut .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -544,7 +515,7 @@ Code for table
   border-bottom-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_footnotes {
+#piutjhlwut .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -558,7 +529,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_footnote {
+#piutjhlwut .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -567,7 +538,7 @@ Code for table
   padding-right: 5px;
 }
 
-#gvzuonmgdo .gt_sourcenotes {
+#piutjhlwut .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -581,7 +552,7 @@ Code for table
   border-right-color: #D3D3D3;
 }
 
-#gvzuonmgdo .gt_sourcenote {
+#piutjhlwut .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -589,63 +560,63 @@ Code for table
   padding-right: 5px;
 }
 
-#gvzuonmgdo .gt_left {
+#piutjhlwut .gt_left {
   text-align: left;
 }
 
-#gvzuonmgdo .gt_center {
+#piutjhlwut .gt_center {
   text-align: center;
 }
 
-#gvzuonmgdo .gt_right {
+#piutjhlwut .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gvzuonmgdo .gt_font_normal {
+#piutjhlwut .gt_font_normal {
   font-weight: normal;
 }
 
-#gvzuonmgdo .gt_font_bold {
+#piutjhlwut .gt_font_bold {
   font-weight: bold;
 }
 
-#gvzuonmgdo .gt_font_italic {
+#piutjhlwut .gt_font_italic {
   font-style: italic;
 }
 
-#gvzuonmgdo .gt_super {
+#piutjhlwut .gt_super {
   font-size: 65%;
 }
 
-#gvzuonmgdo .gt_footnote_marks {
+#piutjhlwut .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#gvzuonmgdo .gt_asterisk {
+#piutjhlwut .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gvzuonmgdo .gt_indent_1 {
+#piutjhlwut .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gvzuonmgdo .gt_indent_2 {
+#piutjhlwut .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gvzuonmgdo .gt_indent_3 {
+#piutjhlwut .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gvzuonmgdo .gt_indent_4 {
+#piutjhlwut .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gvzuonmgdo .gt_indent_5 {
+#piutjhlwut .gt_indent_5 {
   text-indent: 25px;
 }
 
@@ -888,109 +859,6 @@ and <strong>Powered Mobility Devices</strong>
     </tr></tfoot>
 </table>
 </div>
-<p><br><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ex</span> <span class="op">&lt;-</span> <span class="fl">2016</span><span class="op">:</span><span class="fl">2021</span> <span class="op">|&gt;</span>  </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">open_payments</span>, npi <span class="op">=</span> <span class="fl">1043218118</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="va">ex</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 363 × 48</span></span></span>
-<span><span class="co">#&gt;    year  npi      profile_id changed cov_type first_name last_name address city </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2016  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 353 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 39 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   primary_type &lt;chr&gt;, primary_other &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_other &lt;chr&gt;, license_state &lt;chr&gt;, license_state_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, travel_city &lt;chr&gt;, travel_state &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 65 × 44</span></span></span>
-<span><span class="co">#&gt;    year  npi      profile_id changed cov_type first_name last_name address city </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2019  1043218… 92058      FALSE   Physici… AHAD       MAHOOTCHI 6739 G… ZEPH…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 55 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 35 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   primary_type &lt;chr&gt;, primary_other &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty_other &lt;chr&gt;, license_state &lt;chr&gt;, license_state_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, travel_city &lt;chr&gt;, travel_state &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Jacksonville"</span>, state <span class="op">=</span> <span class="st">"FL"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 671 × 49</span></span></span>
-<span><span class="co">#&gt;    year  npi        profile_id changed cov_type first_name middle_name last_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020  1891786059 267451     FALSE   Physici… VICTOR     <span style="color: #BB0000;">NA</span>          MAQUERA  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020  1043212269 1360       FALSE   Physici… MARK       ALEXANDER   MOSTOVYCH</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020  1497851042 21969      FALSE   Physici… SYED       A.          ASAD     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020  1497851042 21969      FALSE   Physici… SYED       A.          ASAD     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020  1497166425 4216556    FALSE   Physici… JAKE       H.          MCKAY    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020  1689834459 122364     FALSE   Physici… YOUSSEF    <span style="color: #BB0000;">NA</span>          NEJJAR   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020  1336198209 105650     FALSE   Physici… Ali        <span style="color: #BB0000;">NA</span>          Chahlavi </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020  1336198209 105650     FALSE   Physici… Ali        <span style="color: #BB0000;">NA</span>          Chahlavi </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020  1336198209 105650     FALSE   Physici… Ali        <span style="color: #BB0000;">NA</span>          Chahlavi </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020  1336198209 105650     FALSE   Physici… Ali        <span style="color: #BB0000;">NA</span>          Chahlavi </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 661 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 41 more variables: suffix &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zipcode &lt;chr&gt;, country &lt;chr&gt;, primary_type &lt;chr&gt;, primary_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty &lt;chr&gt;, specialty_other &lt;chr&gt;, license_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   license_state_other &lt;chr&gt;, payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_name &lt;chr&gt;, payer_state &lt;chr&gt;, payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_date &lt;date&gt;, pay_count &lt;chr&gt;, pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>payer_id <span class="op">=</span> <span class="fl">100000151589</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 719 × 46</span></span></span>
-<span><span class="co">#&gt;    year  npi        profile_id changed cov_type first_name middle_name last_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2020  1740354588 583485     FALSE   Physici… ALAN       G.          KABAT    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2020  1114017175 141692     FALSE   Physici… BRIDGITTE  S.          LEE      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2020  1063417863 962954     FALSE   Physici… DAVID      G.          EVANS    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2020  1548536972 1319821    FALSE   Physici… EIN GUN    J.          SONG     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2020  1528032620 68761      FALSE   Physici… FRANCIS    S.          MAH      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2020  1184636029 279929     FALSE   Physici… GARY       W.          JERKINS  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2020  1689963589 1337900    FALSE   Physici… GURUPRASAD R.          PATTAR   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2020  1962496265 269961     FALSE   Physici… HILARY     E.          BALDWIN  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2020  1639160112 28253      FALSE   Physici… JASON      <span style="color: #BB0000;">NA</span>          BACHARACH</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2020  1366413023 243626     FALSE   Physici… JODI       <span style="color: #BB0000;">NA</span>          LUCHS    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 709 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 38 more variables: suffix &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zipcode &lt;chr&gt;, country &lt;chr&gt;, primary_type &lt;chr&gt;, primary_other &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   specialty &lt;chr&gt;, specialty_other &lt;chr&gt;, license_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   license_state_other &lt;chr&gt;, payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payer_name &lt;chr&gt;, payer_state &lt;chr&gt;, payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   pay_date &lt;date&gt;, pay_count &lt;chr&gt;, pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level2">
