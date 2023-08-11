@@ -86,7 +86,7 @@ revalidation_date <- function(npi              = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  id     <- "3746498e-874d-45d8-9c69-68603cafea60"
+  id     <- cms_update_ids("Revalidation Due Date List")$distribution[1]
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------

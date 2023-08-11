@@ -37,7 +37,7 @@ proper taxonomy code eligible for medicare programs.
 The Medicare Provider and Supplier Taxonomy Crosswalk dataset
 lists the providers and suppliers eligible to enroll in Medicare
 programs with the proper healthcare provider taxonomy code. This data
-includes the Medicare speciality codes, if available, provider/supplier
+includes the Medicare specialty codes, if available, provider/supplier
 type description, taxonomy code, and the taxonomy description. This
 dataset is derived from information gathered from National Plan and
 Provider Enumerator System (NPPES) and Provider Enrollment, Chain and
@@ -53,8 +53,10 @@ Ownership System (PECOS).
 Update Frequency: \strong{Weekly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 taxonomy_crosswalk(specialty_code = "B4[14]")
 taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
 taxonomy_crosswalk(taxonomy_desc = "Agencies/Hospice Care Community Based")
+\dontshow{\}) # examplesIf}
 }

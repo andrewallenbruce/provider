@@ -11,8 +11,6 @@ quality_stats(year)
 }
 \arguments{
 \item{year}{year}
-
-\item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

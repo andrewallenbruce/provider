@@ -39,8 +39,9 @@ taxonomy_crosswalk <- function(taxonomy_code  = NULL,
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "113eb0bc-0c9a-4d91-9f93-3f6b28c0bf6b"
+  id     <- cms_update_ids("Medicare Provider and Supplier Taxonomy Crosswalk")$distribution[1]
   post   <- "/data.json?"
+  #post   <- "/data?"
   url    <- paste0(http, id, post)
 
   # send request ----------------------------------------------------------

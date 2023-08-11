@@ -91,7 +91,7 @@ revalidation_group <- function(npi             = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  id     <- "e1f1fa9a-d6b4-417e-948a-c72dead8a41c"
+  id     <- cms_update_ids("Revalidation Clinic Group Practice Reassignment")$distribution[1]
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------

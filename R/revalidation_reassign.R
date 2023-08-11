@@ -87,7 +87,7 @@ revalidation_reassign <- function(npi             = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  id     <- "20f51cff-4137-4f3a-b6b7-bfc9ad57983b"
+  id     <- cms_update_ids("Revalidation Reassignment List")$distribution[1]
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------
