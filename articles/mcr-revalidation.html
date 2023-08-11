@@ -151,69 +151,69 @@ Revalidation Due Date - Data Dictionary</a></li>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>, </span>
 <span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 13</span></span></span>
-<span><span class="co">#&gt;   npi        enroll_id    first_name last_name org_name enroll_state enroll_type</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1184699621 I2003111000… Eric       Byrd      <span style="color: #BB0000;">NA</span>       NC           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: enroll_desc &lt;chr&gt;, enroll_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;date&gt;, adjusted_due_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   indiv_total_reassigned &lt;chr&gt;, rec_bene_reassign &lt;int&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi        enroll_id       first_name last_name organization_name enroll_state</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1184699621 I20031110000070 Eric       Byrd      <span style="color: #BB0000;">NA</span>                NC          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: enroll_type &lt;chr&gt;, enroll_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_specialty &lt;chr&gt;, revalidation_due_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   adjusted_due_date &lt;date&gt;, group_reassignments &lt;chr&gt;, ind_associations &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>, </span>
 <span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 13</span></span></span>
-<span><span class="co">#&gt;   npi        enroll_id    first_name last_name org_name enroll_state enroll_type</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1184699621 I2003111000… Eric       Byrd      <span style="color: #BB0000;">NA</span>       NC           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1598792285 I2009012800… Eric       Byrd      <span style="color: #BB0000;">NA</span>       SC           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: enroll_desc &lt;chr&gt;, enroll_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;date&gt;, adjusted_due_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   indiv_total_reassigned &lt;chr&gt;, rec_bene_reassign &lt;int&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi        enroll_id       first_name last_name organization_name enroll_state</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1184699621 I20031110000070 Eric       Byrd      <span style="color: #BB0000;">NA</span>                NC          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1598792285 I20090128000461 Eric       Byrd      <span style="color: #BB0000;">NA</span>                SC          </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: enroll_type &lt;chr&gt;, enroll_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_specialty &lt;chr&gt;, revalidation_due_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   adjusted_due_date &lt;date&gt;, group_reassignments &lt;chr&gt;, ind_associations &lt;int&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, </span>
 <span>                  type_code <span class="op">=</span> <span class="st">"3"</span>, </span>
 <span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,560 × 13</span></span></span>
-<span><span class="co">#&gt;    npi        enroll_id   first_name last_name org_name enroll_state enroll_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1184693400 I200311040… John       Abt       <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1356436786 I200311050… Humberto   Fernande… <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1467499285 I200311050… Jorge      Santander <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1104875178 I200311110… Marianela  De La Po… <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1437205796 I200312040… Mohammad   Sheikh    <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1417063454 I200312090… Richard    Rizzo     <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1689646440 I200312110… Rene       Casanova  <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1265580146 I200312110… Maria      Monteale… <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1619943990 I200312150… Ricardo    Dominguez <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1033218821 I200312150… Arles      Perdomo   <span style="color: #BB0000;">NA</span>       FL           3          </span></span>
+<span><span class="co">#&gt;    npi        enroll_id      first_name last_name organization_name enroll_state</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1184693400 I200311040005… John       Abt       <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1356436786 I200311050000… Humberto   Fernande… <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1467499285 I200311050005… Jorge      Santander <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1104875178 I200311110006… Marianela  De La Po… <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1437205796 I200312040005… Mohammad   Sheikh    <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1417063454 I200312090007… Richard    Rizzo     <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1689646440 I200312110003… Rene       Casanova  <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1265580146 I200312110010… Maria      Monteale… <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1619943990 I200312150002… Ricardo    Dominguez <span style="color: #BB0000;">NA</span>                FL          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1033218821 I200312150003… Arles      Perdomo   <span style="color: #BB0000;">NA</span>                FL          </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1,550 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 6 more variables: enroll_desc &lt;chr&gt;, enroll_specialty &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   revalidation_due_date &lt;date&gt;, adjusted_due_date &lt;date&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   indiv_total_reassigned &lt;chr&gt;, rec_bene_reassign &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 7 more variables: enroll_type &lt;chr&gt;, enroll_desc &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_specialty &lt;chr&gt;, revalidation_due_date &lt;date&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   adjusted_due_date &lt;date&gt;, group_reassignments &lt;chr&gt;, ind_associations &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="lekizahdjg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="udnkivxdrn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#lekizahdjg table {
+#udnkivxdrn table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lekizahdjg thead, #lekizahdjg tbody, #lekizahdjg tfoot, #lekizahdjg tr, #lekizahdjg td, #lekizahdjg th {
+#udnkivxdrn thead, #udnkivxdrn tbody, #udnkivxdrn tfoot, #udnkivxdrn tr, #udnkivxdrn td, #udnkivxdrn th {
   border-style: none;
 }
 
-#lekizahdjg p {
+#udnkivxdrn p {
   margin: 0;
   padding: 0;
 }
 
-#lekizahdjg .gt_table {
+#udnkivxdrn .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -239,12 +239,12 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-left-color: #D3D3D3;
 }
 
-#lekizahdjg .gt_caption {
+#udnkivxdrn .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lekizahdjg .gt_title {
+#udnkivxdrn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -256,7 +256,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-width: 0;
 }
 
-#lekizahdjg .gt_subtitle {
+#udnkivxdrn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -268,7 +268,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-top-width: 0;
 }
 
-#lekizahdjg .gt_heading {
+#udnkivxdrn .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -280,13 +280,13 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#lekizahdjg .gt_bottom_border {
+#udnkivxdrn .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_col_headings {
+#udnkivxdrn .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -301,7 +301,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#lekizahdjg .gt_col_heading {
+#udnkivxdrn .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -321,7 +321,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   overflow-x: hidden;
 }
 
-#lekizahdjg .gt_column_spanner_outer {
+#udnkivxdrn .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -333,15 +333,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 4px;
 }
 
-#lekizahdjg .gt_column_spanner_outer:first-child {
+#udnkivxdrn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lekizahdjg .gt_column_spanner_outer:last-child {
+#udnkivxdrn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lekizahdjg .gt_column_spanner {
+#udnkivxdrn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -353,11 +353,11 @@ Revalidation Due Date - Data Dictionary</a></li>
   width: 100%;
 }
 
-#lekizahdjg .gt_spanner_row {
+#udnkivxdrn .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lekizahdjg .gt_group_heading {
+#udnkivxdrn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -383,7 +383,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   text-align: left;
 }
 
-#lekizahdjg .gt_empty_group_heading {
+#udnkivxdrn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -398,15 +398,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   vertical-align: middle;
 }
 
-#lekizahdjg .gt_from_md > :first-child {
+#udnkivxdrn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lekizahdjg .gt_from_md > :last-child {
+#udnkivxdrn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lekizahdjg .gt_row {
+#udnkivxdrn .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -425,7 +425,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   overflow-x: hidden;
 }
 
-#lekizahdjg .gt_stub {
+#udnkivxdrn .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -438,7 +438,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#lekizahdjg .gt_stub_row_group {
+#udnkivxdrn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -452,15 +452,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   vertical-align: top;
 }
 
-#lekizahdjg .gt_row_group_first td {
+#udnkivxdrn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lekizahdjg .gt_row_group_first th {
+#udnkivxdrn .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lekizahdjg .gt_summary_row {
+#udnkivxdrn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -470,16 +470,16 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#lekizahdjg .gt_first_summary_row {
+#udnkivxdrn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_first_summary_row.thick {
+#udnkivxdrn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lekizahdjg .gt_last_summary_row {
+#udnkivxdrn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -489,7 +489,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_grand_summary_row {
+#udnkivxdrn .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -499,7 +499,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#lekizahdjg .gt_first_grand_summary_row {
+#udnkivxdrn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -509,7 +509,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-top-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_last_grand_summary_row_top {
+#udnkivxdrn .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -519,11 +519,11 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_striped {
+#udnkivxdrn .gt_striped {
   background-color: #FEEDEC;
 }
 
-#lekizahdjg .gt_table_body {
+#udnkivxdrn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -532,7 +532,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#lekizahdjg .gt_footnotes {
+#udnkivxdrn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -546,7 +546,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#lekizahdjg .gt_footnote {
+#udnkivxdrn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -555,7 +555,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#lekizahdjg .gt_sourcenotes {
+#udnkivxdrn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -569,7 +569,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#lekizahdjg .gt_sourcenote {
+#udnkivxdrn .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -577,63 +577,63 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#lekizahdjg .gt_left {
+#udnkivxdrn .gt_left {
   text-align: left;
 }
 
-#lekizahdjg .gt_center {
+#udnkivxdrn .gt_center {
   text-align: center;
 }
 
-#lekizahdjg .gt_right {
+#udnkivxdrn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lekizahdjg .gt_font_normal {
+#udnkivxdrn .gt_font_normal {
   font-weight: normal;
 }
 
-#lekizahdjg .gt_font_bold {
+#udnkivxdrn .gt_font_bold {
   font-weight: bold;
 }
 
-#lekizahdjg .gt_font_italic {
+#udnkivxdrn .gt_font_italic {
   font-style: italic;
 }
 
-#lekizahdjg .gt_super {
+#udnkivxdrn .gt_super {
   font-size: 65%;
 }
 
-#lekizahdjg .gt_footnote_marks {
+#udnkivxdrn .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lekizahdjg .gt_asterisk {
+#udnkivxdrn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lekizahdjg .gt_indent_1 {
+#udnkivxdrn .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lekizahdjg .gt_indent_2 {
+#udnkivxdrn .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lekizahdjg .gt_indent_3 {
+#udnkivxdrn .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lekizahdjg .gt_indent_4 {
+#udnkivxdrn .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lekizahdjg .gt_indent_5 {
+#udnkivxdrn .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -789,24 +789,24 @@ Revalidation Due Date - Data Dictionary</a></li>
 <div class="section level3">
 <h3 id="data-dictionary-1">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary-1"></a>
 </h3>
-<div id="ycnbifdlep" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ydnjnxqywx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ycnbifdlep table {
+#ydnjnxqywx table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ycnbifdlep thead, #ycnbifdlep tbody, #ycnbifdlep tfoot, #ycnbifdlep tr, #ycnbifdlep td, #ycnbifdlep th {
+#ydnjnxqywx thead, #ydnjnxqywx tbody, #ydnjnxqywx tfoot, #ydnjnxqywx tr, #ydnjnxqywx td, #ydnjnxqywx th {
   border-style: none;
 }
 
-#ycnbifdlep p {
+#ydnjnxqywx p {
   margin: 0;
   padding: 0;
 }
 
-#ycnbifdlep .gt_table {
+#ydnjnxqywx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -832,12 +832,12 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-left-color: #D3D3D3;
 }
 
-#ycnbifdlep .gt_caption {
+#ydnjnxqywx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ycnbifdlep .gt_title {
+#ydnjnxqywx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -849,7 +849,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-width: 0;
 }
 
-#ycnbifdlep .gt_subtitle {
+#ydnjnxqywx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -861,7 +861,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-top-width: 0;
 }
 
-#ycnbifdlep .gt_heading {
+#ydnjnxqywx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -873,13 +873,13 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ycnbifdlep .gt_bottom_border {
+#ydnjnxqywx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_col_headings {
+#ydnjnxqywx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -894,7 +894,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ycnbifdlep .gt_col_heading {
+#ydnjnxqywx .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -914,7 +914,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   overflow-x: hidden;
 }
 
-#ycnbifdlep .gt_column_spanner_outer {
+#ydnjnxqywx .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -926,15 +926,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 4px;
 }
 
-#ycnbifdlep .gt_column_spanner_outer:first-child {
+#ydnjnxqywx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ycnbifdlep .gt_column_spanner_outer:last-child {
+#ydnjnxqywx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ycnbifdlep .gt_column_spanner {
+#ydnjnxqywx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -946,11 +946,11 @@ Revalidation Due Date - Data Dictionary</a></li>
   width: 100%;
 }
 
-#ycnbifdlep .gt_spanner_row {
+#ydnjnxqywx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ycnbifdlep .gt_group_heading {
+#ydnjnxqywx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -976,7 +976,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   text-align: left;
 }
 
-#ycnbifdlep .gt_empty_group_heading {
+#ydnjnxqywx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -991,15 +991,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   vertical-align: middle;
 }
 
-#ycnbifdlep .gt_from_md > :first-child {
+#ydnjnxqywx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ycnbifdlep .gt_from_md > :last-child {
+#ydnjnxqywx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ycnbifdlep .gt_row {
+#ydnjnxqywx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1018,7 +1018,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   overflow-x: hidden;
 }
 
-#ycnbifdlep .gt_stub {
+#ydnjnxqywx .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -1031,7 +1031,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#ycnbifdlep .gt_stub_row_group {
+#ydnjnxqywx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1045,15 +1045,15 @@ Revalidation Due Date - Data Dictionary</a></li>
   vertical-align: top;
 }
 
-#ycnbifdlep .gt_row_group_first td {
+#ydnjnxqywx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ycnbifdlep .gt_row_group_first th {
+#ydnjnxqywx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ycnbifdlep .gt_summary_row {
+#ydnjnxqywx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1063,16 +1063,16 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#ycnbifdlep .gt_first_summary_row {
+#ydnjnxqywx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_first_summary_row.thick {
+#ydnjnxqywx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ycnbifdlep .gt_last_summary_row {
+#ydnjnxqywx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1082,7 +1082,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_grand_summary_row {
+#ydnjnxqywx .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -1092,7 +1092,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#ycnbifdlep .gt_first_grand_summary_row {
+#ydnjnxqywx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1102,7 +1102,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-top-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_last_grand_summary_row_top {
+#ydnjnxqywx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1112,11 +1112,11 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_striped {
+#ydnjnxqywx .gt_striped {
   background-color: #FEEDEC;
 }
 
-#ycnbifdlep .gt_table_body {
+#ydnjnxqywx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -1125,7 +1125,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ycnbifdlep .gt_footnotes {
+#ydnjnxqywx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1139,7 +1139,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ycnbifdlep .gt_footnote {
+#ydnjnxqywx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1148,7 +1148,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#ycnbifdlep .gt_sourcenotes {
+#ydnjnxqywx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1162,7 +1162,7 @@ Revalidation Due Date - Data Dictionary</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ycnbifdlep .gt_sourcenote {
+#ydnjnxqywx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1170,63 +1170,63 @@ Revalidation Due Date - Data Dictionary</a></li>
   padding-right: 5px;
 }
 
-#ycnbifdlep .gt_left {
+#ydnjnxqywx .gt_left {
   text-align: left;
 }
 
-#ycnbifdlep .gt_center {
+#ydnjnxqywx .gt_center {
   text-align: center;
 }
 
-#ycnbifdlep .gt_right {
+#ydnjnxqywx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ycnbifdlep .gt_font_normal {
+#ydnjnxqywx .gt_font_normal {
   font-weight: normal;
 }
 
-#ycnbifdlep .gt_font_bold {
+#ydnjnxqywx .gt_font_bold {
   font-weight: bold;
 }
 
-#ycnbifdlep .gt_font_italic {
+#ydnjnxqywx .gt_font_italic {
   font-style: italic;
 }
 
-#ycnbifdlep .gt_super {
+#ydnjnxqywx .gt_super {
   font-size: 65%;
 }
 
-#ycnbifdlep .gt_footnote_marks {
+#ydnjnxqywx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ycnbifdlep .gt_asterisk {
+#ydnjnxqywx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ycnbifdlep .gt_indent_1 {
+#ydnjnxqywx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ycnbifdlep .gt_indent_2 {
+#ydnjnxqywx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ycnbifdlep .gt_indent_3 {
+#ydnjnxqywx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ycnbifdlep .gt_indent_4 {
+#ydnjnxqywx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ycnbifdlep .gt_indent_5 {
+#ydnjnxqywx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

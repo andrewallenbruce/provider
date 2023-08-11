@@ -151,6 +151,9 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/quality_payment.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/quality_payment_years.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/quality_stats.html</loc>
   </url>
   <url>
@@ -164,8 +167,5 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/taxonomy_crosswalk.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/years_qualpay.html</loc>
   </url>
 </urlset>
