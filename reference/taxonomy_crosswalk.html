@@ -134,7 +134,7 @@ proper taxonomy code eligible for medicare programs.</p>
     <p>The Medicare Provider and Supplier Taxonomy Crosswalk dataset
 lists the providers and suppliers eligible to enroll in Medicare
 programs with the proper healthcare provider taxonomy code. This data
-includes the Medicare speciality codes, if available, provider/supplier
+includes the Medicare specialty codes, if available, provider/supplier
 type description, taxonomy code, and the taxonomy description. This
 dataset is derived from information gathered from National Plan and
 Provider Enumerator System (NPPES) and Provider Enrollment, Chain and
@@ -153,14 +153,12 @@ Ownership System (PECOS).</p><div class="section">
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_desc <span class="op">=</span> <span class="st">"Agencies/Hospice Care Community Based"</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt;     2084 &amp;&amp; !validate(txt)) {    if (grepl("^https?://", txt, useBytes = TRUE)) {        txt &lt;- if (R.version$major &lt; 4) {            base::url(txt)        }        else {            base::url(txt, headers = c(Accept = "application/json, text/*, */*"))        }    }    else if (file.exists(txt)) {        txt &lt;- file(txt)    }}:</span> missing value where TRUE/FALSE needed</span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
