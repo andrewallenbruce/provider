@@ -17,7 +17,8 @@
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
 #' @param year integer, YYYY, calendar year of Medicare enrollment. Run the
-#'  helper function `years_ccmult()` to return a vector of currently available years.
+#'  helper function `provider:::cc_multiple_years()` to return a vector of
+#'  currently available years.
 #' @param level Geographic level of data; options are `National`, `State`,
 #'   and `County`
 #' @param sublevel The state and/or county where the Medicare beneficiary
@@ -80,7 +81,7 @@ cc_multiple <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cms_update("Multiple Chronic Conditions", "years"))
+  rlang::arg_match(year, values = cc_multiple_years())
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
@@ -177,7 +178,7 @@ cc_multiple <- function(year,
 #' Check the current years available for the Multiple Chronic Conditions API
 #' @autoglobal
 #' @noRd
-years_ccmult <- function() {
+cc_multiple_years <- function() {
   cms_update("Multiple Chronic Conditions", "years") |>
     as.integer()
   }

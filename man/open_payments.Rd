@@ -27,8 +27,9 @@ open_payments(
 )
 }
 \arguments{
-\item{year}{Program reporting year. Run the helper function \code{years_openpay()}
-to return a vector of currently available years.}
+\item{year}{Program reporting year. Run the helper function
+\code{provider:::open_payments_years()} to return a vector of currently
+available years.}
 
 \item{npi}{Covered recipient's National Provider Identifier (NPI).}
 

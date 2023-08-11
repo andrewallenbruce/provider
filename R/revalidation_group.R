@@ -16,7 +16,8 @@
 #' @note Update Frequency: **Monthly**
 #' @param npi NPI of provider who is reassigning their benefits or is an
 #'    employee
-#' @param enroll_id Enrollment ID of provider reassigning their benefits or is an employee
+#' @param enroll_id Enrollment ID of provider reassigning their benefits or is
+#'    an employee
 #' @param first_name First name of provider who is reassigning their benefits
 #'    or is an employee
 #' @param last_name Last name of provider who is reassigning their benefits or
@@ -26,7 +27,8 @@
 #' @param specialty Enrollment specialty of the provider who is
 #'    reassigning their benefits or is an employee
 #' @param pac_id_group PAC ID of provider who is receiving reassignment or is
-#'    the employer
+#'    the employer. Providers enroll at the state level, so one PAC ID may be
+#'    associated with multiple Enrollment IDs.
 #' @param enroll_id_group Enrollment ID of provider who is receiving
 #'    reassignment or is the employer
 #' @param business_name Legal business name of provider who is receiving
@@ -66,6 +68,9 @@ revalidation_group <- function(npi             = NULL,
                                tidy            = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(enroll_id_group)) {enroll_check(enroll_id_group)}
+  if (!is.null(pac_id_group)) {pac_check(pac_id_group)}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -139,24 +144,22 @@ revalidation_group <- function(npi             = NULL,
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
                     group_pac_id = as.character(group_pac_id),
-                    #individual_pac_id = as.character(individual_pac_id),
                     individual_npi = as.character(individual_npi)) |>
       dplyr::select(
         npi = individual_npi,
-        #pac_id = individual_pac_id,
         enroll_id = individual_enrollment_id,
         first_name = individual_first_name,
         last_name = individual_last_name,
-        state = individual_state_code,
-        specialty = individual_specialty_description,
-        due_date_ind = individual_due_date,
-        ind_tot_emp_assn = individual_total_employer_associations,
-        pac_id_group = group_pac_id,
-        enroll_id_group = group_enrollment_id,
-        business_name = group_legal_business_name,
-        state_group = group_state_code,
-        due_date_group = group_due_date,
-        group_reassign_and_phys_assist = group_reassignments_and_physician_assistants,
+        enroll_state = individual_state_code,
+        enroll_specialty = individual_specialty_description,
+        revalidation_due_date = individual_due_date,
+        ind_associations = individual_total_employer_associations,
+        group_pac_id,
+        group_enroll_id = group_enrollment_id,
+        group_legal_business_name,
+        group_state = group_state_code,
+        group_due_date,
+        group_reassignments = group_reassignments_and_physician_assistants,
         record_type)
 
   }

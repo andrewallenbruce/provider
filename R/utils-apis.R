@@ -29,18 +29,18 @@ cms_update <- function(api = NULL, check = c("base", "id", "years")) {
 
   if (check == "base") {return(results)}
 
-    results <- results |>
-      dplyr::select(distribution_title,
-                    distro = distribution) |>
-      tidyr::separate_wider_delim(distribution_title,
-                                  delim = " : ",
-                                  names = c(NA, "year")) |>
-      dplyr::mutate(id = dplyr::row_number(),
-                    year = as.integer(lubridate::year(year))) |>
-      dplyr::filter(id != 1) |>
-      dplyr::select(-id)
+  results <- results |>
+    dplyr::select(distribution_title,
+                  distro = distribution) |>
+    tidyr::separate_wider_delim(distribution_title,
+                                delim = " : ",
+                                names = c(NA, "year")) |>
+    dplyr::mutate(id = dplyr::row_number(),
+                  year = as.integer(lubridate::year(year))) |>
+    dplyr::filter(id != 1) |>
+    dplyr::select(-id)
 
-    if (check == "id") {return(results)}
+  if (check == "id") {return(results)}
 
   if (check == "years") {
     return(results |>

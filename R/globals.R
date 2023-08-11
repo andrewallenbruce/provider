@@ -75,34 +75,6 @@ utils::globalVariables(c(
   "tot_std_pymt_percap", # <cc_specific>
   "tot_pymt_percap", # <cc_specific>
   "er_visits_per_1k", # <cc_specific>
-  "title", # <cms_update>
-  "modified", # <cms_update>
-  "distribution", # <cms_update>
-  "distribution_format", # <cms_update>
-  "distribution_title", # <cms_update>
-  "distribution_modified", # <cms_update>
-  "distribution_accessURL", # <cms_update>
-  "year", # <cms_update>
-  "id", # <cms_update>
-  "distro", # <cms_update>
-  "distro", # <cms_match>
-  "title", # <cms_update_ids>
-  "modified", # <cms_update_ids>
-  "distribution", # <cms_update_ids>
-  "distribution_format", # <cms_update_ids>
-  "distribution_title", # <cms_update_ids>
-  "distribution_modified", # <cms_update_ids>
-  "distribution_accessURL", # <cms_update_ids>
-  "title", # <cms_dataset_full>
-  "description", # <cms_dataset_full>
-  "title", # <cms_dataset_search>
-  "modified", # <cms_dataset_search>
-  "keyword", # <cms_dataset_search>
-  "identifier", # <cms_dataset_search>
-  "description", # <cms_dataset_search>
-  "distribution_title", # <cms_get_dates>
-  "distribution", # <cms_get_dates>
-  "year", # <cms_get_dates>
   "y", # <doctors_and_clinicians>
   "adr_ln_1", # <doctors_and_clinicians>
   "adr_ln_2", # <doctors_and_clinicians>
@@ -174,6 +146,41 @@ utils::globalVariables(c(
   "subgroup__specialty_hospital", # <hospital_enrollment>
   "subgroup__other", # <hospital_enrollment>
   "subgroup__other_text", # <hospital_enrollment>
+  "y", # <mips_group_2021>
+  "org_nm", # <mips_group_2021>
+  "aco_id_1", # <mips_group_2021>
+  "aco_nm_1", # <mips_group_2021>
+  "aco_id_2", # <mips_group_2021>
+  "aco_nm_2", # <mips_group_2021>
+  "measure_cd", # <mips_group_2021>
+  "measure_title", # <mips_group_2021>
+  "invs_msr", # <mips_group_2021>
+  "attestation_value", # <mips_group_2021>
+  "prf_rate", # <mips_group_2021>
+  "patient_count", # <mips_group_2021>
+  "star_value", # <mips_group_2021>
+  "five_star_benchmark", # <mips_group_2021>
+  "collection_type", # <mips_group_2021>
+  "ccxp_ind", # <mips_group_2021>
+  "identifier", # <mips_group_2021_id>
+  "y", # <mips_clinician_2021>
+  "ind_pac_id", # <mips_clinician_2021>
+  "lst_nm", # <mips_clinician_2021>
+  "frst_nm", # <mips_clinician_2021>
+  "apm_affl_1", # <mips_clinician_2021>
+  "apm_affl_2", # <mips_clinician_2021>
+  "apm_affl_3", # <mips_clinician_2021>
+  "measure_cd", # <mips_clinician_2021>
+  "measure_title", # <mips_clinician_2021>
+  "invs_msr", # <mips_clinician_2021>
+  "attestation_value", # <mips_clinician_2021>
+  "prf_rate", # <mips_clinician_2021>
+  "patient_count", # <mips_clinician_2021>
+  "star_value", # <mips_clinician_2021>
+  "five_star_benchmark", # <mips_clinician_2021>
+  "collection_type", # <mips_clinician_2021>
+  "ccxp_ind", # <mips_clinician_2021>
+  "identifier", # <mips_ind_2021_id>
   "y", # <missing_information>
   "NPI", # <missing_information>
   "last_name", # <missing_information>
@@ -328,7 +335,7 @@ utils::globalVariables(c(
   "year", # <open_payments_ids>
   "set", # <open_payments_ids>
   "identifier", # <open_payments_ids>
-  "year", # <years_openpay>
+  "year", # <open_payments_years>
   "y", # <opt_out>
   "optout_end_date", # <opt_out>
   "optout_effective_date", # <opt_out>
@@ -562,6 +569,34 @@ utils::globalVariables(c(
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
+  "title", # <cms_update>
+  "modified", # <cms_update>
+  "distribution", # <cms_update>
+  "distribution_format", # <cms_update>
+  "distribution_title", # <cms_update>
+  "distribution_modified", # <cms_update>
+  "distribution_accessURL", # <cms_update>
+  "year", # <cms_update>
+  "id", # <cms_update>
+  "distro", # <cms_update>
+  "distro", # <cms_match>
+  "title", # <cms_update_ids>
+  "modified", # <cms_update_ids>
+  "distribution", # <cms_update_ids>
+  "distribution_format", # <cms_update_ids>
+  "distribution_title", # <cms_update_ids>
+  "distribution_modified", # <cms_update_ids>
+  "distribution_accessURL", # <cms_update_ids>
+  "title", # <cms_dataset_full>
+  "description", # <cms_dataset_full>
+  "title", # <cms_dataset_search>
+  "modified", # <cms_dataset_search>
+  "keyword", # <cms_dataset_search>
+  "identifier", # <cms_dataset_search>
+  "description", # <cms_dataset_search>
+  "distribution_title", # <cms_get_dates>
+  "distribution", # <cms_get_dates>
+  "year", # <cms_get_dates>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>

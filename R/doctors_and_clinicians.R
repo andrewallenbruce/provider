@@ -64,6 +64,8 @@ doctors_and_clinicians <- function(npi           = NULL,
                                    tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(pac_id)) {pac_check(pac_id)}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

@@ -15,8 +15,9 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually*
-#' @param year Year in YYYY format. Run the helper function `years_pbp()` to
-#'    return a vector of currently available years.
+#' @param year year int (required); Year in YYYY format. Run helper function
+#'    `provider:::physician_by_provider_years()` to return a vector of the years
+#'    currently available.
 #' @param npi National Provider Identifier (NPI) for the rendering provider
 #'    on the claim. The provider NPI is the numeric identifier registered in
 #'    NPPES.
@@ -94,7 +95,7 @@ physician_by_provider <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cms_update("Medicare Physician & Other Practitioners - by Provider", "years"))
+  rlang::arg_match(year, values = physician_by_provider_years())
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider", check = "id") |>
@@ -265,7 +266,7 @@ physician_by_provider <- function(year,
 #' Check the current years available for the Physician & Other Practitioners by Provider API
 #' @autoglobal
 #' @noRd
-years_pbp <- function() {
+physician_by_provider_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Provider", "years") |>
     as.integer()
 }

@@ -48,6 +48,8 @@ hospital_enrollment <- function(npi            = NULL,
                                 tidy           = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(pac_id_org)) {pac_check(pac_id_org)}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

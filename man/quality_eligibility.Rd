@@ -10,7 +10,7 @@ Centers for Medicare & Medicaid Services
 quality_eligibility(year, npi, tidy = TRUE)
 }
 \arguments{
-\item{year}{year}
+\item{year}{integer, YYYY, QPP Performance year.}
 
 \item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.}
 

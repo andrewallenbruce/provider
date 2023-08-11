@@ -28,8 +28,9 @@ physician_by_provider(
 )
 }
 \arguments{
-\item{year}{Year in YYYY format. Run the helper function \code{years_pbp()} to
-return a vector of currently available years.}
+\item{year}{year int (required); Year in YYYY format. Run helper function
+\code{provider:::physician_by_provider_years()} to return a vector of the years
+currently available.}
 
 \item{npi}{National Provider Identifier (NPI) for the rendering provider
 on the claim. The provider NPI is the numeric identifier registered in

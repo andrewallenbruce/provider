@@ -63,6 +63,7 @@ revalidation_date <- function(npi              = NULL,
                               tidy             = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -134,15 +135,15 @@ revalidation_date <- function(npi              = NULL,
                     enroll_id = enrollment_id,
                     first_name,
                     last_name,
-                    org_name = organization_name,
+                    organization_name,
                     enroll_state = enrollment_state_code,
                     enroll_type = enrollment_type,
                     enroll_desc = provider_type_text,
                     enroll_specialty = enrollment_specialty,
                     revalidation_due_date,
                     adjusted_due_date,
-                    indiv_total_reassigned = individual_total_reassign_to,
-                    rec_bene_reassign = receiving_benefits_reassignment)
+                    group_reassignments = individual_total_reassign_to,
+                    ind_associations = receiving_benefits_reassignment)
     }
   return(results)
 }

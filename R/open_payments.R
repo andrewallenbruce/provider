@@ -39,8 +39,9 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Yearly**
-#' @param year Program reporting year. Run the helper function `years_openpay()`
-#'    to return a vector of currently available years.
+#' @param year Program reporting year. Run the helper function
+#'    `provider:::open_payments_years()` to return a vector of currently
+#'    available years.
 #' @param npi Covered recipient's National Provider Identifier (NPI).
 #' @param covered_type Type of covered recipient, e.g.,
 #'    * `Covered Recipient Physician`
@@ -102,7 +103,7 @@ open_payments <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(years_openpay()))
+  rlang::arg_match(year, values = as.character(open_payments_years()))
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -363,10 +364,22 @@ open_payments_error <- function(response) {
 #' Check the current years available for the Open Payments API
 #' @autoglobal
 #' @noRd
-years_openpay <- function() {
+open_payments_years <- function() {
   open_payments_ids("General Payment Data") |>
     dplyr::arrange(year) |>
     dplyr::pull(year)
   }
 
+#' Convert Open Payments Changed col to logical
+#' @param x vector
+#' @autoglobal
+#' @noRd
+changed_logical <- function(x){
 
+  dplyr::case_match(
+    x,
+    "CHANGED" ~ TRUE,
+    "UNCHANGED" ~ FALSE,
+    .default = NA
+    )
+}

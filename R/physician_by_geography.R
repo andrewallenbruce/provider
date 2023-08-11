@@ -19,8 +19,9 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year Year in YYYY format.  Run the internal helper function
-#'    `provider:::years_pbg()` to return a vector of currently available years.
+#' @param year year int (required); Year in YYYY format. Run helper function
+#'    `provider:::physician_by_geography_years()` to return a vector of the years
+#'    currently available.
 #' @param level Identifies the level of geography by which the data in the
 #'    row has been aggregated. A value of 'State' indicates the data in the
 #'    row is aggregated to a single state identified in the Rendering Provider
@@ -93,7 +94,7 @@ physician_by_geography <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years"))
+  rlang::arg_match(year, values = physician_by_geography_years())
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
@@ -190,7 +191,7 @@ physician_by_geography <- function(year,
 #' Check the current years available for the Physician & Other Practitioners by Geography and Service API
 #' @autoglobal
 #' @noRd
-years_pbg <- function() {
+physician_by_geography_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years") |>
     as.integer()
 }

@@ -18,7 +18,9 @@
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year year
+#' @param year integer, YYYY, QPP Performance year. Run the helper function
+#'    `provider:::quality_payment_years()` to return a vector of currently
+#'    available years.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
 #' @param state The State or United States (US) territory code location of the
@@ -33,7 +35,7 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#' quality_payment(year = 2020, state = "GA")
+#' quality_payment(year = 2020, npi = 1144544834)
 #' @autoglobal
 #' @export
 quality_payment <- function(year,
@@ -48,11 +50,7 @@ quality_payment <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year,
-                   values = as.character(
-                     cms_update(
-                       "Quality Payment Program Experience",
-                       "years")))
+  rlang::arg_match(year, values = quality_payment_years())
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
@@ -201,7 +199,7 @@ quality_payment <- function(year,
 #' Check the current years available for the Quality Payments API
 #' @autoglobal
 #' @internal
-years_qualpay <- function() {
+quality_payment_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
 }
 
@@ -232,7 +230,7 @@ years_qualpay <- function() {
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year year
+#' @param year integer, YYYY, QPP Performance year.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.

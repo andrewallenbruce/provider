@@ -26,7 +26,8 @@ revalidation_group(
 \item{npi}{NPI of provider who is reassigning their benefits or is an
 employee}
 
-\item{enroll_id}{Enrollment ID of provider reassigning their benefits or is an employee}
+\item{enroll_id}{Enrollment ID of provider reassigning their benefits or is
+an employee}
 
 \item{first_name}{First name of provider who is reassigning their benefits
 or is an employee}
@@ -41,7 +42,8 @@ benefits or is an employee}
 reassigning their benefits or is an employee}
 
 \item{pac_id_group}{PAC ID of provider who is receiving reassignment or is
-the employer}
+the employer. Providers enroll at the state level, so one PAC ID may be
+associated with multiple Enrollment IDs.}
 
 \item{enroll_id_group}{Enrollment ID of provider who is receiving
 reassignment or is the employer}

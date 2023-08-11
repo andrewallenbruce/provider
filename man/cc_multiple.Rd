@@ -33,7 +33,8 @@ cc_multiple(
 }
 \arguments{
 \item{year}{integer, YYYY, calendar year of Medicare enrollment. Run the
-helper function \code{years_ccmult()} to return a vector of currently available years.}
+helper function \code{provider:::cc_multiple_years()} to return a vector of
+currently available years.}
 
 \item{level}{Geographic level of data; options are \code{National}, \code{State},
 and \code{County}}

@@ -17,7 +17,9 @@ quality_payment(
 )
 }
 \arguments{
-\item{year}{year}
+\item{year}{integer, YYYY, QPP Performance year. Run the helper function
+\code{provider:::quality_payment_years()} to return a vector of currently
+available years.}
 
 \item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.
 Multiple rows for the same NPI indicate multiple TIN/NPI combinations.}
@@ -64,6 +66,6 @@ Update Frequency: \strong{Annually}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-quality_payment(year = 2020, state = "GA")
+quality_payment(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
 }

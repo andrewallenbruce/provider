@@ -21,8 +21,9 @@ physician_by_geography(
 )
 }
 \arguments{
-\item{year}{Year in YYYY format.  Run the internal helper function
-\code{provider:::years_pbg()} to return a vector of currently available years.}
+\item{year}{year int (required); Year in YYYY format. Run helper function
+\code{provider:::physician_by_geography_years()} to return a vector of the years
+currently available.}
 
 \item{level}{Identifies the level of geography by which the data in the
 row has been aggregated. A value of 'State' indicates the data in the
