@@ -137,8 +137,17 @@ scores, and payment adjustments.</p>
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, npi <span class="op">=</span> <span class="fl">1578508776</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 93</span></span></span>
+<span><span class="co">#&gt;    year npi        provider_key state practice_size specialty  years_in_medicare</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 1578508776 000416324    GA              166 Internal …                13</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 86 more variables: participation_type &lt;chr&gt;, beneficiaries &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   allowed_charges &lt;dbl&gt;, services &lt;int&gt;, final_score &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   payment_adjustment &lt;dbl&gt;, complex_patient_bonus &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   quality_category_score &lt;dbl&gt;, quality_improvement_bonus &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   quality_bonus &lt;lgl&gt;, engaged &lt;lgl&gt;, opted_into_mips &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   small_practitioner &lt;lgl&gt;, rural &lt;lgl&gt;, hpsa &lt;lgl&gt;, asc &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hospital_based &lt;lgl&gt;, non_patient_facing &lt;lgl&gt;, facility_based &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_eligibility.html">quality_eligibility</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, npi <span class="op">=</span> <span class="fl">1578508776</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>

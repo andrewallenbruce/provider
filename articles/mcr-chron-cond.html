@@ -146,16 +146,30 @@ conditions. The count of conditions is grouped into four categories
 <span>            level <span class="op">=</span> <span class="st">"National"</span>, </span>
 <span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
 <span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level    sublevel fips  age_group demographic subdemo mcc     prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [0,1]        0.311</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [2,3]        0.291</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [4,5]        0.221</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 National National <span style="color: #BB0000;">NA</span>    All       All         All     [6, In…      0.177</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
 <span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
 <span>            sublevel <span class="op">=</span> <span class="st">"Alabama"</span>, </span>
 <span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
 <span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level sublevel fips  age_group demographic subdemo mcc      prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [0,1]         0.258</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [2,3]         0.285</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [4,5]         0.250</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 State Alabama  01    All       All         All     [6, Inf)      0.207</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
 <span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
@@ -163,8 +177,15 @@ conditions. The count of conditions is grouped into four categories
 <span>            fips <span class="op">=</span> <span class="st">"01001"</span>, </span>
 <span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
 <span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 13</span></span></span>
+<span><span class="co">#&gt;    year level  sublevel     fips  age_group demographic subdemo mcc   prevalence</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [0,1]      0.266</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [2,3]      0.281</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [4,5]      0.248</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>018 County Alabama : A… 01001 All       All         All     [6, …      0.205</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 </div>
@@ -208,37 +229,65 @@ distinct chronic conditions listed below.</p>
 <span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
 <span>            sublevel <span class="op">=</span> <span class="st">"California"</span>, </span>
 <span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 13</span></span></span>
+<span><span class="co">#&gt;     year level sublevel fips  age_group demographic subdemo condition prevalence</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Alcohol …     0.021<span style="text-decoration: underline;">5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Alzheime…     0.105 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Arthritis     0.312 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Asthma        0.053 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Atrial F…     0.074<span style="text-decoration: underline;">9</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Autism S…     0.002<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     COPD          0.095<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Cancer        0.078<span style="text-decoration: underline;">4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Chronic …     0.243 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>018 State Califor… 06    All       All         All     Depressi…     0.162 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2011</span>, </span>
 <span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
 <span>            fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `arg_match0()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `values` must be a character vector.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 63 × 13</span></span></span>
+<span><span class="co">#&gt;     year level sublevel fips  age_group demographic subdemo condition prevalence</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Alcohol …     0.011<span style="text-decoration: underline;">6</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Alzheime…     0.100 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Arthritis     0.274 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Asthma        0.037 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Atrial F…     0.074<span style="text-decoration: underline;">8</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Autism S…    <span style="color: #BB0000;">NA</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     COPD          0.122 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Cancer        0.079<span style="text-decoration: underline;">2</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Chronic …     0.137 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>011 Coun… Alabama… 01001 All       All         All     Depressi…     0.134 </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 53 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="wuwdgayrgn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eprwqzehfv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#wuwdgayrgn table {
+#eprwqzehfv table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#wuwdgayrgn thead, #wuwdgayrgn tbody, #wuwdgayrgn tfoot, #wuwdgayrgn tr, #wuwdgayrgn td, #wuwdgayrgn th {
+#eprwqzehfv thead, #eprwqzehfv tbody, #eprwqzehfv tfoot, #eprwqzehfv tr, #eprwqzehfv td, #eprwqzehfv th {
   border-style: none;
 }
 
-#wuwdgayrgn p {
+#eprwqzehfv p {
   margin: 0;
   padding: 0;
 }
 
-#wuwdgayrgn .gt_table {
+#eprwqzehfv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -264,12 +313,12 @@ distinct chronic conditions listed below.</p>
   border-left-color: #D3D3D3;
 }
 
-#wuwdgayrgn .gt_caption {
+#eprwqzehfv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#wuwdgayrgn .gt_title {
+#eprwqzehfv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -281,7 +330,7 @@ distinct chronic conditions listed below.</p>
   border-bottom-width: 0;
 }
 
-#wuwdgayrgn .gt_subtitle {
+#eprwqzehfv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -293,7 +342,7 @@ distinct chronic conditions listed below.</p>
   border-top-width: 0;
 }
 
-#wuwdgayrgn .gt_heading {
+#eprwqzehfv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -305,13 +354,13 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#wuwdgayrgn .gt_bottom_border {
+#eprwqzehfv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_col_headings {
+#eprwqzehfv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -326,7 +375,7 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#wuwdgayrgn .gt_col_heading {
+#eprwqzehfv .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -346,7 +395,7 @@ distinct chronic conditions listed below.</p>
   overflow-x: hidden;
 }
 
-#wuwdgayrgn .gt_column_spanner_outer {
+#eprwqzehfv .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -358,15 +407,15 @@ distinct chronic conditions listed below.</p>
   padding-right: 4px;
 }
 
-#wuwdgayrgn .gt_column_spanner_outer:first-child {
+#eprwqzehfv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#wuwdgayrgn .gt_column_spanner_outer:last-child {
+#eprwqzehfv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#wuwdgayrgn .gt_column_spanner {
+#eprwqzehfv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -378,11 +427,11 @@ distinct chronic conditions listed below.</p>
   width: 100%;
 }
 
-#wuwdgayrgn .gt_spanner_row {
+#eprwqzehfv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#wuwdgayrgn .gt_group_heading {
+#eprwqzehfv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -408,7 +457,7 @@ distinct chronic conditions listed below.</p>
   text-align: left;
 }
 
-#wuwdgayrgn .gt_empty_group_heading {
+#eprwqzehfv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -423,15 +472,15 @@ distinct chronic conditions listed below.</p>
   vertical-align: middle;
 }
 
-#wuwdgayrgn .gt_from_md > :first-child {
+#eprwqzehfv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#wuwdgayrgn .gt_from_md > :last-child {
+#eprwqzehfv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#wuwdgayrgn .gt_row {
+#eprwqzehfv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -450,7 +499,7 @@ distinct chronic conditions listed below.</p>
   overflow-x: hidden;
 }
 
-#wuwdgayrgn .gt_stub {
+#eprwqzehfv .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -463,7 +512,7 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#wuwdgayrgn .gt_stub_row_group {
+#eprwqzehfv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -477,15 +526,15 @@ distinct chronic conditions listed below.</p>
   vertical-align: top;
 }
 
-#wuwdgayrgn .gt_row_group_first td {
+#eprwqzehfv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#wuwdgayrgn .gt_row_group_first th {
+#eprwqzehfv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#wuwdgayrgn .gt_summary_row {
+#eprwqzehfv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -495,16 +544,16 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#wuwdgayrgn .gt_first_summary_row {
+#eprwqzehfv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_first_summary_row.thick {
+#eprwqzehfv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#wuwdgayrgn .gt_last_summary_row {
+#eprwqzehfv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,7 +563,7 @@ distinct chronic conditions listed below.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_grand_summary_row {
+#eprwqzehfv .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -524,7 +573,7 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#wuwdgayrgn .gt_first_grand_summary_row {
+#eprwqzehfv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,7 +583,7 @@ distinct chronic conditions listed below.</p>
   border-top-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_last_grand_summary_row_top {
+#eprwqzehfv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -544,11 +593,11 @@ distinct chronic conditions listed below.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_striped {
+#eprwqzehfv .gt_striped {
   background-color: #FEEDEC;
 }
 
-#wuwdgayrgn .gt_table_body {
+#eprwqzehfv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -557,7 +606,7 @@ distinct chronic conditions listed below.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#wuwdgayrgn .gt_footnotes {
+#eprwqzehfv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -571,7 +620,7 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#wuwdgayrgn .gt_footnote {
+#eprwqzehfv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -580,7 +629,7 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#wuwdgayrgn .gt_sourcenotes {
+#eprwqzehfv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -594,7 +643,7 @@ distinct chronic conditions listed below.</p>
   border-right-color: #D3D3D3;
 }
 
-#wuwdgayrgn .gt_sourcenote {
+#eprwqzehfv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -602,63 +651,63 @@ distinct chronic conditions listed below.</p>
   padding-right: 5px;
 }
 
-#wuwdgayrgn .gt_left {
+#eprwqzehfv .gt_left {
   text-align: left;
 }
 
-#wuwdgayrgn .gt_center {
+#eprwqzehfv .gt_center {
   text-align: center;
 }
 
-#wuwdgayrgn .gt_right {
+#eprwqzehfv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#wuwdgayrgn .gt_font_normal {
+#eprwqzehfv .gt_font_normal {
   font-weight: normal;
 }
 
-#wuwdgayrgn .gt_font_bold {
+#eprwqzehfv .gt_font_bold {
   font-weight: bold;
 }
 
-#wuwdgayrgn .gt_font_italic {
+#eprwqzehfv .gt_font_italic {
   font-style: italic;
 }
 
-#wuwdgayrgn .gt_super {
+#eprwqzehfv .gt_super {
   font-size: 65%;
 }
 
-#wuwdgayrgn .gt_footnote_marks {
+#eprwqzehfv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#wuwdgayrgn .gt_asterisk {
+#eprwqzehfv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#wuwdgayrgn .gt_indent_1 {
+#eprwqzehfv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#wuwdgayrgn .gt_indent_2 {
+#eprwqzehfv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#wuwdgayrgn .gt_indent_3 {
+#eprwqzehfv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#wuwdgayrgn .gt_indent_4 {
+#eprwqzehfv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#wuwdgayrgn .gt_indent_5 {
+#eprwqzehfv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

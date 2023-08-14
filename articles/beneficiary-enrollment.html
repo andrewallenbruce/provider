@@ -252,7 +252,25 @@ each state:</p>
 <span>                       level <span class="op">=</span> <span class="st">"County"</span>, </span>
 <span>                       state_name <span class="op">=</span> <span class="st">"Georgia"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in if (as.integer(httr2::resp_header(response, "content-length")) &lt;= : argument is of length zero</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 26</span></span></span>
+<span><span class="co">#&gt;    year  period level  state state_name county   fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2013  Year   County GA    Georgia    Appling  13001       <span style="text-decoration: underline;">3</span>389      <span style="text-decoration: underline;">2</span>686</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2013  Year   County GA    Georgia    Atkinson 13003       <span style="text-decoration: underline;">1</span>248       991</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2013  Year   County GA    Georgia    Bacon    13005       <span style="text-decoration: underline;">1</span>977      <span style="text-decoration: underline;">1</span>552</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2013  Year   County GA    Georgia    Baker    13007        608       478</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2013  Year   County GA    Georgia    Baldwin  13009       <span style="text-decoration: underline;">7</span>722      <span style="text-decoration: underline;">4</span>660</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2013  Year   County GA    Georgia    Banks    13011       <span style="text-decoration: underline;">3</span>239      <span style="text-decoration: underline;">2</span>504</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2013  Year   County GA    Georgia    Barrow   13013       <span style="text-decoration: underline;">9</span>738      <span style="text-decoration: underline;">7</span>093</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2013  Year   County GA    Georgia    Bartow   13015      <span style="text-decoration: underline;">15</span>446     <span style="text-decoration: underline;">11</span>826</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2013  Year   County GA    Georgia    Ben Hill 13017       <span style="text-decoration: underline;">3</span>463      <span style="text-decoration: underline;">2</span>628</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2013  Year   County GA    Georgia    Berrien  13019       <span style="text-decoration: underline;">3</span>442      <span style="text-decoration: underline;">2</span>616</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <p>Or a particular county:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -286,24 +304,24 @@ each state:</p>
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="xarjikquoj" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bdzjcbyqvk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#xarjikquoj table {
+#bdzjcbyqvk table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xarjikquoj thead, #xarjikquoj tbody, #xarjikquoj tfoot, #xarjikquoj tr, #xarjikquoj td, #xarjikquoj th {
+#bdzjcbyqvk thead, #bdzjcbyqvk tbody, #bdzjcbyqvk tfoot, #bdzjcbyqvk tr, #bdzjcbyqvk td, #bdzjcbyqvk th {
   border-style: none;
 }
 
-#xarjikquoj p {
+#bdzjcbyqvk p {
   margin: 0;
   padding: 0;
 }
 
-#xarjikquoj .gt_table {
+#bdzjcbyqvk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -329,12 +347,12 @@ each state:</p>
   border-left-color: #D3D3D3;
 }
 
-#xarjikquoj .gt_caption {
+#bdzjcbyqvk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xarjikquoj .gt_title {
+#bdzjcbyqvk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -346,7 +364,7 @@ each state:</p>
   border-bottom-width: 0;
 }
 
-#xarjikquoj .gt_subtitle {
+#bdzjcbyqvk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -358,7 +376,7 @@ each state:</p>
   border-top-width: 0;
 }
 
-#xarjikquoj .gt_heading {
+#bdzjcbyqvk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -370,13 +388,13 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#xarjikquoj .gt_bottom_border {
+#bdzjcbyqvk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_col_headings {
+#bdzjcbyqvk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -391,7 +409,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#xarjikquoj .gt_col_heading {
+#bdzjcbyqvk .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -411,7 +429,7 @@ each state:</p>
   overflow-x: hidden;
 }
 
-#xarjikquoj .gt_column_spanner_outer {
+#bdzjcbyqvk .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -423,15 +441,15 @@ each state:</p>
   padding-right: 4px;
 }
 
-#xarjikquoj .gt_column_spanner_outer:first-child {
+#bdzjcbyqvk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xarjikquoj .gt_column_spanner_outer:last-child {
+#bdzjcbyqvk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xarjikquoj .gt_column_spanner {
+#bdzjcbyqvk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -443,11 +461,11 @@ each state:</p>
   width: 100%;
 }
 
-#xarjikquoj .gt_spanner_row {
+#bdzjcbyqvk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xarjikquoj .gt_group_heading {
+#bdzjcbyqvk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -473,7 +491,7 @@ each state:</p>
   text-align: left;
 }
 
-#xarjikquoj .gt_empty_group_heading {
+#bdzjcbyqvk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -488,15 +506,15 @@ each state:</p>
   vertical-align: middle;
 }
 
-#xarjikquoj .gt_from_md > :first-child {
+#bdzjcbyqvk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xarjikquoj .gt_from_md > :last-child {
+#bdzjcbyqvk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xarjikquoj .gt_row {
+#bdzjcbyqvk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -515,7 +533,7 @@ each state:</p>
   overflow-x: hidden;
 }
 
-#xarjikquoj .gt_stub {
+#bdzjcbyqvk .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -528,7 +546,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#xarjikquoj .gt_stub_row_group {
+#bdzjcbyqvk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -542,15 +560,15 @@ each state:</p>
   vertical-align: top;
 }
 
-#xarjikquoj .gt_row_group_first td {
+#bdzjcbyqvk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xarjikquoj .gt_row_group_first th {
+#bdzjcbyqvk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xarjikquoj .gt_summary_row {
+#bdzjcbyqvk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -560,16 +578,16 @@ each state:</p>
   padding-right: 5px;
 }
 
-#xarjikquoj .gt_first_summary_row {
+#bdzjcbyqvk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_first_summary_row.thick {
+#bdzjcbyqvk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xarjikquoj .gt_last_summary_row {
+#bdzjcbyqvk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -579,7 +597,7 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_grand_summary_row {
+#bdzjcbyqvk .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -589,7 +607,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#xarjikquoj .gt_first_grand_summary_row {
+#bdzjcbyqvk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -599,7 +617,7 @@ each state:</p>
   border-top-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_last_grand_summary_row_top {
+#bdzjcbyqvk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -609,11 +627,11 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_striped {
+#bdzjcbyqvk .gt_striped {
   background-color: #FEEDEC;
 }
 
-#xarjikquoj .gt_table_body {
+#bdzjcbyqvk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -622,7 +640,7 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#xarjikquoj .gt_footnotes {
+#bdzjcbyqvk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -636,7 +654,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#xarjikquoj .gt_footnote {
+#bdzjcbyqvk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -645,7 +663,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#xarjikquoj .gt_sourcenotes {
+#bdzjcbyqvk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -659,7 +677,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#xarjikquoj .gt_sourcenote {
+#bdzjcbyqvk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -667,63 +685,63 @@ each state:</p>
   padding-right: 5px;
 }
 
-#xarjikquoj .gt_left {
+#bdzjcbyqvk .gt_left {
   text-align: left;
 }
 
-#xarjikquoj .gt_center {
+#bdzjcbyqvk .gt_center {
   text-align: center;
 }
 
-#xarjikquoj .gt_right {
+#bdzjcbyqvk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xarjikquoj .gt_font_normal {
+#bdzjcbyqvk .gt_font_normal {
   font-weight: normal;
 }
 
-#xarjikquoj .gt_font_bold {
+#bdzjcbyqvk .gt_font_bold {
   font-weight: bold;
 }
 
-#xarjikquoj .gt_font_italic {
+#bdzjcbyqvk .gt_font_italic {
   font-style: italic;
 }
 
-#xarjikquoj .gt_super {
+#bdzjcbyqvk .gt_super {
   font-size: 65%;
 }
 
-#xarjikquoj .gt_footnote_marks {
+#bdzjcbyqvk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xarjikquoj .gt_asterisk {
+#bdzjcbyqvk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xarjikquoj .gt_indent_1 {
+#bdzjcbyqvk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xarjikquoj .gt_indent_2 {
+#bdzjcbyqvk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xarjikquoj .gt_indent_3 {
+#bdzjcbyqvk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xarjikquoj .gt_indent_4 {
+#bdzjcbyqvk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xarjikquoj .gt_indent_5 {
+#bdzjcbyqvk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
