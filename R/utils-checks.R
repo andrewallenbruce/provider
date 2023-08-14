@@ -159,3 +159,50 @@ enroll_check <- function(enroll_id,
 
   }
 }
+
+#' Facility CCN Validation Check
+#'
+#' @description checks validity of CMS Certification Number (CCN) input against
+#'    CMS requirements.
+#'
+#' @details Effective in 2007, the CCN replaced the term Medicare Provider
+#'    Number, Medicare Identification Number or OSCAR Number.  The CCN is used
+#'    to verify Medicare/Medicaid certification for survey and certification,
+#'    assessment-related activities and communications. Additionally, CMS data
+#'    systems use the CCN to identify each individual provider or supplier that
+#'    has or currently does participate in Medicare and/or Medicaid.
+#'
+#' @param facility_ccn 6-digit unique alphanumeric identifier
+#' @return boolean, `TRUE` or `FALSE`
+#' @examplesIf interactive()
+#' facility_ccn_check(facility_ccn = )
+#' @autoglobal
+#' @noRd
+facility_ccn_check <- function(facility_ccn,
+                               arg = rlang::caller_arg(facility_ccn),
+                               call = rlang::caller_env()) {
+
+  # Abort if numeric
+  # if (grepl("^[[:digit:]]+$", enroll_id) == TRUE) {
+  #   cli::cli_abort(c(
+  #     "{.strong Enrollment ID} must be {.emph alpha-numeric}.",
+  #     "x" = "{.val {enroll_id}} is numeric."), call = call)
+  # }
+
+  # Must be 10 char length
+  if (nchar(enroll_id) != 15L) {
+    cli::cli_abort(c(
+      "{.strong Enrollment ID} must be {.emph 15 characters long}.",
+      "x" = "{.val {enroll_id}} contains {.val {nchar(enroll_id)}} character{?s}."), call = call)
+  }
+
+  first <- unlist(strsplit(enroll_id, ""))[1]
+
+  if ((first %in% c("I", "O")) != TRUE) {
+
+    cli::cli_abort(c(
+      "{.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
+      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
+
+  }
+}

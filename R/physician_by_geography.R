@@ -94,7 +94,7 @@ physician_by_geography <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = physician_by_geography_years())
+  rlang::arg_match(year, values = as.character(physician_by_geography_years()))
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",

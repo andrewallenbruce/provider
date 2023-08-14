@@ -108,7 +108,7 @@ cc_specific <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = cc_specific_years())
+  rlang::arg_match(year, values = as.character(cc_specific_years()))
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}

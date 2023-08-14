@@ -125,7 +125,11 @@ param_format <- function(param, arg) {
 #' @return parameter formatted with "%20" in lieu of a space
 #' @autoglobal
 #' @noRd
-param_space <- function(param) {gsub(" ", "%20", param)}
+param_space <- function(param) {
+
+  gsub(" ", "%20", param)
+
+}
 
 #' param_brackets
 #' Some API parameters have spaces, these must be converted to "%20".
@@ -133,13 +137,12 @@ param_space <- function(param) {gsub(" ", "%20", param)}
 #' @return parameter formatted with "%20" in lieu of a space
 #' @autoglobal
 #' @noRd
-param_brackets <- function(param,
-                           right = TRUE,
-                           left = TRUE,
-                           asterisk = TRUE) {
+param_brackets <- function(param) {
+
   param <- gsub("[", "%5B", param, fixed = TRUE)
   param <- gsub("*", "%2A", param, fixed = TRUE)
   param <- gsub("]", "%5D", param, fixed = TRUE)
+
   return(param)
 }
 
@@ -149,9 +152,18 @@ param_brackets <- function(param,
 #' @return formatted API filters
 #' @autoglobal
 #' @noRd
-sql_format <- function(param, arg) {
-  if (is.null(arg)) {param <- NULL} else {
-    paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}}
+sql_format <- function(param,
+                       arg) {
+
+  if (is.null(arg)) {
+
+    param <- NULL
+
+    } else {
+
+      paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")
+    }
+  }
 
 #' str_to_snakecase
 #' @param string string
@@ -176,7 +188,17 @@ str_to_snakecase <- function(string) {
 #' @param x vector
 #' @autoglobal
 #' @noRd
-tf_logical <- function(x){
+tf_logical <- function(x) {
+
+  ## TO DO Convert to case_match()
+
+  # dplyr::case_match(
+  #   x,
+  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
+  #   .default = NULL
+  # )
+
   dplyr::case_when(
     x == "True" ~ as.logical(TRUE),
     x == "False" ~ as.logical(FALSE),
@@ -187,7 +209,17 @@ tf_logical <- function(x){
 #' @param x vector
 #' @autoglobal
 #' @noRd
-yn_logical <- function(x){
+yn_logical <- function(x) {
+
+  ## TO DO Convert to case_match()
+
+  # dplyr::case_match(
+  #   x,
+  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
+  #   .default = NULL
+  # )
+
   dplyr::case_when(
     x == as.character("Y") ~ as.logical(TRUE),
     x == as.character("N") ~ as.logical(FALSE),
@@ -202,7 +234,17 @@ yn_logical <- function(x){
 #' @param x vector
 #' @autoglobal
 #' @noRd
-entype_char <- function(x){
+entype_char <- function(x) {
+
+  ## TO DO Convert to case_match()
+
+  # dplyr::case_match(
+  #   x,
+  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
+  #   .default = NULL
+  # )
+
   dplyr::case_when(
     x == "NPI-1" ~ "Individual",
     x == "I" ~ "Individual",
@@ -216,7 +258,9 @@ entype_char <- function(x){
 #' @autoglobal
 #' @noRd
 entype_arg <- function(x) {
+
   x <- if (is.numeric(x)) as.character(x)
+
   dplyr::case_match(
     x,
     c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
@@ -230,6 +274,16 @@ entype_arg <- function(x) {
 #' @autoglobal
 #' @noRd
 pos_char <- function(x){
+
+  ## TO DO Convert to case_match()
+
+  # dplyr::case_match(
+  #   x,
+  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
+  #   .default = NULL
+  # )
+
   dplyr::case_when(
     x == "facility" ~ "F",
     x == "Facility" ~ "F",
@@ -248,7 +302,8 @@ pos_char <- function(x){
 #' @noRd
 display_long <- function(df){
 
-  df |> dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) |>
+  df |> dplyr::mutate(dplyr::across(dplyr::everything(),
+                                    as.character)) |>
         tidyr::pivot_longer(dplyr::everything())
 }
 

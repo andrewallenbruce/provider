@@ -27,6 +27,9 @@ library(provider)
 
 <br>
 
+
+The goal of `provider` is to make the experience of accessing publicly-available Medicare provider data easier and more consistent across a variety of sources.
+
 ## Example
 
 ```r
@@ -394,18 +397,18 @@ re_date <- revalidation_date(npi = 1043477615) |>
                 enroll_specialty = "Enrollment Specialty")
 
 re_assign <- revalidation_reassign(npi = 1043477615) |> 
-  dplyr::select(business_name, 
-                state_group, 
-                pac_id_group, 
-                enroll_id_group, 
-                group_reassign_and_phys_assist) |> 
-  dplyr::mutate(state_group = campfin::expand_state(state_group)) |> 
+  dplyr::select(group_legal_business_name, 
+                group_state, 
+                group_pac_id, 
+                group_enroll_id, 
+                group_reassignments) |> 
+  dplyr::mutate(group_state = campfin::expand_state(group_state)) |> 
   provider:::gt_prov(source = gt::md("Source: [Medicare Revalidation Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)")) |> 
-  gt::cols_label(business_name = "Business Name", 
-                 state_group = "State", 
-                 group_reassign_and_phys_assist = "Reassignments / Physicians Assistants",
-                 pac_id_group = "PAC ID", 
-                 enroll_id_group = "Enrollment ID")
+  gt::cols_label(group_legal_business_name = "Business Name", 
+                 group_state = "State", 
+                 group_reassignments = "Reassignments",
+                 group_pac_id = "PAC ID", 
+                 group_enroll_id = "Enrollment ID")
 ```
 
 </details>
@@ -446,32 +449,27 @@ provider_1 <- provider |>
                 tot_srvcs,
                 tot_charges,
                 tot_allowed,
-                tot_payment) |> 
-  dplyr::mutate(rep_benes = tot_srvcs - tot_benes, .after = tot_srvcs) |> 
+                tot_payment) |>  
   provider:::change_abs(tot_benes, year) |> 
   provider:::change_pct(tot_benes, tot_benes_chg, year) |> 
   provider:::change_abs(tot_srvcs, year) |> 
   provider:::change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
-  provider:::change_abs(rep_benes, year) |> 
-  provider:::change_pct(rep_benes, rep_benes_chg, year) |> 
-  dplyr::select(!c(tot_benes_chg, tot_srvcs_chg, rep_benes_chg)) |> 
+  dplyr::select(!c(tot_benes_chg, tot_srvcs_chg)) |> 
   provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
                                      API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
                      title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
                      subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("year", "rep_benes"),
+                     divider = c("year"),
                      dollars = c("tot_charges", "tot_allowed", "tot_payment"),
-                     pctchg = c("tot_benes_pct", "tot_srvcs_pct", "rep_benes_pct")) |>
+                     pctchg = c("tot_benes_pct", "tot_srvcs_pct")) |>
   gt::cols_label(tot_benes = "Beneficiaries", 
                  tot_srvcs = "Services",
-                 rep_benes = "Repeat Beneficiaries",
                  tot_charges = "Charges",
                  tot_allowed = "Allowed",
                  tot_payment = "Payment") |> 
   gt::cols_merge_n_pct(tot_benes, tot_benes_pct) |> 
   gt::cols_merge_n_pct(tot_srvcs, tot_srvcs_pct) |> 
-  gt::cols_merge_n_pct(rep_benes, rep_benes_pct) |> 
-  gtExtras::gt_color_rows(columns = c("tot_charges", "tot_allowed", "tot_payment"))
+  gt::data_color(columns = c("tot_charges", "tot_allowed", "tot_payment"), palette = "ggsci::red_material")
 ```
 
 
@@ -735,17 +733,18 @@ qpp <- 2017:2021 |>
 ```{r echo=FALSE, eval=TRUE}
 qpp |> 
   dplyr::select(year, 
-                final_score,
-                payment_adjustment,
-                complex_patient_bonus,
-                quality_category_score,
-                quality_improvement_bonus,
-                pi_category_score,
-                ia_score,
-                cost_score) |> 
+                Score = final_score,
+                Adjustment = payment_adjustment,
+                Complex = complex_patient_bonus,
+                Quality = quality_category_score,
+                QI = quality_improvement_bonus,
+                PI = pi_category_score,
+                IA = ia_score,
+                Cost = cost_score) |> 
   provider:::gt_prov()
 ```
 
+<br><br>
 
 ```{r echo=FALSE, eval=TRUE}
 qpp |> 
@@ -783,4 +782,14 @@ qpp |>
                                    "2021"))
 
 ```
+
+<br><br>
+
+### QPP Eligibility
+
+```{r}
+quality_eligibility(year = 2021, npi = 1043477615)
+```
+
+
 

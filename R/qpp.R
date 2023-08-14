@@ -50,7 +50,7 @@ quality_payment <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = quality_payment_years())
+  rlang::arg_match(year, values = as.character(quality_payment_years()))
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

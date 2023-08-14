@@ -72,9 +72,13 @@ hospital_enrollment <- function(npi            = NULL,
     stringr::str_c(collapse = "") |>
     param_space()
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update(api = "Hospital Enrollments", check = "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "f6f6505c-e8b0-4d57-b258-e2b94133aaf2"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 

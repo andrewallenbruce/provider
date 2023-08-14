@@ -111,6 +111,7 @@ utils::globalVariables(c(
   "suff", # <facility_affiliations>
   "facility_afl_ccn", # <facility_affiliations>
   "identifier", # <fac_affil_id>
+  "distro", # <hospital_enrollment>
   "y", # <hospital_enrollment>
   "incorporation_date", # <hospital_enrollment>
   "address_line_1", # <hospital_enrollment>
@@ -461,6 +462,7 @@ utils::globalVariables(c(
   "avg_mdcr_alowd_amt", # <physician_by_service>
   "avg_mdcr_pymt_amt", # <physician_by_service>
   "avg_mdcr_stdzd_amt", # <physician_by_service>
+  "distro", # <provider_enrollment>
   "y", # <provider_enrollment>
   "pecos_asct_cntl_id", # <provider_enrollment>
   "enrlmt_id", # <provider_enrollment>

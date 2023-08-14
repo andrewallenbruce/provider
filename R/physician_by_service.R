@@ -165,7 +165,7 @@ physician_by_service <- function(year,
   # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = physician_by_service_years())
+  rlang::arg_match(year, values = as.character(physician_by_service_years()))
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider and Service", check = "id") |>
