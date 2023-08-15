@@ -139,52 +139,53 @@ necessary to protect Medicare provider privacy.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
-<span><span class="co">#&gt;   npi   pac_id enroll_id specialty_code specialty_desc state org_name first_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003… 44868… I2017040… 14-46          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>       RADHIKA   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 3 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, gender &lt;chr&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt;   npi      pac_id enroll_id enroll_type_code enroll_type state organization_name</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1003026… 44868… I2017040… 14-46            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Matthew"</span>, </span>
 <span>                    last_name <span class="op">=</span> <span class="st">"Smith"</span>,</span>
 <span>                    state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 11</span></span></span>
-<span><span class="co">#&gt;    npi        pac_id     enroll_id  specialty_code specialty_desc state org_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1235121724 3072577659 I20041113… 14-08          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1952320897 1951205392 I20070219… 14-10          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1588688543 2567427388 I20111003… 14-29          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1659361749 5193977015 I20121128… 14-37          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1144412362 9830319243 I20141007… 14-97          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1376032474 9638422603 I20181022… 14-65          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1144541152 4486891728 I20190814… 14-02          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1891155339 0840562773 I20200506… 14-93          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1003447665 2264848837 I20210304… 14-35          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1205136652 2567659220 I20210514… 14-97          PRACTITIONER … FL    <span style="color: #BB0000;">NA</span>      </span></span>
+<span><span class="co">#&gt;    npi     pac_id enroll_id enroll_type_code enroll_type state organization_name</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 123512… 30725… I2004111… 14-08            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 195232… 19512… I2007021… 14-10            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 158868… 25674… I2011100… 14-29            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 165936… 51939… I2012112… 14-37            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 114441… 98303… I2014100… 14-97            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 137603… 96384… I2018102… 14-65            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 114454… 44868… I2019081… 14-02            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 189115… 08405… I2020050… 14-93            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 100344… 22648… I2021030… 14-35            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 120513… 25676… I2021051… 14-97            PRACTITION… FL    <span style="color: #BB0000;">NA</span>               </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 4 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="fgtitoronw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="huoiedvrym" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#fgtitoronw table {
+#huoiedvrym table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#fgtitoronw thead, #fgtitoronw tbody, #fgtitoronw tfoot, #fgtitoronw tr, #fgtitoronw td, #fgtitoronw th {
+#huoiedvrym thead, #huoiedvrym tbody, #huoiedvrym tfoot, #huoiedvrym tr, #huoiedvrym td, #huoiedvrym th {
   border-style: none;
 }
 
-#fgtitoronw p {
+#huoiedvrym p {
   margin: 0;
   padding: 0;
 }
 
-#fgtitoronw .gt_table {
+#huoiedvrym .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -210,12 +211,12 @@ necessary to protect Medicare provider privacy.</p>
   border-left-color: #D3D3D3;
 }
 
-#fgtitoronw .gt_caption {
+#huoiedvrym .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#fgtitoronw .gt_title {
+#huoiedvrym .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -227,7 +228,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-width: 0;
 }
 
-#fgtitoronw .gt_subtitle {
+#huoiedvrym .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -239,7 +240,7 @@ necessary to protect Medicare provider privacy.</p>
   border-top-width: 0;
 }
 
-#fgtitoronw .gt_heading {
+#huoiedvrym .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -251,13 +252,13 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#fgtitoronw .gt_bottom_border {
+#huoiedvrym .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_col_headings {
+#huoiedvrym .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -272,7 +273,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#fgtitoronw .gt_col_heading {
+#huoiedvrym .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -292,7 +293,7 @@ necessary to protect Medicare provider privacy.</p>
   overflow-x: hidden;
 }
 
-#fgtitoronw .gt_column_spanner_outer {
+#huoiedvrym .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -304,15 +305,15 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 4px;
 }
 
-#fgtitoronw .gt_column_spanner_outer:first-child {
+#huoiedvrym .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#fgtitoronw .gt_column_spanner_outer:last-child {
+#huoiedvrym .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#fgtitoronw .gt_column_spanner {
+#huoiedvrym .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -324,11 +325,11 @@ necessary to protect Medicare provider privacy.</p>
   width: 100%;
 }
 
-#fgtitoronw .gt_spanner_row {
+#huoiedvrym .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#fgtitoronw .gt_group_heading {
+#huoiedvrym .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -354,7 +355,7 @@ necessary to protect Medicare provider privacy.</p>
   text-align: left;
 }
 
-#fgtitoronw .gt_empty_group_heading {
+#huoiedvrym .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -369,15 +370,15 @@ necessary to protect Medicare provider privacy.</p>
   vertical-align: middle;
 }
 
-#fgtitoronw .gt_from_md > :first-child {
+#huoiedvrym .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#fgtitoronw .gt_from_md > :last-child {
+#huoiedvrym .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#fgtitoronw .gt_row {
+#huoiedvrym .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -396,7 +397,7 @@ necessary to protect Medicare provider privacy.</p>
   overflow-x: hidden;
 }
 
-#fgtitoronw .gt_stub {
+#huoiedvrym .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -409,7 +410,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#fgtitoronw .gt_stub_row_group {
+#huoiedvrym .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -423,15 +424,15 @@ necessary to protect Medicare provider privacy.</p>
   vertical-align: top;
 }
 
-#fgtitoronw .gt_row_group_first td {
+#huoiedvrym .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#fgtitoronw .gt_row_group_first th {
+#huoiedvrym .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#fgtitoronw .gt_summary_row {
+#huoiedvrym .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -441,16 +442,16 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#fgtitoronw .gt_first_summary_row {
+#huoiedvrym .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_first_summary_row.thick {
+#huoiedvrym .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#fgtitoronw .gt_last_summary_row {
+#huoiedvrym .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -460,7 +461,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_grand_summary_row {
+#huoiedvrym .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -470,7 +471,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#fgtitoronw .gt_first_grand_summary_row {
+#huoiedvrym .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -480,7 +481,7 @@ necessary to protect Medicare provider privacy.</p>
   border-top-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_last_grand_summary_row_top {
+#huoiedvrym .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -490,11 +491,11 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_striped {
+#huoiedvrym .gt_striped {
   background-color: #FEEDEC;
 }
 
-#fgtitoronw .gt_table_body {
+#huoiedvrym .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -503,7 +504,7 @@ necessary to protect Medicare provider privacy.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#fgtitoronw .gt_footnotes {
+#huoiedvrym .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -517,7 +518,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#fgtitoronw .gt_footnote {
+#huoiedvrym .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -526,7 +527,7 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#fgtitoronw .gt_sourcenotes {
+#huoiedvrym .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -540,7 +541,7 @@ necessary to protect Medicare provider privacy.</p>
   border-right-color: #D3D3D3;
 }
 
-#fgtitoronw .gt_sourcenote {
+#huoiedvrym .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -548,63 +549,63 @@ necessary to protect Medicare provider privacy.</p>
   padding-right: 5px;
 }
 
-#fgtitoronw .gt_left {
+#huoiedvrym .gt_left {
   text-align: left;
 }
 
-#fgtitoronw .gt_center {
+#huoiedvrym .gt_center {
   text-align: center;
 }
 
-#fgtitoronw .gt_right {
+#huoiedvrym .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#fgtitoronw .gt_font_normal {
+#huoiedvrym .gt_font_normal {
   font-weight: normal;
 }
 
-#fgtitoronw .gt_font_bold {
+#huoiedvrym .gt_font_bold {
   font-weight: bold;
 }
 
-#fgtitoronw .gt_font_italic {
+#huoiedvrym .gt_font_italic {
   font-style: italic;
 }
 
-#fgtitoronw .gt_super {
+#huoiedvrym .gt_super {
   font-size: 65%;
 }
 
-#fgtitoronw .gt_footnote_marks {
+#huoiedvrym .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#fgtitoronw .gt_asterisk {
+#huoiedvrym .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#fgtitoronw .gt_indent_1 {
+#huoiedvrym .gt_indent_1 {
   text-indent: 5px;
 }
 
-#fgtitoronw .gt_indent_2 {
+#huoiedvrym .gt_indent_2 {
   text-indent: 10px;
 }
 
-#fgtitoronw .gt_indent_3 {
+#huoiedvrym .gt_indent_3 {
   text-indent: 15px;
 }
 
-#fgtitoronw .gt_indent_4 {
+#huoiedvrym .gt_indent_4 {
   text-indent: 20px;
 }
 
-#fgtitoronw .gt_indent_5 {
+#huoiedvrym .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

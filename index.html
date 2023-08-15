@@ -119,7 +119,7 @@
 <!-- badges: start -->
 
 <blockquote>
-<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a>-centric data through publicly available APIs &amp; sources.</p>
+<p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources.</p>
 </blockquote>
 <p><br></p>
 <div class="section level2">
@@ -127,841 +127,91 @@
 </h2>
 <p>You can install the development version of <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p><br></p>
+<p>The <em>overarching</em> goal of <code>provider</code> is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of CMS sources. It aims to accomplish this through the following <em>general</em> goals, where possible:</p>
+<ul>
+<li>Harmonization of variable names so as to allow for removal of duplicate information across API output, if desired</li>
+<li>Validation checks of provider identifiers (e.g., NPI, PAC ID, Medicare Enrollment ID, CCN)</li>
+<li>Structuring output in the <em>tidy</em> framework as much as is reasonably possible (with an option to turn off by setting <code>tidy = FALSE</code>)</li>
+</ul>
+<p><br></p>
+</div>
+<div class="section level2">
+<h2 id="apis">APIs<a class="anchor" aria-label="anchor" href="#apis"></a>
+</h2>
+<p>API Search functions can be grouped according to the type of data they return about a provider: <em>administrative</em>, <em>statistical</em>, and <em>auxillary.</em></p>
+<div class="section level3">
+<h3 id="administrative">Administrative<a class="anchor" aria-label="anchor" href="#administrative"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/nppes_npi.html">nppes_npi()</a></code>: Registry of all healthcare providers.</li>
+<li>
+<code><a href="reference/provider_enrollment.html">provider_enrollment()</a></code>: Providers actively enrolled in Medicare.</li>
+<li>
+<code><a href="reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of Medicare.</li>
+<li>
+<code>revalidation_*()</code>: Link Type-1 and Type-2 providers.</li>
+<li>
+<code><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians()</a></code>: Provider school, graduation year, linking.</li>
+<li>
+<code><a href="reference/facility_affiliations.html">facility_affiliations()</a></code>: Linking providers to Facilities.</li>
+<li>
+<code><a href="reference/hospital_enrollment.html">hospital_enrollment()</a></code>: Facilities linked to providers.</li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="statistical">Statistical<a class="anchor" aria-label="anchor" href="#statistical"></a>
+</h3>
+<p>The following return provider-specific stats:</p>
+<ul>
+<li>
+<code><a href="reference/physician_by_provider.html">physician_by_provider()</a></code>: Yearly high-level utilization data.</li>
+<li>
+<code><a href="reference/physician_by_service.html">physician_by_service()</a></code>: Yearly detailed utilization data.</li>
+<li>
+<code>quality_payments()</code>: Yearly QPP/MIPS performance data.</li>
+<li>
+<code><a href="reference/quality_eligibility.html">quality_eligibility()</a></code>: Yearly QPP/MIPS eligibility data.</li>
+<li>
+<code><a href="reference/open_payments.html">open_payments()</a></code>: Yearly Open Payments reporting data.</li>
+</ul>
+<p>The following return yearly stats useful for comparison against data returned from <code><a href="reference/physician_by_service.html">physician_by_service()</a></code>:</p>
+<ul>
+<li><code><a href="reference/physician_by_geography.html">physician_by_geography()</a></code></li>
+<li><code><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment()</a></code></li>
+<li><code><a href="reference/cc_multiple.html">cc_multiple()</a></code></li>
+<li><code><a href="reference/cc_specific.html">cc_specific()</a></code></li>
+</ul>
+</div>
+<div class="section level3">
+<h3 id="auxillary">Auxillary<a class="anchor" aria-label="anchor" href="#auxillary"></a>
+</h3>
+<ul>
+<li>
+<code><a href="reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and refer?</li>
+<li>
+<code><a href="reference/missing_information.html">missing_information()</a></code>: Is a provider missing Endpoints in the NPPES NPI Registry?</li>
+<li>
+<code><a href="reference/pending_applications.html">pending_applications()</a></code>: Has a provider’s Medicare application been processed?</li>
+<li>
+<code><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty eligible to enroll in Medicare?</li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
-<p>The goal of <code>provider</code> is to make the experience of accessing publicly-available Medicare provider data easier and more consistent across a variety of CMS sources.</p>
-<p><br></p>
-<table class="table">
-<colgroup>
-<col width="1%">
-<col width="10%">
-<col width="87%">
-</colgroup>
-<thead><tr class="header">
-<th align="right">#</th>
-<th align="left">Function</th>
-<th align="left">API</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">1</td>
-<td align="left"><code><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment" class="external-link">Medicare Monthly Enrollment</a></td>
-</tr>
-<tr class="even">
-<td align="right">2</td>
-<td align="left"><code><a href="reference/cc_multiple.html">cc_multiple()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions" class="external-link">Medicare Multiple Chronic Conditions</a></td>
-</tr>
-<tr class="odd">
-<td align="right">3</td>
-<td align="left"><code><a href="reference/cc_specific.html">cc_specific()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions" class="external-link">Medicare Specific Chronic Conditions</a></td>
-</tr>
-<tr class="even">
-<td align="right">4</td>
-<td align="left"><code><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-data/dataset/mj5m-pzi6" class="external-link">Doctors and Clinicians National Downloadable File</a></td>
-</tr>
-<tr class="odd">
-<td align="right">5</td>
-<td align="left"><code><a href="reference/facility_affiliations.html">facility_affiliations()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-data/dataset/27ea-46a8" class="external-link">CMS Physician Facility Affiliations</a></td>
-</tr>
-<tr class="even">
-<td align="right">6</td>
-<td align="left"><code><a href="reference/hospital_enrollment.html">hospital_enrollment()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments" class="external-link">Hospital Enrollments</a></td>
-</tr>
-<tr class="odd">
-<td align="right">7</td>
-<td align="left"><code><a href="reference/missing_information.html">missing_information()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information" class="external-link">CMS Public Reporting of Missing Digital Contact Information</a></td>
-</tr>
-<tr class="even">
-<td align="right">8</td>
-<td align="left"><code><a href="reference/nppes_npi.html">nppes_npi()</a></code></td>
-<td align="left"><a href="https://npiregistry.cms.hhs.gov/search" class="external-link">NPPES National Provider Identifier (NPI) Registry</a></td>
-</tr>
-<tr class="odd">
-<td align="right">9</td>
-<td align="left"><code><a href="reference/open_payments.html">open_payments()</a></code></td>
-<td align="left"><a href="https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202" class="external-link">CMS Open Payments Program</a></td>
-</tr>
-<tr class="even">
-<td align="right">10</td>
-<td align="left"><code><a href="reference/opt_out.html">opt_out()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits" class="external-link">Medicare Opt Out Affidavits</a></td>
-</tr>
-<tr class="odd">
-<td align="right">11</td>
-<td align="left"><code><a href="reference/order_refer.html">order_refer()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring" class="external-link">Medicare Order and Referring</a></td>
-</tr>
-<tr class="even">
-<td align="right">12</td>
-<td align="left"><code><a href="reference/pending_applications.html">pending_applications()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians" class="external-link">Medicare Pending Initial Logging and Tracking</a></td>
-</tr>
-<tr class="odd">
-<td align="right">13</td>
-<td align="left"><code><a href="reference/physician_by_geography.html">physician_by_geography()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Geography and Service</a></td>
-</tr>
-<tr class="even">
-<td align="right">14</td>
-<td align="left"><code><a href="reference/physician_by_provider.html">physician_by_provider()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider</a></td>
-</tr>
-<tr class="odd">
-<td align="right">15</td>
-<td align="left"><code><a href="reference/physician_by_service.html">physician_by_service()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service" class="external-link">Medicare Physician &amp; Other Practitioners: by Provider and Service</a></td>
-</tr>
-<tr class="even">
-<td align="right">16</td>
-<td align="left"><code><a href="reference/provider_enrollment.html">provider_enrollment()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment" class="external-link">Medicare Fee-For-Service Public Provider Enrollment</a></td>
-</tr>
-<tr class="odd">
-<td align="right">17</td>
-<td align="left"><code><a href="reference/quality_payment.html">quality_payment()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/quality-of-care/quality-payment-program-experience" class="external-link">CMS Quality Payment Program</a></td>
-</tr>
-<tr class="even">
-<td align="right">18</td>
-<td align="left"><code><a href="reference/revalidation_date.html">revalidation_date()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date</a></td>
-</tr>
-<tr class="odd">
-<td align="right">19</td>
-<td align="left"><code><a href="reference/revalidation_group.html">revalidation_group()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-clinic-group-practice-reassignment" class="external-link">Medicare Revalidation Clinic Group Practice Reassignment</a></td>
-</tr>
-<tr class="even">
-<td align="right">20</td>
-<td align="left"><code><a href="reference/revalidation_reassign.html">revalidation_reassign()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list" class="external-link">Medicare Revalidation Reassignment</a></td>
-</tr>
-<tr class="odd">
-<td align="right">21</td>
-<td align="left"><code><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code></td>
-<td align="left"><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk" class="external-link">Medicare Provider and Supplier Taxonomy Crosswalk</a></td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<div class="section level3">
-<h3 id="beneficiary-enrollment">Beneficiary Enrollment<a class="anchor" aria-label="anchor" href="#beneficiary-enrollment"></a>
-</h3>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, </span>
-<span>                       period <span class="op">=</span> <span class="st">"Year"</span>, </span>
-<span>                       level <span class="op">=</span> <span class="st">"State"</span>, </span>
-<span>                       fips <span class="op">=</span> <span class="st">"01"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 26</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>   year period level state state_name county fips  bene_total bene_orig</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>int<span class="sc">&gt;</span>     <span class="er">&lt;</span>int<span class="sc">&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2020</span> Year   State AL    Alabama    Total  <span class="dv">01</span>       <span class="dv">1062565</span>    <span class="dv">576690</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="chronic-conditions">Chronic Conditions<a class="anchor" aria-label="anchor" href="#chronic-conditions"></a>
-</h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Multiple Chronic Conditions</span></span>
-<span><span class="fu"><a href="reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            level <span class="op">=</span> <span class="st">"National"</span>, </span>
-<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
-<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 4 × 13</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>   year level    sublevel fips  age_group demographic subdemo mcc     prevalence</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>ord<span class="sc">&gt;</span>        <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2018</span> National National <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  All       All         All     [<span class="dv">0</span>,<span class="dv">1</span>]        <span class="fl">0.311</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">2018</span> National National <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  All       All         All     [<span class="dv">2</span>,<span class="dv">3</span>]        <span class="fl">0.291</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  <span class="dv">2018</span> National National <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  All       All         All     [<span class="dv">4</span>,<span class="dv">5</span>]        <span class="fl">0.221</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  <span class="dv">2018</span> National National <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>  All       All         All     [<span class="dv">6</span>, In…      <span class="fl">0.177</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
-<span>            sublevel <span class="op">=</span> <span class="st">"Alabama"</span>, </span>
-<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
-<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 4 × 13</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   year level sublevel fips  age_group demographic subdemo mcc      prevalence</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>ord<span class="sc">&gt;</span>         <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2018</span> State Alabama  <span class="dv">01</span>    All       All         All     [<span class="dv">0</span>,<span class="dv">1</span>]         <span class="fl">0.258</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">2018</span> State Alabama  <span class="dv">01</span>    All       All         All     [<span class="dv">2</span>,<span class="dv">3</span>]         <span class="fl">0.285</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  <span class="dv">2018</span> State Alabama  <span class="dv">01</span>    All       All         All     [<span class="dv">4</span>,<span class="dv">5</span>]         <span class="fl">0.250</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  <span class="dv">2018</span> State Alabama  <span class="dv">01</span>    All       All         All     [<span class="dv">6</span>, <span class="cn">Inf</span><span class="er">)</span>      <span class="fl">0.207</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cc_multiple.html">cc_multiple</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
-<span>            sublevel <span class="op">=</span> <span class="st">"Alabama : Autauga"</span>, </span>
-<span>            fips <span class="op">=</span> <span class="st">"01001"</span>, </span>
-<span>            age_group <span class="op">=</span> <span class="st">"All"</span>, </span>
-<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 4 × 13</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>   year level  sublevel     fips  age_group demographic subdemo mcc   prevalence</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>ord<span class="sc">&gt;</span>      <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2018</span> County Alabama <span class="sc">:</span> A… <span class="dv">01001</span> All       All         All     [<span class="dv">0</span>,<span class="dv">1</span>]      <span class="fl">0.266</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">2018</span> County Alabama <span class="sc">:</span> A… <span class="dv">01001</span> All       All         All     [<span class="dv">2</span>,<span class="dv">3</span>]      <span class="fl">0.281</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  <span class="dv">2018</span> County Alabama <span class="sc">:</span> A… <span class="dv">01001</span> All       All         All     [<span class="dv">4</span>,<span class="dv">5</span>]      <span class="fl">0.248</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  <span class="dv">2018</span> County Alabama <span class="sc">:</span> A… <span class="dv">01001</span> All       All         All     [<span class="dv">6</span>, …      <span class="fl">0.205</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Specific Chronic Conditions</span></span>
-<span><span class="fu"><a href="reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, </span>
-<span>            level <span class="op">=</span> <span class="st">"State"</span>, </span>
-<span>            sublevel <span class="op">=</span> <span class="st">"California"</span>, </span>
-<span>            demographic <span class="op">=</span> <span class="st">"All"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 63 × 13</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    year level sublevel fips  age_group demographic subdemo condition prevalence</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Alcohol …     <span class="fl">0.0215</span></span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Alzheime…     <span class="fl">0.105</span> </span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Arthritis     <span class="fl">0.312</span> </span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Asthma        <span class="fl">0.053</span> </span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Atrial F…     <span class="fl">0.0749</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Autism S…     <span class="fl">0.0022</span></span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     COPD          <span class="fl">0.0952</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Cancer        <span class="fl">0.0784</span></span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Chronic …     <span class="fl">0.243</span> </span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="dv">2018</span> State Califor… <span class="dv">06</span>    All       All         All     Depressi…     <span class="fl">0.162</span> </span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 53 more rows</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/cc_specific.html">cc_specific</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2011</span>, </span>
-<span>            level <span class="op">=</span> <span class="st">"County"</span>, </span>
-<span>            fips <span class="op">=</span> <span class="st">"01001"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 63 × 13</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    year level sublevel fips  age_group demographic subdemo condition prevalence</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Alcohol …     <span class="fl">0.0116</span></span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Alzheime…     <span class="fl">0.100</span> </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Arthritis     <span class="fl">0.274</span> </span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Asthma        <span class="fl">0.037</span> </span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Atrial F…     <span class="fl">0.0748</span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Autism S…    <span class="cn">NA</span>     </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     COPD          <span class="fl">0.122</span> </span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Cancer        <span class="fl">0.0792</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Chronic …     <span class="fl">0.137</span> </span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>  <span class="dv">2011</span> Coun… Alabama… <span class="dv">01001</span> All       All         All     Depressi…     <span class="fl">0.134</span> </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 53 more rows</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: tot_std_pymt_percap &lt;dbl&gt;, tot_pymt_percap &lt;dbl&gt;,</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   hosp_readmsn_rate &lt;dbl&gt;, er_visits_per_1k &lt;dbl&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="doctors-and-clinicians">Doctors and Clinicians<a class="anchor" aria-label="anchor" href="#doctors-and-clinicians"></a>
-</h3>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1720081441</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>✖ No results <span class="cf">for</span> npi<span class="sc">:</span> <span class="dv">1720081441</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1407263999</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 2 × 25</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  npi        pac_id     enroll_id first_name middle_name last_name suffix gender</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1407263999</span> <span class="dv">8729208152</span> I2014100… ROBIN      A           AVERY     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1407263999</span> <span class="dv">8729208152</span> I2014100… ROBIN      A           AVERY     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>school <span class="op">=</span> <span class="st">"NEW YORK UNIVERSITY SCHOOL OF MEDICINE"</span>, </span>
-<span>                       grad_year <span class="op">=</span> <span class="fl">2000</span>, </span>
-<span>                       state <span class="op">=</span> <span class="st">"FL"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb22"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 79 × 25</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>   npi        pac_id    enroll_id first_name middle_name last_name suffix gender</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1043312556</span> 83250900… I2010011… NICOLE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        IOVINE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   F     </span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1073549895</span> 24664809… I2007112… ALAN       B           BENNIE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   M     </span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1073549895</span> 24664809… I2007112… ALAN       B           BENNIE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   M     </span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1073575403</span> 86280744… I2006101… DANIEL     J           GASSERT   <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   M     </span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 69 more rows</span></span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 17 more variables: credential &lt;chr&gt;, school &lt;chr&gt;, grad_year &lt;int&gt;,</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   grad_duration &lt;Duration&gt;, specialty &lt;chr&gt;, specialty_sec &lt;chr&gt;,</span></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   telehealth &lt;lgl&gt;, org_name &lt;chr&gt;, org_pac_id &lt;chr&gt;, org_members &lt;int&gt;,</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, phone &lt;chr&gt;,</span></span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   ind_assn &lt;chr&gt;, group_assn &lt;chr&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="facility-affiliations">Facility Affiliations<a class="anchor" aria-label="anchor" href="#facility-affiliations"></a>
-</h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">10030195634</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb24"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">facility_affiliations()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> NPI may be incorrect or invalid</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>ℹ NPIs are <span class="dv">10</span> characters long.</span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>✖ NPI<span class="sc">:</span> <span class="dv">10030195634</span> is <span class="dv">11</span> characters long.</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 181 × 9</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>   npi        pac_id     first_name middle_name last_name   suffix facility_type</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1003002890</span> <span class="dv">6002953973</span> DANIEL     RICHARD     HAMMAN      <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1003019563</span> <span class="dv">4688707060</span> JOHN       JOSEPH      FRANK       <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1003045022</span> <span class="dv">5890926059</span> ARTHUR     H           DONAHUE     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1003105636</span> <span class="dv">6507182847</span> JAMES      CHARLES     HIGHAM KES… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1003234162</span> <span class="dv">4284940248</span> MATTHEW    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        MCDIARMID   <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1003845249</span> <span class="dv">1254326994</span> GARETH     R           WEINER      <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1013069566</span> <span class="dv">7810096328</span> AMITY      D           HELZER      <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1013115989</span> <span class="dv">4385891712</span> ASHLEY     L           PYLE        <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1013979566</span> <span class="dv">1557374014</span> FIRAS      <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        MUWALLA     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1023261963</span> <span class="dv">2860687431</span> CHAD       MICHAEL     LUCCI       <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Hospital     </span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 171 more rows</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">670055</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 9 × 9</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  npi        pac_id     first_name middle_name last_name suffix facility_type   </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>           </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1083742829</span> <span class="dv">5698833655</span> RAFAEL     JORGE       FORNARIS  <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1144429580</span> <span class="dv">3577659580</span> LYSA       LEE         CURRY     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1558595660</span> <span class="dv">8921241142</span> JOHN       D           ALFONSO   <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">1609973650</span> <span class="dv">0840373239</span> GEORGE     KIMBELL     WILCOX    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">1710112370</span> <span class="dv">9739337122</span> VIDYA      <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        AMARANENI <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">1720069859</span> <span class="dv">7012947229</span> WILLIAM    WARREN      JANES     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="dv">1740577212</span> <span class="dv">0345473773</span> GEOFF      R           WEIKLE    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="dv">1770861742</span> <span class="dv">5193940997</span> AUSTON     J           MYERS     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> <span class="dv">1912260464</span> <span class="dv">5092036509</span> SAAD       MD          MANSOOR   <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>   Inpatient rehab…</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 2 more variables: facility_ccn &lt;chr&gt;, parent_ccn &lt;chr&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="hospital-enrollments">Hospital Enrollments<a class="anchor" aria-label="anchor" href="#hospital-enrollments"></a>
-</h3>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 36</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       </span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1629071758</span> O200706190… CO           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">060004</span>      </span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"VALDOSTA"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 3 × 36</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       </span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1306896253</span> O200803120… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110122</span>      </span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1467404046</span> O200803130… GA           <span class="dv">00-09</span>          PART A PROVID… 11T122      </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1538417753</span> O201212130… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">114036</span>      </span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>enroll_state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 214 × 36</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>   npi        enroll_id  enroll_state specialty_code specialty_desc facility_ccn</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1588664007</span> O20020826… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">112011</span>      </span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1376574277</span> O20021108… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110005</span>      </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1912951963</span> O20030515… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110177</span>      </span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1063406684</span> O20030925… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110043</span>      </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1447252044</span> O20040406… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">112016</span>      </span>
-<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1679543672</span> O20040513… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">114008</span>      </span>
-<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1508810565</span> O20040823… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110168</span>      </span>
-<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1922178789</span> O20041013… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">113301</span>      </span>
-<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1194722389</span> O20041103… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">112013</span>      </span>
-<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1811940976</span> O20041109… GA           <span class="dv">00-09</span>          PART A PROVID… <span class="dv">110201</span>      </span>
-<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 204 more rows</span></span>
-<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span>
-<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span>
-<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span>
-<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span>
-<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span>
-<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20030404000017"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>✖ No results <span class="cf">for</span> enroll_id<span class="sc">:</span> O20030404000017</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="missing-contact-information">Missing Contact Information<a class="anchor" aria-label="anchor" href="#missing-contact-information"></a>
-</h3>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1144224569</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 3</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  npi        last_name first_name</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     </span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1144224569</span> Clouse    John      </span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/missing_information.html">missing_information</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">11111122222</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">missing_information()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> NPI may be incorrect or invalid</span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>ℹ NPIs are <span class="dv">10</span> characters long.</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>✖ NPI<span class="sc">:</span> <span class="dv">11111122222</span> is <span class="dv">11</span> characters long.</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="npi-registry">NPI Registry<a class="anchor" aria-label="anchor" href="#npi-registry"></a>
-</h3>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">13164059391</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">nppes_npi()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> NPI may be incorrect or invalid</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>ℹ NPIs are <span class="dv">10</span> characters long.</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>✖ NPI<span class="sc">:</span> <span class="dv">13164059391</span> is <span class="dv">11</span> characters long.</span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"155836427a"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">nppes_npi()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> NPI may be incorrect or invalid</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>ℹ NPIs must be numeric.</span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>✖ NPI<span class="sc">:</span> <span class="st">"155836427a"</span> has non<span class="sc">-</span>numeric characters.</span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1720081442</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">nppes_npi()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> NPI may be incorrect or invalid</span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a>ℹ NPIs must pass Luhn algorithm.</span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>✖ NPI <span class="dv">1720081442</span> fails Luhn check.</span></code></pre></div>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span><span class="fl">1710983663</span><span class="op">)</span> </span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>✖ No results <span class="cf">for</span> npi<span class="sc">:</span> <span class="dv">1710983663</span></span></code></pre></div>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, org_name <span class="op">=</span> <span class="st">"AIRPORT CLINIC INC"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb50"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 2 × 28</span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  npi        entype       enumeration_date years_passed last_updated status</span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>date<span class="sc">&gt;</span>                  <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>date<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1730354739</span> Organization <span class="dv">2008-04-30</span>               <span class="fl">15.1</span> <span class="dv">2013-11-21</span>   A     </span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1730354739</span> Organization <span class="dv">2008-04-30</span>               <span class="fl">15.1</span> <span class="dv">2013-11-21</span>   A     </span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 22 more variables: organization_name &lt;chr&gt;, organizational_subpart &lt;lgl&gt;,</span></span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   country &lt;chr&gt;, phone_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_last_name &lt;chr&gt;,</span></span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_title_or_position &lt;chr&gt;,</span></span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_telephone_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;,</span></span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   tx_group &lt;chr&gt;, tx_state &lt;lgl&gt;, tx_license &lt;lgl&gt;, tx_primary &lt;lgl&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, purpose_name <span class="op">=</span> <span class="st">"AO"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb52"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 236 × 36</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>   npi      entype enumeration_date years_passed last_updated certification_date</span>
-<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>date<span class="sc">&gt;</span>                  <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>date<span class="sc">&gt;</span>       <span class="er">&lt;</span>date<span class="sc">&gt;</span>            </span>
-<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 1477605… Organ… <span class="dv">2007-01-18</span>              <span class="fl">16.4</span>  <span class="dv">2020-08-22</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-5"><a href="#cb52-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 1477605… Organ… <span class="dv">2007-01-18</span>              <span class="fl">16.4</span>  <span class="dv">2020-08-22</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-6"><a href="#cb52-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 1972882… Organ… <span class="dv">2011-08-16</span>              <span class="fl">11.8</span>  <span class="dv">2016-09-08</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-7"><a href="#cb52-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> 1972882… Organ… <span class="dv">2011-08-16</span>              <span class="fl">11.8</span>  <span class="dv">2016-09-08</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-8"><a href="#cb52-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 1679724… Organ… <span class="dv">2008-10-09</span>              <span class="fl">14.7</span>  <span class="dv">2008-10-09</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-9"><a href="#cb52-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 1679724… Organ… <span class="dv">2008-10-09</span>              <span class="fl">14.7</span>  <span class="dv">2008-10-09</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-10"><a href="#cb52-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> 1306357… Organ… <span class="dv">2017-10-17</span>               <span class="fl">5.65</span> <span class="dv">2018-05-23</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-11"><a href="#cb52-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> 1306357… Organ… <span class="dv">2017-10-17</span>               <span class="fl">5.65</span> <span class="dv">2018-05-23</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-12"><a href="#cb52-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> 1306357… Organ… <span class="dv">2017-10-17</span>               <span class="fl">5.65</span> <span class="dv">2018-05-23</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-13"><a href="#cb52-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> 1306357… Organ… <span class="dv">2017-10-17</span>               <span class="fl">5.65</span> <span class="dv">2018-05-23</span>   <span class="cn">NA</span>                </span>
-<span id="cb52-14"><a href="#cb52-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 226 more rows</span></span>
-<span id="cb52-15"><a href="#cb52-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 30 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span>
-<span id="cb52-16"><a href="#cb52-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   organizational_subpart &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span id="cb52-17"><a href="#cb52-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span>
-<span id="cb52-18"><a href="#cb52-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span>
-<span id="cb52-19"><a href="#cb52-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_middle_name &lt;chr&gt;, authorized_official_last_name &lt;chr&gt;,</span></span>
-<span id="cb52-20"><a href="#cb52-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_title_or_position &lt;chr&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, purpose_name <span class="op">=</span> <span class="st">"Accounts"</span>, city <span class="op">=</span> <span class="st">"Atlanta"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">nppes_npi()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> <span class="st">`</span><span class="at">purpose_name</span><span class="st">`</span> must be one of <span class="st">"AO"</span> or <span class="st">"Provider"</span>, not <span class="st">"Accounts"</span>.</span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"00-17"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span><span class="va">nppes_npi</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 424 × 36</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>   npi      entype enumeration_date years_passed last_updated certification_date</span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>date<span class="sc">&gt;</span>                  <span class="er">&lt;</span>dbl<span class="sc">&gt;</span> <span class="er">&lt;</span>date<span class="sc">&gt;</span>       <span class="er">&lt;</span>date<span class="sc">&gt;</span>            </span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-7"><a href="#cb56-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-8"><a href="#cb56-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-9"><a href="#cb56-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-10"><a href="#cb56-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-11"><a href="#cb56-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-12"><a href="#cb56-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-13"><a href="#cb56-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> 1992710… Organ… <span class="dv">2006-07-30</span>               <span class="fl">16.9</span> <span class="dv">2021-04-28</span>   <span class="dv">2021-04-28</span>        </span>
-<span id="cb56-14"><a href="#cb56-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 414 more rows</span></span>
-<span id="cb56-15"><a href="#cb56-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 30 more variables: status &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span>
-<span id="cb56-16"><a href="#cb56-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   organizational_subpart &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span id="cb56-17"><a href="#cb56-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span>
-<span id="cb56-18"><a href="#cb56-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   fax_number &lt;chr&gt;, authorized_official_first_name &lt;chr&gt;,</span></span>
-<span id="cb56-19"><a href="#cb56-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_last_name &lt;chr&gt;,</span></span>
-<span id="cb56-20"><a href="#cb56-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   authorized_official_title_or_position &lt;chr&gt;, …</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="open-payments">Open Payments<a class="anchor" aria-label="anchor" href="#open-payments"></a>
-</h3>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043218118</span>, year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">covered</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 105 × 42</span></span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a>   year  npi      profile_id changed cov_type first_name last_name address city </span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>lgl<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span></span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… Ahad       Mahootchi <span class="dv">6739</span> G… Zeph…</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-13"><a href="#cb58-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">2021</span>  1043218… <span class="dv">92058</span>      <span class="cn">FALSE</span>   Physici… AHAD       MAHOOTCHI <span class="dv">6739</span> G… ZEPH…</span>
-<span id="cb58-14"><a href="#cb58-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 95 more rows</span></span>
-<span id="cb58-15"><a href="#cb58-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 33 more variables: state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;,</span></span>
-<span id="cb58-16"><a href="#cb58-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   primary_type &lt;chr&gt;, primary_other &lt;chr&gt;, specialty &lt;chr&gt;,</span></span>
-<span id="cb58-17"><a href="#cb58-17" aria-hidden="true" tabindex="-1"></a><span class="co">#   specialty_other &lt;chr&gt;, license_state &lt;chr&gt;, license_state_other &lt;chr&gt;,</span></span>
-<span id="cb58-18"><a href="#cb58-18" aria-hidden="true" tabindex="-1"></a><span class="co">#   payer_id &lt;chr&gt;, payer_sub &lt;chr&gt;, payer_name &lt;chr&gt;, payer_state &lt;chr&gt;,</span></span>
-<span id="cb58-19"><a href="#cb58-19" aria-hidden="true" tabindex="-1"></a><span class="co">#   payer_country &lt;chr&gt;, pay_total &lt;dbl&gt;, pay_date &lt;date&gt;, pay_count &lt;chr&gt;,</span></span>
-<span id="cb58-20"><a href="#cb58-20" aria-hidden="true" tabindex="-1"></a><span class="co">#   pay_form &lt;chr&gt;, pay_nature &lt;chr&gt;, phys_ownship &lt;lgl&gt;, third_pay &lt;chr&gt;, …</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="opt-out-affidavits">Opt-Out Affidavits<a class="anchor" aria-label="anchor" href="#opt-out-affidavits"></a>
-</h3>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"David"</span>, last_name <span class="op">=</span> <span class="st">"Smith"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb60"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 6 × 13</span></span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>  npi        first_name last_name specialty    optout_start_date optout_end_date</span>
-<span id="cb60-3"><a href="#cb60-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>date<span class="sc">&gt;</span>            <span class="er">&lt;</span>date<span class="sc">&gt;</span>         </span>
-<span id="cb60-4"><a href="#cb60-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1649265760</span> David      Smith     Maxillofaci… <span class="dv">2012-06-25</span>        <span class="dv">2024-06-25</span>     </span>
-<span id="cb60-5"><a href="#cb60-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1750565958</span> David      Smith     Oral Surgery <span class="dv">2013-05-07</span>        <span class="dv">2023-05-07</span>     </span>
-<span id="cb60-6"><a href="#cb60-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1114058443</span> David      Smith     Psychiatry   <span class="dv">2014-08-15</span>        <span class="dv">2024-08-15</span>     </span>
-<span id="cb60-7"><a href="#cb60-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">1023002375</span> David      Smith     Obstetrics<span class="sc">/</span>… <span class="dv">2012-10-01</span>        <span class="dv">2024-10-01</span>     </span>
-<span id="cb60-8"><a href="#cb60-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">1790853307</span> David      Smith     Oral Surgery <span class="dv">2015-03-26</span>        <span class="dv">2025-03-26</span>     </span>
-<span id="cb60-9"><a href="#cb60-9" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">1659300077</span> David      Smith     Dentist      <span class="dv">2015-05-26</span>        <span class="dv">2023-05-26</span>     </span>
-<span id="cb60-10"><a href="#cb60-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
-<span id="cb60-11"><a href="#cb60-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span id="cb60-12"><a href="#cb60-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   zipcode &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Psychiatry"</span>, </span>
-<span>        city <span class="op">=</span> <span class="st">"Brooklyn"</span>, </span>
-<span>        state <span class="op">=</span> <span class="st">"NY"</span>, </span>
-<span>        order_and_refer <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 4 × 13</span></span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>  npi        first_name last_name specialty  optout_start_date optout_end_date</span>
-<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>date<span class="sc">&gt;</span>            <span class="er">&lt;</span>date<span class="sc">&gt;</span>         </span>
-<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1538251731</span> Robert     Katz      Psychiatry <span class="dv">2021-10-01</span>        <span class="dv">2023-10-01</span>     </span>
-<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1114239761</span> Adriel     Gerard    Psychiatry <span class="dv">2019-12-30</span>        <span class="dv">2023-12-30</span>     </span>
-<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1740635804</span> Joseph     Mouallem  Psychiatry <span class="dv">2020-07-22</span>        <span class="dv">2024-07-22</span>     </span>
-<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">1932442191</span> Cecilia    Lipira    Psychiatry <span class="dv">2020-08-14</span>        <span class="dv">2024-08-14</span>     </span>
-<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 7 more variables: optout_duration &lt;Duration&gt;, last_updated &lt;date&gt;,</span></span>
-<span id="cb62-9"><a href="#cb62-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   order_and_refer &lt;lgl&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span id="cb62-10"><a href="#cb62-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   zipcode &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/opt_out.html">opt_out</a></span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"Tsychiatry"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb64"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a>✖ No results <span class="cf">for</span> specialty<span class="sc">:</span> Tsychiatry</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="order-and-referring-privileges">Order and Referring Privileges<a class="anchor" aria-label="anchor" href="#order-and-referring-privileges"></a>
-</h3>
-<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 7</span></span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a>  npi        first_name  last_name partb hha   dme   pmd  </span>
-<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span></span>
-<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1083879860</span> CHRISTOPHER AARON     <span class="cn">TRUE</span>  <span class="cn">TRUE</span>  <span class="cn">TRUE</span>  <span class="cn">TRUE</span> </span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/order_refer.html">order_refer</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, </span>
-<span>            partb <span class="op">=</span> <span class="cn">FALSE</span>, </span>
-<span>            pmd <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb68"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 151 × 7</span></span>
-<span id="cb68-2"><a href="#cb68-2" aria-hidden="true" tabindex="-1"></a>   npi        first_name last_name partb hha   dme   pmd  </span>
-<span id="cb68-3"><a href="#cb68-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span> <span class="er">&lt;</span>lgl<span class="sc">&gt;</span></span>
-<span id="cb68-4"><a href="#cb68-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1063535672</span> AARON      SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-5"><a href="#cb68-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1891210431</span> ALAINA     SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-6"><a href="#cb68-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1962830570</span> ALESHA     SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-7"><a href="#cb68-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1922655521</span> ALLISON    SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-8"><a href="#cb68-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1942778188</span> ALYSSA     SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-9"><a href="#cb68-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1467902791</span> AMANDA     SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-10"><a href="#cb68-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1992203582</span> AMANDA     SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-11"><a href="#cb68-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1023475761</span> AMY        SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-12"><a href="#cb68-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1609219773</span> AMY        SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-13"><a href="#cb68-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1063878056</span> ANNA       SMITH     <span class="cn">FALSE</span> <span class="cn">FALSE</span> <span class="cn">TRUE</span>  <span class="cn">FALSE</span></span>
-<span id="cb68-14"><a href="#cb68-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 141 more rows</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="pending-applications">Pending Applications<a class="anchor" aria-label="anchor" href="#pending-applications"></a>
-</h3>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 21 × 4</span></span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a>   npi        last_name first_name type         </span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        </span>
-<span id="cb70-4"><a href="#cb70-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1750870218</span> SMITH     ASHLEY     NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-5"><a href="#cb70-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1861062531</span> SMITH     ASHLEY     NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-6"><a href="#cb70-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1427639202</span> SMITH     BRANDON    NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-7"><a href="#cb70-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1801992912</span> SMITH     BRIDGET    NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-8"><a href="#cb70-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1407553340</span> SMITH     CAMILLE    NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-9"><a href="#cb70-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1811270325</span> SMITH     FRANCESCA  NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-10"><a href="#cb70-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1902527641</span> SMITH     HEATHER    NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-11"><a href="#cb70-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1386906386</span> SMITH     JANET      NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-12"><a href="#cb70-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1356079727</span> SMITH     JARED      NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-13"><a href="#cb70-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1891169751</span> SMITH     JEANA      NON<span class="sc">-</span>PHYSICIAN</span>
-<span id="cb70-14"><a href="#cb70-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 11 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 50 × 4</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a>   npi        last_name first_name type     </span>
-<span id="cb72-3"><a href="#cb72-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    </span>
-<span id="cb72-4"><a href="#cb72-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1881791739</span> ADAMS     JOHN       PHYSICIAN</span>
-<span id="cb72-5"><a href="#cb72-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1275235814</span> ADENT     JOHN       PHYSICIAN</span>
-<span id="cb72-6"><a href="#cb72-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1699397141</span> AHERN     JOHN       PHYSICIAN</span>
-<span id="cb72-7"><a href="#cb72-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1861020240</span> BALTZ     JOHN       PHYSICIAN</span>
-<span id="cb72-8"><a href="#cb72-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1841280963</span> BIGBEE    JOHN       PHYSICIAN</span>
-<span id="cb72-9"><a href="#cb72-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1619996378</span> BODDEN    JOHN       PHYSICIAN</span>
-<span id="cb72-10"><a href="#cb72-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1588744569</span> BRUNO     JOHN       PHYSICIAN</span>
-<span id="cb72-11"><a href="#cb72-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1023591427</span> BRYAN     JOHN       PHYSICIAN</span>
-<span id="cb72-12"><a href="#cb72-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1861142556</span> BURKE     JOHN       PHYSICIAN</span>
-<span id="cb72-13"><a href="#cb72-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1306817531</span> COMBS     JOHN       PHYSICIAN</span>
-<span id="cb72-14"><a href="#cb72-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 40 more rows</span></span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"John"</span>, type <span class="op">=</span> <span class="st">"dentist"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="st">`</span><span class="at">pending_applications()</span><span class="st">`</span><span class="sc">:</span></span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="sc">!</span> <span class="st">`</span><span class="at">type</span><span class="st">`</span> must be one of <span class="st">"physician"</span> or <span class="st">"non-physician"</span>, not <span class="st">"dentist"</span>.</span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"1083879860"</span>, </span>
-<span>                     first_name <span class="op">=</span> <span class="st">"Gaelic"</span>, </span>
-<span>                     last_name <span class="op">=</span> <span class="st">"Garlic"</span>,</span>
-<span>                     type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb76"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a>✖ No results <span class="cf">for</span> npi<span class="sc">:</span> <span class="dv">1083879860</span>, last_name<span class="sc">:</span> Garlic, first_name<span class="sc">:</span> Gaelic, and</span>
-<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a>type<span class="sc">:</span> physician</span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="physician--other-practitioners">Physician &amp; Other Practitioners<a class="anchor" aria-label="anchor" href="#physician--other-practitioners"></a>
-</h3>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># by Geography and Service</span></span>
-<span><span class="fu"><a href="reference/physician_by_geography.html">physician_by_geography</a></span><span class="op">(</span>sublevel <span class="op">=</span> <span class="st">"Georgia"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice_max</a></span><span class="op">(</span><span class="va">avg_payment</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb78"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> <span class="cf">if</span> (<span class="fu">as.integer</span>(httr2<span class="sc">::</span><span class="fu">resp_header</span>(response, <span class="st">"content-length"</span>)) <span class="sc">&lt;=</span> <span class="er">:</span> argument is of length zero</span></code></pre></div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># by Provider and Service</span></span>
-<span><span class="fu"><a href="reference/physician_by_service.html">physician_by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2020</span>, npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb80"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 6 × 28</span></span>
-<span id="cb80-2"><a href="#cb80-2" aria-hidden="true" tabindex="-1"></a>   year npi        entype     first_name middle_name last_name credential gender</span>
-<span id="cb80-3"><a href="#cb80-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
-<span id="cb80-4"><a href="#cb80-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-5"><a href="#cb80-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-6"><a href="#cb80-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-7"><a href="#cb80-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-8"><a href="#cb80-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-9"><a href="#cb80-9" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>  <span class="dv">2020</span> <span class="dv">1083879860</span> Individual Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M     </span>
-<span id="cb80-10"><a href="#cb80-10" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 20 more variables: specialty &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
-<span id="cb80-11"><a href="#cb80-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   fips &lt;chr&gt;, zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, par &lt;lgl&gt;,</span></span>
-<span id="cb80-12"><a href="#cb80-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   hcpcs_code &lt;chr&gt;, hcpcs_desc &lt;chr&gt;, hcpcs_drug &lt;chr&gt;, place_of_srvc &lt;chr&gt;,</span></span>
-<span id="cb80-13"><a href="#cb80-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_day &lt;int&gt;, avg_charges &lt;dbl&gt;,</span></span>
-<span id="cb80-14"><a href="#cb80-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;, avg_std_pymt &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># by Provider</span></span>
-<span><span class="fu"><a href="reference/physician_by_provider.html">physician_by_provider</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb82"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 70</span></span>
-<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>   year npi     first_name middle_name last_name credential gender entype street</span>
-<span id="cb82-3"><a href="#cb82-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>       <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span> </span>
-<span id="cb82-4"><a href="#cb82-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2020</span> 108387… Christoph… <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>        Aaron     <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>       M      Indiv… <span class="dv">792</span> G…</span>
-<span id="cb82-5"><a href="#cb82-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span>
-<span id="cb82-6"><a href="#cb82-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span>
-<span id="cb82-7"><a href="#cb82-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span>
-<span id="cb82-8"><a href="#cb82-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span>
-<span id="cb82-9"><a href="#cb82-9" aria-hidden="true" tabindex="-1"></a><span class="co">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span>
-<span id="cb82-10"><a href="#cb82-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span>
-<span id="cb82-11"><a href="#cb82-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="provider-enrollment">Provider Enrollment<a class="anchor" aria-label="anchor" href="#provider-enrollment"></a>
-</h3>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1083879860</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb84"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 11</span></span>
-<span id="cb84-2"><a href="#cb84-2" aria-hidden="true" tabindex="-1"></a>  npi   pac_id enroll_id specialty_code specialty_desc state org_name first_name</span>
-<span id="cb84-3"><a href="#cb84-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>  <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     </span>
-<span id="cb84-4"><a href="#cb84-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> 1083… 84263… I2020061… <span class="dv">14-08</span>          PRACTITIONER … PA    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     CHRISTOPH…</span>
-<span id="cb84-5"><a href="#cb84-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 3 more variables: middle_name &lt;chr&gt;, last_name &lt;chr&gt;, gender &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"00-17"</span>, state <span class="op">=</span> <span class="st">"GA"</span><span class="op">)</span> <span class="co"># GA RHCs</span></span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 92 × 11</span></span>
-<span id="cb86-2"><a href="#cb86-2" aria-hidden="true" tabindex="-1"></a>   npi        pac_id     enroll_id  specialty_code specialty_desc state org_name</span>
-<span id="cb86-3"><a href="#cb86-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   </span>
-<span id="cb86-4"><a href="#cb86-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> <span class="dv">1992710610</span> <span class="dv">8729997846</span> O20030404… <span class="dv">00-17</span>          PART A PROVID… GA    TMC HAR…</span>
-<span id="cb86-5"><a href="#cb86-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> <span class="dv">1497760243</span> <span class="dv">0042129074</span> O20030407… <span class="dv">00-17</span>          PART A PROVID… GA    TMC TAL…</span>
-<span id="cb86-6"><a href="#cb86-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> <span class="dv">1285706879</span> <span class="dv">1557271731</span> O20030610… <span class="dv">00-17</span>          PART A PROVID… GA    HIAWASS…</span>
-<span id="cb86-7"><a href="#cb86-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> <span class="dv">1982631321</span> <span class="dv">5991616039</span> O20030918… <span class="dv">00-17</span>          PART A PROVID… GA    TMC WES…</span>
-<span id="cb86-8"><a href="#cb86-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> <span class="dv">1821017831</span> <span class="dv">1850294034</span> O20040421… <span class="dv">00-17</span>          PART A PROVID… GA    BACON C…</span>
-<span id="cb86-9"><a href="#cb86-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> <span class="dv">1750339511</span> <span class="dv">2264415538</span> O20040608… <span class="dv">00-17</span>          PART A PROVID… GA    BOWDON<span class="sc">-</span>…</span>
-<span id="cb86-10"><a href="#cb86-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> <span class="dv">1366472003</span> <span class="dv">6002724598</span> O20041109… <span class="dv">00-17</span>          PART A PROVID… GA    HOSPITA…</span>
-<span id="cb86-11"><a href="#cb86-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> <span class="dv">1891863569</span> <span class="dv">2062493083</span> O20050222… <span class="dv">00-17</span>          PART A PROVID… GA    THE MED…</span>
-<span id="cb86-12"><a href="#cb86-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> <span class="dv">1578682696</span> <span class="dv">3779490503</span> O20070601… <span class="dv">00-17</span>          PART A PROVID… GA    UNION C…</span>
-<span id="cb86-13"><a href="#cb86-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="dv">1922211515</span> <span class="dv">6002724598</span> O20070830… <span class="dv">00-17</span>          PART A PROVID… GA    HOSPITA…</span>
-<span id="cb86-14"><a href="#cb86-14" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 82 more rows</span></span>
-<span id="cb86-15"><a href="#cb86-15" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 4 more variables: first_name &lt;chr&gt;, middle_name &lt;chr&gt;, last_name &lt;chr&gt;,</span></span>
-<span id="cb86-16"><a href="#cb86-16" aria-hidden="true" tabindex="-1"></a><span class="co">#   gender &lt;chr&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="quality-payment-program">Quality Payment Program<a class="anchor" aria-label="anchor" href="#quality-payment-program"></a>
-</h3>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fl">2017</span><span class="op">:</span><span class="fl">2020</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1144544834</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 × 56</span></span>
-<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>   year npi        provider_key state practice_size specialty  med_yrs part_type</span>
-<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    </span>
-<span id="cb88-4"><a href="#cb88-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  <span class="dv">2017</span> <span class="dv">1144544834</span> <span class="dv">000865909</span>    GA                <span class="dv">8</span> Physician…       <span class="dv">8</span> Group    </span>
-<span id="cb88-5"><a href="#cb88-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="dv">2018</span> <span class="dv">1144544834</span> <span class="dv">000047522</span>    GA                <span class="dv">8</span> Physician…       <span class="dv">8</span> Group    </span>
-<span id="cb88-6"><a href="#cb88-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>  <span class="dv">2018</span> <span class="dv">1144544834</span> <span class="dv">000117740</span>    GA               <span class="dv">12</span> Physician…       <span class="dv">8</span> Group    </span>
-<span id="cb88-7"><a href="#cb88-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  <span class="dv">2019</span> <span class="dv">1144544834</span> <span class="dv">000659906</span>    GA               <span class="dv">13</span> Physician…       <span class="dv">9</span> Group    </span>
-<span id="cb88-8"><a href="#cb88-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  <span class="dv">2020</span> <span class="dv">1144544834</span> <span class="dv">000000310</span>    GA               <span class="dv">13</span> Physician…      <span class="dv">10</span> Group    </span>
-<span id="cb88-9"><a href="#cb88-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 48 more variables: beneficiaries &lt;int&gt;, allowed_charges &lt;dbl&gt;,</span></span>
-<span id="cb88-10"><a href="#cb88-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   services &lt;int&gt;, final_score &lt;dbl&gt;, pmt_adj_pct &lt;dbl&gt;,</span></span>
-<span id="cb88-11"><a href="#cb88-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   complex_patient_bonus &lt;dbl&gt;, quality_category_score &lt;dbl&gt;,</span></span>
-<span id="cb88-12"><a href="#cb88-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   quality_improvement_bonus &lt;dbl&gt;, quality_bonus &lt;lgl&gt;, engaged &lt;lgl&gt;,</span></span>
-<span id="cb88-13"><a href="#cb88-13" aria-hidden="true" tabindex="-1"></a><span class="co">#   opted_into_mips &lt;lgl&gt;, small_practitioner &lt;lgl&gt;, rural &lt;lgl&gt;, hpsa &lt;lgl&gt;,</span></span>
-<span id="cb88-14"><a href="#cb88-14" aria-hidden="true" tabindex="-1"></a><span class="co">#   asc &lt;lgl&gt;, hospital_based &lt;lgl&gt;, non_patient_facing &lt;lgl&gt;,</span></span>
-<span id="cb88-15"><a href="#cb88-15" aria-hidden="true" tabindex="-1"></a><span class="co">#   facility_based &lt;lgl&gt;, extreme_hardship &lt;lgl&gt;, …</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="revalidation-lists">Revalidation Lists<a class="anchor" aria-label="anchor" href="#revalidation-lists"></a>
-</h3>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Revalidation Due Date List</span></span>
-<span><span class="fu"><a href="reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb90"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 13</span></span>
-<span id="cb90-2"><a href="#cb90-2" aria-hidden="true" tabindex="-1"></a>  npi        enroll_id    first_name last_name org_name enroll_state enroll_type</span>
-<span id="cb90-3"><a href="#cb90-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>    <span class="er">&lt;</span>chr<span class="sc">&gt;</span>        <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      </span>
-<span id="cb90-4"><a href="#cb90-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1710912209</span> I2004060200… Yelena     Voronova  <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>     NY           <span class="dv">3</span>          </span>
-<span id="cb90-5"><a href="#cb90-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 6 more variables: enroll_desc &lt;chr&gt;, enroll_specialty &lt;chr&gt;,</span></span>
-<span id="cb90-6"><a href="#cb90-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   revalidation_due_date &lt;date&gt;, adjusted_due_date &lt;date&gt;,</span></span>
-<span id="cb90-7"><a href="#cb90-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   indiv_total_reassigned &lt;chr&gt;, rec_bene_reassign &lt;int&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Revalidation Reassignment List</span></span>
-<span><span class="fu"><a href="reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 × 16</span></span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>  npi        pac_id  enroll_id first_name last_name state specialty due_date_ind</span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>   <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>date<span class="sc">&gt;</span>      </span>
-<span id="cb92-4"><a href="#cb92-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1710912209</span> 286047… I2004060… Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb92-5"><a href="#cb92-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1710912209</span> 286047… I2004060… Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb92-6"><a href="#cb92-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1710912209</span> 286047… I2004060… Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb92-7"><a href="#cb92-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">1710912209</span> 286047… I2004060… Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb92-8"><a href="#cb92-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">1710912209</span> 286047… I2004060… Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb92-9"><a href="#cb92-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 8 more variables: ind_tot_emp_assn &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span>
-<span id="cb92-10"><a href="#cb92-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span>
-<span id="cb92-11"><a href="#cb92-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   due_date_group &lt;date&gt;, group_reassign_and_phys_assist &lt;int&gt;,</span></span>
-<span id="cb92-12"><a href="#cb92-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   record_type &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Revalidation Clinic Group Practice Reassignment</span></span>
-<span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1710912209</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb94"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 5 × 15</span></span>
-<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  npi        enroll_id       first_name last_name state specialty due_date_ind</span>
-<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>           <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>date<span class="sc">&gt;</span>      </span>
-<span id="cb94-4"><a href="#cb94-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb94-5"><a href="#cb94-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb94-6"><a href="#cb94-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb94-7"><a href="#cb94-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb94-8"><a href="#cb94-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb94-9"><a href="#cb94-9" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 8 more variables: ind_tot_emp_assn &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span>
-<span id="cb94-10"><a href="#cb94-10" aria-hidden="true" tabindex="-1"></a><span class="co">#   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span>
-<span id="cb94-11"><a href="#cb94-11" aria-hidden="true" tabindex="-1"></a><span class="co">#   due_date_group &lt;date&gt;, group_reassign_and_phys_assist &lt;int&gt;,</span></span>
-<span id="cb94-12"><a href="#cb94-12" aria-hidden="true" tabindex="-1"></a><span class="co">#   record_type &lt;chr&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>enroll_id_group <span class="op">=</span> <span class="st">"O20080205000002"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 15</span></span>
-<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>  npi        enroll_id       first_name last_name state specialty due_date_ind</span>
-<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>           <span class="er">&lt;</span>chr<span class="sc">&gt;</span>      <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>chr<span class="sc">&gt;</span> <span class="er">&lt;</span>chr<span class="sc">&gt;</span>     <span class="er">&lt;</span>date<span class="sc">&gt;</span>      </span>
-<span id="cb96-4"><a href="#cb96-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">1710912209</span> I20040602001711 Yelena     Voronova  NY    Podiatry  <span class="dv">2019-10-31</span>  </span>
-<span id="cb96-5"><a href="#cb96-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ℹ 8 more variables: ind_tot_emp_assn &lt;int&gt;, pac_id_group &lt;chr&gt;,</span></span>
-<span id="cb96-6"><a href="#cb96-6" aria-hidden="true" tabindex="-1"></a><span class="co">#   enroll_id_group &lt;chr&gt;, business_name &lt;chr&gt;, state_group &lt;chr&gt;,</span></span>
-<span id="cb96-7"><a href="#cb96-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   due_date_group &lt;date&gt;, group_reassign_and_phys_assist &lt;int&gt;,</span></span>
-<span id="cb96-8"><a href="#cb96-8" aria-hidden="true" tabindex="-1"></a><span class="co">#   record_type &lt;chr&gt;</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="taxonomy-crosswalk">Taxonomy Crosswalk<a class="anchor" aria-label="anchor" href="#taxonomy-crosswalk"></a>
-</h3>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_desc <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb98"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 2 × 4</span></span>
-<span id="cb98-2"><a href="#cb98-2" aria-hidden="true" tabindex="-1"></a>  taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span id="cb98-3"><a href="#cb98-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         </span>
-<span id="cb98-4"><a href="#cb98-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> 261QR0400X    Ambulatory Health Care Facilities… B4[<span class="dv">14</span>]         Rehabilitatio…</span>
-<span id="cb98-5"><a href="#cb98-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> 315D00000X    Nursing <span class="sc">&amp;</span> Custodial Care Faciliti… B4[<span class="dv">14</span>]         Rehabilitatio…</span></code></pre></div>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"B4[14]"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb100"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 13 × 4</span></span>
-<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>   taxonomy_code taxonomy_desc                     specialty_code specialty_desc</span>
-<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                             <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         </span>
-<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Rehabilitatio…</span>
-<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span> 335U00000X    Suppliers<span class="sc">/</span>Organ Procurement Orga… B4[<span class="dv">14</span>]         Organ Procure…</span>
-<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span> 261QM0801X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Community Men…</span>
-<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span> 261QR0401X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Comprehensive…</span>
-<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span> 261QE0700X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         End<span class="sc">-</span>Stage Ren…</span>
-<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span> 261QF0400X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Federally Qua…</span>
-<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span> 251G00000X    Agencies<span class="sc">/</span>Hospice Care Community … B4[<span class="dv">14</span>]         Hospice       </span>
-<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span> 291U00000X    Laboratories<span class="sc">/</span>Clinical Medical La… B4[<span class="dv">14</span>]         Histocompatib…</span>
-<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span> 291900000X    Laboratories<span class="sc">/</span>Military Clinical M… B4[<span class="dv">14</span>]         <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span>          </span>
-<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> 261QR0400X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Outpatient Ph…</span>
-<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span> 315D00000X    Nursing <span class="sc">&amp;</span> Custodial Care Facilit… B4[<span class="dv">14</span>]         Rehabilitatio…</span>
-<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span> 282J00000X    Hospitals<span class="sc">/</span>Religious Non<span class="sc">-</span>medical … B4[<span class="dv">14</span>]         Religious Non…</span>
-<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span> 261QR1300X    Ambulatory Health Care Facilitie… B4[<span class="dv">14</span>]         Rural Health …</span></code></pre></div>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>specialty_code <span class="op">=</span> <span class="st">"8"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb102"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 9 × 4</span></span>
-<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         </span>
-<span id="cb102-4"><a href="#cb102-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> 207Q00000X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-5"><a href="#cb102-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> 207QA0401X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-6"><a href="#cb102-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> 207QA0000X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-7"><a href="#cb102-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> 207QA0505X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-8"><a href="#cb102-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> 207QB0002X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-9"><a href="#cb102-9" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> 207QG0300X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-10"><a href="#cb102-10" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> 207QH0002X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-11"><a href="#cb102-11" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> 207QS0010X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span>
-<span id="cb102-12"><a href="#cb102-12" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span> 207QS1201X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span></code></pre></div>
-<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"207Q00000X"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb104"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 4</span></span>
-<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  taxonomy_code taxonomy_desc                      specialty_code specialty_desc</span>
-<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>chr<span class="sc">&gt;</span>         <span class="er">&lt;</span>chr<span class="sc">&gt;</span>                              <span class="er">&lt;</span>chr<span class="sc">&gt;</span>          <span class="er">&lt;</span>chr<span class="sc">&gt;</span>         </span>
-<span id="cb104-4"><a href="#cb104-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> 207Q00000X    Allopathic <span class="sc">&amp;</span> Osteopathic Physicia… <span class="dv">8</span>              Physician<span class="sc">/</span>Fam…</span></code></pre></div>
-<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># taxonomy_crosswalk() |&gt; </span></span>
-<span><span class="co">#   dplyr::full_join(nucc_taxonomy_230, </span></span>
-<span><span class="co">#   dplyr::join_by(taxonomy_code == code))</span></span></code></pre></div>
 <hr>
-</div>
 </div>
 <div class="section level2">
 <h2 id="code-of-conduct">Code of Conduct<a class="anchor" aria-label="anchor" href="#code-of-conduct"></a>
