@@ -88,16 +88,19 @@
     <loc>https://andrewallenbruce.github.io/provider/news/index.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/asc_ifed_enrollment.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/beneficiary_enrollment.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_multiple.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/cc_multiple_years.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_specific.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/cc_specific_years.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/doctors_and_clinicians.html</loc>
@@ -124,6 +127,9 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/open_payments.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/open_payments_years.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/opt_out.html</loc>
   </url>
   <url>
@@ -136,10 +142,19 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_geography.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_geography_years.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_provider.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_provider_years.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_service.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_service_years.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider-package.html</loc>

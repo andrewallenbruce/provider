@@ -131,28 +131,38 @@ contractors.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>, </span>
 <span>                     type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 24 × 4</span></span></span>
-<span><span class="co">#&gt;    npi        last_name first_name type     </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1073073706 SMITH     AUSTIN     PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1922259332 SMITH     BARRY      PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1477063980 SMITH     BAXTER     PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1831873199 SMITH     DANICA     PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1134205156 SMITH     DANIEL     PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1952001471 SMITH     DANIELLE   PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1235147349 SMITH     GLEN       PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1871098228 SMITH     HALEY      PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1568506368 SMITH     JOHN       PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1750301461 SMITH     JOSHUA     PHYSICIAN</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 20 × 4</span></span></span>
+<span><span class="co">#&gt;    npi        last_name first_name  type     </span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1073073706 SMITH     AUSTIN      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1922259332 SMITH     BARRY       PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1477063980 SMITH     BAXTER      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1831873199 SMITH     DANICA      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1134205156 SMITH     DANIEL      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1952001471 SMITH     DANIELLE    PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1235147349 SMITH     GLEN        PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1568506368 SMITH     JOHN        PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1750301461 SMITH     JOSHUA      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1396447389 SMITH     JULIA       PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1356973549 SMITH     JUSTINE     PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1801456207 SMITH     KELSEY      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 1972253235 SMITH     MAIYA       PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 1497140636 SMITH     MARY AUSTIN PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 1275984965 SMITH     MATTHEW     PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 1558386383 SMITH     NORMAN      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span> 4861639031 SMITH     REBECCA     PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span> 1861679169 SMITH     ROBERT      PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">19</span> 1104971746 SMITH     SALLY       PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">20</span> 1871173542 SMITH     TRAVIS      PHYSICIAN</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Bruce"</span>, </span>
 <span>                     type <span class="op">=</span> <span class="st">"non-physician"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 4</span></span></span>
 <span><span class="co">#&gt;   npi        last_name first_name type         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1861180499 BRUCE     JESSICA    NON-PHYSICIAN</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1104343136 BRUCE     BRITNEY    NON-PHYSICIAN</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1861180499 BRUCE     JESSICA    NON-PHYSICIAN</span></span></code></pre></div>
 <p><br></p>
 <div class="section level3">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a>

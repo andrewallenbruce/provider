@@ -134,11 +134,13 @@
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
 <p><br></p>
-<p>The <em>overarching</em> goal of <code>provider</code> is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of CMS sources. It aims to accomplish this through the following <em>general</em> goals, where possible:</p>
+<p>The overarching goal of <code>provider</code> is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:</p>
+<p><br></p>
 <ul>
-<li>Harmonization of variable names so as to allow for removal of duplicate information across API output, if desired</li>
-<li>Validation checks of provider identifiers (e.g., NPI, PAC ID, Medicare Enrollment ID, CCN)</li>
-<li>Structuring output in the <em>tidy</em> framework as much as is reasonably possible (with an option to turn off by setting <code>tidy = FALSE</code>)</li>
+<li><p><em>Structuring output in the <strong>tidy</strong> framework</em> as much as is reasonably possible, with an option to turn it off by setting <code>tidy = FALSE</code>.</p></li>
+<li><p><em>Harmonization of variable names</em>, for the express purpose of making it easier to understand (and make connections between) each API’s output. This will also allow for removal of duplicate information across API output, if desired.</p></li>
+<li><p><em>Validation checks of inputs</em>, as is reasonable (e.g, identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only is this simply good practice, it will also prevent unnecessary querying of the APIs.</p></li>
+<li><p><em>Well-written documentation</em>, containing as many examples as is necessary. Each API’s output can be difficult to understand, even for someone with expertise in R, healthcare, or both.</p></li>
 </ul>
 <p><br></p>
 </div>
