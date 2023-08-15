@@ -42,9 +42,14 @@ missing_information <- function(npi  = NULL,
     stringr::str_c(collapse = "") |>
     param_space()
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update("Public Reporting of Missing Digital Contact Information",
+                   "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "63a83bb1-4c02-43b3-8ef4-e3d3c6cf62fa"
   post   <- "/data?"
   #post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)

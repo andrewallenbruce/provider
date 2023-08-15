@@ -202,8 +202,11 @@ cc_specific <- function(year,
 }
 
 #' Check the current years available for the Specific Chronic Conditions API
+#' @return integer vector of years available
+#' @examples
+#' cc_specific_years()
 #' @autoglobal
-#' @noRd
+#' @export
 cc_specific_years <- function() {
   cms_update("Specific Chronic Conditions", "years") |>
     as.integer()

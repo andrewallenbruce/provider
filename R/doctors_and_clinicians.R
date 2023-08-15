@@ -146,12 +146,9 @@ doctors_and_clinicians <- function(npi           = NULL,
                    adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
-                    telehlth = yn_logical(telehlth),
-                    grad_duration = lubridate::as.duration(
-                    lubridate::today() - clock::date_build(year = grd_yr))) |>
+                    telehlth = yn_logical(telehlth)) |>
       dplyr::select(
         npi,
         pac_id        = ind_pac_id,
@@ -164,7 +161,6 @@ doctors_and_clinicians <- function(npi           = NULL,
         credential    = cred,
         school        = med_sch,
         grad_year     = grd_yr,
-        grad_duration,
         specialty     = pri_spec,
         specialty_sec = sec_spec_all,
         telehealth    = telehlth,

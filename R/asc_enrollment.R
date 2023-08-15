@@ -32,7 +32,7 @@
 #' @examplesIf interactive()
 #' asc_ifed_enrollment(city = "Atlanta")
 #' @autoglobal
-#' @export
+#' @noRd
 asc_ifed_enrollment <- function(npi            = NULL,
                                 enroll_id      = NULL,
                                 enroll_state   = NULL,

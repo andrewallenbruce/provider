@@ -76,11 +76,10 @@ beneficiary_enrollment(period = "Year",
 
 Each county in that state:
 
-```{r}
+```{r
 beneficiary_enrollment(period = "Year", 
                        level = "County", 
-                       state_name = "Georgia") |> 
-  head(10)
+                       state_name = "Georgia")
 ```
 
 <br><br>

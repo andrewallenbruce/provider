@@ -31,10 +31,11 @@ pending_applications <- function(npi         = NULL,
 
   if (!is.null(npi)) {npi_check(npi)}
   rlang::arg_match(type, c("physician", "non-physician"))
+
   # update distribution ids -------------------------------------------------
-  id <- dplyr::case_when(
-    type == "physician" ~ "6bd6b1dd-208c-4f9c-88b8-b15fec6db548",
-    type == "non-physician" ~ "261b83b6-b89f-43ad-ae7b-0d419a3bc24b")
+  id <- dplyr::case_match(type,
+    "physician" ~ cms_update("Pending Initial Logging and Tracking Physicians", "id")$distro[1],
+    "non-physician" ~ cms_update("Pending Initial Logging and Tracking Non Physicians", "id")$distro[1])
 
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(

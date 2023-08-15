@@ -37,11 +37,14 @@ taxonomy_crosswalk <- function(taxonomy_code  = NULL,
                                specialty_desc = NULL,
                                tidy           = TRUE) {
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update("Medicare Provider and Supplier Taxonomy Crosswalk", "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- cms_update_ids("Medicare Provider and Supplier Taxonomy Crosswalk")$distribution[1]
   post   <- "/data.json?"
-  #post   <- "/data?"
   url    <- paste0(http, id, post)
 
   # send request ----------------------------------------------------------
@@ -63,8 +66,8 @@ taxonomy_crosswalk <- function(taxonomy_code  = NULL,
       dplyr::select(
       taxonomy_code = provider_taxonomy_code,
       taxonomy_desc = provider_taxonomy_description_type_classification_specialization,
-      specialty_code = medicare_specialty_code,
-      specialty_desc = medicare_provider_supplier_type_description)
+      medicare_specialty_code,
+      medicare_specialty_desc = medicare_provider_supplier_type_description)
 
   if (!is.null(taxonomy_code)) {
     results <- dplyr::filter(results,

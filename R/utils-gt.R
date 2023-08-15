@@ -261,3 +261,75 @@ gt_prov <- function(df,
   }
   return(results)
 }
+
+
+# nppes <- nppes_npi(npi = 1043477615)
+#
+# nppes_basic <- nppes |>
+#   dplyr::select(npi:enumeration_date,
+#                 status,
+#                 sole_proprietor,
+#                 gender) |>
+#   dplyr::slice_head() |>
+#   dplyr::mutate(status = dplyr::if_else(status == "A", "Active", status),
+#                 gender = dplyr::if_else(gender == "F", "Female", "Male")) |>
+#   provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"),
+#                      checkmark = c("sole_proprietor"),
+#                      title = gt::md("NPPES **Basic Information**"),
+#                      subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.",
+#                                            first = nppes$first_name[[1]],
+#                                            middle = nppes$middle_name[[1]],
+#                                            last = nppes$last_name[[1]],
+#                                            cred = nppes$credential[[1]])) |>
+#   gt::cols_label(entype = "Type",
+#                  enumeration_date = "Date") |>
+#   gt::tab_spanner(label = "ENUMERATION",
+#                   columns = c(enumeration_date,
+#                               status))
+#
+# nppes_location <- nppes |>
+#   dplyr::select(purpose,
+#                 street:zipcode,
+#                 phone_number) |>
+#   dplyr::distinct_all() |>
+#   dplyr::mutate(zipcode = campfin::normal_zip(zipcode),
+#                 state = campfin::expand_state(state),
+#                 phone_number = campfin::normal_phone(phone_number)) |>
+#   provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"),
+#                      divider = c("purpose"),
+#                      title = gt::md("NPPES **Location Information**"),
+#                      subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.",
+#                                            first = nppes$first_name[[1]],
+#                                            middle = nppes$middle_name[[1]],
+#                                            last = nppes$last_name[[1]],
+#                                            cred = nppes$credential[[1]])) |>
+#   gt::cols_label(zipcode = "Zip Code")
+#
+# nppes_taxonomy <- nppes |>
+#   dplyr::select(tx_code,
+#                 tx_primary,
+#                 tx_desc,
+#                 tx_state,
+#                 tx_license) |>
+#   dplyr::distinct_all() |>
+#   provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"),
+#                      checkmark = c("tx_primary"),
+#                      title = gt::md("NPPES **Taxonomy Information**"),
+#                      subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.",
+#                                            first = nppes$first_name[[1]],
+#                                            middle = nppes$middle_name[[1]],
+#                                            last = nppes$last_name[[1]],
+#                                            cred = nppes$credential[[1]])) |>
+#   gt::cols_label(tx_code = "Taxonomy",
+#                  tx_desc = "Description",
+#                  tx_state = "State",
+#                  tx_license = "License",
+#                  tx_primary = "Primary") |>
+#   gtExtras::gt_highlight_rows(
+#     rows = tx_primary == TRUE,
+#     fill = "#FAFAD2",
+#     bold_target_only = FALSE,
+#     target_col = tx_primary,
+#     font_color = "black",
+#     font_weight = "bold"
+#   )

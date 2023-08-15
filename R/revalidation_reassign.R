@@ -88,10 +88,14 @@ revalidation_reassign <- function(npi             = NULL,
     stringr::str_c(collapse = "") |>
     param_space()
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update("Revalidation Reassignment List", "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  id     <- cms_update_ids("Revalidation Reassignment List")$distribution[1]
   url    <- paste0(http, id, post, params_args)
 
   # send request ------------------------------------------------------------

@@ -1,6 +1,8 @@
 #' Update CMS.gov API distribution IDs
 #' @param api name of the api
 #' @param check base, id, years
+#' @examples
+#' cms_update("Provider of Services File - Clinical Laboratories", "base")
 #' @autoglobal
 #' @noRd
 cms_update <- function(api = NULL, check = c("base", "id", "years")) {

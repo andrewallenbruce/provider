@@ -6,6 +6,12 @@
 \usage{
 quality_payment_years()
 }
+\value{
+integer vector of years available
+}
 \description{
 Check the current years available for the Quality Payments API
+}
+\examples{
+quality_payment_years()
 }

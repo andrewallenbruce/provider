@@ -84,9 +84,13 @@ order_refer <- function(npi          = NULL,
     stringr::str_c(collapse = "") |>
     param_space()
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update("Order and Referring", "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "1cb95115-25c9-4097-8d12-a8f76b266591"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 

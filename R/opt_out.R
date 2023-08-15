@@ -19,7 +19,7 @@
 #' @param address Provider's Street Address
 #' @param city Provider's City
 #' @param state Provider's State Abbreviation
-#' @param zipcode Provider's Zip Code
+#' @param zip Provider's Zip Code
 #' @param order_and_refer Flag indicating whether the Provider is eligible to
 #'    Order and Refer
 #' @param tidy Tidy output; default is `TRUE`.
@@ -40,15 +40,17 @@ opt_out <- function(npi             = NULL,
                     address         = NULL,
                     city            = NULL,
                     state           = NULL,
-                    zipcode         = NULL,
+                    zip             = NULL,
                     order_and_refer = NULL,
                     tidy            = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 
   # args tribble ------------------------------------------------------------
-  if (!is.null(order_and_refer)) {order_and_refer <- dplyr::case_when(
-      order_and_refer == TRUE ~ "Y", order_and_refer == FALSE ~ "N",
+  if (!is.null(order_and_refer)) {
+    order_and_refer <- dplyr::case_when(
+      order_and_refer == TRUE ~ "Y",
+      order_and_refer == FALSE ~ "N",
       .default = NULL)
     }
   args <- tibble::tribble(
@@ -60,7 +62,7 @@ opt_out <- function(npi             = NULL,
        "First Line Street Address",      address,
                        "City Name",         city,
                       "State Code",        state,
-                        "Zip code",      zipcode,
+                        "Zip code",          zip,
      "Eligible to Order and Refer",     order_and_refer)
 
   # map param_format and collapse -------------------------------------------
@@ -69,9 +71,13 @@ opt_out <- function(npi             = NULL,
     stringr::str_c(collapse = "") |>
     param_space()
 
+  # update distribution id -------------------------------------------------
+  id <- cms_update("Opt Out Affidavits", "id") |>
+    dplyr::slice_head() |>
+    dplyr::pull(distro)
+
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "9887a515-7552-4693-bf58-735c77af46d7"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
@@ -90,7 +96,7 @@ opt_out <- function(npi             = NULL,
       "address",       address,
       "city",          city,
       "state",         state,
-      "zipcode",       as.character(zipcode),
+      "zip",           as.character(zip),
       "eligible",      as.character(order_and_refer)) |>
       tidyr::unnest(cols = c(y))
 
@@ -117,9 +123,7 @@ opt_out <- function(npi             = NULL,
                     dplyr::across(dplyr::contains("eligible"), yn_logical),
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
-                    optout_duration = lubridate::as.duration(optout_end_date - optout_effective_date)) |>
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       tidyr::unite("address",
                    dplyr::any_of(c("first_line_street_address",
                                    "second_line_street_address")),
@@ -130,13 +134,12 @@ opt_out <- function(npi             = NULL,
                     specialty,
                     optout_start_date = optout_effective_date,
                     optout_end_date,
-                    optout_duration,
                     last_updated,
                     order_and_refer = eligible_to_order_and_refer,
                     address,
                     city = city_name,
                     state = state_code,
-                    zipcode = zip_code)
+                    zip = zip_code)
     }
   return(results)
 }

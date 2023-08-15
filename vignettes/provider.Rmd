@@ -27,769 +27,140 @@ library(provider)
 
 <br>
 
+The overarching goal of `provider` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:
 
-The goal of `provider` is to make the experience of accessing publicly-available Medicare provider data easier and more consistent across a variety of sources.
+<br>
 
-## Example
+   * *Structuring output in the **tidy** framework* as much as is reasonably possible, with an option to turn it off by setting `tidy = FALSE`.
 
-```r
-nppes_npi(npi = 1043477615)
-```
+   * *Harmonization of variable names*, for the express purpose of making it easier to understand (and make connections between) each API's output. This will also allow for removal of duplicate information across API output, if desired.
+   
+   * *Validation checks of inputs*, as is reasonable (e.g, identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only is this simply good practice, it will also prevent unnecessary querying of the APIs.
+   
+   * *Well-written documentation*, containing as many examples as is necessary. Each API's output can be difficult to understand, even for someone with expertise in R, healthcare, or both.
 
-<details><summary>Code</summary>
+<br>
+
+## Tidy Output
+
+Each function has a `tidy` argument, set to `TRUE` by default:
+
+<br>
 
 ```{r}
-nppes <- nppes_npi(npi = 1043477615)
-
-nppes_basic <- nppes |> 
-  dplyr::select(npi:enumeration_date, 
-                status,
-                sole_proprietor,
-                gender) |> 
-  dplyr::slice_head() |> 
-  dplyr::mutate(status = dplyr::if_else(status == "A", "Active", status),
-                gender = dplyr::if_else(gender == "F", "Female", "Male")) |> 
-  provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
-                     checkmark = c("sole_proprietor"),
-                     title = gt::md("NPPES **Basic Information**"),
-                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
-                                           first = nppes$first_name[[1]], 
-                                           middle = nppes$middle_name[[1]],
-                                           last = nppes$last_name[[1]],
-                                           cred = nppes$credential[[1]])) |> 
-  gt::cols_label(entype = "Type", 
-                 enumeration_date = "Date") |> 
-  gt::tab_spanner(label = "ENUMERATION", 
-                  columns = c(enumeration_date,
-                              status))
-
-nppes_location <- nppes |> 
-  dplyr::select(purpose,
-                street:zipcode,
-                phone_number) |> 
-  dplyr::distinct_all() |> 
-  dplyr::mutate(zipcode = campfin::normal_zip(zipcode),
-                state = campfin::expand_state(state),
-                phone_number = campfin::normal_phone(phone_number)) |> 
-  provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
-                     divider = c("purpose"),
-                     title = gt::md("NPPES **Location Information**"),
-                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
-                                           first = nppes$first_name[[1]], 
-                                           middle = nppes$middle_name[[1]],
-                                           last = nppes$last_name[[1]],
-                                           cred = nppes$credential[[1]])) |> 
-  gt::cols_label(zipcode = "Zip Code")
-
-nppes_taxonomy <- nppes |> 
-  dplyr::select(tx_code, 
-                tx_primary, 
-                tx_desc, 
-                tx_state, 
-                tx_license) |> 
-  dplyr::distinct_all() |> 
-  provider:::gt_prov(source = gt::md("Source: [NPPES NPI Registry](https://npiregistry.cms.hhs.gov/api-page)"), 
-                     checkmark = c("tx_primary"),
-                     title = gt::md("NPPES **Taxonomy Information**"),
-                     subtitle = glue::glue("Provider: {first} {middle}. {last}, {cred}.", 
-                                           first = nppes$first_name[[1]], 
-                                           middle = nppes$middle_name[[1]],
-                                           last = nppes$last_name[[1]],
-                                           cred = nppes$credential[[1]])) |> 
-  gt::cols_label(tx_code = "Taxonomy",
-                 tx_desc = "Description",
-                 tx_state = "State",
-                 tx_license = "License",
-                 tx_primary = "Primary") |> 
-  gtExtras::gt_highlight_rows(
-     rows = tx_primary == TRUE,
-     fill = "#FAFAD2",
-     bold_target_only = FALSE,
-     target_col = tx_primary,
-     font_color = "black",
-     font_weight = "bold"
-   )
-```
-
-</details>
-
-
-```{r, echo=FALSE, eval=TRUE}
-nppes_basic
-```
-
-
-```{r, echo=FALSE, eval=TRUE}
-nppes_location
-```
-
-```{r, echo=FALSE, eval=TRUE}
-nppes_taxonomy
+order_refer(npi = 1043477615) |> 
+  dplyr::select(npi, 
+                first_name, 
+                last_name, 
+                "Medicare Part B" = partb,
+                "Home Health Agency (HHA)" = hha,
+                "Durable Medical Equipment (DME)" = dme,
+                "Power Mobility Device (PMD)" = pmd) |> 
+  tidyr::pivot_longer(cols = !c(npi, 
+                                dplyr::contains("name")), 
+                      names_to = "service", 
+                      values_to = "eligible")
 ```
 
 <br>
 
+Setting it to `FALSE` will return the original output:
 
-```r
-order_refer(npi = 1043477615)
-```
-
-<details><summary>Code</summary>
+<br>
 
 ```{r}
-oar <- order_refer(npi = 1043477615)
-
-oar_gt <- oar |> 
-  dplyr::select(
-    "Medicare Part B" = partb, 
-    "Home Health (HHA)" = hha, 
-    "Durable Medical Equipment (DME)" = dme, 
-    "Power Mobility Devices (PMD)" = pmd) |> 
-  provider:::display_long() |> 
-  dplyr::select(service = name, 
-                eligible = value) |> 
-  provider:::gt_prov(checkmark = c("eligible"),
-                     title = "Medicare Order & Referring Eligibility",
-                     subtitle = glue::glue("Provider: {first} {last}. NPI: {npi}.", 
-                                           first = oar$first_name[[1]], 
-                                           last = oar$last_name[[1]],
-                                           npi = oar$npi[[1]]),
-                     source = gt::md("Source: [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)"))
-```
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-oar_gt
+order_refer(npi = 1043477615, tidy = FALSE)
 ```
 
 <br>
 
-```r
-provider_enrollment(npi = 1043477615)
-```
-<details><summary>Code</summary>
+The `tidy` transformations applied to the output of each function include: 
+
+   * Favoring a long format over wide
+   * `snake_case` for variable names
+   * More descriptive, thematic variable names involving prefixes and a standardized vocabulary across all outputs
+   * Various other quality-of-life data wrangling operations (e.g., replacing empty cells with `NA`, converting year columns to integers, date columns to date type, NPIs to character type)
+
+<br>
+
+However, in the event that you would prefer to do your own transformations, simply turn it off with `tidy = FALSE`.
+
+<br>
+
+## Available Years Helpers
+
+Several functions have a required `year` argument. The years available to query might change at any time, so there's an accompanying helper function to retrieve the years available from each API:
+
+<br>
 
 ```{r}
-pro <- provider_enrollment(npi = 1043477615)
+# Quality Payment Program
+quality_payment_years()
 
-pro_gt <- pro |> 
-  dplyr::mutate(state = campfin::expand_state(state)) |> 
-  dplyr::select("PECOS Associate Control (PAC) ID" = pac_id, 
-                "Enrollment ID" = enroll_id, 
-                "Specialty Code" = specialty_code, 
-                "Specialty Description" = specialty_desc,
-                State = state, 
-                "Organization Name" = org_name) |> 
-  provider:::display_long() |> 
-  dplyr::select(item = name, 
-                result = value) |> 
-  provider:::gt_prov(title = "Medicare Provider Enrollment Information",
-                     divider = c("item"),
-                     source = gt::md("Source: [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)"),
-                     subtitle = glue::glue("Provider: {first} {middle}. {last}. NPI: {npi}", 
-                                           first = pro$first_name[[1]], 
-                                           middle = pro$middle_name[[1]],
-                                           last = pro$last_name[[1]],
-                                           npi = pro$npi[[1]]))
+# Open Payments Program
+open_payments_years()
+
+# Physician and Practitioners
+physician_by_provider_years()
+physician_by_service_years()
+physician_by_geography_years()
+
+# Chronic Conditions
+cc_specific_years()
+cc_multiple_years()
 ```
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-pro_gt
-```
-
 
 <br>
 
-## Doctors and Clinicians
+They can also be used in a pipeline:
 
-```r
-doctors_and_clinicians(npi = 1043477615)
-```
-<details><summary>Code</summary>
+<br>
 
 ```{r}
-drc <- doctors_and_clinicians(npi = 1043477615)
-
-dcli_1 <- drc |> 
-  dplyr::select(school, 
-                grad_year, 
-                grad_duration, 
-                specialty, 
-                ind_assn) |> 
-  provider:::gt_prov(divider = c("grad_duration"),
-                     qmark = c("ind_assn"),
-    source = gt::md("Source: [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)")) |> 
-  gt::cols_label(school = "Medical School", 
-                 grad_year = "Graduated", 
-                 ind_assn = "Accepts Assignment")
-
-dcli_2 <- drc |> 
-  dplyr::select(org_name, 
-                org_pac_id, 
-                org_members, 
-                address, 
-                city, 
-                state, 
-                zipcode, 
-                phone, 
-                group_assn) |> 
-  dplyr::mutate(zipcode = campfin::normal_zip(zipcode),
-                phone = campfin::normal_phone(phone),
-                state = campfin::expand_state(state)) |> 
-  tidyr::unite("location", c(address, city, state, zipcode), sep = " ") |> 
-  provider:::gt_prov(qmark = c("group_assn"),
-    source = gt::md("Source: [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)")) |> 
-  gt::cols_label(org_name = "Organization Name", 
-                 org_pac_id = "PAC ID", 
-                 org_members = "No. of Members", 
-                 group_assn = "Accepts Assignment")
-```
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-dcli_1
-```
-
-
-<br>
-
-```{r, echo=FALSE, eval=TRUE}
-dcli_2
-```
-
-<br>
-
-## Facility Affiliations / Hospital Enrollment
-
-```r
-facility_affiliations(npi = 1043477615) |> 
-  dplyr::pull(facility_ccn) |> 
-  furrr::future_map(\(x) hospital_enrollment(facility_ccn = x)) |>
-  purrr::list_rbind()
-```
-<details><summary>Code</summary>
-
-```{r, message=TRUE}
-fac <- facility_affiliations(npi = 1043477615)
-
-hos <- fac |> 
-  dplyr::pull(facility_ccn) |> 
-  furrr::future_map(\(x) hospital_enrollment(facility_ccn = x)) |>
-  purrr::list_rbind() |> 
-  janitor::remove_empty(which = c("rows", "cols"))
-```
-
-
-```{r}
-hosp_1 <- hos |> 
-  dplyr::select(
-    org_name,
-    npi, 
-    pac_id_org,
-    facility_ccn,
-    enroll_id,
-    specialty_desc,
-    multiple_npis) |> 
-  provider:::gt_prov(checkmark = c("multiple_npis"),
-    source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)")) |> 
-  gt::cols_label(org_name = "Organization Name",
-                 pac_id_org = "PAC ID",
-                 facility_ccn = "CCN",
-                 enroll_id = "Enrollment ID",
-                 specialty_desc = "Specialty",
-                 multiple_npis = "Multiple NPIs")
-
-hosp_2 <- hos |> 
-  dplyr::select(
-    org_name,
-    incorp_date,
-    incorp_length,
-    proprietary_nonprofit,
-    address,
-    city,
-    state,
-    zipcode) |> 
-  dplyr::mutate(zipcode = campfin::normal_zip(zipcode),
-                state = campfin::expand_state(state)) |> 
-  tidyr::unite("location", c(address, city, state, zipcode), sep = " ") |> 
-  provider:::gt_prov(divider = c("org_name"),
-                     checkmark = c("proprietary_nonprofit"),
-    source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)")) |> 
-  gt::cols_label(org_name = "Organization Name", 
-                 incorp_date = "Date Incorporated",
-                 incorp_length = "Years Incorporated",
-                 proprietary_nonprofit = "Nonprofit")
-
-hosp_3 <- hos |> 
-  dplyr::select(
-    org_name,
-    "General" = sg_general,
-    "Acute Care" = sg_acute_care,
-    "Alcohol/Drug" = sg_alcohol_drug,
-    "Childrens" = sg_childrens,
-    "Long-Term" = sg_long_term,
-    "Short-Term" = sg_short_term,
-    "Psychiatric" = sg_psychiatric,
-    "Psych Unit" = sg_psychiatric_unit,
-    "Rehabilitation" = sg_rehabilitation,
-    "Rehab Unit" = sg_rehabilitation_unit,
-    "Swing Bed Approved" = sg_swing_bed_approved,
-    "Specialty Hospital" = sg_specialty_hospital,
-    "Other" = sg_other) |> 
-  tidyr::pivot_longer(cols = !org_name, 
-                      names_to = "subgroup", 
-                      values_to = "value") |> 
-  tidyr::pivot_wider(names_from = org_name, 
-                     values_from = value) |> 
-  provider:::gt_prov(divider = c("subgroup"),
-                     checkmark = c(
-                       "THE CHAMBERSBURG HOSPITAL",
-                       "PENN STATE HEALTH HOLY SPIRIT MEDICAL CENTER",
-                       "THE GOOD SAMARITAN HOSPITAL OF LEBANON, PENNSYLVANIA"),
-    source = gt::md("Source: [CMS Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)"))
-```
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-hosp_1
-```
-
-
-<br>
-
-```{r, echo=FALSE, eval=TRUE}
-hosp_2
-```
-
-<br>
-
-```{r, echo=FALSE, eval=TRUE}
-hosp_3
-```
-
-<br>
-
-## Revalidation Date / Reassignment
-
-```r
-revalidation_date(npi = 1043477615)
-revalidation_reassign(npi = 1043477615)
-```
-
-<details><summary>Code</summary>
-
-```{r}
-re_date <- revalidation_date(npi = 1043477615) |> 
-  dplyr::select(enroll_id, 
-                enroll_state, 
-                enroll_type, 
-                enroll_specialty) |> 
-  dplyr::mutate(enroll_state = campfin::expand_state(enroll_state)) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)")) |> 
-  gt::cols_label(enroll_id = "Enrollment ID", 
-                enroll_state = "Enrollment State", 
-                enroll_type = "Enrollment Type", 
-                enroll_specialty = "Enrollment Specialty")
-
-re_assign <- revalidation_reassign(npi = 1043477615) |> 
-  dplyr::select(group_legal_business_name, 
-                group_state, 
-                group_pac_id, 
-                group_enroll_id, 
-                group_reassignments) |> 
-  dplyr::mutate(group_state = campfin::expand_state(group_state)) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Revalidation Reassignment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list)")) |> 
-  gt::cols_label(group_legal_business_name = "Business Name", 
-                 group_state = "State", 
-                 group_reassignments = "Reassignments",
-                 group_pac_id = "PAC ID", 
-                 group_enroll_id = "Enrollment ID")
-```
-
-</details>
-
-
-```{r, echo=FALSE, eval=TRUE}
-re_date
-```
-
-<br>
-
-```{r, echo=FALSE, eval=TRUE}
-re_assign
-```
-
-<br>
-
-## Physician & Other Practitioners
-
-```r
-2014:2021 |> 
-  furrr::future_map(\(x) physician_by_provider(year = x, npi = 1043477615)) |> 
-  purrr::list_rbind()
-```
-<details><summary>Code</summary>
-
-```{r}
-provider <- 2014:2021 |> 
-  furrr::future_map(\(x) physician_by_provider(year = x, npi = 1043477615)) |> 
-  purrr::list_rbind()
-```
-
-
-```{r}
-provider_1 <- provider |> 
-  dplyr::select(year, 
-                tot_benes, 
-                tot_srvcs,
-                tot_charges,
-                tot_allowed,
-                tot_payment) |>  
-  provider:::change_abs(tot_benes, year) |> 
-  provider:::change_pct(tot_benes, tot_benes_chg, year) |> 
-  provider:::change_abs(tot_srvcs, year) |> 
-  provider:::change_pct(tot_srvcs, tot_srvcs_chg, year) |> 
-  dplyr::select(!c(tot_benes_chg, tot_srvcs_chg)) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
-                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
-                     title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
-                     subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("year"),
-                     dollars = c("tot_charges", "tot_allowed", "tot_payment"),
-                     pctchg = c("tot_benes_pct", "tot_srvcs_pct")) |>
-  gt::cols_label(tot_benes = "Beneficiaries", 
-                 tot_srvcs = "Services",
-                 tot_charges = "Charges",
-                 tot_allowed = "Allowed",
-                 tot_payment = "Payment") |> 
-  gt::cols_merge_n_pct(tot_benes, tot_benes_pct) |> 
-  gt::cols_merge_n_pct(tot_srvcs, tot_srvcs_pct) |> 
-  gt::data_color(columns = c("tot_charges", "tot_allowed", "tot_payment"), palette = "ggsci::red_material")
-```
-
-
-```{r eval=FALSE, echo=FALSE}
-provider_2 <- provider |> 
-  dplyr::select(year, bene_age_avg)
-
-pr_age <- provider |> 
-  dplyr::select(year,
-                bene_age_lt65,
-                bene_age_65_74,
-                bene_age_75_84,
-                bene_age_gt84) |> 
-  dplyr::mutate(bene_age_65_84 = bene_age_65_74 + bene_age_75_84, 
-                .keep = "unused", 
-                .after = bene_age_lt65) |> 
-  tidyr::pivot_longer(cols = c(bene_age_lt65, bene_age_65_84, bene_age_gt84), 
-                      names_to = "measure", 
-                      values_to = "demo_age") |> 
-  dplyr::group_by(year) |> 
-  dplyr::summarise(demo_age = list(demo_age), .groups = "drop")
-
-pr_sex <- provider |> 
-  dplyr::select(year,
-                bene_female,
-                bene_male) |> 
-  tidyr::pivot_longer(cols = c(bene_female, bene_male), 
-                      names_to = "measure", 
-                      values_to = "demo_sex") |> 
-  dplyr::group_by(year) |> 
-  dplyr::summarise(demo_sex = list(demo_sex), .groups = "drop")
-
-
-pr_stat <- provider |> 
-  dplyr::select(year,
-                bene_dual,
-                bene_ndual) |> 
-  tidyr::pivot_longer(cols = c(bene_dual, bene_ndual), 
-                      names_to = "measure", 
-                      values_to = "demo_stat") |> 
-  dplyr::group_by(year) |> 
-  dplyr::summarise(demo_stat = list(demo_stat), .groups = "drop")
-
-provider_2 <- provider_2 |> 
-  dplyr::left_join(pr_age, by = c("year")) |> 
-  dplyr::left_join(pr_sex, by = c("year")) |> 
-  dplyr::left_join(pr_stat, by = c("year")) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
-                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
-                     title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
-                     subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("year", "bene_age_avg")) |> 
-  gt::cols_label(bene_age_avg = "Avg. Age") |> 
-  gtExtras::gt_plt_bar_stack(column = demo_age, 
-                             width = 60,
-                             labels = c("[< 65]  ", " [65-84] ", " [> 84]"),
-                             palette = c("#ff4343", "black", "#ff4343")) |> 
-  gtExtras::gt_plt_bar_stack(column = demo_sex, 
-                             width = 40,
-                             labels = c("Female ", " Male"),
-                             palette = c("black", "#ff4343")) |> 
-  gtExtras::gt_plt_bar_stack(column = demo_stat, 
-                             width = 45,
-                             labels = c("Dual ", " Non-Dual"),
-                             palette = c("black", "#ff4343")) |> 
-  gtExtras::gt_color_rows(columns = c("bene_age_avg"))
-
-provider_3 <- provider |> 
-  dplyr::select(year,
-                "HCC Average Risk Score" = bene_risk_avg,
-                "Atrial Fibrillation" = bene_cc_af,
-                "Alzheimer’s Disease/Dementia" = bene_cc_alz,
-                "Asthma" = bene_cc_asth,
-                "Cancer" = bene_cc_canc,
-                "Heart Failure" = bene_cc_chf,
-                "Chronic Kidney Disease" = bene_cc_ckd,
-                "COPD" = bene_cc_copd,
-                "Depression" = bene_cc_dep,
-                "Diabetes" = bene_cc_diab,
-                "Hyperlipidemia" = bene_cc_hplip,
-                "Hypertension" = bene_cc_hpten,
-                "Ischemic Heart Disease" = bene_cc_ihd,
-                "Osteoporosis" = bene_cc_opo,
-                "Rheumatoid / Osteoarthritis" = bene_cc_raoa,
-                "Schizophrenia / Other Psych" = bene_cc_sz,
-                "Stroke" = bene_cc_strk) |> 
-  tidyr::pivot_longer(cols = !year, 
-                      names_to = "condition", 
-                      values_to = "value") |> 
-  tidyr::pivot_wider(names_from = year, 
-                     values_from = value) |> 
-  dplyr::arrange(condition) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider
-                                     API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)"),
-                     title = gt::md("Medicare Provider Summary: **2014 - 2021**"),
-                     subtitle = gt::md("Provider: **SARAH K. HUSSAIN, MD**"),
-                     divider = c("condition"), 
-                     pct = c("2014", "2015", "2016", "2017", "2018", "2019", "2020", "2021"),
-                     clean = FALSE) |> 
-  gt::data_color(columns = !condition, direction = "row", palette = "ggsci::red_material", na_color = "black")
-```
-
-</details>
-
-```{r, echo=FALSE, eval=TRUE}
-provider_1
-```
-
-<br><br>
-
-```{r echo=FALSE, eval=FALSE}
-cc_prov <- provider |> 
-  dplyr::select(year,
-                "Atrial Fibrillation" = bene_cc_af,
-                "Alzheimer's Disease/Dementia" = bene_cc_alz,
-                "Asthma" = bene_cc_asth,
-                "Cancer" = bene_cc_canc,
-                "Heart Failure" = bene_cc_chf,
-                "Chronic Kidney Disease" = bene_cc_ckd,
-                "COPD" = bene_cc_copd,
-                "Depression" = bene_cc_dep,
-                "Diabetes" = bene_cc_diab,
-                "Hyperlipidemia" = bene_cc_hplip,
-                "Hypertension" = bene_cc_hpten,
-                "Ischemic Heart Disease" = bene_cc_ihd,
-                "Osteoporosis" = bene_cc_opo,
-                "Rheumatoid / Osteoarthritis" = bene_cc_raoa,
-                "Schizophrenia and Other Psychotic Disorders" = bene_cc_sz,
-                "Stroke" = bene_cc_strk) |> 
-  tidyr::pivot_longer(cols = !year, 
-                      names_to = "stat", 
-                      values_to = "value") |> 
-  tidyr::pivot_wider(names_from = year, 
-                     values_from = value) |> 
-  dplyr::pull(stat)
-
-cc_nat <- 2014:2018 |> 
-  furrr::future_map(\(x) cc_specific(year = x, level = "National", demographic = "All", age_group = "All")) |> 
-  purrr::list_rbind() |> 
-  dplyr::select(year, level, condition, prevalence) |> 
-  dplyr::filter(condition %in% cc_prov)
-
-cc_state <- 2014:2018 |> 
-  furrr::future_map(\(x) cc_specific(year = x, level = "State", sublevel = "Pennsylvania", demographic = "All", age_group = "All")) |> 
-  purrr::list_rbind() |> 
-  dplyr::select(year, level, condition, prevalence) |> 
-  dplyr::filter(condition %in% cc_prov)
-
-cc_nat <- cc_nat |> 
-  tidyr::pivot_wider(names_from = year, 
-                     values_from = prevalence)
-
-cc_state <- cc_state |> 
-  tidyr::pivot_wider(names_from = year, 
-                     values_from = prevalence)
-
-cc_all <- dplyr::bind_rows(cc_nat, cc_state) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Specific Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions)"),
-                     title = gt::md("Medicare Chronic Conditions: **2014 - 2018**"),
-                     subtitle = gt::md("National and State Level"),
-                     divider = c("condition"), 
-                     pct = c("2014", "2015", "2016", "2017", "2018"),
-                     clean = FALSE) |> 
-  gt::tab_row_group(label = gt::md("**NATIONAL**"), rows = level == "National") |> 
-  gt::tab_row_group(label = gt::md("**STATE**"), rows = level == "State") |> 
-  gt::cols_hide(columns = c(level))
-```
-
-
-```{r echo=FALSE, eval=FALSE}
-service <- 2014:2021 |> 
-  furrr::future_map(\(x) physician_by_service(year = x, npi = 1043477615)) |> 
-  purrr::list_rbind()
-
-srvc_ind <- service |> 
-  dplyr::select(year, 
-                hcpcs_code,
-                hcpcs_desc,
-                place_of_srvc,
-                tot_benes,
-                tot_srvcs,
-                avg_charges,
-                avg_allowed,
-                avg_payment) |> 
-  dplyr::mutate(sublevel = "Individual", .after = year)
-
-srvc <- service |> 
-  dplyr::select(year, 
-                hcpcs_code,
-                place_of_srvc)
-
-srvc_nat <- furrr::future_pmap(srvc, 
-                               physician_by_geography, 
-                               level = "National") |>
-  purrr::list_rbind() |> 
-  dplyr::select(year, 
-                sublevel,
-                hcpcs_code,
-                hcpcs_desc,
-                place_of_srvc,
-                tot_benes,
-                tot_srvcs,
-                avg_charges,
-                avg_allowed,
-                avg_payment)
-
-srvc_state <- furrr::future_pmap(srvc, 
-                                 physician_by_geography, 
-                                 level = "State", 
-                                 sublevel = "Pennsylvania") |>
-  purrr::list_rbind() |> 
-  dplyr::select(year, 
-                sublevel,
-                hcpcs_code,
-                hcpcs_desc,
-                place_of_srvc,
-                tot_benes,
-                tot_srvcs,
-                avg_charges,
-                avg_allowed,
-                avg_payment)
-
-gt_sum <- dplyr::bind_rows(srvc_ind, 
-                           srvc_state, 
-                           srvc_nat) |> 
-  tidyr::unite("hcpcs", 
-               c(hcpcs_code, place_of_srvc), 
-               remove = TRUE, 
-               sep = " : ") |> 
-  dplyr::group_by(sublevel, hcpcs) |> 
-  dplyr::summarize(avg_charges = mean(avg_charges),
-                   avg_allowed = mean(avg_allowed),
-                   avg_payment = mean(avg_payment),
-                   .groups = "drop") |> 
-  tidyr::pivot_longer(cols = dplyr::contains("avg_"), 
-                      names_to = "type", 
-                      values_to = "amount") |> 
-  tidyr::pivot_wider(names_from = sublevel, 
-                     values_from = amount) |> 
-  dplyr::mutate(type = stringr::str_remove(type, "avg_")) |> 
-  dplyr::arrange(hcpcs) |> 
-  provider:::gt_prov(source = gt::md("Source: [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)"),
-                     title = gt::md("Medicare Provider Summary: **2014 - 2018**"),
-                     subtitle = gt::md("Comparing HCPCS Reimbursement Data at the **National**, **State**, and **Individual** Level"),
-                     divider = c("hcpcs"),
-                     dollars = c("Individual", "National", "Pennsylvania"))
-```
-
-
-
-
-## Quality Payment Program
-
-```{r}
-qpp <- 2017:2021 |> 
+quality_payment_years() |> 
   furrr::future_map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
   purrr::list_rbind()
 ```
 
-
-```{r echo=FALSE, eval=TRUE}
-qpp |> 
-  dplyr::select(year, 
-                Score = final_score,
-                Adjustment = payment_adjustment,
-                Complex = complex_patient_bonus,
-                Quality = quality_category_score,
-                QI = quality_improvement_bonus,
-                PI = pi_category_score,
-                IA = ia_score,
-                Cost = cost_score) |> 
-  provider:::gt_prov()
-```
-
 <br><br>
 
-```{r echo=FALSE, eval=TRUE}
-qpp |> 
-  dplyr::select(year, 
-                "Engaged" = engaged,
-                "Opted Into MIPS" = opted_into_mips,
-                "Small Practitioner" = small_practitioner,
-                "Rural Clinician" = rural,
-                "HPSA Clinician" = hpsa,
-                "Ambulatory Surgical Center" = asc,
-                "Hospital-Based" = hospital_based,
-                "Non-Patient Facing" = non_patient_facing,
-                "Facility-Based" = facility_based,
-                "Performance Extreme Hardship" = extreme_hardship,
-                "Quality Performance Bonus" = quality_bonus,
-                "Quality Performance Extreme Hardship" = extreme_hardship_quality, 
-                "Promoting Interoperability Hardship" = pi_hardship,
-                "Promoting Interoperability Extreme Hardship" = extreme_hardship_pi,
-                "Promoting Interoperability Reweighting" = pi_reweighting,
-                "Promoting Interoperability Bonus" = pi_bonus, 
-                "Improvement Activities Extreme Hardship" = extreme_hardship_ia, 
-                "Improvement Activities Study" = ia_study, 
-                "Cost Performance Extreme Hardship" = extreme_hardship_cost) |> 
-  tidyr::pivot_longer(cols = !year, 
-                      names_to = "status", 
-                      values_to = "value") |> 
-  tidyr::pivot_wider(names_from = year, 
-                     values_from = value) |> 
-  provider:::gt_prov(clean = FALSE, 
-                     divider = c("status"),
-                     checkmark = c("2017", 
-                                   "2018", 
-                                   "2019", 
-                                   "2020",
-                                   "2021"))
+## APIs
 
-```
+API Search functions can be grouped according to the type of data they return about a provider: *administrative*, *statistical*, and *auxillary.*
 
-<br><br>
+### Administrative
 
-### QPP Eligibility
+   * `nppes_npi()`: Registry of all healthcare providers.
+   * `provider_enrollment()`: Providers actively enrolled in Medicare.
+   * `opt_out()`: Providers currently opted out of Medicare.
+   * `revalidation_*()`: Link Type-1 and Type-2 providers.
+   * `doctors_and_clinicians()`: Provider school, graduation year, linking.
+   * `facility_affiliations()`: Linking providers to Facilities.
+   * `hospital_enrollment()`: Facilities linked to providers.
 
-```{r}
-quality_eligibility(year = 2021, npi = 1043477615)
-```
+### Statistical
 
+The following return provider-specific stats:
 
+   * `physician_by_provider()`: Yearly high-level utilization data.
+   * `physician_by_service()`: Yearly detailed utilization data.
+   * `quality_payments()`: Yearly QPP/MIPS performance data.
+   * `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
+   * `open_payments()`: Yearly Open Payments reporting data.
+
+The following return yearly stats useful for comparison against data returned from `physician_by_service()`:
+
+   * `physician_by_geography()`
+   * `beneficiary_enrollment()`
+   * `cc_multiple()`
+   * `cc_specific()`
+
+### Auxillary
+
+   * `order_refer()`: Is a provider eligible to order and refer?
+   * `missing_information()`: Is a provider missing Endpoints in the NPPES NPI Registry?
+   * `pending_applications()`: Has a provider's Medicare application been processed?
+   * `taxonomy_crosswalk()`: Is a provider's specialty eligible to enroll in Medicare?
+
+<br>
 

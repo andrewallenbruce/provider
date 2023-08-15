@@ -15,7 +15,7 @@ opt_out(
   address = NULL,
   city = NULL,
   state = NULL,
-  zipcode = NULL,
+  zip = NULL,
   order_and_refer = NULL,
   tidy = TRUE
 )
@@ -35,7 +35,7 @@ opt_out(
 
 \item{state}{Provider's State Abbreviation}
 
-\item{zipcode}{Provider's Zip Code}
+\item{zip}{Provider's Zip Code}
 
 \item{order_and_refer}{Flag indicating whether the Provider is eligible to
 Order and Refer}

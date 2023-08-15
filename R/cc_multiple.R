@@ -176,8 +176,11 @@ cc_multiple <- function(year,
 }
 
 #' Check the current years available for the Multiple Chronic Conditions API
+#' @return integer vector of years available
+#' @examples
+#' cc_multiple_years()
 #' @autoglobal
-#' @noRd
+#' @export
 cc_multiple_years <- function() {
   cms_update("Multiple Chronic Conditions", "years") |>
     as.integer()

@@ -299,8 +299,11 @@ physician_by_service <- function(year,
 }
 
 #' Check the current years available for the Physician & Other Practitioners by Provider and Service API
+#' @return integer vector of years available
+#' @examples
+#' physician_by_service_years()
 #' @autoglobal
-#' @noRd
+#' @export
 physician_by_service_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Provider and Service", "years") |>
     as.integer()

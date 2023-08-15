@@ -90,7 +90,6 @@ utils::globalVariables(c(
   "gndr", # <doctors_and_clinicians>
   "cred", # <doctors_and_clinicians>
   "med_sch", # <doctors_and_clinicians>
-  "grad_duration", # <doctors_and_clinicians>
   "pri_spec", # <doctors_and_clinicians>
   "sec_spec_all", # <doctors_and_clinicians>
   "org_nm", # <doctors_and_clinicians>
@@ -182,6 +181,7 @@ utils::globalVariables(c(
   "collection_type", # <mips_clinician_2021>
   "ccxp_ind", # <mips_clinician_2021>
   "identifier", # <mips_ind_2021_id>
+  "distro", # <missing_information>
   "y", # <missing_information>
   "NPI", # <missing_information>
   "last_name", # <missing_information>
@@ -337,15 +337,16 @@ utils::globalVariables(c(
   "set", # <open_payments_ids>
   "identifier", # <open_payments_ids>
   "year", # <open_payments_years>
+  "distro", # <opt_out>
   "y", # <opt_out>
-  "optout_end_date", # <opt_out>
   "optout_effective_date", # <opt_out>
-  "optout_duration", # <opt_out>
+  "optout_end_date", # <opt_out>
   "last_updated", # <opt_out>
   "eligible_to_order_and_refer", # <opt_out>
   "city_name", # <opt_out>
   "state_code", # <opt_out>
   "zip_code", # <opt_out>
+  "distro", # <order_refer>
   "y", # <order_refer>
   "y", # <pending_applications>
   "distro", # <physician_by_geography>
@@ -524,6 +525,7 @@ utils::globalVariables(c(
   "group_scenario.isEligible", # <quality_eligibility>
   "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
   "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
+  "distro", # <revalidation_date>
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>
@@ -536,6 +538,7 @@ utils::globalVariables(c(
   "adjusted_due_date", # <revalidation_date>
   "individual_total_reassign_to", # <revalidation_date>
   "receiving_benefits_reassignment", # <revalidation_date>
+  "distro", # <revalidation_group>
   "y", # <revalidation_group>
   "group_pac_id", # <revalidation_group>
   "individual_npi", # <revalidation_group>
@@ -551,6 +554,7 @@ utils::globalVariables(c(
   "group_state_code", # <revalidation_group>
   "group_due_date", # <revalidation_group>
   "group_reassignments_and_physician_assistants", # <revalidation_group>
+  "distro", # <revalidation_reassign>
   "y", # <revalidation_reassign>
   "group_pac_id", # <revalidation_reassign>
   "individual_pac_id", # <revalidation_reassign>
@@ -567,6 +571,7 @@ utils::globalVariables(c(
   "group_state_code", # <revalidation_reassign>
   "group_due_date", # <revalidation_reassign>
   "group_reassignments_and_physician_assistants", # <revalidation_reassign>
+  "distro", # <taxonomy_crosswalk>
   "provider_taxonomy_code", # <taxonomy_crosswalk>
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>

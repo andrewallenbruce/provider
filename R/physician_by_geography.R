@@ -189,8 +189,11 @@ physician_by_geography <- function(year,
 }
 
 #' Check the current years available for the Physician & Other Practitioners by Geography and Service API
+#' @return integer vector of years available
+#' @examples
+#' physician_by_geography_years()
 #' @autoglobal
-#' @noRd
+#' @export
 physician_by_geography_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years") |>
     as.integer()

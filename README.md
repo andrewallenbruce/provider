@@ -44,17 +44,30 @@ pak::pak("andrewallenbruce/provider")
 
 <br>
 
-The *overarching* goal of `provider` is to make the experience of
+The overarching goal of `provider` is to make the experience of
 accessing publicly-available Provider data easier and more consistent
-across a variety of CMS sources. It aims to accomplish this through the
-following *general* goals, where possible:
+across a variety of sources. It aims to accomplish this through the
+following general goals, where possible:
 
-- Harmonization of variable names so as to allow for removal of
-  duplicate information across API output, if desired
-- Validation checks of provider identifiers (e.g., NPI, PAC ID, Medicare
-  Enrollment ID, CCN)
-- Structuring output in the *tidy* framework as much as is reasonably
-  possible (with an option to turn off by setting `tidy = FALSE`)
+<br>
+
+- *Structuring output in the **tidy** framework* as much as is
+  reasonably possible, with an option to turn it off by setting
+  `tidy = FALSE`.
+
+- *Harmonization of variable names*, for the express purpose of making
+  it easier to understand (and make connections between) each API’s
+  output. This will also allow for removal of duplicate information
+  across API output, if desired.
+
+- *Validation checks of inputs*, as is reasonable (e.g, identifiers such
+  as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only
+  is this simply good practice, it will also prevent unnecessary
+  querying of the APIs.
+
+- *Well-written documentation*, containing as many examples as is
+  necessary. Each API’s output can be difficult to understand, even for
+  someone with expertise in R, healthcare, or both.
 
 <br>
 

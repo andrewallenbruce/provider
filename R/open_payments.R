@@ -362,8 +362,11 @@ open_payments_error <- function(response) {
 
 
 #' Check the current years available for the Open Payments API
+#' @return integer vector of years available
+#' @examples
+#' open_payments_years()
 #' @autoglobal
-#' @noRd
+#' @export
 open_payments_years <- function() {
   open_payments_ids("General Payment Data") |>
     dplyr::arrange(year) |>

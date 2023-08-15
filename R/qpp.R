@@ -197,8 +197,11 @@ quality_payment <- function(year,
 }
 
 #' Check the current years available for the Quality Payments API
+#' @return integer vector of years available
+#' @examples
+#' quality_payment_years()
 #' @autoglobal
-#' @internal
+#' @export
 quality_payment_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
 }

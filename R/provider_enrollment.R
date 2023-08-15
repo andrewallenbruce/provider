@@ -112,14 +112,12 @@ provider_enrollment <- function(npi                = NULL,
     param_space()
 
   # update distribution id -------------------------------------------------
-  id <- cms_update(api = "Medicare Fee-For-Service  Public Provider Enrollment",
-                   check = "id") |>
+  id <- cms_update("Medicare Fee-For-Service  Public Provider Enrollment", "id") |>
     dplyr::slice_head() |>
     dplyr::pull(distro)
 
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  #id     <- "2457ea29-fc82-48b0-86ec-3b0755de7515"
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
