@@ -175,7 +175,7 @@ enroll_check <- function(enroll_id,
 #' @param facility_ccn 6-digit unique alphanumeric identifier
 #' @return boolean, `TRUE` or `FALSE`
 #' @examplesIf interactive()
-#' facility_ccn_check(facility_ccn = )
+#' facility_ccn_check(facility_ccn = "11T122")
 #' @autoglobal
 #' @noRd
 facility_ccn_check <- function(facility_ccn,

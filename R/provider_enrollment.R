@@ -1,86 +1,76 @@
-#' Search the Medicare Fee-For-Service Public Provider Enrollment API
+#' Medicare Fee-For-Service Public Provider Enrollment API
 #'
-#' @description Information on a point in time snapshot of enrollment
-#'    level data for providers actively enrolled in Medicare.
+#' @description Information on a point in time snapshot of enrollment level data
+#'   for providers actively enrolled in Medicare.
 #'
-#' @details The Medicare Fee-For-Service Public Provider Enrollment dataset
-#'    includes information on providers who are actively approved to bill
-#'    Medicare or have completed the 855O at the time the data was pulled
-#'    from the Provider Enrollment and Chain Ownership System (PECOS). The
-#'    release of this provider enrollment data is not related to other
-#'    provider information releases such as Physician Compare or Data
-#'    Transparency.
+#' @details The Medicare Fee-For-Service Public Provider Enrollment API includes
+#'   information on providers who are actively approved to bill Medicare.
 #'
-#' ## Links
+#' @section Links:
 #' * [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #'
 #' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Quarterly**
-#' @param npi An NPI is a 10-digit unique numeric identifier that all providers
-#'    must obtain before enrolling in Medicare. It is assigned to health care
-#'    providers upon application through the National Plan and Provider
-#'    Enumeration System (NPPES).
-#' @param pac_id Provider associate level variable (PAC ID) from PECOS
-#'    database used to link across tables. A PAC ID is a 10-digit unique
-#'    numeric identifier that is assigned to each individual or organization
-#'    in PECOS. All entity-level information (e.g., tax identification numbers
-#'    and organizational names) is linked through the PAC ID. A PAC ID may be
-#'    associated with multiple Enrollment IDs if the individual or
-#'    organization enrolled multiple times under different circumstances.
-#' @param enroll_id Provider enrollment ID from PECOS database used to link
-#'    across tables. An Enrollment ID is a 15-digit unique alphanumeric
-#'    identifier that is assigned to each new provider enrollment application.
-#'    All enrollment-level information (e.g., enrollment type, enrollment
-#'    state, provider specialty and reassignment of benefits) is linked
-#'    through the Enrollment ID.
-#' @param specialty_code Provider enrollment application and enrollment
-#'    specialty type. This field shows the provider’s primary specialty code.
-#'    For practitioners and DME suppliers, please see the Secondary Specialty
-#'    file for a list of secondary specialties (when applicable). Only about
-#'    20% of practitioners and DME suppliers have at least one secondary
-#'    specialty.
-#' @param specialty_desc Provider enrollment application and enrollment
-#'    specialty type description
-#' @param state Provider enrollment state, abbreviated location. Providers
-#'    enroll at the state level, so one PAC ID may be associated with multiple
-#'    ENRLMT_IDs and multiple STATE_CD values.
+#' @param npi 10-digit unique numeric identifier that all providers must obtain
+#'   before enrolling in Medicare; assigned upon application through NPPES.
+#' @param pac_id PECOS Provider associate level variable. A 10-digit unique
+#'   numeric identifier assigned to each individual or organization. All
+#'   entity-level information (e.g., TINs, organizational names) is linked
+#'   through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs
+#'   if the individual or organization enrolled multiple times under different
+#'   circumstances.
+#' @param enroll_id PECOS Provider enrollment ID is a 15-digit unique
+#'   alphanumeric identifier assigned to each new provider enrollment
+#'   application. All enrollment-level information (e.g., enrollment type,
+#'   state, specialty, reassignment of benefits) is linked through the
+#'   Enrollment ID.
+#' @param specialty_code Enrollment primary specialty type code.
+#' @param specialty_desc Enrollment specialty type description.
+#' @param state Enrollment state, abbreviated. Providers enroll at the state
+#'   level, so one `pac_id` may be associated with multiple `enroll_id` and
+#'   `state` values.
 #' @param first_name Individual provider first name
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param org_name Organizational provider name
-#' @param gender Individual provider gender: `F` (female), `M` (male), `9` (unknown)
+#' @param gender Individual provider gender:
+#'    * `F`: Female
+#'    * `M`: Male
+#'    * `9`: Unknown
 #' @param tidy Tidy output; default is `TRUE`.
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 #'
-#' provider_enrollment(first_name = "DEBRA",
-#'                     middle_name = "L",
-#'                     last_name = "FROMER")
+#'   provider_enrollment(npi = 1417918293,
+#'   specialty_code = "14-41")
 #'
-#' provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
-#'                     state = "NY",
-#'                     specialty_code = "00-85")
+#'   provider_enrollment(first_name = "DEBRA",
+#'                       middle_name = "L",
+#'                       last_name = "FROMER")
 #'
-#' provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
-#'                     state = "AK",
-#'                     gender = "F")
+#'   provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
+#'                       state = "NY",
+#'                       specialty_code = "00-85")
 #'
+#'   provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
+#'                       state = "AK",
+#'                       gender = "F")
 #'
-#' provider_enrollment(pac_id = 2860305554,
-#'                     enroll_id = "I20031110000120",
-#'                     gender = "9")
-#' prven <- tibble::tribble(
-#' ~fn,         ~params,
-#' "provider_enrollment", list(npi = 1083879860),
-#' "provider_enrollment", list(first_name = "MICHAEL",
-#'                             middle_name = "K",
-#'                             last_name = "GREENBERG",
-#'                             state = "MD"),
-#' "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
-#'                             state = "GA"))
+#'   provider_enrollment(pac_id = 2860305554,
+#'                       enroll_id = "I20031110000120",
+#'                       gender = "9")
 #'
-#' purrr::invoke_map_dfr(prven$fn, prven$params)
+#'   prven <- tibble::tribble(
+#'   ~fn,                   ~params,
+#'   "provider_enrollment", list(npi = 1083879860),
+#'   "provider_enrollment", list(first_name = "MICHAEL",
+#'                               middle_name = "K",
+#'                               last_name = "GREENBERG",
+#'                               state = "MD"),
+#'   "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
+#'                               state = "GA"))
+#'
+#'   purrr::invoke_map_dfr(prven$fn, prven$params)
 #' @autoglobal
 #' @export
 provider_enrollment <- function(npi                = NULL,
@@ -177,16 +167,16 @@ provider_enrollment <- function(npi                = NULL,
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
       dplyr::select(npi,
-                    pac_id         = pecos_asct_cntl_id,
-                    enroll_id      = enrlmt_id,
-                    specialty_code = provider_type_cd,
-                    specialty_desc = provider_type_desc,
-                    state          = state_cd,
-                    org_name,
+                    pac_id            = pecos_asct_cntl_id,
+                    enroll_id         = enrlmt_id,
+                    enroll_type_code  = provider_type_cd,
+                    enroll_type       = provider_type_desc,
+                    state             = state_cd,
+                    organization_name = org_name,
                     first_name,
-                    middle_name    = mdl_name,
+                    middle_name       = mdl_name,
                     last_name,
-                    gender         = gndr_sw)
+                    gender            = gndr_sw)
   }
   return(results)
 }

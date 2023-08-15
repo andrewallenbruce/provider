@@ -2,7 +2,7 @@
 % Please edit documentation in R/provider_enrollment.R
 \name{provider_enrollment}
 \alias{provider_enrollment}
-\title{Search the Medicare Fee-For-Service Public Provider Enrollment API}
+\title{Medicare Fee-For-Service Public Provider Enrollment API}
 \source{
 Centers for Medicare & Medicaid Services
 }
@@ -23,39 +23,29 @@ provider_enrollment(
 )
 }
 \arguments{
-\item{npi}{An NPI is a 10-digit unique numeric identifier that all providers
-must obtain before enrolling in Medicare. It is assigned to health care
-providers upon application through the National Plan and Provider
-Enumeration System (NPPES).}
+\item{npi}{10-digit unique numeric identifier that all providers must obtain
+before enrolling in Medicare; assigned upon application through NPPES.}
 
-\item{pac_id}{Provider associate level variable (PAC ID) from PECOS
-database used to link across tables. A PAC ID is a 10-digit unique
-numeric identifier that is assigned to each individual or organization
-in PECOS. All entity-level information (e.g., tax identification numbers
-and organizational names) is linked through the PAC ID. A PAC ID may be
-associated with multiple Enrollment IDs if the individual or
-organization enrolled multiple times under different circumstances.}
+\item{pac_id}{PECOS Provider associate level variable. A 10-digit unique
+numeric identifier assigned to each individual or organization. All
+entity-level information (e.g., TINs, organizational names) is linked
+through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs
+if the individual or organization enrolled multiple times under different
+circumstances.}
 
-\item{enroll_id}{Provider enrollment ID from PECOS database used to link
-across tables. An Enrollment ID is a 15-digit unique alphanumeric
-identifier that is assigned to each new provider enrollment application.
-All enrollment-level information (e.g., enrollment type, enrollment
-state, provider specialty and reassignment of benefits) is linked
-through the Enrollment ID.}
+\item{enroll_id}{PECOS Provider enrollment ID is a 15-digit unique
+alphanumeric identifier assigned to each new provider enrollment
+application. All enrollment-level information (e.g., enrollment type,
+state, specialty, reassignment of benefits) is linked through the
+Enrollment ID.}
 
-\item{specialty_code}{Provider enrollment application and enrollment
-specialty type. This field shows the provider’s primary specialty code.
-For practitioners and DME suppliers, please see the Secondary Specialty
-file for a list of secondary specialties (when applicable). Only about
-20\% of practitioners and DME suppliers have at least one secondary
-specialty.}
+\item{specialty_code}{Enrollment primary specialty type code.}
 
-\item{specialty_desc}{Provider enrollment application and enrollment
-specialty type description}
+\item{specialty_desc}{Enrollment specialty type description.}
 
-\item{state}{Provider enrollment state, abbreviated location. Providers
-enroll at the state level, so one PAC ID may be associated with multiple
-ENRLMT_IDs and multiple STATE_CD values.}
+\item{state}{Enrollment state, abbreviated. Providers enroll at the state
+level, so one \code{pac_id} may be associated with multiple \code{enroll_id} and
+\code{state} values.}
 
 \item{first_name}{Individual provider first name}
 
@@ -65,64 +55,68 @@ ENRLMT_IDs and multiple STATE_CD values.}
 
 \item{org_name}{Organizational provider name}
 
-\item{gender}{Individual provider gender: \code{F} (female), \code{M} (male), \code{9} (unknown)}
+\item{gender}{Individual provider gender:
+\itemize{
+\item \code{F}: Female
+\item \code{M}: Male
+\item \code{9}: Unknown
+}}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+\link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on a point in time snapshot of enrollment
-level data for providers actively enrolled in Medicare.
+Information on a point in time snapshot of enrollment level data
+for providers actively enrolled in Medicare.
 }
 \details{
-The Medicare Fee-For-Service Public Provider Enrollment dataset
-includes information on providers who are actively approved to bill
-Medicare or have completed the 855O at the time the data was pulled
-from the Provider Enrollment and Chain Ownership System (PECOS). The
-release of this provider enrollment data is not related to other
-provider information releases such as Physician Compare or Data
-Transparency.
-\subsection{Links}{
-\itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Medicare Fee-For-Service Public Provider Enrollment API}
-}
-}
+The Medicare Fee-For-Service Public Provider Enrollment API includes
+information on providers who are actively approved to bill Medicare.
 }
 \note{
 Update Frequency: \strong{Quarterly}
 }
+\section{Links}{
+
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Medicare Fee-For-Service Public Provider Enrollment API}
+}
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 
-provider_enrollment(first_name = "DEBRA",
-                    middle_name = "L",
-                    last_name = "FROMER")
+  provider_enrollment(npi = 1417918293,
+  specialty_code = "14-41")
 
-provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
-                    state = "NY",
-                    specialty_code = "00-85")
+  provider_enrollment(first_name = "DEBRA",
+                      middle_name = "L",
+                      last_name = "FROMER")
 
-provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
-                    state = "AK",
-                    gender = "F")
+  provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
+                      state = "NY",
+                      specialty_code = "00-85")
 
+  provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
+                      state = "AK",
+                      gender = "F")
 
-provider_enrollment(pac_id = 2860305554,
-                    enroll_id = "I20031110000120",
-                    gender = "9")
-prven <- tibble::tribble(
-~fn,         ~params,
-"provider_enrollment", list(npi = 1083879860),
-"provider_enrollment", list(first_name = "MICHAEL",
-                            middle_name = "K",
-                            last_name = "GREENBERG",
-                            state = "MD"),
-"provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
-                            state = "GA"))
+  provider_enrollment(pac_id = 2860305554,
+                      enroll_id = "I20031110000120",
+                      gender = "9")
 
-purrr::invoke_map_dfr(prven$fn, prven$params)
+  prven <- tibble::tribble(
+  ~fn,                   ~params,
+  "provider_enrollment", list(npi = 1083879860),
+  "provider_enrollment", list(first_name = "MICHAEL",
+                              middle_name = "K",
+                              last_name = "GREENBERG",
+                              state = "MD"),
+  "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
+                              state = "GA"))
+
+  purrr::invoke_map_dfr(prven$fn, prven$params)
 \dontshow{\}) # examplesIf}
 }
