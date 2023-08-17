@@ -52,11 +52,10 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/linking_providers.html">Linking Providers</a>
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
-    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -122,87 +121,1608 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
-<strong>Elizabethtown Community Hospital</strong>. Looking it up in the
-<strong>Provider Enrollment</strong> API gives us several avenues to go
-down:</p>
+<strong>Elizabethtown Community Hospital</strong>.</p>
+<p>Looking it up in the <strong>Provider Enrollment</strong> API gives
+us several avenues to go down:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span></span>
-<span><span class="co">#&gt;   npi        pac_id   enroll_id specialty_code specialty state organization_name</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1891785184 3577554… O2004052… 12-70          PART B S… NY    ELIZABETHTOWN CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1891785184 3577554… O2010111… 00-85          PART A P… NY    ELIZABETHTOWN CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1487923637 3577554… O2019071… 12-59          PART B S… NY    ELIZABETHTOWN CO…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1407061591 3577554… O2022082… 00-85          PART A P… NY    ELIZABETHTOWN CO…</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="8%">
+<col width="11%">
+<col width="10%">
+<col width="32%">
+<col width="4%">
+<col width="24%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id</th>
+<th align="left">enroll_id</th>
+<th align="left">specialty_code</th>
+<th align="left">specialty</th>
+<th align="left">state</th>
+<th align="left">organization_name</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1891785184</td>
+<td align="left">3577554138</td>
+<td align="left">O20040521000534</td>
+<td align="left">12-70</td>
+<td align="left">PART B SUPPLIER - CLINIC/GROUP PRACTICE</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+</tr>
+<tr class="even">
+<td align="left">1891785184</td>
+<td align="left">3577554138</td>
+<td align="left">O20101110000259</td>
+<td align="left">00-85</td>
+<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+</tr>
+<tr class="odd">
+<td align="left">1487923637</td>
+<td align="left">3577554138</td>
+<td align="left">O20190719002511</td>
+<td align="left">12-59</td>
+<td align="left">PART B SUPPLIER - AMBULANCE SERVICE SUPPLIER</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+</tr>
+<tr class="even">
+<td align="left">1407061591</td>
+<td align="left">3577554138</td>
+<td align="left">O20220827000145</td>
+<td align="left">00-85</td>
+<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+</tr>
+</tbody>
+</table>
 <p>First, we can see that it has one PAC ID, three different
 organizational NPIs, and four different Enrollment IDs. Looking it up in
 the <strong>Hospital Enrollment</strong> API gives us even more
 detail:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 31</span></span></span>
-<span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1891785184 O201011100… NY           00-85          PART A PROVID… 331302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1407061591 O202208270… NY           00-85          PART A PROVID… 33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 25 more variables: pac_id_org &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;, sg_general &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;, sg_childrens &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, sg_psychiatric &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_psychiatric_unit &lt;lgl&gt;, sg_rehabilitation &lt;lgl&gt;, …</span></span></span></code></pre>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">address</span><span class="op">:</span><span class="va">subgroups</span>, <span class="va">specialty</span>, <span class="va">organization_structure</span>, <span class="va">proprietary_nonprofit</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="8%">
+<col width="8%">
+<col width="12%">
+<col width="10%">
+<col width="11%">
+<col width="26%">
+<col width="10%">
+<col width="11%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id_org</th>
+<th align="left">enroll_id</th>
+<th align="left">facility_ccn</th>
+<th align="left">specialty_code</th>
+<th align="left">organization_name</th>
+<th align="left">enroll_state</th>
+<th align="left">multiple_npis</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1891785184</td>
+<td align="left">3577554138</td>
+<td align="left">O20101110000259</td>
+<td align="left">331302</td>
+<td align="left">00-85</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">1407061591</td>
+<td align="left">3577554138</td>
+<td align="left">O20220827000145</td>
+<td align="left">33Z302</td>
+<td align="left">00-85</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">FALSE</td>
+</tr>
+</tbody>
+</table>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
 include a new data point: two facility CCNs. Plugging those into the
 <strong>Facility Affiliations</strong> API, we can retrieve information
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 174 × 8</span></span></span>
-<span><span class="co">#&gt;    npi        pac_id_ind first_name middle_name last_name   suffix facility_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003815184 4082693676 ARMIN      <span style="color: #BB0000;">NA</span>          AFSAR KESH… <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1023076643 5698798452 JOHN       N           HENRY       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1043245657 7810891009 MARK       K           FUNG        <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1043397656 4183764558 ANTHONY    F           TRAMONTANO  <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1043630510 2365749389 RYAN       <span style="color: #BB0000;">NA</span>          WOLFE       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1053596122 5193802213 TANYA      JEAN        FINCH       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1053863100 8729362207 MATTHEW    D           FARNSWORTH  <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1063592210 0042228009 ROBERT     D           PITTS       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1073099172 0547519381 BROOKE     A           MAGGY       <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1073585055 0749217313 TODD       J           WHITMAN     <span style="color: #BB0000;">NA</span>     Hospital     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 164 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: facility_ccn &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="13%">
+<col width="14%">
+<col width="24%">
+<col width="17%">
+<col width="16%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id_ind</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">facility_type</th>
+<th align="left">facility_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1003815184</td>
+<td align="left">4082693676</td>
+<td align="left">ARMIN</td>
+<td align="left">AFSAR KESHMIRI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1023076643</td>
+<td align="left">5698798452</td>
+<td align="left">JOHN</td>
+<td align="left">HENRY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1043245657</td>
+<td align="left">7810891009</td>
+<td align="left">MARK</td>
+<td align="left">FUNG</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1043397656</td>
+<td align="left">4183764558</td>
+<td align="left">ANTHONY</td>
+<td align="left">TRAMONTANO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1043630510</td>
+<td align="left">2365749389</td>
+<td align="left">RYAN</td>
+<td align="left">WOLFE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1053596122</td>
+<td align="left">5193802213</td>
+<td align="left">TANYA</td>
+<td align="left">FINCH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1053863100</td>
+<td align="left">8729362207</td>
+<td align="left">MATTHEW</td>
+<td align="left">FARNSWORTH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1063592210</td>
+<td align="left">0042228009</td>
+<td align="left">ROBERT</td>
+<td align="left">PITTS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1073099172</td>
+<td align="left">0547519381</td>
+<td align="left">BROOKE</td>
+<td align="left">MAGGY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1073585055</td>
+<td align="left">0749217313</td>
+<td align="left">TODD</td>
+<td align="left">WHITMAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1083148837</td>
+<td align="left">0042564882</td>
+<td align="left">NEIL</td>
+<td align="left">KRULEWITZ</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1083771927</td>
+<td align="left">7012087018</td>
+<td align="left">JOSEPH</td>
+<td align="left">MIHINDUKULASURYIA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1083861934</td>
+<td align="left">2860555141</td>
+<td align="left">STEVEN</td>
+<td align="left">ELLIOTT</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1093796898</td>
+<td align="left">5597848077</td>
+<td align="left">ANDREW</td>
+<td align="left">MAHONEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1104867779</td>
+<td align="left">0042298952</td>
+<td align="left">JENNIFER</td>
+<td align="left">KELLY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1104918721</td>
+<td align="left">2961505326</td>
+<td align="left">MONIKA</td>
+<td align="left">ZIMNA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1114417607</td>
+<td align="left">3274886197</td>
+<td align="left">SAMANTHA</td>
+<td align="left">BAX</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1134186703</td>
+<td align="left">2567476948</td>
+<td align="left">JAMES</td>
+<td align="left">KENNEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1144508144</td>
+<td align="left">5395918379</td>
+<td align="left">ELIZABETH</td>
+<td align="left">HUTCHINS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1154042729</td>
+<td align="left">0840667812</td>
+<td align="left">ISABELLE</td>
+<td align="left">DUCHESNAY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1174810808</td>
+<td align="left">4688843428</td>
+<td align="left">SHANNON</td>
+<td align="left">EVELLIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1184179103</td>
+<td align="left">4789962846</td>
+<td align="left">TINA</td>
+<td align="left">KADER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1184285751</td>
+<td align="left">0941632020</td>
+<td align="left">NICHOLAS</td>
+<td align="left">MONTELLO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1184637233</td>
+<td align="left">3173599834</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">PALMA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1194875310</td>
+<td align="left">5991734212</td>
+<td align="left">HARRY</td>
+<td align="left">SLATCH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1205593852</td>
+<td align="left">0547657322</td>
+<td align="left">HENRY</td>
+<td align="left">EHIZOKHALE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1205960812</td>
+<td align="left">3173647716</td>
+<td align="left">KATHERINE</td>
+<td align="left">HOWARD</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1215918313</td>
+<td align="left">0042202855</td>
+<td align="left">WILLIAM</td>
+<td align="left">BYRNE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1225007347</td>
+<td align="left">0547255705</td>
+<td align="left">JEANNELLE</td>
+<td align="left">SHAVER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1225022668</td>
+<td align="left">2860544699</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">HOY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1225095300</td>
+<td align="left">3577546191</td>
+<td align="left">CURT</td>
+<td align="left">SNYDER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1225219884</td>
+<td align="left">2163615626</td>
+<td align="left">PAUL</td>
+<td align="left">EL AZOURY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1235283482</td>
+<td align="left">0143307462</td>
+<td align="left">ERIC</td>
+<td align="left">GAUTHIER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1235499948</td>
+<td align="left">6507090438</td>
+<td align="left">TIMOTHY</td>
+<td align="left">DONOHUE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1245281740</td>
+<td align="left">6002824588</td>
+<td align="left">DAVID</td>
+<td align="left">MARKOWITZ</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1245518463</td>
+<td align="left">3072828391</td>
+<td align="left">MIKRAM</td>
+<td align="left">JAFRI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1255377438</td>
+<td align="left">7214966134</td>
+<td align="left">JOHN</td>
+<td align="left">HERZOG</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1265443600</td>
+<td align="left">3971643016</td>
+<td align="left">JAMES</td>
+<td align="left">GABLER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1265925630</td>
+<td align="left">9830440759</td>
+<td align="left">LAURENT</td>
+<td align="left">GILLOTEAUX</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1275047466</td>
+<td align="left">2163780974</td>
+<td align="left">CODY</td>
+<td align="left">WHITNEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1275837494</td>
+<td align="left">6204018450</td>
+<td align="left">KEVIN</td>
+<td align="left">CRANSE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1285697128</td>
+<td align="left">7719941152</td>
+<td align="left">DANIEL</td>
+<td align="left">DORSEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1285847467</td>
+<td align="left">9931263258</td>
+<td align="left">LAURA</td>
+<td align="left">FORMAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1285950675</td>
+<td align="left">7416141908</td>
+<td align="left">JORDAN</td>
+<td align="left">BLACKWOOD</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1285960708</td>
+<td align="left">4183768740</td>
+<td align="left">BRANDY</td>
+<td align="left">MANCHESTER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1306138797</td>
+<td align="left">6709021215</td>
+<td align="left">TODD</td>
+<td align="left">JONES</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1306283452</td>
+<td align="left">6305140195</td>
+<td align="left">CAROLYN</td>
+<td align="left">KOULOURIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1316444326</td>
+<td align="left">4486058971</td>
+<td align="left">ROBERT</td>
+<td align="left">INGLIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1326034992</td>
+<td align="left">8224071410</td>
+<td align="left">SCOTT</td>
+<td align="left">PERRAPATO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1336299551</td>
+<td align="left">4880627413</td>
+<td align="left">VINCENT</td>
+<td align="left">COOPER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1336609122</td>
+<td align="left">6800129941</td>
+<td align="left">NOAH</td>
+<td align="left">ROHRER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1336634922</td>
+<td align="left">5294138715</td>
+<td align="left">NATHALIE</td>
+<td align="left">ABISROR</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1346505732</td>
+<td align="left">0244482313</td>
+<td align="left">JEREMY</td>
+<td align="left">LOVING</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1346602257</td>
+<td align="left">1759612914</td>
+<td align="left">JOSHUA</td>
+<td align="left">MARLOW</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1356575369</td>
+<td align="left">0547315111</td>
+<td align="left">KELLY</td>
+<td align="left">MEYER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1366470692</td>
+<td align="left">3072587385</td>
+<td align="left">JORGE</td>
+<td align="left">ANTONETTI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1376811976</td>
+<td align="left">6901063049</td>
+<td align="left">SARA</td>
+<td align="left">CRYSTAL</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1386166890</td>
+<td align="left">0446523989</td>
+<td align="left">KARI</td>
+<td align="left">SUDFELD</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1386999597</td>
+<td align="left">3678821451</td>
+<td align="left">ALANA</td>
+<td align="left">NEVARES</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1396758520</td>
+<td align="left">8729261144</td>
+<td align="left">CRAIG</td>
+<td align="left">HURWITZ</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1396989059</td>
+<td align="left">8921259557</td>
+<td align="left">MARY</td>
+<td align="left">HALLORAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1407068141</td>
+<td align="left">7416040043</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">SAKAL</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1407090095</td>
+<td align="left">8820376502</td>
+<td align="left">ADERONKE</td>
+<td align="left">ADENIYI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1407937485</td>
+<td align="left">4688634256</td>
+<td align="left">KRISTIN</td>
+<td align="left">AMBLER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1417130410</td>
+<td align="left">0749332229</td>
+<td align="left">HANNA</td>
+<td align="left">SLIM</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1417242348</td>
+<td align="left">3476825829</td>
+<td align="left">BARTLOMIEJ</td>
+<td align="left">SZCZECH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1417482027</td>
+<td align="left">8820363880</td>
+<td align="left">RACHAEL</td>
+<td align="left">HITE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1417487273</td>
+<td align="left">5496027294</td>
+<td align="left">BRENDAN</td>
+<td align="left">THOMS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1427027549</td>
+<td align="left">3678487782</td>
+<td align="left">JOHN</td>
+<td align="left">DEJORDY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1427175140</td>
+<td align="left">7719135409</td>
+<td align="left">CARA</td>
+<td align="left">SOPER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1437183183</td>
+<td align="left">6406907435</td>
+<td align="left">DARCI</td>
+<td align="left">GAIOTTI-GRUBBS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1447539507</td>
+<td align="left">4789802299</td>
+<td align="left">KRISTIN</td>
+<td align="left">MACK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1457745903</td>
+<td align="left">5193028496</td>
+<td align="left">CURTIS</td>
+<td align="left">CLEVELAND</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1457757221</td>
+<td align="left">3375856784</td>
+<td align="left">KRISTINE</td>
+<td align="left">ALIX</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1477556181</td>
+<td align="left">4789682253</td>
+<td align="left">PATRICK</td>
+<td align="left">ROWLEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1477560811</td>
+<td align="left">9436167921</td>
+<td align="left">PAUL</td>
+<td align="left">COTTON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1477673713</td>
+<td align="left">1355477555</td>
+<td align="left">MICHAEL</td>
+<td align="left">LIEBERTH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1477872398</td>
+<td align="left">4082982954</td>
+<td align="left">BRANDON</td>
+<td align="left">LIEBELT</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1497712541</td>
+<td align="left">8921012303</td>
+<td align="left">WOLODYMYR</td>
+<td align="left">BULA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1497803175</td>
+<td align="left">1456455567</td>
+<td align="left">GINGER</td>
+<td align="left">GILLETTE-KENT</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1497945596</td>
+<td align="left">4789760976</td>
+<td align="left">SEEMA</td>
+<td align="left">LODHA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1508949009</td>
+<td align="left">8527200872</td>
+<td align="left">JULIE</td>
+<td align="left">ANDERSON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1518161496</td>
+<td align="left">1759477144</td>
+<td align="left">ALBERT</td>
+<td align="left">IMOBERSTEG</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1528051000</td>
+<td align="left">7214928944</td>
+<td align="left">DAVID</td>
+<td align="left">WAGAR</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1538173869</td>
+<td align="left">0547299091</td>
+<td align="left">IL</td>
+<td align="left">CHON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1538502901</td>
+<td align="left">6800181504</td>
+<td align="left">LAURA</td>
+<td align="left">MULVEY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1548374382</td>
+<td align="left">9537283122</td>
+<td align="left">DOUGLAS</td>
+<td align="left">DIER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1558604272</td>
+<td align="left">1355644659</td>
+<td align="left">SUSANNA</td>
+<td align="left">THACH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1558857763</td>
+<td align="left">7719239888</td>
+<td align="left">DEVON</td>
+<td align="left">MCCABE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1568467918</td>
+<td align="left">0446262398</td>
+<td align="left">WILLIAM</td>
+<td align="left">BAUER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1578902649</td>
+<td align="left">9335376631</td>
+<td align="left">WILLIAM</td>
+<td align="left">PREVO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1578981098</td>
+<td align="left">9537461116</td>
+<td align="left">KAITLYN</td>
+<td align="left">BARRETT</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1609130681</td>
+<td align="left">4688942147</td>
+<td align="left">CLAYTON</td>
+<td align="left">WILBURN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1609820158</td>
+<td align="left">1456333772</td>
+<td align="left">ALYAMAN</td>
+<td align="left">SAEED</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1609832096</td>
+<td align="left">2668561168</td>
+<td align="left">DAVID</td>
+<td align="left">KANDATH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1629203559</td>
+<td align="left">6204091465</td>
+<td align="left">JULIE</td>
+<td align="left">VIETH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1629280896</td>
+<td align="left">3173770591</td>
+<td align="left">JENNIFER</td>
+<td align="left">BELLER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1629606363</td>
+<td align="left">0547673287</td>
+<td align="left">JON</td>
+<td align="left">SLEEPER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1639183213</td>
+<td align="left">9537184320</td>
+<td align="left">RICHARD</td>
+<td align="left">MCKEEVER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1649295254</td>
+<td align="left">0547228009</td>
+<td align="left">EPHRAIM</td>
+<td align="left">BACK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1649344805</td>
+<td align="left">1254398753</td>
+<td align="left">JAMES</td>
+<td align="left">MOTLAGH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1649664913</td>
+<td align="left">6002144482</td>
+<td align="left">JOSEPH</td>
+<td align="left">KENNEDY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1659563906</td>
+<td align="left">7214025295</td>
+<td align="left">ERIC</td>
+<td align="left">GORMAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1659635944</td>
+<td align="left">8921235227</td>
+<td align="left">CARLY</td>
+<td align="left">SLEEPER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1669032470</td>
+<td align="left">5496083545</td>
+<td align="left">ELIZABETH</td>
+<td align="left">ANDERSON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1669433413</td>
+<td align="left">3274712070</td>
+<td align="left">JOSEPH</td>
+<td align="left">PIERSON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1689736720</td>
+<td align="left">1254525835</td>
+<td align="left">JULIO</td>
+<td align="left">LEMOS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1699731893</td>
+<td align="left">1658385091</td>
+<td align="left">MACAULAY</td>
+<td align="left">ONUIGBO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1699793539</td>
+<td align="left">7810930609</td>
+<td align="left">IQBAL</td>
+<td align="left">BASHIR</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1700204922</td>
+<td align="left">5991006751</td>
+<td align="left">DAVID</td>
+<td align="left">CHRISTENSEN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1710203765</td>
+<td align="left">4486887007</td>
+<td align="left">PETER</td>
+<td align="left">RATTNER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1710320056</td>
+<td align="left">8123313483</td>
+<td align="left">MARTA</td>
+<td align="left">KOKOSZYNSKA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1710397567</td>
+<td align="left">8123354040</td>
+<td align="left">MICHAL</td>
+<td align="left">NOWAK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1710920186</td>
+<td align="left">1254341555</td>
+<td align="left">SHANNON</td>
+<td align="left">MCMEEKIN-HAGADORN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1720091861</td>
+<td align="left">6002882768</td>
+<td align="left">JOEL</td>
+<td align="left">WOLKOWICZ</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1720187537</td>
+<td align="left">2264336411</td>
+<td align="left">CHARLES</td>
+<td align="left">VOLK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1730146804</td>
+<td align="left">6103830583</td>
+<td align="left">ANTHONY</td>
+<td align="left">CONTI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1730163619</td>
+<td align="left">2668511080</td>
+<td align="left">ANNA</td>
+<td align="left">YOUNGBLOOD</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1730177825</td>
+<td align="left">3072543610</td>
+<td align="left">AMY</td>
+<td align="left">HOGAN MOULTON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1740249226</td>
+<td align="left">8729082334</td>
+<td align="left">MARK</td>
+<td align="left">BISANZO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1740297548</td>
+<td align="left">0648249979</td>
+<td align="left">KARIE</td>
+<td align="left">DEMING</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1750335014</td>
+<td align="left">6002861804</td>
+<td align="left">GAVIN</td>
+<td align="left">NOBLE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1750940151</td>
+<td align="left">9638404296</td>
+<td align="left">HOLLY</td>
+<td align="left">BACHILAS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1760527113</td>
+<td align="left">4789784992</td>
+<td align="left">NICOLAS</td>
+<td align="left">KARAM</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1760559546</td>
+<td align="left">6204999535</td>
+<td align="left">MICHAEL</td>
+<td align="left">HAGADORN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1770068371</td>
+<td align="left">1658615281</td>
+<td align="left">LOREN</td>
+<td align="left">ALLEN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1770689986</td>
+<td align="left">7214905645</td>
+<td align="left">GLENN</td>
+<td align="left">PIZARRO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1780070060</td>
+<td align="left">6507158896</td>
+<td align="left">RYAN</td>
+<td align="left">WILSON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1790710887</td>
+<td align="left">3072791193</td>
+<td align="left">KENNETH</td>
+<td align="left">HARRIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1801158324</td>
+<td align="left">0042464570</td>
+<td align="left">ASHLEY</td>
+<td align="left">WEISMAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1801346796</td>
+<td align="left">5193095248</td>
+<td align="left">MORGAN</td>
+<td align="left">MERCHAND</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1801800529</td>
+<td align="left">7517092125</td>
+<td align="left">FRANCES</td>
+<td align="left">BOLLINGER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1801893318</td>
+<td align="left">3577568724</td>
+<td align="left">ROB</td>
+<td align="left">DEMURO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1801944509</td>
+<td align="left">6406032705</td>
+<td align="left">LAURA</td>
+<td align="left">SCHNED</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1811952583</td>
+<td align="left">9931092434</td>
+<td align="left">PASQUALINO</td>
+<td align="left">CAPUTO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1811989916</td>
+<td align="left">2769469485</td>
+<td align="left">DIEGO</td>
+<td align="left">GRINBERG-FUNES</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1821547290</td>
+<td align="left">5496126690</td>
+<td align="left">EMILY</td>
+<td align="left">BURNHAM</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1831197268</td>
+<td align="left">3971578030</td>
+<td align="left">JONATHAN</td>
+<td align="left">DESANTIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1831552413</td>
+<td align="left">9739467762</td>
+<td align="left">LEILA</td>
+<td align="left">AMINI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1841268836</td>
+<td align="left">8224089719</td>
+<td align="left">JOHN</td>
+<td align="left">HOMER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1851886451</td>
+<td align="left">4486057981</td>
+<td align="left">SALAM</td>
+<td align="left">HAWA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1861437956</td>
+<td align="left">8022047935</td>
+<td align="left">SONYA</td>
+<td align="left">SIDHU-IZZO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1861470247</td>
+<td align="left">0143386862</td>
+<td align="left">JORDAN</td>
+<td align="left">SHIP</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1861757064</td>
+<td align="left">6800129123</td>
+<td align="left">VINCENT</td>
+<td align="left">PERSAUD</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1861797193</td>
+<td align="left">3577797349</td>
+<td align="left">MOAZ</td>
+<td align="left">ABULFARAJ</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1861869950</td>
+<td align="left">9133437122</td>
+<td align="left">ASHLEY</td>
+<td align="left">WILLIAMS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1861936403</td>
+<td align="left">7012265135</td>
+<td align="left">MATTHEW</td>
+<td align="left">BASKIND</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1871053918</td>
+<td align="left">3577896372</td>
+<td align="left">CHANCE</td>
+<td align="left">SULLIVAN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1871589150</td>
+<td align="left">3375457203</td>
+<td align="left">GEORGIA</td>
+<td align="left">ELTABBAKH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1871839035</td>
+<td align="left">8729223235</td>
+<td align="left">NIKOLE</td>
+<td align="left">SLOWICK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1881139863</td>
+<td align="left">4486930641</td>
+<td align="left">GRANT</td>
+<td align="left">SHANNON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1902874902</td>
+<td align="left">5991708208</td>
+<td align="left">EUGENE</td>
+<td align="left">CASSONE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1902981871</td>
+<td align="left">6709886799</td>
+<td align="left">ROGER</td>
+<td align="left">ISHAC</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1912439399</td>
+<td align="left">4082033840</td>
+<td align="left">SAMUEL</td>
+<td align="left">PASKIN</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1912905068</td>
+<td align="left">2062482045</td>
+<td align="left">EUGENE</td>
+<td align="left">BYRNE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1922014562</td>
+<td align="left">6103813993</td>
+<td align="left">CHRISTOPHER</td>
+<td align="left">WOLFE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1922177294</td>
+<td align="left">6608991377</td>
+<td align="left">JAMES</td>
+<td align="left">TODT</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1922391077</td>
+<td align="left">4789861204</td>
+<td align="left">JONATHAN</td>
+<td align="left">RIDDELL</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1922553361</td>
+<td align="left">9133408479</td>
+<td align="left">AIMEE</td>
+<td align="left">CLINTON</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1942295605</td>
+<td align="left">2062410533</td>
+<td align="left">WILLIAM</td>
+<td align="left">REYNOLDS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1942730023</td>
+<td align="left">1254693153</td>
+<td align="left">YVONNE</td>
+<td align="left">DAVIS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1952617995</td>
+<td align="left">5092945105</td>
+<td align="left">VLADA</td>
+<td align="left">ALEXEEVA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1952763575</td>
+<td align="left">2961797543</td>
+<td align="left">JAMES</td>
+<td align="left">EAST</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1962433441</td>
+<td align="left">1456327659</td>
+<td align="left">KENNETH</td>
+<td align="left">CORSE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1962473397</td>
+<td align="left">9931204500</td>
+<td align="left">DEBRA</td>
+<td align="left">CLARK</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1962551150</td>
+<td align="left">9032000914</td>
+<td align="left">NANCY</td>
+<td align="left">CAFFREY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1962611962</td>
+<td align="left">9032375761</td>
+<td align="left">PETER</td>
+<td align="left">HOLOCH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1962718551</td>
+<td align="left">6507083185</td>
+<td align="left">WAJIH</td>
+<td align="left">AKSAMAWATI DIT ARJA</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1972174381</td>
+<td align="left">0244638047</td>
+<td align="left">KAYLA</td>
+<td align="left">NAPPER</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1972542389</td>
+<td align="left">1153329578</td>
+<td align="left">JOSEPH</td>
+<td align="left">ARGUELLES</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1972703288</td>
+<td align="left">1850562984</td>
+<td align="left">TIMOTHY</td>
+<td align="left">ZAGAR</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1982606984</td>
+<td align="left">6901872548</td>
+<td align="left">GREGORY</td>
+<td align="left">KELLY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1992142939</td>
+<td align="left">8527208735</td>
+<td align="left">ALEXANDRA</td>
+<td align="left">MESSERLI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1992261887</td>
+<td align="left">4486981958</td>
+<td align="left">SERGIO</td>
+<td align="left">APUZZO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+</tbody>
+</table>
 <p>That returns 174 individual providers affiliated with the Hospital.
 Now the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
-<span><span class="co">#&gt;   npi     pac_id_ind first_name middle_name last_name facility_type facility_ccn</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 139698… 8921259557 MARY       K           HALLORAN  Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 153817… 0547299091 IL         JUN         CHON      Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 180189… 3577568724 ROB        L           DEMURO    Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: parent_ccn &lt;chr&gt;</span></span></span></code></pre>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="13%">
+<col width="13%">
+<col width="13%">
+<col width="12%">
+<col width="17%">
+<col width="16%">
+<col width="13%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id_ind</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">facility_type</th>
+<th align="left">facility_ccn</th>
+<th align="left">parent_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1396989059</td>
+<td align="left">8921259557</td>
+<td align="left">MARY</td>
+<td align="left">HALLORAN</td>
+<td align="left">Nursing home</td>
+<td align="left">33Z302</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1538173869</td>
+<td align="left">0547299091</td>
+<td align="left">IL</td>
+<td align="left">CHON</td>
+<td align="left">Nursing home</td>
+<td align="left">33Z302</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1801893318</td>
+<td align="left">3577568724</td>
+<td align="left">ROB</td>
+<td align="left">DEMURO</td>
+<td align="left">Nursing home</td>
+<td align="left">33Z302</td>
+<td align="left">331302</td>
+</tr>
+</tbody>
+</table>
 <p>That returns three more affiliated individual providers that practice
 in the Hospital’s nursing home. An alphanumeric CCN represents a
 sub-unit of a Hospital, here a Nursing Home. We would get the same
 result if we’d set the <code>parent_ccn</code> argument to the numeric
 CCN:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
-<span><span class="co">#&gt;   npi     pac_id_ind first_name middle_name last_name facility_type facility_ccn</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 139698… 8921259557 MARY       K           HALLORAN  Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 153817… 0547299091 IL         JUN         CHON      Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 180189… 3577568724 ROB        L           DEMURO    Nursing home  33Z302      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: parent_ccn &lt;chr&gt;</span></span></span></code></pre>
+<pre class="{r"><code><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>parent_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre>
   </main>
 </div>
 

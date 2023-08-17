@@ -52,11 +52,10 @@
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
 <li class="nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-vignettes">Vignettes</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
+    <a class="dropdown-item" href="../articles/linking_providers.html">Linking Providers</a>
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
-    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -140,7 +139,11 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk</a></span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in if (is.character(txt) &amp;&amp; length(txt) == 1 &amp;&amp; nchar(txt, type = "bytes") &lt; : missing value where TRUE/FALSE needed</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 4</span></span></span>
+<span><span class="co">#&gt;   medicare_specialty_code medicare_specialty_type   taxonomy_code</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2                       Physician/General Surgery 2086S0102X   </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: taxonomy_description &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">provider</span><span class="fu">::</span><span class="va"><a href="../reference/nucc_taxonomy_230.html">nucc_taxonomy_230</a></span></span>
@@ -163,24 +166,24 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
 <h3 id="api-data-dictionary">API Data Dictionary<a class="anchor" aria-label="anchor" href="#api-data-dictionary"></a>
 </h3>
 <p><br></p>
-<div id="ubmoerdcdl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="davhijuwiv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#ubmoerdcdl table {
+#davhijuwiv table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ubmoerdcdl thead, #ubmoerdcdl tbody, #ubmoerdcdl tfoot, #ubmoerdcdl tr, #ubmoerdcdl td, #ubmoerdcdl th {
+#davhijuwiv thead, #davhijuwiv tbody, #davhijuwiv tfoot, #davhijuwiv tr, #davhijuwiv td, #davhijuwiv th {
   border-style: none;
 }
 
-#ubmoerdcdl p {
+#davhijuwiv p {
   margin: 0;
   padding: 0;
 }
 
-#ubmoerdcdl .gt_table {
+#davhijuwiv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -206,12 +209,12 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-left-color: #D3D3D3;
 }
 
-#ubmoerdcdl .gt_caption {
+#davhijuwiv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ubmoerdcdl .gt_title {
+#davhijuwiv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -223,7 +226,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-width: 0;
 }
 
-#ubmoerdcdl .gt_subtitle {
+#davhijuwiv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -235,7 +238,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-top-width: 0;
 }
 
-#ubmoerdcdl .gt_heading {
+#davhijuwiv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -247,13 +250,13 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ubmoerdcdl .gt_bottom_border {
+#davhijuwiv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_col_headings {
+#davhijuwiv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -268,7 +271,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ubmoerdcdl .gt_col_heading {
+#davhijuwiv .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -288,7 +291,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   overflow-x: hidden;
 }
 
-#ubmoerdcdl .gt_column_spanner_outer {
+#davhijuwiv .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -300,15 +303,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 4px;
 }
 
-#ubmoerdcdl .gt_column_spanner_outer:first-child {
+#davhijuwiv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ubmoerdcdl .gt_column_spanner_outer:last-child {
+#davhijuwiv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ubmoerdcdl .gt_column_spanner {
+#davhijuwiv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -320,11 +323,11 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   width: 100%;
 }
 
-#ubmoerdcdl .gt_spanner_row {
+#davhijuwiv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ubmoerdcdl .gt_group_heading {
+#davhijuwiv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -350,7 +353,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   text-align: left;
 }
 
-#ubmoerdcdl .gt_empty_group_heading {
+#davhijuwiv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -365,15 +368,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   vertical-align: middle;
 }
 
-#ubmoerdcdl .gt_from_md > :first-child {
+#davhijuwiv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ubmoerdcdl .gt_from_md > :last-child {
+#davhijuwiv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ubmoerdcdl .gt_row {
+#davhijuwiv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -392,7 +395,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   overflow-x: hidden;
 }
 
-#ubmoerdcdl .gt_stub {
+#davhijuwiv .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -405,7 +408,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ubmoerdcdl .gt_stub_row_group {
+#davhijuwiv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -419,15 +422,15 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   vertical-align: top;
 }
 
-#ubmoerdcdl .gt_row_group_first td {
+#davhijuwiv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ubmoerdcdl .gt_row_group_first th {
+#davhijuwiv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ubmoerdcdl .gt_summary_row {
+#davhijuwiv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -437,16 +440,16 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ubmoerdcdl .gt_first_summary_row {
+#davhijuwiv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_first_summary_row.thick {
+#davhijuwiv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ubmoerdcdl .gt_last_summary_row {
+#davhijuwiv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -456,7 +459,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_grand_summary_row {
+#davhijuwiv .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -466,7 +469,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ubmoerdcdl .gt_first_grand_summary_row {
+#davhijuwiv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -476,7 +479,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-top-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_last_grand_summary_row_top {
+#davhijuwiv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -486,11 +489,11 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_striped {
+#davhijuwiv .gt_striped {
   background-color: #FEEDEC;
 }
 
-#ubmoerdcdl .gt_table_body {
+#davhijuwiv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -499,7 +502,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-bottom-color: #5F5F5F;
 }
 
-#ubmoerdcdl .gt_footnotes {
+#davhijuwiv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -513,7 +516,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ubmoerdcdl .gt_footnote {
+#davhijuwiv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -522,7 +525,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ubmoerdcdl .gt_sourcenotes {
+#davhijuwiv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -536,7 +539,7 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   border-right-color: #D3D3D3;
 }
 
-#ubmoerdcdl .gt_sourcenote {
+#davhijuwiv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -544,63 +547,63 @@ Provider and Supplier Taxonomy Crosswalk</a></li>
   padding-right: 5px;
 }
 
-#ubmoerdcdl .gt_left {
+#davhijuwiv .gt_left {
   text-align: left;
 }
 
-#ubmoerdcdl .gt_center {
+#davhijuwiv .gt_center {
   text-align: center;
 }
 
-#ubmoerdcdl .gt_right {
+#davhijuwiv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ubmoerdcdl .gt_font_normal {
+#davhijuwiv .gt_font_normal {
   font-weight: normal;
 }
 
-#ubmoerdcdl .gt_font_bold {
+#davhijuwiv .gt_font_bold {
   font-weight: bold;
 }
 
-#ubmoerdcdl .gt_font_italic {
+#davhijuwiv .gt_font_italic {
   font-style: italic;
 }
 
-#ubmoerdcdl .gt_super {
+#davhijuwiv .gt_super {
   font-size: 65%;
 }
 
-#ubmoerdcdl .gt_footnote_marks {
+#davhijuwiv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ubmoerdcdl .gt_asterisk {
+#davhijuwiv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ubmoerdcdl .gt_indent_1 {
+#davhijuwiv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ubmoerdcdl .gt_indent_2 {
+#davhijuwiv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ubmoerdcdl .gt_indent_3 {
+#davhijuwiv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ubmoerdcdl .gt_indent_4 {
+#davhijuwiv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ubmoerdcdl .gt_indent_5 {
+#davhijuwiv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
