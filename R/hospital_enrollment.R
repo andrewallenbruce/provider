@@ -128,17 +128,17 @@ hospital_enrollment <- function(npi               = NULL,
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
       dplyr::select(npi,
-                    enroll_id              = enrollment_id,
-                    enroll_state           = enrollment_state,
-                    specialty_code         = provider_type_code,
-                    specialty_desc         = provider_type_text,
-                    facility_ccn           = ccn,
                     pac_id_org             = associate_id,
+                    enroll_id              = enrollment_id,
+                    facility_ccn           = ccn,
+                    specialty_code         = provider_type_code,
+                    specialty              = provider_type_text,
                     organization_name,
                     doing_business_as      = doing_business_as_name,
-                    incorp_date            = incorporation_date,
-                    incorp_state           = incorporation_state,
-                    org_structure          = organization_type_structure,
+                    enroll_state           = enrollment_state,
+                    incorporation_date,
+                    incorporation_state,
+                    organization_structure = organization_type_structure,
                     org_other              = organization_other_type_text,
                     address,
                     city,
@@ -162,7 +162,10 @@ hospital_enrollment <- function(npi               = NULL,
                     sg_specialty_hospital  = subgroup_specialty_hospital,
                     sg_other               = subgroup_other,
                     sg_other_text          = subgroup_other_text) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+      janitor::remove_empty(which = c("rows", "cols")) |>
+      tidyr::nest(address = dplyr::any_of(c("address", "city", "state", "zip", "location_type")),
+                  incorporation = dplyr::contains("incorporation"),
+                  subgroups = dplyr::contains("sg_"))
 
     }
   return(results)

@@ -38,12 +38,12 @@ navbar:
       text: Reference
       href: reference/index.html
     articles:
-      text: Articles
+      text: Vignettes
       menu:
+      - text: Linking Providers
+        href: articles/linking_providers.html
       - text: API Overviews
         href: articles/api-overviews.html
-      - text: Linking Providers
-      - href: articles/linking_providers.html
       - text: Geocoding
         href: articles/geocoding.html
     news:

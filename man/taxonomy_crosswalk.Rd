@@ -2,61 +2,69 @@
 % Please edit documentation in R/taxonomy_crosswalk.R
 \name{taxonomy_crosswalk}
 \alias{taxonomy_crosswalk}
-\title{Search the Medicare Provider and Supplier Taxonomy Crosswalk API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Taxonomy to Medicare Specialty Crosswalk}
 \usage{
 taxonomy_crosswalk(
   taxonomy_code = NULL,
-  taxonomy_desc = NULL,
-  specialty_code = NULL,
-  specialty_desc = NULL,
+  taxonomy_description = NULL,
+  medicare_specialty_code = NULL,
+  medicare_specialty_type = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{taxonomy_code}{The taxonomy codes the providers use}
+\item{taxonomy_code}{Taxonomy code}
 
-\item{taxonomy_desc}{The description of the taxonomy that the providers use}
+\item{taxonomy_description}{Taxonomy code description}
 
-\item{specialty_code}{Code that corresponds to the listed Medicare specialty}
+\item{medicare_specialty_code}{Medicare specialty code}
 
-\item{specialty_desc}{Description of the Medicare Provider/Supplier Type}
+\item{medicare_specialty_type}{Medicare specialty code description}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-A list of the type of providers and suppliers with the
-proper taxonomy code eligible for medicare programs.
-}
-\details{
-The Medicare Provider and Supplier Taxonomy Crosswalk dataset
-lists the providers and suppliers eligible to enroll in Medicare
-programs with the proper healthcare provider taxonomy code. This data
-includes the Medicare specialty codes, if available, provider/supplier
-type description, taxonomy code, and the taxonomy description. This
-dataset is derived from information gathered from National Plan and
-Provider Enumerator System (NPPES) and Provider Enrollment, Chain and
-Ownership System (PECOS).
-\subsection{Links}{
+\code{taxonomy_crosswalk()} allows you to search the types of providers and
+suppliers eligible for Medicare programs by taxonomy code or Medicare
+specialty type code.
+\subsection{Taxonomy Codes}{
+
+The \strong{Healthcare Provider Taxonomy Code Set} is a hierarchical HIPAA
+standard code set designed to categorize the type, classification, and
+specialization of health care providers. It consists of two sections:
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Medicare Provider and Supplier Taxonomy Crosswalk API}
-\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}{Medicare Find Your Taxonomy Code}
+\item Individuals and Groups of Individuals
+\item Non-Individuals
+}
+
+When applying for an NPI, a provider must report the taxonomy that most
+closely describes their type/classification/specialization. In some
+situations, a provider may need to report more than one taxonomy but must
+indicate one of them as the primary. The codes selected may not be the same
+as categorizations used by Medicare for enrollment.
 }
 }
+\section{Links}{
+
+\itemize{
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Provider and Supplier Taxonomy Crosswalk}
+\item \href{https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology}{Taxonomy Crosswalk Methodology}
+\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}{Find Your Taxonomy Code}
 }
-\note{
-Update Frequency: \strong{Weekly}
 }
+
+\section{Update Frequency}{
+ Weekly
+}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-taxonomy_crosswalk(specialty_code = "B4[14]")
-taxonomy_crosswalk(specialty_desc = "Rehabilitation Agency")
+taxonomy_crosswalk(medicare_specialty_code = "B4[14]")
+taxonomy_crosswalk(medicare_specialty_type = "Rehabilitation Agency")
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
-taxonomy_crosswalk(taxonomy_desc = "Agencies/Hospice Care Community Based")
+taxonomy_crosswalk(taxonomy_description = "Agencies/Hospice Care Community Based")
 \dontshow{\}) # examplesIf}
 }
