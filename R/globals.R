@@ -112,7 +112,6 @@ utils::globalVariables(c(
   "identifier", # <fac_affil_id>
   "distro", # <hospital_enrollment>
   "y", # <hospital_enrollment>
-  "incorporation_date", # <hospital_enrollment>
   "address_line_1", # <hospital_enrollment>
   "address_line_2", # <hospital_enrollment>
   "enrollment_id", # <hospital_enrollment>
@@ -121,8 +120,8 @@ utils::globalVariables(c(
   "provider_type_text", # <hospital_enrollment>
   "ccn", # <hospital_enrollment>
   "associate_id", # <hospital_enrollment>
-  "organization_name", # <hospital_enrollment>
   "doing_business_as_name", # <hospital_enrollment>
+  "incorporation_date", # <hospital_enrollment>
   "incorporation_state", # <hospital_enrollment>
   "organization_type_structure", # <hospital_enrollment>
   "organization_other_type_text", # <hospital_enrollment>
@@ -132,20 +131,20 @@ utils::globalVariables(c(
   "location_other_type_text", # <hospital_enrollment>
   "multiple_npi_flag", # <hospital_enrollment>
   "proprietary_nonprofit", # <hospital_enrollment>
-  "subgroup__general", # <hospital_enrollment>
-  "subgroup__acute_care", # <hospital_enrollment>
-  "subgroup__alcohol_drug", # <hospital_enrollment>
-  "subgroup__childrens", # <hospital_enrollment>
-  "subgroup__long_term", # <hospital_enrollment>
-  "subgroup__short_term", # <hospital_enrollment>
-  "subgroup__psychiatric", # <hospital_enrollment>
-  "subgroup__psychiatric_unit", # <hospital_enrollment>
-  "subgroup__rehabilitation", # <hospital_enrollment>
-  "subgroup__rehabilitation_unit", # <hospital_enrollment>
-  "subgroup__swing_bed_approved", # <hospital_enrollment>
-  "subgroup__specialty_hospital", # <hospital_enrollment>
-  "subgroup__other", # <hospital_enrollment>
-  "subgroup__other_text", # <hospital_enrollment>
+  "subgroup_general", # <hospital_enrollment>
+  "subgroup_acute_care", # <hospital_enrollment>
+  "subgroup_alcohol_drug", # <hospital_enrollment>
+  "subgroup_childrens", # <hospital_enrollment>
+  "subgroup_long_term", # <hospital_enrollment>
+  "subgroup_short_term", # <hospital_enrollment>
+  "subgroup_psychiatric", # <hospital_enrollment>
+  "subgroup_psychiatric_unit", # <hospital_enrollment>
+  "subgroup_rehabilitation", # <hospital_enrollment>
+  "subgroup_rehabilitation_unit", # <hospital_enrollment>
+  "subgroup_swing_bed_approved", # <hospital_enrollment>
+  "subgroup_specialty_hospital", # <hospital_enrollment>
+  "subgroup_other", # <hospital_enrollment>
+  "subgroup_other_text", # <hospital_enrollment>
   "y", # <mips_group_2021>
   "org_nm", # <mips_group_2021>
   "aco_id_1", # <mips_group_2021>
@@ -470,6 +469,7 @@ utils::globalVariables(c(
   "provider_type_cd", # <provider_enrollment>
   "provider_type_desc", # <provider_enrollment>
   "state_cd", # <provider_enrollment>
+  "org_name", # <provider_enrollment>
   "mdl_name", # <provider_enrollment>
   "gndr_sw", # <provider_enrollment>
   "distro", # <quality_payment>
@@ -479,7 +479,6 @@ utils::globalVariables(c(
   "practice_size", # <quality_payment>
   "clinician_specialty", # <quality_payment>
   "years_in_medicare", # <quality_payment>
-  "participation_type", # <quality_payment>
   "medicare_patients", # <quality_payment>
   "allowed_charges", # <quality_payment>
   "services", # <quality_payment>

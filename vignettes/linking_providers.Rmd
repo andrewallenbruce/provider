@@ -1,0 +1,77 @@
+---
+title: "Linking Providers"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Linking Providers}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse  = FALSE,
+  echo      = TRUE, 
+  message   = FALSE, 
+  warning   = FALSE,
+  error     = TRUE,
+  comment   = "#>",
+  dpi       = 300, 
+  out.width = "100%",
+  fig.path  = "man/figures/README-"
+)
+```
+
+```{r setup}
+library(provider)
+library(dplyr)
+library(purrr)
+```
+
+
+Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. Looking it up in the **Provider Enrollment** API gives us several avenues to go down:
+
+```{r}
+provider_enrollment(organization_name = "Elizabethtown Community Hospital")
+```
+
+
+First, we can see that it has one PAC ID, three different organizational NPIs, and four different Enrollment IDs. Looking it up in the **Hospital Enrollment** API gives us even more detail:
+
+```{r}
+hospital_enrollment(organization_name = "Elizabethtown Community Hospital")
+```
+
+The **Hospital Enrollment** API includes only Medicare Part A (hospital) providers, so we only get two rows back, but those include a new data point: two facility CCNs. Plugging those into the **Facility Affiliations** API, we can retrieve information on the individual providers practicing at this hospital. First, the all-numeric CCN (`331302`):
+
+```{r}
+facility_affiliations(facility_ccn = 331302)
+```
+
+That returns 174 individual providers affiliated with the Hospital. Now the alphanumeric CCN (`33Z302`):
+
+
+```{r}
+facility_affiliations(facility_ccn = "33Z302")
+```
+
+That returns three more affiliated individual providers that practice in the Hospital's nursing home. An alphanumeric CCN represents a sub-unit of a Hospital, here a Nursing Home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN:
+
+
+```{r}
+facility_affiliations(parent_ccn = 331302)
+```
+
+
+
+```{r eval=FALSE, echo=FALSE}
+unique(elizabethtown$npi) |> 
+  map(\(x) nppes_npi(npi = x)) |> 
+  list_rbind() |> 
+  filter(purpose != "MAILING")
+```
+
+
+
+
+
+

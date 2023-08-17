@@ -2,36 +2,33 @@
 % Please edit documentation in R/qpp.R
 \name{quality_payment}
 \alias{quality_payment}
-\title{Search the CMS Quality Payment Program Experience API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Quality Payment Program Experience}
 \usage{
 quality_payment(
   year,
   npi = NULL,
   state = NULL,
   specialty = NULL,
-  part_type = NULL,
+  participation_type = NULL,
   tidy = TRUE
 )
 }
 \arguments{
 \item{year}{integer, YYYY, QPP Performance year. Run the helper function
-\code{provider:::quality_payment_years()} to return a vector of currently
+\code{quality_payment_years()} to return a vector of currently
 available years.}
 
 \item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.
 Multiple rows for the same NPI indicate multiple TIN/NPI combinations.}
 
-\item{state}{The State or United States (US) territory code location of the
+\item{state}{The State or US territory code location of the
 TIN associated with the clinician.}
 
 \item{specialty}{The specialty description is an identifier corresponding to
 the type of service that the clinician submitted most on their Medicare
 Part B claims for this TIN/NPI combination.}
 
-\item{part_type}{Indicates the level at which performance data was
+\item{participation_type}{Indicates the level at which performance data was
 collected, submitted or reported for the final score attributed to the
 clinician. This information drives the data displayed for most of the
 remaining fields in this report.}
@@ -55,15 +52,18 @@ and payment adjustments. The dataset provides additional details at the
 TIN/NPI level on what was published in the previous performance year.
 You can sort the data by variables like clinician type, practice size,
 scores, and payment adjustments.
-\subsection{Links}{
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/quality-of-care/quality-payment-program-experience}{Quality Payment Program Experience}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Annually}
 }
-\note{
-Update Frequency: \strong{Annually}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_payment(year = 2020, npi = 1144544834)

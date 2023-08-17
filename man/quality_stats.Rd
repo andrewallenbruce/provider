@@ -2,15 +2,12 @@
 % Please edit documentation in R/qpp.R
 \name{quality_stats}
 \alias{quality_stats}
-\title{Retrieve Program-Wide Statistics from CMS' Quality Payment Program Eligibility API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Program-Wide Statistics from Quality Payment Program}
 \usage{
 quality_stats(year)
 }
 \arguments{
-\item{year}{year}
+\item{year}{QPP program year}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -36,15 +33,18 @@ basic enrollment information, associated organizations, information
 about those organizations, individual and group special status
 information, and in the future, any available Alternative Payment Model
 (APM) affiliations.
-\subsection{Links}{
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Annually}
 }
-\note{
-Update Frequency: \strong{Annually}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_stats(year = 2020)

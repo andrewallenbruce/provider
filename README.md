@@ -28,28 +28,23 @@ milestone](https://img.shields.io/github/milestones/progress/andrewallenbruce/pr
 > provider](https://en.wikipedia.org/wiki/Health_care_provider) data
 > through publicly available APIs & sources.
 
-<br>
-
 ## Installation
 
-You can install the development version of `provider` from
-[GitHub](https://github.com/) with:
+You can install `provider` from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
 pak::pak("andrewallenbruce/provider")
 ```
 
-## Motivation
-
 <br>
+
+## Motivation
 
 The overarching goal of `provider` is to make the experience of
 accessing publicly-available Provider data easier and more consistent
 across a variety of sources. It aims to accomplish this through the
 following general goals, where possible:
-
-<br>
 
 - *Structuring output in the **tidy** framework* as much as is
   reasonably possible, with an option to turn it off by setting
@@ -75,7 +70,7 @@ following general goals, where possible:
 
 API Search functions can be grouped according to the type of data they
 return about a provider: *administrative*, *statistical*, and
-*auxillary.*
+*auxiliary.*
 
 ### Administrative
 
@@ -105,7 +100,7 @@ returned from `physician_by_service()`:
 - `cc_multiple()`
 - `cc_specific()`
 
-### Auxillary
+### Auxiliary
 
 - `order_refer()`: Is a provider eligible to order and refer?
 - `missing_information()`: Is a provider missing Endpoints in the NPPES

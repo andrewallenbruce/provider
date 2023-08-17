@@ -34,6 +34,8 @@ navbar:
       icon: ~
       text: Overview
       href: articles/provider.html
+      text: Linking Providers
+      href: articles/linking_providers.html
     reference:
       text: Reference
       href: reference/index.html

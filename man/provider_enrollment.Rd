@@ -2,50 +2,40 @@
 % Please edit documentation in R/provider_enrollment.R
 \name{provider_enrollment}
 \alias{provider_enrollment}
-\title{Medicare Fee-For-Service Public Provider Enrollment API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Provider Enrollment in Medicare}
 \usage{
 provider_enrollment(
   npi = NULL,
   pac_id = NULL,
   enroll_id = NULL,
   specialty_code = NULL,
-  specialty_desc = NULL,
+  specialty = NULL,
   state = NULL,
   first_name = NULL,
   middle_name = NULL,
   last_name = NULL,
-  org_name = NULL,
+  organization_name = NULL,
   gender = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{npi}{10-digit unique numeric identifier that all providers must obtain
-before enrolling in Medicare; assigned upon application through NPPES.}
+\item{npi}{10-digit National Provider Identifier}
 
-\item{pac_id}{PECOS Provider associate level variable. A 10-digit unique
-numeric identifier assigned to each individual or organization. All
-entity-level information (e.g., TINs, organizational names) is linked
-through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs
-if the individual or organization enrolled multiple times under different
-circumstances.}
+\item{pac_id}{10-digit Provider associate level variable. Links all
+entity-level information and may be associated with multiple enrollment IDs
+if the individual or organization enrolled multiple times.}
 
-\item{enroll_id}{PECOS Provider enrollment ID is a 15-digit unique
-alphanumeric identifier assigned to each new provider enrollment
-application. All enrollment-level information (e.g., enrollment type,
-state, specialty, reassignment of benefits) is linked through the
-Enrollment ID.}
+\item{enroll_id}{15-digit Provider enrollment ID. Assigned to each new
+provider enrollment application. Links all enrollment-level information
+(enrollment type, state, reassignment of benefits).}
 
 \item{specialty_code}{Enrollment primary specialty type code.}
 
-\item{specialty_desc}{Enrollment specialty type description.}
+\item{specialty}{Enrollment specialty type description.}
 
-\item{state}{Enrollment state, abbreviated. Providers enroll at the state
-level, so one \code{pac_id} may be associated with multiple \code{enroll_id} and
-\code{state} values.}
+\item{state}{Enrollment state abbreviation. Since Providers enroll at the state level,
+a PAC ID can be associated with multiple enrollment IDs and states.}
 
 \item{first_name}{Individual provider first name}
 
@@ -53,13 +43,13 @@ level, so one \code{pac_id} may be associated with multiple \code{enroll_id} and
 
 \item{last_name}{Individual provider last name}
 
-\item{org_name}{Organizational provider name}
+\item{organization_name}{Organizational provider name}
 
 \item{gender}{Individual provider gender:
 \itemize{
 \item \code{F}: Female
 \item \code{M}: Male
-\item \code{9}: Unknown
+\item \code{9}: Unknown or Organizational provider
 }}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
@@ -68,55 +58,28 @@ level, so one \code{pac_id} may be associated with multiple \code{enroll_id} and
 \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on a point in time snapshot of enrollment level data
-for providers actively enrolled in Medicare.
-}
-\details{
-The Medicare Fee-For-Service Public Provider Enrollment API includes
-information on providers who are actively approved to bill Medicare.
-}
-\note{
-Update Frequency: \strong{Quarterly}
+\code{provider_enrollment()} allows you to access enrollment level
+data on individual and organizational providers that are actively approved
+to bill Medicare.
 }
 \section{Links}{
 
 \itemize{
-\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Medicare Fee-For-Service Public Provider Enrollment API}
+\item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
+\item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
 }
+}
+
+\section{Update Frequency}{
+ \strong{Quarterly}
 }
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-
-  provider_enrollment(npi = 1417918293,
-  specialty_code = "14-41")
-
-  provider_enrollment(first_name = "DEBRA",
-                      middle_name = "L",
-                      last_name = "FROMER")
-
-  provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
-                      state = "NY",
-                      specialty_code = "00-85")
-
-  provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
-                      state = "AK",
-                      gender = "F")
-
-  provider_enrollment(pac_id = 2860305554,
-                      enroll_id = "I20031110000120",
-                      gender = "9")
-
-  prven <- tibble::tribble(
-  ~fn,                   ~params,
-  "provider_enrollment", list(npi = 1083879860),
-  "provider_enrollment", list(first_name = "MICHAEL",
-                              middle_name = "K",
-                              last_name = "GREENBERG",
-                              state = "MD"),
-  "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
-                              state = "GA"))
-
-  purrr::invoke_map_dfr(prven$fn, prven$params)
+provider_enrollment(npi = 1417918293, specialty_code = "14-41")
+provider_enrollment(first_name = "DEBRA", last_name = "FROMER")
+provider_enrollment(organization_name = "Elizabethtown Community Hospital", state = "NY")
+provider_enrollment(specialty = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
+provider_enrollment(pac_id = 2860305554, gender = "9")
 \dontshow{\}) # examplesIf}
 }

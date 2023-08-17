@@ -2,10 +2,7 @@
 % Please edit documentation in R/order_refer.R
 \name{order_refer}
 \alias{order_refer}
-\title{Search the Medicare Order and Referring API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Ordering and Referring Eligibility for Medicare}
 \usage{
 order_refer(
   npi = NULL,
@@ -19,63 +16,76 @@ order_refer(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI)}
+\item{npi}{10-digit National Provider Identifier}
 
 \item{first_name}{Provider's first name}
 
 \item{last_name}{Provider's last name}
 
-\item{partb}{logical}
+\item{partb}{boolean; eligibility to refer to Medicare Part B}
 
-\item{dme}{logical}
+\item{dme}{boolean; eligibility to order Durable Medical Equipment (DME)}
 
-\item{hha}{logical}
+\item{hha}{boolean; eligibility to refer to a Home Health Agency}
 
-\item{pmd}{logical}
+\item{pmd}{boolean; eligibility to order Power Mobility Devices (PMD)}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{boolean; Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} object containing the search results.
 }
 \description{
-All physicians and non-physician practitioners who are legally
-eligible to order and refer in the Medicare program and who have current
-enrollment records in Medicare.
+\code{order_refer()} allows you to search for physicians and non-physician
+practitioners who are of a type/specialty that is legally eligible to order
+and refer Part B (clinical laboratory and imaging), DME and Part A HHA claims
+in the Medicare program.
+\subsection{Ordering and Referring (or Certifying) Providers}{
+
+\strong{Ordering providers} can order non-physician services for patients.
+\strong{Referring providers} can request items or services Medicare may reimburse
+on behalf of Medicare beneficiaries. To qualify as an ordering and
+referring/certifying provider, a provider must:
+\itemize{
+\item have an \emph{individual} NPI
+\item be enrolled in Medicare in either an \emph{approved} or \emph{opt-out} status
+\item be of an \emph{eligible specialty} type.
 }
-\details{
-The Medicare Order and Referring dataset provides information on
-all physicians and non-physician practitioners, by their National
-Provider Identifier (NPI), who are of a type/specialty that is legally
-eligible to order and refer in the Medicare program and who have current
-enrollment records in Medicare.
-\subsection{Links}{
+
+Providers currently enrolled in Medicare Part B can order and refer. A
+provider that does not want to bill Medicare for their services can still
+order and refer by opting out of Medicare or enrolling solely to order and
+refer. Medicare coverage will then apply when ordering or referring:
+\itemize{
+\item Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+\item Clinical Laboratory Services
+\item Imaging Services
+\item Home Health Services
+}
+}
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
+\item \href{https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying}{CMS.gov: Ordering & Certifying}
+\item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Twice Weekly}
 }
-\note{
-Update Frequency: \strong{Weekly}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+# Search by NPI
 order_refer(npi = 1003026055)
 
-order_refer(last_name = "phadke",
-            first_name = "radhika")
-
-# Unnamed List of NPIs
-c(1003026055, 1316405939, 1720392988,
-  1518184605, 1922056829, 1083879860) |>
-  purrr::map(order_refer) |>
-  purrr::list_rbind()
-
-# Data frame of NPIs
-data.frame(npi = c(1003026055, 1316405939, 1720392988,
-                   1518184605, 1922056829, 1083879860)) |>
-                   dplyr::pull(npi) |>
-                   purrr::map(order_refer) |>
-                   purrr::list_rbind()
+# Search by name and/or filter for certain privileges
+order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\code{\link[=provider_enrollment]{provider_enrollment()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending_applications]{pending_applications()}}
 }

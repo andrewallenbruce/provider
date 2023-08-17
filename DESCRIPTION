@@ -26,8 +26,7 @@ Imports:
     rlang,
     strex,
     tibble,
-    tidyr,
-    tidyselect
+    tidyr
 Suggests: 
     covr,
     campfin,

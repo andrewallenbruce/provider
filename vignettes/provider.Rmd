@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = TRUE,
+  collapse  = FALSE,
   echo      = TRUE, 
   message   = FALSE, 
   warning   = FALSE,
@@ -23,50 +23,36 @@ knitr::opts_chunk$set(
 
 ```{r}
 library(provider)
+library(purrr)
 ```
 
-<br>
 
 The overarching goal of `provider` is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:
 
-<br>
 
-   * *Structuring output in the **tidy** framework* as much as is reasonably possible, with an option to turn it off by setting `tidy = FALSE`.
+   - **Tidy Output**, with an option to turn it off by setting `tidy = FALSE`.
 
-   * *Harmonization of variable names*, for the express purpose of making it easier to understand (and make connections between) each API's output. This will also allow for removal of duplicate information across API output, if desired.
+   - **Variable Standardization**, for the express purpose of making it easier to understand (and make connections between) each API's output. This will also allow for removal of duplicate information across API output, if desired.
    
-   * *Validation checks of inputs*, as is reasonable (e.g, identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only is this simply good practice, it will also prevent unnecessary querying of the APIs.
+   - **Input Validation**. Not only is this simply good practice, it also prevents unnecessary querying of APIs.
    
-   * *Well-written documentation*, containing as many examples as is necessary. Each API's output can be difficult to understand, even for someone with expertise in R, healthcare, or both.
+   - **Helpful Documentation**. Each API's output can be difficult to understand, even for someone with expertise in R, healthcare, or both.
 
 <br>
 
 ## Tidy Output
 
-Each function has a `tidy` argument, set to `TRUE` by default:
+In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html), every column is a variable, every row is an observation, and every cell is a single value. Many of the outputs of these APIs violate this form by storing column headers as values, not variable names.
 
-<br>
+Each function has a `tidy` argument that is set to `TRUE` by default:
 
 ```{r}
-order_refer(npi = 1043477615) |> 
-  dplyr::select(npi, 
-                first_name, 
-                last_name, 
-                "Medicare Part B" = partb,
-                "Home Health Agency (HHA)" = hha,
-                "Durable Medical Equipment (DME)" = dme,
-                "Power Mobility Device (PMD)" = pmd) |> 
-  tidyr::pivot_longer(cols = !c(npi, 
-                                dplyr::contains("name")), 
-                      names_to = "service", 
-                      values_to = "eligible")
+order_refer(npi = 1043477615)
 ```
 
 <br>
 
-Setting it to `FALSE` will return the original output:
-
-<br>
+Setting it to `FALSE` will return the un-tidied output:
 
 ```{r}
 order_refer(npi = 1043477615, tidy = FALSE)
@@ -76,57 +62,36 @@ order_refer(npi = 1043477615, tidy = FALSE)
 
 The `tidy` transformations applied to the output of each function include: 
 
-   * Favoring a long format over wide
-   * `snake_case` for variable names
-   * More descriptive, thematic variable names involving prefixes and a standardized vocabulary across all outputs
-   * Various other quality-of-life data wrangling operations (e.g., replacing empty cells with `NA`, converting year columns to integers, date columns to date type, NPIs to character type)
-
-<br>
+   - Favoring a long format over wide
+   - `snake_case` for variable names
+   - More descriptive, thematic variable names involving prefixes and a standardized vocabulary across all outputs
+   - Various quality-of-life data wrangling (e.g., replacing empty cells with `NA`, converting year columns to integers, date columns to date type, NPIs to character type)
 
 However, in the event that you would prefer to do your own transformations, simply turn it off with `tidy = FALSE`.
 
 <br>
 
-## Available Years Helpers
+## Available Years
 
-Several functions have a required `year` argument. The years available to query might change at any time, so there's an accompanying helper function to retrieve the years available from each API:
-
-<br>
+Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
 
 ```{r}
-# Quality Payment Program
 quality_payment_years()
-
-# Open Payments Program
-open_payments_years()
-
-# Physician and Practitioners
-physician_by_provider_years()
-physician_by_service_years()
-physician_by_geography_years()
-
-# Chronic Conditions
-cc_specific_years()
-cc_multiple_years()
 ```
 
-<br>
-
-They can also be used in a pipeline:
-
-<br>
+These can also be used in a pipeline, for searching all available years:
 
 ```{r}
 quality_payment_years() |> 
-  furrr::future_map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
-  purrr::list_rbind()
+  map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
+  list_rbind()
 ```
 
-<br><br>
+<br>
 
-## APIs
+## Functions
 
-API Search functions can be grouped according to the type of data they return about a provider: *administrative*, *statistical*, and *auxillary.*
+The API Search functions can be grouped according to the type of data that they return about a provider: *administrative*, *statistical*, and *auxiliary.*
 
 ### Administrative
 
@@ -144,7 +109,7 @@ The following return provider-specific stats:
 
    * `physician_by_provider()`: Yearly high-level utilization data.
    * `physician_by_service()`: Yearly detailed utilization data.
-   * `quality_payments()`: Yearly QPP/MIPS performance data.
+   * `quality_payment()`: Yearly QPP/MIPS performance data.
    * `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
    * `open_payments()`: Yearly Open Payments reporting data.
 
@@ -155,12 +120,14 @@ The following return yearly stats useful for comparison against data returned fr
    * `cc_multiple()`
    * `cc_specific()`
 
-### Auxillary
+### Auxiliary
 
    * `order_refer()`: Is a provider eligible to order and refer?
    * `missing_information()`: Is a provider missing Endpoints in the NPPES NPI Registry?
    * `pending_applications()`: Has a provider's Medicare application been processed?
    * `taxonomy_crosswalk()`: Is a provider's specialty eligible to enroll in Medicare?
+   * `quality_stats()`: Yearly QPP/MIPS performance data.
 
 <br>
+
 

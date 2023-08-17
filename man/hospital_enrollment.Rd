@@ -3,9 +3,6 @@
 \name{hospital_enrollment}
 \alias{hospital_enrollment}
 \title{Search the CMS Hospital Enrollments API}
-\source{
-Centers for Medicare & Medicaid Services
-}
 \usage{
 hospital_enrollment(
   npi = NULL,
@@ -14,37 +11,36 @@ hospital_enrollment(
   enroll_state = NULL,
   specialty_code = NULL,
   pac_id_org = NULL,
-  org_name = NULL,
-  dba_name = NULL,
+  organization_name = NULL,
+  doing_business_as = NULL,
   city = NULL,
   state = NULL,
-  zipcode = NULL,
+  zip = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{npi}{Hospital’s National Provider Identifier (NPI)}
+\item{npi}{Hospital’s National Provider Identifier}
 
-\item{facility_ccn}{Hospital’s CMS Certification Number (CCN), formerly called an
-OSCAR Number}
+\item{facility_ccn}{Hospital’s CMS Certification Number (CCN)}
 
 \item{enroll_id}{Hospital’s enrollment ID}
 
 \item{enroll_state}{Hospital’s enrollment state}
 
-\item{specialty_code}{Enrollment application and specialty type code}
+\item{specialty_code}{Enrollment specialty type code}
 
-\item{pac_id_org}{Hospital’s PECOS Associate Control (PAC) ID}
+\item{pac_id_org}{Hospital’s PAC ID}
 
-\item{org_name}{Hospital’s legal business name}
+\item{organization_name}{Hospital’s legal business name}
 
-\item{dba_name}{Hospital’s doing-business-as name}
+\item{doing_business_as}{Hospital’s doing-business-as name}
 
 \item{city}{City of the hospital’s practice location address}
 
-\item{state}{State of the hospital’s practice location address.}
+\item{state}{State of the hospital’s practice location address}
 
-\item{zipcode}{Zip code of the hospital’s practice location address}
+\item{zip}{Zip code of the hospital’s practice location address}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }

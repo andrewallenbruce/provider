@@ -118,19 +118,19 @@ facility_affiliations <- function(npi           = NULL,
 
   # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(
         npi,
-        pac_id       = ind_pac_id,
+        pac_id_ind   = ind_pac_id,
         first_name   = frst_nm,
         middle_name  = mid_nm,
         last_name    = lst_nm,
         suffix       = suff,
         facility_type,
         facility_ccn = facility_afl_ccn,
-        parent_ccn)
+        parent_ccn) |>
+      janitor::remove_empty(which = c("rows", "cols"))
     }
   return(results)
 }

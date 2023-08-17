@@ -2,17 +2,14 @@
 % Please edit documentation in R/qpp.R
 \name{quality_eligibility}
 \alias{quality_eligibility}
-\title{Search the CMS Quality Payment Program Eligibility API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Quality Payment Program Eligibility}
 \usage{
 quality_eligibility(year, npi, tidy = TRUE)
 }
 \arguments{
-\item{year}{integer, YYYY, QPP Performance year.}
+\item{year}{integer, YYYY, QPP eligibility year.}
 
-\item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.}
+\item{npi}{NPI assigned to the clinician when they enrolled in Medicare.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -40,15 +37,18 @@ basic enrollment information, associated organizations, information
 about those organizations, individual and group special status
 information, and in the future, any available Alternative Payment Model
 (APM) affiliations.
-\subsection{Links}{
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Annually}
 }
-\note{
-Update Frequency: \strong{Annually}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_eligibility(year = 2020, npi = 1144544834)

@@ -1,88 +1,54 @@
-#' Medicare Fee-For-Service Public Provider Enrollment API
+#' Provider Enrollment in Medicare
 #'
-#' @description Information on a point in time snapshot of enrollment level data
-#'   for providers actively enrolled in Medicare.
-#'
-#' @details The Medicare Fee-For-Service Public Provider Enrollment API includes
-#'   information on providers who are actively approved to bill Medicare.
+#' @description `provider_enrollment()` allows you to access enrollment level
+#'    data on individual and organizational providers that are actively approved
+#'    to bill Medicare.
 #'
 #' @section Links:
-#' * [Medicare Fee-For-Service Public Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+#' - [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
+#' - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Quarterly**
-#' @param npi 10-digit unique numeric identifier that all providers must obtain
-#'   before enrolling in Medicare; assigned upon application through NPPES.
-#' @param pac_id PECOS Provider associate level variable. A 10-digit unique
-#'   numeric identifier assigned to each individual or organization. All
-#'   entity-level information (e.g., TINs, organizational names) is linked
-#'   through the PAC ID. A PAC ID may be associated with multiple Enrollment IDs
-#'   if the individual or organization enrolled multiple times under different
-#'   circumstances.
-#' @param enroll_id PECOS Provider enrollment ID is a 15-digit unique
-#'   alphanumeric identifier assigned to each new provider enrollment
-#'   application. All enrollment-level information (e.g., enrollment type,
-#'   state, specialty, reassignment of benefits) is linked through the
-#'   Enrollment ID.
+#' @section Update Frequency: **Quarterly**
+#'
+#' @param npi 10-digit National Provider Identifier
+#' @param pac_id 10-digit Provider associate level variable. Links all
+#'   entity-level information and may be associated with multiple enrollment IDs
+#'   if the individual or organization enrolled multiple times.
+#' @param enroll_id 15-digit Provider enrollment ID. Assigned to each new
+#'    provider enrollment application. Links all enrollment-level information
+#'    (enrollment type, state, reassignment of benefits).
 #' @param specialty_code Enrollment primary specialty type code.
-#' @param specialty_desc Enrollment specialty type description.
-#' @param state Enrollment state, abbreviated. Providers enroll at the state
-#'   level, so one `pac_id` may be associated with multiple `enroll_id` and
-#'   `state` values.
+#' @param specialty Enrollment specialty type description.
+#' @param state Enrollment state abbreviation. Since Providers enroll at the state level,
+#'    a PAC ID can be associated with multiple enrollment IDs and states.
 #' @param first_name Individual provider first name
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
-#' @param org_name Organizational provider name
+#' @param organization_name Organizational provider name
 #' @param gender Individual provider gender:
 #'    * `F`: Female
 #'    * `M`: Male
-#'    * `9`: Unknown
+#'    * `9`: Unknown or Organizational provider
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#'
-#'   provider_enrollment(npi = 1417918293,
-#'   specialty_code = "14-41")
-#'
-#'   provider_enrollment(first_name = "DEBRA",
-#'                       middle_name = "L",
-#'                       last_name = "FROMER")
-#'
-#'   provider_enrollment(org_name = "ELIZABETHTOWN COMMUNITY HOSPITAL",
-#'                       state = "NY",
-#'                       specialty_code = "00-85")
-#'
-#'   provider_enrollment(specialty_desc = "PRACTITIONER - ENDOCRINOLOGY",
-#'                       state = "AK",
-#'                       gender = "F")
-#'
-#'   provider_enrollment(pac_id = 2860305554,
-#'                       enroll_id = "I20031110000120",
-#'                       gender = "9")
-#'
-#'   prven <- tibble::tribble(
-#'   ~fn,                   ~params,
-#'   "provider_enrollment", list(npi = 1083879860),
-#'   "provider_enrollment", list(first_name = "MICHAEL",
-#'                               middle_name = "K",
-#'                               last_name = "GREENBERG",
-#'                               state = "MD"),
-#'   "provider_enrollment", list(org_name = "LUMINUS DIAGNOSTICS LLC",
-#'                               state = "GA"))
-#'
-#'   purrr::invoke_map_dfr(prven$fn, prven$params)
+#' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
+#' provider_enrollment(first_name = "DEBRA", last_name = "FROMER")
+#' provider_enrollment(organization_name = "Elizabethtown Community Hospital", state = "NY")
+#' provider_enrollment(specialty = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
+#' provider_enrollment(pac_id = 2860305554, gender = "9")
 #' @autoglobal
 #' @export
 provider_enrollment <- function(npi                = NULL,
                                 pac_id             = NULL,
                                 enroll_id          = NULL,
                                 specialty_code     = NULL,
-                                specialty_desc     = NULL,
+                                specialty          = NULL,
                                 state              = NULL,
                                 first_name         = NULL,
                                 middle_name        = NULL,
                                 last_name          = NULL,
-                                org_name           = NULL,
+                                organization_name  = NULL,
                                 gender             = NULL,
                                 tidy               = TRUE) {
 
@@ -97,12 +63,12 @@ provider_enrollment <- function(npi                = NULL,
            "PECOS_ASCT_CNTL_ID", pac_id,
                     "ENRLMT_ID", enroll_id,
              "PROVIDER_TYPE_CD", specialty_code,
-           "PROVIDER_TYPE_DESC", specialty_desc,
+           "PROVIDER_TYPE_DESC", specialty,
                      "STATE_CD", state,
                    "FIRST_NAME", first_name,
                      "MDL_NAME", middle_name,
                     "LAST_NAME", last_name,
-                     "ORG_NAME", org_name,
+                     "ORG_NAME", organization_name,
                       "GNDR_SW", gender)
 
   # map param_format and collapse -------------------------------------------
@@ -129,17 +95,17 @@ provider_enrollment <- function(npi                = NULL,
 
     cli_args <- tibble::tribble(
       ~x,                 ~y,
-      "npi",              as.character(npi),
-      "pac_id",           as.character(pac_id),
-      "enroll_id",        as.character(enroll_id),
-      "specialty_code",   as.character(specialty_code),
-      "specialty_desc",   specialty_desc,
-      "state",            state,
-      "first_name",       first_name,
-      "middle_name",      middle_name,
-      "last_name",        last_name,
-      "org_name",         org_name,
-      "gender",           gender) |>
+      "npi",               as.character(npi),
+      "pac_id",            as.character(pac_id),
+      "enroll_id",         as.character(enroll_id),
+      "specialty_code",    as.character(specialty_code),
+      "specialty",         specialty,
+      "state",             state,
+      "first_name",        first_name,
+      "middle_name",       middle_name,
+      "last_name",         last_name,
+      "organization_name", organization_name,
+      "gender",            gender) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -161,20 +127,20 @@ provider_enrollment <- function(npi                = NULL,
 
   # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(npi,
                     pac_id            = pecos_asct_cntl_id,
                     enroll_id         = enrlmt_id,
-                    enroll_type_code  = provider_type_cd,
-                    enroll_type       = provider_type_desc,
+                    specialty_code    = provider_type_cd,
+                    specialty         = provider_type_desc,
                     state             = state_cd,
                     organization_name = org_name,
                     first_name,
                     middle_name       = mdl_name,
                     last_name,
-                    gender            = gndr_sw)
+                    gender            = gndr_sw) |>
+      janitor::remove_empty(which = c("rows", "cols"))
   }
   return(results)
 }

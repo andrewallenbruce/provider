@@ -1,47 +1,58 @@
-#' Search the Medicare Order and Referring API
+#' Ordering and Referring Eligibility for Medicare
 #'
-#' @description All physicians and non-physician practitioners who are legally
-#'    eligible to order and refer in the Medicare program and who have current
-#'    enrollment records in Medicare.
+#' @description
+#' `order_refer()` allows you to search for physicians and non-physician
+#' practitioners who are of a type/specialty that is legally eligible to order
+#' and refer Part B (clinical laboratory and imaging), DME and Part A HHA claims
+#' in the Medicare program.
 #'
-#' @details The Medicare Order and Referring dataset provides information on
-#'    all physicians and non-physician practitioners, by their National
-#'    Provider Identifier (NPI), who are of a type/specialty that is legally
-#'    eligible to order and refer in the Medicare program and who have current
-#'    enrollment records in Medicare.
+#' ## Ordering and Referring (or Certifying) Providers
+#' **Ordering providers** can order non-physician services for patients.
+#' **Referring providers** can request items or services Medicare may reimburse
+#' on behalf of Medicare beneficiaries. To qualify as an ordering and
+#' referring/certifying provider, a provider must:
 #'
-#' ## Links
-#' * [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+#'   - have an *individual* NPI
+#'   - be enrolled in Medicare in either an *approved* or *opt-out* status
+#'   - be of an *eligible specialty* type.
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Weekly**
-#' @param npi 10-digit National Provider Identifier (NPI)
+#' Providers currently enrolled in Medicare Part B can order and refer. A
+#' provider that does not want to bill Medicare for their services can still
+#' order and refer by opting out of Medicare or enrolling solely to order and
+#' refer. Medicare coverage will then apply when ordering or referring:
+#'
+#'  * Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+#'  * Clinical Laboratory Services
+#'  * Imaging Services
+#'  * Home Health Services
+#'
+#' @section Links:
+#'   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
+#'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying)
+#'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
+#'
+#' @section Update Frequency: **Twice Weekly**
+#'
+#' @param npi 10-digit National Provider Identifier
 #' @param first_name Provider's first name
 #' @param last_name Provider's last name
-#' @param partb logical
-#' @param dme logical
-#' @param hha logical
-#' @param pmd logical
-#' @param tidy Tidy output; default is `TRUE`.
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @param partb boolean; eligibility to refer to Medicare Part B
+#' @param dme boolean; eligibility to order Durable Medical Equipment (DME)
+#' @param hha boolean; eligibility to refer to a Home Health Agency
+#' @param pmd boolean; eligibility to order Power Mobility Devices (PMD)
+#' @param tidy boolean; Tidy output; default is `TRUE`.
+#'
+#' @return A [tibble][tibble::tibble-package] object containing the search results.
+#'
+#' @seealso [provider_enrollment()], [opt_out()], [pending_applications()]
+#'
 #' @examplesIf interactive()
+#' # Search by NPI
 #' order_refer(npi = 1003026055)
 #'
-#' order_refer(last_name = "phadke",
-#'             first_name = "radhika")
+#' # Search by name and/or filter for certain privileges
+#' order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
 #'
-#' # Unnamed List of NPIs
-#' c(1003026055, 1316405939, 1720392988,
-#'   1518184605, 1922056829, 1083879860) |>
-#'   purrr::map(order_refer) |>
-#'   purrr::list_rbind()
-#'
-#' # Data frame of NPIs
-#' data.frame(npi = c(1003026055, 1316405939, 1720392988,
-#'                    1518184605, 1922056829, 1083879860)) |>
-#'                    dplyr::pull(npi) |>
-#'                    purrr::map(order_refer) |>
-#'                    purrr::list_rbind()
 #' @autoglobal
 #' @export
 order_refer <- function(npi          = NULL,
@@ -94,10 +105,10 @@ order_refer <- function(npi          = NULL,
   post   <- "/data.json?"
   url    <- paste0(http, id, post, params_args)
 
-  # send request ----------------------------------------------------------
+  # send request
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
+  # no search results returns NULL
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
     cli_args <- tibble::tribble(
@@ -122,11 +133,11 @@ order_refer <- function(npi          = NULL,
 
   }
 
-  # parse response ----------------------------------------------------------
+  # parse response
   results <- tibble::tibble(httr2::resp_body_json(response,
              check_type = FALSE, simplifyVector = TRUE))
 
-  # clean names -------------------------------------------------------------
+  # tidy output
   if (tidy) {
     results <- results |>
       dplyr::rename_with(str_to_snakecase) |>
@@ -134,7 +145,17 @@ order_refer <- function(npi          = NULL,
                     hha = yn_logical(hha),
                     dme = yn_logical(dme),
                     pmd = yn_logical(pmd)) |>
-      dplyr::select(npi, first_name, last_name, partb, hha, dme, pmd)
+      dplyr::select(npi,
+                    first_name,
+                    last_name,
+                    "Medicare Part B" = partb,
+                    "Home Health Agency (HHA)" = hha,
+                    "Durable Medical Equipment (DME)" = dme,
+                    "Power Mobility Device (PMD)" = pmd) |>
+      tidyr::pivot_longer(cols = !c(npi,
+                                    dplyr::contains("name")),
+                          names_to = "service",
+                          values_to = "eligible")
     }
   return(results)
 }

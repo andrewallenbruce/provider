@@ -1,4 +1,4 @@
-#' Search the CMS Quality Payment Program Experience API
+#' Quality Payment Program Experience
 #'
 #' @description Information on participation and performance in the Merit-based
 #'    Incentive Payment System (MIPS) and Advanced Alternative Payment Models
@@ -13,22 +13,21 @@
 #'    You can sort the data by variables like clinician type, practice size,
 #'    scores, and payment adjustments.
 #'
-#'   ## Links
+#' @section Links:
 #'   * [Quality Payment Program Experience](https://data.cms.gov/quality-of-care/quality-payment-program-experience)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
+#' @section Update Frequency: **Annually**
 #' @param year integer, YYYY, QPP Performance year. Run the helper function
-#'    `provider:::quality_payment_years()` to return a vector of currently
+#'    `quality_payment_years()` to return a vector of currently
 #'    available years.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
-#' @param state The State or United States (US) territory code location of the
+#' @param state The State or US territory code location of the
 #'    TIN associated with the clinician.
 #' @param specialty The specialty description is an identifier corresponding to
 #'    the type of service that the clinician submitted most on their Medicare
 #'    Part B claims for this TIN/NPI combination.
-#' @param part_type Indicates the level at which performance data was
+#' @param participation_type Indicates the level at which performance data was
 #'    collected, submitted or reported for the final score attributed to the
 #'    clinician. This information drives the data displayed for most of the
 #'    remaining fields in this report.
@@ -42,7 +41,7 @@ quality_payment <- function(year,
                             npi       = NULL,
                             state     = NULL,
                             specialty = NULL,
-                            part_type = NULL,
+                            participation_type = NULL,
                             tidy      = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
@@ -58,7 +57,7 @@ quality_payment <- function(year,
     "npi",                            npi,
     "practice state or us territory", state,
     "clinician specialty",            specialty,
-    "participation type",             part_type)
+    "participation type",             participation_type)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |>
@@ -89,7 +88,7 @@ quality_payment <- function(year,
       "npi",                            as.character(npi),
       "practice state or us territory", state,
       "clinician specialty",            specialty,
-      "participation type",             part_type) |>
+      "participation type",             participation_type) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -206,7 +205,7 @@ quality_payment_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
 }
 
-#' Search the CMS Quality Payment Program Eligibility API
+#' Quality Payment Program Eligibility
 #'
 #' @description Data pulled from across CMS that is used to create an
 #'    eligibility determination for a clinician. Using what CMS knows about a
@@ -228,13 +227,12 @@ quality_payment_years <- function() {
 #'    information, and in the future, any available Alternative Payment Model
 #'    (APM) affiliations.
 #'
-#'   ## Links
+#' @section Links:
 #'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
-#' @param year integer, YYYY, QPP Performance year.
-#' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
+#' @section Update Frequency: **Annually**
+#' @param year integer, YYYY, QPP eligibility year.
+#' @param npi NPI assigned to the clinician when they enrolled in Medicare.
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
@@ -300,7 +298,7 @@ quality_eligibility <- function(year,
 }
 
 
-#' Retrieve Program-Wide Statistics from CMS' Quality Payment Program Eligibility API
+#' Program-Wide Statistics from Quality Payment Program
 #'
 #' @description Data pulled from across CMS that is used to create an
 #'    eligibility determination for a clinician. Using what CMS knows about a
@@ -322,12 +320,10 @@ quality_eligibility <- function(year,
 #'    information, and in the future, any available Alternative Payment Model
 #'    (APM) affiliations.
 #'
-#'   ## Links
+#' @section Links:
 #'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
-#'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
-#' @param year year
+#' @section Update Frequency: **Annually**
+#' @param year QPP program year
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
 #' quality_stats(year = 2020)
@@ -337,7 +333,9 @@ quality_stats <- function(year) {
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
 
-  error_body <- function(resp) {httr2::resp_body_json(resp)$error$message}
+  error_body <- function(resp) {
+    httr2::resp_body_json(resp)$error$message
+    }
 
   resp <- httr2::request(url) |>
     httr2::req_error(body = error_body) |>
