@@ -9,7 +9,7 @@ vignette: >
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
-  collapse  = FALSE,
+  collapse  = TRUE,
   echo      = TRUE, 
   message   = FALSE, 
   warning   = FALSE,
@@ -42,9 +42,14 @@ The overarching goal of `provider` is to make the experience of accessing public
 
 ## Tidy Output
 
-In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html), every column is a variable, every row is an observation, and every cell is a single value. Many of the outputs of these APIs violate this form by storing column headers as values, not variable names.
+In [**tidy data**](https://tidyr.tidyverse.org/articles/tidy-data.html), every **column** is a *variable*, every **row** is an *observation*, and every **cell** is a *single value*. 
 
-Each function has a `tidy` argument that is set to `TRUE` by default:
+Many of the outputs of these APIs violate this form by 
+
+   - Storing column headers as values, not variable names
+   - Storing multiple variables in one column
+
+To remedy this, there is some post-processing done to the output before it is returned. Each function has a `tidy` argument that is set to `TRUE` by default:
 
 ```{r}
 order_refer(npi = 1043477615)
@@ -52,7 +57,7 @@ order_refer(npi = 1043477615)
 
 <br>
 
-Setting it to `FALSE` will return the un-tidied output:
+Setting it to `FALSE` will return the un-processed output:
 
 ```{r}
 order_refer(npi = 1043477615, tidy = FALSE)
@@ -62,16 +67,16 @@ order_refer(npi = 1043477615, tidy = FALSE)
 
 The `tidy` transformations applied to the output of each function include: 
 
-   - Favoring a long format over wide
-   - `snake_case` for variable names
+   - Favoring a long format over wide.
    - More descriptive, thematic variable names involving prefixes and a standardized vocabulary across all outputs
-   - Various quality-of-life data wrangling (e.g., replacing empty cells with `NA`, converting year columns to integers, date columns to date type, NPIs to character type)
+   - Various quality-of-life data transformations (e.g., using `snake_case` for variable names, replacing empty character cells with `NA`; converting years, dates, booleans to their respective data types)
+   - Nesting large groups of related columns into lists, to initially emphasize the most important output.
 
 However, in the event that you would prefer to do your own transformations, simply turn it off with `tidy = FALSE`.
 
 <br>
 
-## Available Years
+## Helper Functions
 
 Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
 
@@ -91,7 +96,8 @@ quality_payment_years() |>
 
 ## Validation Checks
 
-NPI:
+> **National Provider Identifier**: 
+> A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS). All individual HIPAA–covered healthcare providers or organizations must obtain an NPI. Once assigned, a provider’s NPI is permanent and remains with the provider regardless of job or location changes.
 
 ```{r}
 # Must be 10 characters long
@@ -106,7 +112,7 @@ pending_applications(npi = 1234569123)
 
 <br>
 
-PAC ID
+> **Provider Associate-level Control ID**:
 
 ```{r}
 # Must be 10 characters long
@@ -118,7 +124,7 @@ hospital_enrollment(pac_id_org = "O12345678912")
 
 <br>
 
-Enrollment IDs
+> **Medicare Enrollment ID**:
 
 ```{r}
 # Must be a character vector
@@ -131,6 +137,7 @@ revalidation_group(enroll_id = "I123456789123456")
 provider_enrollment(enroll_id = "012345678912345")
 ```
 
+<br>
 
 ## Functions
 
