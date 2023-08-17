@@ -143,65 +143,71 @@ healthcare, or both.</p></li>
 <h2 id="tidy-output">Tidy Output<a class="anchor" aria-label="anchor" href="#tidy-output"></a>
 </h2>
 <p>In <a href="https://tidyr.tidyverse.org/articles/tidy-data.html" class="external-link"><strong>tidy
-data</strong></a>, every column is a variable, every row is an
-observation, and every cell is a single value. Many of the outputs of
-these APIs violate this form by storing column headers as values, not
-variable names.</p>
-<p>Each function has a <code>tidy</code> argument that is set to
-<code>TRUE</code> by default:</p>
+data</strong></a>, every <strong>column</strong> is a <em>variable</em>,
+every <strong>row</strong> is an <em>observation</em>, and every
+<strong>cell</strong> is a <em>single value</em>.</p>
+<p>Many of the outputs of these APIs violate this form by</p>
+<ul>
+<li>Storing column headers as values, not variable names</li>
+<li>Storing multiple variables in one column</li>
+</ul>
+<p>To remedy this, there is some post-processing done to the output
+before it is returned. Each function has a <code>tidy</code> argument
+that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
 <span><span class="co">#&gt;   npi        first_name last_name service                         eligible</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH      HUSSAIN   Medicare Part B                 TRUE    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH      HUSSAIN   Home Health Agency (HHA)        TRUE    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH      HUSSAIN   Durable Medical Equipment (DME) TRUE    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH      HUSSAIN   Power Mobility Device (PMD)     TRUE</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH      HUSSAIN   Power Mobility Device (PMD)     TRUE</span></span></code></pre></div>
 <p><br></p>
-<p>Setting it to <code>FALSE</code> will return the un-tidied
+<p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
 <span><span class="co">#&gt;   NPI        LAST_NAME FIRST_NAME PARTB DME   HHA   PMD  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 HUSSAIN   SARAH      Y     Y     Y     Y</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 HUSSAIN   SARAH      Y     Y     Y     Y</span></span></code></pre></div>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
 function include:</p>
 <ul>
-<li>Favoring a long format over wide</li>
-<li>
-<code>snake_case</code> for variable names</li>
+<li>Favoring a long format over wide.</li>
 <li>More descriptive, thematic variable names involving prefixes and a
 standardized vocabulary across all outputs</li>
-<li>Various quality-of-life data wrangling (e.g., replacing empty cells
-with <code>NA</code>, converting year columns to integers, date columns
-to date type, NPIs to character type)</li>
+<li>Various quality-of-life data transformations (e.g., using
+<code>snake_case</code> for variable names, replacing empty character
+cells with <code>NA</code>; converting years, dates, booleans to their
+respective data types)</li>
+<li>Nesting large groups of related columns into lists, to initially
+emphasize the most important output.</li>
 </ul>
 <p>However, in the event that you would prefer to do your own
 transformations, simply turn it off with <code>tidy = FALSE</code>.</p>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="available-years">Available Years<a class="anchor" aria-label="anchor" href="#available-years"></a>
+<h2 id="helper-functions">Helper Functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
 </h2>
 <p>Several functions have a required <code>year</code> argument. The
 years available to query these APIs might change at any time, so there
 is an accompanying helper function to retrieve the years available, in
 the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 <code><a href="../reference/quality_payment.html">quality_payment()</a></code>’s is:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre></div>
 <p>These can also be used in a pipeline, for searching all available
 years:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
 <span><span class="co">#&gt;    year npi   practice_state practice_size clinician_specialty years_in_medicare</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043… PA                      <span style="text-decoration: underline;">1</span>394 Cardiac Electrophy…                 5</span></span>
@@ -213,65 +219,78 @@ years:</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   services &lt;int&gt;, allowed_charges &lt;dbl&gt;, final_score &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   payment_adjustment &lt;dbl&gt;, quality_score &lt;chr&gt;, pi_score &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ia_score &lt;chr&gt;, cost_score &lt;chr&gt;, complex_patient_bonus &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   quality_improvement_bonus &lt;dbl&gt;, special_statuses &lt;list&gt;, measures &lt;list&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   quality_improvement_bonus &lt;dbl&gt;, special_statuses &lt;list&gt;, measures &lt;list&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
 <h2 id="validation-checks">Validation Checks<a class="anchor" aria-label="anchor" href="#validation-checks"></a>
 </h2>
-<p>NPI:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<blockquote>
+<p><strong>National Provider Identifier</strong>: A National Provider
+Identifier (NPI) is a unique 10-digit identification number issued to
+health care providers in the United States by the Centers for Medicare
+and Medicaid Services (CMS). All individual HIPAA–covered healthcare
+providers or organizations must obtain an NPI. Once assigned, a
+provider’s NPI is permanent and remains with the provider regardless of
+job or location changes.</p>
+</blockquote>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
-<span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
+<span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">10 characters long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> characters.</span></span></code></pre>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes_npi()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> characters.</span></span>
+<span></span>
+<span><span class="co"># Must be numeric</span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes_npi()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1234569123</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending_applications()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
+<span></span>
+<span><span class="co"># Must pass Luhn check</span></span>
+<span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1234569123</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending_applications()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
 <p><br></p>
-<p>PAC ID</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<blockquote>
+<p><strong>Provider Associate-level Control ID</strong>:</p>
+</blockquote>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
-<span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `facility_affiliations()`:</span></span></span>
+<span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `facility_affiliations()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 characters long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> characters.</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospital_enrollment()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> characters.</span></span>
+<span></span>
+<span><span class="co"># Must be numeric</span></span>
+<span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospital_enrollment()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
 <p><br></p>
-<p>Enrollment IDs</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<blockquote>
+<p><strong>Medicare Enrollment ID</strong>:</p>
+</blockquote>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
-<span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `doctors_and_clinicians()`:</span></span></span>
+<span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `doctors_and_clinicians()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="font-style: italic;">character</span> vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must be 15 characters long</span></span>
-<span><span class="fu"><a href="../reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `revalidation_group()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
+<span></span>
+<span><span class="co"># Must be 15 characters long</span></span>
+<span><span class="fu"><a href="../reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `revalidation_group()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">Enrollment ID</span> must be <span style="font-style: italic;">15 characters long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span></code></pre>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
-<span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `provider_enrollment()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span>
+<span></span>
+<span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
+<span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `provider_enrollment()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`I`</span> or <span style="font-weight: bold;">`O`</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
