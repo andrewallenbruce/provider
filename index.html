@@ -61,7 +61,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
+    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
+    <a class="dropdown-item" href="articles/linking_providers.html"></a>
     <a class="dropdown-item" href="articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -121,21 +122,19 @@
 <blockquote>
 <p>Providing easy access to <a href="https://en.wikipedia.org/wiki/Health_care_provider" class="external-link">healthcare provider</a> data through publicly available APIs &amp; sources.</p>
 </blockquote>
-<p><br></p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<p>You can install <code>provider</code> from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
 </h2>
-<p><br></p>
 <p>The overarching goal of <code>provider</code> is to make the experience of accessing publicly-available Provider data easier and more consistent across a variety of sources. It aims to accomplish this through the following general goals, where possible:</p>
-<p><br></p>
 <ul>
 <li><p><em>Structuring output in the <strong>tidy</strong> framework</em> as much as is reasonably possible, with an option to turn it off by setting <code>tidy = FALSE</code>.</p></li>
 <li><p><em>Harmonization of variable names</em>, for the express purpose of making it easier to understand (and make connections between) each API’s output. This will also allow for removal of duplicate information across API output, if desired.</p></li>
@@ -147,7 +146,7 @@
 <div class="section level2">
 <h2 id="apis">APIs<a class="anchor" aria-label="anchor" href="#apis"></a>
 </h2>
-<p>API Search functions can be grouped according to the type of data they return about a provider: <em>administrative</em>, <em>statistical</em>, and <em>auxillary.</em></p>
+<p>API Search functions can be grouped according to the type of data they return about a provider: <em>administrative</em>, <em>statistical</em>, and <em>auxiliary.</em></p>
 <div class="section level3">
 <h3 id="administrative">Administrative<a class="anchor" aria-label="anchor" href="#administrative"></a>
 </h3>
@@ -193,7 +192,7 @@
 </ul>
 </div>
 <div class="section level3">
-<h3 id="auxillary">Auxillary<a class="anchor" aria-label="anchor" href="#auxillary"></a>
+<h3 id="auxiliary">Auxiliary<a class="anchor" aria-label="anchor" href="#auxiliary"></a>
 </h3>
 <ul>
 <li>

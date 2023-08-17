@@ -55,7 +55,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
+    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
+    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -222,20 +223,20 @@ on their particular eligibilities:</p>
 <span>  <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">first_name</span>, <span class="va">last_name</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 146 × 5</span></span></span>
-<span><span class="co">#&gt;    npi        partb hha   dme   pmd  </span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1083899611 TRUE  TRUE  TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1649265760 TRUE  TRUE  TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1669688156 TRUE  TRUE  TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1396031431 TRUE  FALSE TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1295840825 TRUE  TRUE  TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1881761260 TRUE  TRUE  TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1134383193 TRUE  FALSE TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1154467504 TRUE  FALSE TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1518152768 TRUE  TRUE  TRUE  TRUE </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1952512188 TRUE  FALSE TRUE  FALSE</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 136 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 584 × 3</span></span></span>
+<span><span class="co">#&gt;    npi        service                         eligible</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1083899611 Medicare Part B                 TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1083899611 Home Health Agency (HHA)        TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1083899611 Durable Medical Equipment (DME) TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1083899611 Power Mobility Device (PMD)     TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1649265760 Medicare Part B                 TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1649265760 Home Health Agency (HHA)        TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1649265760 Durable Medical Equipment (DME) TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1649265760 Power Mobility Device (PMD)     TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1669688156 Medicare Part B                 TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1669688156 Home Health Agency (HHA)        TRUE    </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 574 more rows</span></span></span></code></pre></div>
 <p><br></p>
 <p>Then join the two results together for further analysis:</p>
 <p><br></p>
@@ -252,1991 +253,32 @@ on their particular eligibilities:</p>
 <span>                HHA <span class="op">=</span> <span class="va">hha</span>, </span>
 <span>                DME <span class="op">=</span> <span class="va">dme</span>, </span>
 <span>                PMD <span class="op">=</span> <span class="va">pmd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="10%">
-<col width="10%">
-<col width="5%">
-<col width="43%">
-<col width="8%">
-<col width="6%">
-<col width="5%">
-<col width="4%">
-<col width="5%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">First</th>
-<th align="left">Last</th>
-<th align="left">Specialty</th>
-<th align="left">Eligible</th>
-<th align="left">Part B</th>
-<th align="left">HHA</th>
-<th align="left">DME</th>
-<th align="left">PMD</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1003312596</td>
-<td align="left">Jarom</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1003571803</td>
-<td align="left">Marie</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1023002375</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Obstetrics/Gynecology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1023084274</td>
-<td align="left">Michael</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1023138344</td>
-<td align="left">Lanny</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1023138807</td>
-<td align="left">Thomas</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1023187986</td>
-<td align="left">Barry</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1023207958</td>
-<td align="left">Jill</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1023234606</td>
-<td align="left">Richard</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1033204821</td>
-<td align="left">Jeremy</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1033657499</td>
-<td align="left">La Toya</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1043400013</td>
-<td align="left">Kilee</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1043522824</td>
-<td align="left">James</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1053595660</td>
-<td align="left">Jackie</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1063516391</td>
-<td align="left">Scott</td>
-<td align="left">Smith</td>
-<td align="left">Dermatology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1063775724</td>
-<td align="left">Britt</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1073641742</td>
-<td align="left">Stevan</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1073645297</td>
-<td align="left">Candia</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1083610398</td>
-<td align="left">Jason</td>
-<td align="left">Smith</td>
-<td align="left">Optometry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1083664981</td>
-<td align="left">Anthony</td>
-<td align="left">Smith</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1083899611</td>
-<td align="left">Harold</td>
-<td align="left">Smith</td>
-<td align="left">Internal Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1083960793</td>
-<td align="left">Stevenson</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1093023517</td>
-<td align="left">Kelley</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1093793275</td>
-<td align="left">Michael</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1093924318</td>
-<td align="left">Richard</td>
-<td align="left">Smith</td>
-<td align="left">Undefined Non-Physician Type (Specify)</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1104117951</td>
-<td align="left">Rebekah</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1114027893</td>
-<td align="left">Richard</td>
-<td align="left">Smith</td>
-<td align="left">Osteopathic Manipulative Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1114058443</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1124675467</td>
-<td align="left">Christine</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1134202443</td>
-<td align="left">Susan</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1134383193</td>
-<td align="left">Ashley</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1134478522</td>
-<td align="left">Rachel</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1144387374</td>
-<td align="left">Carl</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1144529322</td>
-<td align="left">Kyle</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1154467504</td>
-<td align="left">Eric</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1164519880</td>
-<td align="left">Coleen</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1174582928</td>
-<td align="left">Paul</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1184068918</td>
-<td align="left">Scott</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1184901779</td>
-<td align="left">Leslie</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1184999179</td>
-<td align="left">Michelle</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1194832519</td>
-<td align="left">Carol</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1194886374</td>
-<td align="left">Peter</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1205847696</td>
-<td align="left">Scott</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1225030760</td>
-<td align="left">Roger</td>
-<td align="left">Smith</td>
-<td align="left">Ophthalmology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1225185168</td>
-<td align="left">John</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1225483274</td>
-<td align="left">Stacey</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1235525908</td>
-<td align="left">Christin</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1245366731</td>
-<td align="left">Daniel</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1245454941</td>
-<td align="left">Howard</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1265516397</td>
-<td align="left">Kevin</td>
-<td align="left">Smith</td>
-<td align="left">Plastic And Reconstructive Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1275594848</td>
-<td align="left">Jeremy</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1275889230</td>
-<td align="left">Katherine</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1285643585</td>
-<td align="left">Denise</td>
-<td align="left">Smith</td>
-<td align="left">Optometry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1295806594</td>
-<td align="left">Jan</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1295840825</td>
-<td align="left">Austin</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1306228218</td>
-<td align="left">Dana</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1316051527</td>
-<td align="left">Eileen</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1316157753</td>
-<td align="left">Barbara</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1316265887</td>
-<td align="left">Brett</td>
-<td align="left">Smith</td>
-<td align="left">Rheumatology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1316316250</td>
-<td align="left">Heather</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1316316250</td>
-<td align="left">Heather</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1316365612</td>
-<td align="left">Casey</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1316947690</td>
-<td align="left">Craig</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1316986953</td>
-<td align="left">Paul</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1356451751</td>
-<td align="left">Matthew</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1366451155</td>
-<td align="left">Thomas</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1366451155</td>
-<td align="left">Thomas</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1376508952</td>
-<td align="left">Gregory</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1376664151</td>
-<td align="left">Sarah</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1386777050</td>
-<td align="left">Yolonda</td>
-<td align="left">Smith</td>
-<td align="left">Obstetrics/Gynecology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1396031431</td>
-<td align="left">Lisa</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1396056727</td>
-<td align="left">Nathan</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1396785481</td>
-<td align="left">Kevin</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1396859450</td>
-<td align="left">Pamela</td>
-<td align="left">Smith</td>
-<td align="left">Internal Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1396896288</td>
-<td align="left">Rick</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1407381270</td>
-<td align="left">Christa</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1427080241</td>
-<td align="left">Leslie</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1427080241</td>
-<td align="left">Leslie</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1437129228</td>
-<td align="left">Millard</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1437285038</td>
-<td align="left">Shelby</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1447386065</td>
-<td align="left">Michael</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1457390924</td>
-<td align="left">Marlon</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1467186312</td>
-<td align="left">Nicole</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1477676336</td>
-<td align="left">Timothy</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1477871689</td>
-<td align="left">Sarah</td>
-<td align="left">Smith</td>
-<td align="left">Endocrinology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1487864872</td>
-<td align="left">Devorah</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1487886016</td>
-<td align="left">Heather</td>
-<td align="left">Smith</td>
-<td align="left">Pediatric Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1487972238</td>
-<td align="left">Jennifer</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1508108341</td>
-<td align="left">Sidney</td>
-<td align="left">Smith</td>
-<td align="left">General Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1518049212</td>
-<td align="left">Clark</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1518123173</td>
-<td align="left">Elizabeth</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1518152768</td>
-<td align="left">Sally</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1528268216</td>
-<td align="left">Katherine</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1528453537</td>
-<td align="left">Nicole</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1538342118</td>
-<td align="left">Douglas</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1548242605</td>
-<td align="left">Richard</td>
-<td align="left">Smith</td>
-<td align="left">Otolaryngology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1548330251</td>
-<td align="left">James</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1558684969</td>
-<td align="left">Ryan</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1558743328</td>
-<td align="left">Matthew</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1568492007</td>
-<td align="left">Christina</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1588115778</td>
-<td align="left">Colin</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1588118178</td>
-<td align="left">Cally</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1588962849</td>
-<td align="left">Christian</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1598847949</td>
-<td align="left">Steven</td>
-<td align="left">Smith</td>
-<td align="left">Internal Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1598943821</td>
-<td align="left">Jennifer</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1619168556</td>
-<td align="left">Joshua</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1619333663</td>
-<td align="left">Chad</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1619941440</td>
-<td align="left">Yale</td>
-<td align="left">Smith</td>
-<td align="left">Anesthesiology</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1619990124</td>
-<td align="left">C.</td>
-<td align="left">Smith</td>
-<td align="left">General Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1629081872</td>
-<td align="left">Hazel</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1639221708</td>
-<td align="left">Paul</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1639515364</td>
-<td align="left">Paul</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1649265760</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1659300077</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1659306488</td>
-<td align="left">Jeffrey</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1659582005</td>
-<td align="left">Aaron</td>
-<td align="left">Smith</td>
-<td align="left">Neurosurgery</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1669474912</td>
-<td align="left">Laurette</td>
-<td align="left">Smith</td>
-<td align="left">Obstetrics/Gynecology</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1669688156</td>
-<td align="left">Kyle</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1679650873</td>
-<td align="left">Carol</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1679660427</td>
-<td align="left">Kelsey</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1699986448</td>
-<td align="left">Katherine</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1700114774</td>
-<td align="left">Kristina</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1700144169</td>
-<td align="left">Kimberly</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1700882784</td>
-<td align="left">Shelby</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1710360102</td>
-<td align="left">Peter</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1710976667</td>
-<td align="left">Barbara</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1720376288</td>
-<td align="left">Evan</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1730104175</td>
-<td align="left">Grant</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1730170705</td>
-<td align="left">Maureen</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1730176033</td>
-<td align="left">Randy</td>
-<td align="left">Smith</td>
-<td align="left">Optometry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1740543594</td>
-<td align="left">Emily</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1740629633</td>
-<td align="left">Andrew</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1740665892</td>
-<td align="left">Brandon</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1750360418</td>
-<td align="left">Regina</td>
-<td align="left">Smith</td>
-<td align="left">Internal Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1750565958</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1770697682</td>
-<td align="left">Donald</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1780768945</td>
-<td align="left">Matthew</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1790801744</td>
-<td align="left">Clifford</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1790822534</td>
-<td align="left">Twlya</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1790853307</td>
-<td align="left">David</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1801335336</td>
-<td align="left">Julia</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1811140148</td>
-<td align="left">Donna</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1811244817</td>
-<td align="left">Jacquelyn</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1821161191</td>
-<td align="left">John</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1831188077</td>
-<td align="left">Brian</td>
-<td align="left">Smith</td>
-<td align="left">Maxillofacial Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1841686730</td>
-<td align="left">Glenna</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1851945638</td>
-<td align="left">Candra</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1861638512</td>
-<td align="left">Tonia</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1871521294</td>
-<td align="left">Floyd</td>
-<td align="left">Smith</td>
-<td align="left">General Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1881031946</td>
-<td align="left">Blake</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1881629202</td>
-<td align="left">Craig</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1881761260</td>
-<td align="left">Joann</td>
-<td align="left">Smith</td>
-<td align="left">Psychiatry</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1891883757</td>
-<td align="left">Thomas</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1891984829</td>
-<td align="left">Kevin</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1902800600</td>
-<td align="left">Diana</td>
-<td align="left">Smith</td>
-<td align="left">Nurse Practitioner</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1922110253</td>
-<td align="left">Randall</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1932315652</td>
-<td align="left">Lawrence</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1942419163</td>
-<td align="left">Kamilia</td>
-<td align="left">Smith</td>
-<td align="left">Obstetrics/Gynecology</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1952336661</td>
-<td align="left">Randall</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1952358954</td>
-<td align="left">Stephen</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1952512188</td>
-<td align="left">Melissa</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1952529026</td>
-<td align="left">Sandra</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1952643603</td>
-<td align="left">Holly</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1952717753</td>
-<td align="left">Judson</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1952818833</td>
-<td align="left">Jaclyne</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1962416974</td>
-<td align="left">Christiane</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1972550283</td>
-<td align="left">Scott</td>
-<td align="left">Smith</td>
-<td align="left">Family Practice</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1972588374</td>
-<td align="left">Julie</td>
-<td align="left">Smith</td>
-<td align="left">Oral Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="odd">
-<td align="left">1982187571</td>
-<td align="left">Elizabeth</td>
-<td align="left">Smith</td>
-<td align="left">Registered Dietitian Or Nutrition Professional</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1982779526</td>
-<td align="left">Lane</td>
-<td align="left">Smith</td>
-<td align="left">Plastic And Reconstructive Surgery</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1982793949</td>
-<td align="left">Christian</td>
-<td align="left">Smith</td>
-<td align="left">Internal Medicine</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1982998910</td>
-<td align="left">Barbara</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1982998910</td>
-<td align="left">Barbara</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Psychologist</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1992384416</td>
-<td align="left">Celes</td>
-<td align="left">Smith</td>
-<td align="left">Clinical Social Worker</td>
-<td align="left">FALSE</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1992804140</td>
-<td align="left">Justin</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-<tr class="even">
-<td align="left">1992968267</td>
-<td align="left">Carlos</td>
-<td align="left">Smith</td>
-<td align="left">Dentist</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">TRUE</td>
-<td align="left">FALSE</td>
-</tr>
-</tbody>
-</table>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `partb` doesn't exist.</span></span></code></pre></div>
 <p><br><br></p>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="marxpuibqc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gunsmyphno" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#marxpuibqc table {
+#gunsmyphno table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#marxpuibqc thead, #marxpuibqc tbody, #marxpuibqc tfoot, #marxpuibqc tr, #marxpuibqc td, #marxpuibqc th {
+#gunsmyphno thead, #gunsmyphno tbody, #gunsmyphno tfoot, #gunsmyphno tr, #gunsmyphno td, #gunsmyphno th {
   border-style: none;
 }
 
-#marxpuibqc p {
+#gunsmyphno p {
   margin: 0;
   padding: 0;
 }
 
-#marxpuibqc .gt_table {
+#gunsmyphno .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2262,12 +304,12 @@ on their particular eligibilities:</p>
   border-left-color: #D3D3D3;
 }
 
-#marxpuibqc .gt_caption {
+#gunsmyphno .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#marxpuibqc .gt_title {
+#gunsmyphno .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2279,7 +321,7 @@ on their particular eligibilities:</p>
   border-bottom-width: 0;
 }
 
-#marxpuibqc .gt_subtitle {
+#gunsmyphno .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2291,7 +333,7 @@ on their particular eligibilities:</p>
   border-top-width: 0;
 }
 
-#marxpuibqc .gt_heading {
+#gunsmyphno .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2303,13 +345,13 @@ on their particular eligibilities:</p>
   border-right-color: #D3D3D3;
 }
 
-#marxpuibqc .gt_bottom_border {
+#gunsmyphno .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_col_headings {
+#gunsmyphno .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2324,7 +366,7 @@ on their particular eligibilities:</p>
   border-right-color: #D3D3D3;
 }
 
-#marxpuibqc .gt_col_heading {
+#gunsmyphno .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2344,7 +386,7 @@ on their particular eligibilities:</p>
   overflow-x: hidden;
 }
 
-#marxpuibqc .gt_column_spanner_outer {
+#gunsmyphno .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2356,15 +398,15 @@ on their particular eligibilities:</p>
   padding-right: 4px;
 }
 
-#marxpuibqc .gt_column_spanner_outer:first-child {
+#gunsmyphno .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#marxpuibqc .gt_column_spanner_outer:last-child {
+#gunsmyphno .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#marxpuibqc .gt_column_spanner {
+#gunsmyphno .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2376,11 +418,11 @@ on their particular eligibilities:</p>
   width: 100%;
 }
 
-#marxpuibqc .gt_spanner_row {
+#gunsmyphno .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#marxpuibqc .gt_group_heading {
+#gunsmyphno .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2406,7 +448,7 @@ on their particular eligibilities:</p>
   text-align: left;
 }
 
-#marxpuibqc .gt_empty_group_heading {
+#gunsmyphno .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2421,15 +463,15 @@ on their particular eligibilities:</p>
   vertical-align: middle;
 }
 
-#marxpuibqc .gt_from_md > :first-child {
+#gunsmyphno .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#marxpuibqc .gt_from_md > :last-child {
+#gunsmyphno .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#marxpuibqc .gt_row {
+#gunsmyphno .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2448,7 +490,7 @@ on their particular eligibilities:</p>
   overflow-x: hidden;
 }
 
-#marxpuibqc .gt_stub {
+#gunsmyphno .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -2461,7 +503,7 @@ on their particular eligibilities:</p>
   padding-right: 5px;
 }
 
-#marxpuibqc .gt_stub_row_group {
+#gunsmyphno .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2475,15 +517,15 @@ on their particular eligibilities:</p>
   vertical-align: top;
 }
 
-#marxpuibqc .gt_row_group_first td {
+#gunsmyphno .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#marxpuibqc .gt_row_group_first th {
+#gunsmyphno .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#marxpuibqc .gt_summary_row {
+#gunsmyphno .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2493,16 +535,16 @@ on their particular eligibilities:</p>
   padding-right: 5px;
 }
 
-#marxpuibqc .gt_first_summary_row {
+#gunsmyphno .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_first_summary_row.thick {
+#gunsmyphno .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#marxpuibqc .gt_last_summary_row {
+#gunsmyphno .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2512,7 +554,7 @@ on their particular eligibilities:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_grand_summary_row {
+#gunsmyphno .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -2522,7 +564,7 @@ on their particular eligibilities:</p>
   padding-right: 5px;
 }
 
-#marxpuibqc .gt_first_grand_summary_row {
+#gunsmyphno .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2532,7 +574,7 @@ on their particular eligibilities:</p>
   border-top-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_last_grand_summary_row_top {
+#gunsmyphno .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2542,11 +584,11 @@ on their particular eligibilities:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_striped {
+#gunsmyphno .gt_striped {
   background-color: #FEEDEC;
 }
 
-#marxpuibqc .gt_table_body {
+#gunsmyphno .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2555,7 +597,7 @@ on their particular eligibilities:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#marxpuibqc .gt_footnotes {
+#gunsmyphno .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2569,7 +611,7 @@ on their particular eligibilities:</p>
   border-right-color: #D3D3D3;
 }
 
-#marxpuibqc .gt_footnote {
+#gunsmyphno .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2578,7 +620,7 @@ on their particular eligibilities:</p>
   padding-right: 5px;
 }
 
-#marxpuibqc .gt_sourcenotes {
+#gunsmyphno .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2592,7 +634,7 @@ on their particular eligibilities:</p>
   border-right-color: #D3D3D3;
 }
 
-#marxpuibqc .gt_sourcenote {
+#gunsmyphno .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2600,63 +642,63 @@ on their particular eligibilities:</p>
   padding-right: 5px;
 }
 
-#marxpuibqc .gt_left {
+#gunsmyphno .gt_left {
   text-align: left;
 }
 
-#marxpuibqc .gt_center {
+#gunsmyphno .gt_center {
   text-align: center;
 }
 
-#marxpuibqc .gt_right {
+#gunsmyphno .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#marxpuibqc .gt_font_normal {
+#gunsmyphno .gt_font_normal {
   font-weight: normal;
 }
 
-#marxpuibqc .gt_font_bold {
+#gunsmyphno .gt_font_bold {
   font-weight: bold;
 }
 
-#marxpuibqc .gt_font_italic {
+#gunsmyphno .gt_font_italic {
   font-style: italic;
 }
 
-#marxpuibqc .gt_super {
+#gunsmyphno .gt_super {
   font-size: 65%;
 }
 
-#marxpuibqc .gt_footnote_marks {
+#gunsmyphno .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#marxpuibqc .gt_asterisk {
+#gunsmyphno .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#marxpuibqc .gt_indent_1 {
+#gunsmyphno .gt_indent_1 {
   text-indent: 5px;
 }
 
-#marxpuibqc .gt_indent_2 {
+#gunsmyphno .gt_indent_2 {
   text-indent: 10px;
 }
 
-#marxpuibqc .gt_indent_3 {
+#gunsmyphno .gt_indent_3 {
   text-indent: 15px;
 }
 
-#marxpuibqc .gt_indent_4 {
+#gunsmyphno .gt_indent_4 {
   text-indent: 20px;
 }
 
-#marxpuibqc .gt_indent_5 {
+#gunsmyphno .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

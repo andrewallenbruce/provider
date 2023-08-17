@@ -28,7 +28,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
+    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
+    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -92,28 +93,23 @@
 <span>  enroll_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  dba_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  doing_business_as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
-    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p>Centers for Medicare &amp; Medicaid Services</p>
-    </div>
-    <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>Hospital’s National Provider Identifier (NPI)</p></dd>
+<dd><p>Hospital’s National Provider Identifier</p></dd>
 
 
 <dt>facility_ccn</dt>
-<dd><p>Hospital’s CMS Certification Number (CCN), formerly called an
-OSCAR Number</p></dd>
+<dd><p>Hospital’s CMS Certification Number (CCN)</p></dd>
 
 
 <dt>enroll_id</dt>
@@ -125,18 +121,18 @@ OSCAR Number</p></dd>
 
 
 <dt>specialty_code</dt>
-<dd><p>Enrollment application and specialty type code</p></dd>
+<dd><p>Enrollment specialty type code</p></dd>
 
 
 <dt>pac_id_org</dt>
-<dd><p>Hospital’s PECOS Associate Control (PAC) ID</p></dd>
+<dd><p>Hospital’s PAC ID</p></dd>
 
 
-<dt>org_name</dt>
+<dt>organization_name</dt>
 <dd><p>Hospital’s legal business name</p></dd>
 
 
-<dt>dba_name</dt>
+<dt>doing_business_as</dt>
 <dd><p>Hospital’s doing-business-as name</p></dd>
 
 
@@ -145,10 +141,10 @@ OSCAR Number</p></dd>
 
 
 <dt>state</dt>
-<dd><p>State of the hospital’s practice location address.</p></dd>
+<dd><p>State of the hospital’s practice location address</p></dd>
 
 
-<dt>zipcode</dt>
+<dt>zip</dt>
 <dd><p>Zip code of the hospital’s practice location address</p></dd>
 
 

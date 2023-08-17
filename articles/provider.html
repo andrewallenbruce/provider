@@ -55,7 +55,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
+    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
+    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -119,65 +120,54 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The overarching goal of <code>provider</code> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
 through the following general goals, where possible:</p>
-<p><br></p>
 <ul>
-<li><p><em>Structuring output in the <strong>tidy</strong>
-framework</em> as much as is reasonably possible, with an option to turn
-it off by setting <code>tidy = FALSE</code>.</p></li>
-<li><p><em>Harmonization of variable names</em>, for the express purpose
-of making it easier to understand (and make connections between) each
-API’s output. This will also allow for removal of duplicate information
-across API output, if desired.</p></li>
-<li><p><em>Validation checks of inputs</em>, as is reasonable (e.g,
-identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy
-codes). Not only is this simply good practice, it will also prevent
-unnecessary querying of the APIs.</p></li>
-<li><p><em>Well-written documentation</em>, containing as many examples
-as is necessary. Each API’s output can be difficult to understand, even
-for someone with expertise in R, healthcare, or both.</p></li>
+<li><p><strong>Tidy Output</strong>, with an option to turn it off by
+setting <code>tidy = FALSE</code>.</p></li>
+<li><p><strong>Variable Standardization</strong>, for the express
+purpose of making it easier to understand (and make connections between)
+each API’s output. This will also allow for removal of duplicate
+information across API output, if desired.</p></li>
+<li><p><strong>Input Validation</strong>. Not only is this simply good
+practice, it also prevents unnecessary querying of APIs.</p></li>
+<li><p><strong>Helpful Documentation</strong>. Each API’s output can be
+difficult to understand, even for someone with expertise in R,
+healthcare, or both.</p></li>
 </ul>
 <p><br></p>
 <div class="section level2">
 <h2 id="tidy-output">Tidy Output<a class="anchor" aria-label="anchor" href="#tidy-output"></a>
 </h2>
-<p>Each function has a <code>tidy</code> argument, set to
+<p>In <a href="https://tidyr.tidyverse.org/articles/tidy-data.html" class="external-link"><strong>tidy
+data</strong></a>, every column is a variable, every row is an
+observation, and every cell is a single value. Many of the outputs of
+these APIs violate this form by storing column headers as values, not
+variable names.</p>
+<p>Each function has a <code>tidy</code> argument that is set to
 <code>TRUE</code> by default:</p>
-<p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, </span>
-<span>                <span class="va">first_name</span>, </span>
-<span>                <span class="va">last_name</span>, </span>
-<span>                <span class="st">"Medicare Part B"</span> <span class="op">=</span> <span class="va">partb</span>,</span>
-<span>                <span class="st">"Home Health Agency (HHA)"</span> <span class="op">=</span> <span class="va">hha</span>,</span>
-<span>                <span class="st">"Durable Medical Equipment (DME)"</span> <span class="op">=</span> <span class="va">dme</span>,</span>
-<span>                <span class="st">"Power Mobility Device (PMD)"</span> <span class="op">=</span> <span class="va">pmd</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">tidyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">npi</span>, </span>
-<span>                                <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"name"</span><span class="op">)</span><span class="op">)</span>, </span>
-<span>                      names_to <span class="op">=</span> <span class="st">"service"</span>, </span>
-<span>                      values_to <span class="op">=</span> <span class="st">"eligible"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
 <span><span class="co">#&gt;   npi        first_name last_name service                         eligible</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH      HUSSAIN   Medicare Part B                 TRUE    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH      HUSSAIN   Home Health Agency (HHA)        TRUE    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH      HUSSAIN   Durable Medical Equipment (DME) TRUE    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH      HUSSAIN   Power Mobility Device (PMD)     TRUE</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH      HUSSAIN   Power Mobility Device (PMD)     TRUE</span></span></code></pre>
 <p><br></p>
-<p>Setting it to <code>FALSE</code> will return the original output:</p>
-<p><br></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<p>Setting it to <code>FALSE</code> will return the un-tidied
+output:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
 <span><span class="co">#&gt;   NPI        LAST_NAME FIRST_NAME PARTB DME   HHA   PMD  </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 HUSSAIN   SARAH      Y     Y     Y     Y</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 HUSSAIN   SARAH      Y     Y     Y     Y</span></span></code></pre>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
 function include:</p>
@@ -187,53 +177,32 @@ function include:</p>
 <code>snake_case</code> for variable names</li>
 <li>More descriptive, thematic variable names involving prefixes and a
 standardized vocabulary across all outputs</li>
-<li>Various other quality-of-life data wrangling operations (e.g.,
-replacing empty cells with <code>NA</code>, converting year columns to
-integers, date columns to date type, NPIs to character type)</li>
+<li>Various quality-of-life data wrangling (e.g., replacing empty cells
+with <code>NA</code>, converting year columns to integers, date columns
+to date type, NPIs to character type)</li>
 </ul>
-<p><br></p>
 <p>However, in the event that you would prefer to do your own
 transformations, simply turn it off with <code>tidy = FALSE</code>.</p>
 <p><br></p>
 </div>
 <div class="section level2">
-<h2 id="available-years-helpers">Available Years Helpers<a class="anchor" aria-label="anchor" href="#available-years-helpers"></a>
+<h2 id="available-years">Available Years<a class="anchor" aria-label="anchor" href="#available-years"></a>
 </h2>
 <p>Several functions have a required <code>year</code> argument. The
-years available to query might change at any time, so there’s an
-accompanying helper function to retrieve the years available from each
-API:</p>
-<p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Quality Payment Program</span></span>
-<span><span class="fu"><a href="../reference/quality_payment_years.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span>
-<span></span>
-<span><span class="co"># Open Payments Program</span></span>
-<span><span class="fu"><a href="../reference/open_payments_years.html">open_payments_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2016 2017 2018 2019 2020 2021 2022</span></span>
-<span></span>
-<span><span class="co"># Physician and Practitioners</span></span>
-<span><span class="fu"><a href="../reference/physician_by_provider_years.html">physician_by_provider_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021</span></span>
-<span><span class="fu"><a href="../reference/physician_by_service_years.html">physician_by_service_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021</span></span>
-<span><span class="fu"><a href="../reference/physician_by_geography_years.html">physician_by_geography_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 2013 2014 2015 2016 2017 2018 2019 2020 2021</span></span>
-<span></span>
-<span><span class="co"># Chronic Conditions</span></span>
-<span><span class="fu"><a href="../reference/cc_specific_years.html">cc_specific_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018</span></span>
-<span><span class="fu"><a href="../reference/cc_multiple_years.html">cc_multiple_years</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018</span></span></code></pre></div>
-<p><br></p>
-<p>They can also be used in a pipeline:</p>
-<p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+years available to query these APIs might change at any time, so there
+is an accompanying helper function to retrieve the years available, in
+the form of <code>&lt;function_name&gt;_years()</code>. For instance,
+<code><a href="../reference/quality_payment.html">quality_payment()</a></code>’s is:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment_years.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre>
+<p>These can also be used in a pipeline, for searching all available
+years:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/quality_payment_years.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">furrr</span><span class="fu">::</span><span class="fu"><a href="https://furrr.futureverse.org/reference/future_map.html" class="external-link">future_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 93</span></span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 93</span></span></span>
 <span><span class="co">#&gt;    year npi        provider_key state practice_size specialty  years_in_medicare</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 000962209    PA             <span style="text-decoration: underline;">1</span>394 Cardiac E…                 5</span></span>
@@ -247,15 +216,15 @@ API:</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   quality_category_score &lt;dbl&gt;, quality_improvement_bonus &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   quality_bonus &lt;lgl&gt;, engaged &lt;lgl&gt;, opted_into_mips &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   small_practitioner &lt;lgl&gt;, rural &lt;lgl&gt;, hpsa &lt;lgl&gt;, asc &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   hospital_based &lt;lgl&gt;, non_patient_facing &lt;lgl&gt;, facility_based &lt;lgl&gt;, …</span></span></span></code></pre></div>
-<p><br><br></p>
+<span><span class="co">#&gt; <span style="color: #949494;">#   hospital_based &lt;lgl&gt;, non_patient_facing &lt;lgl&gt;, facility_based &lt;lgl&gt;, …</span></span></span></code></pre>
+<p><br></p>
 </div>
 <div class="section level2">
-<h2 id="apis">APIs<a class="anchor" aria-label="anchor" href="#apis"></a>
+<h2 id="functions">Functions<a class="anchor" aria-label="anchor" href="#functions"></a>
 </h2>
-<p>API Search functions can be grouped according to the type of data
-they return about a provider: <em>administrative</em>,
-<em>statistical</em>, and <em>auxillary.</em></p>
+<p>The API Search functions can be grouped according to the type of data
+that they return about a provider: <em>administrative</em>,
+<em>statistical</em>, and <em>auxiliary.</em></p>
 <div class="section level3">
 <h3 id="administrative">Administrative<a class="anchor" aria-label="anchor" href="#administrative"></a>
 </h3>
@@ -294,7 +263,7 @@ data.</li>
 <code><a href="../reference/physician_by_service.html">physician_by_service()</a></code>: Yearly detailed utilization
 data.</li>
 <li>
-<code>quality_payments()</code>: Yearly QPP/MIPS performance
+<code><a href="../reference/quality_payment.html">quality_payment()</a></code>: Yearly QPP/MIPS performance
 data.</li>
 <li>
 <code><a href="../reference/quality_eligibility.html">quality_eligibility()</a></code>: Yearly QPP/MIPS eligibility
@@ -313,7 +282,7 @@ returned from <code><a href="../reference/physician_by_service.html">physician_b
 </ul>
 </div>
 <div class="section level3">
-<h3 id="auxillary">Auxillary<a class="anchor" aria-label="anchor" href="#auxillary"></a>
+<h3 id="auxiliary">Auxiliary<a class="anchor" aria-label="anchor" href="#auxiliary"></a>
 </h3>
 <ul>
 <li>
@@ -328,6 +297,8 @@ application been processed?</li>
 <li>
 <code><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty
 eligible to enroll in Medicare?</li>
+<li>
+<code><a href="../reference/quality_stats.html">quality_stats()</a></code>: Yearly QPP/MIPS performance data.</li>
 </ul>
 <p><br></p>
 </div>

@@ -55,7 +55,8 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <h6 class="dropdown-header" data-toc-skip>Case Studies</h6>
+    <h6 class="dropdown-header" data-toc-skip>Linking Providers</h6>
+    <a class="dropdown-item" href="../articles/linking_providers.html"></a>
     <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
@@ -125,47 +126,47 @@
 </h2>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"060004"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 36</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 32</span></span></span>
 <span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1629071758 O200706190… CO           00-09          PART A PROVID… 060004      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 26 more variables: pac_id_org &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_type &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_psychiatric &lt;lgl&gt;, sg_psychiatric_unit &lt;lgl&gt;, sg_rehabilitation &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>state <span class="op">=</span> <span class="st">"GA"</span>, city <span class="op">=</span> <span class="st">"VALDOSTA"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 36</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 33</span></span></span>
 <span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1306896253 O200803120… GA           00-09          PART A PROVID… 110122      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1467404046 O200803130… GA           00-09          PART A PROVID… 11T122      </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1538417753 O201212130… GA           00-09          PART A PROVID… 114036      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 27 more variables: pac_id_org &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;int&gt;, location_type &lt;chr&gt;, multiple_npis &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   proprietary_nonprofit &lt;lgl&gt;, sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_alcohol_drug &lt;lgl&gt;, sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_short_term &lt;lgl&gt;, sg_psychiatric &lt;lgl&gt;, sg_psychiatric_unit &lt;lgl&gt;, …</span></span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">6002723947</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 36</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 31</span></span></span>
 <span><span class="co">#&gt;   npi        enroll_id   enroll_state specialty_code specialty_desc facility_ccn</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1588664007 O200208260… GA           00-09          PART A PROVID… 112011      </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 30 more variables: pac_id_org &lt;chr&gt;, org_name &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_length &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   incorp_state &lt;chr&gt;, org_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;int&gt;, location_type &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, proprietary_nonprofit &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_general &lt;lgl&gt;, sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sg_childrens &lt;lgl&gt;, sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 25 more variables: pac_id_org &lt;chr&gt;, organization_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   doing_business_as &lt;chr&gt;, incorp_date &lt;date&gt;, incorp_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   org_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   location_type &lt;chr&gt;, multiple_npis &lt;lgl&gt;, sg_general &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_acute_care &lt;lgl&gt;, sg_alcohol_drug &lt;lgl&gt;, sg_childrens &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_long_term &lt;lgl&gt;, sg_short_term &lt;lgl&gt;, sg_psychiatric &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   sg_psychiatric_unit &lt;lgl&gt;, sg_rehabilitation &lt;lgl&gt;, …</span></span></span></code></pre></div>
 </div>
   </main>
 </div>
