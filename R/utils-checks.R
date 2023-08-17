@@ -136,13 +136,13 @@ enroll_check <- function(enroll_id,
                          call = rlang::caller_env()) {
 
   # Abort if numeric
-  # if (grepl("^[[:digit:]]+$", enroll_id) == TRUE) {
-  #   cli::cli_abort(c(
-  #     "{.strong Enrollment ID} must be {.emph alpha-numeric}.",
-  #     "x" = "{.val {enroll_id}} is numeric."), call = call)
-  # }
+  if (is.numeric(enroll_id) == TRUE) {
+    cli::cli_abort(c(
+      "{.strong Enrollment ID} must be a {.emph character} vector.",
+      "x" = "{.val {enroll_id}} is a {.cls {class(enroll_id)}} vector."), call = call)
+  }
 
-  # Must be 10 char length
+  # Must be 15 char length
   if (nchar(enroll_id) != 15L) {
     cli::cli_abort(c(
       "{.strong Enrollment ID} must be {.emph 15 characters long}.",

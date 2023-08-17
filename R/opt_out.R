@@ -1,7 +1,7 @@
-#' Search the Medicare Opt Out Affidavits API
+#' Providers That Have Opted Out of Medicare
 #'
-#' @description A list of practitioners who are currently opted out
-#'    of Medicare.
+#' @description `opt_out()` allows you to search for providers who have decided
+#' not to participate in Medicare.
 #'
 #' @details The Opt Out Affidavits dataset provides information on providers
 #'    who have decided not to participate in Medicare. It contains the

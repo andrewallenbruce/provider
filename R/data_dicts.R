@@ -424,3 +424,27 @@
 #'
 #'   return(func_tbl)
 #' }
+#'
+#' taxonomy_crosswalk data dictionary
+#' @autoglobal
+#' @noRd
+#' taxonomy_crosswalk_data_dict <- function() {
+#' tibble::tibble(
+#' Variable = c(
+#' "`specialty_code`",
+#' "`specialty_desc`",
+#' "`taxonomy_code`",
+#' "`taxonomy_description`"),
+#' Description = c(
+#' "Medicare Specialty Code",
+#' "Medicare Provider/Supplier Type Description",
+#' "Provider Taxonomy Code",
+#' "Provider Taxonomy Description"),
+#' Definition = c(
+#' "Specialty code that corresponds to the listed Medicare specialty",
+#' "The description of the Medicare Provider/Supplier Type",
+#' "The taxonomy codes the Providers use",
+#' "The description of the taxonomy that the Providers use")) |>
+#' dplyr::select(Variable, Description, Definition) |>
+#' provider:::gt_datadict()
+#' }

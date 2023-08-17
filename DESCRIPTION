@@ -29,20 +29,18 @@ Imports:
     tidyr
 Suggests: 
     covr,
+    tidyverse,
+    printr,
     campfin,
     kableExtra,
     fontawesome,
-    forcats,
     furrr,
     htmltools,
-    ggplot2,
-    gghighlight,
     scales,
     glue,
     gluedown,
     gt,
     gtExtras,
-    httptest2,
     knitr,
     leaflet,
     parsedate,
@@ -52,7 +50,6 @@ Suggests:
     spelling,
     stringr,
     testthat (>= 3.0.0),
-    terse,
     tidygeocoder
 VignetteBuilder: 
     knitr

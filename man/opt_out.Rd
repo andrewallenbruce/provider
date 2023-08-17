@@ -2,7 +2,7 @@
 % Please edit documentation in R/opt_out.R
 \name{opt_out}
 \alias{opt_out}
-\title{Search the Medicare Opt Out Affidavits API}
+\title{Providers That Have Opted Out of Medicare}
 \source{
 Centers for Medicare & Medicaid Services
 }
@@ -46,8 +46,8 @@ Order and Refer}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-A list of practitioners who are currently opted out
-of Medicare.
+\code{opt_out()} allows you to search for providers who have decided
+not to participate in Medicare.
 }
 \details{
 The Opt Out Affidavits dataset provides information on providers

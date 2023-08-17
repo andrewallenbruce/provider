@@ -128,13 +128,13 @@ hospital_enrollment <- function(npi               = NULL,
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
       dplyr::select(npi,
+                    organization_name,
+                    doing_business_as      = doing_business_as_name,
                     pac_id_org             = associate_id,
                     enroll_id              = enrollment_id,
                     facility_ccn           = ccn,
                     specialty_code         = provider_type_code,
                     specialty              = provider_type_text,
-                    organization_name,
-                    doing_business_as      = doing_business_as_name,
                     enroll_state           = enrollment_state,
                     incorporation_date,
                     incorporation_state,
@@ -148,24 +148,12 @@ hospital_enrollment <- function(npi               = NULL,
                     location_other         = location_other_type_text,
                     multiple_npis          = multiple_npi_flag,
                     proprietary_nonprofit,
-                    sg_general             = subgroup_general,
-                    sg_acute_care          = subgroup_acute_care,
-                    sg_alcohol_drug        = subgroup_alcohol_drug,
-                    sg_childrens           = subgroup_childrens,
-                    sg_long_term           = subgroup_long_term,
-                    sg_short_term          = subgroup_short_term,
-                    sg_psychiatric         = subgroup_psychiatric,
-                    sg_psychiatric_unit    = subgroup_psychiatric_unit,
-                    sg_rehabilitation      = subgroup_rehabilitation,
-                    sg_rehabilitation_unit = subgroup_rehabilitation_unit,
-                    sg_swing_bed_approved  = subgroup_swing_bed_approved,
-                    sg_specialty_hospital  = subgroup_specialty_hospital,
-                    sg_other               = subgroup_other,
-                    sg_other_text          = subgroup_other_text) |>
-      janitor::remove_empty(which = c("rows", "cols")) |>
-      tidyr::nest(address = dplyr::any_of(c("address", "city", "state", "zip", "location_type")),
-                  incorporation = dplyr::contains("incorporation"),
-                  subgroups = dplyr::contains("sg_"))
+                    dplyr::contains("subgroup_")) |>
+      # janitor::remove_empty(which = c("rows", "cols")) |>
+      tidyr::nest(
+        # address = dplyr::any_of(c("address", "city", "state", "zip", "location_type")),
+        # incorporation = dplyr::contains("incorporation"),
+                  subgroups = dplyr::contains("subgroup_"))
 
     }
   return(results)

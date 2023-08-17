@@ -2,6 +2,7 @@
 % Please edit documentation in R/qpp.R
 \name{quality_payment}
 \alias{quality_payment}
+\alias{quality_payment_years}
 \title{Quality Payment Program Experience}
 \usage{
 quality_payment(
@@ -12,6 +13,8 @@ quality_payment(
   participation_type = NULL,
   tidy = TRUE
 )
+
+quality_payment_years()
 }
 \arguments{
 \item{year}{integer, YYYY, QPP Performance year. Run the helper function
@@ -37,6 +40,8 @@ remaining fields in this report.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
+
+integer vector of years available
 }
 \description{
 Information on participation and performance in the Merit-based
@@ -68,4 +73,5 @@ scores, and payment adjustments.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_payment(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
+quality_payment_years()
 }

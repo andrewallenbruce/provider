@@ -21,54 +21,62 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, message=FALSE, warning=FALSE}
 library(provider)
-library(dplyr)
-library(purrr)
-library(knitr)
+library(tidyverse)
+library(printr)
 ```
 
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 
+<br>
+
 Looking it up in the **Provider Enrollment** API gives us several avenues to go down:
 
+<br>
+
 ```{r}
-provider_enrollment(organization_name = "Elizabethtown Community Hospital") |> kable()
+provider_enrollment(organization_name = "Elizabethtown Community Hospital")
 ```
 
+<br>
 
 First, we can see that it has one PAC ID, three different organizational NPIs, and four different Enrollment IDs. Looking it up in the **Hospital Enrollment** API gives us even more detail:
 
+<br>
+
 ```{r}
 hospital_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
-  select(-c(address:subgroups, specialty, organization_structure, proprietary_nonprofit)) |> 
-  kable()
+  select(npi, organization_name, pac_id_org, facility_ccn, specialty_code)
 ```
 
+<br>
+
 The **Hospital Enrollment** API includes only Medicare Part A (hospital) providers, so we only get two rows back, but those include a new data point: two facility CCNs. Plugging those into the **Facility Affiliations** API, we can retrieve information on the individual providers practicing at this hospital. First, the all-numeric CCN (`331302`):
+
+<br>
 
 ```{r}
 facility_affiliations(facility_ccn = 331302) |> 
   select(-c(middle_name, suffix)) |> 
-  kable()
+  head(10)
 ```
+
+<br>
 
 That returns 174 individual providers affiliated with the Hospital. Now the alphanumeric CCN (`33Z302`):
 
 
 ```{r}
-facility_affiliations(facility_ccn = "33Z302") |> 
-  select(-c(middle_name)) |> 
-  kable()
+facility_affiliations(facility_ccn = "33Z302")
 ```
 
-That returns three more affiliated individual providers that practice in the Hospital's nursing home. An alphanumeric CCN represents a sub-unit of a Hospital, here a Nursing Home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN:
+<br>
 
+That returns three more affiliated individual providers that practice in the Hospital's nursing home. An alphanumeric CCN represents a sub-unit of a Hospital, here a Nursing Home. 
 
-```{r
-facility_affiliations(parent_ccn = 331302)
-```
+> We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `facility_affiliations(parent_ccn = 331302)`
 
 
 

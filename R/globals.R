@@ -114,13 +114,13 @@ utils::globalVariables(c(
   "y", # <hospital_enrollment>
   "address_line_1", # <hospital_enrollment>
   "address_line_2", # <hospital_enrollment>
+  "doing_business_as_name", # <hospital_enrollment>
+  "associate_id", # <hospital_enrollment>
   "enrollment_id", # <hospital_enrollment>
-  "enrollment_state", # <hospital_enrollment>
+  "ccn", # <hospital_enrollment>
   "provider_type_code", # <hospital_enrollment>
   "provider_type_text", # <hospital_enrollment>
-  "ccn", # <hospital_enrollment>
-  "associate_id", # <hospital_enrollment>
-  "doing_business_as_name", # <hospital_enrollment>
+  "enrollment_state", # <hospital_enrollment>
   "incorporation_date", # <hospital_enrollment>
   "incorporation_state", # <hospital_enrollment>
   "organization_type_structure", # <hospital_enrollment>
@@ -131,20 +131,6 @@ utils::globalVariables(c(
   "location_other_type_text", # <hospital_enrollment>
   "multiple_npi_flag", # <hospital_enrollment>
   "proprietary_nonprofit", # <hospital_enrollment>
-  "subgroup_general", # <hospital_enrollment>
-  "subgroup_acute_care", # <hospital_enrollment>
-  "subgroup_alcohol_drug", # <hospital_enrollment>
-  "subgroup_childrens", # <hospital_enrollment>
-  "subgroup_long_term", # <hospital_enrollment>
-  "subgroup_short_term", # <hospital_enrollment>
-  "subgroup_psychiatric", # <hospital_enrollment>
-  "subgroup_psychiatric_unit", # <hospital_enrollment>
-  "subgroup_rehabilitation", # <hospital_enrollment>
-  "subgroup_rehabilitation_unit", # <hospital_enrollment>
-  "subgroup_swing_bed_approved", # <hospital_enrollment>
-  "subgroup_specialty_hospital", # <hospital_enrollment>
-  "subgroup_other", # <hospital_enrollment>
-  "subgroup_other_text", # <hospital_enrollment>
   "y", # <mips_group_2021>
   "org_nm", # <mips_group_2021>
   "aco_id_1", # <mips_group_2021>
@@ -474,18 +460,20 @@ utils::globalVariables(c(
   "gndr_sw", # <provider_enrollment>
   "distro", # <quality_payment>
   "y", # <quality_payment>
-  "provider_key", # <quality_payment>
   "practice_state_or_us_territory", # <quality_payment>
   "practice_size", # <quality_payment>
   "clinician_specialty", # <quality_payment>
   "years_in_medicare", # <quality_payment>
   "medicare_patients", # <quality_payment>
-  "allowed_charges", # <quality_payment>
   "services", # <quality_payment>
+  "allowed_charges", # <quality_payment>
   "final_score", # <quality_payment>
   "payment_adjustment_percentage", # <quality_payment>
-  "complex_patient_bonus", # <quality_payment>
   "quality_category_score", # <quality_payment>
+  "promoting_interoperability_pi_category_score", # <quality_payment>
+  "ia_score", # <quality_payment>
+  "cost_score", # <quality_payment>
+  "complex_patient_bonus", # <quality_payment>
   "quality_improvement_bonus", # <quality_payment>
   "quality_bonus", # <quality_payment>
   "engaged", # <quality_payment>
@@ -504,10 +492,8 @@ utils::globalVariables(c(
   "pi_reweighting", # <quality_payment>
   "pi_bonus", # <quality_payment>
   "pi_cehrt_id", # <quality_payment>
-  "ia_score", # <quality_payment>
   "extreme_hardship_ia", # <quality_payment>
   "ia_study", # <quality_payment>
-  "cost_score", # <quality_payment>
   "extreme_hardship_cost", # <quality_payment>
   "apms", # <quality_eligibility>
   "individual_scenario", # <quality_eligibility>
@@ -571,10 +557,9 @@ utils::globalVariables(c(
   "group_due_date", # <revalidation_reassign>
   "group_reassignments_and_physician_assistants", # <revalidation_reassign>
   "distro", # <taxonomy_crosswalk>
+  "medicare_provider_supplier_type", # <taxonomy_crosswalk>
   "provider_taxonomy_code", # <taxonomy_crosswalk>
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
-  "medicare_specialty_code", # <taxonomy_crosswalk>
-  "medicare_provider_supplier_type_description", # <taxonomy_crosswalk>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>
