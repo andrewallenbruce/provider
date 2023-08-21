@@ -76,70 +76,7 @@ However, in the event that you would prefer to do your own transformations, simp
 
 <br>
 
-## Helper Functions
-
-Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
-
-```{r}
-quality_payment_years()
-```
-
-These can also be used in a pipeline, for searching all available years:
-
-```{r}
-quality_payment_years() |> 
-  map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
-  list_rbind()
-```
-
-<br>
-
-## Validation Checks
-
-> **National Provider Identifier**: 
-> A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS). All individual HIPAA–covered healthcare providers or organizations must obtain an NPI. Once assigned, a provider’s NPI is permanent and remains with the provider regardless of job or location changes.
-
-```{r}
-# Must be 10 characters long
-open_payments(npi = 12345691234)
-
-# Must be numeric
-nppes_npi(npi = "O12345678912")
-
-# Must pass Luhn check
-pending_applications(npi = 1234569123)
-```
-
-<br>
-
-> **Provider Associate-level Control ID**:
-
-```{r}
-# Must be 10 characters long
-facility_affiliations(pac_id = 0123456789)
-
-# Must be numeric
-hospital_enrollment(pac_id_org = "O12345678912")
-```
-
-<br>
-
-> **Medicare Enrollment ID**:
-
-```{r}
-# Must be a character vector
-doctors_and_clinicians(enroll_id = 0123456789123456)
-
-# Must be 15 characters long
-revalidation_group(enroll_id = "I123456789123456")
-
-# Must begin with a capital I (Individual) or O (Organization/Group)
-provider_enrollment(enroll_id = "012345678912345")
-```
-
-<br>
-
-## Functions
+## Exported Functions
 
 The API Search functions can be grouped according to the type of data that they return about a provider: *administrative*, *statistical*, and *auxiliary.*
 
@@ -179,5 +116,84 @@ The following return yearly stats useful for comparison against data returned fr
    * `quality_stats()`: Yearly QPP/MIPS performance data.
 
 <br>
+
+## Helper Functions
+
+Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
+
+```{r}
+quality_payment_years()
+```
+
+These can also be used in a pipeline, for searching all available years:
+
+```{r}
+quality_payment_years() |> 
+  map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
+  list_rbind()
+```
+
+<br>
+
+## Validation Checks
+
+Several validation checks have been implemented, including checks for *NPIs*, *PAC IDs*, and *Enrollment IDs*:
+
+> **National Provider Identifier**: 
+> A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS) through the National Plan and Provider Enumeration System (NPPES). All individual HIPAA–covered healthcare providers or organizations must obtain an NPI. Once assigned, a provider’s NPI is permanent and remains with the provider regardless of job or location changes.
+
+```{r}
+# Must be 10 characters long
+open_payments(npi = 12345691234)
+
+# Must be numeric
+nppes_npi(npi = "O12345678912")
+
+# Must pass Luhn check
+pending_applications(npi = 001234569123)
+```
+
+<br>
+
+> **Provider Associate-level Control ID**:
+> A Provider associate-level control ID (PAC ID) is a 10-digit unique numeric identifier that is assigned to each individual or organization in PECOS. The PAC ID links all entity-level information (e.g., tax identification numbers and organizational names) and may be associated with multiple enrollment IDs if the individual or organization enrolled multiple times under different circumstances.
+
+
+```{r}
+# Must be 10 characters long
+facility_affiliations(pac_id = 0123456789)
+
+# Must be numeric
+hospital_enrollment(pac_id_org = "O12345678912")
+```
+
+<br>
+
+> **Medicare Enrollment ID**:
+> An Enrollment ID is a 15-digit unique alphanumeric identifier that is assigned to each new provider enrollment application. All enrollment-level information (e.g., enrollment type, enrollment state, provider specialty and reassignment of benefits) is linked through the Enrollment ID.
+
+```{r}
+# Must be a character vector
+doctors_and_clinicians(enroll_id = 0123456789123456)
+
+# Must be 15 characters long
+revalidation_group(enroll_id = "I123456789123456")
+
+# Must begin with a capital I (Individual) or O (Organization/Group)
+provider_enrollment(enroll_id = "012345678912345")
+```
+
+<br>
+
+### Parameters Containing Leading Zeros
+
+For any parameters that may contain leading zeros, make sure that they're input as a character vector. R will drop any leading zeros in a numeric vector:
+
+```{r}
+c(0001, "0001")
+```
+
+
+
 
 

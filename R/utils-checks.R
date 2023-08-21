@@ -92,6 +92,15 @@ pac_check <- function(pac_id,
                       arg = rlang::caller_arg(pac_id),
                       call = rlang::caller_env()) {
 
+  # first <- as.integer(unlist(strsplit(pac_id, ""))[1])
+  #
+  # if (first == 0) {
+  #
+  #   cli::cli_warn(c(
+  #     "{.strong PAC ID}'s that begin with {.strong `0`} must be a {.emph character} vector.",
+  #     "x" = "{.val {pac_id}} is a {.cls {class(pac_id)}} vector."), call = call)
+  # }
+
   # Return FALSE if not a number
   if (grepl("^[[:digit:]]+$", pac_id) == FALSE) {
     cli::cli_abort(c(

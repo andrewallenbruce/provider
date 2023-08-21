@@ -49,7 +49,7 @@ a PAC ID can be associated with multiple enrollment IDs and states.}
 \itemize{
 \item \code{F}: Female
 \item \code{M}: Male
-\item \code{9}: Unknown or Organizational provider
+\item \code{9}: Unknown (or Organizational provider)
 }}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
@@ -71,14 +71,13 @@ to bill Medicare.
 }
 
 \section{Update Frequency}{
- Quarterly
+ \strong{Quarterly}
 }
 
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 provider_enrollment(first_name = "DEBRA", last_name = "FROMER")
-provider_enrollment(organization_name = "Elizabethtown Community Hospital", state = "NY")
 provider_enrollment(specialty = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
 provider_enrollment(pac_id = 2860305554, gender = "9")
 \dontshow{\}) # examplesIf}

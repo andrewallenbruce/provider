@@ -40,9 +40,17 @@ Looking it up in the **Provider Enrollment** API gives us several avenues to go 
 provider_enrollment(organization_name = "Elizabethtown Community Hospital")
 ```
 
+```{r echo=FALSE}
+e <- provider_enrollment(organization_name = "Elizabethtown Community Hospital")
+e_npi <- dplyr::distinct(e, npi)
+e_pac <- dplyr::distinct(e, pac_id)
+e_enroll <- dplyr::distinct(e, enroll_id)
+```
+
+
 <br>
 
-First, we can see that it has one PAC ID, three different organizational NPIs, and four different Enrollment IDs. Looking it up in the **Hospital Enrollment** API gives us even more detail:
+We can see that it has `r nrow(e_pac)` PAC ID, `r nrow(e_npi)` organizational NPIs, and `r nrow(e_enroll)` Enrollment IDs. Searching for it in the **Hospital Enrollment** API gives us even more detail:
 
 <br>
 
@@ -62,10 +70,14 @@ facility_affiliations(facility_ccn = 331302) |>
   select(-c(middle_name, suffix)) |> 
   head(10)
 ```
+```{r echo=FALSE}
+npi <- facility_affiliations(facility_ccn = 331302) |> dplyr::distinct(npi)
+npi2 <- facility_affiliations(facility_ccn = "33Z302") |> dplyr::distinct(npi)
+```
 
 <br>
 
-That returns 174 individual providers affiliated with the Hospital. Now the alphanumeric CCN (`33Z302`):
+That returns `r nrow(npi)` individual providers affiliated with the hospital. Now to search the alphanumeric CCN (`33Z302`):
 
 
 ```{r}
@@ -74,11 +86,13 @@ facility_affiliations(facility_ccn = "33Z302")
 
 <br>
 
-That returns three more affiliated individual providers that practice in the Hospital's nursing home. An alphanumeric CCN represents a sub-unit of a Hospital, here a Nursing Home. 
+That returns `r nrow(npi2)` more affiliated individual providers that practice in the Hospital's nursing home, bringing the total to `r nrow(npi) + nrow(npi2)`.
 
-> We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `facility_affiliations(parent_ccn = 331302)`
+<br>
 
+> An *alphanumeric* CCN represents a sub-unit of the hospital, here a nursing home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `facility_affiliations(parent_ccn = 331302)`
 
+<br>
 
 ```{r eval=FALSE, echo=FALSE}
 unique(elizabethtown$npi) |> 
@@ -86,9 +100,6 @@ unique(elizabethtown$npi) |>
   list_rbind() |> 
   filter(purpose != "MAILING")
 ```
-
-
-
 
 
 

@@ -399,7 +399,7 @@ utils::globalVariables(c(
   "bene_race_black_cnt", # <physician_by_provider>
   "bene_race_api_cnt", # <physician_by_provider>
   "bene_race_hspnc_cnt", # <physician_by_provider>
-  "bene_race_natind_cnt", # <physician_by_provider>
+  "bene_race_nat_ind_cnt", # <physician_by_provider>
   "bene_race_othr_cnt", # <physician_by_provider>
   "bene_dual_cnt", # <physician_by_provider>
   "bene_ndual_cnt", # <physician_by_provider>
@@ -420,6 +420,7 @@ utils::globalVariables(c(
   "bene_cc_sz_pct", # <physician_by_provider>
   "bene_cc_strok_pct", # <physician_by_provider>
   "bene_avg_risk_scre", # <physician_by_provider>
+  "entity_type", # <physician_by_provider>
   "distro", # <physician_by_service>
   "y", # <physician_by_service>
   "tot_benes", # <physician_by_service>

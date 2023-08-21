@@ -26,11 +26,8 @@ ccs_art <- gluedown::md_link("Chronic Conditions (Specific)" = "https://andrewal
 drs_art <- gluedown::md_link("Doctors and Clinicians" = "https://andrewallenbruce.github.io/provider/articles/doctors-and-clinicians.html")
 fac_art <- gluedown::md_link("Facility Affiliations" = "https://andrewallenbruce.github.io/provider/articles/facility-affiliations.html")
 hos_art <- gluedown::md_link("Hospital Enrollment" = "https://andrewallenbruce.github.io/provider/articles/hospital-enrollment.html")
-mis_art <- gluedown::md_link("Missing Information" = "https://andrewallenbruce.github.io/provider/articles/missing-info.html")
 npi_art <- gluedown::md_link("NPPES NPI Registry" = "https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html")
 opp_art <- gluedown::md_link("Open Payments Program" = "https://andrewallenbruce.github.io/provider/articles/cms-open-payments.html")
-opt_art <- gluedown::md_link("Opt Out Affidavits" = "https://andrewallenbruce.github.io/provider/articles/opt-out.html")
-pap_art <- gluedown::md_link("Pending Medicare Applications" = "https://andrewallenbruce.github.io/provider/articles/pending-applications.html")
 pbg_art <- gluedown::md_link("Physician by Geography" = "https://andrewallenbruce.github.io/provider/articles/physician-by-geography.html")
 pbp_art <- gluedown::md_link("Physician by Provider" = "https://andrewallenbruce.github.io/provider/articles/physician-by-provider.html")
 pbs_art <- gluedown::md_link("Physician by Service" = "https://andrewallenbruce.github.io/provider/articles/physician-by-service.html")
@@ -47,11 +44,8 @@ gluedown::md_bullet(c(ben_art,
                      drs_art,
                      fac_art,
                      hos_art,
-                     mis_art,
                      npi_art,
                      opp_art,
-                     opt_art,
-                     pap_art,
                      pbg_art,
                      pbp_art,
                      pbs_art,

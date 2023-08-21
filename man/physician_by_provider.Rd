@@ -2,17 +2,15 @@
 % Please edit documentation in R/physician_by_provider.R
 \name{physician_by_provider}
 \alias{physician_by_provider}
-\title{Search the Medicare Physician & Other Practitioners API
-by \strong{Provider}}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\alias{physician_by_provider_years}
+\title{Yearly Utilization Data on Medicare Part B Providers}
 \usage{
 physician_by_provider(
   year,
   npi = NULL,
   first_name = NULL,
   last_name = NULL,
+  organization_name = NULL,
   credential = NULL,
   gender = NULL,
   entype = NULL,
@@ -26,40 +24,35 @@ physician_by_provider(
   par = NULL,
   tidy = TRUE
 )
+
+physician_by_provider_years()
 }
 \arguments{
-\item{year}{year int (required); Year in YYYY format. Run helper function
-\code{provider:::physician_by_provider_years()} to return a vector of the years
+\item{year}{integer (\emph{required}); Year in \code{YYYY} format. Run helper function
+\code{physician_by_provider_years()} to return a vector of the years
 currently available.}
 
-\item{npi}{National Provider Identifier (NPI) for the rendering provider
-on the claim. The provider NPI is the numeric identifier registered in
-NPPES.}
+\item{npi}{National Provider Identifier for the rendering provider on the claim.}
 
-\item{first_name}{An individual provider's (entity type code \code{I}) first name.
-An organization's (entity type code \code{O}) will be blank.}
+\item{first_name}{Individual provider's first name.}
 
-\item{last_name}{Last name/Organization name of the provider. When the
-provider is registered in NPPES as an individual (entity type code \code{I}),
-this is the provider’s last name. When the provider is registered as an
-organization (entity type code \code{O}), this is the organization name.}
+\item{last_name}{Individual provider's last name.}
 
-\item{credential}{An individual provider's (entity type code \code{I}) credentials.
-An organization's will be blank.}
+\item{organization_name}{Organization name.}
 
-\item{gender}{An individual provider's gender. An organization's will be blank.}
+\item{credential}{Individual provider's credentials.}
 
-\item{entype}{Type of entity reported in NPPES. An entity code of \code{I}
-identifies providers registered as individuals while an entity type
-code of \code{O} identifies providers registered as organizations.}
+\item{gender}{Individual provider's gender.}
 
-\item{city}{The city where the provider is located, as reported in NPPES.}
+\item{entype}{Provider entity type.}
 
-\item{state}{The state where the provider is located, as reported in NPPES.}
+\item{city}{City where provider is located.}
 
-\item{zipcode}{The provider’s zip code, as reported in NPPES.}
+\item{state}{State where provider is located.}
 
-\item{fips}{FIPS code for the rendering provider's state.}
+\item{zipcode}{Provider’s zip code.}
+
+\item{fips}{Provider's state FIPS code.}
 
 \item{ruca}{Rural-Urban Commuting Area Code (RUCA); a Census tract-based
 classification scheme that utilizes the standard Bureau of Census
@@ -69,13 +62,10 @@ regarding their rural and urban status and relationships. The Referring
 Provider ZIP code was cross walked to the United States Department of
 Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.}
 
-\item{country}{The country where the provider is located, as reported
-in NPPES.}
+\item{country}{Country where provider is located.}
 
-\item{specialty}{Derived from the provider specialty code reported on the
-claim. For providers that reported more than one specialty code on their
-claims, this is the specialty code associated with the largest number
-of services.}
+\item{specialty}{Provider specialty code reported on the largest number of
+claims submitted.}
 
 \item{par}{Identifies whether the provider participates in Medicare
 and/or accepts assignment of Medicare allowed amounts. The value will
@@ -90,37 +80,40 @@ services.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
+
+integer vector of years available
 }
 \description{
-Information on services and procedures provided to
-Original Medicare (fee-for-service) Part B (Medical Insurance)
-beneficiaries by physicians and other healthcare professionals;
-aggregated by provider.
+\code{physician_by_provider()} allows you to access data such as
+services and procedures performed; charges submitted and payment received;
+and beneficiary demographic and health characteristics for providers treating
+Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.
 }
-\details{
-The \strong{Provider} dataset provides information on use, payments,
-submitted charges and beneficiary demographic and health characteristics
-organized by National Provider Identifier (NPI).
-\subsection{Links}{
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider}{Medicare Physician & Other Practitioners: by Provider API}
 }
 }
+
+\section{Update Frequency}{
+ *\emph{Annually}
 }
-\note{
-Update Frequency: *\emph{Annually}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-physician_by_provider(npi = 1003000423, year = 2020)
+physician_by_provider(year = 2020,
+                      npi = 1003000423)
 
-physician_by_provider(entype = "I",
-                      city = "Hershey",
-                      state = "PA",
-                      fips = 42,
-                      ruca = 1,
-                      gender = "F",
-                      cred = "MD",
-                      specialty = "Anesthesiology")
+# Use the years helper function to retrieve results for every year:
+physician_by_provider_years() |>
+map(\(x) physician_by_provider(year = x, npi = 1043477615)) |>
+list_rbind()
 \dontshow{\}) # examplesIf}
+physician_by_provider_years()
+}
+\seealso{
+\code{\link[=physician_by_provider_years]{physician_by_provider_years()}}, \code{\link[=physician_by_service]{physician_by_service()}},
+\code{\link[=physician_by_geography]{physician_by_geography()}}, \code{\link[=beneficiary_enrollment]{beneficiary_enrollment()}}, \code{\link[=cc_multiple]{cc_multiple()}},
+\code{\link[=cc_specific]{cc_specific()}}
 }

@@ -2,17 +2,14 @@
 % Please edit documentation in R/missing_information.R
 \name{missing_information}
 \alias{missing_information}
-\title{Search the CMS Public Reporting of Missing Digital Contact Information API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Providers with Missing Endpoints in NPPES}
 \usage{
 missing_information(npi = NULL, name = NULL, tidy = TRUE)
 }
 \arguments{
 \item{npi}{The provider’s National Provider Identifier}
 
-\item{name}{Provider's full name, without spaces, in the form "Last,First"}
+\item{name}{Provider's full name, in the form "last, first"}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -20,26 +17,52 @@ missing_information(npi = NULL, name = NULL, tidy = TRUE)
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on providers missing digital contact information
-in NPPES.
+\code{missing_information()} allows you to search for providers with missing
+digital contact information in NPPES.
+\subsection{Missing Information = NPPES Endpoints}{
+
+Digital contact information, also known as \href{https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH\%20INFORMATION\%20EXCHANGE.html}{endpoints},
+provides a secure way for health care entities to send authenticated,
+encrypted health information to trusted recipients over the internet. Health
+care organizations seeking to engage in electronic health information
+exchange need accurate information about the electronic addresses (for
+example, Direct address, FHIR server URL, query endpoint, or other digital
+contact information) of potential exchange partners to facilitate this
+information exchange.
 }
-\details{
-In the May 2020 CMS Interoperability and Patient Access final rule,
-CMS finalized the policy to publicly report the names and NPIs of those
-providers who do not have digital contact information included in the
-NPPES system (85 FR 25584). This data includes the NPI and provider
-name of providers and clinicians without digital contact
-information in NPPES.
-\subsection{Links}{
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information}{CMS Public Reporting of Missing Digital Contact Information API}
+\item \href{https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH\%20INFORMATION\%20EXCHANGE.html}{Endpoints Information}
+\item \href{https://data.cms.gov/sites/default/files/2021-12/8eb2b4bf-6e5f-4e05-bcdb-39c07ad8f77a/Missing_Digital_Contact_Info_Methods\%20.pdf}{Methodology & Policy}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Quarterly}
 }
-\note{
-Update Frequency: \strong{Quarterly}
-}
+
 \examples{
-missing_information(npi = 1134122013)
-missing_information(name = "Henry,Timothy")
+# A provider that appears in the search results of the Missing Information
+# API has no Endpoints entered into the NPPES NPI Registry and vice versa.
+
+## Appears
+missing_information(name = "Clouse, John")
+
+## No Endpoints in NPPES
+nppes_npi(npi = 1144224569,
+          tidy = FALSE) |>
+          dplyr::select(endpoints)
+
+## Does Not Appear
+missing_information(npi = 1003000423)
+
+## Has Endpoints in NPPES
+nppes_npi(npi = 1003000423, tidy = FALSE) |>
+dplyr::select(endpoints) |>
+tidyr::unnest(cols = c(endpoints)) |>
+janitor::clean_names() |>
+dplyr::select(dplyr::contains("endpoint"))
 }

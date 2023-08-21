@@ -3,9 +3,6 @@
 \name{opt_out}
 \alias{opt_out}
 \title{Providers That Have Opted Out of Medicare}
-\source{
-Centers for Medicare & Medicaid Services
-}
 \usage{
 opt_out(
   npi = NULL,
@@ -16,29 +13,29 @@ opt_out(
   city = NULL,
   state = NULL,
   zip = NULL,
-  order_and_refer = NULL,
+  order_refer = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{npi}{National Provider Identifier (NPI) number of the Opt Out Provider}
+\item{npi}{10-digit National Provider Identifier}
 
-\item{first_name}{First Name of the Opt Out Provider}
+\item{first_name}{Provider's first name}
 
-\item{last_name}{Last Name of the Opt Out Provider}
+\item{last_name}{Provider's last name}
 
-\item{specialty}{Specialty of the Opt Out Provider}
+\item{specialty}{Provider's specialty}
 
-\item{address}{Provider's Street Address}
+\item{address}{Provider's address}
 
-\item{city}{Provider's City}
+\item{city}{Provider's city}
 
-\item{state}{Provider's State Abbreviation}
+\item{state}{Provider's state abbreviation}
 
-\item{zip}{Provider's Zip Code}
+\item{zip}{Provider's zip code}
 
-\item{order_and_refer}{Flag indicating whether the Provider is eligible to
-Order and Refer}
+\item{order_refer}{boolean indicating whether the provider is eligible
+to order and refer}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -46,29 +43,79 @@ Order and Refer}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{opt_out()} allows you to search for providers who have decided
-not to participate in Medicare.
+\code{opt_out()} allows you to search for information on providers who have
+decided not to participate in Medicare.
+\subsection{Opting Out}{
+
+Providers who do not wish to enroll in the Medicare program may “opt-out” of Medicare. This means that neither the physician,
+nor the beneficiary submits the bill to Medicare for services rendered.
+Instead, the beneficiary pays the physician out-of-pocket and neither party
+is reimbursed by Medicare. A private contract is signed between the physician
+and the beneficiary that states that neither one can receive payment from
+Medicare for the services that were performed.
+
+To opt out, a provider must:
+\itemize{
+\item Be of an \emph{eligible specialty} type
+\item Submit an \emph{opt-out affidavit} to Medicare
+\item Enter into a \emph{private contract} with their Medicare patients, reflecting
+the agreement that they will pay out-of-pocket for services, and that no
+one will submit the bill to Medicare for reimbursement
+\item Contact their Medicare Administrative Contractor (MAC) for
+\emph{instruction on information} that should be included in their opt-out
+affidavit and private contract
 }
-\details{
-The Opt Out Affidavits dataset provides information on providers
-who have decided not to participate in Medicare. It contains the
-provider's NPI, specialty, address, and effective dates.
-\subsection{Links}{
+}
+
+\subsection{Opt-Out Periods}{
+
+Opt-out periods last for two years and cannot be terminated early unless the
+provider is opting out for the very first time and terminates the opt-out no
+later than 90 days after the opt-out period's effective date.
+
+Opt-out statuses are effective for two years and automatically renew every
+two years. Providers that do not want to extend their opt-out status at the
+end of an opt-out period may cancel by notifying all Medicare contractors an
+affidavit was filed with at least 30 days prior to the start of the next
+opt-out period.
+
+If a provider retires, surrenders their license, or no longer wants to
+participate in the Medicare program, they must officially withdraw within 90
+days. DMEPOS suppliers must withdraw within 30 days.
+
+Providers may \emph{NOT} opt-out if they intend to be a Medicare Advantage
+(Part C) provider or furnish services covered by traditional Medicare
+fee-for-service (Part B).
+}
+}
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}{Medicare Opt Out Affidavits API}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Monthly}
 }
-\note{
-Update Frequency: \strong{Monthly}
-}
+
 \examples{
+opt_out(last_name = "Smith",
+        first_name = "James",
+        specialty = "Nurse Practitioner",
+        order_refer = TRUE)
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-opt_out(specialty = "Psychiatry", zipcode = "07626")
-opt_out(first = "David", last = "Smith")
-opt_out(npi = 1114974490)
-opt_out(city = "Los Angeles", address = "9201 W SUNSET BLVD")
-opt_out(state = "NY", order_and_refer = FALSE)
-opt_out(npi = 1326011057)
+# For providers that have opted out, but are eligible to order and refer,
+# use `order_refer()` to look up their specific eligibility statuses
+opt_out(last_name = "Smith",
+        first_name = "James",
+        specialty = "Nurse Practitioner",
+        order_refer = TRUE) |>
+        dplyr::pull(npi) |>
+        purrr::map(\(x) order_refer(npi = x)) |>
+        purrr::list_rbind()
 \dontshow{\}) # examplesIf}
+}
+\seealso{
+\code{\link[=order_refer]{order_refer()}}, \code{\link[=provider_enrollment]{provider_enrollment()}}, \code{\link[=pending_applications]{pending_applications()}}
 }

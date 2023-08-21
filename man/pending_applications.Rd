@@ -2,27 +2,24 @@
 % Please edit documentation in R/pending_applications.R
 \name{pending_applications}
 \alias{pending_applications}
-\title{Search the Medicare Pending Initial Logging and Tracking API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Providers with Pending Medicare Enrollment Applications}
 \usage{
 pending_applications(
+  type,
   npi = NULL,
   last_name = NULL,
   first_name = NULL,
-  type,
   tidy = TRUE
 )
 }
 \arguments{
+\item{type}{physician or non-physician}
+
 \item{npi}{National Provider Identifier (NPI) number}
 
 \item{last_name}{Last name of provider}
 
 \item{first_name}{First name of provider}
-
-\item{type}{physician or non-physician}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -30,23 +27,21 @@ pending_applications(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-A list of enrollment applications pending CMS contractor
+\code{pending_applications()} A list of enrollment applications pending CMS contractor
 review for physicians & non-physicians.
 }
-\details{
-The Pending Initial Logging and Tracking (L & T) dataset provides
-a list of pending applications that have not been processed by CMS
-contractors.
-\subsection{Links}{
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians}{Medicare Pending Initial Logging and Tracking Physicians API}
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians}{Medicare Pending Initial Logging and Tracking Non-Physicians API}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Weekly}
 }
-\note{
-Update Frequency: \strong{Weekly}
-}
+
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pending_applications(last_name = "Smith", type = "non-physician")

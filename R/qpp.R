@@ -38,11 +38,11 @@
 #' @autoglobal
 #' @export
 quality_payment <- function(year,
-                            npi       = NULL,
-                            state     = NULL,
-                            specialty = NULL,
+                            npi                = NULL,
+                            state              = NULL,
+                            specialty          = NULL,
                             participation_type = NULL,
-                            tidy      = TRUE) {
+                            tidy               = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 

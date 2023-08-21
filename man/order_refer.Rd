@@ -22,13 +22,13 @@ order_refer(
 
 \item{last_name}{Provider's last name}
 
-\item{partb}{boolean; eligibility to refer to Medicare Part B}
+\item{partb}{boolean; eligibility to order & refer to Medicare Part B}
 
-\item{dme}{boolean; eligibility to order Durable Medical Equipment (DME)}
+\item{dme}{boolean; eligibility to order Durable Medical Equipment}
 
 \item{hha}{boolean; eligibility to refer to a Home Health Agency}
 
-\item{pmd}{boolean; eligibility to order Power Mobility Devices (PMD)}
+\item{pmd}{boolean; eligibility to order Power Mobility Devices}
 
 \item{tidy}{boolean; Tidy output; default is \code{TRUE}.}
 }
@@ -38,18 +38,19 @@ A \link[tibble:tibble-package]{tibble} object containing the search results.
 \description{
 \code{order_refer()} allows you to search for physicians and non-physician
 practitioners who are of a type/specialty that is legally eligible to order
-and refer Part B (clinical laboratory and imaging), DME and Part A HHA claims
-in the Medicare program.
+and refer to Part B (clinical laboratory and imaging), DME and Part A HHA
+claims in the Medicare program.
 \subsection{Ordering and Referring (or Certifying) Providers}{
 
 \strong{Ordering providers} can order non-physician services for patients.
 \strong{Referring providers} can request items or services Medicare may reimburse
-on behalf of Medicare beneficiaries. To qualify as an ordering and
-referring/certifying provider, a provider must:
+on behalf of Medicare beneficiaries.
+
+To qualify as an ordering and referring/certifying provider, a provider must:
 \itemize{
 \item have an \emph{individual} NPI
 \item be enrolled in Medicare in either an \emph{approved} or \emph{opt-out} status
-\item be of an \emph{eligible specialty} type.
+\item be of an \emph{eligible specialty} type
 }
 
 Providers currently enrolled in Medicare Part B can order and refer. A

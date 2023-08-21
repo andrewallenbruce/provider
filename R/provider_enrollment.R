@@ -8,7 +8,7 @@
 #' - [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #' - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' @section Update Frequency: Quarterly
+#' @section Update Frequency: **Quarterly**
 #'
 #' @param npi 10-digit National Provider Identifier
 #' @param pac_id 10-digit Provider associate level variable. Links all
@@ -28,8 +28,9 @@
 #' @param gender Individual provider gender:
 #'    * `F`: Female
 #'    * `M`: Male
-#'    * `9`: Unknown or Organizational provider
+#'    * `9`: Unknown (or Organizational provider)
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @seealso [order_refer()], [opt_out()], [pending_applications()]
@@ -37,7 +38,6 @@
 #' @examplesIf interactive()
 #' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
 #' provider_enrollment(first_name = "DEBRA", last_name = "FROMER")
-#' provider_enrollment(organization_name = "Elizabethtown Community Hospital", state = "NY")
 #' provider_enrollment(specialty = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
 #' provider_enrollment(pac_id = 2860305554, gender = "9")
 #' @autoglobal
@@ -81,7 +81,8 @@ provider_enrollment <- function(npi                = NULL,
     param_space()
 
   # update distribution id -------------------------------------------------
-  id <- cms_update("Medicare Fee-For-Service  Public Provider Enrollment", "id") |>
+  id <- cms_update("Medicare Fee-For-Service  Public Provider Enrollment",
+                   "id") |>
     dplyr::slice_head() |>
     dplyr::pull(distro)
 

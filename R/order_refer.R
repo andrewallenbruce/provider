@@ -3,28 +3,29 @@
 #' @description
 #' `order_refer()` allows you to search for physicians and non-physician
 #' practitioners who are of a type/specialty that is legally eligible to order
-#' and refer Part B (clinical laboratory and imaging), DME and Part A HHA claims
-#' in the Medicare program.
+#' and refer to Part B (clinical laboratory and imaging), DME and Part A HHA
+#' claims in the Medicare program.
 #'
 #' ## Ordering and Referring (or Certifying) Providers
 #' **Ordering providers** can order non-physician services for patients.
 #' **Referring providers** can request items or services Medicare may reimburse
-#' on behalf of Medicare beneficiaries. To qualify as an ordering and
-#' referring/certifying provider, a provider must:
+#' on behalf of Medicare beneficiaries.
+#'
+#' To qualify as an ordering and referring/certifying provider, a provider must:
 #'
 #'   - have an *individual* NPI
 #'   - be enrolled in Medicare in either an *approved* or *opt-out* status
-#'   - be of an *eligible specialty* type.
+#'   - be of an *eligible specialty* type
 #'
 #' Providers currently enrolled in Medicare Part B can order and refer. A
 #' provider that does not want to bill Medicare for their services can still
 #' order and refer by opting out of Medicare or enrolling solely to order and
 #' refer. Medicare coverage will then apply when ordering or referring:
 #'
-#'  * Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
-#'  * Clinical Laboratory Services
-#'  * Imaging Services
-#'  * Home Health Services
+#'   - Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+#'   - Clinical Laboratory Services
+#'   - Imaging Services
+#'   - Home Health Services
 #'
 #' @section Links:
 #'   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
@@ -36,10 +37,10 @@
 #' @param npi 10-digit National Provider Identifier
 #' @param first_name Provider's first name
 #' @param last_name Provider's last name
-#' @param partb boolean; eligibility to refer to Medicare Part B
-#' @param dme boolean; eligibility to order Durable Medical Equipment (DME)
+#' @param partb boolean; eligibility to order & refer to Medicare Part B
+#' @param dme boolean; eligibility to order Durable Medical Equipment
 #' @param hha boolean; eligibility to refer to a Home Health Agency
-#' @param pmd boolean; eligibility to order Power Mobility Devices (PMD)
+#' @param pmd boolean; eligibility to order Power Mobility Devices
 #' @param tidy boolean; Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] object containing the search results.
@@ -139,8 +140,7 @@ order_refer <- function(npi          = NULL,
 
   # tidy output
   if (tidy) {
-    results <- results |>
-      dplyr::rename_with(str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
       dplyr::mutate(partb = yn_logical(partb),
                     hha = yn_logical(hha),
                     dme = yn_logical(dme),
