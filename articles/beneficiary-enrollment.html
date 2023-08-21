@@ -190,7 +190,25 @@ national totals only:</p>
 each state:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"State"</span>, period <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in if (as.integer(httr2::resp_header(response, "content-length")) &lt;= : argument is of length zero</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 26</span></span></span>
+<span><span class="co">#&gt;    year  period level state state_name         county fips  bene_total bene_orig</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2013  Year   State AL    Alabama            Total  01        <span style="text-decoration: underline;">921</span>477    <span style="text-decoration: underline;">711</span>448</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2013  Year   State AK    Alaska             Total  02         <span style="text-decoration: underline;">76</span>224     <span style="text-decoration: underline;">75</span>676</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2013  Year   State AZ    Arizona            Total  04       1<span style="text-decoration: underline;">050</span>128    <span style="text-decoration: underline;">658</span>948</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2013  Year   State AR    Arkansas           Total  05        <span style="text-decoration: underline;">572</span>713    <span style="text-decoration: underline;">467</span>399</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2013  Year   State CA    California         Total  06       5<span style="text-decoration: underline;">300</span>177   3<span style="text-decoration: underline;">318</span>396</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2013  Year   State CO    Colorado           Total  08        <span style="text-decoration: underline;">721</span>035    <span style="text-decoration: underline;">468</span>492</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2013  Year   State CT    Connecticut        Total  09        <span style="text-decoration: underline;">608</span>512    <span style="text-decoration: underline;">467</span>291</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2013  Year   State DE    Delaware           Total  10        <span style="text-decoration: underline;">167</span>686    <span style="text-decoration: underline;">155</span>803</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2013  Year   State DC    District of Colum… Total  11         <span style="text-decoration: underline;">83</span>964     <span style="text-decoration: underline;">74</span>946</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2013  Year   State FL    Florida            Total  12       3<span style="text-decoration: underline;">753</span>454   2<span style="text-decoration: underline;">402</span>926</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 17 more variables: bene_ma_oth &lt;int&gt;, bene_aged_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_aged_esrd &lt;int&gt;, bene_aged_no_esrd &lt;int&gt;, bene_dsb_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_dsb_esrd &lt;int&gt;, bene_dsb_no_esrd &lt;int&gt;, bene_ab_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_ab_orig &lt;int&gt;, bene_ab_ma_oth &lt;int&gt;, bene_rx_total &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_pdp &lt;int&gt;, bene_rx_mapd &lt;int&gt;, bene_rx_elig &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   bene_rx_full &lt;int&gt;, bene_rx_part &lt;int&gt;, bene_rx_none &lt;int&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"State"</span>, </span>
@@ -265,24 +283,24 @@ each state:</p>
 <div class="section level2">
 <h2 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h2>
-<div id="yuulfndyry" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="llasqwnfyf" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#yuulfndyry table {
+#llasqwnfyf table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#yuulfndyry thead, #yuulfndyry tbody, #yuulfndyry tfoot, #yuulfndyry tr, #yuulfndyry td, #yuulfndyry th {
+#llasqwnfyf thead, #llasqwnfyf tbody, #llasqwnfyf tfoot, #llasqwnfyf tr, #llasqwnfyf td, #llasqwnfyf th {
   border-style: none;
 }
 
-#yuulfndyry p {
+#llasqwnfyf p {
   margin: 0;
   padding: 0;
 }
 
-#yuulfndyry .gt_table {
+#llasqwnfyf .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -308,12 +326,12 @@ each state:</p>
   border-left-color: #D3D3D3;
 }
 
-#yuulfndyry .gt_caption {
+#llasqwnfyf .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#yuulfndyry .gt_title {
+#llasqwnfyf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -325,7 +343,7 @@ each state:</p>
   border-bottom-width: 0;
 }
 
-#yuulfndyry .gt_subtitle {
+#llasqwnfyf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -337,7 +355,7 @@ each state:</p>
   border-top-width: 0;
 }
 
-#yuulfndyry .gt_heading {
+#llasqwnfyf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -349,13 +367,13 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#yuulfndyry .gt_bottom_border {
+#llasqwnfyf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_col_headings {
+#llasqwnfyf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -370,7 +388,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#yuulfndyry .gt_col_heading {
+#llasqwnfyf .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -390,7 +408,7 @@ each state:</p>
   overflow-x: hidden;
 }
 
-#yuulfndyry .gt_column_spanner_outer {
+#llasqwnfyf .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -402,15 +420,15 @@ each state:</p>
   padding-right: 4px;
 }
 
-#yuulfndyry .gt_column_spanner_outer:first-child {
+#llasqwnfyf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#yuulfndyry .gt_column_spanner_outer:last-child {
+#llasqwnfyf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#yuulfndyry .gt_column_spanner {
+#llasqwnfyf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -422,11 +440,11 @@ each state:</p>
   width: 100%;
 }
 
-#yuulfndyry .gt_spanner_row {
+#llasqwnfyf .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#yuulfndyry .gt_group_heading {
+#llasqwnfyf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -452,7 +470,7 @@ each state:</p>
   text-align: left;
 }
 
-#yuulfndyry .gt_empty_group_heading {
+#llasqwnfyf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -467,15 +485,15 @@ each state:</p>
   vertical-align: middle;
 }
 
-#yuulfndyry .gt_from_md > :first-child {
+#llasqwnfyf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#yuulfndyry .gt_from_md > :last-child {
+#llasqwnfyf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#yuulfndyry .gt_row {
+#llasqwnfyf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -494,7 +512,7 @@ each state:</p>
   overflow-x: hidden;
 }
 
-#yuulfndyry .gt_stub {
+#llasqwnfyf .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -507,7 +525,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#yuulfndyry .gt_stub_row_group {
+#llasqwnfyf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -521,15 +539,15 @@ each state:</p>
   vertical-align: top;
 }
 
-#yuulfndyry .gt_row_group_first td {
+#llasqwnfyf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#yuulfndyry .gt_row_group_first th {
+#llasqwnfyf .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#yuulfndyry .gt_summary_row {
+#llasqwnfyf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -539,16 +557,16 @@ each state:</p>
   padding-right: 5px;
 }
 
-#yuulfndyry .gt_first_summary_row {
+#llasqwnfyf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_first_summary_row.thick {
+#llasqwnfyf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#yuulfndyry .gt_last_summary_row {
+#llasqwnfyf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +576,7 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_grand_summary_row {
+#llasqwnfyf .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -568,7 +586,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#yuulfndyry .gt_first_grand_summary_row {
+#llasqwnfyf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -578,7 +596,7 @@ each state:</p>
   border-top-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_last_grand_summary_row_top {
+#llasqwnfyf .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -588,11 +606,11 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_striped {
+#llasqwnfyf .gt_striped {
   background-color: #FEEDEC;
 }
 
-#yuulfndyry .gt_table_body {
+#llasqwnfyf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -601,7 +619,7 @@ each state:</p>
   border-bottom-color: #5F5F5F;
 }
 
-#yuulfndyry .gt_footnotes {
+#llasqwnfyf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -615,7 +633,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#yuulfndyry .gt_footnote {
+#llasqwnfyf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -624,7 +642,7 @@ each state:</p>
   padding-right: 5px;
 }
 
-#yuulfndyry .gt_sourcenotes {
+#llasqwnfyf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -638,7 +656,7 @@ each state:</p>
   border-right-color: #D3D3D3;
 }
 
-#yuulfndyry .gt_sourcenote {
+#llasqwnfyf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -646,63 +664,63 @@ each state:</p>
   padding-right: 5px;
 }
 
-#yuulfndyry .gt_left {
+#llasqwnfyf .gt_left {
   text-align: left;
 }
 
-#yuulfndyry .gt_center {
+#llasqwnfyf .gt_center {
   text-align: center;
 }
 
-#yuulfndyry .gt_right {
+#llasqwnfyf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#yuulfndyry .gt_font_normal {
+#llasqwnfyf .gt_font_normal {
   font-weight: normal;
 }
 
-#yuulfndyry .gt_font_bold {
+#llasqwnfyf .gt_font_bold {
   font-weight: bold;
 }
 
-#yuulfndyry .gt_font_italic {
+#llasqwnfyf .gt_font_italic {
   font-style: italic;
 }
 
-#yuulfndyry .gt_super {
+#llasqwnfyf .gt_super {
   font-size: 65%;
 }
 
-#yuulfndyry .gt_footnote_marks {
+#llasqwnfyf .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#yuulfndyry .gt_asterisk {
+#llasqwnfyf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#yuulfndyry .gt_indent_1 {
+#llasqwnfyf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#yuulfndyry .gt_indent_2 {
+#llasqwnfyf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#yuulfndyry .gt_indent_3 {
+#llasqwnfyf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#yuulfndyry .gt_indent_4 {
+#llasqwnfyf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#yuulfndyry .gt_indent_5 {
+#llasqwnfyf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
