@@ -46,16 +46,7 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/missing-info.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/opt-out.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/pending-applications.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/physician-by-geography.html</loc>
@@ -140,9 +131,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_provider.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_provider_years.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/physician_by_service.html</loc>

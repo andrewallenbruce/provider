@@ -157,7 +157,7 @@ a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
 <dt>gender</dt>
 <dd><p>Individual provider gender:</p><ul><li><p><code>F</code>: Female</p></li>
 <li><p><code>M</code>: Male</p></li>
-<li><p><code>9</code>: Unknown or Organizational provider</p></li>
+<li><p><code>9</code>: Unknown (or Organizational provider)</p></li>
 </ul></dd>
 
 
@@ -180,7 +180,7 @@ a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
 </ul></div>
     <div class="section level2">
     <h2 id="update-frequency">Update Frequency<a class="anchor" aria-label="anchor" href="#update-frequency"></a></h2>
-    <p>Quarterly</p>
+    <p><strong>Quarterly</strong></p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -192,7 +192,6 @@ a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1417918293</span>, specialty_code <span class="op">=</span> <span class="st">"14-41"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"DEBRA"</span>, last_name <span class="op">=</span> <span class="st">"FROMER"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span>, state <span class="op">=</span> <span class="st">"NY"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>specialty <span class="op">=</span> <span class="st">"PRACTITIONER - ENDOCRINOLOGY"</span>, state <span class="op">=</span> <span class="st">"AK"</span>, gender <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">provider_enrollment</span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">2860305554</span>, gender <span class="op">=</span> <span class="st">"9"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>

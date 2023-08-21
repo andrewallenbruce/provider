@@ -148,56 +148,54 @@ Chronic Conditions Data Warehouse.</p>
 <span>                      gender <span class="op">=</span> <span class="st">"F"</span>, </span>
 <span>                      credential <span class="op">=</span> <span class="st">"MD"</span>, </span>
 <span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 70</span></span></span>
-<span><span class="co">#&gt;     year npi    first_name middle_name last_name credential gender entype street</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 10232… Melissa    L           Coleman   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 10634… Padmani    <span style="color: #BB0000;">NA</span>          Dhar      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 11240… To-Nhu     <span style="color: #BB0000;">NA</span>          Vu        MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 12159… Cathy      D           Paige     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 13062… Eileen     M           Micaroni  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 14473… Anita      <span style="color: #BB0000;">NA</span>          Malhotra  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 15482… Sonia      J           Vaida     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 15583… Priti      G           Dalal     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 16090… Zoulfira   <span style="color: #BB0000;">NA</span>          Nisnevit… MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 17503… Niraja     <span style="color: #BB0000;">NA</span>          Rajan     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>021 18010… Sharon     <span style="color: #BB0000;">NA</span>          Lee       MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>021 18018… Jansie     <span style="color: #BB0000;">NA</span>          Prozesky  MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 18514… Kelly      S           Gidusko   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>021 18717… Rochelle   <span style="color: #BB0000;">NA</span>          Sims      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>021 18917… Elizabeth  H           Sinz      MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>021 19222… Kristin    B           Brennan   MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>021 19628… Sadie      E           Smith     MD         F      Indiv… 500 U…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 61 more variables: city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;, zipcode &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;, tot_hcpcs &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;, tot_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, drug_hcpcs &lt;int&gt;, drug_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_srvcs &lt;int&gt;, drug_charges &lt;dbl&gt;, drug_allowed &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug_payment &lt;dbl&gt;, drug_std_pymt &lt;dbl&gt;, med_hcpcs &lt;int&gt;, med_benes &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   med_srvcs &lt;int&gt;, med_charges &lt;dbl&gt;, med_allowed &lt;dbl&gt;, med_payment &lt;dbl&gt;, …</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 28</span></span></span>
+<span><span class="co">#&gt;     year npi      first_name middle_name last_name credential gender entity_type</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 1023245… Melissa    L           Coleman   MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 1063463… Padmani    <span style="color: #BB0000;">NA</span>          Dhar      MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 1124006… To-Nhu     <span style="color: #BB0000;">NA</span>          Vu        MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 1215934… Cathy      D           Paige     MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 1306264… Eileen     M           Micaroni  MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 1447312… Anita      <span style="color: #BB0000;">NA</span>          Malhotra  MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 1548210… Sonia      J           Vaida     MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 1558389… Priti      G           Dalal     MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 1609035… Zoulfira   <span style="color: #BB0000;">NA</span>          Nisnevit… MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 1750331… Niraja     <span style="color: #BB0000;">NA</span>          Rajan     MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>021 1801003… Sharon     <span style="color: #BB0000;">NA</span>          Lee       MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>021 1801846… Jansie     <span style="color: #BB0000;">NA</span>          Prozesky  MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 1851437… Kelly      S           Gidusko   MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>021 1871706… Rochelle   <span style="color: #BB0000;">NA</span>          Sims      MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>021 1891745… Elizabeth  H           Sinz      MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>021 1922241… Kristin    B           Brennan   MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>021 1962829… Sadie      E           Smith     MD         F      Individual </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_hcpcs &lt;int&gt;, tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   tot_allowed &lt;dbl&gt;, tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, medical &lt;list&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   drug &lt;list&gt;, demographics &lt;list&gt;, conditions &lt;list&gt;</span></span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="txmstsufmw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pwtsfiguts" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#txmstsufmw table {
+#pwtsfiguts table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#txmstsufmw thead, #txmstsufmw tbody, #txmstsufmw tfoot, #txmstsufmw tr, #txmstsufmw td, #txmstsufmw th {
+#pwtsfiguts thead, #pwtsfiguts tbody, #pwtsfiguts tfoot, #pwtsfiguts tr, #pwtsfiguts td, #pwtsfiguts th {
   border-style: none;
 }
 
-#txmstsufmw p {
+#pwtsfiguts p {
   margin: 0;
   padding: 0;
 }
 
-#txmstsufmw .gt_table {
+#pwtsfiguts .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -223,12 +221,12 @@ Chronic Conditions Data Warehouse.</p>
   border-left-color: #D3D3D3;
 }
 
-#txmstsufmw .gt_caption {
+#pwtsfiguts .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#txmstsufmw .gt_title {
+#pwtsfiguts .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -240,7 +238,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-width: 0;
 }
 
-#txmstsufmw .gt_subtitle {
+#pwtsfiguts .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -252,7 +250,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-width: 0;
 }
 
-#txmstsufmw .gt_heading {
+#pwtsfiguts .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -264,13 +262,13 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#txmstsufmw .gt_bottom_border {
+#pwtsfiguts .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_col_headings {
+#pwtsfiguts .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -285,7 +283,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#txmstsufmw .gt_col_heading {
+#pwtsfiguts .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -305,7 +303,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#txmstsufmw .gt_column_spanner_outer {
+#pwtsfiguts .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -317,15 +315,15 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 4px;
 }
 
-#txmstsufmw .gt_column_spanner_outer:first-child {
+#pwtsfiguts .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#txmstsufmw .gt_column_spanner_outer:last-child {
+#pwtsfiguts .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#txmstsufmw .gt_column_spanner {
+#pwtsfiguts .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -337,11 +335,11 @@ Chronic Conditions Data Warehouse.</p>
   width: 100%;
 }
 
-#txmstsufmw .gt_spanner_row {
+#pwtsfiguts .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#txmstsufmw .gt_group_heading {
+#pwtsfiguts .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -367,7 +365,7 @@ Chronic Conditions Data Warehouse.</p>
   text-align: left;
 }
 
-#txmstsufmw .gt_empty_group_heading {
+#pwtsfiguts .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -382,15 +380,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: middle;
 }
 
-#txmstsufmw .gt_from_md > :first-child {
+#pwtsfiguts .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#txmstsufmw .gt_from_md > :last-child {
+#pwtsfiguts .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#txmstsufmw .gt_row {
+#pwtsfiguts .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -409,7 +407,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#txmstsufmw .gt_stub {
+#pwtsfiguts .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -422,7 +420,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#txmstsufmw .gt_stub_row_group {
+#pwtsfiguts .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -436,15 +434,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: top;
 }
 
-#txmstsufmw .gt_row_group_first td {
+#pwtsfiguts .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#txmstsufmw .gt_row_group_first th {
+#pwtsfiguts .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#txmstsufmw .gt_summary_row {
+#pwtsfiguts .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -454,16 +452,16 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#txmstsufmw .gt_first_summary_row {
+#pwtsfiguts .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_first_summary_row.thick {
+#pwtsfiguts .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#txmstsufmw .gt_last_summary_row {
+#pwtsfiguts .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -473,7 +471,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_grand_summary_row {
+#pwtsfiguts .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -483,7 +481,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#txmstsufmw .gt_first_grand_summary_row {
+#pwtsfiguts .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -493,7 +491,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_last_grand_summary_row_top {
+#pwtsfiguts .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -503,11 +501,11 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_striped {
+#pwtsfiguts .gt_striped {
   background-color: #FEEDEC;
 }
 
-#txmstsufmw .gt_table_body {
+#pwtsfiguts .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -516,7 +514,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#txmstsufmw .gt_footnotes {
+#pwtsfiguts .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -530,7 +528,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#txmstsufmw .gt_footnote {
+#pwtsfiguts .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -539,7 +537,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#txmstsufmw .gt_sourcenotes {
+#pwtsfiguts .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -553,7 +551,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#txmstsufmw .gt_sourcenote {
+#pwtsfiguts .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -561,63 +559,63 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#txmstsufmw .gt_left {
+#pwtsfiguts .gt_left {
   text-align: left;
 }
 
-#txmstsufmw .gt_center {
+#pwtsfiguts .gt_center {
   text-align: center;
 }
 
-#txmstsufmw .gt_right {
+#pwtsfiguts .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#txmstsufmw .gt_font_normal {
+#pwtsfiguts .gt_font_normal {
   font-weight: normal;
 }
 
-#txmstsufmw .gt_font_bold {
+#pwtsfiguts .gt_font_bold {
   font-weight: bold;
 }
 
-#txmstsufmw .gt_font_italic {
+#pwtsfiguts .gt_font_italic {
   font-style: italic;
 }
 
-#txmstsufmw .gt_super {
+#pwtsfiguts .gt_super {
   font-size: 65%;
 }
 
-#txmstsufmw .gt_footnote_marks {
+#pwtsfiguts .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#txmstsufmw .gt_asterisk {
+#pwtsfiguts .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#txmstsufmw .gt_indent_1 {
+#pwtsfiguts .gt_indent_1 {
   text-indent: 5px;
 }
 
-#txmstsufmw .gt_indent_2 {
+#pwtsfiguts .gt_indent_2 {
   text-indent: 10px;
 }
 
-#txmstsufmw .gt_indent_3 {
+#pwtsfiguts .gt_indent_3 {
   text-indent: 15px;
 }
 
-#txmstsufmw .gt_indent_4 {
+#pwtsfiguts .gt_indent_4 {
   text-indent: 20px;
 }
 
-#txmstsufmw .gt_indent_5 {
+#pwtsfiguts .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

@@ -190,10 +190,9 @@ us several avenues to go down:</p>
 </tbody>
 </table>
 <p><br></p>
-<p>First, we can see that it has one PAC ID, three different
-organizational NPIs, and four different Enrollment IDs. Looking it up in
-the <strong>Hospital Enrollment</strong> API gives us even more
-detail:</p>
+<p>We can see that it has 1 PAC ID, 3 organizational NPIs, and 4
+Enrollment IDs. Searching for it in the <strong>Hospital
+Enrollment</strong> API gives us even more detail:</p>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -343,8 +342,8 @@ all-numeric CCN (<code>331302</code>):</p>
 </tbody>
 </table>
 <p><br></p>
-<p>That returns 174 individual providers affiliated with the Hospital.
-Now the alphanumeric CCN (<code>33Z302</code>):</p>
+<p>That returns 174 individual providers affiliated with the hospital.
+Now to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -402,14 +401,16 @@ Now the alphanumeric CCN (<code>33Z302</code>):</p>
 </tbody>
 </table>
 <p><br></p>
-<p>That returns three more affiliated individual providers that practice
-in the Hospital’s nursing home. An alphanumeric CCN represents a
-sub-unit of a Hospital, here a Nursing Home.</p>
+<p>That returns 3 more affiliated individual providers that practice in
+the Hospital’s nursing home, bringing the total to 177.</p>
+<p><br></p>
 <blockquote>
-<p>We would get the same result if we’d set the <code>parent_ccn</code>
-argument to the numeric CCN,
+<p>An <em>alphanumeric</em> CCN represents a sub-unit of the hospital,
+here a nursing home. We would get the same result if we’d set the
+<code>parent_ccn</code> argument to the numeric CCN,
 i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 </blockquote>
+<p><br></p>
   </main>
 </div>
 

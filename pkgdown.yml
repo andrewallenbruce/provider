@@ -11,17 +11,14 @@ articles:
   hospital-enrollment: hospital-enrollment.html
   mcr-chron-cond: mcr-chron-cond.html
   mcr-revalidation: mcr-revalidation.html
-  missing-info: missing-info.html
   nppes-npi-registry: nppes-npi-registry.html
-  opt-out: opt-out.html
-  pending-applications: pending-applications.html
   physician-by-geography: physician-by-geography.html
   physician-by-provider: physician-by-provider.html
   physician-by-service: physician-by-service.html
   quality-payment: quality-payment.html
   linking_providers: linking_providers.html
   provider: provider.html
-last_built: 2023-08-17T20:02Z
+last_built: 2023-08-21T04:58Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles
