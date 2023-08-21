@@ -2,12 +2,12 @@
 % Please edit documentation in R/hospital_enrollment.R
 \name{hospital_enrollment}
 \alias{hospital_enrollment}
-\title{Search the CMS Hospital Enrollments API}
+\title{Hospitals Enrolled in Medicare}
 \usage{
 hospital_enrollment(
   npi = NULL,
   facility_ccn = NULL,
-  enroll_id = NULL,
+  enroll_id_org = NULL,
   enroll_state = NULL,
   specialty_code = NULL,
   pac_id_org = NULL,
@@ -24,7 +24,7 @@ hospital_enrollment(
 
 \item{facility_ccn}{Hospital’s CMS Certification Number (CCN)}
 
-\item{enroll_id}{Hospital’s enrollment ID}
+\item{enroll_id_org}{Hospital’s enrollment ID}
 
 \item{enroll_state}{Hospital’s enrollment state}
 
@@ -48,28 +48,25 @@ hospital_enrollment(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Information on hospitals currently enrolled in Medicare.
+\code{hospital_enrollment()} allows you to search for information on all hospitals
+currently enrolled in Medicare. Data returned includes the hospital's
+sub-group types, legal business name, doing-business-as name, organization type and address.
 }
-\details{
-The Hospital Enrollments dataset provides enrollment information of
-all Hospitals currently enrolled in Medicare. This data includes
-information on the Hospital's sub-group type, legal business name, doing
-business as name, organization type and address.
-\subsection{Links}{
+\section{Links}{
+
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
 }
+
+\section{Update Frequency}{
+ \strong{Monthly}
 }
-\note{
-Update Frequency: \strong{Monthly}
-}
+
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-hospital_enrollment(npi = 1689653487)
-hospital_enrollment(facility_ccn = "440058")
 hospital_enrollment(pac_id_org = 6103733050)
-hospital_enrollment(city = "Atlanta")
-hospital_enrollment(zipcode = 117771928)
-\dontshow{\}) # examplesIf}
+
+}
+\seealso{
+\code{\link[=doctors_and_clinicians]{doctors_and_clinicians()}}, \code{\link[=provider_enrollment]{provider_enrollment()}}, \code{\link[=facility_affiliations]{facility_affiliations()}}
 }

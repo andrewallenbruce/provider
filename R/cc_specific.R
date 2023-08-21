@@ -205,6 +205,7 @@ cc_specific <- function(year,
 #' @return integer vector of years available
 #' @examples
 #' cc_specific_years()
+#' @rdname years
 #' @autoglobal
 #' @export
 cc_specific_years <- function() {

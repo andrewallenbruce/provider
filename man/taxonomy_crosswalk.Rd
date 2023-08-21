@@ -35,7 +35,7 @@ specialty type code.
 The \strong{Healthcare Provider Taxonomy Code Set} is a hierarchical HIPAA
 standard code set designed to categorize the type, classification, and
 specialization of health care providers. It consists of two sections:
-\itemize{
+\enumerate{
 \item Individuals and Groups of Individuals
 \item Non-Individuals
 }
@@ -57,7 +57,7 @@ as categorizations used by Medicare for enrollment.
 }
 
 \section{Update Frequency}{
- Weekly
+ \strong{Weekly}
 }
 
 \examples{
@@ -65,6 +65,5 @@ as categorizations used by Medicare for enrollment.
 taxonomy_crosswalk(medicare_specialty_code = "B4[14]")
 taxonomy_crosswalk(medicare_specialty_type = "Rehabilitation Agency")
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
-taxonomy_crosswalk(taxonomy_description = "Agencies/Hospice Care Community Based")
 \dontshow{\}) # examplesIf}
 }

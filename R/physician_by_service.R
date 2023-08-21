@@ -125,6 +125,7 @@
 #' c(1003026055, 1316405939, 1720392988) |>
 #'   purrr::map(physician_by_service, year = 2020) |>
 #'   purrr::list_rbind()
+#' @rdname provider-statistics
 #' @autoglobal
 #' @export
 physician_by_service <- function(year,
@@ -302,6 +303,7 @@ physician_by_service <- function(year,
 #' @return integer vector of years available
 #' @examples
 #' physician_by_service_years()
+#' @rdname years
 #' @autoglobal
 #' @export
 physician_by_service_years <- function() {

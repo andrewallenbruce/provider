@@ -4,15 +4,15 @@
 #' `missing_information()` allows you to search for providers with missing
 #' digital contact information in NPPES.
 #'
-#' ## Missing Information = NPPES Endpoints
+#' ## Missing Information `=` NPPES Endpoints
 #' Digital contact information, also known as [endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html),
 #' provides a secure way for health care entities to send authenticated,
-#' encrypted health information to trusted recipients over the internet. Health
-#' care organizations seeking to engage in electronic health information
-#' exchange need accurate information about the electronic addresses (for
-#' example, Direct address, FHIR server URL, query endpoint, or other digital
-#' contact information) of potential exchange partners to facilitate this
-#' information exchange.
+#' encrypted health information to trusted recipients over the internet.
+#'
+#' Health care organizations seeking to engage in electronic health information
+#' exchange need accurate information about the electronic addresses (e.g.,
+#' Direct address, FHIR server URL, query endpoint, or other digital contact
+#' information) of potential exchange partners to facilitate this information exchange.
 #'
 #' @section Links:
 #'  - [CMS Public Reporting of Missing Digital Contact Information API](https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information)
@@ -26,6 +26,8 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @seealso [nppes_npi()]
 #'
 #' @examples
 #' # A provider that appears in the search results of the Missing Information
@@ -48,6 +50,7 @@
 #' tidyr::unnest(cols = c(endpoints)) |>
 #' janitor::clean_names() |>
 #' dplyr::select(dplyr::contains("endpoint"))
+#'
 #' @autoglobal
 #' @export
 missing_information <- function(npi  = NULL,

@@ -23,9 +23,6 @@ knitr::opts_chunk$set(
 ben_art <- gluedown::md_link("Beneficiary Enrollment" = "https://andrewallenbruce.github.io/provider/articles/beneficiary-enrollment.html")
 ccm_art <- gluedown::md_link("Chronic Conditions (Multiple)" = "https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html")
 ccs_art <- gluedown::md_link("Chronic Conditions (Specific)" = "https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html")
-drs_art <- gluedown::md_link("Doctors and Clinicians" = "https://andrewallenbruce.github.io/provider/articles/doctors-and-clinicians.html")
-fac_art <- gluedown::md_link("Facility Affiliations" = "https://andrewallenbruce.github.io/provider/articles/facility-affiliations.html")
-hos_art <- gluedown::md_link("Hospital Enrollment" = "https://andrewallenbruce.github.io/provider/articles/hospital-enrollment.html")
 npi_art <- gluedown::md_link("NPPES NPI Registry" = "https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html")
 opp_art <- gluedown::md_link("Open Payments Program" = "https://andrewallenbruce.github.io/provider/articles/cms-open-payments.html")
 pbg_art <- gluedown::md_link("Physician by Geography" = "https://andrewallenbruce.github.io/provider/articles/physician-by-geography.html")
@@ -41,9 +38,6 @@ rer_art <- gluedown::md_link("Revalidation Reassignment" = "https://andrewallenb
 gluedown::md_bullet(c(ben_art, 
                      ccm_art,
                      ccs_art,
-                     drs_art,
-                     fac_art,
-                     hos_art,
                      npi_art,
                      opp_art,
                      pbg_art,

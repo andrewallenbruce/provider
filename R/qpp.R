@@ -14,9 +14,10 @@
 #'    scores, and payment adjustments.
 #'
 #' @section Links:
-#'   * [Quality Payment Program Experience](https://data.cms.gov/quality-of-care/quality-payment-program-experience)
+#'   - [Quality Payment Program Experience](https://data.cms.gov/quality-of-care/quality-payment-program-experience)
 #'
 #' @section Update Frequency: **Annually**
+#'
 #' @param year integer, YYYY, QPP Performance year. Run the helper function
 #'    `quality_payment_years()` to return a vector of currently
 #'    available years.
@@ -32,9 +33,13 @@
 #'    clinician. This information drives the data displayed for most of the
 #'    remaining fields in this report.
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' quality_payment(year = 2020, npi = 1144544834)
+#'
+#' @rdname quality_payment
 #' @autoglobal
 #' @export
 quality_payment <- function(year,
@@ -182,7 +187,6 @@ quality_payment <- function(year,
                     dplyr::contains("pi_measure_"),
                     dplyr::contains("ia_measure_"),
                     dplyr::contains("cost_measure_")) |>
-      #janitor::remove_empty(which = c("rows", "cols")) |>
       tidyr::nest(special_statuses = dplyr::contains("ind_"),
                   measures = dplyr::contains("measure_"))
   }
@@ -194,7 +198,7 @@ quality_payment <- function(year,
 #' @examples
 #' quality_payment_years()
 #' @autoglobal
-#' @rdname quality_payment
+#' @rdname years
 #' @export
 quality_payment_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
@@ -226,12 +230,17 @@ quality_payment_years <- function() {
 #'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
 #'
 #' @section Update Frequency: **Annually**
+#'
 #' @param year integer, YYYY, QPP eligibility year.
 #' @param npi NPI assigned to the clinician when they enrolled in Medicare.
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' quality_eligibility(year = 2020, npi = 1144544834)
+#'
+#' @rdname quality_payment
 #' @autoglobal
 #' @export
 quality_eligibility <- function(year,
@@ -286,7 +295,6 @@ quality_eligibility <- function(year,
       tidyr::unnest_wider(c(individual_scenario.lowVolumeStatusReasons_1,
                             group_scenario.lowVolumeStatusReasons_1),
                           names_sep = ".") |>
-      # remove_empty(which = c("rows", "cols")) |>
       janitor::clean_names()
   }
   return(results)
@@ -300,28 +308,19 @@ quality_eligibility <- function(year,
 #'    clinician from their billing patterns and enrollments, eligibility is
 #'    "calculated" multiple times before and during the performance year.
 #'
-#' @details The Quality Payment Program (QPP) Eligibility System pulls together
-#'    data from across the Centers for Medicare and Medicaid Services (CMS) to
-#'    create an eligibility determination for every clinician in the system.
-#'    Using what CMS knows about a clinician from their billing patterns and
-#'    enrollments, eligibility is "calculated" multiple times before and during
-#'    the performance year. Information can be obtained primarily by the
-#'    Clinician type. You can query the Clinician type by passing in an National
-#'    Provider Identifier, or NPI. This number is a unique 10-digit
-#'    identification number issued to health care providers in the United
-#'    States by CMS. The information contained in these endpoints includes
-#'    basic enrollment information, associated organizations, information
-#'    about those organizations, individual and group special status
-#'    information, and in the future, any available Alternative Payment Model
-#'    (APM) affiliations.
-#'
 #' @section Links:
-#'   * [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#'   - [QPP Eligibility API Documentation](https://cmsgov.github.io/qpp-eligibility-docs/)
+#'
 #' @section Update Frequency: **Annually**
+#'
 #' @param year QPP program year
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examplesIf interactive()
+#'
+#' @examples
 #' quality_stats(year = 2020)
+#'
+#' @rdname quality_payment
 #' @autoglobal
 #' @export
 quality_stats <- function(year) {

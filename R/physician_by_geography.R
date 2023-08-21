@@ -77,6 +77,7 @@
 #' # State Level
 #' purrr::map2_dfr(arg_cross$x, arg_cross$y,
 #' ~physician_by_geography(geo_level = "Georgia", year = .x, hcpcs_code = .y))
+#' @rdname provider-statistics
 #' @autoglobal
 #' @export
 physician_by_geography <- function(year,
@@ -192,6 +193,7 @@ physician_by_geography <- function(year,
 #' @return integer vector of years available
 #' @examples
 #' physician_by_geography_years()
+#' @rdname years
 #' @autoglobal
 #' @export
 physician_by_geography_years <- function() {

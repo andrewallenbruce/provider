@@ -19,16 +19,16 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \description{
 \code{missing_information()} allows you to search for providers with missing
 digital contact information in NPPES.
-\subsection{Missing Information = NPPES Endpoints}{
+\subsection{Missing Information \code{=} NPPES Endpoints}{
 
 Digital contact information, also known as \href{https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH\%20INFORMATION\%20EXCHANGE.html}{endpoints},
 provides a secure way for health care entities to send authenticated,
-encrypted health information to trusted recipients over the internet. Health
-care organizations seeking to engage in electronic health information
-exchange need accurate information about the electronic addresses (for
-example, Direct address, FHIR server URL, query endpoint, or other digital
-contact information) of potential exchange partners to facilitate this
-information exchange.
+encrypted health information to trusted recipients over the internet.
+
+Health care organizations seeking to engage in electronic health information
+exchange need accurate information about the electronic addresses (e.g.,
+Direct address, FHIR server URL, query endpoint, or other digital contact
+information) of potential exchange partners to facilitate this information exchange.
 }
 }
 \section{Links}{
@@ -65,4 +65,8 @@ dplyr::select(endpoints) |>
 tidyr::unnest(cols = c(endpoints)) |>
 janitor::clean_names() |>
 dplyr::select(dplyr::contains("endpoint"))
+
+}
+\seealso{
+\code{\link[=nppes_npi]{nppes_npi()}}
 }

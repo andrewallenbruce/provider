@@ -57,6 +57,7 @@
 #' physician_by_provider_years() |>
 #' map(\(x) physician_by_provider(year = x, npi = 1043477615)) |>
 #' list_rbind()
+#' @rdname provider-statistics
 #' @autoglobal
 #' @export
 physician_by_provider <- function(year,
@@ -272,7 +273,7 @@ physician_by_provider <- function(year,
 #' physician_by_provider_years()
 #' @autoglobal
 #' @export
-#' @rdname physician_by_provider
+#' @rdname years
 physician_by_provider_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Provider", "years") |>
     as.integer()

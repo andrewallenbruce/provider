@@ -10,8 +10,8 @@
 #' standard code set designed to categorize the type, classification, and
 #' specialization of health care providers. It consists of two sections:
 #'
-#'    - Individuals and Groups of Individuals
-#'    - Non-Individuals
+#'    1. Individuals and Groups of Individuals
+#'    1. Non-Individuals
 #'
 #' When applying for an NPI, a provider must report the taxonomy that most
 #' closely describes their type/classification/specialization. In some
@@ -24,7 +24,7 @@
 #' - [Taxonomy Crosswalk Methodology](https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology)
 #' - [Find Your Taxonomy Code](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code)
 #'
-#' @section Update Frequency: Weekly
+#' @section Update Frequency: **Weekly**
 #' @param taxonomy_code Taxonomy code
 #' @param taxonomy_description Taxonomy code description
 #' @param medicare_specialty_code Medicare specialty code
@@ -35,7 +35,6 @@
 #' taxonomy_crosswalk(medicare_specialty_code = "B4[14]")
 #' taxonomy_crosswalk(medicare_specialty_type = "Rehabilitation Agency")
 #' taxonomy_crosswalk(taxonomy_code = "2086S0102X")
-#' taxonomy_crosswalk(taxonomy_description = "Agencies/Hospice Care Community Based")
 #' @autoglobal
 #' @export
 taxonomy_crosswalk <- function(taxonomy_code           = NULL,

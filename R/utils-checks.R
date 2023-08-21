@@ -26,15 +26,15 @@ npi_check <- function(npi,
   # Return FALSE if not a number
   if (grepl("^[[:digit:]]+$", npi) == FALSE) {
     cli::cli_abort(c(
-      "{.strong NPI} must be {.emph numeric}.",
+      "An {.strong NPI} must be {.emph numeric}.",
       "x" = "{.val {npi}} contains {.emph non-numeric} characters."), call = call)
   }
 
   # Must be 10 char length
   if (nchar(npi) != 10L) {
     cli::cli_abort(c(
-      "{.strong NPI} must be {.emph 10 characters long}.",
-      "x" = "{.val {npi}} contains {.val {nchar(npi)}} character{?s}."), call = call)
+      "An {.strong NPI} must be {.emph 10 digits long}.",
+      "x" = "{.val {npi}} contains {.val {nchar(npi)}} digit{?s}."), call = call)
   }
 
   # Strip whitespace
@@ -58,7 +58,7 @@ npi_check <- function(npi,
   # Check if the sum divides by 10
   if ((sum(npi_luhn) %% 10) != 0) {
     cli::cli_abort(c(
-      "{.strong NPI} must pass {.emph Luhn algorithm}.",
+      "An {.strong NPI} must pass {.emph Luhn algorithm}.",
       "x" = "{.val {npi}} {.emph fails} Luhn check."), call = call)
   }
 }
@@ -92,27 +92,18 @@ pac_check <- function(pac_id,
                       arg = rlang::caller_arg(pac_id),
                       call = rlang::caller_env()) {
 
-  # first <- as.integer(unlist(strsplit(pac_id, ""))[1])
-  #
-  # if (first == 0) {
-  #
-  #   cli::cli_warn(c(
-  #     "{.strong PAC ID}'s that begin with {.strong `0`} must be a {.emph character} vector.",
-  #     "x" = "{.val {pac_id}} is a {.cls {class(pac_id)}} vector."), call = call)
-  # }
-
   # Return FALSE if not a number
   if (grepl("^[[:digit:]]+$", pac_id) == FALSE) {
     cli::cli_abort(c(
-      "{.strong PAC ID} must be {.emph numeric}.",
+      "A {.strong PAC ID} must be {.emph numeric}.",
       "x" = "{.val {pac_id}} contains {.emph non-numeric} characters."), call = call)
   }
 
   # Must be 10 char length
   if (nchar(pac_id) != 10L) {
     cli::cli_abort(c(
-      "{.strong PAC ID} must be {.emph 10 characters long}.",
-      "x" = "{.val {pac_id}} contains {.val {nchar(pac_id)}} character{?s}."), call = call)
+      "A {.strong PAC ID} must be {.emph 10 digits long}.",
+      "x" = "{.val {pac_id}} contains {.val {nchar(pac_id)}} digit{?s}."), call = call)
   }
 }
 
@@ -147,14 +138,14 @@ enroll_check <- function(enroll_id,
   # Abort if numeric
   if (is.numeric(enroll_id) == TRUE) {
     cli::cli_abort(c(
-      "{.strong Enrollment ID} must be a {.emph character} vector.",
+      "An {.strong Enrollment ID} must be a {.emph character} vector.",
       "x" = "{.val {enroll_id}} is a {.cls {class(enroll_id)}} vector."), call = call)
   }
 
   # Must be 15 char length
   if (nchar(enroll_id) != 15L) {
     cli::cli_abort(c(
-      "{.strong Enrollment ID} must be {.emph 15 characters long}.",
+      "An {.strong Enrollment ID} must be {.emph 15 characters long}.",
       "x" = "{.val {enroll_id}} contains {.val {nchar(enroll_id)}} character{?s}."), call = call)
   }
 
@@ -163,7 +154,85 @@ enroll_check <- function(enroll_id,
   if ((first %in% c("I", "O")) != TRUE) {
 
     cli::cli_abort(c(
-      "{.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
+      "An {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`} or {.strong `O`}.",
+      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
+
+  }
+}
+
+#' Organizational/Group Enrollment ID Validation Check
+#'
+#' @description checks validity of Organizational/Group provider enrollment ID
+#'    input against CMS requirements.
+#'
+#' @details An Enrollment ID is a 15-digit unique alphanumeric identifier that
+#'    is assigned to each new provider enrollment application. All
+#'    enrollment-level information (e.g., enrollment type, enrollment state,
+#'    provider specialty and reassignment of benefits) is linked through the
+#'    Enrollment ID.
+#'
+#' @param enroll_id 15-digit unique alphanumeric identifier
+#' @return boolean, `TRUE` or `FALSE`
+#' @examplesIf interactive()
+#' # Valid:
+#' enroll_check(1528060837)
+#' enroll_check("1528060837")
+#'
+#' # Invalid:
+#' enroll_check(1234567891)
+#' enroll_check(123456789)
+#' enroll_check("152806O837")
+#' @autoglobal
+#' @noRd
+enroll_org_check <- function(enroll_id,
+                             arg = rlang::caller_arg(enroll_id),
+                             call = rlang::caller_env()) {
+
+  first <- unlist(strsplit(enroll_id, ""))[1]
+
+  if ((first %in% c("O")) != TRUE) {
+
+    cli::cli_abort(c(
+      "An {.emph organizational/group} {.strong Enrollment ID} must begin with a {.emph capital} {.strong `O`}.",
+      "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
+
+  }
+}
+
+#' Individual Enrollment ID Validation Check
+#'
+#' @description checks validity of Individual provider enrollment ID
+#'    input against CMS requirements.
+#'
+#' @details An Enrollment ID is a 15-digit unique alphanumeric identifier that
+#'    is assigned to each new provider enrollment application. All
+#'    enrollment-level information (e.g., enrollment type, enrollment state,
+#'    provider specialty and reassignment of benefits) is linked through the
+#'    Enrollment ID.
+#'
+#' @param enroll_id 15-digit unique alphanumeric identifier
+#' @return boolean, `TRUE` or `FALSE`
+#' @examplesIf interactive()
+#' # Valid:
+#' enroll_check(1528060837)
+#' enroll_check("1528060837")
+#'
+#' # Invalid:
+#' enroll_check(1234567891)
+#' enroll_check(123456789)
+#' enroll_check("152806O837")
+#' @autoglobal
+#' @noRd
+enroll_ind_check <- function(enroll_id,
+                             arg = rlang::caller_arg(enroll_id),
+                             call = rlang::caller_env()) {
+
+  first <- unlist(strsplit(enroll_id, ""))[1]
+
+  if ((first %in% c("I")) != TRUE) {
+
+    cli::cli_abort(c(
+      "An {.emph individual} {.strong Enrollment ID} must begin with a {.emph capital} {.strong `I`}.",
       "x" = "{.val {enroll_id}} begins with {.val {first}}."), call = call)
 
   }

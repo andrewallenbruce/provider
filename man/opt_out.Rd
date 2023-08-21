@@ -104,7 +104,7 @@ opt_out(last_name = "Smith",
         first_name = "James",
         specialty = "Nurse Practitioner",
         order_refer = TRUE)
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 # For providers that have opted out, but are eligible to order and refer,
 # use `order_refer()` to look up their specific eligibility statuses
 opt_out(last_name = "Smith",
@@ -114,7 +114,7 @@ opt_out(last_name = "Smith",
         dplyr::pull(npi) |>
         purrr::map(\(x) order_refer(npi = x)) |>
         purrr::list_rbind()
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 \code{\link[=order_refer]{order_refer()}}, \code{\link[=provider_enrollment]{provider_enrollment()}}, \code{\link[=pending_applications]{pending_applications()}}

@@ -2,7 +2,8 @@
 % Please edit documentation in R/qpp.R
 \name{quality_payment}
 \alias{quality_payment}
-\alias{quality_payment_years}
+\alias{quality_eligibility}
+\alias{quality_stats}
 \title{Quality Payment Program Experience}
 \usage{
 quality_payment(
@@ -14,15 +15,14 @@ quality_payment(
   tidy = TRUE
 )
 
-quality_payment_years()
+quality_eligibility(year, npi, tidy = TRUE)
+
+quality_stats(year)
 }
 \arguments{
-\item{year}{integer, YYYY, QPP Performance year. Run the helper function
-\code{quality_payment_years()} to return a vector of currently
-available years.}
+\item{year}{QPP program year}
 
-\item{npi}{The NPI assigned to the clinician when they enrolled in Medicare.
-Multiple rows for the same NPI indicate multiple TIN/NPI combinations.}
+\item{npi}{NPI assigned to the clinician when they enrolled in Medicare.}
 
 \item{state}{The State or US territory code location of the
 TIN associated with the clinician.}
@@ -41,12 +41,24 @@ remaining fields in this report.}
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 
-integer vector of years available
+A \link[tibble:tibble-package]{tibble} containing the search results.
+
+A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 Information on participation and performance in the Merit-based
 Incentive Payment System (MIPS) and Advanced Alternative Payment Models
 (APMs) tracks.
+
+Data pulled from across CMS that is used to create an
+eligibility determination for a clinician. Using what CMS knows about a
+clinician from their billing patterns and enrollments, eligibility is
+"calculated" multiple times before and during the performance year.
+
+Data pulled from across CMS that is used to create an
+eligibility determination for a clinician. Using what CMS knows about a
+clinician from their billing patterns and enrollments, eligibility is
+"calculated" multiple times before and during the performance year.
 }
 \details{
 The Quality Payment Program (QPP) Experience dataset provides
@@ -57,15 +69,44 @@ and payment adjustments. The dataset provides additional details at the
 TIN/NPI level on what was published in the previous performance year.
 You can sort the data by variables like clinician type, practice size,
 scores, and payment adjustments.
+
+The Quality Payment Program (QPP) Eligibility System pulls together
+data from across the Centers for Medicare and Medicaid Services (CMS) to
+create an eligibility determination for every clinician in the system.
+Using what CMS knows about a clinician from their billing patterns and
+enrollments, eligibility is "calculated" multiple times before and during
+the performance year. Information can be obtained primarily by the
+Clinician type. You can query the Clinician type by passing in an National
+Provider Identifier, or NPI. This number is a unique 10-digit
+identification number issued to health care providers in the United
+States by CMS. The information contained in these endpoints includes
+basic enrollment information, associated organizations, information
+about those organizations, individual and group special status
+information, and in the future, any available Alternative Payment Model
+(APM) affiliations.
 }
 \section{Links}{
 
 \itemize{
 \item \href{https://data.cms.gov/quality-of-care/quality-payment-program-experience}{Quality Payment Program Experience}
 }
+
+
+\itemize{
+\item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
+}
+
+
+\itemize{
+\item \href{https://cmsgov.github.io/qpp-eligibility-docs/}{QPP Eligibility API Documentation}
+}
 }
 
 \section{Update Frequency}{
+ \strong{Annually}
+
+ \strong{Annually}
+
  \strong{Annually}
 }
 
@@ -73,5 +114,9 @@ scores, and payment adjustments.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 quality_payment(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
-quality_payment_years()
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+quality_eligibility(year = 2020, npi = 1144544834)
+\dontshow{\}) # examplesIf}
+quality_stats(year = 2020)
+
 }

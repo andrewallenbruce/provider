@@ -40,17 +40,67 @@ Looking it up in the **Provider Enrollment** API gives us several avenues to go 
 provider_enrollment(organization_name = "Elizabethtown Community Hospital")
 ```
 
-```{r echo=FALSE}
-e <- provider_enrollment(organization_name = "Elizabethtown Community Hospital")
-e_npi <- dplyr::distinct(e, npi)
-e_pac <- dplyr::distinct(e, pac_id)
-e_enroll <- dplyr::distinct(e, enroll_id)
-```
-
 
 <br>
 
-We can see that it has `r nrow(e_pac)` PAC ID, `r nrow(e_npi)` organizational NPIs, and `r nrow(e_enroll)` Enrollment IDs. Searching for it in the **Hospital Enrollment** API gives us even more detail:
+
+```{r echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
+flow_data <- tibble(
+  from = c(
+    "3577554138", "3577554138", "3577554138",
+    "1891785184", "1891785184",
+    "1487923637",
+    "1407061591"
+           ), 
+  to = c(
+    "1891785184", "1487923637", "1407061591",
+    "O20040521000534", "O20101110000259",
+    "O20190719002511",
+    "O20220827000145"
+  ))
+
+node_data <- tibble(
+  name = c(
+  "3577554138", 
+  "1891785184", 
+  "1487923637",
+  "1407061591",
+  "O20040521000534", 
+  "O20101110000259",
+  "O20190719002511",
+  "O20220827000145"), 
+  "ID Type" = c(
+    "PAC ID",
+    "NPI-2",
+    "NPI-2",
+    "NPI-2",
+    "Enrollment ID (Organization)",
+    "Enrollment ID (Organization)",
+    "Enrollment ID (Organization)",
+    "Enrollment ID (Organization)"))
+
+# ggflowchart(flow_data, 
+#             node_data, 
+#             fill = 'ID Type',
+#             text_size = 5,
+#   text_colour = "black",
+#   arrow_colour = "#585c45",
+#   arrow_size = 0.15,
+#   x_nudge = 0.2,
+#   y_nudge = 0.45,
+#   colour = "white",
+#   horizontal = TRUE) +
+#   theme(
+#     plot.title = element_text(
+#       size = 20,
+#       hjust = 0.5,
+#       face = "bold",
+#       colour = "#585c45"),
+#     legend.position = "top",
+#     legend.title = element_text(size = 0))
+```
+
+Searching for it in the **Hospital Enrollment** API gives us even more detail:
 
 <br>
 
@@ -70,14 +120,11 @@ facility_affiliations(facility_ccn = 331302) |>
   select(-c(middle_name, suffix)) |> 
   head(10)
 ```
-```{r echo=FALSE}
-npi <- facility_affiliations(facility_ccn = 331302) |> dplyr::distinct(npi)
-npi2 <- facility_affiliations(facility_ccn = "33Z302") |> dplyr::distinct(npi)
-```
+
 
 <br>
 
-That returns `r nrow(npi)` individual providers affiliated with the hospital. Now to search the alphanumeric CCN (`33Z302`):
+That returns individual providers affiliated with the hospital. Now to search the alphanumeric CCN (`33Z302`):
 
 
 ```{r}
@@ -86,7 +133,7 @@ facility_affiliations(facility_ccn = "33Z302")
 
 <br>
 
-That returns `r nrow(npi2)` more affiliated individual providers that practice in the Hospital's nursing home, bringing the total to `r nrow(npi) + nrow(npi2)`.
+That returns more affiliated individual providers that practice in the Hospital's nursing home..
 
 <br>
 

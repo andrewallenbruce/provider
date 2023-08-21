@@ -1,19 +1,18 @@
-#' Search the CMS Hospital Enrollments API
+#' Hospitals Enrolled in Medicare
 #'
-#' @description Information on hospitals currently enrolled in Medicare.
+#' @description
+#' `hospital_enrollment()` allows you to search for information on all hospitals
+#' currently enrolled in Medicare. Data returned includes the hospital's
+#' sub-group types, legal business name, doing-business-as name, organization type and address.
 #'
-#' @details The Hospital Enrollments dataset provides enrollment information of
-#'   all Hospitals currently enrolled in Medicare. This data includes
-#'   information on the Hospital's sub-group type, legal business name, doing
-#'   business as name, organization type and address.
+#' @section Links:
+#'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#'   ## Links
-#'   * [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
+#' @section Update Frequency: **Monthly**
 #'
-#' @note Update Frequency: **Monthly**
 #' @param npi Hospital’s National Provider Identifier
 #' @param facility_ccn Hospital’s CMS Certification Number (CCN)
-#' @param enroll_id Hospital’s enrollment ID
+#' @param enroll_id_org Hospital’s enrollment ID
 #' @param enroll_state Hospital’s enrollment state
 #' @param specialty_code Enrollment specialty type code
 #' @param pac_id_org Hospital’s PAC ID
@@ -23,18 +22,19 @@
 #' @param state State of the hospital’s practice location address
 #' @param zip Zip code of the hospital’s practice location address
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @examplesIf interactive()
-#' hospital_enrollment(npi = 1689653487)
-#' hospital_enrollment(facility_ccn = "440058")
+#'
+#' @seealso [doctors_and_clinicians()], [provider_enrollment()], [facility_affiliations()]
+#'
+#' @examples
 #' hospital_enrollment(pac_id_org = 6103733050)
-#' hospital_enrollment(city = "Atlanta")
-#' hospital_enrollment(zipcode = 117771928)
+#'
 #' @autoglobal
 #' @export
 hospital_enrollment <- function(npi               = NULL,
                                 facility_ccn      = NULL,
-                                enroll_id         = NULL,
+                                enroll_id_org     = NULL,
                                 enroll_state      = NULL,
                                 specialty_code    = NULL,
                                 pac_id_org        = NULL,
@@ -46,7 +46,8 @@ hospital_enrollment <- function(npi               = NULL,
                                 tidy              = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(enroll_id_org)) {enroll_check(enroll_id_org)}
+  if (!is.null(enroll_id_org)) {enroll_org_check(enroll_id_org)}
   if (!is.null(pac_id_org)) {pac_check(pac_id_org)}
 
   # args tribble ------------------------------------------------------------
@@ -54,7 +55,7 @@ hospital_enrollment <- function(npi               = NULL,
     ~x,                       ~y,
     "NPI",                    npi,
     "CCN",                    facility_ccn,
-    "ENROLLMENT ID",          enroll_id,
+    "ENROLLMENT ID",          enroll_id_org,
     "ENROLLMENT STATE",       enroll_state,
     "PROVIDER TYPE CODE",     specialty_code,
     "ASSOCIATE ID",           pac_id_org,
@@ -90,7 +91,7 @@ hospital_enrollment <- function(npi               = NULL,
       ~x,                  ~y,
       "npi",               as.character(npi),
       "facility_ccn",      as.character(facility_ccn),
-      "enroll_id",         as.character(enroll_id),
+      "enroll_id_org",     as.character(enroll_id_org),
       "enroll_state",      enroll_state,
       "specialty_code",    specialty_code,
       "pac_id_org",        pac_id_org,
@@ -131,7 +132,7 @@ hospital_enrollment <- function(npi               = NULL,
                     organization_name,
                     doing_business_as      = doing_business_as_name,
                     pac_id_org             = associate_id,
-                    enroll_id              = enrollment_id,
+                    enroll_id_org          = enrollment_id,
                     facility_ccn           = ccn,
                     specialty_code         = provider_type_code,
                     specialty              = provider_type_text,
@@ -149,11 +150,7 @@ hospital_enrollment <- function(npi               = NULL,
                     multiple_npis          = multiple_npi_flag,
                     proprietary_nonprofit,
                     dplyr::contains("subgroup_")) |>
-      # janitor::remove_empty(which = c("rows", "cols")) |>
-      tidyr::nest(
-        # address = dplyr::any_of(c("address", "city", "state", "zip", "location_type")),
-        # incorporation = dplyr::contains("incorporation"),
-                  subgroups = dplyr::contains("subgroup_"))
+      tidyr::nest(subgroups = dplyr::contains("subgroup_"))
 
     }
   return(results)

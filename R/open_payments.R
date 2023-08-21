@@ -365,6 +365,7 @@ open_payments_error <- function(response) {
 #' @return integer vector of years available
 #' @examples
 #' open_payments_years()
+#' @rdname years
 #' @autoglobal
 #' @export
 open_payments_years <- function() {

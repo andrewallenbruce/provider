@@ -179,6 +179,7 @@ cc_multiple <- function(year,
 #' @return integer vector of years available
 #' @examples
 #' cc_multiple_years()
+#' @rdname years
 #' @autoglobal
 #' @export
 cc_multiple_years <- function() {

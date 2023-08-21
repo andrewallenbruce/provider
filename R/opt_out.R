@@ -68,7 +68,7 @@
 #'         first_name = "James",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE)
-#' @examplesIf interactive()
+#'
 #' # For providers that have opted out, but are eligible to order and refer,
 #' # use `order_refer()` to look up their specific eligibility statuses
 #' opt_out(last_name = "Smith",
@@ -78,6 +78,7 @@
 #'         dplyr::pull(npi) |>
 #'         purrr::map(\(x) order_refer(npi = x)) |>
 #'         purrr::list_rbind()
+#'
 #' @autoglobal
 #' @export
 opt_out <- function(npi             = NULL,
