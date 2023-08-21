@@ -51,18 +51,15 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \code{hospital_enrollment()} allows you to search for information on all hospitals
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization type and address.
-}
-\section{Links}{
-
+\subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
 }
 
-\section{Update Frequency}{
- \strong{Monthly}
+\subsection{Update Frequency: \strong{Monthly}}{
 }
-
+}
 \examples{
 hospital_enrollment(pac_id_org = 6103733050)
 

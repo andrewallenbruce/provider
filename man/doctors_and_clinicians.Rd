@@ -93,7 +93,6 @@ Update Frequency: \strong{Monthly}
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 doctors_and_clinicians(npi = 1407263999)
 doctors_and_clinicians(enroll_id = "I20081002000549")
-doctors_and_clinicians(first_name = "John")
 doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 doctors_and_clinicians(grad_year = 2003)
 \dontshow{\}) # examplesIf}

@@ -181,6 +181,9 @@ revalidation_group(enroll_id = "I123456789123456")
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
 provider_enrollment(enroll_id = "012345678912345")
+
+# Some functions' parameters differentiate between an Organizational and Individual ID
+hospital_enrollment(enroll_id_org = "I20180115000174")
 ```
 
 <br>

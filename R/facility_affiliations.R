@@ -1,49 +1,48 @@
-#' Search the CMS Physician Facility Affiliations API
+#' Provider Facility Affiliations
 #'
-#' @description Dataset of providers' facility affiliations
+#' @description
+#' `facility_affiliations()` allows you to access information concerning providers' facility affiliations
 #'
-#' @details This file lists clinicians' facility affiliations, which have been
-#'    expanded to include Long-term Care Hospitals (LTCHs), Skilled Nursing
-#'    Facilities (SNFs), Inpatient Rehabilitation Facility (IRFs), Home Health
-#'    Agencies, Hospices, and/or Dialysis Facilities, in addition to hospitals.
+#' ### Links
+#'  - [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
+#'  - [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
-#' ## Links
-#' *  [CMS Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
-#' *  [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
+#' *Update Frequency:* **Monthly**
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Monthly**
 #' @param npi Unique clinician ID assigned by NPPES
 #' @param pac_id Unique individual clinician ID assigned by PECOS
 #' @param last_name Individual clinician last name
 #' @param first_name Individual clinician first name
 #' @param middle_name Individual clinician middle name
 #' @param facility_type Facilities can fall into the following type categories:
-#'    Hospital, Long-term Care Hospital, Nursing Home, Inpatient
-#'    Rehabilitation Facility, Home Health Agency, Hospice, and Dialysis
-#'    Facility
+#'     - Hospital
+#'     - Long-term Care Hospital (LTCH)
+#'     - Nursing Home
+#'     - Inpatient Rehabilitation Facility (IRF)
+#'     - Home Health Agency (HHA)
+#'     - Skilled Nursing Facility (SNF)
+#'     - Hospice
+#'     - Dialysis Facility
 #' @param facility_ccn alphanumeric; Medicare CCN (CMS Certification Number) of
 #'    facility type or unit within hospital where an individual clinician
-#'    provides service. Effective 2007, the CCN replaced the terms
-#'    *Medicare Provider Number*, *Medicare Identification Number* and
-#'    *OSCAR Number*. The CCN is used to verify Medicare/Medicaid certification
-#'    for survey and certification, assessment-related activities and
-#'    communications.
-#' @param parent_ccn numeric; Medicare CCN of the primary hospital where an
+#'    provides service. The CCN replaced the terms *Medicare Provider Number*,
+#'    *Medicare Identification Number* and *OSCAR Number* and is used to verify
+#'    Medicare/Medicaid certification for survey and certification,
+#'    assessment-related activities and communications.
+#' @param parent_ccn numeric; CCN of the primary hospital where an
 #'    individual clinician provides service, should the clinician provide
 #'    services in a unit within the hospital.
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
-#' facility_affiliations(npi = 1003019563)
 #' facility_affiliations(facility_ccn = "060004")
 #' facility_affiliations(parent_ccn = 670055)
-#' facility_affiliations(first_name = "John")
-#' facility_affiliations(facility_type = "Home Health Agency")
+#'
 #' @autoglobal
 #' @export
-
 facility_affiliations <- function(npi           = NULL,
                                   pac_id        = NULL,
                                   first_name    = NULL,
@@ -52,7 +51,7 @@ facility_affiliations <- function(npi           = NULL,
                                   facility_type = NULL,
                                   facility_ccn  = NULL,
                                   parent_ccn    = NULL,
-                                  offset        = 0,
+                                  offset        = 0L,
                                   tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}

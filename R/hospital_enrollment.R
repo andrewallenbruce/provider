@@ -5,10 +5,10 @@
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization type and address.
 #'
-#' @section Links:
+#' ### Links:
 #'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' @section Update Frequency: **Monthly**
+#' Update Frequency: **Monthly**
 #'
 #' @param npi Hospital’s National Provider Identifier
 #' @param facility_ccn Hospital’s CMS Certification Number (CCN)
