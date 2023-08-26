@@ -128,7 +128,6 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="http://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"andrewallenbruce/provider"</span><span class="op">)</span></span></code></pre></div>
-<p><br></p>
 </div>
 <div class="section level2">
 <h2 id="motivation">Motivation<a class="anchor" aria-label="anchor" href="#motivation"></a>
@@ -140,10 +139,9 @@
 <li><p><em>Validation checks of inputs</em>, as is reasonable (e.g, identifiers such as NPI, PAC ID, Medicare Enrollment ID, CCN, Taxonomy codes). Not only is this simply good practice, it will also prevent unnecessary querying of the APIs.</p></li>
 <li><p><em>Well-written documentation</em>, containing as many examples as is necessary. Each API’s output can be difficult to understand, even for someone with expertise in R, healthcare, or both.</p></li>
 </ul>
-<p><br></p>
 </div>
 <div class="section level2">
-<h2 id="apis">APIs<a class="anchor" aria-label="anchor" href="#apis"></a>
+<h2 id="exported-functions">Exported Functions<a class="anchor" aria-label="anchor" href="#exported-functions"></a>
 </h2>
 <p>API Search functions can be grouped according to the type of data they return about a provider: <em>administrative</em>, <em>statistical</em>, and <em>auxiliary.</em></p>
 <div class="section level3">
@@ -151,9 +149,9 @@
 </h3>
 <ul>
 <li>
-<code><a href="reference/nppes_npi.html">nppes_npi()</a></code>: Registry of all healthcare providers.</li>
+<code>nppes()</code>: Registry of all healthcare providers.</li>
 <li>
-<code><a href="reference/provider_enrollment.html">provider_enrollment()</a></code>: Providers actively enrolled in Medicare.</li>
+<code>enrollment()</code>: Providers actively enrolled in Medicare.</li>
 <li>
 <code><a href="reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of Medicare.</li>
 <li>
@@ -161,7 +159,7 @@
 <li>
 <code><a href="reference/doctors_and_clinicians.html">doctors_and_clinicians()</a></code>: Provider school, graduation year, linking.</li>
 <li>
-<code><a href="reference/facility_affiliations.html">facility_affiliations()</a></code>: Linking providers to Facilities.</li>
+<code>affiliation()</code>: Linking providers to Facilities.</li>
 <li>
 <code><a href="reference/hospital_enrollment.html">hospital_enrollment()</a></code>: Facilities linked to providers.</li>
 </ul>
@@ -172,22 +170,22 @@
 <p>The following return provider-specific stats:</p>
 <ul>
 <li>
-<code><a href="reference/provider-statistics.html">physician_by_provider()</a></code>: Yearly high-level utilization data.</li>
+<code>by_provider()</code>: Yearly high-level utilization data.</li>
 <li>
-<code><a href="reference/provider-statistics.html">physician_by_service()</a></code>: Yearly detailed utilization data.</li>
+<code>by_service()</code>: Yearly detailed utilization data.</li>
 <li>
-<code>quality_payments()</code>: Yearly QPP/MIPS performance data.</li>
+<code><a href="reference/quality_payment.html">quality_payment()</a></code>: Yearly QPP/MIPS performance data.</li>
 <li>
 <code><a href="reference/quality_payment.html">quality_eligibility()</a></code>: Yearly QPP/MIPS eligibility data.</li>
 <li>
 <code><a href="reference/open_payments.html">open_payments()</a></code>: Yearly Open Payments reporting data.</li>
 </ul>
-<p>The following return yearly stats useful for comparison against data returned from <code><a href="reference/provider-statistics.html">physician_by_service()</a></code>:</p>
+<p>The following return yearly stats useful for comparison against data returned from <code>by_service()</code>:</p>
 <ul>
-<li><code><a href="reference/provider-statistics.html">physician_by_geography()</a></code></li>
-<li><code><a href="reference/beneficiary_enrollment.html">beneficiary_enrollment()</a></code></li>
-<li><code><a href="reference/cc_multiple.html">cc_multiple()</a></code></li>
-<li><code><a href="reference/cc_specific.html">cc_specific()</a></code></li>
+<li><code>geography()</code></li>
+<li><code>beneficiary()</code></li>
+<li><code>chronic_multiple()</code></li>
+<li><code>chronic_specific()</code></li>
 </ul>
 </div>
 <div class="section level3">
@@ -197,13 +195,12 @@
 <li>
 <code><a href="reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and refer?</li>
 <li>
-<code><a href="reference/missing_information.html">missing_information()</a></code>: Is a provider missing Endpoints in the NPPES NPI Registry?</li>
+<code>missing_endpoints()</code>: Is a provider missing Endpoints in the NPPES NPI Registry?</li>
 <li>
 <code><a href="reference/pending_applications.html">pending_applications()</a></code>: Has a provider’s Medicare application been processed?</li>
 <li>
 <code><a href="reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty eligible to enroll in Medicare?</li>
 </ul>
-<p><br></p>
 </div>
 </div>
 <div class="section level2">

@@ -120,7 +120,9 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/printr/" class="external-link">printr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The overarching goal of <code>provider</code> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
@@ -155,23 +157,78 @@ every <strong>row</strong> is an <em>observation</em>, and every
 before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
-<span><span class="co">#&gt;   npi        first_name last_name service                         eligible</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH      HUSSAIN   Medicare Part B                 TRUE    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH      HUSSAIN   Home Health Agency (HHA)        TRUE    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH      HUSSAIN   Durable Medical Equipment (DME) TRUE    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH      HUSSAIN   Power Mobility Device (PMD)     TRUE</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="15%">
+<col width="15%">
+<col width="13%">
+<col width="43%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">service</th>
+<th align="left">eligible</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Medicare Part B</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Home Health Agency (HHA)</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Durable Medical Equipment (DME)</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Power Mobility Device (PMD)</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
-<span><span class="co">#&gt;   NPI        LAST_NAME FIRST_NAME PARTB DME   HHA   PMD  </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 HUSSAIN   SARAH      Y     Y     Y     Y</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">NPI</th>
+<th align="left">LAST_NAME</th>
+<th align="left">FIRST_NAME</th>
+<th align="left">PARTB</th>
+<th align="left">DME</th>
+<th align="left">HHA</th>
+<th align="left">PMD</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1043477615</td>
+<td align="left">HUSSAIN</td>
+<td align="left">SARAH</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+<td align="left">Y</td>
+</tr></tbody>
+</table>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
 function include:</p>
@@ -201,25 +258,22 @@ that they return about a provider: <em>administrative</em>,
 </h3>
 <ul>
 <li>
-<code><a href="../reference/nppes_npi.html">nppes_npi()</a></code>: Registry of all healthcare providers.</li>
+<code>nppes()</code>: Registry of all healthcare providers.</li>
 <li>
-<code><a href="../reference/provider_enrollment.html">provider_enrollment()</a></code>: Providers actively enrolled in
+<code><a href="../reference/provider-package.html">provider()</a></code>: Providers actively enrolled in
 Medicare.</li>
 <li>
 <code><a href="../reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of
 Medicare.</li>
 <li>
-<code>revalidation_*()</code>: Link Type-1 and Type-2
-providers.</li>
+<code>revalidation()</code>: Link Type-1 and Type-2 providers.</li>
 <li>
-<code><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians()</a></code>: Provider school, graduation
-year, linking.</li>
+<code>clinician()</code>: Provider school, graduation year,
+linking.</li>
 <li>
-<code><a href="../reference/facility_affiliations.html">facility_affiliations()</a></code>: Linking providers to
-Facilities.</li>
+<code>affiliations()</code>: Linking providers to Facilities.</li>
 <li>
-<code><a href="../reference/hospital_enrollment.html">hospital_enrollment()</a></code>: Facilities linked to
-providers.</li>
+<code>hospitals()</code>: Facilities linked to providers.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -228,16 +282,15 @@ providers.</li>
 <p>The following return provider-specific stats:</p>
 <ul>
 <li>
-<code><a href="../reference/provider-statistics.html">physician_by_provider()</a></code>: Yearly high-level utilization
+<code>by_physician()</code>: Yearly high-level utilization
 data.</li>
 <li>
-<code><a href="../reference/provider-statistics.html">physician_by_service()</a></code>: Yearly detailed utilization
+<code>by_service()</code>: Yearly detailed utilization data.</li>
+<li>
+<code>qpp_performance()</code>: Yearly QPP/MIPS performance
 data.</li>
 <li>
-<code><a href="../reference/quality_payment.html">quality_payment()</a></code>: Yearly QPP/MIPS performance
-data.</li>
-<li>
-<code><a href="../reference/quality_payment.html">quality_eligibility()</a></code>: Yearly QPP/MIPS eligibility
+<code>qpp_eligibility()</code>: Yearly QPP/MIPS eligibility
 data.</li>
 <li>
 <code><a href="../reference/open_payments.html">open_payments()</a></code>: Yearly Open Payments reporting
@@ -246,8 +299,9 @@ data.</li>
 <p>The following return yearly stats useful for comparison against data
 returned from <code><a href="../reference/provider-statistics.html">physician_by_service()</a></code>:</p>
 <ul>
-<li><code><a href="../reference/provider-statistics.html">physician_by_geography()</a></code></li>
-<li><code><a href="../reference/beneficiary_enrollment.html">beneficiary_enrollment()</a></code></li>
+<li><code>by_geography()</code></li>
+<li><code>beneficiaries()</code></li>
+<li><code>conditions()</code></li>
 <li><code><a href="../reference/cc_multiple.html">cc_multiple()</a></code></li>
 <li><code><a href="../reference/cc_specific.html">cc_specific()</a></code></li>
 </ul>
@@ -260,16 +314,16 @@ returned from <code><a href="../reference/provider-statistics.html">physician_by
 <code><a href="../reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and
 refer?</li>
 <li>
-<code><a href="../reference/missing_information.html">missing_information()</a></code>: Is a provider missing Endpoints
-in the NPPES NPI Registry?</li>
+<code>endpoints_missing()</code>: Is a provider missing Endpoints in
+the NPPES NPI Registry?</li>
 <li>
-<code><a href="../reference/pending_applications.html">pending_applications()</a></code>: Has a provider’s Medicare
-application been processed?</li>
+<code>pending()</code>: Has a provider’s Medicare application been
+processed?</li>
 <li>
-<code><a href="../reference/taxonomy_crosswalk.html">taxonomy_crosswalk()</a></code>: Is a provider’s specialty
-eligible to enroll in Medicare?</li>
+<code>taxonomy()</code>: Is a provider’s specialty eligible to
+enroll in Medicare?</li>
 <li>
-<code><a href="../reference/quality_payment.html">quality_stats()</a></code>: Yearly QPP/MIPS performance data.</li>
+<code>qpp_stats()</code>: Yearly QPP/MIPS performance data.</li>
 </ul>
 <p><br></p>
 </div>
@@ -290,20 +344,103 @@ years:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
-<span><span class="co">#&gt;    year npi   practice_state practice_size clinician_specialty years_in_medicare</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043… PA                      <span style="text-decoration: underline;">1</span>394 Cardiac Electrophy…                 5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043… PA                      <span style="text-decoration: underline;">1</span>297 Cardiac Electrophy…                 5</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043… PA                      <span style="text-decoration: underline;">1</span>344 Cardiac Electrophy…                 6</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043… PA                      <span style="text-decoration: underline;">1</span>440 Cardiac Electrophy…                 7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043… PA                      <span style="text-decoration: underline;">1</span>940 Cardiac Electrophy…                 8</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: participation_type &lt;chr&gt;, beneficiaries &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   services &lt;int&gt;, allowed_charges &lt;dbl&gt;, final_score &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   payment_adjustment &lt;dbl&gt;, quality_score &lt;chr&gt;, pi_score &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ia_score &lt;chr&gt;, cost_score &lt;chr&gt;, complex_patient_bonus &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   quality_improvement_bonus &lt;dbl&gt;, special_statuses &lt;list&gt;, measures &lt;list&gt;</span></span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="3%">
+<col width="6%">
+<col width="9%">
+<col width="8%">
+<col width="16%">
+<col width="11%">
+<col width="11%">
+<col width="8%">
+<col width="5%">
+<col width="10%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">npi</th>
+<th align="left">practice_state</th>
+<th align="right">practice_size</th>
+<th align="left">clinician_specialty</th>
+<th align="right">years_in_medicare</th>
+<th align="left">participation_type</th>
+<th align="right">beneficiaries</th>
+<th align="right">services</th>
+<th align="right">allowed_charges</th>
+<th align="left">final_score</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1394</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">5</td>
+<td align="left">MIPS APM</td>
+<td align="right">43007</td>
+<td align="right">NA</td>
+<td align="right">36391760</td>
+<td align="left">97.09</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1297</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">5</td>
+<td align="left">MIPS APM</td>
+<td align="right">41034</td>
+<td align="right">0</td>
+<td align="right">35008312</td>
+<td align="left">100</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1344</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">6</td>
+<td align="left">MIPS APM</td>
+<td align="right">42222</td>
+<td align="right">415298</td>
+<td align="right">36899498</td>
+<td align="left">95.12</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1440</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">7</td>
+<td align="left">MIPS APM</td>
+<td align="right">39624</td>
+<td align="right">374278</td>
+<td align="right">33458425</td>
+<td align="left">96.7</td>
+</tr>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1940</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">8</td>
+<td align="left">MIPS APM</td>
+<td align="right">41404</td>
+<td align="right">403720</td>
+<td align="right">35627551</td>
+<td align="left">97.25</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -329,16 +466,12 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes_npi()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
+<span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in nppes(npi = "O12345678912"): could not find function "nppes"</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending_applications()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
+<span><span class="fu">pending</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in pending(npi = 1234569123): could not find function "pending"</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
@@ -351,16 +484,12 @@ under different circumstances.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
-<span><span class="fu"><a href="../reference/facility_affiliations.html">facility_affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `facility_affiliations()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
+<span><span class="fu">affiliations</span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in affiliations(pac_id = 123456789): could not find function "affiliations"</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospital_enrollment()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
+<span><span class="fu">hospitals</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in hospitals(pac_id_org = "O12345678912"): could not find function "hospitals"</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a
@@ -371,39 +500,32 @@ of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
-<span><span class="fu"><a href="../reference/doctors_and_clinicians.html">doctors_and_clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `doctors_and_clinicians()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="font-style: italic;">character</span> vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
+<span><span class="fu">clinicians</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in clinicians(enroll_id = 123456789123456): could not find function "clinicians"</span></span>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
-<span><span class="fu"><a href="../reference/revalidation_group.html">revalidation_group</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `revalidation_group()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be <span style="font-style: italic;">15 characters long</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span>
+<span><span class="fu">revalidation</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in revalidation(enroll_id = "I123456789123456"): could not find function "revalidation"</span></span>
 <span></span>
 <span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
-<span><span class="fu"><a href="../reference/provider_enrollment.html">provider_enrollment</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `provider_enrollment()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`I`</span> or <span style="font-weight: bold;">`O`</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/providers.html" class="external-link">providers</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in providers(enroll_id = "012345678912345"): could not find function "providers"</span></span>
 <span></span>
 <span><span class="co"># Some functions' parameters differentiate between an Organizational and Individual ID</span></span>
-<span><span class="fu"><a href="../reference/hospital_enrollment.html">hospital_enrollment</a></span><span class="op">(</span>enroll_id_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospital_enrollment()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-style: italic;">organizational/group</span> <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I20180115000174"</span> begins with <span style="color: #0000BB;">"I"</span>.</span></span></code></pre></div>
+<span><span class="fu">hospitals</span><span class="op">(</span>enroll_id_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in hospitals(enroll_id_org = "I20180115000174"): could not find function "hospitals"</span></span></code></pre></div>
 <p><br></p>
-<div class="section level3">
-<h3 id="parameters-containing-leading-zeros">Parameters Containing Leading Zeros<a class="anchor" aria-label="anchor" href="#parameters-containing-leading-zeros"></a>
-</h3>
-<p>For any parameters that may contain leading zeros, make sure that
-they’re input as a character vector. R will drop any leading zeros in a
-numeric vector:</p>
+<blockquote>
+<p>Numeric Parameters with Leading Zeros R will drop any leading zeros
+in a numeric vector. For any parameters that may contain leading zeros,
+make sure that they’re input as a character vector. :</p>
+</blockquote>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0001</span>, <span class="st">"0001"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "1"    "0001"</span></span></code></pre></div>
-</div>
+<code class="sourceCode R"><span><span class="fl">0001</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span></span>
+<span><span class="st">"0001"</span></span>
+<span><span class="co">#&gt; [1] "0001"</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
