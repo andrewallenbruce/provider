@@ -62,7 +62,9 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
-}Update Frequency: Monthly
+}
+
+\emph{Update Frequency:} \strong{Monthly}
 }
 }
 \examples{

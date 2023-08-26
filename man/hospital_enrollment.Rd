@@ -55,9 +55,8 @@ sub-group types, legal business name, doing-business-as name, organization type 
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
-}
 
-\subsection{Update Frequency: \strong{Monthly}}{
+Update Frequency: \strong{Monthly}
 }
 }
 \examples{

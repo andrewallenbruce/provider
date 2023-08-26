@@ -37,8 +37,6 @@ You can install `provider` from [GitHub](https://github.com/) with:
 pak::pak("andrewallenbruce/provider")
 ```
 
-<br>
-
 ## Motivation
 
 The overarching goal of `provider` is to make the experience of
@@ -64,9 +62,7 @@ following general goals, where possible:
   necessary. Each API’s output can be difficult to understand, even for
   someone with expertise in R, healthcare, or both.
 
-<br>
-
-## APIs
+## Exported Functions
 
 API Search functions can be grouped according to the type of data they
 return about a provider: *administrative*, *statistical*, and
@@ -74,43 +70,41 @@ return about a provider: *administrative*, *statistical*, and
 
 ### Administrative
 
-- `nppes_npi()`: Registry of all healthcare providers.
-- `provider_enrollment()`: Providers actively enrolled in Medicare.
+- `nppes()`: Registry of all healthcare providers.
+- `enrollment()`: Providers actively enrolled in Medicare.
 - `opt_out()`: Providers currently opted out of Medicare.
 - `revalidation_*()`: Link Type-1 and Type-2 providers.
 - `doctors_and_clinicians()`: Provider school, graduation year, linking.
-- `facility_affiliations()`: Linking providers to Facilities.
+- `affiliation()`: Linking providers to Facilities.
 - `hospital_enrollment()`: Facilities linked to providers.
 
 ### Statistical
 
 The following return provider-specific stats:
 
-- `physician_by_provider()`: Yearly high-level utilization data.
-- `physician_by_service()`: Yearly detailed utilization data.
-- `quality_payments()`: Yearly QPP/MIPS performance data.
+- `by_provider()`: Yearly high-level utilization data.
+- `by_service()`: Yearly detailed utilization data.
+- `quality_payment()`: Yearly QPP/MIPS performance data.
 - `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
 - `open_payments()`: Yearly Open Payments reporting data.
 
 The following return yearly stats useful for comparison against data
-returned from `physician_by_service()`:
+returned from `by_service()`:
 
-- `physician_by_geography()`
-- `beneficiary_enrollment()`
-- `cc_multiple()`
-- `cc_specific()`
+- `geography()`
+- `beneficiary()`
+- `chronic_multiple()`
+- `chronic_specific()`
 
 ### Auxiliary
 
 - `order_refer()`: Is a provider eligible to order and refer?
-- `missing_information()`: Is a provider missing Endpoints in the NPPES
+- `missing_endpoints()`: Is a provider missing Endpoints in the NPPES
   NPI Registry?
 - `pending_applications()`: Has a provider’s Medicare application been
   processed?
 - `taxonomy_crosswalk()`: Is a provider’s specialty eligible to enroll
   in Medicare?
-
-<br>
 
 ## Usage
 

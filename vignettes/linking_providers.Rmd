@@ -42,68 +42,6 @@ provider_enrollment(organization_name = "Elizabethtown Community Hospital")
 ```
 
 
-<br>
-
-
-```{r echo=FALSE, eval=FALSE, message=FALSE, warning=FALSE}
-flow_data <- tibble(
-  from = c(
-    "3577554138", "3577554138", "3577554138",
-    "1891785184", "1891785184",
-    "1487923637",
-    "1407061591"
-           ), 
-  to = c(
-    "1891785184", "1487923637", "1407061591",
-    "O20040521000534", "O20101110000259",
-    "O20190719002511",
-    "O20220827000145"
-  ))
-
-node_data <- tibble(
-  name = c(
-  "3577554138", 
-  "1891785184", 
-  "1487923637",
-  "1407061591",
-  "O20040521000534", 
-  "O20101110000259",
-  "O20190719002511",
-  "O20220827000145"), 
-  "ID Type" = c(
-    "PAC ID",
-    "NPI-2",
-    "NPI-2",
-    "NPI-2",
-    "Enrollment ID (Organization)",
-    "Enrollment ID (Organization)",
-    "Enrollment ID (Organization)",
-    "Enrollment ID (Organization)"))
-
-# ggflowchart(flow_data, 
-#             node_data, 
-#             fill = 'ID Type',
-#             text_size = 5,
-#   text_colour = "black",
-#   arrow_colour = "#585c45",
-#   arrow_size = 0.15,
-#   x_nudge = 0.2,
-#   y_nudge = 0.45,
-#   colour = "white",
-#   horizontal = TRUE) +
-#   theme(
-#     plot.title = element_text(
-#       size = 20,
-#       hjust = 0.5,
-#       face = "bold",
-#       colour = "#585c45"),
-#     legend.position = "top",
-#     legend.title = element_text(size = 0))
-```
-
-Searching for it in the **Hospital Enrollment** API gives us even more detail:
-
-<br>
 
 ```{r}
 hospital_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
@@ -150,4 +88,58 @@ unique(elizabethtown$npi) |>
 ```
 
 
+
+```{r echo=FALSE, eval=FALSE}
+elizabeth.prov <- provider_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
+  select(organization = organization_name, 
+         pac_organization = pac_id, 
+         npi_organization = npi, 
+         enroll_organization = enroll_id, 
+         specialty)
+
+elizabeth.hosp <- hospital_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
+  select(organization = organization_name, 
+         pac_organization = pac_id_org,
+         npi_organization = npi,
+         enroll_organization = enroll_id,
+         facility_ccn)
+
+elizabeth.affil <- elizabeth.hosp$facility_ccn |> 
+  map(\(x) facility_affiliations(facility_ccn = x)) |> 
+  list_rbind() |> 
+  select(pac_individual = pac_id_ind, 
+         npi_individual = npi, 
+         facility_ccn)
+
+left_join(elizabeth.prov, 
+          elizabeth.hosp, by = join_by(organization, 
+                                       pac_organization, 
+                                       npi_organization, 
+                                       enroll_organization)) |> 
+  left_join(elizabeth.affil, by = join_by(facility_ccn))
+
+#######################################
+
+elizabeth.prov.pac <- unique(elizabeth.affil$pac_individual) |>
+  map(\(x) provider_enrollment(pac_id = x)) |> 
+  list_rbind() |> 
+  select(pac_individual = pac_id,
+         npi_individual = npi, 
+         enroll_individual = enroll_id)
+
+elizabeth.group <- unique(elizabeth.prov.pac$npi_individual) |>
+  map(\(x) revalidation_group(npi = x)) |> 
+  list_rbind() |> 
+  select(npi_individual = npi, 
+         enroll_individual = enroll_id,
+         pac_organization = group_pac_id,
+         enroll_organization = group_enroll_id,
+         organization = group_legal_business_name,
+         organization_reassignments = group_reassignments)
+
+left_join(elizabeth.prov.pac, 
+          elizabeth.group, 
+          by = join_by(npi_individual, enroll_individual)) |> 
+  arrange(desc(organization_reassignments))
+```
 
