@@ -56,7 +56,6 @@
   <div class="dropdown-menu" aria-labelledby="dropdown-vignettes">
     <a class="dropdown-item" href="../articles/linking_providers.html">Linking Providers</a>
     <a class="dropdown-item" href="../articles/api-overviews.html">API Overviews</a>
-    <a class="dropdown-item" href="../articles/geocoding.html">Geocoding</a>
   </div>
 </li>
       </ul>
@@ -121,8 +120,7 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://purrr.tidyverse.org/" class="external-link">purrr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/printr/" class="external-link">printr</a></span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
 <p>The overarching goal of <code>provider</code> is to make the
 experience of accessing publicly-available Provider data easier and more
 consistent across a variety of sources. It aims to accomplish this
@@ -282,26 +280,24 @@ linking.</li>
 <p>The following return provider-specific stats:</p>
 <ul>
 <li>
-<code>by_physician()</code>: Yearly high-level utilization
-data.</li>
+<code><a href="../reference/by_provider.html">by_provider()</a></code>: Yearly high-level utilization data.</li>
 <li>
 <code><a href="../reference/by_service.html">by_service()</a></code>: Yearly detailed utilization data.</li>
 <li>
-<code>qpp_performance()</code>: Yearly QPP/MIPS performance
+<code><a href="../reference/quality_payment.html">quality_payment()</a></code>: Yearly QPP/MIPS performance
 data.</li>
 <li>
-<code>qpp_eligibility()</code>: Yearly QPP/MIPS eligibility
+<code><a href="../reference/quality_payment.html">quality_eligibility()</a></code>: Yearly QPP/MIPS eligibility
 data.</li>
 <li>
 <code><a href="../reference/open_payments.html">open_payments()</a></code>: Yearly Open Payments reporting
 data.</li>
 </ul>
 <p>The following return yearly stats useful for comparison against data
-returned from <code>physician_by_service()</code>:</p>
+returned from <code><a href="../reference/by_service.html">by_service()</a></code>:</p>
 <ul>
 <li><code><a href="../reference/by_geography.html">by_geography()</a></code></li>
 <li><code>beneficiaries()</code></li>
-<li><code>conditions()</code></li>
 <li><code><a href="../reference/cc_multiple.html">cc_multiple()</a></code></li>
 <li><code><a href="../reference/cc_specific.html">cc_specific()</a></code></li>
 </ul>
@@ -314,13 +310,13 @@ returned from <code>physician_by_service()</code>:</p>
 <code><a href="../reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and
 refer?</li>
 <li>
-<code>pending()</code>: Has a provider’s Medicare application been
+<code><a href="../reference/pending.html">pending()</a></code>: Has a provider’s Medicare application been
 processed?</li>
 <li>
 <code>taxonomy()</code>: Is a provider’s specialty eligible to
 enroll in Medicare?</li>
 <li>
-<code>qpp_stats()</code>: Yearly QPP/MIPS performance data.</li>
+<code><a href="../reference/quality_payment.html">quality_stats()</a></code>: Yearly QPP/MIPS performance data.</li>
 </ul>
 <p><br></p>
 </div>
@@ -463,12 +459,14 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes_npi(npi = "O12345678912"): could not find function "nppes_npi"</span></span>
+<span><span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending_applications()`:</span></span></span>
+<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
 <p><br></p>

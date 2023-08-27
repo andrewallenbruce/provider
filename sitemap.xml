@@ -22,9 +22,6 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/cms-open-payments.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/geocoding.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/index.html</loc>
   </url>
   <url>
@@ -34,25 +31,13 @@
     <loc>https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/physician-by-geography.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/physician-by-provider.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/physician-by-service.html</loc>
-  </url>
-  <url>
     <loc>https://andrewallenbruce.github.io/provider/articles/provider.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/articles/quality-payment.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/authors.html</loc>
@@ -94,7 +79,7 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/index.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/missing_information.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/missing_endpoints.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nppes.html</loc>
@@ -112,7 +97,7 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/order_refer.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/pending_applications.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/pending.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider-package.html</loc>
