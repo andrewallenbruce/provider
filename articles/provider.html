@@ -260,7 +260,7 @@ that they return about a provider: <em>administrative</em>,
 <li>
 <code>nppes()</code>: Registry of all healthcare providers.</li>
 <li>
-<code><a href="../reference/provider-package.html">provider()</a></code>: Providers actively enrolled in
+<code><a href="../reference/providers.html">providers()</a></code>: Providers actively enrolled in
 Medicare.</li>
 <li>
 <code><a href="../reference/opt_out.html">opt_out()</a></code>: Providers currently opted out of
@@ -268,12 +268,12 @@ Medicare.</li>
 <li>
 <code>revalidation()</code>: Link Type-1 and Type-2 providers.</li>
 <li>
-<code>clinician()</code>: Provider school, graduation year,
+<code><a href="../reference/clinicians.html">clinicians()</a></code>: Provider school, graduation year,
 linking.</li>
 <li>
-<code>affiliations()</code>: Linking providers to Facilities.</li>
+<code><a href="../reference/affiliations.html">affiliations()</a></code>: Linking providers to Facilities.</li>
 <li>
-<code>hospitals()</code>: Facilities linked to providers.</li>
+<code><a href="../reference/hospitals.html">hospitals()</a></code>: Facilities linked to providers.</li>
 </ul>
 </div>
 <div class="section level3">
@@ -466,12 +466,16 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in nppes(npi = "O12345678912"): could not find function "nppes"</span></span>
+<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes_npi()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu">pending</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in pending(npi = 1234569123): could not find function "pending"</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending_applications()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
@@ -484,12 +488,16 @@ under different circumstances.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
-<span><span class="fu">affiliations</span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in affiliations(pac_id = 123456789): could not find function "affiliations"</span></span>
+<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu">hospitals</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in hospitals(pac_id_org = "O12345678912"): could not find function "hospitals"</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a
@@ -500,20 +508,28 @@ of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
-<span><span class="fu">clinicians</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in clinicians(enroll_id = 123456789123456): could not find function "clinicians"</span></span>
+<span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="font-style: italic;">character</span> vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
-<span><span class="fu">revalidation</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in revalidation(enroll_id = "I123456789123456"): could not find function "revalidation"</span></span>
+<span><span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I123456789123456"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `revalidation_date()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be <span style="font-style: italic;">15 characters long</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I123456789123456"</span> contains <span style="color: #0000BB;">16</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must begin with a capital I (Individual) or O (Organization/Group)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/leaflet/man/providers.html" class="external-link">providers</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in providers(enroll_id = "012345678912345"): could not find function "providers"</span></span>
+<span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"012345678912345"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `providers()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`I`</span> or <span style="font-weight: bold;">`O`</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span>
 <span></span>
 <span><span class="co"># Some functions' parameters differentiate between an Organizational and Individual ID</span></span>
-<span><span class="fu">hospitals</span><span class="op">(</span>enroll_id_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in hospitals(enroll_id_org = "I20180115000174"): could not find function "hospitals"</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>enroll_id_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-style: italic;">organizational/group</span> <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I20180115000174"</span> begins with <span style="color: #0000BB;">"I"</span>.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p>Numeric Parameters with Leading Zeros R will drop any leading zeros
