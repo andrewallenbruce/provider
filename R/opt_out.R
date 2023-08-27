@@ -61,7 +61,7 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [order_refer()], [provider_enrollment()], [pending_applications()]
+#' @seealso [order_refer()], [providers()], [pending_applications()]
 #'
 #' @examples
 #' opt_out(last_name = "Smith",
@@ -89,7 +89,7 @@ opt_out <- function(npi             = NULL,
                     city            = NULL,
                     state           = NULL,
                     zip             = NULL,
-                    order_refer = NULL,
+                    order_refer     = NULL,
                     tidy            = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}

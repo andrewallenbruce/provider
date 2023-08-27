@@ -85,10 +85,10 @@ The API Search functions can be grouped according to the type of data that they 
 ### Administrative
 
    * `nppes()`: Registry of all healthcare providers.
-   * `provider()`: Providers actively enrolled in Medicare.
+   * `providers()`: Providers actively enrolled in Medicare.
    * `opt_out()`: Providers currently opted out of Medicare.
    * `revalidation()`: Link Type-1 and Type-2 providers.
-   * `clinician()`: Provider school, graduation year, linking.
+   * `clinicians()`: Provider school, graduation year, linking.
    * `affiliations()`: Linking providers to Facilities.
    * `hospitals()`: Facilities linked to providers.
 
@@ -151,10 +151,10 @@ Several validation checks have been implemented, including checks for *NPIs*, *P
 open_payments(npi = 12345691234)
 
 # Must be numeric
-nppes(npi = "O12345678912")
+nppes_npi(npi = "O12345678912")
 
 # Must pass Luhn check
-pending(npi = 001234569123)
+pending_applications(npi = 001234569123)
 ```
 
 <br>
@@ -181,7 +181,7 @@ hospitals(pac_id_org = "O12345678912")
 clinicians(enroll_id = 0123456789123456)
 
 # Must be 15 characters long
-revalidation(enroll_id = "I123456789123456")
+revalidation_date(enroll_id = "I123456789123456")
 
 # Must begin with a capital I (Individual) or O (Organization/Group)
 providers(enroll_id = "012345678912345")

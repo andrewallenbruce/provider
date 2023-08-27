@@ -1,18 +1,17 @@
-#' Search the CMS Doctors and Clinicians National Downloadable File API
+#' Doctors and Clinicians National Downloadable File
 #'
-#' @description Dataset of providers' facility affiliations
-#'
-#' @details The Doctors and Clinicians national downloadable file is organized
+#' @description `clinicians()` . The Doctors and Clinicians national downloadable file is organized
 #'   such that each line is unique at the clinician/enrollment
 #'   record/group/address level. Clinicians with multiple Medicare enrollment
 #'   records and/or single enrollments linking to multiple practice locations
 #'   are listed on multiple lines.
 #'
 #'   ## Links
-#'   * [Doctors and Clinicians National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+#'   - [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
+#'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Monthly**
+#' *Update Frequency:* **Monthly**
+#'
 #' @param npi Unique clinician ID assigned by NPPES
 #' @param pac_id Unique individual clinician ID assigned by PECOS
 #' @param enroll_id Unique ID for the clinician enrollment that is the source
@@ -27,43 +26,38 @@
 #'   clinician in the selected enrollment
 #' @param city Group or individual's city
 #' @param state Group or individual's state
-#' @param zipcode Group or individual's ZIP code (9 digits when available)
-#' @param ind_assn Indicator for whether clinician accepts Medicare approved
-#'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
-#'   as payment in full. `M` = Clinician may accept Medicare Assignment.
-#' @param group_assn Indicator for whether group accepts Medicare approved
-#'   amount as payment in full. `Y` = Clinician accepts Medicare approved amount
-#'   as payment in full. `M` = Clinician may accept Medicare Assignment.
+#' @param zip Group or individual's ZIP code
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @seealso [hospitals()], [providers()], [affiliations()]
+#'
 #' @examplesIf interactive()
-#' doctors_and_clinicians(npi = 1407263999)
-#' doctors_and_clinicians(enroll_id = "I20081002000549")
-#' doctors_and_clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
-#' doctors_and_clinicians(grad_year = 2003)
+#' clinicians(enroll_id = "I20081002000549")
+#' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' @autoglobal
 #' @export
-doctors_and_clinicians <- function(npi           = NULL,
-                                   pac_id        = NULL,
-                                   enroll_id     = NULL,
-                                   first_name    = NULL,
-                                   middle_name   = NULL,
-                                   last_name     = NULL,
-                                   gender        = NULL,
-                                   school        = NULL,
-                                   grad_year     = NULL,
-                                   specialty     = NULL,
-                                   city          = NULL,
-                                   state         = NULL,
-                                   zipcode       = NULL,
-                                   ind_assn      = NULL,
-                                   group_assn    = NULL,
-                                   offset        = 0L,
-                                   tidy          = TRUE) {
+clinicians <- function(npi = NULL,
+                       pac_id = NULL,
+                       enroll_id = NULL,
+                       first_name = NULL,
+                       middle_name = NULL,
+                       last_name = NULL,
+                       gender = NULL,
+                       school = NULL,
+                       grad_year = NULL,
+                       specialty = NULL,
+                       city = NULL,
+                       state = NULL,
+                       zip = NULL,
+                       offset = 0L,
+                       tidy = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
   if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(enroll_id)) {enroll_ind_check(enroll_id)}
   if (!is.null(pac_id)) {pac_check(pac_id)}
 
   # args tribble ------------------------------------------------------------
@@ -140,7 +134,7 @@ doctors_and_clinicians <- function(npi           = NULL,
 
   # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
       tidyr::unite("address",
                    adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
@@ -150,29 +144,29 @@ doctors_and_clinicians <- function(npi           = NULL,
                     telehlth = yn_logical(telehlth)) |>
       dplyr::select(
         npi,
-        pac_id        = ind_pac_id,
-        enroll_id     = ind_enrl_id,
-        first_name    = frst_nm,
-        middle_name   = mid_nm,
-        last_name     = lst_nm,
-        suffix        = suff,
-        gender        = gndr,
-        credential    = cred,
-        school        = med_sch,
-        grad_year     = grd_yr,
-        specialty     = pri_spec,
-        specialty_sec = sec_spec_all,
-        telehealth    = telehlth,
-        org_name      = org_nm,
-        org_pac_id,
-        org_members   = num_org_mem,
+        pac_id_ind             = ind_pac_id,
+        enroll_id_ind          = ind_enrl_id,
+        first_name             = frst_nm,
+        middle_name            = mid_nm,
+        last_name              = lst_nm,
+        suffix                 = suff,
+        gender                 = gndr,
+        credential             = cred,
+        school                 = med_sch,
+        grad_year              = grd_yr,
+        specialty              = pri_spec,
+        specialty_sec          = sec_spec_all,
+        organization_name      = org_nm,
+        pac_id_org,
+        org_members            = num_org_mem,
         address,
-        city          = cty,
-        state         = st,
-        zipcode       = zip,
-        phone         = phn_numbr,
-        ind_assn      = ind_assgn,
-        group_assn    = grp_assgn)
+        city                   = cty,
+        state                  = st,
+        zip,
+        phone                  = phn_numbr,
+        telehealth             = telehlth,
+        assign_ind             = ind_assgn,
+        assign_group           = grp_assgn)
     }
   return(results)
 }

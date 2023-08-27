@@ -1,7 +1,7 @@
 #' Provider Facility Affiliations
 #'
 #' @description
-#' `facility_affiliations()` allows you to access information concerning providers' facility affiliations
+#' `affiliations()` allows you to access information concerning providers' facility affiliations
 #'
 #' ### Links
 #'  - [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
@@ -37,22 +37,24 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
+#' @seealso [clinicians()], [providers()], [hospitals()]
+#'
 #' @examplesIf interactive()
-#' facility_affiliations(facility_ccn = "060004")
-#' facility_affiliations(parent_ccn = 670055)
+#' affiliations(facility_ccn = "060004")
+#' affiliations(parent_ccn = 670055)
 #'
 #' @autoglobal
 #' @export
-facility_affiliations <- function(npi           = NULL,
-                                  pac_id        = NULL,
-                                  first_name    = NULL,
-                                  middle_name   = NULL,
-                                  last_name     = NULL,
-                                  facility_type = NULL,
-                                  facility_ccn  = NULL,
-                                  parent_ccn    = NULL,
-                                  offset        = 0L,
-                                  tidy          = TRUE) {
+affiliations <- function(npi           = NULL,
+                         pac_id        = NULL,
+                         first_name    = NULL,
+                         middle_name   = NULL,
+                         last_name     = NULL,
+                         facility_type = NULL,
+                         facility_ccn  = NULL,
+                         parent_ccn    = NULL,
+                         offset        = 0L,
+                         tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
   if (!is.null(pac_id)) {pac_check(pac_id)}

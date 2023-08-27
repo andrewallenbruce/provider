@@ -1,6 +1,6 @@
 #' Provider Enrollment in Medicare
 #'
-#' @description `provider_enrollment()` allows you to access enrollment level
+#' @description `providers()` allows you to access enrollment level
 #'    data on individual and organizational providers that are actively approved
 #'    to bill Medicare.
 #'
@@ -25,7 +25,7 @@
 #' @param middle_name Individual provider middle name
 #' @param last_name Individual provider last name
 #' @param organization_name Organizational provider name
-#' @param gender Individual provider gender:
+#' @param gender Individual provider gender. Options are:
 #'    * `F`: Female
 #'    * `M`: Male
 #'    * `9`: Unknown (or Organizational provider)
@@ -36,24 +36,23 @@
 #' @seealso [order_refer()], [opt_out()], [pending_applications()]
 #'
 #' @examplesIf interactive()
-#' provider_enrollment(npi = 1417918293, specialty_code = "14-41")
-#' provider_enrollment(first_name = "DEBRA", last_name = "FROMER")
-#' provider_enrollment(specialty = "PRACTITIONER - ENDOCRINOLOGY", state = "AK", gender = "F")
-#' provider_enrollment(pac_id = 2860305554, gender = "9")
+#' providers(npi = 1417918293, specialty_code = "14-41")
+#' providers(pac_id = 2860305554, gender = "9")
+#'
 #' @autoglobal
 #' @export
-provider_enrollment <- function(npi                = NULL,
-                                pac_id             = NULL,
-                                enroll_id          = NULL,
-                                specialty_code     = NULL,
-                                specialty          = NULL,
-                                state              = NULL,
-                                first_name         = NULL,
-                                middle_name        = NULL,
-                                last_name          = NULL,
-                                organization_name  = NULL,
-                                gender             = NULL,
-                                tidy               = TRUE) {
+providers <- function(npi                = NULL,
+                      pac_id             = NULL,
+                      enroll_id          = NULL,
+                      specialty_code     = NULL,
+                      specialty          = NULL,
+                      state              = NULL,
+                      first_name         = NULL,
+                      middle_name        = NULL,
+                      last_name          = NULL,
+                      organization_name  = NULL,
+                      gender             = NULL,
+                      tidy               = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
   if (!is.null(enroll_id)) {enroll_check(enroll_id)}

@@ -71,12 +71,12 @@ return about a provider: *administrative*, *statistical*, and
 ### Administrative
 
 - `nppes()`: Registry of all healthcare providers.
-- `enrollment()`: Providers actively enrolled in Medicare.
+- `providers()`: Providers actively enrolled in Medicare.
 - `opt_out()`: Providers currently opted out of Medicare.
 - `revalidation_*()`: Link Type-1 and Type-2 providers.
-- `doctors_and_clinicians()`: Provider school, graduation year, linking.
-- `affiliation()`: Linking providers to Facilities.
-- `hospital_enrollment()`: Facilities linked to providers.
+- `clinicians()`: Provider school, graduation year, linking.
+- `affiliations()`: Linking providers to Facilities.
+- `hospitals()`: Facilities linked to providers.
 
 ### Statistical
 

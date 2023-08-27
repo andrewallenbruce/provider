@@ -327,9 +327,7 @@ quality_stats <- function(year) {
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
 
-  error_body <- function(resp) {
-    httr2::resp_body_json(resp)$error$message
-    }
+  error_body <- function(resp) {httr2::resp_body_json(resp)$error$message}
 
   resp <- httr2::request(url) |>
     httr2::req_error(body = error_body) |>

@@ -88,5 +88,5 @@ order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=provider_enrollment]{provider_enrollment()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending_applications]{pending_applications()}}
+\code{\link[=providers]{providers()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending_applications]{pending_applications()}}
 }

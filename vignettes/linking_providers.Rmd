@@ -25,7 +25,7 @@ library(printr)
 
 ```{r message=FALSE, warning=FALSE}
 library(provider)
-library(tidyverse)
+library(dplyr)
 ```
 
 
@@ -38,13 +38,13 @@ Looking it up in the **Provider Enrollment** API gives us several avenues to go 
 <br>
 
 ```{r}
-provider_enrollment(organization_name = "Elizabethtown Community Hospital")
+providers(organization_name = "Elizabethtown Community Hospital")
 ```
 
 
 
 ```{r}
-hospital_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
+hospitals(organization_name = "Elizabethtown Community Hospital") |> 
   select(npi, organization_name, pac_id_org, facility_ccn, specialty_code)
 ```
 
@@ -55,7 +55,7 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 <br>
 
 ```{r}
-facility_affiliations(facility_ccn = 331302) |> 
+affiliations(facility_ccn = 331302) |> 
   select(-c(middle_name, suffix)) |> 
   head(10)
 ```
@@ -67,7 +67,7 @@ That returns individual providers affiliated with the hospital. Now to search th
 
 
 ```{r}
-facility_affiliations(facility_ccn = "33Z302")
+affiliations(facility_ccn = "33Z302")
 ```
 
 <br>
@@ -90,14 +90,14 @@ unique(elizabethtown$npi) |>
 
 
 ```{r echo=FALSE, eval=FALSE}
-elizabeth.prov <- provider_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
+elizabeth.prov <- providers(organization_name = "Elizabethtown Community Hospital") |> 
   select(organization = organization_name, 
          pac_organization = pac_id, 
          npi_organization = npi, 
          enroll_organization = enroll_id, 
          specialty)
 
-elizabeth.hosp <- hospital_enrollment(organization_name = "Elizabethtown Community Hospital") |> 
+elizabeth.hosp <- hospitals(organization_name = "Elizabethtown Community Hospital") |> 
   select(organization = organization_name, 
          pac_organization = pac_id_org,
          npi_organization = npi,
@@ -105,7 +105,7 @@ elizabeth.hosp <- hospital_enrollment(organization_name = "Elizabethtown Communi
          facility_ccn)
 
 elizabeth.affil <- elizabeth.hosp$facility_ccn |> 
-  map(\(x) facility_affiliations(facility_ccn = x)) |> 
+  map(\(x) affiliations(facility_ccn = x)) |> 
   list_rbind() |> 
   select(pac_individual = pac_id_ind, 
          npi_individual = npi, 
@@ -121,7 +121,7 @@ left_join(elizabeth.prov,
 #######################################
 
 elizabeth.prov.pac <- unique(elizabeth.affil$pac_individual) |>
-  map(\(x) provider_enrollment(pac_id = x)) |> 
+  map(\(x) providers(pac_id = x)) |> 
   list_rbind() |> 
   select(pac_individual = pac_id,
          npi_individual = npi, 
