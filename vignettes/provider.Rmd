@@ -113,7 +113,6 @@ The following return yearly stats useful for comparison against data returned fr
 ### Auxiliary
 
    * `order_refer()`: Is a provider eligible to order and refer?
-   * `endpoints_missing()`: Is a provider missing Endpoints in the NPPES NPI Registry?
    * `pending()`: Has a provider's Medicare application been processed?
    * `taxonomy()`: Is a provider's specialty eligible to enroll in Medicare?
    * `qpp_stats()`: Yearly QPP/MIPS performance data.

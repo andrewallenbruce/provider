@@ -6,9 +6,9 @@
 \alias{cc_multiple_years}
 \alias{cc_specific_years}
 \alias{open_payments_years}
-\alias{physician_by_geography_years}
-\alias{physician_by_provider_years}
-\alias{physician_by_service_years}
+\alias{by_geography_years}
+\alias{by_provider_years}
+\alias{by_service_years}
 \alias{quality_payment_years}
 \title{Check the current years available for the Multiple Chronic Conditions API}
 \usage{
@@ -18,11 +18,11 @@ cc_specific_years()
 
 open_payments_years()
 
-physician_by_geography_years()
+by_geography_years()
 
-physician_by_provider_years()
+by_provider_years()
 
-physician_by_service_years()
+by_service_years()
 
 quality_payment_years()
 }
@@ -60,8 +60,8 @@ Check the current years available for the Quality Payments API
 cc_multiple_years()
 cc_specific_years()
 open_payments_years()
-physician_by_geography_years()
-physician_by_provider_years()
-physician_by_service_years()
+by_geography_years()
+by_provider_years()
+by_service_years()
 quality_payment_years()
 }

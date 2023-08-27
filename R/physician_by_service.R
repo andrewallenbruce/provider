@@ -28,32 +28,25 @@
 #'    because separate fee schedules apply depending on whether the place
 #'    of service submitted on the claim is facility or non-facility.
 #'
-#' @references
-#' * [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
-#' @param year int (required); Year in YYYY format. Run helper function
-#'    `provider:::physician_by_service_years()` to return a vector of the years
+#' ### Links
+#'   - [Medicare Physician & Other Practitioners: by Provider and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider-and-service)
+#'
+#' *Update Frequency:* **Annually**
+#'
+#' @param year integer (*required*); Year in `YYYY` format. Run helper function
+#'    `by_service_years()` to return a vector of the years
 #'    currently available.
-#' @param npi National Provider Identifier (NPI) for the rendering provider
-#'    on the claim. The provider NPI is the numeric identifier registered in
-#'    NPPES.
-#' @param last_name Last name/Organization name of the provider. When the
-#'    provider is registered in NPPES as an individual (entity type code = `I`),
-#'    this is the provider’s last name. When the provider is registered as an
-#'    organization (entity type code = `O`), this is the organization name.
-#' @param first_name An individual provider's (entity type code = `I`) first name.
-#'    An organization's (entity type code = `O`) will be blank.
-#' @param credential An individual provider's (entity type code=’I’) credentials. An organization's will be blank.
-#' @param gender An individual provider's gender. An organization's will be blank.
-#' @param entype Type of entity reported in NPPES. An entity code of ‘I’
-#'    identifies providers registered as individuals while an entity type
-#'    code of ‘O’ identifies providers registered as organizations.
-#' @param city The city where the provider is located, as reported in NPPES.
-#' @param state The state where the provider is located, as reported
-#'    in NPPES.
-#' @param fips FIPS code for the rendering provider's state.
-#' @param zipcode The provider’s zip code, as reported in NPPES.
+#' @param npi National Provider Identifier for the rendering provider on the claim.
+#' @param first_name Individual provider's first name.
+#' @param last_name Individual provider's last name.
+#' @param organization_name Organization name.
+#' @param credential Individual provider's credentials.
+#' @param gender Individual provider's gender.
+#' @param entype Provider entity type.
+#' @param city City where provider is located.
+#' @param state State where provider is located.
+#' @param fips Provider's state FIPS code.
+#' @param zip Provider’s zip code.
 #' @param ruca Rural-Urban Commuting Area Code (RUCA); a Census tract-based
 #'    classification scheme that utilizes the standard Bureau of Census
 #'    Urbanized Area and Urban Cluster definitions in combination with work
@@ -61,12 +54,9 @@
 #'    regarding their rural and urban status and relationships. The Referring
 #'    Provider ZIP code was cross walked to the United States Department of
 #'    Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.
-#' @param country The country where the provider is located, as reported
-#'    in NPPES.
-#' @param specialty Derived from the provider specialty code reported on the
-#'    claim. For providers that reported more than one specialty code on their
-#'    claims, this is the specialty code associated with the largest number
-#'    of services.
+#' @param country Country where provider is located.
+#' @param specialty Provider specialty code reported on the largest number of
+#'    claims submitted.
 #' @param par Identifies whether the provider participates in Medicare
 #'    and/or accepts assignment of Medicare allowed amounts. The value will
 #'    be `Y` for any provider that had at least one claim identifying the
@@ -81,92 +71,50 @@
 #'    by the American Medical Association and Level II codes are created by
 #'    CMS to identify products, supplies and services not covered by the CPT
 #'    codes (such as ambulance services).
-#' @param hcpcs_drug Identifies whether the HCPCS code for the specific service
+#' @param drug Identifies whether the HCPCS code for the specific service
 #'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 #'    Average Sales Price (ASP) File. Please visit the ASP drug pricing page
 #'    for additional information.
-#' @param place_of_srvc Identifies whether the place of service submitted on the claims
-#'    is a facility (value of `F`) or non-facility (value of `O`). Non-facility
-#'    is generally an office setting; however other entities are included
-#'    in non-facility.
+#' @param pos Identifies whether the place of service submitted on the claims
+#'    is a facility (`F`) or non-facility (`O`). Non-facility is generally an
+#'    office setting; however other entities are included in non-facility.
 #' @param tidy Tidy output; default is `TRUE`.
-#' @returns A [tibble][tibble::tibble-package] containing 29 columns:
-#'    \item{year}{year}
-#'    \item{npi}{year}
-#'    \item{entype}{Entity/Enumeration Type of the Provider}
-#'    \item{first_name}{year}
-#'    \item{middle_name}{year}
-#'    \item{last_name}{year}
-#'    \item{credential}{year}
-#'    \item{gender}{year}
-#'    \item{specialty}{year}
-#'    \item{street}{ the provider’s street address}
-#'    \item{city}{The city where the provider is located, as reported in NPPES.}
-#'    \item{state}{State Abbreviation of the Provider}
-#'    \item{fips}{State FIPS Code of the Provider}
-#'    \item{zipcode}{Zip Code of the Provider}
-#'    \item{ruca}{RUCA Code of the Provider}
-#'    \item{country}{Country Code of the Provider}
-#'    \item{par}{Medicare Participation Indicator}
-#'    \item{hcpcs_cd}{HCPCS Code}
-#'    \item{hcpcs_desc}{HCPCS Description}
-#'    \item{hcpcs_drug}{HCPCS Drug Indicator}
-#'    \item{pos}{Place of Service}
-#'    \item{tot_benes}{Number of Medicare Beneficiaries}
-#'    \item{tot_srvcs}{Number of Services}
-#'    \item{tot_day}{Number of Distinct Medicare Beneficiary/Per Day Services}
-#'    \item{avg_charge}{Average Submitted Charge Amount}
-#'    \item{avg_allowed}{Average Medicare Allowed Amount}
-#'    \item{avg_payment}{Average Medicare Payment Amount}
-#'    \item{avg_std_pymt}{Average Medicare Standardized Payment Amount}
+#'
+#' @returns A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' physician_by_service(npi = 1003000126)
 #' physician_by_service(year = 2019, last_name = "Enkeshafi")
-#' c(1003026055, 1316405939, 1720392988) |>
-#'   purrr::map(physician_by_service, year = 2020) |>
-#'   purrr::list_rbind()
-#' @rdname provider-statistics
 #' @autoglobal
 #' @export
-physician_by_service <- function(year,
-                                 npi           = NULL,
-                                 last_name     = NULL,
-                                 first_name    = NULL,
-                                 credential    = NULL,
-                                 gender        = NULL,
-                                 entype        = NULL,
-                                 city          = NULL,
-                                 state         = NULL,
-                                 zipcode       = NULL,
-                                 fips          = NULL,
-                                 ruca          = NULL,
-                                 country       = NULL,
-                                 specialty     = NULL,
-                                 par           = NULL,
-                                 hcpcs_code    = NULL,
-                                 hcpcs_drug    = NULL,
-                                 place_of_srvc = NULL,
-                                 tidy          = TRUE) {
+by_service <- function(year,
+                       npi           = NULL,
+                       last_name     = NULL,
+                       first_name    = NULL,
+                       organization_name = NULL,
+                       credential    = NULL,
+                       gender        = NULL,
+                       entype        = NULL,
+                       city          = NULL,
+                       state         = NULL,
+                       zip       = NULL,
+                       fips          = NULL,
+                       ruca          = NULL,
+                       country       = NULL,
+                       specialty     = NULL,
+                       par           = NULL,
+                       hcpcs_code    = NULL,
+                       drug          = NULL,
+                       pos           = NULL,
+                       tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 
-  if (!is.null(place_of_srvc)) {
-    place_of_srvc <- dplyr::case_when(
-      place_of_srvc == "facility" ~ "F",
-      place_of_srvc == "Facility" ~ "F",
-      place_of_srvc == "F" ~ "F",
-      place_of_srvc == "f" ~ "F",
-      place_of_srvc == "office" ~ "O",
-      place_of_srvc == "Office" ~ "O",
-      place_of_srvc == "O" ~ "O",
-      place_of_srvc == "o" ~ "O",
-      .default = NULL)
-  }
+  if (!is.null(pos)) {pos <- pos_char(pos)}
 
-  # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(physician_by_service_years()))
+  rlang::arg_match(year, values = as.character(by_service_years()))
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider and Service", check = "id") |>
@@ -177,22 +125,23 @@ physician_by_service <- function(year,
   args <- tibble::tribble(
                                ~x,   ~y,
                      "Rndrng_NPI",   npi,
-     "Rndrng_Prvdr_Last_Org_Name",   last_name,
         "Rndrng_Prvdr_First_Name",   first_name,
+     "Rndrng_Prvdr_Last_Org_Name",   last_name,
+     "Rndrng_Prvdr_Last_Org_Name",   organization_name,
            "Rndrng_Prvdr_Crdntls",   credential,
               "Rndrng_Prvdr_Gndr",   gender,
             "Rndrng_Prvdr_Ent_Cd",   entype,
               "Rndrng_Prvdr_City",   city,
       "Rndrng_Prvdr_State_Abrvtn",   state,
         "Rndrng_Prvdr_State_FIPS",   fips,
-              "Rndrng_Prvdr_Zip5",   zipcode,
+              "Rndrng_Prvdr_Zip5",   zip,
               "Rndrng_Prvdr_RUCA",   ruca,
              "Rndrng_Prvdr_Cntry",   country,
               "Rndrng_Prvdr_Type",   specialty,
   "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",   par,
                        "HCPCS_Cd",   hcpcs_code,
-                 "HCPCS_Drug_Ind",   hcpcs_drug,
-                  "Place_Of_Srvc",   place_of_srvc)
+                 "HCPCS_Drug_Ind",   drug,
+                  "Place_Of_Srvc",   pos)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, param_format) |>
@@ -217,20 +166,21 @@ physician_by_service <- function(year,
       "npi",          as.character(npi),
       "last_name",    last_name,
       "first_name",   first_name,
+      "organization_name", organization_name,
       "credential",   credential,
       "gender",       gender,
       "entype",       entype,
       "city",         city,
       "state",        state,
       "fips",         as.character(fips),
-      "zipcode",      zipcode,
+      "zip",          zip,
       "ruca",         ruca,
       "country",      country,
       "specialty",    specialty,
       "par",          par,
       "hcpcs_code",   as.character(hcpcs_code),
-      "hcpcs_drug",   as.character(hcpcs_drug),
-      "place_of_srvc",          place_of_srvc) |>
+      "drug",         as.character(drug),
+      "pos",          pos) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -250,7 +200,7 @@ physician_by_service <- function(year,
 
   # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year),
                     dplyr::across(c(tot_benes,
                                     tot_srvcs,
@@ -275,25 +225,25 @@ physician_by_service <- function(year,
                     city          = rndrng_prvdr_city,
                     state         = rndrng_prvdr_state_abrvtn,
                     fips          = rndrng_prvdr_state_fips,
-                    zipcode       = rndrng_prvdr_zip5,
+                    zip       = rndrng_prvdr_zip5,
                     ruca          = rndrng_prvdr_ruca,
                     #ruca_desc    = rndrng_prvdr_ruca_desc,
                     country       = rndrng_prvdr_cntry,
                     par           = rndrng_prvdr_mdcr_prtcptg_ind,
                     hcpcs_code    = hcpcs_cd,
                     hcpcs_desc,
-                    hcpcs_drug    = hcpcs_drug_ind,
-                    place_of_srvc,
+                    drug    = hcpcs_drug_ind,
+                    pos = place_of_srvc,
                     tot_benes,
                     tot_srvcs,
                     tot_day       = tot_bene_day_srvcs,
-                    avg_charges   = avg_sbmtd_chrg,
+                    avg_charge   = avg_sbmtd_chrg,
                     avg_allowed   = avg_mdcr_alowd_amt,
                     avg_payment   = avg_mdcr_pymt_amt,
                     avg_std_pymt  = avg_mdcr_stdzd_amt) |>
       dplyr::mutate(credential    = clean_credentials(credential),
                     entype        = entype_char(entype),
-                    place_of_srvc = pos_char(place_of_srvc),
+                    pos = pos_char(pos),
                     par           = yn_logical(par))
     }
   return(results)
@@ -302,11 +252,11 @@ physician_by_service <- function(year,
 #' Check the current years available for the Physician & Other Practitioners by Provider and Service API
 #' @return integer vector of years available
 #' @examples
-#' physician_by_service_years()
+#' by_service_years()
 #' @rdname years
 #' @autoglobal
 #' @export
-physician_by_service_years <- function() {
+by_service_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Provider and Service", "years") |>
     as.integer()
 }

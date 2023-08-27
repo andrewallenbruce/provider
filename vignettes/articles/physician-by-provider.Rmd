@@ -15,35 +15,73 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+library(printr)
 ```
 
-```{r setup}
+```{r message=FALSE, warning=FALSE}
 library(provider)
+library(tidyverse)
 ```
 
- > The **Provider Utilization and Payment Data Physician and Other Practitioners Dataset** provides information on services and procedures provided to Original Medicare (fee-for-service) Part B (Medical Insurance) beneficiaries by physicians and other healthcare professionals. The **Provider** data subset provides information on use, payments, submitted charges and beneficiary demographic and health characteristics organized by NPI.
-
-
-The **Provider** data subset provides information on use, payments, submitted charges and beneficiary demographic and health characteristics organized by National Provider Identifier (NPI). This dataset is based on information gathered from CMS administrative claims data for Original Medicare Part B beneficiaries available from the CMS Chronic Conditions Data Warehouse.
 
 ### Examples
 
 ```{r}
-physician_by_provider(year = 2021, 
-                      entype = "I", 
-                      city = "Hershey", 
-                      state = "PA", 
-                      fips = 42, 
-                      ruca = 1, 
-                      gender = "F", 
-                      credential = "MD", 
-                      specialty = "Anesthesiology")
+by_provider_years() |> 
+  map(\(x) by_provider(year = x, npi = 1023076643)) |> 
+  list_rbind() |> 
+  unnest_wider(conditions) |> 
+  select(year, 
+         first_name, 
+         last_name, 
+         credential, 
+         city, 
+         state, 
+         ruca, 
+         hcc_risk_avg,
+         contains("tot_")) 
 ```
 
 
-<br><br>
+
+```{r}
+by_service_years() |> 
+  map(\(x) by_service(year = x, npi = 1023076643)) |> 
+  list_rbind() |> 
+  select(year, 
+         city,
+         state,
+         ruca, 
+         hcpcs_code, 
+         hcpcs_desc, 
+         pos, 
+         tot_benes, 
+         tot_srvcs, 
+         avg_charge, 
+         avg_allowed, 
+         avg_payment)
+```
 
 
+```{r}
+srvc <- by_service_years() |> 
+  map(\(x) by_service(year = x, npi = 1023076643)) |> 
+  list_rbind() |> 
+  select(year,  hcpcs = hcpcs_code, pos)
+srvc
+# year <- as.list(srvc$year)
+# hcpcs_code <- as.list(srvc$hcpcs)
+# pos <- as.list(srvc$pos)
+# 
+# l <- list(year = srvc$year, hcpcs_code = srvc$hcpcs, pos = srvc$pos)
+# 
+# pmap(l, by_geography(year, hcpcs_code, pos, level = "National"))
+```
+
+
+```{r}
+by_geography(year = 2013, hcpcs_code = "99217", pos = "F")
+```
 
 
 ### Data Dictionary

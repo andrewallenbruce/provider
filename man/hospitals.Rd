@@ -57,7 +57,7 @@ type and address.
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
 
-Update Frequency: \strong{Monthly}
+\emph{Update Frequency:} \strong{Monthly}
 }
 }
 \examples{

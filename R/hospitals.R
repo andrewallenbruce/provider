@@ -9,7 +9,7 @@
 #' ### Links:
 #'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
-#' Update Frequency: **Monthly**
+#' *Update Frequency:* **Monthly**
 #'
 #' @param npi Hospital’s National Provider Identifier
 #' @param facility_ccn Hospital’s CMS Certification Number (CCN)

@@ -236,20 +236,10 @@ yn_logical <- function(x) {
 #' @noRd
 entype_char <- function(x) {
 
-  ## TO DO Convert to case_match()
-
-  # dplyr::case_match(
-  #   x,
-  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
-  #   .default = NULL
-  # )
-
-  dplyr::case_when(
-    x == "NPI-1" ~ "Individual",
-    x == "I" ~ "Individual",
-    x == "NPI-2" ~ "Organization",
-    x == "O" ~ "Organization"
+  dplyr::case_match(x,
+    c("NPI-1", "I") ~ "Individual",
+    c("NPI-2", "O") ~ "Organization",
+    .default = x
     )
 }
 
@@ -269,38 +259,23 @@ entype_arg <- function(x) {
   )
 }
 
-#' Convert Place of Service values ----------------------
+#' Convert Place of Service values
 #' @param x vector
 #' @autoglobal
 #' @noRd
-pos_char <- function(x){
+pos_char <- function(x) {
 
-  ## TO DO Convert to case_match()
+    dplyr::case_match(x,
+      c("facility", "Facility", "F", "f") ~ "F",
+      c("office", "Office", "O", "o") ~ "O",
+      .default = NULL)
+  }
 
-  # dplyr::case_match(
-  #   x,
-  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
-  #   .default = NULL
-  # )
-
-  dplyr::case_when(
-    x == "facility" ~ "F",
-    x == "Facility" ~ "F",
-    x == "F" ~ "F",
-    x == "f" ~ "F",
-    x == "office" ~ "O",
-    x == "Office" ~ "O",
-    x == "O" ~ "O",
-    x == "o" ~ "O",
-    .default = NULL)
-}
-
-#' display_long ------------------------------------------------------------
+#' display_long
 #' @param df data frame
 #' @autoglobal
 #' @noRd
-display_long <- function(df){
+display_long <- function(df) {
 
   df |> dplyr::mutate(dplyr::across(dplyr::everything(),
                                     as.character)) |>

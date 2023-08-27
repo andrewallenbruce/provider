@@ -1,16 +1,17 @@
 #' Yearly Utilization Data on Medicare Part B Providers
 #'
-#' @description `physician_by_provider()` allows you to access data such as
+#' @description `by_provider()` allows you to access data such as
 #' services and procedures performed; charges submitted and payment received;
 #' and beneficiary demographic and health characteristics for providers treating
 #' Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.
 #'
-#' @section Links:
+#' ### Links:
 #' - [Medicare Physician & Other Practitioners: by Provider API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-provider)
 #'
-#' @section Update Frequency: **Annually*
+#' *Update Frequency:* **Annually**
+#'
 #' @param year integer (*required*); Year in `YYYY` format. Run helper function
-#'    `physician_by_provider_years()` to return a vector of the years
+#'    `by_provider_years()` to return a vector of the years
 #'    currently available.
 #' @param npi National Provider Identifier for the rendering provider on the claim.
 #' @param first_name Individual provider's first name.
@@ -22,7 +23,7 @@
 #' @param city City where provider is located.
 #' @param state State where provider is located.
 #' @param fips Provider's state FIPS code.
-#' @param zipcode Provider’s zip code.
+#' @param zip Provider’s zip code.
 #' @param ruca Rural-Urban Commuting Area Code (RUCA); a Census tract-based
 #'    classification scheme that utilizes the standard Bureau of Census
 #'    Urbanized Area and Urban Cluster definitions in combination with work
@@ -45,10 +46,6 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [physician_by_provider_years()], [physician_by_service()],
-#' [physician_by_geography()], [beneficiary_enrollment()], [cc_multiple()],
-#' [cc_specific()]
-#'
 #' @examplesIf interactive()
 #' physician_by_provider(year = 2020,
 #'                       npi = 1003000423)
@@ -57,40 +54,32 @@
 #' physician_by_provider_years() |>
 #' map(\(x) physician_by_provider(year = x, npi = 1043477615)) |>
 #' list_rbind()
-#' @rdname provider-statistics
 #' @autoglobal
 #' @export
-physician_by_provider <- function(year,
-                                  npi         = NULL,
-                                  first_name  = NULL,
-                                  last_name   = NULL,
-                                  organization_name = NULL,
-                                  credential  = NULL,
-                                  gender      = NULL,
-                                  entype      = NULL,
-                                  city        = NULL,
-                                  state       = NULL,
-                                  zipcode     = NULL,
-                                  fips        = NULL,
-                                  ruca        = NULL,
-                                  country     = NULL,
-                                  specialty   = NULL,
-                                  par         = NULL,
-                                  tidy        = TRUE) {
-
-  # if (!is.null(year)) {
-  #   years <- physician_by_provider_years()
-  #   cli::cli_abort(c(
-  #     "{.var year} is required",
-  #     "i" = "Years available are {.val years}", wrap = TRUE
-  #     ))
-  # }
+by_provider <- function(year,
+                        npi         = NULL,
+                        first_name  = NULL,
+                        last_name   = NULL,
+                        organization_name = NULL,
+                        credential  = NULL,
+                        gender      = NULL,
+                        entype      = NULL,
+                        city        = NULL,
+                        state       = NULL,
+                        zip     = NULL,
+                        fips        = NULL,
+                        ruca        = NULL,
+                        country     = NULL,
+                        specialty   = NULL,
+                        par         = NULL,
+                        tidy        = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
 
   # match args
+  rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(physician_by_provider_years()))
+  year <- rlang::arg_match(year, values = as.character(by_provider_years()))
 
   # update distribution ids
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider",
@@ -111,7 +100,7 @@ physician_by_provider <- function(year,
              "Rndrng_Prvdr_City",  city,
      "Rndrng_Prvdr_State_Abrvtn",  state,
        "Rndrng_Prvdr_State_FIPS",  fips,
-             "Rndrng_Prvdr_Zip5",  zipcode,
+             "Rndrng_Prvdr_Zip5",  zip,
              "Rndrng_Prvdr_RUCA",  ruca,
             "Rndrng_Prvdr_Cntry",  country,
              "Rndrng_Prvdr_Type",  specialty,
@@ -147,7 +136,7 @@ physician_by_provider <- function(year,
       "city",         city,
       "state",        state,
       "fips",         as.character(fips),
-      "zipcode",      as.character(zipcode),
+      "zip",          as.character(zip),
       "ruca",         as.character(ruca),
       "country",      country,
       "specialty",    specialty,
@@ -194,7 +183,7 @@ physician_by_provider <- function(year,
                     city           = rndrng_prvdr_city,
                     state          = rndrng_prvdr_state_abrvtn,
                     fips           = rndrng_prvdr_state_fips,
-                    zipcode        = rndrng_prvdr_zip5,
+                    zip            = rndrng_prvdr_zip5,
                     ruca           = rndrng_prvdr_ruca,
                     # ruca_desc     = rndrng_prvdr_ruca_desc,
                     country        = rndrng_prvdr_cntry,
@@ -270,11 +259,11 @@ physician_by_provider <- function(year,
 #' Check the current years available for the Physician & Other Practitioners by Provider API
 #' @return integer vector of years available
 #' @examples
-#' physician_by_provider_years()
+#' by_provider_years()
 #' @autoglobal
 #' @export
 #' @rdname years
-physician_by_provider_years <- function() {
+by_provider_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Provider", "years") |>
     as.integer()
 }

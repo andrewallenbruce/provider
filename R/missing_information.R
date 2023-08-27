@@ -27,25 +27,26 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [nppes_npi()]
+#' @seealso [nppes()]
 #'
 #' @examples
-#' # A provider that appears in the search results of the Missing Information
-#' # API has no Endpoints entered into the NPPES NPI Registry and vice versa.
+#' # A provider that appears in the search results
+#' # of the Missing Information API has no Endpoints
+#' # entered into the NPPES NPI Registry and vice versa.
 #'
 #' ## Appears
 #' missing_information(name = "Clouse, John")
 #'
 #' ## No Endpoints in NPPES
-#' nppes_npi(npi = 1144224569,
-#'           tidy = FALSE) |>
-#'           dplyr::select(endpoints)
+#' nppes(npi = 1144224569,
+#'       tidy = FALSE) |>
+#'       dplyr::select(endpoints)
 #'
 #' ## Does Not Appear
 #' missing_information(npi = 1003000423)
 #'
 #' ## Has Endpoints in NPPES
-#' nppes_npi(npi = 1003000423, tidy = FALSE) |>
+#' nppes(npi = 1003000423, tidy = FALSE) |>
 #' dplyr::select(endpoints) |>
 #' tidyr::unnest(cols = c(endpoints)) |>
 #' janitor::clean_names() |>

@@ -14,13 +14,12 @@
 #'    a HCPCS drug indicator to identify whether the HCPCS product/service is
 #'    a drug as defined from the Medicare Part B Drug ASP list.
 #'
-#' ## Links
-#' * [Medicare Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
+#' ### Links
+#' - [Medicare Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
 #'
-#' @source Centers for Medicare & Medicaid Services
 #' @note Update Frequency: **Annually**
-#' @param year year int (required); Year in YYYY format. Run helper function
-#'    `provider:::physician_by_geography_years()` to return a vector of the years
+#' @param year int (required); Year in YYYY format. Run helper function
+#'    `by_geography_years()` to return a vector of the years
 #'    currently available.
 #' @param level Identifies the level of geography by which the data in the
 #'    row has been aggregated. A value of 'State' indicates the data in the
@@ -48,15 +47,17 @@
 #'    restrictions, the CMS Level II descriptions have been truncated to
 #'    256 bytes. As a result, the same HCPCS description can be associated
 #'    with more than one HCPCS code.
-#' @param hcpcs_drug Flag that identifies whether the HCPCS code for the specific
+#' @param drug Flag that identifies whether the HCPCS code for the specific
 #'    service furnished by the provider is a HCPCS listed on the Medicare Part
 #'    B Drug Average Sales Price (ASP) File.
-#' @param place_of_srvc Identifies whether the place of service submitted on the claims
+#' @param pos Identifies whether the place of service submitted on the claims
 #'    is a facility (`facility`) or non-facility (`office`). Non-facility
 #'    is generally an office setting; however other entities are included
 #'    in non-facility.
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' physician_by_geography(hcpcs_code = "0002A", year = 2020)
 #' service <- purrr::map_dfr(as.character(2013:2020),
@@ -77,25 +78,23 @@
 #' # State Level
 #' purrr::map2_dfr(arg_cross$x, arg_cross$y,
 #' ~physician_by_geography(geo_level = "Georgia", year = .x, hcpcs_code = .y))
-#' @rdname provider-statistics
 #' @autoglobal
 #' @export
-physician_by_geography <- function(year,
-                                   level         = NULL,
-                                   sublevel      = NULL,
-                                   fips          = NULL,
-                                   hcpcs_code    = NULL,
-                                   hcpcs_desc    = NULL,
-                                   hcpcs_drug    = NULL,
-                                   place_of_srvc = NULL,
-                                   tidy          = TRUE) {
+by_geography <- function(year,
+                         level         = NULL,
+                         sublevel      = NULL,
+                         fips          = NULL,
+                         hcpcs_code    = NULL,
+                         hcpcs_desc    = NULL,
+                         drug          = NULL,
+                         pos           = NULL,
+                         tidy          = TRUE) {
 
-  if (!is.null(place_of_srvc)) {place_of_srvc <- pos_char(place_of_srvc)}
+  if (!is.null(pos)) {pos <- pos_char(pos)}
 
-  # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(physician_by_geography_years()))
+  rlang::arg_match(year, values = as.character(by_geography_years()))
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
@@ -111,8 +110,8 @@ physician_by_geography <- function(year,
              "Rndrng_Prvdr_Geo_Cd",             fips,
                         "HCPCS_Cd",       hcpcs_code,
                       "HCPCS_Desc",       hcpcs_desc,
-                  "HCPCS_Drug_Ind",       hcpcs_drug,
-                   "Place_Of_Srvc",    place_of_srvc)
+                  "HCPCS_Drug_Ind",       drug,
+                   "Place_Of_Srvc",       pos)
 
 
   # map param_format and collapse -------------------------------------------
@@ -140,8 +139,8 @@ physician_by_geography <- function(year,
       "fips",           as.character(fips),
       "hcpcs_code",     as.character(hcpcs_code),
       "hcpcs_desc",     hcpcs_desc,
-      "hcpcs_drug",     as.character(hcpcs_drug),
-      "place_of_srvc",  place_of_srvc) |>
+      "drug",           as.character(drug),
+      "pos",  pos) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -161,7 +160,7 @@ physician_by_geography <- function(year,
   # clean names -------------------------------------------------------------
   if (tidy) {
 
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
                     level        = rndrng_prvdr_geo_lvl,
@@ -169,19 +168,19 @@ physician_by_geography <- function(year,
                     fips         = rndrng_prvdr_geo_cd,
                     hcpcs_code   = hcpcs_cd,
                     hcpcs_desc,
-                    hcpcs_drug   = hcpcs_drug_ind,
-                    place_of_srvc,
+                    drug   = hcpcs_drug_ind,
+                    pos = place_of_srvc,
                     tot_provs    = tot_rndrng_prvdrs,
                     tot_benes,
                     tot_srvcs,
                     tot_day      = tot_bene_day_srvcs,
-                    avg_charges  = avg_sbmtd_chrg,
+                    avg_charge  = avg_sbmtd_chrg,
                     avg_allowed  = avg_mdcr_alowd_amt,
                     avg_payment  = avg_mdcr_pymt_amt,
                     avg_std_pymt = avg_mdcr_stdzd_amt) |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    hcpcs_drug = yn_logical(hcpcs_drug),
-                    place_of_srvc = pos_char(place_of_srvc),
+                    drug = yn_logical(drug),
+                    pos = pos_char(pos),
                     dplyr::across(dplyr::contains("tot"), as.integer),
                     dplyr::across(dplyr::contains("avg"), ~round(., digits = 2)))
 
@@ -192,11 +191,11 @@ physician_by_geography <- function(year,
 #' Check the current years available for the Physician & Other Practitioners by Geography and Service API
 #' @return integer vector of years available
 #' @examples
-#' physician_by_geography_years()
+#' by_geography_years()
 #' @rdname years
 #' @autoglobal
 #' @export
-physician_by_geography_years <- function() {
+by_geography_years <- function() {
   cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years") |>
     as.integer()
 }
