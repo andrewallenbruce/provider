@@ -61,7 +61,7 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [order_refer()], [providers()], [pending_applications()]
+#' @seealso [order_refer()], [providers()], [pending()]
 #'
 #' @examples
 #' opt_out(last_name = "Smith",

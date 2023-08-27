@@ -36,10 +36,9 @@ by_provider_years() |>
          last_name, 
          credential, 
          city, 
-         state, 
-         ruca, 
-         hcc_risk_avg,
-         contains("tot_")) 
+         state,
+         hcc_risk_avg, 
+         tot_hcpcs:tot_payment)
 ```
 
 
@@ -49,11 +48,10 @@ by_service_years() |>
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
   select(year, 
-         city,
+         #city,
          state,
-         ruca, 
          hcpcs_code, 
-         hcpcs_desc, 
+         #hcpcs_desc, 
          pos, 
          tot_benes, 
          tot_srvcs, 
@@ -64,23 +62,36 @@ by_service_years() |>
 
 
 ```{r}
-srvc <- by_service_years() |> 
+geography <- by_service_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
-  select(year,  hcpcs = hcpcs_code, pos)
-srvc
-# year <- as.list(srvc$year)
-# hcpcs_code <- as.list(srvc$hcpcs)
-# pos <- as.list(srvc$pos)
-# 
-# l <- list(year = srvc$year, hcpcs_code = srvc$hcpcs, pos = srvc$pos)
-# 
-# pmap(l, by_geography(year, hcpcs_code, pos, level = "National"))
+  select(year, state, hcpcs_code, pos) |> 
+  rowwise() |> 
+  mutate(statewide = by_geography(year, state, hcpcs_code, pos),
+         national = by_geography(year, state = "National", hcpcs_code, pos))
+
+geography |> 
+  unnest(national, names_sep = ".") |> 
+  unnest(statewide, names_sep = ".")
 ```
 
 
 ```{r}
-by_geography(year = 2013, hcpcs_code = "99217", pos = "F")
+by_geography(year = 2014, 
+             sublevel = "New Hampshire", 
+             hcpcs_code = "93010", 
+             pos = "F") |> 
+  mutate(avg_benes = tot_benes / tot_provs,
+         avg_srvcs = tot_srvcs / tot_provs) |> 
+  select(year, 
+         sublevel, 
+         hcpcs_code, 
+         pos, 
+         avg_benes, 
+         avg_srvcs, 
+         avg_charge, 
+         avg_allowed, 
+         avg_payment)
 ```
 
 

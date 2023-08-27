@@ -44,8 +44,6 @@ navbar:
         href: articles/linking_providers.html
       - text: API Overviews
         href: articles/api-overviews.html
-      - text: Geocoding
-        href: articles/geocoding.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html

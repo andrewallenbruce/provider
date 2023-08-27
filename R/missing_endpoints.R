@@ -1,10 +1,10 @@
 #' Providers with Missing Endpoints in NPPES
 #'
 #' @description
-#' `missing_information()` allows you to search for providers with missing
+#' `missing_endpoints()` allows you to search for providers with missing
 #' digital contact information in NPPES.
 #'
-#' ## Missing Information `=` NPPES Endpoints
+#' ## NPPES Endpoints
 #' Digital contact information, also known as [endpoints](https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH%20INFORMATION%20EXCHANGE.html),
 #' provides a secure way for health care entities to send authenticated,
 #' encrypted health information to trusted recipients over the internet.
@@ -35,7 +35,7 @@
 #' # entered into the NPPES NPI Registry and vice versa.
 #'
 #' ## Appears
-#' missing_information(name = "Clouse, John")
+#' missing_endpoints(name = "Clouse, John")
 #'
 #' ## No Endpoints in NPPES
 #' nppes(npi = 1144224569,
@@ -43,7 +43,7 @@
 #'       dplyr::select(endpoints)
 #'
 #' ## Does Not Appear
-#' missing_information(npi = 1003000423)
+#' missing_endpoints(npi = 1003000423)
 #'
 #' ## Has Endpoints in NPPES
 #' nppes(npi = 1003000423, tidy = FALSE) |>
@@ -54,9 +54,9 @@
 #'
 #' @autoglobal
 #' @export
-missing_information <- function(npi  = NULL,
-                                name = NULL,
-                                tidy = TRUE) {
+missing_endpoints <- function(npi  = NULL,
+                              name = NULL,
+                              tidy = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
   if (!is.null(name)) {name <- stringr::str_replace(name, " ", "")}

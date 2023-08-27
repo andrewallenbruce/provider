@@ -1,13 +1,14 @@
 #' Providers with Pending Medicare Enrollment Applications
 #'
-#' @description `pending_applications()` A list of enrollment applications pending CMS contractor
-#'    review for physicians & non-physicians.
+#' @description
+#' `pending()` allows you to search for physicians & non-physicians with
+#' pending Medicare enrollment applications.
 #'
-#' @section Links:
+#' ### Links:
 #'  - [Medicare Pending Initial Logging and Tracking Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-physicians)
 #'  - [Medicare Pending Initial Logging and Tracking Non-Physicians API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/pending-initial-logging-and-tracking-non-physicians)
 #'
-#' @section Update Frequency: **Weekly**
+#' *Update Frequency:* **Weekly**
 #'
 #' @param npi National Provider Identifier (NPI) number
 #' @param last_name Last name of provider
@@ -18,16 +19,16 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' pending_applications(last_name = "Smith", type = "non-physician")
-#' pending_applications(first_name = "John", type = "physician")
+#' pending(last_name = "Smith", type = "non-physician")
+#' pending(first_name = "John", type = "physician")
 #'
 #' @autoglobal
 #' @export
-pending_applications <- function(type,
-                                 npi         = NULL,
-                                 last_name   = NULL,
-                                 first_name  = NULL,
-                                 tidy        = TRUE) {
+pending <- function(type,
+                    npi         = NULL,
+                    last_name   = NULL,
+                    first_name  = NULL,
+                    tidy        = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
   type <- rlang::arg_match(type, c("physician", "non-physician"))

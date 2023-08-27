@@ -21,31 +21,17 @@ knitr::opts_chunk$set(
 
 ```{r echo=FALSE, eval=TRUE}
 ben_art <- gluedown::md_link("Beneficiary Enrollment" = "https://andrewallenbruce.github.io/provider/articles/beneficiary-enrollment.html")
-ccm_art <- gluedown::md_link("Chronic Conditions (Multiple)" = "https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html")
-ccs_art <- gluedown::md_link("Chronic Conditions (Specific)" = "https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html")
+ccm_art <- gluedown::md_link("Chronic Conditions" = "https://andrewallenbruce.github.io/provider/articles/mcr-chron-cond.html")
 npi_art <- gluedown::md_link("NPPES NPI Registry" = "https://andrewallenbruce.github.io/provider/articles/nppes-npi-registry.html")
 opp_art <- gluedown::md_link("Open Payments Program" = "https://andrewallenbruce.github.io/provider/articles/cms-open-payments.html")
-pbg_art <- gluedown::md_link("Physician by Geography" = "https://andrewallenbruce.github.io/provider/articles/physician-by-geography.html")
 pbp_art <- gluedown::md_link("Physician by Provider" = "https://andrewallenbruce.github.io/provider/articles/physician-by-provider.html")
-pbs_art <- gluedown::md_link("Physician by Service" = "https://andrewallenbruce.github.io/provider/articles/physician-by-service.html")
-qpp_art <- gluedown::md_link("Quality Payment Program" = "https://andrewallenbruce.github.io/provider/articles/quality-payment.html")
-red_art <- gluedown::md_link("Revalidation Date" = "https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html")
-reg_art <- gluedown::md_link("Revalidation Group" = "https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html")
-rer_art <- gluedown::md_link("Revalidation Reassignment" = "https://andrewallenbruce.github.io/provider/articles/mcr-revalidation.html")
 ```
 
 ```{r results='asis', echo=FALSE, eval=TRUE}
 gluedown::md_bullet(c(ben_art, 
                      ccm_art,
-                     ccs_art,
                      npi_art,
                      opp_art,
-                     pbg_art,
-                     pbp_art,
-                     pbs_art,
-                     qpp_art,
-                     red_art,
-                     reg_art,
-                     rer_art))
+                     pbp_art))
 ```
 

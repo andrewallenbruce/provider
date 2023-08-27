@@ -81,5 +81,5 @@ providers(pac_id = 2860305554, gender = "9")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=order_refer]{order_refer()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending_applications]{pending_applications()}}
+\code{\link[=order_refer]{order_refer()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending]{pending()}}
 }

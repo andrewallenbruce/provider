@@ -45,7 +45,7 @@
 #'
 #' @return A [tibble][tibble::tibble-package] object containing the search results.
 #'
-#' @seealso [providers()], [opt_out()], [pending_applications()]
+#' @seealso [providers()], [opt_out()], [pending()]
 #'
 #' @examplesIf interactive()
 #' # Search by NPI

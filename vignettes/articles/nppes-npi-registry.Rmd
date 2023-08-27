@@ -26,13 +26,13 @@ library(provider)
 ## Examples
 
 ```{r}
-nppes_npi(npi = 1114499340)
+nppes(npi = 1114499340)
 ```
 
 <br>
 
 ```{r}
-nppes_npi(npi = 1528060837)
+nppes(npi = 1528060837)
 ```
 
 

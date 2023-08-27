@@ -19,13 +19,13 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
+library(printr)
 ```
 
 ```{r}
 library(provider)
 library(purrr)
 library(dplyr)
-library(printr)
 ```
 
 
@@ -96,17 +96,16 @@ The API Search functions can be grouped according to the type of data that they 
 
 The following return provider-specific stats:
 
-   * `by_physician()`: Yearly high-level utilization data.
+   * `by_provider()`: Yearly high-level utilization data.
    * `by_service()`: Yearly detailed utilization data.
-   * `qpp_performance()`: Yearly QPP/MIPS performance data.
-   * `qpp_eligibility()`: Yearly QPP/MIPS eligibility data.
+   * `quality_payment()`: Yearly QPP/MIPS performance data.
+   * `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
    * `open_payments()`: Yearly Open Payments reporting data.
 
-The following return yearly stats useful for comparison against data returned from `physician_by_service()`:
+The following return yearly stats useful for comparison against data returned from `by_service()`:
 
    * `by_geography()`
    * `beneficiaries()`
-   * `conditions()`
    * `cc_multiple()`
    * `cc_specific()`
 
@@ -115,7 +114,7 @@ The following return yearly stats useful for comparison against data returned fr
    * `order_refer()`: Is a provider eligible to order and refer?
    * `pending()`: Has a provider's Medicare application been processed?
    * `taxonomy()`: Is a provider's specialty eligible to enroll in Medicare?
-   * `qpp_stats()`: Yearly QPP/MIPS performance data.
+   * `quality_stats()`: Yearly QPP/MIPS performance data.
 
 <br>
 
@@ -150,10 +149,10 @@ Several validation checks have been implemented, including checks for *NPIs*, *P
 open_payments(npi = 12345691234)
 
 # Must be numeric
-nppes_npi(npi = "O12345678912")
+nppes(npi = "O12345678912")
 
 # Must pass Luhn check
-pending_applications(npi = 001234569123)
+pending(npi = 001234569123)
 ```
 
 <br>

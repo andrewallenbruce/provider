@@ -33,7 +33,7 @@
 #'
 #' @return [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [order_refer()], [opt_out()], [pending_applications()]
+#' @seealso [order_refer()], [opt_out()], [pending()]
 #'
 #' @examplesIf interactive()
 #' providers(npi = 1417918293, specialty_code = "14-41")

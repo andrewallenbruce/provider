@@ -117,5 +117,5 @@ opt_out(last_name = "Smith",
 
 }
 \seealso{
-\code{\link[=order_refer]{order_refer()}}, \code{\link[=providers]{providers()}}, \code{\link[=pending_applications]{pending_applications()}}
+\code{\link[=order_refer]{order_refer()}}, \code{\link[=providers]{providers()}}, \code{\link[=pending]{pending()}}
 }

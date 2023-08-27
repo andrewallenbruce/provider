@@ -1,5 +1,4 @@
-#' @title Search the Medicare Physician & Other Practitioners API
-#'    by **Provider and Service**
+#' Search the Medicare Physician & Other Practitioners API by **Provider and Service**
 #'
 #' @description Information on services and procedures provided to
 #'    Original Medicare (fee-for-service) Part B (Medical Insurance)
@@ -249,7 +248,7 @@ by_service <- function(year,
   return(results)
 }
 
-#' Check the current years available for the Physician & Other Practitioners by Provider and Service API
+#' Current years available for the Provider and Service API
 #' @return integer vector of years available
 #' @examples
 #' by_service_years()

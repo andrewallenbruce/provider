@@ -1,4 +1,4 @@
-#' Yearly Utilization Data on Medicare Part B Providers
+#' Yearly Utilization Statistics on Medicare Part B Providers
 #'
 #' @description `by_provider()` allows you to access data such as
 #' services and procedures performed; charges submitted and payment received;
@@ -66,7 +66,7 @@ by_provider <- function(year,
                         entype      = NULL,
                         city        = NULL,
                         state       = NULL,
-                        zip     = NULL,
+                        zip         = NULL,
                         fips        = NULL,
                         ruca        = NULL,
                         country     = NULL,
@@ -242,8 +242,8 @@ by_provider <- function(year,
                     cc_sz     = bene_cc_sz_pct,
                     cc_strk   = bene_cc_strok_pct,
                     hcc_risk_avg  = bene_avg_risk_scre) |>
-      dplyr::mutate(credential     = clean_credentials(credential),
-                    entity_type         = entype_char(entity_type)) |>
+      dplyr::mutate(credential = clean_credentials(credential),
+                    entity_type = entype_char(entity_type)) |>
       tidyr::nest(medical = dplyr::contains("med_"),
                   drug = dplyr::contains("drug_"),
                   demographics = dplyr::contains("bene_"),
@@ -256,7 +256,7 @@ by_provider <- function(year,
   return(results)
 }
 
-#' Check the current years available for the Physician & Other Practitioners by Provider API
+#' Current years available for the Provider API
 #' @return integer vector of years available
 #' @examples
 #' by_provider_years()
