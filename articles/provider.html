@@ -258,7 +258,7 @@ that they return about a provider: <em>administrative</em>,
 </h3>
 <ul>
 <li>
-<code>nppes()</code>: Registry of all healthcare providers.</li>
+<code><a href="../reference/nppes.html">nppes()</a></code>: Registry of all healthcare providers.</li>
 <li>
 <code><a href="../reference/providers.html">providers()</a></code>: Providers actively enrolled in
 Medicare.</li>
@@ -285,7 +285,7 @@ linking.</li>
 <code>by_physician()</code>: Yearly high-level utilization
 data.</li>
 <li>
-<code>by_service()</code>: Yearly detailed utilization data.</li>
+<code><a href="../reference/by_service.html">by_service()</a></code>: Yearly detailed utilization data.</li>
 <li>
 <code>qpp_performance()</code>: Yearly QPP/MIPS performance
 data.</li>
@@ -297,9 +297,9 @@ data.</li>
 data.</li>
 </ul>
 <p>The following return yearly stats useful for comparison against data
-returned from <code><a href="../reference/provider-statistics.html">physician_by_service()</a></code>:</p>
+returned from <code>physician_by_service()</code>:</p>
 <ul>
-<li><code>by_geography()</code></li>
+<li><code><a href="../reference/by_geography.html">by_geography()</a></code></li>
 <li><code>beneficiaries()</code></li>
 <li><code>conditions()</code></li>
 <li><code><a href="../reference/cc_multiple.html">cc_multiple()</a></code></li>
@@ -313,9 +313,6 @@ returned from <code><a href="../reference/provider-statistics.html">physician_by
 <li>
 <code><a href="../reference/order_refer.html">order_refer()</a></code>: Is a provider eligible to order and
 refer?</li>
-<li>
-<code>endpoints_missing()</code>: Is a provider missing Endpoints in
-the NPPES NPI Registry?</li>
 <li>
 <code>pending()</code>: Has a provider’s Medicare application been
 processed?</li>
@@ -466,10 +463,8 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `nppes_npi()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
+<span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in nppes_npi(npi = "O12345678912"): could not find function "nppes_npi"</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
 <span><span class="fu"><a href="../reference/pending_applications.html">pending_applications</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>

@@ -151,45 +151,31 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
 <h3 id="search-examples">Search Examples<a class="anchor" aria-label="anchor" href="#search-examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider-statistics.html">physician_by_geography</a></span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 16</span></span></span>
-<span><span class="co">#&gt;    year level    sublevel   fips  hcpcs_code hcpcs_desc hcpcs_drug place_of_srvc</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>020 National National   <span style="color: #BB0000;">NA</span>    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>020 State    California 06    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>020 State    Florida    12    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 State    Illinois   17    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>020 State    Maine      23    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>020 State    Maryland   24    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">7</span>  <span style="text-decoration: underline;">2</span>020 State    Massachus… 25    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">8</span>  <span style="text-decoration: underline;">2</span>020 State    New Jersey 34    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span>  <span style="text-decoration: underline;">2</span>020 State    Pennsylva… 42    0002A      Adm sarsc… FALSE      O            </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: tot_provs &lt;int&gt;, tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_day &lt;int&gt;, avg_charges &lt;dbl&gt;, avg_allowed &lt;dbl&gt;, avg_payment &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   avg_std_pymt &lt;dbl&gt;</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">physician_by_geography</span><span class="op">(</span>hcpcs_code <span class="op">=</span> <span class="st">"0002A"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in physician_by_geography(hcpcs_code = "0002A", year = 2020): could not find function "physician_by_geography"</span></span></code></pre></div>
 <p><br><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="cxzunxgner" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="alwldkrclu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#cxzunxgner table {
+#alwldkrclu table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cxzunxgner thead, #cxzunxgner tbody, #cxzunxgner tfoot, #cxzunxgner tr, #cxzunxgner td, #cxzunxgner th {
+#alwldkrclu thead, #alwldkrclu tbody, #alwldkrclu tfoot, #alwldkrclu tr, #alwldkrclu td, #alwldkrclu th {
   border-style: none;
 }
 
-#cxzunxgner p {
+#alwldkrclu p {
   margin: 0;
   padding: 0;
 }
 
-#cxzunxgner .gt_table {
+#alwldkrclu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -215,12 +201,12 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-left-color: #D3D3D3;
 }
 
-#cxzunxgner .gt_caption {
+#alwldkrclu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cxzunxgner .gt_title {
+#alwldkrclu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -232,7 +218,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-bottom-width: 0;
 }
 
-#cxzunxgner .gt_subtitle {
+#alwldkrclu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -244,7 +230,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-top-width: 0;
 }
 
-#cxzunxgner .gt_heading {
+#alwldkrclu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -256,13 +242,13 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-right-color: #D3D3D3;
 }
 
-#cxzunxgner .gt_bottom_border {
+#alwldkrclu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_col_headings {
+#alwldkrclu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -277,7 +263,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-right-color: #D3D3D3;
 }
 
-#cxzunxgner .gt_col_heading {
+#alwldkrclu .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -297,7 +283,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   overflow-x: hidden;
 }
 
-#cxzunxgner .gt_column_spanner_outer {
+#alwldkrclu .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -309,15 +295,15 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 4px;
 }
 
-#cxzunxgner .gt_column_spanner_outer:first-child {
+#alwldkrclu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cxzunxgner .gt_column_spanner_outer:last-child {
+#alwldkrclu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cxzunxgner .gt_column_spanner {
+#alwldkrclu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -329,11 +315,11 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   width: 100%;
 }
 
-#cxzunxgner .gt_spanner_row {
+#alwldkrclu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cxzunxgner .gt_group_heading {
+#alwldkrclu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -359,7 +345,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   text-align: left;
 }
 
-#cxzunxgner .gt_empty_group_heading {
+#alwldkrclu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -374,15 +360,15 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   vertical-align: middle;
 }
 
-#cxzunxgner .gt_from_md > :first-child {
+#alwldkrclu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cxzunxgner .gt_from_md > :last-child {
+#alwldkrclu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cxzunxgner .gt_row {
+#alwldkrclu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -401,7 +387,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   overflow-x: hidden;
 }
 
-#cxzunxgner .gt_stub {
+#alwldkrclu .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -414,7 +400,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 5px;
 }
 
-#cxzunxgner .gt_stub_row_group {
+#alwldkrclu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -428,15 +414,15 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   vertical-align: top;
 }
 
-#cxzunxgner .gt_row_group_first td {
+#alwldkrclu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cxzunxgner .gt_row_group_first th {
+#alwldkrclu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cxzunxgner .gt_summary_row {
+#alwldkrclu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -446,16 +432,16 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 5px;
 }
 
-#cxzunxgner .gt_first_summary_row {
+#alwldkrclu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_first_summary_row.thick {
+#alwldkrclu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cxzunxgner .gt_last_summary_row {
+#alwldkrclu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -465,7 +451,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-bottom-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_grand_summary_row {
+#alwldkrclu .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -475,7 +461,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 5px;
 }
 
-#cxzunxgner .gt_first_grand_summary_row {
+#alwldkrclu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -485,7 +471,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-top-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_last_grand_summary_row_top {
+#alwldkrclu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -495,11 +481,11 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-bottom-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_striped {
+#alwldkrclu .gt_striped {
   background-color: #FEEDEC;
 }
 
-#cxzunxgner .gt_table_body {
+#alwldkrclu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -508,7 +494,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-bottom-color: #5F5F5F;
 }
 
-#cxzunxgner .gt_footnotes {
+#alwldkrclu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -522,7 +508,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-right-color: #D3D3D3;
 }
 
-#cxzunxgner .gt_footnote {
+#alwldkrclu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -531,7 +517,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 5px;
 }
 
-#cxzunxgner .gt_sourcenotes {
+#alwldkrclu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -545,7 +531,7 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   border-right-color: #D3D3D3;
 }
 
-#cxzunxgner .gt_sourcenote {
+#alwldkrclu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -553,63 +539,63 @@ Service</strong><a class="anchor" aria-label="anchor" href="#physician-other-pra
   padding-right: 5px;
 }
 
-#cxzunxgner .gt_left {
+#alwldkrclu .gt_left {
   text-align: left;
 }
 
-#cxzunxgner .gt_center {
+#alwldkrclu .gt_center {
   text-align: center;
 }
 
-#cxzunxgner .gt_right {
+#alwldkrclu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cxzunxgner .gt_font_normal {
+#alwldkrclu .gt_font_normal {
   font-weight: normal;
 }
 
-#cxzunxgner .gt_font_bold {
+#alwldkrclu .gt_font_bold {
   font-weight: bold;
 }
 
-#cxzunxgner .gt_font_italic {
+#alwldkrclu .gt_font_italic {
   font-style: italic;
 }
 
-#cxzunxgner .gt_super {
+#alwldkrclu .gt_super {
   font-size: 65%;
 }
 
-#cxzunxgner .gt_footnote_marks {
+#alwldkrclu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cxzunxgner .gt_asterisk {
+#alwldkrclu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cxzunxgner .gt_indent_1 {
+#alwldkrclu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cxzunxgner .gt_indent_2 {
+#alwldkrclu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cxzunxgner .gt_indent_3 {
+#alwldkrclu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cxzunxgner .gt_indent_4 {
+#alwldkrclu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cxzunxgner .gt_indent_5 {
+#alwldkrclu .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

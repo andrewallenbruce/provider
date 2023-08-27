@@ -70,6 +70,15 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/beneficiary_enrollment.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/by_geography.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/by_provider.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/by_service.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_multiple.html</loc>
   </url>
   <url>
@@ -88,7 +97,7 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/missing_information.html</loc>
   </url>
   <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/nppes_npi.html</loc>
+    <loc>https://andrewallenbruce.github.io/provider/reference/nppes.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/nucc_taxonomy_230.html</loc>
@@ -107,9 +116,6 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/provider-package.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/provider-statistics.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/providers.html</loc>

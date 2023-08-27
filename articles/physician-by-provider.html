@@ -119,83 +119,1924 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span></code></pre></div>
-<blockquote>
-<p>The <strong>Provider Utilization and Payment Data Physician and Other
-Practitioners Dataset</strong> provides information on services and
-procedures provided to Original Medicare (fee-for-service) Part B
-(Medical Insurance) beneficiaries by physicians and other healthcare
-professionals. The <strong>Provider</strong> data subset provides
-information on use, payments, submitted charges and beneficiary
-demographic and health characteristics organized by NPI.</p>
-</blockquote>
-<p>The <strong>Provider</strong> data subset provides information on
-use, payments, submitted charges and beneficiary demographic and health
-characteristics organized by National Provider Identifier (NPI). This
-dataset is based on information gathered from CMS administrative claims
-data for Original Medicare Part B beneficiaries available from the CMS
-Chronic Conditions Data Warehouse.</p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/provider-statistics.html">physician_by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2021</span>, </span>
-<span>                      entype <span class="op">=</span> <span class="st">"I"</span>, </span>
-<span>                      city <span class="op">=</span> <span class="st">"Hershey"</span>, </span>
-<span>                      state <span class="op">=</span> <span class="st">"PA"</span>, </span>
-<span>                      fips <span class="op">=</span> <span class="fl">42</span>, </span>
-<span>                      ruca <span class="op">=</span> <span class="fl">1</span>, </span>
-<span>                      gender <span class="op">=</span> <span class="st">"F"</span>, </span>
-<span>                      credential <span class="op">=</span> <span class="st">"MD"</span>, </span>
-<span>                      specialty <span class="op">=</span> <span class="st">"Anesthesiology"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 17 × 28</span></span></span>
-<span><span class="co">#&gt;     year npi      first_name middle_name last_name credential gender entity_type</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>021 1023245… Melissa    L           Coleman   MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>021 1063463… Padmani    <span style="color: #BB0000;">NA</span>          Dhar      MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>021 1124006… To-Nhu     <span style="color: #BB0000;">NA</span>          Vu        MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>021 1215934… Cathy      D           Paige     MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>021 1306264… Eileen     M           Micaroni  MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>021 1447312… Anita      <span style="color: #BB0000;">NA</span>          Malhotra  MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>021 1548210… Sonia      J           Vaida     MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>021 1558389… Priti      G           Dalal     MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>021 1609035… Zoulfira   <span style="color: #BB0000;">NA</span>          Nisnevit… MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>021 1750331… Niraja     <span style="color: #BB0000;">NA</span>          Rajan     MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>  <span style="text-decoration: underline;">2</span>021 1801003… Sharon     <span style="color: #BB0000;">NA</span>          Lee       MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>  <span style="text-decoration: underline;">2</span>021 1801846… Jansie     <span style="color: #BB0000;">NA</span>          Prozesky  MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">2</span>021 1851437… Kelly      S           Gidusko   MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>  <span style="text-decoration: underline;">2</span>021 1871706… Rochelle   <span style="color: #BB0000;">NA</span>          Sims      MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>  <span style="text-decoration: underline;">2</span>021 1891745… Elizabeth  H           Sinz      MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>  <span style="text-decoration: underline;">2</span>021 1922241… Kristin    B           Brennan   MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>  <span style="text-decoration: underline;">2</span>021 1962829… Sadie      E           Smith     MD         F      Individual </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 20 more variables: street &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, fips &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   zipcode &lt;chr&gt;, ruca &lt;chr&gt;, country &lt;chr&gt;, specialty &lt;chr&gt;, par &lt;lgl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_hcpcs &lt;int&gt;, tot_benes &lt;int&gt;, tot_srvcs &lt;int&gt;, tot_charges &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tot_allowed &lt;dbl&gt;, tot_payment &lt;dbl&gt;, tot_std_pymt &lt;dbl&gt;, medical &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   drug &lt;list&gt;, demographics &lt;list&gt;, conditions &lt;list&gt;</span></span></span></code></pre></div>
-<p><br><br></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">by_provider_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_provider.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">first_name</span>, </span>
+<span>         <span class="va">last_name</span>, </span>
+<span>         <span class="va">credential</span>, </span>
+<span>         <span class="va">city</span>, </span>
+<span>         <span class="va">state</span>, </span>
+<span>         <span class="va">ruca</span>, </span>
+<span>         <span class="va">hcc_risk_avg</span>,</span>
+<span>         <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"tot_"</span><span class="op">)</span><span class="op">)</span> </span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="3%">
+<col width="7%">
+<col width="6%">
+<col width="7%">
+<col width="7%">
+<col width="3%">
+<col width="3%">
+<col width="8%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+<col width="7%">
+<col width="7%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">first_name</th>
+<th align="left">last_name</th>
+<th align="left">credential</th>
+<th align="left">city</th>
+<th align="left">state</th>
+<th align="left">ruca</th>
+<th align="right">hcc_risk_avg</th>
+<th align="right">tot_hcpcs</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">tot_charges</th>
+<th align="right">tot_allowed</th>
+<th align="right">tot_payment</th>
+<th align="right">tot_std_pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Pittsfield</td>
+<td align="left">MA</td>
+<td align="left">1</td>
+<td align="right">1.3832</td>
+<td align="right">7</td>
+<td align="right">568</td>
+<td align="right">936</td>
+<td align="right">86308</td>
+<td align="right">32714.18</td>
+<td align="right">24656.43</td>
+<td align="right">29197.43</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">1.2529</td>
+<td align="right">6</td>
+<td align="right">622</td>
+<td align="right">1036</td>
+<td align="right">96688</td>
+<td align="right">37852.30</td>
+<td align="right">28751.20</td>
+<td align="right">34274.42</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">1.3927</td>
+<td align="right">15</td>
+<td align="right">191</td>
+<td align="right">287</td>
+<td align="right">46296</td>
+<td align="right">12456.78</td>
+<td align="right">8248.40</td>
+<td align="right">9939.89</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">2.4020</td>
+<td align="right">11</td>
+<td align="right">34</td>
+<td align="right">48</td>
+<td align="right">17218</td>
+<td align="right">3375.55</td>
+<td align="right">2689.55</td>
+<td align="right">2662.61</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">1.7315</td>
+<td align="right">16</td>
+<td align="right">57</td>
+<td align="right">139</td>
+<td align="right">30639</td>
+<td align="right">12761.97</td>
+<td align="right">10168.26</td>
+<td align="right">10294.04</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">1.6429</td>
+<td align="right">21</td>
+<td align="right">203</td>
+<td align="right">727</td>
+<td align="right">146819</td>
+<td align="right">62682.72</td>
+<td align="right">48737.02</td>
+<td align="right">50191.31</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="left">John</td>
+<td align="left">Henry</td>
+<td align="left">PAC</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="right">2.1367</td>
+<td align="right">9</td>
+<td align="right">24</td>
+<td align="right">69</td>
+<td align="right">13813</td>
+<td align="right">6147.90</td>
+<td align="right">3095.02</td>
+<td align="right">3165.58</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">city</span>,</span>
+<span>         <span class="va">state</span>,</span>
+<span>         <span class="va">ruca</span>, </span>
+<span>         <span class="va">hcpcs_code</span>, </span>
+<span>         <span class="va">hcpcs_desc</span>, </span>
+<span>         <span class="va">pos</span>, </span>
+<span>         <span class="va">tot_benes</span>, </span>
+<span>         <span class="va">tot_srvcs</span>, </span>
+<span>         <span class="va">avg_charge</span>, </span>
+<span>         <span class="va">avg_allowed</span>, </span>
+<span>         <span class="va">avg_payment</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="2%">
+<col width="5%">
+<col width="2%">
+<col width="2%">
+<col width="5%">
+<col width="54%">
+<col width="1%">
+<col width="4%">
+<col width="4%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">city</th>
+<th align="left">state</th>
+<th align="left">ruca</th>
+<th align="left">hcpcs_code</th>
+<th align="left">hcpcs_desc</th>
+<th align="left">pos</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">avg_charge</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_payment</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">Pittsfield</td>
+<td align="left">MA</td>
+<td align="left">1</td>
+<td align="left">93010</td>
+<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
+with interpretation and report</td>
+<td align="left">F</td>
+<td align="right">140</td>
+<td align="right">187</td>
+<td align="right">32.0000</td>
+<td align="right">6.981177</td>
+<td align="right">5.185508</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">Pittsfield</td>
+<td align="left">MA</td>
+<td align="left">1</td>
+<td align="left">93016</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG monitoring and physician supervision</td>
+<td align="left">F</td>
+<td align="right">379</td>
+<td align="right">383</td>
+<td align="right">85.0000</td>
+<td align="right">18.382141</td>
+<td align="right">14.200313</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">Pittsfield</td>
+<td align="left">MA</td>
+<td align="left">1</td>
+<td align="left">99214</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 25 minutes</td>
+<td align="left">F</td>
+<td align="right">201</td>
+<td align="right">341</td>
+<td align="right">128.0000</td>
+<td align="right">65.446276</td>
+<td align="right">48.751290</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">Pittsfield</td>
+<td align="left">MA</td>
+<td align="left">1</td>
+<td align="left">99215</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 40 minutes</td>
+<td align="left">F</td>
+<td align="right">17</td>
+<td align="right">19</td>
+<td align="right">185.0000</td>
+<td align="right">92.407368</td>
+<td align="right">73.073158</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">93010</td>
+<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
+with interpretation and report</td>
+<td align="left">F</td>
+<td align="right">173</td>
+<td align="right">229</td>
+<td align="right">32.0000</td>
+<td align="right">7.142096</td>
+<td align="right">5.590611</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">93016</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG monitoring and physician supervision</td>
+<td align="left">F</td>
+<td align="right">373</td>
+<td align="right">381</td>
+<td align="right">85.0000</td>
+<td align="right">18.625748</td>
+<td align="right">14.051680</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99214</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 25 minutes</td>
+<td align="left">F</td>
+<td align="right">249</td>
+<td align="right">377</td>
+<td align="right">128.3024</td>
+<td align="right">65.877507</td>
+<td align="right">49.622653</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99215</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 40 minutes</td>
+<td align="left">F</td>
+<td align="right">45</td>
+<td align="right">45</td>
+<td align="right">185.0000</td>
+<td align="right">92.762000</td>
+<td align="right">73.815111</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">93010</td>
+<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
+with interpretation and report</td>
+<td align="left">F</td>
+<td align="right">33</td>
+<td align="right">34</td>
+<td align="right">32.0000</td>
+<td align="right">7.289412</td>
+<td align="right">4.848235</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">93016</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG monitoring and physician supervision</td>
+<td align="left">F</td>
+<td align="right">100</td>
+<td align="right">100</td>
+<td align="right">101.4300</td>
+<td align="right">19.229000</td>
+<td align="right">11.710200</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">93018</td>
+<td align="left">Exercise or drug-induced heart and blood vessel stress
+test with EKG monitoring, physician interpretation and report</td>
+<td align="left">F</td>
+<td align="right">11</td>
+<td align="right">11</td>
+<td align="right">349.0000</td>
+<td align="right">12.463636</td>
+<td align="right">9.934546</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99214</td>
+<td align="left">Established patient office or other outpatient, visit
+typically 25 minutes</td>
+<td align="left">F</td>
+<td align="right">61</td>
+<td align="right">79</td>
+<td align="right">128.7215</td>
+<td align="right">67.197722</td>
+<td align="right">39.244430</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">11</td>
+<td align="right">18</td>
+<td align="right">295.5000</td>
+<td align="right">61.923333</td>
+<td align="right">49.336667</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99233</td>
+<td align="left">Subsequent hospital inpatient care, typically 35
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">12</td>
+<td align="right">15</td>
+<td align="right">443.1333</td>
+<td align="right">89.190667</td>
+<td align="right">71.066667</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">12</td>
+<td align="right">16</td>
+<td align="right">299.9375</td>
+<td align="right">61.410000</td>
+<td align="right">48.930000</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99233</td>
+<td align="left">Subsequent hospital inpatient care, typically 35
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">14</td>
+<td align="right">19</td>
+<td align="right">446.0526</td>
+<td align="right">88.580000</td>
+<td align="right">70.580000</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99223</td>
+<td align="left">Initial hospital inpatient care, typically 70 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">15</td>
+<td align="right">15</td>
+<td align="right">387.0000</td>
+<td align="right">169.330000</td>
+<td align="right">134.910000</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">28</td>
+<td align="right">38</td>
+<td align="right">173.2895</td>
+<td align="right">60.554737</td>
+<td align="right">48.249474</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99239</td>
+<td align="left">Hospital discharge day management, more than 30
+minutes</td>
+<td align="left">F</td>
+<td align="right">29</td>
+<td align="right">31</td>
+<td align="right">226.0000</td>
+<td align="right">90.250000</td>
+<td align="right">71.910000</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99316</td>
+<td align="left">Nursing facility discharge management, more than 30
+minutes</td>
+<td align="left">F</td>
+<td align="right">13</td>
+<td align="right">13</td>
+<td align="right">190.0000</td>
+<td align="right">88.630000</td>
+<td align="right">70.620000</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care on day of discharge</td>
+<td align="left">F</td>
+<td align="right">14</td>
+<td align="right">14</td>
+<td align="right">175.0000</td>
+<td align="right">61.370714</td>
+<td align="right">48.795000</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99223</td>
+<td align="left">Initial hospital inpatient care, typically 70 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">66</td>
+<td align="right">67</td>
+<td align="right">387.0000</td>
+<td align="right">165.361194</td>
+<td align="right">117.726716</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99232</td>
+<td align="left">Subsequent hospital inpatient care, typically 25
+minutes per day</td>
+<td align="left">F</td>
+<td align="right">101</td>
+<td align="right">217</td>
+<td align="right">162.0000</td>
+<td align="right">59.968618</td>
+<td align="right">47.683410</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99238</td>
+<td align="left">Hospital discharge day management, 30 minutes or
+less</td>
+<td align="left">F</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">162.0000</td>
+<td align="right">61.490000</td>
+<td align="right">48.990000</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99239</td>
+<td align="left">Hospital discharge day management, more than 30
+minutes</td>
+<td align="left">F</td>
+<td align="right">91</td>
+<td align="right">95</td>
+<td align="right">226.0000</td>
+<td align="right">89.021158</td>
+<td align="right">70.972526</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99305</td>
+<td align="left">Initial nursing facility visit, typically 35 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">16</td>
+<td align="right">16</td>
+<td align="right">177.0000</td>
+<td align="right">109.532500</td>
+<td align="right">87.268750</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99306</td>
+<td align="left">Initial nursing facility visit, typically 45 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">28</td>
+<td align="right">31</td>
+<td align="right">254.0000</td>
+<td align="right">140.220968</td>
+<td align="right">111.721290</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99308</td>
+<td align="left">Subsequent nursing facility visit, typically 15 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">26</td>
+<td align="right">33</td>
+<td align="right">128.0000</td>
+<td align="right">58.205151</td>
+<td align="right">46.376970</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99309</td>
+<td align="left">Subsequent nursing facility visit, typically 25 minutes
+per day</td>
+<td align="left">F</td>
+<td align="right">50</td>
+<td align="right">113</td>
+<td align="right">160.0000</td>
+<td align="right">76.999911</td>
+<td align="right">61.354071</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">Lebanon</td>
+<td align="left">NH</td>
+<td align="left">4</td>
+<td align="left">99316</td>
+<td align="left">Nursing facility discharge management, more than 30
+minutes</td>
+<td align="left">F</td>
+<td align="right">67</td>
+<td align="right">79</td>
+<td align="right">190.0000</td>
+<td align="right">89.027089</td>
+<td align="right">69.127342</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">srvc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>,  hcpcs <span class="op">=</span> <span class="va">hcpcs_code</span>, <span class="va">pos</span><span class="op">)</span></span>
+<span><span class="va">srvc</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">hcpcs</th>
+<th align="left">pos</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">93010</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">93016</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">99214</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">99215</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="left">93010</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">93016</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2014</td>
+<td align="left">99214</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="left">99215</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">93010</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">93016</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">93018</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">99214</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="left">99232</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2015</td>
+<td align="left">99233</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2016</td>
+<td align="left">99232</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="left">99233</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">99223</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">99232</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">99239</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2017</td>
+<td align="left">99316</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">99217</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">99223</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">99232</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">99238</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">99239</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">99305</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">99306</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">99308</td>
+<td align="left">F</td>
+</tr>
+<tr class="odd">
+<td align="right">2018</td>
+<td align="left">99309</td>
+<td align="left">F</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">99316</td>
+<td align="left">F</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># year &lt;- as.list(srvc$year)</span></span>
+<span><span class="co"># hcpcs_code &lt;- as.list(srvc$hcpcs)</span></span>
+<span><span class="co"># pos &lt;- as.list(srvc$pos)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># l &lt;- list(year = srvc$year, hcpcs_code = srvc$hcpcs, pos = srvc$pos)</span></span>
+<span><span class="co"># </span></span>
+<span><span class="co"># pmap(l, by_geography(year, hcpcs_code, pos, level = "National"))</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2013</span>, hcpcs_code <span class="op">=</span> <span class="st">"99217"</span>, pos <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="2%">
+<col width="4%">
+<col width="11%">
+<col width="2%">
+<col width="6%">
+<col width="19%">
+<col width="3%">
+<col width="2%">
+<col width="5%">
+<col width="5%">
+<col width="5%">
+<col width="4%">
+<col width="6%">
+<col width="6%">
+<col width="6%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">level</th>
+<th align="left">sublevel</th>
+<th align="left">fips</th>
+<th align="left">hcpcs_code</th>
+<th align="left">hcpcs_desc</th>
+<th align="left">drug</th>
+<th align="left">pos</th>
+<th align="right">tot_provs</th>
+<th align="right">tot_benes</th>
+<th align="right">tot_srvcs</th>
+<th align="right">tot_day</th>
+<th align="right">avg_charge</th>
+<th align="right">avg_allowed</th>
+<th align="right">avg_payment</th>
+<th align="right">avg_std_pymt</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">National</td>
+<td align="left">National</td>
+<td align="left">NA</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">87598</td>
+<td align="right">1013389</td>
+<td align="right">1141840</td>
+<td align="right">1141676</td>
+<td align="right">154.75</td>
+<td align="right">68.23</td>
+<td align="right">53.78</td>
+<td align="right">56.07</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Alabama</td>
+<td align="left">01</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1478</td>
+<td align="right">21243</td>
+<td align="right">23514</td>
+<td align="right">23513</td>
+<td align="right">109.59</td>
+<td align="right">64.45</td>
+<td align="right">50.95</td>
+<td align="right">56.38</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Alaska</td>
+<td align="left">02</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">188</td>
+<td align="right">1096</td>
+<td align="right">1183</td>
+<td align="right">1183</td>
+<td align="right">272.48</td>
+<td align="right">85.77</td>
+<td align="right">67.13</td>
+<td align="right">55.59</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Arizona</td>
+<td align="left">04</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1500</td>
+<td align="right">24189</td>
+<td align="right">26998</td>
+<td align="right">26991</td>
+<td align="right">152.38</td>
+<td align="right">67.57</td>
+<td align="right">53.35</td>
+<td align="right">56.15</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Arkansas</td>
+<td align="left">05</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">968</td>
+<td align="right">13977</td>
+<td align="right">15619</td>
+<td align="right">15609</td>
+<td align="right">116.29</td>
+<td align="right">64.64</td>
+<td align="right">51.02</td>
+<td align="right">56.18</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">California</td>
+<td align="left">06</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4420</td>
+<td align="right">42104</td>
+<td align="right">45299</td>
+<td align="right">45291</td>
+<td align="right">179.10</td>
+<td align="right">73.31</td>
+<td align="right">57.85</td>
+<td align="right">56.04</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Colorado</td>
+<td align="left">08</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1363</td>
+<td align="right">13712</td>
+<td align="right">14901</td>
+<td align="right">14900</td>
+<td align="right">151.65</td>
+<td align="right">68.61</td>
+<td align="right">54.06</td>
+<td align="right">56.00</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Connecticut</td>
+<td align="left">09</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1058</td>
+<td align="right">10843</td>
+<td align="right">11825</td>
+<td align="right">11823</td>
+<td align="right">170.83</td>
+<td align="right">72.70</td>
+<td align="right">57.20</td>
+<td align="right">55.89</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Delaware</td>
+<td align="left">10</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">311</td>
+<td align="right">4185</td>
+<td align="right">4481</td>
+<td align="right">4481</td>
+<td align="right">145.71</td>
+<td align="right">69.83</td>
+<td align="right">54.86</td>
+<td align="right">55.82</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">District of Columbia</td>
+<td align="left">11</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">242</td>
+<td align="right">2856</td>
+<td align="right">3056</td>
+<td align="right">3056</td>
+<td align="right">163.94</td>
+<td align="right">73.23</td>
+<td align="right">57.57</td>
+<td align="right">55.91</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Florida</td>
+<td align="left">12</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4946</td>
+<td align="right">72899</td>
+<td align="right">81169</td>
+<td align="right">81150</td>
+<td align="right">154.09</td>
+<td align="right">70.91</td>
+<td align="right">56.01</td>
+<td align="right">56.13</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Georgia</td>
+<td align="left">13</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2803</td>
+<td align="right">34570</td>
+<td align="right">38173</td>
+<td align="right">38169</td>
+<td align="right">156.18</td>
+<td align="right">67.04</td>
+<td align="right">53.00</td>
+<td align="right">56.27</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Hawaii</td>
+<td align="left">15</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">179</td>
+<td align="right">1628</td>
+<td align="right">1725</td>
+<td align="right">1725</td>
+<td align="right">152.10</td>
+<td align="right">70.59</td>
+<td align="right">55.77</td>
+<td align="right">56.41</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Idaho</td>
+<td align="left">16</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">393</td>
+<td align="right">2195</td>
+<td align="right">2312</td>
+<td align="right">2312</td>
+<td align="right">130.11</td>
+<td align="right">65.81</td>
+<td align="right">51.31</td>
+<td align="right">55.49</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Illinois</td>
+<td align="left">17</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4151</td>
+<td align="right">49113</td>
+<td align="right">54148</td>
+<td align="right">54144</td>
+<td align="right">162.98</td>
+<td align="right">71.03</td>
+<td align="right">56.06</td>
+<td align="right">56.10</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Indiana</td>
+<td align="left">18</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2511</td>
+<td align="right">29473</td>
+<td align="right">32573</td>
+<td align="right">32568</td>
+<td align="right">136.50</td>
+<td align="right">66.20</td>
+<td align="right">52.24</td>
+<td align="right">56.17</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Iowa</td>
+<td align="left">19</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1384</td>
+<td align="right">14013</td>
+<td align="right">15524</td>
+<td align="right">15524</td>
+<td align="right">154.05</td>
+<td align="right">65.19</td>
+<td align="right">51.33</td>
+<td align="right">56.01</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Kansas</td>
+<td align="left">20</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1237</td>
+<td align="right">13672</td>
+<td align="right">15069</td>
+<td align="right">15069</td>
+<td align="right">136.58</td>
+<td align="right">66.30</td>
+<td align="right">52.34</td>
+<td align="right">56.15</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Kentucky</td>
+<td align="left">21</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1787</td>
+<td align="right">23086</td>
+<td align="right">26401</td>
+<td align="right">26370</td>
+<td align="right">129.99</td>
+<td align="right">65.31</td>
+<td align="right">51.33</td>
+<td align="right">55.93</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Louisiana</td>
+<td align="left">22</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1474</td>
+<td align="right">17417</td>
+<td align="right">19375</td>
+<td align="right">19375</td>
+<td align="right">138.25</td>
+<td align="right">65.69</td>
+<td align="right">51.77</td>
+<td align="right">56.10</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Maine</td>
+<td align="left">23</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">616</td>
+<td align="right">6403</td>
+<td align="right">6992</td>
+<td align="right">6992</td>
+<td align="right">154.37</td>
+<td align="right">66.41</td>
+<td align="right">52.41</td>
+<td align="right">56.13</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Maryland</td>
+<td align="left">24</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1279</td>
+<td align="right">22843</td>
+<td align="right">25138</td>
+<td align="right">25125</td>
+<td align="right">152.43</td>
+<td align="right">71.04</td>
+<td align="right">56.03</td>
+<td align="right">56.08</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Massachusetts</td>
+<td align="left">25</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2680</td>
+<td align="right">36253</td>
+<td align="right">41341</td>
+<td align="right">41341</td>
+<td align="right">185.11</td>
+<td align="right">70.80</td>
+<td align="right">55.87</td>
+<td align="right">56.12</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Michigan</td>
+<td align="left">26</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4015</td>
+<td align="right">47382</td>
+<td align="right">53355</td>
+<td align="right">53354</td>
+<td align="right">158.01</td>
+<td align="right">69.27</td>
+<td align="right">54.81</td>
+<td align="right">56.26</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Minnesota</td>
+<td align="left">27</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2125</td>
+<td align="right">14034</td>
+<td align="right">15464</td>
+<td align="right">15463</td>
+<td align="right">163.14</td>
+<td align="right">66.81</td>
+<td align="right">52.38</td>
+<td align="right">55.83</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Mississippi</td>
+<td align="left">28</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1026</td>
+<td align="right">15831</td>
+<td align="right">17828</td>
+<td align="right">17825</td>
+<td align="right">122.87</td>
+<td align="right">65.13</td>
+<td align="right">51.41</td>
+<td align="right">56.19</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Missouri</td>
+<td align="left">29</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2333</td>
+<td align="right">26322</td>
+<td align="right">29027</td>
+<td align="right">29027</td>
+<td align="right">139.50</td>
+<td align="right">66.94</td>
+<td align="right">52.69</td>
+<td align="right">55.98</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Montana</td>
+<td align="left">30</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">341</td>
+<td align="right">3357</td>
+<td align="right">3620</td>
+<td align="right">3620</td>
+<td align="right">161.90</td>
+<td align="right">68.83</td>
+<td align="right">53.95</td>
+<td align="right">55.72</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Nebraska</td>
+<td align="left">31</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">885</td>
+<td align="right">8361</td>
+<td align="right">9225</td>
+<td align="right">9225</td>
+<td align="right">140.95</td>
+<td align="right">64.75</td>
+<td align="right">50.69</td>
+<td align="right">55.73</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Nevada</td>
+<td align="left">32</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">432</td>
+<td align="right">7185</td>
+<td align="right">7821</td>
+<td align="right">7821</td>
+<td align="right">170.26</td>
+<td align="right">70.89</td>
+<td align="right">55.75</td>
+<td align="right">55.91</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">New Hampshire</td>
+<td align="left">33</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">563</td>
+<td align="right">8169</td>
+<td align="right">9035</td>
+<td align="right">9035</td>
+<td align="right">191.15</td>
+<td align="right">68.41</td>
+<td align="right">54.19</td>
+<td align="right">56.34</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">New Jersey</td>
+<td align="left">34</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2172</td>
+<td align="right">23002</td>
+<td align="right">24961</td>
+<td align="right">24956</td>
+<td align="right">166.32</td>
+<td align="right">73.22</td>
+<td align="right">57.91</td>
+<td align="right">56.20</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">New Mexico</td>
+<td align="left">35</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">460</td>
+<td align="right">4853</td>
+<td align="right">5100</td>
+<td align="right">5100</td>
+<td align="right">165.16</td>
+<td align="right">67.03</td>
+<td align="right">52.73</td>
+<td align="right">55.95</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">New York</td>
+<td align="left">36</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">3090</td>
+<td align="right">37925</td>
+<td align="right">41065</td>
+<td align="right">41060</td>
+<td align="right">167.34</td>
+<td align="right">68.44</td>
+<td align="right">54.01</td>
+<td align="right">56.10</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">North Carolina</td>
+<td align="left">37</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">3338</td>
+<td align="right">46867</td>
+<td align="right">51845</td>
+<td align="right">51842</td>
+<td align="right">165.33</td>
+<td align="right">66.22</td>
+<td align="right">52.02</td>
+<td align="right">55.90</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">North Dakota</td>
+<td align="left">38</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">399</td>
+<td align="right">4084</td>
+<td align="right">4479</td>
+<td align="right">4479</td>
+<td align="right">149.85</td>
+<td align="right">67.34</td>
+<td align="right">53.26</td>
+<td align="right">56.26</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Ohio</td>
+<td align="left">39</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4057</td>
+<td align="right">47824</td>
+<td align="right">53750</td>
+<td align="right">53749</td>
+<td align="right">143.59</td>
+<td align="right">67.99</td>
+<td align="right">53.55</td>
+<td align="right">56.02</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Oklahoma</td>
+<td align="left">40</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1046</td>
+<td align="right">13385</td>
+<td align="right">14781</td>
+<td align="right">14778</td>
+<td align="right">133.59</td>
+<td align="right">65.11</td>
+<td align="right">51.33</td>
+<td align="right">56.10</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Oregon</td>
+<td align="left">41</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1010</td>
+<td align="right">8446</td>
+<td align="right">9105</td>
+<td align="right">9105</td>
+<td align="right">181.61</td>
+<td align="right">67.38</td>
+<td align="right">52.63</td>
+<td align="right">55.57</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Pennsylvania</td>
+<td align="left">42</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">4662</td>
+<td align="right">44135</td>
+<td align="right">48332</td>
+<td align="right">48306</td>
+<td align="right">139.63</td>
+<td align="right">68.40</td>
+<td align="right">53.77</td>
+<td align="right">55.92</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Rhode Island</td>
+<td align="left">44</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">415</td>
+<td align="right">4983</td>
+<td align="right">5540</td>
+<td align="right">5540</td>
+<td align="right">137.21</td>
+<td align="right">70.31</td>
+<td align="right">55.38</td>
+<td align="right">56.01</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">South Carolina</td>
+<td align="left">45</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1455</td>
+<td align="right">18518</td>
+<td align="right">19922</td>
+<td align="right">19922</td>
+<td align="right">164.31</td>
+<td align="right">65.75</td>
+<td align="right">51.71</td>
+<td align="right">56.01</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">South Dakota</td>
+<td align="left">46</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">444</td>
+<td align="right">3591</td>
+<td align="right">3824</td>
+<td align="right">3824</td>
+<td align="right">127.41</td>
+<td align="right">67.67</td>
+<td align="right">53.03</td>
+<td align="right">55.70</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Tennessee</td>
+<td align="left">47</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2594</td>
+<td align="right">32749</td>
+<td align="right">36356</td>
+<td align="right">36354</td>
+<td align="right">148.01</td>
+<td align="right">64.85</td>
+<td align="right">51.25</td>
+<td align="right">56.30</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Texas</td>
+<td align="left">48</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">5426</td>
+<td align="right">68345</td>
+<td align="right">75872</td>
+<td align="right">75866</td>
+<td align="right">155.27</td>
+<td align="right">67.29</td>
+<td align="right">53.06</td>
+<td align="right">56.09</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Utah</td>
+<td align="left">49</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">486</td>
+<td align="right">2713</td>
+<td align="right">2849</td>
+<td align="right">2848</td>
+<td align="right">155.94</td>
+<td align="right">65.70</td>
+<td align="right">51.59</td>
+<td align="right">55.95</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Vermont</td>
+<td align="left">50</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">209</td>
+<td align="right">2816</td>
+<td align="right">3074</td>
+<td align="right">3074</td>
+<td align="right">170.73</td>
+<td align="right">68.24</td>
+<td align="right">53.66</td>
+<td align="right">55.89</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Virginia</td>
+<td align="left">51</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2158</td>
+<td align="right">27554</td>
+<td align="right">30015</td>
+<td align="right">30015</td>
+<td align="right">154.25</td>
+<td align="right">68.64</td>
+<td align="right">54.03</td>
+<td align="right">56.02</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Washington</td>
+<td align="left">53</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">1792</td>
+<td align="right">17892</td>
+<td align="right">19367</td>
+<td align="right">19366</td>
+<td align="right">163.84</td>
+<td align="right">69.26</td>
+<td align="right">54.39</td>
+<td align="right">55.85</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">West Virginia</td>
+<td align="left">54</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">942</td>
+<td align="right">12933</td>
+<td align="right">14736</td>
+<td align="right">14736</td>
+<td align="right">141.82</td>
+<td align="right">65.53</td>
+<td align="right">51.57</td>
+<td align="right">56.05</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Wisconsin</td>
+<td align="left">55</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">2518</td>
+<td align="right">20152</td>
+<td align="right">22019</td>
+<td align="right">22018</td>
+<td align="right">207.05</td>
+<td align="right">66.55</td>
+<td align="right">52.33</td>
+<td align="right">55.97</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Wyoming</td>
+<td align="left">56</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">160</td>
+<td align="right">1990</td>
+<td align="right">2182</td>
+<td align="right">2182</td>
+<td align="right">175.54</td>
+<td align="right">69.05</td>
+<td align="right">54.44</td>
+<td align="right">56.04</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Guam</td>
+<td align="left">66</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">3</td>
+<td align="right">40</td>
+<td align="right">41</td>
+<td align="right">41</td>
+<td align="right">163.32</td>
+<td align="right">71.42</td>
+<td align="right">56.94</td>
+<td align="right">56.61</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Puerto Rico</td>
+<td align="left">72</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">55</td>
+<td align="right">318</td>
+<td align="right">325</td>
+<td align="right">325</td>
+<td align="right">114.07</td>
+<td align="right">63.71</td>
+<td align="right">50.18</td>
+<td align="right">56.00</td>
+</tr>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Virgin Islands</td>
+<td align="left">78</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">6</td>
+<td align="right">39</td>
+<td align="right">39</td>
+<td align="right">39</td>
+<td align="right">282.01</td>
+<td align="right">66.92</td>
+<td align="right">52.81</td>
+<td align="right">56.03</td>
+</tr>
+<tr class="even">
+<td align="right">2013</td>
+<td align="left">State</td>
+<td align="left">Foreign Country</td>
+<td align="left">9E</td>
+<td align="left">99217</td>
+<td align="left">Hospital observation care discharge</td>
+<td align="left">FALSE</td>
+<td align="left">F</td>
+<td align="right">9</td>
+<td align="right">56</td>
+<td align="right">56</td>
+<td align="right">56</td>
+<td align="right">173.79</td>
+<td align="right">70.69</td>
+<td align="right">56.28</td>
+<td align="right">56.44</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="lsmfnjwtgw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rqjnhuyrck" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#lsmfnjwtgw table {
+#rqjnhuyrck table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#lsmfnjwtgw thead, #lsmfnjwtgw tbody, #lsmfnjwtgw tfoot, #lsmfnjwtgw tr, #lsmfnjwtgw td, #lsmfnjwtgw th {
+#rqjnhuyrck thead, #rqjnhuyrck tbody, #rqjnhuyrck tfoot, #rqjnhuyrck tr, #rqjnhuyrck td, #rqjnhuyrck th {
   border-style: none;
 }
 
-#lsmfnjwtgw p {
+#rqjnhuyrck p {
   margin: 0;
   padding: 0;
 }
 
-#lsmfnjwtgw .gt_table {
+#rqjnhuyrck .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -221,12 +2062,12 @@ Chronic Conditions Data Warehouse.</p>
   border-left-color: #D3D3D3;
 }
 
-#lsmfnjwtgw .gt_caption {
+#rqjnhuyrck .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#lsmfnjwtgw .gt_title {
+#rqjnhuyrck .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -238,7 +2079,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-width: 0;
 }
 
-#lsmfnjwtgw .gt_subtitle {
+#rqjnhuyrck .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -250,7 +2091,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-width: 0;
 }
 
-#lsmfnjwtgw .gt_heading {
+#rqjnhuyrck .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -262,13 +2103,13 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#lsmfnjwtgw .gt_bottom_border {
+#rqjnhuyrck .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_col_headings {
+#rqjnhuyrck .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -283,7 +2124,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#lsmfnjwtgw .gt_col_heading {
+#rqjnhuyrck .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -303,7 +2144,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#lsmfnjwtgw .gt_column_spanner_outer {
+#rqjnhuyrck .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -315,15 +2156,15 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 4px;
 }
 
-#lsmfnjwtgw .gt_column_spanner_outer:first-child {
+#rqjnhuyrck .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lsmfnjwtgw .gt_column_spanner_outer:last-child {
+#rqjnhuyrck .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lsmfnjwtgw .gt_column_spanner {
+#rqjnhuyrck .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -335,11 +2176,11 @@ Chronic Conditions Data Warehouse.</p>
   width: 100%;
 }
 
-#lsmfnjwtgw .gt_spanner_row {
+#rqjnhuyrck .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#lsmfnjwtgw .gt_group_heading {
+#rqjnhuyrck .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -365,7 +2206,7 @@ Chronic Conditions Data Warehouse.</p>
   text-align: left;
 }
 
-#lsmfnjwtgw .gt_empty_group_heading {
+#rqjnhuyrck .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -380,15 +2221,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: middle;
 }
 
-#lsmfnjwtgw .gt_from_md > :first-child {
+#rqjnhuyrck .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lsmfnjwtgw .gt_from_md > :last-child {
+#rqjnhuyrck .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lsmfnjwtgw .gt_row {
+#rqjnhuyrck .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -407,7 +2248,7 @@ Chronic Conditions Data Warehouse.</p>
   overflow-x: hidden;
 }
 
-#lsmfnjwtgw .gt_stub {
+#rqjnhuyrck .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -420,7 +2261,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#lsmfnjwtgw .gt_stub_row_group {
+#rqjnhuyrck .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -434,15 +2275,15 @@ Chronic Conditions Data Warehouse.</p>
   vertical-align: top;
 }
 
-#lsmfnjwtgw .gt_row_group_first td {
+#rqjnhuyrck .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lsmfnjwtgw .gt_row_group_first th {
+#rqjnhuyrck .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#lsmfnjwtgw .gt_summary_row {
+#rqjnhuyrck .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -452,16 +2293,16 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#lsmfnjwtgw .gt_first_summary_row {
+#rqjnhuyrck .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_first_summary_row.thick {
+#rqjnhuyrck .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lsmfnjwtgw .gt_last_summary_row {
+#rqjnhuyrck .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -471,7 +2312,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_grand_summary_row {
+#rqjnhuyrck .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -481,7 +2322,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#lsmfnjwtgw .gt_first_grand_summary_row {
+#rqjnhuyrck .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -491,7 +2332,7 @@ Chronic Conditions Data Warehouse.</p>
   border-top-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_last_grand_summary_row_top {
+#rqjnhuyrck .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -501,11 +2342,11 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_striped {
+#rqjnhuyrck .gt_striped {
   background-color: #FEEDEC;
 }
 
-#lsmfnjwtgw .gt_table_body {
+#rqjnhuyrck .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -514,7 +2355,7 @@ Chronic Conditions Data Warehouse.</p>
   border-bottom-color: #5F5F5F;
 }
 
-#lsmfnjwtgw .gt_footnotes {
+#rqjnhuyrck .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -528,7 +2369,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#lsmfnjwtgw .gt_footnote {
+#rqjnhuyrck .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -537,7 +2378,7 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#lsmfnjwtgw .gt_sourcenotes {
+#rqjnhuyrck .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -551,7 +2392,7 @@ Chronic Conditions Data Warehouse.</p>
   border-right-color: #D3D3D3;
 }
 
-#lsmfnjwtgw .gt_sourcenote {
+#rqjnhuyrck .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -559,63 +2400,63 @@ Chronic Conditions Data Warehouse.</p>
   padding-right: 5px;
 }
 
-#lsmfnjwtgw .gt_left {
+#rqjnhuyrck .gt_left {
   text-align: left;
 }
 
-#lsmfnjwtgw .gt_center {
+#rqjnhuyrck .gt_center {
   text-align: center;
 }
 
-#lsmfnjwtgw .gt_right {
+#rqjnhuyrck .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lsmfnjwtgw .gt_font_normal {
+#rqjnhuyrck .gt_font_normal {
   font-weight: normal;
 }
 
-#lsmfnjwtgw .gt_font_bold {
+#rqjnhuyrck .gt_font_bold {
   font-weight: bold;
 }
 
-#lsmfnjwtgw .gt_font_italic {
+#rqjnhuyrck .gt_font_italic {
   font-style: italic;
 }
 
-#lsmfnjwtgw .gt_super {
+#rqjnhuyrck .gt_super {
   font-size: 65%;
 }
 
-#lsmfnjwtgw .gt_footnote_marks {
+#rqjnhuyrck .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#lsmfnjwtgw .gt_asterisk {
+#rqjnhuyrck .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lsmfnjwtgw .gt_indent_1 {
+#rqjnhuyrck .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lsmfnjwtgw .gt_indent_2 {
+#rqjnhuyrck .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lsmfnjwtgw .gt_indent_3 {
+#rqjnhuyrck .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lsmfnjwtgw .gt_indent_4 {
+#rqjnhuyrck .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lsmfnjwtgw .gt_indent_5 {
+#rqjnhuyrck .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

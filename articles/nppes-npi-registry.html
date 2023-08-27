@@ -135,46 +135,12 @@ Notice. There is no charge to use the NPI Registry.</p>
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 24</span></span></span>
-<span><span class="co">#&gt;   npi        entype     enumeration_date last_updated certification_date status</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1114499340 Individual 2018-12-28       2020-06-15   2020-06-15         A     </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 18 more variables: first_name &lt;chr&gt;, last_name &lt;chr&gt;, credential &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gender &lt;chr&gt;, sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;, tx_state &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1114499340</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in nppes_npi(npi = 1114499340): could not find function "nppes_npi"</span></span></code></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/nppes_npi.html">nppes_npi</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 16 × 28</span></span></span>
-<span><span class="co">#&gt;    npi        entype enumeration_date last_updated status first_name middle_name</span></span>
-<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 21 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">nppes_npi</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in nppes_npi(npi = 1528060837): could not find function "nppes_npi"</span></span></code></pre></div>
 <p><br><br></p>
 <hr>
 </div>
