@@ -25,36 +25,28 @@ Imports:
     purrr,
     rlang,
     strex,
-    tibble,
-    tidyr
+    stringr,
+    tidyr,
+    anytime
 Suggests: 
     covr,
-    tidyverse,
-    printr,
-    campfin,
-    kableExtra,
-    fontawesome,
-    furrr,
-    htmltools,
-    scales,
-    glue,
-    gluedown,
     gt,
     gtExtras,
+    htmltools,
+    tibble,
+    fontawesome,
+    printr,
+    scales,
+    glue,
     knitr,
-    leaflet,
     parsedate,
-    patchwork,
     rmarkdown,
     roxyglobals (>= 0.2.1),
     spelling,
-    stringr,
     testthat (>= 3.0.0),
-    tidygeocoder
 VignetteBuilder: 
     knitr
 Remotes: 
-    coolbutuseless/terse,
     anthonynorth/roxyglobals
 Config/testthat/edition: 3
 Encoding: UTF-8

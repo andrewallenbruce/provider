@@ -197,24 +197,96 @@ utils::globalVariables(c(
   "er_visits_per_1k", # <cc_specific>
   "distro", # <clia_labs>
   "fac_name", # <clia_labs>
+  "addtnl_fac_name", # <clia_labs>
   "prvdr_num", # <clia_labs>
   "clia_mdcr_num", # <clia_labs>
-  "prvdr_ctgry_cd", # <clia_labs>
-  "prvdr_ctgry_sbtyp_cd", # <clia_labs>
-  "acptbl_poc_sw", # <clia_labs>
-  "cmplnc_stus_cd", # <clia_labs>
-  "elgblty_sw", # <clia_labs>
-  "city_name", # <clia_labs>
-  "state_cd", # <clia_labs>
-  "aplctn_rcvd_dt", # <clia_labs>
-  "current_clia_lab_clsfctn_cd", # <clia_labs>
-  "pgm_trmntn_cd", # <clia_labs>
+  "aplctn_type_cd", # <clia_labs>
+  "crtfct_type_cd", # <clia_labs>
+  "crtfct_efctv_dt", # <clia_labs>
   "trmntn_exprtn_dt", # <clia_labs>
+  "cmplnc_stus_cd", # <clia_labs>
+  "acptbl_poc_sw", # <clia_labs>
+  "pgm_trmntn_cd", # <clia_labs>
+  "clia_trmntn_cd", # <clia_labs>
   "crtfctn_actn_type_cd", # <clia_labs>
   "gnrl_cntl_type_cd", # <clia_labs>
+  "gnrl_fac_type_cd", # <clia_labs>
+  "drctly_afltd_lab_cnt", # <clia_labs>
+  "prvdr_ctgry_cd", # <clia_labs>
+  "prvdr_ctgry_sbtyp_cd", # <clia_labs>
+  "orgnl_prtcptn_dt", # <clia_labs>
+  "aplctn_rcvd_dt", # <clia_labs>
+  "crtfctn_dt", # <clia_labs>
+  "crtfct_mail_dt", # <clia_labs>
+  "st_adr", # <clia_labs>
+  "addtnl_st_adr", # <clia_labs>
+  "city_name", # <clia_labs>
+  "state_cd", # <clia_labs>
+  "zip_cd", # <clia_labs>
+  "phne_num", # <clia_labs>
+  "fax_phne_num", # <clia_labs>
+  "rgn_cd", # <clia_labs>
+  "state_rgn_cd", # <clia_labs>
+  "fips_cnty_cd", # <clia_labs>
+  "fips_state_cd", # <clia_labs>
+  "cbsa_urbn_rrl_ind", # <clia_labs>
+  "cbsa_cd", # <clia_labs>
+  "intrmdry_carr_cd", # <clia_labs>
+  "intrmdry_carr_prior_cd", # <clia_labs>
+  "mdcd_vndr_num", # <clia_labs>
+  "chow_cnt", # <clia_labs>
+  "chow_dt", # <clia_labs>
+  "chow_prior_dt", # <clia_labs>
+  "fy_end_mo_day_cd", # <clia_labs>
+  "elgblty_sw", # <clia_labs>
+  "skltn_rec_sw", # <clia_labs>
+  "mlt_site_excptn_sw", # <clia_labs>
+  "hosp_lab_excptn_sw", # <clia_labs>
+  "non_prft_excptn_sw", # <clia_labs>
+  "lab_temp_tstg_site_sw", # <clia_labs>
+  "shr_lab_sw", # <clia_labs>
+  "shared_lab_xref_number", # <clia_labs>
+  "lab_site_cnt", # <clia_labs>
+  "ppmp_test_vol_cnt", # <clia_labs>
+  "acrdtn_schdl_cd", # <clia_labs>
+  "form_116_acrdtd_test_vol_cnt", # <clia_labs>
+  "form_116_test_vol_cnt", # <clia_labs>
+  "form_1557_crtfct_schdl_cd", # <clia_labs>
+  "form_1557_cmplnc_schdl_cd", # <clia_labs>
+  "form_1557_test_vol_cnt", # <clia_labs>
+  "wvd_test_vol_cnt", # <clia_labs>
+  "a2la_acrdtd_cd", # <clia_labs>
+  "a2la_acrdtd_y_match_sw", # <clia_labs>
+  "a2la_acrdtd_y_match_dt", # <clia_labs>
+  "aabb_acrdtd_cd", # <clia_labs>
+  "aabb_acrdtd_y_match_sw", # <clia_labs>
+  "aabb_acrdtd_y_match_dt", # <clia_labs>
+  "aoa_acrdtd_cd", # <clia_labs>
+  "aoa_acrdtd_y_match_sw", # <clia_labs>
+  "aoa_acrdtd_y_match_dt", # <clia_labs>
+  "ashi_acrdtd_cd", # <clia_labs>
+  "ashi_acrdtd_y_match_sw", # <clia_labs>
+  "ashi_acrdtd_y_match_dt", # <clia_labs>
+  "cap_acrdtd_cd", # <clia_labs>
+  "cap_acrdtd_y_match_sw", # <clia_labs>
+  "cap_acrdtd_y_match_dt", # <clia_labs>
+  "cola_acrdtd_cd", # <clia_labs>
+  "cola_acrdtd_y_match_sw", # <clia_labs>
+  "cola_acrdtd_y_match_dt", # <clia_labs>
+  "jcaho_acrdtd_cd", # <clia_labs>
+  "jcaho_acrdtd_y_match_sw", # <clia_labs>
+  "jcaho_acrdtd_y_match_dt", # <clia_labs>
+  "cross_ref_provider_number", # <clia_labs>
   "related_provider_number", # <clia_labs>
-  "term_code", # <clia_labs>
+  "current_clia_lab_clsfctn_cd", # <clia_labs>
+  "termination_reason", # <clia_labs>
   "type_of_action", # <clia_labs>
+  "ownership_type", # <clia_labs>
+  "certification_type", # <clia_labs>
+  "facility_type", # <clia_labs>
+  "clia_lab_classification_current", # <clia_labs>
+  "category", # <clia_labs>
+  "subcategory", # <clia_labs>
   "zipcode", # <clinicians>
   "ind_assn", # <clinicians>
   "group_assn", # <clinicians>

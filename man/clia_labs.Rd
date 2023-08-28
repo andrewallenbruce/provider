@@ -6,8 +6,7 @@
 \usage{
 clia_labs(
   facility_name = NULL,
-  clia_number = NULL,
-  ccn = NULL,
+  clia = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -17,9 +16,7 @@ clia_labs(
 \arguments{
 \item{facility_name}{Hospital’s CMS Certification Number (CCN)}
 
-\item{clia_number}{description}
-
-\item{ccn}{description}
+\item{clia}{description}
 
 \item{city}{City of the hospital’s practice location address}
 
@@ -60,6 +57,6 @@ responsibilities.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 clia_labs(city = "Valdosta")
 clia_labs(clia_number = "00205114A3")
-clia_labs(ccn = "11D0265516")
+clia_labs(clia = "11D0265516")
 \dontshow{\}) # examplesIf}
 }
