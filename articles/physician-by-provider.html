@@ -127,37 +127,27 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">by_provider_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_provider.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_wider.html" class="external-link">unnest_wider</a></span><span class="op">(</span><span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">first_name</span>, </span>
-<span>         <span class="va">last_name</span>, </span>
-<span>         <span class="va">credential</span>, </span>
-<span>         <span class="va">city</span>, </span>
+<span>         <span class="va">credential</span>,</span>
 <span>         <span class="va">state</span>,</span>
 <span>         <span class="va">hcc_risk_avg</span>, </span>
 <span>         <span class="va">tot_hcpcs</span><span class="op">:</span><span class="va">tot_payment</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="3%">
-<col width="8%">
-<col width="7%">
-<col width="8%">
-<col width="8%">
 <col width="4%">
-<col width="9%">
-<col width="7%">
-<col width="7%">
-<col width="7%">
-<col width="9%">
+<col width="10%">
+<col width="5%">
+<col width="12%">
 <col width="9%">
 <col width="9%">
+<col width="9%">
+<col width="11%">
+<col width="11%">
+<col width="11%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">year</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
 <th align="left">credential</th>
-<th align="left">city</th>
 <th align="left">state</th>
 <th align="right">hcc_risk_avg</th>
 <th align="right">tot_hcpcs</th>
@@ -170,10 +160,7 @@
 <tbody>
 <tr class="odd">
 <td align="right">2013</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Pittsfield</td>
 <td align="left">MA</td>
 <td align="right">1.3832</td>
 <td align="right">7</td>
@@ -185,10 +172,7 @@
 </tr>
 <tr class="even">
 <td align="right">2014</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">1.2529</td>
 <td align="right">6</td>
@@ -200,10 +184,7 @@
 </tr>
 <tr class="odd">
 <td align="right">2015</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">1.3927</td>
 <td align="right">15</td>
@@ -215,10 +196,7 @@
 </tr>
 <tr class="even">
 <td align="right">2016</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">2.4020</td>
 <td align="right">11</td>
@@ -230,10 +208,7 @@
 </tr>
 <tr class="odd">
 <td align="right">2017</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">1.7315</td>
 <td align="right">16</td>
@@ -245,10 +220,7 @@
 </tr>
 <tr class="even">
 <td align="right">2018</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">1.6429</td>
 <td align="right">21</td>
@@ -260,10 +232,7 @@
 </tr>
 <tr class="odd">
 <td align="right">2019</td>
-<td align="left">John</td>
-<td align="left">Henry</td>
 <td align="left">PAC</td>
-<td align="left">Lebanon</td>
 <td align="left">NH</td>
 <td align="right">2.1367</td>
 <td align="right">9</td>
@@ -280,10 +249,8 @@
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="co">#city,</span></span>
 <span>         <span class="va">state</span>,</span>
 <span>         <span class="va">hcpcs_code</span>, </span>
-<span>         <span class="co">#hcpcs_desc, </span></span>
 <span>         <span class="va">pos</span>, </span>
 <span>         <span class="va">tot_benes</span>, </span>
 <span>         <span class="va">tot_srvcs</span>, </span>
@@ -1938,7 +1905,7 @@ minutes</td>
 </table>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2014</span>, </span>
-<span>             sublevel <span class="op">=</span> <span class="st">"New Hampshire"</span>, </span>
+<span>             state <span class="op">=</span> <span class="st">"New Hampshire"</span>, </span>
 <span>             hcpcs_code <span class="op">=</span> <span class="st">"93010"</span>, </span>
 <span>             pos <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg_benes <span class="op">=</span> <span class="va">tot_benes</span> <span class="op">/</span> <span class="va">tot_provs</span>,</span>
@@ -1952,29 +1919,31 @@ minutes</td>
 <span>         <span class="va">avg_charge</span>, </span>
 <span>         <span class="va">avg_allowed</span>, </span>
 <span>         <span class="va">avg_payment</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in by_geography(year = 2014, sublevel = "New Hampshire", hcpcs_code = "93010", : unused argument (sublevel = "New Hampshire")</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `sublevel` doesn't exist.</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="vtnrtiufav" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="qjkgcgxwvk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#vtnrtiufav table {
+#qjkgcgxwvk table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#vtnrtiufav thead, #vtnrtiufav tbody, #vtnrtiufav tfoot, #vtnrtiufav tr, #vtnrtiufav td, #vtnrtiufav th {
+#qjkgcgxwvk thead, #qjkgcgxwvk tbody, #qjkgcgxwvk tfoot, #qjkgcgxwvk tr, #qjkgcgxwvk td, #qjkgcgxwvk th {
   border-style: none;
 }
 
-#vtnrtiufav p {
+#qjkgcgxwvk p {
   margin: 0;
   padding: 0;
 }
 
-#vtnrtiufav .gt_table {
+#qjkgcgxwvk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2000,12 +1969,12 @@ minutes</td>
   border-left-color: #D3D3D3;
 }
 
-#vtnrtiufav .gt_caption {
+#qjkgcgxwvk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#vtnrtiufav .gt_title {
+#qjkgcgxwvk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2017,7 +1986,7 @@ minutes</td>
   border-bottom-width: 0;
 }
 
-#vtnrtiufav .gt_subtitle {
+#qjkgcgxwvk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2029,7 +1998,7 @@ minutes</td>
   border-top-width: 0;
 }
 
-#vtnrtiufav .gt_heading {
+#qjkgcgxwvk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2041,13 +2010,13 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#vtnrtiufav .gt_bottom_border {
+#qjkgcgxwvk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_col_headings {
+#qjkgcgxwvk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2062,7 +2031,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#vtnrtiufav .gt_col_heading {
+#qjkgcgxwvk .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2082,7 +2051,7 @@ minutes</td>
   overflow-x: hidden;
 }
 
-#vtnrtiufav .gt_column_spanner_outer {
+#qjkgcgxwvk .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2094,15 +2063,15 @@ minutes</td>
   padding-right: 4px;
 }
 
-#vtnrtiufav .gt_column_spanner_outer:first-child {
+#qjkgcgxwvk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vtnrtiufav .gt_column_spanner_outer:last-child {
+#qjkgcgxwvk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vtnrtiufav .gt_column_spanner {
+#qjkgcgxwvk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2114,11 +2083,11 @@ minutes</td>
   width: 100%;
 }
 
-#vtnrtiufav .gt_spanner_row {
+#qjkgcgxwvk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#vtnrtiufav .gt_group_heading {
+#qjkgcgxwvk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2144,7 +2113,7 @@ minutes</td>
   text-align: left;
 }
 
-#vtnrtiufav .gt_empty_group_heading {
+#qjkgcgxwvk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2159,15 +2128,15 @@ minutes</td>
   vertical-align: middle;
 }
 
-#vtnrtiufav .gt_from_md > :first-child {
+#qjkgcgxwvk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vtnrtiufav .gt_from_md > :last-child {
+#qjkgcgxwvk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vtnrtiufav .gt_row {
+#qjkgcgxwvk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2186,7 +2155,7 @@ minutes</td>
   overflow-x: hidden;
 }
 
-#vtnrtiufav .gt_stub {
+#qjkgcgxwvk .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -2199,7 +2168,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#vtnrtiufav .gt_stub_row_group {
+#qjkgcgxwvk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2213,15 +2182,15 @@ minutes</td>
   vertical-align: top;
 }
 
-#vtnrtiufav .gt_row_group_first td {
+#qjkgcgxwvk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#vtnrtiufav .gt_row_group_first th {
+#qjkgcgxwvk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#vtnrtiufav .gt_summary_row {
+#qjkgcgxwvk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2231,16 +2200,16 @@ minutes</td>
   padding-right: 5px;
 }
 
-#vtnrtiufav .gt_first_summary_row {
+#qjkgcgxwvk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_first_summary_row.thick {
+#qjkgcgxwvk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#vtnrtiufav .gt_last_summary_row {
+#qjkgcgxwvk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2250,7 +2219,7 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_grand_summary_row {
+#qjkgcgxwvk .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -2260,7 +2229,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#vtnrtiufav .gt_first_grand_summary_row {
+#qjkgcgxwvk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2270,7 +2239,7 @@ minutes</td>
   border-top-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_last_grand_summary_row_top {
+#qjkgcgxwvk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2280,11 +2249,11 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_striped {
+#qjkgcgxwvk .gt_striped {
   background-color: #FEEDEC;
 }
 
-#vtnrtiufav .gt_table_body {
+#qjkgcgxwvk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2293,7 +2262,7 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#vtnrtiufav .gt_footnotes {
+#qjkgcgxwvk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2307,7 +2276,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#vtnrtiufav .gt_footnote {
+#qjkgcgxwvk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2316,7 +2285,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#vtnrtiufav .gt_sourcenotes {
+#qjkgcgxwvk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2330,7 +2299,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#vtnrtiufav .gt_sourcenote {
+#qjkgcgxwvk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2338,63 +2307,63 @@ minutes</td>
   padding-right: 5px;
 }
 
-#vtnrtiufav .gt_left {
+#qjkgcgxwvk .gt_left {
   text-align: left;
 }
 
-#vtnrtiufav .gt_center {
+#qjkgcgxwvk .gt_center {
   text-align: center;
 }
 
-#vtnrtiufav .gt_right {
+#qjkgcgxwvk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vtnrtiufav .gt_font_normal {
+#qjkgcgxwvk .gt_font_normal {
   font-weight: normal;
 }
 
-#vtnrtiufav .gt_font_bold {
+#qjkgcgxwvk .gt_font_bold {
   font-weight: bold;
 }
 
-#vtnrtiufav .gt_font_italic {
+#qjkgcgxwvk .gt_font_italic {
   font-style: italic;
 }
 
-#vtnrtiufav .gt_super {
+#qjkgcgxwvk .gt_super {
   font-size: 65%;
 }
 
-#vtnrtiufav .gt_footnote_marks {
+#qjkgcgxwvk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#vtnrtiufav .gt_asterisk {
+#qjkgcgxwvk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#vtnrtiufav .gt_indent_1 {
+#qjkgcgxwvk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#vtnrtiufav .gt_indent_2 {
+#qjkgcgxwvk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#vtnrtiufav .gt_indent_3 {
+#qjkgcgxwvk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#vtnrtiufav .gt_indent_4 {
+#qjkgcgxwvk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#vtnrtiufav .gt_indent_5 {
+#qjkgcgxwvk .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
