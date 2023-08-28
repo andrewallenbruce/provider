@@ -124,30 +124,35 @@
 <h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">by_provider_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">all</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_provider_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_provider.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">credential</span>,</span>
 <span>         <span class="va">state</span>,</span>
 <span>         <span class="va">hcc_risk_avg</span>, </span>
-<span>         <span class="va">tot_hcpcs</span><span class="op">:</span><span class="va">tot_payment</span><span class="op">)</span></span></code></pre></div>
+<span>         <span class="va">tot_hcpcs</span><span class="op">:</span><span class="va">tot_payment</span>,</span>
+<span>         <span class="va">demographics</span>,</span>
+<span>         <span class="va">conditions</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">quality_payment_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_stats</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">all</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">demographics</span>, <span class="va">conditions</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
-<col width="4%">
-<col width="10%">
 <col width="5%">
-<col width="12%">
-<col width="9%">
-<col width="9%">
-<col width="9%">
+<col width="6%">
+<col width="14%">
 <col width="11%">
 <col width="11%">
 <col width="11%">
+<col width="13%">
+<col width="13%">
+<col width="13%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">year</th>
-<th align="left">credential</th>
 <th align="left">state</th>
 <th align="right">hcc_risk_avg</th>
 <th align="right">tot_hcpcs</th>
@@ -160,7 +165,6 @@
 <tbody>
 <tr class="odd">
 <td align="right">2013</td>
-<td align="left">PAC</td>
 <td align="left">MA</td>
 <td align="right">1.3832</td>
 <td align="right">7</td>
@@ -172,7 +176,6 @@
 </tr>
 <tr class="even">
 <td align="right">2014</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">1.2529</td>
 <td align="right">6</td>
@@ -184,7 +187,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2015</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">1.3927</td>
 <td align="right">15</td>
@@ -196,7 +198,6 @@
 </tr>
 <tr class="even">
 <td align="right">2016</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">2.4020</td>
 <td align="right">11</td>
@@ -208,7 +209,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2017</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">1.7315</td>
 <td align="right">16</td>
@@ -220,7 +220,6 @@
 </tr>
 <tr class="even">
 <td align="right">2018</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">1.6429</td>
 <td align="right">21</td>
@@ -232,7 +231,6 @@
 </tr>
 <tr class="odd">
 <td align="right">2019</td>
-<td align="left">PAC</td>
 <td align="left">NH</td>
 <td align="right">2.1367</td>
 <td align="right">9</td>
@@ -245,1705 +243,1375 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">stats</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Individual"</span>, </span>
+<span>         <span class="va">stat</span> <span class="op">==</span> <span class="st">"HCC Risk Score Average"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">state</span>,</span>
-<span>         <span class="va">hcpcs_code</span>, </span>
-<span>         <span class="va">pos</span>, </span>
-<span>         <span class="va">tot_benes</span>, </span>
-<span>         <span class="va">tot_srvcs</span>, </span>
-<span>         <span class="va">avg_charge</span>, </span>
-<span>         <span class="va">avg_allowed</span>, </span>
-<span>         <span class="va">avg_payment</span><span class="op">)</span></span></code></pre></div>
+<span>         hcc_risk_avg <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
-<colgroup>
-<col width="6%">
-<col width="7%">
-<col width="13%">
-<col width="4%">
-<col width="12%">
-<col width="12%">
-<col width="13%">
-<col width="14%">
-<col width="14%">
-</colgroup>
 <thead><tr class="header">
 <th align="right">year</th>
-<th align="left">state</th>
-<th align="left">hcpcs_code</th>
-<th align="left">pos</th>
-<th align="right">tot_benes</th>
-<th align="right">tot_srvcs</th>
-<th align="right">avg_charge</th>
-<th align="right">avg_allowed</th>
-<th align="right">avg_payment</th>
+<th align="right">hcc_risk_avg</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">140</td>
-<td align="right">187</td>
-<td align="right">32.0000</td>
-<td align="right">6.981177</td>
-<td align="right">5.185508</td>
-</tr>
-<tr class="even">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">379</td>
-<td align="right">383</td>
-<td align="right">85.0000</td>
-<td align="right">18.382141</td>
-<td align="right">14.200313</td>
-</tr>
-<tr class="odd">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">201</td>
-<td align="right">341</td>
-<td align="right">128.0000</td>
-<td align="right">65.446276</td>
-<td align="right">48.751290</td>
-</tr>
-<tr class="even">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">99215</td>
-<td align="left">F</td>
-<td align="right">17</td>
-<td align="right">19</td>
-<td align="right">185.0000</td>
-<td align="right">92.407368</td>
-<td align="right">73.073158</td>
-</tr>
-<tr class="odd">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">173</td>
-<td align="right">229</td>
-<td align="right">32.0000</td>
-<td align="right">7.142096</td>
-<td align="right">5.590611</td>
-</tr>
-<tr class="even">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">373</td>
-<td align="right">381</td>
-<td align="right">85.0000</td>
-<td align="right">18.625748</td>
-<td align="right">14.051680</td>
-</tr>
-<tr class="odd">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">249</td>
-<td align="right">377</td>
-<td align="right">128.3024</td>
-<td align="right">65.877507</td>
-<td align="right">49.622653</td>
-</tr>
-<tr class="even">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">99215</td>
-<td align="left">F</td>
-<td align="right">45</td>
-<td align="right">45</td>
-<td align="right">185.0000</td>
-<td align="right">92.762000</td>
-<td align="right">73.815111</td>
-</tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">33</td>
-<td align="right">34</td>
-<td align="right">32.0000</td>
-<td align="right">7.289412</td>
-<td align="right">4.848235</td>
-</tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">100</td>
-<td align="right">100</td>
-<td align="right">101.4300</td>
-<td align="right">19.229000</td>
-<td align="right">11.710200</td>
-</tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93018</td>
-<td align="left">F</td>
-<td align="right">11</td>
-<td align="right">11</td>
-<td align="right">349.0000</td>
-<td align="right">12.463636</td>
-<td align="right">9.934546</td>
-</tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">61</td>
-<td align="right">79</td>
-<td align="right">128.7215</td>
-<td align="right">67.197722</td>
-<td align="right">39.244430</td>
-</tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">11</td>
-<td align="right">18</td>
-<td align="right">295.5000</td>
-<td align="right">61.923333</td>
-<td align="right">49.336667</td>
-</tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99233</td>
-<td align="left">F</td>
-<td align="right">12</td>
-<td align="right">15</td>
-<td align="right">443.1333</td>
-<td align="right">89.190667</td>
-<td align="right">71.066667</td>
-</tr>
-<tr class="odd">
-<td align="right">2016</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">12</td>
-<td align="right">16</td>
-<td align="right">299.9375</td>
-<td align="right">61.410000</td>
-<td align="right">48.930000</td>
-</tr>
-<tr class="even">
-<td align="right">2016</td>
-<td align="left">NH</td>
-<td align="left">99233</td>
-<td align="left">F</td>
-<td align="right">14</td>
-<td align="right">19</td>
-<td align="right">446.0526</td>
-<td align="right">88.580000</td>
-<td align="right">70.580000</td>
-</tr>
-<tr class="odd">
 <td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99223</td>
-<td align="left">F</td>
-<td align="right">15</td>
-<td align="right">15</td>
-<td align="right">387.0000</td>
-<td align="right">169.330000</td>
-<td align="right">134.910000</td>
+<td align="right">2.5050</td>
 </tr>
 <tr class="even">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">28</td>
-<td align="right">38</td>
-<td align="right">173.2895</td>
-<td align="right">60.554737</td>
-<td align="right">48.249474</td>
+<td align="right">2018</td>
+<td align="right">2.5049</td>
 </tr>
 <tr class="odd">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99239</td>
-<td align="left">F</td>
-<td align="right">29</td>
-<td align="right">31</td>
-<td align="right">226.0000</td>
-<td align="right">90.250000</td>
-<td align="right">71.910000</td>
+<td align="right">2019</td>
+<td align="right">2.5049</td>
 </tr>
 <tr class="even">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99316</td>
-<td align="left">F</td>
-<td align="right">13</td>
-<td align="right">13</td>
-<td align="right">190.0000</td>
-<td align="right">88.630000</td>
-<td align="right">70.620000</td>
+<td align="right">2020</td>
+<td align="right">2.5047</td>
 </tr>
 <tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99217</td>
-<td align="left">F</td>
-<td align="right">14</td>
-<td align="right">14</td>
-<td align="right">175.0000</td>
-<td align="right">61.370714</td>
-<td align="right">48.795000</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99223</td>
-<td align="left">F</td>
-<td align="right">66</td>
-<td align="right">67</td>
-<td align="right">387.0000</td>
-<td align="right">165.361194</td>
-<td align="right">117.726716</td>
-</tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">101</td>
-<td align="right">217</td>
-<td align="right">162.0000</td>
-<td align="right">59.968618</td>
-<td align="right">47.683410</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99238</td>
-<td align="left">F</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">162.0000</td>
-<td align="right">61.490000</td>
-<td align="right">48.990000</td>
-</tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99239</td>
-<td align="left">F</td>
-<td align="right">91</td>
-<td align="right">95</td>
-<td align="right">226.0000</td>
-<td align="right">89.021158</td>
-<td align="right">70.972526</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99305</td>
-<td align="left">F</td>
-<td align="right">16</td>
-<td align="right">16</td>
-<td align="right">177.0000</td>
-<td align="right">109.532500</td>
-<td align="right">87.268750</td>
-</tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99306</td>
-<td align="left">F</td>
-<td align="right">28</td>
-<td align="right">31</td>
-<td align="right">254.0000</td>
-<td align="right">140.220968</td>
-<td align="right">111.721290</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99308</td>
-<td align="left">F</td>
-<td align="right">26</td>
-<td align="right">33</td>
-<td align="right">128.0000</td>
-<td align="right">58.205151</td>
-<td align="right">46.376970</td>
-</tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99309</td>
-<td align="left">F</td>
-<td align="right">50</td>
-<td align="right">113</td>
-<td align="right">160.0000</td>
-<td align="right">76.999911</td>
-<td align="right">61.354071</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99316</td>
-<td align="left">F</td>
-<td align="right">67</td>
-<td align="right">79</td>
-<td align="right">190.0000</td>
-<td align="right">89.027089</td>
-<td align="right">69.127342</td>
+<td align="right">2021</td>
+<td align="right">2.5052</td>
 </tr>
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">geography</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="va">all</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">demographics</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>dual_eligibility_ratio <span class="op">=</span> <span class="va">bene_dual</span> <span class="op">/</span> <span class="va">bene_ndual</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">dual_eligibility_ratio</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">dual_eligibility_ratio</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">0.2678571</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">0.2745902</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">0.2993197</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">1.3750000</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">1.0714286</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">stats</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"Individual"</span>, </span>
+<span>         <span class="va">stat</span> <span class="op">==</span> <span class="st">"Dual Eligibility Average"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         dual_eligibility_ratio <span class="op">=</span> <span class="va">value</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">dual_eligibility_ratio</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">0.5072</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">0.5070</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">0.5072</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="right">0.5070</td>
+</tr>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="right">0.5072</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">all</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">conditions</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">conditions</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="3%">
+<col width="4%">
+<col width="5%">
+<col width="6%">
+<col width="6%">
+<col width="5%">
+<col width="5%">
+<col width="6%">
+<col width="5%">
+<col width="6%">
+<col width="7%">
+<col width="7%">
+<col width="5%">
+<col width="5%">
+<col width="6%">
+<col width="4%">
+<col width="6%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="right">cc_af</th>
+<th align="right">cc_alz</th>
+<th align="right">cc_asth</th>
+<th align="right">cc_canc</th>
+<th align="right">cc_chf</th>
+<th align="right">cc_ckd</th>
+<th align="right">cc_copd</th>
+<th align="right">cc_dep</th>
+<th align="right">cc_diab</th>
+<th align="right">cc_hplip</th>
+<th align="right">cc_hpten</th>
+<th align="right">cc_ihd</th>
+<th align="right">cc_opo</th>
+<th align="right">cc_raoa</th>
+<th align="right">cc_sz</th>
+<th align="right">cc_strk</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2013</td>
+<td align="right">0.25</td>
+<td align="right">0.06</td>
+<td align="right">0.05</td>
+<td align="right">0.13</td>
+<td align="right">0.29</td>
+<td align="right">0.27</td>
+<td align="right">0.18</td>
+<td align="right">0.23</td>
+<td align="right">0.38</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">0.70</td>
+<td align="right">0.10</td>
+<td align="right">0.33</td>
+<td align="right">NA</td>
+<td align="right">0.07</td>
+</tr>
+<tr class="even">
+<td align="right">2014</td>
+<td align="right">0.28</td>
+<td align="right">0.05</td>
+<td align="right">0.07</td>
+<td align="right">0.13</td>
+<td align="right">0.26</td>
+<td align="right">0.23</td>
+<td align="right">0.19</td>
+<td align="right">0.21</td>
+<td align="right">0.31</td>
+<td align="right">0.73</td>
+<td align="right">0.75</td>
+<td align="right">0.66</td>
+<td align="right">0.09</td>
+<td align="right">0.34</td>
+<td align="right">0.03</td>
+<td align="right">0.07</td>
+</tr>
+<tr class="odd">
+<td align="right">2015</td>
+<td align="right">0.32</td>
+<td align="right">0.06</td>
+<td align="right">0.12</td>
+<td align="right">0.11</td>
+<td align="right">0.39</td>
+<td align="right">0.29</td>
+<td align="right">0.23</td>
+<td align="right">0.24</td>
+<td align="right">0.41</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">0.72</td>
+<td align="right">0.12</td>
+<td align="right">0.40</td>
+<td align="right">0.07</td>
+<td align="right">0.06</td>
+</tr>
+<tr class="even">
+<td align="right">2016</td>
+<td align="right">0.47</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">0.41</td>
+<td align="right">0.44</td>
+<td align="right">0.56</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">0.75</td>
+<td align="right">NA</td>
+<td align="right">0.44</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="right">0.23</td>
+<td align="right">0.33</td>
+<td align="right">NA</td>
+<td align="right">0.21</td>
+<td align="right">0.56</td>
+<td align="right">0.53</td>
+<td align="right">0.53</td>
+<td align="right">0.49</td>
+<td align="right">0.44</td>
+<td align="right">0.63</td>
+<td align="right">0.75</td>
+<td align="right">0.56</td>
+<td align="right">NA</td>
+<td align="right">0.35</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="right">0.25</td>
+<td align="right">0.28</td>
+<td align="right">0.09</td>
+<td align="right">0.09</td>
+<td align="right">0.48</td>
+<td align="right">0.48</td>
+<td align="right">0.44</td>
+<td align="right">0.44</td>
+<td align="right">0.47</td>
+<td align="right">0.70</td>
+<td align="right">0.75</td>
+<td align="right">0.51</td>
+<td align="right">0.10</td>
+<td align="right">0.33</td>
+<td align="right">0.08</td>
+<td align="right">0.13</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.00</td>
+<td align="right">NA</td>
+<td align="right">0.63</td>
+<td align="right">0.46</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">0.50</td>
+<td align="right">0.75</td>
+<td align="right">0.54</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">service</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>level <span class="op">=</span> <span class="st">"individual"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">geography</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">state</span>, <span class="va">hcpcs_code</span>, <span class="va">pos</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rowwise.html" class="external-link">rowwise</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>statewide <span class="op">=</span> <span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">state</span>, <span class="va">hcpcs_code</span>, <span class="va">pos</span><span class="op">)</span>,</span>
-<span>         national <span class="op">=</span> <span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span><span class="va">year</span>, state <span class="op">=</span> <span class="st">"National"</span>, <span class="va">hcpcs_code</span>, <span class="va">pos</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">geography</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">national</span>, names_sep <span class="op">=</span> <span class="st">"."</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html" class="external-link">unnest</a></span><span class="op">(</span><span class="va">statewide</span>, names_sep <span class="op">=</span> <span class="st">"."</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="0%">
-<col width="0%">
-<col width="1%">
-<col width="0%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="14%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="14%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-</colgroup>
-<thead><tr class="header">
-<th align="right">year</th>
-<th align="left">state</th>
-<th align="left">hcpcs_code</th>
-<th align="left">pos</th>
-<th align="right">statewide.year</th>
-<th align="left">statewide.level</th>
-<th align="left">statewide.state</th>
-<th align="left">statewide.fips</th>
-<th align="left">statewide.hcpcs_code</th>
-<th align="left">statewide.hcpcs_desc</th>
-<th align="left">statewide.drug</th>
-<th align="left">statewide.pos</th>
-<th align="right">statewide.tot_provs</th>
-<th align="right">statewide.tot_benes</th>
-<th align="right">statewide.tot_srvcs</th>
-<th align="right">statewide.tot_day</th>
-<th align="right">statewide.avg_charge</th>
-<th align="right">statewide.avg_allowed</th>
-<th align="right">statewide.avg_payment</th>
-<th align="right">statewide.avg_std_pymt</th>
-<th align="right">national.year</th>
-<th align="left">national.level</th>
-<th align="left">national.state</th>
-<th align="left">national.fips</th>
-<th align="left">national.hcpcs_code</th>
-<th align="left">national.hcpcs_desc</th>
-<th align="left">national.drug</th>
-<th align="left">national.pos</th>
-<th align="right">national.tot_provs</th>
-<th align="right">national.tot_benes</th>
-<th align="right">national.tot_srvcs</th>
-<th align="right">national.tot_day</th>
-<th align="right">national.avg_charge</th>
-<th align="right">national.avg_allowed</th>
-<th align="right">national.avg_payment</th>
-<th align="right">national.avg_std_pymt</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">2013</td>
-<td align="left">State</td>
-<td align="left">Massachusetts</td>
-<td align="left">25</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1860</td>
-<td align="right">270611</td>
-<td align="right">687276</td>
-<td align="right">628409</td>
-<td align="right">33.76</td>
-<td align="right">8.25</td>
-<td align="right">6.41</td>
-<td align="right">6.37</td>
-<td align="right">2013</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">72959</td>
-<td align="right">7768062</td>
-<td align="right">18809139</td>
-<td align="right">17428428</td>
-<td align="right">39.15</td>
-<td align="right">8.07</td>
-<td align="right">6.30</td>
-<td align="right">6.40</td>
+<span>         national <span class="op">=</span> <span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span><span class="va">year</span>, state <span class="op">=</span> <span class="st">"National"</span>, <span class="va">hcpcs_code</span>, <span class="va">pos</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">geography</span><span class="op">$</span><span class="va">national</span>, </span>
+<span>         beneficiaries <span class="op">=</span> <span class="va">tot_benes</span> <span class="op">/</span> <span class="va">tot_provs</span>,</span>
+<span>         services <span class="op">=</span> <span class="va">tot_srvcs</span> <span class="op">/</span> <span class="va">tot_provs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">level</span>,</span>
+<span>         <span class="va">hcpcs_code</span>, </span>
+<span>         <span class="va">pos</span>, </span>
+<span>         <span class="va">beneficiaries</span>, </span>
+<span>         <span class="va">services</span>, </span>
+<span>         <span class="va">avg_charge</span>, </span>
+<span>         <span class="va">avg_allowed</span>, </span>
+<span>         <span class="va">avg_payment</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="va">geography</span><span class="op">$</span><span class="va">statewide</span>, </span>
+<span>         beneficiaries <span class="op">=</span> <span class="va">tot_benes</span> <span class="op">/</span> <span class="va">tot_provs</span>,</span>
+<span>         services <span class="op">=</span> <span class="va">tot_srvcs</span> <span class="op">/</span> <span class="va">tot_provs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
+<span>         <span class="va">level</span>,</span>
+<span>         <span class="va">hcpcs_code</span>, </span>
+<span>         <span class="va">pos</span>, </span>
+<span>         <span class="va">beneficiaries</span>, </span>
+<span>         <span class="va">services</span>, </span>
+<span>         <span class="va">avg_charge</span>, </span>
+<span>         <span class="va">avg_allowed</span>, </span>
+<span>         <span class="va">avg_payment</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">service</span>,</span>
+<span>         <span class="va">year</span>, </span>
+<span>         <span class="va">level</span>,</span>
+<span>         <span class="va">hcpcs_code</span>, </span>
+<span>         <span class="va">pos</span>, </span>
+<span>         beneficiaries <span class="op">=</span> <span class="va">tot_benes</span>, </span>
+<span>         services <span class="op">=</span> <span class="va">tot_srvcs</span>, </span>
+<span>         <span class="va">avg_charge</span>, </span>
+<span>         <span class="va">avg_allowed</span>, </span>
+<span>         <span class="va">avg_payment</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
+<span>              values_from <span class="op">=</span> <span class="va">beneficiaries</span><span class="op">:</span><span class="va">avg_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span><span class="op">!</span><span class="va">year</span><span class="op">:</span><span class="va">pos</span>, </span>
+<span>               names_to <span class="op">=</span> <span class="st">"stat"</span>, </span>
+<span>               values_to <span class="op">=</span> <span class="st">"amount"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/separate_wider_delim.html" class="external-link">separate_wider_regex</a></span><span class="op">(</span><span class="va">stat</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>measure <span class="op">=</span> <span class="st">".*"</span>, <span class="st">"_"</span>, level <span class="op">=</span> <span class="st">".*"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
+<span>              values_from <span class="op">=</span> <span class="va">amount</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">measure</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"beneficiaries"</span>, <span class="st">"services"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">measure</span>, <span class="va">hcpcs_code</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gtExtras</span><span class="fu">::</span><span class="fu"><a href="https://jthomasmock.github.io/gtExtras/reference/gt_theme_nytimes.html" class="external-link">gt_theme_nytimes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div id="klbsyogcwz" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+#klbsyogcwz table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#klbsyogcwz thead, #klbsyogcwz tbody, #klbsyogcwz tfoot, #klbsyogcwz tr, #klbsyogcwz td, #klbsyogcwz th {
+  border-style: none;
+}
+
+#klbsyogcwz p {
+  margin: 0;
+  padding: 0;
+}
+
+#klbsyogcwz .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#klbsyogcwz .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#klbsyogcwz .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#klbsyogcwz .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#klbsyogcwz .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#klbsyogcwz .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#klbsyogcwz .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#klbsyogcwz .gt_column_spanner {
+  border-bottom-style: none;
+  border-bottom-width: 1px;
+  border-bottom-color: #334422;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#klbsyogcwz .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#klbsyogcwz .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#klbsyogcwz .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#klbsyogcwz .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#klbsyogcwz .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#klbsyogcwz .gt_row {
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#klbsyogcwz .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbsyogcwz .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#klbsyogcwz .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#klbsyogcwz .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#klbsyogcwz .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbsyogcwz .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#klbsyogcwz .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbsyogcwz .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#klbsyogcwz .gt_table_body {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #FFFFFF;
+}
+
+#klbsyogcwz .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbsyogcwz .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#klbsyogcwz .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#klbsyogcwz .gt_left {
+  text-align: left;
+}
+
+#klbsyogcwz .gt_center {
+  text-align: center;
+}
+
+#klbsyogcwz .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#klbsyogcwz .gt_font_normal {
+  font-weight: normal;
+}
+
+#klbsyogcwz .gt_font_bold {
+  font-weight: bold;
+}
+
+#klbsyogcwz .gt_font_italic {
+  font-style: italic;
+}
+
+#klbsyogcwz .gt_super {
+  font-size: 65%;
+}
+
+#klbsyogcwz .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#klbsyogcwz .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#klbsyogcwz .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#klbsyogcwz .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#klbsyogcwz .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#klbsyogcwz .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#klbsyogcwz .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="year">year</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="hcpcs_code">hcpcs_code</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="pos">pos</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="measure">measure</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="National">National</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="State">State</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" style="color: #A9A9A9; font-family: 'Source Sans Pro'; text-transform: uppercase;" scope="col" id="individual">individual</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">106.47161</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">145.48978</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">140</td>
 </tr>
-<tr class="even">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">2013</td>
-<td align="left">State</td>
-<td align="left">Massachusetts</td>
-<td align="left">25</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">498</td>
-<td align="right">26498</td>
-<td align="right">27881</td>
-<td align="right">27850</td>
-<td align="right">91.15</td>
-<td align="right">21.34</td>
-<td align="right">16.29</td>
-<td align="right">16.45</td>
-<td align="right">2013</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">20846</td>
-<td align="right">983198</td>
-<td align="right">1016794</td>
-<td align="right">1015821</td>
-<td align="right">86.33</td>
-<td align="right">20.73</td>
-<td align="right">15.93</td>
-<td align="right">16.58</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">104.16781</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93.89331</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">173</td>
 </tr>
-<tr class="odd">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">2013</td>
-<td align="left">State</td>
-<td align="left">Massachusetts</td>
-<td align="left">25</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">6717</td>
-<td align="right">219542</td>
-<td align="right">609300</td>
-<td align="right">609293</td>
-<td align="right">221.76</td>
-<td align="right">75.45</td>
-<td align="right">54.64</td>
-<td align="right">56.12</td>
-<td align="right">2013</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">129705</td>
-<td align="right">3623309</td>
-<td align="right">9110283</td>
-<td align="right">9109227</td>
-<td align="right">168.41</td>
-<td align="right">73.00</td>
-<td align="right">52.79</td>
-<td align="right">56.15</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">102.45673</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">86.94419</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">33</td>
 </tr>
-<tr class="even">
-<td align="right">2013</td>
-<td align="left">MA</td>
-<td align="left">99215</td>
-<td align="left">F</td>
-<td align="right">2013</td>
-<td align="left">State</td>
-<td align="left">Massachusetts</td>
-<td align="left">25</td>
-<td align="left">99215</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 40 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">4354</td>
-<td align="right">58540</td>
-<td align="right">100687</td>
-<td align="right">100683</td>
-<td align="right">323.58</td>
-<td align="right">107.83</td>
-<td align="right">81.00</td>
-<td align="right">81.66</td>
-<td align="right">2013</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99215</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 40 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">73632</td>
-<td align="right">851434</td>
-<td align="right">1487976</td>
-<td align="right">1487843</td>
-<td align="right">266.94</td>
-<td align="right">104.76</td>
-<td align="right">78.78</td>
-<td align="right">81.94</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">47.16483</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">53.20884</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">379</td>
 </tr>
-<tr class="odd">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">2014</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">553</td>
-<td align="right">51923</td>
-<td align="right">102967</td>
-<td align="right">95396</td>
-<td align="right">53.02</td>
-<td align="right">8.48</td>
-<td align="right">6.45</td>
-<td align="right">6.28</td>
-<td align="right">2014</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">74171</td>
-<td align="right">7726231</td>
-<td align="right">18355992</td>
-<td align="right">17043435</td>
-<td align="right">39.60</td>
-<td align="right">8.46</td>
-<td align="right">6.58</td>
-<td align="right">6.44</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">47.96256</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">71.13710</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">373</td>
 </tr>
-<tr class="even">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">2014</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">124</td>
-<td align="right">8821</td>
-<td align="right">9212</td>
-<td align="right">9207</td>
-<td align="right">106.40</td>
-<td align="right">20.44</td>
-<td align="right">15.64</td>
-<td align="right">16.80</td>
-<td align="right">2014</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">20515</td>
-<td align="right">983952</td>
-<td align="right">1016502</td>
-<td align="right">1016018</td>
-<td align="right">85.05</td>
-<td align="right">21.40</td>
-<td align="right">16.45</td>
-<td align="right">16.86</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">48.92453</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">49.97727</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">100</td>
 </tr>
-<tr class="odd">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">2014</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1606</td>
-<td align="right">78899</td>
-<td align="right">205644</td>
-<td align="right">205643</td>
-<td align="right">141.89</td>
-<td align="right">75.72</td>
-<td align="right">54.29</td>
-<td align="right">56.26</td>
-<td align="right">2014</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">138765</td>
-<td align="right">3943957</td>
-<td align="right">10066638</td>
-<td align="right">10065500</td>
-<td align="right">172.89</td>
-<td align="right">75.89</td>
-<td align="right">54.99</td>
-<td align="right">56.87</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93018</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">53.70289</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">55.14458</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">11</td>
 </tr>
-<tr class="even">
-<td align="right">2014</td>
-<td align="left">NH</td>
-<td align="left">99215</td>
-<td align="left">F</td>
-<td align="right">2014</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99215</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 40 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1038</td>
-<td align="right">14143</td>
-<td align="right">22127</td>
-<td align="right">22127</td>
-<td align="right">190.34</td>
-<td align="right">107.88</td>
-<td align="right">80.60</td>
-<td align="right">82.26</td>
-<td align="right">2014</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99215</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 40 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">78297</td>
-<td align="right">921656</td>
-<td align="right">1612084</td>
-<td align="right">1611956</td>
-<td align="right">274.86</td>
-<td align="right">108.30</td>
-<td align="right">81.42</td>
-<td align="right">82.84</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">27.93500</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">32.68453</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">201</td>
 </tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93010</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">645</td>
-<td align="right">56079</td>
-<td align="right">110143</td>
-<td align="right">102229</td>
-<td align="right">56.43</td>
-<td align="right">8.45</td>
-<td align="right">6.40</td>
-<td align="right">6.41</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93010</td>
-<td align="left">Routine electrocardiogram (EKG) using at least 12 leads
-with interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">76382</td>
-<td align="right">7825850</td>
-<td align="right">18482923</td>
-<td align="right">17169787</td>
-<td align="right">40.68</td>
-<td align="right">8.43</td>
-<td align="right">6.55</td>
-<td align="right">6.57</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">28.42184</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">49.12765</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">249</td>
 </tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93016</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">176</td>
-<td align="right">8796</td>
-<td align="right">9197</td>
-<td align="right">9195</td>
-<td align="right">111.05</td>
-<td align="right">20.66</td>
-<td align="right">15.67</td>
-<td align="right">17.00</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93016</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring and physician supervision</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">20022</td>
-<td align="right">979567</td>
-<td align="right">1010798</td>
-<td align="right">1010711</td>
-<td align="right">84.81</td>
-<td align="right">21.67</td>
-<td align="right">16.68</td>
-<td align="right">17.21</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">28.68194</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">50.75117</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">61</td>
 </tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">93018</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">93018</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring, physician interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">166</td>
-<td align="right">9154</td>
-<td align="right">9519</td>
-<td align="right">9517</td>
-<td align="right">115.14</td>
-<td align="right">14.22</td>
-<td align="right">10.87</td>
-<td align="right">11.11</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">93018</td>
-<td align="left">Exercise or drug-induced heart and blood vessel stress
-test with EKG monitoring, physician interpretation and report</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">21154</td>
-<td align="right">1136031</td>
-<td align="right">1177053</td>
-<td align="right">1176941</td>
-<td align="right">84.38</td>
-<td align="right">14.24</td>
-<td align="right">10.99</td>
-<td align="right">11.23</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99215</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">11.56337</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">13.44511</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">17</td>
 </tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99214</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1704</td>
-<td align="right">86480</td>
-<td align="right">222659</td>
-<td align="right">220634</td>
-<td align="right">142.30</td>
-<td align="right">74.90</td>
-<td align="right">53.86</td>
-<td align="right">56.08</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99214</td>
-<td align="left">Established patient office or other outpatient, visit
-typically 25 minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">145887</td>
-<td align="right">4184322</td>
-<td align="right">10816734</td>
-<td align="right">10813612</td>
-<td align="right">177.00</td>
-<td align="right">75.58</td>
-<td align="right">54.77</td>
-<td align="right">57.06</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99215</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">11.77128</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">13.62524</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">45</td>
 </tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1608</td>
-<td align="right">36763</td>
-<td align="right">171312</td>
-<td align="right">167877</td>
-<td align="right">181.03</td>
-<td align="right">70.65</td>
-<td align="right">55.94</td>
-<td align="right">56.96</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">272776</td>
-<td align="right">4956118</td>
-<td align="right">49161208</td>
-<td align="right">47053068</td>
-<td align="right">148.14</td>
-<td align="right">71.30</td>
-<td align="right">56.56</td>
-<td align="right">56.87</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99217</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">12.95900</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">15.29585</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">14</td>
 </tr>
-<tr class="even">
-<td align="right">2015</td>
-<td align="left">NH</td>
-<td align="left">99233</td>
-<td align="left">F</td>
-<td align="right">2015</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99233</td>
-<td align="left">Subsequent hospital inpatient care, typically 35
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1233</td>
-<td align="right">22807</td>
-<td align="right">76688</td>
-<td align="right">76574</td>
-<td align="right">293.38</td>
-<td align="right">102.40</td>
-<td align="right">81.30</td>
-<td align="right">82.54</td>
-<td align="right">2015</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99233</td>
-<td align="left">Subsequent hospital inpatient care, typically 35
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">212792</td>
-<td align="right">3539096</td>
-<td align="right">22192309</td>
-<td align="right">21652485</td>
-<td align="right">220.21</td>
-<td align="right">103.34</td>
-<td align="right">82.05</td>
-<td align="right">82.27</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99223</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">18.75818</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">20.82321</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">15</td>
 </tr>
-<tr class="odd">
-<td align="right">2016</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">2016</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1594</td>
-<td align="right">37098</td>
-<td align="right">179671</td>
-<td align="right">174228</td>
-<td align="right">185.57</td>
-<td align="right">70.23</td>
-<td align="right">55.59</td>
-<td align="right">55.54</td>
-<td align="right">2016</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">278763</td>
-<td align="right">4918291</td>
-<td align="right">48606752</td>
-<td align="right">46793345</td>
-<td align="right">154.35</td>
-<td align="right">70.59</td>
-<td align="right">55.95</td>
-<td align="right">56.30</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99223</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">18.15262</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">19.54992</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">66</td>
 </tr>
-<tr class="even">
-<td align="right">2016</td>
-<td align="left">NH</td>
-<td align="left">99233</td>
-<td align="left">F</td>
-<td align="right">2016</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99233</td>
-<td align="left">Subsequent hospital inpatient care, typically 35
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1196</td>
-<td align="right">22906</td>
-<td align="right">78091</td>
-<td align="right">78021</td>
-<td align="right">299.93</td>
-<td align="right">101.80</td>
-<td align="right">80.64</td>
-<td align="right">80.49</td>
-<td align="right">2016</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99233</td>
-<td align="left">Subsequent hospital inpatient care, typically 35
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">217948</td>
-<td align="right">3559873</td>
-<td align="right">22498516</td>
-<td align="right">22025679</td>
-<td align="right">232.08</td>
-<td align="right">102.50</td>
-<td align="right">81.31</td>
-<td align="right">81.48</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">18.16919</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">22.86256</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">11</td>
 </tr>
-<tr class="odd">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99223</td>
-<td align="left">F</td>
-<td align="right">2017</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1301</td>
-<td align="right">27091</td>
-<td align="right">39794</td>
-<td align="right">39792</td>
-<td align="right">534.96</td>
-<td align="right">199.79</td>
-<td align="right">157.03</td>
-<td align="right">157.06</td>
-<td align="right">2017</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">235709</td>
-<td align="right">4421471</td>
-<td align="right">10722231</td>
-<td align="right">10720460</td>
-<td align="right">453.16</td>
-<td align="right">200.00</td>
-<td align="right">156.83</td>
-<td align="right">157.60</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2016</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">17.64327</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">23.27353</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">12</td>
 </tr>
-<tr class="even">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">2017</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1598</td>
-<td align="right">38933</td>
-<td align="right">188900</td>
-<td align="right">178167</td>
-<td align="right">190.52</td>
-<td align="right">70.62</td>
-<td align="right">55.75</td>
-<td align="right">55.95</td>
-<td align="right">2017</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">284633</td>
-<td align="right">4857437</td>
-<td align="right">47346871</td>
-<td align="right">45814942</td>
-<td align="right">162.37</td>
-<td align="right">71.02</td>
-<td align="right">56.23</td>
-<td align="right">56.58</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">17.06561</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.36358</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">28</td>
 </tr>
-<tr class="odd">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99239</td>
-<td align="left">F</td>
-<td align="right">2017</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99239</td>
-<td align="left">Hospital discharge day management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">620</td>
-<td align="right">23392</td>
-<td align="right">29677</td>
-<td align="right">29677</td>
-<td align="right">302.08</td>
-<td align="right">106.38</td>
-<td align="right">83.91</td>
-<td align="right">83.51</td>
-<td align="right">2017</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99239</td>
-<td align="left">Hospital discharge day management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">100042</td>
-<td align="right">3285085</td>
-<td align="right">4846563</td>
-<td align="right">4846410</td>
-<td align="right">280.38</td>
-<td align="right">105.58</td>
-<td align="right">83.44</td>
-<td align="right">84.23</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16.20305</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">21.87080</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">101</td>
 </tr>
-<tr class="even">
-<td align="right">2017</td>
-<td align="left">NH</td>
-<td align="left">99316</td>
-<td align="left">F</td>
-<td align="right">2017</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99316</td>
-<td align="left">Nursing facility discharge management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">114</td>
-<td align="right">2434</td>
-<td align="right">2725</td>
-<td align="right">2725</td>
-<td align="right">187.14</td>
-<td align="right">95.04</td>
-<td align="right">73.28</td>
-<td align="right">73.00</td>
-<td align="right">2017</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99316</td>
-<td align="left">Nursing facility discharge management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">14448</td>
-<td align="right">312172</td>
-<td align="right">347110</td>
-<td align="right">347049</td>
-<td align="right">203.75</td>
-<td align="right">97.37</td>
-<td align="right">76.15</td>
-<td align="right">76.18</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99233</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16.63172</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">18.49716</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">12</td>
 </tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99217</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99217</td>
-<td align="left">Hospital observation care on day of discharge</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">578</td>
-<td align="right">8841</td>
-<td align="right">9699</td>
-<td align="right">9699</td>
-<td align="right">242.32</td>
-<td align="right">71.27</td>
-<td align="right">55.63</td>
-<td align="right">55.02</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99217</td>
-<td align="left">Hospital observation care on day of discharge</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">95420</td>
-<td align="right">1236548</td>
-<td align="right">1410144</td>
-<td align="right">1410048</td>
-<td align="right">207.38</td>
-<td align="right">71.11</td>
-<td align="right">55.67</td>
-<td align="right">56.38</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2016</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99233</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16.33359</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">19.15217</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">14</td>
 </tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99223</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1322</td>
-<td align="right">25845</td>
-<td align="right">37209</td>
-<td align="right">37209</td>
-<td align="right">547.11</td>
-<td align="right">201.62</td>
-<td align="right">158.76</td>
-<td align="right">157.62</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99223</td>
-<td align="left">Initial hospital inpatient care, typically 70 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">239293</td>
-<td align="right">4343796</td>
-<td align="right">10636617</td>
-<td align="right">10635084</td>
-<td align="right">470.12</td>
-<td align="right">200.98</td>
-<td align="right">157.58</td>
-<td align="right">158.07</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99238</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">15.80838</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">12.60802</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16</td>
 </tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99232</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">1695</td>
-<td align="right">37071</td>
-<td align="right">185902</td>
-<td align="right">175352</td>
-<td align="right">194.84</td>
-<td align="right">72.21</td>
-<td align="right">57.15</td>
-<td align="right">56.83</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99232</td>
-<td align="left">Subsequent hospital inpatient care, typically 25
-minutes per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">291421</td>
-<td align="right">4721908</td>
-<td align="right">45851358</td>
-<td align="right">44546013</td>
-<td align="right">167.09</td>
-<td align="right">71.94</td>
-<td align="right">56.96</td>
-<td align="right">57.21</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99239</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">32.83706</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">37.72903</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">29</td>
 </tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99238</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99238</td>
-<td align="left">Hospital discharge day management, 30 minutes or
-less</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">773</td>
-<td align="right">9746</td>
-<td align="right">10682</td>
-<td align="right">10682</td>
-<td align="right">215.10</td>
-<td align="right">71.91</td>
-<td align="right">56.61</td>
-<td align="right">56.22</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99238</td>
-<td align="left">Hospital discharge day management, 30 minutes or
-less</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">132080</td>
-<td align="right">2087971</td>
-<td align="right">2773138</td>
-<td align="right">2772966</td>
-<td align="right">176.69</td>
-<td align="right">71.60</td>
-<td align="right">56.40</td>
-<td align="right">57.21</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99239</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">33.01304</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">38.03528</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">91</td>
 </tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99239</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99239</td>
-<td align="left">Hospital discharge day management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">652</td>
-<td align="right">24799</td>
-<td align="right">31789</td>
-<td align="right">31789</td>
-<td align="right">299.78</td>
-<td align="right">107.42</td>
-<td align="right">84.92</td>
-<td align="right">83.96</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99239</td>
-<td align="left">Hospital discharge day management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">102178</td>
-<td align="right">3373206</td>
-<td align="right">5021889</td>
-<td align="right">5021769</td>
-<td align="right">290.96</td>
-<td align="right">106.30</td>
-<td align="right">83.96</td>
-<td align="right">84.55</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99305</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.05292</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">20.44882</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16</td>
 </tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99305</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99305</td>
-<td align="left">Initial nursing facility visit, typically 35 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">127</td>
-<td align="right">2597</td>
-<td align="right">3101</td>
-<td align="right">3101</td>
-<td align="right">250.15</td>
-<td align="right">127.94</td>
-<td align="right">99.60</td>
-<td align="right">100.02</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99305</td>
-<td align="left">Initial nursing facility visit, typically 35 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">23809</td>
-<td align="right">572676</td>
-<td align="right">762714</td>
-<td align="right">762653</td>
-<td align="right">243.56</td>
-<td align="right">128.97</td>
-<td align="right">100.77</td>
-<td align="right">100.51</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99306</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">32.51456</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">23.47115</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">28</td>
 </tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99306</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99306</td>
-<td align="left">Initial nursing facility visit, typically 45 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">104</td>
-<td align="right">2441</td>
-<td align="right">2834</td>
-<td align="right">2834</td>
-<td align="right">319.22</td>
-<td align="right">164.72</td>
-<td align="right">128.59</td>
-<td align="right">128.35</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99306</td>
-<td align="left">Initial nursing facility visit, typically 45 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">23321</td>
-<td align="right">758272</td>
-<td align="right">1047285</td>
-<td align="right">1046989</td>
-<td align="right">306.57</td>
-<td align="right">165.70</td>
-<td align="right">129.88</td>
-<td align="right">129.76</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99308</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">27.91077</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.80176</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">26</td>
 </tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99308</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99308</td>
-<td align="left">Subsequent nursing facility visit, typically 15 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">227</td>
-<td align="right">5630</td>
-<td align="right">16676</td>
-<td align="right">16676</td>
-<td align="right">119.56</td>
-<td align="right">62.28</td>
-<td align="right">46.15</td>
-<td align="right">46.03</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99308</td>
-<td align="left">Subsequent nursing facility visit, typically 15 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">40706</td>
-<td align="right">1136136</td>
-<td align="right">6621288</td>
-<td align="right">6608853</td>
-<td align="right">130.08</td>
-<td align="right">65.86</td>
-<td align="right">50.57</td>
-<td align="right">50.33</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99309</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">30.59486</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">31.77512</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">50</td>
 </tr>
-<tr class="odd">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99309</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99309</td>
-<td align="left">Subsequent nursing facility visit, typically 25 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">209</td>
-<td align="right">6641</td>
-<td align="right">22728</td>
-<td align="right">22728</td>
-<td align="right">179.16</td>
-<td align="right">83.25</td>
-<td align="right">63.31</td>
-<td align="right">62.51</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99309</td>
-<td align="left">Subsequent nursing facility visit, typically 25 minutes
-per day</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">37180</td>
-<td align="right">1137517</td>
-<td align="right">5939273</td>
-<td align="right">5933718</td>
-<td align="right">177.66</td>
-<td align="right">85.83</td>
-<td align="right">66.25</td>
-<td align="right">66.00</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99316</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">21.60659</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">21.35088</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">13</td>
 </tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">NH</td>
-<td align="left">99316</td>
-<td align="left">F</td>
-<td align="right">2018</td>
-<td align="left">State</td>
-<td align="left">New Hampshire</td>
-<td align="left">33</td>
-<td align="left">99316</td>
-<td align="left">Nursing facility discharge management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">120</td>
-<td align="right">2811</td>
-<td align="right">3095</td>
-<td align="right">3095</td>
-<td align="right">196.65</td>
-<td align="right">95.52</td>
-<td align="right">74.42</td>
-<td align="right">73.68</td>
-<td align="right">2018</td>
-<td align="left">National</td>
-<td align="left">National</td>
-<td align="left">NA</td>
-<td align="left">99316</td>
-<td align="left">Nursing facility discharge management, more than 30
-minutes</td>
-<td align="left">FALSE</td>
-<td align="left">F</td>
-<td align="right">14845</td>
-<td align="right">324916</td>
-<td align="right">363046</td>
-<td align="right">363024</td>
-<td align="right">208.73</td>
-<td align="right">97.67</td>
-<td align="right">76.43</td>
-<td align="right">76.36</td>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99316</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">beneficiaries</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">21.88723</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">23.42500</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">67</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">257.80423</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">369.50323</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">187</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">247.48206</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">186.19711</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">229</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93010</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">241.98009</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">170.76434</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">34</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">48.77646</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">55.98594</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">383</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">49.54921</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">74.29032</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">381</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93016</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">50.48437</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">52.25568</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">100</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">93018</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">55.64210</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">57.34337</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">11</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">70.23849</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">90.71014</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">341</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">72.54450</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">128.04732</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">377</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99214</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">74.14461</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">130.66843</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">79</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2013</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99215</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">20.20828</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">23.12517</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">19</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2014</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99215</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">20.58935</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">21.31696</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">45</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99217</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">14.77829</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16.78028</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">14</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99223</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">45.48927</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">30.58724</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">15</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99223</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">44.45018</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">28.14599</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">67</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">180.22556</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">106.53731</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">18</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2016</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">174.36587</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">112.71706</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">166.34358</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">118.21026</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">38</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99232</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">157.33718</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">109.67670</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">217</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2015</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99233</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">104.29109</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">62.19627</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">15</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2016</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99233</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">103.22883</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">65.29348</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">19</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99238</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">20.99590</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">13.81889</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99239</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">48.44528</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">47.86613</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">31</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99239</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">49.14844</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">48.75613</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">95</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99305</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">32.03469</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.41732</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">16</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99306</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">44.90738</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">27.25000</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">31</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99308</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">162.66123</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">73.46256</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">33</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99309</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">159.74376</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">108.74641</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">113</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2017</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99316</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.02478</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">23.90351</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">13</td>
+</tr>
+<tr>
+<td headers="year" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">2018</td>
+<td headers="hcpcs_code" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">99316</td>
+<td headers="pos" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">F</td>
+<td headers="measure" class="gt_row gt_left" style="font-family: 'Source Sans Pro'; font-weight: 400;">services</td>
+<td headers="National" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">24.45578</td>
+<td headers="State" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">25.79167</td>
+<td headers="individual" class="gt_row gt_right" style="font-family: 'Source Sans Pro'; font-weight: 400;">79</td>
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/by_geography.html">by_geography</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2014</span>, </span>
-<span>             state <span class="op">=</span> <span class="st">"New Hampshire"</span>, </span>
-<span>             hcpcs_code <span class="op">=</span> <span class="st">"93010"</span>, </span>
-<span>             pos <span class="op">=</span> <span class="st">"F"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>avg_benes <span class="op">=</span> <span class="va">tot_benes</span> <span class="op">/</span> <span class="va">tot_provs</span>,</span>
-<span>         avg_srvcs <span class="op">=</span> <span class="va">tot_srvcs</span> <span class="op">/</span> <span class="va">tot_provs</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span>, </span>
-<span>         <span class="va">sublevel</span>, </span>
-<span>         <span class="va">hcpcs_code</span>, </span>
-<span>         <span class="va">pos</span>, </span>
-<span>         <span class="va">avg_benes</span>, </span>
-<span>         <span class="va">avg_srvcs</span>, </span>
-<span>         <span class="va">avg_charge</span>, </span>
-<span>         <span class="va">avg_allowed</span>, </span>
-<span>         <span class="va">avg_payment</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `sublevel` doesn't exist.</span></span></code></pre></div>
+</div>
+<p><br></p>
 </div>
 <div class="section level3">
 <h3 id="data-dictionary">Data Dictionary<a class="anchor" aria-label="anchor" href="#data-dictionary"></a>
 </h3>
-<div id="xwonorxdky" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zakymxgtyb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#xwonorxdky table {
+#zakymxgtyb table {
   font-family: Karla, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xwonorxdky thead, #xwonorxdky tbody, #xwonorxdky tfoot, #xwonorxdky tr, #xwonorxdky td, #xwonorxdky th {
+#zakymxgtyb thead, #zakymxgtyb tbody, #zakymxgtyb tfoot, #zakymxgtyb tr, #zakymxgtyb td, #zakymxgtyb th {
   border-style: none;
 }
 
-#xwonorxdky p {
+#zakymxgtyb p {
   margin: 0;
   padding: 0;
 }
 
-#xwonorxdky .gt_table {
+#zakymxgtyb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1969,12 +1637,12 @@ minutes</td>
   border-left-color: #D3D3D3;
 }
 
-#xwonorxdky .gt_caption {
+#zakymxgtyb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xwonorxdky .gt_title {
+#zakymxgtyb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1986,7 +1654,7 @@ minutes</td>
   border-bottom-width: 0;
 }
 
-#xwonorxdky .gt_subtitle {
+#zakymxgtyb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1998,7 +1666,7 @@ minutes</td>
   border-top-width: 0;
 }
 
-#xwonorxdky .gt_heading {
+#zakymxgtyb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2010,13 +1678,13 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#xwonorxdky .gt_bottom_border {
+#zakymxgtyb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_col_headings {
+#zakymxgtyb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2031,7 +1699,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#xwonorxdky .gt_col_heading {
+#zakymxgtyb .gt_col_heading {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2051,7 +1719,7 @@ minutes</td>
   overflow-x: hidden;
 }
 
-#xwonorxdky .gt_column_spanner_outer {
+#zakymxgtyb .gt_column_spanner_outer {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -2063,15 +1731,15 @@ minutes</td>
   padding-right: 4px;
 }
 
-#xwonorxdky .gt_column_spanner_outer:first-child {
+#zakymxgtyb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xwonorxdky .gt_column_spanner_outer:last-child {
+#zakymxgtyb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xwonorxdky .gt_column_spanner {
+#zakymxgtyb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -2083,11 +1751,11 @@ minutes</td>
   width: 100%;
 }
 
-#xwonorxdky .gt_spanner_row {
+#zakymxgtyb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xwonorxdky .gt_group_heading {
+#zakymxgtyb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2113,7 +1781,7 @@ minutes</td>
   text-align: left;
 }
 
-#xwonorxdky .gt_empty_group_heading {
+#zakymxgtyb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2128,15 +1796,15 @@ minutes</td>
   vertical-align: middle;
 }
 
-#xwonorxdky .gt_from_md > :first-child {
+#zakymxgtyb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xwonorxdky .gt_from_md > :last-child {
+#zakymxgtyb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xwonorxdky .gt_row {
+#zakymxgtyb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2155,7 +1823,7 @@ minutes</td>
   overflow-x: hidden;
 }
 
-#xwonorxdky .gt_stub {
+#zakymxgtyb .gt_stub {
   color: #333333;
   background-color: #FFCCC7;
   font-size: 100%;
@@ -2168,7 +1836,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#xwonorxdky .gt_stub_row_group {
+#zakymxgtyb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2182,15 +1850,15 @@ minutes</td>
   vertical-align: top;
 }
 
-#xwonorxdky .gt_row_group_first td {
+#zakymxgtyb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xwonorxdky .gt_row_group_first th {
+#zakymxgtyb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xwonorxdky .gt_summary_row {
+#zakymxgtyb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2200,16 +1868,16 @@ minutes</td>
   padding-right: 5px;
 }
 
-#xwonorxdky .gt_first_summary_row {
+#zakymxgtyb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_first_summary_row.thick {
+#zakymxgtyb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xwonorxdky .gt_last_summary_row {
+#zakymxgtyb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2219,7 +1887,7 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_grand_summary_row {
+#zakymxgtyb .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -2229,7 +1897,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#xwonorxdky .gt_first_grand_summary_row {
+#zakymxgtyb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2239,7 +1907,7 @@ minutes</td>
   border-top-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_last_grand_summary_row_top {
+#zakymxgtyb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2249,11 +1917,11 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_striped {
+#zakymxgtyb .gt_striped {
   background-color: #FEEDEC;
 }
 
-#xwonorxdky .gt_table_body {
+#zakymxgtyb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -2262,7 +1930,7 @@ minutes</td>
   border-bottom-color: #5F5F5F;
 }
 
-#xwonorxdky .gt_footnotes {
+#zakymxgtyb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2276,7 +1944,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#xwonorxdky .gt_footnote {
+#zakymxgtyb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2285,7 +1953,7 @@ minutes</td>
   padding-right: 5px;
 }
 
-#xwonorxdky .gt_sourcenotes {
+#zakymxgtyb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2299,7 +1967,7 @@ minutes</td>
   border-right-color: #D3D3D3;
 }
 
-#xwonorxdky .gt_sourcenote {
+#zakymxgtyb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2307,63 +1975,63 @@ minutes</td>
   padding-right: 5px;
 }
 
-#xwonorxdky .gt_left {
+#zakymxgtyb .gt_left {
   text-align: left;
 }
 
-#xwonorxdky .gt_center {
+#zakymxgtyb .gt_center {
   text-align: center;
 }
 
-#xwonorxdky .gt_right {
+#zakymxgtyb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xwonorxdky .gt_font_normal {
+#zakymxgtyb .gt_font_normal {
   font-weight: normal;
 }
 
-#xwonorxdky .gt_font_bold {
+#zakymxgtyb .gt_font_bold {
   font-weight: bold;
 }
 
-#xwonorxdky .gt_font_italic {
+#zakymxgtyb .gt_font_italic {
   font-style: italic;
 }
 
-#xwonorxdky .gt_super {
+#zakymxgtyb .gt_super {
   font-size: 65%;
 }
 
-#xwonorxdky .gt_footnote_marks {
+#zakymxgtyb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xwonorxdky .gt_asterisk {
+#zakymxgtyb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xwonorxdky .gt_indent_1 {
+#zakymxgtyb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xwonorxdky .gt_indent_2 {
+#zakymxgtyb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xwonorxdky .gt_indent_3 {
+#zakymxgtyb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xwonorxdky .gt_indent_4 {
+#zakymxgtyb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xwonorxdky .gt_indent_5 {
+#zakymxgtyb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
