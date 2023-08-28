@@ -195,6 +195,26 @@ utils::globalVariables(c(
   "tot_std_pymt_percap", # <cc_specific>
   "tot_pymt_percap", # <cc_specific>
   "er_visits_per_1k", # <cc_specific>
+  "distro", # <clia_labs>
+  "fac_name", # <clia_labs>
+  "prvdr_num", # <clia_labs>
+  "clia_mdcr_num", # <clia_labs>
+  "prvdr_ctgry_cd", # <clia_labs>
+  "prvdr_ctgry_sbtyp_cd", # <clia_labs>
+  "acptbl_poc_sw", # <clia_labs>
+  "cmplnc_stus_cd", # <clia_labs>
+  "elgblty_sw", # <clia_labs>
+  "city_name", # <clia_labs>
+  "state_cd", # <clia_labs>
+  "aplctn_rcvd_dt", # <clia_labs>
+  "current_clia_lab_clsfctn_cd", # <clia_labs>
+  "pgm_trmntn_cd", # <clia_labs>
+  "trmntn_exprtn_dt", # <clia_labs>
+  "crtfctn_actn_type_cd", # <clia_labs>
+  "gnrl_cntl_type_cd", # <clia_labs>
+  "related_provider_number", # <clia_labs>
+  "term_code", # <clia_labs>
+  "type_of_action", # <clia_labs>
   "zipcode", # <clinicians>
   "ind_assn", # <clinicians>
   "group_assn", # <clinicians>

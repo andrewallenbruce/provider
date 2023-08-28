@@ -30,12 +30,8 @@ library(tidyverse)
 by_provider_years() |> 
   map(\(x) by_provider(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
-  unnest_wider(conditions) |> 
   select(year, 
-         first_name, 
-         last_name, 
-         credential, 
-         city, 
+         credential,
          state,
          hcc_risk_avg, 
          tot_hcpcs:tot_payment)
@@ -48,10 +44,8 @@ by_service_years() |>
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
   select(year, 
-         #city,
          state,
          hcpcs_code, 
-         #hcpcs_desc, 
          pos, 
          tot_benes, 
          tot_srvcs, 
@@ -78,7 +72,7 @@ geography |>
 
 ```{r}
 by_geography(year = 2014, 
-             sublevel = "New Hampshire", 
+             state = "New Hampshire", 
              hcpcs_code = "93010", 
              pos = "F") |> 
   mutate(avg_benes = tot_benes / tot_provs,

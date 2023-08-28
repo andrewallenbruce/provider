@@ -244,10 +244,10 @@ by_provider <- function(year,
                     hcc_risk_avg  = bene_avg_risk_scre) |>
       dplyr::mutate(credential = clean_credentials(credential),
                     entity_type = entype_char(entity_type)) |>
-      tidyr::nest(medical = dplyr::contains("med_"),
-                  drug = dplyr::contains("drug_"),
-                  demographics = dplyr::contains("bene_"),
-                  conditions = dplyr::contains("cc_"))
+      tidyr::nest(medical = dplyr::starts_with("med_"),
+                  drug = dplyr::starts_with("drug_"),
+                  demographics = dplyr::starts_with("bene_"),
+                  conditions = dplyr::starts_with("cc_"))
 
     # if (results$entity_type == "Organization") {results <- dplyr::mutate(results, organization_name = last_name, .before = entity_type) |> dplyr::mutate(last_name = NA)}
     # if (results$entity_type == "Individual") {results <- dplyr::mutate(results, organization_name = NA, .before = entity_type)}
