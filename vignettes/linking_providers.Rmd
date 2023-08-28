@@ -143,3 +143,11 @@ left_join(elizabeth.prov.pac,
   arrange(desc(organization_reassignments))
 ```
 
+
+
+```{r}
+clia_labs(clia = "11D0265516") |> 
+  janitor::remove_empty(which = c("rows", "cols")) |> 
+  dplyr::glimpse()
+```
+

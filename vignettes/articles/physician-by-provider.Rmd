@@ -27,35 +27,66 @@ library(tidyverse)
 ### Examples
 
 ```{r}
-by_provider_years() |> 
+all <- by_provider_years() |> 
   map(\(x) by_provider(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
   select(year, 
-         credential,
          state,
          hcc_risk_avg, 
-         tot_hcpcs:tot_payment)
+         tot_hcpcs:tot_payment,
+         demographics,
+         conditions)
+
+stats <- quality_payment_years() |> 
+  map(\(x) quality_stats(year = x)) |> 
+  list_rbind()
+
+all |> select(-c(demographics, conditions))
+```
+
+
+```{r}
+stats |> 
+  filter(type == "Individual", 
+         stat == "HCC Risk Score Average") |> 
+  select(year, 
+         hcc_risk_avg = value)
+```
+
+
+```{r}
+all |> 
+  unnest(demographics) |> 
+  mutate(dual_eligibility_ratio = bene_dual / bene_ndual) |> 
+  select(year, dual_eligibility_ratio)
+```
+
+
+
+
+```{r}
+stats |> 
+  filter(type == "Individual", 
+         stat == "Dual Eligibility Average") |> 
+  select(year, 
+         dual_eligibility_ratio = value)
+```
+
+
+```{r}
+all |> 
+  select(year, conditions) |> 
+  unnest(conditions)
 ```
 
 
 
 ```{r}
-by_service_years() |> 
+service <- by_service_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
-  select(year, 
-         state,
-         hcpcs_code, 
-         pos, 
-         tot_benes, 
-         tot_srvcs, 
-         avg_charge, 
-         avg_allowed, 
-         avg_payment)
-```
+  mutate(level = "individual")
 
-
-```{r}
 geography <- by_service_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
@@ -63,31 +94,62 @@ geography <- by_service_years() |>
   rowwise() |> 
   mutate(statewide = by_geography(year, state, hcpcs_code, pos),
          national = by_geography(year, state = "National", hcpcs_code, pos))
-
-geography |> 
-  unnest(national, names_sep = ".") |> 
-  unnest(statewide, names_sep = ".")
 ```
 
+<br>
 
 ```{r}
-by_geography(year = 2014, 
-             state = "New Hampshire", 
-             hcpcs_code = "93010", 
-             pos = "F") |> 
-  mutate(avg_benes = tot_benes / tot_provs,
-         avg_srvcs = tot_srvcs / tot_provs) |> 
+bind_rows(
+  mutate(geography$national, 
+         beneficiaries = tot_benes / tot_provs,
+         services = tot_srvcs / tot_provs) |> 
   select(year, 
-         sublevel, 
+         level,
          hcpcs_code, 
          pos, 
-         avg_benes, 
-         avg_srvcs, 
+         beneficiaries, 
+         services, 
          avg_charge, 
          avg_allowed, 
-         avg_payment)
+         avg_payment),
+  mutate(geography$statewide, 
+         beneficiaries = tot_benes / tot_provs,
+         services = tot_srvcs / tot_provs) |> 
+  select(year, 
+         level,
+         hcpcs_code, 
+         pos, 
+         beneficiaries, 
+         services, 
+         avg_charge, 
+         avg_allowed, 
+         avg_payment), 
+  select(service,
+         year, 
+         level,
+         hcpcs_code, 
+         pos, 
+         beneficiaries = tot_benes, 
+         services = tot_srvcs, 
+         avg_charge, 
+         avg_allowed, 
+         avg_payment)) |> 
+  pivot_wider(names_from = level, 
+              values_from = beneficiaries:avg_payment) |> 
+  pivot_longer(!year:pos, 
+               names_to = "stat", 
+               values_to = "amount") |> 
+  separate_wider_regex(stat, c(measure = ".*", "_", level = ".*")) |> 
+  pivot_wider(names_from = level, 
+              values_from = amount) |> 
+  filter(measure %in% c("beneficiaries", "services")) |> 
+  arrange(measure, hcpcs_code) |> 
+  gt::gt() |> 
+  gtExtras::gt_theme_nytimes()
 ```
 
+
+<br>
 
 ### Data Dictionary
 

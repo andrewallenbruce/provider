@@ -56,7 +56,6 @@ responsibilities.
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 clia_labs(city = "Valdosta")
-clia_labs(clia_number = "00205114A3")
 clia_labs(clia = "11D0265516")
 \dontshow{\}) # examplesIf}
 }
