@@ -153,11 +153,10 @@ by_provider <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
+  # parse response
   results <- tibble::tibble(httr2::resp_body_json(response,
              check_type = FALSE, simplifyVector = TRUE))
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year),
@@ -166,7 +165,7 @@ by_provider <- function(year,
                     rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
                     dplyr::across(dplyr::ends_with(c("_hcpcs_cds", "_benes", "_srvcs", "_cnt")), ~as.integer(.)),
                     dplyr::across(dplyr::ends_with(c("amt", "chrg", "pct")), ~as.double(.))) |>
-      tidyr::unite("street",
+      tidyr::unite("address",
                    dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
                    remove = TRUE,
                    na.rm = TRUE,
@@ -179,7 +178,7 @@ by_provider <- function(year,
                     credential     = rndrng_prvdr_crdntls,
                     gender         = rndrng_prvdr_gndr,
                     entity_type    = rndrng_prvdr_ent_cd,
-                    street,
+                    address,
                     city           = rndrng_prvdr_city,
                     state          = rndrng_prvdr_state_abrvtn,
                     fips           = rndrng_prvdr_state_fips,

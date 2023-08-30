@@ -226,7 +226,7 @@ by_service <- function(year,
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year),
-                    level = "individual",
+                    level = "Provider",
                     dplyr::across(c(tot_benes,
                                     tot_srvcs,
                                     tot_bene_day_srvcs), ~as.integer(.)),

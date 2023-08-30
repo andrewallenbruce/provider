@@ -21,13 +21,13 @@ Centers for Medicare & Medicaid Services
 \usage{
 cc_specific(
   year,
-  level = NULL,
+  condition = NULL,
   sublevel = NULL,
+  level = NULL,
   fips = NULL,
   age_group = NULL,
   demographic = NULL,
   subdemo = NULL,
-  condition = NULL,
   tidy = TRUE
 )
 }
@@ -36,13 +36,21 @@ cc_specific(
 helper function \code{provider:::cc_specific_years()} to return a vector of
 currently available years.}
 
-\item{level}{Geographic level of data; options are \code{National}, \code{State},
-and \code{County}}
+\item{condition}{Identifies the chronic condition for which the prevalence
+and utilization is compiled. There are 21 chronic conditions identified
+using Medicare administrative claims. A Medicare beneficiary is
+considered to have a chronic condition if the CMS administrative data
+have a claim indicating that the beneficiary received a service or
+treatment for the specific condition. Beneficiaries may have more than
+one of the chronic conditions listed.}
 
 \item{sublevel}{The state and/or county where the Medicare beneficiary
 resides. The values include the 50 United States, District of Columbia,
 Puerto Rico or U.S. Virgin Islands. Data aggregated at the National level
 are identified by "National'.}
+
+\item{level}{Geographic level of data; options are \code{National}, \code{State},
+and \code{County}}
 
 \item{fips}{FIPS state and/or county code where the Medicare beneficiary
 resides. This column will be blank for data aggregated at the National
@@ -73,14 +81,6 @@ Beneficiaries enrolled in both Medicare and Medicaid are known as “dual
 eligibles.” Medicare beneficiaries are classified as dual eligibles if in
 any month in the given calendar year they were receiving full or partial
 Medicaid benefits.}
-
-\item{condition}{Identifies the chronic condition for which the prevalence
-and utilization is compiled. There are 21 chronic conditions identified
-using Medicare administrative claims. A Medicare beneficiary is
-considered to have a chronic condition if the CMS administrative data
-have a claim indicating that the beneficiary received a service or
-treatment for the specific condition. Beneficiaries may have more than
-one of the chronic conditions listed.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }

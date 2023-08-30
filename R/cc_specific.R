@@ -96,13 +96,13 @@
 #' @autoglobal
 #' @export
 cc_specific <- function(year,
-                        level         = NULL,
+                        condition     = NULL,
                         sublevel      = NULL,
+                        level         = NULL,
                         fips          = NULL,
                         age_group     = NULL,
                         demographic   = NULL,
                         subdemo       = NULL,
-                        condition     = NULL,
                         tidy          = TRUE) {
 
   # match args ----------------------------------------------------
@@ -112,6 +112,12 @@ cc_specific <- function(year,
   if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
+
+  if (!is.null(sublevel) && (sublevel %in% state.abb)) {
+    sublevel <- dplyr::tibble(x = state.abb, y = state.name) |>
+      dplyr::filter(x == sublevel) |>
+      dplyr::pull(y)
+  }
 
   # update distribution ids -------------------------------------------------
   id <- cms_update(api = "Specific Chronic Conditions", check = "id") |>
@@ -171,24 +177,22 @@ cc_specific <- function(year,
   results <- tibble::tibble(httr2::resp_body_json(response,
              check_type = FALSE, simplifyVector = TRUE))
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(year                = as.integer(year)) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
-                    level               = bene_geo_lvl,
-                    sublevel            = bene_geo_desc,
-                    fips                = bene_geo_cd,
-                    age_group           = bene_age_lvl,
-                    demographic         = bene_demo_lvl,
-                    subdemo             = bene_demo_desc,
-                    condition           = bene_cond,
-                    prevalence          = prvlnc,
+                    level = bene_geo_lvl,
+                    sublevel = bene_geo_desc,
+                    fips = bene_geo_cd,
+                    age_group = bene_age_lvl,
+                    demographic = bene_demo_lvl,
+                    subdemo = bene_demo_desc,
+                    condition = bene_cond,
+                    prevalence = prvlnc,
                     tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
-                    tot_pymt_percap     = tot_mdcr_pymt_pc,
+                    tot_pymt_percap = tot_mdcr_pymt_pc,
                     hosp_readmsn_rate,
-                    er_visits_per_1k    = er_visits_per_1000_benes) |>
+                    er_visits_per_1k = er_visits_per_1000_benes) |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(c(prevalence,
                                     tot_std_pymt_percap,

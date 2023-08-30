@@ -1,19 +1,8 @@
-#' Compare
+#' Compare Yearly HCPCS Utilization Data
 #'
 #' @description
-#' `clia()` allows you to search for information on clinical laboratories
-#' including demographics and the type of testing services the facility provides.
-#'
-#' ## Clinical Laboratory Improvement Amendments (CLIA)
-#' CMS regulates all laboratory testing (except research) performed on humans
-#' in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
-#' In total, CLIA covers approximately 320,000 laboratory entities. The Division
-#' of Clinical Laboratory Improvement & Quality, within the Quality, Safety &
-#' Oversight Group, under the Center for Clinical Standards and Quality (CCSQ)
-#' has the responsibility for implementing the CLIA Program. Although all
-#' clinical laboratories must be properly certified to receive Medicare or
-#' Medicaid payments, CLIA has no direct Medicare or Medicaid program
-#' responsibilities.
+#' `compare_hcpcs()` allows you to compare yearly HCPCS utilization by provider,
+#' state and national averages
 #'
 #' @param df data frame returned by `by_service()`
 #' @return A [tibble][tibble::tibble-package] containing the results.
@@ -22,13 +11,11 @@
 #' by_service_years() |>
 #' purrr::map(\(x) by_service(year = x, npi = 1023076643)) |>
 #' purrr::list_rbind() |>
-#' compare_geography()
-#' mutate(level = "individual")
+#' compare_hcpcs()
 #'
 #' @autoglobal
 #' @export
-
-compare_geography <- function(df) {
+compare_hcpcs <- function(df) {
 
   g <- df |>
     dplyr::select(year, state, hcpcs_code, pos) |>
@@ -40,7 +27,7 @@ compare_geography <- function(df) {
                                           pos),
                   .keep = "none")
 
-  results <- dplyr::bind_rows(
+  results <- vctrs::vec_rbind(
     dplyr::select(df,
                   year,
                   level,
@@ -49,10 +36,9 @@ compare_geography <- function(df) {
                   beneficiaries = tot_benes,
                   services = tot_srvcs,
                   dplyr::contains("avg_")),
-    dplyr::mutate(g$national,
+    dplyr::mutate(g$state,
                   beneficiaries = tot_benes / tot_provs,
-                  services = tot_srvcs / tot_provs,
-                  level = stringr::str_to_lower(level)) |>
+                  services = tot_srvcs / tot_provs) |>
       dplyr::select(year,
                     level,
                     hcpcs_code,
@@ -60,10 +46,9 @@ compare_geography <- function(df) {
                     beneficiaries,
                     services,
                     dplyr::contains("avg_")),
-    dplyr::mutate(g$state,
+    dplyr::mutate(g$national,
                   beneficiaries = tot_benes / tot_provs,
-                  services = tot_srvcs / tot_provs,
-                  level = stringr::str_to_lower(level)) |>
+                  services = tot_srvcs / tot_provs) |>
       dplyr::select(year,
                     level,
                     hcpcs_code,
@@ -74,4 +59,85 @@ compare_geography <- function(df) {
 
   return(results)
 
+}
+
+#' Compare Yearly Chronic Condition Prevalence Data
+#'
+#' @description
+#' `compare_conditions()` allows you to compare yearly chronic condition
+#' prevalence by provider, state and national averages
+#'
+#' @param df data frame returned by `by_provider()`
+#' @return A [tibble][tibble::tibble-package] containing the results.
+#'
+#' @examplesIf interactive()
+#' by_provider_years() |>
+#' purrr::map(\(x) by_provider(year = x, npi = 1023076643)) |>
+#' purrr::list_rbind() |>
+#' compare_conditions()
+#'
+#' @autoglobal
+#' @export
+
+compare_conditions <- function(df) {
+
+  p <- dplyr::select(df, year, conditions) |>
+    tidyr::unnest(conditions) |>
+    dplyr::mutate(level = "Provider", .after = year) |>
+    dplyr::rename("Atrial Fibrillation" = cc_af,
+           "Alzheimer's Disease/Dementia" = cc_alz,
+           "Asthma" = cc_asth,
+           "Cancer" = cc_canc,
+           "Heart Failure" = cc_chf,
+           "Chronic Kidney Disease" = cc_ckd,
+           "COPD" = cc_copd,
+           "Depression" = cc_dep,
+           "Diabetes" = cc_diab,
+           "Hyperlipidemia" = cc_hplip,
+           "Hypertension" = cc_hpten,
+           "Ischemic Heart Disease" = cc_ihd,
+           "Osteoporosis" = cc_opo,
+           "Arthritis" = cc_raoa,
+           "Schizophrenia and Other Psychotic Disorders" = cc_sz,
+           "Stroke" = cc_strk) |>
+    tidyr::pivot_longer(cols = !c(year, level),
+                 names_to = "condition",
+                 values_to = "prevalence") |>
+    dplyr::filter(!is.na(prevalence),
+           year %in% cc_specific_years())
+
+  n <- dplyr::select(p, year, condition) |>
+    dplyr::rowwise() |>
+    dplyr::mutate(national = cc_specific(year,
+                                         condition,
+                                         sublevel = "National",
+                                         demographic = "All",
+                                         subdemo = "All",
+                                         age_group = "All"), .keep = "none")
+
+  s <- dplyr::left_join(dplyr::select(p, year, condition),
+                        dplyr::select(df, year, sublevel = state),
+                        by = dplyr::join_by(year)) |>
+    dplyr::rowwise() |>
+    dplyr::mutate(statewide = cc_specific(year,
+                                          condition,
+                                          sublevel,
+                                          demographic = "All",
+                                          subdemo = "All",
+                                          age_group = "All"), .keep = "none")
+
+  results <- vctrs::vec_rbind(p,
+                   dplyr::select(s$statewide,
+                                 year,
+                                 level,
+                                 condition,
+                                 prevalence),
+                   dplyr::select(n$national,
+                                 year,
+                                 level,
+                                 condition,
+                                 prevalence)) |>
+    dplyr::arrange(year, condition)
+
+  return(results)
 }

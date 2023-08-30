@@ -86,6 +86,12 @@ cc_multiple <- function(year,
   if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
 
+  if (!is.null(sublevel) && (sublevel %in% state.abb)) {
+    sublevel <- dplyr::tibble(x = state.abb, y = state.name) |>
+      dplyr::filter(x == state) |>
+      dplyr::pull(y)
+  }
+
   if (!is.null(subdemo)) {rlang::arg_match(subdemo, c("All", "Medicare Only",
   "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
   "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
@@ -148,7 +154,7 @@ cc_multiple <- function(year,
   # clean names -------------------------------------------------------------
   if (tidy) {
 
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
                     level               = bene_geo_lvl,

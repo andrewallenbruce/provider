@@ -67,7 +67,7 @@ utils::globalVariables(c(
   "rndrng_prvdr_last_org_name", # <by_provider>
   "rndrng_prvdr_gndr", # <by_provider>
   "rndrng_prvdr_ent_cd", # <by_provider>
-  "street", # <by_provider>
+  "address", # <by_provider>
   "rndrng_prvdr_city", # <by_provider>
   "rndrng_prvdr_state_abrvtn", # <by_provider>
   "rndrng_prvdr_state_fips", # <by_provider>
@@ -159,8 +159,12 @@ utils::globalVariables(c(
   "avg_mdcr_alowd_amt", # <by_service>
   "avg_mdcr_pymt_amt", # <by_service>
   "avg_mdcr_stdzd_amt", # <by_service>
-  "distro", # <cc_multiple>
+  "state.abb", # <cc_multiple>
+  "state.name", # <cc_multiple>
+  "x", # <cc_multiple>
+  "state", # <cc_multiple>
   "y", # <cc_multiple>
+  "distro", # <cc_multiple>
   "bene_geo_lvl", # <cc_multiple>
   "bene_geo_desc", # <cc_multiple>
   "bene_geo_cd", # <cc_multiple>
@@ -178,8 +182,11 @@ utils::globalVariables(c(
   "tot_pymt_percap", # <cc_multiple>
   "er_visits_per_1k", # <cc_multiple>
   "mcc", # <cc_multiple>
-  "distro", # <cc_specific>
+  "state.abb", # <cc_specific>
+  "state.name", # <cc_specific>
+  "x", # <cc_specific>
   "y", # <cc_specific>
+  "distro", # <cc_specific>
   "bene_geo_lvl", # <cc_specific>
   "bene_geo_desc", # <cc_specific>
   "bene_geo_cd", # <cc_specific>
@@ -317,16 +324,39 @@ utils::globalVariables(c(
   "ind_assgn", # <clinicians>
   "grp_assgn", # <clinicians>
   "identifier", # <drs_clinics_id>
-  "year", # <compare_geography>
-  "state", # <compare_geography>
-  "hcpcs_code", # <compare_geography>
-  "pos", # <compare_geography>
-  "level", # <compare_geography>
-  "tot_benes", # <compare_geography>
-  "tot_srvcs", # <compare_geography>
-  "tot_provs", # <compare_geography>
-  "beneficiaries", # <compare_geography>
-  "services", # <compare_geography>
+  "year", # <compare_hcpcs>
+  "state", # <compare_hcpcs>
+  "hcpcs_code", # <compare_hcpcs>
+  "pos", # <compare_hcpcs>
+  "level", # <compare_hcpcs>
+  "tot_benes", # <compare_hcpcs>
+  "tot_srvcs", # <compare_hcpcs>
+  "tot_provs", # <compare_hcpcs>
+  "beneficiaries", # <compare_hcpcs>
+  "services", # <compare_hcpcs>
+  "year", # <compare_conditions>
+  "conditions", # <compare_conditions>
+  "cc_af", # <compare_conditions>
+  "cc_alz", # <compare_conditions>
+  "cc_asth", # <compare_conditions>
+  "cc_canc", # <compare_conditions>
+  "cc_chf", # <compare_conditions>
+  "cc_ckd", # <compare_conditions>
+  "cc_copd", # <compare_conditions>
+  "cc_dep", # <compare_conditions>
+  "cc_diab", # <compare_conditions>
+  "cc_hplip", # <compare_conditions>
+  "cc_hpten", # <compare_conditions>
+  "cc_ihd", # <compare_conditions>
+  "cc_opo", # <compare_conditions>
+  "cc_raoa", # <compare_conditions>
+  "cc_sz", # <compare_conditions>
+  "cc_strk", # <compare_conditions>
+  "level", # <compare_conditions>
+  "prevalence", # <compare_conditions>
+  "condition", # <compare_conditions>
+  "state", # <compare_conditions>
+  "sublevel", # <compare_conditions>
   "distro", # <hospitals>
   "y", # <hospitals>
   "address_line_1", # <hospitals>

@@ -27,7 +27,8 @@ Imports:
     strex,
     stringr,
     tidyr,
-    anytime
+    anytime,
+    vctrs
 Suggests: 
     covr,
     gt,

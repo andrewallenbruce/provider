@@ -70,7 +70,7 @@ by_geography <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(by_geography_years()))
 
-  # update distribution ids -------------------------------------------------
+  # update distribution ids
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
                    check = "id") |>
     dplyr::filter(year == {{ year }}) |>
@@ -127,11 +127,10 @@ by_geography <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
+  # parse response
   results <- tibble::tibble(httr2::resp_body_json(response,
              check_type = FALSE, simplifyVector = TRUE))
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
 
     results <- janitor::clean_names(results) |>
