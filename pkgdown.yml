@@ -2,15 +2,12 @@ pandoc: 2.19.2
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
-  api-overviews: api-overviews.html
   beneficiary-enrollment: beneficiary-enrollment.html
   cms-open-payments: cms-open-payments.html
-  mcr-chron-cond: mcr-chron-cond.html
-  nppes-npi-registry: nppes-npi-registry.html
-  physician-by-provider: physician-by-provider.html
+  partb-stats: partb-stats.html
   linking_providers: linking_providers.html
   provider: provider.html
-last_built: 2023-08-30T10:17Z
+last_built: 2023-08-30T12:02Z
 urls:
   reference: https://andrewallenbruce.github.io/provider/reference
   article: https://andrewallenbruce.github.io/provider/articles
