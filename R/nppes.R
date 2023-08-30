@@ -2,19 +2,19 @@
 #'
 #' @description
 #' `nppes()` allows you to search the National Plan and Provider Enumeration
-#' System (NPPES) NPI Registry's public API. Th Registry is a free directory of
+#' System (NPPES) NPI Registry's public API. The Registry is a free directory of
 #' all active National Provider Identifier (NPI) records.
 #'
-#' **National Provider Identifier**
+#' **National Provider Identifier** <br>
 #' Healthcare providers acquire their unique 10-digit NPIs to identify
 #' themselves in a standard way throughout their industry. Once CMS supplies
 #' an NPI, they publish the parts of the NPI record that have public relevance,
 #' including the provider’s name, taxonomy and practice address.
 #'
-#' **Enumeration Type**
+#' **Enumeration Type** <br>
 #' Two categories of health care providers exist for NPI enumeration purposes:
 #'
-#' **Entity Type 1**
+#' **Entity Type 1** <br>
 #' Individual health care providers (including sole proprietors) may get an
 #' NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI
 #' using their own SSN, not an Employer Identification Number (EIN) even if
@@ -34,7 +34,9 @@
 #' provider who's incorporated, you may need to get an NPI for yourself
 #' (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
 #'
-#' **Entity Type 2**
+#' <br>
+#'
+#' **Entity Type 2** <br>
 #' Organizational health care providers are group health care providers eligible
 #' for NPIs as Entity Type 2. Organization health care providers may have a
 #' single employee or thousands of employees. An example is an incorporated
@@ -56,7 +58,7 @@
 #' delegation doesn't affect Entity Type 1 health care providers. As individuals,
 #' these health care providers can't choose sub-parts and are not sub-parts.
 #'
-#' **Authorized Official**
+#' **Authorized Official** <br>
 #' An appointed official (e.g., chief executive officer, chief financial officer,
 #' general partner, chairman of the board, or direct owner) to whom the
 #' organization has granted the legal authority to enroll it in the Medicare
@@ -70,12 +72,12 @@
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param npi 10-digit National Provider Identifier (NPI).
+#' @param npi *<numeric>* <br> 10-digit National Provider Identifier (NPI).
 #' @param entype Entity type. Choices are either `I` for an Individual provider
 #'    or `O` for an Organizational provider. Cannot be the only criteria entered.
-#' @param first_name Individual provider's first name. Trailing wildcard
-#'    entries are permitted requiring at least two characters to be entered
-#'    (e.g. `jo*` ).
+#' @param first_name *<numeric>* <br> Individual provider's first name. Trailing
+#'    wildcard entries are permitted requiring at least two characters to be
+#'    entered (e.g. `jo*` ).
 #' @param last_name Individual provider's last name. Trailing wildcard
 #'    entries are permitted requiring at least two characters to be entered
 #'    (e.g. `jo*` ).

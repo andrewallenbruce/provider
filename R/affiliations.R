@@ -15,14 +15,14 @@
 #' @param first_name Individual clinician first name
 #' @param middle_name Individual clinician middle name
 #' @param facility_type Facilities can fall into the following type categories:
-#'     - Hospital
-#'     - Long-term Care Hospital (LTCH)
-#'     - Nursing Home
-#'     - Inpatient Rehabilitation Facility (IRF)
-#'     - Home Health Agency (HHA)
-#'     - Skilled Nursing Facility (SNF)
-#'     - Hospice
-#'     - Dialysis Facility
+#'    - Hospital
+#'    - Long-term Care Hospital (LTCH)
+#'    - Nursing Home
+#'    - Inpatient Rehabilitation Facility (IRF)
+#'    - Home Health Agency (HHA)
+#'    - Skilled Nursing Facility (SNF)
+#'    - Hospice
+#'    - Dialysis Facility
 #' @param facility_ccn alphanumeric; Medicare CCN (CMS Certification Number) of
 #'    facility type or unit within hospital where an individual clinician
 #'    provides service. The CCN replaced the terms *Medicare Provider Number*,
@@ -39,8 +39,7 @@
 #'
 #' @seealso [clinicians()], [providers()], [hospitals()]
 #'
-#' @examplesIf interactive()
-#' affiliations(facility_ccn = "060004")
+#' @examples
 #' affiliations(parent_ccn = 670055)
 #'
 #' @autoglobal

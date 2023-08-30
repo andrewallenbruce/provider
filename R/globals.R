@@ -718,7 +718,6 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
-  "enroll_id", # <facility_ccn_check>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>

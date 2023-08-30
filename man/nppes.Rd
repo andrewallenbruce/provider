@@ -22,14 +22,14 @@ nppes(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI).}
+\item{npi}{\emph{\if{html}{\out{<numeric>}}} \if{html}{\out{<br>}} 10-digit National Provider Identifier (NPI).}
 
 \item{entype}{Entity type. Choices are either \code{I} for an Individual provider
 or \code{O} for an Organizational provider. Cannot be the only criteria entered.}
 
-\item{first_name}{Individual provider's first name. Trailing wildcard
-entries are permitted requiring at least two characters to be entered
-(e.g. \verb{jo*} ).}
+\item{first_name}{\emph{\if{html}{\out{<numeric>}}} \if{html}{\out{<br>}} Individual provider's first name. Trailing
+wildcard entries are permitted requiring at least two characters to be
+entered (e.g. \verb{jo*} ).}
 
 \item{last_name}{Individual provider's last name. Trailing wildcard
 entries are permitted requiring at least two characters to be entered
@@ -83,19 +83,19 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 \code{nppes()} allows you to search the National Plan and Provider Enumeration
-System (NPPES) NPI Registry's public API. Th Registry is a free directory of
+System (NPPES) NPI Registry's public API. The Registry is a free directory of
 all active National Provider Identifier (NPI) records.
 
-\strong{National Provider Identifier}
+\strong{National Provider Identifier} \if{html}{\out{<br>}}
 Healthcare providers acquire their unique 10-digit NPIs to identify
 themselves in a standard way throughout their industry. Once CMS supplies
 an NPI, they publish the parts of the NPI record that have public relevance,
 including the provider’s name, taxonomy and practice address.
 
-\strong{Enumeration Type}
+\strong{Enumeration Type} \if{html}{\out{<br>}}
 Two categories of health care providers exist for NPI enumeration purposes:
 
-\strong{Entity Type 1}
+\strong{Entity Type 1} \if{html}{\out{<br>}}
 Individual health care providers (including sole proprietors) may get an
 NPI as \strong{Entity Type 1}. As a sole proprietor, they must apply for the NPI
 using their own SSN, not an Employer Identification Number (EIN) even if
@@ -114,9 +114,12 @@ incorporated individual because the sole proprietor didn't form a
 corporation. If you're a sole/solo practitioner, it doesn't necessarily mean
 you're a sole proprietor, and vice versa. If you're an individual health care
 provider who's incorporated, you may need to get an NPI for yourself
-(Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+(Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).\if{html}{\out{
+<br>
+}}
 
-\strong{Entity Type 2}
+
+\strong{Entity Type 2} \if{html}{\out{<br>}}
 Organizational health care providers are group health care providers eligible
 for NPIs as Entity Type 2. Organization health care providers may have a
 single employee or thousands of employees. An example is an incorporated
@@ -138,7 +141,7 @@ each sends its own standard transactions to one or more health plans. Sub-part
 delegation doesn't affect Entity Type 1 health care providers. As individuals,
 these health care providers can't choose sub-parts and are not sub-parts.
 
-\strong{Authorized Official}
+\strong{Authorized Official} \if{html}{\out{<br>}}
 An appointed official (e.g., chief executive officer, chief financial officer,
 general partner, chairman of the board, or direct owner) to whom the
 organization has granted the legal authority to enroll it in the Medicare

@@ -21,6 +21,7 @@ library(printr)
 ```{r message=FALSE, warning=FALSE}
 library(provider)
 library(tidyverse)
+library(gt)
 ```
 
 
@@ -52,24 +53,69 @@ select(df, year, demographics) |>
 ```
 
 
+<br>
+
 ### Counts & Amounts
 
 ```{r}
-select(df, year, tot_hcpcs:tot_payment)
+select(df, 
+       year, 
+       HCPCS = tot_hcpcs,
+       Beneficiaries = tot_benes,
+       Services = tot_srvcs,
+       Charges = tot_charges,
+       Allowed = tot_allowed,
+       Payment = tot_payment) |> 
+  gt(rowname_col = "year") |> 
+  grand_summary_rows(columns = c(HCPCS, Beneficiaries, Services),
+                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fmt = ~ fmt_integer(.)) |> 
+  grand_summary_rows(columns = c(Charges, Allowed, Payment),
+                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fmt = ~ fmt_currency(., decimals = 0)) |> 
+  fmt_integer(columns = c(HCPCS, Beneficiaries, Services)) |> 
+  fmt_currency(columns = c(Charges, Allowed, Payment), decimals = 0) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Medicare Part B** Utilization Summary")) |> 
+  data_color(columns = c(Charges, Allowed, Payment),
+             method = "numeric",
+             palette = "Reds", 
+             direction = "column") |> 
+  tab_options(table.width = pct(75),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
 ```
+
+<br>
 
 ### Chronic Condition Prevalence
 
 ```{r}
 chronic <- compare_conditions(df)
+
 chronic |> 
-  pivot_wider(names_from = level, values_from = prevalence) |> 
+  pivot_wider(names_from = level, 
+              values_from = prevalence) |> 
   arrange(condition) |> 
-  gt::gt(groupname_col = "condition") |> 
-  gt::fmt_percent(columns = c(Provider, State, National)) |> 
-  gtExtras::gt_theme_nytimes()
+  gt(groupname_col = "condition", rowname_col = "year") |> 
+  fmt_percent(columns = c(Provider, State, National)) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Chronic Conditions** Prevalence")) |> 
+  data_color(columns = c(Provider, State, National),
+             direction = "row",
+             method = "numeric",
+             palette = "Reds") |> 
+  tab_options(table.width = pct(50),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
 ```
 
+
+<br>
 
 ## HCPCS Utilization Data
 
@@ -77,53 +123,62 @@ chronic |>
 hcpcs <- by_service_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
-  compare_hcpcs()
+  compare_hcpcs() |> 
+  select(year, 
+         level, 
+         HCPCS = hcpcs_code,
+         beneficiaries,
+         services, 
+         "Average Payment" = avg_payment) |> 
+  mutate("Services Per Beneficiary" = services/beneficiaries) |> 
+  select(-c(beneficiaries, services)) |> 
+  pivot_longer(!year:HCPCS, 
+               names_to = "stat", 
+               values_to = "amount") |> 
+  pivot_wider(names_from = level, 
+              values_from = amount) |> 
+  arrange(stat, HCPCS)
 ```
 
 <br>
 
 ```{r}
-table <- hcpcs |> 
-  select(year, 
-         level, 
-         hcpcs_code,
-         BENEFICIARIES = beneficiaries,
-         SERVICES = services, 
-         "Average Charge" = avg_charge, 
-         "Average Allowed" = avg_allowed, 
-         "Average Payment" = avg_payment) |> 
-  pivot_longer(!year:hcpcs_code, 
-               names_to = "stat", 
-               values_to = "amount") |> 
-  pivot_wider(names_from = level, 
-              values_from = amount)
-
-# TODO: AVG PROCEDURES PER BENEFICIARY
-table |> 
-  filter(stat %in% c("SERVICES")) |> 
-  arrange(stat, hcpcs_code) |> 
-  gt::gt(groupname_col = "stat", rowname_col = "hcpcs_code") |> 
-  gt::fmt_number(decimals = 0) |> 
-  gt::fmt_integer(columns = "year", sep_mark = "") |> 
-  gt::cols_label(hcpcs_code = "HCPCS") |> 
-  gtExtras::gt_theme_nytimes()
-
-table |> 
-  filter(stat %in% c("BENEFICIARIES")) |> 
-  arrange(stat, hcpcs_code) |> 
-  gt::gt(groupname_col = "stat", rowname_col = "hcpcs_code") |> 
-  gt::fmt_number(decimals = 0) |> 
-  gt::fmt_integer(columns = "year", sep_mark = "") |> 
-  gt::cols_label(hcpcs_code = "HCPCS") |> 
-  gtExtras::gt_theme_nytimes()
-
-table |> 
+hcpcs |> 
   filter(stat %in% c("Average Payment")) |> 
-  arrange(stat, hcpcs_code) |> 
-  gt::gt(groupname_col = "stat", rowname_col = "hcpcs_code") |> 
-  gt::fmt_number(decimals = 2) |> 
-  gt::fmt_integer(columns = "year", sep_mark = "") |> 
-  #gt::cols_label(hcpcs_code = "HCPCS") |> 
-  gtExtras::gt_theme_nytimes()
+  gt(rowname_col = "year") |> 
+  fmt_currency(columns = c(Provider, State, National), decimals = 2) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Average Payment** Per HCPCS")) |> 
+  cols_hide(stat) |> 
+  data_color(columns = c(Provider, State, National),
+             direction = "row",
+             method = "numeric",
+             palette = "Reds") |> 
+  tab_options(table.width = pct(75),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
 ```
 
+<br>
+
+```{r}
+hcpcs |> 
+  filter(stat %in% c("Services Per Beneficiary")) |> 
+  gt(rowname_col = "year") |> 
+  fmt_number(columns = c(Provider, State, National), decimals = 2) |> 
+  #opt_stylize(color = "red") |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Services Per Beneficiary** By HCPCS")) |> 
+  cols_hide(stat) |> 
+  data_color(columns = c(Provider, State, National),
+             direction = "row",
+             method = "numeric",
+             palette = "Reds") |> 
+  tab_options(table.width = pct(75),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
+```

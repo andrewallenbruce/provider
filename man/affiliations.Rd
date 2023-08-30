@@ -29,14 +29,16 @@ affiliations(
 \item{last_name}{Individual clinician last name}
 
 \item{facility_type}{Facilities can fall into the following type categories:
-- Hospital
-- Long-term Care Hospital (LTCH)
-- Nursing Home
-- Inpatient Rehabilitation Facility (IRF)
-- Home Health Agency (HHA)
-- Skilled Nursing Facility (SNF)
-- Hospice
-- Dialysis Facility}
+\itemize{
+\item Hospital
+\item Long-term Care Hospital (LTCH)
+\item Nursing Home
+\item Inpatient Rehabilitation Facility (IRF)
+\item Home Health Agency (HHA)
+\item Skilled Nursing Facility (SNF)
+\item Hospice
+\item Dialysis Facility
+}}
 
 \item{facility_ccn}{alphanumeric; Medicare CCN (CMS Certification Number) of
 facility type or unit within hospital where an individual clinician
@@ -68,10 +70,8 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-affiliations(facility_ccn = "060004")
 affiliations(parent_ccn = 670055)
-\dontshow{\}) # examplesIf}
+
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=hospitals]{hospitals()}}

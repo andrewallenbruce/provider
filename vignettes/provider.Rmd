@@ -145,7 +145,7 @@ Several validation checks have been implemented, including checks for *NPIs*, *P
 > A National Provider Identifier (NPI) is a unique 10-digit identification number issued to health care providers in the United States by the Centers for Medicare and Medicaid Services (CMS) through the National Plan and Provider Enumeration System (NPPES). All individual HIPAA–covered healthcare providers or organizations must obtain an NPI. Once assigned, a provider’s NPI is permanent and remains with the provider regardless of job or location changes.
 
 ```{r}
-# Must be 10 characters long
+# Must be 10 digits long
 open_payments(npi = 12345691234)
 
 # Must be numeric
@@ -162,7 +162,7 @@ pending(npi = 001234569123)
 
 
 ```{r}
-# Must be 10 characters long
+# Must be 10 digits long
 affiliations(pac_id = 0123456789)
 
 # Must be numeric
@@ -184,7 +184,7 @@ revalidation_date(enroll_id = "I123456789123456")
 # Must begin with a capital I (Individual) or O (Organization/Group)
 providers(enroll_id = "012345678912345")
 
-# Some functions' parameters differentiate between an Organizational and Individual ID
+# Some functions require one of ID types
 hospitals(enroll_id_org = "I20180115000174")
 ```
 
