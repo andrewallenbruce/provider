@@ -81,69 +81,31 @@ all |>
 
 
 
-```{r}
-service <- by_service_years() |> 
-  map(\(x) by_service(year = x, npi = 1023076643)) |> 
-  list_rbind() |> 
-  mutate(level = "individual")
+## Comparing Service & Geography
 
-geography <- by_service_years() |> 
+```{r}
+compare <- by_service_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
-  select(year, state, hcpcs_code, pos) |> 
-  rowwise() |> 
-  mutate(statewide = by_geography(year, state, hcpcs_code, pos),
-         national = by_geography(year, state = "National", hcpcs_code, pos))
+  compare_geography()
 ```
 
 <br>
 
 ```{r}
-bind_rows(
-  mutate(geography$national, 
-         beneficiaries = tot_benes / tot_provs,
-         services = tot_srvcs / tot_provs) |> 
-  select(year, 
-         level,
-         hcpcs_code, 
-         pos, 
-         beneficiaries, 
-         services, 
-         avg_charge, 
-         avg_allowed, 
-         avg_payment),
-  mutate(geography$statewide, 
-         beneficiaries = tot_benes / tot_provs,
-         services = tot_srvcs / tot_provs) |> 
-  select(year, 
-         level,
-         hcpcs_code, 
-         pos, 
-         beneficiaries, 
-         services, 
-         avg_charge, 
-         avg_allowed, 
-         avg_payment), 
-  select(service,
-         year, 
-         level,
-         hcpcs_code, 
-         pos, 
-         beneficiaries = tot_benes, 
-         services = tot_srvcs, 
-         avg_charge, 
-         avg_allowed, 
-         avg_payment)) |> 
-  pivot_wider(names_from = level, 
-              values_from = beneficiaries:avg_payment) |> 
+compare |> 
+  select(year:services, 
+         "average charge" = avg_charge, 
+         "average allowed" = avg_allowed, 
+         "average payment" = avg_payment,
+         "average standard payment" = avg_std_pymt) |> 
   pivot_longer(!year:pos, 
                names_to = "stat", 
                values_to = "amount") |> 
-  separate_wider_regex(stat, c(measure = ".*", "_", level = ".*")) |> 
   pivot_wider(names_from = level, 
               values_from = amount) |> 
-  filter(measure %in% c("beneficiaries", "services")) |> 
-  arrange(measure, hcpcs_code) |> 
+  filter(stat %in% c("beneficiaries", "services")) |> 
+  arrange(stat, hcpcs_code) |> 
   gt::gt() |> 
   gtExtras::gt_theme_nytimes()
 ```

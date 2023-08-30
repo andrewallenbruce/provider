@@ -46,13 +46,40 @@
 #' @param state State where provider is located.
 #' @param fips Provider's state FIPS code.
 #' @param zip Provider’s zip code.
-#' @param ruca Rural-Urban Commuting Area Code (RUCA); a Census tract-based
-#'    classification scheme that utilizes the standard Bureau of Census
-#'    Urbanized Area and Urban Cluster definitions in combination with work
-#'    commuting information to characterize all of the nation's Census tracts
-#'    regarding their rural and urban status and relationships. The Referring
-#'    Provider ZIP code was cross walked to the United States Department of
-#'    Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.
+#' @param ruca Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
+#'    was cross walked to the USDA's 2010 RUCA Codes. Choices are:
+#'     - **Metro Area Core**
+#'        - `1`: Primary flow within Urbanized Area (UA)
+#'        - `1.1`: Secondary flow 30-50% to larger UA
+#'     - **Metro Area High Commuting**
+#'        - `2`: Primary flow 30% or more to UA
+#'        - `2.1`: Secondary flow 30-50% to larger UA
+#'     - **Metro Area Low Commuting**
+#'        - `3`: Primary flow 10-30% to UA
+#'     - **Micro Area Core**
+#'        - `4`: Primary flow within large Urban Cluster (10k - 49k)
+#'        - `4.1`: Secondary flow 30-50% to UA
+#'     - **Micro High Commuting**
+#'        - `5`: Primary flow 30% or more to large UC
+#'        - `5.1`: Secondary flow 30-50% to UA
+#'     - **Micro Low Commuting**
+#'        - `6`: Primary flow 10-30% to large UC
+#'     - **Small Town Core**
+#'        - `7`: Primary flow within small UC (2.5k - 9.9k)
+#'        - `7.1`: Secondary flow 30-50% to UA
+#'        - `7.2`: Secondary flow 30-50% to large UC
+#'     - **Small Town High Commuting**
+#'        - `8`: Primary flow 30% or more to small UC
+#'        - `8.1`: Secondary flow 30-50% to UA
+#'        - `8.2`: Secondary flow 30-50% to large UC
+#'     - **Small Town Low Commuting**
+#'        - `9`: Primary flow 10-30% to small UC
+#'     - **Rural Areas**
+#'        - `10`: Primary flow to tract outside a UA or UC
+#'        - `10.1`: Secondary flow 30-50% to UA
+#'        - `10.2`: Secondary flow 30-50% to large UC
+#'        - `10.3`: Secondary flow 30-50% to small UC
+#'     - `99`: Zero population and no rural-urban identifier information
 #' @param country Country where provider is located.
 #' @param specialty Provider specialty code reported on the largest number of
 #'    claims submitted.
@@ -72,8 +99,7 @@
 #'    codes (such as ambulance services).
 #' @param drug Identifies whether the HCPCS code for the specific service
 #'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
-#'    Average Sales Price (ASP) File. Please visit the ASP drug pricing page
-#'    for additional information.
+#'    Average Sales Price (ASP) File.
 #' @param pos Identifies whether the place of service submitted on the claims
 #'    is a facility (`F`) or non-facility (`O`). Non-facility is generally an
 #'    office setting; however other entities are included in non-facility.
@@ -82,8 +108,7 @@
 #' @returns A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' physician_by_service(npi = 1003000126)
-#' physician_by_service(year = 2019, last_name = "Enkeshafi")
+#' by_service(year = 2019, npi = 1003000126)
 #' @autoglobal
 #' @export
 by_service <- function(year,
@@ -96,7 +121,7 @@ by_service <- function(year,
                        entype        = NULL,
                        city          = NULL,
                        state         = NULL,
-                       zip       = NULL,
+                       zip           = NULL,
                        fips          = NULL,
                        ruca          = NULL,
                        country       = NULL,
@@ -108,7 +133,6 @@ by_service <- function(year,
                        tidy          = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
-
   if (!is.null(pos)) {pos <- pos_char(pos)}
 
   rlang::check_required(year)
@@ -116,7 +140,8 @@ by_service <- function(year,
   rlang::arg_match(year, values = as.character(by_service_years()))
 
   # update distribution ids -------------------------------------------------
-  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider and Service", check = "id") |>
+  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider and Service",
+                   check = "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
@@ -192,27 +217,33 @@ by_service <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
+  # parse response
   results <- tibble::tibble(httr2::resp_body_json(response,
     check_type = FALSE,
     simplifyVector = TRUE))
 
-  # clean names -------------------------------------------------------------
+  # clean names
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::mutate(year = as.integer(year),
+                    level = "individual",
                     dplyr::across(c(tot_benes,
                                     tot_srvcs,
                                     tot_bene_day_srvcs), ~as.integer(.)),
                     dplyr::across(dplyr::ends_with(c("amt", "chrg")), ~as.double(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
-      tidyr::unite("street",
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
+                    rndrng_prvdr_ent_cd = entype_char(rndrng_prvdr_ent_cd),
+                    place_of_srvc = pos_char(place_of_srvc),
+                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind)) |>
+      tidyr::unite("address",
                    dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
                    remove = TRUE,
                    na.rm = TRUE,
                    sep = " ") |>
       dplyr::select(year,
                     npi           = rndrng_npi,
+                    level,
                     entype        = rndrng_prvdr_ent_cd,
                     first_name    = rndrng_prvdr_first_name,
                     middle_name   = rndrng_prvdr_mi,
@@ -220,30 +251,26 @@ by_service <- function(year,
                     credential    = rndrng_prvdr_crdntls,
                     gender        = rndrng_prvdr_gndr,
                     specialty     = rndrng_prvdr_type,
-                    street,
+                    address,
                     city          = rndrng_prvdr_city,
                     state         = rndrng_prvdr_state_abrvtn,
                     fips          = rndrng_prvdr_state_fips,
-                    zip       = rndrng_prvdr_zip5,
+                    zip           = rndrng_prvdr_zip5,
                     ruca          = rndrng_prvdr_ruca,
                     #ruca_desc    = rndrng_prvdr_ruca_desc,
                     country       = rndrng_prvdr_cntry,
                     par           = rndrng_prvdr_mdcr_prtcptg_ind,
                     hcpcs_code    = hcpcs_cd,
                     hcpcs_desc,
-                    drug    = hcpcs_drug_ind,
-                    pos = place_of_srvc,
+                    drug          = hcpcs_drug_ind,
+                    pos           = place_of_srvc,
                     tot_benes,
                     tot_srvcs,
                     tot_day       = tot_bene_day_srvcs,
-                    avg_charge   = avg_sbmtd_chrg,
+                    avg_charge    = avg_sbmtd_chrg,
                     avg_allowed   = avg_mdcr_alowd_amt,
                     avg_payment   = avg_mdcr_pymt_amt,
-                    avg_std_pymt  = avg_mdcr_stdzd_amt) |>
-      dplyr::mutate(credential    = clean_credentials(credential),
-                    entype        = entype_char(entype),
-                    pos = pos_char(pos),
-                    par           = yn_logical(par))
+                    avg_std_pymt  = avg_mdcr_stdzd_amt)
     }
   return(results)
 }

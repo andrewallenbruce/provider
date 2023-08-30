@@ -134,26 +134,27 @@ utils::globalVariables(c(
   "tot_benes", # <by_service>
   "tot_srvcs", # <by_service>
   "tot_bene_day_srvcs", # <by_service>
-  "rndrng_npi", # <by_service>
+  "rndrng_prvdr_crdntls", # <by_service>
   "rndrng_prvdr_ent_cd", # <by_service>
+  "place_of_srvc", # <by_service>
+  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
+  "rndrng_npi", # <by_service>
+  "level", # <by_service>
   "rndrng_prvdr_first_name", # <by_service>
   "rndrng_prvdr_mi", # <by_service>
   "rndrng_prvdr_last_org_name", # <by_service>
-  "rndrng_prvdr_crdntls", # <by_service>
   "rndrng_prvdr_gndr", # <by_service>
   "rndrng_prvdr_type", # <by_service>
-  "street", # <by_service>
+  "address", # <by_service>
   "rndrng_prvdr_city", # <by_service>
   "rndrng_prvdr_state_abrvtn", # <by_service>
   "rndrng_prvdr_state_fips", # <by_service>
   "rndrng_prvdr_zip5", # <by_service>
   "rndrng_prvdr_ruca", # <by_service>
   "rndrng_prvdr_cntry", # <by_service>
-  "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
   "hcpcs_cd", # <by_service>
   "hcpcs_desc", # <by_service>
   "hcpcs_drug_ind", # <by_service>
-  "place_of_srvc", # <by_service>
   "avg_sbmtd_chrg", # <by_service>
   "avg_mdcr_alowd_amt", # <by_service>
   "avg_mdcr_pymt_amt", # <by_service>
@@ -316,6 +317,16 @@ utils::globalVariables(c(
   "ind_assgn", # <clinicians>
   "grp_assgn", # <clinicians>
   "identifier", # <drs_clinics_id>
+  "year", # <compare_geography>
+  "state", # <compare_geography>
+  "hcpcs_code", # <compare_geography>
+  "pos", # <compare_geography>
+  "level", # <compare_geography>
+  "tot_benes", # <compare_geography>
+  "tot_srvcs", # <compare_geography>
+  "tot_provs", # <compare_geography>
+  "beneficiaries", # <compare_geography>
+  "services", # <compare_geography>
   "distro", # <hospitals>
   "y", # <hospitals>
   "address_line_1", # <hospitals>

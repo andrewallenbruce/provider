@@ -54,13 +54,40 @@ currently available.}
 
 \item{fips}{Provider's state FIPS code.}
 
-\item{ruca}{Rural-Urban Commuting Area Code (RUCA); a Census tract-based
-classification scheme that utilizes the standard Bureau of Census
-Urbanized Area and Urban Cluster definitions in combination with work
-commuting information to characterize all of the nation's Census tracts
-regarding their rural and urban status and relationships. The Referring
-Provider ZIP code was cross walked to the United States Department of
-Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.}
+\item{ruca}{Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
+was cross walked to the USDA's 2010 RUCA Codes. Choices are:
+- \strong{Metro Area Core}
+- \code{1}: Primary flow within Urbanized Area (UA)
+- \code{1.1}: Secondary flow 30-50\% to larger UA
+- \strong{Metro Area High Commuting}
+- \code{2}: Primary flow 30\% or more to UA
+- \code{2.1}: Secondary flow 30-50\% to larger UA
+- \strong{Metro Area Low Commuting}
+- \code{3}: Primary flow 10-30\% to UA
+- \strong{Micro Area Core}
+- \code{4}: Primary flow within large Urban Cluster (10k - 49k)
+- \code{4.1}: Secondary flow 30-50\% to UA
+- \strong{Micro High Commuting}
+- \code{5}: Primary flow 30\% or more to large UC
+- \code{5.1}: Secondary flow 30-50\% to UA
+- \strong{Micro Low Commuting}
+- \code{6}: Primary flow 10-30\% to large UC
+- \strong{Small Town Core}
+- \code{7}: Primary flow within small UC (2.5k - 9.9k)
+- \code{7.1}: Secondary flow 30-50\% to UA
+- \code{7.2}: Secondary flow 30-50\% to large UC
+- \strong{Small Town High Commuting}
+- \code{8}: Primary flow 30\% or more to small UC
+- \code{8.1}: Secondary flow 30-50\% to UA
+- \code{8.2}: Secondary flow 30-50\% to large UC
+- \strong{Small Town Low Commuting}
+- \code{9}: Primary flow 10-30\% to small UC
+- \strong{Rural Areas}
+- \code{10}: Primary flow to tract outside a UA or UC
+- \code{10.1}: Secondary flow 30-50\% to UA
+- \code{10.2}: Secondary flow 30-50\% to large UC
+- \code{10.3}: Secondary flow 30-50\% to small UC
+- \code{99}: Zero population and no rural-urban identifier information}
 
 \item{country}{Country where provider is located.}
 
@@ -85,8 +112,7 @@ codes (such as ambulance services).}
 
 \item{drug}{Identifies whether the HCPCS code for the specific service
 furnished by the provider is a HCPCS listed on the Medicare Part B Drug
-Average Sales Price (ASP) File. Please visit the ASP drug pricing page
-for additional information.}
+Average Sales Price (ASP) File.}
 
 \item{pos}{Identifies whether the place of service submitted on the claims
 is a facility (\code{F}) or non-facility (\code{O}). Non-facility is generally an
@@ -136,7 +162,6 @@ of service submitted on the claim is facility or non-facility.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-physician_by_service(npi = 1003000126)
-physician_by_service(year = 2019, last_name = "Enkeshafi")
+by_service(year = 2019, npi = 1003000126)
 \dontshow{\}) # examplesIf}
 }
