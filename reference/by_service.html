@@ -170,13 +170,40 @@ currently available.</p></dd>
 
 
 <dt>ruca</dt>
-<dd><p>Rural-Urban Commuting Area Code (RUCA); a Census tract-based
-classification scheme that utilizes the standard Bureau of Census
-Urbanized Area and Urban Cluster definitions in combination with work
-commuting information to characterize all of the nation's Census tracts
-regarding their rural and urban status and relationships. The Referring
-Provider ZIP code was cross walked to the United States Department of
-Agriculture (USDA) 2010 Rural-Urban Commuting Area Codes.</p></dd>
+<dd><p>Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
+was cross walked to the USDA's 2010 RUCA Codes. Choices are:
+- <strong>Metro Area Core</strong>
+- <code>1</code>: Primary flow within Urbanized Area (UA)
+- <code>1.1</code>: Secondary flow 30-50% to larger UA
+- <strong>Metro Area High Commuting</strong>
+- <code>2</code>: Primary flow 30% or more to UA
+- <code>2.1</code>: Secondary flow 30-50% to larger UA
+- <strong>Metro Area Low Commuting</strong>
+- <code>3</code>: Primary flow 10-30% to UA
+- <strong>Micro Area Core</strong>
+- <code>4</code>: Primary flow within large Urban Cluster (10k - 49k)
+- <code>4.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro High Commuting</strong>
+- <code>5</code>: Primary flow 30% or more to large UC
+- <code>5.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro Low Commuting</strong>
+- <code>6</code>: Primary flow 10-30% to large UC
+- <strong>Small Town Core</strong>
+- <code>7</code>: Primary flow within small UC (2.5k - 9.9k)
+- <code>7.1</code>: Secondary flow 30-50% to UA
+- <code>7.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town High Commuting</strong>
+- <code>8</code>: Primary flow 30% or more to small UC
+- <code>8.1</code>: Secondary flow 30-50% to UA
+- <code>8.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town Low Commuting</strong>
+- <code>9</code>: Primary flow 10-30% to small UC
+- <strong>Rural Areas</strong>
+- <code>10</code>: Primary flow to tract outside a UA or UC
+- <code>10.1</code>: Secondary flow 30-50% to UA
+- <code>10.2</code>: Secondary flow 30-50% to large UC
+- <code>10.3</code>: Secondary flow 30-50% to small UC
+- <code>99</code>: Zero population and no rural-urban identifier information</p></dd>
 
 
 <dt>country</dt>
@@ -211,8 +238,7 @@ codes (such as ambulance services).</p></dd>
 <dt>drug</dt>
 <dd><p>Identifies whether the HCPCS code for the specific service
 furnished by the provider is a HCPCS listed on the Medicare Part B Drug
-Average Sales Price (ASP) File. Please visit the ASP drug pricing page
-for additional information.</p></dd>
+Average Sales Price (ASP) File.</p></dd>
 
 
 <dt>pos</dt>
@@ -260,8 +286,7 @@ of service submitted on the claim is facility or non-facility.</p><div class="se
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">physician_by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, last_name <span class="op">=</span> <span class="st">"Enkeshafi"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">by_service</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2019</span>, npi <span class="op">=</span> <span class="fl">1003000126</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

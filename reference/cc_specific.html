@@ -92,13 +92,13 @@ beneficiaries.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cc_specific</span><span class="op">(</span></span>
 <span>  <span class="va">year</span>,</span>
-<span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  sublevel <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  level <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  fips <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  age_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  demographic <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subdemo <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  condition <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -141,9 +141,14 @@ helper function <code>provider:::cc_specific_years()</code> to return a vector o
 currently available years.</p></dd>
 
 
-<dt>level</dt>
-<dd><p>Geographic level of data; options are <code>National</code>, <code>State</code>,
-and <code>County</code></p></dd>
+<dt>condition</dt>
+<dd><p>Identifies the chronic condition for which the prevalence
+and utilization is compiled. There are 21 chronic conditions identified
+using Medicare administrative claims. A Medicare beneficiary is
+considered to have a chronic condition if the CMS administrative data
+have a claim indicating that the beneficiary received a service or
+treatment for the specific condition. Beneficiaries may have more than
+one of the chronic conditions listed.</p></dd>
 
 
 <dt>sublevel</dt>
@@ -151,6 +156,11 @@ and <code>County</code></p></dd>
 resides. The values include the 50 United States, District of Columbia,
 Puerto Rico or U.S. Virgin Islands. Data aggregated at the National level
 are identified by "National'.</p></dd>
+
+
+<dt>level</dt>
+<dd><p>Geographic level of data; options are <code>National</code>, <code>State</code>,
+and <code>County</code></p></dd>
 
 
 <dt>fips</dt>
@@ -189,16 +199,6 @@ Beneficiaries enrolled in both Medicare and Medicaid are known as “dual
 eligibles.” Medicare beneficiaries are classified as dual eligibles if in
 any month in the given calendar year they were receiving full or partial
 Medicaid benefits.</p></dd>
-
-
-<dt>condition</dt>
-<dd><p>Identifies the chronic condition for which the prevalence
-and utilization is compiled. There are 21 chronic conditions identified
-using Medicare administrative claims. A Medicare beneficiary is
-considered to have a chronic condition if the CMS administrative data
-have a claim indicating that the beneficiary received a service or
-treatment for the specific condition. Beneficiaries may have more than
-one of the chronic conditions listed.</p></dd>
 
 
 <dt>tidy</dt>
