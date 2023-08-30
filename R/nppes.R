@@ -5,13 +5,66 @@
 #' System (NPPES) NPI Registry's public API. Th Registry is a free directory of
 #' all active National Provider Identifier (NPI) records.
 #'
-#' ## National Provider Identifier (NPI)
+#' **National Provider Identifier**
 #' Healthcare providers acquire their unique 10-digit NPIs to identify
 #' themselves in a standard way throughout their industry. Once CMS supplies
 #' an NPI, they publish the parts of the NPI record that have public relevance,
 #' including the provider’s name, taxonomy and practice address.
 #'
-#' ### Links
+#' **Enumeration Type**
+#' Two categories of health care providers exist for NPI enumeration purposes:
+#'
+#' **Entity Type 1**
+#' Individual health care providers (including sole proprietors) may get an
+#' NPI as **Entity Type 1**. As a sole proprietor, they must apply for the NPI
+#' using their own SSN, not an Employer Identification Number (EIN) even if
+#' they have an EIN. As a sole proprietor, they may get only one NPI, just like
+#' any other individual. The following factors **do not** affect whether a sole
+#' proprietor is an Entity Type 1:
+#'
+#'    - Number of different office locations
+#'    - Whether they have employees
+#'    - Whether the IRS issued them an EIN
+#'
+#' An **incorporated individual** is a single health care provider who forms
+#' and conducts business under a corporation. A sole proprietor **is not** an
+#' incorporated individual because the sole proprietor didn't form a
+#' corporation. If you're a sole/solo practitioner, it doesn't necessarily mean
+#' you're a sole proprietor, and vice versa. If you're an individual health care
+#' provider who's incorporated, you may need to get an NPI for yourself
+#' (Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+#'
+#' **Entity Type 2**
+#' Organizational health care providers are group health care providers eligible
+#' for NPIs as Entity Type 2. Organization health care providers may have a
+#' single employee or thousands of employees. An example is an incorporated
+#' individual who is an organization's only employee. Some organization health
+#' care providers are made up of parts that work somewhat independently from
+#' their parent organization. These parts may offer different types of health
+#' care or offer health care in separate physical locations. These parts and
+#' their physical locations aren't themselves legal entities but are part of
+#' the organization health care provider (which is a legal entity). The NPI
+#' Final Rule refers to the parts and locations as sub-parts. An organization
+#' health care provider can get its sub-parts their own NPIs. If a sub-part
+#' conducts any HIPAA standard transactions on its own (separately from its
+#' parent), it must get its own NPI. Sub-part determination makes sure that
+#' entities within a covered organization are uniquely identified in HIPAA
+#' standard transactions they conduct with Medicare and other covered entities.
+#' For example, a hospital offers acute care, laboratory, pharmacy, and
+#' rehabilitation services. Each of these sub-parts may need its own NPI because
+#' each sends its own standard transactions to one or more health plans. Sub-part
+#' delegation doesn't affect Entity Type 1 health care providers. As individuals,
+#' these health care providers can't choose sub-parts and are not sub-parts.
+#'
+#' **Authorized Official**
+#' An appointed official (e.g., chief executive officer, chief financial officer,
+#' general partner, chairman of the board, or direct owner) to whom the
+#' organization has granted the legal authority to enroll it in the Medicare
+#' program, to make changes or updates to the organization's status in the
+#' Medicare program, and to commit the organization to fully abide by the
+#' statutes, regulations, and program instructions of the Medicare program.
+#'
+#' **Links**
 #' - [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
 #' - [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
 #'
@@ -59,9 +112,12 @@
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
 #' @param tidy Tidy output; default is `TRUE`.
-#' @examplesIf interactive()
-#' nppes_full(npi = 1528060837)
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
+#' @examples
+#' nppes(npi = 1528060837)
+#'
 #' @autoglobal
 #' @export
 nppes <- function(npi = NULL,
@@ -355,24 +411,6 @@ nppes <- function(npi = NULL,
 #' @description `nppes_npi()` allows you to search the NPPES NPI
 #'    Registry's public API by many of the parameters defined in the
 #'    API's documentation.
-#'
-#' @details The NPPES NPI Registry Public Search is a free directory of all
-#'    active National Provider Identifier (NPI) records. Healthcare providers
-#'    acquire their unique 10-digit NPIs to identify themselves in a standard
-#'    way throughout their industry. After CMS supplies an NPI, they publish
-#'    the parts of the NPI record that have public relevance, including the
-#'    provider’s name, taxonomy and practice address. It enables you to search
-#'    for providers in the NPPES (National Plan and Provider Enumeration
-#'    System.) All information produced by the NPI Registry is provided in
-#'    accordance with the NPPES Data Dissemination Notice. There is no charge
-#'    to use the NPI Registry.
-#'
-#' ## Links
-#' * [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
-#' * [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
-#'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI).
 #' @param enum_type The Read API can be refined to retrieve only Individual

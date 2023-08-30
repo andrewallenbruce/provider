@@ -85,13 +85,68 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \code{nppes()} allows you to search the National Plan and Provider Enumeration
 System (NPPES) NPI Registry's public API. Th Registry is a free directory of
 all active National Provider Identifier (NPI) records.
-\subsection{National Provider Identifier (NPI)}{
 
+\strong{National Provider Identifier}
 Healthcare providers acquire their unique 10-digit NPIs to identify
 themselves in a standard way throughout their industry. Once CMS supplies
 an NPI, they publish the parts of the NPI record that have public relevance,
 including the provider’s name, taxonomy and practice address.
-\subsection{Links}{
+
+\strong{Enumeration Type}
+Two categories of health care providers exist for NPI enumeration purposes:
+
+\strong{Entity Type 1}
+Individual health care providers (including sole proprietors) may get an
+NPI as \strong{Entity Type 1}. As a sole proprietor, they must apply for the NPI
+using their own SSN, not an Employer Identification Number (EIN) even if
+they have an EIN. As a sole proprietor, they may get only one NPI, just like
+any other individual. The following factors \strong{do not} affect whether a sole
+proprietor is an Entity Type 1:
+\itemize{
+\item Number of different office locations
+\item Whether they have employees
+\item Whether the IRS issued them an EIN
+}
+
+An \strong{incorporated individual} is a single health care provider who forms
+and conducts business under a corporation. A sole proprietor \strong{is not} an
+incorporated individual because the sole proprietor didn't form a
+corporation. If you're a sole/solo practitioner, it doesn't necessarily mean
+you're a sole proprietor, and vice versa. If you're an individual health care
+provider who's incorporated, you may need to get an NPI for yourself
+(Entity Type 1) and an NPI for your corporation or LLC (Entity Type 2).
+
+\strong{Entity Type 2}
+Organizational health care providers are group health care providers eligible
+for NPIs as Entity Type 2. Organization health care providers may have a
+single employee or thousands of employees. An example is an incorporated
+individual who is an organization's only employee. Some organization health
+care providers are made up of parts that work somewhat independently from
+their parent organization. These parts may offer different types of health
+care or offer health care in separate physical locations. These parts and
+their physical locations aren't themselves legal entities but are part of
+the organization health care provider (which is a legal entity). The NPI
+Final Rule refers to the parts and locations as sub-parts. An organization
+health care provider can get its sub-parts their own NPIs. If a sub-part
+conducts any HIPAA standard transactions on its own (separately from its
+parent), it must get its own NPI. Sub-part determination makes sure that
+entities within a covered organization are uniquely identified in HIPAA
+standard transactions they conduct with Medicare and other covered entities.
+For example, a hospital offers acute care, laboratory, pharmacy, and
+rehabilitation services. Each of these sub-parts may need its own NPI because
+each sends its own standard transactions to one or more health plans. Sub-part
+delegation doesn't affect Entity Type 1 health care providers. As individuals,
+these health care providers can't choose sub-parts and are not sub-parts.
+
+\strong{Authorized Official}
+An appointed official (e.g., chief executive officer, chief financial officer,
+general partner, chairman of the board, or direct owner) to whom the
+organization has granted the legal authority to enroll it in the Medicare
+program, to make changes or updates to the organization's status in the
+Medicare program, and to commit the organization to fully abide by the
+statutes, regulations, and program instructions of the Medicare program.
+
+\strong{Links}
 \itemize{
 \item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API Documentation}
 \item \href{https://npiregistry.cms.hhs.gov/demo-api}{NPPES NPI Registry API Demo}
@@ -99,11 +154,7 @@ including the provider’s name, taxonomy and practice address.
 
 \emph{Update Frequency:} \strong{Weekly}
 }
-
-}
-}
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-nppes_full(npi = 1528060837)
-\dontshow{\}) # examplesIf}
+nppes(npi = 1528060837)
+
 }

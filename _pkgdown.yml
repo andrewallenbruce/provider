@@ -42,8 +42,8 @@ navbar:
       menu:
       - text: Linking Providers
         href: articles/linking_providers.html
-      - text: API Overviews
-        href: articles/api-overviews.html
+      - text: Provider Analysis
+        href: articles/partb-stats.html
     news:
       icon: far fa-newspaper fa-lg
       href: news/index.html
