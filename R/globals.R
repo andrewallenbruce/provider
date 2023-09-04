@@ -7,7 +7,8 @@ utils::globalVariables(c(
   "mid_nm", # <affiliations>
   "lst_nm", # <affiliations>
   "suff", # <affiliations>
-  "facility_afl_ccn", # <affiliations>
+  "facility_affiliations_certification_number", # <affiliations>
+  "facility_type_certification_number", # <affiliations>
   "identifier", # <fac_affil_id>
   "state.abb", # <beneficiary_enrollment>
   "state.name", # <beneficiary_enrollment>

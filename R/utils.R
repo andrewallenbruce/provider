@@ -342,8 +342,7 @@ change_pct <- function(df, col, col_abs, by) {
 #' @param col column of numeric values to calculate lag
 #' @param by column to calculate lag by
 #' @returns A `tibble`
-#' @examples
-#' # example code
+#' @examplesIf interactive()
 #' by_provider_years() |>
 #' map(\(x) by_provider(year = x, npi = 1023076643)) |>
 #' list_rbind() |>

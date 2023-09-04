@@ -20,11 +20,11 @@ A \code{tibble}
 Calculate lagged values by column
 }
 \examples{
-# example code
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 by_provider_years() |>
 map(\(x) by_provider(year = x, npi = 1023076643)) |>
 list_rbind() |>
 select(year, tot_payment) |>
 change_year(tot_payment, year)
-
+\dontshow{\}) # examplesIf}
 }
