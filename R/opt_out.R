@@ -95,15 +95,16 @@ opt_out <- function(npi             = NULL,
   if (!is.null(npi)) {npi_check(npi)}
 
   if (!is.null(order_refer)) {
-    order_refer <- dplyr::case_when(
-      order_refer == TRUE ~ "Y",
-      order_refer == FALSE ~ "N",
+    order_refer <- dplyr::case_match(
+      order_refer,
+      TRUE ~ "Y",
+      FALSE ~ "N",
       .default = NULL)
   }
 
   # args tribble
   args <- tibble::tribble(
-                                ~x,           ~y,
+                          ~param,           ~arg,
                              "NPI",          npi,
                       "First Name",   first_name,
                        "Last Name",    last_name,
@@ -112,13 +113,12 @@ opt_out <- function(npi             = NULL,
                        "City Name",         city,
                       "State Code",        state,
                         "Zip code",          zip,
-     "Eligible to Order and Refer",   order_refer)
+     "Eligible to Order and Refer",   order_refer) |>
+    tidyr::unnest(arg)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  args$filter <- TRUE
+  args$sql <- FALSE
+  args <- encode_param(args)
 
   # update distribution id -------------------------------------------------
   id <- cms_update("Opt Out Affidavits", "id") |>
@@ -128,7 +128,7 @@ opt_out <- function(npi             = NULL,
   # build URL ---------------------------------------------------------------
   http   <- "https://data.cms.gov/data-api/v1/dataset/"
   post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
+  url    <- paste0(http, id, post, args)
 
   # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()

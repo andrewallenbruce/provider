@@ -102,7 +102,45 @@ years_diff <- function(date_col) {
         tz = "UTC")) / 52.17857, 2)
 }
 
+#' Format Parameters and Arguments
+#' @param param API parameter
+#' @param arg API function arg
+#' @param filter description
+#' @param sql description
+#' @return formatted API filters
+#' @autoglobal
+#' @noRd
+format_param <- function(param,
+                         arg,
+                         filter = FALSE,
+                         sql = FALSE) {
 
+  if (isTRUE(filter)) {param <- paste0("filter[", param, "]=", arg)}
+  if (isTRUE(sql))    {param <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}
+  # %22 url encoding for double quote (")
+
+  return(param)
+}
+
+#' encode_param
+#' Some API parameters have spaces, these must be converted to "%20".
+#' @param args args tibble
+#' @return parameter formatted with "%20" in lieu of a space
+#' @autoglobal
+#' @noRd
+encode_param <- function(args) {
+
+  args <- purrr::pmap(args, format_param) |>
+    unlist() |>
+    stringr::str_c(collapse = "&")
+
+  args <- gsub(" ", "%20", args)
+  args <- gsub("[", "%5B", args, fixed = TRUE)
+  args <- gsub("*", "%2A", args, fixed = TRUE)
+  args <- gsub("]", "%5D", args, fixed = TRUE)
+
+  return(args)
+}
 
 #' param_format
 #' @param param API parameter
@@ -139,6 +177,7 @@ param_space <- function(param) {
 #' @noRd
 param_brackets <- function(param) {
 
+  param <- gsub(" ", "%20", param)
   param <- gsub("[", "%5B", param, fixed = TRUE)
   param <- gsub("*", "%2A", param, fixed = TRUE)
   param <- gsub("]", "%5D", param, fixed = TRUE)
@@ -211,23 +250,12 @@ tf_logical <- function(x) {
 #' @noRd
 yn_logical <- function(x) {
 
-  ## TO DO Convert to case_match()
-
-  # dplyr::case_match(
-  #   x,
-  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
-  #   .default = NULL
-  # )
-
-  dplyr::case_when(
-    x == as.character("Y") ~ as.logical(TRUE),
-    x == as.character("N") ~ as.logical(FALSE),
-    x == as.character("YES") ~ as.logical(TRUE),
-    x == as.character("NO") ~ as.logical(FALSE),
-    x == as.character("Yes") ~ as.logical(TRUE),
-    x == as.character("No") ~ as.logical(FALSE),
-    .default = NA)
+  dplyr::case_match(
+    x,
+    c("Y", "YES", "Yes", "yes", "y") ~ TRUE,
+    c("N", "NO", "No", "no", "n") ~ FALSE,
+    .default = NA
+  )
 }
 
 #' Convert I/O char values to logical ----------------------
@@ -309,22 +337,33 @@ change_pct <- function(df, col, col_abs, by) {
     .after = {{ col_abs }})
 }
 
-#' @param df df
-#' @param col col
-#' @param by by
-#' @return A `tibble`
+#' Calculate lagged values by column
+#' @param df data frame
+#' @param col column of numeric values to calculate lag
+#' @param by column to calculate lag by
+#' @returns A `tibble`
+#' @examples
+#' # example code
+#' by_provider_years() |>
+#' map(\(x) by_provider(year = x, npi = 1023076643)) |>
+#' list_rbind() |>
+#' select(year, tot_payment) |>
+#' change_year(tot_payment, year)
+#'
 #' @autoglobal
-#' @noRd
+#' @internal
 change_year <- function(df, col, by) {
 
   df |>
     dplyr::mutate(
-      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }}, order_by = {{ by }}),
-      "{{ col }}_pct" := "{{ col }}_chg" / dplyr::lag({{ col }}, order_by = {{ by }}),
+      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }},
+                                                order_by = {{ by }}),
+      "{{ col }}_pct" := dplyr::pick(
+        dplyr::contains("_chg")) / dplyr::lag({{ col }}, order_by = {{ by }}),
       .after = {{ col }})
 }
 
-#' convert_breaks ------------------------------------------------------------
+#' convert_breaks
 #' @param x vector
 #' @param decimal TRUE or FALSE
 #' @autoglobal

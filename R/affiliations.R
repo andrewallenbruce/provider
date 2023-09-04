@@ -61,14 +61,14 @@ affiliations <- function(npi           = NULL,
   # args tribble ------------------------------------------------------------
   args <- tibble::tribble(
     ~x,                   ~y,
-    "NPI",                npi,
-    "Ind_PAC_ID",         pac_id,
+    "npi",                npi,
+    "ind_pac_id",         pac_id,
     "frst_nm",            first_name,
     "mid_nm",             middle_name,
     "lst_nm",             last_name,
     "facility_type",      facility_type,
-    "facility_afl_ccn",   facility_ccn,
-    "parent_ccn",         parent_ccn)
+    "facility_affiliations_certification_number",   facility_ccn,
+    "facility_type_certification_number",         parent_ccn)
 
   # map param_format and collapse -------------------------------------------
   params_args <- purrr::map2(args$x, args$y, sql_format) |>
@@ -84,7 +84,11 @@ affiliations <- function(npi           = NULL,
     param_space()
 
   # send request ----------------------------------------------------------
-  response <- httr2::request(url) |> httr2::req_perform()
+  error_body <- function(response) {httr2::resp_body_json(response)$message}
+
+  response <- httr2::request(url) |>
+    httr2::req_error(body = error_body) |>
+    httr2::req_perform()
 
   # no search results returns empty tibble ----------------------------------
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
@@ -122,14 +126,14 @@ affiliations <- function(npi           = NULL,
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(
         npi,
-        pac_id_ind   = ind_pac_id,
-        first_name   = frst_nm,
-        middle_name  = mid_nm,
-        last_name    = lst_nm,
-        suffix       = suff,
+        pac_id_ind     = ind_pac_id,
+        first_name     = frst_nm,
+        middle_name    = mid_nm,
+        last_name      = lst_nm,
+        suffix         = suff,
         facility_type,
-        facility_ccn = facility_afl_ccn,
-        parent_ccn) |>
+        facility_ccn   = facility_affiliations_certification_number,
+        parent_ccn     = facility_type_certification_number) |>
       janitor::remove_empty(which = c("rows", "cols"))
     }
   return(results)

@@ -566,6 +566,7 @@ utils::globalVariables(c(
   "set", # <open_payments_ids>
   "identifier", # <open_payments_ids>
   "year", # <open_payments_years>
+  "arg", # <opt_out>
   "distro", # <opt_out>
   "y", # <opt_out>
   "optout_effective_date", # <opt_out>
