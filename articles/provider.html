@@ -452,7 +452,7 @@ provider’s NPI is permanent and remains with the provider regardless of
 job or location changes.</p>
 </blockquote>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
+<code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
@@ -480,7 +480,7 @@ enrollment IDs if the individual or organization enrolled multiple times
 under different circumstances.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Must be 10 characters long</span></span>
+<code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
@@ -503,7 +503,7 @@ of benefits) is linked through the Enrollment ID.</p>
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="font-style: italic;">character</span> vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="color: #0000BB;">&lt;character&gt;</span> vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>
 <span></span>
 <span><span class="co"># Must be 15 characters long</span></span>
@@ -518,10 +518,10 @@ of benefits) is linked through the Enrollment ID.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`I`</span> or <span style="font-weight: bold;">`O`</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"012345678912345"</span> begins with <span style="color: #0000BB;">"0"</span>.</span></span>
 <span></span>
-<span><span class="co"># Some functions' parameters differentiate between an Organizational and Individual ID</span></span>
+<span><span class="co"># Some functions require one of ID types</span></span>
 <span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>enroll_id_org <span class="op">=</span> <span class="st">"I20180115000174"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-style: italic;">organizational/group</span> <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-style: italic;">org/group</span> <span style="font-weight: bold;">Enrollment ID</span> must begin with a <span style="font-style: italic;">capital</span> <span style="font-weight: bold;">`O`</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"I20180115000174"</span> begins with <span style="color: #0000BB;">"I"</span>.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
