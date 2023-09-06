@@ -1,4 +1,4 @@
-#' Search CMS' Open Payments Program API
+#' Open Payments Program
 #'
 #' @description [open_payments()] allows you to search CMS' Open Payments
 #'    Program API.
@@ -26,7 +26,7 @@
 #'    questions about what the data means, patients and their advocates should
 #'    speak directly to the health care provider for a better understanding.
 #'
-#' ## Links
+#' ### Links
 #'  * [What is the Open Payments Program?](https://www.cms.gov/OpenPayments)
 #'  * [OpenPaymentsData.cms.gov](https://www.cms.gov/OpenPaymentsData.cms.gov)
 #'  * [2021 General Payment Data](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)
@@ -37,24 +37,23 @@
 #'  * [2016 General Payment Data](https://openpaymentsdata.cms.gov/dataset/4c774e90-7f9e-5d19-b168-ff9be1e69034)
 #'  * [2015 General Payment Data](https://openpaymentsdata.cms.gov/dataset/e657f6f0-7abb-5e82-8b42-23bff09f0763)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Yearly**
+#' *Update Frequency:* **Yearly**
+#'
 #' @param year Program reporting year. Run the helper function
-#'    `provider:::open_payments_years()` to return a vector of currently
+#'    `open_payments_years()` to return a vector of currently
 #'    available years.
-#' @param npi Covered recipient's National Provider Identifier (NPI).
+#' @param npi Covered recipient's National Provider Identifier.
 #' @param covered_type Type of covered recipient, e.g.,
 #'    * `Covered Recipient Physician`
 #'    * `Covered Recipient Non-Physician Practitioner`
 #'    * `Covered Recipient Teaching Hospital`
 #' @param teaching_hospital Name of teaching hospital, e.g.
 #'    `Vanderbilt University Medical Center`
-#' @param profile_id Covered recipient's  unique Open Payments ID
 #' @param first_name Covered recipient's first name
 #' @param last_name Covered recipient's last name
 #' @param city City
 #' @param state State, abbreviation
-#' @param zipcode Zip code
+#' @param zip Zip code
 #' @param payer_name Paying entity's name. Examples:
 #'    * `Pharmacosmos Therapeutics Inc.`
 #'    * `Getinge USA Sales, LLC`
@@ -72,7 +71,10 @@
 #'    * `Food and Beverage`
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
+#' @param pivot Pivot output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' open_payments(npi = 1043218118, year = 2021)
 #' open_payments(payment_nature = "Royalty or License")
@@ -83,86 +85,75 @@
 #' @export
 open_payments <- function(year,
                           npi               = NULL,
-                          profile_id        = NULL,
                           covered_type      = NULL,
                           first_name        = NULL,
                           last_name         = NULL,
                           city              = NULL,
                           state             = NULL,
-                          zipcode           = NULL,
+                          zip               = NULL,
                           teaching_hospital = NULL,
                           payer_name        = NULL,
                           payer_id          = NULL,
                           payment_form      = NULL,
                           payment_nature    = NULL,
-                          offset            = 0,
-                          tidy              = TRUE) {
+                          offset            = 0L,
+                          tidy              = TRUE,
+                          pivot             = FALSE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
 
-  # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(open_payments_years()))
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                              ~y,
-    "covered_recipient_npi",         npi,
-    "covered_recipient_profile_id",  profile_id,
-    "covered_recipient_type",        covered_type,
-    "covered_recipient_first_name",  first_name,
-    "covered_recipient_last_name",   last_name,
-    "recipient_city",                city,
-    "recipient_state",               state,
-    "recipient_zip_code",            zipcode,
-    "teaching_hospital_name",        teaching_hospital,
-    "form_of_payment_or_transfer_of_value", payment_form,
-    "nature_of_payment_or_transfer_of_value", payment_nature,
+  if (!is.null(npi))  {npi  <- npi_check(npi)}
+  if (!is.null(zip)) {fips <- as.character(zip)}
+
+  args <- dplyr::tribble(
+    ~param,                                                         ~arg,
+    "covered_recipient_npi",                                         npi,
+    "covered_recipient_type",                                        covered_type,
+    "covered_recipient_first_name",                                  first_name,
+    "covered_recipient_last_name",                                   last_name,
+    "recipient_city",                                                city,
+    "recipient_state",                                               state,
+    "recipient_zip_code",                                            zip,
+    "teaching_hospital_name",                                        teaching_hospital,
+    "form_of_payment_or_transfer_of_value",                          payment_form,
+    "nature_of_payment_or_transfer_of_value",                        payment_nature,
     "applicable_manufacturer_or_applicable_gpo_making_payment_name", payer_name,
-    "applicable_manufacturer_or_applicable_gpo_making_payment_id", payer_id)
+    "applicable_manufacturer_or_applicable_gpo_making_payment_id",   payer_id)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, sql_format) |>
-    unlist() |>
-    stringr::str_flatten()
-
-  # update distribution ids -------------------------------------------------
   id <- open_payments_ids("General Payment Data") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(identifier)
 
-  id <- paste0("[SELECT * FROM ", id, "]")
+  url <- paste0("https://openpaymentsdata.cms.gov/api/1/datastore/sql?query=",
+                "[SELECT * FROM ", id, "]",
+                encode_param(args, type = "sql"),
+                "[LIMIT 10000 OFFSET ", offset, "]")
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://openpaymentsdata.cms.gov/api/1/datastore/sql?query="
-  post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
-  url    <- paste0(http, id, params_args, post) |>
-    param_brackets() |>
-    param_space()
-
-  # send request ----------------------------------------------------------
-  response <- httr2::request(url) |>
+  response <- httr2::request(encode_url(url)) |>
     httr2::req_error(body = open_payments_error) |>
     httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-    cli_args <- tibble::tribble(
-      ~x,               ~y,
-      "npi",            as.character(npi),
-      "profile_id",     as.character(profile_id),
-      "first_name",     first_name,
-      "last_name",      last_name,
-      "city",           city,
-      "state",          state,
-      "zipcode",        as.character(zipcode),
+  if (isTRUE(vctrs::vec_is_empty(results))) {
+
+    cli_args <- dplyr::tribble(
+      ~x,                  ~y,
+      "npi",               npi,
+      "covered_type",      covered_type,
+      "first_name",        first_name,
+      "last_name",         last_name,
+      "city",              city,
+      "state",             state,
+      "zip",               zip,
       "teaching_hospital", teaching_hospital,
-      "payment_form",   payment_form,
-      "payment_nature", payment_nature,
-      "payer_name",     payer_name,
-      "payer_id",       as.character(payer_id)) |>
+      "payment_form",      payment_form,
+      "payment_nature",    payment_nature,
+      "payer_name",        payer_name,
+      "payer_id",          payer_id) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -176,19 +167,32 @@ open_payments <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-              check_type = FALSE, simplifyVector = TRUE))
-
-  # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+    results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
+      dplyr::mutate(program_year = as.integer(program_year),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
                     dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(dplyr::contains("dollars"), ~as.double(.))) |>
+                    dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
+                    change_type = changed_logical(change_type),
+                    charity_indicator = yn_logical(charity_indicator),
+                    physician_ownership_indicator = yn_logical(physician_ownership_indicator),
+                    delay_in_publication_indicator = yn_logical(delay_in_publication_indicator),
+                    dispute_status_for_publication = yn_logical(dispute_status_for_publication),
+                    related_product_indicator = yn_logical(related_product_indicator),
+                    third_party_equals_covered_recipient_indicator = yn_logical(third_party_equals_covered_recipient_indicator),
+                    third_party_payment_recipient_indicator = yn_logical(third_party_payment_recipient_indicator),
+                    covered_recipient_type = dplyr::case_match(covered_recipient_type,
+                                                 "Covered Recipient Physician" ~ "Physician",
+                                                 "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician Practitioner",
+                                                 "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
+                                                 .default = covered_recipient_type),
+                    nature_of_payment_or_transfer_of_value = dplyr::case_match(nature_of_payment_or_transfer_of_value,
+                                                   "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation (Other)",
+                                                   .default = nature_of_payment_or_transfer_of_value)) |>
       tidyr::unite("address",
                    dplyr::any_of(c("recipient_primary_business_street_address_line1",
                                    "recipient_primary_business_street_address_line1")),
@@ -213,10 +217,8 @@ open_payments <- function(year,
                                    "covered_recipient_license_state_code4",
                                    "covered_recipient_license_state_code5")),
                    remove = TRUE, na.rm = TRUE, sep = ", ") |>
-      dplyr::select(year                 = program_year,
+      dplyr::select(program_year,
                     npi                  = covered_recipient_npi,
-                    profile_id           = covered_recipient_profile_id,
-                    #record_number,
                     changed              = change_type,
                     cov_type             = covered_recipient_type,
                     teach_hosp_ccn       = teaching_hospital_ccn,
@@ -229,7 +231,7 @@ open_payments <- function(year,
                     address,
                     city                 = recipient_city,
                     state                = recipient_state,
-                    zipcode              = recipient_zip_code,
+                    zip                  = recipient_zip_code,
                     postal_code          = recipient_postal_code,
                     country              = recipient_country,
                     province             = recipient_province,
@@ -244,7 +246,7 @@ open_payments <- function(year,
                     payer_name           = applicable_manufacturer_or_applicable_gpo_making_payment_name,
                     payer_state          = applicable_manufacturer_or_applicable_gpo_making_payment_state,
                     payer_country        = applicable_manufacturer_or_applicable_gpo_making_payment_country,
-                    pay_total            = total_amount_of_payment_usdollars,
+                    pay_total            = total_amount_of_payment_us_dollars,
                     pay_date             = date_of_payment,
                     pay_count            = number_of_payments_included_in_total_amount,
                     pay_form             = form_of_payment_or_transfer_of_value,
@@ -253,15 +255,14 @@ open_payments <- function(year,
                     travel_state         = state_of_travel,
                     travel_country       = country_of_travel,
                     phys_ownship         = physician_ownership_indicator,
-                    third_pay            = third_party_payment_recipient_indicator,
-                    third_name           = name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc,
-                    third_cov            = third_party_equals_covered_recipient_indicator,
+                    third_party          = third_party_payment_recipient_indicator,
+                    third_name           = name_of_third_party_entity_receiving_payment_or_transfer_of_value,
+                    third_cover          = third_party_equals_covered_recipient_indicator,
                     charity              = charity_indicator,
                     context              = contextual_information,
                     pub_date             = payment_publication_date,
                     pub_delay            = delay_in_publication_indicator,
                     pub_dispute          = dispute_status_for_publication,
-                    #record_id,
                     related_product      = related_product_indicator,
                     name_1               = name_of_drug_or_biological_or_device_or_medical_supply_1,
                     covered_1            = covered_or_noncovered_indicator_1,
@@ -292,37 +293,25 @@ open_payments <- function(year,
                     type_5               = indicate_drug_or_biological_or_device_or_medical_supply_5,
                     category_5           = product_category_or_therapeutic_area_5,
                     ndc_5                = associated_drug_or_biological_ndc_5,
-                    pdi_5                = associated_device_or_medical_supply_pdi_5) |>
-      dplyr::mutate(changed         = changed_logical(changed),
-                    phys_ownship    = yn_logical(phys_ownship),
-                    charity         = yn_logical(charity),
-                    pub_delay       = yn_logical(pub_delay),
-                    pub_dispute     = yn_logical(pub_dispute),
-                    related_product = yn_logical(related_product),
-                    third_cov       = yn_logical(third_cov),
-                    cov_type        = dplyr::case_when(
-                      cov_type == "Covered Recipient Physician" ~ "Physician",
-                      cov_type == "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician Practitioner",
-                      cov_type == "Covered Recipient Teaching Hospital" ~ "Teaching Hospital",
-                      .default = cov_type),
-                    pay_nature = dplyr::case_when(
-                      pay_nature == "Compensation for services other than consulting, including serving as faculty or as a speaker at a venue other than a continuing education program" ~ "Compensation (Other)",
-                      .default = pay_nature))
+                    pdi_5                = associated_device_or_medical_supply_pdi_5)
 
-    results <- results |>
-      tidyr::pivot_longer(cols = name_1:pdi_5,
-                          names_to = c("attr", "group"),
-                          names_pattern = "(.*)_(.)",
-                          values_to = "val") |>
-      tidyr::pivot_wider(names_from = attr,
-                         values_from = val,
-                         values_fn = list) |>
-      tidyr::unnest(cols = c(name, type, category, ndc, pdi)) |>
-      dplyr::mutate(covered = dplyr::case_when(covered == "Covered" ~ TRUE,
-                                               covered == "Non-Covered" ~ FALSE,
-                                               .default = NA),
-                    pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
+    if (pivot) {
+      results <- results |>
+        tidyr::pivot_longer(cols = name_1:pdi_5,
+                            names_to = c("attr", "group"),
+                            names_pattern = "(.*)_(.)",
+                            values_to = "val") |>
+        tidyr::pivot_wider(names_from = attr,
+                           values_from = val,
+                           values_fn = list) |>
+        tidyr::unnest(cols = c(name, type, category, ndc, pdi)) |>
+        dplyr::mutate(covered = dplyr::case_match(covered,
+                                                  "Covered" ~ TRUE,
+                                                  "Non-Covered" ~ FALSE,
+                                                  .default = NA),
+                      pay_total = dplyr::if_else(group != "1", as.double(0.00), pay_total))
     }
+  }
   return(results)
 }
 

@@ -59,6 +59,8 @@ encode_param <- function(args, type = "filter") {
   args <- gsub("[", "%5B", args, fixed = TRUE)
   args <- gsub("*", "%2A", args, fixed = TRUE)
   args <- gsub("]", "%5D", args, fixed = TRUE)
+  args <- gsub("<", "%3C", args, fixed = TRUE)
+  args <- gsub("+", "%2B", args, fixed = TRUE)
 
   return(args)
 }

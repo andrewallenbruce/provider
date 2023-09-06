@@ -25,36 +25,20 @@ library(gt)
 ```
 
 
-### Medicare Utilization Summary
+## Utilization Summary
 
 ```{r}
 df <- by_provider_years() |> 
   map(\(x) by_provider(year = x, npi = 1023076643)) |> 
   list_rbind()
-```
 
-```{r eval=FALSE, echo=FALSE}
-hcc_dual <- df$year |> 
-  map(\(x) quality_stats(year = x)) |> 
-  list_rbind() |> 
-  filter(!is.na(value), type == "Individual") |> 
-  pivot_wider(names_from = "stat", values_from = "value") |> 
-  janitor::clean_names() |> 
-  select(year, 
-         hcc_risk_avg_nat = hcc_risk_score_average, 
-         dual_eligibility_ratio_avg = dual_eligibility_average)
-
-select(df, year, demographics) |> 
-  unnest(demographics) |> 
-  #janitor::remove_empty(which = c("rows", "cols")) |> 
-  mutate(dual_eligibility_ratio = bene_dual / bene_ndual) |> 
-  left_join(select(hcc_dual, -hcc_risk_avg_nat), by = join_by(year)) |> 
-  select(year, contains(c("age", "male", "elig")))
+df
 ```
 
 
 <br>
 
+### Counts & Amounts
 
 ```{r}
 select(df, 
@@ -67,10 +51,12 @@ select(df,
        Payment = tot_payment) |> 
   gt(rowname_col = "year") |> 
   grand_summary_rows(columns = c(HCPCS, Beneficiaries, Services),
-                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fns =  list(label = md("**AVERAGES**"), 
+                                 id = "average", fn = "mean"),
                      fmt = ~ fmt_integer(.)) |> 
   grand_summary_rows(columns = c(Charges, Allowed, Payment),
-                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fns =  list(label = md("**AVERAGES**"), 
+                                 id = "average", fn = "mean"),
                      fmt = ~ fmt_currency(., decimals = 0)) |> 
   fmt_integer(columns = c(HCPCS, Beneficiaries, Services)) |> 
   fmt_currency(columns = c(Charges, Allowed, Payment), decimals = 0) |> 
@@ -94,36 +80,31 @@ select(df,
 ```{r}
 select(df, 
        year, 
-       HCPCS = tot_hcpcs,
        Beneficiaries = tot_benes,
        Services = tot_srvcs,
        Payment = tot_payment) |> 
-  change_year(HCPCS) |> 
   change_year(Beneficiaries) |> 
   change_year(Services) |> 
   change_year(Payment) |> 
   select(-contains("_chg")) |> 
   gt(rowname_col = "year") |> 
-  grand_summary_rows(columns = c(HCPCS, Beneficiaries, Services),
-                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+  grand_summary_rows(columns = c(Beneficiaries, Services),
+                     fns =  list(label = md("**AVERAGES**"), 
+                                 id = "average", fn = "mean"),
                      fmt = ~ fmt_integer(.)) |> 
   grand_summary_rows(columns = c(Payment),
-                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fns =  list(label = md("**AVERAGES**"), 
+                                 id = "average", fn = "mean"),
                      fmt = ~ fmt_currency(., decimals = 0)) |>
   fmt_percent(columns = contains("_pct"), decimals = 0, force_sign = TRUE) |> 
-  fmt_integer(columns = c(HCPCS, Beneficiaries, Services)) |> 
+  fmt_integer(columns = c(Beneficiaries, Services)) |> 
   fmt_currency(columns = c(Payment), decimals = 0) |> 
-  cols_merge_n_pct(HCPCS, HCPCS_pct) |> 
   cols_merge_n_pct(Beneficiaries, Beneficiaries_pct) |> 
   cols_merge_n_pct(Services, Services_pct) |>
   cols_merge_n_pct(Payment, Payment_pct) |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
   tab_header(title = md("**Medicare Part B** Utilization YOY Changes")) |> 
-  data_color(columns = c(Payment),
-             method = "numeric",
-             palette = "Reds", 
-             direction = "column") |> 
-  tab_options(table.width = pct(100),
+  tab_options(table.width = pct(75),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",
@@ -149,7 +130,7 @@ chronic |>
              direction = "row",
              method = "numeric",
              palette = "Reds") |> 
-  tab_options(table.width = pct(75),
+  tab_options(table.width = pct(85),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",

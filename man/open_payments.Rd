@@ -2,38 +2,33 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Search CMS' Open Payments Program API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Open Payments Program}
 \usage{
 open_payments(
   year,
   npi = NULL,
-  profile_id = NULL,
   covered_type = NULL,
   first_name = NULL,
   last_name = NULL,
   city = NULL,
   state = NULL,
-  zipcode = NULL,
+  zip = NULL,
   teaching_hospital = NULL,
   payer_name = NULL,
   payer_id = NULL,
   payment_form = NULL,
   payment_nature = NULL,
-  offset = 0,
-  tidy = TRUE
+  offset = 0L,
+  tidy = TRUE,
+  pivot = FALSE
 )
 }
 \arguments{
 \item{year}{Program reporting year. Run the helper function
-\code{provider:::open_payments_years()} to return a vector of currently
+\code{open_payments_years()} to return a vector of currently
 available years.}
 
-\item{npi}{Covered recipient's National Provider Identifier (NPI).}
-
-\item{profile_id}{Covered recipient's  unique Open Payments ID}
+\item{npi}{Covered recipient's National Provider Identifier.}
 
 \item{covered_type}{Type of covered recipient, e.g.,
 \itemize{
@@ -50,7 +45,7 @@ available years.}
 
 \item{state}{State, abbreviation}
 
-\item{zipcode}{Zip code}
+\item{zip}{Zip code}
 
 \item{teaching_hospital}{Name of teaching hospital, e.g.
 \verb{Vanderbilt University Medical Center}}
@@ -83,6 +78,8 @@ available years.}
 \item{offset}{offset; API pagination}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{pivot}{Pivot output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -126,10 +123,9 @@ speak directly to the health care provider for a better understanding.
 \item \href{https://openpaymentsdata.cms.gov/dataset/4c774e90-7f9e-5d19-b168-ff9be1e69034}{2016 General Payment Data}
 \item \href{https://openpaymentsdata.cms.gov/dataset/e657f6f0-7abb-5e82-8b42-23bff09f0763}{2015 General Payment Data}
 }
+
+\emph{Update Frequency:} \strong{Yearly}
 }
-}
-\note{
-Update Frequency: \strong{Yearly}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

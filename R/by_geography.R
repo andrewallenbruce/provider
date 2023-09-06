@@ -71,8 +71,8 @@ by_geography <- function(year,
       dplyr::pull(y)
     }
 
-  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
-                   check = "id") |>
+  id <- cms_update("Medicare Physician & Other Practitioners - by Geography and Service",
+                   "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
@@ -120,6 +120,7 @@ by_geography <- function(year,
 
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(year           = as.integer(year),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     hcpcs_drug_ind = yn_logical(hcpcs_drug_ind),

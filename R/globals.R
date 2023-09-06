@@ -166,6 +166,11 @@ utils::globalVariables(c(
   "state", # <cc_multiple>
   "y", # <cc_multiple>
   "distro", # <cc_multiple>
+  "prvlnc", # <cc_multiple>
+  "tot_mdcr_stdzd_pymt_pc", # <cc_multiple>
+  "tot_mdcr_pymt_pc", # <cc_multiple>
+  "hosp_readmsn_rate", # <cc_multiple>
+  "er_visits_per_1000_benes", # <cc_multiple>
   "bene_geo_lvl", # <cc_multiple>
   "bene_geo_desc", # <cc_multiple>
   "bene_geo_cd", # <cc_multiple>
@@ -173,20 +178,16 @@ utils::globalVariables(c(
   "bene_demo_lvl", # <cc_multiple>
   "bene_demo_desc", # <cc_multiple>
   "bene_mcc", # <cc_multiple>
-  "prvlnc", # <cc_multiple>
-  "tot_mdcr_stdzd_pymt_pc", # <cc_multiple>
-  "tot_mdcr_pymt_pc", # <cc_multiple>
-  "hosp_readmsn_rate", # <cc_multiple>
-  "er_visits_per_1000_benes", # <cc_multiple>
-  "prevalence", # <cc_multiple>
-  "tot_std_pymt_percap", # <cc_multiple>
-  "tot_pymt_percap", # <cc_multiple>
-  "er_visits_per_1k", # <cc_multiple>
   "state.abb", # <cc_specific>
   "state.name", # <cc_specific>
   "x", # <cc_specific>
   "y", # <cc_specific>
   "distro", # <cc_specific>
+  "prvlnc", # <cc_specific>
+  "tot_mdcr_stdzd_pymt_pc", # <cc_specific>
+  "tot_mdcr_pymt_pc", # <cc_specific>
+  "hosp_readmsn_rate", # <cc_specific>
+  "er_visits_per_1000_benes", # <cc_specific>
   "bene_geo_lvl", # <cc_specific>
   "bene_geo_desc", # <cc_specific>
   "bene_geo_cd", # <cc_specific>
@@ -194,15 +195,6 @@ utils::globalVariables(c(
   "bene_demo_lvl", # <cc_specific>
   "bene_demo_desc", # <cc_specific>
   "bene_cond", # <cc_specific>
-  "prvlnc", # <cc_specific>
-  "tot_mdcr_stdzd_pymt_pc", # <cc_specific>
-  "tot_mdcr_pymt_pc", # <cc_specific>
-  "hosp_readmsn_rate", # <cc_specific>
-  "er_visits_per_1000_benes", # <cc_specific>
-  "prevalence", # <cc_specific>
-  "tot_std_pymt_percap", # <cc_specific>
-  "tot_pymt_percap", # <cc_specific>
-  "er_visits_per_1k", # <cc_specific>
   "distro", # <clia_labs>
   "fac_name", # <clia_labs>
   "addtnl_fac_name", # <clia_labs>
@@ -460,10 +452,17 @@ utils::globalVariables(c(
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>
-  "covered_recipient_npi", # <open_payments>
-  "covered_recipient_profile_id", # <open_payments>
   "change_type", # <open_payments>
+  "charity_indicator", # <open_payments>
+  "physician_ownership_indicator", # <open_payments>
+  "delay_in_publication_indicator", # <open_payments>
+  "dispute_status_for_publication", # <open_payments>
+  "related_product_indicator", # <open_payments>
+  "third_party_equals_covered_recipient_indicator", # <open_payments>
+  "third_party_payment_recipient_indicator", # <open_payments>
   "covered_recipient_type", # <open_payments>
+  "nature_of_payment_or_transfer_of_value", # <open_payments>
+  "covered_recipient_npi", # <open_payments>
   "teaching_hospital_ccn", # <open_payments>
   "teaching_hospital_id", # <open_payments>
   "teaching_hospital_name", # <open_payments>
@@ -489,24 +488,16 @@ utils::globalVariables(c(
   "applicable_manufacturer_or_applicable_gpo_making_payment_name", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_state", # <open_payments>
   "applicable_manufacturer_or_applicable_gpo_making_payment_country", # <open_payments>
-  "total_amount_of_payment_usdollars", # <open_payments>
+  "total_amount_of_payment_us_dollars", # <open_payments>
   "date_of_payment", # <open_payments>
   "number_of_payments_included_in_total_amount", # <open_payments>
   "form_of_payment_or_transfer_of_value", # <open_payments>
-  "nature_of_payment_or_transfer_of_value", # <open_payments>
   "city_of_travel", # <open_payments>
   "state_of_travel", # <open_payments>
   "country_of_travel", # <open_payments>
-  "physician_ownership_indicator", # <open_payments>
-  "third_party_payment_recipient_indicator", # <open_payments>
-  "name_of_third_party_entity_receiving_payment_or_transfer_of_ccfc", # <open_payments>
-  "third_party_equals_covered_recipient_indicator", # <open_payments>
-  "charity_indicator", # <open_payments>
+  "name_of_third_party_entity_receiving_payment_or_transfer_of_value", # <open_payments>
   "contextual_information", # <open_payments>
   "payment_publication_date", # <open_payments>
-  "delay_in_publication_indicator", # <open_payments>
-  "dispute_status_for_publication", # <open_payments>
-  "related_product_indicator", # <open_payments>
   "name_of_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
   "covered_or_noncovered_indicator_1", # <open_payments>
   "indicate_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
@@ -537,15 +528,6 @@ utils::globalVariables(c(
   "product_category_or_therapeutic_area_5", # <open_payments>
   "associated_drug_or_biological_ndc_5", # <open_payments>
   "associated_device_or_medical_supply_pdi_5", # <open_payments>
-  "changed", # <open_payments>
-  "phys_ownship", # <open_payments>
-  "charity", # <open_payments>
-  "pub_delay", # <open_payments>
-  "pub_dispute", # <open_payments>
-  "related_product", # <open_payments>
-  "third_cov", # <open_payments>
-  "cov_type", # <open_payments>
-  "pay_nature", # <open_payments>
   "name_1", # <open_payments>
   "pdi_5", # <open_payments>
   "val", # <open_payments>
@@ -554,6 +536,7 @@ utils::globalVariables(c(
   "category", # <open_payments>
   "ndc", # <open_payments>
   "pdi", # <open_payments>
+  "covered", # <open_payments>
   "group", # <open_payments>
   "pay_total", # <open_payments>
   "title", # <open_payments_ids>

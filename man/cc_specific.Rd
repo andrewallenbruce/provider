@@ -4,8 +4,6 @@
 \alias{cc_specific}
 \title{Search the Medicare Specific Chronic Conditions API}
 \format{
-\subsection{In addition to the searchable columns:}{
-
 \describe{
 \item{prevalence}{Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.}
 \item{tot_std_pymt_percap}{Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care use among beneficiaries.}
@@ -13,10 +11,6 @@
 \item{hosp_readmsn_rate}{Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is classified as an index admission, a readmission, or both.}
 \item{er_visits_per_1k}{Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.}
 }
-}
-}
-\source{
-Centers for Medicare & Medicaid Services
 }
 \usage{
 cc_specific(
@@ -33,7 +27,7 @@ cc_specific(
 }
 \arguments{
 \item{year}{integer, YYYY, calendar year of Medicare enrollment. Run the
-helper function \code{provider:::cc_specific_years()} to return a vector of
+helper function \code{cc_specific_years()} to return a vector of
 currently available years.}
 
 \item{condition}{Identifies the chronic condition for which the prevalence
@@ -98,23 +92,23 @@ The Select Chronic Conditions dataset provides information on
 The dataset contains prevalence, use and spending organized by
 geography and distinct chronic conditions listed below.
 \itemize{
-\item Alcohol Abuse Drug Abuse/ Substance Abuse
-\item Alzheimer’s Disease and Related Dementia
-\item Arthritis (Osteoarthritis and Rheumatoid)
+\item Alcohol Abuse
+\item Alzheimer’s Disease/Dementia
+\item Arthritis
 \item Asthma
 \item Atrial Fibrillation
 \item Autism Spectrum Disorders
-\item Cancer (Breast, Colorectal, Lung, and Prostate)
+\item Cancer
 \item Chronic Kidney Disease
-\item Chronic Obstructive Pulmonary Disease
+\item COPD
 \item Depression
 \item Diabetes
-\item Drug Abuse/ Substance Abuse
+\item Drug Abuse/Substance Abuse
 \item Heart Failure
 \item Hepatitis (Chronic Viral B & C)
 \item HIV/AIDS
-\item Hyperlipidemia (High cholesterol)
-\item Hypertension (High blood pressure)
+\item Hyperlipidemia
+\item Hypertension
 \item Ischemic Heart Disease
 \item Osteoporosis
 \item Schizophrenia and Other Psychotic Disorders
@@ -124,14 +118,13 @@ geography and distinct chronic conditions listed below.
 \itemize{
 \item \href{https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions}{Medicare Specific Chronic Conditions}
 }
+
+\emph{Update Frequency:} \strong{Annually}
 }
-}
-\note{
-Update Frequency: \strong{Annually}
 }
 \examples{
-\dontrun{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 cc_specific(year = 2018, level = "State", sublevel = "CA")
 cc_specific(year = 2007, level  = "National", demographic = "Race")
-}
+\dontshow{\}) # examplesIf}
 }

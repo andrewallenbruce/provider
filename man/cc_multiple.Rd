@@ -4,20 +4,13 @@
 \alias{cc_multiple}
 \title{Search the Medicare Multiple Chronic Conditions API}
 \format{
-\subsection{In addition to the searchable columns:}{
-
 \describe{
-\item{mcc}{To classify MCC for each Medicare beneficiary, the 21 chronic conditions are counted and grouped into four categories (0-1, 2-3, 4-5 and 6 or more).}
 \item{prevalence}{Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.}
 \item{tot_std_pymt_percap}{Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care use among beneficiaries.}
 \item{tot_pymt_percap}{Medicare spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita).}
 \item{hosp_readmsn_rate}{Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is classified as an index admission, a readmission, or both.}
 \item{er_visits_per_1k}{Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.}
 }
-}
-}
-\source{
-Centers for Medicare & Medicaid Services
 }
 \usage{
 cc_multiple(
@@ -28,12 +21,13 @@ cc_multiple(
   age_group = NULL,
   demographic = NULL,
   subdemo = NULL,
+  mcc = NULL,
   tidy = TRUE
 )
 }
 \arguments{
 \item{year}{integer, YYYY, calendar year of Medicare enrollment. Run the
-helper function \code{provider:::cc_multiple_years()} to return a vector of
+helper function \code{cc_multiple_years()} to return a vector of
 currently available years.}
 
 \item{level}{Geographic level of data; options are \code{National}, \code{State},
@@ -74,6 +68,13 @@ eligibles.” Medicare beneficiaries are classified as dual eligibles if in
 any month in the given calendar year they were receiving full or partial
 Medicaid benefits.}
 
+\item{mcc}{To classify MCC for each Medicare beneficiary, the 21 chronic
+conditions are counted and grouped into four categories:
+- \verb{0 to 1}
+- \verb{2 to 3}
+- \verb{4 to 5}
+- \verb{6+}}
+
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
 \value{
@@ -95,14 +96,13 @@ conditions. The count of conditions is grouped into four categories (0-1,
 \itemize{
 \item \href{https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions}{Medicare Multiple Chronic Conditions}
 }
+
+\emph{Update Frequency:} \strong{Annually}
 }
-}
-\note{
-Update Frequency: \strong{Annually}
 }
 \examples{
-\dontrun{
-cc_multiple(year = 2018, level  = "State", sublevel = "California")
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+cc_multiple(year = 2018, level = "State", sublevel = "California")
 cc_multiple(year = 2007, level = "National", demographic = "Race")
-}
+\dontshow{\}) # examplesIf}
 }

@@ -11,13 +11,13 @@
 #'   conditions. The count of conditions is grouped into four categories (0-1,
 #'   2-3, 4-5 and 6 or more).
 #'
-#'   ## Links
-#' * [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
+#'   ### Links
+#'   - [Medicare Multiple Chronic Conditions](https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Annually**
+#' *Update Frequency:* **Annually**
+#'
 #' @param year integer, YYYY, calendar year of Medicare enrollment. Run the
-#'  helper function `provider:::cc_multiple_years()` to return a vector of
+#'  helper function `cc_multiple_years()` to return a vector of
 #'  currently available years.
 #' @param level Geographic level of data; options are `National`, `State`,
 #'   and `County`
@@ -51,22 +51,25 @@
 #'   eligibles.” Medicare beneficiaries are classified as dual eligibles if in
 #'   any month in the given calendar year they were receiving full or partial
 #'   Medicaid benefits.
+#' @param mcc To classify MCC for each Medicare beneficiary, the 21 chronic
+#'   conditions are counted and grouped into four categories:
+#'      - `0 to 1`
+#'      - `2 to 3`
+#'      - `4 to 5`
+#'      - `6+`
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
-#' @format ## In addition to the searchable columns:
+#' @format
 #' \describe{
-#'   \item{mcc}{To classify MCC for each Medicare beneficiary, the 21 chronic conditions are counted and grouped into four categories (0-1, 2-3, 4-5 and 6 or more).}
 #'   \item{prevalence}{Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.}
 #'   \item{tot_std_pymt_percap}{Medicare standardized spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita). Standardized payments are presented to allow for comparisons across geographic areas in health care use among beneficiaries.}
 #'   \item{tot_pymt_percap}{Medicare spending includes total Medicare payments for all covered services in Parts A and B and is presented per beneficiary (i.e. per capita).}
 #'   \item{hosp_readmsn_rate}{Hospital readmissions are expressed as a percentage of all admissions. A 30-day readmission is defined as an admission to an acute care hospital for any cause within 30 days of discharge from an acute care hospital. Except when the patient died during the stay, each inpatient stay is classified as an index admission, a readmission, or both.}
 #'   \item{er_visits_per_1k}{Emergency department visits are presented as the number of visits per 1,000 beneficiaries. ED visits include visits where the beneficiary was released from the outpatient setting and where the beneficiary was admitted to an inpatient setting.}
 #' }
-#' @examples
-#' \dontrun{
-#' cc_multiple(year = 2018, level  = "State", sublevel = "California")
+#' @examplesIf interactive()
+#' cc_multiple(year = 2018, level = "State", sublevel = "California")
 #' cc_multiple(year = 2007, level = "National", demographic = "Race")
-#' }
 #' @autoglobal
 #' @export
 cc_multiple <- function(year,
@@ -76,15 +79,18 @@ cc_multiple <- function(year,
                         age_group     = NULL,
                         demographic   = NULL,
                         subdemo       = NULL,
+                        mcc           = NULL,
                         tidy          = TRUE) {
 
-  # match args ----------------------------------------------------
   rlang::check_required(year)
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(cc_multiple_years()))
-  if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
-  if (!is.null(age_group)) {rlang::arg_match(age_group, c("All", "<65", "65+"))}
+
+  if (!is.null(level))       {rlang::arg_match(level, c("National", "State", "County"))}
+  if (!is.null(age_group))   {rlang::arg_match(age_group, c("All", "<65", "65+"))}
   if (!is.null(demographic)) {rlang::arg_match(demographic, c("All", "Dual Status", "Sex", "Race"))}
+  if (!is.null(mcc))         {rlang::arg_match(mcc, c("0 to 1", "2 to 3", "4 to 5", "6+"))}
+  if (!is.null(fips))        {fips <- as.character(fips)}
 
   if (!is.null(sublevel) && (sublevel %in% state.abb)) {
     sublevel <- dplyr::tibble(x = state.abb, y = state.name) |>
@@ -96,46 +102,37 @@ cc_multiple <- function(year,
   "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
   "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
 
-  # update distribution ids -------------------------------------------------
-  id <- cms_update(api = "Multiple Chronic Conditions", check = "id") |>
+  id <- cms_update("Multiple Chronic Conditions", "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                 ~y,
+
+  args <- dplyr::tribble(
+    ~param,            ~arg,
     "Bene_Geo_Lvl",     level,
     "Bene_Geo_Desc",    sublevel,
     "Bene_Geo_Cd",      fips,
     "Bene_Age_Lvl",     age_group,
     "Bene_Demo_Lvl",    demographic,
-    "Bene_Demo_Desc",   subdemo)
+    "Bene_Demo_Desc",   subdemo,
+    "Bene_MCC",         mcc)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ------------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (httr2::resp_header(response, "content-length") == "0") {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,             ~y,
-      "year",         as.character(year),
+      "year",         year,
       "level",        level,
       "sublevel",     sublevel,
-      "fips",         as.character(fips),
+      "fips",         fips,
       "age_group",    age_group,
       "demographic",  demographic,
-      "subdemo",      subdemo) |>
+      "subdemo",      subdemo,
+      "mcc",          mcc) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -148,14 +145,19 @@ cc_multiple <- function(year,
     return(invisible(NULL))
   }
 
-    results <- tibble::tibble(httr2::resp_body_json(response,
-      check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-
     results <- janitor::clean_names(results) |>
-      dplyr::mutate(year = as.integer(year)) |>
+      dplyr::tibble() |>
+      dplyr::mutate(year = as.integer(year),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(c(prvlnc,
+                                    tot_mdcr_stdzd_pymt_pc,
+                                    tot_mdcr_pymt_pc,
+                                    hosp_readmsn_rate,
+                                    er_visits_per_1000_benes),
+                                  ~as.double(.))) |>
       dplyr::select(year,
                     level               = bene_geo_lvl,
                     sublevel            = bene_geo_desc,
@@ -165,17 +167,11 @@ cc_multiple <- function(year,
                     subdemo             = bene_demo_desc,
                     mcc                 = bene_mcc,
                     prevalence          = prvlnc,
-                    tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
                     tot_pymt_percap     = tot_mdcr_pymt_pc,
+                    tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
                     hosp_readmsn_rate,
-                    er_visits_per_1k    = er_visits_per_1000_benes) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(c(prevalence,
-                                    tot_std_pymt_percap,
-                                    tot_pymt_percap,
-                                    hosp_readmsn_rate,
-                                    er_visits_per_1k),
-                                  as.double))
+                    er_visits_per_1k    = er_visits_per_1000_benes,
+                    dplyr::everything())
     }
   return(results)
 }
