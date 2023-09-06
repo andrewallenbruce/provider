@@ -42,12 +42,12 @@ utils::globalVariables(c(
   "x", # <by_geography>
   "y", # <by_geography>
   "distro", # <by_geography>
+  "hcpcs_drug_ind", # <by_geography>
+  "place_of_srvc", # <by_geography>
   "rndrng_prvdr_geo_lvl", # <by_geography>
   "rndrng_prvdr_geo_desc", # <by_geography>
   "rndrng_prvdr_geo_cd", # <by_geography>
   "hcpcs_cd", # <by_geography>
-  "hcpcs_drug_ind", # <by_geography>
-  "place_of_srvc", # <by_geography>
   "tot_rndrng_prvdrs", # <by_geography>
   "tot_benes", # <by_geography>
   "tot_srvcs", # <by_geography>
@@ -130,13 +130,11 @@ utils::globalVariables(c(
   "entity_type", # <by_provider>
   "distro", # <by_service>
   "y", # <by_service>
-  "tot_benes", # <by_service>
-  "tot_srvcs", # <by_service>
-  "tot_bene_day_srvcs", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>
   "rndrng_prvdr_ent_cd", # <by_service>
   "place_of_srvc", # <by_service>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
+  "hcpcs_drug_ind", # <by_service>
   "rndrng_npi", # <by_service>
   "level", # <by_service>
   "rndrng_prvdr_first_name", # <by_service>
@@ -153,7 +151,9 @@ utils::globalVariables(c(
   "rndrng_prvdr_cntry", # <by_service>
   "hcpcs_cd", # <by_service>
   "hcpcs_desc", # <by_service>
-  "hcpcs_drug_ind", # <by_service>
+  "tot_benes", # <by_service>
+  "tot_srvcs", # <by_service>
+  "tot_bene_day_srvcs", # <by_service>
   "avg_sbmtd_chrg", # <by_service>
   "avg_mdcr_alowd_amt", # <by_service>
   "avg_mdcr_pymt_amt", # <by_service>

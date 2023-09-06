@@ -64,7 +64,6 @@ encode_param <- function(args, type = "filter") {
 }
 
 #' encode_url
-#' Some API parameters have spaces, these must be converted to "%20".
 #' @param url parameter with a space
 #' @return parameter formatted with "%20" in lieu of a space
 #' @autoglobal

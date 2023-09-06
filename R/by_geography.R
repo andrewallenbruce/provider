@@ -56,8 +56,14 @@ by_geography <- function(year,
                          drug          = NULL,
                          tidy          = TRUE) {
 
-  if (!is.null(pos)) {pos <- pos_char(pos)}
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, values = as.character(by_geography_years()))
 
+  if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
+  if (!is.null(pos))        {pos <- pos_char(pos)}
+  if (!is.null(fips))       {fips <- as.character(fips)}
+  if (!is.null(drug))       {drug <- tf_2_yn(drug)}
   if (!is.null(state) && (state %in% state.abb)) {
     state <- dplyr::tibble(x = state.abb,
                   y = state.name) |>
@@ -65,20 +71,13 @@ by_geography <- function(year,
       dplyr::pull(y)
     }
 
-
-  rlang::check_required(year)
-  year <- as.character(year)
-  rlang::arg_match(year, values = as.character(by_geography_years()))
-
-  # update distribution ids
   id <- cms_update(api = "Medicare Physician & Other Practitioners - by Geography and Service",
                    check = "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-                                ~x,       ~y,
+  args <- dplyr::tribble(
+                            ~param,      ~arg,
             "Rndrng_Prvdr_Geo_Lvl",       level,
            "Rndrng_Prvdr_Geo_Desc",       state,
              "Rndrng_Prvdr_Geo_Cd",       fips,
@@ -88,33 +87,23 @@ by_geography <- function(year,
                    "Place_Of_Srvc",       pos)
 
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,               ~y,
-      "year",           as.character(year),
+      "year",           year,
       "level",          level,
-      "state",       state,
-      "fips",           as.character(fips),
-      "hcpcs_code",     as.character(hcpcs_code),
+      "state",          state,
+      "fips",           fips,
+      "hcpcs_code",     hcpcs_code,
       "hcpcs_desc",     hcpcs_desc,
-      "drug",           as.character(drug),
-      "pos",  pos) |>
+      "drug",           drug,
+      "pos",            pos) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -127,35 +116,32 @@ by_geography <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response
-  results <- tibble::tibble(httr2::resp_body_json(response,
-             check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-
     results <- janitor::clean_names(results) |>
-      dplyr::mutate(year = as.integer(year)) |>
+      dplyr::mutate(year           = as.integer(year),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    hcpcs_drug_ind = yn_logical(hcpcs_drug_ind),
+                    place_of_srvc  = pos_char(place_of_srvc),
+                    dplyr::across(dplyr::starts_with("tot_"), ~as.integer(.)),
+                    dplyr::across(dplyr::starts_with("avg_"), ~as.double(.))) |>
       dplyr::select(year,
-                    level = rndrng_prvdr_geo_lvl,
-                    state = rndrng_prvdr_geo_desc,
-                    fips = rndrng_prvdr_geo_cd,
-                    hcpcs_code = hcpcs_cd,
+                    level          = rndrng_prvdr_geo_lvl,
+                    state          = rndrng_prvdr_geo_desc,
+                    fips           = rndrng_prvdr_geo_cd,
+                    hcpcs_code     = hcpcs_cd,
                     hcpcs_desc,
-                    drug = hcpcs_drug_ind,
-                    pos = place_of_srvc,
-                    tot_provs = tot_rndrng_prvdrs,
+                    drug           = hcpcs_drug_ind,
+                    pos            = place_of_srvc,
+                    tot_provs      = tot_rndrng_prvdrs,
                     tot_benes,
                     tot_srvcs,
-                    tot_day = tot_bene_day_srvcs,
-                    avg_charge = avg_sbmtd_chrg,
-                    avg_allowed = avg_mdcr_alowd_amt,
-                    avg_payment = avg_mdcr_pymt_amt,
-                    avg_std_pymt = avg_mdcr_stdzd_amt) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    drug = yn_logical(drug),
-                    pos = pos_char(pos),
-                    dplyr::across(dplyr::contains("tot"), as.integer),
-                    dplyr::across(dplyr::contains("avg"), ~round(., digits = 2)))
+                    tot_day        = tot_bene_day_srvcs,
+                    avg_charge     = avg_sbmtd_chrg,
+                    avg_allowed    = avg_mdcr_alowd_amt,
+                    avg_payment    = avg_mdcr_pymt_amt,
+                    avg_std_pymt   = avg_mdcr_stdzd_amt)
 
   }
   return(results)

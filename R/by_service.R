@@ -132,22 +132,26 @@ by_service <- function(year,
                        pos           = NULL,
                        tidy          = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(pos)) {pos <- pos_char(pos)}
-
   rlang::check_required(year)
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(by_service_years()))
 
-  # update distribution ids -------------------------------------------------
-  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider and Service",
-                   check = "id") |>
+  if (!is.null(npi))        {npi <- npi_check(npi)}
+  if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
+  if (!is.null(pos))        {pos <- pos_char(pos)}
+  if (!is.null(zip))        {zip <- as.character(zip)}
+  if (!is.null(fips))       {fips <- as.character(fips)}
+  if (!is.null(ruca))       {ruca <- as.character(ruca)}
+  if (!is.null(par))        {par <- tf_2_yn(par)}
+  if (!is.null(drug))       {drug <- tf_2_yn(drug)}
+
+  id <- cms_update("Medicare Physician & Other Practitioners - by Provider and Service",
+                   "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-                               ~x,   ~y,
+  args <- dplyr::tribble(
+                           ~param,  ~arg,
                      "Rndrng_NPI",   npi,
         "Rndrng_Prvdr_First_Name",   first_name,
      "Rndrng_Prvdr_Last_Org_Name",   last_name,
@@ -167,27 +171,17 @@ by_service <- function(year,
                  "HCPCS_Drug_Ind",   drug,
                   "Place_Of_Srvc",   pos)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,             ~y,
-      "year",         as.character(year),
-      "npi",          as.character(npi),
+      "year",         year,
+      "npi",          npi,
       "last_name",    last_name,
       "first_name",   first_name,
       "organization_name", organization_name,
@@ -196,14 +190,14 @@ by_service <- function(year,
       "entype",       entype,
       "city",         city,
       "state",        state,
-      "fips",         as.character(fips),
+      "fips",         fips,
       "zip",          zip,
       "ruca",         ruca,
       "country",      country,
       "specialty",    specialty,
       "par",          par,
-      "hcpcs_code",   as.character(hcpcs_code),
-      "drug",         as.character(drug),
+      "hcpcs_code",   hcpcs_code,
+      "drug",         drug,
       "pos",          pos) |>
       tidyr::unnest(cols = c(y))
 
@@ -217,60 +211,54 @@ by_service <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response
-  results <- tibble::tibble(httr2::resp_body_json(response,
-    check_type = FALSE,
-    simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names
   if (tidy) {
     results <- janitor::clean_names(results) |>
-      dplyr::mutate(year = as.integer(year),
-                    level = "Provider",
-                    dplyr::across(c(tot_benes,
-                                    tot_srvcs,
-                                    tot_bene_day_srvcs), ~as.integer(.)),
-                    dplyr::across(dplyr::ends_with(c("amt", "chrg")), ~as.double(.)),
+      dplyr::tibble() |>
+      dplyr::mutate(year                          = as.integer(year),
+                    level                         = "Provider",
+                    dplyr::across(dplyr::starts_with("tot_"), ~as.integer(.)),
+                    dplyr::across(dplyr::starts_with("avg_"), ~as.double(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
-                    rndrng_prvdr_ent_cd = entype_char(rndrng_prvdr_ent_cd),
-                    place_of_srvc = pos_char(place_of_srvc),
-                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind)) |>
+                    rndrng_prvdr_crdntls          = clean_credentials(rndrng_prvdr_crdntls),
+                    rndrng_prvdr_ent_cd           = entype_char(rndrng_prvdr_ent_cd),
+                    place_of_srvc                 = pos_char(place_of_srvc),
+                    rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
+                    hcpcs_drug_ind                = yn_logical(hcpcs_drug_ind)) |>
       tidyr::unite("address",
                    dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
-                   remove = TRUE,
-                   na.rm = TRUE,
-                   sep = " ") |>
+                   remove                         = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::select(year,
-                    npi           = rndrng_npi,
+                    npi                           = rndrng_npi,
                     level,
-                    entype        = rndrng_prvdr_ent_cd,
-                    first_name    = rndrng_prvdr_first_name,
-                    middle_name   = rndrng_prvdr_mi,
-                    last_name     = rndrng_prvdr_last_org_name,
-                    credential    = rndrng_prvdr_crdntls,
-                    gender        = rndrng_prvdr_gndr,
-                    specialty     = rndrng_prvdr_type,
+                    entype                        = rndrng_prvdr_ent_cd,
+                    first_name                    = rndrng_prvdr_first_name,
+                    middle_name                   = rndrng_prvdr_mi,
+                    last_name                     = rndrng_prvdr_last_org_name,
+                    credential                    = rndrng_prvdr_crdntls,
+                    gender                        = rndrng_prvdr_gndr,
+                    specialty                     = rndrng_prvdr_type,
                     address,
-                    city          = rndrng_prvdr_city,
-                    state         = rndrng_prvdr_state_abrvtn,
-                    fips          = rndrng_prvdr_state_fips,
-                    zip           = rndrng_prvdr_zip5,
-                    ruca          = rndrng_prvdr_ruca,
-                    #ruca_desc    = rndrng_prvdr_ruca_desc,
-                    country       = rndrng_prvdr_cntry,
-                    par           = rndrng_prvdr_mdcr_prtcptg_ind,
-                    hcpcs_code    = hcpcs_cd,
+                    city                          = rndrng_prvdr_city,
+                    state                         = rndrng_prvdr_state_abrvtn,
+                    fips                          = rndrng_prvdr_state_fips,
+                    zip                           = rndrng_prvdr_zip5,
+                    ruca                          = rndrng_prvdr_ruca,
+                    #ruca_desc                    = rndrng_prvdr_ruca_desc,
+                    country                       = rndrng_prvdr_cntry,
+                    par                           = rndrng_prvdr_mdcr_prtcptg_ind,
+                    hcpcs_code                    = hcpcs_cd,
                     hcpcs_desc,
-                    drug          = hcpcs_drug_ind,
-                    pos           = place_of_srvc,
+                    drug                          = hcpcs_drug_ind,
+                    pos                           = place_of_srvc,
                     tot_benes,
                     tot_srvcs,
-                    tot_day       = tot_bene_day_srvcs,
-                    avg_charge    = avg_sbmtd_chrg,
-                    avg_allowed   = avg_mdcr_alowd_amt,
-                    avg_payment   = avg_mdcr_pymt_amt,
-                    avg_std_pymt  = avg_mdcr_stdzd_amt)
+                    tot_day                       = tot_bene_day_srvcs,
+                    avg_charge                    = avg_sbmtd_chrg,
+                    avg_allowed                   = avg_mdcr_alowd_amt,
+                    avg_payment                   = avg_mdcr_pymt_amt,
+                    avg_std_pymt                  = avg_mdcr_stdzd_amt)
     }
   return(results)
 }

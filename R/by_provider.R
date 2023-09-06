@@ -74,22 +74,23 @@ by_provider <- function(year,
                         par         = NULL,
                         tidy        = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-
-  # match args
   rlang::check_required(year)
   year <- as.character(year)
   year <- rlang::arg_match(year, values = as.character(by_provider_years()))
 
-  # update distribution ids
-  id <- cms_update(api = "Medicare Physician & Other Practitioners - by Provider",
-                   check = "id") |>
+  if (!is.null(npi))  {npi <- npi_check(npi)}
+  if (!is.null(zip))  {zip <- as.character(zip)}
+  if (!is.null(fips)) {fips <- as.character(fips)}
+  if (!is.null(ruca)) {ruca <- as.character(ruca)}
+  if (!is.null(par))  {par <- tf_2_yn(par)}
+
+  id <- cms_update("Medicare Physician & Other Practitioners - by Provider",
+                   "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
-  # args tribble
-  args <- tibble::tribble(
-                              ~x,  ~y,
+  args <- dplyr::tribble(
+                          ~param, ~arg,
                     "Rndrng_NPI",  npi,
     "Rndrng_Prvdr_Last_Org_Name",  last_name,
     "Rndrng_Prvdr_Last_Org_Name",  organization_name,
@@ -106,27 +107,17 @@ by_provider <- function(year,
              "Rndrng_Prvdr_Type",  specialty,
  "Rndrng_Prvdr_Mdcr_Prtcptg_Ind",  par)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,             ~y,
-      "year",         as.character(year),
-      "npi",          as.character(npi),
+      "year",         year,
+      "npi",          npi,
       "last_name",    last_name,
       "organization_name",    organization_name,
       "first_name",   first_name,
@@ -135,12 +126,12 @@ by_provider <- function(year,
       "entype",       entype,
       "city",         city,
       "state",        state,
-      "fips",         as.character(fips),
-      "zip",          as.character(zip),
-      "ruca",         as.character(ruca),
+      "fips",         fips,
+      "zip",          zip,
+      "ruca",         ruca,
       "country",      country,
       "specialty",    specialty,
-      "par",          as.character(par)) |>
+      "par",          par) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -153,12 +144,11 @@ by_provider <- function(year,
     return(invisible(NULL))
   }
 
-  # parse response
-  results <- tibble::tibble(httr2::resp_body_json(response,
-             check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(year = as.integer(year),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
