@@ -55,7 +55,6 @@ select(df, year, demographics) |>
 
 <br>
 
-### Counts & Amounts
 
 ```{r}
 select(df, 
@@ -90,6 +89,49 @@ select(df,
 
 <br>
 
+### Absolute & Relative Yearly Changes
+
+```{r}
+select(df, 
+       year, 
+       HCPCS = tot_hcpcs,
+       Beneficiaries = tot_benes,
+       Services = tot_srvcs,
+       Payment = tot_payment) |> 
+  change_year(HCPCS) |> 
+  change_year(Beneficiaries) |> 
+  change_year(Services) |> 
+  change_year(Payment) |> 
+  select(-contains("_chg")) |> 
+  gt(rowname_col = "year") |> 
+  grand_summary_rows(columns = c(HCPCS, Beneficiaries, Services),
+                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fmt = ~ fmt_integer(.)) |> 
+  grand_summary_rows(columns = c(Payment),
+                     fns =  list(label = md("**AVERAGES**"), id = "average", fn = "mean"),
+                     fmt = ~ fmt_currency(., decimals = 0)) |>
+  fmt_percent(columns = contains("_pct"), decimals = 0, force_sign = TRUE) |> 
+  fmt_integer(columns = c(HCPCS, Beneficiaries, Services)) |> 
+  fmt_currency(columns = c(Payment), decimals = 0) |> 
+  cols_merge_n_pct(HCPCS, HCPCS_pct) |> 
+  cols_merge_n_pct(Beneficiaries, Beneficiaries_pct) |> 
+  cols_merge_n_pct(Services, Services_pct) |>
+  cols_merge_n_pct(Payment, Payment_pct) |>
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Medicare Part B** Utilization YOY Changes")) |> 
+  data_color(columns = c(Payment),
+             method = "numeric",
+             palette = "Reds", 
+             direction = "column") |> 
+  tab_options(table.width = pct(100),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
+```
+
+<br>
+
 ### Chronic Condition Prevalence
 
 ```{r}
@@ -107,7 +149,7 @@ chronic |>
              direction = "row",
              method = "numeric",
              palette = "Reds") |> 
-  tab_options(table.width = pct(50),
+  tab_options(table.width = pct(75),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",

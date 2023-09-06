@@ -47,7 +47,7 @@
 #'
 #' @section Update Frequency: **Monthly**
 #'
-#' @param npi  10-digit National Provider Identifier
+#' @param npi 10-digit National Provider Identifier
 #' @param first_name Provider's first name
 #' @param last_name Provider's last name
 #' @param specialty Provider's specialty
@@ -61,24 +61,23 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @seealso [order_refer()], [providers()], [pending()]
+#' @seealso [order_refer()]
 #'
 #' @examples
 #' opt_out(last_name = "Smith",
 #'         first_name = "James",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE)
-#'
+#' @examplesIf  interactive()
 #' # For providers that have opted out, but are eligible to order and refer,
 #' # use `order_refer()` to look up their specific eligibility statuses
 #' opt_out(last_name = "Smith",
 #'         first_name = "James",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE) |>
-#'         dplyr::pull(npi) |>
-#'         purrr::map(\(x) order_refer(npi = x)) |>
-#'         purrr::list_rbind()
-#'
+#'         pull(npi) |>
+#'         map(\(x) order_refer(npi = x)) |>
+#'         list_rbind()
 #' @autoglobal
 #' @export
 opt_out <- function(npi             = NULL,
@@ -93,50 +92,30 @@ opt_out <- function(npi             = NULL,
                     tidy            = TRUE) {
 
   if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(order_refer)) {order_refer <- tf_2_yn(order_refer)}
 
-  if (!is.null(order_refer)) {
-    order_refer <- dplyr::case_match(
-      order_refer,
-      TRUE ~ "Y",
-      FALSE ~ "N",
-      .default = NULL)
-  }
+  args <- dplyr::tribble(
+    ~param,                         ~arg,
+    "NPI",                           npi,
+    "First Name",                    first_name,
+    "Last Name",                     last_name,
+    "Specialty",                     specialty,
+    "First Line Street Address",     address,
+    "City Name",                     city,
+    "State Code",                    state,
+    "Zip code",                      zip,
+    "Eligible to Order and Refer",   order_refer)
 
-  # args tribble
-  args <- tibble::tribble(
-                          ~param,           ~arg,
-                             "NPI",          npi,
-                      "First Name",   first_name,
-                       "Last Name",    last_name,
-                       "Specialty",    specialty,
-       "First Line Street Address",      address,
-                       "City Name",         city,
-                      "State Code",        state,
-                        "Zip code",          zip,
-     "Eligible to Order and Refer",   order_refer) |>
-    tidyr::unnest(arg)
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                 cms_update("Opt Out Affidavits", "id")[1, 2],
+                 "/data.json?",
+                 encode_param(args))
 
-  args$filter <- TRUE
-  args$sql <- FALSE
-  args <- encode_param(args)
-
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Opt Out Affidavits", "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           as.character(npi),
       "first_name",    first_name,
@@ -146,7 +125,7 @@ opt_out <- function(npi             = NULL,
       "city",          city,
       "state",         state,
       "zip",           as.character(zip),
-      "order_refer",      as.character(order_refer)) |>
+      "order_refer",   as.character(order_refer)) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -161,17 +140,15 @@ opt_out <- function(npi             = NULL,
 
   }
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-            check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(npi = as.character(npi),
                     dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       tidyr::unite("address",
                    dplyr::any_of(c("first_line_street_address",
@@ -181,14 +158,14 @@ opt_out <- function(npi             = NULL,
                     first_name,
                     last_name,
                     specialty,
+                    order_refer       = eligible_to_order_and_refer,
                     optout_start_date = optout_effective_date,
                     optout_end_date,
                     last_updated,
-                    order_refer = eligible_to_order_and_refer,
                     address,
-                    city = city_name,
-                    state = state_code,
-                    zip = zip_code)
+                    city              = city_name,
+                    state             = state_code,
+                    zip               = zip_code)
     }
   return(results)
 }

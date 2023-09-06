@@ -53,6 +53,7 @@ cms_update <- function(api = NULL, check = c("base", "id", "years")) {
   }
 }
 
+#' Update CMS.gov API distribution IDs
 #' @param api name of the api
 #' @param year int, year of the data distribution to return
 #' @return A [tibble][tibble::tibble-package] containing the updated ids.

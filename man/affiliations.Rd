@@ -70,8 +70,9 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 affiliations(parent_ccn = 670055)
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=hospitals]{hospitals()}}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/missing_endpoints.R
 \name{missing_endpoints}
 \alias{missing_endpoints}
-\title{Providers with Missing Endpoints in NPPES}
+\title{Providers Missing Endpoints in NPPES}
 \usage{
 missing_endpoints(npi = NULL, name = NULL, tidy = TRUE)
 }

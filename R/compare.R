@@ -9,10 +9,9 @@
 #'
 #' @examplesIf interactive()
 #' by_service_years() |>
-#' purrr::map(\(x) by_service(year = x, npi = 1023076643)) |>
-#' purrr::list_rbind() |>
+#' map(\(x) by_service(year = x, npi = 1023076643)) |>
+#' list_rbind() |>
 #' compare_hcpcs()
-#'
 #' @autoglobal
 #' @export
 compare_hcpcs <- function(df) {
@@ -72,10 +71,9 @@ compare_hcpcs <- function(df) {
 #'
 #' @examplesIf interactive()
 #' by_provider_years() |>
-#' purrr::map(\(x) by_provider(year = x, npi = 1023076643)) |>
-#' purrr::list_rbind() |>
+#' map(\(x) by_provider(year = x, npi = 1023076643)) |>
+#' list_rbind() |>
 #' compare_conditions()
-#'
 #' @autoglobal
 #' @export
 

@@ -53,7 +53,6 @@
 #'
 #' # Search by name and/or filter for certain privileges
 #' order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
-#'
 #' @autoglobal
 #' @export
 order_refer <- function(npi          = NULL,
@@ -65,23 +64,14 @@ order_refer <- function(npi          = NULL,
                         pmd          = NULL,
                         tidy         = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))   {npi_check(npi)}
+  if (!is.null(partb)) {partb <- tf_2_yn(partb)}
+  if (!is.null(dme))   {dme   <- tf_2_yn(dme)}
+  if (!is.null(hha))   {hha   <- tf_2_yn(hha)}
+  if (!is.null(pmd))   {pmd   <- tf_2_yn(pmd)}
 
-  if (!is.null(partb)) {partb <- dplyr::case_when(
-    partb == TRUE ~ "Y", partb == FALSE ~ "N", .default = NULL)}
-
-  if (!is.null(dme)) {dme <- dplyr::case_when(
-    dme == TRUE ~ "Y", dme == FALSE ~ "N", .default = NULL)}
-
-  if (!is.null(hha)) {hha <- dplyr::case_when(
-    hha == TRUE ~ "Y", hha == FALSE ~ "N", .default = NULL)}
-
-  if (!is.null(pmd)) {pmd <- dplyr::case_when(
-    pmd == TRUE ~ "Y", pmd == FALSE ~ "N", .default = NULL)}
-
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,           ~y,
+  args <- dplyr::tribble(
+    ~param,      ~arg,
     "NPI",        npi,
     "FIRST_NAME", first_name,
     "LAST_NAME",  last_name,
@@ -90,29 +80,16 @@ order_refer <- function(npi          = NULL,
     "HHA",        hha,
     "PMD",        pmd)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                cms_update("Order and Referring", "id")[1, 2],
+                "/data.json?",
+                encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Order and Referring", "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns NULL
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           as.character(npi),
       "first_name",    first_name,
@@ -134,26 +111,23 @@ order_refer <- function(npi          = NULL,
 
   }
 
-  # parse response
-  results <- tibble::tibble(httr2::resp_body_json(response,
-             check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # tidy output
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(partb = yn_logical(partb),
-                    hha = yn_logical(hha),
-                    dme = yn_logical(dme),
-                    pmd = yn_logical(pmd)) |>
+                    hha   = yn_logical(hha),
+                    dme   = yn_logical(dme),
+                    pmd   = yn_logical(pmd)) |>
       dplyr::select(npi,
                     first_name,
                     last_name,
-                    "Medicare Part B" = partb,
-                    "Home Health Agency (HHA)" = hha,
+                    "Medicare Part B"                 = partb,
+                    "Home Health Agency (HHA)"        = hha,
                     "Durable Medical Equipment (DME)" = dme,
-                    "Power Mobility Device (PMD)" = pmd) |>
-      tidyr::pivot_longer(cols = !c(npi,
-                                    dplyr::contains("name")),
+                    "Power Mobility Device (PMD)"     = pmd) |>
+      tidyr::pivot_longer(cols = !c(npi, dplyr::contains("name")),
                           names_to = "service",
                           values_to = "eligible")
     }

@@ -39,9 +39,8 @@
 #'
 #' @seealso [clinicians()], [providers()], [hospitals()]
 #'
-#' @examples
+#' @examplesIf interactive()
 #' affiliations(parent_ccn = 670055)
-#'
 #' @autoglobal
 #' @export
 affiliations <- function(npi           = NULL,
@@ -55,45 +54,36 @@ affiliations <- function(npi           = NULL,
                          offset        = 0L,
                          tidy          = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))    {npi_check(npi)}
   if (!is.null(pac_id)) {pac_check(pac_id)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                   ~y,
-    "npi",                npi,
-    "ind_pac_id",         pac_id,
-    "frst_nm",            first_name,
-    "mid_nm",             middle_name,
-    "lst_nm",             last_name,
-    "facility_type",      facility_type,
+  args <- dplyr::tribble(
+    ~param,                                         ~arg,
+    "npi",                                          npi,
+    "ind_pac_id",                                   pac_id,
+    "frst_nm",                                      first_name,
+    "mid_nm",                                       middle_name,
+    "lst_nm",                                       last_name,
+    "facility_type",                                facility_type,
     "facility_affiliations_certification_number",   facility_ccn,
-    "facility_type_certification_number",         parent_ccn)
+    "facility_type_certification_number",           parent_ccn)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, sql_format) |>
-    unlist() |>
-    stringr::str_flatten()
+  url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+                "[SELECT * FROM ", fac_affil_id(), "]",
+                encode_param(args, type = "sql"),
+                "[LIMIT 10000 OFFSET ", offset, "]")
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
-  id     <- paste0("[SELECT * FROM ", fac_affil_id(), "]")
-  post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
-  url    <- paste0(http, id, params_args, post) |>
-    param_brackets() |>
-    param_space()
-
-  # send request ----------------------------------------------------------
   error_body <- function(response) {httr2::resp_body_json(response)$message}
 
-  response <- httr2::request(url) |>
+  response <- httr2::request(encode_url(url)) |>
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-    cli_args <- tibble::tribble(
+  if (isTRUE(vctrs::vec_is_empty(results))) {
+
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           as.character(npi),
       "pac_id",        as.character(pac_id),
@@ -116,13 +106,9 @@ affiliations <- function(npi           = NULL,
 
   }
 
-    # parse response ---------------------------------------------------------
-    results <- tibble::tibble(httr2::resp_body_json(response,
-               check_type = FALSE, simplifyVector = TRUE))
-
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(
         npi,
@@ -133,8 +119,7 @@ affiliations <- function(npi           = NULL,
         suffix         = suff,
         facility_type,
         facility_ccn   = facility_affiliations_certification_number,
-        parent_ccn     = facility_type_certification_number) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+        parent_ccn     = facility_type_certification_number)
     }
   return(results)
 }

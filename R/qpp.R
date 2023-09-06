@@ -38,7 +38,6 @@
 #'
 #' @examplesIf interactive()
 #' quality_payment(year = 2020, npi = 1144544834)
-#'
 #' @rdname quality_payment
 #' @autoglobal
 #' @export
@@ -51,12 +50,12 @@ quality_payment <- function(year,
 
   if (!is.null(npi)) {npi_check(npi)}
 
-  # match args ----------------------------------------------------
+  # match args
   rlang::check_required(year)
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(quality_payment_years()))
 
-  # args tribble ------------------------------------------------------------
+  # args tribble
   args <- tibble::tribble(
     ~x,                              ~y,
     "npi",                            npi,
@@ -249,9 +248,7 @@ quality_eligibility <- function(year,
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
 
-  error_body <- function(resp) {
-    httr2::resp_body_json(resp)$error$message
-  }
+  error_body <- function(resp) {httr2::resp_body_json(resp)$error$message}
 
   resp <- httr2::request(url) |>
     httr2::req_error(body = error_body) |>

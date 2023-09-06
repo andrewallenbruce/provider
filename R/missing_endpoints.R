@@ -1,4 +1,4 @@
-#' Providers with Missing Endpoints in NPPES
+#' Providers Missing Endpoints in NPPES
 #'
 #' @description
 #' `missing_endpoints()` allows you to search for providers with missing

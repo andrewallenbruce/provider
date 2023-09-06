@@ -75,73 +75,6 @@ clean_credentials <- function(x) {
   return(out)
 }
 
-#' Calculate number of years since today's date
-#' @param df data frame
-#' @param date_col date column
-#' @return number of years since today's date
-#' @autoglobal
-#' @noRd
-years_passed <- function(df, date_col) {
-
-  df |>
-    dplyr::mutate(
-      years_passed = round(as.double(difftime(lubridate::today(),
-                                              {{ date_col }},
-                                              units = "weeks",
-                                  tz = "UTC")) / 52.17857, 2),
-      .after = {{ date_col }})
-}
-
-years_diff <- function(date_col) {
-  round(
-    as.double(
-      difftime(
-        lubridate::today(),
-        date_col,
-        units = "weeks",
-        tz = "UTC")) / 52.17857, 2)
-}
-
-#' Format Parameters and Arguments
-#' @param param API parameter
-#' @param arg API function arg
-#' @param filter description
-#' @param sql description
-#' @return formatted API filters
-#' @autoglobal
-#' @noRd
-format_param <- function(param,
-                         arg,
-                         filter = FALSE,
-                         sql = FALSE) {
-
-  if (isTRUE(filter)) {param <- paste0("filter[", param, "]=", arg)}
-  if (isTRUE(sql))    {param <- paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")}
-  # %22 url encoding for double quote (")
-
-  return(param)
-}
-
-#' encode_param
-#' Some API parameters have spaces, these must be converted to "%20".
-#' @param args args tibble
-#' @return parameter formatted with "%20" in lieu of a space
-#' @autoglobal
-#' @noRd
-encode_param <- function(args) {
-
-  args <- purrr::pmap(args, format_param) |>
-    unlist() |>
-    stringr::str_c(collapse = "&")
-
-  args <- gsub(" ", "%20", args)
-  args <- gsub("[", "%5B", args, fixed = TRUE)
-  args <- gsub("*", "%2A", args, fixed = TRUE)
-  args <- gsub("]", "%5D", args, fixed = TRUE)
-
-  return(args)
-}
-
 #' param_format
 #' @param param API parameter
 #' @param arg API function arg
@@ -252,13 +185,27 @@ yn_logical <- function(x) {
 
   dplyr::case_match(
     x,
-    c("Y", "YES", "Yes", "yes", "y") ~ TRUE,
-    c("N", "NO", "No", "no", "n") ~ FALSE,
+    c("Y", "YES", "Yes", "yes", "y", "True") ~ TRUE,
+    c("N", "NO", "No", "no", "n", "False") ~ FALSE,
     .default = NA
   )
 }
 
-#' Convert I/O char values to logical ----------------------
+#' Convert TRUE/FALSE values to Y/N
+#' @param x vector
+#' @autoglobal
+#' @noRd
+tf_2_yn <- function(x) {
+
+  dplyr::case_match(
+    x,
+    c(TRUE) ~ "Y",
+    c(FALSE) ~ "N",
+    .default = NULL
+  )
+}
+
+#' Convert I/O char values to logical
 #' @param x vector
 #' @autoglobal
 #' @noRd
@@ -271,7 +218,7 @@ entype_char <- function(x) {
     )
 }
 
-#' Convert I/O char values to logical ----------------------
+#' Convert I/O char values to logical
 #' @param x vector
 #' @autoglobal
 #' @noRd
@@ -308,58 +255,6 @@ display_long <- function(df) {
   df |> dplyr::mutate(dplyr::across(dplyr::everything(),
                                     as.character)) |>
         tidyr::pivot_longer(dplyr::everything())
-}
-
-#' @param df df
-#' @param col col
-#' @param by by
-#' @return A `tibble`
-#' @autoglobal
-#' @noRd
-change_abs <- function(df, col, by) {
-
-  df |> dplyr::mutate(
-    "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }}, order_by = {{ by }}),
-    .after = {{ col }})
-}
-
-#' @param df df
-#' @param col col
-#' @param col_abs col_abs_chng
-#' @param by by
-#' @return A `tibble`
-#' @autoglobal
-#' @noRd
-change_pct <- function(df, col, col_abs, by) {
-
-  df |> dplyr::mutate(
-    "{{ col }}_pct" := {{ col_abs }} / dplyr::lag({{ col }}, order_by = {{ by }}),
-    .after = {{ col_abs }})
-}
-
-#' Calculate lagged values by column
-#' @param df data frame
-#' @param col column of numeric values to calculate lag
-#' @param by column to calculate lag by
-#' @returns A `tibble`
-#' @examplesIf interactive()
-#' by_provider_years() |>
-#' map(\(x) by_provider(year = x, npi = 1023076643)) |>
-#' list_rbind() |>
-#' select(year, tot_payment) |>
-#' change_year(tot_payment, year)
-#'
-#' @autoglobal
-#' @internal
-change_year <- function(df, col, by) {
-
-  df |>
-    dplyr::mutate(
-      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }},
-                                                order_by = {{ by }}),
-      "{{ col }}_pct" := dplyr::pick(
-        dplyr::contains("_chg")) / dplyr::lag({{ col }}, order_by = {{ by }}),
-      .after = {{ col }})
 }
 
 #' convert_breaks

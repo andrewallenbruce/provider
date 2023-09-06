@@ -175,8 +175,7 @@ cc_multiple <- function(year,
                                     tot_pymt_percap,
                                     hosp_readmsn_rate,
                                     er_visits_per_1k),
-                                  as.double),
-                    mcc = convert_breaks(mcc))
+                                  as.double))
     }
   return(results)
 }

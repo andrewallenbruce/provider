@@ -10,35 +10,35 @@ utils::globalVariables(c(
   "facility_affiliations_certification_number", # <affiliations>
   "facility_type_certification_number", # <affiliations>
   "identifier", # <fac_affil_id>
-  "state.abb", # <beneficiary_enrollment>
-  "state.name", # <beneficiary_enrollment>
-  "y", # <beneficiary_enrollment>
-  "x", # <beneficiary_enrollment>
-  "bene_geo_lvl", # <beneficiary_enrollment>
-  "month", # <beneficiary_enrollment>
-  "bene_state_abrvtn", # <beneficiary_enrollment>
-  "bene_state_desc", # <beneficiary_enrollment>
-  "bene_county_desc", # <beneficiary_enrollment>
-  "bene_fips_cd", # <beneficiary_enrollment>
-  "tot_benes", # <beneficiary_enrollment>
-  "orgnl_mdcr_benes", # <beneficiary_enrollment>
-  "ma_and_oth_benes", # <beneficiary_enrollment>
-  "aged_tot_benes", # <beneficiary_enrollment>
-  "aged_esrd_benes", # <beneficiary_enrollment>
-  "aged_no_esrd_benes", # <beneficiary_enrollment>
-  "dsbld_tot_benes", # <beneficiary_enrollment>
-  "dsbld_esrd_and_esrd_only_benes", # <beneficiary_enrollment>
-  "dsbld_no_esrd_benes", # <beneficiary_enrollment>
-  "a_b_tot_benes", # <beneficiary_enrollment>
-  "a_b_orgnl_mdcr_benes", # <beneficiary_enrollment>
-  "a_b_ma_and_oth_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_tot_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_pdp_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_mapd_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_deemed_eligible_full_lis_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_full_lis_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_partial_lis_benes", # <beneficiary_enrollment>
-  "prscrptn_drug_no_lis_benes", # <beneficiary_enrollment>
+  "state.abb", # <beneficiaries>
+  "state.name", # <beneficiaries>
+  "y", # <beneficiaries>
+  "x", # <beneficiaries>
+  "bene_geo_lvl", # <beneficiaries>
+  "month", # <beneficiaries>
+  "bene_state_abrvtn", # <beneficiaries>
+  "bene_state_desc", # <beneficiaries>
+  "bene_county_desc", # <beneficiaries>
+  "bene_fips_cd", # <beneficiaries>
+  "tot_benes", # <beneficiaries>
+  "orgnl_mdcr_benes", # <beneficiaries>
+  "ma_and_oth_benes", # <beneficiaries>
+  "aged_tot_benes", # <beneficiaries>
+  "aged_esrd_benes", # <beneficiaries>
+  "aged_no_esrd_benes", # <beneficiaries>
+  "dsbld_tot_benes", # <beneficiaries>
+  "dsbld_esrd_and_esrd_only_benes", # <beneficiaries>
+  "dsbld_no_esrd_benes", # <beneficiaries>
+  "a_b_tot_benes", # <beneficiaries>
+  "a_b_orgnl_mdcr_benes", # <beneficiaries>
+  "a_b_ma_and_oth_benes", # <beneficiaries>
+  "prscrptn_drug_tot_benes", # <beneficiaries>
+  "prscrptn_drug_pdp_benes", # <beneficiaries>
+  "prscrptn_drug_mapd_benes", # <beneficiaries>
+  "prscrptn_drug_deemed_eligible_full_lis_benes", # <beneficiaries>
+  "prscrptn_drug_full_lis_benes", # <beneficiaries>
+  "prscrptn_drug_partial_lis_benes", # <beneficiaries>
+  "prscrptn_drug_no_lis_benes", # <beneficiaries>
   "state.abb", # <by_geography>
   "state.name", # <by_geography>
   "x", # <by_geography>
@@ -160,6 +160,8 @@ utils::globalVariables(c(
   "avg_mdcr_alowd_amt", # <by_service>
   "avg_mdcr_pymt_amt", # <by_service>
   "avg_mdcr_stdzd_amt", # <by_service>
+  "year", # <change_year>
+  ":=", # <change_year>
   "state.abb", # <cc_multiple>
   "state.name", # <cc_multiple>
   "x", # <cc_multiple>
@@ -182,7 +184,6 @@ utils::globalVariables(c(
   "tot_std_pymt_percap", # <cc_multiple>
   "tot_pymt_percap", # <cc_multiple>
   "er_visits_per_1k", # <cc_multiple>
-  "mcc", # <cc_multiple>
   "state.abb", # <cc_specific>
   "state.name", # <cc_specific>
   "x", # <cc_specific>
@@ -333,7 +334,6 @@ utils::globalVariables(c(
   "tot_benes", # <compare_hcpcs>
   "tot_srvcs", # <compare_hcpcs>
   "tot_provs", # <compare_hcpcs>
-  "beneficiaries", # <compare_hcpcs>
   "services", # <compare_hcpcs>
   "year", # <compare_conditions>
   "conditions", # <compare_conditions>
@@ -567,17 +567,14 @@ utils::globalVariables(c(
   "set", # <open_payments_ids>
   "identifier", # <open_payments_ids>
   "year", # <open_payments_years>
-  "arg", # <opt_out>
-  "distro", # <opt_out>
   "y", # <opt_out>
+  "eligible_to_order_and_refer", # <opt_out>
   "optout_effective_date", # <opt_out>
   "optout_end_date", # <opt_out>
   "last_updated", # <opt_out>
-  "eligible_to_order_and_refer", # <opt_out>
   "city_name", # <opt_out>
   "state_code", # <opt_out>
   "zip_code", # <opt_out>
-  "distro", # <order_refer>
   "y", # <order_refer>
   "y", # <pending>
   "distro", # <providers>
@@ -720,11 +717,9 @@ utils::globalVariables(c(
   "distribution_title", # <cms_get_dates>
   "distribution", # <cms_get_dates>
   "year", # <cms_get_dates>
+  "arg", # <encode_param>
   "Variable", # <gt_datadict>
   "Description", # <gt_datadict>
   "Definition", # <gt_datadict>
-  ":=", # <change_abs>
-  ":=", # <change_pct>
-  ":=", # <change_year>
   NULL
 ))

@@ -40,30 +40,30 @@
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
-#' beneficiary_enrollment(year = NULL,
+#' beneficiaries(year = NULL,
 #'                        period = "Year",
 #'                        level = "County",
 #'                        state = "AL",
 #'                        county = "Autauga")
 #'
-#' beneficiary_enrollment(year = 2021, level = "County", fips = "01001")
+#' beneficiaries(year = 2021, level = "County", fips = "01001")
 #'
-#' beneficiary_enrollment(year = 2022,
+#' beneficiaries(year = 2022,
 #'                        period = "July",
 #'                        level = "State",
 #'                        state_name = "Georgia")
 #'
-#' beneficiary_enrollment(level = "State", fips = "10")
+#' beneficiaries(level = "State", fips = "10")
 #' @autoglobal
 #' @export
-beneficiary_enrollment <- function(year        = NULL,
-                                   period      = NULL,
-                                   level       = NULL,
-                                   state       = NULL,
-                                   state_name  = NULL,
-                                   county      = NULL,
-                                   fips        = NULL,
-                                   tidy        = TRUE) {
+beneficiaries <- function(year        = NULL,
+                          period      = NULL,
+                          level       = NULL,
+                          state       = NULL,
+                          state_name  = NULL,
+                          county      = NULL,
+                          fips        = NULL,
+                          tidy        = TRUE) {
 
   # match args ----------------------------------------------------
   if (!is.null(period)) {rlang::arg_match0(period, c("Year", "Month", month.name))}
