@@ -62,7 +62,6 @@ type and address.
 }
 \examples{
 hospitals(pac_id_org = 6103733050)
-
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}

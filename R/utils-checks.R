@@ -61,6 +61,7 @@ npi_check <- function(npi,
       "An {.strong NPI} must pass {.emph Luhn algorithm}.",
       "x" = "{.val {npi}} {.emph fails} Luhn check."), call = call)
   }
+  return(as.character(npi))
 }
 
 #' PAC ID Validation Check
@@ -105,6 +106,7 @@ pac_check <- function(pac_id,
       "A {.strong PAC ID} must be {.emph 10 digits long}.",
       "x" = "{.val {pac_id}} contains {.val {nchar(pac_id)}} digit{?s}."), call = call)
   }
+  return(as.character(pac_id))
 }
 
 #' Enrollment ID Validation Check

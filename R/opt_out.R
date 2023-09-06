@@ -91,8 +91,9 @@ opt_out <- function(npi             = NULL,
                     order_refer     = NULL,
                     tidy            = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))         {npi         <- npi_check(npi)}
   if (!is.null(order_refer)) {order_refer <- tf_2_yn(order_refer)}
+  if (!is.null(zip))         {zip         <- as.character(zip)}
 
   args <- dplyr::tribble(
     ~param,                         ~arg,
@@ -107,7 +108,7 @@ opt_out <- function(npi             = NULL,
     "Eligible to Order and Refer",   order_refer)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                 cms_update("Opt Out Affidavits", "id")[1, 2],
+                 cms_update("Opt Out Affidavits", "id")$distro[1],
                  "/data.json?",
                  encode_param(args))
 
@@ -117,15 +118,15 @@ opt_out <- function(npi             = NULL,
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
+      "npi",           npi,
       "first_name",    first_name,
       "last_name",     last_name,
       "specialty",     specialty,
       "address",       address,
       "city",          city,
       "state",         state,
-      "zip",           as.character(zip),
-      "order_refer",   as.character(order_refer)) |>
+      "zip",           zip,
+      "order_refer",   order_refer) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -142,7 +143,6 @@ opt_out <- function(npi             = NULL,
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::tibble() |>

@@ -1,7 +1,8 @@
-#' Provider Facility Affiliations
+#' Provider-Facility Affiliations
 #'
 #' @description
-#' `affiliations()` allows you to access information concerning providers' facility affiliations
+#' `affiliations()` allows you to access information concerning providers'
+#' facility affiliations
 #'
 #' ### Links
 #'  - [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
@@ -54,8 +55,10 @@ affiliations <- function(npi           = NULL,
                          offset        = 0L,
                          tidy          = TRUE) {
 
-  if (!is.null(npi))    {npi_check(npi)}
-  if (!is.null(pac_id)) {pac_check(pac_id)}
+  if (!is.null(npi))          {npi          <- npi_check(npi)}
+  if (!is.null(pac_id))       {pac_id       <- pac_check(pac_id)}
+  if (!is.null(facility_ccn)) {facility_ccn <- as.character(facility_ccn)}
+  if (!is.null(parent_ccn))   {parent_ccn   <- as.character(parent_ccn)}
 
   args <- dplyr::tribble(
     ~param,                                         ~arg,
@@ -85,14 +88,14 @@ affiliations <- function(npi           = NULL,
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
-      "pac_id",        as.character(pac_id),
+      "npi",           npi,
+      "pac_id",        pac_id,
       "first_name",    first_name,
       "middle_name",   middle_name,
       "last_name",     last_name,
       "facility_type", facility_type,
-      "facility_ccn",  as.character(facility_ccn),
-      "parent_ccn",    as.character(parent_ccn)) |>
+      "facility_ccn",  facility_ccn,
+      "parent_ccn",    parent_ccn) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -119,7 +122,8 @@ affiliations <- function(npi           = NULL,
         suffix         = suff,
         facility_type,
         facility_ccn   = facility_affiliations_certification_number,
-        parent_ccn     = facility_type_certification_number)
+        parent_ccn     = facility_type_certification_number,
+        dplyr::everything())
     }
   return(results)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/affiliations.R
 \name{affiliations}
 \alias{affiliations}
-\title{Provider Facility Affiliations}
+\title{Provider-Facility Affiliations}
 \usage{
 affiliations(
   npi = NULL,
@@ -59,7 +59,8 @@ services in a unit within the hospital.}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{affiliations()} allows you to access information concerning providers' facility affiliations
+\code{affiliations()} allows you to access information concerning providers'
+facility affiliations
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}

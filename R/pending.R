@@ -30,8 +30,8 @@ pending <- function(type,
                     first_name  = NULL,
                     tidy        = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
   type <- rlang::arg_match(type, c("physician", "non-physician"))
+  if (!is.null(npi)) {npi <- npi_check(npi)}
 
   # update distribution ids
   id <- dplyr::case_match(type,
@@ -39,33 +39,22 @@ pending <- function(type,
     "non-physician" ~ cms_update("Pending Initial Logging and Tracking Non Physicians", "id")$distro[1])
 
   # args tribble
-  args <- tibble::tribble(
-    ~x,           ~y,
+  args <- dplyr::tribble(
+    ~param,       ~args,
     "NPI",        npi,
     "LAST_NAME",  last_name,
     "FIRST_NAME", first_name)
 
-  # map param_format and collapse
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data.json?", encode_param(args))
 
-  # build URL
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  #post   <- "/data?"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # response
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,               ~y,
-      "npi",            as.character(npi),
+      "npi",            npi,
       "last_name",      last_name,
       "first_name",     first_name,
       "type",           type) |>
@@ -83,13 +72,11 @@ pending <- function(type,
     return(invisible(NULL))
   }
 
-  results <- tibble::tibble(httr2::resp_body_json(response,
-              check_type = FALSE,
-              simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(type = toupper(type))
     }
   return(results)

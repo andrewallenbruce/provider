@@ -58,42 +58,27 @@ missing_endpoints <- function(npi  = NULL,
                               name = NULL,
                               tidy = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))  {npi <- npi_check(npi)}
   if (!is.null(name)) {name <- stringr::str_replace(name, " ", "")}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,               ~y,
+  args <- dplyr::tribble(
+    ~param,          ~arg,
     "NPI",            npi,
     "Provider Name",  name)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+         cms_update("Public Reporting of Missing Digital Contact Information",
+         "id")$distro[1], "/data?", encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Public Reporting of Missing Digital Contact Information",
-                   "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data?"
-  #post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # create request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28) {
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-    cli_args <- tibble::tribble(
+  if (isTRUE(vctrs::vec_is_empty(results))) {
+
+    cli_args <- dplyr::tribble(
       ~x,            ~y,
-      "npi",         as.character(npi),
+      "npi",         npi,
       "name",        name) |>
       tidyr::unnest(cols = c(y))
 
@@ -109,16 +94,12 @@ missing_endpoints <- function(npi  = NULL,
     return(invisible(NULL))
   }
 
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                check_type = FALSE,
-                simplifyVector = TRUE))
-
   # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- tidyr::separate(results,
-                               col = "Provider Name",
-                               into = c("last_name", "first_name"),
-                               sep = ",") |>
+    results <- results |>
+      dplyr::tibble() |>
+      tidyr::separate_wider_delim("Provider Name", ",",
+                      names = c("last_name", "first_name")) |>
       dplyr::select(npi = NPI, last_name, first_name)
     }
   return(results)

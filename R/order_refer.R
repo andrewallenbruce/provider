@@ -64,7 +64,7 @@ order_refer <- function(npi          = NULL,
                         pmd          = NULL,
                         tidy         = TRUE) {
 
-  if (!is.null(npi))   {npi_check(npi)}
+  if (!is.null(npi))   {npi   <- npi_check(npi)}
   if (!is.null(partb)) {partb <- tf_2_yn(partb)}
   if (!is.null(dme))   {dme   <- tf_2_yn(dme)}
   if (!is.null(hha))   {hha   <- tf_2_yn(hha)}
@@ -81,7 +81,7 @@ order_refer <- function(npi          = NULL,
     "PMD",        pmd)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                cms_update("Order and Referring", "id")[1, 2],
+                cms_update("Order and Referring", "id")$distro[1],
                 "/data.json?",
                 encode_param(args))
 
@@ -91,13 +91,13 @@ order_refer <- function(npi          = NULL,
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
+      "npi",           npi,
       "first_name",    first_name,
       "last_name",     last_name,
-      "partb",         as.character(partb),
-      "dme",           as.character(dme),
-      "hha",           as.character(hha),
-      "pmd",           as.character(pmd)) |>
+      "partb",         partb,
+      "dme",           dme,
+      "hha",           hha,
+      "pmd",           pmd) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,

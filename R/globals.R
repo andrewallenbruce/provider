@@ -10,8 +10,6 @@ utils::globalVariables(c(
   "facility_affiliations_certification_number", # <affiliations>
   "facility_type_certification_number", # <affiliations>
   "identifier", # <fac_affil_id>
-  "state.abb", # <beneficiaries>
-  "state.name", # <beneficiaries>
   "y", # <beneficiaries>
   "x", # <beneficiaries>
   "bene_geo_lvl", # <beneficiaries>
@@ -297,12 +295,10 @@ utils::globalVariables(c(
   "clia_lab_classification_current", # <clia_labs>
   "category", # <clia_labs>
   "subcategory", # <clia_labs>
-  "zipcode", # <clinicians>
-  "ind_assn", # <clinicians>
-  "group_assn", # <clinicians>
   "y", # <clinicians>
   "adr_ln_1", # <clinicians>
   "adr_ln_2", # <clinicians>
+  "address", # <clinicians>
   "num_org_mem", # <clinicians>
   "grd_yr", # <clinicians>
   "telehlth", # <clinicians>
@@ -317,12 +313,12 @@ utils::globalVariables(c(
   "med_sch", # <clinicians>
   "pri_spec", # <clinicians>
   "sec_spec_all", # <clinicians>
-  "org_nm", # <clinicians>
-  "pac_id_org", # <clinicians>
-  "address", # <clinicians>
-  "cty", # <clinicians>
-  "st", # <clinicians>
-  "phn_numbr", # <clinicians>
+  "facility_name", # <clinicians>
+  "org_pac_id", # <clinicians>
+  "adrs_id", # <clinicians>
+  "city_town", # <clinicians>
+  "zip_code", # <clinicians>
+  "telephone_number", # <clinicians>
   "ind_assgn", # <clinicians>
   "grp_assgn", # <clinicians>
   "identifier", # <drs_clinics_id>
@@ -358,7 +354,6 @@ utils::globalVariables(c(
   "condition", # <compare_conditions>
   "state", # <compare_conditions>
   "sublevel", # <compare_conditions>
-  "distro", # <hospitals>
   "y", # <hospitals>
   "address_line_1", # <hospitals>
   "address_line_2", # <hospitals>
@@ -378,6 +373,9 @@ utils::globalVariables(c(
   "practice_location_type", # <hospitals>
   "location_other_type_text", # <hospitals>
   "multiple_npi_flag", # <hospitals>
+  "cah_or_hospital_ccn", # <hospitals>
+  "reh_conversion_flag", # <hospitals>
+  "reh_conversion_date", # <hospitals>
   "proprietary_nonprofit", # <hospitals>
   "y", # <asc_ifed_enrollment>
   "line_1_st_adr", # <asc_ifed_enrollment>
@@ -422,7 +420,6 @@ utils::globalVariables(c(
   "collection_type", # <mips_clinician_2021>
   "ccxp_ind", # <mips_clinician_2021>
   "identifier", # <mips_ind_2021_id>
-  "distro", # <missing_endpoints>
   "y", # <missing_endpoints>
   "NPI", # <missing_endpoints>
   "last_name", # <missing_endpoints>
@@ -577,7 +574,6 @@ utils::globalVariables(c(
   "zip_code", # <opt_out>
   "y", # <order_refer>
   "y", # <pending>
-  "distro", # <providers>
   "y", # <providers>
   "pecos_asct_cntl_id", # <providers>
   "enrlmt_id", # <providers>

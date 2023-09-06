@@ -54,13 +54,12 @@ providers <- function(npi                = NULL,
                       gender             = NULL,
                       tidy               = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))       {npi    <- npi_check(npi)}
+  if (!is.null(pac_id))    {pac_id <- pac_check(pac_id)}
   if (!is.null(enroll_id)) {enroll_check(enroll_id)}
-  if (!is.null(pac_id)) {pac_check(pac_id)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-                        ~x,  ~y,
+  args <- dplyr::tribble(
+                        ~param,  ~arg,
                           "NPI", npi,
            "PECOS_ASCT_CNTL_ID", pac_id,
                     "ENRLMT_ID", enroll_id,
@@ -73,35 +72,22 @@ providers <- function(npi                = NULL,
                      "ORG_NAME", organization_name,
                       "GNDR_SW", gender)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+         cms_update("Medicare Fee-For-Service  Public Provider Enrollment",
+                    "id")$distro[1],
+                "/data.json?",
+                encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Medicare Fee-For-Service  Public Provider Enrollment",
-                   "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,                 ~y,
-      "npi",               as.character(npi),
-      "pac_id",            as.character(pac_id),
-      "enroll_id",         as.character(enroll_id),
-      "specialty_code",    as.character(specialty_code),
+      "npi",               npi,
+      "pac_id",            pac_id,
+      "enroll_id",         enroll_id,
+      "specialty_code",    specialty_code,
       "specialty",         specialty,
       "state",             state,
       "first_name",        first_name,
@@ -119,18 +105,15 @@ providers <- function(npi                = NULL,
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
 
-
     return(invisible(NULL))
 
   }
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                          check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(npi,
                     pac_id            = pecos_asct_cntl_id,
@@ -142,8 +125,7 @@ providers <- function(npi                = NULL,
                     first_name,
                     middle_name       = mdl_name,
                     last_name,
-                    gender            = gndr_sw) |>
-      janitor::remove_empty(which = c("rows", "cols"))
+                    gender            = gndr_sw)
   }
   return(results)
 }

@@ -41,10 +41,10 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @examplesIf interactive()
 #' beneficiaries(year = NULL,
-#'                        period = "Year",
-#'                        level = "County",
-#'                        state = "AL",
-#'                        county = "Autauga")
+#'               period = "Year",
+#'               level = "County",
+#'               state = "AL",
+#'               county = "Autauga")
 #'
 #' beneficiaries(year = 2021, level = "County", fips = "01001")
 #'
@@ -66,13 +66,13 @@ beneficiaries <- function(year        = NULL,
                           tidy        = TRUE) {
 
   # match args ----------------------------------------------------
-  if (!is.null(period)) {rlang::arg_match0(period, c("Year", "Month", month.name))}
-  if (!is.null(level)) {rlang::arg_match0(level, c("National", "State", "County"))}
-  if (!is.null(state)) {rlang::arg_match0(state, c(state.abb))}
-  if (!is.null(state_name)) {rlang::arg_match0(state_name, c(state.name))}
+  if (!is.null(period)) {rlang::arg_match(period, c("Year", "Month", month.name))}
+  if (!is.null(level)) {rlang::arg_match(level, c("National", "State", "County"))}
+  #if (!is.null(state)) {rlang::arg_match(state, c(state.abb))}
+  #if (!is.null(state_name)) {rlang::arg_match(state_name, c(state.name))}
 
   # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
+  args <- dplyr::tribble(
                      ~x,         ~y,
                  "YEAR",       year,
                 "MONTH",     period,
@@ -107,7 +107,7 @@ beneficiaries <- function(year        = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,           ~y,
       "year",       as.character(year),
       "period",     period,
@@ -130,7 +130,7 @@ beneficiaries <- function(year        = NULL,
     return(invisible(NULL))
     }
 
-    results <- tibble::tibble(httr2::resp_body_json(response,
+    results <- dplyr::tibble(httr2::resp_body_json(response,
       check_type = FALSE, simplifyVector = TRUE))
 
   # clean names -------------------------------------------------------------

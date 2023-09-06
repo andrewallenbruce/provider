@@ -2,12 +2,12 @@
 % Please edit documentation in R/clinicians.R
 \name{clinicians}
 \alias{clinicians}
-\title{Doctors and Clinicians National Downloadable File}
+\title{Clinicians Enrolled in Medicare}
 \usage{
 clinicians(
   npi = NULL,
-  pac_id = NULL,
-  enroll_id = NULL,
+  pac_id_ind = NULL,
+  enroll_id_ind = NULL,
   first_name = NULL,
   middle_name = NULL,
   last_name = NULL,
@@ -15,6 +15,8 @@ clinicians(
   school = NULL,
   grad_year = NULL,
   specialty = NULL,
+  facility = NULL,
+  pac_id_org = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -25,9 +27,9 @@ clinicians(
 \arguments{
 \item{npi}{Unique clinician ID assigned by NPPES}
 
-\item{pac_id}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
 
-\item{enroll_id}{Unique ID for the clinician enrollment that is the source
+\item{enroll_id_ind}{Unique ID for the clinician enrollment that is the source
 for the data in the observation}
 
 \item{first_name}{Individual clinician first name}
@@ -45,6 +47,10 @@ for the data in the observation}
 \item{specialty}{Primary medical specialty reported by the individual
 clinician in the selected enrollment}
 
+\item{facility}{description}
+
+\item{pac_id_org}{description}
+
 \item{city}{Group or individual's city}
 
 \item{state}{Group or individual's state}
@@ -59,11 +65,9 @@ clinician in the selected enrollment}
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{clinicians()} . The Doctors and Clinicians national downloadable file is organized
-such that each line is unique at the clinician/enrollment
-record/group/address level. Clinicians with multiple Medicare enrollment
-records and/or single enrollments linking to multiple practice locations
-are listed on multiple lines.
+\code{clinicians()} allows you to access information about providers
+enrolled in Medicare, including the medical school that they attended ant the
+year they graduated
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}

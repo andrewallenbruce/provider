@@ -30,7 +30,6 @@
 #'
 #' @examples
 #' hospitals(pac_id_org = 6103733050)
-#'
 #' @autoglobal
 #' @export
 hospitals <- function(npi               = NULL,
@@ -46,14 +45,15 @@ hospitals <- function(npi               = NULL,
                       zip               = NULL,
                       tidy              = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi))           {npi          <- npi_check(npi)}
+  if (!is.null(pac_id_org))    {pac_id_org   <- pac_check(pac_id_org)}
+  if (!is.null(zip))           {zip          <- as.character(zip)}
+  if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(enroll_id_org)) {enroll_check(enroll_id_org)}
   if (!is.null(enroll_id_org)) {enroll_org_check(enroll_id_org)}
-  if (!is.null(pac_id_org)) {pac_check(pac_id_org)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                       ~y,
+  args <- dplyr::tribble(
+    ~param,                  ~arg,
     "NPI",                    npi,
     "CCN",                    facility_ccn,
     "ENROLLMENT ID",          enroll_id_org,
@@ -66,33 +66,20 @@ hospitals <- function(npi               = NULL,
     "STATE",                  state,
     "ZIP CODE",               zip)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                cms_update("Hospital Enrollments", "id")$distro[1],
+                "/data.json?",
+                encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update(api = "Hospital Enrollments", check = "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,                  ~y,
-      "npi",               as.character(npi),
-      "facility_ccn",      as.character(facility_ccn),
-      "enroll_id_org",     as.character(enroll_id_org),
+      "npi",               npi,
+      "facility_ccn",      facility_ccn,
+      "enroll_id_org",     enroll_id_org,
       "enroll_state",      enroll_state,
       "specialty_code",    specialty_code,
       "pac_id_org",        pac_id_org,
@@ -114,16 +101,13 @@ hospitals <- function(npi               = NULL,
 
   }
 
-    # parse response ---------------------------------------------------------
-    results <- tibble::tibble(httr2::resp_body_json(response,
-              check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup", "proprietary")), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
       tidyr::unite("address",
@@ -149,8 +133,12 @@ hospitals <- function(npi               = NULL,
                     location_type          = practice_location_type,
                     location_other         = location_other_type_text,
                     multiple_npis          = multiple_npi_flag,
+                    cah_or_hospital_ccn,
+                    reh_conversion_flag,
+                    reh_conversion_date,
                     proprietary_nonprofit,
-                    dplyr::contains("subgroup_")) |>
+                    dplyr::contains("subgroup_"),
+                    dplyr::everything()) |>
       tidyr::nest(subgroups = dplyr::contains("subgroup_"))
 
     }

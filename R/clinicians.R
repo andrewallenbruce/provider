@@ -1,20 +1,18 @@
-#' Doctors and Clinicians National Downloadable File
+#' Clinicians Enrolled in Medicare
 #'
-#' @description `clinicians()` . The Doctors and Clinicians national downloadable file is organized
-#'   such that each line is unique at the clinician/enrollment
-#'   record/group/address level. Clinicians with multiple Medicare enrollment
-#'   records and/or single enrollments linking to multiple practice locations
-#'   are listed on multiple lines.
+#' @description `clinicians()` allows you to access information about providers
+#' enrolled in Medicare, including the medical school that they attended ant the
+#' year they graduated
 #'
-#'   ## Links
+#' ### Links
 #'   - [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 #'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id Unique individual clinician ID assigned by PECOS
-#' @param enroll_id Unique ID for the clinician enrollment that is the source
+#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
+#' @param enroll_id_ind Unique ID for the clinician enrollment that is the source
 #'   for the data in the observation
 #' @param first_name Individual clinician first name
 #' @param middle_name Individual clinician middle name
@@ -24,6 +22,8 @@
 #' @param grad_year Individual clinician’s medical school graduation year
 #' @param specialty Primary medical specialty reported by the individual
 #'   clinician in the selected enrollment
+#' @param facility description
+#' @param pac_id_org description
 #' @param city Group or individual's city
 #' @param state Group or individual's state
 #' @param zip Group or individual's ZIP code
@@ -40,8 +40,8 @@
 #' @autoglobal
 #' @export
 clinicians <- function(npi = NULL,
-                       pac_id = NULL,
-                       enroll_id = NULL,
+                       pac_id_ind = NULL,
+                       enroll_id_ind = NULL,
                        first_name = NULL,
                        middle_name = NULL,
                        last_name = NULL,
@@ -49,72 +49,72 @@ clinicians <- function(npi = NULL,
                        school = NULL,
                        grad_year = NULL,
                        specialty = NULL,
+                       facility = NULL,
+                       pac_id_org = NULL,
                        city = NULL,
                        state = NULL,
                        zip = NULL,
                        offset = 0L,
                        tidy = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
-  if (!is.null(enroll_id)) {enroll_ind_check(enroll_id)}
-  if (!is.null(pac_id)) {pac_check(pac_id)}
+  if (!is.null(npi))           {npi        <- npi_check(npi)}
+  if (!is.null(pac_id_ind))    {pac_id_ind <- pac_check(pac_id_ind)}
+  if (!is.null(pac_id_org))    {pac_id_org <- pac_check(pac_id_org)}
+  if (!is.null(enroll_id_ind)) {enroll_check(enroll_id_ind)}
+  if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
+  if (!is.null(grad_year))     {grad_year <- as.character(grad_year)}
+  if (!is.null(zip))           {zip <- as.character(zip)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                   ~y,
+  args <- dplyr::tribble(
+    ~param,               ~arg,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_id,
-    "Ind_enrl_ID",        enroll_id,
+    "Ind_PAC_ID",         pac_id_ind,
+    "Ind_enrl_ID",        enroll_id_ind,
     "frst_nm",            first_name,
     "mid_nm",             middle_name,
     "lst_nm",             last_name,
     "gndr",               gender,
-    "Med_sch",            school,
-    "Grd_yr",             grad_year,
+    "med_sch",            school,
+    "grd_yr",             grad_year,
     "pri_spec",           specialty,
-    "cty",                city,
-    "st",                 state,
-    "zip",                zipcode,
-    "ind_assgn",          ind_assn,
-    "grp_assgn",          group_assn)
+    "facility_name",      facility,
+    "org_pac_id",         pac_id_org,
+    "citytown",           city,
+    "state",              state,
+    "zip_code",           zip)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, sql_format) |>
-    unlist() |>
-    stringr::str_flatten()
+  url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+                "[SELECT * FROM ", drs_clinics_id(), "]",
+                encode_param(args, type = "sql"),
+                "[LIMIT 10000 OFFSET ", offset, "]")
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/provider-data/api/1/datastore/sql?query="
-  id     <- paste0("[SELECT * FROM ", drs_clinics_id(), "]")
-  post   <- paste0("[LIMIT 10000 OFFSET ", offset, "]&show_db_columns")
-  url    <- paste0(http, id, params_args, post) |>
-    param_brackets() |>
-    param_space()
+  error_body <- function(response) {httr2::resp_body_json(response)$message}
 
-  # send request ----------------------------------------------------------
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(encode_url(url)) |>
+    httr2::req_error(body = error_body) |>
+    httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-    cli_args <- tibble::tribble(
+  if (isTRUE(vctrs::vec_is_empty(results))) {
+
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
-      "pac_id",        as.character(pac_id),
-      "enroll_id",     as.character(enroll_id),
+      "npi",           npi,
+      "pac_id_ind",    pac_id_ind,
+      "enroll_id_ind", enroll_id_ind,
       "first_name",    first_name,
       "middle_name",   middle_name,
       "last_name",     last_name,
       "gender",        gender,
       "school",        school,
-      "grad_year",     as.character(grad_year),
+      "grad_year",     grad_year,
       "specialty",     specialty,
+      "facility",      facility,
+      "pac_id_org",    pac_id_org,
       "city",          city,
       "state",         state,
-      "zipcode",       zipcode,
-      "ind_assn",      ind_assn,
-      "group_assn",    group_assn) |>
+      "zip",           zip) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -128,17 +128,13 @@ clinicians <- function(npi = NULL,
     return(invisible(NULL))
   }
 
-    # parse response ---------------------------------------------------------
-    results <- tibble::tibble(httr2::resp_body_json(response,
-               check_type = FALSE, simplifyVector = TRUE))
-
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
-      tidyr::unite("address",
-                   adr_ln_1:adr_ln_2,
+      dplyr::tibble() |>
+      tidyr::unite("address", adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    address = stringr::str_squish(address),
                     num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth)) |>
@@ -156,14 +152,15 @@ clinicians <- function(npi = NULL,
         grad_year              = grd_yr,
         specialty              = pri_spec,
         specialty_sec          = sec_spec_all,
-        organization_name      = org_nm,
-        pac_id_org,
+        facility_name,
+        org_pac_id,
         org_members            = num_org_mem,
         address,
-        city                   = cty,
-        state                  = st,
-        zip,
-        phone                  = phn_numbr,
+        address_id             = adrs_id,
+        city                   = city_town,
+        state,
+        zip                    = zip_code,
+        phone                  = telephone_number,
         telehealth             = telehlth,
         assign_ind             = ind_assgn,
         assign_group           = grp_assgn)
@@ -175,7 +172,8 @@ clinicians <- function(npi = NULL,
 #' @noRd
 drs_clinics_id <- function() {
 
-  response <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
+  response <- httr2::request(
+    "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
     httr2::req_perform() |>
     httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 

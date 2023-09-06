@@ -76,10 +76,10 @@ Update Frequency: \strong{Monthly}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 beneficiaries(year = NULL,
-                       period = "Year",
-                       level = "County",
-                       state = "AL",
-                       county = "Autauga")
+              period = "Year",
+              level = "County",
+              state = "AL",
+              county = "Autauga")
 
 beneficiaries(year = 2021, level = "County", fips = "01001")
 
