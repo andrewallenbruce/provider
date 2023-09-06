@@ -285,7 +285,7 @@ to order and refer</p></dd>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="order_refer.html">order_refer()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="pending.html">pending()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="order_refer.html">order_refer()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -295,29 +295,22 @@ to order and refer</p></dd>
 <span class="r-in"><span>        specialty <span class="op">=</span> <span class="st">"Nurse Practitioner"</span>,</span></span>
 <span class="r-in"><span>        order_refer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 12</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty    optout_start_date optout_end_date</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1043522824 James      Smith     Nurse Pract… 2019-07-01        2025-07-01     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: last_updated &lt;date&gt;, order_refer &lt;lgl&gt;, address &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
-<span class="r-in"><span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name specialty        order_refer optout_start_date</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1043522824 James      Smith     Nurse Practitio… TRUE        2019-07-01       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 6 more variables: optout_end_date &lt;date&gt;, last_updated &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;</span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="co"># For providers that have opted out, but are eligible to order and refer,</span></span></span>
 <span class="r-in"><span><span class="co"># use `order_refer()` to look up their specific eligibility statuses</span></span></span>
 <span class="r-in"><span><span class="fu">opt_out</span><span class="op">(</span>last_name <span class="op">=</span> <span class="st">"Smith"</span>,</span></span>
 <span class="r-in"><span>        first_name <span class="op">=</span> <span class="st">"James"</span>,</span></span>
 <span class="r-in"><span>        specialty <span class="op">=</span> <span class="st">"Nurse Practitioner"</span>,</span></span>
 <span class="r-in"><span>        order_refer <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>        <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>        <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
-<span class="r-in"><span>        <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        first_name last_name service                         eligible</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1043522824 JAMES      SMITH     Medicare Part B                 TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1043522824 JAMES      SMITH     Home Health Agency (HHA)        TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1043522824 JAMES      SMITH     Durable Medical Equipment (DME) TRUE    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 1043522824 JAMES      SMITH     Power Mobility Device (PMD)     TRUE    </span>
-<span class="r-in"><span></span></span>
+<span class="r-in"><span>        <span class="fu">pull</span><span class="op">(</span><span class="va">npi</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>        <span class="fu">map</span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>        <span class="fu">list_rbind</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

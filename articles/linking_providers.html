@@ -236,12 +236,13 @@ all-numeric CCN (<code>331302</code>):</p>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="14%">
-<col width="14%">
-<col width="14%">
-<col width="20%">
-<col width="18%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
 <col width="17%">
+<col width="16%">
+<col width="15%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -250,6 +251,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <th align="left">last_name</th>
 <th align="left">facility_type</th>
 <th align="left">facility_ccn</th>
+<th align="left">parent_ccn</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -259,6 +261,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">AFSAR KESHMIRI</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">1023076643</td>
@@ -267,6 +270,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">HENRY</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">1023377843</td>
@@ -275,6 +279,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">WILHELM</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">1043245657</td>
@@ -283,6 +288,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">FUNG</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">1043397656</td>
@@ -291,6 +297,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">TRAMONTANO</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">1043630510</td>
@@ -299,6 +306,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">WOLFE</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">1053596122</td>
@@ -307,6 +315,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">FINCH</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">1053863100</td>
@@ -315,6 +324,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">FARNSWORTH</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">1063592210</td>
@@ -323,6 +333,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">PITTS</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 <tr class="even">
 <td align="left">1073099172</td>
@@ -331,6 +342,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <td align="left">MAGGY</td>
 <td align="left">Hospital</td>
 <td align="left">331302</td>
+<td align="left">NA</td>
 </tr>
 </tbody>
 </table>
@@ -339,16 +351,17 @@ all-numeric CCN (<code>331302</code>):</p>
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
+<table style="width:100%;" class="table">
 <colgroup>
+<col width="10%">
+<col width="10%">
+<col width="10%">
 <col width="11%">
-<col width="11%">
-<col width="11%">
+<col width="9%">
+<col width="6%">
+<col width="13%">
 <col width="12%">
 <col width="10%">
-<col width="15%">
-<col width="13%">
-<col width="11%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">npi</th>
@@ -356,6 +369,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <th align="left">first_name</th>
 <th align="left">middle_name</th>
 <th align="left">last_name</th>
+<th align="left">suffix</th>
 <th align="left">facility_type</th>
 <th align="left">facility_ccn</th>
 <th align="left">parent_ccn</th>
@@ -367,6 +381,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">MARY</td>
 <td align="left">K</td>
 <td align="left">HALLORAN</td>
+<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
@@ -377,6 +392,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">IL</td>
 <td align="left">JUN</td>
 <td align="left">CHON</td>
+<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
@@ -387,6 +403,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">ROB</td>
 <td align="left">L</td>
 <td align="left">DEMURO</td>
+<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
