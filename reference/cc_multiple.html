@@ -98,6 +98,7 @@ beneficiaries.</p>
 <span>  age_group <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  demographic <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  subdemo <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  mcc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -105,14 +106,7 @@ beneficiaries.</p>
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     
-<div class="section">
-<h3 id="in-addition-to-the-searchable-columns-">In addition to the searchable columns:<a class="anchor" aria-label="anchor" href="#in-addition-to-the-searchable-columns-"></a></h3>
-
-
-<dl><dt>mcc</dt>
-<dd><p>To classify MCC for each Medicare beneficiary, the 21 chronic conditions are counted and grouped into four categories (0-1, 2-3, 4-5 and 6 or more).</p></dd>
-
-<dt>prevalence</dt>
+<dl><dt>prevalence</dt>
 <dd><p>Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.</p></dd>
 
 <dt>tot_std_pymt_percap</dt>
@@ -129,17 +123,11 @@ beneficiaries.</p>
 
 
 </dl></div>
-
-    </div>
-    <div class="section level2">
-    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p>Centers for Medicare &amp; Medicaid Services</p>
-    </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>integer, YYYY, calendar year of Medicare enrollment. Run the
-helper function <code>provider:::cc_multiple_years()</code> to return a vector of
+helper function <code><a href="years.html">cc_multiple_years()</a></code> to return a vector of
 currently available years.</p></dd>
 
 
@@ -193,6 +181,15 @@ any month in the given calendar year they were receiving full or partial
 Medicaid benefits.</p></dd>
 
 
+<dt>mcc</dt>
+<dd><p>To classify MCC for each Medicare beneficiary, the 21 chronic
+conditions are counted and grouped into four categories:
+- <code>0 to 1</code>
+- <code>2 to 3</code>
+- <code>4 to 5</code>
+- <code>6+</code></p></dd>
+
+
 <dt>tidy</dt>
 <dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
 
@@ -214,18 +211,15 @@ conditions. The count of conditions is grouped into four categories (0-1,
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.cms.gov/medicare-chronic-conditions/multiple-chronic-conditions" class="external-link">Medicare Multiple Chronic Conditions</a></p></li>
-</ul></div>
+</ul><p><em>Update Frequency:</em> <strong>Annually</strong></p>
+</div>
 
-    </div>
-    <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Update Frequency: <strong>Annually</strong></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
-<span class="r-in"><span><span class="fu">cc_multiple</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, level  <span class="op">=</span> <span class="st">"State"</span>, sublevel <span class="op">=</span> <span class="st">"California"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">cc_multiple</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, level <span class="op">=</span> <span class="st">"State"</span>, sublevel <span class="op">=</span> <span class="st">"California"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">cc_multiple</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, level <span class="op">=</span> <span class="st">"National"</span>, demographic <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

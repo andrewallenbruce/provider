@@ -106,10 +106,6 @@ beneficiaries.</p>
     <div class="section level2">
     <h2 id="format">Format<a class="anchor" aria-label="anchor" href="#format"></a></h2>
     
-<div class="section">
-<h3 id="in-addition-to-the-searchable-columns-">In addition to the searchable columns:<a class="anchor" aria-label="anchor" href="#in-addition-to-the-searchable-columns-"></a></h3>
-
-
 <dl><dt>prevalence</dt>
 <dd><p>Prevalence estimates are calculated by taking the beneficiaries within the MCC category divided by the total number of beneficiaries in the fee-for-service population, expressed as a percentage.</p></dd>
 
@@ -127,17 +123,11 @@ beneficiaries.</p>
 
 
 </dl></div>
-
-    </div>
-    <div class="section level2">
-    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p>Centers for Medicare &amp; Medicaid Services</p>
-    </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>integer, YYYY, calendar year of Medicare enrollment. Run the
-helper function <code>provider:::cc_specific_years()</code> to return a vector of
+helper function <code><a href="years.html">cc_specific_years()</a></code> to return a vector of
 currently available years.</p></dd>
 
 
@@ -216,23 +206,23 @@ Medicaid benefits.</p></dd>
     <p>The Select Chronic Conditions dataset provides information on
 21 selected chronic conditions among Original Medicare beneficiaries.
 The dataset contains prevalence, use and spending organized by
-geography and distinct chronic conditions listed below.</p><ul><li><p>Alcohol Abuse Drug Abuse/ Substance Abuse</p></li>
-<li><p>Alzheimer’s Disease and Related Dementia</p></li>
-<li><p>Arthritis (Osteoarthritis and Rheumatoid)</p></li>
+geography and distinct chronic conditions listed below.</p><ul><li><p>Alcohol Abuse</p></li>
+<li><p>Alzheimer’s Disease/Dementia</p></li>
+<li><p>Arthritis</p></li>
 <li><p>Asthma</p></li>
 <li><p>Atrial Fibrillation</p></li>
 <li><p>Autism Spectrum Disorders</p></li>
-<li><p>Cancer (Breast, Colorectal, Lung, and Prostate)</p></li>
+<li><p>Cancer</p></li>
 <li><p>Chronic Kidney Disease</p></li>
-<li><p>Chronic Obstructive Pulmonary Disease</p></li>
+<li><p>COPD</p></li>
 <li><p>Depression</p></li>
 <li><p>Diabetes</p></li>
-<li><p>Drug Abuse/ Substance Abuse</p></li>
+<li><p>Drug Abuse/Substance Abuse</p></li>
 <li><p>Heart Failure</p></li>
 <li><p>Hepatitis (Chronic Viral B &amp; C)</p></li>
 <li><p>HIV/AIDS</p></li>
-<li><p>Hyperlipidemia (High cholesterol)</p></li>
-<li><p>Hypertension (High blood pressure)</p></li>
+<li><p>Hyperlipidemia</p></li>
+<li><p>Hypertension</p></li>
 <li><p>Ischemic Heart Disease</p></li>
 <li><p>Osteoporosis</p></li>
 <li><p>Schizophrenia and Other Psychotic Disorders</p></li>
@@ -241,17 +231,14 @@ geography and distinct chronic conditions listed below.</p><ul><li><p>Alcohol Ab
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.cms.gov/medicare-chronic-conditions/specific-chronic-conditions" class="external-link">Medicare Specific Chronic Conditions</a></p></li>
-</ul></div>
+</ul><p><em>Update Frequency:</em> <strong>Annually</strong></p>
+</div>
 
-    </div>
-    <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Update Frequency: <strong>Annually</strong></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2018</span>, level <span class="op">=</span> <span class="st">"State"</span>, sublevel <span class="op">=</span> <span class="st">"CA"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">cc_specific</span><span class="op">(</span>year <span class="op">=</span> <span class="fl">2007</span>, level  <span class="op">=</span> <span class="st">"National"</span>, demographic <span class="op">=</span> <span class="st">"Race"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
