@@ -109,17 +109,13 @@ dates are appended to the list</p>
 <span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  type_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  prov_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
-    <div class="section level2">
-    <h2 id="source">Source<a class="anchor" aria-label="anchor" href="#source"></a></h2>
-    <p>Centers for Medicare &amp; Medicaid Services</p>
-    </div>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
@@ -146,12 +142,12 @@ dates are appended to the list</p>
 <dd><p>Enrollment state</p></dd>
 
 
-<dt>type_code</dt>
+<dt>enroll_type</dt>
 <dd><p>Provider enrollment type code (<code>1</code> if <em>Part A</em>;
 <code>2</code> if <em>DME</em>; <code>3</code> if <em>Non-DME Part B</em>)</p></dd>
 
 
-<dt>prov_type</dt>
+<dt>enroll_desc</dt>
 <dd><p>Provider type description</p></dd>
 
 
@@ -181,32 +177,17 @@ their providers.</p><div class="section">
 <h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
 
 <ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date API</a></p></li>
-</ul></div>
+</ul><p><em>Update Frequency:</em> <strong>Monthly</strong></p>
+</div>
 
-    </div>
-    <div class="section level2">
-    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>Update Frequency: <strong>Monthly</strong></p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span>,</span></span>
-<span class="r-in"><span>                  npi <span class="op">=</span> <span class="fl">1184699621</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>first_name <span class="op">=</span> <span class="st">"Eric"</span>,</span></span>
-<span class="r-in"><span>                  last_name <span class="op">=</span> <span class="st">"Byrd"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
-<span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"3"</span>,</span></span>
-<span class="r-in"><span>                  specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span>,</span></span>
-<span class="r-in"><span>                  org_name <span class="op">=</span> <span class="st">"Lee Memorial Health System"</span>,</span></span>
-<span class="r-in"><span>                  state <span class="op">=</span> <span class="st">"FL"</span>,</span></span>
-<span class="r-in"><span>                  prov_type <span class="op">=</span> <span class="st">"DME"</span>,</span></span>
-<span class="r-in"><span>                  type_code <span class="op">=</span> <span class="st">"2"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, enroll_type <span class="op">=</span> <span class="fl">3</span>, specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
