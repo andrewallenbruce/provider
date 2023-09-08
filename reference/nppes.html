@@ -280,7 +280,7 @@ statutes, regulations, and program instructions of the Medicare program.</p>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  zipcode <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  country <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">1200</span>,</span>
 <span>  skip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -312,12 +312,12 @@ entries are permitted requiring at least two characters to be entered
 
 
 <dt>org_name</dt>
-<dd><p>Healthcare organization's name (NPI-2). Trailing wildcard entries are
-permitted requiring at least two characters to be entered. All types of
-Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
-NPI are examined for matching contents, therefore, the results might
-contain an organization name different from the one entered in the
-Organization Name criterion.</p></dd>
+<dd><p>Healthcare organization's name (NPI-2). Trailing wildcard
+entries are permitted requiring at least two characters to be entered.
+All types of Organization Names (LBN, DBA, Former LBN, Other Name)
+associated with an NPI are examined for matching contents, therefore, the
+results might contain an organization name different from the one entered
+in the Organization Name criterion.</p></dd>
 
 
 <dt>purpose_name</dt>
@@ -341,11 +341,10 @@ Military Address, enter either <code>APO</code> or <code>FPO</code>.</p></dd>
 <dt>state</dt>
 <dd><p>State abbreviation associated with the provider's address. If
 this field is used, at least one other field, besides the <code>entype</code> and
-<code>country</code>, must be populated. Valid values for state abbreviations:
-<a href="https://npiregistry.cms.hhs.gov/help-api/state" class="external-link">State Abbreviations</a>.</p></dd>
+<code>country</code>, must be populated.</p></dd>
 
 
-<dt>zipcode</dt>
+<dt>zip</dt>
 <dd><p>The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
@@ -356,9 +355,7 @@ entered (e.g., <code>21*</code>).</p></dd>
 <dt>country</dt>
 <dd><p>Country abbreviation associated with the provider's
 address. This field <strong>can</strong> be used as the only input criterion, as long
-as the value selected <em>is not</em> <strong>US</strong> (United States). Valid values for
-country abbreviations:
-<a href="https://npiregistry.cms.hhs.gov/help-api/country" class="external-link">Country Abbreviations</a>.</p></dd>
+as the value selected <em>is not</em> <strong>US</strong> (United States).</p></dd>
 
 
 <dt>limit</dt>
@@ -384,7 +381,7 @@ the previous number; set in <code>limit</code>.</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 28</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 16 × 34</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    npi        entype enumeration_date last_updated status first_name middle_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span>
@@ -403,12 +400,13 @@ the previous number; set in <code>limit</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">16</span> 1528060837 Indiv… 2005-06-01       2007-07-09   A      JOHN       B          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 21 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, street &lt;chr&gt;, city &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zipcode &lt;chr&gt;, country &lt;chr&gt;, phone_number &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 27 more variables: last_name &lt;chr&gt;, credential &lt;chr&gt;, gender &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   sole_proprietor &lt;lgl&gt;, purpose &lt;chr&gt;, address_1 &lt;chr&gt;, address_2 &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, country &lt;chr&gt;, phone &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   fax_number &lt;chr&gt;, tx_code &lt;chr&gt;, tx_desc &lt;chr&gt;, tx_group &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_issuer &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   id_identifier &lt;chr&gt;, id_state &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   tx_state &lt;chr&gt;, tx_license &lt;chr&gt;, tx_primary &lt;lgl&gt;, id_desc &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   id_issuer &lt;chr&gt;, id_identifier &lt;chr&gt;, id_state &lt;chr&gt;, name_prefix &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   name_suffix &lt;chr&gt;, created_epoch &lt;chr&gt;, last_updated_epoch &lt;date&gt;</span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
