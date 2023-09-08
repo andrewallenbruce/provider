@@ -105,8 +105,8 @@ open_payments <- function(year,
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(open_payments_years()))
 
-  if (!is.null(npi))  {npi  <- npi_check(npi)}
-  if (!is.null(zip)) {fips <- as.character(zip)}
+  if (!is.null(npi)) {npi  <- npi_check(npi)}
+  if (!is.null(zip)) {zip <- as.character(zip)}
 
   args <- dplyr::tribble(
     ~param,                                                         ~arg,
@@ -162,8 +162,7 @@ open_payments <- function(year,
                             sep = ": ",
                             collapse = "")
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
@@ -173,9 +172,7 @@ open_payments <- function(year,
       dplyr::mutate(program_year = as.integer(program_year),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
-                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
                     change_type = changed_logical(change_type),
                     charity_indicator = yn_logical(charity_indicator),
@@ -325,7 +322,7 @@ open_payments_ids <- function(search) {
   response <- httr2::request("https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?show-reference-ids") |>
     httr2::req_perform()
 
-  results <- tibble::tibble(
+  results <- dplyr::tibble(
     httr2::resp_body_json(response,
                           check_type = FALSE, simplifyVector = TRUE)) |>
     dplyr::select(title, modified, distribution) |>

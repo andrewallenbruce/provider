@@ -108,8 +108,7 @@ hospitals <- function(npi               = NULL,
       dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup", "proprietary")), yn_logical),
                     dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       tidyr::unite("address",
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>

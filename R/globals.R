@@ -610,19 +610,34 @@ utils::globalVariables(c(
   "group_scenario.isEligible", # <quality_eligibility>
   "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
   "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
-  "distro", # <revalidation_date>
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>
   "organization_name", # <revalidation_date>
   "enrollment_state_code", # <revalidation_date>
-  "enrollment_type", # <revalidation_date>
   "provider_type_text", # <revalidation_date>
   "enrollment_specialty", # <revalidation_date>
-  "revalidation_due_date", # <revalidation_date>
-  "adjusted_due_date", # <revalidation_date>
+  "enrollment_type", # <revalidation_date>
   "individual_total_reassign_to", # <revalidation_date>
   "receiving_benefits_reassignment", # <revalidation_date>
+  "revalidation_due_date", # <revalidation_date>
+  "adjusted_due_date", # <revalidation_date>
+  "y", # <revalidation_reassign>
+  "group_pac_id", # <revalidation_reassign>
+  "individual_pac_id", # <revalidation_reassign>
+  "individual_npi", # <revalidation_reassign>
+  "individual_enrollment_id", # <revalidation_reassign>
+  "individual_first_name", # <revalidation_reassign>
+  "individual_last_name", # <revalidation_reassign>
+  "individual_state_code", # <revalidation_reassign>
+  "individual_specialty_description", # <revalidation_reassign>
+  "individual_total_employer_associations", # <revalidation_reassign>
+  "group_enrollment_id", # <revalidation_reassign>
+  "group_legal_business_name", # <revalidation_reassign>
+  "group_state_code", # <revalidation_reassign>
+  "group_reassignments_and_physician_assistants", # <revalidation_reassign>
+  "individual_due_date", # <revalidation_reassign>
+  "group_due_date", # <revalidation_reassign>
   "distro", # <revalidation_group>
   "y", # <revalidation_group>
   "group_pac_id", # <revalidation_group>
@@ -639,23 +654,6 @@ utils::globalVariables(c(
   "group_state_code", # <revalidation_group>
   "group_due_date", # <revalidation_group>
   "group_reassignments_and_physician_assistants", # <revalidation_group>
-  "distro", # <revalidation_reassign>
-  "y", # <revalidation_reassign>
-  "group_pac_id", # <revalidation_reassign>
-  "individual_pac_id", # <revalidation_reassign>
-  "individual_npi", # <revalidation_reassign>
-  "individual_enrollment_id", # <revalidation_reassign>
-  "individual_first_name", # <revalidation_reassign>
-  "individual_last_name", # <revalidation_reassign>
-  "individual_state_code", # <revalidation_reassign>
-  "individual_specialty_description", # <revalidation_reassign>
-  "individual_due_date", # <revalidation_reassign>
-  "individual_total_employer_associations", # <revalidation_reassign>
-  "group_enrollment_id", # <revalidation_reassign>
-  "group_legal_business_name", # <revalidation_reassign>
-  "group_state_code", # <revalidation_reassign>
-  "group_due_date", # <revalidation_reassign>
-  "group_reassignments_and_physician_assistants", # <revalidation_reassign>
   "y", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type", # <taxonomy_crosswalk>
@@ -670,7 +668,6 @@ utils::globalVariables(c(
   "distribution_accessURL", # <cms_update>
   "year", # <cms_update>
   "id", # <cms_update>
-  "distro", # <cms_update>
   "distro", # <cms_match>
   "title", # <cms_update_ids>
   "modified", # <cms_update_ids>

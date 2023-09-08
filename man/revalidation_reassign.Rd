@@ -3,21 +3,19 @@
 \name{revalidation_reassign}
 \alias{revalidation_reassign}
 \title{Search the Medicare Revalidation Reassignment List API}
-\source{
-Centers for Medicare & Medicaid Services
-}
 \usage{
 revalidation_reassign(
   npi = NULL,
-  enroll_id = NULL,
+  pac_id_ind = NULL,
+  enroll_id_ind = NULL,
   first_name = NULL,
   last_name = NULL,
-  state = NULL,
+  state_ind = NULL,
   specialty = NULL,
-  pac_id_group = NULL,
-  enroll_id_group = NULL,
+  pac_id_org = NULL,
+  enroll_id_org = NULL,
+  state_org = NULL,
   business_name = NULL,
-  state_group = NULL,
   record_type = NULL,
   tidy = TRUE
 )
@@ -26,7 +24,11 @@ revalidation_reassign(
 \item{npi}{NPI of provider who is reassigning their benefits or is an
 employee}
 
-\item{enroll_id}{Enrollment ID of provider reassigning their benefits or is an employee}
+\item{pac_id_ind}{PAC ID of provider reassigning their benefits or
+is an employee}
+
+\item{enroll_id_ind}{Enrollment ID of provider reassigning their benefits or
+is an employee}
 
 \item{first_name}{First name of provider who is reassigning their benefits
 or is an employee}
@@ -34,23 +36,23 @@ or is an employee}
 \item{last_name}{Last name of provider who is reassigning their benefits or
 is an employee}
 
-\item{state}{Enrollment state of provider who is reassigning their
+\item{state_ind}{Enrollment state of provider who is reassigning their
 benefits or is an employee}
 
 \item{specialty}{Enrollment specialty of the provider who is
 reassigning their benefits or is an employee}
 
-\item{pac_id_group}{PAC ID of provider who is receiving reassignment or is
+\item{pac_id_org}{PAC ID of provider who is receiving reassignment or is
 the employer. Providers enroll at the state level, so one PAC ID may be
 associated with multiple Enrollment IDs.}
 
-\item{enroll_id_group}{Enrollment ID of provider who is receiving
+\item{enroll_id_org}{Enrollment ID of provider who is receiving
+reassignment or is the employer}
+
+\item{state_org}{Enrollment state of provider who is receiving
 reassignment or is the employer}
 
 \item{business_name}{Legal business name of provider who is receiving
-reassignment or is the employer}
-
-\item{state_group}{Enrollment state of provider who is receiving
 reassignment or is the employer}
 
 \item{record_type}{Identifies whether the record is for a reassignment
@@ -71,24 +73,14 @@ reassignments of providers who are due for revalidation.
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
 }
+
+\emph{Update Frequency:} \strong{Monthly}
 }
-}
-\note{
-Update Frequency: \strong{Monthly}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-revalidation_reassign(enroll_id = "I20200929003184",
-                   npi = 1962026229,
-                   first_name = "Rashadda",
-                   last_name = "Wong",
-                   state = "CT",
-                   specialty = "Physician Assistant")
-
-revalidation_reassign(pac_id_group = 9436483807,
-                   enroll_id_group = "O20190619002165",
-                   business_name = "1st Call Urgent Care",
-                   state_group = "FL",
-                   record_type = "Reassignment")
+revalidation_reassign(enroll_id_ind = "I20200929003184")
+revalidation_reassign(pac_id_ind = 9830437441)
+revalidation_reassign(pac_id_org = 3173525888)
 \dontshow{\}) # examplesIf}
 }

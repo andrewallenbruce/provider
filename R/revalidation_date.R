@@ -16,39 +16,29 @@
 #'    as well as due date listings for clinics and group practices and
 #'    their providers.
 #'
-#' ## Links
+#' ### Links
 #' * [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
 #'
-#' @source Centers for Medicare & Medicaid Services
-#' @note Update Frequency: **Monthly**
+#' *Update Frequency:* **Monthly**
+#'
 #' @param npi National Provider Identifier (NPI)
 #' @param enroll_id Enrollment ID
 #' @param first_name First name of individual provider
 #' @param last_name Last name of individual provider
 #' @param org_name Legal business name of organizational provider
 #' @param state Enrollment state
-#' @param type_code Provider enrollment type code (`1` if _Part A_;
+#' @param enroll_type Provider enrollment type code (`1` if _Part A_;
 #'    `2` if _DME_; `3` if _Non-DME Part B_)
-#' @param prov_type Provider type description
+#' @param enroll_desc Provider type description
 #' @param specialty Enrollment specialty
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
-#' revalidation_date(enroll_id = "I20031110000070",
-#'                   npi = 1184699621)
-#'
-#' revalidation_date(first_name = "Eric",
-#'                   last_name = "Byrd")
-#'
-#' revalidation_date(state = "FL",
-#'                   type_code = "3",
-#'                   specialty = "General Practice")
-#'
-#' revalidation_date(enroll_id = "O20110620000324",
-#'                   org_name = "Lee Memorial Health System",
-#'                   state = "FL",
-#'                   prov_type = "DME",
-#'                   type_code = "2")
+#' revalidation_date(enroll_id = "I20031110000070")
+#' revalidation_date(enroll_id = "O20110620000324")
+#' revalidation_date(state = "FL", enroll_type = 3, specialty = "General Practice")
 #' @autoglobal
 #' @export
 revalidation_date <- function(npi              = NULL,
@@ -57,58 +47,49 @@ revalidation_date <- function(npi              = NULL,
                               last_name        = NULL,
                               org_name         = NULL,
                               state            = NULL,
-                              type_code        = NULL,
-                              prov_type        = NULL,
+                              enroll_type      = NULL,
+                              enroll_desc      = NULL,
                               specialty        = NULL,
                               tidy             = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(npi))         {npi <- npi_check(npi)}
+  if (!is.null(enroll_id))   {enroll_check(enroll_id)}
+  if (!is.null(enroll_desc)) {
+    rlang::arg_match(enroll_desc, c("Part A", "DME", "Non-DME Part B"))}
+  if (!is.null(enroll_type)) {
+    enroll_type <- as.character(enroll_type)
+    rlang::arg_match(enroll_type, as.character(1:3))}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-                                ~x,                ~y,
+  args <- dplyr::tribble(
+                            ~param,              ~arg,
     "National Provider Identifier",               npi,
                    "Enrollment ID",         enroll_id,
                       "First Name",        first_name,
                        "Last Name",         last_name,
                "Organization Name",          org_name,
            "Enrollment State Code",             state,
-                 "Enrollment Type",         type_code,
-              "Provider Type Text",         prov_type,
+                 "Enrollment Type",       enroll_type,
+              "Provider Type Text",       enroll_desc,
             "Enrollment Specialty",         specialty)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                cms_update("Revalidation Due Date List", "id")$distro[1],
+                "/data.json?", encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Revalidation Due Date List", "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ------------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
-      "enroll_id",     as.character(enroll_id),
+      "npi",           npi,
+      "enroll_id",     enroll_id,
       "first_name",    first_name,
       "last_name",     last_name,
       "org_name",      org_name,
       "state",         state,
-      "type_code",     as.character(type_code),
+      "enroll_type",   enroll_type,
+      "enroll_desc",   enroll_desc,
       "specialty",     specialty) |>
       tidyr::unnest(cols = c(y))
 
@@ -123,31 +104,27 @@ revalidation_date <- function(npi              = NULL,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-         check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A"))) |>
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(npi = national_provider_identifier,
                     enroll_id = enrollment_id,
                     first_name,
                     last_name,
                     organization_name,
                     enroll_state = enrollment_state_code,
-                    enroll_type = enrollment_type,
                     enroll_desc = provider_type_text,
                     enroll_specialty = enrollment_specialty,
-                    revalidation_due_date,
-                    adjusted_due_date,
+                    enroll_type = enrollment_type,
                     group_reassignments = individual_total_reassign_to,
-                    ind_associations = receiving_benefits_reassignment)
+                    ind_associations = receiving_benefits_reassignment,
+                    revalidation_due_date,
+                    adjusted_due_date)
     }
   return(results)
 }

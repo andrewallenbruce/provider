@@ -13,7 +13,7 @@ cms_update <- function(api = NULL, check = c("base", "id", "years")) {
                           simplifyVector = TRUE)
 
   results <- id_resp$dataset |>
-    tibble::tibble() |>
+    dplyr::tibble() |>
     dplyr::select(title,
                   modified,
                   distribution) |>
@@ -46,9 +46,9 @@ cms_update <- function(api = NULL, check = c("base", "id", "years")) {
 
   if (check == "years") {
     return(results |>
-             dplyr::select(-distro) |>
+             dplyr::distinct(year) |>
              dplyr::arrange(year) |>
-             tibble::deframe() |>
+             dplyr::pull(year) |>
              as.character())
   }
 }
@@ -96,7 +96,7 @@ cms_update_ids <- function(api = NULL) {
                           simplifyVector = TRUE)
 
   ids <- id_resp$dataset |>
-    tibble::tibble() |>
+    dplyr::tibble() |>
     dplyr::select(title,
                   modified,
                   distribution) |>
@@ -127,7 +127,7 @@ cms_dataset_full <- function() {
                           simplifyVector = TRUE)
 
   ids <- resp$dataset |>
-    tibble::tibble() |>
+    dplyr::tibble() |>
     dplyr::select(title,
                   description)
 
@@ -147,7 +147,7 @@ cms_dataset_search <- function(search = NULL) {
                           simplifyVector = TRUE)
 
   ids <- resp$dataset |>
-    tibble::tibble() |>
+    dplyr::tibble() |>
     dplyr::select(title,
                   modified,
                   keyword,

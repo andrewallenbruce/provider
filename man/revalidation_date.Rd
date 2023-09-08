@@ -3,9 +3,6 @@
 \name{revalidation_date}
 \alias{revalidation_date}
 \title{Search the Medicare Revalidation Due Date List API}
-\source{
-Centers for Medicare & Medicaid Services
-}
 \usage{
 revalidation_date(
   npi = NULL,
@@ -14,8 +11,8 @@ revalidation_date(
   last_name = NULL,
   org_name = NULL,
   state = NULL,
-  type_code = NULL,
-  prov_type = NULL,
+  enroll_type = NULL,
+  enroll_desc = NULL,
   specialty = NULL,
   tidy = TRUE
 )
@@ -33,10 +30,10 @@ revalidation_date(
 
 \item{state}{Enrollment state}
 
-\item{type_code}{Provider enrollment type code (\code{1} if \emph{Part A};
+\item{enroll_type}{Provider enrollment type code (\code{1} if \emph{Part A};
 \code{2} if \emph{DME}; \code{3} if \emph{Non-DME Part B})}
 
-\item{prov_type}{Provider type description}
+\item{enroll_desc}{Provider type description}
 
 \item{specialty}{Enrollment specialty}
 
@@ -66,27 +63,14 @@ their providers.
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}{Medicare Revalidation Due Date API}
 }
+
+\emph{Update Frequency:} \strong{Monthly}
 }
-}
-\note{
-Update Frequency: \strong{Monthly}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-revalidation_date(enroll_id = "I20031110000070",
-                  npi = 1184699621)
-
-revalidation_date(first_name = "Eric",
-                  last_name = "Byrd")
-
-revalidation_date(state = "FL",
-                  type_code = "3",
-                  specialty = "General Practice")
-
-revalidation_date(enroll_id = "O20110620000324",
-                  org_name = "Lee Memorial Health System",
-                  state = "FL",
-                  prov_type = "DME",
-                  type_code = "2")
+revalidation_date(enroll_id = "I20031110000070")
+revalidation_date(enroll_id = "O20110620000324")
+revalidation_date(state = "FL", enroll_type = 3, specialty = "General Practice")
 \dontshow{\}) # examplesIf}
 }
