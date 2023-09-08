@@ -2,8 +2,8 @@
 #'
 #' @description
 #' `nppes()` allows you to search the National Plan and Provider Enumeration
-#' System (NPPES) NPI Registry's public API. The Registry is a free directory of
-#' all active National Provider Identifier (NPI) records.
+#' System (NPPES) NPI Registry's public API, a free directory of all active
+#' National Provider Identifier (NPI) records.
 #'
 #' **National Provider Identifier** <br>
 #' Healthcare providers acquire their unique 10-digit NPIs to identify
@@ -72,10 +72,10 @@
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param npi *<numeric>* <br> 10-digit National Provider Identifier (NPI).
+#' @param npi 10-digit National Provider Identifier (NPI).
 #' @param entype Entity type. Choices are either `I` for an Individual provider
 #'    or `O` for an Organizational provider. Cannot be the only criteria entered.
-#' @param first_name *<numeric>* <br> Individual provider's first name. Trailing
+#' @param first_name Individual provider's first name. Trailing
 #'    wildcard entries are permitted requiring at least two characters to be
 #'    entered (e.g. `jo*` ).
 #' @param last_name Individual provider's last name. Trailing wildcard
@@ -106,17 +106,15 @@
 #'    entered (e.g., `21*`).
 #' @param country Country abbreviation associated with the provider's
 #'    address. This field **can** be used as the only input criterion, as long
-#'    as the value selected *is not* **US** (United States).
+#'    as the value selected *is not* `US` (United States).
 #' @param limit Maximum number of results to return; default is 1200.
-#' @param skip Number of results to skip after searching
-#'    the previous number; set in `limit`.
+#' @param skip Number of results to skip after those set in `limit`.
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examples
-#' nppes(npi = 1528060837)
-#'
+#' nppes(npi = 1528060837, tidy = FALSE)
 #' @autoglobal
 #' @export
 nppes <- function(npi = NULL,
@@ -134,10 +132,10 @@ nppes <- function(npi = NULL,
                   skip = NULL,
                   tidy = TRUE) {
 
-  if (!is.null(npi)) {npi <- npi_check(npi)}
-  if (!is.null(entype)) {entype <- entype_arg(entype)}
+  if (!is.null(npi))          {npi <- npi_check(npi)}
+  if (!is.null(entype))       {entype <- entype_arg(entype)}
   if (!is.null(purpose_name)) {rlang::arg_match(purpose_name, c("AO", "Provider"))}
-  if (!is.null(zip))       {zip <- as.character(zip)}
+  if (!is.null(zip))          {zip <- as.character(zip)}
 
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,
@@ -159,7 +157,7 @@ nppes <- function(npi = NULL,
 
   res_cnt <- response$result_count
 
-  if (is.null(res_cnt) | res_cnt == 0) {
+  if (is.null(res_cnt) || res_cnt == 0) {
 
     cli_args <- dplyr::tribble(
       ~x,              ~y,
@@ -172,7 +170,7 @@ nppes <- function(npi = NULL,
       "taxonomy_desc", taxonomy_desc,
       "city",          city,
       "state",         state,
-      "zipcode",       zip,
+      "zip",           zip,
       "country",       country) |>
       tidyr::unnest(cols = c(y))
 

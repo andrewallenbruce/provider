@@ -61,19 +61,15 @@ a PAC ID can be associated with multiple enrollment IDs and states.}
 \code{providers()} allows you to access enrollment level
 data on individual and organizational providers that are actively approved
 to bill Medicare.
-}
-\section{Links}{
-
+\subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
 \item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
 }
-}
 
-\section{Update Frequency}{
- \strong{Quarterly}
+\emph{Update Frequency:} \strong{Quarterly}
 }
-
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 providers(npi = 1417918293, specialty_code = "14-41")

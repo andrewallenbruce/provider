@@ -2,24 +2,27 @@
 % Please edit documentation in R/taxonomy_crosswalk.R
 \name{taxonomy_crosswalk}
 \alias{taxonomy_crosswalk}
-\title{Taxonomy to Medicare Specialty Crosswalk}
+\title{Provider Taxonomy to Medicare Specialty Crosswalk}
 \usage{
 taxonomy_crosswalk(
   taxonomy_code = NULL,
   taxonomy_description = NULL,
-  medicare_specialty_code = NULL,
-  medicare_specialty_type = NULL,
+  medicare_code = NULL,
+  medicare_type = NULL,
+  keyword_search = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{taxonomy_code}{Taxonomy code}
+\item{taxonomy_code}{Provider's taxonomy code}
 
-\item{taxonomy_description}{Taxonomy code description}
+\item{taxonomy_description}{Provider's taxonomy description}
 
-\item{medicare_specialty_code}{Medicare specialty code}
+\item{medicare_code}{Medicare specialty code}
 
-\item{medicare_specialty_type}{Medicare specialty code description}
+\item{medicare_type}{Medicare provider/supplier type}
+
+\item{keyword_search}{Search term to use for quick full-text search.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}}
 }
@@ -45,25 +48,23 @@ closely describes their type/classification/specialization. In some
 situations, a provider may need to report more than one taxonomy but must
 indicate one of them as the primary. The codes selected may not be the same
 as categorizations used by Medicare for enrollment.
-}
-}
-\section{Links}{
-
+\subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Provider and Supplier Taxonomy Crosswalk}
 \item \href{https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology}{Taxonomy Crosswalk Methodology}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}{Find Your Taxonomy Code}
 }
+
+\emph{Update Frequency:} \strong{Weekly}
 }
 
-\section{Update Frequency}{
- \strong{Weekly}
 }
-
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-taxonomy_crosswalk(medicare_specialty_code = "B4[14]")
-taxonomy_crosswalk(medicare_specialty_type = "Rehabilitation Agency")
+taxonomy_crosswalk(keyword_search = "B4")
+taxonomy_crosswalk(keyword_search = "Histocompatibility")
+taxonomy_crosswalk(medicare_type = "Rehabilitation Agency")
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
 \dontshow{\}) # examplesIf}
 }

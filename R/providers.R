@@ -4,11 +4,11 @@
 #'    data on individual and organizational providers that are actively approved
 #'    to bill Medicare.
 #'
-#' @section Links:
+#' ### Links
 #' - [Provider Enrollment API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment)
 #' - [Provider Enrollment Data Dictionary](https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary)
 #'
-#' @section Update Frequency: **Quarterly**
+#' *Update Frequency:* **Quarterly**
 #'
 #' @param npi 10-digit National Provider Identifier
 #' @param pac_id 10-digit Provider associate level variable. Links all
@@ -57,6 +57,7 @@ providers <- function(npi                = NULL,
   if (!is.null(npi))       {npi    <- npi_check(npi)}
   if (!is.null(pac_id))    {pac_id <- pac_check(pac_id)}
   if (!is.null(enroll_id)) {enroll_check(enroll_id)}
+  if (!is.null(gender))    {rlang::arg_match(gender, c("F", "M", "9"))}
 
   args <- dplyr::tribble(
                         ~param,  ~arg,
@@ -74,9 +75,7 @@ providers <- function(npi                = NULL,
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
          cms_update("Medicare Fee-For-Service  Public Provider Enrollment",
-                    "id")$distro[1],
-                "/data.json?",
-                encode_param(args))
+                    "id")$distro[1], "/data.json?", encode_param(args))
 
   response <- httr2::request(url) |> httr2::req_perform()
 

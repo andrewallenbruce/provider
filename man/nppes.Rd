@@ -22,12 +22,12 @@ nppes(
 )
 }
 \arguments{
-\item{npi}{\emph{\if{html}{\out{<numeric>}}} \if{html}{\out{<br>}} 10-digit National Provider Identifier (NPI).}
+\item{npi}{10-digit National Provider Identifier (NPI).}
 
 \item{entype}{Entity type. Choices are either \code{I} for an Individual provider
 or \code{O} for an Organizational provider. Cannot be the only criteria entered.}
 
-\item{first_name}{\emph{\if{html}{\out{<numeric>}}} \if{html}{\out{<br>}} Individual provider's first name. Trailing
+\item{first_name}{Individual provider's first name. Trailing
 wildcard entries are permitted requiring at least two characters to be
 entered (e.g. \verb{jo*} ).}
 
@@ -66,12 +66,11 @@ entered (e.g., \verb{21*}).}
 
 \item{country}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
-as the value selected \emph{is not} \strong{US} (United States).}
+as the value selected \emph{is not} \code{US} (United States).}
 
 \item{limit}{Maximum number of results to return; default is 1200.}
 
-\item{skip}{Number of results to skip after searching
-the previous number; set in \code{limit}.}
+\item{skip}{Number of results to skip after those set in \code{limit}.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
@@ -80,8 +79,8 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
 \code{nppes()} allows you to search the National Plan and Provider Enumeration
-System (NPPES) NPI Registry's public API. The Registry is a free directory of
-all active National Provider Identifier (NPI) records.
+System (NPPES) NPI Registry's public API, a free directory of all active
+National Provider Identifier (NPI) records.
 
 \strong{National Provider Identifier} \if{html}{\out{<br>}}
 Healthcare providers acquire their unique 10-digit NPIs to identify
@@ -155,6 +154,5 @@ statutes, regulations, and program instructions of the Medicare program.
 \emph{Update Frequency:} \strong{Weekly}
 }
 \examples{
-nppes(npi = 1528060837)
-
+nppes(npi = 1528060837, tidy = FALSE)
 }

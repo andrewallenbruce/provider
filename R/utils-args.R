@@ -30,7 +30,7 @@ format_param <- function(param,
 #' encode_param(args)
 #'
 #' encode_param(args, "sql")
-#' @return parameter formatted with "%20" in lieu of a space
+#' @return formatted string
 #' @autoglobal
 #' @noRd
 encode_param <- function(args, type = "filter") {

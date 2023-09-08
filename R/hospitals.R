@@ -161,7 +161,7 @@ hospitals <- function(npi               = NULL,
 #'    Standing Emergency Departments (IFEDs) that have been temporarily
 #'    certified as Hospitals during the COVID-19 public health emergency.
 #'
-#'   ## Links
+#'   ### Links
 #'   * [ASCs and IFEDs Enrolled in Medicare As Hospital Providers](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' @param npi NPI of the Provider
@@ -172,9 +172,11 @@ hospitals <- function(npi               = NULL,
 #' @param address description
 #' @param city City where the enrolled provider is located
 #' @param state State where the provider is located
-#' @param zipcode Zip code of the provider's location
+#' @param zip Zip code of the provider's location
 #' @param tidy Tidy output; default is `TRUE`.
+#'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
+#'
 #' @examplesIf interactive()
 #' asc_ifed_enrollment(city = "Atlanta")
 #' @autoglobal
@@ -187,14 +189,14 @@ asc_ifed_enrollment <- function(npi            = NULL,
                                 address        = NULL,
                                 city           = NULL,
                                 state          = NULL,
-                                zipcode        = NULL,
+                                zip            = NULL,
                                 tidy           = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi)) {npi <- npi_check(npi)}
+  if (!is.null(enroll_id)) {enroll_id <- enroll_check(enroll_id)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
-    ~x,                       ~y,
+  args <- dplyr::tribble(
+    ~param,                  ~arg,
     "NPI",                    npi,
     "ENROLLMENT_ID",          enroll_id,
     "ENROLLMENT_STATE",       enroll_state,
@@ -203,27 +205,17 @@ asc_ifed_enrollment <- function(npi            = NULL,
     "LINE_1_ST_ADR",          address,
     "CITY",                   city,
     "STATE",                  state,
-    "ZIP CODE",               zipcode)
+    "ZIP CODE",               zip)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                "3f37b54d-eb2d-4266-8c18-ad3ecd0bede3",
+                "/data?", encode_param(args))
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  id     <- "3f37b54d-eb2d-4266-8c18-ad3ecd0bede3"
-  post   <- "/data?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,               ~y,
       "npi",            as.character(npi),
       "enroll_id",      as.character(enroll_id),
@@ -233,7 +225,7 @@ asc_ifed_enrollment <- function(npi            = NULL,
       "address",        address,
       "city",           city,
       "state",          state,
-      "zipcode",        zipcode) |>
+      "zip",            zip) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -247,13 +239,11 @@ asc_ifed_enrollment <- function(npi            = NULL,
 
   }
 
-  # parse response ---------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                                                  check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       tidyr::unite("address",
                    line_1_st_adr:line_2_st_adr,
@@ -262,11 +252,11 @@ asc_ifed_enrollment <- function(npi            = NULL,
                     enroll_id = enrollment_id,
                     enroll_state = enrollment_state,
                     enroll_type = type,
-                    org_name = organization_name,
+                    organization_name,
                     address,
                     city,
                     state,
-                    zipcode = zip_code)
+                    zip = zip_code)
 
   }
   return(results)

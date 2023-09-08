@@ -42,7 +42,6 @@ Suggests:
     parsedate,
     rmarkdown,
     roxyglobals (>= 0.2.1),
-    spelling,
     testthat (>= 3.0.0),
 VignetteBuilder: 
     knitr

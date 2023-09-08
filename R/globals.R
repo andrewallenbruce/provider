@@ -369,8 +369,8 @@ utils::globalVariables(c(
   "jcaho_acrdtd_y_match_dt", # <laboratories>
   "cross_ref_provider_number", # <laboratories>
   "related_provider_number", # <laboratories>
+  "org_name", # <mips_group_2021>
   "y", # <mips_group_2021>
-  "org_nm", # <mips_group_2021>
   "aco_id_1", # <mips_group_2021>
   "aco_nm_1", # <mips_group_2021>
   "aco_id_2", # <mips_group_2021>
@@ -656,7 +656,8 @@ utils::globalVariables(c(
   "group_state_code", # <revalidation_reassign>
   "group_due_date", # <revalidation_reassign>
   "group_reassignments_and_physician_assistants", # <revalidation_reassign>
-  "distro", # <taxonomy_crosswalk>
+  "y", # <taxonomy_crosswalk>
+  "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type", # <taxonomy_crosswalk>
   "provider_taxonomy_code", # <taxonomy_crosswalk>
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>

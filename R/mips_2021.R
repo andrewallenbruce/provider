@@ -22,17 +22,16 @@
 #' mips_group_2021(org_pac_id = 4789842956)
 #' @autoglobal
 #' @noRd
-mips_group_2021 <- function(org_name = NULL,
+mips_group_2021 <- function(facility_name = NULL,
                             org_pac_id = NULL,
                             offset = 0L,
                             tidy = TRUE) {
 
-  if (!is.null(org_pac_id)) {pac_check(org_pac_id)}
+  if (!is.null(org_pac_id)) {org_pac_id <- pac_check(org_pac_id)}
 
-  # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
+  args <- dplyr::tribble(
     ~x,                   ~y,
-    "org_nm",             org_name,
+    "facility_name",      org_name,
     "org_pac_id",         org_pac_id)
 
   # map param_format and collapse -------------------------------------------
@@ -54,10 +53,10 @@ mips_group_2021 <- function(org_name = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
       "org_pac_id", as.character(org_pac_id),
-      "org_nm",     org_name) |>
+      "facility_name",     facility_name) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -71,16 +70,15 @@ mips_group_2021 <- function(org_name = NULL,
     return(invisible(NULL))
   }
 
-  # parse response ---------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                                                  check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   # clean names -------------------------------------------------------------
   if (tidy) {
     results <- results |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(
-        org_name = org_nm,
+        facility_name,
         org_pac_id,
         aco_id_1,
         aco_nm_1,
@@ -113,7 +111,7 @@ mips_group_2021_id <- function() {
 
 
 #' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id Unique individual clinician ID assigned by PECOS
+#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
 #' @param first_name Individual clinician first name
 #' @param last_name Individual clinician last name
 #' @param offset offset; API pagination
@@ -124,20 +122,20 @@ mips_group_2021_id <- function() {
 #' @autoglobal
 #' @noRd
 mips_clinician_2021 <- function(npi = NULL,
-                                pac_id = NULL,
+                                pac_id_ind = NULL,
                                 first_name = NULL,
                                 last_name = NULL,
                                 offset = 0L,
                                 tidy = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
-  if (!is.null(pac_id)) {pac_check(pac_id)}
+  if (!is.null(npi)) {npi <- npi_check(npi)}
+  if (!is.null(pac_id_ind)) {pac_id_ind <- pac_check(pac_id_ind)}
 
   # args tribble ------------------------------------------------------------
-  args <- tibble::tribble(
+  args <- dplyr::tribble(
     ~x,               ~y,
     "npi",            npi,
-    "ind_pac_id",     pac_id,
+    "ind_pac_id",     pac_id_ind,
     "lst_name",       last_name,
     "frst_name",      first_name
     )
@@ -161,10 +159,10 @@ mips_clinician_2021 <- function(npi = NULL,
   # no search results returns empty tibble ----------------------------------
   if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,            ~y,
-      "npi",         as.character(npi),
-      "pac_id",      as.character(pac_id),
+      "npi",         npi,
+      "pac_id",      pac_id_ind,
       "last_name",   last_name,
       "first_name",  first_name) |>
       tidyr::unnest(cols = c(y))
@@ -180,17 +178,16 @@ mips_clinician_2021 <- function(npi = NULL,
     return(invisible(NULL))
   }
 
-  # parse response ---------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                                                  check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   # clean names -------------------------------------------------------------
   if (tidy) {
     results <- results |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(
         npi,
-        pac_id = ind_pac_id,
+        pac_id_ind = ind_pac_id,
         last_name = lst_nm,
         first_name = frst_nm,
         apm_affl_1,
