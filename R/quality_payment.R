@@ -50,46 +50,32 @@ quality_payment <- function(year,
 
   if (!is.null(npi)) {npi_check(npi)}
 
-  # match args
   rlang::check_required(year)
   year <- as.character(year)
   rlang::arg_match(year, values = as.character(quality_payment_years()))
 
-  # args tribble
-  args <- tibble::tribble(
-    ~x,                              ~y,
+  args <- dplyr::tribble(
+    ~param,                          ~arg,
     "npi",                            npi,
     "practice state or us territory", state,
     "clinician specialty",            specialty,
     "participation type",             participation_type)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
-
-  # update distribution ids -------------------------------------------------
   id <- cms_update("Quality Payment Program Experience", "id") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  #post   <- "/data.json?"
-  post   <- "/data?"
-  url    <- paste0(http, id, post, params_args)
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                id, "/data?", encode_param(args))
 
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,                               ~y,
-      "year",                           as.character(year),
-      "npi",                            as.character(npi),
+      "year",                           year,
+      "npi",                            npi,
       "practice state or us territory", state,
       "clinician specialty",            specialty,
       "participation type",             participation_type) |>
@@ -106,14 +92,13 @@ quality_payment <- function(year,
 
   }
 
-  # parse response ---------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+      dplyr::tibble() |>
+      dplyr::mutate(year = as.integer(year),
+                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::any_of(c("practice_size",
                                                   "years_in_medicare",
@@ -143,49 +128,49 @@ quality_payment <- function(year,
                                                   "extreme_hardship_ia",
                                                   "ia_study",
                                                   "extreme_hardship_cost")), tf_logical)) |>
-      dplyr::mutate(year = as.integer(year)) |>
       dplyr::select(year,
                     npi,
-                    practice_state = practice_state_or_us_territory,
-                    practice_size,
+                    state                        = practice_state_or_us_territory,
+                    size                         = practice_size,
                     clinician_specialty,
                     years_in_medicare,
                     participation_type,
-                    beneficiaries = medicare_patients,
+                    beneficiaries                = medicare_patients,
                     services,
                     allowed_charges,
                     final_score,
-                    payment_adjustment = payment_adjustment_percentage,
-                    quality_score = quality_category_score,
-                    pi_score = promoting_interoperability_pi_category_score,
+                    payment_adjustment           = payment_adjustment_percentage,
+                    quality_score                = quality_category_score,
+                    pi_score                     = promoting_interoperability_pi_category_score,
                     ia_score,
                     cost_score,
                     complex_patient_bonus,
                     quality_improvement_bonus,
-                    ind_quality_bonus = quality_bonus,
-                    ind_engaged = engaged,
-                    ind_opted_into_mips = opted_into_mips,
-                    ind_small_practitioner = small_practitioner,
-                    ind_rural = rural_clinician,
-                    ind_hpsa = hpsa_clinician,
-                    ind_asc = ambulatory_surgical_center,
-                    ind_hospital_based = hospital_based_clinician,
-                    ind_non_patient_facing = non_patient_facing,
-                    ind_facility_based = facility_based,
-                    ind_extreme_hardship = extreme_hardship,
+                    ind_quality_bonus            = quality_bonus,
+                    ind_engaged                  = engaged,
+                    ind_opted_into_mips          = opted_into_mips,
+                    ind_small_practitioner       = small_practitioner,
+                    ind_rural                    = rural_clinician,
+                    ind_hpsa                     = hpsa_clinician,
+                    ind_asc                      = ambulatory_surgical_center,
+                    ind_hospital_based           = hospital_based_clinician,
+                    ind_non_patient_facing       = non_patient_facing,
+                    ind_facility_based           = facility_based,
+                    ind_extreme_hardship         = extreme_hardship,
                     ind_extreme_hardship_quality = extreme_hardship_quality,
-                    ind_extreme_hardship_pi = extreme_hardship_pi,
-                    ind_pi_hardship = pi_hardship,
-                    ind_pi_reweighting = pi_reweighting,
-                    ind_pi_bonus = pi_bonus,
-                    ind_pi_cehrt_id = pi_cehrt_id,
-                    ind_extreme_hardship_ia = extreme_hardship_ia,
-                    ind_ia_study = ia_study,
-                    ind_extreme_hardship_cost = extreme_hardship_cost,
+                    ind_extreme_hardship_pi      = extreme_hardship_pi,
+                    ind_pi_hardship              = pi_hardship,
+                    ind_pi_reweighting           = pi_reweighting,
+                    ind_pi_bonus                 = pi_bonus,
+                    ind_pi_cehrt_id              = pi_cehrt_id,
+                    ind_extreme_hardship_ia      = extreme_hardship_ia,
+                    ind_ia_study                 = ia_study,
+                    ind_extreme_hardship_cost    = extreme_hardship_cost,
                     dplyr::contains("quality_measure_"),
                     dplyr::contains("pi_measure_"),
                     dplyr::contains("ia_measure_"),
-                    dplyr::contains("cost_measure_")) |>
+                    dplyr::contains("cost_measure_"),
+                    dplyr::everything()) |>
       tidyr::nest(special_statuses = dplyr::contains("ind_"),
                   measures = dplyr::contains("measure_"))
   }
@@ -243,8 +228,14 @@ quality_payment_years <- function() {
 #' @autoglobal
 #' @export
 quality_eligibility <- function(year,
-                                npi,
+                                npi = NULL,
                                 tidy = TRUE) {
+
+  if (!is.null(npi)) {npi_check(npi)}
+
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, values = as.character(quality_payment_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
 
@@ -272,9 +263,7 @@ quality_eligibility <- function(year,
 
   results <- dplyr::bind_cols(top, org)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-
     results <- results |>
       tidyr::unnest_wider(c(apms,
                             individual_scenario,
@@ -296,7 +285,6 @@ quality_eligibility <- function(year,
   }
   return(results)
 }
-
 
 #' Program-Wide Statistics from Quality Payment Program
 #'
@@ -321,6 +309,10 @@ quality_eligibility <- function(year,
 #' @autoglobal
 #' @export
 quality_stats <- function(year) {
+
+  rlang::check_required(year)
+  year <- as.character(year)
+  rlang::arg_match(year, values = as.character(quality_payment_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
 

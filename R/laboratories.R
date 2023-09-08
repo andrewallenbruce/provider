@@ -20,7 +20,7 @@
 #'
 #' *Update Frequency:* **Quarterly**
 #'
-#' @param facility_name Hospital’s CMS Certification Number (CCN)
+#' @param name Hospital’s CMS Certification Number (CCN)
 #' @param clia description
 #' @param city City of the hospital’s practice location address
 #' @param state State of the hospital’s practice location address
@@ -30,17 +30,17 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' clia_labs(city = "Valdosta")
-#' clia_labs(clia = "11D0265516")
+#' laboratories(city = "Valdosta")
+#' laboratories(clia = "11D0265516")
 #'
 #' @autoglobal
 #' @export
-clia_labs <- function(facility_name = NULL,
-                      clia = NULL,
-                      city = NULL,
-                      state = NULL,
-                      zip = NULL,
-                      tidy = TRUE) {
+laboratories <- function(name = NULL,
+                         clia = NULL,
+                         city = NULL,
+                         state = NULL,
+                         zip = NULL,
+                         tidy = TRUE) {
 
   # args tribble
   args <- tibble::tribble(

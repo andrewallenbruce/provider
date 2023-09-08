@@ -62,8 +62,8 @@ clinicians <- function(npi = NULL,
   if (!is.null(pac_id_org))    {pac_id_org <- pac_check(pac_id_org)}
   if (!is.null(enroll_id_ind)) {enroll_check(enroll_id_ind)}
   if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
-  if (!is.null(grad_year))     {grad_year <- as.character(grad_year)}
-  if (!is.null(zip))           {zip <- as.character(zip)}
+  if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
+  if (!is.null(zip))           {zip        <- as.character(zip)}
 
   args <- dplyr::tribble(
     ~param,               ~arg,

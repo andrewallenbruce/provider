@@ -293,7 +293,8 @@ open_payments <- function(year,
                     type_5               = indicate_drug_or_biological_or_device_or_medical_supply_5,
                     category_5           = product_category_or_therapeutic_area_5,
                     ndc_5                = associated_drug_or_biological_ndc_5,
-                    pdi_5                = associated_device_or_medical_supply_pdi_5)
+                    pdi_5                = associated_device_or_medical_supply_pdi_5,
+                    dplyr::everything())
 
     if (pivot) {
       results <- results |>

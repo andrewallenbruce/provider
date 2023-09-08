@@ -31,12 +31,9 @@ library(gt)
 df <- by_provider_years() |> 
   map(\(x) by_provider(year = x, npi = 1023076643)) |> 
   list_rbind()
-
-df
 ```
 
 
-<br>
 
 ### Counts & Amounts
 
@@ -61,7 +58,8 @@ select(df,
   fmt_integer(columns = c(HCPCS, Beneficiaries, Services)) |> 
   fmt_currency(columns = c(Charges, Allowed, Payment), decimals = 0) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Medicare Part B** Utilization Summary")) |> 
+  tab_header(title = md("**Medicare Part B** Utilization"),
+             subtitle = md("Counts & Amounts, 2013-2019")) |> 
   data_color(columns = c(Charges, Allowed, Payment),
              method = "numeric",
              palette = "Reds", 
@@ -75,7 +73,7 @@ select(df,
 
 <br>
 
-### Absolute & Relative Yearly Changes
+### Year-Over-Year Percentage Change
 
 ```{r}
 select(df, 
@@ -103,8 +101,56 @@ select(df,
   cols_merge_n_pct(Services, Services_pct) |>
   cols_merge_n_pct(Payment, Payment_pct) |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Medicare Part B** Utilization YOY Changes")) |> 
+  tab_header(title = md("**Medicare Part B** Utilization"),
+             subtitle = md("Year-Over-Year Percentage Changes, 2013-2019")) |> 
   tab_options(table.width = pct(75),
+              column_labels.font.weight = "bold",
+              row_group.font.weight = "bold",
+              heading.background.color = "black",
+              heading.align = "left")
+```
+
+<br>
+
+### Trends
+
+```{r}
+select(df, 
+       year, 
+       HCPCS = tot_hcpcs,
+       Beneficiaries = tot_benes,
+       Services = tot_srvcs,
+       Charges = tot_charges,
+       Allowed = tot_allowed,
+       Payment = tot_payment) |> 
+  pivot_longer(cols = c(HCPCS, 
+                        Beneficiaries, 
+                        Services, 
+                        Charges, 
+                        Allowed, 
+                        Payment), 
+               names_to = "Type", 
+               values_to = "Amount") |> 
+  pivot_wider(names_from = year, 
+              values_from = Amount) |> 
+  gt(rowname_col = "Type") |> 
+  tab_stubhead(label = md("**Measures**")) |>
+  cols_hide(columns = matches("2014|2015|2016|2017|2018")) |>
+  cols_nanoplot(
+    columns = contains("20"),
+    new_col_name = "nanoplots",
+    new_col_label = md("*TREND*"),
+    reference_line = "mean",
+    height = "3em",
+    options = nanoplot_options(
+      data_line_stroke_color = "black",
+      show_reference_line = TRUE,
+      show_reference_area = FALSE)) |> 
+  opt_table_font(font = google_font(name = "JetBrains Mono")) |>
+  tab_header(title = md("**Medicare Part B** Utilization"),
+             subtitle = md("Trends, 2013-2019")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  tab_options(table.width = pct(50),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",
@@ -119,18 +165,48 @@ select(df,
 chronic <- compare_conditions(df)
 
 chronic |> 
-  pivot_wider(names_from = level, 
+  pivot_wider(names_from = c(year, level), 
               values_from = prevalence) |> 
-  arrange(condition) |> 
-  gt(groupname_col = "condition", rowname_col = "year") |> 
-  fmt_percent(columns = c(Provider, State, National)) |> 
+  gt() |> 
+  cols_nanoplot(
+    columns = contains("Provider"),
+    reference_line = "mean",
+    new_col_name = "provider_plot",
+    new_col_label = md("*Provider*"),
+    missing_vals = "remove",
+    height = "3em",
+    options = nanoplot_options(
+      data_line_stroke_color = "black",
+      show_reference_line = TRUE,
+      show_reference_area = FALSE)) |> 
+  cols_nanoplot(
+    columns = contains("State"),
+    reference_line = "mean",
+    new_col_name = "state_plot",
+    new_col_label = md("*State*"),
+    missing_vals = "remove",
+    height = "3em",
+    options = nanoplot_options(
+      data_line_stroke_color = "black",
+      show_reference_line = TRUE,
+      show_reference_area = FALSE)) |> 
+  cols_nanoplot(
+    columns = contains("National"),
+    reference_line = "mean",
+    new_col_name = "national_plot",
+    new_col_label = md("*National*"),
+    missing_vals = "remove",
+    height = "3em",
+    options = nanoplot_options(
+      data_line_stroke_color = "black",
+      show_reference_line = TRUE,
+      show_reference_area = FALSE)) |> 
+  cols_hide(columns = contains("20")) |>
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Chronic Conditions** Prevalence")) |> 
-  data_color(columns = c(Provider, State, National),
-             direction = "row",
-             method = "numeric",
-             palette = "Reds") |> 
-  tab_options(table.width = pct(85),
+  tab_header(title = md("**Medicare Part B** Utilization"),
+             subtitle = md("**Chronic Conditions Prevalence** Comparison, 2013-2018")) |> 
+  opt_horizontal_padding(scale = 2) |> 
+  tab_options(table.width = pct(50),
               column_labels.font.weight = "bold",
               row_group.font.weight = "bold",
               heading.background.color = "black",
@@ -171,7 +247,7 @@ hcpcs |>
   gt(rowname_col = "year") |> 
   fmt_currency(columns = c(Provider, State, National), decimals = 2) |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
-  tab_header(title = md("**Average Payment** Per HCPCS")) |> 
+  tab_header(title = md("**Average Payment** By HCPCS")) |> 
   cols_hide(stat) |> 
   data_color(columns = c(Provider, State, National),
              direction = "row",
