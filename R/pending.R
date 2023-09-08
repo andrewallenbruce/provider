@@ -13,7 +13,7 @@
 #' @param npi National Provider Identifier (NPI) number
 #' @param last_name Last name of provider
 #' @param first_name First name of provider
-#' @param type physician or non-physician
+#' @param type `physician` or `non-physician`
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.

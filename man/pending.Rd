@@ -7,7 +7,7 @@
 pending(type, npi = NULL, last_name = NULL, first_name = NULL, tidy = TRUE)
 }
 \arguments{
-\item{type}{physician or non-physician}
+\item{type}{\code{physician} or \code{non-physician}}
 
 \item{npi}{National Provider Identifier (NPI) number}
 

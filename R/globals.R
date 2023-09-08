@@ -369,41 +369,6 @@ utils::globalVariables(c(
   "jcaho_acrdtd_y_match_dt", # <laboratories>
   "cross_ref_provider_number", # <laboratories>
   "related_provider_number", # <laboratories>
-  "org_name", # <mips_group_2021>
-  "y", # <mips_group_2021>
-  "aco_id_1", # <mips_group_2021>
-  "aco_nm_1", # <mips_group_2021>
-  "aco_id_2", # <mips_group_2021>
-  "aco_nm_2", # <mips_group_2021>
-  "measure_cd", # <mips_group_2021>
-  "measure_title", # <mips_group_2021>
-  "invs_msr", # <mips_group_2021>
-  "attestation_value", # <mips_group_2021>
-  "prf_rate", # <mips_group_2021>
-  "patient_count", # <mips_group_2021>
-  "star_value", # <mips_group_2021>
-  "five_star_benchmark", # <mips_group_2021>
-  "collection_type", # <mips_group_2021>
-  "ccxp_ind", # <mips_group_2021>
-  "identifier", # <mips_group_2021_id>
-  "y", # <mips_clinician_2021>
-  "ind_pac_id", # <mips_clinician_2021>
-  "lst_nm", # <mips_clinician_2021>
-  "frst_nm", # <mips_clinician_2021>
-  "apm_affl_1", # <mips_clinician_2021>
-  "apm_affl_2", # <mips_clinician_2021>
-  "apm_affl_3", # <mips_clinician_2021>
-  "measure_cd", # <mips_clinician_2021>
-  "measure_title", # <mips_clinician_2021>
-  "invs_msr", # <mips_clinician_2021>
-  "attestation_value", # <mips_clinician_2021>
-  "prf_rate", # <mips_clinician_2021>
-  "patient_count", # <mips_clinician_2021>
-  "star_value", # <mips_clinician_2021>
-  "five_star_benchmark", # <mips_clinician_2021>
-  "collection_type", # <mips_clinician_2021>
-  "ccxp_ind", # <mips_clinician_2021>
-  "identifier", # <mips_ind_2021_id>
   "y", # <missing_endpoints>
   "NPI", # <missing_endpoints>
   "last_name", # <missing_endpoints>
@@ -428,19 +393,6 @@ utils::globalVariables(c(
   "primary", # <nppes>
   "issuer", # <nppes>
   "identifier", # <nppes>
-  "data_lists", # <nppes_npi_old>
-  "outcome", # <nppes_npi_old>
-  "description", # <nppes_npi_old>
-  "field", # <nppes_npi_old>
-  "number", # <nppes_npi_old>
-  "created_epoch", # <nppes_npi_old>
-  "last_updated_epoch", # <nppes_npi_old>
-  "enumeration_type", # <nppes_npi_old>
-  "basic", # <nppes_npi_old>
-  "basic_organization_name", # <nppes_npi_old>
-  "addresses", # <nppes_npi_old>
-  "basic_first_name", # <nppes_npi_old>
-  "basic_last_name", # <nppes_npi_old>
   "identifier", # <open_payments>
   "y", # <open_payments>
   "program_year", # <open_payments>
@@ -610,6 +562,28 @@ utils::globalVariables(c(
   "group_scenario.isEligible", # <quality_eligibility>
   "individual_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
   "group_scenario.lowVolumeStatusReasons_1", # <quality_eligibility>
+  "y", # <mips_2021>
+  "org_pac_id", # <mips_2021>
+  "aco_id_1", # <mips_2021>
+  "aco_nm_1", # <mips_2021>
+  "aco_id_2", # <mips_2021>
+  "aco_nm_2", # <mips_2021>
+  "measure_cd", # <mips_2021>
+  "measure_title", # <mips_2021>
+  "invs_msr", # <mips_2021>
+  "attestation_value", # <mips_2021>
+  "prf_rate", # <mips_2021>
+  "patient_count", # <mips_2021>
+  "star_value", # <mips_2021>
+  "five_star_benchmark", # <mips_2021>
+  "collection_type", # <mips_2021>
+  "ccxp_ind", # <mips_2021>
+  "ind_pac_id", # <mips_2021>
+  "frst_nm", # <mips_2021>
+  "lst_nm", # <mips_2021>
+  "apm_affl_1", # <mips_2021>
+  "apm_affl_2", # <mips_2021>
+  "apm_affl_3", # <mips_2021>
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>
@@ -638,7 +612,6 @@ utils::globalVariables(c(
   "group_reassignments_and_physician_assistants", # <revalidation_reassign>
   "individual_due_date", # <revalidation_reassign>
   "group_due_date", # <revalidation_reassign>
-  "distro", # <revalidation_group>
   "y", # <revalidation_group>
   "group_pac_id", # <revalidation_group>
   "individual_npi", # <revalidation_group>
@@ -647,13 +620,13 @@ utils::globalVariables(c(
   "individual_last_name", # <revalidation_group>
   "individual_state_code", # <revalidation_group>
   "individual_specialty_description", # <revalidation_group>
-  "individual_due_date", # <revalidation_group>
   "individual_total_employer_associations", # <revalidation_group>
   "group_enrollment_id", # <revalidation_group>
   "group_legal_business_name", # <revalidation_group>
   "group_state_code", # <revalidation_group>
-  "group_due_date", # <revalidation_group>
   "group_reassignments_and_physician_assistants", # <revalidation_group>
+  "individual_due_date", # <revalidation_group>
+  "group_due_date", # <revalidation_group>
   "y", # <taxonomy_crosswalk>
   "medicare_specialty_code", # <taxonomy_crosswalk>
   "medicare_provider_supplier_type", # <taxonomy_crosswalk>

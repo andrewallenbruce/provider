@@ -191,7 +191,7 @@ asc_ifed_enrollment <- function(npi            = NULL,
                                 zip            = NULL,
                                 tidy           = TRUE) {
 
-  if (!is.null(npi)) {npi <- npi_check(npi)}
+  if (!is.null(npi))       {npi <- npi_check(npi)}
   if (!is.null(enroll_id)) {enroll_id <- enroll_check(enroll_id)}
 
   args <- dplyr::tribble(

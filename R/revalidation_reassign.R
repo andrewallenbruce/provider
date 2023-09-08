@@ -232,9 +232,8 @@ revalidation_group <- function(npi             = NULL,
   if (!is.null(enroll_id_group)) {enroll_check(enroll_id_group)}
   if (!is.null(pac_id_group)) {pac_check(pac_id_group)}
 
-  # args tribble ------------------------------------------------------------
   args <- dplyr::tribble(
-    ~x,                                 ~y,
+    ~param,                             ~arg,
     "Individual NPI",                   npi,
     "Individual Enrollment ID",         enroll_id,
     "Individual First Name",            first_name,
@@ -247,38 +246,24 @@ revalidation_group <- function(npi             = NULL,
     "Group State Code",                 state_group,
     "Record Type",                      record_type)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                cms_update("Revalidation Clinic Group Practice Reassignment",
+                "id")$distro[1], "/data.json?", encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update("Revalidation Clinic Group Practice Reassignment", "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ------------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
       ~x,                 ~y,
-      "npi",              as.character(npi),
-      "enroll_id",        as.character(enroll_id),
+      "npi",              npi,
+      "enroll_id",        enroll_id,
       "first_name",       first_name,
       "last_name",        last_name,
       "state",            state,
       "specialty",        specialty,
-      "pac_id_group",     as.character(pac_id_group),
-      "enroll_id_group",  as.character(enroll_id_group),
+      "pac_id_group",     pac_id_group,
+      "enroll_id_group",  enroll_id_group,
       "business_name",    business_name,
       "state_group",      state_group,
       "record_type",      record_type) |>
@@ -295,34 +280,30 @@ revalidation_group <- function(npi             = NULL,
     return(invisible(NULL))
   }
 
-  # parse response ----------------------------------------------------------
-  results <- dplyr::tibble(httr2::resp_body_json(response,
-                                                 check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
-
-    results <- dplyr::rename_with(results, str_to_snakecase) |>
+    results <- janitor::clean_names(results) |>
+      dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     group_pac_id = as.character(group_pac_id),
                     individual_npi = as.character(individual_npi)) |>
       dplyr::select(
         npi = individual_npi,
-        enroll_id = individual_enrollment_id,
+        enroll_id_ind = individual_enrollment_id,
         first_name = individual_first_name,
         last_name = individual_last_name,
-        enroll_state = individual_state_code,
-        enroll_specialty = individual_specialty_description,
-        revalidation_due_date = individual_due_date,
+        enroll_state_ind = individual_state_code,
+        enroll_specialty_ind = individual_specialty_description,
         ind_associations = individual_total_employer_associations,
-        group_pac_id,
-        group_enroll_id = group_enrollment_id,
-        group_legal_business_name,
-        group_state = group_state_code,
-        group_due_date,
+        pac_id_org = group_pac_id,
+        enroll_id_org = group_enrollment_id,
+        business_name = group_legal_business_name,
+        state_org = group_state_code,
         group_reassignments = group_reassignments_and_physician_assistants,
+        revalidation_date_ind = individual_due_date,
+        revalidation_date_org = group_due_date,
         record_type)
 
   }
