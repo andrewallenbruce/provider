@@ -30,7 +30,7 @@ laboratories(
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{clia()} allows you to search for information on clinical laboratories
+\code{laboratories()} allows you to search for information on clinical laboratories
 including demographics and the type of testing services the facility provides.
 \subsection{Clinical Laboratory Improvement Amendments (CLIA)}{
 
@@ -43,6 +43,8 @@ has the responsibility for implementing the CLIA Program. Although all
 clinical laboratories must be properly certified to receive Medicare or
 Medicaid payments, CLIA has no direct Medicare or Medicaid program
 responsibilities.
+}
+
 \subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories}
@@ -50,12 +52,9 @@ responsibilities.
 
 \emph{Update Frequency:} \strong{Quarterly}
 }
-
-}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-laboratories(city = "Valdosta")
 laboratories(clia = "11D0265516")
 \dontshow{\}) # examplesIf}
 }

@@ -11,7 +11,7 @@
 #' and state-wide by HCPCS code and place of service.
 #'
 #' ### Links
-#' - [Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
+#'    - [Physician & Other Practitioners: by Geography and Service API](https://data.cms.gov/provider-summary-by-type-of-service/medicare-physician-other-practitioners/medicare-physician-other-practitioners-by-geography-and-service)
 #'
 #' *Update Frequency:* **Annually**
 #'

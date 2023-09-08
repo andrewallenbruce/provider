@@ -2,6 +2,7 @@
 
 export(affiliations)
 export(beneficiaries)
+export(beneficiaries_years)
 export(by_geography)
 export(by_geography_years)
 export(by_provider)

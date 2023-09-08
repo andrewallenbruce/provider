@@ -1,10 +1,10 @@
 #' Clinical Laboratories
 #'
 #' @description
-#' `clia()` allows you to search for information on clinical laboratories
+#' `laboratories()` allows you to search for information on clinical laboratories
 #' including demographics and the type of testing services the facility provides.
 #'
-#' ## Clinical Laboratory Improvement Amendments (CLIA)
+#' ### Clinical Laboratory Improvement Amendments (CLIA)
 #' CMS regulates all laboratory testing (except research) performed on humans
 #' in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
 #' In total, CLIA covers approximately 320,000 laboratory entities. The Division
@@ -30,9 +30,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' laboratories(city = "Valdosta")
 #' laboratories(clia = "11D0265516")
-#'
 #' @autoglobal
 #' @export
 laboratories <- function(name = NULL,
@@ -42,39 +40,25 @@ laboratories <- function(name = NULL,
                          zip = NULL,
                          tidy = TRUE) {
 
-  # args tribble
-  args <- tibble::tribble(
-    ~x,              ~y,
-    "FAC_NAME",      facility_name,
+  args <- dplyr::tribble(
+    ~param,          ~arg,
+    "FAC_NAME",      name,
     "PRVDR_NUM",     clia,
     "CITY_NAME",     city,
     "STATE_CD",      state,
     "ZIP_CD",        zip)
 
-  # map param_format and collapse -------------------------------------------
-  params_args <- purrr::map2(args$x, args$y, param_format) |>
-    unlist() |>
-    stringr::str_c(collapse = "") |>
-    param_space()
+  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+         cms_update("Provider of Services File - Clinical Laboratories",
+         "id")$distro[1],
+         "/data.json?",
+         encode_param(args))
 
-  # update distribution id -------------------------------------------------
-  id <- cms_update(api = "Provider of Services File - Clinical Laboratories",
-                   check = "id") |>
-    dplyr::slice_head() |>
-    dplyr::pull(distro)
-
-  # build URL ---------------------------------------------------------------
-  http   <- "https://data.cms.gov/data-api/v1/dataset/"
-  post   <- "/data.json?"
-  url    <- paste0(http, id, post, params_args)
-
-  # send request ----------------------------------------------------------
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # no search results returns empty tibble ----------------------------------
-  # if (as.integer(httr2::resp_header(response, "content-length")) <= 28L) {
+  # if (isTRUE(vctrs::vec_is_empty(response$body))) {
   #
-  #   cli_args <- tibble::tribble(
+  #   cli_args <- dplyr::tribble(
   #     ~x,                  ~y,
   #     "npi",               as.character(npi),
   #     "facility_ccn",      as.character(facility_ccn),
@@ -94,15 +78,26 @@ laboratories <- function(name = NULL,
   #
   # }
 
-  # parse response ---------------------------------------------------------
-  results <- tibble::tibble(httr2::resp_body_json(response,
-                                                  check_type = FALSE, simplifyVector = TRUE))
+  results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
-  # clean names -------------------------------------------------------------
   if (tidy) {
     results <- janitor::clean_names(results) |>
-      dplyr::select(facility_name = fac_name,
-                    facility_name2 = addtnl_fac_name,
+      dplyr::tibble() |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
+                    dplyr::across(dplyr::contains("_dt"), ~anytime::anydate(.)),
+                    dplyr::across(dplyr::contains("_sw"), ~yn_logical(.)),
+                    pgm_trmntn_cd = termcd(pgm_trmntn_cd),
+                    crtfctn_actn_type_cd = toa(crtfctn_actn_type_cd),
+                    cmplnc_stus_cd = status(cmplnc_stus_cd),
+                    rgn_cd = region(rgn_cd),
+                    gnrl_cntl_type_cd = owner(gnrl_cntl_type_cd),
+                    crtfct_type_cd = app(crtfct_type_cd),
+                    gnrl_fac_type_cd = factype(gnrl_fac_type_cd),
+                    current_clia_lab_clsfctn_cd = labclass(current_clia_lab_clsfctn_cd),
+                    prvdr_ctgry_cd = labclass(prvdr_ctgry_cd),
+                    prvdr_ctgry_sbtyp_cd = labclass(prvdr_ctgry_sbtyp_cd)) |>
+      dplyr::select(name = fac_name,
+                    name_addl = addtnl_fac_name,
                     clia = prvdr_num,
                     clia_medicare = clia_mdcr_num,
                     application_type = aplctn_type_cd,
@@ -202,21 +197,8 @@ laboratories <- function(name = NULL,
                     dplyr::contains("_provider_number_"),
 
                     clia_lab_classification_current = current_clia_lab_clsfctn_cd,
-                    dplyr::starts_with("clia_lab_classification_cd_")) |>
-
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
-                    dplyr::across(dplyr::contains("_ind"), ~yn_logical(.)),
-                    termination_reason = termcd(termination_reason),
-                    type_of_action = toa(type_of_action),
-                    status = status(status),
-                    region = region(region),
-                    ownership_type = owner(ownership_type),
-                    certification_type = app(certification_type),
-                    facility_type = factype(facility_type),
-                    clia_lab_classification_current = labclass(clia_lab_classification_current),
-                    category = labclass(category),
-                    subcategory = labclass(subcategory))
+                    dplyr::starts_with("clia_lab_classification_cd_"),
+                    dplyr::everything())
 
   }
   return(results)

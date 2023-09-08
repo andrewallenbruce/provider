@@ -86,30 +86,27 @@
 #'    the results will search against a provider's first and last name. AO will
 #'    only search against Authorized Official names. While PROVIDER will only
 #'    search against Provider name. Valid values are: `AO` and `Provider.`
-#' @param org_name Healthcare organization's name (NPI-2). Trailing wildcard entries are
-#'    permitted requiring at least two characters to be entered. All types of
-#'    Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
-#'    NPI are examined for matching contents, therefore, the results might
-#'    contain an organization name different from the one entered in the
-#'    Organization Name criterion.
+#' @param org_name Healthcare organization's name (NPI-2). Trailing wildcard
+#'    entries are permitted requiring at least two characters to be entered.
+#'    All types of Organization Names (LBN, DBA, Former LBN, Other Name)
+#'    associated with an NPI are examined for matching contents, therefore, the
+#'    results might contain an organization name different from the one entered
+#'    in the Organization Name criterion.
 #' @param taxonomy_desc Search for providers by their taxonomy by entering the
 #'    taxonomy description.
 #' @param city City associated with the provider's address. To search for a
 #'    Military Address, enter either `APO` or `FPO`.
 #' @param state State abbreviation associated with the provider's address. If
 #'    this field is used, at least one other field, besides the `entype` and
-#'    `country`, must be populated. Valid values for state abbreviations:
-#'    [State Abbreviations](https://npiregistry.cms.hhs.gov/help-api/state).
-#' @param zipcode The Postal Code associated with the provider's address
+#'    `country`, must be populated.
+#' @param zip The Postal Code associated with the provider's address
 #'    identified in Address Purpose. If you enter a 5 digit postal code, it
 #'    will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 #'    wildcard entries are permitted requiring at least two characters to be
 #'    entered (e.g., `21*`).
 #' @param country Country abbreviation associated with the provider's
 #'    address. This field **can** be used as the only input criterion, as long
-#'    as the value selected *is not* **US** (United States). Valid values for
-#'    country abbreviations:
-#'    [Country Abbreviations](https://npiregistry.cms.hhs.gov/help-api/country).
+#'    as the value selected *is not* **US** (United States).
 #' @param limit Maximum number of results to return; default is 1200.
 #' @param skip Number of results to skip after searching
 #'    the previous number; set in `limit`.
@@ -131,17 +128,17 @@ nppes <- function(npi = NULL,
                   taxonomy_desc  = NULL,
                   city = NULL,
                   state = NULL,
-                  zipcode = NULL,
+                  zip = NULL,
                   country = NULL,
                   limit = 1200,
                   skip = NULL,
                   tidy = TRUE) {
 
-  if (!is.null(npi)) {npi_check(npi)}
+  if (!is.null(npi)) {npi <- npi_check(npi)}
   if (!is.null(entype)) {entype <- entype_arg(entype)}
   if (!is.null(purpose_name)) {rlang::arg_match(purpose_name, c("AO", "Provider"))}
+  if (!is.null(zip))       {zip <- as.character(zip)}
 
-  # request and response ----------------------------------------------------
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,
                          enumeration_type     = entype,
@@ -152,24 +149,21 @@ nppes <- function(npi = NULL,
                          taxonomy_description = taxonomy_desc,
                          city                 = city,
                          state                = state,
-                         postal_code          = zipcode,
+                         postal_code          = zip,
                          country_code         = country,
                          limit                = limit,
                          skip                 = skip) |>
     httr2::req_perform()
 
-  # parse response ---------------------------------------------------------
-  response <- httr2::resp_body_json(request, check_type = FALSE,
-                                    simplifyVector = TRUE)
+  response <- httr2::resp_body_json(request, simplifyVector = TRUE)
 
   res_cnt <- response$result_count
 
-  # no search results returns empty tibble ----------------------------------
   if (is.null(res_cnt) | res_cnt == 0) {
 
-    cli_args <- tibble::tribble(
+    cli_args <- dplyr::tribble(
       ~x,              ~y,
-      "npi",           as.character(npi),
+      "npi",           npi,
       "entype",        entype,
       "first_name",    first_name,
       "last_name",     last_name,
@@ -178,7 +172,7 @@ nppes <- function(npi = NULL,
       "taxonomy_desc", taxonomy_desc,
       "city",          city,
       "state",         state,
-      "zipcode",       as.character(zipcode),
+      "zipcode",       zip,
       "country",       country) |>
       tidyr::unnest(cols = c(y))
 
@@ -202,14 +196,13 @@ nppes <- function(npi = NULL,
                   identifiers,
                   endpoints,
                   practice_locations = practiceLocations,
-                  other_names) |>
+                  other_names,
+                  dplyr::everything()) |>
     tidyr::unnest(c(basic))
 
-  # replace empty lists with NA -------------------------------------------
   results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
   if (tidy) {
-
     key <- dplyr::join_by(npi)
 
     # basic ------------------------------------------------------------------
@@ -225,16 +218,12 @@ nppes <- function(npi = NULL,
     address <- results |>
       dplyr::select(npi, addresses) |>
       tidyr::unnest(c(addresses)) |>
-      # tidyr::unite("street",
-      #              dplyr::any_of(c("address_1", "address_2")),
-      #              remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::mutate(address_type = NULL,
                     country_name = NULL) |>
       dplyr::rename(country      = country_code,
-                    phone_number = telephone_number,
-                    zipcode      = postal_code,
-                    purpose      = address_purpose,
-                    street       = address_1) |>
+                    phone = telephone_number,
+                    zip      = postal_code,
+                    purpose      = address_purpose) |>
       dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION",
                                              "PRACTICE",
                                              purpose))
@@ -254,8 +243,8 @@ nppes <- function(npi = NULL,
         dplyr::mutate(address_type = NULL,
                       country_name = NULL) |>
         dplyr::rename(country      = country_code,
-                      phone_number = telephone_number,
-                      zipcode      = postal_code,
+                      phone = telephone_number,
+                      zip      = postal_code,
                       purpose      = address_purpose,
                       street       = address_1)
 
@@ -291,13 +280,8 @@ nppes <- function(npi = NULL,
     if (ncol(identifiers) > 2) {
 
       identifiers <- identifiers |>
-        dplyr::mutate(desc = gsub("Other ", "", desc)) |>
-        tidyr::unite("issuer",
-                     dplyr::any_of(c("issuer", "desc")),
-                     remove = TRUE,
-                     na.rm = TRUE,
-                     sep = " ") |>
         dplyr::select(npi,
+                      id_desc = desc,
                       id_issuer = issuer,
                       id_identifier = identifier,
                       id_state = state)
@@ -317,19 +301,9 @@ nppes <- function(npi = NULL,
                      dplyr::any_of(c("address_1", "address_2")),
                      remove = TRUE,
                      na.rm = TRUE,
-                     sep = " ") |>
-        datawizard::data_addprefix("end_", exclude = npi)
-      # dplyr::select(npi,
-      #               end_point = endpoint,
-      #               end_type = endpointTypeDescription,
-      #               end_aff = affiliation,
-      #               end_affname = affiliationName,
-      #               end_use = useDescription,
-      #               end_content = contentTypeDescription,
-      #               end_street,
-      #               end_city = city,
-      #               end_state = state,
-      #               end_zip = postal_code)
+                     sep = " ")
+      names(endpoints) <- c("npi",
+            paste0("end_", names(endpoints)[2:length(names(endpoints))]))
 
       final <- dplyr::left_join(final, endpoints, key)
     }
@@ -341,16 +315,15 @@ nppes <- function(npi = NULL,
 
     if (ncol(other) > 2) {
 
-      other <- other |>
-        datawizard::data_addprefix("other_", exclude = npi)
+      names(other) <- c("npi",
+           paste0("other_", names(other)[2:length(names(other))]))
 
       final <- dplyr::left_join(final, other, key)
     }
 
     # final post-join cleaning logic -----------------------------------------
     results <- final |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~parsedate::parse_date(.)),
-                    dplyr::across(dplyr::contains("date"), ~lubridate::ymd(.)),
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
@@ -375,12 +348,13 @@ nppes <- function(npi = NULL,
                       "organizational_subpart",
                       "sole_proprietor",
                       "purpose",
-                      "street",
+                      "address_1",
+                      "address_2",
                       "city",
                       "state",
-                      "zipcode",
+                      "zip",
                       "country",
-                      "phone_number",
+                      "phone",
                       "fax_number",
                       "authorized_official_first_name",
                       "authorized_official_middle_name",
@@ -395,6 +369,7 @@ nppes <- function(npi = NULL,
                       "tx_state",
                       "tx_license",
                       "tx_primary",
+                      "id_desc",
                       "id_issuer",
                       "id_identifier",
                       "id_state")
@@ -402,7 +377,8 @@ nppes <- function(npi = NULL,
     results <- results |>
       dplyr::select(dplyr::any_of(valid_fields),
                     dplyr::starts_with("end_"),
-                    dplyr::starts_with("other_"))
+                    dplyr::starts_with("other_"),
+                    dplyr::everything())
 
   }
   return(results)

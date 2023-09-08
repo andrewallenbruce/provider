@@ -10,10 +10,11 @@ utils::globalVariables(c(
   "facility_affiliations_certification_number", # <affiliations>
   "facility_type_certification_number", # <affiliations>
   "identifier", # <fac_affil_id>
+  "state.abb", # <beneficiaries>
+  "state.name", # <beneficiaries>
   "y", # <beneficiaries>
-  "x", # <beneficiaries>
-  "bene_geo_lvl", # <beneficiaries>
   "month", # <beneficiaries>
+  "bene_geo_lvl", # <beneficiaries>
   "bene_state_abrvtn", # <beneficiaries>
   "bene_state_desc", # <beneficiaries>
   "bene_county_desc", # <beneficiaries>
@@ -285,26 +286,26 @@ utils::globalVariables(c(
   "type", # <asc_ifed_enrollment>
   "organization_name", # <asc_ifed_enrollment>
   "zip_code", # <asc_ifed_enrollment>
-  "facility_name", # <laboratories>
-  "distro", # <laboratories>
+  "pgm_trmntn_cd", # <laboratories>
+  "crtfctn_actn_type_cd", # <laboratories>
+  "cmplnc_stus_cd", # <laboratories>
+  "rgn_cd", # <laboratories>
+  "gnrl_cntl_type_cd", # <laboratories>
+  "crtfct_type_cd", # <laboratories>
+  "gnrl_fac_type_cd", # <laboratories>
+  "current_clia_lab_clsfctn_cd", # <laboratories>
+  "prvdr_ctgry_cd", # <laboratories>
+  "prvdr_ctgry_sbtyp_cd", # <laboratories>
   "fac_name", # <laboratories>
   "addtnl_fac_name", # <laboratories>
   "prvdr_num", # <laboratories>
   "clia_mdcr_num", # <laboratories>
   "aplctn_type_cd", # <laboratories>
-  "crtfct_type_cd", # <laboratories>
   "crtfct_efctv_dt", # <laboratories>
   "trmntn_exprtn_dt", # <laboratories>
-  "cmplnc_stus_cd", # <laboratories>
   "acptbl_poc_sw", # <laboratories>
-  "pgm_trmntn_cd", # <laboratories>
   "clia_trmntn_cd", # <laboratories>
-  "crtfctn_actn_type_cd", # <laboratories>
-  "gnrl_cntl_type_cd", # <laboratories>
-  "gnrl_fac_type_cd", # <laboratories>
   "drctly_afltd_lab_cnt", # <laboratories>
-  "prvdr_ctgry_cd", # <laboratories>
-  "prvdr_ctgry_sbtyp_cd", # <laboratories>
   "orgnl_prtcptn_dt", # <laboratories>
   "aplctn_rcvd_dt", # <laboratories>
   "crtfctn_dt", # <laboratories>
@@ -316,7 +317,6 @@ utils::globalVariables(c(
   "zip_cd", # <laboratories>
   "phne_num", # <laboratories>
   "fax_phne_num", # <laboratories>
-  "rgn_cd", # <laboratories>
   "state_rgn_cd", # <laboratories>
   "fips_cnty_cd", # <laboratories>
   "fips_state_cd", # <laboratories>
@@ -369,15 +369,6 @@ utils::globalVariables(c(
   "jcaho_acrdtd_y_match_dt", # <laboratories>
   "cross_ref_provider_number", # <laboratories>
   "related_provider_number", # <laboratories>
-  "current_clia_lab_clsfctn_cd", # <laboratories>
-  "termination_reason", # <laboratories>
-  "type_of_action", # <laboratories>
-  "ownership_type", # <laboratories>
-  "certification_type", # <laboratories>
-  "facility_type", # <laboratories>
-  "clia_lab_classification_current", # <laboratories>
-  "category", # <laboratories>
-  "subcategory", # <laboratories>
   "y", # <mips_group_2021>
   "org_nm", # <mips_group_2021>
   "aco_id_1", # <mips_group_2021>
@@ -429,8 +420,8 @@ utils::globalVariables(c(
   "telephone_number", # <nppes>
   "postal_code", # <nppes>
   "address_purpose", # <nppes>
-  "address_1", # <nppes>
   "purpose", # <nppes>
+  "address_1", # <nppes>
   "code", # <nppes>
   "desc", # <nppes>
   "taxonomy_group", # <nppes>

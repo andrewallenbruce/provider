@@ -14,7 +14,7 @@ nppes(
   taxonomy_desc = NULL,
   city = NULL,
   state = NULL,
-  zipcode = NULL,
+  zip = NULL,
   country = NULL,
   limit = 1200,
   skip = NULL,
@@ -35,12 +35,12 @@ entered (e.g. \verb{jo*} ).}
 entries are permitted requiring at least two characters to be entered
 (e.g. \verb{jo*} ).}
 
-\item{org_name}{Healthcare organization's name (NPI-2). Trailing wildcard entries are
-permitted requiring at least two characters to be entered. All types of
-Organization Names (LBN, DBA, Former LBN, Other Name) associated with an
-NPI are examined for matching contents, therefore, the results might
-contain an organization name different from the one entered in the
-Organization Name criterion.}
+\item{org_name}{Healthcare organization's name (NPI-2). Trailing wildcard
+entries are permitted requiring at least two characters to be entered.
+All types of Organization Names (LBN, DBA, Former LBN, Other Name)
+associated with an NPI are examined for matching contents, therefore, the
+results might contain an organization name different from the one entered
+in the Organization Name criterion.}
 
 \item{purpose_name}{Refers to whether the name information entered pertains
 to an Authorized Official's name or a Provider's name. When not specified,
@@ -56,10 +56,9 @@ Military Address, enter either \code{APO} or \code{FPO}.}
 
 \item{state}{State abbreviation associated with the provider's address. If
 this field is used, at least one other field, besides the \code{entype} and
-\code{country}, must be populated. Valid values for state abbreviations:
-\href{https://npiregistry.cms.hhs.gov/help-api/state}{State Abbreviations}.}
+\code{country}, must be populated.}
 
-\item{zipcode}{The Postal Code associated with the provider's address
+\item{zip}{The Postal Code associated with the provider's address
 identified in Address Purpose. If you enter a 5 digit postal code, it
 will match any appropriate 9 digit (zip+4) codes in the data. Trailing
 wildcard entries are permitted requiring at least two characters to be
@@ -67,9 +66,7 @@ entered (e.g., \verb{21*}).}
 
 \item{country}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
-as the value selected \emph{is not} \strong{US} (United States). Valid values for
-country abbreviations:
-\href{https://npiregistry.cms.hhs.gov/help-api/country}{Country Abbreviations}.}
+as the value selected \emph{is not} \strong{US} (United States).}
 
 \item{limit}{Maximum number of results to return; default is 1200.}
 

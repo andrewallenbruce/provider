@@ -2,92 +2,82 @@
 % Please edit documentation in R/beneficiaries.R
 \name{beneficiaries}
 \alias{beneficiaries}
-\title{Search the Medicare Monthly Enrollment API}
-\source{
-Centers for Medicare & Medicaid Services
-}
+\title{Beneficiary Enrollment in Medicare}
 \usage{
 beneficiaries(
   year = NULL,
   period = NULL,
   level = NULL,
   state = NULL,
-  state_name = NULL,
   county = NULL,
   fips = NULL,
   tidy = TRUE
 )
 }
 \arguments{
-\item{year}{Calendar year of Medicare enrollment; current options are
-\code{2017 - 2022}}
+\item{year}{Calendar year of Medicare enrollment; current years can be
+checked with:
+\itemize{
+\item \code{beneficiaries_years("year")}: Years available for all 12 months
+\item \code{beneficiaries_years("month")}: Years available for individual months
+}}
 
-\item{period}{Time frame of Medicare enrollment; options are \code{Year}, \code{Month} or any
-month within the 12-month time span of the month in the data set's version
-name (listed \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment/api-docs}{here})}
+\item{period}{Time frame of Medicare enrollment; options are:
+\itemize{
+\item \code{Year}
+\item \code{Month}
+\item Any individual month name
+}}
 
-\item{level}{Geographic level of data; options are \code{National}, \code{State},
-or \code{County}}
+\item{level}{Geographic level of data; options are:
+\itemize{
+\item \code{National}
+\item \code{State}
+\item \code{County}
+}}
 
-\item{state}{Two-letter state abbreviation of beneficiary residence}
-
-\item{state_name}{Full state name of beneficiary residence}
+\item{state}{Full state name or abbreviation of beneficiary residence}
 
 \item{county}{County of beneficiary residence}
 
 \item{fips}{FIPS code of beneficiary residence}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-Current information on the number of Medicare
-beneficiaries with hospital/medical coverage and prescription
-drug coverage, available for several geographical areas.
+\code{beneficiaries()} allows you to access current data on enrolled
+Medicare beneficiaries.
+\subsection{Medicare Monthly Enrollment}{
+
+Current monthly information on the number of Medicare beneficiaries with
+hospital/medical coverage and prescription drug coverage, available for
+several geographic areas including national, state and county.
+
+The hospital/medical coverage data can be broken down further by health care
+delivery (Original Medicare versus Medicare Advantage and Other Health Plans)
+and the prescription drug coverage data can be examined by those enrolled in
+stand-alone Prescription Drug Plans and those enrolled in Medicare Advantage
+Prescription Drug plans.
+
+The dataset includes enrollee counts on a \emph{rolling 12 month basis} and also
+provides information on yearly trends.
 }
-\details{
-The Medicare Monthly Enrollment data provides current
-monthly information on the number of Medicare beneficiaries
-with hospital/medical coverage and prescription drug coverage,
-available for several geographic areas including national,
-state/territory, and county. The hospital/medical coverage
-data can be broken down further by health care delivery
-(Original Medicare versus Medicare Advantage and Other
-Health Plans) and the prescription drug coverage data can
-be examined by those enrolled in stand-alone Prescription
-Drug Plans and those enrolled in Medicare Advantage
-Prescription Drug plans. The dataset includes enrollee
-counts on a \emph{rolling 12 month basis} and also provides
-information on yearly trends. The dataset is based on
-information gathered from CMS administrative enrollment
-data for beneficiaries enrolled in the Medicare program
-available from the CMS Chronic Conditions Data Warehouse.
+
 \subsection{Links}{
 \itemize{
 \item \href{https://data.cms.gov/summary-statistics-on-beneficiary-enrollment/medicare-and-medicaid-reports/medicare-monthly-enrollment}{Medicare Monthly Enrollment}
 }
+
+\emph{Update Frequency:} \strong{Monthly}
 }
-}
-\note{
-Update Frequency: \strong{Monthly}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-beneficiaries(year = NULL,
-              period = "Year",
-              level = "County",
-              state = "AL",
-              county = "Autauga")
-
-beneficiaries(year = 2021, level = "County", fips = "01001")
-
-beneficiaries(year = 2022,
-                       period = "July",
-                       level = "State",
-                       state_name = "Georgia")
-
+beneficiaries(year = 2022, period = "Year", level = "County", county = "Autauga")
+beneficiaries(year = 2022, period = "July", state = "Georgia")
 beneficiaries(level = "State", fips = "10")
 \dontshow{\}) # examplesIf}
 }
