@@ -446,67 +446,10 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 </blockquote>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/clia_labs.html">clia_labs</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu">clia_labs</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
-<span><span class="co">#&gt; Columns: 56</span></span>
-<span><span class="co">#&gt; $ facility_name                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "DANIEL FELDMAN MD"</span></span>
-<span><span class="co">#&gt; $ clia                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "11D0265516"</span></span>
-<span><span class="co">#&gt; $ clia_medicare                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00205114A3"</span></span>
-<span><span class="co">#&gt; $ application_type                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1"</span></span>
-<span><span class="co">#&gt; $ certification_type              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Compliance"</span></span>
-<span><span class="co">#&gt; $ effective_date                  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1996-08-29</span></span>
-<span><span class="co">#&gt; $ expiration_date                 <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1998-08-04</span></span>
-<span><span class="co">#&gt; $ status                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "In Compliance"</span></span>
-<span><span class="co">#&gt; $ poc_ind                         <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ termination_reason              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Mail Returned No Forward Address Cert…</span></span>
-<span><span class="co">#&gt; $ termination_code                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "17"</span></span>
-<span><span class="co">#&gt; $ type_of_action                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Recertification"</span></span>
-<span><span class="co">#&gt; $ ownership_type                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Proprietary"</span></span>
-<span><span class="co">#&gt; $ facility_type                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Physician Office"</span></span>
-<span><span class="co">#&gt; $ director_affiliations           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ category                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CLIA Lab"</span></span>
-<span><span class="co">#&gt; $ subcategory                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CLIA88 Lab"</span></span>
-<span><span class="co">#&gt; $ orig_part_date                  <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1992-09-01</span></span>
-<span><span class="co">#&gt; $ application_date                <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1993-01-20</span></span>
-<span><span class="co">#&gt; $ certification_date              <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1996-03-21</span></span>
-<span><span class="co">#&gt; $ mailed_date                     <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 1996-09-25</span></span>
-<span><span class="co">#&gt; $ address                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "205 WOODROW WILSON DR"</span></span>
-<span><span class="co">#&gt; $ city                            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VALDOSTA"</span></span>
-<span><span class="co">#&gt; $ state                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "GA"</span></span>
-<span><span class="co">#&gt; $ zip                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "31602"</span></span>
-<span><span class="co">#&gt; $ phone                           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "8032619888"</span></span>
-<span><span class="co">#&gt; $ region                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Atlanta"</span></span>
-<span><span class="co">#&gt; $ state_region                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "001"</span></span>
-<span><span class="co">#&gt; $ fips_cnty_cd                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "185"</span></span>
-<span><span class="co">#&gt; $ fips_state_cd                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "13"</span></span>
-<span><span class="co">#&gt; $ cbsa_cd                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "46660"</span></span>
-<span><span class="co">#&gt; $ chow_count                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span>
-<span><span class="co">#&gt; $ eligible_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
-<span><span class="co">#&gt; $ skeleton_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ multi_site_cert_ind             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ hospital_campus_ind             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ public_health_ind               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ temp_test_site_ind              <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ shared_lab_ind                  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ lab_site_count                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ ppm_test_count                  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ form_116_acrdtd_test_vol_cnt    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ form_116_test_vol_cnt           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ form_1557_test_vol_cnt          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ wvd_test_vol_cnt                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0</span></span>
-<span><span class="co">#&gt; $ acr_aala_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_aabb_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_aoa_ind                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_ashi_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_cap_ind                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_cola_ind                    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ acr_jcaho_ind                   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> FALSE</span></span>
-<span><span class="co">#&gt; $ clia_lab_classification_current <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CLIA Lab"</span></span>
-<span><span class="co">#&gt; $ clia_lab_classification_cd_1    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span>
-<span><span class="co">#&gt; $ clia_lab_classification_cd_2    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span>
-<span><span class="co">#&gt; $ clia_lab_classification_cd_3    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "00"</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in clia_labs(clia = "11D0265516"): could not find function "clia_labs"</span></span></code></pre>
   </main>
 </div>
 

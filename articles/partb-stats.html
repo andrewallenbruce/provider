@@ -127,314 +127,7 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_provider_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_provider.html">by_provider</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">df</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="0%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="1%">
-<col width="2%">
-<col width="1%">
-<col width="2%">
-<col width="4%">
-<col width="2%">
-<col width="1%">
-<col width="0%">
-<col width="1%">
-<col width="0%">
-<col width="1%">
-<col width="3%">
-<col width="0%">
-<col width="1%">
-<col width="1%">
-<col width="1%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="2%">
-<col width="12%">
-<col width="3%">
-<col width="12%">
-<col width="18%">
-</colgroup>
-<thead><tr class="header">
-<th align="right">year</th>
-<th align="left">npi</th>
-<th align="left">first_name</th>
-<th align="left">middle_name</th>
-<th align="left">last_name</th>
-<th align="left">credential</th>
-<th align="left">gender</th>
-<th align="left">entity_type</th>
-<th align="left">address</th>
-<th align="left">city</th>
-<th align="left">state</th>
-<th align="left">fips</th>
-<th align="left">zip</th>
-<th align="left">ruca</th>
-<th align="left">country</th>
-<th align="left">specialty</th>
-<th align="left">par</th>
-<th align="right">tot_hcpcs</th>
-<th align="right">tot_benes</th>
-<th align="right">tot_srvcs</th>
-<th align="right">tot_charges</th>
-<th align="right">tot_allowed</th>
-<th align="right">tot_payment</th>
-<th align="right">tot_std_pymt</th>
-<th align="right">hcc_risk_avg</th>
-<th align="left">medical</th>
-<th align="left">drug</th>
-<th align="left">demographics</th>
-<th align="left">conditions</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">2013</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">777 North St Cardiology</td>
-<td align="left">Pittsfield</td>
-<td align="left">MA</td>
-<td align="left">25</td>
-<td align="left">01201</td>
-<td align="left">1</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">7</td>
-<td align="right">568</td>
-<td align="right">936</td>
-<td align="right">86308</td>
-<td align="right">32714.18</td>
-<td align="right">24656.43</td>
-<td align="right">29197.43</td>
-<td align="right">1.3832</td>
-<td align="left">7.00, 568.00, 936.00, 86308.00, 32714.18, 24656.43,
-29197.43</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">73, 88, 204, 206, 70, 258, 310, 552, NA, NA, NA, 0, NA,
-120, 448</td>
-<td align="left">0.25, 0.06, 0.05, 0.13, 0.29, 0.27, 0.18, 0.23, 0.38,
-0.75, 0.75, 0.70, 0.10, 0.33, NA, 0.07</td>
-</tr>
-<tr class="even">
-<td align="right">2014</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">6</td>
-<td align="right">622</td>
-<td align="right">1036</td>
-<td align="right">96688</td>
-<td align="right">37852.30</td>
-<td align="right">28751.20</td>
-<td align="right">34274.42</td>
-<td align="right">1.2529</td>
-<td align="left">6.00, 622.00, 1036.00, 96688.00, 37852.30, 28751.20,
-34274.42</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">74, 88, 240, 211, 83, 289, 333, 593, 11, NA, NA, 0, NA,
-134, 488</td>
-<td align="left">0.28, 0.05, 0.07, 0.13, 0.26, 0.23, 0.19, 0.21, 0.31,
-0.73, 0.75, 0.66, 0.09, 0.34, 0.03, 0.07</td>
-</tr>
-<tr class="odd">
-<td align="right">2015</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">15</td>
-<td align="right">191</td>
-<td align="right">287</td>
-<td align="right">46296</td>
-<td align="right">12456.78</td>
-<td align="right">8248.40</td>
-<td align="right">9939.89</td>
-<td align="right">1.3927</td>
-<td align="left">15.00, 191.00, 287.00, 46296.00, 12456.78, 8248.40,
-9939.89</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">75, 20, 67, 71, 33, 91, 100, NA, NA, NA, NA, NA, NA,
-44, 147</td>
-<td align="left">0.32, 0.06, 0.12, 0.11, 0.39, 0.29, 0.23, 0.24, 0.41,
-0.75, 0.75, 0.72, 0.12, 0.40, 0.07, 0.06</td>
-</tr>
-<tr class="even">
-<td align="right">2016</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">11</td>
-<td align="right">34</td>
-<td align="right">48</td>
-<td align="right">17218</td>
-<td align="right">3375.55</td>
-<td align="right">2689.55</td>
-<td align="right">2662.61</td>
-<td align="right">2.4020</td>
-<td align="left">11.00, 34.00, 48.00, 17218.00, 3375.55, 2689.55,
-2662.61</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">76, NA, NA, 13, NA, 17, 17, NA, NA, NA, NA, NA, NA, NA,
-NA</td>
-<td align="left">0.47, NA, NA, NA, 0.75, 0.75, 0.41, 0.44, 0.56, 0.75,
-0.75, 0.75, NA, 0.44, NA, NA</td>
-</tr>
-<tr class="odd">
-<td align="right">2017</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">16</td>
-<td align="right">57</td>
-<td align="right">139</td>
-<td align="right">30639</td>
-<td align="right">12761.97</td>
-<td align="right">10168.26</td>
-<td align="right">10294.04</td>
-<td align="right">1.7315</td>
-<td align="left">16.00, 57.00, 139.00, 30639.00, 12761.97, 10168.26,
-10294.04</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">76, NA, NA, 18, 15, 25, 32, NA, NA, NA, NA, NA, NA, 33,
-24</td>
-<td align="left">0.23, 0.33, NA, 0.21, 0.56, 0.53, 0.53, 0.49, 0.44,
-0.63, 0.75, 0.56, NA, 0.35, NA, NA</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">21</td>
-<td align="right">203</td>
-<td align="right">727</td>
-<td align="right">146819</td>
-<td align="right">62682.72</td>
-<td align="right">48737.02</td>
-<td align="right">50191.31</td>
-<td align="right">1.6429</td>
-<td align="left">21.00, 203.00, 727.00, 146819.00, 62682.72, 48737.02,
-50191.31</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">77, 19, 56, 70, 58, 110, 93, NA, NA, NA, NA, NA, NA,
-105, 98</td>
-<td align="left">0.25, 0.28, 0.09, 0.09, 0.48, 0.48, 0.44, 0.44, 0.47,
-0.70, 0.75, 0.51, 0.10, 0.33, 0.08, 0.13</td>
-</tr>
-<tr class="odd">
-<td align="right">2019</td>
-<td align="left">1023076643</td>
-<td align="left">John</td>
-<td align="left">N</td>
-<td align="left">Henry</td>
-<td align="left">PAC</td>
-<td align="left">M</td>
-<td align="left">Individual</td>
-<td align="left">1 Medical Center Dr</td>
-<td align="left">Lebanon</td>
-<td align="left">NH</td>
-<td align="left">33</td>
-<td align="left">03756</td>
-<td align="left">4</td>
-<td align="left">US</td>
-<td align="left">Physician Assistant</td>
-<td align="left">TRUE</td>
-<td align="right">9</td>
-<td align="right">24</td>
-<td align="right">69</td>
-<td align="right">13813</td>
-<td align="right">6147.90</td>
-<td align="right">3095.02</td>
-<td align="right">3165.58</td>
-<td align="right">2.1367</td>
-<td align="left">9.00, 24.00, 69.00, 13813.00, 6147.90, 3095.02,
-3165.58</td>
-<td align="left">0, 0, 0, 0, 0, 0, 0</td>
-<td align="left">78, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,
-NA</td>
-<td align="left">NA, NA, 0.00, NA, 0.63, 0.46, NA, NA, NA, 0.50, 0.75,
-0.54, NA, NA, NA, NA</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="counts-amounts">Counts &amp; Amounts<a class="anchor" aria-label="anchor" href="#counts-amounts"></a>
 </h3>
@@ -459,7 +152,8 @@ NA</td>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_integer.html" class="external-link">fmt_integer</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">HCPCS</span>, <span class="va">Beneficiaries</span>, <span class="va">Services</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Charges</span>, <span class="va">Allowed</span>, <span class="va">Payment</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization Summary"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization"</span><span class="op">)</span>,</span>
+<span>             subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Counts &amp; Amounts, 2013-2019"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html" class="external-link">data_color</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Charges</span>, <span class="va">Allowed</span>, <span class="va">Payment</span><span class="op">)</span>,</span>
 <span>             method <span class="op">=</span> <span class="st">"numeric"</span>,</span>
 <span>             palette <span class="op">=</span> <span class="st">"Reds"</span>, </span>
@@ -469,24 +163,24 @@ NA</td>
 <span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-<div id="bjyncgfiyn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="hglqmlubmx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#bjyncgfiyn table {
+#hglqmlubmx table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bjyncgfiyn thead, #bjyncgfiyn tbody, #bjyncgfiyn tfoot, #bjyncgfiyn tr, #bjyncgfiyn td, #bjyncgfiyn th {
+#hglqmlubmx thead, #hglqmlubmx tbody, #hglqmlubmx tfoot, #hglqmlubmx tr, #hglqmlubmx td, #hglqmlubmx th {
   border-style: none;
 }
 
-#bjyncgfiyn p {
+#hglqmlubmx p {
   margin: 0;
   padding: 0;
 }
 
-#bjyncgfiyn .gt_table {
+#hglqmlubmx .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -512,12 +206,12 @@ NA</td>
   border-left-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_caption {
+#hglqmlubmx .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bjyncgfiyn .gt_title {
+#hglqmlubmx .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -529,7 +223,7 @@ NA</td>
   border-bottom-width: 0;
 }
 
-#bjyncgfiyn .gt_subtitle {
+#hglqmlubmx .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -541,7 +235,7 @@ NA</td>
   border-top-width: 0;
 }
 
-#bjyncgfiyn .gt_heading {
+#hglqmlubmx .gt_heading {
   background-color: #000000;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -553,13 +247,13 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_bottom_border {
+#hglqmlubmx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_col_headings {
+#hglqmlubmx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -574,7 +268,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_col_heading {
+#hglqmlubmx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -594,7 +288,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#bjyncgfiyn .gt_column_spanner_outer {
+#hglqmlubmx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,15 +300,15 @@ NA</td>
   padding-right: 4px;
 }
 
-#bjyncgfiyn .gt_column_spanner_outer:first-child {
+#hglqmlubmx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bjyncgfiyn .gt_column_spanner_outer:last-child {
+#hglqmlubmx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bjyncgfiyn .gt_column_spanner {
+#hglqmlubmx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -626,11 +320,11 @@ NA</td>
   width: 100%;
 }
 
-#bjyncgfiyn .gt_spanner_row {
+#hglqmlubmx .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bjyncgfiyn .gt_group_heading {
+#hglqmlubmx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +350,7 @@ NA</td>
   text-align: left;
 }
 
-#bjyncgfiyn .gt_empty_group_heading {
+#hglqmlubmx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -671,15 +365,15 @@ NA</td>
   vertical-align: middle;
 }
 
-#bjyncgfiyn .gt_from_md > :first-child {
+#hglqmlubmx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bjyncgfiyn .gt_from_md > :last-child {
+#hglqmlubmx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bjyncgfiyn .gt_row {
+#hglqmlubmx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -698,7 +392,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#bjyncgfiyn .gt_stub {
+#hglqmlubmx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -711,7 +405,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#bjyncgfiyn .gt_stub_row_group {
+#hglqmlubmx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -725,15 +419,15 @@ NA</td>
   vertical-align: top;
 }
 
-#bjyncgfiyn .gt_row_group_first td {
+#hglqmlubmx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bjyncgfiyn .gt_row_group_first th {
+#hglqmlubmx .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bjyncgfiyn .gt_summary_row {
+#hglqmlubmx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -743,16 +437,16 @@ NA</td>
   padding-right: 5px;
 }
 
-#bjyncgfiyn .gt_first_summary_row {
+#hglqmlubmx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_first_summary_row.thick {
+#hglqmlubmx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bjyncgfiyn .gt_last_summary_row {
+#hglqmlubmx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -762,7 +456,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_grand_summary_row {
+#hglqmlubmx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -772,7 +466,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#bjyncgfiyn .gt_first_grand_summary_row {
+#hglqmlubmx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -782,7 +476,7 @@ NA</td>
   border-top-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_last_grand_summary_row_top {
+#hglqmlubmx .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -792,11 +486,11 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_striped {
+#hglqmlubmx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bjyncgfiyn .gt_table_body {
+#hglqmlubmx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -805,7 +499,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_footnotes {
+#hglqmlubmx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -819,7 +513,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_footnote {
+#hglqmlubmx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -828,7 +522,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#bjyncgfiyn .gt_sourcenotes {
+#hglqmlubmx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -842,7 +536,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#bjyncgfiyn .gt_sourcenote {
+#hglqmlubmx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -850,71 +544,74 @@ NA</td>
   padding-right: 5px;
 }
 
-#bjyncgfiyn .gt_left {
+#hglqmlubmx .gt_left {
   text-align: left;
 }
 
-#bjyncgfiyn .gt_center {
+#hglqmlubmx .gt_center {
   text-align: center;
 }
 
-#bjyncgfiyn .gt_right {
+#hglqmlubmx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bjyncgfiyn .gt_font_normal {
+#hglqmlubmx .gt_font_normal {
   font-weight: normal;
 }
 
-#bjyncgfiyn .gt_font_bold {
+#hglqmlubmx .gt_font_bold {
   font-weight: bold;
 }
 
-#bjyncgfiyn .gt_font_italic {
+#hglqmlubmx .gt_font_italic {
   font-style: italic;
 }
 
-#bjyncgfiyn .gt_super {
+#hglqmlubmx .gt_super {
   font-size: 65%;
 }
 
-#bjyncgfiyn .gt_footnote_marks {
+#hglqmlubmx .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bjyncgfiyn .gt_asterisk {
+#hglqmlubmx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bjyncgfiyn .gt_indent_1 {
+#hglqmlubmx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bjyncgfiyn .gt_indent_2 {
+#hglqmlubmx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bjyncgfiyn .gt_indent_3 {
+#hglqmlubmx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bjyncgfiyn .gt_indent_4 {
+#hglqmlubmx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bjyncgfiyn .gt_indent_5 {
+#hglqmlubmx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>Medicare Part B</strong> Utilization Summary</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>
+<strong>Medicare Part B</strong> Utilization</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Counts &amp; Amounts, 2013-2019</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
@@ -1005,7 +702,7 @@ NA</td>
 <p><br></p>
 </div>
 <div class="section level3">
-<h3 id="absolute-relative-yearly-changes">Absolute &amp; Relative Yearly Changes<a class="anchor" aria-label="anchor" href="#absolute-relative-yearly-changes"></a>
+<h3 id="year-over-year-percentage-change">Year-Over-Year Percentage Change<a class="anchor" aria-label="anchor" href="#year-over-year-percentage-change"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, </span>
@@ -1033,30 +730,31 @@ NA</td>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span><span class="va">Services</span>, <span class="va">Services_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_merge_n_pct.html" class="external-link">cols_merge_n_pct</a></span><span class="op">(</span><span class="va">Payment</span>, <span class="va">Payment_pct</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization YOY Changes"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization"</span><span class="op">)</span>,</span>
+<span>             subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Year-Over-Year Percentage Changes, 2013-2019"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">75</span><span class="op">)</span>,</span>
 <span>              column_labels.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-<div id="pcxukkuqzn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="aoewghnhkr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pcxukkuqzn table {
+#aoewghnhkr table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pcxukkuqzn thead, #pcxukkuqzn tbody, #pcxukkuqzn tfoot, #pcxukkuqzn tr, #pcxukkuqzn td, #pcxukkuqzn th {
+#aoewghnhkr thead, #aoewghnhkr tbody, #aoewghnhkr tfoot, #aoewghnhkr tr, #aoewghnhkr td, #aoewghnhkr th {
   border-style: none;
 }
 
-#pcxukkuqzn p {
+#aoewghnhkr p {
   margin: 0;
   padding: 0;
 }
 
-#pcxukkuqzn .gt_table {
+#aoewghnhkr .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -1082,12 +780,12 @@ NA</td>
   border-left-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_caption {
+#aoewghnhkr .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pcxukkuqzn .gt_title {
+#aoewghnhkr .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -1099,7 +797,7 @@ NA</td>
   border-bottom-width: 0;
 }
 
-#pcxukkuqzn .gt_subtitle {
+#aoewghnhkr .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -1111,7 +809,7 @@ NA</td>
   border-top-width: 0;
 }
 
-#pcxukkuqzn .gt_heading {
+#aoewghnhkr .gt_heading {
   background-color: #000000;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -1123,13 +821,13 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_bottom_border {
+#aoewghnhkr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_col_headings {
+#aoewghnhkr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1144,7 +842,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_col_heading {
+#aoewghnhkr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1164,7 +862,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#pcxukkuqzn .gt_column_spanner_outer {
+#aoewghnhkr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1176,15 +874,15 @@ NA</td>
   padding-right: 4px;
 }
 
-#pcxukkuqzn .gt_column_spanner_outer:first-child {
+#aoewghnhkr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pcxukkuqzn .gt_column_spanner_outer:last-child {
+#aoewghnhkr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pcxukkuqzn .gt_column_spanner {
+#aoewghnhkr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1196,11 +894,11 @@ NA</td>
   width: 100%;
 }
 
-#pcxukkuqzn .gt_spanner_row {
+#aoewghnhkr .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pcxukkuqzn .gt_group_heading {
+#aoewghnhkr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1226,7 +924,7 @@ NA</td>
   text-align: left;
 }
 
-#pcxukkuqzn .gt_empty_group_heading {
+#aoewghnhkr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1241,15 +939,15 @@ NA</td>
   vertical-align: middle;
 }
 
-#pcxukkuqzn .gt_from_md > :first-child {
+#aoewghnhkr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pcxukkuqzn .gt_from_md > :last-child {
+#aoewghnhkr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pcxukkuqzn .gt_row {
+#aoewghnhkr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1268,7 +966,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#pcxukkuqzn .gt_stub {
+#aoewghnhkr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1281,7 +979,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#pcxukkuqzn .gt_stub_row_group {
+#aoewghnhkr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1295,15 +993,15 @@ NA</td>
   vertical-align: top;
 }
 
-#pcxukkuqzn .gt_row_group_first td {
+#aoewghnhkr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pcxukkuqzn .gt_row_group_first th {
+#aoewghnhkr .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pcxukkuqzn .gt_summary_row {
+#aoewghnhkr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1313,16 +1011,16 @@ NA</td>
   padding-right: 5px;
 }
 
-#pcxukkuqzn .gt_first_summary_row {
+#aoewghnhkr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_first_summary_row.thick {
+#aoewghnhkr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pcxukkuqzn .gt_last_summary_row {
+#aoewghnhkr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1332,7 +1030,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_grand_summary_row {
+#aoewghnhkr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1342,7 +1040,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#pcxukkuqzn .gt_first_grand_summary_row {
+#aoewghnhkr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1352,7 +1050,7 @@ NA</td>
   border-top-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_last_grand_summary_row_top {
+#aoewghnhkr .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1362,11 +1060,11 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_striped {
+#aoewghnhkr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pcxukkuqzn .gt_table_body {
+#aoewghnhkr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1375,7 +1073,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_footnotes {
+#aoewghnhkr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1389,7 +1087,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_footnote {
+#aoewghnhkr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1398,7 +1096,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#pcxukkuqzn .gt_sourcenotes {
+#aoewghnhkr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1412,7 +1110,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#pcxukkuqzn .gt_sourcenote {
+#aoewghnhkr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1420,71 +1118,74 @@ NA</td>
   padding-right: 5px;
 }
 
-#pcxukkuqzn .gt_left {
+#aoewghnhkr .gt_left {
   text-align: left;
 }
 
-#pcxukkuqzn .gt_center {
+#aoewghnhkr .gt_center {
   text-align: center;
 }
 
-#pcxukkuqzn .gt_right {
+#aoewghnhkr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pcxukkuqzn .gt_font_normal {
+#aoewghnhkr .gt_font_normal {
   font-weight: normal;
 }
 
-#pcxukkuqzn .gt_font_bold {
+#aoewghnhkr .gt_font_bold {
   font-weight: bold;
 }
 
-#pcxukkuqzn .gt_font_italic {
+#aoewghnhkr .gt_font_italic {
   font-style: italic;
 }
 
-#pcxukkuqzn .gt_super {
+#aoewghnhkr .gt_super {
   font-size: 65%;
 }
 
-#pcxukkuqzn .gt_footnote_marks {
+#aoewghnhkr .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pcxukkuqzn .gt_asterisk {
+#aoewghnhkr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pcxukkuqzn .gt_indent_1 {
+#aoewghnhkr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pcxukkuqzn .gt_indent_2 {
+#aoewghnhkr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pcxukkuqzn .gt_indent_3 {
+#aoewghnhkr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pcxukkuqzn .gt_indent_4 {
+#aoewghnhkr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pcxukkuqzn .gt_indent_5 {
+#aoewghnhkr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>Medicare Part B</strong> Utilization YOY Changes</td>
+<td colspan="4" class="gt_heading gt_title gt_font_normal" style>
+<strong>Medicare Part B</strong> Utilization</td>
+    </tr>
+<tr class="gt_heading">
+<td colspan="4" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Year-Over-Year Percentage Changes, 2013-2019</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
@@ -1548,1051 +1249,113 @@ NA</td>
 <p><br></p>
 </div>
 <div class="section level3">
-<h3 id="chronic-condition-prevalence">Chronic Condition Prevalence<a class="anchor" aria-label="anchor" href="#chronic-condition-prevalence"></a>
+<h3 id="trends">Trends<a class="anchor" aria-label="anchor" href="#trends"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">chronic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_conditions.html">compare_conditions</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">chronic</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">level</span>, </span>
-<span>              values_from <span class="op">=</span> <span class="va">prevalence</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">condition</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>groupname_col <span class="op">=</span> <span class="st">"condition"</span>, rowname_col <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html" class="external-link">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Provider</span>, <span class="va">State</span>, <span class="va">National</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">df</span>, </span>
+<span>       <span class="va">year</span>, </span>
+<span>       HCPCS <span class="op">=</span> <span class="va">tot_hcpcs</span>,</span>
+<span>       Beneficiaries <span class="op">=</span> <span class="va">tot_benes</span>,</span>
+<span>       Services <span class="op">=</span> <span class="va">tot_srvcs</span>,</span>
+<span>       Charges <span class="op">=</span> <span class="va">tot_charges</span>,</span>
+<span>       Allowed <span class="op">=</span> <span class="va">tot_allowed</span>,</span>
+<span>       Payment <span class="op">=</span> <span class="va">tot_payment</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html" class="external-link">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">HCPCS</span>, </span>
+<span>                        <span class="va">Beneficiaries</span>, </span>
+<span>                        <span class="va">Services</span>, </span>
+<span>                        <span class="va">Charges</span>, </span>
+<span>                        <span class="va">Allowed</span>, </span>
+<span>                        <span class="va">Payment</span><span class="op">)</span>, </span>
+<span>               names_to <span class="op">=</span> <span class="st">"Type"</span>, </span>
+<span>               values_to <span class="op">=</span> <span class="st">"Amount"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="va">year</span>, </span>
+<span>              values_from <span class="op">=</span> <span class="va">Amount</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"Type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_stubhead.html" class="external-link">tab_stubhead</a></span><span class="op">(</span>label <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Measures**"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_hide.html" class="external-link">cols_hide</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">matches</a></span><span class="op">(</span><span class="st">"2014|2015|2016|2017|2018"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">cols_nanoplot</span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"20"</span><span class="op">)</span>,</span>
+<span>    new_col_name <span class="op">=</span> <span class="st">"nanoplots"</span>,</span>
+<span>    new_col_label <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"*TREND*"</span><span class="op">)</span>,</span>
+<span>    reference_line <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>    height <span class="op">=</span> <span class="st">"3em"</span>,</span>
+<span>    options <span class="op">=</span> <span class="fu">nanoplot_options</span><span class="op">(</span></span>
+<span>      data_line_stroke_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>      show_reference_line <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      show_reference_area <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Chronic Conditions** Prevalence"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html" class="external-link">data_color</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Provider</span>, <span class="va">State</span>, <span class="va">National</span><span class="op">)</span>,</span>
-<span>             direction <span class="op">=</span> <span class="st">"row"</span>,</span>
-<span>             method <span class="op">=</span> <span class="st">"numeric"</span>,</span>
-<span>             palette <span class="op">=</span> <span class="st">"Reds"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">85</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization"</span><span class="op">)</span>,</span>
+<span>             subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"Trends, 2013-2019"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_horizontal_padding.html" class="external-link">opt_horizontal_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>,</span>
 <span>              column_labels.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
-<span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-<div id="iaavzlwllc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#iaavzlwllc table {
-  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#iaavzlwllc thead, #iaavzlwllc tbody, #iaavzlwllc tfoot, #iaavzlwllc tr, #iaavzlwllc td, #iaavzlwllc th {
-  border-style: none;
-}
-
-#iaavzlwllc p {
-  margin: 0;
-  padding: 0;
-}
-
-#iaavzlwllc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: 85%;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#iaavzlwllc .gt_title {
-  color: #FFFFFF;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#iaavzlwllc .gt_subtitle {
-  color: #FFFFFF;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#iaavzlwllc .gt_heading {
-  background-color: #000000;
-  text-align: left;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#iaavzlwllc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#iaavzlwllc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#iaavzlwllc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#iaavzlwllc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#iaavzlwllc .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#iaavzlwllc .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#iaavzlwllc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: bold;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#iaavzlwllc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#iaavzlwllc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#iaavzlwllc .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#iaavzlwllc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iaavzlwllc .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#iaavzlwllc .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#iaavzlwllc .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#iaavzlwllc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iaavzlwllc .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#iaavzlwllc .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iaavzlwllc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#iaavzlwllc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iaavzlwllc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#iaavzlwllc .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#iaavzlwllc .gt_left {
-  text-align: left;
-}
-
-#iaavzlwllc .gt_center {
-  text-align: center;
-}
-
-#iaavzlwllc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#iaavzlwllc .gt_font_normal {
-  font-weight: normal;
-}
-
-#iaavzlwllc .gt_font_bold {
-  font-weight: bold;
-}
-
-#iaavzlwllc .gt_font_italic {
-  font-style: italic;
-}
-
-#iaavzlwllc .gt_super {
-  font-size: 65%;
-}
-
-#iaavzlwllc .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#iaavzlwllc .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#iaavzlwllc .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#iaavzlwllc .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#iaavzlwllc .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#iaavzlwllc .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#iaavzlwllc .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_heading">
-<td colspan="4" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>Chronic Conditions</strong> Prevalence</td>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Provider">Provider</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="State">State</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="National">National</th>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Alzheimer's Disease/Dementia">Alzheimer's Disease/Dementia</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_1" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Alzheimer's Disease/Dementia stub_1_1 Provider" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">6.00%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_1 State" class="gt_row gt_right" style="background-color: #6C010E; color: #FFFFFF;">10.49%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_1 National" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">10.54%</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Alzheimer's Disease/Dementia stub_1_2 Provider" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.00%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_2 State" class="gt_row gt_right" style="background-color: #AE1117; color: #FFFFFF;">9.48%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_2 National" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">10.31%</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Alzheimer's Disease/Dementia stub_1_3 Provider" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">6.00%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_3 State" class="gt_row gt_right" style="background-color: #C5171C; color: #FFFFFF;">9.31%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_3 National" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">10.31%</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Alzheimer's Disease/Dementia stub_1_4 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">33.00%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_4 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">9.21%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_4 National" class="gt_row gt_right" style="background-color: #FFEAE0; color: #000000;">10.82%</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Alzheimer's Disease/Dementia stub_1_5 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">28.00%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_5 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">9.13%</td>
-<td headers="Alzheimer's Disease/Dementia stub_1_5 National" class="gt_row gt_right" style="background-color: #FEE6DB; color: #000000;">10.78%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Arthritis">Arthritis</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_6" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Arthritis stub_1_6 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">33.00%</td>
-<td headers="Arthritis stub_1_6 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">27.48%</td>
-<td headers="Arthritis stub_1_6 National" class="gt_row gt_right" style="background-color: #FC7C5B; color: #FFFFFF;">29.94%</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Arthritis stub_1_7 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">34.00%</td>
-<td headers="Arthritis stub_1_7 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">26.53%</td>
-<td headers="Arthritis stub_1_7 National" class="gt_row gt_right" style="background-color: #FB6C4C; color: #FFFFFF;">30.22%</td>
-</tr>
-<tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Arthritis stub_1_8 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">40.00%</td>
-<td headers="Arthritis stub_1_8 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">27.34%</td>
-<td headers="Arthritis stub_1_8 National" class="gt_row gt_right" style="background-color: #FDAF93; color: #000000;">30.98%</td>
-</tr>
-<tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Arthritis stub_1_9 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">44.00%</td>
-<td headers="Arthritis stub_1_9 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">28.35%</td>
-<td headers="Arthritis stub_1_9 National" class="gt_row gt_right" style="background-color: #FCBAA0; color: #000000;">32.29%</td>
-</tr>
-<tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Arthritis stub_1_10 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">35.00%</td>
-<td headers="Arthritis stub_1_10 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">29.14%</td>
-<td headers="Arthritis stub_1_10 National" class="gt_row gt_right" style="background-color: #E43227; color: #FFFFFF;">33.02%</td>
-</tr>
-<tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Arthritis stub_1_11 Provider" class="gt_row gt_right" style="background-color: #A60F15; color: #FFFFFF;">33.00%</td>
-<td headers="Arthritis stub_1_11 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">29.84%</td>
-<td headers="Arthritis stub_1_11 National" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">33.47%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Asthma">Asthma</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_12" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Asthma stub_1_12 Provider" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.00%</td>
-<td headers="Asthma stub_1_12 State" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">6.29%</td>
-<td headers="Asthma stub_1_12 National" class="gt_row gt_right" style="background-color: #FEE5DA; color: #000000;">5.12%</td>
-</tr>
-<tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Asthma stub_1_13 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">7.00%</td>
-<td headers="Asthma stub_1_13 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.05%</td>
-<td headers="Asthma stub_1_13 National" class="gt_row gt_right" style="background-color: #FFEAE0; color: #000000;">5.18%</td>
-</tr>
-<tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Asthma stub_1_14 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">12.00%</td>
-<td headers="Asthma stub_1_14 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.11%</td>
-<td headers="Asthma stub_1_14 National" class="gt_row gt_right" style="background-color: #FFF1EA; color: #000000;">5.29%</td>
-</tr>
-<tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Asthma stub_1_15 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">9.00%</td>
-<td headers="Asthma stub_1_15 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">4.85%</td>
-<td headers="Asthma stub_1_15 National" class="gt_row gt_right" style="background-color: #FFF0E9; color: #000000;">4.97%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Atrial Fibrillation">Atrial Fibrillation</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_16" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Atrial Fibrillation stub_1_16 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">25.00%</td>
-<td headers="Atrial Fibrillation stub_1_16 State" class="gt_row gt_right" style="background-color: #FFE8DD; color: #000000;">9.43%</td>
-<td headers="Atrial Fibrillation stub_1_16 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.12%</td>
-</tr>
-<tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Atrial Fibrillation stub_1_17 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">28.00%</td>
-<td headers="Atrial Fibrillation stub_1_17 State" class="gt_row gt_right" style="background-color: #FFF1EA; color: #000000;">8.71%</td>
-<td headers="Atrial Fibrillation stub_1_17 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.22%</td>
-</tr>
-<tr>
-<th id="stub_1_18" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Atrial Fibrillation stub_1_18 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">32.00%</td>
-<td headers="Atrial Fibrillation stub_1_18 State" class="gt_row gt_right" style="background-color: #FFF2EC; color: #000000;">8.77%</td>
-<td headers="Atrial Fibrillation stub_1_18 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.34%</td>
-</tr>
-<tr>
-<th id="stub_1_19" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Atrial Fibrillation stub_1_19 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">47.00%</td>
-<td headers="Atrial Fibrillation stub_1_19 State" class="gt_row gt_right" style="background-color: #FFF3ED; color: #000000;">8.82%</td>
-<td headers="Atrial Fibrillation stub_1_19 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.29%</td>
-</tr>
-<tr>
-<th id="stub_1_20" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Atrial Fibrillation stub_1_20 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">23.00%</td>
-<td headers="Atrial Fibrillation stub_1_20 State" class="gt_row gt_right" style="background-color: #FFEFE8; color: #000000;">8.84%</td>
-<td headers="Atrial Fibrillation stub_1_20 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.34%</td>
-</tr>
-<tr>
-<th id="stub_1_21" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Atrial Fibrillation stub_1_21 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">25.00%</td>
-<td headers="Atrial Fibrillation stub_1_21 State" class="gt_row gt_right" style="background-color: #FFF0E8; color: #000000;">8.93%</td>
-<td headers="Atrial Fibrillation stub_1_21 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.41%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="COPD">COPD</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_22" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="COPD stub_1_22 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">18.00%</td>
-<td headers="COPD stub_1_22 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.25%</td>
-<td headers="COPD stub_1_22 National" class="gt_row gt_right" style="background-color: #FED6C5; color: #000000;">11.47%</td>
-</tr>
-<tr>
-<th id="stub_1_23" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="COPD stub_1_23 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">19.00%</td>
-<td headers="COPD stub_1_23 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.40%</td>
-<td headers="COPD stub_1_23 National" class="gt_row gt_right" style="background-color: #FEE3D6; color: #000000;">11.33%</td>
-</tr>
-<tr>
-<th id="stub_1_24" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="COPD stub_1_24 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">23.00%</td>
-<td headers="COPD stub_1_24 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.53%</td>
-<td headers="COPD stub_1_24 National" class="gt_row gt_right" style="background-color: #FFE7DC; color: #000000;">11.55%</td>
-</tr>
-<tr>
-<th id="stub_1_25" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="COPD stub_1_25 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">41.00%</td>
-<td headers="COPD stub_1_25 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.44%</td>
-<td headers="COPD stub_1_25 National" class="gt_row gt_right" style="background-color: #FFEEE7; color: #000000;">11.64%</td>
-</tr>
-<tr>
-<th id="stub_1_26" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="COPD stub_1_26 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">53.00%</td>
-<td headers="COPD stub_1_26 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.57%</td>
-<td headers="COPD stub_1_26 National" class="gt_row gt_right" style="background-color: #FFF1EA; color: #000000;">11.68%</td>
-</tr>
-<tr>
-<th id="stub_1_27" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="COPD stub_1_27 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">44.00%</td>
-<td headers="COPD stub_1_27 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.32%</td>
-<td headers="COPD stub_1_27 National" class="gt_row gt_right" style="background-color: #FFEFE8; color: #000000;">11.47%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Cancer">Cancer</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_28" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Cancer stub_1_28 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">13.00%</td>
-<td headers="Cancer stub_1_28 State" class="gt_row gt_right" style="background-color: #FECDB9; color: #000000;">8.97%</td>
-<td headers="Cancer stub_1_28 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">8.03%</td>
-</tr>
-<tr>
-<th id="stub_1_29" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Cancer stub_1_29 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">13.00%</td>
-<td headers="Cancer stub_1_29 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">7.76%</td>
-<td headers="Cancer stub_1_29 National" class="gt_row gt_right" style="background-color: #FFEEE6; color: #000000;">7.98%</td>
-</tr>
-<tr>
-<th id="stub_1_30" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Cancer stub_1_30 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">11.00%</td>
-<td headers="Cancer stub_1_30 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">7.65%</td>
-<td headers="Cancer stub_1_30 National" class="gt_row gt_right" style="background-color: #FEE2D5; color: #000000;">8.03%</td>
-</tr>
-<tr>
-<th id="stub_1_31" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Cancer stub_1_31 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">21.00%</td>
-<td headers="Cancer stub_1_31 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">7.79%</td>
-<td headers="Cancer stub_1_31 National" class="gt_row gt_right" style="background-color: #FFF0E8; color: #000000;">8.22%</td>
-</tr>
-<tr>
-<th id="stub_1_32" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Cancer stub_1_32 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">9.00%</td>
-<td headers="Cancer stub_1_32 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">7.94%</td>
-<td headers="Cancer stub_1_32 National" class="gt_row gt_right" style="background-color: #FC8C6B; color: #000000;">8.36%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Chronic Kidney Disease">Chronic Kidney Disease</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_33" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Chronic Kidney Disease stub_1_33 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">27.00%</td>
-<td headers="Chronic Kidney Disease stub_1_33 State" class="gt_row gt_right" style="background-color: #FFEEE6; color: #000000;">16.83%</td>
-<td headers="Chronic Kidney Disease stub_1_33 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">16.41%</td>
-</tr>
-<tr>
-<th id="stub_1_34" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Chronic Kidney Disease stub_1_34 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">23.00%</td>
-<td headers="Chronic Kidney Disease stub_1_34 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">14.19%</td>
-<td headers="Chronic Kidney Disease stub_1_34 National" class="gt_row gt_right" style="background-color: #FDA587; color: #000000;">16.99%</td>
-</tr>
-<tr>
-<th id="stub_1_35" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Chronic Kidney Disease stub_1_35 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">29.00%</td>
-<td headers="Chronic Kidney Disease stub_1_35 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">14.99%</td>
-<td headers="Chronic Kidney Disease stub_1_35 National" class="gt_row gt_right" style="background-color: #FCB69B; color: #000000;">18.70%</td>
-</tr>
-<tr>
-<th id="stub_1_36" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Chronic Kidney Disease stub_1_36 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Chronic Kidney Disease stub_1_36 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">17.30%</td>
-<td headers="Chronic Kidney Disease stub_1_36 National" class="gt_row gt_right" style="background-color: #FFE6DB; color: #000000;">22.32%</td>
-</tr>
-<tr>
-<th id="stub_1_37" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Chronic Kidney Disease stub_1_37 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">53.00%</td>
-<td headers="Chronic Kidney Disease stub_1_37 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">18.60%</td>
-<td headers="Chronic Kidney Disease stub_1_37 National" class="gt_row gt_right" style="background-color: #FED7C6; color: #000000;">23.96%</td>
-</tr>
-<tr>
-<th id="stub_1_38" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Chronic Kidney Disease stub_1_38 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">48.00%</td>
-<td headers="Chronic Kidney Disease stub_1_38 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">19.04%</td>
-<td headers="Chronic Kidney Disease stub_1_38 National" class="gt_row gt_right" style="background-color: #FECDB9; color: #000000;">24.48%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Depression">Depression</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_39" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Depression stub_1_39 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">23.00%</td>
-<td headers="Depression stub_1_39 State" class="gt_row gt_right" style="background-color: #D82622; color: #FFFFFF;">21.00%</td>
-<td headers="Depression stub_1_39 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">16.22%</td>
-</tr>
-<tr>
-<th id="stub_1_40" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Depression stub_1_40 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">21.00%</td>
-<td headers="Depression stub_1_40 State" class="gt_row gt_right" style="background-color: #ED392B; color: #FFFFFF;">19.43%</td>
-<td headers="Depression stub_1_40 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">16.72%</td>
-</tr>
-<tr>
-<th id="stub_1_41" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Depression stub_1_41 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">24.00%</td>
-<td headers="Depression stub_1_41 State" class="gt_row gt_right" style="background-color: #FDA284; color: #000000;">19.57%</td>
-<td headers="Depression stub_1_41 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">17.41%</td>
-</tr>
-<tr>
-<th id="stub_1_42" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Depression stub_1_42 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">44.00%</td>
-<td headers="Depression stub_1_42 State" class="gt_row gt_right" style="background-color: #FFEAE1; color: #000000;">19.06%</td>
-<td headers="Depression stub_1_42 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">17.40%</td>
-</tr>
-<tr>
-<th id="stub_1_43" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Depression stub_1_43 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">49.00%</td>
-<td headers="Depression stub_1_43 State" class="gt_row gt_right" style="background-color: #FFEDE5; color: #000000;">19.34%</td>
-<td headers="Depression stub_1_43 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">17.92%</td>
-</tr>
-<tr>
-<th id="stub_1_44" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Depression stub_1_44 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">44.00%</td>
-<td headers="Depression stub_1_44 State" class="gt_row gt_right" style="background-color: #FFEDE5; color: #000000;">19.57%</td>
-<td headers="Depression stub_1_44 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">18.40%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Diabetes">Diabetes</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_45" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Diabetes stub_1_45 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">38.00%</td>
-<td headers="Diabetes stub_1_45 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">24.30%</td>
-<td headers="Diabetes stub_1_45 National" class="gt_row gt_right" style="background-color: #FCBFA6; color: #000000;">27.54%</td>
-</tr>
-<tr>
-<th id="stub_1_46" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Diabetes stub_1_46 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">31.00%</td>
-<td headers="Diabetes stub_1_46 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">22.44%</td>
-<td headers="Diabetes stub_1_46 National" class="gt_row gt_right" style="background-color: #F34D36; color: #FFFFFF;">27.43%</td>
-</tr>
-<tr>
-<th id="stub_1_47" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Diabetes stub_1_47 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">41.00%</td>
-<td headers="Diabetes stub_1_47 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">22.23%</td>
-<td headers="Diabetes stub_1_47 National" class="gt_row gt_right" style="background-color: #FCB398; color: #000000;">27.36%</td>
-</tr>
-<tr>
-<th id="stub_1_48" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Diabetes stub_1_48 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">56.00%</td>
-<td headers="Diabetes stub_1_48 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">22.09%</td>
-<td headers="Diabetes stub_1_48 National" class="gt_row gt_right" style="background-color: #FED7C6; color: #000000;">27.33%</td>
-</tr>
-<tr>
-<th id="stub_1_49" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Diabetes stub_1_49 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">44.00%</td>
-<td headers="Diabetes stub_1_49 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">21.86%</td>
-<td headers="Diabetes stub_1_49 National" class="gt_row gt_right" style="background-color: #FCBEA4; color: #000000;">27.20%</td>
-</tr>
-<tr>
-<th id="stub_1_50" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Diabetes stub_1_50 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">47.00%</td>
-<td headers="Diabetes stub_1_50 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">21.54%</td>
-<td headers="Diabetes stub_1_50 National" class="gt_row gt_right" style="background-color: #FDC6B0; color: #000000;">26.95%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Heart Failure">Heart Failure</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_51" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Heart Failure stub_1_51 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">29.00%</td>
-<td headers="Heart Failure stub_1_51 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">13.16%</td>
-<td headers="Heart Failure stub_1_51 National" class="gt_row gt_right" style="background-color: #FFE8DD; color: #000000;">14.42%</td>
-</tr>
-<tr>
-<th id="stub_1_52" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Heart Failure stub_1_52 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">26.00%</td>
-<td headers="Heart Failure stub_1_52 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.49%</td>
-<td headers="Heart Failure stub_1_52 National" class="gt_row gt_right" style="background-color: #FDC1A9; color: #000000;">14.05%</td>
-</tr>
-<tr>
-<th id="stub_1_53" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Heart Failure stub_1_53 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">39.00%</td>
-<td headers="Heart Failure stub_1_53 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.58%</td>
-<td headers="Heart Failure stub_1_53 National" class="gt_row gt_right" style="background-color: #FEE1D4; color: #000000;">13.90%</td>
-</tr>
-<tr>
-<th id="stub_1_54" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Heart Failure stub_1_54 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Heart Failure stub_1_54 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.47%</td>
-<td headers="Heart Failure stub_1_54 National" class="gt_row gt_right" style="background-color: #FFECE3; color: #000000;">13.85%</td>
-</tr>
-<tr>
-<th id="stub_1_55" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Heart Failure stub_1_55 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">56.00%</td>
-<td headers="Heart Failure stub_1_55 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.48%</td>
-<td headers="Heart Failure stub_1_55 National" class="gt_row gt_right" style="background-color: #FFE9DE; color: #000000;">13.85%</td>
-</tr>
-<tr>
-<th id="stub_1_56" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Heart Failure stub_1_56 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">48.00%</td>
-<td headers="Heart Failure stub_1_56 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">10.84%</td>
-<td headers="Heart Failure stub_1_56 National" class="gt_row gt_right" style="background-color: #FFE7DC; color: #000000;">13.95%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Hyperlipidemia">Hyperlipidemia</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_57" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Hyperlipidemia stub_1_57 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hyperlipidemia stub_1_57 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">45.67%</td>
-<td headers="Hyperlipidemia stub_1_57 National" class="gt_row gt_right" style="background-color: #FFF3ED; color: #000000;">46.02%</td>
-</tr>
-<tr>
-<th id="stub_1_58" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Hyperlipidemia stub_1_58 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">73.00%</td>
-<td headers="Hyperlipidemia stub_1_58 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">43.62%</td>
-<td headers="Hyperlipidemia stub_1_58 National" class="gt_row gt_right" style="background-color: #FFE8DE; color: #000000;">45.87%</td>
-</tr>
-<tr>
-<th id="stub_1_59" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Hyperlipidemia stub_1_59 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hyperlipidemia stub_1_59 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">41.89%</td>
-<td headers="Hyperlipidemia stub_1_59 National" class="gt_row gt_right" style="background-color: #FEE1D3; color: #000000;">45.89%</td>
-</tr>
-<tr>
-<th id="stub_1_60" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Hyperlipidemia stub_1_60 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hyperlipidemia stub_1_60 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">40.41%</td>
-<td headers="Hyperlipidemia stub_1_60 National" class="gt_row gt_right" style="background-color: #FEDDCE; color: #000000;">45.08%</td>
-</tr>
-<tr>
-<th id="stub_1_61" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Hyperlipidemia stub_1_61 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">63.00%</td>
-<td headers="Hyperlipidemia stub_1_61 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">42.44%</td>
-<td headers="Hyperlipidemia stub_1_61 National" class="gt_row gt_right" style="background-color: #FDC4AD; color: #000000;">46.92%</td>
-</tr>
-<tr>
-<th id="stub_1_62" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Hyperlipidemia stub_1_62 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">70.00%</td>
-<td headers="Hyperlipidemia stub_1_62 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">42.49%</td>
-<td headers="Hyperlipidemia stub_1_62 National" class="gt_row gt_right" style="background-color: #FECDB9; color: #000000;">47.66%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Hypertension">Hypertension</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_63" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Hypertension stub_1_63 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_63 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">55.94%</td>
-<td headers="Hypertension stub_1_63 National" class="gt_row gt_right" style="background-color: #FFEDE5; color: #000000;">56.79%</td>
-</tr>
-<tr>
-<th id="stub_1_64" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Hypertension stub_1_64 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_64 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">50.24%</td>
-<td headers="Hypertension stub_1_64 National" class="gt_row gt_right" style="background-color: #FCBA9F; color: #000000;">56.53%</td>
-</tr>
-<tr>
-<th id="stub_1_65" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Hypertension stub_1_65 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_65 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">49.08%</td>
-<td headers="Hypertension stub_1_65 National" class="gt_row gt_right" style="background-color: #FDAE92; color: #000000;">56.57%</td>
-</tr>
-<tr>
-<th id="stub_1_66" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Hypertension stub_1_66 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_66 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">49.30%</td>
-<td headers="Hypertension stub_1_66 National" class="gt_row gt_right" style="background-color: #FDAC8F; color: #000000;">56.94%</td>
-</tr>
-<tr>
-<th id="stub_1_67" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Hypertension stub_1_67 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_67 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">49.48%</td>
-<td headers="Hypertension stub_1_67 National" class="gt_row gt_right" style="background-color: #FDAC8F; color: #000000;">57.04%</td>
-</tr>
-<tr>
-<th id="stub_1_68" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Hypertension stub_1_68 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Hypertension stub_1_68 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">49.83%</td>
-<td headers="Hypertension stub_1_68 National" class="gt_row gt_right" style="background-color: #FDAD91; color: #000000;">57.20%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Ischemic Heart Disease">Ischemic Heart Disease</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_69" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Ischemic Heart Disease stub_1_69 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">70.00%</td>
-<td headers="Ischemic Heart Disease stub_1_69 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">24.72%</td>
-<td headers="Ischemic Heart Disease stub_1_69 National" class="gt_row gt_right" style="background-color: #FFE7DD; color: #000000;">28.38%</td>
-</tr>
-<tr>
-<th id="stub_1_70" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Ischemic Heart Disease stub_1_70 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">66.00%</td>
-<td headers="Ischemic Heart Disease stub_1_70 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">21.18%</td>
-<td headers="Ischemic Heart Disease stub_1_70 National" class="gt_row gt_right" style="background-color: #FEDACA; color: #000000;">27.69%</td>
-</tr>
-<tr>
-<th id="stub_1_71" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Ischemic Heart Disease stub_1_71 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">72.00%</td>
-<td headers="Ischemic Heart Disease stub_1_71 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">20.79%</td>
-<td headers="Ischemic Heart Disease stub_1_71 National" class="gt_row gt_right" style="background-color: #FEE0D2; color: #000000;">27.25%</td>
-</tr>
-<tr>
-<th id="stub_1_72" scope="row" class="gt_row gt_right gt_stub">2016</th>
-<td headers="Ischemic Heart Disease stub_1_72 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">75.00%</td>
-<td headers="Ischemic Heart Disease stub_1_72 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">20.86%</td>
-<td headers="Ischemic Heart Disease stub_1_72 National" class="gt_row gt_right" style="background-color: #FEE2D5; color: #000000;">27.04%</td>
-</tr>
-<tr>
-<th id="stub_1_73" scope="row" class="gt_row gt_right gt_stub">2017</th>
-<td headers="Ischemic Heart Disease stub_1_73 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">56.00%</td>
-<td headers="Ischemic Heart Disease stub_1_73 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">21.07%</td>
-<td headers="Ischemic Heart Disease stub_1_73 National" class="gt_row gt_right" style="background-color: #FED4C2; color: #000000;">26.86%</td>
-</tr>
-<tr>
-<th id="stub_1_74" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Ischemic Heart Disease stub_1_74 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">51.00%</td>
-<td headers="Ischemic Heart Disease stub_1_74 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">21.49%</td>
-<td headers="Ischemic Heart Disease stub_1_74 National" class="gt_row gt_right" style="background-color: #FED0BC; color: #000000;">26.81%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Osteoporosis">Osteoporosis</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_75" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Osteoporosis stub_1_75 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">10.00%</td>
-<td headers="Osteoporosis stub_1_75 State" class="gt_row gt_right" style="background-color: #FED4C2; color: #000000;">6.85%</td>
-<td headers="Osteoporosis stub_1_75 National" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">6.23%</td>
-</tr>
-<tr>
-<th id="stub_1_76" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Osteoporosis stub_1_76 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">9.00%</td>
-<td headers="Osteoporosis stub_1_76 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.64%</td>
-<td headers="Osteoporosis stub_1_76 National" class="gt_row gt_right" style="background-color: #FEDBCB; color: #000000;">6.12%</td>
-</tr>
-<tr>
-<th id="stub_1_77" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Osteoporosis stub_1_77 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">12.00%</td>
-<td headers="Osteoporosis stub_1_77 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.53%</td>
-<td headers="Osteoporosis stub_1_77 National" class="gt_row gt_right" style="background-color: #FEE4D8; color: #000000;">6.18%</td>
-</tr>
-<tr>
-<th id="stub_1_78" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Osteoporosis stub_1_78 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">10.00%</td>
-<td headers="Osteoporosis stub_1_78 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">5.61%</td>
-<td headers="Osteoporosis stub_1_78 National" class="gt_row gt_right" style="background-color: #FDC4AD; color: #000000;">6.57%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Schizophrenia and Other Psychotic Disorders">Schizophrenia and Other Psychotic Disorders</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_79" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_79 Provider" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">3.00%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_79 State" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">3.90%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_79 National" class="gt_row gt_right" style="background-color: #6C010E; color: #FFFFFF;">3.89%</td>
-</tr>
-<tr>
-<th id="stub_1_80" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_80 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">7.00%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_80 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">3.81%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_80 National" class="gt_row gt_right" style="background-color: #FFF4EF; color: #000000;">3.82%</td>
-</tr>
-<tr>
-<th id="stub_1_81" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_81 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">8.00%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_81 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">2.57%</td>
-<td headers="Schizophrenia and Other Psychotic Disorders stub_1_81 National" class="gt_row gt_right" style="background-color: #FFE9DF; color: #000000;">2.95%</td>
-</tr>
-<tr class="gt_group_heading_row">
-<th colspan="4" class="gt_group_heading" scope="colgroup" id="Stroke">Stroke</th>
-    </tr>
-<tr class="gt_row_group_first">
-<th id="stub_1_82" scope="row" class="gt_row gt_right gt_stub">2013</th>
-<td headers="Stroke stub_1_82 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">7.00%</td>
-<td headers="Stroke stub_1_82 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">3.57%</td>
-<td headers="Stroke stub_1_82 National" class="gt_row gt_right" style="background-color: #FFE8DE; color: #000000;">3.83%</td>
-</tr>
-<tr>
-<th id="stub_1_83" scope="row" class="gt_row gt_right gt_stub">2014</th>
-<td headers="Stroke stub_1_83 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">7.00%</td>
-<td headers="Stroke stub_1_83 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">3.07%</td>
-<td headers="Stroke stub_1_83 National" class="gt_row gt_right" style="background-color: #FECCB7; color: #000000;">3.83%</td>
-</tr>
-<tr>
-<th id="stub_1_84" scope="row" class="gt_row gt_right gt_stub">2015</th>
-<td headers="Stroke stub_1_84 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">6.00%</td>
-<td headers="Stroke stub_1_84 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">2.95%</td>
-<td headers="Stroke stub_1_84 National" class="gt_row gt_right" style="background-color: #FDB296; color: #000000;">3.80%</td>
-</tr>
-<tr>
-<th id="stub_1_85" scope="row" class="gt_row gt_right gt_stub">2018</th>
-<td headers="Stroke stub_1_85 Provider" class="gt_row gt_right" style="background-color: #67000D; color: #FFFFFF;">13.00%</td>
-<td headers="Stroke stub_1_85 State" class="gt_row gt_right" style="background-color: #FFF5F0; color: #000000;">3.05%</td>
-<td headers="Stroke stub_1_85 National" class="gt_row gt_right" style="background-color: #FFE9DF; color: #000000;">3.77%</td>
-</tr>
-</tbody>
-</table>
+<span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cols_nanoplot(cols_hide(tab_stubhead(gt(pivot_wider(pivot_longer(select(df, : could not find function "cols_nanoplot"</span></span></code></pre></div>
+<p><br></p>
 </div>
+<div class="section level3">
+<h3 id="chronic-condition-prevalence">Chronic Condition Prevalence<a class="anchor" aria-label="anchor" href="#chronic-condition-prevalence"></a>
+</h3>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">chronic</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/compare_conditions.html">compare_conditions</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">chronic</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span>names_from <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">level</span><span class="op">)</span>, </span>
+<span>              values_from <span class="op">=</span> <span class="va">prevalence</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">cols_nanoplot</span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"Provider"</span><span class="op">)</span>,</span>
+<span>    reference_line <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>    new_col_name <span class="op">=</span> <span class="st">"provider_plot"</span>,</span>
+<span>    new_col_label <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"*Provider*"</span><span class="op">)</span>,</span>
+<span>    missing_vals <span class="op">=</span> <span class="st">"remove"</span>,</span>
+<span>    height <span class="op">=</span> <span class="st">"3em"</span>,</span>
+<span>    options <span class="op">=</span> <span class="fu">nanoplot_options</span><span class="op">(</span></span>
+<span>      data_line_stroke_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>      show_reference_line <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      show_reference_area <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">cols_nanoplot</span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"State"</span><span class="op">)</span>,</span>
+<span>    reference_line <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>    new_col_name <span class="op">=</span> <span class="st">"state_plot"</span>,</span>
+<span>    new_col_label <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"*State*"</span><span class="op">)</span>,</span>
+<span>    missing_vals <span class="op">=</span> <span class="st">"remove"</span>,</span>
+<span>    height <span class="op">=</span> <span class="st">"3em"</span>,</span>
+<span>    options <span class="op">=</span> <span class="fu">nanoplot_options</span><span class="op">(</span></span>
+<span>      data_line_stroke_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>      show_reference_line <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      show_reference_area <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">cols_nanoplot</span><span class="op">(</span></span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"National"</span><span class="op">)</span>,</span>
+<span>    reference_line <span class="op">=</span> <span class="st">"mean"</span>,</span>
+<span>    new_col_name <span class="op">=</span> <span class="st">"national_plot"</span>,</span>
+<span>    new_col_label <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"*National*"</span><span class="op">)</span>,</span>
+<span>    missing_vals <span class="op">=</span> <span class="st">"remove"</span>,</span>
+<span>    height <span class="op">=</span> <span class="st">"3em"</span>,</span>
+<span>    options <span class="op">=</span> <span class="fu">nanoplot_options</span><span class="op">(</span></span>
+<span>      data_line_stroke_color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>      show_reference_line <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>      show_reference_area <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_hide.html" class="external-link">cols_hide</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"20"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Medicare Part B** Utilization"</span><span class="op">)</span>,</span>
+<span>             subtitle <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Chronic Conditions Prevalence** Comparison, 2013-2018"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_horizontal_padding.html" class="external-link">opt_horizontal_padding</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_options.html" class="external-link">tab_options</a></span><span class="op">(</span>table.width <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/pct.html" class="external-link">pct</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>,</span>
+<span>              column_labels.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
+<span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
+<span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
+<span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in cols_nanoplot(cols_nanoplot(cols_nanoplot(gt(pivot_wider(chronic, : could not find function "cols_nanoplot"</span></span></code></pre></div>
 <p><br></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="hcpcs-utilization-data">HCPCS Utilization Data<a class="anchor" aria-label="anchor" href="#hcpcs-utilization-data"></a>
 </h2>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/years.html">by_service_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/by_service.html">by_service</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1023076643</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -2612,13 +1375,13 @@ NA</td>
 <span>              values_from <span class="op">=</span> <span class="va">amount</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">stat</span>, <span class="va">HCPCS</span><span class="op">)</span></span></code></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">stat</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Average Payment"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_currency.html" class="external-link">fmt_currency</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Provider</span>, <span class="va">State</span>, <span class="va">National</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Average Payment** Per HCPCS"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/tab_header.html" class="external-link">tab_header</a></span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="https://gt.rstudio.com/reference/md.html" class="external-link">md</a></span><span class="op">(</span><span class="st">"**Average Payment** By HCPCS"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_hide.html" class="external-link">cols_hide</a></span><span class="op">(</span><span class="va">stat</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/data_color.html" class="external-link">data_color</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">Provider</span>, <span class="va">State</span>, <span class="va">National</span><span class="op">)</span>,</span>
 <span>             direction <span class="op">=</span> <span class="st">"row"</span>,</span>
@@ -2629,24 +1392,24 @@ NA</td>
 <span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-<div id="jlneflettl" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="erngfzbaxo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#jlneflettl table {
+#erngfzbaxo table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jlneflettl thead, #jlneflettl tbody, #jlneflettl tfoot, #jlneflettl tr, #jlneflettl td, #jlneflettl th {
+#erngfzbaxo thead, #erngfzbaxo tbody, #erngfzbaxo tfoot, #erngfzbaxo tr, #erngfzbaxo td, #erngfzbaxo th {
   border-style: none;
 }
 
-#jlneflettl p {
+#erngfzbaxo p {
   margin: 0;
   padding: 0;
 }
 
-#jlneflettl .gt_table {
+#erngfzbaxo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -2672,12 +1435,12 @@ NA</td>
   border-left-color: #D3D3D3;
 }
 
-#jlneflettl .gt_caption {
+#erngfzbaxo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jlneflettl .gt_title {
+#erngfzbaxo .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -2689,7 +1452,7 @@ NA</td>
   border-bottom-width: 0;
 }
 
-#jlneflettl .gt_subtitle {
+#erngfzbaxo .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -2701,7 +1464,7 @@ NA</td>
   border-top-width: 0;
 }
 
-#jlneflettl .gt_heading {
+#erngfzbaxo .gt_heading {
   background-color: #000000;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2713,13 +1476,13 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#jlneflettl .gt_bottom_border {
+#erngfzbaxo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jlneflettl .gt_col_headings {
+#erngfzbaxo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2734,7 +1497,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#jlneflettl .gt_col_heading {
+#erngfzbaxo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2754,7 +1517,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#jlneflettl .gt_column_spanner_outer {
+#erngfzbaxo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2766,15 +1529,15 @@ NA</td>
   padding-right: 4px;
 }
 
-#jlneflettl .gt_column_spanner_outer:first-child {
+#erngfzbaxo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jlneflettl .gt_column_spanner_outer:last-child {
+#erngfzbaxo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jlneflettl .gt_column_spanner {
+#erngfzbaxo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2786,11 +1549,11 @@ NA</td>
   width: 100%;
 }
 
-#jlneflettl .gt_spanner_row {
+#erngfzbaxo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jlneflettl .gt_group_heading {
+#erngfzbaxo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2816,7 +1579,7 @@ NA</td>
   text-align: left;
 }
 
-#jlneflettl .gt_empty_group_heading {
+#erngfzbaxo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2831,15 +1594,15 @@ NA</td>
   vertical-align: middle;
 }
 
-#jlneflettl .gt_from_md > :first-child {
+#erngfzbaxo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jlneflettl .gt_from_md > :last-child {
+#erngfzbaxo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jlneflettl .gt_row {
+#erngfzbaxo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2858,7 +1621,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#jlneflettl .gt_stub {
+#erngfzbaxo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2871,7 +1634,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#jlneflettl .gt_stub_row_group {
+#erngfzbaxo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2885,15 +1648,15 @@ NA</td>
   vertical-align: top;
 }
 
-#jlneflettl .gt_row_group_first td {
+#erngfzbaxo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jlneflettl .gt_row_group_first th {
+#erngfzbaxo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jlneflettl .gt_summary_row {
+#erngfzbaxo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2903,16 +1666,16 @@ NA</td>
   padding-right: 5px;
 }
 
-#jlneflettl .gt_first_summary_row {
+#erngfzbaxo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jlneflettl .gt_first_summary_row.thick {
+#erngfzbaxo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jlneflettl .gt_last_summary_row {
+#erngfzbaxo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2922,7 +1685,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#jlneflettl .gt_grand_summary_row {
+#erngfzbaxo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2932,7 +1695,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#jlneflettl .gt_first_grand_summary_row {
+#erngfzbaxo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2942,7 +1705,7 @@ NA</td>
   border-top-color: #D3D3D3;
 }
 
-#jlneflettl .gt_last_grand_summary_row_top {
+#erngfzbaxo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2952,11 +1715,11 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#jlneflettl .gt_striped {
+#erngfzbaxo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jlneflettl .gt_table_body {
+#erngfzbaxo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2965,7 +1728,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#jlneflettl .gt_footnotes {
+#erngfzbaxo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2979,7 +1742,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#jlneflettl .gt_footnote {
+#erngfzbaxo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -2988,7 +1751,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#jlneflettl .gt_sourcenotes {
+#erngfzbaxo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3002,7 +1765,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#jlneflettl .gt_sourcenote {
+#erngfzbaxo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3010,63 +1773,63 @@ NA</td>
   padding-right: 5px;
 }
 
-#jlneflettl .gt_left {
+#erngfzbaxo .gt_left {
   text-align: left;
 }
 
-#jlneflettl .gt_center {
+#erngfzbaxo .gt_center {
   text-align: center;
 }
 
-#jlneflettl .gt_right {
+#erngfzbaxo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jlneflettl .gt_font_normal {
+#erngfzbaxo .gt_font_normal {
   font-weight: normal;
 }
 
-#jlneflettl .gt_font_bold {
+#erngfzbaxo .gt_font_bold {
   font-weight: bold;
 }
 
-#jlneflettl .gt_font_italic {
+#erngfzbaxo .gt_font_italic {
   font-style: italic;
 }
 
-#jlneflettl .gt_super {
+#erngfzbaxo .gt_super {
   font-size: 65%;
 }
 
-#jlneflettl .gt_footnote_marks {
+#erngfzbaxo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jlneflettl .gt_asterisk {
+#erngfzbaxo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jlneflettl .gt_indent_1 {
+#erngfzbaxo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jlneflettl .gt_indent_2 {
+#erngfzbaxo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jlneflettl .gt_indent_3 {
+#erngfzbaxo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jlneflettl .gt_indent_4 {
+#erngfzbaxo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jlneflettl .gt_indent_5 {
+#erngfzbaxo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3074,7 +1837,7 @@ NA</td>
 <thead>
 <tr class="gt_heading">
 <td colspan="5" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>
-<strong>Average Payment</strong> Per HCPCS</td>
+<strong>Average Payment</strong> By HCPCS</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
@@ -3299,7 +2062,7 @@ NA</td>
 </table>
 </div>
 <p><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">hcpcs</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">stat</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Services Per Beneficiary"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -3317,24 +2080,24 @@ NA</td>
 <span>              row_group.font.weight <span class="op">=</span> <span class="st">"bold"</span>,</span>
 <span>              heading.background.color <span class="op">=</span> <span class="st">"black"</span>,</span>
 <span>              heading.align <span class="op">=</span> <span class="st">"left"</span><span class="op">)</span></span></code></pre></div>
-<div id="mtmtjbapjd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="rvjckublme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#mtmtjbapjd table {
+#rvjckublme table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#mtmtjbapjd thead, #mtmtjbapjd tbody, #mtmtjbapjd tfoot, #mtmtjbapjd tr, #mtmtjbapjd td, #mtmtjbapjd th {
+#rvjckublme thead, #rvjckublme tbody, #rvjckublme tfoot, #rvjckublme tr, #rvjckublme td, #rvjckublme th {
   border-style: none;
 }
 
-#mtmtjbapjd p {
+#rvjckublme p {
   margin: 0;
   padding: 0;
 }
 
-#mtmtjbapjd .gt_table {
+#rvjckublme .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -3360,12 +2123,12 @@ NA</td>
   border-left-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_caption {
+#rvjckublme .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mtmtjbapjd .gt_title {
+#rvjckublme .gt_title {
   color: #FFFFFF;
   font-size: 125%;
   font-weight: initial;
@@ -3377,7 +2140,7 @@ NA</td>
   border-bottom-width: 0;
 }
 
-#mtmtjbapjd .gt_subtitle {
+#rvjckublme .gt_subtitle {
   color: #FFFFFF;
   font-size: 85%;
   font-weight: initial;
@@ -3389,7 +2152,7 @@ NA</td>
   border-top-width: 0;
 }
 
-#mtmtjbapjd .gt_heading {
+#rvjckublme .gt_heading {
   background-color: #000000;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3401,13 +2164,13 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_bottom_border {
+#rvjckublme .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_col_headings {
+#rvjckublme .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3422,7 +2185,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_col_heading {
+#rvjckublme .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3442,7 +2205,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#mtmtjbapjd .gt_column_spanner_outer {
+#rvjckublme .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3454,15 +2217,15 @@ NA</td>
   padding-right: 4px;
 }
 
-#mtmtjbapjd .gt_column_spanner_outer:first-child {
+#rvjckublme .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mtmtjbapjd .gt_column_spanner_outer:last-child {
+#rvjckublme .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mtmtjbapjd .gt_column_spanner {
+#rvjckublme .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3474,11 +2237,11 @@ NA</td>
   width: 100%;
 }
 
-#mtmtjbapjd .gt_spanner_row {
+#rvjckublme .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#mtmtjbapjd .gt_group_heading {
+#rvjckublme .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3504,7 +2267,7 @@ NA</td>
   text-align: left;
 }
 
-#mtmtjbapjd .gt_empty_group_heading {
+#rvjckublme .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3519,15 +2282,15 @@ NA</td>
   vertical-align: middle;
 }
 
-#mtmtjbapjd .gt_from_md > :first-child {
+#rvjckublme .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mtmtjbapjd .gt_from_md > :last-child {
+#rvjckublme .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mtmtjbapjd .gt_row {
+#rvjckublme .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3546,7 +2309,7 @@ NA</td>
   overflow-x: hidden;
 }
 
-#mtmtjbapjd .gt_stub {
+#rvjckublme .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3559,7 +2322,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#mtmtjbapjd .gt_stub_row_group {
+#rvjckublme .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3573,15 +2336,15 @@ NA</td>
   vertical-align: top;
 }
 
-#mtmtjbapjd .gt_row_group_first td {
+#rvjckublme .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mtmtjbapjd .gt_row_group_first th {
+#rvjckublme .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#mtmtjbapjd .gt_summary_row {
+#rvjckublme .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3591,16 +2354,16 @@ NA</td>
   padding-right: 5px;
 }
 
-#mtmtjbapjd .gt_first_summary_row {
+#rvjckublme .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_first_summary_row.thick {
+#rvjckublme .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mtmtjbapjd .gt_last_summary_row {
+#rvjckublme .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3610,7 +2373,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_grand_summary_row {
+#rvjckublme .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3620,7 +2383,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#mtmtjbapjd .gt_first_grand_summary_row {
+#rvjckublme .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3630,7 +2393,7 @@ NA</td>
   border-top-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_last_grand_summary_row_top {
+#rvjckublme .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3640,11 +2403,11 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_striped {
+#rvjckublme .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mtmtjbapjd .gt_table_body {
+#rvjckublme .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3653,7 +2416,7 @@ NA</td>
   border-bottom-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_footnotes {
+#rvjckublme .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3667,7 +2430,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_footnote {
+#rvjckublme .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -3676,7 +2439,7 @@ NA</td>
   padding-right: 5px;
 }
 
-#mtmtjbapjd .gt_sourcenotes {
+#rvjckublme .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3690,7 +2453,7 @@ NA</td>
   border-right-color: #D3D3D3;
 }
 
-#mtmtjbapjd .gt_sourcenote {
+#rvjckublme .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3698,63 +2461,63 @@ NA</td>
   padding-right: 5px;
 }
 
-#mtmtjbapjd .gt_left {
+#rvjckublme .gt_left {
   text-align: left;
 }
 
-#mtmtjbapjd .gt_center {
+#rvjckublme .gt_center {
   text-align: center;
 }
 
-#mtmtjbapjd .gt_right {
+#rvjckublme .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mtmtjbapjd .gt_font_normal {
+#rvjckublme .gt_font_normal {
   font-weight: normal;
 }
 
-#mtmtjbapjd .gt_font_bold {
+#rvjckublme .gt_font_bold {
   font-weight: bold;
 }
 
-#mtmtjbapjd .gt_font_italic {
+#rvjckublme .gt_font_italic {
   font-style: italic;
 }
 
-#mtmtjbapjd .gt_super {
+#rvjckublme .gt_super {
   font-size: 65%;
 }
 
-#mtmtjbapjd .gt_footnote_marks {
+#rvjckublme .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#mtmtjbapjd .gt_asterisk {
+#rvjckublme .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mtmtjbapjd .gt_indent_1 {
+#rvjckublme .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mtmtjbapjd .gt_indent_2 {
+#rvjckublme .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mtmtjbapjd .gt_indent_3 {
+#rvjckublme .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mtmtjbapjd .gt_indent_4 {
+#rvjckublme .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mtmtjbapjd .gt_indent_5 {
+#rvjckublme .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
