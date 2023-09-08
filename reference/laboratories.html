@@ -159,6 +159,7 @@ responsibilities.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">laboratories</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clia <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  certification_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -169,23 +170,27 @@ responsibilities.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>name</dt>
-<dd><p>Hospital’s CMS Certification Number (CCN)</p></dd>
+<dd><p>Provider or clinical laboratory's name</p></dd>
 
 
 <dt>clia</dt>
-<dd><p>description</p></dd>
+<dd><p>CLIA number</p></dd>
+
+
+<dt>certification_type</dt>
+<dd><p><code>Waiver</code>, <code>Compliance</code>, <code>Accreditation</code>, <code>PPM</code>, or <code>Reg</code></p></dd>
 
 
 <dt>city</dt>
-<dd><p>City of the hospital’s practice location address</p></dd>
+<dd><p>City</p></dd>
 
 
 <dt>state</dt>
-<dd><p>State of the hospital’s practice location address</p></dd>
+<dd><p>State</p></dd>
 
 
 <dt>zip</dt>
-<dd><p>State of the hospital’s practice location address</p></dd>
+<dd><p>Zip code</p></dd>
 
 
 <dt>tidy</dt>
