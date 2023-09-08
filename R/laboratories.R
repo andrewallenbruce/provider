@@ -20,11 +20,12 @@
 #'
 #' *Update Frequency:* **Quarterly**
 #'
-#' @param name Hospital’s CMS Certification Number (CCN)
-#' @param clia description
-#' @param city City of the hospital’s practice location address
-#' @param state State of the hospital’s practice location address
-#' @param zip State of the hospital’s practice location address
+#' @param name Provider or clinical laboratory's name
+#' @param clia CLIA number
+#' @param certification_type `Waiver`, `Compliance`, `Accreditation`, `PPM`, or `Reg`
+#' @param city City
+#' @param state State
+#' @param zip Zip code
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -35,24 +36,28 @@
 #' @export
 laboratories <- function(name = NULL,
                          clia = NULL,
+                         certification_type = NULL,
                          city = NULL,
                          state = NULL,
                          zip = NULL,
                          tidy = TRUE) {
 
+  if (!is.null(certification_type)) {
+    certification_type <- cert(certification_type)
+  }
+
   args <- dplyr::tribble(
     ~param,          ~arg,
-    "FAC_NAME",      name,
-    "PRVDR_NUM",     clia,
-    "CITY_NAME",     city,
-    "STATE_CD",      state,
-    "ZIP_CD",        zip)
+    "FAC_NAME",       name,
+    "PRVDR_NUM",      clia,
+    "CRTFCT_TYPE_CD", certification_type,
+    "CITY_NAME",      city,
+    "STATE_CD",       state,
+    "ZIP_CD",         zip)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
          cms_update("Provider of Services File - Clinical Laboratories",
-         "id")$distro[1],
-         "/data.json?",
-         encode_param(args))
+         "id")$distro[1], "/data.json?", encode_param(args))
 
   response <- httr2::request(url) |> httr2::req_perform()
 
@@ -229,6 +234,20 @@ app <- function(x) {
                     "3" ~ "Accreditation",
                     "4" ~ "PPM",
                     "9" ~ "Reg",
+                    .default = x
+  )
+}
+
+#' @autoglobal
+#' @noRd
+cert <- function(x) {
+
+  dplyr::case_match(x,
+                    "Compliance" ~ "1",
+                    "Waiver" ~ "2",
+                    "Accreditation" ~ "3",
+                    "PPM" ~ "4",
+                    "Reg" ~ "9",
                     .default = x
   )
 }

@@ -143,11 +143,32 @@ left_join(elizabeth.prov.pac,
   arrange(desc(organization_reassignments))
 ```
 
+<br>
 
+### CLIA Labs
 
 ```{r}
-clia_labs(clia = "11D0265516") |> 
+laboratories(clia = "11D0265516") |> 
   janitor::remove_empty(which = c("rows", "cols")) |> 
-  dplyr::glimpse()
+  provider:::display_long() |> 
+  gt::gt(rowname_col = "name") |> 
+  gt::cols_label(value = "results") |> 
+  gt::cols_label_with(fn = toupper) |> 
+  gt::opt_table_font(font = gt::google_font(name = "JetBrains Mono")) |>
+  gt::opt_stylize(color = "gray")
+```
+
+<br><br>
+
+```{r}
+laboratories(city = "Valdosta", certification_type = "Waiver") |> 
+  dplyr::select(name, clia, expiration_date, termination_reason, facility_type) |> 
+  janitor::remove_empty(which = c("rows", "cols")) |> 
+  gt::gt(rowname_col = "name", groupname_col = "facility_type") |> 
+  gt::cols_label(termination_reason = "termination") |> 
+  gt::cols_label_with(fn = toupper) |> 
+  gt::fmt_date(columns = gt::contains("date"), date_style = "wd_m_day_year") |> 
+  gt::opt_table_font(font = gt::google_font(name = "JetBrains Mono")) |>
+  gt::opt_stylize(color = "gray")
 ```
 

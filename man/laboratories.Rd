@@ -7,6 +7,7 @@
 laboratories(
   name = NULL,
   clia = NULL,
+  certification_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -14,15 +15,17 @@ laboratories(
 )
 }
 \arguments{
-\item{name}{Hospital’s CMS Certification Number (CCN)}
+\item{name}{Provider or clinical laboratory's name}
 
-\item{clia}{description}
+\item{clia}{CLIA number}
 
-\item{city}{City of the hospital’s practice location address}
+\item{certification_type}{\code{Waiver}, \code{Compliance}, \code{Accreditation}, \code{PPM}, or \code{Reg}}
 
-\item{state}{State of the hospital’s practice location address}
+\item{city}{City}
 
-\item{zip}{State of the hospital’s practice location address}
+\item{state}{State}
+
+\item{zip}{Zip code}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }
