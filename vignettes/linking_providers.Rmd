@@ -38,14 +38,14 @@ Looking it up in the **Provider Enrollment** API gives us several avenues to go 
 <br>
 
 ```{r}
-providers(organization_name = "Elizabethtown Community Hospital")
+providers(organization = "Elizabethtown Community Hospital")
 ```
 
 
 
 ```{r}
-hospitals(organization_name = "Elizabethtown Community Hospital") |> 
-  select(npi, organization_name, pac_id_org, facility_ccn, specialty_code)
+hospitals(organization = "Elizabethtown Community Hospital") |> 
+  select(npi, organization, pac_id_org, facility_ccn, specialty_code)
 ```
 
 <br>
@@ -56,7 +56,7 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 
 ```{r}
 affiliations(facility_ccn = 331302) |> 
-  select(-c(middle_name, suffix)) |> 
+  select(-c(middle_name, suffix, parent_ccn)) |> 
   head(10)
 ```
 
@@ -80,25 +80,21 @@ That returns more affiliated individual providers that practice in the Hospital'
 
 <br>
 
-```{r eval=FALSE, echo=FALSE}
+```{r echo=FALSE, eval=FALSE}
 unique(elizabethtown$npi) |> 
   map(\(x) nppes_npi(npi = x)) |> 
   list_rbind() |> 
   filter(purpose != "MAILING")
-```
 
-
-
-```{r echo=FALSE, eval=FALSE}
-elizabeth.prov <- providers(organization_name = "Elizabethtown Community Hospital") |> 
-  select(organization = organization_name, 
+elizabeth.prov <- providers(organization = "Elizabethtown Community Hospital") |> 
+  select(organization, 
          pac_organization = pac_id, 
          npi_organization = npi, 
          enroll_organization = enroll_id, 
          specialty)
 
-elizabeth.hosp <- hospitals(organization_name = "Elizabethtown Community Hospital") |> 
-  select(organization = organization_name, 
+elizabeth.hosp <- hospitals(organization = "Elizabethtown Community Hospital") |> 
+  select(organization, 
          pac_organization = pac_id_org,
          npi_organization = npi,
          enroll_organization = enroll_id,
@@ -161,8 +157,8 @@ laboratories(clia = "11D0265516") |>
 <br><br>
 
 ```{r}
-laboratories(city = "Valdosta", certification_type = "Waiver") |> 
-  dplyr::select(name, clia, expiration_date, termination_reason, facility_type) |> 
+laboratories(city = "Valdosta", certificate = "waiver") |> 
+  dplyr::select(name, clia, certificate, expiration_date, termination_reason, facility_type) |> 
   janitor::remove_empty(which = c("rows", "cols")) |> 
   gt::gt(rowname_col = "name", groupname_col = "facility_type") |> 
   gt::cols_label(termination_reason = "termination") |> 

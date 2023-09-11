@@ -20,5 +20,5 @@ Calculate relative change
 \examples{
 dplyr::tibble(year = 2015:2020,
               pay = 1000:1005) |>
-dplyr::mutate(pct_change = pct(pay, year)
+dplyr::mutate(pct_change = pct(pay)
 }

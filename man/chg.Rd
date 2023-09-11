@@ -20,5 +20,5 @@ Calculate absolute change
 \examples{
 dplyr::tibble(year = 2015:2020,
               pay = 1000:1005) |>
-dplyr::mutate(change = chg(pay, year)
+dplyr::mutate(change = chg(pay)
 }

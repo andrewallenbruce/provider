@@ -49,7 +49,7 @@ change <- function(df, cols) {
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
 #'               pay = 1000:1005) |>
-#' dplyr::mutate(change = chg(pay, year)
+#' dplyr::mutate(change = chg(pay)
 #' @autoglobal
 #' @export
 chg <- function (x, n = 1L) {
@@ -65,7 +65,7 @@ chg <- function (x, n = 1L) {
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
 #'               pay = 1000:1005) |>
-#' dplyr::mutate(pct_change = pct(pay, year)
+#' dplyr::mutate(pct_change = pct(pay)
 #' @autoglobal
 #' @export
 pct <- function (x, n = 1L) {

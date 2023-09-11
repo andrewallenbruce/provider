@@ -72,7 +72,8 @@
 #'
 #' **Trailing Wildcard Entries**
 #' Arguments that allow trailing wildcard entries are denoted in the parameter
-#' description with _Trailing Wildcard Allowed_. Wildcard entries require at least two characters to be entered, e.g. `"jo*"`
+#' description with _Trailing Wildcard Allowed_. Wildcard entries require at
+#' least two characters to be entered, e.g. `"jo*"`
 #'
 #' *Update Frequency:* **Weekly**
 #'
@@ -85,7 +86,7 @@
 #' _Trailing Wildcard Allowed_
 #' @param name_type Type of name the `first`/`last` arguments pertain to.
 #' Options are:
-#'   *`"AO"`: will only search Authorized Official names
+#'   * `"AO"`: will only search Authorized Official names
 #'   * `"Provider"`:  will only search Individual Provider names _(default)_
 #' @param organization Healthcare organization's name. Many types of names (LBN,
 #' DBA, Former LBN, Other Name) are examined for a match. As such, the results

@@ -146,7 +146,7 @@ Several validation checks have been implemented, including checks for *NPIs*, *P
 
 ```{r}
 # Must be 10 digits long
-open_payments(npi = 12345691234)
+open_payments(npi = 12345691234, year = 2021)
 
 # Must be numeric
 nppes(npi = "O12345678912")

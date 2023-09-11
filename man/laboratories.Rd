@@ -11,7 +11,8 @@ laboratories(
   city = NULL,
   state = NULL,
   zip = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  pivot = FALSE
 )
 }
 \arguments{
@@ -35,6 +36,8 @@ laboratories(
 \item{zip}{Zip code}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{pivot}{Pivot output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

@@ -129,9 +129,6 @@ utils::globalVariables(c(
   "bene_avg_risk_scre", # <by_provider>
   "entity_type", # <by_provider>
   "distro", # <by_service>
-  "last_name", # <by_service>
-  "first_name", # <by_service>
-  "organization_name", # <by_service>
   "y", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>
   "rndrng_prvdr_ent_cd", # <by_service>
@@ -299,20 +296,18 @@ utils::globalVariables(c(
   "prvdr_ctgry_sbtyp_cd", # <laboratories>
   "fac_name", # <laboratories>
   "addtnl_fac_name", # <laboratories>
+  "st_adr", # <laboratories>
+  "addtnl_st_adr", # <laboratories>
   "prvdr_num", # <laboratories>
-  "clia_mdcr_num", # <laboratories>
-  "aplctn_type_cd", # <laboratories>
   "crtfct_efctv_dt", # <laboratories>
   "trmntn_exprtn_dt", # <laboratories>
   "acptbl_poc_sw", # <laboratories>
-  "clia_trmntn_cd", # <laboratories>
   "drctly_afltd_lab_cnt", # <laboratories>
   "orgnl_prtcptn_dt", # <laboratories>
   "aplctn_rcvd_dt", # <laboratories>
   "crtfctn_dt", # <laboratories>
   "crtfct_mail_dt", # <laboratories>
-  "st_adr", # <laboratories>
-  "addtnl_st_adr", # <laboratories>
+  "address", # <laboratories>
   "city_name", # <laboratories>
   "state_cd", # <laboratories>
   "zip_cd", # <laboratories>
@@ -321,14 +316,14 @@ utils::globalVariables(c(
   "state_rgn_cd", # <laboratories>
   "fips_cnty_cd", # <laboratories>
   "fips_state_cd", # <laboratories>
-  "cbsa_urbn_rrl_ind", # <laboratories>
   "cbsa_cd", # <laboratories>
+  "cbsa_urbn_rrl_ind", # <laboratories>
   "intrmdry_carr_cd", # <laboratories>
   "intrmdry_carr_prior_cd", # <laboratories>
   "mdcd_vndr_num", # <laboratories>
   "chow_cnt", # <laboratories>
-  "chow_dt", # <laboratories>
   "chow_prior_dt", # <laboratories>
+  "chow_dt", # <laboratories>
   "fy_end_mo_day_cd", # <laboratories>
   "elgblty_sw", # <laboratories>
   "skltn_rec_sw", # <laboratories>
@@ -337,7 +332,6 @@ utils::globalVariables(c(
   "non_prft_excptn_sw", # <laboratories>
   "lab_temp_tstg_site_sw", # <laboratories>
   "shr_lab_sw", # <laboratories>
-  "shared_lab_xref_number", # <laboratories>
   "lab_site_cnt", # <laboratories>
   "ppmp_test_vol_cnt", # <laboratories>
   "acrdtn_schdl_cd", # <laboratories>
@@ -368,8 +362,40 @@ utils::globalVariables(c(
   "jcaho_acrdtd_cd", # <laboratories>
   "jcaho_acrdtd_y_match_sw", # <laboratories>
   "jcaho_acrdtd_y_match_dt", # <laboratories>
-  "cross_ref_provider_number", # <laboratories>
-  "related_provider_number", # <laboratories>
+  "clia_number", # <laboratories>
+  "acr_aala", # <laboratories>
+  "acr_aala_ind", # <laboratories>
+  "acr_aala_date", # <laboratories>
+  "acr_aabb", # <laboratories>
+  "acr_aabb_ind", # <laboratories>
+  "acr_aabb_date", # <laboratories>
+  "acr_aoa", # <laboratories>
+  "acr_aoa_ind", # <laboratories>
+  "acr_aoa_date", # <laboratories>
+  "acr_ashi", # <laboratories>
+  "acr_ashi_ind", # <laboratories>
+  "acr_ashi_date", # <laboratories>
+  "acr_cap", # <laboratories>
+  "acr_cap_ind", # <laboratories>
+  "acr_cap_date", # <laboratories>
+  "acr_cola", # <laboratories>
+  "acr_cola_ind", # <laboratories>
+  "acr_cola_date", # <laboratories>
+  "acr_jcaho", # <laboratories>
+  "acr_jcaho_ind", # <laboratories>
+  "acr_jcaho_date", # <laboratories>
+  "aala", # <laboratories>
+  "aabb", # <laboratories>
+  "aoa", # <laboratories>
+  "ashi", # <laboratories>
+  "cap", # <laboratories>
+  "cola", # <laboratories>
+  "jcaho", # <laboratories>
+  "accredited", # <laboratories>
+  "organization", # <laboratories>
+  "confirmed", # <laboratories>
+  "confirmed_date", # <laboratories>
+  "type_of_action", # <laboratories>
   "y", # <missing_endpoints>
   "NPI", # <missing_endpoints>
   "last_name", # <missing_endpoints>
@@ -493,6 +519,8 @@ utils::globalVariables(c(
   "identifier", # <open_payments_ids>
   "year", # <open_payments_years>
   "y", # <opt_out>
+  "first_name", # <opt_out>
+  "last_name", # <opt_out>
   "eligible_to_order_and_refer", # <opt_out>
   "optout_effective_date", # <opt_out>
   "optout_end_date", # <opt_out>
@@ -501,6 +529,8 @@ utils::globalVariables(c(
   "state_code", # <opt_out>
   "zip_code", # <opt_out>
   "y", # <order_refer>
+  "first_name", # <order_refer>
+  "last_name", # <order_refer>
   "y", # <pending>
   "y", # <providers>
   "pecos_asct_cntl_id", # <providers>

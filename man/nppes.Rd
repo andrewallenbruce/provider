@@ -40,8 +40,8 @@ might contain a different name from the one entered. \emph{Trailing Wildcard All
 
 \item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to.
 Options are:
-*\code{"AO"}: will only search Authorized Official names
 \itemize{
+\item \code{"AO"}: will only search Authorized Official names
 \item \code{"Provider"}:  will only search Individual Provider names \emph{(default)}
 }}
 
@@ -147,7 +147,8 @@ statutes, regulations, and program instructions of the Medicare program.
 
 \strong{Trailing Wildcard Entries}
 Arguments that allow trailing wildcard entries are denoted in the parameter
-description with \emph{Trailing Wildcard Allowed}. Wildcard entries require at least two characters to be entered, e.g. \code{"jo*"}
+description with \emph{Trailing Wildcard Allowed}. Wildcard entries require at
+least two characters to be entered, e.g. \code{"jo*"}
 
 \emph{Update Frequency:} \strong{Weekly}
 }

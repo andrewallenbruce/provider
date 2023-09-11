@@ -126,7 +126,7 @@ order_refer <- function(npi = NULL,
                     "Home Health Agency (HHA)"        = hha,
                     "Durable Medical Equipment (DME)" = dme,
                     "Power Mobility Device (PMD)"     = pmd) |>
-      tidyr::pivot_longer(cols = !c(npi, dplyr::contains("name")),
+      tidyr::pivot_longer(cols = !c(npi, first, last),
                           names_to = "service",
                           values_to = "eligible")
     }
