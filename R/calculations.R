@@ -25,26 +25,41 @@ change_year <- function(df, col, by = year) {
 #' Calculate number of years since today's date
 #' @param df data frame
 #' @param date_col date column
-#' @return number of years since today's date
+#' @returns number of years since today's date
+#' @examples
+#' dplyr::tibble(date = lubridate::today() - 366) |>
+#' years_df(date_col = date)
 #' @autoglobal
-#' @noRd
-years_passed <- function(df, date_col) {
+#' @export
+years_df <- function(df, date_col) {
 
   df |>
     dplyr::mutate(
-      years_passed = round(as.double(difftime(lubridate::today(),
-                                              {{ date_col }},
-                                              units = "weeks",
-                                              tz = "UTC")) / 52.17857, 2),
+      years_passed = round(
+        as.double(
+          difftime(
+            lubridate::today(),
+            {{ date_col }},
+            units = "weeks",
+            tz = "UTC")) / 52.17857, 2),
       .after = {{ date_col }})
 }
 
-years_diff <- function(date_col) {
+
+#' Calculate number of years since today's date
+#' @param date date column
+#' @returns number of years since today's date
+#' @examples
+#' dplyr::tibble(date = lubridate::today() - 366) |>
+#' dplyr::mutate(years_passed = years_vec(date = date))
+#' @autoglobal
+#' @export
+years_vec <- function(date) {
   round(
     as.double(
       difftime(
         lubridate::today(),
-        date_col,
+        date,
         units = "weeks",
         tz = "UTC")) / 52.17857, 2)
 }

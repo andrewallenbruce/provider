@@ -7,7 +7,7 @@
 laboratories(
   name = NULL,
   clia = NULL,
-  certification_type = NULL,
+  certificate = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -19,7 +19,15 @@ laboratories(
 
 \item{clia}{CLIA number}
 
-\item{certification_type}{\code{Waiver}, \code{Compliance}, \code{Accreditation}, \code{PPM}, or \code{Reg}}
+\item{certificate}{There are five different CLIA certificate types
+which all are effective for a period of two years:
+\itemize{
+\item \code{waiver}
+\item \code{compliance}
+\item \code{accreditation}
+\item \code{ppm} (Provider-Performed Microscopy Procedures)
+\item \code{registration}
+}}
 
 \item{city}{City}
 

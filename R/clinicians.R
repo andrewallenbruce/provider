@@ -22,7 +22,7 @@
 #' @param grad_year Individual clinician’s medical school graduation year
 #' @param specialty Primary medical specialty reported by the individual
 #'   clinician in the selected enrollment
-#' @param facility description
+#' @param facility_name Name of facility associated with the clinician
 #' @param pac_id_org description
 #' @param city Group or individual's city
 #' @param state Group or individual's state
@@ -49,7 +49,7 @@ clinicians <- function(npi = NULL,
                        school = NULL,
                        grad_year = NULL,
                        specialty = NULL,
-                       facility = NULL,
+                       facility_name = NULL,
                        pac_id_org = NULL,
                        city = NULL,
                        state = NULL,
@@ -77,7 +77,7 @@ clinicians <- function(npi = NULL,
     "med_sch",            school,
     "grd_yr",             grad_year,
     "pri_spec",           specialty,
-    "facility_name",      facility,
+    "facility_name",      facility_name,
     "org_pac_id",         pac_id_org,
     "citytown",           city,
     "state",              state,
@@ -110,7 +110,7 @@ clinicians <- function(npi = NULL,
       "school",        school,
       "grad_year",     grad_year,
       "specialty",     specialty,
-      "facility",      facility,
+      "facility_name", facility_name,
       "pac_id_org",    pac_id_org,
       "city",          city,
       "state",         state,

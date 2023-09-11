@@ -22,7 +22,13 @@
 #'
 #' @param name Provider or clinical laboratory's name
 #' @param clia CLIA number
-#' @param certification_type `Waiver`, `Compliance`, `Accreditation`, `PPM`, or `Reg`
+#' @param certificate There are five different CLIA certificate types
+#' which all are effective for a period of two years:
+#'    * `waiver`
+#'    * `compliance`
+#'    * `accreditation`
+#'    * `ppm` (Provider-Performed Microscopy Procedures)
+#'    * `registration`
 #' @param city City
 #' @param state State
 #' @param zip Zip code
@@ -36,21 +42,22 @@
 #' @export
 laboratories <- function(name = NULL,
                          clia = NULL,
-                         certification_type = NULL,
+                         certificate = NULL,
                          city = NULL,
                          state = NULL,
                          zip = NULL,
                          tidy = TRUE) {
 
-  if (!is.null(certification_type)) {
-    certification_type <- cert(certification_type)
+  if (!is.null(certificate)) {
+    rlang::arg_match(certificate, c("waiver", "compliance", "accreditation", "ppm", "registration"))
+    certificate <- cert(certificate)
   }
 
   args <- dplyr::tribble(
     ~param,          ~arg,
     "FAC_NAME",       name,
     "PRVDR_NUM",      clia,
-    "CRTFCT_TYPE_CD", certification_type,
+    "CRTFCT_TYPE_CD", certificate,
     "CITY_NAME",      city,
     "STATE_CD",       state,
     "ZIP_CD",         zip)
@@ -104,9 +111,9 @@ laboratories <- function(name = NULL,
       dplyr::select(name = fac_name,
                     name_addl = addtnl_fac_name,
                     clia = prvdr_num,
+                    certificate = crtfct_type_cd,
                     clia_medicare = clia_mdcr_num,
-                    application_type = aplctn_type_cd,
-                    certification_type = crtfct_type_cd,
+                    application = aplctn_type_cd,
                     effective_date = crtfct_efctv_dt,
                     expiration_date = trmntn_exprtn_dt,
                     status = cmplnc_stus_cd,
@@ -233,7 +240,7 @@ app <- function(x) {
                     "2" ~ "Waiver",
                     "3" ~ "Accreditation",
                     "4" ~ "PPM",
-                    "9" ~ "Reg",
+                    "9" ~ "Registration",
                     .default = x
   )
 }
@@ -243,11 +250,11 @@ app <- function(x) {
 cert <- function(x) {
 
   dplyr::case_match(x,
-                    "Compliance" ~ "1",
-                    "Waiver" ~ "2",
-                    "Accreditation" ~ "3",
-                    "PPM" ~ "4",
-                    "Reg" ~ "9",
+                    "compliance"    ~ "1",
+                    "waiver"        ~ "2",
+                    "accreditation" ~ "3",
+                    "ppm"           ~ "4",
+                    "registration"  ~ "9",
                     .default = x
   )
 }

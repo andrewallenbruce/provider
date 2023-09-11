@@ -9,7 +9,6 @@ utils::globalVariables(c(
   "suff", # <affiliations>
   "facility_affiliations_certification_number", # <affiliations>
   "facility_type_certification_number", # <affiliations>
-  "identifier", # <fac_affil_id>
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
@@ -214,7 +213,6 @@ utils::globalVariables(c(
   "med_sch", # <clinicians>
   "pri_spec", # <clinicians>
   "sec_spec_all", # <clinicians>
-  "facility_name", # <clinicians>
   "org_pac_id", # <clinicians>
   "adrs_id", # <clinicians>
   "city_town", # <clinicians>

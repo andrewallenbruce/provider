@@ -10,20 +10,20 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id Unique individual clinician ID assigned by PECOS
-#' @param last_name Individual clinician last name
-#' @param first_name Individual clinician first name
-#' @param middle_name Individual clinician middle name
+#' @param npi 10-digit National Provider Identifier
+#' @param pac_id 10-digit Provider associate level variable. Links all
+#' entity-level information and may be associated with multiple enrollment IDs
+#' if the individual or organization enrolled multiple times.
+#' @param first_name,middle_name,last_name Individual clinician's first, middle, or last name
 #' @param facility_type Facilities can fall into the following type categories:
-#'    - Hospital
-#'    - Long-term Care Hospital (LTCH)
-#'    - Nursing Home
-#'    - Inpatient Rehabilitation Facility (IRF)
-#'    - Home Health Agency (HHA)
-#'    - Skilled Nursing Facility (SNF)
-#'    - Hospice
-#'    - Dialysis Facility
+#'    - `"Hospital"`
+#'    - `"Long-term care hospital"` (LTCH)
+#'    - `"Nursing home"`
+#'    - `"Inpatient rehabilitation facility"` (IRF)
+#'    - `"Home health agency"` (HHA)
+#'    - `"Skilled nursing facility"` (SNF)
+#'    - `"Hospice"`
+#'    - `"Dialysis facility"`
 #' @param facility_ccn alphanumeric; Medicare CCN (CMS Certification Number) of
 #'    facility type or unit within hospital where an individual clinician
 #'    provides service. The CCN replaced the terms *Medicare Provider Number*,
@@ -55,10 +55,17 @@ affiliations <- function(npi           = NULL,
                          offset        = 0L,
                          tidy          = TRUE) {
 
-  if (!is.null(npi))          {npi          <- npi_check(npi)}
-  if (!is.null(pac_id))       {pac_id       <- pac_check(pac_id)}
-  if (!is.null(facility_ccn)) {facility_ccn <- as.character(facility_ccn)}
-  if (!is.null(parent_ccn))   {parent_ccn   <- as.character(parent_ccn)}
+  if (!is.null(npi))           {npi          <- npi_check(npi)}
+  if (!is.null(pac_id))        {pac_id       <- pac_check(pac_id)}
+  if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
+  if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
+  if (!is.null(facility_type)) {
+    rlang::arg_match(facility_type, c("Hospital", "Long-term care hospital",
+                                      "Nursing home",
+                                      "Inpatient rehabilitation facility",
+                                      "Home health agency",
+                                      "Skilled nursing facility", "Hospice",
+                                      "Dialysis facility"))}
 
   args <- dplyr::tribble(
     ~param,                                         ~arg,
@@ -72,7 +79,7 @@ affiliations <- function(npi           = NULL,
     "facility_type_certification_number",           parent_ccn)
 
   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-                "[SELECT * FROM ", fac_affil_id(), "]",
+                "[SELECT * FROM ", aff_id(), "]",
                 encode_param(args, type = "sql"),
                 "[LIMIT 10000 OFFSET ", offset, "]")
 
@@ -109,6 +116,20 @@ affiliations <- function(npi           = NULL,
 
   }
 
+  # if (vctrs::vec_size(results) == 500) {
+  #
+  #   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+  #                 "[SELECT * FROM ", aff_id(), "]",
+  #                 encode_param(args, type = "sql"),
+  #                 "[LIMIT 10000 OFFSET ", "501", "]")
+  #
+  #   response <- httr2::request(encode_url(url)) |>
+  #     httr2::req_error(body = error_body) |>
+  #     httr2::req_perform()
+  #
+  #   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
+  # }
+
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::tibble() |>
@@ -130,11 +151,11 @@ affiliations <- function(npi           = NULL,
 
 #' @autoglobal
 #' @noRd
-fac_affil_id <- function() {
+aff_id <- function() {
 
   response <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
     httr2::req_perform() |>
-    httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
+    httr2::resp_body_json(simplifyVector = TRUE)
 
-  response$distribution |> dplyr::pull(identifier)
+  response$distribution$identifier
 }

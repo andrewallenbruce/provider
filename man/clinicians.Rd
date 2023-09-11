@@ -15,7 +15,7 @@ clinicians(
   school = NULL,
   grad_year = NULL,
   specialty = NULL,
-  facility = NULL,
+  facility_name = NULL,
   pac_id_org = NULL,
   city = NULL,
   state = NULL,
@@ -47,7 +47,7 @@ for the data in the observation}
 \item{specialty}{Primary medical specialty reported by the individual
 clinician in the selected enrollment}
 
-\item{facility}{description}
+\item{facility_name}{Name of facility associated with the clinician}
 
 \item{pac_id_org}{description}
 

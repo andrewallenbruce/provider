@@ -18,26 +18,24 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{Unique clinician ID assigned by NPPES}
+\item{npi}{10-digit National Provider Identifier}
 
-\item{pac_id}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id}{10-digit Provider associate level variable. Links all
+entity-level information and may be associated with multiple enrollment IDs
+if the individual or organization enrolled multiple times.}
 
-\item{first_name}{Individual clinician first name}
-
-\item{middle_name}{Individual clinician middle name}
-
-\item{last_name}{Individual clinician last name}
+\item{first_name, middle_name, last_name}{Individual clinician's first, middle, or last name}
 
 \item{facility_type}{Facilities can fall into the following type categories:
 \itemize{
-\item Hospital
-\item Long-term Care Hospital (LTCH)
-\item Nursing Home
-\item Inpatient Rehabilitation Facility (IRF)
-\item Home Health Agency (HHA)
-\item Skilled Nursing Facility (SNF)
-\item Hospice
-\item Dialysis Facility
+\item \code{"Hospital"}
+\item \code{"Long-term care hospital"} (LTCH)
+\item \code{"Nursing home"}
+\item \code{"Inpatient rehabilitation facility"} (IRF)
+\item \code{"Home health agency"} (HHA)
+\item \code{"Skilled nursing facility"} (SNF)
+\item \code{"Hospice"}
+\item \code{"Dialysis facility"}
 }}
 
 \item{facility_ccn}{alphanumeric; Medicare CCN (CMS Certification Number) of
