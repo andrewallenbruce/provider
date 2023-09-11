@@ -35,25 +35,23 @@
 #' @param year integer (*required*); Year in `YYYY` format. Run helper function
 #'    `by_service_years()` to return a vector of the years
 #'    currently available.
-#' @param npi National Provider Identifier for the rendering provider on the claim.
-#' @param first_name Individual provider's first name.
-#' @param last_name Individual provider's last name.
-#' @param organization_name Organization name.
-#' @param credential Individual provider's credentials.
-#' @param gender Individual provider's gender.
-#' @param entype Provider entity type.
-#' @param city City where provider is located.
-#' @param state State where provider is located.
-#' @param fips Provider's state FIPS code.
-#' @param zip Provider’s zip code.
-#' @param ruca Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
-#'    was cross walked to the USDA's 2010 RUCA Codes. Choices are:
-#'     - **Metro Area Core**
-#'        - `1`: Primary flow within Urbanized Area (UA)
-#'        - `1.1`: Secondary flow 30-50% to larger UA
-#'     - **Metro Area High Commuting**
-#'        - `2`: Primary flow 30% or more to UA
-#'        - `2.1`: Secondary flow 30-50% to larger UA
+#' @param npi National Provider Identifier for the rendering provider on the claim
+#' @param first,last Individual provider's name
+#' @param organization Organization name
+#' @param credential Individual provider's credentials
+#' @param gender Individual provider's gender; `"F"` (Female), `"M"` (Male)
+#' @param entype Provider entity type; `"I"` (Individual), `"O"` (Organization)
+#' @param city City where provider is located
+#' @param state State where provider is located
+#' @param fips Provider's state FIPS code
+#' @param zip Provider’s zip code
+#' @param ruca Rural-Urban Commuting Area Code (RUCA). Choices are:
+#'    * __Metro Area Core__
+#'       * `"1"`: Primary flow within Urbanized Area (UA)
+#'       * `"1.1"`: Secondary flow 30-50% to larger UA
+#'    * __Metro Area High Commuting__
+#'        - `"2"`: Primary flow 30% or more to UA
+#'        - `"2.1"`: Secondary flow 30-50% to larger UA
 #'     - **Metro Area Low Commuting**
 #'        - `3`: Primary flow 10-30% to UA
 #'     - **Micro Area Core**
@@ -101,7 +99,7 @@
 #'    furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 #'    Average Sales Price (ASP) File.
 #' @param pos Identifies whether the place of service submitted on the claims
-#'    is a facility (`F`) or non-facility (`O`). Non-facility is generally an
+#'    is a facility (`"F"`) or non-facility (`"O"`). Non-facility is generally an
 #'    office setting; however other entities are included in non-facility.
 #' @param tidy Tidy output; default is `TRUE`.
 #'
@@ -112,29 +110,29 @@
 #' @autoglobal
 #' @export
 by_service <- function(year,
-                       npi           = NULL,
-                       last_name     = NULL,
-                       first_name    = NULL,
-                       organization_name = NULL,
-                       credential    = NULL,
-                       gender        = NULL,
-                       entype        = NULL,
-                       city          = NULL,
-                       state         = NULL,
-                       zip           = NULL,
-                       fips          = NULL,
-                       ruca          = NULL,
-                       country       = NULL,
-                       specialty     = NULL,
-                       par           = NULL,
-                       hcpcs_code    = NULL,
-                       drug          = NULL,
-                       pos           = NULL,
-                       tidy          = TRUE) {
+                       npi = NULL,
+                       first = NULL,
+                       last = NULL,
+                       organization = NULL,
+                       credential = NULL,
+                       gender = NULL,
+                       entype = NULL,
+                       city = NULL,
+                       state = NULL,
+                       zip = NULL,
+                       fips = NULL,
+                       ruca = NULL,
+                       country = NULL,
+                       specialty = NULL,
+                       par = NULL,
+                       hcpcs_code = NULL,
+                       drug = NULL,
+                       pos = NULL,
+                       tidy = TRUE) {
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(by_service_years()))
+  rlang::arg_match(year, as.character(by_service_years()))
 
   if (!is.null(npi))        {npi <- npi_check(npi)}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
@@ -153,9 +151,9 @@ by_service <- function(year,
   args <- dplyr::tribble(
                            ~param,  ~arg,
                      "Rndrng_NPI",   npi,
-        "Rndrng_Prvdr_First_Name",   first_name,
-     "Rndrng_Prvdr_Last_Org_Name",   last_name,
-     "Rndrng_Prvdr_Last_Org_Name",   organization_name,
+        "Rndrng_Prvdr_First_Name",   first,
+     "Rndrng_Prvdr_Last_Org_Name",   last,
+     "Rndrng_Prvdr_Last_Org_Name",   organization,
            "Rndrng_Prvdr_Crdntls",   credential,
               "Rndrng_Prvdr_Gndr",   gender,
             "Rndrng_Prvdr_Ent_Cd",   entype,
@@ -182,9 +180,9 @@ by_service <- function(year,
       ~x,             ~y,
       "year",         year,
       "npi",          npi,
-      "last_name",    last_name,
-      "first_name",   first_name,
-      "organization_name", organization_name,
+      "last",         last_name,
+      "first",        first_name,
+      "organization", organization_name,
       "credential",   credential,
       "gender",       gender,
       "entype",       entype,
@@ -216,26 +214,26 @@ by_service <- function(year,
   if (tidy) {
     results <- janitor::clean_names(results) |>
       dplyr::tibble() |>
-      dplyr::mutate(year                          = as.integer(year),
-                    level                         = "Provider",
+      dplyr::mutate(year = as.integer(year),
+                    level = "Provider",
                     dplyr::across(dplyr::starts_with("tot_"), ~as.integer(.)),
                     dplyr::across(dplyr::starts_with("avg_"), ~as.double(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    rndrng_prvdr_crdntls          = clean_credentials(rndrng_prvdr_crdntls),
-                    rndrng_prvdr_ent_cd           = entype_char(rndrng_prvdr_ent_cd),
-                    place_of_srvc                 = pos_char(place_of_srvc),
+                    rndrng_prvdr_crdntls = clean_credentials(rndrng_prvdr_crdntls),
+                    rndrng_prvdr_ent_cd = entype_char(rndrng_prvdr_ent_cd),
+                    place_of_srvc = pos_char(place_of_srvc),
                     rndrng_prvdr_mdcr_prtcptg_ind = yn_logical(rndrng_prvdr_mdcr_prtcptg_ind),
-                    hcpcs_drug_ind                = yn_logical(hcpcs_drug_ind)) |>
+                    hcpcs_drug_ind = yn_logical(hcpcs_drug_ind)) |>
       tidyr::unite("address",
                    dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
-                   remove                         = TRUE, na.rm = TRUE, sep = " ") |>
+                   remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::select(year,
-                    npi                           = rndrng_npi,
+                    npi = rndrng_npi,
                     level,
                     entype                        = rndrng_prvdr_ent_cd,
-                    first_name                    = rndrng_prvdr_first_name,
-                    middle_name                   = rndrng_prvdr_mi,
-                    last_name                     = rndrng_prvdr_last_org_name,
+                    first                   = rndrng_prvdr_first_name,
+                    middle                   = rndrng_prvdr_mi,
+                    last                     = rndrng_prvdr_last_org_name,
                     credential                    = rndrng_prvdr_crdntls,
                     gender                        = rndrng_prvdr_gndr,
                     specialty                     = rndrng_prvdr_type,

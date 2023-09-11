@@ -8,8 +8,8 @@ revalidation_reassign(
   npi = NULL,
   pac_id_ind = NULL,
   enroll_id_ind = NULL,
-  first_name = NULL,
-  last_name = NULL,
+  first = NULL,
+  last = NULL,
   state_ind = NULL,
   specialty = NULL,
   pac_id_org = NULL,
@@ -30,11 +30,8 @@ is an employee}
 \item{enroll_id_ind}{Enrollment ID of provider reassigning their benefits or
 is an employee}
 
-\item{first_name}{First name of provider who is reassigning their benefits
+\item{first, last}{First and/or last name of provider who is reassigning their benefits
 or is an employee}
-
-\item{last_name}{Last name of provider who is reassigning their benefits or
-is an employee}
 
 \item{state_ind}{Enrollment state of provider who is reassigning their
 benefits or is an employee}
@@ -43,8 +40,7 @@ benefits or is an employee}
 reassigning their benefits or is an employee}
 
 \item{pac_id_org}{PAC ID of provider who is receiving reassignment or is
-the employer. Providers enroll at the state level, so one PAC ID may be
-associated with multiple Enrollment IDs.}
+the employer.}
 
 \item{enroll_id_org}{Enrollment ID of provider who is receiving
 reassignment or is the employer}

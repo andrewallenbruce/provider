@@ -129,6 +129,9 @@ utils::globalVariables(c(
   "bene_avg_risk_scre", # <by_provider>
   "entity_type", # <by_provider>
   "distro", # <by_service>
+  "last_name", # <by_service>
+  "first_name", # <by_service>
+  "organization_name", # <by_service>
   "y", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>
   "rndrng_prvdr_ent_cd", # <by_service>
@@ -214,13 +217,11 @@ utils::globalVariables(c(
   "pri_spec", # <clinicians>
   "sec_spec_all", # <clinicians>
   "org_pac_id", # <clinicians>
-  "adrs_id", # <clinicians>
   "city_town", # <clinicians>
   "zip_code", # <clinicians>
   "telephone_number", # <clinicians>
   "ind_assgn", # <clinicians>
   "grp_assgn", # <clinicians>
-  "identifier", # <drs_clinics_id>
   "year", # <compare_hcpcs>
   "state", # <compare_hcpcs>
   "hcpcs_code", # <compare_hcpcs>
@@ -256,6 +257,7 @@ utils::globalVariables(c(
   "y", # <hospitals>
   "address_line_1", # <hospitals>
   "address_line_2", # <hospitals>
+  "organization_name", # <hospitals>
   "doing_business_as_name", # <hospitals>
   "associate_id", # <hospitals>
   "enrollment_id", # <hospitals>
@@ -284,6 +286,7 @@ utils::globalVariables(c(
   "type", # <asc_ifed_enrollment>
   "organization_name", # <asc_ifed_enrollment>
   "zip_code", # <asc_ifed_enrollment>
+  "y", # <laboratories>
   "pgm_trmntn_cd", # <laboratories>
   "crtfctn_actn_type_cd", # <laboratories>
   "cmplnc_stus_cd", # <laboratories>
@@ -585,6 +588,8 @@ utils::globalVariables(c(
   "y", # <revalidation_date>
   "national_provider_identifier", # <revalidation_date>
   "enrollment_id", # <revalidation_date>
+  "first_name", # <revalidation_date>
+  "last_name", # <revalidation_date>
   "organization_name", # <revalidation_date>
   "enrollment_state_code", # <revalidation_date>
   "provider_type_text", # <revalidation_date>

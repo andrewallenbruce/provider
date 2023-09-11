@@ -15,20 +15,60 @@
 #' Medicaid payments, CLIA has no direct Medicare or Medicaid program
 #' responsibilities.
 #'
+#' ### CLIA Certificate types
+#' There are five different CLIA certificate types which all are effective for a
+#' period of two years:
+#'
+#' Certificate of **Waiver**
+#' Issued to a laboratory to perform only waived tests; does not waive the lab
+#' from all CLIA requirements. Waived tests are laboratory tests that are simple
+#' and easy to perform. Routine inspections are not conducted for waiver labs,
+#' though 2% are visited each year to ensure quality laboratory testing.
+#'
+#' Certificate for **Provider-Performed Microscopy Procedures** (PPM)
+#' Issued to a laboratory in which a physician, midlevel practitioner or dentist
+#' performs limited tests that require microscopic examination. PPM tests are
+#' considered moderate complexity. Waived tests can also be performed under this
+#' certificate type. There are no routine inspections conducted for PPM labs.
+#'
+#' Certificate of **Registration**
+#' Initially issued to a laboratory that has applied for a Certificate of
+#' Compliance or a Certificate of Accreditation, enabling the lab to conduct
+#' moderate/high complexity testing until the survey is performed and the
+#' laboratory found to be in compliance with the CLIA regulations. Includes PPM
+#' and waived testing.
+#'
+#' Certificate of **Compliance**
+#' Allows the laboratory to conduct moderate/high complexity testing and is
+#' issued after an inspection finds the lab to be in compliance with all
+#' applicable CLIA requirements. Includes PPM and waived testing.
+#'
+#' Certificate of **Accreditation**
+#' Exactly the same as the Certificate of Compliance, except that the laboratory
+#' must be accredited by one of the following CMS-approved accreditation
+#' organizations:
+#'
+#'    * American Association for Laboratory Accreditation (AALA)
+#'    * American Association of Blood Banks (AABB)
+#'    * American Osteopathic Association (AOA)
+#'    * American Society for Histocompatibility and Immunogenetics (ASHI)
+#'    * College of American Pathologists (CAP)
+#'    * Commission on Office Laboratory Accreditation (COLA)
+#'    * the Joint Commission (JCAHO)
+#'
 #' ### Links:
 #'   - [Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 #'
 #' *Update Frequency:* **Quarterly**
 #'
 #' @param name Provider or clinical laboratory's name
-#' @param clia CLIA number
-#' @param certificate There are five different CLIA certificate types
-#' which all are effective for a period of two years:
-#'    * `waiver`
-#'    * `compliance`
-#'    * `accreditation`
-#'    * `ppm` (Provider-Performed Microscopy Procedures)
-#'    * `registration`
+#' @param clia 10-character CLIA number
+#' @param certificate CLIA certificate type:
+#'    * `"waiver"`
+#'    * `"compliance"`
+#'    * `"accreditation"`
+#'    * `"ppm"` (Provider-Performed Microscopy Procedures)
+#'    * `"registration"`
 #' @param city City
 #' @param state State
 #' @param zip Zip code
@@ -36,7 +76,7 @@
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @examplesIf interactive()
+#' @examples
 #' laboratories(clia = "11D0265516")
 #' @autoglobal
 #' @export
@@ -49,7 +89,8 @@ laboratories <- function(name = NULL,
                          tidy = TRUE) {
 
   if (!is.null(certificate)) {
-    rlang::arg_match(certificate, c("waiver", "compliance", "accreditation", "ppm", "registration"))
+    rlang::arg_match(certificate,
+    c("waiver", "compliance", "accreditation", "ppm", "registration"))
     certificate <- cert(certificate)
   }
 
@@ -68,27 +109,28 @@ laboratories <- function(name = NULL,
 
   response <- httr2::request(url) |> httr2::req_perform()
 
-  # if (isTRUE(vctrs::vec_is_empty(response$body))) {
-  #
-  #   cli_args <- dplyr::tribble(
-  #     ~x,                  ~y,
-  #     "npi",               as.character(npi),
-  #     "facility_ccn",      as.character(facility_ccn),
-  #     "city",              city,
-  #     "state",             state,
-  #     "zip",               zip) |>
-  #     tidyr::unnest(cols = c(y))
-  #
-  #   cli_args <- purrr::map2(cli_args$x,
-  #                           as.character(cli_args$y),
-  #                           stringr::str_c,
-  #                           sep = ": ",
-  #                           collapse = "")
-  #
-  #   cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-  #   return(invisible(NULL))
-  #
-  # }
+  if (isTRUE(vctrs::vec_is_empty(response$body))) {
+
+    cli_args <- dplyr::tribble(
+      ~x,                  ~y,
+      "name",              name,
+      "clia",              clia,
+      "certificate",       certificate,
+      "city",              city,
+      "state",             state,
+      "zip",               zip) |>
+      tidyr::unnest(cols = c(y))
+
+    cli_args <- purrr::map2(cli_args$x,
+                            as.character(cli_args$y),
+                            stringr::str_c,
+                            sep = ": ",
+                            collapse = "")
+
+    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    return(invisible(NULL))
+
+  }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 

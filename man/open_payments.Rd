@@ -8,16 +8,16 @@ open_payments(
   year,
   npi = NULL,
   covered_type = NULL,
-  first_name = NULL,
-  last_name = NULL,
+  first = NULL,
+  last = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   teaching_hospital = NULL,
-  payer_name = NULL,
+  payer = NULL,
   payer_id = NULL,
-  payment_form = NULL,
-  payment_nature = NULL,
+  pay_form = NULL,
+  pay_nature = NULL,
   offset = 0L,
   tidy = TRUE,
   pivot = FALSE
@@ -32,47 +32,45 @@ available years.}
 
 \item{covered_type}{Type of covered recipient, e.g.,
 \itemize{
-\item \verb{Covered Recipient Physician}
-\item \verb{Covered Recipient Non-Physician Practitioner}
-\item \verb{Covered Recipient Teaching Hospital}
+\item \code{"Physician"}
+\item \code{"Non-Physician Practitioner"}
+\item \code{"Teaching Hospital"}
 }}
 
-\item{first_name}{Covered recipient's first name}
+\item{first, last}{Covered recipient's first and/or last name}
 
-\item{last_name}{Covered recipient's last name}
+\item{city}{Covered recipient's city}
 
-\item{city}{City}
+\item{state}{Covered recipient's state abbreviation}
 
-\item{state}{State, abbreviation}
-
-\item{zip}{Zip code}
+\item{zip}{Covered recipient's zip code}
 
 \item{teaching_hospital}{Name of teaching hospital, e.g.
 \verb{Vanderbilt University Medical Center}}
 
-\item{payer_name}{Paying entity's name. Examples:
+\item{payer}{Paying entity's name; examples:
 \itemize{
-\item \verb{Pharmacosmos Therapeutics Inc.}
-\item \verb{Getinge USA Sales, LLC}
-\item \verb{Agiliti Health, Inc.}
-\item \verb{OrthoScan, Inc.}
+\item \code{"Pharmacosmos Therapeutics Inc."}
+\item \code{"Getinge USA Sales, LLC"}
+\item \code{"Agiliti Health, Inc."}
+\item \code{"OrthoScan, Inc."}
 }}
 
 \item{payer_id}{Paying entity's unique Open Payments ID}
 
-\item{payment_form}{Form of payment, examples:
+\item{pay_form}{Form of payment, examples:
 \itemize{
-\item \verb{Stock option}
-\item \verb{Cash or cash equivalent}
-\item \verb{In-kind items and services}
+\item \code{"Stock option"}
+\item \code{"Cash or cash equivalent"}
+\item \code{"In-kind items and services"}
 }}
 
-\item{payment_nature}{Nature of payment or transfer of value, examples:
+\item{pay_nature}{Nature of payment or transfer of value; examples:
 \itemize{
-\item \verb{Royalty or License}
-\item \verb{Charitable Contribution}
-\item \verb{Current or prospective ownership or investment interest}
-\item \verb{Food and Beverage}
+\item \code{"Royalty or License"}
+\item \code{"Charitable Contribution"}
+\item \code{"Current or prospective ownership or investment interest"}
+\item \code{"Food and Beverage"}
 }}
 
 \item{offset}{offset; API pagination}
@@ -129,10 +127,10 @@ speak directly to the health care provider for a better understanding.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-open_payments(npi = 1043218118, year = 2021)
-open_payments(payment_nature = "Royalty or License")
-open_payments(payment_form = "Stock option")
-open_payments(payer_name = "Adaptive Biotechnologies Corporation")
+open_payments(year = 2021, npi = 1043218118)
+open_payments(pay_nature = "Royalty or License")
+open_payments(pay_form = "Stock option")
+open_payments(payer = "Adaptive Biotechnologies Corporation")
 open_payments(teaching_hospital = "Nyu Langone Hospitals")
 \dontshow{\}) # examplesIf}
 }

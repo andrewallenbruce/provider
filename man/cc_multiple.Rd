@@ -30,8 +30,8 @@ cc_multiple(
 helper function \code{cc_multiple_years()} to return a vector of
 currently available years.}
 
-\item{level}{Geographic level of data; options are \code{National}, \code{State},
-and \code{County}}
+\item{level}{Geographic level of data; options are \code{"National"}, \code{"State"},
+and \code{"County"}}
 
 \item{sublevel}{The state and/or county where the Medicare beneficiary
 resides. The values include the 50 United States, District of Columbia,
@@ -42,20 +42,14 @@ are identified by "National'.}
 resides. This column will be blank for data aggregated at the National
 level or for Puerto Rico and Virgin Islands.}
 
-\item{age_group}{Identifies the age level of the population that the data has
-been aggregated. A value of \code{All} indicates the data in the row represents
-all Fee-for-Service Medicare Beneficiaries. A value of \verb{<65} or \verb{65+}
-indicates that the data is aggregated by the age of the Medicare
-Beneficiaries at the end of the calendar year.}
+\item{age_group}{Population age level at which the data has been aggregated.
+\code{"All"} includes all Fee-for-Service Medicare beneficiaries. \code{"<65"} or
+\code{"65+"} returns data by those age groups.}
 
-\item{demographic}{Identifies the demographic level of the population that the
-data has been aggregated. A value of \code{All} indicates the data in the row
-represents all Fee-for-Service Medicare beneficiaries. A value of \code{Sex}
-indicates that the data has been aggregated by the Medicare beneficiary's
-sex. A value of \code{Race} indicates that the data has been aggregated by the
-Medicare beneficiary's race. A value of \verb{Dual Status} indicates that the
-data has been aggregated by the Medicare beneficiary's dual eligibility
-status.}
+\item{demographic}{Population demographic level at which the data has been
+aggregated. \code{"All"} includes all Fee-for-Service Medicare beneficiaries.
+\code{"Sex"} aggregates by beneficiary gender,  \code{"Race"} by beneficiary race.
+\code{"Dual Status"} aggregates by the beneficiary's dual eligibility status.}
 
 \item{subdemo}{For \code{Sex}, a beneficiary’s sex is classified
 as Male or Female and is identified using information from the CMS
@@ -70,10 +64,10 @@ Medicaid benefits.}
 
 \item{mcc}{To classify MCC for each Medicare beneficiary, the 21 chronic
 conditions are counted and grouped into four categories:
-- \verb{0 to 1}
-- \verb{2 to 3}
-- \verb{4 to 5}
-- \verb{6+}}
+- \code{"0 to 1"}
+- \code{"2 to 3"}
+- \code{"4 to 5"}
+- \code{"6+"}}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
 }

@@ -7,11 +7,11 @@
 revalidation_date(
   npi = NULL,
   enroll_id = NULL,
-  first_name = NULL,
-  last_name = NULL,
-  org_name = NULL,
+  first = NULL,
+  last = NULL,
+  organization = NULL,
   state = NULL,
-  enroll_type = NULL,
+  enroll_code = NULL,
   enroll_desc = NULL,
   specialty = NULL,
   tidy = TRUE
@@ -22,18 +22,20 @@ revalidation_date(
 
 \item{enroll_id}{Enrollment ID}
 
-\item{first_name}{First name of individual provider}
+\item{first}{First name of individual provider}
 
-\item{last_name}{Last name of individual provider}
+\item{last}{Last name of individual provider}
 
-\item{org_name}{Legal business name of organizational provider}
+\item{organization}{Legal business name of organizational provider}
 
 \item{state}{Enrollment state}
 
-\item{enroll_type}{Provider enrollment type code (\code{1} if \emph{Part A};
-\code{2} if \emph{DME}; \code{3} if \emph{Non-DME Part B})}
-
-\item{enroll_desc}{Provider type description}
+\item{enroll_code, enroll_desc}{Provider enrollment type code or description:
+\itemize{
+\item \code{1} = \code{"Part A"}
+\item \code{2} = \code{"DME"}
+\item \code{3} = \code{"Non-DME Part B"}
+}}
 
 \item{specialty}{Enrollment specialty}
 
@@ -71,6 +73,6 @@ their providers.
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 revalidation_date(enroll_id = "I20031110000070")
 revalidation_date(enroll_id = "O20110620000324")
-revalidation_date(state = "FL", enroll_type = 3, specialty = "General Practice")
+revalidation_date(state = "FL", enroll_code = 3, specialty = "General Practice")
 \dontshow{\}) # examplesIf}
 }

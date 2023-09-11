@@ -11,12 +11,10 @@
 #' *Update Frequency:* **Annually**
 #'
 #' @param year integer (*required*); Year in `YYYY` format. Run helper function
-#'    `by_provider_years()` to return a vector of the years
-#'    currently available.
+#'    `by_provider_years()` to return a vector of the years currently available.
 #' @param npi National Provider Identifier for the rendering provider on the claim.
-#' @param first_name Individual provider's first name.
-#' @param last_name Individual provider's last name.
-#' @param organization_name Organization name.
+#' @param first,last Individual provider's first and/or last name
+#' @param organization Organization name.
 #' @param credential Individual provider's credentials.
 #' @param gender Individual provider's gender.
 #' @param entype Provider entity type.
@@ -58,9 +56,9 @@
 #' @export
 by_provider <- function(year,
                         npi         = NULL,
-                        first_name  = NULL,
-                        last_name   = NULL,
-                        organization_name = NULL,
+                        first  = NULL,
+                        last   = NULL,
+                        organization = NULL,
                         credential  = NULL,
                         gender      = NULL,
                         entype      = NULL,
@@ -76,7 +74,7 @@ by_provider <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, values = as.character(by_provider_years()))
+  year <- rlang::arg_match(year, as.character(by_provider_years()))
 
   if (!is.null(npi))  {npi <- npi_check(npi)}
   if (!is.null(zip))  {zip <- as.character(zip)}
@@ -92,9 +90,9 @@ by_provider <- function(year,
   args <- dplyr::tribble(
                           ~param, ~arg,
                     "Rndrng_NPI",  npi,
-    "Rndrng_Prvdr_Last_Org_Name",  last_name,
-    "Rndrng_Prvdr_Last_Org_Name",  organization_name,
-       "Rndrng_Prvdr_First_Name",  first_name,
+       "Rndrng_Prvdr_First_Name",  first,
+    "Rndrng_Prvdr_Last_Org_Name",  last,
+    "Rndrng_Prvdr_Last_Org_Name",  organization,
           "Rndrng_Prvdr_Crdntls",  credential,
              "Rndrng_Prvdr_Gndr",  gender,
            "Rndrng_Prvdr_Ent_Cd",  entype,
@@ -118,9 +116,9 @@ by_provider <- function(year,
       ~x,             ~y,
       "year",         year,
       "npi",          npi,
-      "last_name",    last_name,
-      "organization_name",    organization_name,
-      "first_name",   first_name,
+      "first",        first,
+      "last",         last,
+      "organization", organization,
       "credential",   credential,
       "gender",       gender,
       "entype",       entype,
@@ -162,9 +160,9 @@ by_provider <- function(year,
                    sep = " ") |>
       dplyr::select(year,
                     npi            = rndrng_npi,
-                    first_name     = rndrng_prvdr_first_name,
-                    middle_name    = rndrng_prvdr_mi,
-                    last_name      = rndrng_prvdr_last_org_name,
+                    first     = rndrng_prvdr_first_name,
+                    middle    = rndrng_prvdr_mi,
+                    last      = rndrng_prvdr_last_org_name,
                     credential     = rndrng_prvdr_crdntls,
                     gender         = rndrng_prvdr_gndr,
                     entity_type    = rndrng_prvdr_ent_cd,

@@ -35,15 +35,14 @@
 #'    service furnished by the provider is a HCPCS listed on the Medicare Part
 #'    B Drug Average Sales Price (ASP) File.
 #' @param pos Identifies whether the place of service submitted on claims
-#'    is a facility (`F`) or non-facility (`O`). Non-facility
+#'    is a facility (`"F"`) or non-facility (`"O"`). Non-facility
 #'    is generally an office setting.
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' by_geography(hcpcs_code = "0002A", year = 2020)
-#'
+#' by_geography(year = 2020, hcpcs_code = "0002A")
 #' @autoglobal
 #' @export
 by_geography <- function(year,
@@ -58,12 +57,19 @@ by_geography <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(by_geography_years()))
+  rlang::arg_match(year, as.character(by_geography_years()))
 
+  if (!is.null(level))      {rlang::arg_match(level, c("National", "State"))}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
-  if (!is.null(pos))        {pos <- pos_char(pos)}
   if (!is.null(fips))       {fips <- as.character(fips)}
   if (!is.null(drug))       {drug <- tf_2_yn(drug)}
+
+  if (!is.null(pos)) {
+    pos <- pos_char(pos)
+    rlang::arg_match(pos, c("F", "O"))
+    }
+
+
   if (!is.null(state) && (state %in% state.abb)) {
     state <- dplyr::tibble(x = state.abb,
                   y = state.name) |>

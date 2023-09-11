@@ -7,9 +7,9 @@
 by_service(
   year,
   npi = NULL,
-  last_name = NULL,
-  first_name = NULL,
-  organization_name = NULL,
+  first = NULL,
+  last = NULL,
+  organization = NULL,
   credential = NULL,
   gender = NULL,
   entype = NULL,
@@ -32,62 +32,65 @@ by_service(
 \code{by_service_years()} to return a vector of the years
 currently available.}
 
-\item{npi}{National Provider Identifier for the rendering provider on the claim.}
+\item{npi}{National Provider Identifier for the rendering provider on the claim}
 
-\item{last_name}{Individual provider's last name.}
+\item{first, last}{Individual provider's name}
 
-\item{first_name}{Individual provider's first name.}
+\item{organization}{Organization name}
 
-\item{organization_name}{Organization name.}
+\item{credential}{Individual provider's credentials}
 
-\item{credential}{Individual provider's credentials.}
+\item{gender}{Individual provider's gender; \code{"F"} (Female), \code{"M"} (Male)}
 
-\item{gender}{Individual provider's gender.}
+\item{entype}{Provider entity type; \code{"I"} (Individual), \code{"O"} (Organization)}
 
-\item{entype}{Provider entity type.}
+\item{city}{City where provider is located}
 
-\item{city}{City where provider is located.}
+\item{state}{State where provider is located}
 
-\item{state}{State where provider is located.}
+\item{zip}{Provider’s zip code}
 
-\item{zip}{Provider’s zip code.}
+\item{fips}{Provider's state FIPS code}
 
-\item{fips}{Provider's state FIPS code.}
-
-\item{ruca}{Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
-was cross walked to the USDA's 2010 RUCA Codes. Choices are:
-- \strong{Metro Area Core}
-- \code{1}: Primary flow within Urbanized Area (UA)
-- \code{1.1}: Secondary flow 30-50\% to larger UA
-- \strong{Metro Area High Commuting}
-- \code{2}: Primary flow 30\% or more to UA
-- \code{2.1}: Secondary flow 30-50\% to larger UA
+\item{ruca}{Rural-Urban Commuting Area Code (RUCA). Choices are:
+\itemize{
+\item \strong{Metro Area Core}
+\itemize{
+\item \code{"1"}: Primary flow within Urbanized Area (UA)
+\item \code{"1.1"}: Secondary flow 30-50\% to larger UA
+}
+\item \strong{Metro Area High Commuting}
+\itemize{
+\item \code{"2"}: Primary flow 30\% or more to UA
+\item \code{"2.1"}: Secondary flow 30-50\% to larger UA
 - \strong{Metro Area Low Commuting}
-- \code{3}: Primary flow 10-30\% to UA
+\item \code{3}: Primary flow 10-30\% to UA
 - \strong{Micro Area Core}
-- \code{4}: Primary flow within large Urban Cluster (10k - 49k)
-- \code{4.1}: Secondary flow 30-50\% to UA
+\item \code{4}: Primary flow within large Urban Cluster (10k - 49k)
+\item \code{4.1}: Secondary flow 30-50\% to UA
 - \strong{Micro High Commuting}
-- \code{5}: Primary flow 30\% or more to large UC
-- \code{5.1}: Secondary flow 30-50\% to UA
+\item \code{5}: Primary flow 30\% or more to large UC
+\item \code{5.1}: Secondary flow 30-50\% to UA
 - \strong{Micro Low Commuting}
-- \code{6}: Primary flow 10-30\% to large UC
+\item \code{6}: Primary flow 10-30\% to large UC
 - \strong{Small Town Core}
-- \code{7}: Primary flow within small UC (2.5k - 9.9k)
-- \code{7.1}: Secondary flow 30-50\% to UA
-- \code{7.2}: Secondary flow 30-50\% to large UC
+\item \code{7}: Primary flow within small UC (2.5k - 9.9k)
+\item \code{7.1}: Secondary flow 30-50\% to UA
+\item \code{7.2}: Secondary flow 30-50\% to large UC
 - \strong{Small Town High Commuting}
-- \code{8}: Primary flow 30\% or more to small UC
-- \code{8.1}: Secondary flow 30-50\% to UA
-- \code{8.2}: Secondary flow 30-50\% to large UC
+\item \code{8}: Primary flow 30\% or more to small UC
+\item \code{8.1}: Secondary flow 30-50\% to UA
+\item \code{8.2}: Secondary flow 30-50\% to large UC
 - \strong{Small Town Low Commuting}
-- \code{9}: Primary flow 10-30\% to small UC
+\item \code{9}: Primary flow 10-30\% to small UC
 - \strong{Rural Areas}
-- \code{10}: Primary flow to tract outside a UA or UC
-- \code{10.1}: Secondary flow 30-50\% to UA
-- \code{10.2}: Secondary flow 30-50\% to large UC
-- \code{10.3}: Secondary flow 30-50\% to small UC
-- \code{99}: Zero population and no rural-urban identifier information}
+\item \code{10}: Primary flow to tract outside a UA or UC
+\item \code{10.1}: Secondary flow 30-50\% to UA
+\item \code{10.2}: Secondary flow 30-50\% to large UC
+\item \code{10.3}: Secondary flow 30-50\% to small UC
+- \code{99}: Zero population and no rural-urban identifier information
+}
+}}
 
 \item{country}{Country where provider is located.}
 
@@ -115,7 +118,7 @@ furnished by the provider is a HCPCS listed on the Medicare Part B Drug
 Average Sales Price (ASP) File.}
 
 \item{pos}{Identifies whether the place of service submitted on the claims
-is a facility (\code{F}) or non-facility (\code{O}). Non-facility is generally an
+is a facility (\code{"F"}) or non-facility (\code{"O"}). Non-facility is generally an
 office setting; however other entities are included in non-facility.}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}

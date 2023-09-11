@@ -16,17 +16,14 @@
 #'    is an employee
 #' @param enroll_id_ind Enrollment ID of provider reassigning their benefits or
 #'    is an employee
-#' @param first_name First name of provider who is reassigning their benefits
+#' @param first,last First and/or last name of provider who is reassigning their benefits
 #'    or is an employee
-#' @param last_name Last name of provider who is reassigning their benefits or
-#'    is an employee
 #' @param state_ind Enrollment state of provider who is reassigning their
 #'    benefits or is an employee
 #' @param specialty Enrollment specialty of the provider who is
 #'    reassigning their benefits or is an employee
 #' @param pac_id_org PAC ID of provider who is receiving reassignment or is
-#'    the employer. Providers enroll at the state level, so one PAC ID may be
-#'    associated with multiple Enrollment IDs.
+#'    the employer.
 #' @param enroll_id_org Enrollment ID of provider who is receiving
 #'    reassignment or is the employer
 #' @param state_org Enrollment state of provider who is receiving
@@ -45,19 +42,19 @@
 #' revalidation_reassign(pac_id_org = 3173525888)
 #' @autoglobal
 #' @export
-revalidation_reassign <- function(npi             = NULL,
-                                  pac_id_ind      = NULL,
-                                  enroll_id_ind   = NULL,
-                                  first_name      = NULL,
-                                  last_name       = NULL,
-                                  state_ind       = NULL,
-                                  specialty       = NULL,
-                                  pac_id_org      = NULL,
-                                  enroll_id_org   = NULL,
-                                  state_org       = NULL,
-                                  business_name   = NULL,
-                                  record_type     = NULL,
-                                  tidy            = TRUE) {
+revalidation_reassign <- function(npi = NULL,
+                                  pac_id_ind = NULL,
+                                  enroll_id_ind = NULL,
+                                  first = NULL,
+                                  last = NULL,
+                                  state_ind = NULL,
+                                  specialty = NULL,
+                                  pac_id_org = NULL,
+                                  enroll_id_org = NULL,
+                                  state_org = NULL,
+                                  business_name = NULL,
+                                  record_type = NULL,
+                                  tidy = TRUE) {
 
   if (!is.null(npi)) {npi <- npi_check(npi)}
   if (!is.null(pac_id_ind)) {pac_id_ind <- pac_check(pac_id_ind)}
@@ -79,8 +76,8 @@ revalidation_reassign <- function(npi             = NULL,
     "Individual NPI",                   npi,
     "Individual PAC ID",                pac_id_ind,
     "Individual Enrollment ID",         enroll_id_ind,
-    "Individual First Name",            first_name,
-    "Individual Last Name",             last_name,
+    "Individual First Name",            first,
+    "Individual Last Name",             last,
     "Individual State Code",            state_ind,
     "Individual Specialty Description", specialty,
     "Group PAC ID",                     pac_id_org,
@@ -102,8 +99,8 @@ revalidation_reassign <- function(npi             = NULL,
       "npi",              npi,
       "pac_id_ind",       pac_id_ind,
       "enroll_id_ind",    enroll_id_ind,
-      "first_name",       first_name,
-      "last_name",        last_name,
+      "first",       first,
+      "last",        last,
       "state_ind",        state_ind,
       "specialty",        specialty,
       "pac_id_org",       pac_id_org,
@@ -139,8 +136,8 @@ revalidation_reassign <- function(npi             = NULL,
         npi                   = individual_npi,
         pac_id_ind            = individual_pac_id,
         enroll_id_ind         = individual_enrollment_id,
-        first_name            = individual_first_name,
-        last_name             = individual_last_name,
+        first                 = individual_first_name,
+        last                  = individual_last_name,
         state_ind             = individual_state_code,
         enroll_specialty_ind  = individual_specialty_description,
         ind_associations      = individual_total_employer_associations,

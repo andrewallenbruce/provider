@@ -17,7 +17,7 @@
 #' @param enroll_state Hospital’s enrollment state
 #' @param specialty_code Enrollment specialty type code
 #' @param pac_id_org Hospital’s PAC ID
-#' @param organization_name Hospital’s legal business name
+#' @param organization Hospital’s legal business name
 #' @param doing_business_as Hospital’s doing-business-as name
 #' @param city City of the hospital’s practice location address
 #' @param state State of the hospital’s practice location address
@@ -38,7 +38,7 @@ hospitals <- function(npi               = NULL,
                       enroll_state      = NULL,
                       specialty_code    = NULL,
                       pac_id_org        = NULL,
-                      organization_name = NULL,
+                      organization = NULL,
                       doing_business_as = NULL,
                       city              = NULL,
                       state             = NULL,
@@ -60,7 +60,7 @@ hospitals <- function(npi               = NULL,
     "ENROLLMENT STATE",       enroll_state,
     "PROVIDER TYPE CODE",     specialty_code,
     "ASSOCIATE ID",           pac_id_org,
-    "ORGANIZATION NAME",      organization_name,
+    "ORGANIZATION NAME",      organization,
     "DOING BUSINESS AS NAME", doing_business_as,
     "CITY",                   city,
     "STATE",                  state,
@@ -83,7 +83,7 @@ hospitals <- function(npi               = NULL,
       "enroll_state",      enroll_state,
       "specialty_code",    specialty_code,
       "pac_id_org",        pac_id_org,
-      "organization_name", organization_name,
+      "organization",      organization,
       "doing_business_as", doing_business_as,
       "city",              city,
       "state",             state,
@@ -113,7 +113,7 @@ hospitals <- function(npi               = NULL,
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
       dplyr::select(npi,
-                    organization_name,
+                    organization = organization_name,
                     doing_business_as      = doing_business_as_name,
                     pac_id_org             = associate_id,
                     enroll_id_org          = enrollment_id,

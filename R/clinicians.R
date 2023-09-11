@@ -14,10 +14,8 @@
 #' @param pac_id_ind Unique individual clinician ID assigned by PECOS
 #' @param enroll_id_ind Unique ID for the clinician enrollment that is the source
 #'   for the data in the observation
-#' @param first_name Individual clinician first name
-#' @param middle_name Individual clinician middle name
-#' @param last_name Individual clinician last name
-#' @param gender Individual clinician gender
+#' @param first,middle,last Individual clinician's first, middle, or last name
+#' @param gender Individual clinician gender; `"F"` (Female) or `"M"` (Male)
 #' @param school Individual clinician’s medical school
 #' @param grad_year Individual clinician’s medical school graduation year
 #' @param specialty Primary medical specialty reported by the individual
@@ -42,9 +40,9 @@
 clinicians <- function(npi = NULL,
                        pac_id_ind = NULL,
                        enroll_id_ind = NULL,
-                       first_name = NULL,
-                       middle_name = NULL,
-                       last_name = NULL,
+                       first = NULL,
+                       middle = NULL,
+                       last = NULL,
                        gender = NULL,
                        school = NULL,
                        grad_year = NULL,
@@ -64,15 +62,16 @@ clinicians <- function(npi = NULL,
   if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
   if (!is.null(zip))           {zip        <- as.character(zip)}
+  if (!is.null(gender))        {rlang::arg_match(gender, c("F", "M"))}
 
   args <- dplyr::tribble(
     ~param,               ~arg,
     "NPI",                npi,
     "Ind_PAC_ID",         pac_id_ind,
     "Ind_enrl_ID",        enroll_id_ind,
-    "frst_nm",            first_name,
-    "mid_nm",             middle_name,
-    "lst_nm",             last_name,
+    "frst_nm",            first,
+    "mid_nm",             middle,
+    "lst_nm",             last,
     "gndr",               gender,
     "med_sch",            school,
     "grd_yr",             grad_year,
@@ -84,7 +83,7 @@ clinicians <- function(npi = NULL,
     "zip_code",           zip)
 
   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-                "[SELECT * FROM ", drs_clinics_id(), "]",
+                "[SELECT * FROM ", clinic_id(), "]",
                 encode_param(args, type = "sql"),
                 "[LIMIT 10000 OFFSET ", offset, "]")
 
@@ -103,9 +102,9 @@ clinicians <- function(npi = NULL,
       "npi",           npi,
       "pac_id_ind",    pac_id_ind,
       "enroll_id_ind", enroll_id_ind,
-      "first_name",    first_name,
-      "middle_name",   middle_name,
-      "last_name",     last_name,
+      "first",         first,
+      "middle",        middle,
+      "last",          last,
       "gender",        gender,
       "school",        school,
       "grad_year",     grad_year,
@@ -140,42 +139,42 @@ clinicians <- function(npi = NULL,
                     telehlth = yn_logical(telehlth)) |>
       dplyr::select(
         npi,
-        pac_id_ind             = ind_pac_id,
-        enroll_id_ind          = ind_enrl_id,
-        first_name             = frst_nm,
-        middle_name            = mid_nm,
-        last_name              = lst_nm,
-        suffix                 = suff,
-        gender                 = gndr,
-        credential             = cred,
-        school                 = med_sch,
-        grad_year              = grd_yr,
-        specialty              = pri_spec,
-        specialty_sec          = sec_spec_all,
+        pac_id_ind = ind_pac_id,
+        enroll_id_ind = ind_enrl_id,
+        first = frst_nm,
+        middle = mid_nm,
+        last = lst_nm,
+        suffix = suff,
+        gender = gndr,
+        credential = cred,
+        school = med_sch,
+        grad_year = grd_yr,
+        specialty = pri_spec,
+        specialty_sec = sec_spec_all,
         facility_name,
-        org_pac_id,
-        org_members            = num_org_mem,
+        pac_id_org = org_pac_id,
+        members = num_org_mem,
         address,
-        address_id             = adrs_id,
-        city                   = city_town,
+        # address_id = adrs_id,
+        city = city_town,
         state,
-        zip                    = zip_code,
-        phone                  = telephone_number,
-        telehealth             = telehlth,
-        assign_ind             = ind_assgn,
-        assign_group           = grp_assgn)
+        zip = zip_code,
+        phone = telephone_number,
+        telehealth = telehlth,
+        assign_ind = ind_assgn,
+        assign_group = grp_assgn)
     }
   return(results)
 }
 
 #' @autoglobal
 #' @noRd
-drs_clinics_id <- function() {
+clinic_id <- function() {
 
   response <- httr2::request(
     "https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/mj5m-pzi6?show-reference-ids=true") |>
     httr2::req_perform() |>
     httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 
-  response$distribution |> dplyr::pull(identifier)
+  return(response$distribution$identifier)
 }

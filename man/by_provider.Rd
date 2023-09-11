@@ -7,9 +7,9 @@
 by_provider(
   year,
   npi = NULL,
-  first_name = NULL,
-  last_name = NULL,
-  organization_name = NULL,
+  first = NULL,
+  last = NULL,
+  organization = NULL,
   credential = NULL,
   gender = NULL,
   entype = NULL,
@@ -26,16 +26,13 @@ by_provider(
 }
 \arguments{
 \item{year}{integer (\emph{required}); Year in \code{YYYY} format. Run helper function
-\code{by_provider_years()} to return a vector of the years
-currently available.}
+\code{by_provider_years()} to return a vector of the years currently available.}
 
 \item{npi}{National Provider Identifier for the rendering provider on the claim.}
 
-\item{first_name}{Individual provider's first name.}
+\item{first, last}{Individual provider's first and/or last name}
 
-\item{last_name}{Individual provider's last name.}
-
-\item{organization_name}{Organization name.}
+\item{organization}{Organization name.}
 
 \item{credential}{Individual provider's credentials.}
 

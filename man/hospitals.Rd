@@ -11,7 +11,7 @@ hospitals(
   enroll_state = NULL,
   specialty_code = NULL,
   pac_id_org = NULL,
-  organization_name = NULL,
+  organization = NULL,
   doing_business_as = NULL,
   city = NULL,
   state = NULL,
@@ -32,7 +32,7 @@ hospitals(
 
 \item{pac_id_org}{Hospital’s PAC ID}
 
-\item{organization_name}{Hospital’s legal business name}
+\item{organization}{Hospital’s legal business name}
 
 \item{doing_business_as}{Hospital’s doing-business-as name}
 

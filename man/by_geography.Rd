@@ -29,7 +29,7 @@ aggregated at the National level are identified by the word 'National'.}
 furnished by the provider.}
 
 \item{pos}{Identifies whether the place of service submitted on claims
-is a facility (\code{F}) or non-facility (\code{O}). Non-facility
+is a facility (\code{"F"}) or non-facility (\code{"O"}). Non-facility
 is generally an office setting.}
 
 \item{level}{Level of geography by which the data will be aggregated. \code{State}
@@ -71,6 +71,6 @@ and state-wide by HCPCS code and place of service.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-by_geography(hcpcs_code = "0002A", year = 2020)
+by_geography(year = 2020, hcpcs_code = "0002A")
 \dontshow{\}) # examplesIf}
 }

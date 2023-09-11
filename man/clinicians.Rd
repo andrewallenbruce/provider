@@ -8,9 +8,9 @@ clinicians(
   npi = NULL,
   pac_id_ind = NULL,
   enroll_id_ind = NULL,
-  first_name = NULL,
-  middle_name = NULL,
-  last_name = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
   gender = NULL,
   school = NULL,
   grad_year = NULL,
@@ -32,13 +32,9 @@ clinicians(
 \item{enroll_id_ind}{Unique ID for the clinician enrollment that is the source
 for the data in the observation}
 
-\item{first_name}{Individual clinician first name}
+\item{first, middle, last}{Individual clinician's first, middle, or last name}
 
-\item{middle_name}{Individual clinician middle name}
-
-\item{last_name}{Individual clinician last name}
-
-\item{gender}{Individual clinician gender}
+\item{gender}{Individual clinician gender; \code{"F"} (Female) or \code{"M"} (Male)}
 
 \item{school}{Individual clinician’s medical school}
 

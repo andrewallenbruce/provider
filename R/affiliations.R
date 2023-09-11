@@ -11,10 +11,10 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi 10-digit National Provider Identifier
-#' @param pac_id 10-digit Provider associate level variable. Links all
+#' @param pac_id_ind 10-digit Provider associate level variable. Links all
 #' entity-level information and may be associated with multiple enrollment IDs
 #' if the individual or organization enrolled multiple times.
-#' @param first_name,middle_name,last_name Individual clinician's first, middle, or last name
+#' @param first,middle,last Individual clinician's first, middle, or last name
 #' @param facility_type Facilities can fall into the following type categories:
 #'    - `"Hospital"`
 #'    - `"Long-term care hospital"` (LTCH)
@@ -44,36 +44,39 @@
 #' affiliations(parent_ccn = 670055)
 #' @autoglobal
 #' @export
-affiliations <- function(npi           = NULL,
-                         pac_id        = NULL,
-                         first_name    = NULL,
-                         middle_name   = NULL,
-                         last_name     = NULL,
+affiliations <- function(npi = NULL,
+                         pac_id_ind = NULL,
+                         first = NULL,
+                         middle = NULL,
+                         last = NULL,
                          facility_type = NULL,
-                         facility_ccn  = NULL,
-                         parent_ccn    = NULL,
-                         offset        = 0L,
-                         tidy          = TRUE) {
+                         facility_ccn = NULL,
+                         parent_ccn = NULL,
+                         offset = 0L,
+                         tidy = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac_id))        {pac_id       <- pac_check(pac_id)}
+  if (!is.null(pac_id_ind))    {pac_id_ind   <- pac_check(pac_id_ind)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
+
   if (!is.null(facility_type)) {
-    rlang::arg_match(facility_type, c("Hospital", "Long-term care hospital",
+    rlang::arg_match(facility_type, c("Hospital",
+                                      "Long-term care hospital",
                                       "Nursing home",
                                       "Inpatient rehabilitation facility",
                                       "Home health agency",
-                                      "Skilled nursing facility", "Hospice",
+                                      "Skilled nursing facility",
+                                      "Hospice",
                                       "Dialysis facility"))}
 
   args <- dplyr::tribble(
     ~param,                                         ~arg,
     "npi",                                          npi,
-    "ind_pac_id",                                   pac_id,
-    "frst_nm",                                      first_name,
-    "mid_nm",                                       middle_name,
-    "lst_nm",                                       last_name,
+    "ind_pac_id",                                   pac_id_ind,
+    "frst_nm",                                      first,
+    "mid_nm",                                       middle,
+    "lst_nm",                                       last,
     "facility_type",                                facility_type,
     "facility_affiliations_certification_number",   facility_ccn,
     "facility_type_certification_number",           parent_ccn)
@@ -96,10 +99,10 @@ affiliations <- function(npi           = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "pac_id",        pac_id,
-      "first_name",    first_name,
-      "middle_name",   middle_name,
-      "last_name",     last_name,
+      "pac_id_ind",    pac_id_ind,
+      "first",         first,
+      "middle",        middle,
+      "last",          last,
       "facility_type", facility_type,
       "facility_ccn",  facility_ccn,
       "parent_ccn",    parent_ccn) |>
@@ -115,20 +118,6 @@ affiliations <- function(npi           = NULL,
     return(invisible(NULL))
 
   }
-
-  # if (vctrs::vec_size(results) == 500) {
-  #
-  #   url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-  #                 "[SELECT * FROM ", aff_id(), "]",
-  #                 encode_param(args, type = "sql"),
-  #                 "[LIMIT 10000 OFFSET ", "501", "]")
-  #
-  #   response <- httr2::request(encode_url(url)) |>
-  #     httr2::req_error(body = error_body) |>
-  #     httr2::req_perform()
-  #
-  #   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
-  # }
 
   if (tidy) {
     results <- janitor::clean_names(results) |>
@@ -157,5 +146,5 @@ aff_id <- function() {
     httr2::req_perform() |>
     httr2::resp_body_json(simplifyVector = TRUE)
 
-  response$distribution$identifier
+  return(response$distribution$identifier)
 }

@@ -44,31 +44,30 @@
 #'    available years.
 #' @param npi Covered recipient's National Provider Identifier.
 #' @param covered_type Type of covered recipient, e.g.,
-#'    * `Covered Recipient Physician`
-#'    * `Covered Recipient Non-Physician Practitioner`
-#'    * `Covered Recipient Teaching Hospital`
+#'    * `"Physician"`
+#'    * `"Non-Physician Practitioner"`
+#'    * `"Teaching Hospital"`
 #' @param teaching_hospital Name of teaching hospital, e.g.
 #'    `Vanderbilt University Medical Center`
-#' @param first_name Covered recipient's first name
-#' @param last_name Covered recipient's last name
-#' @param city City
-#' @param state State, abbreviation
-#' @param zip Zip code
-#' @param payer_name Paying entity's name. Examples:
-#'    * `Pharmacosmos Therapeutics Inc.`
-#'    * `Getinge USA Sales, LLC`
-#'    * `Agiliti Health, Inc.`
-#'    * `OrthoScan, Inc.`
+#' @param first,last Covered recipient's first and/or last name
+#' @param city Covered recipient's city
+#' @param state Covered recipient's state abbreviation
+#' @param zip Covered recipient's zip code
+#' @param payer Paying entity's name; examples:
+#'    * `"Pharmacosmos Therapeutics Inc."`
+#'    * `"Getinge USA Sales, LLC"`
+#'    * `"Agiliti Health, Inc."`
+#'    * `"OrthoScan, Inc."`
 #' @param payer_id Paying entity's unique Open Payments ID
-#' @param payment_form Form of payment, examples:
-#'    * `Stock option`
-#'    * `Cash or cash equivalent`
-#'    * `In-kind items and services`
-#' @param payment_nature Nature of payment or transfer of value, examples:
-#'    * `Royalty or License`
-#'    * `Charitable Contribution`
-#'    * `Current or prospective ownership or investment interest`
-#'    * `Food and Beverage`
+#' @param pay_form Form of payment, examples:
+#'    * `"Stock option"`
+#'    * `"Cash or cash equivalent"`
+#'    * `"In-kind items and services"`
+#' @param pay_nature Nature of payment or transfer of value; examples:
+#'    * `"Royalty or License"`
+#'    * `"Charitable Contribution"`
+#'    * `"Current or prospective ownership or investment interest"`
+#'    * `"Food and Beverage"`
 #' @param offset offset; API pagination
 #' @param tidy Tidy output; default is `TRUE`.
 #' @param pivot Pivot output; default is `TRUE`.
@@ -76,51 +75,58 @@
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
-#' open_payments(npi = 1043218118, year = 2021)
-#' open_payments(payment_nature = "Royalty or License")
-#' open_payments(payment_form = "Stock option")
-#' open_payments(payer_name = "Adaptive Biotechnologies Corporation")
+#' open_payments(year = 2021, npi = 1043218118)
+#' open_payments(pay_nature = "Royalty or License")
+#' open_payments(pay_form = "Stock option")
+#' open_payments(payer = "Adaptive Biotechnologies Corporation")
 #' open_payments(teaching_hospital = "Nyu Langone Hospitals")
 #' @autoglobal
 #' @export
 open_payments <- function(year,
-                          npi               = NULL,
-                          covered_type      = NULL,
-                          first_name        = NULL,
-                          last_name         = NULL,
-                          city              = NULL,
-                          state             = NULL,
-                          zip               = NULL,
+                          npi = NULL,
+                          covered_type = NULL,
+                          first = NULL,
+                          last  = NULL,
+                          city = NULL,
+                          state = NULL,
+                          zip = NULL,
                           teaching_hospital = NULL,
-                          payer_name        = NULL,
-                          payer_id          = NULL,
-                          payment_form      = NULL,
-                          payment_nature    = NULL,
-                          offset            = 0L,
-                          tidy              = TRUE,
-                          pivot             = FALSE) {
+                          payer = NULL,
+                          payer_id = NULL,
+                          pay_form = NULL,
+                          pay_nature = NULL,
+                          offset = 0L,
+                          tidy = TRUE,
+                          pivot = FALSE) {
 
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(open_payments_years()))
+  rlang::arg_match(year, as.character(open_payments_years()))
 
   if (!is.null(npi)) {npi  <- npi_check(npi)}
   if (!is.null(zip)) {zip <- as.character(zip)}
+
+  if (!is.null(covered_type)) {
+    rlang::arg_match(covered_type, c("Physician",
+                                     "Non-Physician Practitioner",
+                                     "Teaching Hospital"))
+    covered_type <- paste0("Covered Recipient ", covered_type)
+  }
 
   args <- dplyr::tribble(
     ~param,                                                         ~arg,
     "covered_recipient_npi",                                         npi,
     "covered_recipient_type",                                        covered_type,
-    "covered_recipient_first_name",                                  first_name,
-    "covered_recipient_last_name",                                   last_name,
+    "covered_recipient_first_name",                                  first,
+    "covered_recipient_last_name",                                   last,
     "recipient_city",                                                city,
     "recipient_state",                                               state,
     "recipient_zip_code",                                            zip,
     "teaching_hospital_name",                                        teaching_hospital,
-    "form_of_payment_or_transfer_of_value",                          payment_form,
-    "nature_of_payment_or_transfer_of_value",                        payment_nature,
-    "applicable_manufacturer_or_applicable_gpo_making_payment_name", payer_name,
+    "form_of_payment_or_transfer_of_value",                          pay_form,
+    "nature_of_payment_or_transfer_of_value",                        pay_nature,
+    "applicable_manufacturer_or_applicable_gpo_making_payment_name", payer,
     "applicable_manufacturer_or_applicable_gpo_making_payment_id",   payer_id)
 
   id <- open_payments_ids("General Payment Data") |>
@@ -144,15 +150,15 @@ open_payments <- function(year,
       ~x,                  ~y,
       "npi",               npi,
       "covered_type",      covered_type,
-      "first_name",        first_name,
-      "last_name",         last_name,
+      "first",             first,
+      "last",              last,
       "city",              city,
       "state",             state,
       "zip",               zip,
       "teaching_hospital", teaching_hospital,
-      "payment_form",      payment_form,
-      "payment_nature",    payment_nature,
-      "payer_name",        payer_name,
+      "pay_form",          pay_form,
+      "pay_nature",        pay_nature,
+      "payer",             payer,
       "payer_id",          payer_id) |>
       tidyr::unnest(cols = c(y))
 
@@ -221,9 +227,9 @@ open_payments <- function(year,
                     teach_hosp_ccn       = teaching_hospital_ccn,
                     teach_hosp_id        = teaching_hospital_id,
                     teach_hosp_name      = teaching_hospital_name,
-                    first_name           = covered_recipient_first_name,
-                    middle_name          = covered_recipient_middle_name,
-                    last_name            = covered_recipient_last_name,
+                    first           = covered_recipient_first_name,
+                    middle          = covered_recipient_middle_name,
+                    last            = covered_recipient_last_name,
                     suffix               = covered_recipient_name_suffix,
                     address,
                     city                 = recipient_city,

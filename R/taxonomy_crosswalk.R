@@ -1,4 +1,4 @@
-#' Provider Taxonomy to Medicare Specialty Crosswalk
+#' Taxonomy to Medicare Specialty Crosswalk
 #'
 #' @description
 #' `taxonomy_crosswalk()` allows you to search the types of providers and

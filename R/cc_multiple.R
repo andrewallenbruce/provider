@@ -19,8 +19,8 @@
 #' @param year integer, YYYY, calendar year of Medicare enrollment. Run the
 #'  helper function `cc_multiple_years()` to return a vector of
 #'  currently available years.
-#' @param level Geographic level of data; options are `National`, `State`,
-#'   and `County`
+#' @param level Geographic level of data; options are `"National"`, `"State"`,
+#'   and `"County"`
 #' @param sublevel The state and/or county where the Medicare beneficiary
 #'   resides. The values include the 50 United States, District of Columbia,
 #'   Puerto Rico or U.S. Virgin Islands. Data aggregated at the National level
@@ -28,19 +28,13 @@
 #' @param fips FIPS state and/or county code where the Medicare beneficiary
 #'   resides. This column will be blank for data aggregated at the National
 #'   level or for Puerto Rico and Virgin Islands.
-#' @param age_group Identifies the age level of the population that the data has
-#'   been aggregated. A value of `All` indicates the data in the row represents
-#'   all Fee-for-Service Medicare Beneficiaries. A value of `<65` or `65+`
-#'   indicates that the data is aggregated by the age of the Medicare
-#'   Beneficiaries at the end of the calendar year.
-#' @param demographic Identifies the demographic level of the population that the
-#'   data has been aggregated. A value of `All` indicates the data in the row
-#'   represents all Fee-for-Service Medicare beneficiaries. A value of `Sex`
-#'   indicates that the data has been aggregated by the Medicare beneficiary's
-#'   sex. A value of `Race` indicates that the data has been aggregated by the
-#'   Medicare beneficiary's race. A value of `Dual Status` indicates that the
-#'   data has been aggregated by the Medicare beneficiary's dual eligibility
-#'   status.
+#' @param age_group Population age level at which the data has been aggregated.
+#' `"All"` includes all Fee-for-Service Medicare beneficiaries. `"<65"` or
+#' `"65+"` returns data by those age groups.
+#' @param demographic Population demographic level at which the data has been
+#' aggregated. `"All"` includes all Fee-for-Service Medicare beneficiaries.
+#' `"Sex"` aggregates by beneficiary gender,  `"Race"` by beneficiary race.
+#' `"Dual Status"` aggregates by the beneficiary's dual eligibility status.
 #' @param subdemo For `Sex`, a beneficiary’s sex is classified
 #'   as Male or Female and is identified using information from the CMS
 #'   enrollment database. For `Race`, the race/ethnicity classifications are:
@@ -53,10 +47,10 @@
 #'   Medicaid benefits.
 #' @param mcc To classify MCC for each Medicare beneficiary, the 21 chronic
 #'   conditions are counted and grouped into four categories:
-#'      - `0 to 1`
-#'      - `2 to 3`
-#'      - `4 to 5`
-#'      - `6+`
+#'      - `"0 to 1"`
+#'      - `"2 to 3"`
+#'      - `"4 to 5"`
+#'      - `"6+"`
 #' @param tidy Tidy output; default is `TRUE`.
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #' @format
@@ -84,7 +78,7 @@ cc_multiple <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(cc_multiple_years()))
+  rlang::arg_match(year, as.character(cc_multiple_years()))
 
   if (!is.null(level))       {rlang::arg_match(level, c("National", "State", "County"))}
   if (!is.null(age_group))   {rlang::arg_match(age_group, c("All", "<65", "65+"))}

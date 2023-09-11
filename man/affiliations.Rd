@@ -6,10 +6,10 @@
 \usage{
 affiliations(
   npi = NULL,
-  pac_id = NULL,
-  first_name = NULL,
-  middle_name = NULL,
-  last_name = NULL,
+  pac_id_ind = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
   facility_type = NULL,
   facility_ccn = NULL,
   parent_ccn = NULL,
@@ -20,11 +20,11 @@ affiliations(
 \arguments{
 \item{npi}{10-digit National Provider Identifier}
 
-\item{pac_id}{10-digit Provider associate level variable. Links all
+\item{pac_id_ind}{10-digit Provider associate level variable. Links all
 entity-level information and may be associated with multiple enrollment IDs
 if the individual or organization enrolled multiple times.}
 
-\item{first_name, middle_name, last_name}{Individual clinician's first, middle, or last name}
+\item{first, middle, last}{Individual clinician's first, middle, or last name}
 
 \item{facility_type}{Facilities can fall into the following type categories:
 \itemize{

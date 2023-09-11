@@ -377,7 +377,7 @@ mips_2021 <- function(facility_name = NULL,
 
   if (any(!is.null(c(npi, pac_id_ind, first_name, last_name)))) {
     facility_name <- NULL
-    pac_id_org <- NULL
+    pac_id_org    <- NULL
 
     id <- mips_2021_id("ind")
 
@@ -387,10 +387,10 @@ mips_2021 <- function(facility_name = NULL,
   }
 
   if (any(!is.null(c(facility_name, pac_id_org)))) {
-    npi <- NULL
+    npi        <- NULL
     pac_id_ind <- NULL
     first_name <- NULL
-    last_name <- NULL
+    last_name  <- NULL
 
     id <- mips_2021_id("group")
 
