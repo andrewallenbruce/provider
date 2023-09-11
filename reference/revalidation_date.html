@@ -105,11 +105,11 @@ dates are appended to the list</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">revalidation_date</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  org_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  enroll_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -126,15 +126,15 @@ dates are appended to the list</p>
 <dd><p>Enrollment ID</p></dd>
 
 
-<dt>first_name</dt>
+<dt>first</dt>
 <dd><p>First name of individual provider</p></dd>
 
 
-<dt>last_name</dt>
+<dt>last</dt>
 <dd><p>Last name of individual provider</p></dd>
 
 
-<dt>org_name</dt>
+<dt>organization</dt>
 <dd><p>Legal business name of organizational provider</p></dd>
 
 
@@ -142,13 +142,11 @@ dates are appended to the list</p>
 <dd><p>Enrollment state</p></dd>
 
 
-<dt>enroll_type</dt>
-<dd><p>Provider enrollment type code (<code>1</code> if <em>Part A</em>;
-<code>2</code> if <em>DME</em>; <code>3</code> if <em>Non-DME Part B</em>)</p></dd>
-
-
-<dt>enroll_desc</dt>
-<dd><p>Provider type description</p></dd>
+<dt>enroll_code, enroll_desc</dt>
+<dd><p>Provider enrollment type code or description:</p><ul><li><p><code>1</code> = <code>"Part A"</code></p></li>
+<li><p><code>2</code> = <code>"DME"</code></p></li>
+<li><p><code>3</code> = <code>"Non-DME Part B"</code></p></li>
+</ul></dd>
 
 
 <dt>specialty</dt>
@@ -187,7 +185,7 @@ their providers.</p><div class="section">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, enroll_type <span class="op">=</span> <span class="fl">3</span>, specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, enroll_code <span class="op">=</span> <span class="fl">3</span>, specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

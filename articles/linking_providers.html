@@ -214,38 +214,7 @@ us several avenues to go down:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization_name</span>, <span class="va">pac_id_org</span>, <span class="va">facility_ccn</span>, <span class="va">specialty_code</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="13%">
-<col width="39%">
-<col width="13%">
-<col width="15%">
-<col width="18%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">organization_name</th>
-<th align="left">pac_id_org</th>
-<th align="left">facility_ccn</th>
-<th align="left">specialty_code</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1891785184</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">3577554138</td>
-<td align="left">331302</td>
-<td align="left">00-85</td>
-</tr>
-<tr class="even">
-<td align="left">1407061591</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">3577554138</td>
-<td align="left">33Z302</td>
-<td align="left">00-85</td>
-</tr>
-</tbody>
-</table>
+<pre><code><span><span class="co">#&gt; Error in hospitals(organization_name = "Elizabethtown Community Hospital"): unused argument (organization_name = "Elizabethtown Community Hospital")</span></span></code></pre>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -254,7 +223,7 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -373,7 +342,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -449,7 +418,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <div class="section level3">
 <h3 id="clia-labs">CLIA Labs<a class="anchor" aria-label="anchor" href="#clia-labs"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -458,24 +427,24 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<div id="jgaqgxcurv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="spysbdbvfo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#jgaqgxcurv table {
+#spysbdbvfo table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jgaqgxcurv thead, #jgaqgxcurv tbody, #jgaqgxcurv tfoot, #jgaqgxcurv tr, #jgaqgxcurv td, #jgaqgxcurv th {
+#spysbdbvfo thead, #spysbdbvfo tbody, #spysbdbvfo tfoot, #spysbdbvfo tr, #spysbdbvfo td, #spysbdbvfo th {
   border-style: none;
 }
 
-#jgaqgxcurv p {
+#spysbdbvfo p {
   margin: 0;
   padding: 0;
 }
 
-#jgaqgxcurv .gt_table {
+#spysbdbvfo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -501,12 +470,12 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-left-color: #D3D3D3;
 }
 
-#jgaqgxcurv .gt_caption {
+#spysbdbvfo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jgaqgxcurv .gt_title {
+#spysbdbvfo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -518,7 +487,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-width: 0;
 }
 
-#jgaqgxcurv .gt_subtitle {
+#spysbdbvfo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -530,7 +499,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-width: 0;
 }
 
-#jgaqgxcurv .gt_heading {
+#spysbdbvfo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -542,13 +511,13 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jgaqgxcurv .gt_bottom_border {
+#spysbdbvfo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_col_headings {
+#spysbdbvfo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -563,7 +532,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jgaqgxcurv .gt_col_heading {
+#spysbdbvfo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -583,7 +552,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#jgaqgxcurv .gt_column_spanner_outer {
+#spysbdbvfo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -595,15 +564,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 4px;
 }
 
-#jgaqgxcurv .gt_column_spanner_outer:first-child {
+#spysbdbvfo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jgaqgxcurv .gt_column_spanner_outer:last-child {
+#spysbdbvfo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jgaqgxcurv .gt_column_spanner {
+#spysbdbvfo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -615,11 +584,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: 100%;
 }
 
-#jgaqgxcurv .gt_spanner_row {
+#spysbdbvfo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jgaqgxcurv .gt_group_heading {
+#spysbdbvfo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -645,7 +614,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-align: left;
 }
 
-#jgaqgxcurv .gt_empty_group_heading {
+#spysbdbvfo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -660,15 +629,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: middle;
 }
 
-#jgaqgxcurv .gt_from_md > :first-child {
+#spysbdbvfo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jgaqgxcurv .gt_from_md > :last-child {
+#spysbdbvfo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jgaqgxcurv .gt_row {
+#spysbdbvfo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -687,7 +656,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#jgaqgxcurv .gt_stub {
+#spysbdbvfo .gt_stub {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 100%;
@@ -700,7 +669,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jgaqgxcurv .gt_stub_row_group {
+#spysbdbvfo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -714,15 +683,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: top;
 }
 
-#jgaqgxcurv .gt_row_group_first td {
+#spysbdbvfo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jgaqgxcurv .gt_row_group_first th {
+#spysbdbvfo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jgaqgxcurv .gt_summary_row {
+#spysbdbvfo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -732,16 +701,16 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jgaqgxcurv .gt_first_summary_row {
+#spysbdbvfo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_first_summary_row.thick {
+#spysbdbvfo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jgaqgxcurv .gt_last_summary_row {
+#spysbdbvfo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -751,7 +720,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_grand_summary_row {
+#spysbdbvfo .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -761,7 +730,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jgaqgxcurv .gt_first_grand_summary_row {
+#spysbdbvfo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -771,7 +740,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_last_grand_summary_row_top {
+#spysbdbvfo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -781,11 +750,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_striped {
+#spysbdbvfo .gt_striped {
   background-color: #F4F4F4;
 }
 
-#jgaqgxcurv .gt_table_body {
+#spysbdbvfo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -794,7 +763,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#jgaqgxcurv .gt_footnotes {
+#spysbdbvfo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -808,7 +777,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jgaqgxcurv .gt_footnote {
+#spysbdbvfo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -817,7 +786,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jgaqgxcurv .gt_sourcenotes {
+#spysbdbvfo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -831,7 +800,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jgaqgxcurv .gt_sourcenote {
+#spysbdbvfo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -839,63 +808,63 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jgaqgxcurv .gt_left {
+#spysbdbvfo .gt_left {
   text-align: left;
 }
 
-#jgaqgxcurv .gt_center {
+#spysbdbvfo .gt_center {
   text-align: center;
 }
 
-#jgaqgxcurv .gt_right {
+#spysbdbvfo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jgaqgxcurv .gt_font_normal {
+#spysbdbvfo .gt_font_normal {
   font-weight: normal;
 }
 
-#jgaqgxcurv .gt_font_bold {
+#spysbdbvfo .gt_font_bold {
   font-weight: bold;
 }
 
-#jgaqgxcurv .gt_font_italic {
+#spysbdbvfo .gt_font_italic {
   font-style: italic;
 }
 
-#jgaqgxcurv .gt_super {
+#spysbdbvfo .gt_super {
   font-size: 65%;
 }
 
-#jgaqgxcurv .gt_footnote_marks {
+#spysbdbvfo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jgaqgxcurv .gt_asterisk {
+#spysbdbvfo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jgaqgxcurv .gt_indent_1 {
+#spysbdbvfo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jgaqgxcurv .gt_indent_2 {
+#spysbdbvfo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jgaqgxcurv .gt_indent_3 {
+#spysbdbvfo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jgaqgxcurv .gt_indent_4 {
+#spysbdbvfo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jgaqgxcurv .gt_indent_5 {
+#spysbdbvfo .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1145,7 +1114,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 </table>
 </div>
 <p><br><br></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, certification_type <span class="op">=</span> <span class="st">"Waiver"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">clia</span>, <span class="va">expiration_date</span>, <span class="va">termination_reason</span>, <span class="va">facility_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>

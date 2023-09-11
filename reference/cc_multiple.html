@@ -132,8 +132,8 @@ currently available years.</p></dd>
 
 
 <dt>level</dt>
-<dd><p>Geographic level of data; options are <code>National</code>, <code>State</code>,
-and <code>County</code></p></dd>
+<dd><p>Geographic level of data; options are <code>"National"</code>, <code>"State"</code>,
+and <code>"County"</code></p></dd>
 
 
 <dt>sublevel</dt>
@@ -150,22 +150,16 @@ level or for Puerto Rico and Virgin Islands.</p></dd>
 
 
 <dt>age_group</dt>
-<dd><p>Identifies the age level of the population that the data has
-been aggregated. A value of <code>All</code> indicates the data in the row represents
-all Fee-for-Service Medicare Beneficiaries. A value of <code>&lt;65</code> or <code>65+</code>
-indicates that the data is aggregated by the age of the Medicare
-Beneficiaries at the end of the calendar year.</p></dd>
+<dd><p>Population age level at which the data has been aggregated.
+<code>"All"</code> includes all Fee-for-Service Medicare beneficiaries. <code>"&lt;65"</code> or
+<code>"65+"</code> returns data by those age groups.</p></dd>
 
 
 <dt>demographic</dt>
-<dd><p>Identifies the demographic level of the population that the
-data has been aggregated. A value of <code>All</code> indicates the data in the row
-represents all Fee-for-Service Medicare beneficiaries. A value of <code>Sex</code>
-indicates that the data has been aggregated by the Medicare beneficiary's
-sex. A value of <code>Race</code> indicates that the data has been aggregated by the
-Medicare beneficiary's race. A value of <code>Dual Status</code> indicates that the
-data has been aggregated by the Medicare beneficiary's dual eligibility
-status.</p></dd>
+<dd><p>Population demographic level at which the data has been
+aggregated. <code>"All"</code> includes all Fee-for-Service Medicare beneficiaries.
+<code>"Sex"</code> aggregates by beneficiary gender,  <code>"Race"</code> by beneficiary race.
+<code>"Dual Status"</code> aggregates by the beneficiary's dual eligibility status.</p></dd>
 
 
 <dt>subdemo</dt>
@@ -184,10 +178,10 @@ Medicaid benefits.</p></dd>
 <dt>mcc</dt>
 <dd><p>To classify MCC for each Medicare beneficiary, the 21 chronic
 conditions are counted and grouped into four categories:
-- <code>0 to 1</code>
-- <code>2 to 3</code>
-- <code>4 to 5</code>
-- <code>6+</code></p></dd>
+- <code>"0 to 1"</code>
+- <code>"2 to 3"</code>
+- <code>"4 to 5"</code>
+- <code>"6+"</code></p></dd>
 
 
 <dt>tidy</dt>

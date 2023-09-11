@@ -124,7 +124,7 @@ type and address.</p><div class="section">
 <span>  enroll_state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  pac_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  doing_business_as <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -159,7 +159,7 @@ type and address.</p><div class="section">
 <dd><p>Hospital’s PAC ID</p></dd>
 
 
-<dt>organization_name</dt>
+<dt>organization</dt>
 <dd><p>Hospital’s legal business name</p></dd>
 
 
@@ -198,17 +198,16 @@ type and address.</p><div class="section">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">hospitals</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">6103733050</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 2 × 25</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        organization_name   doing_business_as pac_id_org enroll_id_org  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1164481529 ST CHARLES HOSPITAL <span style="color: #BB0000;">NA</span>                6103733050 O20020904000011</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1225097652 ST CHARLES HOSPITAL <span style="color: #BB0000;">NA</span>                6103733050 O20090408000323</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 20 more variables: facility_ccn &lt;chr&gt;, specialty_code &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   specialty &lt;chr&gt;, enroll_state &lt;chr&gt;, incorporation_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   incorporation_state &lt;chr&gt;, organization_structure &lt;chr&gt;, org_other &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;int&gt;, location_type &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   location_other &lt;chr&gt;, multiple_npis &lt;lgl&gt;, cah_or_hospital_ccn &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_conversion_flag &lt;lgl&gt;, reh_conversion_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   proprietary_nonprofit &lt;lgl&gt;, subgroups &lt;list&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   npi       organization doing_business_as pac_id_org enroll_id_org facility_ccn</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11644815… ST CHARLES … <span style="color: #BB0000;">NA</span>                6103733050 O20020904000… 330246      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 12250976… ST CHARLES … <span style="color: #BB0000;">NA</span>                6103733050 O20090408000… 33T246      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 19 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   enroll_state &lt;chr&gt;, incorporation_date &lt;date&gt;, incorporation_state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   organization_structure &lt;chr&gt;, org_other &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   state &lt;chr&gt;, zip &lt;int&gt;, location_type &lt;chr&gt;, location_other &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   multiple_npis &lt;lgl&gt;, cah_or_hospital_ccn &lt;chr&gt;, reh_conversion_flag &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   reh_conversion_date &lt;date&gt;, proprietary_nonprofit &lt;lgl&gt;, subgroups &lt;list&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

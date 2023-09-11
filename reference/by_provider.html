@@ -120,9 +120,9 @@ Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.</p
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_provider</span><span class="op">(</span></span>
 <span>  <span class="va">year</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -142,23 +142,18 @@ Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.</p
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>year</dt>
 <dd><p>integer (<em>required</em>); Year in <code>YYYY</code> format. Run helper function
-<code><a href="years.html">by_provider_years()</a></code> to return a vector of the years
-currently available.</p></dd>
+<code><a href="years.html">by_provider_years()</a></code> to return a vector of the years currently available.</p></dd>
 
 
 <dt>npi</dt>
 <dd><p>National Provider Identifier for the rendering provider on the claim.</p></dd>
 
 
-<dt>first_name</dt>
-<dd><p>Individual provider's first name.</p></dd>
+<dt>first, last</dt>
+<dd><p>Individual provider's first and/or last name</p></dd>
 
 
-<dt>last_name</dt>
-<dd><p>Individual provider's last name.</p></dd>
-
-
-<dt>organization_name</dt>
+<dt>organization</dt>
 <dd><p>Organization name.</p></dd>
 
 

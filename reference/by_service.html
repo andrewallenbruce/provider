@@ -96,9 +96,9 @@ aggregated by provider and service.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">by_service</span><span class="op">(</span></span>
 <span>  <span class="va">year</span>,</span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  credential <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -126,84 +126,79 @@ currently available.</p></dd>
 
 
 <dt>npi</dt>
-<dd><p>National Provider Identifier for the rendering provider on the claim.</p></dd>
+<dd><p>National Provider Identifier for the rendering provider on the claim</p></dd>
 
 
-<dt>last_name</dt>
-<dd><p>Individual provider's last name.</p></dd>
+<dt>first, last</dt>
+<dd><p>Individual provider's name</p></dd>
 
 
-<dt>first_name</dt>
-<dd><p>Individual provider's first name.</p></dd>
-
-
-<dt>organization_name</dt>
-<dd><p>Organization name.</p></dd>
+<dt>organization</dt>
+<dd><p>Organization name</p></dd>
 
 
 <dt>credential</dt>
-<dd><p>Individual provider's credentials.</p></dd>
+<dd><p>Individual provider's credentials</p></dd>
 
 
 <dt>gender</dt>
-<dd><p>Individual provider's gender.</p></dd>
+<dd><p>Individual provider's gender; <code>"F"</code> (Female), <code>"M"</code> (Male)</p></dd>
 
 
 <dt>entype</dt>
-<dd><p>Provider entity type.</p></dd>
+<dd><p>Provider entity type; <code>"I"</code> (Individual), <code>"O"</code> (Organization)</p></dd>
 
 
 <dt>city</dt>
-<dd><p>City where provider is located.</p></dd>
+<dd><p>City where provider is located</p></dd>
 
 
 <dt>state</dt>
-<dd><p>State where provider is located.</p></dd>
+<dd><p>State where provider is located</p></dd>
 
 
 <dt>zip</dt>
-<dd><p>Provider’s zip code.</p></dd>
+<dd><p>Provider’s zip code</p></dd>
 
 
 <dt>fips</dt>
-<dd><p>Provider's state FIPS code.</p></dd>
+<dd><p>Provider's state FIPS code</p></dd>
 
 
 <dt>ruca</dt>
-<dd><p>Rural-Urban Commuting Area Code (RUCA). The provider's ZIP code
-was cross walked to the USDA's 2010 RUCA Codes. Choices are:
-- <strong>Metro Area Core</strong>
-- <code>1</code>: Primary flow within Urbanized Area (UA)
-- <code>1.1</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area High Commuting</strong>
-- <code>2</code>: Primary flow 30% or more to UA
-- <code>2.1</code>: Secondary flow 30-50% to larger UA
-- <strong>Metro Area Low Commuting</strong>
-- <code>3</code>: Primary flow 10-30% to UA
-- <strong>Micro Area Core</strong>
-- <code>4</code>: Primary flow within large Urban Cluster (10k - 49k)
-- <code>4.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro High Commuting</strong>
-- <code>5</code>: Primary flow 30% or more to large UC
-- <code>5.1</code>: Secondary flow 30-50% to UA
-- <strong>Micro Low Commuting</strong>
-- <code>6</code>: Primary flow 10-30% to large UC
-- <strong>Small Town Core</strong>
-- <code>7</code>: Primary flow within small UC (2.5k - 9.9k)
-- <code>7.1</code>: Secondary flow 30-50% to UA
-- <code>7.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town High Commuting</strong>
-- <code>8</code>: Primary flow 30% or more to small UC
-- <code>8.1</code>: Secondary flow 30-50% to UA
-- <code>8.2</code>: Secondary flow 30-50% to large UC
-- <strong>Small Town Low Commuting</strong>
-- <code>9</code>: Primary flow 10-30% to small UC
-- <strong>Rural Areas</strong>
-- <code>10</code>: Primary flow to tract outside a UA or UC
-- <code>10.1</code>: Secondary flow 30-50% to UA
-- <code>10.2</code>: Secondary flow 30-50% to large UC
-- <code>10.3</code>: Secondary flow 30-50% to small UC
-- <code>99</code>: Zero population and no rural-urban identifier information</p></dd>
+<dd><p>Rural-Urban Commuting Area Code (RUCA). Choices are:</p><ul><li><p><strong>Metro Area Core</strong></p><ul><li><p><code>"1"</code>: Primary flow within Urbanized Area (UA)</p></li>
+<li><p><code>"1.1"</code>: Secondary flow 30-50% to larger UA</p></li>
+</ul></li>
+<li><p><strong>Metro Area High Commuting</strong></p><ul><li><p><code>"2"</code>: Primary flow 30% or more to UA</p></li>
+<li><p><code>"2.1"</code>: Secondary flow 30-50% to larger UA
+- <strong>Metro Area Low Commuting</strong></p></li>
+<li><p><code>3</code>: Primary flow 10-30% to UA
+- <strong>Micro Area Core</strong></p></li>
+<li><p><code>4</code>: Primary flow within large Urban Cluster (10k - 49k)</p></li>
+<li><p><code>4.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro High Commuting</strong></p></li>
+<li><p><code>5</code>: Primary flow 30% or more to large UC</p></li>
+<li><p><code>5.1</code>: Secondary flow 30-50% to UA
+- <strong>Micro Low Commuting</strong></p></li>
+<li><p><code>6</code>: Primary flow 10-30% to large UC
+- <strong>Small Town Core</strong></p></li>
+<li><p><code>7</code>: Primary flow within small UC (2.5k - 9.9k)</p></li>
+<li><p><code>7.1</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>7.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town High Commuting</strong></p></li>
+<li><p><code>8</code>: Primary flow 30% or more to small UC</p></li>
+<li><p><code>8.1</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>8.2</code>: Secondary flow 30-50% to large UC
+- <strong>Small Town Low Commuting</strong></p></li>
+<li><p><code>9</code>: Primary flow 10-30% to small UC
+- <strong>Rural Areas</strong></p></li>
+<li><p><code>10</code>: Primary flow to tract outside a UA or UC</p></li>
+<li><p><code>10.1</code>: Secondary flow 30-50% to UA</p></li>
+<li><p><code>10.2</code>: Secondary flow 30-50% to large UC</p></li>
+<li><p><code>10.3</code>: Secondary flow 30-50% to small UC
+- <code>99</code>: Zero population and no rural-urban identifier information</p></li>
+</ul></li>
+</ul></dd>
 
 
 <dt>country</dt>
@@ -243,7 +238,7 @@ Average Sales Price (ASP) File.</p></dd>
 
 <dt>pos</dt>
 <dd><p>Identifies whether the place of service submitted on the claims
-is a facility (<code>F</code>) or non-facility (<code>O</code>). Non-facility is generally an
+is a facility (<code>"F"</code>) or non-facility (<code>"O"</code>). Non-facility is generally an
 office setting; however other entities are included in non-facility.</p></dd>
 
 
