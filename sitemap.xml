@@ -61,7 +61,13 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_specific.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/change.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/change_year.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/chg.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/clinicians.html</loc>
@@ -101,6 +107,9 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/order_refer.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/pct.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/pending.html</loc>

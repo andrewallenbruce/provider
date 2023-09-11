@@ -155,53 +155,9 @@ every <strong>row</strong> is an <em>observation</em>, and every
 before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="15%">
-<col width="15%">
-<col width="13%">
-<col width="43%">
-<col width="12%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">service</th>
-<th align="left">eligible</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Medicare Part B</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Home Health Agency (HHA)</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Durable Medical Equipment (DME)</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Power Mobility Device (PMD)</td>
-<td align="left">TRUE</td>
-</tr>
-</tbody>
-</table>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyr::pivot_longer()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't combine `first` &lt;character&gt; and `Medicare Part B` &lt;logical&gt;.</span></span></code></pre></div>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
@@ -464,9 +420,10 @@ job or location changes.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span>
 <span></span>
 <span><span class="co"># Must pass Luhn check</span></span>
-<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/pending.html">pending</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">001234569123</span>, type <span class="op">=</span> <span class="st">"physician"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `pending()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `type` must be a character vector, not absent.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must pass <span style="font-style: italic;">Luhn algorithm</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">1234569123</span> <span style="font-style: italic;">fails</span> Luhn check.</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Provider Associate-level Control ID</strong>: A Provider
@@ -479,7 +436,7 @@ under different circumstances.</p>
 </blockquote>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
-<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_id <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_id_ind <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
@@ -499,7 +456,7 @@ of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
-<span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id_ind <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">Enrollment ID</span> must be a <span style="color: #0000BB;">&lt;character&gt;</span> vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789123456</span> is a <span style="color: #0000BB;">&lt;numeric&gt;</span> vector.</span></span>

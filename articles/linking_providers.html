@@ -129,89 +129,8 @@ us several avenues to go down:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="6%">
-<col width="6%">
-<col width="9%">
-<col width="8%">
-<col width="25%">
-<col width="3%">
-<col width="18%">
-<col width="6%">
-<col width="6%">
-<col width="5%">
-<col width="3%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pac_id</th>
-<th align="left">enroll_id</th>
-<th align="left">specialty_code</th>
-<th align="left">specialty</th>
-<th align="left">state</th>
-<th align="left">organization_name</th>
-<th align="left">first_name</th>
-<th align="left">middle_name</th>
-<th align="left">last_name</th>
-<th align="left">gender</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1891785184</td>
-<td align="left">3577554138</td>
-<td align="left">O20040521000534</td>
-<td align="left">12-70</td>
-<td align="left">PART B SUPPLIER - CLINIC/GROUP PRACTICE</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1891785184</td>
-<td align="left">3577554138</td>
-<td align="left">O20101110000259</td>
-<td align="left">00-85</td>
-<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1487923637</td>
-<td align="left">3577554138</td>
-<td align="left">O20190719002511</td>
-<td align="left">12-59</td>
-<td align="left">PART B SUPPLIER - AMBULANCE SERVICE SUPPLIER</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1407061591</td>
-<td align="left">3577554138</td>
-<td align="left">O20220827000145</td>
-<td align="left">00-85</td>
-<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; Error in providers(organization_name = "Elizabethtown Community Hospital"): unused argument (organization_name = "Elizabethtown Community Hospital")</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization_name</span>, <span class="va">pac_id_org</span>, <span class="va">facility_ccn</span>, <span class="va">specialty_code</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; Error in hospitals(organization_name = "Elizabethtown Community Hospital"): unused argument (organization_name = "Elizabethtown Community Hospital")</span></span></code></pre>
@@ -223,7 +142,7 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -342,7 +261,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <table style="width:100%;" class="table">
 <colgroup>
@@ -418,7 +337,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <div class="section level3">
 <h3 id="clia-labs">CLIA Labs<a class="anchor" aria-label="anchor" href="#clia-labs"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -427,24 +346,24 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<div id="spysbdbvfo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="pdwzoomkxv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#spysbdbvfo table {
+#pdwzoomkxv table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#spysbdbvfo thead, #spysbdbvfo tbody, #spysbdbvfo tfoot, #spysbdbvfo tr, #spysbdbvfo td, #spysbdbvfo th {
+#pdwzoomkxv thead, #pdwzoomkxv tbody, #pdwzoomkxv tfoot, #pdwzoomkxv tr, #pdwzoomkxv td, #pdwzoomkxv th {
   border-style: none;
 }
 
-#spysbdbvfo p {
+#pdwzoomkxv p {
   margin: 0;
   padding: 0;
 }
 
-#spysbdbvfo .gt_table {
+#pdwzoomkxv .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -470,12 +389,12 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-left-color: #D3D3D3;
 }
 
-#spysbdbvfo .gt_caption {
+#pdwzoomkxv .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#spysbdbvfo .gt_title {
+#pdwzoomkxv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -487,7 +406,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-width: 0;
 }
 
-#spysbdbvfo .gt_subtitle {
+#pdwzoomkxv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -499,7 +418,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-width: 0;
 }
 
-#spysbdbvfo .gt_heading {
+#pdwzoomkxv .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -511,13 +430,13 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#spysbdbvfo .gt_bottom_border {
+#pdwzoomkxv .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_col_headings {
+#pdwzoomkxv .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -532,7 +451,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#spysbdbvfo .gt_col_heading {
+#pdwzoomkxv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -552,7 +471,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#spysbdbvfo .gt_column_spanner_outer {
+#pdwzoomkxv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -564,15 +483,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 4px;
 }
 
-#spysbdbvfo .gt_column_spanner_outer:first-child {
+#pdwzoomkxv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#spysbdbvfo .gt_column_spanner_outer:last-child {
+#pdwzoomkxv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#spysbdbvfo .gt_column_spanner {
+#pdwzoomkxv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -584,11 +503,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: 100%;
 }
 
-#spysbdbvfo .gt_spanner_row {
+#pdwzoomkxv .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#spysbdbvfo .gt_group_heading {
+#pdwzoomkxv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -614,7 +533,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-align: left;
 }
 
-#spysbdbvfo .gt_empty_group_heading {
+#pdwzoomkxv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -629,15 +548,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: middle;
 }
 
-#spysbdbvfo .gt_from_md > :first-child {
+#pdwzoomkxv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#spysbdbvfo .gt_from_md > :last-child {
+#pdwzoomkxv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#spysbdbvfo .gt_row {
+#pdwzoomkxv .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +575,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#spysbdbvfo .gt_stub {
+#pdwzoomkxv .gt_stub {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 100%;
@@ -669,7 +588,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#spysbdbvfo .gt_stub_row_group {
+#pdwzoomkxv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -683,15 +602,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: top;
 }
 
-#spysbdbvfo .gt_row_group_first td {
+#pdwzoomkxv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#spysbdbvfo .gt_row_group_first th {
+#pdwzoomkxv .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#spysbdbvfo .gt_summary_row {
+#pdwzoomkxv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -701,16 +620,16 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#spysbdbvfo .gt_first_summary_row {
+#pdwzoomkxv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_first_summary_row.thick {
+#pdwzoomkxv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#spysbdbvfo .gt_last_summary_row {
+#pdwzoomkxv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -720,7 +639,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_grand_summary_row {
+#pdwzoomkxv .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -730,7 +649,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#spysbdbvfo .gt_first_grand_summary_row {
+#pdwzoomkxv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -740,7 +659,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_last_grand_summary_row_top {
+#pdwzoomkxv .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -750,11 +669,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_striped {
+#pdwzoomkxv .gt_striped {
   background-color: #F4F4F4;
 }
 
-#spysbdbvfo .gt_table_body {
+#pdwzoomkxv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -763,7 +682,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#spysbdbvfo .gt_footnotes {
+#pdwzoomkxv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -777,7 +696,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#spysbdbvfo .gt_footnote {
+#pdwzoomkxv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -786,7 +705,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#spysbdbvfo .gt_sourcenotes {
+#pdwzoomkxv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -800,7 +719,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#spysbdbvfo .gt_sourcenote {
+#pdwzoomkxv .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -808,63 +727,63 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#spysbdbvfo .gt_left {
+#pdwzoomkxv .gt_left {
   text-align: left;
 }
 
-#spysbdbvfo .gt_center {
+#pdwzoomkxv .gt_center {
   text-align: center;
 }
 
-#spysbdbvfo .gt_right {
+#pdwzoomkxv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#spysbdbvfo .gt_font_normal {
+#pdwzoomkxv .gt_font_normal {
   font-weight: normal;
 }
 
-#spysbdbvfo .gt_font_bold {
+#pdwzoomkxv .gt_font_bold {
   font-weight: bold;
 }
 
-#spysbdbvfo .gt_font_italic {
+#pdwzoomkxv .gt_font_italic {
   font-style: italic;
 }
 
-#spysbdbvfo .gt_super {
+#pdwzoomkxv .gt_super {
   font-size: 65%;
 }
 
-#spysbdbvfo .gt_footnote_marks {
+#pdwzoomkxv .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#spysbdbvfo .gt_asterisk {
+#pdwzoomkxv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#spysbdbvfo .gt_indent_1 {
+#pdwzoomkxv .gt_indent_1 {
   text-indent: 5px;
 }
 
-#spysbdbvfo .gt_indent_2 {
+#pdwzoomkxv .gt_indent_2 {
   text-indent: 10px;
 }
 
-#spysbdbvfo .gt_indent_3 {
+#pdwzoomkxv .gt_indent_3 {
   text-indent: 15px;
 }
 
-#spysbdbvfo .gt_indent_4 {
+#pdwzoomkxv .gt_indent_4 {
   text-indent: 20px;
 }
 
-#spysbdbvfo .gt_indent_5 {
+#pdwzoomkxv .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1114,7 +1033,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 </table>
 </div>
 <p><br><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, certification_type <span class="op">=</span> <span class="st">"Waiver"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">clia</span>, <span class="va">expiration_date</span>, <span class="va">termination_reason</span>, <span class="va">facility_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>

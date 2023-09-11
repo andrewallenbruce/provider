@@ -124,10 +124,10 @@ to bill Medicare.</p><div class="section">
 <span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  first_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  middle_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  last_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  organization_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  gender <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -164,26 +164,18 @@ provider enrollment application. Links all enrollment-level information
 a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
 
 
-<dt>first_name</dt>
-<dd><p>Individual provider first name</p></dd>
+<dt>first, middle, last</dt>
+<dd><p>Individual provider's first/middle/last name</p></dd>
 
 
-<dt>middle_name</dt>
-<dd><p>Individual provider middle name</p></dd>
-
-
-<dt>last_name</dt>
-<dd><p>Individual provider last name</p></dd>
-
-
-<dt>organization_name</dt>
+<dt>organization</dt>
 <dd><p>Organizational provider name</p></dd>
 
 
 <dt>gender</dt>
-<dd><p>Individual provider gender. Options are:</p><ul><li><p><code>F</code>: Female</p></li>
-<li><p><code>M</code>: Male</p></li>
-<li><p><code>9</code>: Unknown (or Organizational provider)</p></li>
+<dd><p>Individual provider gender. Options are:</p><ul><li><p><code>"F"</code>: Female</p></li>
+<li><p><code>"M"</code>: Male</p></li>
+<li><p><code>"9"</code>: Unknown (or Organizational provider)</p></li>
 </ul></dd>
 
 
