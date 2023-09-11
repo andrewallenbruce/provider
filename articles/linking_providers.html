@@ -256,35 +256,129 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span>, <span class="va">parent_ccn</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span>, <span class="va">parent_ccn</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `middle_name` doesn't exist.</span></span></code></pre>
-<p><br></p>
-<p>That returns individual providers affiliated with the hospital. Now
-to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
-<col width="12%">
-<col width="12%">
-<col width="6%">
-<col width="7%">
-<col width="10%">
-<col width="7%">
 <col width="15%">
-<col width="14%">
-<col width="12%">
+<col width="15%">
+<col width="11%">
+<col width="20%">
+<col width="19%">
+<col width="18%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">npi</th>
 <th align="left">pac_id_ind</th>
 <th align="left">first</th>
-<th align="left">middle</th>
 <th align="left">last</th>
-<th align="left">suffix</th>
+<th align="left">facility_type</th>
+<th align="left">facility_ccn</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1003815184</td>
+<td align="left">4082693676</td>
+<td align="left">ARMIN</td>
+<td align="left">AFSAR KESHMIRI</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1023076643</td>
+<td align="left">5698798452</td>
+<td align="left">JOHN</td>
+<td align="left">HENRY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1023377843</td>
+<td align="left">6901115278</td>
+<td align="left">LINDSEY</td>
+<td align="left">WILHELM</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1043245657</td>
+<td align="left">7810891009</td>
+<td align="left">MARK</td>
+<td align="left">FUNG</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1043397656</td>
+<td align="left">4183764558</td>
+<td align="left">ANTHONY</td>
+<td align="left">TRAMONTANO</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1043630510</td>
+<td align="left">2365749389</td>
+<td align="left">RYAN</td>
+<td align="left">WOLFE</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1053596122</td>
+<td align="left">5193802213</td>
+<td align="left">TANYA</td>
+<td align="left">FINCH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1053863100</td>
+<td align="left">8729362207</td>
+<td align="left">MATTHEW</td>
+<td align="left">FARNSWORTH</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="odd">
+<td align="left">1063592210</td>
+<td align="left">0042228009</td>
+<td align="left">ROBERT</td>
+<td align="left">PITTS</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+<tr class="even">
+<td align="left">1073099172</td>
+<td align="left">0547519381</td>
+<td align="left">BROOKE</td>
+<td align="left">MAGGY</td>
+<td align="left">Hospital</td>
+<td align="left">331302</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<p>That returns individual providers affiliated with the hospital. Now
+to search the alphanumeric CCN (<code>33Z302</code>):</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="14%">
+<col width="14%">
+<col width="8%">
+<col width="12%">
+<col width="18%">
+<col width="17%">
+<col width="14%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id_ind</th>
+<th align="left">first</th>
+<th align="left">last</th>
 <th align="left">facility_type</th>
 <th align="left">facility_ccn</th>
 <th align="left">parent_ccn</th>
@@ -294,9 +388,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">1396989059</td>
 <td align="left">8921259557</td>
 <td align="left">MARY</td>
-<td align="left">K</td>
 <td align="left">HALLORAN</td>
-<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
@@ -305,9 +397,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">1538173869</td>
 <td align="left">0547299091</td>
 <td align="left">IL</td>
-<td align="left">JUN</td>
 <td align="left">CHON</td>
-<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
@@ -316,9 +406,7 @@ to search the alphanumeric CCN (<code>33Z302</code>):</p>
 <td align="left">1801893318</td>
 <td align="left">3577568724</td>
 <td align="left">ROB</td>
-<td align="left">L</td>
 <td align="left">DEMURO</td>
-<td align="left">NA</td>
 <td align="left">Nursing home</td>
 <td align="left">33Z302</td>
 <td align="left">331302</td>
@@ -338,35 +426,53 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <p><br></p>
 <p><br></p>
 <div class="section level3">
-<h3 id="clia-labs">CLIA Labs<a class="anchor" aria-label="anchor" href="#clia-labs"></a>
+<h3 id="clia-laboratories">CLIA Laboratories<a class="anchor" aria-label="anchor" href="#clia-laboratories"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, </span>
+<span>             certificate <span class="op">=</span> <span class="st">"accreditation"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>value <span class="op">=</span> <span class="st">"results"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">confirmed</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>,</span>
+<span>                <span class="va">clia_number</span>,</span>
+<span>                <span class="va">certificate</span>,</span>
+<span>                <span class="va">expiration_date</span>, </span>
+<span>                <span class="va">termination_reason</span>, </span>
+<span>                <span class="va">facility_type</span>, </span>
+<span>                <span class="va">organization</span>, </span>
+<span>                <span class="va">confirmed_date</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span>, </span>
+<span>         groupname_col <span class="op">=</span> <span class="st">"certificate"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>termination_reason <span class="op">=</span> <span class="st">"status"</span>, </span>
+<span>                 clia_number <span class="op">=</span> <span class="st">"clia"</span>,</span>
+<span>                 expiration_date <span class="op">=</span> <span class="st">"expires"</span>,</span>
+<span>                 confirmed_date <span class="op">=</span> <span class="st">"confirmed"</span>,</span>
+<span>                 facility_type <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"ACCREDITATION"</span>,</span>
+<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">organization</span>, <span class="va">confirmed_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_date.html" class="external-link">fmt_date</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span>, </span>
+<span>               date_style <span class="op">=</span> <span class="st">"m_day_year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<div id="jmqbxssgmy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
+<div id="cgfvjzcnce" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#jmqbxssgmy table {
+#cgfvjzcnce table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#jmqbxssgmy thead, #jmqbxssgmy tbody, #jmqbxssgmy tfoot, #jmqbxssgmy tr, #jmqbxssgmy td, #jmqbxssgmy th {
+#cgfvjzcnce thead, #cgfvjzcnce tbody, #cgfvjzcnce tfoot, #cgfvjzcnce tr, #cgfvjzcnce td, #cgfvjzcnce th {
   border-style: none;
 }
 
-#jmqbxssgmy p {
+#cgfvjzcnce p {
   margin: 0;
   padding: 0;
 }
 
-#jmqbxssgmy .gt_table {
+#cgfvjzcnce .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -380,24 +486,24 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: auto;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #000000;
+  border-top-color: #A81600;
   border-right-style: none;
   border-right-width: 2px;
   border-right-color: #D3D3D3;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #000000;
+  border-bottom-color: #A81600;
   border-left-style: none;
   border-left-width: 2px;
   border-left-color: #D3D3D3;
 }
 
-#jmqbxssgmy .gt_caption {
+#cgfvjzcnce .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#jmqbxssgmy .gt_title {
+#cgfvjzcnce .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -409,7 +515,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-width: 0;
 }
 
-#jmqbxssgmy .gt_subtitle {
+#cgfvjzcnce .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -421,7 +527,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-width: 0;
 }
 
-#jmqbxssgmy .gt_heading {
+#cgfvjzcnce .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -433,19 +539,19 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jmqbxssgmy .gt_bottom_border {
+#cgfvjzcnce .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_col_headings {
+#cgfvjzcnce .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -454,7 +560,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jmqbxssgmy .gt_col_heading {
+#cgfvjzcnce .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -474,7 +580,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#jmqbxssgmy .gt_column_spanner_outer {
+#cgfvjzcnce .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -486,18 +592,18 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 4px;
 }
 
-#jmqbxssgmy .gt_column_spanner_outer:first-child {
+#cgfvjzcnce .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jmqbxssgmy .gt_column_spanner_outer:last-child {
+#cgfvjzcnce .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jmqbxssgmy .gt_column_spanner {
+#cgfvjzcnce .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
   vertical-align: bottom;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -506,11 +612,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: 100%;
 }
 
-#jmqbxssgmy .gt_spanner_row {
+#cgfvjzcnce .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#jmqbxssgmy .gt_group_heading {
+#cgfvjzcnce .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -522,10 +628,10 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-transform: inherit;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
   border-left-style: none;
   border-left-width: 1px;
   border-left-color: #D3D3D3;
@@ -536,7 +642,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-align: left;
 }
 
-#jmqbxssgmy .gt_empty_group_heading {
+#cgfvjzcnce .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -544,22 +650,22 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   font-weight: initial;
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
   vertical-align: middle;
 }
 
-#jmqbxssgmy .gt_from_md > :first-child {
+#cgfvjzcnce .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jmqbxssgmy .gt_from_md > :last-child {
+#cgfvjzcnce .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jmqbxssgmy .gt_row {
+#cgfvjzcnce .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -567,31 +673,31 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   margin: 10px;
   border-top-style: none;
   border-top-width: 1px;
-  border-top-color: #D5D5D5;
+  border-top-color: #FFCCC7;
   border-left-style: none;
   border-left-width: 1px;
-  border-left-color: #D5D5D5;
+  border-left-color: #FFCCC7;
   border-right-style: none;
   border-right-width: 1px;
-  border-right-color: #D5D5D5;
+  border-right-color: #FFCCC7;
   vertical-align: middle;
   overflow-x: hidden;
 }
 
-#jmqbxssgmy .gt_stub {
+#cgfvjzcnce .gt_stub {
   color: #FFFFFF;
-  background-color: #5F5F5F;
+  background-color: #E4220C;
   font-size: 100%;
   font-weight: initial;
   text-transform: inherit;
   border-right-style: solid;
   border-right-width: 2px;
-  border-right-color: #5F5F5F;
+  border-right-color: #E4220C;
   padding-left: 5px;
   padding-right: 5px;
 }
 
-#jmqbxssgmy .gt_stub_row_group {
+#cgfvjzcnce .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -605,15 +711,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: top;
 }
 
-#jmqbxssgmy .gt_row_group_first td {
+#cgfvjzcnce .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jmqbxssgmy .gt_row_group_first th {
+#cgfvjzcnce .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#jmqbxssgmy .gt_summary_row {
+#cgfvjzcnce .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -623,28 +729,28 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jmqbxssgmy .gt_first_summary_row {
+#cgfvjzcnce .gt_first_summary_row {
   border-top-style: solid;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_first_summary_row.thick {
+#cgfvjzcnce .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jmqbxssgmy .gt_last_summary_row {
+#cgfvjzcnce .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_grand_summary_row {
+#cgfvjzcnce .gt_grand_summary_row {
   color: #333333;
-  background-color: #D5D5D5;
+  background-color: #FFCCC7;
   text-transform: inherit;
   padding-top: 8px;
   padding-bottom: 8px;
@@ -652,40 +758,40 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jmqbxssgmy .gt_first_grand_summary_row {
+#cgfvjzcnce .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-top-style: double;
   border-top-width: 6px;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_last_grand_summary_row_top {
+#cgfvjzcnce .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
   padding-right: 5px;
   border-bottom-style: double;
   border-bottom-width: 6px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_striped {
+#cgfvjzcnce .gt_striped {
   background-color: #F4F4F4;
 }
 
-#jmqbxssgmy .gt_table_body {
+#cgfvjzcnce .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
-  border-top-color: #5F5F5F;
+  border-top-color: #E4220C;
   border-bottom-style: solid;
   border-bottom-width: 2px;
-  border-bottom-color: #5F5F5F;
+  border-bottom-color: #E4220C;
 }
 
-#jmqbxssgmy .gt_footnotes {
+#cgfvjzcnce .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -699,7 +805,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jmqbxssgmy .gt_footnote {
+#cgfvjzcnce .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -708,7 +814,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jmqbxssgmy .gt_sourcenotes {
+#cgfvjzcnce .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -722,7 +828,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#jmqbxssgmy .gt_sourcenote {
+#cgfvjzcnce .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -730,325 +836,198 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#jmqbxssgmy .gt_left {
+#cgfvjzcnce .gt_left {
   text-align: left;
 }
 
-#jmqbxssgmy .gt_center {
+#cgfvjzcnce .gt_center {
   text-align: center;
 }
 
-#jmqbxssgmy .gt_right {
+#cgfvjzcnce .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jmqbxssgmy .gt_font_normal {
+#cgfvjzcnce .gt_font_normal {
   font-weight: normal;
 }
 
-#jmqbxssgmy .gt_font_bold {
+#cgfvjzcnce .gt_font_bold {
   font-weight: bold;
 }
 
-#jmqbxssgmy .gt_font_italic {
+#cgfvjzcnce .gt_font_italic {
   font-style: italic;
 }
 
-#jmqbxssgmy .gt_super {
+#cgfvjzcnce .gt_super {
   font-size: 65%;
 }
 
-#jmqbxssgmy .gt_footnote_marks {
+#cgfvjzcnce .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#jmqbxssgmy .gt_asterisk {
+#cgfvjzcnce .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jmqbxssgmy .gt_indent_1 {
+#cgfvjzcnce .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jmqbxssgmy .gt_indent_2 {
+#cgfvjzcnce .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jmqbxssgmy .gt_indent_3 {
+#cgfvjzcnce .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jmqbxssgmy .gt_indent_4 {
+#cgfvjzcnce .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jmqbxssgmy .gt_indent_5 {
+#cgfvjzcnce .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
 <table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="RESULTS">RESULTS</th>
-    </tr></thead>
+<thead>
+<tr class="gt_col_headings gt_spanner_row">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="CLIA">CLIA</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" scope="col" id="EXPIRES">EXPIRES</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="STATUS">STATUS</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="TYPE">TYPE</th>
+      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="ACCREDITATION">
+        <span class="gt_column_spanner">ACCREDITATION</span>
+      </th>
+    </tr>
+<tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="ORGANIZATION">ORGANIZATION</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CONFIRMED">CONFIRMED</th>
+    </tr>
+</thead>
 <tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">name</th>
-<td headers="stub_1_1 value" class="gt_row gt_left">DANIEL FELDMAN MD</td>
+<tr class="gt_group_heading_row">
+<th colspan="7" class="gt_group_heading" scope="colgroup" id="Accreditation">Accreditation</th>
+    </tr>
+<tr class="gt_row_group_first">
+<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">SOUTH GEORGIA MEDICAL CENTER</th>
+<td headers="Accreditation stub_1_1 clia_number" class="gt_row gt_left">11D0022233</td>
+<td headers="Accreditation stub_1_1 expiration_date" class="gt_row gt_right">Feb 27, 2025</td>
+<td headers="Accreditation stub_1_1 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_1 facility_type" class="gt_row gt_left">Hospital</td>
+<td headers="Accreditation stub_1_1 organization" class="gt_row gt_left">JCAHO</td>
+<td headers="Accreditation stub_1_1 confirmed_date" class="gt_row gt_right">Jun 6, 2016</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">clia_number</th>
-<td headers="stub_1_2 value" class="gt_row gt_left gt_striped">11D0265516</td>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">SGMC- SMITH NORTHVIEW CAMPUS</th>
+<td headers="Accreditation stub_1_2 clia_number" class="gt_row gt_left gt_striped">11D0022241</td>
+<td headers="Accreditation stub_1_2 expiration_date" class="gt_row gt_right gt_striped">Dec 6, 2023</td>
+<td headers="Accreditation stub_1_2 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
+<td headers="Accreditation stub_1_2 facility_type" class="gt_row gt_left gt_striped">Ambulatory Surgical Center</td>
+<td headers="Accreditation stub_1_2 organization" class="gt_row gt_left gt_striped">CAP</td>
+<td headers="Accreditation stub_1_2 confirmed_date" class="gt_row gt_right gt_striped">May 17, 2023</td>
 </tr>
 <tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">certificate</th>
-<td headers="stub_1_3 value" class="gt_row gt_left">Compliance</td>
+<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">SOUTH GA MED CTR DEPT PULMONARY SVCS</th>
+<td headers="Accreditation stub_1_3 clia_number" class="gt_row gt_left">11D0680179</td>
+<td headers="Accreditation stub_1_3 expiration_date" class="gt_row gt_right">Dec 27, 2023</td>
+<td headers="Accreditation stub_1_3 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_3 facility_type" class="gt_row gt_left">Other</td>
+<td headers="Accreditation stub_1_3 organization" class="gt_row gt_left">CAP</td>
+<td headers="Accreditation stub_1_3 confirmed_date" class="gt_row gt_right">Dec 28, 2007</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">effective_date</th>
-<td headers="stub_1_4 value" class="gt_row gt_left gt_striped">1996-08-29</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">VALDOSTA CBOC</th>
+<td headers="Accreditation stub_1_4 clia_number" class="gt_row gt_left gt_striped">11D1001568</td>
+<td headers="Accreditation stub_1_4 expiration_date" class="gt_row gt_right gt_striped">May 22, 2026</td>
+<td headers="Accreditation stub_1_4 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
+<td headers="Accreditation stub_1_4 facility_type" class="gt_row gt_left gt_striped">Community Clinic</td>
+<td headers="Accreditation stub_1_4 organization" class="gt_row gt_left gt_striped">JCAHO</td>
+<td headers="Accreditation stub_1_4 confirmed_date" class="gt_row gt_right gt_striped">Jul 18, 2002</td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">expiration_date</th>
-<td headers="stub_1_5 value" class="gt_row gt_left">1998-08-04</td>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">ALLEGIANT SOLUTIONS</th>
+<td headers="Accreditation stub_1_5 clia_number" class="gt_row gt_left">11D1065138</td>
+<td headers="Accreditation stub_1_5 expiration_date" class="gt_row gt_right">Jul 24, 2024</td>
+<td headers="Accreditation stub_1_5 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_5 facility_type" class="gt_row gt_left">Independent</td>
+<td headers="Accreditation stub_1_5 organization" class="gt_row gt_left">COLA</td>
+<td headers="Accreditation stub_1_5 confirmed_date" class="gt_row gt_right">Jul 25, 2012</td>
 </tr>
 <tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">status</th>
-<td headers="stub_1_6 value" class="gt_row gt_left gt_striped">In Compliance</td>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">BRIAN C GRINER MD LLC</th>
+<td headers="Accreditation stub_1_6 clia_number" class="gt_row gt_left gt_striped">11D1070146</td>
+<td headers="Accreditation stub_1_6 expiration_date" class="gt_row gt_right gt_striped">Oct 13, 2024</td>
+<td headers="Accreditation stub_1_6 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
+<td headers="Accreditation stub_1_6 facility_type" class="gt_row gt_left gt_striped">Physician Office</td>
+<td headers="Accreditation stub_1_6 organization" class="gt_row gt_left gt_striped">COLA</td>
+<td headers="Accreditation stub_1_6 confirmed_date" class="gt_row gt_right gt_striped">Oct 14, 2020</td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">poc_ind</th>
-<td headers="stub_1_7 value" class="gt_row gt_left">TRUE</td>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">CARE MEDICAL CENTER</th>
+<td headers="Accreditation stub_1_7 clia_number" class="gt_row gt_left">11D2027917</td>
+<td headers="Accreditation stub_1_7 expiration_date" class="gt_row gt_right">Jun 29, 2025</td>
+<td headers="Accreditation stub_1_7 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_7 facility_type" class="gt_row gt_left">Other</td>
+<td headers="Accreditation stub_1_7 organization" class="gt_row gt_left">COLA</td>
+<td headers="Accreditation stub_1_7 confirmed_date" class="gt_row gt_right">Jun 30, 2021</td>
 </tr>
 <tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">termination_reason</th>
-<td headers="stub_1_8 value" class="gt_row gt_left gt_striped">Mail Returned No Forward Address Cert Ended (CLIA Only)</td>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">BPC PLASMA, INC - VALDOSTA</th>
+<td headers="Accreditation stub_1_8 clia_number" class="gt_row gt_left gt_striped">11D2079448</td>
+<td headers="Accreditation stub_1_8 expiration_date" class="gt_row gt_right gt_striped">Jul 21, 2025</td>
+<td headers="Accreditation stub_1_8 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
+<td headers="Accreditation stub_1_8 facility_type" class="gt_row gt_left gt_striped">Other</td>
+<td headers="Accreditation stub_1_8 organization" class="gt_row gt_left gt_striped">COLA</td>
+<td headers="Accreditation stub_1_8 confirmed_date" class="gt_row gt_right gt_striped">Jul 22, 2015</td>
 </tr>
 <tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">type_of_action</th>
-<td headers="stub_1_9 value" class="gt_row gt_left">Recertification</td>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">SOUTH GEORGIA TOXICOLOGY, LLC</th>
+<td headers="Accreditation stub_1_9 clia_number" class="gt_row gt_left">11D2101175</td>
+<td headers="Accreditation stub_1_9 expiration_date" class="gt_row gt_right">Nov 1, 2024</td>
+<td headers="Accreditation stub_1_9 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_9 facility_type" class="gt_row gt_left">Independent</td>
+<td headers="Accreditation stub_1_9 organization" class="gt_row gt_left">COLA</td>
+<td headers="Accreditation stub_1_9 confirmed_date" class="gt_row gt_right">Nov 2, 2016</td>
 </tr>
 <tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">ownership_type</th>
-<td headers="stub_1_10 value" class="gt_row gt_left gt_striped">Proprietary</td>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">SGMC POINT OF CARE</th>
+<td headers="Accreditation stub_1_10 clia_number" class="gt_row gt_left gt_striped">11D2144796</td>
+<td headers="Accreditation stub_1_10 expiration_date" class="gt_row gt_right gt_striped">Aug 16, 2022</td>
+<td headers="Accreditation stub_1_10 termination_reason" class="gt_row gt_left gt_striped">Voluntary: Merger, Closure</td>
+<td headers="Accreditation stub_1_10 facility_type" class="gt_row gt_left gt_striped">Hospital</td>
+<td headers="Accreditation stub_1_10 organization" class="gt_row gt_left gt_striped">JCAHO</td>
+<td headers="Accreditation stub_1_10 confirmed_date" class="gt_row gt_right gt_striped">Nov 26, 2018</td>
 </tr>
 <tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">facility_type</th>
-<td headers="stub_1_11 value" class="gt_row gt_left">Physician Office</td>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">OCTAPHARMA PLASMA, INC</th>
+<td headers="Accreditation stub_1_11 clia_number" class="gt_row gt_left">11D2193538</td>
+<td headers="Accreditation stub_1_11 expiration_date" class="gt_row gt_right">Jun 29, 2025</td>
+<td headers="Accreditation stub_1_11 termination_reason" class="gt_row gt_left">Active Provider</td>
+<td headers="Accreditation stub_1_11 facility_type" class="gt_row gt_left">Other</td>
+<td headers="Accreditation stub_1_11 organization" class="gt_row gt_left">COLA</td>
+<td headers="Accreditation stub_1_11 confirmed_date" class="gt_row gt_right">Jun 30, 2021</td>
 </tr>
 <tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">director_affiliations</th>
-<td headers="stub_1_12 value" class="gt_row gt_left gt_striped">0</td>
-</tr>
-<tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub">orig_part_date</th>
-<td headers="stub_1_13 value" class="gt_row gt_left">1992-09-01</td>
-</tr>
-<tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub">application_date</th>
-<td headers="stub_1_14 value" class="gt_row gt_left gt_striped">1993-01-20</td>
-</tr>
-<tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub">certification_date</th>
-<td headers="stub_1_15 value" class="gt_row gt_left">1996-03-21</td>
-</tr>
-<tr>
-<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub">mailed_date</th>
-<td headers="stub_1_16 value" class="gt_row gt_left gt_striped">1996-09-25</td>
-</tr>
-<tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub">address</th>
-<td headers="stub_1_17 value" class="gt_row gt_left">205 WOODROW WILSON DR</td>
-</tr>
-<tr>
-<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub">city</th>
-<td headers="stub_1_18 value" class="gt_row gt_left gt_striped">VALDOSTA</td>
-</tr>
-<tr>
-<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub">state</th>
-<td headers="stub_1_19 value" class="gt_row gt_left">GA</td>
-</tr>
-<tr>
-<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub">zip</th>
-<td headers="stub_1_20 value" class="gt_row gt_left gt_striped">31602</td>
-</tr>
-<tr>
-<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub">phone</th>
-<td headers="stub_1_21 value" class="gt_row gt_left">8032619888</td>
-</tr>
-<tr>
-<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub">region</th>
-<td headers="stub_1_22 value" class="gt_row gt_left gt_striped">Atlanta</td>
-</tr>
-<tr>
-<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub">state_region</th>
-<td headers="stub_1_23 value" class="gt_row gt_left">001</td>
-</tr>
-<tr>
-<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub">fips_county</th>
-<td headers="stub_1_24 value" class="gt_row gt_left gt_striped">185</td>
-</tr>
-<tr>
-<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub">fips_state</th>
-<td headers="stub_1_25 value" class="gt_row gt_left">13</td>
-</tr>
-<tr>
-<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub">cbsa</th>
-<td headers="stub_1_26 value" class="gt_row gt_left gt_striped">46660</td>
-</tr>
-<tr>
-<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub">cbsa_ind</th>
-<td headers="stub_1_27 value" class="gt_row gt_left">U</td>
-</tr>
-<tr>
-<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub">chow_count</th>
-<td headers="stub_1_28 value" class="gt_row gt_left gt_striped">00</td>
-</tr>
-<tr>
-<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub">eligible_ind</th>
-<td headers="stub_1_29 value" class="gt_row gt_left">TRUE</td>
-</tr>
-<tr>
-<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub">skeleton_ind</th>
-<td headers="stub_1_30 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub">multi_site_ind</th>
-<td headers="stub_1_31 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub">hosp_campus_ind</th>
-<td headers="stub_1_32 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub">pub_health_ind</th>
-<td headers="stub_1_33 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub">tmp_test_site_ind</th>
-<td headers="stub_1_34 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub">shared_lab_ind</th>
-<td headers="stub_1_35 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub">lab_site_count</th>
-<td headers="stub_1_36 value" class="gt_row gt_left gt_striped">0</td>
-</tr>
-<tr>
-<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub">ppm_test_count</th>
-<td headers="stub_1_37 value" class="gt_row gt_left">0</td>
-</tr>
-<tr>
-<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub">form_116_acrdtd_test_vol_cnt</th>
-<td headers="stub_1_38 value" class="gt_row gt_left gt_striped">0</td>
-</tr>
-<tr>
-<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub">form_116_test_vol_cnt</th>
-<td headers="stub_1_39 value" class="gt_row gt_left">0</td>
-</tr>
-<tr>
-<th id="stub_1_40" scope="row" class="gt_row gt_left gt_stub">form_1557_test_vol_cnt</th>
-<td headers="stub_1_40 value" class="gt_row gt_left gt_striped">0</td>
-</tr>
-<tr>
-<th id="stub_1_41" scope="row" class="gt_row gt_left gt_stub">wvd_test_vol_cnt</th>
-<td headers="stub_1_41 value" class="gt_row gt_left">0</td>
-</tr>
-<tr>
-<th id="stub_1_42" scope="row" class="gt_row gt_left gt_stub">acr_aala_ind</th>
-<td headers="stub_1_42 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_43" scope="row" class="gt_row gt_left gt_stub">acr_aabb_ind</th>
-<td headers="stub_1_43 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_44" scope="row" class="gt_row gt_left gt_stub">acr_aoa_ind</th>
-<td headers="stub_1_44 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_45" scope="row" class="gt_row gt_left gt_stub">acr_ashi_ind</th>
-<td headers="stub_1_45 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_46" scope="row" class="gt_row gt_left gt_stub">acr_cap_ind</th>
-<td headers="stub_1_46 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_47" scope="row" class="gt_row gt_left gt_stub">acr_cola_ind</th>
-<td headers="stub_1_47 value" class="gt_row gt_left">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_48" scope="row" class="gt_row gt_left gt_stub">acr_jcaho_ind</th>
-<td headers="stub_1_48 value" class="gt_row gt_left gt_striped">FALSE</td>
-</tr>
-<tr>
-<th id="stub_1_49" scope="row" class="gt_row gt_left gt_stub">clia_class_current</th>
-<td headers="stub_1_49 value" class="gt_row gt_left">CLIA Lab</td>
-</tr>
-<tr>
-<th id="stub_1_50" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_1</th>
-<td headers="stub_1_50 value" class="gt_row gt_left gt_striped">00</td>
-</tr>
-<tr>
-<th id="stub_1_51" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_2</th>
-<td headers="stub_1_51 value" class="gt_row gt_left">00</td>
-</tr>
-<tr>
-<th id="stub_1_52" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_3</th>
-<td headers="stub_1_52 value" class="gt_row gt_left gt_striped">00</td>
-</tr>
-<tr>
-<th id="stub_1_53" scope="row" class="gt_row gt_left gt_stub">prvdr_ctgry_sbtyp_cd</th>
-<td headers="stub_1_53 value" class="gt_row gt_left">CLIA88 Lab</td>
-</tr>
-<tr>
-<th id="stub_1_54" scope="row" class="gt_row gt_left gt_stub">prvdr_ctgry_cd</th>
-<td headers="stub_1_54 value" class="gt_row gt_left gt_striped">CLIA Lab</td>
-</tr>
-<tr>
-<th id="stub_1_55" scope="row" class="gt_row gt_left gt_stub">ssa_cnty_cd</th>
-<td headers="stub_1_55 value" class="gt_row gt_left">700</td>
-</tr>
-<tr>
-<th id="stub_1_56" scope="row" class="gt_row gt_left gt_stub">ssa_state_cd</th>
-<td headers="stub_1_56 value" class="gt_row gt_left gt_striped">11</td>
-</tr>
-<tr>
-<th id="stub_1_57" scope="row" class="gt_row gt_left gt_stub">aplctn_type_cd</th>
-<td headers="stub_1_57 value" class="gt_row gt_left">1</td>
-</tr>
-<tr>
-<th id="stub_1_58" scope="row" class="gt_row gt_left gt_stub">clia_mdcr_num</th>
-<td headers="stub_1_58 value" class="gt_row gt_left gt_striped">00205114A3</td>
-</tr>
-<tr>
-<th id="stub_1_59" scope="row" class="gt_row gt_left gt_stub">clia_trmntn_cd</th>
-<td headers="stub_1_59 value" class="gt_row gt_left">17</td>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">VEEDHATA OM LLC DBA PRIME DIAGNOSTICS</th>
+<td headers="Accreditation stub_1_12 clia_number" class="gt_row gt_left gt_striped">11D2223235</td>
+<td headers="Accreditation stub_1_12 expiration_date" class="gt_row gt_right gt_striped">Oct 31, 2024</td>
+<td headers="Accreditation stub_1_12 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
+<td headers="Accreditation stub_1_12 facility_type" class="gt_row gt_left gt_striped">Independent</td>
+<td headers="Accreditation stub_1_12 organization" class="gt_row gt_left gt_striped">COLA</td>
+<td headers="Accreditation stub_1_12 confirmed_date" class="gt_row gt_right gt_striped">Nov 1, 2022</td>
 </tr>
 </tbody>
 </table>
 </div>
-<p><br><br></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, certificate <span class="op">=</span> <span class="st">"waiver"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">clia</span>, <span class="va">certificate</span>, <span class="va">expiration_date</span>, <span class="va">termination_reason</span>, <span class="va">facility_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span>, groupname_col <span class="op">=</span> <span class="st">"facility_type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>termination_reason <span class="op">=</span> <span class="st">"termination"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_date.html" class="external-link">fmt_date</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span>, date_style <span class="op">=</span> <span class="st">"wd_m_day_year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `clia` doesn't exist.</span></span></code></pre>
 </div>
   </main>
 </div>
