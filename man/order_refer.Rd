@@ -6,8 +6,8 @@
 \usage{
 order_refer(
   npi = NULL,
-  first_name = NULL,
-  last_name = NULL,
+  first = NULL,
+  last = NULL,
   partb = NULL,
   dme = NULL,
   hha = NULL,
@@ -18,9 +18,7 @@ order_refer(
 \arguments{
 \item{npi}{10-digit National Provider Identifier}
 
-\item{first_name}{Provider's first name}
-
-\item{last_name}{Provider's last name}
+\item{first, last}{Provider's first/last name}
 
 \item{partb}{boolean; eligibility to order & refer to Medicare Part B}
 
@@ -63,28 +61,25 @@ refer. Medicare coverage will then apply when ordering or referring:
 \item Imaging Services
 \item Home Health Services
 }
-}
-}
-\section{Links}{
-
+\subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying}{CMS.gov: Ordering & Certifying}
 \item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
 }
+
+\emph{Update Frequency:} \strong{Twice Weekly}
 }
 
-\section{Update Frequency}{
- \strong{Twice Weekly}
 }
-
+}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # Search by NPI
 order_refer(npi = 1003026055)
 
 # Search by name and/or filter for certain privileges
-order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
+order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 \dontshow{\}) # examplesIf}
 }
 \seealso{

@@ -30,6 +30,7 @@ Imports:
     vctrs
 Suggests: 
     covr,
+    stats,
     gt,
     gtExtras,
     htmltools,

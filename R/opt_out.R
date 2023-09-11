@@ -42,14 +42,13 @@
 #' (Part C) provider or furnish services covered by traditional Medicare
 #' fee-for-service (Part B).
 #'
-#' @section Links:
-#' - [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
+#' ### Links:
+#'    - [Medicare Opt Out Affidavits API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits)
 #'
-#' @section Update Frequency: **Monthly**
+#' *Update Frequency:* **Monthly**
 #'
 #' @param npi 10-digit National Provider Identifier
-#' @param first_name Provider's first name
-#' @param last_name Provider's last name
+#' @param first,last Provider's first/last name
 #' @param specialty Provider's specialty
 #' @param address Provider's address
 #' @param city Provider's city
@@ -64,15 +63,15 @@
 #' @seealso [order_refer()]
 #'
 #' @examples
-#' opt_out(last_name = "Smith",
-#'         first_name = "James",
+#' opt_out(first = "James",
+#'         last = "Smith",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE)
 #' @examplesIf  interactive()
 #' # For providers that have opted out, but are eligible to order and refer,
 #' # use `order_refer()` to look up their specific eligibility statuses
-#' opt_out(last_name = "Smith",
-#'         first_name = "James",
+#' opt_out(first = "James",
+#'         last = "Smith",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE) |>
 #'         pull(npi) |>
@@ -81,8 +80,8 @@
 #' @autoglobal
 #' @export
 opt_out <- function(npi             = NULL,
-                    first_name      = NULL,
-                    last_name       = NULL,
+                    first           = NULL,
+                    last            = NULL,
                     specialty       = NULL,
                     address         = NULL,
                     city            = NULL,
@@ -98,8 +97,8 @@ opt_out <- function(npi             = NULL,
   args <- dplyr::tribble(
     ~param,                         ~arg,
     "NPI",                           npi,
-    "First Name",                    first_name,
-    "Last Name",                     last_name,
+    "First Name",                    first,
+    "Last Name",                     last,
     "Specialty",                     specialty,
     "First Line Street Address",     address,
     "City Name",                     city,
@@ -119,8 +118,8 @@ opt_out <- function(npi             = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "first_name",    first_name,
-      "last_name",     last_name,
+      "first",         first,
+      "last",          last,
       "specialty",     specialty,
       "address",       address,
       "city",          city,
@@ -155,8 +154,8 @@ opt_out <- function(npi             = NULL,
                                    "second_line_street_address")),
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
       dplyr::select(npi,
-                    first_name,
-                    last_name,
+                    first = first_name,
+                    last = last_name,
                     specialty,
                     order_refer       = eligible_to_order_and_refer,
                     optout_start_date = optout_effective_date,

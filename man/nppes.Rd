@@ -7,10 +7,10 @@
 nppes(
   npi = NULL,
   entype = NULL,
-  first_name = NULL,
-  last_name = NULL,
-  org_name = NULL,
-  purpose_name = NULL,
+  first = NULL,
+  last = NULL,
+  organization = NULL,
+  name_type = NULL,
   taxonomy_desc = NULL,
   city = NULL,
   state = NULL,
@@ -22,53 +22,47 @@ nppes(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier (NPI).}
+\item{npi}{10-digit National Provider Identifier (NPI)}
 
-\item{entype}{Entity type. Choices are either \code{I} for an Individual provider
-or \code{O} for an Organizational provider. Cannot be the only criteria entered.}
+\item{entype}{Entity/enumeration type. Cannot be the only criteria entered.
+Options are:
+\itemize{
+\item \code{"I"}: Individual provider (NPI-1)
+\item \code{"O"}: Organizational provider (NPI-2)
+}}
 
-\item{first_name}{Individual provider's first name. Trailing
-wildcard entries are permitted requiring at least two characters to be
-entered (e.g. \verb{jo*} ).}
+\item{first, last}{Individual provider's first/last name.
+\emph{Trailing Wildcard Allowed}}
 
-\item{last_name}{Individual provider's last name. Trailing wildcard
-entries are permitted requiring at least two characters to be entered
-(e.g. \verb{jo*} ).}
+\item{organization}{Healthcare organization's name. Many types of names (LBN,
+DBA, Former LBN, Other Name) are examined for a match. As such, the results
+might contain a different name from the one entered. \emph{Trailing Wildcard Allowed}}
 
-\item{org_name}{Healthcare organization's name (NPI-2). Trailing wildcard
-entries are permitted requiring at least two characters to be entered.
-All types of Organization Names (LBN, DBA, Former LBN, Other Name)
-associated with an NPI are examined for matching contents, therefore, the
-results might contain an organization name different from the one entered
-in the Organization Name criterion.}
+\item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to.
+Options are:
+*\code{"AO"}: will only search Authorized Official names
+\itemize{
+\item \code{"Provider"}:  will only search Individual Provider names \emph{(default)}
+}}
 
-\item{purpose_name}{Refers to whether the name information entered pertains
-to an Authorized Official's name or a Provider's name. When not specified,
-the results will search against a provider's first and last name. AO will
-only search against Authorized Official names. While PROVIDER will only
-search against Provider name. Valid values are: \code{AO} and \code{Provider.}}
-
-\item{taxonomy_desc}{Search for providers by their taxonomy by entering the
-taxonomy description.}
+\item{taxonomy_desc}{Provider's taxonomy description}
 
 \item{city}{City associated with the provider's address. To search for a
-Military Address, enter either \code{APO} or \code{FPO}.}
+Military Address, enter either \code{"APO"} or \code{"FPO"}.}
 
 \item{state}{State abbreviation associated with the provider's address. If
 this field is used, at least one other field, besides the \code{entype} and
 \code{country}, must be populated.}
 
-\item{zip}{The Postal Code associated with the provider's address
-identified in Address Purpose. If you enter a 5 digit postal code, it
-will match any appropriate 9 digit (zip+4) codes in the data. Trailing
-wildcard entries are permitted requiring at least two characters to be
-entered (e.g., \verb{21*}).}
+\item{zip}{Zip code associated with the provider's address. If a 5 digit zip
+is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
+the data. \emph{Trailing Wildcard Allowed}}
 
 \item{country}{Country abbreviation associated with the provider's
 address. This field \strong{can} be used as the only input criterion, as long
-as the value selected \emph{is not} \code{US} (United States).}
+as the value selected \emph{is not} \code{"US"} (United States).}
 
-\item{limit}{Maximum number of results to return; default is 1200.}
+\item{limit}{Maximum number of results to return; default is \code{1200}.}
 
 \item{skip}{Number of results to skip after those set in \code{limit}.}
 
@@ -150,6 +144,10 @@ statutes, regulations, and program instructions of the Medicare program.
 \item \href{https://npiregistry.cms.hhs.gov/api-page}{NPPES NPI Registry API Documentation}
 \item \href{https://npiregistry.cms.hhs.gov/demo-api}{NPPES NPI Registry API Demo}
 }
+
+\strong{Trailing Wildcard Entries}
+Arguments that allow trailing wildcard entries are denoted in the parameter
+description with \emph{Trailing Wildcard Allowed}. Wildcard entries require at least two characters to be entered, e.g. \code{"jo*"}
 
 \emph{Update Frequency:} \strong{Weekly}
 }

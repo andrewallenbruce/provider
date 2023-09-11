@@ -70,44 +70,39 @@
 #' - [NPPES NPI Registry API Documentation](https://npiregistry.cms.hhs.gov/api-page)
 #' - [NPPES NPI Registry API Demo](https://npiregistry.cms.hhs.gov/demo-api)
 #'
+#' **Trailing Wildcard Entries**
+#' Arguments that allow trailing wildcard entries are denoted in the parameter
+#' description with _Trailing Wildcard Allowed_. Wildcard entries require at least two characters to be entered, e.g. `"jo*"`
+#'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param npi 10-digit National Provider Identifier (NPI).
-#' @param entype Entity type. Choices are either `I` for an Individual provider
-#'    or `O` for an Organizational provider. Cannot be the only criteria entered.
-#' @param first_name Individual provider's first name. Trailing
-#'    wildcard entries are permitted requiring at least two characters to be
-#'    entered (e.g. `jo*` ).
-#' @param last_name Individual provider's last name. Trailing wildcard
-#'    entries are permitted requiring at least two characters to be entered
-#'    (e.g. `jo*` ).
-#' @param purpose_name Refers to whether the name information entered pertains
-#'    to an Authorized Official's name or a Provider's name. When not specified,
-#'    the results will search against a provider's first and last name. AO will
-#'    only search against Authorized Official names. While PROVIDER will only
-#'    search against Provider name. Valid values are: `AO` and `Provider.`
-#' @param org_name Healthcare organization's name (NPI-2). Trailing wildcard
-#'    entries are permitted requiring at least two characters to be entered.
-#'    All types of Organization Names (LBN, DBA, Former LBN, Other Name)
-#'    associated with an NPI are examined for matching contents, therefore, the
-#'    results might contain an organization name different from the one entered
-#'    in the Organization Name criterion.
-#' @param taxonomy_desc Search for providers by their taxonomy by entering the
-#'    taxonomy description.
+#' @param npi 10-digit National Provider Identifier (NPI)
+#' @param entype Entity/enumeration type. Cannot be the only criteria entered.
+#' Options are:
+#'   * `"I"`: Individual provider (NPI-1)
+#'   * `"O"`: Organizational provider (NPI-2)
+#' @param first,last Individual provider's first/last name.
+#' _Trailing Wildcard Allowed_
+#' @param name_type Type of name the `first`/`last` arguments pertain to.
+#' Options are:
+#'   *`"AO"`: will only search Authorized Official names
+#'   * `"Provider"`:  will only search Individual Provider names _(default)_
+#' @param organization Healthcare organization's name. Many types of names (LBN,
+#' DBA, Former LBN, Other Name) are examined for a match. As such, the results
+#' might contain a different name from the one entered. _Trailing Wildcard Allowed_
+#' @param taxonomy_desc Provider's taxonomy description
 #' @param city City associated with the provider's address. To search for a
-#'    Military Address, enter either `APO` or `FPO`.
+#'    Military Address, enter either `"APO"` or `"FPO"`.
 #' @param state State abbreviation associated with the provider's address. If
-#'    this field is used, at least one other field, besides the `entype` and
-#'    `country`, must be populated.
-#' @param zip The Postal Code associated with the provider's address
-#'    identified in Address Purpose. If you enter a 5 digit postal code, it
-#'    will match any appropriate 9 digit (zip+4) codes in the data. Trailing
-#'    wildcard entries are permitted requiring at least two characters to be
-#'    entered (e.g., `21*`).
+#' this field is used, at least one other field, besides the `entype` and
+#' `country`, must be populated.
+#' @param zip Zip code associated with the provider's address. If a 5 digit zip
+#' is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
+#' the data. _Trailing Wildcard Allowed_
 #' @param country Country abbreviation associated with the provider's
-#'    address. This field **can** be used as the only input criterion, as long
-#'    as the value selected *is not* `US` (United States).
-#' @param limit Maximum number of results to return; default is 1200.
+#' address. This field **can** be used as the only input criterion, as long
+#' as the value selected *is not* `"US"` (United States).
+#' @param limit Maximum number of results to return; default is `1200`.
 #' @param skip Number of results to skip after those set in `limit`.
 #' @param tidy Tidy output; default is `TRUE`.
 #'
@@ -119,10 +114,10 @@
 #' @export
 nppes <- function(npi = NULL,
                   entype = NULL,
-                  first_name = NULL,
-                  last_name = NULL,
-                  org_name = NULL,
-                  purpose_name   = NULL,
+                  first = NULL,
+                  last = NULL,
+                  organization = NULL,
+                  name_type = NULL,
                   taxonomy_desc  = NULL,
                   city = NULL,
                   state = NULL,
@@ -132,18 +127,18 @@ nppes <- function(npi = NULL,
                   skip = NULL,
                   tidy = TRUE) {
 
-  if (!is.null(npi))          {npi <- npi_check(npi)}
-  if (!is.null(entype))       {entype <- entype_arg(entype)}
-  if (!is.null(purpose_name)) {rlang::arg_match(purpose_name, c("AO", "Provider"))}
-  if (!is.null(zip))          {zip <- as.character(zip)}
+  if (!is.null(npi))       {npi <- npi_check(npi)}
+  if (!is.null(entype))    {entype <- entype_arg(entype)}
+  if (!is.null(name_type)) {rlang::arg_match(name_type, c("AO", "Provider"))}
+  if (!is.null(zip))       {zip <- as.character(zip)}
 
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,
                          enumeration_type     = entype,
-                         first_name           = first_name,
-                         last_name            = last_name,
-                         name_purpose         = purpose_name,
-                         organization_name    = org_name,
+                         first_name           = first,
+                         last_name            = last,
+                         name_purpose         = name_type,
+                         organization_name    = organization,
                          taxonomy_description = taxonomy_desc,
                          city                 = city,
                          state                = state,
@@ -163,10 +158,10 @@ nppes <- function(npi = NULL,
       ~x,              ~y,
       "npi",           npi,
       "entype",        entype,
-      "first_name",    first_name,
-      "last_name",     last_name,
-      "purpose_name",  purpose_name,
-      "org_name",      org_name,
+      "first",         first,
+      "last",          last,
+      "name_type",     name_type,
+      "organization",  organization,
       "taxonomy_desc", taxonomy_desc,
       "city",          city,
       "state",         state,
@@ -218,10 +213,10 @@ nppes <- function(npi = NULL,
       tidyr::unnest(c(addresses)) |>
       dplyr::mutate(address_type = NULL,
                     country_name = NULL) |>
-      dplyr::rename(country      = country_code,
+      dplyr::rename(country = country_code,
                     phone = telephone_number,
-                    zip      = postal_code,
-                    purpose      = address_purpose) |>
+                    zip = postal_code,
+                    purpose = address_purpose) |>
       dplyr::mutate(purpose = dplyr::if_else(purpose == "LOCATION",
                                              "PRACTICE",
                                              purpose))
@@ -235,16 +230,13 @@ nppes <- function(npi = NULL,
     if (ncol(pracloc) > 2) {
 
       pracloc <- pracloc |>
-        # tidyr::unite("street",
-        #              dplyr::any_of(c("address_1", "address_2")),
-        #              remove = TRUE, na.rm = TRUE, sep = " ") |>
         dplyr::mutate(address_type = NULL,
                       country_name = NULL) |>
-        dplyr::rename(country      = country_code,
+        dplyr::rename(country = country_code,
                       phone = telephone_number,
-                      zip      = postal_code,
-                      purpose      = address_purpose,
-                      street       = address_1)
+                      zip = postal_code,
+                      purpose = address_purpose,
+                      street = address_1)
 
       address <- dplyr::bind_rows(address, pracloc)
     }
@@ -260,12 +252,15 @@ nppes <- function(npi = NULL,
 
       taxonomy <- taxonomy |>
         dplyr::select(npi,
-                      tx_code = code,
-                      tx_desc = desc,
-                      tx_group = taxonomy_group,
-                      tx_state = state,
-                      tx_license = license,
-                      tx_primary = primary)
+                      code,
+                      desc,
+                      group = taxonomy_group,
+                      state,
+                      license,
+                      primary)
+
+      names(taxonomy) <- c("npi",
+            paste0("taxonomy_", names(taxonomy)[2:length(names(taxonomy))]))
 
       final <- dplyr::left_join(final, taxonomy, key)
     }
@@ -300,6 +295,7 @@ nppes <- function(npi = NULL,
                      remove = TRUE,
                      na.rm = TRUE,
                      sep = " ")
+
       names(endpoints) <- c("npi",
             paste0("end_", names(endpoints)[2:length(names(endpoints))]))
 
@@ -354,26 +350,13 @@ nppes <- function(npi = NULL,
                       "country",
                       "phone",
                       "fax_number",
-                      "authorized_official_first_name",
-                      "authorized_official_middle_name",
-                      "authorized_official_last_name",
-                      "authorized_official_title_or_position",
-                      "authorized_official_telephone_number",
-                      "authorized_official_credential",
-                      "parent_organization_legal_business_name",
-                      "tx_code",
-                      "tx_desc",
-                      "tx_group",
-                      "tx_state",
-                      "tx_license",
-                      "tx_primary",
-                      "id_desc",
-                      "id_issuer",
-                      "id_identifier",
-                      "id_state")
+                      "parent_organization_legal_business_name")
 
     results <- results |>
       dplyr::select(dplyr::any_of(valid_fields),
+                    dplyr::starts_with("authorized_official_"),
+                    dplyr::starts_with("taxonomy_"),
+                    dplyr::starts_with("id_"),
                     dplyr::starts_with("end_"),
                     dplyr::starts_with("other_"),
                     dplyr::everything())

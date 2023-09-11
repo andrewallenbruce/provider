@@ -90,12 +90,11 @@ Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-physician_by_provider(year = 2020,
-                      npi = 1003000423)
+by_provider(year = 2020, npi = 1003000423)
 
 # Use the years helper function to retrieve results for every year:
-physician_by_provider_years() |>
-map(\(x) physician_by_provider(year = x, npi = 1043477615)) |>
+by_provider_years() |>
+map(\(x) by_provider(year = x, npi = 1043477615)) |>
 list_rbind()
 \dontshow{\}) # examplesIf}
 }

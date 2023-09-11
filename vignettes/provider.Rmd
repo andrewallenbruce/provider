@@ -152,7 +152,7 @@ open_payments(npi = 12345691234)
 nppes(npi = "O12345678912")
 
 # Must pass Luhn check
-pending(npi = 001234569123)
+pending(npi = 001234569123, type = "physician")
 ```
 
 <br>
@@ -163,7 +163,7 @@ pending(npi = 001234569123)
 
 ```{r}
 # Must be 10 digits long
-affiliations(pac_id = 0123456789)
+affiliations(pac_id_ind = 0123456789)
 
 # Must be numeric
 hospitals(pac_id_org = "O12345678912")
@@ -176,7 +176,7 @@ hospitals(pac_id_org = "O12345678912")
 
 ```{r}
 # Must be a character vector
-clinicians(enroll_id = 0123456789123456)
+clinicians(enroll_id_ind = 0123456789123456)
 
 # Must be 15 characters long
 revalidation_date(enroll_id = "I123456789123456")

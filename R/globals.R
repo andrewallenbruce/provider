@@ -509,7 +509,9 @@ utils::globalVariables(c(
   "provider_type_desc", # <providers>
   "state_cd", # <providers>
   "org_name", # <providers>
+  "first_name", # <providers>
   "mdl_name", # <providers>
+  "last_name", # <providers>
   "gndr_sw", # <providers>
   "distro", # <quality_payment>
   "y", # <quality_payment>

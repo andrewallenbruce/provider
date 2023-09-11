@@ -1,38 +1,3 @@
-#' Returns a tidytable of summary stats
-#' @description Returns a tidy table of summary stats
-#' @param df data frame
-#' @param condition filter condition, i.e. `patient == "new"`
-#' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
-#' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
-#' @param arr column to arrange data by, i.e. `cost`
-#' @return A `tibble` containing the summary stats
-#' @examplesIf interactive()
-#' summary_stats(condition = patient == "new",
-#'               group_vars = c(specialty, state, hcpcs, cost),
-#'               summary_vars = c(min, max, mode, range),
-#'               arr = cost)
-#' @autoglobal
-#' @noRd
-summary_stats <- function(df,
-                          condition = NULL,
-                          group_vars = NULL,
-                          summary_vars = NULL,
-                          arr = NULL) {
-
-  results <- df |>
-    dplyr::filter({{ condition }}) |>
-    dplyr::summarise(
-      dplyr::across({{ summary_vars }},
-       list(median = \(x) stats::median(x, na.rm = TRUE),
-            mean = \(x) mean(x, na.rm = TRUE)),
-       .names = "{.fn}_{.col}"),
-       n = dplyr::n(),
-       .by = ({{ group_vars }}) ) |>
-    dplyr::arrange(dplyr::desc({{ arr }}))
-
-  return(results)
-}
-
 #' Format US ZIP codes
 #' @param zip Nine-digit US ZIP code
 #' @return ZIP code, hyphenated for ZIP+4 or 5-digit ZIP.
@@ -75,101 +40,11 @@ clean_credentials <- function(x) {
   return(out)
 }
 
-#' param_format
-#' @param param API parameter
-#' @param arg API function arg
-#' @return formatted API filters
-#' @autoglobal
-#' @noRd
-param_format <- function(param, arg) {
-
-  if (is.null(arg)) {
-    param <- NULL
-  } else {
-      paste0("filter[", param, "]=", arg, "&")
-    }
-  }
-
-#' param_space
-#' Some API parameters have spaces, these must be converted to "%20".
-#' @param param parameter with a space
-#' @return parameter formatted with "%20" in lieu of a space
-#' @autoglobal
-#' @noRd
-param_space <- function(param) {
-
-  gsub(" ", "%20", param)
-
-}
-
-#' param_brackets
-#' Some API parameters have spaces, these must be converted to "%20".
-#' @param param parameter with a space
-#' @return parameter formatted with "%20" in lieu of a space
-#' @autoglobal
-#' @noRd
-param_brackets <- function(param) {
-
-  param <- gsub(" ", "%20", param)
-  param <- gsub("[", "%5B", param, fixed = TRUE)
-  param <- gsub("*", "%2A", param, fixed = TRUE)
-  param <- gsub("]", "%5D", param, fixed = TRUE)
-
-  return(param)
-}
-
-#' sql_format
-#' @param param API parameter
-#' @param arg API function arg
-#' @return formatted API filters
-#' @autoglobal
-#' @noRd
-sql_format <- function(param,
-                       arg) {
-
-  if (is.null(arg)) {
-
-    param <- NULL
-
-    } else {
-
-      paste0("[WHERE ", param, " = ", "%22", arg, "%22", "]")
-    }
-  }
-
-#' str_to_snakecase
-#' @param string string
-#' @return string formatted to snakecase
-#' @autoglobal
-#' @noRd
-str_to_snakecase <- function(string) {
-
-  string |>
-    purrr::map_chr(function(string) {
-      string |> stringr::str_to_lower() |>
-                stringr::str_c(collapse = "_")}) |>
-    stringr::str_remove("^_") |>
-    stringr::str_replace_all(c(" " = "_",
-                               "/" = "_",
-                               "-" = "_",
-                               "__" = "_",
-                               ":" = ""))
-}
-
 #' Convert True/False char values to logical
 #' @param x vector
 #' @autoglobal
 #' @noRd
 tf_logical <- function(x) {
-
-  ## TO DO Convert to case_match()
-
-  # dplyr::case_match(
-  #   x,
-  #   c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-  #   c("O", "o", "Org", "org", "2") ~ "NPI-2",
-  #   .default = NULL
-  # )
 
   dplyr::case_when(
     x == "True" ~ as.logical(TRUE),

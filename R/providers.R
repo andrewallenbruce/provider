@@ -21,14 +21,12 @@
 #' @param specialty Enrollment specialty type description.
 #' @param state Enrollment state abbreviation. Since Providers enroll at the state level,
 #'    a PAC ID can be associated with multiple enrollment IDs and states.
-#' @param first_name Individual provider first name
-#' @param middle_name Individual provider middle name
-#' @param last_name Individual provider last name
-#' @param organization_name Organizational provider name
+#' @param first,middle,last Individual provider's first/middle/last name
+#' @param organization Organizational provider name
 #' @param gender Individual provider gender. Options are:
-#'    * `F`: Female
-#'    * `M`: Male
-#'    * `9`: Unknown (or Organizational provider)
+#'    * `"F"`: Female
+#'    * `"M"`: Male
+#'    * `"9"`: Unknown (or Organizational provider)
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return [tibble][tibble::tibble-package] containing the search results.
@@ -38,21 +36,20 @@
 #' @examplesIf interactive()
 #' providers(npi = 1417918293, specialty_code = "14-41")
 #' providers(pac_id = 2860305554, gender = "9")
-#'
 #' @autoglobal
 #' @export
-providers <- function(npi                = NULL,
-                      pac_id             = NULL,
-                      enroll_id          = NULL,
-                      specialty_code     = NULL,
-                      specialty          = NULL,
-                      state              = NULL,
-                      first_name         = NULL,
-                      middle_name        = NULL,
-                      last_name          = NULL,
-                      organization_name  = NULL,
-                      gender             = NULL,
-                      tidy               = TRUE) {
+providers <- function(npi = NULL,
+                      pac_id = NULL,
+                      enroll_id = NULL,
+                      specialty_code = NULL,
+                      specialty = NULL,
+                      state = NULL,
+                      first = NULL,
+                      middle = NULL,
+                      last = NULL,
+                      organization = NULL,
+                      gender = NULL,
+                      tidy = TRUE) {
 
   if (!is.null(npi))       {npi    <- npi_check(npi)}
   if (!is.null(pac_id))    {pac_id <- pac_check(pac_id)}
@@ -67,10 +64,10 @@ providers <- function(npi                = NULL,
              "PROVIDER_TYPE_CD", specialty_code,
            "PROVIDER_TYPE_DESC", specialty,
                      "STATE_CD", state,
-                   "FIRST_NAME", first_name,
-                     "MDL_NAME", middle_name,
-                    "LAST_NAME", last_name,
-                     "ORG_NAME", organization_name,
+                   "FIRST_NAME", first,
+                     "MDL_NAME", middle,
+                    "LAST_NAME", last,
+                     "ORG_NAME", organization,
                       "GNDR_SW", gender)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
@@ -89,10 +86,10 @@ providers <- function(npi                = NULL,
       "specialty_code",    specialty_code,
       "specialty",         specialty,
       "state",             state,
-      "first_name",        first_name,
-      "middle_name",       middle_name,
-      "last_name",         last_name,
-      "organization_name", organization_name,
+      "first",             first,
+      "middle",            middle,
+      "last",              last,
+      "organization",      organization,
       "gender",            gender) |>
       tidyr::unnest(cols = c(y))
 
@@ -115,16 +112,17 @@ providers <- function(npi                = NULL,
       dplyr::tibble() |>
       dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
       dplyr::select(npi,
-                    pac_id            = pecos_asct_cntl_id,
-                    enroll_id         = enrlmt_id,
-                    specialty_code    = provider_type_cd,
-                    specialty         = provider_type_desc,
-                    state             = state_cd,
-                    organization_name = org_name,
-                    first_name,
-                    middle_name       = mdl_name,
-                    last_name,
-                    gender            = gndr_sw)
+                    pac_id = pecos_asct_cntl_id,
+                    enroll_id = enrlmt_id,
+                    specialty_code = provider_type_cd,
+                    specialty = provider_type_desc,
+                    state = state_cd,
+                    organization = org_name,
+                    first = first_name,
+                    middle = mdl_name,
+                    last = last_name,
+                    gender = gndr_sw,
+                    dplyr::everything())
   }
   return(results)
 }

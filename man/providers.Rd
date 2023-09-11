@@ -11,10 +11,10 @@ providers(
   specialty_code = NULL,
   specialty = NULL,
   state = NULL,
-  first_name = NULL,
-  middle_name = NULL,
-  last_name = NULL,
-  organization_name = NULL,
+  first = NULL,
+  middle = NULL,
+  last = NULL,
+  organization = NULL,
   gender = NULL,
   tidy = TRUE
 )
@@ -37,19 +37,15 @@ provider enrollment application. Links all enrollment-level information
 \item{state}{Enrollment state abbreviation. Since Providers enroll at the state level,
 a PAC ID can be associated with multiple enrollment IDs and states.}
 
-\item{first_name}{Individual provider first name}
+\item{first, middle, last}{Individual provider's first/middle/last name}
 
-\item{middle_name}{Individual provider middle name}
-
-\item{last_name}{Individual provider last name}
-
-\item{organization_name}{Organizational provider name}
+\item{organization}{Organizational provider name}
 
 \item{gender}{Individual provider gender. Options are:
 \itemize{
-\item \code{F}: Female
-\item \code{M}: Male
-\item \code{9}: Unknown (or Organizational provider)
+\item \code{"F"}: Female
+\item \code{"M"}: Male
+\item \code{"9"}: Unknown (or Organizational provider)
 }}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}

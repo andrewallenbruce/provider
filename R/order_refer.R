@@ -27,16 +27,15 @@
 #'   - Imaging Services
 #'   - Home Health Services
 #'
-#' @section Links:
+#' ### Links:
 #'   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 #'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying)
 #'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
-#' @section Update Frequency: **Twice Weekly**
+#' *Update Frequency:* **Twice Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier
-#' @param first_name Provider's first name
-#' @param last_name Provider's last name
+#' @param first,last Provider's first/last name
 #' @param partb boolean; eligibility to order & refer to Medicare Part B
 #' @param dme boolean; eligibility to order Durable Medical Equipment
 #' @param hha boolean; eligibility to refer to a Home Health Agency
@@ -52,17 +51,17 @@
 #' order_refer(npi = 1003026055)
 #'
 #' # Search by name and/or filter for certain privileges
-#' order_refer(last_name = "Smith", partb = FALSE, hha = TRUE)
+#' order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 #' @autoglobal
 #' @export
-order_refer <- function(npi          = NULL,
-                        first_name   = NULL,
-                        last_name    = NULL,
-                        partb        = NULL,
-                        dme          = NULL,
-                        hha          = NULL,
-                        pmd          = NULL,
-                        tidy         = TRUE) {
+order_refer <- function(npi = NULL,
+                        first = NULL,
+                        last = NULL,
+                        partb = NULL,
+                        dme = NULL,
+                        hha = NULL,
+                        pmd = NULL,
+                        tidy = TRUE) {
 
   if (!is.null(npi))   {npi   <- npi_check(npi)}
   if (!is.null(partb)) {partb <- tf_2_yn(partb)}
@@ -73,8 +72,8 @@ order_refer <- function(npi          = NULL,
   args <- dplyr::tribble(
     ~param,      ~arg,
     "NPI",        npi,
-    "FIRST_NAME", first_name,
-    "LAST_NAME",  last_name,
+    "FIRST_NAME", first,
+    "LAST_NAME",  last,
     "PARTB",      partb,
     "DME",        dme,
     "HHA",        hha,
@@ -92,8 +91,8 @@ order_refer <- function(npi          = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "first_name",    first_name,
-      "last_name",     last_name,
+      "first",         first,
+      "last",          last,
       "partb",         partb,
       "dme",           dme,
       "hha",           hha,
@@ -121,8 +120,8 @@ order_refer <- function(npi          = NULL,
                     dme   = yn_logical(dme),
                     pmd   = yn_logical(pmd)) |>
       dplyr::select(npi,
-                    first_name,
-                    last_name,
+                    first = first_name,
+                    last = last_name,
                     "Medicare Part B"                 = partb,
                     "Home Health Agency (HHA)"        = hha,
                     "Durable Medical Equipment (DME)" = dme,

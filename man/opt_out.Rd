@@ -6,8 +6,8 @@
 \usage{
 opt_out(
   npi = NULL,
-  first_name = NULL,
-  last_name = NULL,
+  first = NULL,
+  last = NULL,
   specialty = NULL,
   address = NULL,
   city = NULL,
@@ -20,9 +20,7 @@ opt_out(
 \arguments{
 \item{npi}{10-digit National Provider Identifier}
 
-\item{first_name}{Provider's first name}
-
-\item{last_name}{Provider's last name}
+\item{first, last}{Provider's first/last name}
 
 \item{specialty}{Provider's specialty}
 
@@ -86,29 +84,26 @@ days. DMEPOS suppliers must withdraw within 30 days.
 Providers may \emph{NOT} opt-out if they intend to be a Medicare Advantage
 (Part C) provider or furnish services covered by traditional Medicare
 fee-for-service (Part B).
-}
-}
-\section{Links}{
-
+\subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/opt-out-affidavits}{Medicare Opt Out Affidavits API}
 }
+
+\emph{Update Frequency:} \strong{Monthly}
 }
 
-\section{Update Frequency}{
- \strong{Monthly}
 }
-
+}
 \examples{
-opt_out(last_name = "Smith",
-        first_name = "James",
+opt_out(first = "James",
+        last = "Smith",
         specialty = "Nurse Practitioner",
         order_refer = TRUE)
 \dontshow{if ( interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # For providers that have opted out, but are eligible to order and refer,
 # use `order_refer()` to look up their specific eligibility statuses
-opt_out(last_name = "Smith",
-        first_name = "James",
+opt_out(first = "James",
+        last = "Smith",
         specialty = "Nurse Practitioner",
         order_refer = TRUE) |>
         pull(npi) |>
