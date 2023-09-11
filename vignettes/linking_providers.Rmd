@@ -56,7 +56,7 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 
 ```{r}
 affiliations(facility_ccn = 331302) |> 
-  select(-c(middle_name, suffix, parent_ccn)) |> 
+  select(-c(middle, suffix, parent_ccn)) |> 
   head(10)
 ```
 
@@ -67,7 +67,8 @@ That returns individual providers affiliated with the hospital. Now to search th
 
 
 ```{r}
-affiliations(facility_ccn = "33Z302")
+affiliations(facility_ccn = "33Z302") |> 
+  select(-c(middle, suffix))
 ```
 
 <br>
@@ -141,30 +142,34 @@ left_join(elizabeth.prov.pac,
 
 <br>
 
-### CLIA Labs
+### CLIA Laboratories
 
 ```{r}
-laboratories(clia = "11D0265516") |> 
+laboratories(city = "Valdosta", 
+             certificate = "accreditation") |> 
   janitor::remove_empty(which = c("rows", "cols")) |> 
-  provider:::display_long() |> 
-  gt::gt(rowname_col = "name") |> 
-  gt::cols_label(value = "results") |> 
+  dplyr::filter(confirmed == TRUE) |> 
+  dplyr::select(name,
+                clia_number,
+                certificate,
+                expiration_date, 
+                termination_reason, 
+                facility_type, 
+                organization, 
+                confirmed_date) |> 
+  gt::gt(rowname_col = "name", 
+         groupname_col = "certificate") |> 
+  gt::cols_label(termination_reason = "status", 
+                 clia_number = "clia",
+                 expiration_date = "expires",
+                 confirmed_date = "confirmed",
+                 facility_type = "type") |> 
   gt::cols_label_with(fn = toupper) |> 
+  gt::tab_spanner(label = "ACCREDITATION",
+    columns = c(organization, confirmed_date)) |> 
+  gt::fmt_date(columns = gt::contains("date"), 
+               date_style = "m_day_year") |> 
   gt::opt_table_font(font = gt::google_font(name = "JetBrains Mono")) |>
-  gt::opt_stylize(color = "gray")
-```
-
-<br><br>
-
-```{r}
-laboratories(city = "Valdosta", certificate = "waiver") |> 
-  dplyr::select(name, clia, certificate, expiration_date, termination_reason, facility_type) |> 
-  janitor::remove_empty(which = c("rows", "cols")) |> 
-  gt::gt(rowname_col = "name", groupname_col = "facility_type") |> 
-  gt::cols_label(termination_reason = "termination") |> 
-  gt::cols_label_with(fn = toupper) |> 
-  gt::fmt_date(columns = gt::contains("date"), date_style = "wd_m_day_year") |> 
-  gt::opt_table_font(font = gt::google_font(name = "JetBrains Mono")) |>
-  gt::opt_stylize(color = "gray")
+  gt::opt_stylize(color = "red")
 ```
 

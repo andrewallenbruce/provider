@@ -12,7 +12,7 @@ laboratories(
   state = NULL,
   zip = NULL,
   tidy = TRUE,
-  pivot = FALSE
+  pivot = TRUE
 )
 }
 \arguments{

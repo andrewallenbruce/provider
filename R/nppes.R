@@ -194,6 +194,9 @@ nppes <- function(npi = NULL,
                   dplyr::everything()) |>
     tidyr::unnest(c(basic))
 
+  # return(response$results |> dplyr::tibble())
+  # vctrs::vec_is_empty(purrr::pluck(n$practiceLocations, 1))
+
   results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
 
   if (tidy) {

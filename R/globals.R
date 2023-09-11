@@ -303,44 +303,16 @@ utils::globalVariables(c(
   "trmntn_exprtn_dt", # <laboratories>
   "acptbl_poc_sw", # <laboratories>
   "drctly_afltd_lab_cnt", # <laboratories>
-  "orgnl_prtcptn_dt", # <laboratories>
-  "aplctn_rcvd_dt", # <laboratories>
-  "crtfctn_dt", # <laboratories>
-  "crtfct_mail_dt", # <laboratories>
   "address", # <laboratories>
   "city_name", # <laboratories>
   "state_cd", # <laboratories>
   "zip_cd", # <laboratories>
   "phne_num", # <laboratories>
   "fax_phne_num", # <laboratories>
-  "state_rgn_cd", # <laboratories>
-  "fips_cnty_cd", # <laboratories>
-  "fips_state_cd", # <laboratories>
-  "cbsa_cd", # <laboratories>
-  "cbsa_urbn_rrl_ind", # <laboratories>
-  "intrmdry_carr_cd", # <laboratories>
-  "intrmdry_carr_prior_cd", # <laboratories>
-  "mdcd_vndr_num", # <laboratories>
-  "chow_cnt", # <laboratories>
-  "chow_prior_dt", # <laboratories>
-  "chow_dt", # <laboratories>
-  "fy_end_mo_day_cd", # <laboratories>
-  "elgblty_sw", # <laboratories>
-  "skltn_rec_sw", # <laboratories>
-  "mlt_site_excptn_sw", # <laboratories>
-  "hosp_lab_excptn_sw", # <laboratories>
-  "non_prft_excptn_sw", # <laboratories>
-  "lab_temp_tstg_site_sw", # <laboratories>
-  "shr_lab_sw", # <laboratories>
-  "lab_site_cnt", # <laboratories>
-  "ppmp_test_vol_cnt", # <laboratories>
-  "acrdtn_schdl_cd", # <laboratories>
-  "form_116_acrdtd_test_vol_cnt", # <laboratories>
-  "form_116_test_vol_cnt", # <laboratories>
-  "form_1557_crtfct_schdl_cd", # <laboratories>
-  "form_1557_cmplnc_schdl_cd", # <laboratories>
-  "form_1557_test_vol_cnt", # <laboratories>
-  "wvd_test_vol_cnt", # <laboratories>
+  "orgnl_prtcptn_dt", # <laboratories>
+  "aplctn_rcvd_dt", # <laboratories>
+  "crtfctn_dt", # <laboratories>
+  "crtfct_mail_dt", # <laboratories>
   "a2la_acrdtd_cd", # <laboratories>
   "a2la_acrdtd_y_match_sw", # <laboratories>
   "a2la_acrdtd_y_match_dt", # <laboratories>
@@ -363,9 +335,9 @@ utils::globalVariables(c(
   "jcaho_acrdtd_y_match_sw", # <laboratories>
   "jcaho_acrdtd_y_match_dt", # <laboratories>
   "clia_number", # <laboratories>
-  "acr_aala", # <laboratories>
-  "acr_aala_ind", # <laboratories>
-  "acr_aala_date", # <laboratories>
+  "acr_a2la", # <laboratories>
+  "acr_a2la_ind", # <laboratories>
+  "acr_a2la_date", # <laboratories>
   "acr_aabb", # <laboratories>
   "acr_aabb_ind", # <laboratories>
   "acr_aabb_date", # <laboratories>
@@ -384,7 +356,7 @@ utils::globalVariables(c(
   "acr_jcaho", # <laboratories>
   "acr_jcaho_ind", # <laboratories>
   "acr_jcaho_date", # <laboratories>
-  "aala", # <laboratories>
+  "a2la", # <laboratories>
   "aabb", # <laboratories>
   "aoa", # <laboratories>
   "ashi", # <laboratories>

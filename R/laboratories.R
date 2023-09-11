@@ -88,7 +88,7 @@ laboratories <- function(name = NULL,
                          state = NULL,
                          zip = NULL,
                          tidy = TRUE,
-                         pivot = FALSE) {
+                         pivot = TRUE) {
 
   if (!is.null(certificate)) {
     rlang::arg_match(certificate,
@@ -172,52 +172,52 @@ laboratories <- function(name = NULL,
                     #category = prvdr_ctgry_cd,
                     #subcategory = prvdr_ctgry_sbtyp_cd,
 
-                    orig_part_date = orgnl_prtcptn_dt,
-                    application_date = aplctn_rcvd_dt,
-                    certification_date = crtfctn_dt,
-                    mailed_date = crtfct_mail_dt,
-
                     address,
                     city = city_name,
                     state = state_cd,
                     zip = zip_cd,
                     phone = phne_num,
                     fax = fax_phne_num,
-                    region = rgn_cd,
-                    state_region = state_rgn_cd,
-                    fips_county = fips_cnty_cd,
-                    fips_state = fips_state_cd,
-                    cbsa = cbsa_cd,
-                    cbsa_ind = cbsa_urbn_rrl_ind,
-                    carrier = intrmdry_carr_cd,
-                    carrier_prior = intrmdry_carr_prior_cd,
-                    medicaid_vendor = mdcd_vndr_num,
-                    chow_count = chow_cnt,
-                    chow_date_prev = chow_prior_dt,
-                    chow_date = chow_dt,
-                    fiscal_year_end = fy_end_mo_day_cd,
-                    eligible_ind = elgblty_sw,
-                    skeleton_ind = skltn_rec_sw,
-                    multi_site_ind = mlt_site_excptn_sw,
-                    hosp_campus_ind = hosp_lab_excptn_sw,
-                    pub_health_ind = non_prft_excptn_sw,
-                    tmp_test_site_ind = lab_temp_tstg_site_sw,
-                    shared_lab_ind = shr_lab_sw,
+                    orig_part_date = orgnl_prtcptn_dt,
+                    application_date = aplctn_rcvd_dt,
+                    certification_date = crtfctn_dt,
+                    mailed_date = crtfct_mail_dt,
+
+                    # region = rgn_cd,
+                    # state_region = state_rgn_cd,
+                    # fips_county = fips_cnty_cd,
+                    # fips_state = fips_state_cd,
+                    # cbsa = cbsa_cd,
+                    # cbsa_ind = cbsa_urbn_rrl_ind,
+                    # carrier = intrmdry_carr_cd,
+                    # carrier_prior = intrmdry_carr_prior_cd,
+                    # medicaid_vendor = mdcd_vndr_num,
+                    # chow_count = chow_cnt,
+                    # chow_date_prev = chow_prior_dt,
+                    # chow_date = chow_dt,
+                    # fiscal_year_end = fy_end_mo_day_cd,
+                    # eligible_ind = elgblty_sw,
+                    # skeleton_ind = skltn_rec_sw,
+                    # multi_site_ind = mlt_site_excptn_sw,
+                    # hosp_campus_ind = hosp_lab_excptn_sw,
+                    # pub_health_ind = non_prft_excptn_sw,
+                    # tmp_test_site_ind = lab_temp_tstg_site_sw,
+                    # shared_lab_ind = shr_lab_sw,
                     # shared_lab_xref_number,
-                    lab_site_count = lab_site_cnt,
-                    ppm_test_count = ppmp_test_vol_cnt,
-                    acc_sched = acrdtn_schdl_cd,
-                    form_116_acrdtd_test_vol_cnt,
-                    form_116_test_vol_cnt,
-                    form_1557_crtfct_schdl_cd,
-                    form_1557_cmplnc_schdl_cd,
-                    form_1557_test_vol_cnt,
-                    wvd_test_vol_cnt,
+                    # lab_site_count = lab_site_cnt,
+                    # ppm_test_count = ppmp_test_vol_cnt,
+                    # acc_sched = acrdtn_schdl_cd,
+                    # form_116_acrdtd_test_vol_cnt,
+                    # form_116_test_vol_cnt,
+                    # form_1557_crtfct_schdl_cd,
+                    # form_1557_cmplnc_schdl_cd,
+                    # form_1557_test_vol_cnt,
+                    # wvd_test_vol_cnt,
 
                     # American Association for Laboratory Accreditation
-                    acr_aala = a2la_acrdtd_cd,
-                    acr_aala_ind = a2la_acrdtd_y_match_sw,
-                    acr_aala_date = a2la_acrdtd_y_match_dt,
+                    acr_a2la = a2la_acrdtd_cd,
+                    acr_a2la_ind = a2la_acrdtd_y_match_sw,
+                    acr_a2la_date = a2la_acrdtd_y_match_dt,
 
                     # American Association of Blood Banks
                     acr_aabb = aabb_acrdtd_cd,
@@ -249,18 +249,17 @@ laboratories <- function(name = NULL,
                     acr_jcaho_ind = jcaho_acrdtd_y_match_sw,
                     acr_jcaho_date = jcaho_acrdtd_y_match_dt,
                     clia_class_current = current_clia_lab_clsfctn_cd,
-                    dplyr::starts_with("clia_lab_classification_cd_"),
-                    dplyr::contains("_provider_number_"),
-                    dplyr::everything())
+                    # dplyr::starts_with("clia_lab_classification_cd_"),
+                    dplyr::contains("_provider_number_"))
 
     if (pivot) {
       res <- dplyr::select(results, -dplyr::starts_with("acr_"))
 
       acr <- dplyr::select(results, clia_number, dplyr::starts_with("acr_")) |>
         dplyr::select(clia_number,
-                      aala = acr_aala,
-                      aala_ind = acr_aala_ind,
-                      aala_date = acr_aala_date,
+                      a2la = acr_a2la,
+                      a2la_ind = acr_a2la_ind,
+                      a2la_date = acr_a2la_date,
                       aabb = acr_aabb,
                       aabb_ind = acr_aabb_ind,
                       aabb_date = acr_aabb_date,
@@ -281,7 +280,7 @@ laboratories <- function(name = NULL,
                       jcaho_date = acr_jcaho_date)
 
       org <- acr |>
-        dplyr::select(clia_number, aala, aabb, aoa, ashi, cap, cola, jcaho) |>
+        dplyr::select(clia_number, a2la, aabb, aoa, ashi, cap, cola, jcaho) |>
         tidyr::pivot_longer(cols = !clia_number, names_to = "organization", values_to = "accredited") |>
         dplyr::mutate(accredited = dplyr::if_else(accredited == "X", TRUE, FALSE))
 
