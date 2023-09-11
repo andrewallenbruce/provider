@@ -52,7 +52,7 @@ change <- function(df, cols) {
 #' dplyr::mutate(change = chg(pay)
 #' @autoglobal
 #' @export
-chg <- function (x, n = 1L) {
+chg <- function(x, n = 1L) {
   lg  <- dplyr::lag(x, n = n)
   res <- (x - lg)
   return(res)
@@ -68,7 +68,7 @@ chg <- function (x, n = 1L) {
 #' dplyr::mutate(pct_change = pct(pay)
 #' @autoglobal
 #' @export
-pct <- function (x, n = 1L) {
+pct <- function(x, n = 1L) {
   lg <- dplyr::lag(x, n = n)
   res <- (x - lg) / lg
   return(res)
