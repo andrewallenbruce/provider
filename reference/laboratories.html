@@ -159,7 +159,7 @@ responsibilities.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">laboratories</span><span class="op">(</span></span>
 <span>  name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  clia <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  certification_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  certificate <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -177,8 +177,14 @@ responsibilities.</p>
 <dd><p>CLIA number</p></dd>
 
 
-<dt>certification_type</dt>
-<dd><p><code>Waiver</code>, <code>Compliance</code>, <code>Accreditation</code>, <code>PPM</code>, or <code>Reg</code></p></dd>
+<dt>certificate</dt>
+<dd><p>There are five different CLIA certificate types
+which all are effective for a period of two years:</p><ul><li><p><code>waiver</code></p></li>
+<li><p><code>compliance</code></p></li>
+<li><p><code>accreditation</code></p></li>
+<li><p><code>ppm</code> (Provider-Performed Microscopy Procedures)</p></li>
+<li><p><code>registration</code></p></li>
+</ul></dd>
 
 
 <dt>city</dt>

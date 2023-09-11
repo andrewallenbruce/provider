@@ -126,4 +126,10 @@
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/years.html</loc>
   </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/years_df.html</loc>
+  </url>
+  <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/years_vec.html</loc>
+  </url>
 </urlset>
