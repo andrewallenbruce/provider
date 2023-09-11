@@ -155,9 +155,46 @@ every <strong>row</strong> is an <em>observation</em>, and every
 before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tidyr::pivot_longer()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't combine `first` &lt;character&gt; and `Medicare Part B` &lt;logical&gt;.</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">first</th>
+<th align="left">last</th>
+<th align="left">service</th>
+<th align="left">eligible</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Medicare Part B</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Home Health Agency (HHA)</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="odd">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Durable Medical Equipment (DME)</td>
+<td align="left">TRUE</td>
+</tr>
+<tr class="even">
+<td align="left">1043477615</td>
+<td align="left">SARAH</td>
+<td align="left">HUSSAIN</td>
+<td align="left">Power Mobility Device (PMD)</td>
+<td align="left">TRUE</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
@@ -409,9 +446,10 @@ job or location changes.</p>
 </blockquote>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
-<span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span>, year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `year` is absent but must be supplied.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> An <span style="font-weight: bold;">NPI</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">12345691234</span> contains <span style="color: #0000BB;">11</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
 <span><span class="fu"><a href="../reference/nppes.html">nppes</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>

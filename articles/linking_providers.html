@@ -128,12 +128,124 @@ insights. For example, there is a hospital in New York named
 us several avenues to go down:</p>
 <p><br></p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in providers(organization_name = "Elizabethtown Community Hospital"): unused argument (organization_name = "Elizabethtown Community Hospital")</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization_name <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization_name</span>, <span class="va">pac_id_org</span>, <span class="va">facility_ccn</span>, <span class="va">specialty_code</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in hospitals(organization_name = "Elizabethtown Community Hospital"): unused argument (organization_name = "Elizabethtown Community Hospital")</span></span></code></pre>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="6%">
+<col width="6%">
+<col width="9%">
+<col width="9%">
+<col width="27%">
+<col width="3%">
+<col width="20%">
+<col width="3%">
+<col width="4%">
+<col width="3%">
+<col width="4%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">pac_id</th>
+<th align="left">enroll_id</th>
+<th align="left">specialty_code</th>
+<th align="left">specialty</th>
+<th align="left">state</th>
+<th align="left">organization</th>
+<th align="left">first</th>
+<th align="left">middle</th>
+<th align="left">last</th>
+<th align="left">gender</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1891785184</td>
+<td align="left">3577554138</td>
+<td align="left">O20040521000534</td>
+<td align="left">12-70</td>
+<td align="left">PART B SUPPLIER - CLINIC/GROUP PRACTICE</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1891785184</td>
+<td align="left">3577554138</td>
+<td align="left">O20101110000259</td>
+<td align="left">00-85</td>
+<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">1487923637</td>
+<td align="left">3577554138</td>
+<td align="left">O20190719002511</td>
+<td align="left">12-59</td>
+<td align="left">PART B SUPPLIER - AMBULANCE SERVICE SUPPLIER</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">1407061591</td>
+<td align="left">3577554138</td>
+<td align="left">O20220827000145</td>
+<td align="left">00-85</td>
+<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
+<td align="left">NY</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span>, <span class="va">organization</span>, <span class="va">pac_id_org</span>, <span class="va">facility_ccn</span>, <span class="va">specialty_code</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="13%">
+<col width="39%">
+<col width="13%">
+<col width="15%">
+<col width="18%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">organization</th>
+<th align="left">pac_id_org</th>
+<th align="left">facility_ccn</th>
+<th align="left">specialty_code</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">1891785184</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">3577554138</td>
+<td align="left">331302</td>
+<td align="left">00-85</td>
+</tr>
+<tr class="even">
+<td align="left">1407061591</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">3577554138</td>
+<td align="left">33Z302</td>
+<td align="left">00-85</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -142,145 +254,36 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle_name</span>, <span class="va">suffix</span>, <span class="va">parent_ccn</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `middle_name` doesn't exist.</span></span></code></pre>
+<p><br></p>
+<p>That returns individual providers affiliated with the hospital. Now
+to search the alphanumeric CCN (<code>33Z302</code>):</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
 <col width="12%">
 <col width="12%">
-<col width="12%">
-<col width="17%">
-<col width="16%">
-<col width="15%">
-<col width="12%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pac_id_ind</th>
-<th align="left">first_name</th>
-<th align="left">last_name</th>
-<th align="left">facility_type</th>
-<th align="left">facility_ccn</th>
-<th align="left">parent_ccn</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1003815184</td>
-<td align="left">4082693676</td>
-<td align="left">ARMIN</td>
-<td align="left">AFSAR KESHMIRI</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1023076643</td>
-<td align="left">5698798452</td>
-<td align="left">JOHN</td>
-<td align="left">HENRY</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1023377843</td>
-<td align="left">6901115278</td>
-<td align="left">LINDSEY</td>
-<td align="left">WILHELM</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1043245657</td>
-<td align="left">7810891009</td>
-<td align="left">MARK</td>
-<td align="left">FUNG</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1043397656</td>
-<td align="left">4183764558</td>
-<td align="left">ANTHONY</td>
-<td align="left">TRAMONTANO</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1043630510</td>
-<td align="left">2365749389</td>
-<td align="left">RYAN</td>
-<td align="left">WOLFE</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1053596122</td>
-<td align="left">5193802213</td>
-<td align="left">TANYA</td>
-<td align="left">FINCH</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1053863100</td>
-<td align="left">8729362207</td>
-<td align="left">MATTHEW</td>
-<td align="left">FARNSWORTH</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">1063592210</td>
-<td align="left">0042228009</td>
-<td align="left">ROBERT</td>
-<td align="left">PITTS</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-<tr class="even">
-<td align="left">1073099172</td>
-<td align="left">0547519381</td>
-<td align="left">BROOKE</td>
-<td align="left">MAGGY</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-<td align="left">NA</td>
-</tr>
-</tbody>
-</table>
-<p><br></p>
-<p>That returns individual providers affiliated with the hospital. Now
-to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="11%">
-<col width="9%">
 <col width="6%">
-<col width="13%">
-<col width="12%">
+<col width="7%">
 <col width="10%">
+<col width="7%">
+<col width="15%">
+<col width="14%">
+<col width="12%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">npi</th>
 <th align="left">pac_id_ind</th>
-<th align="left">first_name</th>
-<th align="left">middle_name</th>
-<th align="left">last_name</th>
+<th align="left">first</th>
+<th align="left">middle</th>
+<th align="left">last</th>
 <th align="left">suffix</th>
 <th align="left">facility_type</th>
 <th align="left">facility_ccn</th>
@@ -337,7 +340,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <div class="section level3">
 <h3 id="clia-labs">CLIA Labs<a class="anchor" aria-label="anchor" href="#clia-labs"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">provider</span><span class="fu">:::</span><span class="fu">display_long</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -346,24 +349,24 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<div id="pdwzoomkxv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="jmqbxssgmy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#pdwzoomkxv table {
+#jmqbxssgmy table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pdwzoomkxv thead, #pdwzoomkxv tbody, #pdwzoomkxv tfoot, #pdwzoomkxv tr, #pdwzoomkxv td, #pdwzoomkxv th {
+#jmqbxssgmy thead, #jmqbxssgmy tbody, #jmqbxssgmy tfoot, #jmqbxssgmy tr, #jmqbxssgmy td, #jmqbxssgmy th {
   border-style: none;
 }
 
-#pdwzoomkxv p {
+#jmqbxssgmy p {
   margin: 0;
   padding: 0;
 }
 
-#pdwzoomkxv .gt_table {
+#jmqbxssgmy .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -389,12 +392,12 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-left-color: #D3D3D3;
 }
 
-#pdwzoomkxv .gt_caption {
+#jmqbxssgmy .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pdwzoomkxv .gt_title {
+#jmqbxssgmy .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -406,7 +409,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-width: 0;
 }
 
-#pdwzoomkxv .gt_subtitle {
+#jmqbxssgmy .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -418,7 +421,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-width: 0;
 }
 
-#pdwzoomkxv .gt_heading {
+#jmqbxssgmy .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -430,13 +433,13 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#pdwzoomkxv .gt_bottom_border {
+#jmqbxssgmy .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_col_headings {
+#jmqbxssgmy .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -451,7 +454,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#pdwzoomkxv .gt_col_heading {
+#jmqbxssgmy .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -471,7 +474,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#pdwzoomkxv .gt_column_spanner_outer {
+#jmqbxssgmy .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -483,15 +486,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 4px;
 }
 
-#pdwzoomkxv .gt_column_spanner_outer:first-child {
+#jmqbxssgmy .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pdwzoomkxv .gt_column_spanner_outer:last-child {
+#jmqbxssgmy .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pdwzoomkxv .gt_column_spanner {
+#jmqbxssgmy .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #5F5F5F;
@@ -503,11 +506,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: 100%;
 }
 
-#pdwzoomkxv .gt_spanner_row {
+#jmqbxssgmy .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pdwzoomkxv .gt_group_heading {
+#jmqbxssgmy .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -533,7 +536,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-align: left;
 }
 
-#pdwzoomkxv .gt_empty_group_heading {
+#jmqbxssgmy .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -548,15 +551,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: middle;
 }
 
-#pdwzoomkxv .gt_from_md > :first-child {
+#jmqbxssgmy .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pdwzoomkxv .gt_from_md > :last-child {
+#jmqbxssgmy .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pdwzoomkxv .gt_row {
+#jmqbxssgmy .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -575,7 +578,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#pdwzoomkxv .gt_stub {
+#jmqbxssgmy .gt_stub {
   color: #FFFFFF;
   background-color: #5F5F5F;
   font-size: 100%;
@@ -588,7 +591,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#pdwzoomkxv .gt_stub_row_group {
+#jmqbxssgmy .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -602,15 +605,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: top;
 }
 
-#pdwzoomkxv .gt_row_group_first td {
+#jmqbxssgmy .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pdwzoomkxv .gt_row_group_first th {
+#jmqbxssgmy .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pdwzoomkxv .gt_summary_row {
+#jmqbxssgmy .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -620,16 +623,16 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#pdwzoomkxv .gt_first_summary_row {
+#jmqbxssgmy .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_first_summary_row.thick {
+#jmqbxssgmy .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pdwzoomkxv .gt_last_summary_row {
+#jmqbxssgmy .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -639,7 +642,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_grand_summary_row {
+#jmqbxssgmy .gt_grand_summary_row {
   color: #333333;
   background-color: #D5D5D5;
   text-transform: inherit;
@@ -649,7 +652,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#pdwzoomkxv .gt_first_grand_summary_row {
+#jmqbxssgmy .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -659,7 +662,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_last_grand_summary_row_top {
+#jmqbxssgmy .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -669,11 +672,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_striped {
+#jmqbxssgmy .gt_striped {
   background-color: #F4F4F4;
 }
 
-#pdwzoomkxv .gt_table_body {
+#jmqbxssgmy .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #5F5F5F;
@@ -682,7 +685,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #5F5F5F;
 }
 
-#pdwzoomkxv .gt_footnotes {
+#jmqbxssgmy .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -696,7 +699,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#pdwzoomkxv .gt_footnote {
+#jmqbxssgmy .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -705,7 +708,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#pdwzoomkxv .gt_sourcenotes {
+#jmqbxssgmy .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -719,7 +722,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#pdwzoomkxv .gt_sourcenote {
+#jmqbxssgmy .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -727,63 +730,63 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#pdwzoomkxv .gt_left {
+#jmqbxssgmy .gt_left {
   text-align: left;
 }
 
-#pdwzoomkxv .gt_center {
+#jmqbxssgmy .gt_center {
   text-align: center;
 }
 
-#pdwzoomkxv .gt_right {
+#jmqbxssgmy .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pdwzoomkxv .gt_font_normal {
+#jmqbxssgmy .gt_font_normal {
   font-weight: normal;
 }
 
-#pdwzoomkxv .gt_font_bold {
+#jmqbxssgmy .gt_font_bold {
   font-weight: bold;
 }
 
-#pdwzoomkxv .gt_font_italic {
+#jmqbxssgmy .gt_font_italic {
   font-style: italic;
 }
 
-#pdwzoomkxv .gt_super {
+#jmqbxssgmy .gt_super {
   font-size: 65%;
 }
 
-#pdwzoomkxv .gt_footnote_marks {
+#jmqbxssgmy .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pdwzoomkxv .gt_asterisk {
+#jmqbxssgmy .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pdwzoomkxv .gt_indent_1 {
+#jmqbxssgmy .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pdwzoomkxv .gt_indent_2 {
+#jmqbxssgmy .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pdwzoomkxv .gt_indent_3 {
+#jmqbxssgmy .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pdwzoomkxv .gt_indent_4 {
+#jmqbxssgmy .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pdwzoomkxv .gt_indent_5 {
+#jmqbxssgmy .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -798,7 +801,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <td headers="stub_1_1 value" class="gt_row gt_left">DANIEL FELDMAN MD</td>
 </tr>
 <tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">clia</th>
+<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">clia_number</th>
 <td headers="stub_1_2 value" class="gt_row gt_left gt_striped">11D0265516</td>
 </tr>
 <tr>
@@ -806,236 +809,236 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <td headers="stub_1_3 value" class="gt_row gt_left">Compliance</td>
 </tr>
 <tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">clia_medicare</th>
-<td headers="stub_1_4 value" class="gt_row gt_left gt_striped">00205114A3</td>
+<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">effective_date</th>
+<td headers="stub_1_4 value" class="gt_row gt_left gt_striped">1996-08-29</td>
 </tr>
 <tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">application</th>
-<td headers="stub_1_5 value" class="gt_row gt_left">1</td>
+<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">expiration_date</th>
+<td headers="stub_1_5 value" class="gt_row gt_left">1998-08-04</td>
 </tr>
 <tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">effective_date</th>
-<td headers="stub_1_6 value" class="gt_row gt_left gt_striped">1996-08-29</td>
+<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">status</th>
+<td headers="stub_1_6 value" class="gt_row gt_left gt_striped">In Compliance</td>
 </tr>
 <tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">expiration_date</th>
-<td headers="stub_1_7 value" class="gt_row gt_left">1998-08-04</td>
+<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">poc_ind</th>
+<td headers="stub_1_7 value" class="gt_row gt_left">TRUE</td>
 </tr>
 <tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">status</th>
-<td headers="stub_1_8 value" class="gt_row gt_left gt_striped">In Compliance</td>
+<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">termination_reason</th>
+<td headers="stub_1_8 value" class="gt_row gt_left gt_striped">Mail Returned No Forward Address Cert Ended (CLIA Only)</td>
 </tr>
 <tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">poc_ind</th>
-<td headers="stub_1_9 value" class="gt_row gt_left">TRUE</td>
+<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">type_of_action</th>
+<td headers="stub_1_9 value" class="gt_row gt_left">Recertification</td>
 </tr>
 <tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">termination_reason</th>
-<td headers="stub_1_10 value" class="gt_row gt_left gt_striped">Mail Returned No Forward Address Cert Ended (CLIA Only)</td>
+<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">ownership_type</th>
+<td headers="stub_1_10 value" class="gt_row gt_left gt_striped">Proprietary</td>
 </tr>
 <tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">termination_code</th>
-<td headers="stub_1_11 value" class="gt_row gt_left">17</td>
+<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">facility_type</th>
+<td headers="stub_1_11 value" class="gt_row gt_left">Physician Office</td>
 </tr>
 <tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">type_of_action</th>
-<td headers="stub_1_12 value" class="gt_row gt_left gt_striped">Recertification</td>
+<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">director_affiliations</th>
+<td headers="stub_1_12 value" class="gt_row gt_left gt_striped">0</td>
 </tr>
 <tr>
-<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub">ownership_type</th>
-<td headers="stub_1_13 value" class="gt_row gt_left">Proprietary</td>
+<th id="stub_1_13" scope="row" class="gt_row gt_left gt_stub">orig_part_date</th>
+<td headers="stub_1_13 value" class="gt_row gt_left">1992-09-01</td>
 </tr>
 <tr>
-<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub">facility_type</th>
-<td headers="stub_1_14 value" class="gt_row gt_left gt_striped">Physician Office</td>
+<th id="stub_1_14" scope="row" class="gt_row gt_left gt_stub">application_date</th>
+<td headers="stub_1_14 value" class="gt_row gt_left gt_striped">1993-01-20</td>
 </tr>
 <tr>
-<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub">director_affiliations</th>
-<td headers="stub_1_15 value" class="gt_row gt_left">0</td>
+<th id="stub_1_15" scope="row" class="gt_row gt_left gt_stub">certification_date</th>
+<td headers="stub_1_15 value" class="gt_row gt_left">1996-03-21</td>
 </tr>
 <tr>
-<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub">category</th>
-<td headers="stub_1_16 value" class="gt_row gt_left gt_striped">CLIA Lab</td>
+<th id="stub_1_16" scope="row" class="gt_row gt_left gt_stub">mailed_date</th>
+<td headers="stub_1_16 value" class="gt_row gt_left gt_striped">1996-09-25</td>
 </tr>
 <tr>
-<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub">subcategory</th>
-<td headers="stub_1_17 value" class="gt_row gt_left">CLIA88 Lab</td>
+<th id="stub_1_17" scope="row" class="gt_row gt_left gt_stub">address</th>
+<td headers="stub_1_17 value" class="gt_row gt_left">205 WOODROW WILSON DR</td>
 </tr>
 <tr>
-<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub">orig_part_date</th>
-<td headers="stub_1_18 value" class="gt_row gt_left gt_striped">1992-09-01</td>
+<th id="stub_1_18" scope="row" class="gt_row gt_left gt_stub">city</th>
+<td headers="stub_1_18 value" class="gt_row gt_left gt_striped">VALDOSTA</td>
 </tr>
 <tr>
-<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub">application_date</th>
-<td headers="stub_1_19 value" class="gt_row gt_left">1993-01-20</td>
+<th id="stub_1_19" scope="row" class="gt_row gt_left gt_stub">state</th>
+<td headers="stub_1_19 value" class="gt_row gt_left">GA</td>
 </tr>
 <tr>
-<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub">certification_date</th>
-<td headers="stub_1_20 value" class="gt_row gt_left gt_striped">1996-03-21</td>
+<th id="stub_1_20" scope="row" class="gt_row gt_left gt_stub">zip</th>
+<td headers="stub_1_20 value" class="gt_row gt_left gt_striped">31602</td>
 </tr>
 <tr>
-<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub">mailed_date</th>
-<td headers="stub_1_21 value" class="gt_row gt_left">1996-09-25</td>
+<th id="stub_1_21" scope="row" class="gt_row gt_left gt_stub">phone</th>
+<td headers="stub_1_21 value" class="gt_row gt_left">8032619888</td>
 </tr>
 <tr>
-<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub">address</th>
-<td headers="stub_1_22 value" class="gt_row gt_left gt_striped">205 WOODROW WILSON DR</td>
+<th id="stub_1_22" scope="row" class="gt_row gt_left gt_stub">region</th>
+<td headers="stub_1_22 value" class="gt_row gt_left gt_striped">Atlanta</td>
 </tr>
 <tr>
-<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub">city</th>
-<td headers="stub_1_23 value" class="gt_row gt_left">VALDOSTA</td>
+<th id="stub_1_23" scope="row" class="gt_row gt_left gt_stub">state_region</th>
+<td headers="stub_1_23 value" class="gt_row gt_left">001</td>
 </tr>
 <tr>
-<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub">state</th>
-<td headers="stub_1_24 value" class="gt_row gt_left gt_striped">GA</td>
+<th id="stub_1_24" scope="row" class="gt_row gt_left gt_stub">fips_county</th>
+<td headers="stub_1_24 value" class="gt_row gt_left gt_striped">185</td>
 </tr>
 <tr>
-<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub">zip</th>
-<td headers="stub_1_25 value" class="gt_row gt_left">31602</td>
+<th id="stub_1_25" scope="row" class="gt_row gt_left gt_stub">fips_state</th>
+<td headers="stub_1_25 value" class="gt_row gt_left">13</td>
 </tr>
 <tr>
-<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub">phone</th>
-<td headers="stub_1_26 value" class="gt_row gt_left gt_striped">8032619888</td>
+<th id="stub_1_26" scope="row" class="gt_row gt_left gt_stub">cbsa</th>
+<td headers="stub_1_26 value" class="gt_row gt_left gt_striped">46660</td>
 </tr>
 <tr>
-<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub">region</th>
-<td headers="stub_1_27 value" class="gt_row gt_left">Atlanta</td>
+<th id="stub_1_27" scope="row" class="gt_row gt_left gt_stub">cbsa_ind</th>
+<td headers="stub_1_27 value" class="gt_row gt_left">U</td>
 </tr>
 <tr>
-<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub">state_region</th>
-<td headers="stub_1_28 value" class="gt_row gt_left gt_striped">001</td>
+<th id="stub_1_28" scope="row" class="gt_row gt_left gt_stub">chow_count</th>
+<td headers="stub_1_28 value" class="gt_row gt_left gt_striped">00</td>
 </tr>
 <tr>
-<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub">fips_cnty_cd</th>
-<td headers="stub_1_29 value" class="gt_row gt_left">185</td>
+<th id="stub_1_29" scope="row" class="gt_row gt_left gt_stub">eligible_ind</th>
+<td headers="stub_1_29 value" class="gt_row gt_left">TRUE</td>
 </tr>
 <tr>
-<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub">fips_state_cd</th>
-<td headers="stub_1_30 value" class="gt_row gt_left gt_striped">13</td>
+<th id="stub_1_30" scope="row" class="gt_row gt_left gt_stub">skeleton_ind</th>
+<td headers="stub_1_30 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub">cbsa_urbn_rrl_ind</th>
-<td headers="stub_1_31 value" class="gt_row gt_left">U</td>
+<th id="stub_1_31" scope="row" class="gt_row gt_left gt_stub">multi_site_ind</th>
+<td headers="stub_1_31 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub">cbsa_cd</th>
-<td headers="stub_1_32 value" class="gt_row gt_left gt_striped">46660</td>
+<th id="stub_1_32" scope="row" class="gt_row gt_left gt_stub">hosp_campus_ind</th>
+<td headers="stub_1_32 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub">chow_count</th>
-<td headers="stub_1_33 value" class="gt_row gt_left">00</td>
+<th id="stub_1_33" scope="row" class="gt_row gt_left gt_stub">pub_health_ind</th>
+<td headers="stub_1_33 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub">eligible_ind</th>
-<td headers="stub_1_34 value" class="gt_row gt_left gt_striped">TRUE</td>
+<th id="stub_1_34" scope="row" class="gt_row gt_left gt_stub">tmp_test_site_ind</th>
+<td headers="stub_1_34 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub">skeleton_ind</th>
+<th id="stub_1_35" scope="row" class="gt_row gt_left gt_stub">shared_lab_ind</th>
 <td headers="stub_1_35 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub">multi_site_cert_ind</th>
-<td headers="stub_1_36 value" class="gt_row gt_left gt_striped">FALSE</td>
+<th id="stub_1_36" scope="row" class="gt_row gt_left gt_stub">lab_site_count</th>
+<td headers="stub_1_36 value" class="gt_row gt_left gt_striped">0</td>
 </tr>
 <tr>
-<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub">hospital_campus_ind</th>
-<td headers="stub_1_37 value" class="gt_row gt_left">FALSE</td>
+<th id="stub_1_37" scope="row" class="gt_row gt_left gt_stub">ppm_test_count</th>
+<td headers="stub_1_37 value" class="gt_row gt_left">0</td>
 </tr>
 <tr>
-<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub">public_health_ind</th>
-<td headers="stub_1_38 value" class="gt_row gt_left gt_striped">FALSE</td>
+<th id="stub_1_38" scope="row" class="gt_row gt_left gt_stub">form_116_acrdtd_test_vol_cnt</th>
+<td headers="stub_1_38 value" class="gt_row gt_left gt_striped">0</td>
 </tr>
 <tr>
-<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub">temp_test_site_ind</th>
-<td headers="stub_1_39 value" class="gt_row gt_left">FALSE</td>
+<th id="stub_1_39" scope="row" class="gt_row gt_left gt_stub">form_116_test_vol_cnt</th>
+<td headers="stub_1_39 value" class="gt_row gt_left">0</td>
 </tr>
 <tr>
-<th id="stub_1_40" scope="row" class="gt_row gt_left gt_stub">shared_lab_ind</th>
-<td headers="stub_1_40 value" class="gt_row gt_left gt_striped">FALSE</td>
+<th id="stub_1_40" scope="row" class="gt_row gt_left gt_stub">form_1557_test_vol_cnt</th>
+<td headers="stub_1_40 value" class="gt_row gt_left gt_striped">0</td>
 </tr>
 <tr>
-<th id="stub_1_41" scope="row" class="gt_row gt_left gt_stub">lab_site_count</th>
+<th id="stub_1_41" scope="row" class="gt_row gt_left gt_stub">wvd_test_vol_cnt</th>
 <td headers="stub_1_41 value" class="gt_row gt_left">0</td>
 </tr>
 <tr>
-<th id="stub_1_42" scope="row" class="gt_row gt_left gt_stub">ppm_test_count</th>
-<td headers="stub_1_42 value" class="gt_row gt_left gt_striped">0</td>
+<th id="stub_1_42" scope="row" class="gt_row gt_left gt_stub">acr_aala_ind</th>
+<td headers="stub_1_42 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_43" scope="row" class="gt_row gt_left gt_stub">form_116_acrdtd_test_vol_cnt</th>
-<td headers="stub_1_43 value" class="gt_row gt_left">0</td>
+<th id="stub_1_43" scope="row" class="gt_row gt_left gt_stub">acr_aabb_ind</th>
+<td headers="stub_1_43 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_44" scope="row" class="gt_row gt_left gt_stub">form_116_test_vol_cnt</th>
-<td headers="stub_1_44 value" class="gt_row gt_left gt_striped">0</td>
+<th id="stub_1_44" scope="row" class="gt_row gt_left gt_stub">acr_aoa_ind</th>
+<td headers="stub_1_44 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_45" scope="row" class="gt_row gt_left gt_stub">form_1557_test_vol_cnt</th>
-<td headers="stub_1_45 value" class="gt_row gt_left">0</td>
+<th id="stub_1_45" scope="row" class="gt_row gt_left gt_stub">acr_ashi_ind</th>
+<td headers="stub_1_45 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_46" scope="row" class="gt_row gt_left gt_stub">wvd_test_vol_cnt</th>
-<td headers="stub_1_46 value" class="gt_row gt_left gt_striped">0</td>
+<th id="stub_1_46" scope="row" class="gt_row gt_left gt_stub">acr_cap_ind</th>
+<td headers="stub_1_46 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_47" scope="row" class="gt_row gt_left gt_stub">acr_aala_ind</th>
+<th id="stub_1_47" scope="row" class="gt_row gt_left gt_stub">acr_cola_ind</th>
 <td headers="stub_1_47 value" class="gt_row gt_left">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_48" scope="row" class="gt_row gt_left gt_stub">acr_aabb_ind</th>
+<th id="stub_1_48" scope="row" class="gt_row gt_left gt_stub">acr_jcaho_ind</th>
 <td headers="stub_1_48 value" class="gt_row gt_left gt_striped">FALSE</td>
 </tr>
 <tr>
-<th id="stub_1_49" scope="row" class="gt_row gt_left gt_stub">acr_aoa_ind</th>
-<td headers="stub_1_49 value" class="gt_row gt_left">FALSE</td>
+<th id="stub_1_49" scope="row" class="gt_row gt_left gt_stub">clia_class_current</th>
+<td headers="stub_1_49 value" class="gt_row gt_left">CLIA Lab</td>
 </tr>
 <tr>
-<th id="stub_1_50" scope="row" class="gt_row gt_left gt_stub">acr_ashi_ind</th>
-<td headers="stub_1_50 value" class="gt_row gt_left gt_striped">FALSE</td>
+<th id="stub_1_50" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_1</th>
+<td headers="stub_1_50 value" class="gt_row gt_left gt_striped">00</td>
 </tr>
 <tr>
-<th id="stub_1_51" scope="row" class="gt_row gt_left gt_stub">acr_cap_ind</th>
-<td headers="stub_1_51 value" class="gt_row gt_left">FALSE</td>
+<th id="stub_1_51" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_2</th>
+<td headers="stub_1_51 value" class="gt_row gt_left">00</td>
 </tr>
 <tr>
-<th id="stub_1_52" scope="row" class="gt_row gt_left gt_stub">acr_cola_ind</th>
-<td headers="stub_1_52 value" class="gt_row gt_left gt_striped">FALSE</td>
+<th id="stub_1_52" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_3</th>
+<td headers="stub_1_52 value" class="gt_row gt_left gt_striped">00</td>
 </tr>
 <tr>
-<th id="stub_1_53" scope="row" class="gt_row gt_left gt_stub">acr_jcaho_ind</th>
-<td headers="stub_1_53 value" class="gt_row gt_left">FALSE</td>
+<th id="stub_1_53" scope="row" class="gt_row gt_left gt_stub">prvdr_ctgry_sbtyp_cd</th>
+<td headers="stub_1_53 value" class="gt_row gt_left">CLIA88 Lab</td>
 </tr>
 <tr>
-<th id="stub_1_54" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_current</th>
+<th id="stub_1_54" scope="row" class="gt_row gt_left gt_stub">prvdr_ctgry_cd</th>
 <td headers="stub_1_54 value" class="gt_row gt_left gt_striped">CLIA Lab</td>
 </tr>
 <tr>
-<th id="stub_1_55" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_1</th>
-<td headers="stub_1_55 value" class="gt_row gt_left">00</td>
+<th id="stub_1_55" scope="row" class="gt_row gt_left gt_stub">ssa_cnty_cd</th>
+<td headers="stub_1_55 value" class="gt_row gt_left">700</td>
 </tr>
 <tr>
-<th id="stub_1_56" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_2</th>
-<td headers="stub_1_56 value" class="gt_row gt_left gt_striped">00</td>
+<th id="stub_1_56" scope="row" class="gt_row gt_left gt_stub">ssa_state_cd</th>
+<td headers="stub_1_56 value" class="gt_row gt_left gt_striped">11</td>
 </tr>
 <tr>
-<th id="stub_1_57" scope="row" class="gt_row gt_left gt_stub">clia_lab_classification_cd_3</th>
-<td headers="stub_1_57 value" class="gt_row gt_left">00</td>
+<th id="stub_1_57" scope="row" class="gt_row gt_left gt_stub">aplctn_type_cd</th>
+<td headers="stub_1_57 value" class="gt_row gt_left">1</td>
 </tr>
 <tr>
-<th id="stub_1_58" scope="row" class="gt_row gt_left gt_stub">ssa_cnty_cd</th>
-<td headers="stub_1_58 value" class="gt_row gt_left gt_striped">700</td>
+<th id="stub_1_58" scope="row" class="gt_row gt_left gt_stub">clia_mdcr_num</th>
+<td headers="stub_1_58 value" class="gt_row gt_left gt_striped">00205114A3</td>
 </tr>
 <tr>
-<th id="stub_1_59" scope="row" class="gt_row gt_left gt_stub">ssa_state_cd</th>
-<td headers="stub_1_59 value" class="gt_row gt_left">11</td>
+<th id="stub_1_59" scope="row" class="gt_row gt_left gt_stub">clia_trmntn_cd</th>
+<td headers="stub_1_59 value" class="gt_row gt_left">17</td>
 </tr>
 </tbody>
 </table>
 </div>
 <p><br><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, certification_type <span class="op">=</span> <span class="st">"Waiver"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">clia</span>, <span class="va">expiration_date</span>, <span class="va">termination_reason</span>, <span class="va">facility_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, certificate <span class="op">=</span> <span class="st">"waiver"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>, <span class="va">clia</span>, <span class="va">certificate</span>, <span class="va">expiration_date</span>, <span class="va">termination_reason</span>, <span class="va">facility_type</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">janitor</span><span class="fu">::</span><span class="fu"><a href="https://sfirke.github.io/janitor/reference/remove_empty.html" class="external-link">remove_empty</a></span><span class="op">(</span>which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rows"</span>, <span class="st">"cols"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span>, groupname_col <span class="op">=</span> <span class="st">"facility_type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>termination_reason <span class="op">=</span> <span class="st">"termination"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -1043,7 +1046,9 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_date.html" class="external-link">fmt_date</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span>, date_style <span class="op">=</span> <span class="st">"wd_m_day_year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"gray"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in laboratories(city = "Valdosta", certification_type = "Waiver"): unused argument (certification_type = "Waiver")</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `dplyr::select()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `clia` doesn't exist.</span></span></code></pre>
 </div>
   </main>
 </div>
