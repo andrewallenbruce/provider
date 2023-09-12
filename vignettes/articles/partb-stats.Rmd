@@ -25,10 +25,10 @@ library(gt)
 ```
 
 
-## Utilization Summary
+## Provider Utilization Summary
 
 ```{r}
-df <- by_provider_years() |> 
+df <- prac_years() |> 
   map(\(x) by_provider(year = x, npi = 1023076643)) |> 
   list_rbind()
 ```

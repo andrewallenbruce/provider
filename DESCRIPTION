@@ -31,6 +31,7 @@ Imports:
 Suggests: 
     covr,
     data.table,
+    rvest,
     fontawesome,
     glue,
     gt,

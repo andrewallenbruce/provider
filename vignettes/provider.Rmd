@@ -80,7 +80,7 @@ However, in the event that you would prefer to do your own transformations, simp
 
 ## Exported Functions
 
-The API Search functions can be grouped according to the type of data that they return about a provider: *administrative*, *statistical*, and *auxiliary.*
+The API Search functions can be grouped according to the type of data that they return about a Provider: *administrative*, *statistical*, and *auxiliary.*
 
 ### Administrative
 
@@ -91,23 +91,20 @@ The API Search functions can be grouped according to the type of data that they 
    * `clinicians()`: Provider school, graduation year, linking.
    * `affiliations()`: Linking providers to Facilities.
    * `hospitals()`: Facilities linked to providers.
+   * `laboratories()`: Clinical laboratories.
 
 ### Statistical
 
-The following return provider-specific stats:
+The following return yearly Provider-specific stats:
 
-   * `by_provider()`: Yearly high-level utilization data.
-   * `by_service()`: Yearly detailed utilization data.
-   * `quality_payment()`: Yearly QPP/MIPS performance data.
-   * `quality_eligibility()`: Yearly QPP/MIPS eligibility data.
-   * `open_payments()`: Yearly Open Payments reporting data.
-
-The following return yearly stats useful for comparison against data returned from `by_service()`:
-
-   * `by_geography()`
-   * `beneficiaries()`
-   * `cc_multiple()`
-   * `cc_specific()`
+   * `by_provider()`: Utilization summary.
+   * `by_service()`: Utilization detail.
+   * `by_geography()`: National/state/county utilization summary.
+   * `quality_payment()`: QPP/MIPS performance.
+   * `quality_eligibility()`: QPP/MIPS eligibility.
+   * `open_payments()`: Open Payments reporting.
+   * `beneficiaries()`: Medicare enrollment.
+   * `chronic_conditions`: Chronic condition prevalence.
 
 ### Auxiliary
 
@@ -123,13 +120,13 @@ The following return yearly stats useful for comparison against data returned fr
 Several functions have a required `year` argument. The years available to query these APIs might change at any time, so there is an accompanying helper function to retrieve the years available, in the form of `<function_name>_years()`. For instance, `quality_payment()`'s is:
 
 ```{r}
-quality_payment_years()
+quality_years()
 ```
 
 These can also be used in a pipeline, for searching all available years:
 
 ```{r}
-quality_payment_years() |> 
+quality_years() |> 
   map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
   list_rbind() |> 
   select(year:final_score)
@@ -190,16 +187,17 @@ hospitals(enroll_id_org = "I20180115000174")
 
 <br>
 
-> Numeric Parameters with Leading Zeros
-R will drop any leading zeros in a numeric vector. For any parameters that may contain leading zeros, make sure that they're input as a character vector. :
+> **Note**: _R will drop any leading zeros in a numeric vector when it's evaluated._ Parameters that contain leading zeros must be input as a character vector:
+
+<br>
 
 ```{r}
+# Leading zeros are dropped in an integer vector:
 0001
-
+# But preserved in a character vector:
 "0001"
 ```
 
 
-
-
+--------------
 
