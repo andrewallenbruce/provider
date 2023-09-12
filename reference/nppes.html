@@ -287,9 +287,11 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 <span>  entype <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  alias <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  name_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  address_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -307,8 +309,7 @@ least two characters to be entered, e.g. <code>"jo*"</code></p>
 
 
 <dt>entype</dt>
-<dd><p>Entity/enumeration type. Cannot be the only criteria entered.
-Options are:</p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
+<dd><p>Entity/enumeration type. <em>Cannot be the only criteria entered.</em></p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li>
 <li><p><code>"O"</code>: Organizational provider (NPI-2)</p></li>
 </ul></dd>
 
@@ -318,26 +319,40 @@ Options are:</p><ul><li><p><code>"I"</code>: Individual provider (NPI-1)</p></li
 <em>Trailing Wildcard Allowed</em></p></dd>
 
 
+<dt>alias</dt>
+<dd><p><code>"TRUE"</code>/<code>"FALSE"</code>. Applies to authorized officials and individual providers when
+not doing a wildcard search. When set to <code>"TRUE"</code>, the results will include
+providers with similar first names.</p></dd>
+
+
 <dt>organization</dt>
 <dd><p>Healthcare organization's name. Many types of names (LBN,
-DBA, Former LBN, Other Name) are examined for a match. As such, the results
-might contain a different name from the one entered. <em>Trailing Wildcard Allowed</em></p></dd>
+DBA, Former LBN, Other Name) may match. As such, the results might contain a
+name different from the one entered. <em>Trailing Wildcard Allowed</em></p></dd>
 
 
 <dt>name_type</dt>
-<dd><p>Type of name the <code>first</code>/<code>last</code> arguments pertain to.
-Options are:</p><ul><li><p><code>"AO"</code>: will only search Authorized Official names</p></li>
-<li><p><code>"Provider"</code>:  will only search Individual Provider names <em>(default)</em></p></li>
+<dd><p>Type of name the <code>first</code>/<code>last</code> arguments pertain to:</p><ul><li><p><code>"AO"</code>: search Authorized Officials only</p></li>
+<li><p><code>"Provider"</code>: search Individual Providers only <em>(default)</em></p></li>
 </ul></dd>
 
 
 <dt>taxonomy_desc</dt>
-<dd><p>Provider's taxonomy description</p></dd>
+<dd><p>Provider's taxonomy description, e.g. <code>"Pharmacist"</code>,
+<code>"Pediatrics"</code></p></dd>
+
+
+<dt>address_type</dt>
+<dd><p>Address type of provider; options are:</p><ul><li><p><code>"location"</code> (Practice location)</p></li>
+<li><p><code>"mailing"</code></p></li>
+<li><p><code>"primary"</code></p></li>
+<li><p><code>"secondary"</code></p></li>
+</ul></dd>
 
 
 <dt>city</dt>
 <dd><p>City associated with the provider's address. To search for a
-Military Address, enter either <code>"APO"</code> or <code>"FPO"</code>.</p></dd>
+military address, enter either <code>"APO"</code> or <code>"FPO"</code>.</p></dd>
 
 
 <dt>state</dt>
@@ -354,8 +369,8 @@ the data. <em>Trailing Wildcard Allowed</em></p></dd>
 
 <dt>country</dt>
 <dd><p>Country abbreviation associated with the provider's
-address. This field <strong>can</strong> be used as the only input criterion, as long
-as the value selected <em>is not</em> <code>"US"</code> (United States).</p></dd>
+address. <strong>Can</strong> be used as the only input criterion, as long as the value
+selected <em>is not</em> <code>"US"</code> (United States).</p></dd>
 
 
 <dt>limit</dt>
@@ -379,16 +394,9 @@ as the value selected <em>is not</em> <code>"US"</code> (United States).</p></dd
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 21</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   npi        entype first_name last_name middle_name credential sole_proprietor</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1528060837 NPI-1  JOHN       SARGEANT  B           PT         NO             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 14 more variables: gender &lt;chr&gt;, enumeration_date &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last_updated &lt;chr&gt;, status &lt;chr&gt;, name_prefix &lt;chr&gt;, name_suffix &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   addresses &lt;list&gt;, taxonomy &lt;list&gt;, identifiers &lt;list&gt;, endpoints &lt;lgl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   practice_locations &lt;lgl&gt;, other_names &lt;lgl&gt;, created_epoch &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   last_updated_epoch &lt;chr&gt;</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
+<span class="r-in"><span><span class="fu">nppes</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1528060837</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
