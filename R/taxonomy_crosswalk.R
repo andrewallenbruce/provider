@@ -106,3 +106,30 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
   }
   return(results)
 }
+
+#' @autoglobal
+#' @noRd
+download_nucc <- function() {
+
+  url <- "https://www.nucc.org"
+
+  x <- rvest::session(url) |>
+       rvest::session_follow_link("Code Sets") |>
+       rvest::session_follow_link("Taxonomy") |>
+       rvest::session_follow_link("CSV") |>
+       rvest::html_elements("a") |>
+       rvest::html_attr("href") |>
+       stringr::str_subset("taxonomy") |>
+       stringr::str_subset("csv")
+
+  x <- rvest::session(paste0(url, x)) |>
+       rvest::session_follow_link("Version")
+
+  x <- x$response$url
+
+  x <- data.table::fread(x) |>
+       dplyr::tibble() |>
+       janitor::clean_names()
+
+  return(x)
+}

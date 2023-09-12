@@ -30,6 +30,7 @@ Imports:
     vctrs
 Suggests: 
     covr,
+    data.table,
     fontawesome,
     glue,
     gt,

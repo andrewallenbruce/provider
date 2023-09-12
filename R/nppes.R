@@ -171,7 +171,6 @@ nppes <- function(npi = NULL,
     httr2::req_perform()
 
   response <- httr2::resp_body_json(request, simplifyVector = TRUE)
-  return(response)
 
   res_cnt <- response$result_count
 
