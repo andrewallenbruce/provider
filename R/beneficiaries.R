@@ -174,9 +174,7 @@ beneficiaries <- function(year        = NULL,
   return(results)
 }
 
-#' Current years available for the Medicare Monthly Enrollment API
 #' @param period "year", "month"
-#' @return integer vector of years available
 #' @examples
 #' beneficiaries_years("year")
 #' beneficiaries_years("month")

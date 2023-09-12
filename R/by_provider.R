@@ -11,7 +11,7 @@
 #' *Update Frequency:* **Annually**
 #'
 #' @param year integer (*required*); Year in `YYYY` format. Run helper function
-#'    `by_provider_years()` to return a vector of the years currently available.
+#'    `prac_years()` to return a vector of the years currently available.
 #' @param npi National Provider Identifier for the rendering provider on the claim.
 #' @param first,last Individual provider's first and/or last name
 #' @param organization Organization name.
@@ -48,7 +48,7 @@
 #' by_provider(year = 2020, npi = 1003000423)
 #'
 #' # Use the years helper function to retrieve results for every year:
-#' by_provider_years() |>
+#' prac_years() |>
 #' map(\(x) by_provider(year = x, npi = 1043477615)) |>
 #' list_rbind()
 #' @autoglobal
@@ -73,7 +73,7 @@ by_provider <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  year <- rlang::arg_match(year, as.character(by_provider_years()))
+  year <- rlang::arg_match(year, as.character(prac_years()))
 
   if (!is.null(npi))  {npi <- npi_check(npi)}
   if (!is.null(zip))  {zip <- as.character(zip)}
@@ -240,16 +240,4 @@ by_provider <- function(year,
 
     }
   return(results)
-}
-
-#' Current years available for the Provider API
-#' @return integer vector of years available
-#' @examples
-#' by_provider_years()
-#' @autoglobal
-#' @export
-#' @rdname years
-by_provider_years <- function() {
-  cms_update("Medicare Physician & Other Practitioners - by Provider", "years") |>
-    as.integer()
 }

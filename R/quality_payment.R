@@ -19,7 +19,7 @@
 #' @section Update Frequency: **Annually**
 #'
 #' @param year integer, YYYY, QPP Performance year. Run the helper function
-#'    `quality_payment_years()` to return a vector of currently
+#'    `quality_years()` to return a vector of currently
 #'    available years.
 #' @param npi The NPI assigned to the clinician when they enrolled in Medicare.
 #'    Multiple rows for the same NPI indicate multiple TIN/NPI combinations.
@@ -52,7 +52,7 @@ quality_payment <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_payment_years()))
+  rlang::arg_match(year, values = as.character(quality_years()))
 
   args <- dplyr::tribble(
     ~param,                          ~arg,
@@ -177,17 +177,6 @@ quality_payment <- function(year,
   return(results)
 }
 
-#' Check the current years available for the Quality Payments API
-#' @return integer vector of years available
-#' @examples
-#' quality_payment_years()
-#' @autoglobal
-#' @rdname years
-#' @export
-quality_payment_years <- function() {
-  as.integer(cms_update("Quality Payment Program Experience", "years"))
-}
-
 #' Quality Payment Program Eligibility
 #'
 #' @description Data pulled from across CMS that is used to create an
@@ -223,7 +212,6 @@ quality_payment_years <- function() {
 #'
 #' @examplesIf interactive()
 #' quality_eligibility(year = 2020, npi = 1144544834)
-#'
 #' @rdname quality_payment
 #' @autoglobal
 #' @export
@@ -235,7 +223,7 @@ quality_eligibility <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_payment_years()))
+  rlang::arg_match(year, values = as.character(quality_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/npi/{npi}/?year={year}")
 
@@ -304,7 +292,6 @@ quality_eligibility <- function(year,
 #'
 #' @examples
 #' quality_stats(year = 2020)
-#'
 #' @rdname quality_payment
 #' @autoglobal
 #' @export
@@ -312,7 +299,7 @@ quality_stats <- function(year) {
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, values = as.character(quality_payment_years()))
+  rlang::arg_match(year, values = as.character(quality_years()))
 
   url <- glue::glue("https://qpp.cms.gov/api/eligibility/stats/?year={year}")
 

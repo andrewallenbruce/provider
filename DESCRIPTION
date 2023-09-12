@@ -14,8 +14,9 @@ URL: https://andrewallenbruce.github.io/provider/,
     https://github.com/andrewallenbruce/provider
 BugReports: https://github.com/andrewallenbruce/provider/issues
 Depends: 
-    R (>= 2.10)
+    R (>= 3.6)
 Imports: 
+    anytime,
     cli,
     dplyr,
     httr2,
@@ -26,22 +27,21 @@ Imports:
     strex,
     stringr,
     tidyr,
-    anytime,
     vctrs
 Suggests: 
     covr,
-    stats,
+    fontawesome,
+    glue,
     gt,
     gtExtras,
     htmltools,
-    fontawesome,
-    printr,
-    scales,
-    glue,
     knitr,
+    printr,
     rmarkdown,
     roxyglobals (>= 0.2.1),
-    testthat (>= 3.0.0),
+    scales,
+    stats,
+    testthat (>= 3.0.0)
 VignetteBuilder: 
     knitr
 Remotes: 
@@ -51,9 +51,6 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 Language: en-US
 LazyData: true
-Roxygen: list(
-    markdown = TRUE,
-    roclets = c("collate", "namespace", "rd", 
-                "roxyglobals::global_roclet", 
-                "doctest::dt_roclet"))
+Roxygen: list( markdown = TRUE, roclets = c("collate", "namespace", "rd",
+    "roxyglobals::global_roclet", "doctest::dt_roclet"))
 RoxygenNote: 7.2.3

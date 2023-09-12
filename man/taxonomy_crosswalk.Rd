@@ -52,7 +52,7 @@ as categorizations used by Medicare for enrollment.
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Provider and Supplier Taxonomy Crosswalk}
 \item \href{https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology}{Taxonomy Crosswalk Methodology}
-\item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code}{Find Your Taxonomy Code}
+\item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/health-care-taxonomy}{Find Your Taxonomy Code}
 }
 
 \emph{Update Frequency:} \strong{Weekly}

@@ -29,7 +29,7 @@ by_service(
 }
 \arguments{
 \item{year}{integer (\emph{required}); Year in \code{YYYY} format. Run helper function
-\code{by_service_years()} to return a vector of the years
+\code{prac_years()} to return a vector of the years
 currently available.}
 
 \item{npi}{National Provider Identifier for the rendering provider on the claim}

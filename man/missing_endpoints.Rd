@@ -29,22 +29,20 @@ Health care organizations seeking to engage in electronic health information
 exchange need accurate information about the electronic addresses (e.g.,
 Direct address, FHIR server URL, query endpoint, or other digital contact
 information) of potential exchange partners to facilitate this information exchange.
-}
-}
-\section{Links}{
-
+\subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-compliance/public-reporting-of-missing-digital-contact-information}{CMS Public Reporting of Missing Digital Contact Information API}
 \item \href{https://nppes.cms.hhs.gov/webhelp/nppeshelp/HEALTH\%20INFORMATION\%20EXCHANGE.html}{Endpoints Information}
 \item \href{https://data.cms.gov/sites/default/files/2021-12/8eb2b4bf-6e5f-4e05-bcdb-39c07ad8f77a/Missing_Digital_Contact_Info_Methods\%20.pdf}{Methodology & Policy}
 }
+
+\emph{Update Frequency:} \strong{Quarterly}
 }
 
-\section{Update Frequency}{
- \strong{Quarterly}
 }
-
+}
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # A provider that appears in the search results
 # of the Missing Information API has no Endpoints
 # entered into the NPPES NPI Registry and vice versa.
@@ -66,7 +64,7 @@ dplyr::select(endpoints) |>
 tidyr::unnest(cols = c(endpoints)) |>
 janitor::clean_names() |>
 dplyr::select(dplyr::contains("endpoint"))
-
+\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=nppes]{nppes()}}

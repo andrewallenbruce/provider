@@ -29,7 +29,7 @@
 #'
 #' ### Links:
 #'   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
-#'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying)
+#'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
 #' *Update Frequency:* **Twice Weekly**

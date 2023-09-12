@@ -22,7 +22,7 @@
 #' ### Links
 #' - [Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
 #' - [Taxonomy Crosswalk Methodology](https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology)
-#' - [Find Your Taxonomy Code](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/Find-Your-Taxonomy-Code)
+#' - [Find Your Taxonomy Code](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/health-care-taxonomy)
 #'
 #' *Update Frequency:* **Weekly**
 #'

@@ -27,15 +27,7 @@
 #'    speak directly to the health care provider for a better understanding.
 #'
 #' ### Links
-#'  * [What is the Open Payments Program?](https://www.cms.gov/OpenPayments)
-#'  * [OpenPaymentsData.cms.gov](https://www.cms.gov/OpenPaymentsData.cms.gov)
-#'  * [2021 General Payment Data](https://openpaymentsdata.cms.gov/dataset/0380bbeb-aea1-58b6-b708-829f92a48202)
-#'  * [2020 General Payment Data](https://openpaymentsdata.cms.gov/dataset/a08c4b30-5cf3-4948-ad40-36f404619019)
-#'  * [2019 General Payment Data](https://openpaymentsdata.cms.gov/dataset/4e54dd6c-30f8-4f86-86a7-3c109a89528e)
-#'  * [2018 General Payment Data](https://openpaymentsdata.cms.gov/dataset/f003634c-c103-568f-876c-73017fa83be0)
-#'  * [2017 General Payment Data](https://openpaymentsdata.cms.gov/dataset/74e3a32c-e8f8-595c-899c-35f9bffa828f)
-#'  * [2016 General Payment Data](https://openpaymentsdata.cms.gov/dataset/4c774e90-7f9e-5d19-b168-ff9be1e69034)
-#'  * [2015 General Payment Data](https://openpaymentsdata.cms.gov/dataset/e657f6f0-7abb-5e82-8b42-23bff09f0763)
+#'  * [What is the Open Payments Program?](https://www.cms.gov/priorities/key-initiatives/open-payments)
 #'
 #' *Update Frequency:* **Yearly**
 #'
@@ -102,7 +94,7 @@ open_payments <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, as.character(open_payments_years()))
+  rlang::arg_match(year, as.character(open_years()))
 
   if (!is.null(npi)) {npi  <- npi_check(npi)}
   if (!is.null(zip)) {zip <- as.character(zip)}
@@ -129,7 +121,7 @@ open_payments <- function(year,
     "applicable_manufacturer_or_applicable_gpo_making_payment_name", payer,
     "applicable_manufacturer_or_applicable_gpo_making_payment_id",   payer_id)
 
-  id <- open_payments_ids("General Payment Data") |>
+  id <- open_ids("General Payment Data") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(identifier)
 
@@ -180,14 +172,15 @@ open_payments <- function(year,
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::contains("dollars"), ~as.double(.)),
+                    dplyr::across(dplyr::contains("_indicator"), ~yn_logical(.)),
                     change_type = changed_logical(change_type),
-                    charity_indicator = yn_logical(charity_indicator),
-                    physician_ownership_indicator = yn_logical(physician_ownership_indicator),
-                    delay_in_publication_indicator = yn_logical(delay_in_publication_indicator),
-                    dispute_status_for_publication = yn_logical(dispute_status_for_publication),
-                    related_product_indicator = yn_logical(related_product_indicator),
-                    third_party_equals_covered_recipient_indicator = yn_logical(third_party_equals_covered_recipient_indicator),
-                    third_party_payment_recipient_indicator = yn_logical(third_party_payment_recipient_indicator),
+                    # charity_indicator = yn_logical(charity_indicator),
+                    # physician_ownership_indicator = yn_logical(physician_ownership_indicator),
+                    # delay_in_publication_indicator = yn_logical(delay_in_publication_indicator),
+                    # dispute_status_for_publication = yn_logical(dispute_status_for_publication),
+                    # related_product_indicator = yn_logical(related_product_indicator),
+                    # third_party_equals_covered_recipient_indicator = yn_logical(third_party_equals_covered_recipient_indicator),
+                    # third_party_payment_recipient_indicator = yn_logical(third_party_payment_recipient_indicator),
                     covered_recipient_type = dplyr::case_match(covered_recipient_type,
                                                  "Covered Recipient Physician" ~ "Physician",
                                                  "Covered Recipient Non-Physician Practitioner" ~ "Non-Physician Practitioner",
@@ -198,7 +191,7 @@ open_payments <- function(year,
                                                    .default = nature_of_payment_or_transfer_of_value)) |>
       tidyr::unite("address",
                    dplyr::any_of(c("recipient_primary_business_street_address_line1",
-                                   "recipient_primary_business_street_address_line1")),
+                                   "recipient_primary_business_street_address_line2")),
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
       tidyr::unite("primary_other",
                    dplyr::any_of(c("covered_recipient_primary_type_2",
@@ -221,82 +214,82 @@ open_payments <- function(year,
                                    "covered_recipient_license_state_code5")),
                    remove = TRUE, na.rm = TRUE, sep = ", ") |>
       dplyr::select(program_year,
-                    npi                  = covered_recipient_npi,
-                    changed              = change_type,
-                    cov_type             = covered_recipient_type,
-                    teach_hosp_ccn       = teaching_hospital_ccn,
-                    teach_hosp_id        = teaching_hospital_id,
-                    teach_hosp_name      = teaching_hospital_name,
-                    first           = covered_recipient_first_name,
-                    middle          = covered_recipient_middle_name,
-                    last            = covered_recipient_last_name,
-                    suffix               = covered_recipient_name_suffix,
+                    npi = covered_recipient_npi,
+                    changed = change_type,
+                    covered_recipient = covered_recipient_type,
+                    teaching_ccn = teaching_hospital_ccn,
+                    teaching_id = teaching_hospital_id,
+                    teaching_name = teaching_hospital_name,
+                    first = covered_recipient_first_name,
+                    middle = covered_recipient_middle_name,
+                    last = covered_recipient_last_name,
+                    suffix = covered_recipient_name_suffix,
                     address,
-                    city                 = recipient_city,
-                    state                = recipient_state,
-                    zip                  = recipient_zip_code,
-                    postal_code          = recipient_postal_code,
-                    country              = recipient_country,
-                    province             = recipient_province,
-                    primary_type         = covered_recipient_primary_type_1,
+                    city = recipient_city,
+                    state = recipient_state,
+                    zip = recipient_zip_code,
+                    postal = recipient_postal_code,
+                    country = recipient_country,
+                    province = recipient_province,
+                    primary = covered_recipient_primary_type_1,
                     primary_other,
-                    specialty            = covered_recipient_specialty_1,
+                    specialty = covered_recipient_specialty_1,
                     specialty_other,
-                    license_state        = covered_recipient_license_state_code1,
+                    license_state = covered_recipient_license_state_code1,
                     license_state_other,
-                    payer_id             = applicable_manufacturer_or_applicable_gpo_making_payment_id,
-                    payer_sub            = submitting_applicable_manufacturer_or_applicable_gpo_name,
-                    payer_name           = applicable_manufacturer_or_applicable_gpo_making_payment_name,
-                    payer_state          = applicable_manufacturer_or_applicable_gpo_making_payment_state,
-                    payer_country        = applicable_manufacturer_or_applicable_gpo_making_payment_country,
-                    pay_total            = total_amount_of_payment_us_dollars,
-                    pay_date             = date_of_payment,
-                    pay_count            = number_of_payments_included_in_total_amount,
-                    pay_form             = form_of_payment_or_transfer_of_value,
-                    pay_nature           = nature_of_payment_or_transfer_of_value,
-                    travel_city          = city_of_travel,
-                    travel_state         = state_of_travel,
-                    travel_country       = country_of_travel,
-                    phys_ownship         = physician_ownership_indicator,
-                    third_party          = third_party_payment_recipient_indicator,
-                    third_name           = name_of_third_party_entity_receiving_payment_or_transfer_of_value,
-                    third_cover          = third_party_equals_covered_recipient_indicator,
-                    charity              = charity_indicator,
-                    context              = contextual_information,
-                    pub_date             = payment_publication_date,
-                    pub_delay            = delay_in_publication_indicator,
-                    pub_dispute          = dispute_status_for_publication,
-                    related_product      = related_product_indicator,
-                    name_1               = name_of_drug_or_biological_or_device_or_medical_supply_1,
-                    covered_1            = covered_or_noncovered_indicator_1,
-                    type_1               = indicate_drug_or_biological_or_device_or_medical_supply_1,
-                    category_1           = product_category_or_therapeutic_area_1,
-                    ndc_1                = associated_drug_or_biological_ndc_1,
-                    pdi_1                = associated_device_or_medical_supply_pdi_1,
-                    name_2               = name_of_drug_or_biological_or_device_or_medical_supply_2,
-                    covered_2            = covered_or_noncovered_indicator_2,
-                    type_2               = indicate_drug_or_biological_or_device_or_medical_supply_2,
-                    category_2           = product_category_or_therapeutic_area_2,
-                    ndc_2                = associated_drug_or_biological_ndc_2,
-                    pdi_2                = associated_device_or_medical_supply_pdi_2,
-                    name_3               = name_of_drug_or_biological_or_device_or_medical_supply_3,
-                    covered_3            = covered_or_noncovered_indicator_3,
-                    type_3               = indicate_drug_or_biological_or_device_or_medical_supply_3,
-                    category_3           = product_category_or_therapeutic_area_3,
-                    ndc_3                = associated_drug_or_biological_ndc_3,
-                    pdi_3                = associated_device_or_medical_supply_pdi_3,
-                    name_4               = name_of_drug_or_biological_or_device_or_medical_supply_4,
-                    covered_4            = covered_or_noncovered_indicator_4,
-                    type_4               = indicate_drug_or_biological_or_device_or_medical_supply_4,
-                    category_4           = product_category_or_therapeutic_area_4,
-                    ndc_4                = associated_drug_or_biological_ndc_4,
-                    pdi_4                = associated_device_or_medical_supply_pdi_4,
-                    name_5               = name_of_drug_or_biological_or_device_or_medical_supply_5,
-                    covered_5            = covered_or_noncovered_indicator_5,
-                    type_5               = indicate_drug_or_biological_or_device_or_medical_supply_5,
-                    category_5           = product_category_or_therapeutic_area_5,
-                    ndc_5                = associated_drug_or_biological_ndc_5,
-                    pdi_5                = associated_device_or_medical_supply_pdi_5,
+                    payer_id = applicable_manufacturer_or_applicable_gpo_making_payment_id,
+                    payer_sub = submitting_applicable_manufacturer_or_applicable_gpo_name,
+                    payer_name = applicable_manufacturer_or_applicable_gpo_making_payment_name,
+                    payer_state = applicable_manufacturer_or_applicable_gpo_making_payment_state,
+                    payer_country = applicable_manufacturer_or_applicable_gpo_making_payment_country,
+                    pay_total = total_amount_of_payment_us_dollars,
+                    pay_date = date_of_payment,
+                    pay_count = number_of_payments_included_in_total_amount,
+                    pay_form = form_of_payment_or_transfer_of_value,
+                    pay_nature = nature_of_payment_or_transfer_of_value,
+                    travel_city = city_of_travel,
+                    travel_state = state_of_travel,
+                    travel_country = country_of_travel,
+                    physician_ownership = physician_ownership_indicator,
+                    third_party_payment = third_party_payment_recipient_indicator,
+                    third_party_name = name_of_third_party_entity_receiving_payment_or_transfer_of_value,
+                    third_party_recipient = third_party_equals_covered_recipient_indicator,
+                    charity = charity_indicator,
+                    context = contextual_information,
+                    publish_date = payment_publication_date,
+                    publish_delay = delay_in_publication_indicator,
+                    publish_dispute = dispute_status_for_publication,
+                    related_product = related_product_indicator,
+                    name_1 = name_of_drug_or_biological_or_device_or_medical_supply_1,
+                    covered_1 = covered_or_noncovered_indicator_1,
+                    type_1 = indicate_drug_or_biological_or_device_or_medical_supply_1,
+                    category_1 = product_category_or_therapeutic_area_1,
+                    ndc_1 = associated_drug_or_biological_ndc_1,
+                    pdi_1 = associated_device_or_medical_supply_pdi_1,
+                    name_2 = name_of_drug_or_biological_or_device_or_medical_supply_2,
+                    covered_2 = covered_or_noncovered_indicator_2,
+                    type_2 = indicate_drug_or_biological_or_device_or_medical_supply_2,
+                    category_2 = product_category_or_therapeutic_area_2,
+                    ndc_2 = associated_drug_or_biological_ndc_2,
+                    pdi_2 = associated_device_or_medical_supply_pdi_2,
+                    name_3 = name_of_drug_or_biological_or_device_or_medical_supply_3,
+                    covered_3 = covered_or_noncovered_indicator_3,
+                    type_3 = indicate_drug_or_biological_or_device_or_medical_supply_3,
+                    category_3 = product_category_or_therapeutic_area_3,
+                    ndc_3 = associated_drug_or_biological_ndc_3,
+                    pdi_3 = associated_device_or_medical_supply_pdi_3,
+                    name_4 = name_of_drug_or_biological_or_device_or_medical_supply_4,
+                    covered_4 = covered_or_noncovered_indicator_4,
+                    type_4 = indicate_drug_or_biological_or_device_or_medical_supply_4,
+                    category_4 = product_category_or_therapeutic_area_4,
+                    ndc_4 = associated_drug_or_biological_ndc_4,
+                    pdi_4 = associated_device_or_medical_supply_pdi_4,
+                    name_5 = name_of_drug_or_biological_or_device_or_medical_supply_5,
+                    covered_5 = covered_or_noncovered_indicator_5,
+                    type_5 = indicate_drug_or_biological_or_device_or_medical_supply_5,
+                    category_5 = product_category_or_therapeutic_area_5,
+                    ndc_5 = associated_drug_or_biological_ndc_5,
+                    pdi_5 = associated_device_or_medical_supply_pdi_5,
                     dplyr::everything())
 
     if (pivot) {
@@ -323,7 +316,7 @@ open_payments <- function(year,
 #' @param search term to search for in open payments database
 #' @autoglobal
 #' @noRd
-open_payments_ids <- function(search) {
+open_ids <- function(search) {
 
   response <- httr2::request("https://openpaymentsdata.cms.gov/api/1/metastore/schemas/dataset/items?show-reference-ids") |>
     httr2::req_perform()
@@ -353,21 +346,7 @@ open_payments_error <- function(response) {
     strex::str_before_nth(":", 2)
 }
 
-
-#' Check the current years available for the Open Payments API
-#' @return integer vector of years available
-#' @examples
-#' open_payments_years()
-#' @rdname years
-#' @autoglobal
-#' @export
-open_payments_years <- function() {
-  open_payments_ids("General Payment Data") |>
-    dplyr::arrange(year) |>
-    dplyr::pull(year)
-  }
-
-#' Convert Open Payments Changed col to logical
+#' Convert Changed column to logical
 #' @param x vector
 #' @autoglobal
 #' @noRd

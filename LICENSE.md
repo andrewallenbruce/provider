@@ -1,6 +1,6 @@
 # MIT License
 
-Copyright (c) 2022 Andrew Bruce
+Copyright (c) 2023 Andrew Bruce
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

@@ -18,7 +18,7 @@ state and national averages
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-by_service_years() |>
+prac_years() |>
 map(\(x) by_service(year = x, npi = 1023076643)) |>
 list_rbind() |>
 compare_hcpcs()

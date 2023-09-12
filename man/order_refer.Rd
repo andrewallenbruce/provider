@@ -64,7 +64,7 @@ refer. Medicare coverage will then apply when ordering or referring:
 \subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
-\item \href{https://www.cms.gov/medicare/provider-enrollment-and-certification/ordering-and-certifying}{CMS.gov: Ordering & Certifying}
+\item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
 \item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
 }
 

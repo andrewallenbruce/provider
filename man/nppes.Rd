@@ -9,9 +9,11 @@ nppes(
   entype = NULL,
   first = NULL,
   last = NULL,
+  alias = TRUE,
   organization = NULL,
   name_type = NULL,
   taxonomy_desc = NULL,
+  address_type = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
@@ -24,8 +26,7 @@ nppes(
 \arguments{
 \item{npi}{10-digit National Provider Identifier (NPI)}
 
-\item{entype}{Entity/enumeration type. Cannot be the only criteria entered.
-Options are:
+\item{entype}{Entity/enumeration type. \emph{Cannot be the only criteria entered.}
 \itemize{
 \item \code{"I"}: Individual provider (NPI-1)
 \item \code{"O"}: Organizational provider (NPI-2)
@@ -34,21 +35,33 @@ Options are:
 \item{first, last}{Individual provider's first/last name.
 \emph{Trailing Wildcard Allowed}}
 
-\item{organization}{Healthcare organization's name. Many types of names (LBN,
-DBA, Former LBN, Other Name) are examined for a match. As such, the results
-might contain a different name from the one entered. \emph{Trailing Wildcard Allowed}}
+\item{alias}{\code{"TRUE"}/\code{"FALSE"}. Applies to authorized officials and individual providers when
+not doing a wildcard search. When set to \code{"TRUE"}, the results will include
+providers with similar first names.}
 
-\item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to.
-Options are:
+\item{organization}{Healthcare organization's name. Many types of names (LBN,
+DBA, Former LBN, Other Name) may match. As such, the results might contain a
+name different from the one entered. \emph{Trailing Wildcard Allowed}}
+
+\item{name_type}{Type of name the \code{first}/\code{last} arguments pertain to:
 \itemize{
-\item \code{"AO"}: will only search Authorized Official names
-\item \code{"Provider"}:  will only search Individual Provider names \emph{(default)}
+\item \code{"AO"}: search Authorized Officials only
+\item \code{"Provider"}: search Individual Providers only \emph{(default)}
 }}
 
-\item{taxonomy_desc}{Provider's taxonomy description}
+\item{taxonomy_desc}{Provider's taxonomy description, e.g. \code{"Pharmacist"},
+\code{"Pediatrics"}}
+
+\item{address_type}{Address type of provider; options are:
+\itemize{
+\item \code{"location"} (Practice location)
+\item \code{"mailing"}
+\item \code{"primary"}
+\item \code{"secondary"}
+}}
 
 \item{city}{City associated with the provider's address. To search for a
-Military Address, enter either \code{"APO"} or \code{"FPO"}.}
+military address, enter either \code{"APO"} or \code{"FPO"}.}
 
 \item{state}{State abbreviation associated with the provider's address. If
 this field is used, at least one other field, besides the \code{entype} and
@@ -59,8 +72,8 @@ is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
 the data. \emph{Trailing Wildcard Allowed}}
 
 \item{country}{Country abbreviation associated with the provider's
-address. This field \strong{can} be used as the only input criterion, as long
-as the value selected \emph{is not} \code{"US"} (United States).}
+address. \strong{Can} be used as the only input criterion, as long as the value
+selected \emph{is not} \code{"US"} (United States).}
 
 \item{limit}{Maximum number of results to return; default is \code{1200}.}
 
@@ -153,5 +166,7 @@ least two characters to be entered, e.g. \code{"jo*"}
 \emph{Update Frequency:} \strong{Weekly}
 }
 \examples{
+\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 nppes(npi = 1528060837, tidy = FALSE)
+\dontshow{\}) # examplesIf}
 }

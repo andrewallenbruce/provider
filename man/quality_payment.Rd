@@ -118,5 +118,4 @@ quality_payment(year = 2020, npi = 1144544834)
 quality_eligibility(year = 2020, npi = 1144544834)
 \dontshow{\}) # examplesIf}
 quality_stats(year = 2020)
-
 }

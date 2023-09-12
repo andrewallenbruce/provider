@@ -78,22 +78,29 @@
 #' *Update Frequency:* **Weekly**
 #'
 #' @param npi 10-digit National Provider Identifier (NPI)
-#' @param entype Entity/enumeration type. Cannot be the only criteria entered.
-#' Options are:
+#' @param entype Entity/enumeration type. _Cannot be the only criteria entered._
 #'   * `"I"`: Individual provider (NPI-1)
 #'   * `"O"`: Organizational provider (NPI-2)
 #' @param first,last Individual provider's first/last name.
 #' _Trailing Wildcard Allowed_
-#' @param name_type Type of name the `first`/`last` arguments pertain to.
-#' Options are:
-#'   * `"AO"`: will only search Authorized Official names
-#'   * `"Provider"`:  will only search Individual Provider names _(default)_
+#' @param alias `"TRUE"`/`"FALSE"`. Applies to authorized officials and individual providers when
+#' not doing a wildcard search. When set to `"TRUE"`, the results will include
+#' providers with similar first names.
+#' @param name_type Type of name the `first`/`last` arguments pertain to:
+#'   * `"AO"`: search Authorized Officials only
+#'   * `"Provider"`: search Individual Providers only _(default)_
 #' @param organization Healthcare organization's name. Many types of names (LBN,
-#' DBA, Former LBN, Other Name) are examined for a match. As such, the results
-#' might contain a different name from the one entered. _Trailing Wildcard Allowed_
-#' @param taxonomy_desc Provider's taxonomy description
+#' DBA, Former LBN, Other Name) may match. As such, the results might contain a
+#'  name different from the one entered. _Trailing Wildcard Allowed_
+#' @param taxonomy_desc Provider's taxonomy description, e.g. `"Pharmacist"`,
+#' `"Pediatrics"`
+#' @param address_type Address type of provider; options are:
+#'    * `"location"` (Practice location)
+#'    * `"mailing"`
+#'    * `"primary"`
+#'    * `"secondary"`
 #' @param city City associated with the provider's address. To search for a
-#'    Military Address, enter either `"APO"` or `"FPO"`.
+#'    military address, enter either `"APO"` or `"FPO"`.
 #' @param state State abbreviation associated with the provider's address. If
 #' this field is used, at least one other field, besides the `entype` and
 #' `country`, must be populated.
@@ -101,15 +108,15 @@
 #' is entered, it will be matched to any appropriate 9 digit (zip+4) codes in
 #' the data. _Trailing Wildcard Allowed_
 #' @param country Country abbreviation associated with the provider's
-#' address. This field **can** be used as the only input criterion, as long
-#' as the value selected *is not* `"US"` (United States).
+#' address. **Can** be used as the only input criterion, as long as the value
+#' selected *is not* `"US"` (United States).
 #' @param limit Maximum number of results to return; default is `1200`.
 #' @param skip Number of results to skip after those set in `limit`.
 #' @param tidy Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
-#' @examples
+#' @examplesIf interactive()
 #' nppes(npi = 1528060837, tidy = FALSE)
 #' @autoglobal
 #' @export
@@ -117,9 +124,11 @@ nppes <- function(npi = NULL,
                   entype = NULL,
                   first = NULL,
                   last = NULL,
+                  alias = TRUE,
                   organization = NULL,
                   name_type = NULL,
                   taxonomy_desc  = NULL,
+                  address_type = NULL,
                   city = NULL,
                   state = NULL,
                   zip = NULL,
@@ -129,18 +138,30 @@ nppes <- function(npi = NULL,
                   tidy = TRUE) {
 
   if (!is.null(npi))       {npi <- npi_check(npi)}
-  if (!is.null(entype))    {entype <- entype_arg(entype)}
   if (!is.null(name_type)) {rlang::arg_match(name_type, c("AO", "Provider"))}
   if (!is.null(zip))       {zip <- as.character(zip)}
+  if (!is.null(alias) && isTRUE(alias))  {alias <- "True"}
+  if (!is.null(alias) && isFALSE(alias)) {alias <- "False"}
+
+  if (!is.null(address_type)) {
+    rlang::arg_match(address_type,
+    c("location", "mailing", "primary", "secondary"))
+    address_type <- toupper(address_type)}
+
+  if (!is.null(entype)) {
+    rlang::arg_match(entype, c("I", "O"))
+    entype <- entype_arg(entype)}
 
   request <- httr2::request("https://npiregistry.cms.hhs.gov/api/?version=2.1") |>
     httr2::req_url_query(number               = npi,
                          enumeration_type     = entype,
                          first_name           = first,
                          last_name            = last,
+                         use_first_name_alias = alias,
                          name_purpose         = name_type,
                          organization_name    = organization,
                          taxonomy_description = taxonomy_desc,
+                         address_purpose      = address_type,
                          city                 = city,
                          state                = state,
                          postal_code          = zip,
@@ -150,6 +171,7 @@ nppes <- function(npi = NULL,
     httr2::req_perform()
 
   response <- httr2::resp_body_json(request, simplifyVector = TRUE)
+  return(response)
 
   res_cnt <- response$result_count
 
@@ -161,9 +183,11 @@ nppes <- function(npi = NULL,
       "entype",        entype,
       "first",         first,
       "last",          last,
+      "alias",         alias,
       "name_type",     name_type,
       "organization",  organization,
       "taxonomy_desc", taxonomy_desc,
+      "address_type",  address_type,
       "city",          city,
       "state",         state,
       "zip",           zip,
@@ -323,7 +347,6 @@ nppes <- function(npi = NULL,
     results <- final |>
       dplyr::mutate(dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "N/A")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "--")),
                     dplyr::across(dplyr::where(is.character), ~clean_credentials(.)),
                     entype = entype_char(entype),
@@ -369,79 +392,30 @@ nppes <- function(npi = NULL,
   return(results)
 }
 
-# nppes_npi_old <- function(npi            = NULL,
-#                           enum_type      = NULL,
-#                           first_name     = NULL,
-#                           last_name      = NULL,
-#                           org_name       = NULL,
-#                           taxonomy_desc  = NULL,
-#                           city           = NULL,
-#                           state          = NULL,
-#                           zip            = NULL,
-#                           country        = NULL,
-#                           limit          = 200,
-#                           skip           = NULL) {
-#
-#   # base URL ---------------------------------------------------------------
-#   url <- "https://npiregistry.cms.hhs.gov/api/?version=2.1"
-#
-#   # request and response ----------------------------------------------------
-#   resp <- httr2::request(url) |>
-#     httr2::req_url_query(number               = npi,
-#                          enumeration_type     = enum_type,
-#                          first_name           = first_name,
-#                          last_name            = last_name,
-#                          organization_name    = org_name,
-#                          taxonomy_description = taxonomy_desc,
-#                          city                 = city,
-#                          state                = state,
-#                          postal_code          = zip,
-#                          country_code         = country,
-#                          limit                = limit,
-#                          skip                 = skip) |>
-#     httr2::req_perform()
-#
-#   res <- httr2::resp_body_json(resp,
-#                                check_type = FALSE,
-#                                simplifyVector = TRUE)
-#
-#   # Remove result_count header
-#   res$result_count <- NULL
-#
-#   return(res)
-#
-#   # Convert to tibble
-#   results <- tibble::enframe(res, name = "outcome", value = "data_lists") |>
-#     dplyr::mutate(datetime = httr2::resp_date(resp), .before = 1) |>
-#     tidyr::unnest(cols = c(data_lists))
-#
-#   if (nrow(dplyr::filter(results, outcome == "Errors")) >= 1) {
-#     results <- results |> tidyr::nest(errors = c(description, field, number))
-#     return(results)
-#   }
-#
-#   if (nrow(dplyr::filter(results, outcome == "results")) >= 1) {
-#     results <- results |> tidyr::nest(epochs = c(created_epoch, last_updated_epoch))}
-#
-#   if (nrow(dplyr::filter(results, enumeration_type == "NPI-2")) >= 1) {
-#     results <- results |>
-#       tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
-#       dplyr::mutate(name = basic_organization_name, .after = 4) |>
-#       tidyr::nest(authorized_official = tidyr::contains("authorized"),
-#                   basic = tidyr::contains("basic")) |>
-#       tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
-#     return(results)
-#   }
-#
-#   if (nrow(dplyr::filter(results, enumeration_type == "NPI-1")) >= 1) {
-#     results <- results |>
-#       tidyr::unnest(c(basic), keep_empty = TRUE, names_sep = "_") |>
-#       dplyr::mutate(name = stringr::str_c(basic_first_name, basic_last_name, sep = " "), .after = 4) |>
-#       tidyr::nest(basic = tidyr::contains("basic")) |>
-#       tidyr::hoist(addresses, city = list("city", 2L), state = list("state", 2L), .remove = FALSE)
-#     return(results)
-#   }
-#
-#   #results[apply(results, 2, function(x) lapply(x, length) == 0)] <- NA
-#
-# }
+#' @param x vector
+#' @autoglobal
+#' @noRd
+entype_arg <- function(x) {
+
+  x <- if (is.numeric(x)) as.character(x)
+
+  dplyr::case_match(
+    x,
+    c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
+    c("O", "o", "Org", "org", "2") ~ "NPI-2",
+    .default = NULL
+  )
+}
+
+#' @param x vector
+#' @autoglobal
+#' @noRd
+entype_char <- function(x) {
+
+  dplyr::case_match(
+    x,
+    c("NPI-1", "I") ~ "Individual",
+    c("NPI-2", "O") ~ "Organization",
+    .default = x
+  )
+}

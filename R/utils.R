@@ -80,34 +80,7 @@ tf_2_yn <- function(x) {
   )
 }
 
-#' Convert I/O char values to logical
-#' @param x vector
-#' @autoglobal
-#' @noRd
-entype_char <- function(x) {
 
-  dplyr::case_match(x,
-    c("NPI-1", "I") ~ "Individual",
-    c("NPI-2", "O") ~ "Organization",
-    .default = x
-    )
-}
-
-#' Convert I/O char values to logical
-#' @param x vector
-#' @autoglobal
-#' @noRd
-entype_arg <- function(x) {
-
-  x <- if (is.numeric(x)) as.character(x)
-
-  dplyr::case_match(
-    x,
-    c("I", "i", "Ind", "ind", "1") ~ "NPI-1",
-    c("O", "o", "Org", "org", "2") ~ "NPI-2",
-    .default = NULL
-  )
-}
 
 #' Convert Place of Service values
 #' @param x vector

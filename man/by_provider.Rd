@@ -26,7 +26,7 @@ by_provider(
 }
 \arguments{
 \item{year}{integer (\emph{required}); Year in \code{YYYY} format. Run helper function
-\code{by_provider_years()} to return a vector of the years currently available.}
+\code{prac_years()} to return a vector of the years currently available.}
 
 \item{npi}{National Provider Identifier for the rendering provider on the claim.}
 
@@ -93,7 +93,7 @@ Original Medicare (fee-for-service) Part B beneficiaries, aggregated by year.
 by_provider(year = 2020, npi = 1003000423)
 
 # Use the years helper function to retrieve results for every year:
-by_provider_years() |>
+prac_years() |>
 map(\(x) by_provider(year = x, npi = 1043477615)) |>
 list_rbind()
 \dontshow{\}) # examplesIf}

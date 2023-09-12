@@ -16,7 +16,7 @@
 #' *Update Frequency:* **Annually**
 #'
 #' @param year int (*required*); Year in YYYY format. Run helper function
-#'    `by_geography_years()` to return a vector of the years currently available.
+#'    `prac_years()` to return a vector of the years currently available.
 #' @param level Level of geography by which the data will be aggregated. `State`
 #'    indicates the data is aggregated to a single state identified in the Rendering Provider
 #'    State column. `National` indicates the data is aggregated across all states for a
@@ -57,7 +57,7 @@ by_geography <- function(year,
 
   rlang::check_required(year)
   year <- as.character(year)
-  rlang::arg_match(year, as.character(by_geography_years()))
+  rlang::arg_match(year, as.character(prac_years()))
 
   if (!is.null(level))      {rlang::arg_match(level, c("National", "State"))}
   if (!is.null(hcpcs_code)) {hcpcs_code <- as.character(hcpcs_code)}
@@ -152,16 +152,4 @@ by_geography <- function(year,
 
   }
   return(results)
-}
-
-#' Current years available for the Geography and Service API
-#' @return integer vector of years available
-#' @examples
-#' by_geography_years()
-#' @rdname years
-#' @autoglobal
-#' @export
-by_geography_years <- function() {
-  cms_update("Medicare Physician & Other Practitioners - by Geography and Service", "years") |>
-    as.integer()
 }

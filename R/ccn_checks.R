@@ -1,13 +1,78 @@
+#' The CCN is used to identify each separately certified Medicare provider or
+#' supplier. It is used to track provider agreements and cost reports. The
+#' national provider identifier (NPI) and provider transaction account number
+#' (PTAN) are tied to the CCN.
+#'
+#' The CCN for providers and suppliers paid under Medicare Part A have six
+#' digits. The first two digits identify the State in which the provider is
+#' located. The last four digits identify the type of facility.
+#'
+#' Organ procurement organizations (OPOs) are assigned a 6-digit alphanumeric CCN.  The first 2 digits identify the State Code.  The third digit is the alpha character “P.”  The remaining 3 digits are the unique facility identifier.
+#'
 #' @autoglobal
 #' @noRd
-supplier_codes <- function(x) {
+ccn_decode <- function(x) {
 
-  # 3rd character of a 10-character CCN
-  dplyr::case_match(x,
-      "C" ~ "Ambulatory Surgical Center",
-      "D" ~ "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Laboratory",
-      "X" ~ "Portable X-Ray Facility",
-      .default = x)
+  if (nchar(x) %in% !c(6, 10)) {type <- "Unknown Type"}
+  if (nchar(x) == 6)           {type <- "Medicare Provider"}
+  if (nchar(x) == 10)          {type <- "Medicare Supplier"}
+
+  s <- unlist(strsplit(x, ""))
+
+  # First two characters always represent the state
+  cd <- paste0(s[1], s[2])
+  st <- ccn_state_codes(cd)
+  state <- paste0(st, " [", cd, "]")
+
+  # Medicare Provider
+  if (nchar(x) == 6 && isTRUE(grepl("^[[:digit:]]+$", s[3]))) {
+    type <- "Medicare Provider"
+    fcd <- paste0(s[3], s[4], s[5], s[6])
+    fac <- facility_ranges(fcd)
+    facility <- paste0(fac, " [", fcd, "]")
+
+    return(list(type = type,
+                state = state,
+                facility_type = facility))
+  }
+
+  if (nchar(x) == 6 && s[3] == "P") {
+    type <- "Medicare Provider"
+    facility <- paste0("Organ Procurement Organization", " [P]")
+
+    return(list(type = type,
+                state = state,
+                facility_type = facility,
+                facility_id = paste0(s[4], s[5], s[6])))
+  }
+
+  # Medicaid-Only Provider
+  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[3]))) {
+    type <- "Medicaid-Only Provider"
+    parent <- paste0(medicaid_facility_codes(s[3]), " [", s[3], "]")
+    fcd <- paste0(s[4], s[5], s[6])
+    fac <- medicaid_hospital_ranges(fcd)
+    facility <- paste0(fac, " [", fcd, "]")
+  }
+  # Medicare-Medicaid Provider Excluded from IPPS
+  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[4]))) {
+    parent <- medicaid_facility_codes(s[4])}
+
+  return(list(type = type,
+              state = state,
+              facility_type = facility,
+              parent_type = parent))
+}
+
+# ccn_decode("11T122")
+
+#' @autoglobal
+#' @noRd
+medicaid_type_codes <- function(x) {
+
+  vctrs::vec_c("A", "B", "E",
+               "F", "G", "H",
+               "K", "L", "J")
 }
 
 #' @autoglobal
@@ -100,18 +165,6 @@ facility_ranges <- function(x) {
 
 }
 
-#' @autoglobal
-#' @noRd
-emergency_codes <- function(x) {
-
-  # 6th character of a 6-character CCN
-  dplyr::case_match(
-    x,
-    "E" ~ "Non-Federal Emergency Hospital",
-    "F" ~ "Federal Emergency Hospital",
-    .default = x)
-
-}
 
 #' @autoglobal
 #' @noRd
@@ -132,15 +185,6 @@ ipps_parent_hospital_types <- function(x) {
     "K" ~ "Psychiatric Hospital (44)",
     .default = x)
 
-}
-
-#' @autoglobal
-#' @noRd
-medicaid_type_codes <- function(x) {
-
-  vctrs::vec_c("A", "B", "E",
-               "F", "G", "H",
-               "K", "L", "J")
 }
 
 #' @autoglobal
@@ -223,56 +267,26 @@ ccn_state_codes <- function(x) {
 
 #' @autoglobal
 #' @noRd
-ccn_decode <- function(x) {
+supplier_codes <- function(x) {
 
-  if (nchar(x) %in% !c(6, 10)) {type <- "Unknown Type"}
-  if (nchar(x) == 6)           {type <- "Medicare Provider"}
-  if (nchar(x) == 10)          {type <- "Medicare Supplier"}
-
-  s <- unlist(strsplit(x, ""))
-
-  # First two characters always represent the state
-  cd <- paste0(s[1], s[2])
-  st <- ccn_state_codes(cd)
-  state <- paste0(st, " [", cd, "]")
-
-  # Medicare Provider
-  if (nchar(x) == 6 && isTRUE(grepl("^[[:digit:]]+$", s[3]))) {
-    type <- "Medicare Provider"
-    fcd <- paste0(s[3], s[4], s[5], s[6])
-    fac <- facility_ranges(fcd)
-    facility <- paste0(fac, " [", fcd, "]")
-
-    return(list(type = type,
-                state = state,
-                facility_type = facility))
-  }
-
-  if (nchar(x) == 6 && s[3] == "P") {
-    type <- "Medicare Provider"
-    facility <- paste0("Organ Procurement Organization", " [P]")
-
-    return(list(type = type,
-                state = state,
-                facility_type = facility))
-  }
-
-  # Medicaid-Only Provider
-  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[3]))) {
-    type <- "Medicaid-Only Provider"
-    parent <- paste0(medicaid_facility_codes(s[3]), " [", s[3], "]")
-    fcd <- paste0(s[4], s[5], s[6])
-    fac <- medicaid_hospital_ranges(fcd)
-    facility <- paste0(fac, " [", fcd, "]")
-  }
-  # Medicare-Medicaid Provider Excluded from IPPS
-  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[4]))) {
-    parent <- medicaid_facility_codes(s[4])}
-
-  return(list(type = type,
-              state = state,
-              facility_type = facility,
-              parent_type = parent))
+  # 3rd character of a 10-character CCN
+  dplyr::case_match(x,
+                    "C" ~ "Ambulatory Surgical Center",
+                    "D" ~ "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Laboratory",
+                    "X" ~ "Portable X-Ray Facility",
+                    .default = x)
 }
 
-# ccn_decode("11T122")
+
+#' @autoglobal
+#' @noRd
+emergency_codes <- function(x) {
+
+  # 6th character of a 6-character CCN
+  dplyr::case_match(
+    x,
+    "E" ~ "Non-Federal Emergency Hospital",
+    "F" ~ "Federal Emergency Hospital",
+    .default = x)
+
+}

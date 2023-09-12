@@ -8,7 +8,7 @@
 #' @return A [tibble][tibble::tibble-package] containing the results.
 #'
 #' @examplesIf interactive()
-#' by_service_years() |>
+#' prac_years() |>
 #' map(\(x) by_service(year = x, npi = 1023076643)) |>
 #' list_rbind() |>
 #' compare_hcpcs()
@@ -70,7 +70,7 @@ compare_hcpcs <- function(df) {
 #' @return A [tibble][tibble::tibble-package] containing the results.
 #'
 #' @examplesIf interactive()
-#' by_provider_years() |>
+#' prac_years() |>
 #' map(\(x) by_provider(year = x, npi = 1023076643)) |>
 #' list_rbind() |>
 #' compare_conditions()
@@ -102,7 +102,7 @@ compare_conditions <- function(df) {
                  names_to = "condition",
                  values_to = "prevalence") |>
     dplyr::filter(!is.na(prevalence),
-           year %in% cc_specific_years())
+           year %in% cc_years())
 
   n <- dplyr::select(p, year, condition) |>
     dplyr::rowwise() |>

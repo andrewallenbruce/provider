@@ -18,7 +18,7 @@ by_geography(
 }
 \arguments{
 \item{year}{int (\emph{required}); Year in YYYY format. Run helper function
-\code{by_geography_years()} to return a vector of the years currently available.}
+\code{prac_years()} to return a vector of the years currently available.}
 
 \item{state}{State where the provider is located, as reported
 in NPPES. Values include the 50 United States, District of Columbia,
