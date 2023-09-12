@@ -16,7 +16,8 @@ hospitals(
   city = NULL,
   state = NULL,
   zip = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
@@ -43,6 +44,8 @@ hospitals(
 \item{zip}{Zip code of the hospital’s practice location address}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

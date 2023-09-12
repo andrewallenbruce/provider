@@ -28,6 +28,7 @@
 #'    * `"M"`: Male
 #'    * `"9"`: Unknown (or Organizational provider)
 #' @param tidy Tidy output; default is `TRUE`.
+#' @param na.rm Remove empty rows and columns; default is `TRUE`.
 #'
 #' @return [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -49,7 +50,8 @@ providers <- function(npi = NULL,
                       last = NULL,
                       organization = NULL,
                       gender = NULL,
-                      tidy = TRUE) {
+                      tidy = TRUE,
+                      na.rm = TRUE) {
 
   if (!is.null(npi))       {npi    <- npi_check(npi)}
   if (!is.null(pac_id))    {pac_id <- pac_check(pac_id)}
@@ -123,6 +125,10 @@ providers <- function(npi = NULL,
                     last = last_name,
                     gender = gndr_sw,
                     dplyr::everything())
+
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))
+    }
   }
   return(results)
 }

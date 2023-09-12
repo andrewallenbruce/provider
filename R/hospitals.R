@@ -23,6 +23,7 @@
 #' @param state State of the hospital’s practice location address
 #' @param zip Zip code of the hospital’s practice location address
 #' @param tidy Tidy output; default is `TRUE`.
+#' @param na.rm Remove empty rows and columns; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -43,7 +44,8 @@ hospitals <- function(npi               = NULL,
                       city              = NULL,
                       state             = NULL,
                       zip               = NULL,
-                      tidy              = TRUE) {
+                      tidy              = TRUE,
+                      na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
   if (!is.null(pac_id_org))    {pac_id_org   <- pac_check(pac_id_org)}
@@ -139,6 +141,10 @@ hospitals <- function(npi               = NULL,
                     dplyr::contains("subgroup_"),
                     dplyr::everything()) |>
       tidyr::nest(subgroups = dplyr::contains("subgroup_"))
+
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))
+    }
 
     }
   return(results)

@@ -16,7 +16,8 @@ providers(
   last = NULL,
   organization = NULL,
   gender = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
@@ -49,6 +50,8 @@ a PAC ID can be associated with multiple enrollment IDs and states.}
 }}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
 \link[tibble:tibble-package]{tibble} containing the search results.

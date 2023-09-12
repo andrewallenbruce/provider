@@ -2,6 +2,7 @@
 #' @noRd
 supplier_codes <- function(x) {
 
+  # 3rd character of a 10-character CCN
   dplyr::case_match(x,
       "C" ~ "Ambulatory Surgical Center",
       "D" ~ "Clinical Laboratory Improvement Amendments of 1988 (CLIA) Laboratory",
@@ -13,6 +14,7 @@ supplier_codes <- function(x) {
 #' @noRd
 medicaid_facility_codes <- function(x) {
 
+  # 3rd character of a 6-character CCN
   dplyr::case_match(
     x,
     c("A", "B") ~ "NF (Formerly assigned to Medicaid SNF)",
@@ -102,6 +104,7 @@ facility_ranges <- function(x) {
 #' @noRd
 emergency_codes <- function(x) {
 
+  # 6th character of a 6-character CCN
   dplyr::case_match(
     x,
     "E" ~ "Non-Federal Emergency Hospital",
@@ -114,6 +117,7 @@ emergency_codes <- function(x) {
 #' @noRd
 ipps_parent_hospital_types <- function(x) {
 
+  # 4th character of a 6-character CCN
   dplyr::case_match(
     x,
     "A" ~ "LTCH (20)",
@@ -134,15 +138,17 @@ ipps_parent_hospital_types <- function(x) {
 #' @noRd
 medicaid_type_codes <- function(x) {
 
-  vctrs::vec_c("A", "B", "E", "F", "G", "H", "K", "L", "J")
-
+  vctrs::vec_c("A", "B", "E",
+               "F", "G", "H",
+               "K", "L", "J")
 }
 
 #' @autoglobal
 #' @noRd
 ipps_excluded_type_codes <- function(x) {
 
-  vctrs::vec_c("M", "R", "S", "T", "U", "W", "Z")
+  vctrs::vec_c("M", "R", "S",
+               "T", "U", "W", "Z")
 
 }
 
@@ -155,66 +161,65 @@ ccn_state_codes <- function(x) {
     "01" ~ "Alabama",
     "30" ~ "New Hampshire",
     "02" ~ "Alaska",
-    c("31", "83") ~ "New Jersey",
-    c("00", "03") ~ "Arizona",
-    c("32", "96") ~ "New Mexico",
-    c("04", "89") ~ "Arkansas",
-    c("33", "57") ~ "New York",
-    c("05", "55", "75", "92", "A0", "A1", "B2") ~ "California",
-    c("34", "86") ~ "North Carolina",
-    c("06", "91") ~ "Colorado",
     "35" ~ "North Dakota",
-    c("07", "81") ~ "Connecticut",
-    c("36", "72", "A6") ~ "Ohio",
     "08" ~ "Delaware",
-    c("37", "90") ~ "Oklahoma",
+    "46" ~ "Utah",
     "09" ~ "District of Columbia",
-    c("38", "93") ~ "Oregon",
-    c("10", "68", "69", "A2") ~ "Florida",
-    c("39", "73", "A7") ~ "Pennsylvania",
-    c("11", "85") ~ "Georgia",
-    c("40", "84") ~ "Puerto Rico",
     "12" ~ "Hawaii",
     "41" ~ "Rhode Island",
-    c("13", "54"), "Idaho",
-    c("42", "87"), "South Carolina",
-    c("14", "78"), "Illinois",
     "43" ~ "South Dakota",
     "15" ~ "Indiana",
-    c("44", "88", "A8") ~ "Tennessee",
-    c("16", "76") ~ "Iowa",
-    c("45", "67", "74", "97", "A9") ~ "Texas",
-    c("17", "70") ~ "Kansas",
-    "46" ~ "Utah",
-    c("18", "B0") ~ "Kentucky",
     "47" ~ "Vermont",
-    c("19", "71", "95", "A3"), "Louisiana",
     "48" ~ "Virgin Islands",
     "20" ~ "Maine",
     "49" ~ "Virginia",
-    c("21", "80") ~ "Maryland",
-    c("50", "94") ~ "Washington",
-    c("22", "82") ~ "Massachusetts",
-    c("51", "58", "B1") ~ "West Virginia",
-    c("23", "A4") ~ "Michigan",
     "52" ~ "Wisconsin",
-    c("24", "77") ~ "Minnesota",
     "53" ~ "Wyoming",
-    c("25", "A5") ~ "Mississippi",
     "56" ~ "Canada",
-    c("26", "79") ~ "Missouri",
     "59" ~ "Mexico",
     "27" ~ "Montana",
     "64" ~ "American Samoa",
     "28" ~ "Nebraska",
     "65" ~ "Guam",
     "29" ~ "Nevada",
-    "66" ~ "Commonwealth of the Northern Marianas Islands",
-    "99" ~ "Foreign Countries (exceptions: Canada and Mexico)",
+    "66" ~ "Northern Marianas Islands",
+    "99" ~ "Foreign Countries",
+    c("24", "77") ~ "Minnesota",
+    c("25", "A5") ~ "Mississippi",
+    c("21", "80") ~ "Maryland",
+    c("50", "94") ~ "Washington",
+    c("22", "82") ~ "Massachusetts",
+    c("18", "B0") ~ "Kentucky",
+    c("31", "83") ~ "New Jersey",
+    c("00", "03") ~ "Arizona",
+    c("32", "96") ~ "New Mexico",
+    c("04", "89") ~ "Arkansas",
+    c("33", "57") ~ "New York",
+    c("34", "86") ~ "North Carolina",
+    c("06", "91") ~ "Colorado",
+    c("07", "81") ~ "Connecticut",
+    c("37", "90") ~ "Oklahoma",
+    c("38", "93") ~ "Oregon",
+    c("11", "85") ~ "Georgia",
+    c("40", "84") ~ "Puerto Rico",
+    c("13", "54") ~ "Idaho",
+    c("42", "87") ~ "South Carolina",
+    c("14", "78") ~ "Illinois",
+    c("17", "70") ~ "Kansas",
+    c("26", "79") ~ "Missouri",
+    c("16", "76") ~ "Iowa",
+    c("23", "A4") ~ "Michigan",
+    c("39", "73", "A7") ~ "Pennsylvania",
+    c("36", "72", "A6") ~ "Ohio",
+    c("44", "88", "A8") ~ "Tennessee",
+    c("51", "58", "B1") ~ "West Virginia",
+    c("10", "68", "69", "A2") ~ "Florida",
+    c("19", "71", "95", "A3") ~ "Louisiana",
+    c("45", "67", "74", "97", "A9") ~ "Texas",
+    c("05", "55", "75", "92", "A0", "A1", "B2") ~ "California",
     .default = x)
 
 }
-
 
 #' @autoglobal
 #' @noRd
@@ -227,13 +232,47 @@ ccn_decode <- function(x) {
   s <- unlist(strsplit(x, ""))
 
   # First two characters always represent the state
-  state <- ccn_state_codes(paste0(s[1], s[2]))
+  cd <- paste0(s[1], s[2])
+  st <- ccn_state_codes(cd)
+  state <- paste0(st, " [", cd, "]")
 
   # Medicare Provider
   if (nchar(x) == 6 && isTRUE(grepl("^[[:digit:]]+$", s[3]))) {
-    facility <- facility_ranges(paste0(s[3], s[4], s[5], s[6]))
+    type <- "Medicare Provider"
+    fcd <- paste0(s[3], s[4], s[5], s[6])
+    fac <- facility_ranges(fcd)
+    facility <- paste0(fac, " [", fcd, "]")
+
+    return(list(type = type,
+                state = state,
+                facility_type = facility))
   }
+
   if (nchar(x) == 6 && s[3] == "P") {
-    facility <- "Organ Procurement Organization"
+    type <- "Medicare Provider"
+    facility <- paste0("Organ Procurement Organization", " [P]")
+
+    return(list(type = type,
+                state = state,
+                facility_type = facility))
   }
+
+  # Medicaid-Only Provider
+  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[3]))) {
+    type <- "Medicaid-Only Provider"
+    parent <- paste0(medicaid_facility_codes(s[3]), " [", s[3], "]")
+    fcd <- paste0(s[4], s[5], s[6])
+    fac <- medicaid_hospital_ranges(fcd)
+    facility <- paste0(fac, " [", fcd, "]")
+  }
+  # Medicare-Medicaid Provider Excluded from IPPS
+  if (nchar(x) == 6 && isFALSE(grepl("^[[:digit:]]+$", s[4]))) {
+    parent <- medicaid_facility_codes(s[4])}
+
+  return(list(type = type,
+              state = state,
+              facility_type = facility,
+              parent_type = parent))
 }
+
+# ccn_decode("11T122")

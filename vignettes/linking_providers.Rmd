@@ -45,7 +45,7 @@ providers(organization = "Elizabethtown Community Hospital")
 
 ```{r}
 hospitals(organization = "Elizabethtown Community Hospital") |> 
-  select(npi, organization, pac_id_org, facility_ccn, specialty_code)
+  select(npi:specialty, multiple_npis)
 ```
 
 <br>
@@ -147,18 +147,16 @@ left_join(elizabeth.prov.pac,
 ```{r}
 laboratories(city = "Valdosta", 
              certificate = "accreditation") |> 
-  janitor::remove_empty(which = c("rows", "cols")) |> 
   dplyr::filter(confirmed == TRUE) |> 
   dplyr::select(name,
                 clia_number,
-                certificate,
                 expiration_date, 
                 termination_reason, 
                 facility_type, 
                 organization, 
                 confirmed_date) |> 
-  gt::gt(rowname_col = "name", 
-         groupname_col = "certificate") |> 
+  dplyr::distinct() |> 
+  gt::gt(rowname_col = "name") |> 
   gt::cols_label(termination_reason = "status", 
                  clia_number = "clia",
                  expiration_date = "expires",

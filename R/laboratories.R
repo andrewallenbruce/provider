@@ -73,6 +73,7 @@
 #' @param state State
 #' @param zip Zip code
 #' @param tidy Tidy output; default is `TRUE`.
+#' @param na.rm Remove empty rows and columns; default is `TRUE`.
 #' @param pivot Pivot output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
@@ -88,6 +89,7 @@ laboratories <- function(name = NULL,
                          state = NULL,
                          zip = NULL,
                          tidy = TRUE,
+                         na.rm = TRUE,
                          pivot = TRUE) {
 
   if (!is.null(certificate)) {
@@ -299,8 +301,25 @@ laboratories <- function(name = NULL,
         dplyr::filter(accredited == TRUE) |>
         dplyr::right_join(res, by = dplyr::join_by(clia_number)) |>
         dplyr::mutate(organization = stringr::str_to_upper(organization)) |>
-        dplyr::relocate(c(organization, accredited, confirmed, confirmed_date), .after = type_of_action)
+        dplyr::relocate(c(organization, accredited, confirmed, confirmed_date), .after = type_of_action) |>
+        dplyr::select(-dplyr::starts_with("affiliated_"))
 
+
+      aff <- dplyr::select(res, clia_number, dplyr::starts_with("affiliated_")) |>
+        dplyr::distinct() |>
+        tidyr::pivot_longer(!clia_number,
+                            names_to = "affiliated_provider",
+                            values_to = "affiliated_provider_clia",
+                            values_drop_na = TRUE)
+
+      aff$affiliated_provider <- NULL
+
+      results <- dplyr::left_join(results, aff, by = dplyr::join_by(clia_number))
+
+    }
+
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))
     }
 
   }
