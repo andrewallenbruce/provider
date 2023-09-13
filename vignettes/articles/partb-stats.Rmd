@@ -219,7 +219,7 @@ chronic |>
 ## HCPCS Utilization Data
 
 ```{r}
-hcpcs <- by_service_years() |> 
+hcpcs <- prac_years() |> 
   map(\(x) by_service(year = x, npi = 1023076643)) |> 
   list_rbind() |> 
   compare_hcpcs() |> 
@@ -267,7 +267,6 @@ hcpcs |>
   filter(stat %in% c("Services Per Beneficiary")) |> 
   gt(rowname_col = "year") |> 
   fmt_number(columns = c(Provider, State, National), decimals = 2) |> 
-  #opt_stylize(color = "red") |> 
   opt_table_font(font = google_font(name = "JetBrains Mono")) |>
   tab_header(title = md("**Services Per Beneficiary** By HCPCS")) |> 
   cols_hide(stat) |> 

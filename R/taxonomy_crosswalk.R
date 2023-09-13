@@ -107,6 +107,11 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
   return(results)
 }
 
+#' 002  Categories
+#' 029  Groupings
+#' 245  Classifications
+#' 474  Specializations
+#' 874  Taxonomies
 #' @autoglobal
 #' @noRd
 download_nucc <- function() {
@@ -128,8 +133,18 @@ download_nucc <- function() {
   x <- x$response$url
 
   x <- data.table::fread(x) |>
-       dplyr::tibble() |>
-       janitor::clean_names()
-
+    dplyr::tibble() |>
+    janitor::clean_names() |>
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::everything(), ~dplyr::na_if(., "")),
+      dplyr::across(
+        dplyr::everything(), ~stringr::str_squish(.))) |>
+    dplyr::select(category = section,
+                  grouping,
+                  classification,
+                  specialization,
+                  #display_name, definition,
+                  taxonomy = code)
   return(x)
 }
