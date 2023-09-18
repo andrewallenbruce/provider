@@ -1,13 +1,28 @@
-#' Calculate lagged values by columns
+#' Calculations for analysis of Providers' stats
+#'
+#' @description Functions for calculating lagged changes and elapsed duration
+#' between dates.
+#'
+#' @examples
+#' df <- dplyr::tibble(year = 2015:2020,
+#'                     charges = sample(1000:2000, size = 6),
+#'                     payment = sample(1000:2000, size = 6))
+#'
+#' # Calculate the lagged absolute/relative change
+#' # and the cumulative sum of both:
+#' change(df, c(charges, payment))
+#'
+#' # Calculate the number of years between dates:
+#' dplyr::tibble(date = lubridate::today() - 366) |>
+#' years_df(date_col = date)
+#' @name calculations
+NULL
+
 #' @param df data frame
 #' @param cols numeric columns
-#' @param digits Number of digits to round to
+#' @param digits Number of digits to round to, default is 3
 #' @returns A `tibble`
-#' @examples
-#' dplyr::tibble(year = 2015:2020,
-#' charges = sample(1000:2000, size = 6),
-#' payment = sample(1000:2000, size = 6)) |>
-#' change(c(charges, payment))
+#' @rdname calculations
 #' @autoglobal
 #' @export
 change <- function(df, cols, digits = 3) {
@@ -15,15 +30,20 @@ change <- function(df, cols, digits = 3) {
   dplyr::mutate(df,
     dplyr::across({{ cols }},
       list(chg = \(x) chg(x),
-           pct = \(x) pct(x)),
-      .names = "{.col}_{.fn}")) |>
+           pct = \(x) pct(x)), .names = "{.col}_{.fn}")) |>
     dplyr::mutate(dplyr::across(
-      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
+      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits))) |>
+    dplyr::mutate(dplyr::across(
+      dplyr::contains(c("_chg", "_pct")), ~cumsum(.), .names = "{.col}_cum")) |>
+    dplyr::relocate(dplyr::contains("_chg"), dplyr::contains("_pct"),
+                    .after = dplyr::last_col())
+
 }
 
 #' Calculate absolute change
 #' @param x numeric vector
 #' @param n values to offset
+#' @param fill_na fill value for any NAs; default is 0
 #' @returns numeric vector
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
@@ -31,15 +51,17 @@ change <- function(df, cols, digits = 3) {
 #' dplyr::mutate(change = chg(pay)
 #' @autoglobal
 #' @noRd
-chg <- function(x, n = 1L) {
+chg <- function(x, n = 1L, fill_na = 0L) {
   lg  <- dplyr::lag(x, n = n)
   res <- (x - lg)
+  if (!is.na(fill_na)) res[is.na(res)] <- fill_na
   return(res)
 }
 
 #' Calculate relative change
 #' @param x numeric vector
 #' @param n values to offset
+#' @param fill_na fill value for any NAs; default is 0
 #' @returns numeric vector
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
@@ -47,9 +69,10 @@ chg <- function(x, n = 1L) {
 #' dplyr::mutate(pct_change = pct(pay)
 #' @autoglobal
 #' @noRd
-pct <- function(x, n = 1L) {
+pct <- function(x, n = 1L, fill_na = 0L) {
   lg <- dplyr::lag(x, n = n)
   res <- (x - lg) / lg
+  if (!is.na(fill_na)) res[is.na(res)] <- fill_na
   return(res)
 }
 
@@ -84,9 +107,7 @@ change_year <- function(df, col, by = year, digits = 3) {
 #' @param df data frame
 #' @param date_col date column
 #' @returns number of years since today's date
-#' @examples
-#' dplyr::tibble(date = lubridate::today() - 366) |>
-#' years_df(date_col = date)
+#' @rdname calculations
 #' @autoglobal
 #' @export
 years_df <- function(df, date_col) {
@@ -110,7 +131,7 @@ years_df <- function(df, date_col) {
 #' dplyr::tibble(date = lubridate::today() - 366) |>
 #' dplyr::mutate(years_passed = years_vec(date = date))
 #' @autoglobal
-#' @export
+#' @noRd
 years_vec <- function(date) {
   round(
     as.double(
