@@ -52,13 +52,13 @@
     <loc>https://andrewallenbruce.github.io/provider/reference/by_service.html</loc>
   </url>
   <url>
+    <loc>https://andrewallenbruce.github.io/provider/reference/calculations.html</loc>
+  </url>
+  <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_multiple.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/cc_specific.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/change.html</loc>
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/clinicians.html</loc>
@@ -122,11 +122,5 @@
   </url>
   <url>
     <loc>https://andrewallenbruce.github.io/provider/reference/years.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/years_df.html</loc>
-  </url>
-  <url>
-    <loc>https://andrewallenbruce.github.io/provider/reference/years_vec.html</loc>
   </url>
 </urlset>
