@@ -4,12 +4,14 @@
 \alias{change}
 \title{Calculate lagged values by columns}
 \usage{
-change(df, cols)
+change(df, cols, digits = 3)
 }
 \arguments{
 \item{df}{data frame}
 
 \item{cols}{numeric columns}
+
+\item{digits}{Number of digits to round to}
 }
 \value{
 A \code{tibble}

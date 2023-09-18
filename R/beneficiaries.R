@@ -168,20 +168,19 @@ beneficiaries <- function(year        = NULL,
 
   }
     if (!is.null(period) && period == "Month") {
-      results <- results |>
-        dplyr::filter(period %in% month.name)
+      results <- dplyr::filter(results, period %in% month.name)
     }
   return(results)
 }
 
-#' @param period "year", "month"
+#' @param period One of `"year"` or `"month"`
 #' @examples
-#' beneficiaries_years("year")
-#' beneficiaries_years("month")
+#' bene_years("year")
+#' bene_years("month")
 #' @rdname years
 #' @autoglobal
 #' @export
-beneficiaries_years <- function(period = c("year", "month")) {
+bene_years <- function(period = c("year", "month")) {
 
   if (period == "year") {
   return(beneficiaries(period = "Year", level = "National")$year)}

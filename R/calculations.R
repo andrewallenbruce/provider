@@ -1,30 +1,7 @@
-#' Calculate lagged values by column
-#' @param df data frame
-#' @param col column of numeric values to calculate lag
-#' @param by column to calculate lag by
-#' @returns A `tibble`
-#' @examples
-#' dplyr::tibble(year = 2015:2020,
-#'               pay = 1000:1005) |>
-#' change_year(pay, year)
-#' @autoglobal
-#' @export
-change_year <- function(df, col, by = year) {
-
-  newcol <- rlang::englue("{{col}}_chg")
-  newcol <- rlang::sym(newcol)
-
-  df |>
-    dplyr::mutate(
-      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }},
-                                                order_by = {{ by }}),
-      "{{ col }}_pct" := !!newcol / dplyr::lag({{ col }}, order_by = {{ by }}),
-      .after = {{ col }})
-}
-
 #' Calculate lagged values by columns
 #' @param df data frame
 #' @param cols numeric columns
+#' @param digits Number of digits to round to
 #' @returns A `tibble`
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
@@ -33,13 +10,15 @@ change_year <- function(df, col, by = year) {
 #' change(c(charges, payment))
 #' @autoglobal
 #' @export
-change <- function(df, cols) {
+change <- function(df, cols, digits = 3) {
 
   dplyr::mutate(df,
     dplyr::across({{ cols }},
       list(chg = \(x) chg(x),
            pct = \(x) pct(x)),
-      .names = "{.col}_{.fn}"))
+      .names = "{.col}_{.fn}")) |>
+    dplyr::mutate(dplyr::across(
+      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
 }
 
 #' Calculate absolute change
@@ -72,6 +51,30 @@ pct <- function(x, n = 1L) {
   lg <- dplyr::lag(x, n = n)
   res <- (x - lg) / lg
   return(res)
+}
+
+#' Calculate lagged values by column
+#' @param df data frame
+#' @param col column of numeric values to calculate lag
+#' @param by column to calculate lag by
+#' @returns A `tibble`
+#' @examples
+#' dplyr::tibble(year = 2015:2020,
+#'               pay = 1000:1005) |>
+#' change_year(pay, year)
+#' @autoglobal
+#' @noRd
+change_year <- function(df, col, by = year) {
+
+  newcol <- rlang::englue("{{col}}_chg")
+  newcol <- rlang::sym(newcol)
+
+  df |>
+    dplyr::mutate(
+      "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }},
+                                                order_by = {{ by }}),
+      "{{ col }}_pct" := !!newcol / dplyr::lag({{ col }}, order_by = {{ by }}),
+      .after = {{ col }})
 }
 
 #' Calculate number of years since today's date
