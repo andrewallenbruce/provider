@@ -16,15 +16,31 @@ test_that("change() works", {
 
 })
 
+test_that("change_year() works", {
+
+  a <- dplyr::tibble(year = 2015:2020, x = 1000:1005)
+  b <- a
+  b$x_chg <- c(NA, 1, 1, 1, 1, 1)
+  b$x_pct <- c(NA, 0.001, 0.001, 0.001, 0.001, 0.001)
 
 
+  expect_equal(change_year(df = a, col = x), b)
 
-test_that("change() works", {
+})
+
+test_that("years_df() works", {
 
   a <- dplyr::tibble(date = lubridate::today() - 366)
   b <- a
   b$years_passed <- as.double(1)
 
   expect_equal(years_df(a, date), b)
+
+})
+
+test_that("years_vec() works", {
+
+  a <- dplyr::tibble(date = lubridate::today() - 366)
+  expect_equal(years_vec(a$date), 1)
 
 })

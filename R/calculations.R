@@ -57,6 +57,7 @@ pct <- function(x, n = 1L) {
 #' @param df data frame
 #' @param col column of numeric values to calculate lag
 #' @param by column to calculate lag by
+#' @param digits Number of digits to round to
 #' @returns A `tibble`
 #' @examples
 #' dplyr::tibble(year = 2015:2020,
@@ -64,7 +65,7 @@ pct <- function(x, n = 1L) {
 #' change_year(pay, year)
 #' @autoglobal
 #' @noRd
-change_year <- function(df, col, by = year) {
+change_year <- function(df, col, by = year, digits = 3) {
 
   newcol <- rlang::englue("{{col}}_chg")
   newcol <- rlang::sym(newcol)
@@ -74,7 +75,9 @@ change_year <- function(df, col, by = year) {
       "{{ col }}_chg" := {{ col }} - dplyr::lag({{ col }},
                                                 order_by = {{ by }}),
       "{{ col }}_pct" := !!newcol / dplyr::lag({{ col }}, order_by = {{ by }}),
-      .after = {{ col }})
+      .after = {{ col }}) |>
+    dplyr::mutate(dplyr::across(
+      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
 }
 
 #' Calculate number of years since today's date

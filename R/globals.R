@@ -638,10 +638,10 @@ utils::globalVariables(c(
   "medicare_provider_supplier_type", # <taxonomy_crosswalk>
   "provider_taxonomy_code", # <taxonomy_crosswalk>
   "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
-  "section", # <download_nucc>
-  "classification", # <download_nucc>
-  "specialization", # <download_nucc>
-  "code", # <download_nucc>
+  "section", # <download_nucc_csv>
+  "classification", # <download_nucc_csv>
+  "specialization", # <download_nucc_csv>
+  "code", # <download_nucc_csv>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

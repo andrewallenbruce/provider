@@ -2,9 +2,11 @@
 #'
 #' @returns integer vector of years available to search
 #'
-#' @seealso [open_payments()], [by_geography()], [by_provider()], [by_service()], [quality_payment()], [quality_eligibility()], [quality_stats()]
+#' @seealso [open_payments()], [by_geography()], [by_provider()], [by_service()], [quality_payment()], [quality_eligibility()], [quality_stats()], [beneficiaries()]
 #'
-#' @examples
+#' @examplesIf interactive()
+#' bene_years("year")
+#' bene_years("month")
 #' open_years()
 #' prac_years()
 #' cc_years()
@@ -36,4 +38,19 @@ cc_years <- function() {
 #' @export
 quality_years <- function() {
   as.integer(cms_update("Quality Payment Program Experience", "years"))
+}
+
+#' @param period One of `"year"` or `"month"`
+#' @rdname years
+#' @autoglobal
+#' @export
+bene_years <- function(period = c("year", "month")) {
+
+  if (period == "year") {
+    return(beneficiaries(period = "Year",
+                         level = "National")$year)}
+
+  if (period == "month") {
+    return(beneficiaries(period = "January",
+                         level = "National")$year)}
 }

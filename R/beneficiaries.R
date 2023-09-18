@@ -172,19 +172,3 @@ beneficiaries <- function(year        = NULL,
     }
   return(results)
 }
-
-#' @param period One of `"year"` or `"month"`
-#' @examples
-#' bene_years("year")
-#' bene_years("month")
-#' @rdname years
-#' @autoglobal
-#' @export
-bene_years <- function(period = c("year", "month")) {
-
-  if (period == "year") {
-  return(beneficiaries(period = "Year", level = "National")$year)}
-
-  if (period == "month") {
-  return(beneficiaries(period = "January", level = "National")$year)}
-}

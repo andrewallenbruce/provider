@@ -11,14 +11,16 @@ format_zipcode <- function(zip) {
 
   if (stringr::str_detect(zip, "^[[:digit:]]{9}$") == TRUE) {
 
-    zip <- paste0(stringr::str_sub(zip, 1, 5), "-", stringr::str_sub(zip, 6, 9))
+    zip <- paste0(stringr::str_sub(zip, 1, 5), "-",
+                  stringr::str_sub(zip, 6, 9))
 
     return(zip)
 
     } else {
+
       return(zip)
-    }
   }
+}
 
 #' Remove NULL elements from vector
 #' @autoglobal
@@ -79,8 +81,6 @@ tf_2_yn <- function(x) {
     .default = NULL
   )
 }
-
-
 
 #' Convert Place of Service values
 #' @param x vector
