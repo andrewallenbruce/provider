@@ -1,11 +1,14 @@
 #' Update CMS.gov API distribution IDs
 #' @param api name of the api
-#' @param check base, id, years
+#' @param check `"base"`, `"id"`, or `"years"`, default is `"id"`
+#' @return A [tibble][tibble::tibble-package] containing the updated ids.
 #' @examples
 #' cms_update("Provider of Services File - Clinical Laboratories", "base")
+#' cms_update("Provider of Services File - Clinical Laboratories", "id")
+#' cms_update("Provider of Services File - Clinical Laboratories", "years")
 #' @autoglobal
 #' @noRd
-cms_update <- function(api = NULL, check = c("base", "id", "years")) {
+cms_update <- function(api, check = "id") {
 
   id_resp <- httr2::request("https://data.cms.gov/data.json") |>
     httr2::req_perform() |>

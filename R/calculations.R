@@ -149,6 +149,7 @@ years_vec <- function(date) {
 #' @param group_vars variables to group by, i.e. `c(specialty, state, hcpcs, cost)`
 #' @param summary_vars variables to summarise, i.e. `c(min, max, mode, range)`
 #' @param arr column to arrange data by, i.e. `cost`
+#' @param digits Number of digits to round to, default is 3
 #' @return A `tibble` containing the summary stats
 #' @examplesIf interactive()
 #' dplyr::tibble(
@@ -166,7 +167,8 @@ summary_stats <- function(df,
                           condition = NULL,
                           group_vars = NULL,
                           summary_vars = NULL,
-                          arr = NULL) {
+                          arr = NULL,
+                          digits = 3) {
 
   results <- df |>
     dplyr::filter({{ condition }}) |>
@@ -178,7 +180,9 @@ summary_stats <- function(df,
                     .names = "{.col}_{.fn}"),
       n = dplyr::n(),
       .by = ({{ group_vars }})) |>
-    dplyr::arrange(dplyr::desc({{ arr }}))
+    dplyr::arrange(dplyr::desc({{ arr }})) |>
+    dplyr::mutate(dplyr::across(
+      dplyr::where(is.double), ~janitor::round_half_up(., digits = digits)))
 
   return(results)
 }

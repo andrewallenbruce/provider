@@ -61,7 +61,7 @@ quality_payment <- function(year,
     "clinician specialty",            specialty,
     "participation type",             participation_type)
 
-  id <- cms_update("Quality Payment Program Experience", "id") |>
+  id <- api_years("qpp") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 

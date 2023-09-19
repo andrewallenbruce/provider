@@ -64,8 +64,8 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
       "PROVIDER TAXONOMY DESCRIPTION%3A TYPE CLASSIFICATION SPECIALIZATION", taxonomy_description)
 
       url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-             cms_update("Medicare Provider and Supplier Taxonomy Crosswalk",
-             "id")$distro[1], "/data?", encode_param(args))
+                    cms_update("Medicare Provider and Supplier Taxonomy Crosswalk",
+                               "id")$distro[1], "/data?", encode_param(args))
   }
 
   response <- httr2::request(url) |> httr2::req_perform()
