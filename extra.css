@@ -3,11 +3,11 @@ body {
 }
 
 code {
-  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+  font-family: ui-monospace, 'Cascadia Code', 'JetBrains Mono', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
 }
 
 h1, .h1 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   line-height: 1em;
 }
 
@@ -21,7 +21,7 @@ h3, .h3 {
 }
 
 h4, .h4 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 dt {
@@ -57,7 +57,7 @@ img {
 }
 
 .active .nav-link {
-  color: #F85714 !important;
+  color: rgb(3, 153, 3) !important;
 }
 
 .text-muted {
