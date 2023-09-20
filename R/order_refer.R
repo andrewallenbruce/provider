@@ -1,12 +1,11 @@
 #' Ordering and Referring Eligibility for Medicare
 #'
 #' @description
-#' `order_refer()` allows you to search for physicians and non-physician
-#' practitioners who are of a type/specialty that is legally eligible to order
-#' and refer to Part B (clinical laboratory and imaging), DME and Part A HHA
-#' claims in the Medicare program.
+#' `order_refer()` allows you to search for providers who are legally eligible
+#' to order and refer to Part B (clinical laboratory and imaging), DME and
+#' Part A HHA claims in Medicare.
 #'
-#' ## Ordering and Referring (or Certifying) Providers
+#' ### Ordering and Referring (or Certifying) Providers
 #' **Ordering providers** can order non-physician services for patients.
 #' **Referring providers** can request items or services Medicare may reimburse
 #' on behalf of Medicare beneficiaries.
@@ -32,6 +31,20 @@
 #'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
+#' *Update Frequency:* **Twice Weekly**
+#'
+#' @param npi < *integer* > 10-digit National Provider Identifier
+#' @param first,last < *character* > Provider's first/last name
+#' @param partb,dme,hha,pmd < *boolean* > `TRUE`/`FALSE` <br>
+#' Whether a provider is eligible to order and refer to: <br>
+#'     - `partb`: Medicare Part B
+#'     - `dme`: Durable Medical Equipment
+#'     - `hha`: Home Health Agency
+#'     - `pmd`: Power Mobility Devices
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#'
+#' @return A [tibble][tibble::tibble-package] with the following columns: <br>
+#'
 #' |Field      |Description                                                 |
 #' |:----------|:-----------------------------------------------------------|
 #' |`npi`      |National Provider Identifier                                |
@@ -39,20 +52,6 @@
 #' |`last`     |Order and Referring Provider's Last Name                    |
 #' |`service`  |Services An Eligible Provider Can Order/Refer To            |
 #' |`eligible` |Indicates that provider can order Durable Medical Equipment |
-#'
-#' *Update Frequency:* **Twice Weekly**
-#'
-#' @param npi < *integer* > 10-digit National Provider Identifier
-#' @param first,last < *character* > Provider's first/last name
-#' @param partb,dme,hha,pmd < *boolean* > `TRUE`/`FALSE`
-#' Whether a provider is eligible to order and refer to:
-#'     * `partb`: Medicare Part B
-#'     * `dme`: Durable Medical Equipment
-#'     * `hha`: Home Health Agency
-#'     * `pmd`: Power Mobility Devices
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
-#'
-#' @return A [tibble][tibble::tibble-package]
 #'
 #' @seealso [providers()], [opt_out()], [pending()]
 #'

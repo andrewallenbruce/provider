@@ -20,23 +20,29 @@ order_refer(
 
 \item{first, last}{< \emph{character} > Provider's first/last name}
 
-\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE}/\code{FALSE}
-Whether a provider is eligible to order and refer to:
-* \code{partb}: Medicare Part B
-* \code{dme}: Durable Medical Equipment
-* \code{hha}: Home Health Agency
-* \code{pmd}: Power Mobility Devices}
+\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE}/\code{FALSE} \if{html}{\out{<br>}}
+Whether a provider is eligible to order and refer to: \if{html}{\out{<br>}}
+- \code{partb}: Medicare Part B
+- \code{dme}: Durable Medical Equipment
+- \code{hha}: Home Health Agency
+- \code{pmd}: Power Mobility Devices}
 
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble}
+A \link[tibble:tibble-package]{tibble} with the following columns: \if{html}{\out{<br>}}\tabular{ll}{
+   Field \tab Description \cr
+   \code{npi} \tab National Provider Identifier \cr
+   \code{first} \tab Order and Referring Provider's First Name \cr
+   \code{last} \tab Order and Referring Provider's Last Name \cr
+   \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
+   \code{eligible} \tab Indicates that provider can order Durable Medical Equipment \cr
+}
 }
 \description{
-\code{order_refer()} allows you to search for physicians and non-physician
-practitioners who are of a type/specialty that is legally eligible to order
-and refer to Part B (clinical laboratory and imaging), DME and Part A HHA
-claims in the Medicare program.
+\code{order_refer()} allows you to search for providers who are legally eligible
+to order and refer to Part B (clinical laboratory and imaging), DME and
+Part A HHA claims in Medicare.
 \subsection{Ordering and Referring (or Certifying) Providers}{
 
 \strong{Ordering providers} can order non-physician services for patients.
@@ -60,24 +66,16 @@ refer. Medicare coverage will then apply when ordering or referring:
 \item Imaging Services
 \item Home Health Services
 }
+}
+
 \subsection{Links:}{
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
 \item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
-}\tabular{ll}{
-   Field \tab Description \cr
-   \code{npi} \tab National Provider Identifier \cr
-   \code{first} \tab Order and Referring Provider's First Name \cr
-   \code{last} \tab Order and Referring Provider's Last Name \cr
-   \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
-   \code{eligible} \tab Indicates that provider can order Durable Medical Equipment \cr
 }
-
 
 \emph{Update Frequency:} \strong{Twice Weekly}
-}
-
 }
 }
 \examples{

@@ -1,6 +1,7 @@
 ^provider\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
+vignettes
 ^README\.Rmd$
 ^_pkgdown\.yml$
 ^docs$

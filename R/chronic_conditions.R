@@ -368,3 +368,17 @@ cc_multiple <- function(year,
   }
   return(results)
 }
+
+# chronic_conditions <- function(year,
+#                                type = c("specific", "multiple"),
+#                                sublevel = NULL,
+#                                level = NULL,
+#                                fips = NULL,
+#                                age_group = NULL,
+#                                demographic = NULL,
+#                                subdemo = NULL,
+#                                condition = NULL,
+#                                mcc = NULL,
+#                                tidy = TRUE) {
+#
+# }
