@@ -25,53 +25,57 @@ clinicians(
 )
 }
 \arguments{
-\item{npi}{Unique clinician ID assigned by NPPES}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id_ind}{Unique individual clinician ID assigned by PECOS}
+\item{pac_id_ind}{< \emph{integer} > 10-digit individual provider associate-level
+control identifier}
 
-\item{enroll_id_ind}{Unique ID for the clinician enrollment that is the source
-for the data in the observation}
+\item{enroll_id_ind}{< \emph{character} > 15-digit individual provider Medicare
+enrollment identifier; begins with capital "I"}
 
-\item{first, middle, last}{Individual clinician's first, middle, or last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's first,
+middle, or last name}
 
-\item{gender}{Individual clinician gender; \code{"F"} (Female) or \code{"M"} (Male)}
+\item{gender}{< \emph{character} > Individual provider's gender; \code{"F"} (Female)
+or \code{"M"} (Male)}
 
-\item{school}{Individual clinician’s medical school}
+\item{school}{< \emph{character} > Individual provider’s medical school}
 
-\item{grad_year}{Individual clinician’s medical school graduation year}
+\item{grad_year}{< \emph{integer} > Individual provider’s graduation year}
 
-\item{specialty}{Primary medical specialty reported by the individual
-clinician in the selected enrollment}
+\item{specialty}{< \emph{character} > Individual provider’s primary medical
+specialty reported in the selected enrollment}
 
-\item{facility_name}{Name of facility associated with the clinician}
+\item{facility_name}{< \emph{character} > Name of facility associated with the
+individual provider}
 
-\item{pac_id_org}{description}
+\item{pac_id_org}{< \emph{integer} > 10-digit organizational/group provider
+associate-level control identifier}
 
-\item{city}{Group or individual's city}
+\item{city}{< \emph{character} > Provider's city}
 
-\item{state}{Group or individual's state}
+\item{state}{< \emph{character} > Provider's state}
 
-\item{zip}{Group or individual's ZIP code}
+\item{zip}{< \emph{character} > Provider's ZIP code}
 
-\item{offset}{offset; API pagination}
+\item{offset}{< \emph{integer} > offset; API pagination}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{clinicians()} allows you to access information about providers
-enrolled in Medicare, including the medical school that they attended ant the
-year they graduated
-\subsection{Links}{
+\code{clinicians()} allows you to access information about providers enrolled in
+Medicare, including the medical school that they attended and the year they graduated
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/mj5m-pzi6}{National Downloadable File}
 \item \href{https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf}{Provider Data Catalog (PDC) Data Dictionary}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
-}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

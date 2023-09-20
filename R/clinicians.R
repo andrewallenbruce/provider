@@ -1,32 +1,38 @@
 #' Clinicians Enrolled in Medicare
 #'
-#' @description `clinicians()` allows you to access information about providers
-#' enrolled in Medicare, including the medical school that they attended ant the
-#' year they graduated
+#' @description
 #'
-#' ### Links
+#' `clinicians()` allows you to access information about providers enrolled in
+#' Medicare, including the medical school that they attended and the year they graduated
+#'
+#' Links:
 #'   - [National Downloadable File](https://data.cms.gov/provider-data/dataset/mj5m-pzi6)
 #'   - [Provider Data Catalog (PDC) Data Dictionary](https://data.cms.gov/provider-data/sites/default/files/data_dictionaries/physician/DOC_Data_Dictionary.pdf)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi Unique clinician ID assigned by NPPES
-#' @param pac_id_ind Unique individual clinician ID assigned by PECOS
-#' @param enroll_id_ind Unique ID for the clinician enrollment that is the source
-#'   for the data in the observation
-#' @param first,middle,last Individual clinician's first, middle, or last name
-#' @param gender Individual clinician gender; `"F"` (Female) or `"M"` (Male)
-#' @param school Individual clinician’s medical school
-#' @param grad_year Individual clinician’s medical school graduation year
-#' @param specialty Primary medical specialty reported by the individual
-#'   clinician in the selected enrollment
-#' @param facility_name Name of facility associated with the clinician
-#' @param pac_id_org description
-#' @param city Group or individual's city
-#' @param state Group or individual's state
-#' @param zip Group or individual's ZIP code
-#' @param offset offset; API pagination
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param pac_id_ind < *integer* > 10-digit individual provider associate-level
+#' control identifier
+#' @param enroll_id_ind < *character* > 15-digit individual provider Medicare
+#' enrollment identifier; begins with capital "I"
+#' @param first,middle,last < *character* > Individual provider's first,
+#' middle, or last name
+#' @param gender < *character* > Individual provider's gender; `"F"` (Female)
+#' or `"M"` (Male)
+#' @param school < *character* > Individual provider’s medical school
+#' @param grad_year < *integer* > Individual provider’s graduation year
+#' @param specialty < *character* > Individual provider’s primary medical
+#' specialty reported in the selected enrollment
+#' @param facility_name < *character* > Name of facility associated with the
+#' individual provider
+#' @param pac_id_org < *integer* > 10-digit organizational/group provider
+#' associate-level control identifier
+#' @param city < *character* > Provider's city
+#' @param state < *character* > Provider's state
+#' @param zip < *character* > Provider's ZIP code
+#' @param offset < *integer* > offset; API pagination
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'

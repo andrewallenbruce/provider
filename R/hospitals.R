@@ -1,29 +1,32 @@
 #' Hospitals Enrolled in Medicare
 #'
 #' @description
+#'
 #' `hospitals()` allows you to search for information on all hospitals
 #' currently enrolled in Medicare. Data returned includes the hospital's
 #' sub-group types, legal business name, doing-business-as name, organization
 #' type and address.
 #'
-#' ### Links:
+#' Links:
 #'   - [Hospital Enrollments](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi Hospital’s National Provider Identifier
-#' @param facility_ccn Hospital’s CMS Certification Number (CCN)
-#' @param enroll_id_org Hospital’s enrollment ID
-#' @param enroll_state Hospital’s enrollment state
-#' @param specialty_code Enrollment specialty type code
-#' @param pac_id_org Hospital’s PAC ID
-#' @param organization Hospital’s legal business name
-#' @param doing_business_as Hospital’s doing-business-as name
-#' @param city City of the hospital’s practice location address
-#' @param state State of the hospital’s practice location address
-#' @param zip Zip code of the hospital’s practice location address
-#' @param tidy Tidy output; default is `TRUE`.
-#' @param na.rm Remove empty rows and columns; default is `TRUE`.
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param facility_ccn < *character* > 6-digit CMS Certification Number of hospital
+#' @param enroll_id_org < *character* > 15-digit organizational provider Medicare
+#' enrollment identifier; begins with capital "O"
+#' @param enroll_state < *character* > Hospital’s enrollment state
+#' @param specialty_code < *character* > Enrollment specialty type code
+#' @param pac_id_org < *integer* > 10-digit organizational/group provider
+#' associate-level control identifier
+#' @param organization < *character* > Hospital’s legal business name
+#' @param doing_business_as < *character* > Hospital’s doing-business-as name
+#' @param city < *character* > City of the hospital’s practice location
+#' @param state < *character* > State of the hospital’s practice location
+#' @param zip < *character* > Zip code of the hospital’s practice location
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'

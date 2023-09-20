@@ -2,7 +2,7 @@
 % Please edit documentation in R/affiliations.R
 \name{affiliations}
 \alias{affiliations}
-\title{Provider-Facility Affiliations}
+\title{Facility Affiliations}
 \usage{
 affiliations(
   npi = NULL,
@@ -18,40 +18,36 @@ affiliations(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id_ind}{10-digit Provider associate level variable. Links all
-entity-level information and may be associated with multiple enrollment IDs
-if the individual or organization enrolled multiple times.}
+\item{pac_id_ind}{< \emph{integer} > 10-digit individual provider associate level variable
+Links all entity-level information and may be associated with multiple
+enrollment IDs if the individual or organization enrolled multiple times}
 
-\item{first, middle, last}{Individual clinician's first, middle, or last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's first, middle,
+or last name}
 
-\item{facility_type}{Facilities can fall into the following type categories:
+\item{facility_type}{< \emph{character} > Category of facility:
 \itemize{
-\item \code{"Hospital"}
-\item \code{"Long-term care hospital"} (LTCH)
-\item \code{"Nursing home"}
-\item \code{"Inpatient rehabilitation facility"} (IRF)
-\item \code{"Home health agency"} (HHA)
-\item \code{"Skilled nursing facility"} (SNF)
-\item \code{"Hospice"}
-\item \code{"Dialysis facility"}
+\item \code{"Hospital"} or \code{"hp"}
+\item \code{"Long-term care hospital"} or \code{"ltch"}
+\item \code{"Nursing home"} or \code{"nh"}
+\item \code{"Inpatient rehabilitation facility"} or \code{"irf"}
+\item \code{"Home health agency"} or \code{"hha"}
+\item \code{"Skilled nursing facility"} or \code{"snf"}
+\item \code{"Hospice"} or \code{"hs"}
+\item \code{"Dialysis facility"} or \code{"df"}
 }}
 
-\item{facility_ccn}{alphanumeric; Medicare CCN (CMS Certification Number) of
-facility type or unit within hospital where an individual clinician
-provides service. The CCN replaced the terms \emph{Medicare Provider Number},
-\emph{Medicare Identification Number} and \emph{OSCAR Number} and is used to verify
-Medicare/Medicaid certification for survey and certification,
-assessment-related activities and communications.}
+\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of
+facility or unit within hospital where an individual provider provides service}
 
-\item{parent_ccn}{numeric; CCN of the primary hospital where an
-individual clinician provides service, should the clinician provide
-services in a unit within the hospital.}
+\item{parent_ccn}{< \emph{integer} > 6-digit CMS Certification Number of a
+sub-unit's primary hospital, should the provider provide services in said unit}
 
-\item{offset}{offset; API pagination}
+\item{offset}{< \emph{integer} > offset; API pagination}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -59,14 +55,14 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 \description{
 \code{affiliations()} allows you to access information concerning providers'
 facility affiliations
-\subsection{Links}{
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-data/dataset/27ea-46a8}{Physician Facility Affiliations}
 \item \href{https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf}{Certification Number (CCN) State Codes}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
-}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

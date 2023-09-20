@@ -37,7 +37,7 @@
 #' *Update Frequency:* **Twice Weekly**
 #'
 #' @param npi < *integer* > 10-digit National Provider Identifier
-#' @param first,last < *character* > Provider's first/last name
+#' @param first,last < *character* > Individual provider's first/last name
 #' @param partb,dme,hha,pmd < *boolean* > `TRUE` or `FALSE`. Whether a provider
 #' is eligible to order and refer to:
 #' - `partb`: Medicare Part B

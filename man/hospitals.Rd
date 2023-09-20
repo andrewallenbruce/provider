@@ -21,31 +21,33 @@ hospitals(
 )
 }
 \arguments{
-\item{npi}{Hospital’s National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{facility_ccn}{Hospital’s CMS Certification Number (CCN)}
+\item{facility_ccn}{< \emph{character} > 6-digit CMS Certification Number of hospital}
 
-\item{enroll_id_org}{Hospital’s enrollment ID}
+\item{enroll_id_org}{< \emph{character} > 15-digit organizational provider Medicare
+enrollment identifier; begins with capital "O"}
 
-\item{enroll_state}{Hospital’s enrollment state}
+\item{enroll_state}{< \emph{character} > Hospital’s enrollment state}
 
-\item{specialty_code}{Enrollment specialty type code}
+\item{specialty_code}{< \emph{character} > Enrollment specialty type code}
 
-\item{pac_id_org}{Hospital’s PAC ID}
+\item{pac_id_org}{< \emph{integer} > 10-digit organizational/group provider
+associate-level control identifier}
 
-\item{organization}{Hospital’s legal business name}
+\item{organization}{< \emph{character} > Hospital’s legal business name}
 
-\item{doing_business_as}{Hospital’s doing-business-as name}
+\item{doing_business_as}{< \emph{character} > Hospital’s doing-business-as name}
 
-\item{city}{City of the hospital’s practice location address}
+\item{city}{< \emph{character} > City of the hospital’s practice location}
 
-\item{state}{State of the hospital’s practice location address}
+\item{state}{< \emph{character} > State of the hospital’s practice location}
 
-\item{zip}{Zip code of the hospital’s practice location address}
+\item{zip}{< \emph{character} > Zip code of the hospital’s practice location}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 
-\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -55,13 +57,13 @@ A \link[tibble:tibble-package]{tibble} containing the search results.
 currently enrolled in Medicare. Data returned includes the hospital's
 sub-group types, legal business name, doing-business-as name, organization
 type and address.
-\subsection{Links:}{
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/hospital-enrollments}{Hospital Enrollments}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
-}
 }
 \examples{
 hospitals(pac_id_org = 6103733050)

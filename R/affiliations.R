@@ -1,40 +1,38 @@
-#' Provider-Facility Affiliations
+#' Facility Affiliations
 #'
 #' @description
+#'
 #' `affiliations()` allows you to access information concerning providers'
 #' facility affiliations
 #'
-#' ### Links
+#' Links:
+#'
 #'  - [Physician Facility Affiliations](https://data.cms.gov/provider-data/dataset/27ea-46a8)
 #'  - [Certification Number (CCN) State Codes](https://www.cms.gov/Medicare/Provider-Enrollment-and-Certification/SurveyCertificationGenInfo/Downloads/Survey-and-Cert-Letter-16-09.pdf)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi 10-digit National Provider Identifier
-#' @param pac_id_ind 10-digit Provider associate level variable. Links all
-#' entity-level information and may be associated with multiple enrollment IDs
-#' if the individual or organization enrolled multiple times.
-#' @param first,middle,last Individual clinician's first, middle, or last name
-#' @param facility_type Facilities can fall into the following type categories:
-#'    - `"Hospital"`
-#'    - `"Long-term care hospital"` (LTCH)
-#'    - `"Nursing home"`
-#'    - `"Inpatient rehabilitation facility"` (IRF)
-#'    - `"Home health agency"` (HHA)
-#'    - `"Skilled nursing facility"` (SNF)
-#'    - `"Hospice"`
-#'    - `"Dialysis facility"`
-#' @param facility_ccn alphanumeric; Medicare CCN (CMS Certification Number) of
-#'    facility type or unit within hospital where an individual clinician
-#'    provides service. The CCN replaced the terms *Medicare Provider Number*,
-#'    *Medicare Identification Number* and *OSCAR Number* and is used to verify
-#'    Medicare/Medicaid certification for survey and certification,
-#'    assessment-related activities and communications.
-#' @param parent_ccn numeric; CCN of the primary hospital where an
-#'    individual clinician provides service, should the clinician provide
-#'    services in a unit within the hospital.
-#' @param offset offset; API pagination
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param pac_id_ind < *integer* > 10-digit individual provider associate level variable
+#' Links all entity-level information and may be associated with multiple
+#' enrollment IDs if the individual or organization enrolled multiple times
+#' @param first,middle,last < *character* > Individual provider's first, middle,
+#' or last name
+#' @param facility_type < *character* > Category of facility:
+#'    - `"Hospital"` or `"hp"`
+#'    - `"Long-term care hospital"` or `"ltch"`
+#'    - `"Nursing home"` or `"nh"`
+#'    - `"Inpatient rehabilitation facility"` or `"irf"`
+#'    - `"Home health agency"` or `"hha"`
+#'    - `"Skilled nursing facility"` or `"snf"`
+#'    - `"Hospice"` or `"hs"`
+#'    - `"Dialysis facility"` or `"df"`
+#' @param facility_ccn < *character* > 6-digit CMS Certification Number of
+#' facility or unit within hospital where an individual provider provides service
+#' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a
+#' sub-unit's primary hospital, should the provider provide services in said unit
+#' @param offset < *integer* > offset; API pagination
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
