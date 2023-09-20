@@ -32,6 +32,15 @@ Medicare Order and Referring API
 CMS.gov: Ordering &amp;amp; Certifying
 Order and Referring Methodology
 
+FieldDescription
+npiNational Provider Identifier
+firstOrder and Referring Provider's First Name
+lastOrder and Referring Provider's Last Name
+serviceServices An Eligible Provider Can Order/Refer To
+eligibleIndicates that provider can order Durable Medical Equipment
+
+
+
 
 Update Frequency: Twice Weekly
 
@@ -70,6 +79,15 @@ Links:
 Medicare Order and Referring API
 CMS.gov: Ordering &amp;amp; Certifying
 Order and Referring Methodology
+
+FieldDescription
+npiNational Provider Identifier
+firstOrder and Referring Provider's First Name
+lastOrder and Referring Provider's Last Name
+serviceServices An Eligible Provider Can Order/Refer To
+eligibleIndicates that provider can order Durable Medical Equipment
+
+
 
 
 Update Frequency: Twice Weekly
@@ -183,7 +201,7 @@ refer. Medicare coverage will then apply when ordering or referring:</p><ul><li>
 <ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring" class="external-link">Medicare Order and Referring API</a></p></li>
 <li><p><a href="https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying" class="external-link">CMS.gov: Ordering &amp; Certifying</a></p></li>
 <li><p><a href="https://data.cms.gov/resources/order-and-referring-methodology" class="external-link">Order and Referring Methodology</a></p></li>
-</ul><p><em>Update Frequency:</em> <strong>Twice Weekly</strong></p>
+</ul><table class="table table"><tr><td>Field</td><td>Description</td></tr><tr><td><code>npi</code></td><td>National Provider Identifier</td></tr><tr><td><code>first</code></td><td>Order and Referring Provider's First Name</td></tr><tr><td><code>last</code></td><td>Order and Referring Provider's Last Name</td></tr><tr><td><code>service</code></td><td>Services An Eligible Provider Can Order/Refer To</td></tr><tr><td><code>eligible</code></td><td>Indicates that provider can order Durable Medical Equipment</td></tr></table><p><em>Update Frequency:</em> <strong>Twice Weekly</strong></p>
 </div>
 
 
@@ -208,38 +226,33 @@ refer. Medicare coverage will then apply when ordering or referring:</p><ul><li>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>10-digit National Provider Identifier</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit National Provider Identifier</p></dd>
 
 
 <dt>first, last</dt>
-<dd><p>Provider's first/last name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Provider's first/last name</p></dd>
 
 
-<dt>partb</dt>
-<dd><p>boolean; eligibility to order &amp; refer to Medicare Part B</p></dd>
-
-
-<dt>dme</dt>
-<dd><p>boolean; eligibility to order Durable Medical Equipment</p></dd>
-
-
-<dt>hha</dt>
-<dd><p>boolean; eligibility to refer to a Home Health Agency</p></dd>
-
-
-<dt>pmd</dt>
-<dd><p>boolean; eligibility to order Power Mobility Devices</p></dd>
+<dt>partb, dme, hha, pmd</dt>
+<dd><p>&lt; <em>boolean</em> &gt; <code>TRUE</code>/<code>FALSE</code>
+Whether a provider is eligible to order and refer to:
+* <code>partb</code>: Medicare Part B
+* <code>dme</code>: Durable Medical Equipment
+* <code>hha</code>: Home Health Agency
+* <code>pmd</code>: Power Mobility Devices</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>boolean; Tidy output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> object containing the search results.</p>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a></p>
+
+
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -252,7 +265,7 @@ refer. Medicare coverage will then apply when ordering or referring:</p><ul><li>
 <span class="r-in"><span><span class="co"># Search by NPI</span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1003026055</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Search by name and/or filter for certain privileges</span></span></span>
+<span class="r-in"><span><span class="co"># Filter for certain privileges</span></span></span>
 <span class="r-in"><span><span class="fu">order_refer</span><span class="op">(</span>last <span class="op">=</span> <span class="st">"Smith"</span>, partb <span class="op">=</span> <span class="cn">FALSE</span>, hha <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
