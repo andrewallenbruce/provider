@@ -90,7 +90,7 @@ beneficiaries.
 The Select Chronic Conditions dataset provides information on
 21 selected chronic conditions among Original Medicare beneficiaries.
 The dataset contains prevalence, use and spending organized by
-geography and distinct chronic conditions listed below.
+geography and distinct chronic conditions listed below:
 \itemize{
 \item Alcohol Abuse
 \item Alzheimer’s Disease/Dementia

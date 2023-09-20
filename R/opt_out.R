@@ -67,6 +67,7 @@
 #'         last = "Smith",
 #'         specialty = "Nurse Practitioner",
 #'         order_refer = TRUE)
+#'
 #' @examplesIf  interactive()
 #' # For providers that have opted out, but are eligible to order and refer,
 #' # use `order_refer()` to look up their specific eligibility statuses

@@ -99,6 +99,7 @@ opt_out(first = "James",
         last = "Smith",
         specialty = "Nurse Practitioner",
         order_refer = TRUE)
+
 \dontshow{if ( interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # For providers that have opted out, but are eligible to order and refer,
 # use `order_refer()` to look up their specific eligibility statuses

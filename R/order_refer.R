@@ -1,32 +1,35 @@
-#' Ordering and Referring Eligibility for Medicare
+#' Order and Referral Eligibility
 #'
 #' @description
-#' `order_refer()` allows you to search for providers who are legally eligible
-#' to order and refer to Part B (clinical laboratory and imaging), DME and
-#' Part A HHA claims in Medicare.
 #'
-#' ### Ordering and Referring (or Certifying) Providers
-#' **Ordering providers** can order non-physician services for patients.
-#' **Referring providers** can request items or services Medicare may reimburse
-#' on behalf of Medicare beneficiaries.
+#' `order_refer()` returns a provider's eligibility status concerning ordering
+#' and referring within Medicare to:
 #'
-#' To qualify as an ordering and referring/certifying provider, a provider must:
+#' - **Part B**: Clinical Laboratory Services, Imaging Services
+#' - **DME**: Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+#' - **Part A**: Home Health Services
 #'
-#'   - have an *individual* NPI
-#'   - be enrolled in Medicare in either an *approved* or *opt-out* status
-#'   - be of an *eligible specialty* type
 #'
-#' Providers currently enrolled in Medicare Part B can order and refer. A
-#' provider that does not want to bill Medicare for their services can still
-#' order and refer by opting out of Medicare or enrolling solely to order and
-#' refer. Medicare coverage will then apply when ordering or referring:
+#' To be eligible, a provider must:
 #'
-#'   - Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
-#'   - Clinical Laboratory Services
-#'   - Imaging Services
-#'   - Home Health Services
+#' - have an *Individual* NPI
+#' - be enrolled in Medicare in either an *Approved* or *Opt-Out* status
+#' - be of an *Eligible Specialty* type
 #'
-#' ### Links:
+#'
+#' **Ordering Providers** can order non-physician services for patients.
+#'
+#'
+#' **Referring (or Certifying) Providers** can request items or services that
+#' Medicare may reimburse on behalf of its beneficiaries.
+#'
+#'
+#' **Opt-Out Providers**: Providers who have opted out of Medicare may still
+#' order and refer. They can also enroll solely to order and refer.
+#'
+#'
+#' Links:
+#'
 #'   - [Medicare Order and Referring API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring)
 #'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
@@ -35,31 +38,32 @@
 #'
 #' @param npi < *integer* > 10-digit National Provider Identifier
 #' @param first,last < *character* > Provider's first/last name
-#' @param partb,dme,hha,pmd < *boolean* > `TRUE`/`FALSE` <br>
-#' Whether a provider is eligible to order and refer to: <br>
-#'     - `partb`: Medicare Part B
-#'     - `dme`: Durable Medical Equipment
-#'     - `hha`: Home Health Agency
-#'     - `pmd`: Power Mobility Devices
+#' @param partb,dme,hha,pmd < *boolean* > `TRUE` or `FALSE`. Whether a provider
+#' is eligible to order and refer to:
+#' - `partb`: Medicare Part B
+#' - `dme`: Durable Medical Equipment
+#' - `hha`: Home Health Agency
+#' - `pmd`: Power Mobility Devices
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] with the following columns: <br>
 #'
-#' |Field      |Description                                                 |
-#' |:----------|:-----------------------------------------------------------|
-#' |`npi`      |National Provider Identifier                                |
-#' |`first`    |Order and Referring Provider's First Name                   |
-#' |`last`     |Order and Referring Provider's Last Name                    |
-#' |`service`  |Services An Eligible Provider Can Order/Refer To            |
-#' |`eligible` |Indicates that provider can order Durable Medical Equipment |
+#' @return A [tibble][tibble::tibble-package] with the following columns:
+#'
+#' |**Field**  |**Description**                                   |
+#' |:----------|:-------------------------------------------------|
+#' |`npi`      |National Provider Identifier                      |
+#' |`first`    |Order and Referring Provider's First Name         |
+#' |`last`     |Order and Referring Provider's Last Name          |
+#' |`service`  |Services An Eligible Provider Can Order/Refer To  |
+#' |`eligible` |Indicates Provider's Eligibility                  |
 #'
 #' @seealso [providers()], [opt_out()], [pending()]
 #'
-#' @examplesIf interactive()
-#' # Search by NPI
+#'
+#' @examples
 #' order_refer(npi = 1003026055)
 #'
-#' # Filter for certain privileges
+#' ## Filter for certain privileges
 #' order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 #' @autoglobal
 #' @export

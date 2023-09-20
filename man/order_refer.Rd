@@ -2,7 +2,7 @@
 % Please edit documentation in R/order_refer.R
 \name{order_refer}
 \alias{order_refer}
-\title{Ordering and Referring Eligibility for Medicare}
+\title{Order and Referral Eligibility}
 \usage{
 order_refer(
   npi = NULL,
@@ -20,55 +20,52 @@ order_refer(
 
 \item{first, last}{< \emph{character} > Provider's first/last name}
 
-\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE}/\code{FALSE} \if{html}{\out{<br>}}
-Whether a provider is eligible to order and refer to: \if{html}{\out{<br>}}
-- \code{partb}: Medicare Part B
-- \code{dme}: Durable Medical Equipment
-- \code{hha}: Home Health Agency
-- \code{pmd}: Power Mobility Devices}
+\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE} or \code{FALSE}. Whether a provider
+is eligible to order and refer to:
+\itemize{
+\item \code{partb}: Medicare Part B
+\item \code{dme}: Durable Medical Equipment
+\item \code{hha}: Home Health Agency
+\item \code{pmd}: Power Mobility Devices
+}}
 
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the following columns: \if{html}{\out{<br>}}\tabular{ll}{
-   Field \tab Description \cr
+A \link[tibble:tibble-package]{tibble} with the following columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab National Provider Identifier \cr
    \code{first} \tab Order and Referring Provider's First Name \cr
    \code{last} \tab Order and Referring Provider's Last Name \cr
    \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
-   \code{eligible} \tab Indicates that provider can order Durable Medical Equipment \cr
+   \code{eligible} \tab Indicates Provider's Eligibility \cr
 }
 }
 \description{
-\code{order_refer()} allows you to search for providers who are legally eligible
-to order and refer to Part B (clinical laboratory and imaging), DME and
-Part A HHA claims in Medicare.
-\subsection{Ordering and Referring (or Certifying) Providers}{
-
-\strong{Ordering providers} can order non-physician services for patients.
-\strong{Referring providers} can request items or services Medicare may reimburse
-on behalf of Medicare beneficiaries.
-
-To qualify as an ordering and referring/certifying provider, a provider must:
+\code{order_refer()} returns a provider's eligibility status concerning ordering
+and referring within Medicare to:
 \itemize{
-\item have an \emph{individual} NPI
-\item be enrolled in Medicare in either an \emph{approved} or \emph{opt-out} status
-\item be of an \emph{eligible specialty} type
+\item \strong{Part B}: Clinical Laboratory Services, Imaging Services
+\item \strong{DME}: Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
+\item \strong{Part A}: Home Health Services
 }
 
-Providers currently enrolled in Medicare Part B can order and refer. A
-provider that does not want to bill Medicare for their services can still
-order and refer by opting out of Medicare or enrolling solely to order and
-refer. Medicare coverage will then apply when ordering or referring:
+To be eligible, a provider must:
 \itemize{
-\item Durable Medical Equipment, Prosthetics, Orthotics, and Supplies (DMEPOS)
-\item Clinical Laboratory Services
-\item Imaging Services
-\item Home Health Services
-}
+\item have an \emph{Individual} NPI
+\item be enrolled in Medicare in either an \emph{Approved} or \emph{Opt-Out} status
+\item be of an \emph{Eligible Specialty} type
 }
 
-\subsection{Links:}{
+\strong{Ordering Providers} can order non-physician services for patients.
+
+\strong{Referring (or Certifying) Providers} can request items or services that
+Medicare may reimburse on behalf of its beneficiaries.
+
+\strong{Opt-Out Providers}: Providers who have opted out of Medicare may still
+order and refer. They can also enroll solely to order and refer.
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
@@ -77,15 +74,11 @@ refer. Medicare coverage will then apply when ordering or referring:
 
 \emph{Update Frequency:} \strong{Twice Weekly}
 }
-}
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# Search by NPI
 order_refer(npi = 1003026055)
 
-# Filter for certain privileges
+## Filter for certain privileges
 order_refer(last = "Smith", partb = FALSE, hha = TRUE)
-\dontshow{\}) # examplesIf}
 }
 \seealso{
 \code{\link[=providers]{providers()}}, \code{\link[=opt_out]{opt_out()}}, \code{\link[=pending]{pending()}}
