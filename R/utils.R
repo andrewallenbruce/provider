@@ -105,77 +105,27 @@ display_long <- function(df) {
         tidyr::pivot_longer(dplyr::everything())
 }
 
-#' convert_breaks
-#' @param x vector
-#' @param decimal TRUE or FALSE
-#' @autoglobal
+#' creates a boilerplate tribble based on provided names
+#' @param names column names
+#' @param nrows fake data number of rows
 #' @noRd
-convert_breaks <- function(x, decimal = FALSE) {
-
-  rx <- "(\\d{1,3}(?:,\\d{3})*(?:\\.\\d+)?)"
-
-  p <- all(stringr::str_detect(x, "%"))
-
-  if (length(unique(x)) == 1) {
-
-    return(TRUE)
-
-  } else if (all(stringr::str_detect(x, "\\d", negate = TRUE))) {
-
-    return(factor(x, ordered = FALSE))
-
-  }
-
-  x <- stringr::str_replace(x, "\\sor\\s(fewer|lower)", "-")
-  x <- stringr::str_replace(x, "\\sor\\s(more|higher)", "+")
-  x <- stringr::str_replace(x, "\\sto\\s", " - ")
-  x <- stringr::str_remove_all(x, "[^[\\+\\d\\s\\.-]]")
-  x <- stringr::str_remove(x, "(?<=\\d)(\\.0)(?=\\D)")
-
-  if (any(stringr::str_detect(x, sprintf("^%s$", rx)))) {
-
-    x <- stringr::str_replace(x, paste0(rx, "(?:-$)"), "[0,\\1]")
-    x <- stringr::str_replace(x, paste0(rx, "(?:\\+$)"), "[\\1, Inf)")
-    x <- stringr::str_replace(x, sprintf("^%s$", rx), "[\\1,\\1]")
-
-  } else if (p) {
-
-    x <- stringr::str_replace(x, paste0(rx, "(?:-$)"), "[0,\\1)")
-    x <- stringr::str_replace(x, paste0(rx, "(?:\\+$)"), "[\\1,100]")
-    x <- stringr::str_replace(x, paste(rx, "-", rx), "[\\1,\\2)")
-
-    if (decimal) {
-
-      x <- stringr::str_replace_all(x, rx, function(p) as.numeric(p)/100)
-
-    }
-
-    n <- stringr::str_extract_all(x, "(\\d{1,3}(?:\\.\\d+)?)|Inf")
-
-    if (length(n) >= 2) {
-
-      d <- abs(diff(as.numeric(c(n[[2]][1], n[[1]][2]))))
-
-      if (p & round(d, digits = 2) == 0.1) {
-
-        x <- stringr::str_replace_all(string = x,
-                                      pattern = paste0(rx, "(?=\\)$)"),
-          replacement = function(n) as.numeric(n) + 0.1)
-      }
-    }
-  } else if (any(stringr::str_detect(x, paste(rx, "-", rx)))) {
-
-    x <- stringr::str_replace(x, paste0(rx, "(?:-$)"), "[0,\\1]")
-    x <- stringr::str_replace(x, paste(rx, "(?:-|to)", rx), "[\\1,\\2]")
-    x <- stringr::str_replace(x, paste0(rx, "(?:\\+$)"), "[\\1, Inf)")
-
-  }
-
-  z <- unique(x)
-  a <- stringr::str_extract_all(z, "(\\d{1,3}(?:\\.\\d+)?)|Inf")
-  a <- vapply(a, FUN = function(i) sum(as.numeric(i)), FUN.VALUE = double(1))
-  a <- match(a, sort(a))
-  factor(x, levels = z[order(sort(z)[a])], ordered = TRUE)
-
-}
-
+# create_tribble <- function(names = c("param", "arg"), nrows = 4){
+#
+#   header <- paste(paste(paste0("~", names), collapse = ", "), "\n")
+#   base_val <- rep(NA, length(names))
+#
+#   row_vals <- dplyr::tibble(placeholder = rep(base_val, nrows)) |>
+#     tibble::rowid_to_column() |>
+#     dplyr::mutate(
+#       placeholder = dplyr::case_when(rowid != max(rowid, na.rm = TRUE) ~ paste0(placeholder, ","), TRUE ~ placeholder),
+#       placeholder = dplyr::case_when(rowid %% length(names) == 0 ~ paste0(placeholder, "\n\n"), TRUE ~ placeholder)) |>
+#     dplyr::pull(placeholder) |>
+#     paste(collapse = "")
+#
+#   out <- glue::glue("tribble(\n", paste0(header, ","), row_vals, ")") |> styler::style_text()
+#
+#   clipr::write_clip(out)
+#   writeLines(out)
+#   invisible(out)
+#
+# }

@@ -32,17 +32,27 @@
 #'   - [CMS.gov: Ordering & Certifying](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying)
 #'   - [Order and Referring Methodology](https://data.cms.gov/resources/order-and-referring-methodology)
 #'
+#' |Field      |Description                                                 |
+#' |:----------|:-----------------------------------------------------------|
+#' |`npi`      |National Provider Identifier                                |
+#' |`first`    |Order and Referring Provider's First Name                   |
+#' |`last`     |Order and Referring Provider's Last Name                    |
+#' |`service`  |Services An Eligible Provider Can Order/Refer To            |
+#' |`eligible` |Indicates that provider can order Durable Medical Equipment |
+#'
 #' *Update Frequency:* **Twice Weekly**
 #'
-#' @param npi 10-digit National Provider Identifier
-#' @param first,last Provider's first/last name
-#' @param partb boolean; eligibility to order & refer to Medicare Part B
-#' @param dme boolean; eligibility to order Durable Medical Equipment
-#' @param hha boolean; eligibility to refer to a Home Health Agency
-#' @param pmd boolean; eligibility to order Power Mobility Devices
-#' @param tidy boolean; Tidy output; default is `TRUE`.
+#' @param npi < *integer* > 10-digit National Provider Identifier
+#' @param first,last < *character* > Provider's first/last name
+#' @param partb,dme,hha,pmd < *boolean* > `TRUE`/`FALSE`
+#' Whether a provider is eligible to order and refer to:
+#'     * `partb`: Medicare Part B
+#'     * `dme`: Durable Medical Equipment
+#'     * `hha`: Home Health Agency
+#'     * `pmd`: Power Mobility Devices
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] object containing the search results.
+#' @return A [tibble][tibble::tibble-package]
 #'
 #' @seealso [providers()], [opt_out()], [pending()]
 #'
@@ -50,18 +60,18 @@
 #' # Search by NPI
 #' order_refer(npi = 1003026055)
 #'
-#' # Search by name and/or filter for certain privileges
+#' # Filter for certain privileges
 #' order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 #' @autoglobal
 #' @export
-order_refer <- function(npi = NULL,
+order_refer <- function(npi   = NULL,
                         first = NULL,
-                        last = NULL,
+                        last  = NULL,
                         partb = NULL,
-                        dme = NULL,
-                        hha = NULL,
-                        pmd = NULL,
-                        tidy = TRUE) {
+                        dme   = NULL,
+                        hha   = NULL,
+                        pmd   = NULL,
+                        tidy  = TRUE) {
 
   if (!is.null(npi))   {npi   <- npi_check(npi)}
   if (!is.null(partb)) {partb <- tf_2_yn(partb)}

@@ -16,22 +16,21 @@ order_refer(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit National Provider Identifier}
 
-\item{first, last}{Provider's first/last name}
+\item{first, last}{< \emph{character} > Provider's first/last name}
 
-\item{partb}{boolean; eligibility to order & refer to Medicare Part B}
+\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE}/\code{FALSE}
+Whether a provider is eligible to order and refer to:
+* \code{partb}: Medicare Part B
+* \code{dme}: Durable Medical Equipment
+* \code{hha}: Home Health Agency
+* \code{pmd}: Power Mobility Devices}
 
-\item{dme}{boolean; eligibility to order Durable Medical Equipment}
-
-\item{hha}{boolean; eligibility to refer to a Home Health Agency}
-
-\item{pmd}{boolean; eligibility to order Power Mobility Devices}
-
-\item{tidy}{boolean; Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} object containing the search results.
+A \link[tibble:tibble-package]{tibble}
 }
 \description{
 \code{order_refer()} allows you to search for physicians and non-physician
@@ -66,7 +65,15 @@ refer. Medicare coverage will then apply when ordering or referring:
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/order-and-referring}{Medicare Order and Referring API}
 \item \href{https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/chain-ownership-system-pecos/ordering-certifying}{CMS.gov: Ordering & Certifying}
 \item \href{https://data.cms.gov/resources/order-and-referring-methodology}{Order and Referring Methodology}
+}\tabular{ll}{
+   Field \tab Description \cr
+   \code{npi} \tab National Provider Identifier \cr
+   \code{first} \tab Order and Referring Provider's First Name \cr
+   \code{last} \tab Order and Referring Provider's Last Name \cr
+   \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
+   \code{eligible} \tab Indicates that provider can order Durable Medical Equipment \cr
 }
+
 
 \emph{Update Frequency:} \strong{Twice Weekly}
 }
@@ -78,7 +85,7 @@ refer. Medicare coverage will then apply when ordering or referring:
 # Search by NPI
 order_refer(npi = 1003026055)
 
-# Search by name and/or filter for certain privileges
+# Filter for certain privileges
 order_refer(last = "Smith", partb = FALSE, hha = TRUE)
 \dontshow{\}) # examplesIf}
 }
