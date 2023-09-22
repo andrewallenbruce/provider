@@ -25,6 +25,36 @@
 #' @param city < *character* > City of the hospital’s practice location
 #' @param state < *character* > State of the hospital’s practice location
 #' @param zip < *character* > Zip code of the hospital’s practice location
+#' @param proprietary_nonprofit < *character* > `"P"` if hospital registered as
+#' proprietor with the IRS; `"N"` if registered as non-profit
+#' @param multiple_npis < *boolean* > Indicates hospital has more than one NPI
+#' @param general < *boolean* > Indicates hospital’s subgroup/unit is General
+#' @param acute_care < *boolean* > Indicates hospital’s subgroup/unit is
+#' Acute Care
+#' @param alcohol_drug < *boolean* > Indicates hospital’s subgroup/unit is
+#' Alcohol/Drug
+#' @param childrens < *boolean* > Indicates hospital’s subgroup/unit is
+#' Children's Hospital
+#' @param long_term < *boolean* > Indicates hospital’s subgroup/unit is
+#' Long-Term
+#' @param psychiatric < *boolean* > Indicates hospital’s subgroup/unit is
+#' Psychiatric
+#' @param rehabilitation < *boolean* > Indicates hospital’s subgroup/unit is
+#' Rehabilitation
+#' @param short_term < *boolean* > Indicates hospital’s subgroup/unit is
+#' Short-Term
+#' @param swing_bed < *boolean* > Indicates hospital’s subgroup/unit is
+#' Swing-Bed Approved
+#' @param psych_unit < *boolean* > Indicates hospital’s subgroup/unit is
+#' Psychiatric Unit
+#' @param rehab_unit < *boolean* > Indicates hospital’s subgroup/unit is
+#' Rehabilitation Unit
+#' @param specialty_hospital < *boolean* > Indicates hospital’s subgroup/unit
+#' is Specialty Hospital
+#' @param other < *boolean* > Indicates hospital’s subgroup/unit is not listed
+#' on the CMS form
+#' @param reh_conversion < *boolean* > Indicates a former Hospital or Critical
+#' Access Hospital that converted to a Rural Emergency Hospital
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
 #'
@@ -34,20 +64,38 @@
 #'
 #' @examples
 #' hospitals(pac_id_org = 6103733050)
+#'
+#' hospitals(state = "GA", reh_conversion = TRUE)
 #' @autoglobal
 #' @export
-hospitals <- function(npi               = NULL,
-                      facility_ccn      = NULL,
-                      enroll_id_org     = NULL,
-                      enroll_state      = NULL,
-                      specialty_code    = NULL,
-                      pac_id_org        = NULL,
-                      organization      = NULL,
+hospitals <- function(npi = NULL,
+                      facility_ccn = NULL,
+                      enroll_id_org = NULL,
+                      enroll_state = NULL,
+                      specialty_code = NULL,
+                      pac_id_org = NULL,
+                      organization = NULL,
                       doing_business_as = NULL,
-                      city              = NULL,
-                      state             = NULL,
-                      zip               = NULL,
-                      tidy              = TRUE,
+                      city = NULL,
+                      state = NULL,
+                      zip = NULL,
+                      proprietary_nonprofit = NULL,
+                      multiple_npis = NULL,
+                      general = NULL,
+                      acute_care = NULL,
+                      alcohol_drug = NULL,
+                      childrens = NULL,
+                      long_term = NULL,
+                      psychiatric = NULL,
+                      rehabilitation = NULL,
+                      short_term = NULL,
+                      swing_bed = NULL,
+                      psych_unit = NULL,
+                      rehab_unit = NULL,
+                      specialty_hospital = NULL,
+                      other = NULL,
+                      reh_conversion = NULL,
+                      tidy = TRUE,
                       na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
@@ -56,20 +104,53 @@ hospitals <- function(npi               = NULL,
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(enroll_id_org)) {enroll_check(enroll_id_org)}
   if (!is.null(enroll_id_org)) {enroll_org_check(enroll_id_org)}
+  if (!is.null(proprietary_nonprofit)) {rlang::arg_match(proprietary_nonprofit, c("P", "N"))}
+
+  if (!is.null(multiple_npis)) {multiple_npis <- tf_2_yn(multiple_npis)}
+  if (!is.null(general)) {general <- tf_2_yn(general)}
+  if (!is.null(acute_care)) {acute_care <- tf_2_yn(acute_care)}
+  if (!is.null(alcohol_drug)) {alcohol_drug <- tf_2_yn(alcohol_drug)}
+  if (!is.null(childrens)) {childrens <- tf_2_yn(childrens)}
+  if (!is.null(long_term)) {long_term <- tf_2_yn(long_term)}
+  if (!is.null(psychiatric)) {psychiatric <- tf_2_yn(psychiatric)}
+  if (!is.null(rehabilitation)) {rehabilitation <- tf_2_yn(rehabilitation)}
+  if (!is.null(short_term)) {short_term <- tf_2_yn(short_term)}
+  if (!is.null(swing_bed)) {swing_bed <- tf_2_yn(swing_bed)}
+  if (!is.null(psych_unit)) {psych_unit <- tf_2_yn(psych_unit)}
+  if (!is.null(rehab_unit)) {rehab_unit <- tf_2_yn(rehab_unit)}
+  if (!is.null(specialty_hospital)) {specialty_hospital <- tf_2_yn(specialty_hospital)}
+  if (!is.null(other)) {other <- tf_2_yn(other)}
+  if (!is.null(reh_conversion)) {reh_conversion <- tf_2_yn(reh_conversion)}
 
   args <- dplyr::tribble(
-    ~param,                  ~arg,
-    "NPI",                    npi,
-    "CCN",                    facility_ccn,
-    "ENROLLMENT ID",          enroll_id_org,
-    "ENROLLMENT STATE",       enroll_state,
-    "PROVIDER TYPE CODE",     specialty_code,
-    "ASSOCIATE ID",           pac_id_org,
-    "ORGANIZATION NAME",      organization,
-    "DOING BUSINESS AS NAME", doing_business_as,
-    "CITY",                   city,
-    "STATE",                  state,
-    "ZIP CODE",               zip)
+    ~param,                           ~arg,
+    "NPI",                            npi,
+    "CCN",                            facility_ccn,
+    "ENROLLMENT ID",                  enroll_id_org,
+    "ENROLLMENT STATE",               enroll_state,
+    "PROVIDER TYPE CODE",             specialty_code,
+    "ASSOCIATE ID",                   pac_id_org,
+    "ORGANIZATION NAME",              organization,
+    "DOING BUSINESS AS NAME",         doing_business_as,
+    "CITY",                           city,
+    "STATE",                          state,
+    "ZIP CODE",                       zip,
+    "PROPRIETARY_NONPROFIT",          proprietary_nonprofit,
+    "MULTIPLE NPI FLAG",              multiple_npis,
+    "SUBGROUP %2D GENERAL",             general,
+    "SUBGROUP %2D ACUTE CARE",          acute_care,
+    "SUBGROUP %2D ALCOHOL DRUG",        alcohol_drug,
+    "SUBGROUP %2D CHILDRENS",           childrens,
+    "SUBGROUP %2D LONG-TERM",           long_term,
+    "SUBGROUP %2D PSYCHIATRIC",         psychiatric,
+    "SUBGROUP %2D REHABILITATION",      rehabilitation,
+    "SUBGROUP %2D SHORT-TERM",          short_term,
+    "SUBGROUP %2D SWING-BED APPROVED",  swing_bed,
+    "SUBGROUP %2D PSYCHIATRIC UNIT",    psych_unit,
+    "SUBGROUP %2D REHABILITATION UNIT", rehab_unit,
+    "SUBGROUP %2D SPECIALTY HOSPITAL",  specialty_hospital,
+    "SUBGROUP %2D OTHER",               other,
+    "REH CONVERSION FLAG",            reh_conversion)
 
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                 cms_update("Hospital Enrollments", "id")$distro[1],
@@ -92,7 +173,23 @@ hospitals <- function(npi               = NULL,
       "doing_business_as", doing_business_as,
       "city",              city,
       "state",             state,
-      "zip",               zip) |>
+      "zip",               zip,
+      "proprietary_nonprofit", proprietary_nonprofit,
+      "multiple_npis",     multiple_npis,
+      "general",           general,
+      "acute_care",        acute_care,
+      "alcohol_drug",      alcohol_drug,
+      "childrens",         childrens,
+      "long_term",         long_term,
+      "psychiatric",       psychiatric,
+      "rehabilitation",    rehabilitation,
+      "short_term",        short_term,
+      "swing_bed",         swing_bed,
+      "psych_unit",        psych_unit,
+      "rehab_unit",        rehab_unit,
+      "specialty_hospital", specialty_hospital,
+      "other",             other,
+      "reh_conversion",    reh_conversion) |>
       tidyr::unnest(cols = c(y))
 
     cli_args <- purrr::map2(cli_args$x,
@@ -151,7 +248,7 @@ hospitals <- function(npi               = NULL,
         "REH Conversion" = reh_conversion_flag,
         "Subgroup General" = subgroup_general,
         "Subgroup Acute Care" = subgroup_acute_care,
-        "Subgroup Alcohol/Drug" = subgroup_alcohol_drug,
+        "Subgroup Alcohol Drug" = subgroup_alcohol_drug,
         "Subgroup Childrens' Hospital" = subgroup_childrens,
         "Subgroup Long-term" = subgroup_long_term,
         "Subgroup Psychiatric" = subgroup_psychiatric,

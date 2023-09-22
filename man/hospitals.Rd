@@ -16,6 +16,22 @@ hospitals(
   city = NULL,
   state = NULL,
   zip = NULL,
+  proprietary_nonprofit = NULL,
+  multiple_npis = NULL,
+  general = NULL,
+  acute_care = NULL,
+  alcohol_drug = NULL,
+  childrens = NULL,
+  long_term = NULL,
+  psychiatric = NULL,
+  rehabilitation = NULL,
+  short_term = NULL,
+  swing_bed = NULL,
+  psych_unit = NULL,
+  rehab_unit = NULL,
+  specialty_hospital = NULL,
+  other = NULL,
+  reh_conversion = NULL,
   tidy = TRUE,
   na.rm = TRUE
 )
@@ -45,6 +61,52 @@ associate-level control identifier}
 
 \item{zip}{< \emph{character} > Zip code of the hospital’s practice location}
 
+\item{proprietary_nonprofit}{< \emph{character} > \code{"P"} if hospital registered as
+proprietor with the IRS; \code{"N"} if registered as non-profit}
+
+\item{multiple_npis}{< \emph{boolean} > Indicates hospital has more than one NPI}
+
+\item{general}{< \emph{boolean} > Indicates hospital’s subgroup/unit is General}
+
+\item{acute_care}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Acute Care}
+
+\item{alcohol_drug}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Alcohol/Drug}
+
+\item{childrens}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Children's Hospital}
+
+\item{long_term}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Long-Term}
+
+\item{psychiatric}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Psychiatric}
+
+\item{rehabilitation}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Rehabilitation}
+
+\item{short_term}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Short-Term}
+
+\item{swing_bed}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Swing-Bed Approved}
+
+\item{psych_unit}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Psychiatric Unit}
+
+\item{rehab_unit}{< \emph{boolean} > Indicates hospital’s subgroup/unit is
+Rehabilitation Unit}
+
+\item{specialty_hospital}{< \emph{boolean} > Indicates hospital’s subgroup/unit
+is Specialty Hospital}
+
+\item{other}{< \emph{boolean} > Indicates hospital’s subgroup/unit is not listed
+on the CMS form}
+
+\item{reh_conversion}{< \emph{boolean} > Indicates a former Hospital or Critical
+Access Hospital that converted to a Rural Emergency Hospital}
+
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 
 \item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
@@ -67,6 +129,8 @@ Links:
 }
 \examples{
 hospitals(pac_id_org = 6103733050)
+
+hospitals(state = "GA", reh_conversion = TRUE)
 }
 \seealso{
 \code{\link[=clinicians]{clinicians()}}, \code{\link[=providers]{providers()}}, \code{\link[=affiliations]{affiliations()}}

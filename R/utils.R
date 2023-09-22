@@ -117,10 +117,6 @@ display_long <- function(df) {
         tidyr::pivot_longer(dplyr::everything())
 }
 
-#' creates a boilerplate tribble based on provided names
-#' @param names column names
-#' @param nrows fake data number of rows
-#' @noRd
 # create_tribble <- function(names = c("param", "arg"), nrows = 4){
 #
 #   header <- paste(paste(paste0("~", names), collapse = ", "), "\n")

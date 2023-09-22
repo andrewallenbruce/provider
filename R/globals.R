@@ -274,7 +274,20 @@ utils::globalVariables(c(
   "cah_or_hospital_ccn", # <hospitals>
   "reh_conversion_flag", # <hospitals>
   "reh_conversion_date", # <hospitals>
-  "proprietary_nonprofit", # <hospitals>
+  "subgroup_general", # <hospitals>
+  "subgroup_acute_care", # <hospitals>
+  "subgroup_alcohol_drug", # <hospitals>
+  "subgroup_childrens", # <hospitals>
+  "subgroup_long_term", # <hospitals>
+  "subgroup_psychiatric", # <hospitals>
+  "subgroup_rehabilitation", # <hospitals>
+  "subgroup_short_term", # <hospitals>
+  "subgroup_swing_bed_approved", # <hospitals>
+  "subgroup_psychiatric_unit", # <hospitals>
+  "subgroup_rehabilitation_unit", # <hospitals>
+  "subgroup_specialty_hospital", # <hospitals>
+  "subgroup_other", # <hospitals>
+  "flag", # <hospitals>
   "y", # <asc_ifed_enrollment>
   "line_1_st_adr", # <asc_ifed_enrollment>
   "line_2_st_adr", # <asc_ifed_enrollment>
