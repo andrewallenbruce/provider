@@ -137,32 +137,33 @@ to bill Medicare.</p><div class="section">
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>10-digit National Provider Identifier</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
 
 
 <dt>pac_id</dt>
-<dd><p>10-digit Provider associate level variable. Links all
-entity-level information and may be associated with multiple enrollment IDs
-if the individual or organization enrolled multiple times.</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit provider associate level variable. Links
+all entity-level information and may be associated with multiple enrollment
+IDs if the individual or organization enrolled multiple times.</p></dd>
 
 
 <dt>enroll_id</dt>
-<dd><p>15-digit Provider enrollment ID. Assigned to each new
-provider enrollment application. Links all enrollment-level information
-(enrollment type, state, reassignment of benefits).</p></dd>
+<dd><p>&lt; <em>character</em> &gt; 15-digit provider enrollment ID. Assigned to
+each new provider enrollment application. Links all enrollment-level
+information (enrollment type, state, reassignment of benefits).</p></dd>
 
 
 <dt>specialty_code</dt>
-<dd><p>Enrollment primary specialty type code.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment primary specialty type code</p></dd>
 
 
 <dt>specialty</dt>
-<dd><p>Enrollment specialty type description.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment specialty type description</p></dd>
 
 
 <dt>state</dt>
-<dd><p>Enrollment state abbreviation. Since Providers enroll at the state level,
-a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment state abbreviation/full name.
+Providers enroll at the state level, so a PAC ID can be associated with
+multiple enrollment IDs and states.</p></dd>
 
 
 <dt>first, middle, last</dt>
@@ -170,7 +171,7 @@ a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
 
 
 <dt>organization</dt>
-<dd><p>Organizational provider name</p></dd>
+<dd><p>Organizational provider's name</p></dd>
 
 
 <dt>gender</dt>
@@ -181,19 +182,18 @@ a PAC ID can be associated with multiple enrollment IDs and states.</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code>.</p></dd>
 
 
 <dt>na.rm</dt>
-<dd><p>Remove empty rows and columns; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p><a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> containing the search results.</p>
-    </div>
+<p><a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac_id</code></td><td>10-digit PAC ID</td></tr><tr><td><code>enroll_id</code></td><td>15-digit provider enrollment ID</td></tr><tr><td><code>specialty_code</code></td><td>Enrollment primary specialty type code</td></tr><tr><td><code>specialty</code></td><td>Enrollment specialty type description</td></tr><tr><td><code>state</code></td><td>Enrollment state</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>gender</code></td><td>Individual provider's gender</td></tr><tr><td><code>organization</code></td><td>Organizational provider's name</td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="order_refer.html">order_refer()</a></code>, <code><a href="opt_out.html">opt_out()</a></code>, <code><a href="pending.html">pending()</a></code></p></div>
