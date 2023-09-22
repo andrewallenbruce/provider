@@ -14,20 +14,26 @@ taxonomy_crosswalk(
 )
 }
 \arguments{
-\item{taxonomy_code}{Provider's taxonomy code}
+\item{taxonomy_code}{< \emph{character} > 10-digit taxonomy code}
 
-\item{taxonomy_description}{Provider's taxonomy description}
+\item{taxonomy_description}{< \emph{character} > Provider's taxonomy description}
 
-\item{medicare_code}{Medicare specialty code}
+\item{medicare_code}{< \emph{character} > Medicare specialty code}
 
-\item{medicare_type}{Medicare provider/supplier type}
+\item{medicare_type}{< \emph{character} > Medicare provider/supplier type}
 
-\item{keyword_search}{Search term to use for quick full-text search.}
+\item{keyword_search}{< \emph{character} > Search term to use for quick full-text search.}
 
-\item{tidy}{Tidy output; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{medicare_code} \tab Code that corresponds to the Medicare specialty \cr
+   \code{medicare_type} \tab Description of the Medicare provider/Supplier Type \cr
+   \code{taxonomy_code} \tab Provider's taxonomy code \cr
+   \code{taxonomy_description} \tab Description of the taxonomy code \cr
+}
 }
 \description{
 \code{taxonomy_crosswalk()} allows you to search the types of providers and
@@ -48,7 +54,8 @@ closely describes their type/classification/specialization. In some
 situations, a provider may need to report more than one taxonomy but must
 indicate one of them as the primary. The codes selected may not be the same
 as categorizations used by Medicare for enrollment.
-\subsection{Links}{
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk}{Provider and Supplier Taxonomy Crosswalk}
 \item \href{https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology}{Taxonomy Crosswalk Methodology}
@@ -56,8 +63,6 @@ as categorizations used by Medicare for enrollment.
 }
 
 \emph{Update Frequency:} \strong{Weekly}
-}
-
 }
 }
 \examples{

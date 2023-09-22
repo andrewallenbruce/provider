@@ -1,4 +1,4 @@
-#' Calculations for analysis of Providers' stats
+#' Calculations for Providers' stats
 #'
 #' @description Functions for calculating lagged changes and elapsed duration
 #' between dates.

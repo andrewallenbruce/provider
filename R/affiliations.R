@@ -34,7 +34,19 @@
 #' @param offset < *integer* > offset; API pagination
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**       |**Description**                   |
+#' |:---------------|:---------------------------------|
+#' |`npi`           |10-digit NPI                      |
+#' |`pac_id_ind`    |10-digit individual PAC ID        |
+#' |`first`         |Individual provider's first name  |
+#' |`middle`        |Individual provider's middle name |
+#' |`last`          |Individual provider's last name   |
+#' |`suffix`        |Individual provider's suffix      |
+#' |`facility_type` |Category of facility              |
+#' |`facility_ccn`  |Facility's 6-digit CCN            |
+#' |`parent_ccn`    |Primary facility's 6-digit CCN    |
 #'
 #' @seealso [clinicians()], [providers()], [hospitals()]
 #'

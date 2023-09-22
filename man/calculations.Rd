@@ -4,7 +4,7 @@
 \alias{calculations}
 \alias{change}
 \alias{years_df}
-\title{Calculations for analysis of Providers' stats}
+\title{Calculations for Providers' stats}
 \usage{
 change(df, cols, digits = 3)
 

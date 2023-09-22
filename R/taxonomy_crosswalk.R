@@ -19,21 +19,28 @@
 #' indicate one of them as the primary. The codes selected may not be the same
 #' as categorizations used by Medicare for enrollment.
 #'
-#' ### Links
+#' Links:
 #' - [Provider and Supplier Taxonomy Crosswalk](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-provider-and-supplier-taxonomy-crosswalk)
 #' - [Taxonomy Crosswalk Methodology](https://data.cms.gov/resources/medicare-provider-and-supplier-taxonomy-crosswalk-methodology)
 #' - [Find Your Taxonomy Code](https://www.cms.gov/medicare/enrollment-renewal/providers-suppliers/health-care-taxonomy)
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param taxonomy_code Provider's taxonomy code
-#' @param taxonomy_description Provider's taxonomy description
-#' @param medicare_code Medicare specialty code
-#' @param medicare_type Medicare provider/supplier type
-#' @param keyword_search Search term to use for quick full-text search.
-#' @param tidy Tidy output; default is `TRUE`
+#' @param medicare_code < *character* > Medicare specialty code
+#' @param medicare_type < *character* > Medicare provider/supplier type
+#' @param taxonomy_code < *character* > 10-digit taxonomy code
+#' @param taxonomy_description < *character* > Provider's taxonomy description
+#' @param keyword_search < *character* > Search term to use for quick full-text search.
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**              |**Description**                                    |
+#' |:----------------------|:--------------------------------------------------|
+#' |`medicare_code`        |Code that corresponds to the Medicare specialty    |
+#' |`medicare_type`        |Description of the Medicare provider/Supplier Type |
+#' |`taxonomy_code`        |Provider's taxonomy code                           |
+#' |`taxonomy_description` |Description of the taxonomy code                   |
 #'
 #' @examplesIf interactive()
 #' taxonomy_crosswalk(keyword_search = "B4")

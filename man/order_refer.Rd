@@ -32,7 +32,7 @@ is eligible to order and refer to:
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} with the following columns:\tabular{ll}{
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab National Provider Identifier \cr
    \code{first} \tab Order and Referring Provider's First Name \cr

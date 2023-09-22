@@ -50,7 +50,18 @@ sub-unit's primary hospital, should the provider provide services in said unit}
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab 10-digit NPI \cr
+   \code{pac_id_ind} \tab 10-digit individual PAC ID \cr
+   \code{first} \tab Individual provider's first name \cr
+   \code{middle} \tab Individual provider's middle name \cr
+   \code{last} \tab Individual provider's last name \cr
+   \code{suffix} \tab Individual provider's suffix \cr
+   \code{facility_type} \tab Category of facility \cr
+   \code{facility_ccn} \tab Facility's 6-digit CCN \cr
+   \code{parent_ccn} \tab Primary facility's 6-digit CCN \cr
+}
 }
 \description{
 \code{affiliations()} allows you to access information concerning providers'
