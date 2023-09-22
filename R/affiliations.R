@@ -18,7 +18,7 @@
 #' enrollment IDs if the individual or organization enrolled multiple times
 #' @param first,middle,last < *character* > Individual provider's first, middle,
 #' or last name
-#' @param facility_type < *character* > Category of facility:
+#' @param facility_type < *character* >
 #'    - `"Hospital"` or `"hp"`
 #'    - `"Long-term care hospital"` or `"ltch"`
 #'    - `"Nursing home"` or `"nh"`
@@ -71,6 +71,17 @@ affiliations <- function(npi = NULL,
   if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
 
   if (!is.null(facility_type)) {
+    facility_type <- dplyr::case_match(facility_type,
+                                       "hp" ~ "Hospital",
+                                       "ltch" ~ "Long-term care hospital",
+                                       "nh" ~ "Nursing home",
+                                       "irf" ~ "Inpatient rehabilitation facility",
+                                       "hha" ~ "Home health agency",
+                                       "snf" ~ "Skilled nursing facility",
+                                       "hs" ~ "Hospice",
+                                       "df" ~ "Dialysis facility",
+                                       .default = facility_type)
+
     rlang::arg_match(facility_type, c("Hospital",
                                       "Long-term care hospital",
                                       "Nursing home",
@@ -130,9 +141,7 @@ affiliations <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
+    results <- tidyup(results) |>
       dplyr::select(
         npi,
         pac_id_ind = ind_pac_id,

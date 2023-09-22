@@ -10,27 +10,42 @@
 #'
 #' *Update Frequency:* **Quarterly**
 #'
-#' @param npi 10-digit National Provider Identifier
-#' @param pac_id 10-digit Provider associate level variable. Links all
-#'   entity-level information and may be associated with multiple enrollment IDs
-#'   if the individual or organization enrolled multiple times.
-#' @param enroll_id 15-digit Provider enrollment ID. Assigned to each new
-#'    provider enrollment application. Links all enrollment-level information
-#'    (enrollment type, state, reassignment of benefits).
-#' @param specialty_code Enrollment primary specialty type code.
-#' @param specialty Enrollment specialty type description.
-#' @param state Enrollment state abbreviation. Since Providers enroll at the state level,
-#'    a PAC ID can be associated with multiple enrollment IDs and states.
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param pac_id < *integer* > 10-digit provider associate level variable. Links
+#' all entity-level information and may be associated with multiple enrollment
+#' IDs if the individual or organization enrolled multiple times.
+#' @param enroll_id < *character* > 15-digit provider enrollment ID. Assigned to
+#' each new provider enrollment application. Links all enrollment-level
+#' information (enrollment type, state, reassignment of benefits).
+#' @param specialty_code < *character* > Enrollment primary specialty type code
+#' @param specialty < *character* > Enrollment specialty type description
+#' @param state < *character* > Enrollment state abbreviation/full name.
+#' Providers enroll at the state level, so a PAC ID can be associated with
+#' multiple enrollment IDs and states.
 #' @param first,middle,last Individual provider's first/middle/last name
-#' @param organization Organizational provider name
+#' @param organization Organizational provider's name
 #' @param gender Individual provider gender. Options are:
 #'    * `"F"`: Female
 #'    * `"M"`: Male
 #'    * `"9"`: Unknown (or Organizational provider)
-#' @param tidy Tidy output; default is `TRUE`.
-#' @param na.rm Remove empty rows and columns; default is `TRUE`.
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
 #'
-#' @return [tibble][tibble::tibble-package] containing the search results.
+#' @return [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**        |**Description**                        |
+#' |:----------------|:--------------------------------------|
+#' |`npi`            |10-digit NPI                           |
+#' |`pac_id`         |10-digit PAC ID                        |
+#' |`enroll_id`      |15-digit provider enrollment ID        |
+#' |`specialty_code` |Enrollment primary specialty type code |
+#' |`specialty`      |Enrollment specialty type description  |
+#' |`state`          |Enrollment state                       |
+#' |`first`          |Individual provider's first name       |
+#' |`middle`         |Individual provider's middle name      |
+#' |`last`           |Individual provider's last name        |
+#' |`gender`         |Individual provider's gender           |
+#' |`organization`   |Organizational provider's name         |
 #'
 #' @seealso [order_refer()], [opt_out()], [pending()]
 #'
@@ -110,9 +125,7 @@ providers <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
+    results <- tidyup(results) |>
       dplyr::select(npi,
                     pac_id = pecos_asct_cntl_id,
                     enroll_id = enrlmt_id,

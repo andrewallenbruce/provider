@@ -108,11 +108,9 @@ revalidation_date <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.))) |>
       dplyr::select(npi = national_provider_identifier,
                     enroll_id = enrollment_id,
                     first = first_name,

@@ -16,7 +16,7 @@ order_refer(
 )
 }
 \arguments{
-\item{npi}{< \emph{integer} > 10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
 \item{first, last}{< \emph{character} > Individual provider's first/last name}
 

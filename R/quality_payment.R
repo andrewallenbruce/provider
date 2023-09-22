@@ -95,10 +95,8 @@ quality_payment <- function(year,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::any_of(c("practice_size",
                                                   "years_in_medicare",
@@ -426,9 +424,7 @@ mips_2021 <- function(facility_name = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")))
+    results <- tidyup(results)
 
     if (any(!is.null(c(facility_name, pac_id_org)))) {
       results <- dplyr::select(results,

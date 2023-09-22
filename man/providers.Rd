@@ -21,26 +21,27 @@ providers(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id}{10-digit Provider associate level variable. Links all
-entity-level information and may be associated with multiple enrollment IDs
-if the individual or organization enrolled multiple times.}
+\item{pac_id}{< \emph{integer} > 10-digit provider associate level variable. Links
+all entity-level information and may be associated with multiple enrollment
+IDs if the individual or organization enrolled multiple times.}
 
-\item{enroll_id}{15-digit Provider enrollment ID. Assigned to each new
-provider enrollment application. Links all enrollment-level information
-(enrollment type, state, reassignment of benefits).}
+\item{enroll_id}{< \emph{character} > 15-digit provider enrollment ID. Assigned to
+each new provider enrollment application. Links all enrollment-level
+information (enrollment type, state, reassignment of benefits).}
 
-\item{specialty_code}{Enrollment primary specialty type code.}
+\item{specialty_code}{< \emph{character} > Enrollment primary specialty type code}
 
-\item{specialty}{Enrollment specialty type description.}
+\item{specialty}{< \emph{character} > Enrollment specialty type description}
 
-\item{state}{Enrollment state abbreviation. Since Providers enroll at the state level,
-a PAC ID can be associated with multiple enrollment IDs and states.}
+\item{state}{< \emph{character} > Enrollment state abbreviation/full name.
+Providers enroll at the state level, so a PAC ID can be associated with
+multiple enrollment IDs and states.}
 
 \item{first, middle, last}{Individual provider's first/middle/last name}
 
-\item{organization}{Organizational provider name}
+\item{organization}{Organizational provider's name}
 
 \item{gender}{Individual provider gender. Options are:
 \itemize{
@@ -49,12 +50,25 @@ a PAC ID can be associated with multiple enrollment IDs and states.}
 \item \code{"9"}: Unknown (or Organizational provider)
 }}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 
-\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
-\link[tibble:tibble-package]{tibble} containing the search results.
+\link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab 10-digit NPI \cr
+   \code{pac_id} \tab 10-digit PAC ID \cr
+   \code{enroll_id} \tab 15-digit provider enrollment ID \cr
+   \code{specialty_code} \tab Enrollment primary specialty type code \cr
+   \code{specialty} \tab Enrollment specialty type description \cr
+   \code{state} \tab Enrollment state \cr
+   \code{first} \tab Individual provider's first name \cr
+   \code{middle} \tab Individual provider's middle name \cr
+   \code{last} \tab Individual provider's last name \cr
+   \code{gender} \tab Individual provider's gender \cr
+   \code{organization} \tab Organizational provider's name \cr
+}
 }
 \description{
 \code{providers()} allows you to access enrollment level

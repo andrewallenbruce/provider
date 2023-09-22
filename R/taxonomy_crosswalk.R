@@ -96,16 +96,13 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
                             collapse = "")
 
     cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
-
     return(invisible(NULL))
 
   }
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~stringr::str_squish(.))) |>
+    results <- tidyup(results) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~stringr::str_squish(.))) |>
       dplyr::select(medicare_code = medicare_specialty_code,
                     medicare_type = medicare_provider_supplier_type,
                     taxonomy_code = provider_taxonomy_code,

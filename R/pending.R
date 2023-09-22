@@ -75,8 +75,7 @@ pending <- function(type,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(type = toupper(type))
     }
   return(results)

@@ -36,7 +36,7 @@
 #'
 #' *Update Frequency:* **Twice Weekly**
 #'
-#' @param npi < *integer* > 10-digit National Provider Identifier
+#' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last < *character* > Individual provider's first/last name
 #' @param partb,dme,hha,pmd < *boolean* > `TRUE` or `FALSE`. Whether a provider
 #' is eligible to order and refer to:
@@ -126,12 +126,9 @@ order_refer <- function(npi   = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(partb = yn_logical(partb),
-                    hha   = yn_logical(hha),
-                    dme   = yn_logical(dme),
-                    pmd   = yn_logical(pmd)) |>
+    results <- tidyup(results) |>
+      dplyr::mutate(dplyr::across(
+        dplyr::contains(c("partb", "hha", "dme", "pmd")), yn_logical)) |>
       dplyr::select(npi,
                     first = first_name,
                     last = last_name,

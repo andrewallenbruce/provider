@@ -47,49 +47,59 @@
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi 10-digit National Provider Identifier
-#' @param first,last Provider's first/last name
-#' @param specialty Provider's specialty
-#' @param address Provider's address
-#' @param city Provider's city
-#' @param state Provider's state abbreviation
-#' @param zip Provider's zip code
-#' @param order_refer boolean indicating whether the provider is eligible
-#'    to order and refer
-#' @param tidy Tidy output; default is `TRUE`.
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param first,last < *character* > Opt-out provider's first/last name
+#' @param specialty < *character* > Opt-out provider's specialty
+#' @param address < *character* > Opt-out provider's address
+#' @param city < *character* > Opt-out provider's city
+#' @param state < *character* > Opt-out provider's state abbreviation
+#' @param zip < *character* > Opt-out provider's zip code
+#' @param order_refer < *boolean* > Indicates if the provider is eligible to
+#' order and refer
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**           |**Description**                               |
+#' |:-------------------|:---------------------------------------------|
+#' |`npi`               |10-digit NPI                                  |
+#' |`first`             |Opt-out provider's first name                 |
+#' |`last`              |Opt-out provider's last name                  |
+#' |`specialty`         |Opt-out provider's specialty                  |
+#' |`order_refer`       |Indicates if the provider can order and refer |
+#' |`optout_start_date` |Date that provider's Opt-Out period begins    |
+#' |`optout_end_date`   |Date that provider's Opt-Out period ends      |
+#' |`last_updated`      |Date information was last updated             |
+#' |`address`           |Opt-out provider's street address             |
+#' |`city`              |Opt-out provider's city                       |
+#' |`state`             |Opt-out provider's state                      |
+#' |`zip`               |Opt-out provider's zip code                   |
 #'
 #' @seealso [order_refer()]
 #'
 #' @examples
-#' opt_out(first = "James",
-#'         last = "Smith",
-#'         specialty = "Nurse Practitioner",
-#'         order_refer = TRUE)
+#' opt_out(npi = 1043522824)
 #'
 #' @examplesIf  interactive()
-#' # For providers that have opted out, but are eligible to order and refer,
-#' # use `order_refer()` to look up their specific eligibility statuses
-#' opt_out(first = "James",
-#'         last = "Smith",
-#'         specialty = "Nurse Practitioner",
-#'         order_refer = TRUE) |>
+#' # For opt-out providers that are eligible to order and refer,
+#' # use `order_refer()` to look up their eligibility status:
+#'
+#' opt_out(npi = 1043522824) |>
 #'         pull(npi) |>
 #'         map(\(x) order_refer(npi = x)) |>
 #'         list_rbind()
 #' @autoglobal
 #' @export
-opt_out <- function(npi             = NULL,
-                    first           = NULL,
-                    last            = NULL,
-                    specialty       = NULL,
-                    address         = NULL,
-                    city            = NULL,
-                    state           = NULL,
-                    zip             = NULL,
-                    order_refer     = NULL,
-                    tidy            = TRUE) {
+opt_out <- function(npi = NULL,
+                    first = NULL,
+                    last = NULL,
+                    specialty = NULL,
+                    address = NULL,
+                    city = NULL,
+                    state = NULL,
+                    zip = NULL,
+                    order_refer = NULL,
+                    tidy = TRUE) {
 
   if (!is.null(npi))         {npi         <- npi_check(npi)}
   if (!is.null(order_refer)) {order_refer <- tf_2_yn(order_refer)}
@@ -144,12 +154,10 @@ opt_out <- function(npi             = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(npi = as.character(npi),
                     dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., ""))) |>
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.))) |>
       tidyr::unite("address",
                    dplyr::any_of(c("first_line_street_address",
                                    "second_line_street_address")),

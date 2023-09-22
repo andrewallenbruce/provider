@@ -142,6 +142,18 @@ display_long <- function(df) {
 #
 # }
 
+#' display_long
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+tidyup <- function(df) {
+
+  janitor::clean_names(df) |>
+    dplyr::tibble() |>
+    dplyr::mutate(
+      dplyr::across(dplyr::where(is.character), na_blank))
+
+}
 
 # tidyup <- function(df) {
 #

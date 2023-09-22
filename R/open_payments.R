@@ -165,10 +165,8 @@ open_payments <- function(year,
   }
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(program_year = as.integer(program_year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., " ")),
                     dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::contains("dollars"), ~as.double(.)),

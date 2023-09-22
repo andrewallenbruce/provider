@@ -27,7 +27,7 @@ enrollment IDs if the individual or organization enrolled multiple times}
 \item{first, middle, last}{< \emph{character} > Individual provider's first, middle,
 or last name}
 
-\item{facility_type}{< \emph{character} > Category of facility:
+\item{facility_type}{< \emph{character} >
 \itemize{
 \item \code{"Hospital"} or \code{"hp"}
 \item \code{"Long-term care hospital"} or \code{"ltch"}

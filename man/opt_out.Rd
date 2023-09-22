@@ -18,27 +18,41 @@ opt_out(
 )
 }
 \arguments{
-\item{npi}{10-digit National Provider Identifier}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{first, last}{Provider's first/last name}
+\item{first, last}{< \emph{character} > Opt-out provider's first/last name}
 
-\item{specialty}{Provider's specialty}
+\item{specialty}{< \emph{character} > Opt-out provider's specialty}
 
-\item{address}{Provider's address}
+\item{address}{< \emph{character} > Opt-out provider's address}
 
-\item{city}{Provider's city}
+\item{city}{< \emph{character} > Opt-out provider's city}
 
-\item{state}{Provider's state abbreviation}
+\item{state}{< \emph{character} > Opt-out provider's state abbreviation}
 
-\item{zip}{Provider's zip code}
+\item{zip}{< \emph{character} > Opt-out provider's zip code}
 
-\item{order_refer}{boolean indicating whether the provider is eligible
-to order and refer}
+\item{order_refer}{< \emph{boolean} > Indicates if the provider is eligible to
+order and refer}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab 10-digit NPI \cr
+   \code{first} \tab Opt-out provider's first name \cr
+   \code{last} \tab Opt-out provider's last name \cr
+   \code{specialty} \tab Opt-out provider's specialty \cr
+   \code{order_refer} \tab Indicates if the provider can order and refer \cr
+   \code{optout_start_date} \tab Date that provider's Opt-Out period begins \cr
+   \code{optout_end_date} \tab Date that provider's Opt-Out period ends \cr
+   \code{last_updated} \tab Date information was last updated \cr
+   \code{address} \tab Opt-out provider's street address \cr
+   \code{city} \tab Opt-out provider's city \cr
+   \code{state} \tab Opt-out provider's state \cr
+   \code{zip} \tab Opt-out provider's zip code \cr
+}
 }
 \description{
 \code{opt_out()} allows you to search for information on providers who have
@@ -95,18 +109,13 @@ fee-for-service (Part B).
 }
 }
 \examples{
-opt_out(first = "James",
-        last = "Smith",
-        specialty = "Nurse Practitioner",
-        order_refer = TRUE)
+opt_out(npi = 1043522824)
 
 \dontshow{if ( interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# For providers that have opted out, but are eligible to order and refer,
-# use `order_refer()` to look up their specific eligibility statuses
-opt_out(first = "James",
-        last = "Smith",
-        specialty = "Nurse Practitioner",
-        order_refer = TRUE) |>
+# For opt-out providers that are eligible to order and refer,
+# use `order_refer()` to look up their eligibility status:
+
+opt_out(npi = 1043522824) |>
         pull(npi) |>
         map(\(x) order_refer(npi = x)) |>
         list_rbind()
