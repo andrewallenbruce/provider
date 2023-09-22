@@ -110,8 +110,13 @@ hospitals <- function(npi               = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup", "proprietary")), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.))) |>
+      dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup")), yn_logical),
+                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
+                    proprietary_nonprofit = dplyr::case_match(
+                      proprietary_nonprofit,
+                      "P" ~ "Proprietary",
+                      "N" ~ "Non-Profit",
+                      .default = NA)) |>
       tidyr::unite("address",
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
@@ -141,7 +146,30 @@ hospitals <- function(npi               = NULL,
                     proprietary_nonprofit,
                     dplyr::contains("subgroup_"),
                     dplyr::everything()) |>
-      tidyr::nest(subgroups = dplyr::contains("subgroup_"))
+      dplyr::rename(
+        "Multiple NPIs" = multiple_npis,
+        "REH Conversion" = reh_conversion_flag,
+        "Subgroup General" = subgroup_general,
+        "Subgroup Acute Care" = subgroup_acute_care,
+        "Subgroup Alcohol/Drug" = subgroup_alcohol_drug,
+        "Subgroup Childrens' Hospital" = subgroup_childrens,
+        "Subgroup Long-term" = subgroup_long_term,
+        "Subgroup Psychiatric" = subgroup_psychiatric,
+        "Subgroup Rehabilitation" = subgroup_rehabilitation,
+        "Subgroup Short-Term" = subgroup_short_term,
+        "Subgroup Swing-Bed Approved" = subgroup_swing_bed_approved,
+        "Subgroup Psychiatric Unit" = subgroup_psychiatric_unit,
+        "Subgroup Rehabilitation Unit" = subgroup_rehabilitation_unit,
+        "Subgroup Specialty Hospital" = subgroup_specialty_hospital,
+        "Subgroup Other" = subgroup_other) |>
+      tidyr::pivot_longer(
+        cols = c("Multiple NPIs",
+                 "REH Conversion",
+                 dplyr::contains("Subgroup")),
+        names_to = "status",
+        values_to = "flag") |>
+      dplyr::filter(flag == TRUE) |>
+      dplyr::mutate(flag = NULL)
 
     if (na.rm) {
       results <- janitor::remove_empty(results, which = c("rows", "cols"))

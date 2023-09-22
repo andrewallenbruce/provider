@@ -63,7 +63,33 @@ associate-level control identifier}
 \item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 }
 \value{
-A \link[tibble:tibble-package]{tibble} containing the search results.
+A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
+   \strong{Field} \tab \strong{Description} \cr
+   \code{npi} \tab 10-digit individual NPI \cr
+   \code{pac_id_ind} \tab 10-digit individual PAC ID \cr
+   \code{enroll_id_ind} \tab 15-digit individual enrollment ID \cr
+   \code{first} \tab Provider's first name \cr
+   \code{middle} \tab Provider's middle name \cr
+   \code{last} \tab Provider's last name \cr
+   \code{suffix} \tab Provider's name suffix \cr
+   \code{gender} \tab Provider's gender \cr
+   \code{credential} \tab Provider's credential \cr
+   \code{school} \tab Provider's medical school \cr
+   \code{grad_year} \tab Provider's graduation year \cr
+   \code{specialty} \tab Provider's primary specialty \cr
+   \code{specialty_sec} \tab Provider's secondary specialty \cr
+   \code{facility_name} \tab Facility associated with provider \cr
+   \code{pac_id_org} \tab Facility's 10-digit PAC ID \cr
+   \code{members} \tab Number of providers associated with facility's PAC ID \cr
+   \code{address} \tab Provider's street address \cr
+   \code{city} \tab Provider's city \cr
+   \code{state} \tab Provider's state \cr
+   \code{zip} \tab Provider's zip code \cr
+   \code{phone} \tab Provider's phone number \cr
+   \code{telehealth} \tab Indicates if provider offers telehealth services \cr
+   \code{assign_ind} \tab Indicates if provider accepts Medicare assignment \cr
+   \code{assign_group} \tab Indicates if facility accepts Medicare assignment \cr
+}
 }
 \description{
 \code{clinicians()} allows you to access information about providers enrolled in

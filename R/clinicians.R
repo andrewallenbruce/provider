@@ -34,7 +34,34 @@
 #' @param offset < *integer* > offset; API pagination
 #' @param tidy < *boolean* > Tidy output; default is `TRUE`.
 #'
-#' @return A [tibble][tibble::tibble-package] containing the search results.
+#' @return A [tibble][tibble::tibble-package] with the columns:
+#'
+#' |**Field**       |**Description**                                       |
+#' |:---------------|:-----------------------------------------------------|
+#' |`npi`           |10-digit individual NPI                               |
+#' |`pac_id_ind`    |10-digit individual PAC ID                            |
+#' |`enroll_id_ind` |15-digit individual enrollment ID                     |
+#' |`first`         |Provider's first name                                 |
+#' |`middle`        |Provider's middle name                                |
+#' |`last`          |Provider's last name                                  |
+#' |`suffix`        |Provider's name suffix                                |
+#' |`gender`        |Provider's gender                                     |
+#' |`credential`    |Provider's credential                                 |
+#' |`school`        |Provider's medical school                             |
+#' |`grad_year`     |Provider's graduation year                            |
+#' |`specialty`     |Provider's primary specialty                          |
+#' |`specialty_sec` |Provider's secondary specialty                        |
+#' |`facility_name` |Facility associated with provider                     |
+#' |`pac_id_org`    |Facility's 10-digit PAC ID                            |
+#' |`members`       |Number of providers associated with facility's PAC ID |
+#' |`address`       |Provider's street address                             |
+#' |`city`          |Provider's city                                       |
+#' |`state`         |Provider's state                                      |
+#' |`zip`           |Provider's zip code                                   |
+#' |`phone`         |Provider's phone number                               |
+#' |`telehealth`    |Indicates if provider offers telehealth services      |
+#' |`assign_ind`    |Indicates if provider accepts Medicare assignment     |
+#' |`assign_group`  |Indicates if facility accepts Medicare assignment     |
 #'
 #' @seealso [hospitals()], [providers()], [affiliations()]
 #'
@@ -134,12 +161,10 @@ clinicians <- function(npi = NULL,
   }
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       tidyr::unite("address", adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    address = stringr::str_squish(address),
+      dplyr::mutate(address = stringr::str_squish(address),
                     num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth)) |>

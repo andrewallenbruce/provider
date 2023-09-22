@@ -39,11 +39,11 @@ information (enrollment type, state, reassignment of benefits).}
 Providers enroll at the state level, so a PAC ID can be associated with
 multiple enrollment IDs and states.}
 
-\item{first, middle, last}{Individual provider's first/middle/last name}
+\item{first, middle, last}{< \emph{character} > Individual provider's first/middle/last name}
 
-\item{organization}{Organizational provider's name}
+\item{organization}{< \emph{character} > Organizational provider's name}
 
-\item{gender}{Individual provider gender. Options are:
+\item{gender}{< \emph{character} > Individual provider gender. Options are:
 \itemize{
 \item \code{"F"}: Female
 \item \code{"M"}: Male

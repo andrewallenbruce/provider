@@ -22,9 +22,9 @@
 #' @param state < *character* > Enrollment state abbreviation/full name.
 #' Providers enroll at the state level, so a PAC ID can be associated with
 #' multiple enrollment IDs and states.
-#' @param first,middle,last Individual provider's first/middle/last name
-#' @param organization Organizational provider's name
-#' @param gender Individual provider gender. Options are:
+#' @param first,middle,last < *character* > Individual provider's first/middle/last name
+#' @param organization < *character* > Organizational provider's name
+#' @param gender < *character* > Individual provider gender. Options are:
 #'    * `"F"`: Female
 #'    * `"M"`: Male
 #'    * `"9"`: Unknown (or Organizational provider)
