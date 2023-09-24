@@ -117,6 +117,19 @@ display_long <- function(df) {
         tidyr::pivot_longer(dplyr::everything())
 }
 
+#' tidyup
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+tidyup <- function(df) {
+
+  janitor::clean_names(df) |>
+    dplyr::tibble() |>
+    dplyr::mutate(
+      dplyr::across(dplyr::where(is.character), na_blank))
+
+}
+
 # create_tribble <- function(names = c("param", "arg"), nrows = 4){
 #
 #   header <- paste(paste(paste0("~", names), collapse = ", "), "\n")
@@ -137,19 +150,6 @@ display_long <- function(df) {
 #   invisible(out)
 #
 # }
-
-#' display_long
-#' @param df data frame
-#' @autoglobal
-#' @noRd
-tidyup <- function(df) {
-
-  janitor::clean_names(df) |>
-    dplyr::tibble() |>
-    dplyr::mutate(
-      dplyr::across(dplyr::where(is.character), na_blank))
-
-}
 
 # tidyup <- function(df) {
 #

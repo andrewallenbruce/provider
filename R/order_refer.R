@@ -124,16 +124,27 @@ order_refer <- function(npi   = NULL,
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(
         dplyr::contains(c("partb", "hha", "dme", "pmd")), yn_logical)) |>
-      dplyr::select(npi,
-                    first = first_name,
-                    last = last_name,
-                    "Medicare Part B"                 = partb,
-                    "Home Health Agency (HHA)"        = hha,
-                    "Durable Medical Equipment (DME)" = dme,
-                    "Power Mobility Device (PMD)"     = pmd) |>
+      ord_cols() |>
       tidyr::pivot_longer(cols = !c(npi, first, last),
                           names_to = "service",
                           values_to = "eligible")
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+ord_cols <- function(df) {
+
+  cols <- c('npi',
+            'first' = 'first_name',
+            'last' = 'last_name',
+            "Medicare Part B" = 'partb',
+            "Home Health Agency (HHA)" = 'hha',
+            "Durable Medical Equipment (DME)" = 'dme',
+            "Power Mobility Device (PMD)" = 'pmd')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

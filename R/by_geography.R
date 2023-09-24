@@ -126,23 +126,34 @@ by_geography <- function(year,
                     place_of_srvc  = pos_char(place_of_srvc),
                     dplyr::across(dplyr::starts_with("tot_"), as.integer),
                     dplyr::across(dplyr::starts_with("avg_"), as.double)) |>
-      dplyr::select(year,
-                    level          = rndrng_prvdr_geo_lvl,
-                    state          = rndrng_prvdr_geo_desc,
-                    fips           = rndrng_prvdr_geo_cd,
-                    hcpcs_code     = hcpcs_cd,
-                    hcpcs_desc,
-                    drug           = hcpcs_drug_ind,
-                    pos            = place_of_srvc,
-                    tot_provs      = tot_rndrng_prvdrs,
-                    tot_benes,
-                    tot_srvcs,
-                    tot_day        = tot_bene_day_srvcs,
-                    avg_charge     = avg_sbmtd_chrg,
-                    avg_allowed    = avg_mdcr_alowd_amt,
-                    avg_payment    = avg_mdcr_pymt_amt,
-                    avg_std_pymt   = avg_mdcr_stdzd_amt)
+      geo_cols()
 
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+geo_cols <- function(df) {
+
+  cols <- c("year",
+            "level" = "rndrng_prvdr_geo_lvl",
+            "state" = "rndrng_prvdr_geo_desc",
+            "fips" = "rndrng_prvdr_geo_cd",
+            "hcpcs_code" = "hcpcs_cd",
+            "hcpcs_desc",
+            "drug" = "hcpcs_drug_ind",
+            "pos" = "place_of_srvc",
+            "tot_provs" = "tot_rndrng_prvdrs",
+            "tot_benes",
+            "tot_srvcs",
+            "tot_day" = "tot_bene_day_srvcs",
+            "avg_charge" = "avg_sbmtd_chrg",
+            "avg_allowed" = "avg_mdcr_alowd_amt",
+            "avg_payment" = "avg_mdcr_pymt_amt",
+            "avg_std_pymt" = "avg_mdcr_stdzd_amt")
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

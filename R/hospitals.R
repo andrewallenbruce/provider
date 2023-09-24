@@ -203,7 +203,7 @@ hospitals <- function(npi = NULL,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::contains(c("flag", "subgroup")), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
+                    dplyr::across(dplyr::contains("date"), anytime::anydate),
                     proprietary_nonprofit = dplyr::case_match(
                       proprietary_nonprofit,
                       "P" ~ "Proprietary",
@@ -212,48 +212,7 @@ hospitals <- function(npi = NULL,
       tidyr::unite("address",
                    address_line_1:address_line_2,
                    remove = TRUE, na.rm = TRUE) |>
-      dplyr::select(npi,
-                    organization = organization_name,
-                    doing_business_as      = doing_business_as_name,
-                    pac_id_org             = associate_id,
-                    enroll_id_org          = enrollment_id,
-                    facility_ccn           = ccn,
-                    specialty_code         = provider_type_code,
-                    specialty              = provider_type_text,
-                    enroll_state           = enrollment_state,
-                    incorporation_date,
-                    incorporation_state,
-                    organization_structure = organization_type_structure,
-                    org_other              = organization_other_type_text,
-                    address,
-                    city,
-                    state,
-                    zip                    = zip_code,
-                    location_type          = practice_location_type,
-                    location_other         = location_other_type_text,
-                    multiple_npis          = multiple_npi_flag,
-                    cah_or_hospital_ccn,
-                    reh_conversion_flag,
-                    reh_conversion_date,
-                    proprietary_nonprofit,
-                    dplyr::contains("subgroup_"),
-                    dplyr::everything()) |>
-      dplyr::rename(
-        "Multiple NPIs" = multiple_npis,
-        "REH Conversion" = reh_conversion_flag,
-        "Subgroup General" = subgroup_general,
-        "Subgroup Acute Care" = subgroup_acute_care,
-        "Subgroup Alcohol Drug" = subgroup_alcohol_drug,
-        "Subgroup Childrens' Hospital" = subgroup_childrens,
-        "Subgroup Long-term" = subgroup_long_term,
-        "Subgroup Psychiatric" = subgroup_psychiatric,
-        "Subgroup Rehabilitation" = subgroup_rehabilitation,
-        "Subgroup Short-Term" = subgroup_short_term,
-        "Subgroup Swing-Bed Approved" = subgroup_swing_bed_approved,
-        "Subgroup Psychiatric Unit" = subgroup_psychiatric_unit,
-        "Subgroup Rehabilitation Unit" = subgroup_rehabilitation_unit,
-        "Subgroup Specialty Hospital" = subgroup_specialty_hospital,
-        "Subgroup Other" = subgroup_other) |>
+      hosp_cols() |>
       tidyr::pivot_longer(
         cols = c("Multiple NPIs",
                  "REH Conversion",
@@ -263,14 +222,58 @@ hospitals <- function(npi = NULL,
       dplyr::filter(flag == TRUE) |>
       dplyr::mutate(flag = NULL)
 
-    if (na.rm) {
-      results <- janitor::remove_empty(results, which = c("rows", "cols"))
-    }
-
+    if (na.rm) {results <- janitor::remove_empty(results,
+                              which = c("rows", "cols"))}
     }
   return(results)
 }
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+hosp_cols <- function(df) {
+
+  cols <- c('npi',
+            'organization' = 'organization_name',
+            'doing_business_as' = 'doing_business_as_name',
+            'pac_id_org' = 'associate_id',
+            'enroll_id_org' = 'enrollment_id',
+            'facility_ccn' = 'ccn',
+            'specialty_code' = 'provider_type_code',
+            'specialty' = 'provider_type_text',
+            'enroll_state' = 'enrollment_state',
+            'incorporation_date',
+            'incorporation_state',
+            'organization_structure' = 'organization_type_structure',
+            'org_other' = 'organization_other_type_text',
+            'address',
+            'city',
+            'state',
+            'zip' = 'zip_code',
+            'location_type' = 'practice_location_type',
+            'location_other' = 'location_other_type_text',
+            'cah_or_hospital_ccn',
+            'reh_conversion_date',
+            'proprietary_nonprofit',
+            "Multiple NPIs" = 'multiple_npi_flag',
+            "REH Conversion" = 'reh_conversion_flag',
+            "Subgroup General" = 'subgroup_general',
+            "Subgroup Acute Care" = 'subgroup_acute_care',
+            "Subgroup Alcohol Drug" = 'subgroup_alcohol_drug',
+            "Subgroup Childrens' Hospital" = 'subgroup_childrens',
+            "Subgroup Long-term" = 'subgroup_long_term',
+            "Subgroup Psychiatric" = 'subgroup_psychiatric',
+            "Subgroup Rehabilitation" = 'subgroup_rehabilitation',
+            "Subgroup Short-Term" = 'subgroup_short_term',
+            "Subgroup Swing-Bed Approved" = 'subgroup_swing_bed_approved',
+            "Subgroup Psychiatric Unit" = 'subgroup_psychiatric_unit',
+            "Subgroup Rehabilitation Unit" = 'subgroup_rehabilitation_unit',
+            "Subgroup Specialty Hospital" = 'subgroup_specialty_hospital',
+            "Subgroup Other" = 'subgroup_other')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
+}
 
 #' Search the Ambulatory Surgical Centers and Independent Free Standing
 #' Emergency Departments Enrolled in Medicare As Hospital Providers

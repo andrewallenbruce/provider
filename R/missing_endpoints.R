@@ -90,9 +90,20 @@ missing_endpoints <- function(npi  = NULL,
     results <- tidyup(results) |>
       tidyr::separate_wider_delim("Provider Name", ",",
                       names = c("last_name", "first_name")) |>
-      dplyr::select(npi = NPI,
-                    first = first_name,
-                    last = last_name)
+      miss_cols()
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+miss_cols <- function(df) {
+
+  cols <- c("npi"   = "NPI",
+            "first" = "first_name",
+            "last"  = "last_name")
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

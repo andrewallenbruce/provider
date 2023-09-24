@@ -2,41 +2,10 @@
 
 utils::globalVariables(c(
   "y", # <affiliations>
-  "ind_pac_id", # <affiliations>
-  "frst_nm", # <affiliations>
-  "mid_nm", # <affiliations>
-  "lst_nm", # <affiliations>
-  "suff", # <affiliations>
-  "facility_affiliations_certification_number", # <affiliations>
-  "facility_type_certification_number", # <affiliations>
   "state.abb", # <beneficiaries>
   "state.name", # <beneficiaries>
   "y", # <beneficiaries>
-  "month", # <beneficiaries>
-  "bene_geo_lvl", # <beneficiaries>
-  "bene_state_abrvtn", # <beneficiaries>
-  "bene_state_desc", # <beneficiaries>
-  "bene_county_desc", # <beneficiaries>
   "bene_fips_cd", # <beneficiaries>
-  "tot_benes", # <beneficiaries>
-  "orgnl_mdcr_benes", # <beneficiaries>
-  "ma_and_oth_benes", # <beneficiaries>
-  "aged_tot_benes", # <beneficiaries>
-  "aged_esrd_benes", # <beneficiaries>
-  "aged_no_esrd_benes", # <beneficiaries>
-  "dsbld_tot_benes", # <beneficiaries>
-  "dsbld_esrd_and_esrd_only_benes", # <beneficiaries>
-  "dsbld_no_esrd_benes", # <beneficiaries>
-  "a_b_tot_benes", # <beneficiaries>
-  "a_b_orgnl_mdcr_benes", # <beneficiaries>
-  "a_b_ma_and_oth_benes", # <beneficiaries>
-  "prscrptn_drug_tot_benes", # <beneficiaries>
-  "prscrptn_drug_pdp_benes", # <beneficiaries>
-  "prscrptn_drug_mapd_benes", # <beneficiaries>
-  "prscrptn_drug_deemed_eligible_full_lis_benes", # <beneficiaries>
-  "prscrptn_drug_full_lis_benes", # <beneficiaries>
-  "prscrptn_drug_partial_lis_benes", # <beneficiaries>
-  "prscrptn_drug_no_lis_benes", # <beneficiaries>
   "state.abb", # <by_geography>
   "state.name", # <by_geography>
   "x", # <by_geography>
@@ -44,89 +13,11 @@ utils::globalVariables(c(
   "distro", # <by_geography>
   "hcpcs_drug_ind", # <by_geography>
   "place_of_srvc", # <by_geography>
-  "rndrng_prvdr_geo_lvl", # <by_geography>
-  "rndrng_prvdr_geo_desc", # <by_geography>
-  "rndrng_prvdr_geo_cd", # <by_geography>
-  "hcpcs_cd", # <by_geography>
-  "tot_rndrng_prvdrs", # <by_geography>
-  "tot_benes", # <by_geography>
-  "tot_srvcs", # <by_geography>
-  "tot_bene_day_srvcs", # <by_geography>
-  "avg_sbmtd_chrg", # <by_geography>
-  "avg_mdcr_alowd_amt", # <by_geography>
-  "avg_mdcr_pymt_amt", # <by_geography>
-  "avg_mdcr_stdzd_amt", # <by_geography>
   "distro", # <by_provider>
   "y", # <by_provider>
   "rndrng_prvdr_crdntls", # <by_provider>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
   "rndrng_prvdr_ent_cd", # <by_provider>
-  "rndrng_npi", # <by_provider>
-  "rndrng_prvdr_first_name", # <by_provider>
-  "rndrng_prvdr_mi", # <by_provider>
-  "rndrng_prvdr_last_org_name", # <by_provider>
-  "rndrng_prvdr_gndr", # <by_provider>
-  "address", # <by_provider>
-  "rndrng_prvdr_city", # <by_provider>
-  "rndrng_prvdr_state_abrvtn", # <by_provider>
-  "rndrng_prvdr_state_fips", # <by_provider>
-  "rndrng_prvdr_zip5", # <by_provider>
-  "rndrng_prvdr_ruca", # <by_provider>
-  "rndrng_prvdr_cntry", # <by_provider>
-  "rndrng_prvdr_type", # <by_provider>
-  "tot_hcpcs_cds", # <by_provider>
-  "tot_benes", # <by_provider>
-  "tot_srvcs", # <by_provider>
-  "tot_sbmtd_chrg", # <by_provider>
-  "tot_mdcr_alowd_amt", # <by_provider>
-  "tot_mdcr_pymt_amt", # <by_provider>
-  "tot_mdcr_stdzd_amt", # <by_provider>
-  "drug_tot_hcpcs_cds", # <by_provider>
-  "drug_tot_benes", # <by_provider>
-  "drug_tot_srvcs", # <by_provider>
-  "drug_sbmtd_chrg", # <by_provider>
-  "drug_mdcr_alowd_amt", # <by_provider>
-  "drug_mdcr_pymt_amt", # <by_provider>
-  "drug_mdcr_stdzd_amt", # <by_provider>
-  "med_tot_hcpcs_cds", # <by_provider>
-  "med_tot_benes", # <by_provider>
-  "med_tot_srvcs", # <by_provider>
-  "med_sbmtd_chrg", # <by_provider>
-  "med_mdcr_alowd_amt", # <by_provider>
-  "med_mdcr_pymt_amt", # <by_provider>
-  "med_mdcr_stdzd_amt", # <by_provider>
-  "bene_avg_age", # <by_provider>
-  "bene_age_lt_65_cnt", # <by_provider>
-  "bene_age_65_74_cnt", # <by_provider>
-  "bene_age_75_84_cnt", # <by_provider>
-  "bene_age_gt_84_cnt", # <by_provider>
-  "bene_feml_cnt", # <by_provider>
-  "bene_male_cnt", # <by_provider>
-  "bene_race_wht_cnt", # <by_provider>
-  "bene_race_black_cnt", # <by_provider>
-  "bene_race_api_cnt", # <by_provider>
-  "bene_race_hspnc_cnt", # <by_provider>
-  "bene_race_nat_ind_cnt", # <by_provider>
-  "bene_race_othr_cnt", # <by_provider>
-  "bene_dual_cnt", # <by_provider>
-  "bene_ndual_cnt", # <by_provider>
-  "bene_cc_af_pct", # <by_provider>
-  "bene_cc_alzhmr_pct", # <by_provider>
-  "bene_cc_asthma_pct", # <by_provider>
-  "bene_cc_cncr_pct", # <by_provider>
-  "bene_cc_chf_pct", # <by_provider>
-  "bene_cc_ckd_pct", # <by_provider>
-  "bene_cc_copd_pct", # <by_provider>
-  "bene_cc_dprssn_pct", # <by_provider>
-  "bene_cc_dbts_pct", # <by_provider>
-  "bene_cc_hyplpdma_pct", # <by_provider>
-  "bene_cc_hyprtnsn_pct", # <by_provider>
-  "bene_cc_ihd_pct", # <by_provider>
-  "bene_cc_opo_pct", # <by_provider>
-  "bene_cc_raoa_pct", # <by_provider>
-  "bene_cc_sz_pct", # <by_provider>
-  "bene_cc_strok_pct", # <by_provider>
-  "bene_avg_risk_scre", # <by_provider>
   "distro", # <by_service>
   "y", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>
@@ -134,29 +25,6 @@ utils::globalVariables(c(
   "place_of_srvc", # <by_service>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <by_service>
   "hcpcs_drug_ind", # <by_service>
-  "rndrng_npi", # <by_service>
-  "level", # <by_service>
-  "rndrng_prvdr_first_name", # <by_service>
-  "rndrng_prvdr_mi", # <by_service>
-  "rndrng_prvdr_last_org_name", # <by_service>
-  "rndrng_prvdr_gndr", # <by_service>
-  "rndrng_prvdr_type", # <by_service>
-  "address", # <by_service>
-  "rndrng_prvdr_city", # <by_service>
-  "rndrng_prvdr_state_abrvtn", # <by_service>
-  "rndrng_prvdr_state_fips", # <by_service>
-  "rndrng_prvdr_zip5", # <by_service>
-  "rndrng_prvdr_ruca", # <by_service>
-  "rndrng_prvdr_cntry", # <by_service>
-  "hcpcs_cd", # <by_service>
-  "hcpcs_desc", # <by_service>
-  "tot_benes", # <by_service>
-  "tot_srvcs", # <by_service>
-  "tot_bene_day_srvcs", # <by_service>
-  "avg_sbmtd_chrg", # <by_service>
-  "avg_mdcr_alowd_amt", # <by_service>
-  "avg_mdcr_pymt_amt", # <by_service>
-  "avg_mdcr_stdzd_amt", # <by_service>
   "year", # <change_year>
   ":=", # <change_year>
   "state.abb", # <cc_specific>
@@ -169,13 +37,6 @@ utils::globalVariables(c(
   "tot_mdcr_pymt_pc", # <cc_specific>
   "hosp_readmsn_rate", # <cc_specific>
   "er_visits_per_1000_benes", # <cc_specific>
-  "bene_geo_lvl", # <cc_specific>
-  "bene_geo_desc", # <cc_specific>
-  "bene_geo_cd", # <cc_specific>
-  "bene_age_lvl", # <cc_specific>
-  "bene_demo_lvl", # <cc_specific>
-  "bene_demo_desc", # <cc_specific>
-  "bene_cond", # <cc_specific>
   "state.abb", # <cc_multiple>
   "state.name", # <cc_multiple>
   "x", # <cc_multiple>
@@ -187,13 +48,6 @@ utils::globalVariables(c(
   "tot_mdcr_pymt_pc", # <cc_multiple>
   "hosp_readmsn_rate", # <cc_multiple>
   "er_visits_per_1000_benes", # <cc_multiple>
-  "bene_geo_lvl", # <cc_multiple>
-  "bene_geo_desc", # <cc_multiple>
-  "bene_geo_cd", # <cc_multiple>
-  "bene_age_lvl", # <cc_multiple>
-  "bene_demo_lvl", # <cc_multiple>
-  "bene_demo_desc", # <cc_multiple>
-  "bene_mcc", # <cc_multiple>
   "y", # <clinicians>
   "adr_ln_1", # <clinicians>
   "adr_ln_2", # <clinicians>
@@ -201,23 +55,6 @@ utils::globalVariables(c(
   "num_org_mem", # <clinicians>
   "grd_yr", # <clinicians>
   "telehlth", # <clinicians>
-  "ind_pac_id", # <clinicians>
-  "ind_enrl_id", # <clinicians>
-  "frst_nm", # <clinicians>
-  "mid_nm", # <clinicians>
-  "lst_nm", # <clinicians>
-  "suff", # <clinicians>
-  "gndr", # <clinicians>
-  "cred", # <clinicians>
-  "med_sch", # <clinicians>
-  "pri_spec", # <clinicians>
-  "sec_spec_all", # <clinicians>
-  "org_pac_id", # <clinicians>
-  "city_town", # <clinicians>
-  "zip_code", # <clinicians>
-  "telephone_number", # <clinicians>
-  "ind_assgn", # <clinicians>
-  "grp_assgn", # <clinicians>
   "year", # <compare_hcpcs>
   "state", # <compare_hcpcs>
   "hcpcs_code", # <compare_hcpcs>
@@ -253,39 +90,6 @@ utils::globalVariables(c(
   "y", # <hospitals>
   "address_line_1", # <hospitals>
   "address_line_2", # <hospitals>
-  "organization_name", # <hospitals>
-  "doing_business_as_name", # <hospitals>
-  "associate_id", # <hospitals>
-  "enrollment_id", # <hospitals>
-  "ccn", # <hospitals>
-  "provider_type_code", # <hospitals>
-  "provider_type_text", # <hospitals>
-  "enrollment_state", # <hospitals>
-  "incorporation_date", # <hospitals>
-  "incorporation_state", # <hospitals>
-  "organization_type_structure", # <hospitals>
-  "organization_other_type_text", # <hospitals>
-  "address", # <hospitals>
-  "zip_code", # <hospitals>
-  "practice_location_type", # <hospitals>
-  "location_other_type_text", # <hospitals>
-  "multiple_npi_flag", # <hospitals>
-  "cah_or_hospital_ccn", # <hospitals>
-  "reh_conversion_flag", # <hospitals>
-  "reh_conversion_date", # <hospitals>
-  "subgroup_general", # <hospitals>
-  "subgroup_acute_care", # <hospitals>
-  "subgroup_alcohol_drug", # <hospitals>
-  "subgroup_childrens", # <hospitals>
-  "subgroup_long_term", # <hospitals>
-  "subgroup_psychiatric", # <hospitals>
-  "subgroup_rehabilitation", # <hospitals>
-  "subgroup_short_term", # <hospitals>
-  "subgroup_swing_bed_approved", # <hospitals>
-  "subgroup_psychiatric_unit", # <hospitals>
-  "subgroup_rehabilitation_unit", # <hospitals>
-  "subgroup_specialty_hospital", # <hospitals>
-  "subgroup_other", # <hospitals>
   "flag", # <hospitals>
   "y", # <asc_ifed_enrollment>
   "line_1_st_adr", # <asc_ifed_enrollment>
@@ -381,9 +185,6 @@ utils::globalVariables(c(
   "confirmed_date", # <laboratories>
   "type_of_action", # <laboratories>
   "y", # <missing_endpoints>
-  "NPI", # <missing_endpoints>
-  "first_name", # <missing_endpoints>
-  "last_name", # <missing_endpoints>
   "y", # <nppes>
   "number", # <nppes>
   "enumeration_type", # <nppes>
@@ -410,79 +211,6 @@ utils::globalVariables(c(
   "change_type", # <open_payments>
   "covered_recipient_type", # <open_payments>
   "nature_of_payment_or_transfer_of_value", # <open_payments>
-  "covered_recipient_npi", # <open_payments>
-  "teaching_hospital_ccn", # <open_payments>
-  "teaching_hospital_id", # <open_payments>
-  "teaching_hospital_name", # <open_payments>
-  "covered_recipient_first_name", # <open_payments>
-  "covered_recipient_middle_name", # <open_payments>
-  "covered_recipient_last_name", # <open_payments>
-  "covered_recipient_name_suffix", # <open_payments>
-  "address", # <open_payments>
-  "recipient_city", # <open_payments>
-  "recipient_state", # <open_payments>
-  "recipient_zip_code", # <open_payments>
-  "recipient_postal_code", # <open_payments>
-  "recipient_country", # <open_payments>
-  "recipient_province", # <open_payments>
-  "covered_recipient_primary_type_1", # <open_payments>
-  "primary_other", # <open_payments>
-  "covered_recipient_specialty_1", # <open_payments>
-  "specialty_other", # <open_payments>
-  "covered_recipient_license_state_code1", # <open_payments>
-  "license_state_other", # <open_payments>
-  "applicable_manufacturer_or_applicable_gpo_making_payment_id", # <open_payments>
-  "submitting_applicable_manufacturer_or_applicable_gpo_name", # <open_payments>
-  "applicable_manufacturer_or_applicable_gpo_making_payment_name", # <open_payments>
-  "applicable_manufacturer_or_applicable_gpo_making_payment_state", # <open_payments>
-  "applicable_manufacturer_or_applicable_gpo_making_payment_country", # <open_payments>
-  "total_amount_of_payment_us_dollars", # <open_payments>
-  "date_of_payment", # <open_payments>
-  "number_of_payments_included_in_total_amount", # <open_payments>
-  "form_of_payment_or_transfer_of_value", # <open_payments>
-  "city_of_travel", # <open_payments>
-  "state_of_travel", # <open_payments>
-  "country_of_travel", # <open_payments>
-  "physician_ownership_indicator", # <open_payments>
-  "third_party_payment_recipient_indicator", # <open_payments>
-  "name_of_third_party_entity_receiving_payment_or_transfer_of_value", # <open_payments>
-  "third_party_equals_covered_recipient_indicator", # <open_payments>
-  "charity_indicator", # <open_payments>
-  "contextual_information", # <open_payments>
-  "payment_publication_date", # <open_payments>
-  "delay_in_publication_indicator", # <open_payments>
-  "dispute_status_for_publication", # <open_payments>
-  "related_product_indicator", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
-  "covered_or_noncovered_indicator_1", # <open_payments>
-  "indicate_drug_or_biological_or_device_or_medical_supply_1", # <open_payments>
-  "product_category_or_therapeutic_area_1", # <open_payments>
-  "associated_drug_or_biological_ndc_1", # <open_payments>
-  "associated_device_or_medical_supply_pdi_1", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_2", # <open_payments>
-  "covered_or_noncovered_indicator_2", # <open_payments>
-  "indicate_drug_or_biological_or_device_or_medical_supply_2", # <open_payments>
-  "product_category_or_therapeutic_area_2", # <open_payments>
-  "associated_drug_or_biological_ndc_2", # <open_payments>
-  "associated_device_or_medical_supply_pdi_2", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_3", # <open_payments>
-  "covered_or_noncovered_indicator_3", # <open_payments>
-  "indicate_drug_or_biological_or_device_or_medical_supply_3", # <open_payments>
-  "product_category_or_therapeutic_area_3", # <open_payments>
-  "associated_drug_or_biological_ndc_3", # <open_payments>
-  "associated_device_or_medical_supply_pdi_3", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_4", # <open_payments>
-  "covered_or_noncovered_indicator_4", # <open_payments>
-  "indicate_drug_or_biological_or_device_or_medical_supply_4", # <open_payments>
-  "product_category_or_therapeutic_area_4", # <open_payments>
-  "associated_drug_or_biological_ndc_4", # <open_payments>
-  "associated_device_or_medical_supply_pdi_4", # <open_payments>
-  "name_of_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
-  "covered_or_noncovered_indicator_5", # <open_payments>
-  "indicate_drug_or_biological_or_device_or_medical_supply_5", # <open_payments>
-  "product_category_or_therapeutic_area_5", # <open_payments>
-  "associated_drug_or_biological_ndc_5", # <open_payments>
-  "associated_device_or_medical_supply_pdi_5", # <open_payments>
   "name_1", # <open_payments>
   "pdi_5", # <open_payments>
   "val", # <open_payments>
@@ -502,30 +230,9 @@ utils::globalVariables(c(
   "set", # <open_ids>
   "identifier", # <open_ids>
   "y", # <opt_out>
-  "first_name", # <opt_out>
-  "last_name", # <opt_out>
-  "eligible_to_order_and_refer", # <opt_out>
-  "optout_effective_date", # <opt_out>
-  "optout_end_date", # <opt_out>
-  "last_updated", # <opt_out>
-  "city_name", # <opt_out>
-  "state_code", # <opt_out>
-  "zip_code", # <opt_out>
   "y", # <order_refer>
-  "first_name", # <order_refer>
-  "last_name", # <order_refer>
   "y", # <pending>
   "y", # <providers>
-  "pecos_asct_cntl_id", # <providers>
-  "enrlmt_id", # <providers>
-  "provider_type_cd", # <providers>
-  "provider_type_desc", # <providers>
-  "state_cd", # <providers>
-  "org_name", # <providers>
-  "first_name", # <providers>
-  "mdl_name", # <providers>
-  "last_name", # <providers>
-  "gndr_sw", # <providers>
   "distro", # <quality_payment>
   "y", # <quality_payment>
   "practice_state_or_us_territory", # <quality_payment>
@@ -601,35 +308,10 @@ utils::globalVariables(c(
   "apm_affl_2", # <mips_2021>
   "apm_affl_3", # <mips_2021>
   "y", # <revalidation_date>
-  "national_provider_identifier", # <revalidation_date>
-  "enrollment_id", # <revalidation_date>
-  "first_name", # <revalidation_date>
-  "last_name", # <revalidation_date>
-  "organization_name", # <revalidation_date>
-  "enrollment_state_code", # <revalidation_date>
-  "provider_type_text", # <revalidation_date>
-  "enrollment_specialty", # <revalidation_date>
-  "enrollment_type", # <revalidation_date>
-  "individual_total_reassign_to", # <revalidation_date>
-  "receiving_benefits_reassignment", # <revalidation_date>
-  "revalidation_due_date", # <revalidation_date>
-  "adjusted_due_date", # <revalidation_date>
   "y", # <revalidation_reassign>
   "group_pac_id", # <revalidation_reassign>
   "individual_pac_id", # <revalidation_reassign>
   "individual_npi", # <revalidation_reassign>
-  "individual_enrollment_id", # <revalidation_reassign>
-  "individual_first_name", # <revalidation_reassign>
-  "individual_last_name", # <revalidation_reassign>
-  "individual_state_code", # <revalidation_reassign>
-  "individual_specialty_description", # <revalidation_reassign>
-  "individual_total_employer_associations", # <revalidation_reassign>
-  "group_enrollment_id", # <revalidation_reassign>
-  "group_legal_business_name", # <revalidation_reassign>
-  "group_state_code", # <revalidation_reassign>
-  "group_reassignments_and_physician_assistants", # <revalidation_reassign>
-  "individual_due_date", # <revalidation_reassign>
-  "group_due_date", # <revalidation_reassign>
   "y", # <revalidation_group>
   "group_pac_id", # <revalidation_group>
   "individual_npi", # <revalidation_group>

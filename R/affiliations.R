@@ -2,7 +2,7 @@
 #'
 #' @description
 #'
-#' `affiliations()` allows you to access information concerning providers'
+#' [affiliations()] allows you to access information concerning providers'
 #' facility affiliations
 #'
 #' Links:
@@ -135,20 +135,8 @@ affiliations <- function(npi = NULL,
 
   }
 
-  if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::select(
-        npi,
-        pac_id_ind = ind_pac_id,
-        first = frst_nm,
-        middle = mid_nm,
-        last = lst_nm,
-        suffix = suff,
-        facility_type,
-        facility_ccn = facility_affiliations_certification_number,
-        parent_ccn = facility_type_certification_number,
-        dplyr::everything())
-    }
+  if (tidy) {results <- tidyup(results) |> aff_cols()}
+
   return(results)
 }
 
@@ -161,4 +149,23 @@ aff_id <- function() {
     httr2::resp_body_json(simplifyVector = TRUE)
 
   return(response$distribution$identifier)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+aff_cols <- function(df) {
+
+  cols <- c("npi",
+            "pac_id_ind"   = "ind_pac_id",
+            "first"        = "frst_nm",
+            "middle"       = "mid_nm",
+            "last"         = "lst_nm",
+            "suffix"       = "suff",
+            "facility_type",
+            "facility_ccn" = "facility_affiliations_certification_number",
+            "parent_ccn"   = "facility_type_certification_number")
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

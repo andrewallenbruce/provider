@@ -97,13 +97,27 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~stringr::str_squish(.))) |>
+      dplyr::mutate(dplyr::across(dplyr::where(is.character), stringr::str_squish)) |>
       dplyr::select(medicare_code = medicare_specialty_code,
                     medicare_type = medicare_provider_supplier_type,
                     taxonomy_code = provider_taxonomy_code,
                     taxonomy_description = provider_taxonomy_description_type_classification_specialization)
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+cross_cols <- function(df) {
+
+  cols <- c('medicare_code' = 'medicare_specialty_code',
+            'medicare_type' = 'medicare_provider_supplier_type',
+            'taxonomy_code' = 'provider_taxonomy_code',
+            'taxonomy_description' = 'provider_taxonomy_description_type_classification_specialization')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }
 
 #' Download Current NUCC Taxonomy CSV

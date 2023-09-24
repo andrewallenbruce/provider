@@ -132,36 +132,48 @@ beneficiaries <- function(year        = NULL,
                     bene_fips_cd = stringr::str_squish(bene_fips_cd),
                     dplyr::across(dplyr::where(is.character), na_star),
                     dplyr::across(dplyr::contains("_benes"), as.integer)) |>
-      dplyr::select(year,
-                    period = month,
-                    level = bene_geo_lvl,
-                    state = bene_state_abrvtn,
-                    state_name = bene_state_desc,
-                    county = bene_county_desc,
-                    fips = bene_fips_cd,
-                    bene_total = tot_benes,
-                    bene_orig = orgnl_mdcr_benes,
-                    bene_ma_oth = ma_and_oth_benes,
-                    bene_total_aged = aged_tot_benes,
-                    bene_aged_esrd = aged_esrd_benes,
-                    bene_aged_no_esrd = aged_no_esrd_benes,
-                    bene_total_dsb = dsbld_tot_benes,
-                    bene_dsb_esrd = dsbld_esrd_and_esrd_only_benes,
-                    bene_dsb_no_esrd = dsbld_no_esrd_benes,
-                    bene_total_ab = a_b_tot_benes,
-                    bene_ab_orig = a_b_orgnl_mdcr_benes,
-                    bene_ab_ma_oth = a_b_ma_and_oth_benes,
-                    bene_total_rx = prscrptn_drug_tot_benes,
-                    bene_rx_pdp = prscrptn_drug_pdp_benes,
-                    bene_rx_mapd = prscrptn_drug_mapd_benes,
-                    bene_rx_lis_elig = prscrptn_drug_deemed_eligible_full_lis_benes,
-                    bene_rx_lis_full = prscrptn_drug_full_lis_benes,
-                    bene_rx_lis_part = prscrptn_drug_partial_lis_benes,
-                    bene_rx_lis_no = prscrptn_drug_no_lis_benes)
+      bene_cols()
 
   }
     if (!is.null(period) && period == "Month") {
       results <- dplyr::filter(results, period %in% month.name)
     }
   return(results)
+}
+
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+bene_cols <- function(df) {
+
+  cols <- c("year",
+            "period"            = "month",
+            "level"             = "bene_geo_lvl",
+            "state"             = "bene_state_abrvtn",
+            "state_name"        = "bene_state_desc",
+            "county"            = "bene_county_desc",
+            "fips"              = "bene_fips_cd",
+            "bene_total"        = "tot_benes",
+            "bene_orig"         = "orgnl_mdcr_benes",
+            "bene_ma_oth"       = "ma_and_oth_benes",
+            "bene_total_aged"   = "aged_tot_benes",
+            "bene_aged_esrd"    = "aged_esrd_benes",
+            "bene_aged_no_esrd" = "aged_no_esrd_benes",
+            "bene_total_dsb"    = "dsbld_tot_benes",
+            "bene_dsb_esrd"     = "dsbld_esrd_and_esrd_only_benes",
+            "bene_dsb_no_esrd"  = "dsbld_no_esrd_benes",
+            "bene_total_ab"     = "a_b_tot_benes",
+            "bene_ab_orig"      = "a_b_orgnl_mdcr_benes",
+            "bene_ab_ma_oth"    = "a_b_ma_and_oth_benes",
+            "bene_total_rx"     = "prscrptn_drug_tot_benes",
+            "bene_rx_pdp"       = "prscrptn_drug_pdp_benes",
+            "bene_rx_mapd"      = "prscrptn_drug_mapd_benes",
+            "bene_rx_lis_elig"  = "prscrptn_drug_deemed_eligible_full_lis_benes",
+            "bene_rx_lis_full"  = "prscrptn_drug_full_lis_benes",
+            "bene_rx_lis_part"  = "prscrptn_drug_partial_lis_benes",
+            "bene_rx_lis_no"    = "prscrptn_drug_no_lis_benes")
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

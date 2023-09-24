@@ -119,32 +119,41 @@ revalidation_reassign <- function(npi = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::contains("date"), ~anytime::anydate(.)),
+      dplyr::mutate(dplyr::across(dplyr::contains("date"), anytime::anydate),
                     group_pac_id = as.character(group_pac_id),
                     individual_pac_id = as.character(individual_pac_id),
                     individual_npi = as.character(individual_npi)) |>
-      dplyr::select(
-        npi                   = individual_npi,
-        pac_id_ind            = individual_pac_id,
-        enroll_id_ind         = individual_enrollment_id,
-        first                 = individual_first_name,
-        last                  = individual_last_name,
-        state_ind             = individual_state_code,
-        enroll_specialty_ind  = individual_specialty_description,
-        ind_associations      = individual_total_employer_associations,
-        pac_id_org            = group_pac_id,
-        enroll_id_org         = group_enrollment_id,
-        business_name         = group_legal_business_name,
-        state_org             = group_state_code,
-        group_reassignments   = group_reassignments_and_physician_assistants,
-        record_type,
-        revalidation_date_ind = individual_due_date,
-        revalidation_date_org = group_due_date)
+      rass_cols()
 
     }
   return(results)
 }
 
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+rass_cols <- function(df) {
+
+  cols <- c('npi' = 'individual_npi',
+            'pac_id_ind' = 'individual_pac_id',
+            'enroll_id_ind' = 'individual_enrollment_id',
+            'first' = 'individual_first_name',
+            'last' = 'individual_last_name',
+            'state_ind' = 'individual_state_code',
+            'specialty_ind' = 'individual_specialty_description',
+            'ind_associations' = 'individual_total_employer_associations',
+            'pac_id_org' = 'group_pac_id',
+            'enroll_id_org' = 'group_enrollment_id',
+            'business_name' = 'group_legal_business_name',
+            'state_org' = 'group_state_code',
+            'group_reassignments' = 'group_reassignments_and_physician_assistants',
+            'record_type',
+            'revalidation_date_ind' = 'individual_due_date',
+            'revalidation_date_org' = 'group_due_date')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
+}
 
 #' Search the Medicare Revalidation Clinic Group Practice Reassignment API
 #'

@@ -171,23 +171,33 @@ cc_specific <- function(year,
                                     hosp_readmsn_rate,
                                     er_visits_per_1000_benes),
                                   as.double)) |>
-      dplyr::select(year,
-                    level               = bene_geo_lvl,
-                    sublevel            = bene_geo_desc,
-                    fips                = bene_geo_cd,
-                    age_group           = bene_age_lvl,
-                    demographic         = bene_demo_lvl,
-                    subdemo             = bene_demo_desc,
-                    condition           = bene_cond,
-                    prevalence          = prvlnc,
-                    tot_pymt_percap     = tot_mdcr_pymt_pc,
-                    tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
-                    hosp_readmsn_rate,
-                    er_visits_per_1k    = er_visits_per_1000_benes,
-                    dplyr::everything())
+      ccs_cols()
 
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+ccs_cols <- function(df) {
+
+  cols <- c('year',
+            'level' = 'bene_geo_lvl',
+            'sublevel' = 'bene_geo_desc',
+            'fips' = 'bene_geo_cd',
+            'age' = 'bene_age_lvl',
+            'demographic' = 'bene_demo_lvl',
+            'subdemo' = 'bene_demo_desc',
+            'condition' = 'bene_cond',
+            'prevalence' = 'prvlnc',
+            'tot_pymt_percap' = 'tot_mdcr_pymt_pc',
+            'tot_std_pymt_percap' = 'tot_mdcr_stdzd_pymt_pc',
+            'hosp_readmit_rate' = 'hosp_readmsn_rate',
+            'er_visits_per_1k' = 'er_visits_per_1000_benes')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }
 
 #' Search the Medicare Multiple Chronic Conditions API
@@ -338,22 +348,32 @@ cc_multiple <- function(year,
                                     hosp_readmsn_rate,
                                     er_visits_per_1000_benes),
                                   as.double)) |>
-      dplyr::select(year,
-                    level               = bene_geo_lvl,
-                    sublevel            = bene_geo_desc,
-                    fips                = bene_geo_cd,
-                    age_group           = bene_age_lvl,
-                    demographic         = bene_demo_lvl,
-                    subdemo             = bene_demo_desc,
-                    mcc                 = bene_mcc,
-                    prevalence          = prvlnc,
-                    tot_pymt_percap     = tot_mdcr_pymt_pc,
-                    tot_std_pymt_percap = tot_mdcr_stdzd_pymt_pc,
-                    hosp_readmsn_rate,
-                    er_visits_per_1k    = er_visits_per_1000_benes,
-                    dplyr::everything())
+      ccm_cols()
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+ccm_cols <- function(df) {
+
+  cols <- c('year',
+            'level' = 'bene_geo_lvl',
+            'sublevel' = 'bene_geo_desc',
+            'fips' = 'bene_geo_cd',
+            'age' = 'bene_age_lvl',
+            'demographic' = 'bene_demo_lvl',
+            'subdemo' = 'bene_demo_desc',
+            'mcc' = "bene_mcc",
+            'prevalence' = 'prvlnc',
+            'tot_pymt_percap' = 'tot_mdcr_pymt_pc',
+            'tot_std_pymt_percap' = 'tot_mdcr_stdzd_pymt_pc',
+            'hosp_readmit_rate' = 'hosp_readmsn_rate',
+            'er_visits_per_1k' = 'er_visits_per_1000_benes')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }
 
 # chronic_conditions <- function(year,

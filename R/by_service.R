@@ -220,36 +220,47 @@ by_service <- function(year,
       tidyr::unite("address",
                    dplyr::any_of(c("rndrng_prvdr_st1", "rndrng_prvdr_st2")),
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
-      dplyr::select(year,
-                    npi = rndrng_npi,
-                    level,
-                    entype                        = rndrng_prvdr_ent_cd,
-                    first                   = rndrng_prvdr_first_name,
-                    middle                   = rndrng_prvdr_mi,
-                    last                     = rndrng_prvdr_last_org_name,
-                    credential                    = rndrng_prvdr_crdntls,
-                    gender                        = rndrng_prvdr_gndr,
-                    specialty                     = rndrng_prvdr_type,
-                    address,
-                    city                          = rndrng_prvdr_city,
-                    state                         = rndrng_prvdr_state_abrvtn,
-                    fips                          = rndrng_prvdr_state_fips,
-                    zip                           = rndrng_prvdr_zip5,
-                    ruca                          = rndrng_prvdr_ruca,
-                    #ruca_desc                    = rndrng_prvdr_ruca_desc,
-                    country                       = rndrng_prvdr_cntry,
-                    par                           = rndrng_prvdr_mdcr_prtcptg_ind,
-                    hcpcs_code                    = hcpcs_cd,
-                    hcpcs_desc,
-                    drug                          = hcpcs_drug_ind,
-                    pos                           = place_of_srvc,
-                    tot_benes,
-                    tot_srvcs,
-                    tot_day                       = tot_bene_day_srvcs,
-                    avg_charge                    = avg_sbmtd_chrg,
-                    avg_allowed                   = avg_mdcr_alowd_amt,
-                    avg_payment                   = avg_mdcr_pymt_amt,
-                    avg_std_pymt                  = avg_mdcr_stdzd_amt)
+      serv_cols()
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+serv_cols <- function(df) {
+
+  cols <- c('year',
+            'npi' = 'rndrng_npi',
+            'level',
+            'entype' = 'rndrng_prvdr_ent_cd',
+            'first' = 'rndrng_prvdr_first_name',
+            'middle' = 'rndrng_prvdr_mi',
+            'last' = 'rndrng_prvdr_last_org_name',
+            'credential' = 'rndrng_prvdr_crdntls',
+            'gender' = 'rndrng_prvdr_gndr',
+            'specialty' = 'rndrng_prvdr_type',
+            'address',
+            'city' = 'rndrng_prvdr_city',
+            'state' = 'rndrng_prvdr_state_abrvtn',
+            'fips' = 'rndrng_prvdr_state_fips',
+            'zip' = 'rndrng_prvdr_zip5',
+            'ruca' = 'rndrng_prvdr_ruca',
+            # 'ruca_desc' = 'rndrng_prvdr_ruca_desc',
+            'country' = 'rndrng_prvdr_cntry',
+            'par' = 'rndrng_prvdr_mdcr_prtcptg_ind',
+            'hcpcs_code' = 'hcpcs_cd',
+            'hcpcs_desc',
+            'drug' = 'hcpcs_drug_ind',
+            'pos' = 'place_of_srvc',
+            'tot_benes',
+            'tot_srvcs',
+            'tot_day' = 'tot_bene_day_srvcs',
+            'avg_charge' = 'avg_sbmtd_chrg',
+            'avg_allowed' = 'avg_mdcr_alowd_amt',
+            'avg_payment' = 'avg_mdcr_pymt_amt',
+            'avg_std_pymt' = 'avg_mdcr_stdzd_amt')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

@@ -162,32 +162,7 @@ clinicians <- function(npi = NULL,
                     num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth)) |>
-      dplyr::select(
-        npi,
-        pac_id_ind = ind_pac_id,
-        enroll_id_ind = ind_enrl_id,
-        first = frst_nm,
-        middle = mid_nm,
-        last = lst_nm,
-        suffix = suff,
-        gender = gndr,
-        credential = cred,
-        school = med_sch,
-        grad_year = grd_yr,
-        specialty = pri_spec,
-        specialty_sec = sec_spec_all,
-        facility_name,
-        pac_id_org = org_pac_id,
-        members = num_org_mem,
-        address,
-        # address_id = adrs_id,
-        city = city_town,
-        state,
-        zip = zip_code,
-        phone = telephone_number,
-        telehealth = telehlth,
-        assign_ind = ind_assgn,
-        assign_group = grp_assgn)
+      clin_cols()
     }
   return(results)
 }
@@ -202,4 +177,39 @@ clinic_id <- function() {
     httr2::resp_body_json(check_type = FALSE, simplifyVector = TRUE)
 
   return(response$distribution$identifier)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+clin_cols <- function(df) {
+
+  cols <- c('npi',
+            'pac_id_ind' = 'ind_pac_id',
+            'enroll_id_ind' = 'ind_enrl_id',
+            'first' = 'frst_nm',
+            'middle' = 'mid_nm',
+            'last' = 'lst_nm',
+            'suffix' = 'suff',
+            'gender' = 'gndr',
+            'credential' = 'cred',
+            'school' = 'med_sch',
+            'grad_year' = 'grd_yr',
+            'specialty' = 'pri_spec',
+            'specialty_sec' = 'sec_spec_all',
+            'facility_name',
+            'pac_id_org' = 'org_pac_id',
+            'members' = 'num_org_mem',
+            'address',
+            # 'address_id' = 'adrs_id',
+            'city' = 'city_town',
+            'state',
+            'zip' = 'zip_code',
+            'phone' = 'telephone_number',
+            'telehealth' = 'telehlth',
+            'assign_ind' = 'ind_assgn',
+            'assign_group' = 'grp_assgn')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

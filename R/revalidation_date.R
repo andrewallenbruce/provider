@@ -104,20 +104,31 @@ revalidation_date <- function(npi = NULL,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.))) |>
-      dplyr::select(npi = national_provider_identifier,
-                    enroll_id = enrollment_id,
-                    first = first_name,
-                    last = last_name,
-                    organization = organization_name,
-                    enroll_state = enrollment_state_code,
-                    enroll_desc = provider_type_text,
-                    enroll_specialty = enrollment_specialty,
-                    enroll_code = enrollment_type,
-                    group_reassignments = individual_total_reassign_to,
-                    ind_associations = receiving_benefits_reassignment,
-                    revalidation_due_date,
-                    adjusted_due_date)
+                    dplyr::across(dplyr::contains("date"), anytime::anydate)) |>
+      rdate_cols()
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+rdate_cols <- function(df) {
+
+  cols <- c('npi' = 'national_provider_identifier',
+            'enroll_id' = 'enrollment_id',
+            'first' = 'first_name',
+            'last' = 'last_name',
+            'organization' = 'organization_name',
+            'enroll_state' = 'enrollment_state_code',
+            'enroll_desc' = 'provider_type_text',
+            'enroll_specialty' = 'enrollment_specialty',
+            'enroll_code' = 'enrollment_type',
+            'group_reassignments' = 'individual_total_reassign_to',
+            'ind_associations' = 'receiving_benefits_reassignment',
+            'revalidation_due_date',
+            'adjusted_due_date')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

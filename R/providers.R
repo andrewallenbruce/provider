@@ -119,23 +119,32 @@ providers <- function(npi = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- tidyup(results) |>
-      dplyr::select(npi,
-                    pac_id = pecos_asct_cntl_id,
-                    enroll_id = enrlmt_id,
-                    specialty_code = provider_type_cd,
-                    specialty = provider_type_desc,
-                    state = state_cd,
-                    organization = org_name,
-                    first = first_name,
-                    middle = mdl_name,
-                    last = last_name,
-                    gender = gndr_sw,
-                    dplyr::everything())
+    results <- tidyup(results) |> pros_cols()
 
     if (na.rm) {
       results <- janitor::remove_empty(results, which = c("rows", "cols"))
     }
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+pros_cols <- function(df) {
+
+  cols <- c('npi',
+            'pac_id' = 'pecos_asct_cntl_id',
+            'enroll_id' = 'enrlmt_id',
+            'specialty_code' = 'provider_type_cd',
+            'specialty' = 'provider_type_desc',
+            'state' = 'state_cd',
+            'organization' = 'org_name',
+            'first' = 'first_name',
+            'middle' = 'mdl_name',
+            'last' = 'last_name',
+            'gender' = 'gndr_sw')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

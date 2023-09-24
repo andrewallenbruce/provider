@@ -151,23 +151,34 @@ opt_out <- function(npi = NULL,
     results <- tidyup(results) |>
       dplyr::mutate(npi = as.character(npi),
                     dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), ~anytime::anydate(.))) |>
+                    dplyr::across(dplyr::contains("date"), anytime::anydate)) |>
       tidyr::unite("address",
                    dplyr::any_of(c("first_line_street_address",
                                    "second_line_street_address")),
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
-      dplyr::select(npi,
-                    first = first_name,
-                    last = last_name,
-                    specialty,
-                    order_refer       = eligible_to_order_and_refer,
-                    optout_start_date = optout_effective_date,
-                    optout_end_date,
-                    last_updated,
-                    address,
-                    city              = city_name,
-                    state             = state_code,
-                    zip               = zip_code)
+      opt_cols()
     }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+opt_cols <- function(df) {
+
+  cols <- c('npi',
+            'first' = 'first_name',
+            'last' = 'last_name',
+            'specialty',
+            'order_refer' = 'eligible_to_order_and_refer',
+            'optout_start_date' = 'optout_effective_date',
+            'optout_end_date',
+            'last_updated',
+            'address',
+            'city' = 'city_name',
+            'state' = 'state_code',
+            'zip' = 'zip_code')
+
+  df |> dplyr::select(dplyr::all_of(cols))
+
 }

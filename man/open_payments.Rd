@@ -2,7 +2,7 @@
 % Please edit documentation in R/open_payments.R
 \name{open_payments}
 \alias{open_payments}
-\title{Open Payments Program}
+\title{Open Payments}
 \usage{
 open_payments(
   year,
@@ -24,31 +24,31 @@ open_payments(
 )
 }
 \arguments{
-\item{year}{Program reporting year. Run the helper function
+\item{year}{< \emph{integer} > Program reporting year. Run the helper function
 \code{open_payments_years()} to return a vector of currently
 available years.}
 
-\item{npi}{Covered recipient's National Provider Identifier.}
+\item{npi}{< \emph{integer} > Covered recipient's National Provider Identifier.}
 
-\item{covered_type}{Type of covered recipient, e.g.,
+\item{covered_type}{< \emph{character} > Type of covered recipient, e.g.,
 \itemize{
 \item \code{"Physician"}
 \item \code{"Non-Physician Practitioner"}
 \item \code{"Teaching Hospital"}
 }}
 
-\item{first, last}{Covered recipient's first and/or last name}
+\item{first, last}{< \emph{character} > Covered recipient's first and/or last name}
 
-\item{city}{Covered recipient's city}
+\item{city}{< \emph{character} > Covered recipient's city}
 
-\item{state}{Covered recipient's state abbreviation}
+\item{state}{< \emph{character} > Covered recipient's state abbreviation}
 
-\item{zip}{Covered recipient's zip code}
+\item{zip}{< \emph{character} > Covered recipient's zip code}
 
-\item{teaching_hospital}{Name of teaching hospital, e.g.
+\item{teaching_hospital}{< \emph{character} > Name of teaching hospital, e.g.
 \verb{Vanderbilt University Medical Center}}
 
-\item{payer}{Paying entity's name; examples:
+\item{payer}{< \emph{character} > Paying entity's name; examples:
 \itemize{
 \item \code{"Pharmacosmos Therapeutics Inc."}
 \item \code{"Getinge USA Sales, LLC"}
@@ -56,16 +56,16 @@ available years.}
 \item \code{"OrthoScan, Inc."}
 }}
 
-\item{payer_id}{Paying entity's unique Open Payments ID}
+\item{payer_id}{< \emph{integer} > Paying entity's unique Open Payments ID}
 
-\item{pay_form}{Form of payment, examples:
+\item{pay_form}{< \emph{character} > Form of payment, examples:
 \itemize{
 \item \code{"Stock option"}
 \item \code{"Cash or cash equivalent"}
 \item \code{"In-kind items and services"}
 }}
 
-\item{pay_nature}{Nature of payment or transfer of value; examples:
+\item{pay_nature}{< \emph{character} > Nature of payment or transfer of value; examples:
 \itemize{
 \item \code{"Royalty or License"}
 \item \code{"Charitable Contribution"}
@@ -73,49 +73,108 @@ available years.}
 \item \code{"Food and Beverage"}
 }}
 
-\item{offset}{offset; API pagination}
+\item{offset}{< \emph{integer} > offset; API pagination}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
 
-\item{pivot}{Pivot output; default is \code{TRUE}.}
+\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
 }
 \description{
-\code{\link[=open_payments]{open_payments()}} allows you to search CMS' Open Payments
-Program API.
+\code{\link[=open_payments]{open_payments()}} allows you to search CMS' Open Payments Program API
+
+The Open Payments program is a national disclosure program that collects and
+publishes information about financial relationships between drug and medical
+device companies (referred to as "reporting entities") and certain health
+care providers (referred to as "covered recipients"). These relationships may
+involve payments to providers for things including but not limited to
+research, meals, travel, gifts or speaking fees.
+
+\strong{Applicable Group Purchasing Organizations} (GPOs): Entities that operate
+in the United States and purchase, arrange for or negotiate the purchase of
+covered drugs, devices, biologicals, or medical supplies for a group of
+individuals or entities, but not solely for use by the entity itself.
+
+\strong{Applicable Manufacturers}: Entities that operate in the United States and
+are (1) engaged in the production, preparation, propagation, compounding, or
+conversion of a covered drug, device, biological, or medical supply, but not
+if such covered drug, device, biological or medical supply is solely for use
+by or within the entity itself or by the entity's own patients (this
+definition does not include distributors or wholesalers (including, but not
+limited to, re-packagers, re-labelers, and kit assemblers) that do not hold
+title to any covered drug, device, biological or medical supply); or are (2)
+entities under common ownership with an entity described in part (1) of this
+definition, which provides assistance or support to such entities with
+respect to the production, preparation, propagation, compounding, conversion,
+marketing, promotion, sale, or distribution of a covered drug, device,
+biological or medical supply.
+
+\strong{Reporting Entities}: Applicable manufacturers or GPOs.
+
+\strong{Covered Recipients}: Any physician, physician assistant, nurse
+practitioner, clinical nurse specialist, certified registered nurse
+anesthetist, or certified nurse-midwife who is not a bona fide employee of
+the applicable manufacturer that is reporting the payment; or a teaching
+hospital, which is any institution that received a payment.
+
+\strong{Teaching Hospitals}: Hospitals that receive payment for Medicare direct
+graduate medical education (GME), IPPS indirect medical education (IME), or
+psychiatric hospital IME programs.
+
+\strong{Natures of Payment}: Categories that must be used to describe why a
+payment or other transfer of value was made. They are only applicable to
+the “general” payment type, not research or ownership. The categories are:
+\itemize{
+\item Acquisitions (2021 - current)
+\item Charitable contributions
+\item Compensation for services other than consulting
+\item Compensation for serving as faculty or speaker for:
+\itemize{
+\item An accredited or certified continuing education program (2013 - 2020)
+\item An unaccredited and non-certified continuing education program (2013 - 2020)
+\item A medical education program (2021 - current)
 }
-\details{
-The Open Payments program is a national disclosure program that
-promotes a more transparent and accountable health care system. Open
-Payments houses a publicly accessible database of payments that reporting
-entities, including drug and medical device companies, make to covered
-recipients like physicians. Please note that CMS does not comment on
-what relationships may be beneficial or potential conflicts of interest.
-CMS publishes the data attested to by reporting entities. The data is
-open to individual interpretation.
+\item Consulting fees
+\item Current or prospective ownership or investment interest (prior to 2023)
+\item Debt Forgiveness (2021 - current)
+\item Education
+\item Entertainment
+\item Food and beverage
+\item Gift
+\item Grant
+\item Honoraria
+\item Long-term medical supply or device loan (2021 - current)
+\item Royalty or license
+\item Space rental or facility fees (Teaching Hospitals only)
+\item Travel and lodging
+}
 
-Open Payments is a national transparency program that collects and
-publishes information about financial relationships between drug and
-medical device companies (referred to as "reporting entities") and
-certain health care providers (referred to as "covered recipients").
-These relationships may involve payments to providers for things
-including but not limited to research, meals, travel, gifts or speaking
-fees.
+\strong{Transfers of Value}: Anything of value given by an applicable manufacturer
+or applicable GPO to a covered recipient or physician owner/investor that
+does not fall within one of the excluded categories in the rule.
 
-The purpose of the program is to provide the public with a more
-transparent health care system. All information available on the Open
-Payments database is open to personal interpretation and if there are
-questions about what the data means, patients and their advocates should
-speak directly to the health care provider for a better understanding.
-\subsection{Links}{
+\strong{Ownership and Investment Interests} include, but are not limited to:
+\itemize{
+\item Stock
+\item Stock option(s) (not received as compensation, until they are exercised)
+\item Partnership share(s)
+\item Limited liability company membership(s)
+\item Loans
+\item Bonds
+\item Financial instruments secured with an entity’s property or revenue
+}
+
+This may be direct or indirect and through debt, equity or other means.
+
+Links:
 \itemize{
 \item \href{https://www.cms.gov/priorities/key-initiatives/open-payments}{What is the Open Payments Program?}
+\item \href{https://www.cms.gov/OpenPayments/Resources}{Open Payments: General Resources}
 }
 
 \emph{Update Frequency:} \strong{Yearly}
-}
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}

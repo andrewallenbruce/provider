@@ -64,7 +64,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
 }
 }
 \description{
-\code{affiliations()} allows you to access information concerning providers'
+\code{\link[=affiliations]{affiliations()}} allows you to access information concerning providers'
 facility affiliations
 
 Links:
