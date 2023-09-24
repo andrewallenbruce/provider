@@ -81,13 +81,8 @@ quality_payment <- function(year,
       "participation type",             participation_type) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
 
   }
@@ -410,14 +405,8 @@ mips_2021 <- function(facility_name = NULL,
       "first_name",    first_name) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
     return(invisible(NULL))
   }
 

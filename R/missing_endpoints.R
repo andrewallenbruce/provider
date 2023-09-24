@@ -81,24 +81,18 @@ missing_endpoints <- function(npi  = NULL,
       "name",        name) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
-
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
+    format_cli(cli_args)
 
     return(invisible(NULL))
   }
 
   if (tidy) {
-    results <- results |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       tidyr::separate_wider_delim("Provider Name", ",",
                       names = c("last_name", "first_name")) |>
-      dplyr::select(npi = NPI, last_name, first_name)
+      dplyr::select(npi = NPI,
+                    first = first_name,
+                    last = last_name)
     }
   return(results)
 }

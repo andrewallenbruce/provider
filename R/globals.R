@@ -60,12 +60,12 @@ utils::globalVariables(c(
   "y", # <by_provider>
   "rndrng_prvdr_crdntls", # <by_provider>
   "rndrng_prvdr_mdcr_prtcptg_ind", # <by_provider>
+  "rndrng_prvdr_ent_cd", # <by_provider>
   "rndrng_npi", # <by_provider>
   "rndrng_prvdr_first_name", # <by_provider>
   "rndrng_prvdr_mi", # <by_provider>
   "rndrng_prvdr_last_org_name", # <by_provider>
   "rndrng_prvdr_gndr", # <by_provider>
-  "rndrng_prvdr_ent_cd", # <by_provider>
   "address", # <by_provider>
   "rndrng_prvdr_city", # <by_provider>
   "rndrng_prvdr_state_abrvtn", # <by_provider>
@@ -127,7 +127,6 @@ utils::globalVariables(c(
   "bene_cc_sz_pct", # <by_provider>
   "bene_cc_strok_pct", # <by_provider>
   "bene_avg_risk_scre", # <by_provider>
-  "entity_type", # <by_provider>
   "distro", # <by_service>
   "y", # <by_service>
   "rndrng_prvdr_crdntls", # <by_service>
@@ -383,8 +382,8 @@ utils::globalVariables(c(
   "type_of_action", # <laboratories>
   "y", # <missing_endpoints>
   "NPI", # <missing_endpoints>
-  "last_name", # <missing_endpoints>
   "first_name", # <missing_endpoints>
+  "last_name", # <missing_endpoints>
   "y", # <nppes>
   "number", # <nppes>
   "enumeration_type", # <nppes>

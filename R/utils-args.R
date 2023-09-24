@@ -154,3 +154,21 @@ file_id <- function(fun = c("cln", "aff")) {
 
       return(r$distribution$identifier)
 }
+
+
+#' Format empty search results
+#' @param df data frame of parameter arguments
+#' @autoglobal
+#' @noRd
+format_cli <- function(df) {
+
+  x <- purrr::map2(df$x,
+                   df$y,
+                   stringr::str_c,
+                   sep = ": ",
+                   collapse = "")
+
+  cli::cli_alert_danger("No results for {.val {x}}",
+                        wrap = TRUE)
+
+}

@@ -139,13 +139,7 @@ opt_out <- function(npi = NULL,
       "order_refer",   order_refer) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
-
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
+    format_cli(cli_args)
 
     return(invisible(NULL))
 

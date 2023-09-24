@@ -4,7 +4,7 @@
 #' `laboratories()` allows you to search for information on clinical laboratories
 #' including demographics and the type of testing services the facility provides.
 #'
-#' ### Clinical Laboratory Improvement Amendments (CLIA)
+#' #### Clinical Laboratory Improvement Amendments (CLIA)
 #' CMS regulates all laboratory testing (except research) performed on humans
 #' in the U.S. through the Clinical Laboratory Improvement Amendments (CLIA).
 #' In total, CLIA covers approximately 320,000 laboratory entities. The Division
@@ -15,48 +15,46 @@
 #' Medicaid payments, CLIA has no direct Medicare or Medicaid program
 #' responsibilities.
 #'
-#' ### CLIA Certificate types
-#' There are five different CLIA certificate types which all are effective for a
+#' #### CLIA Certificates
+#' There are five CLIA certificate types all of which are effective for a
 #' period of two years:
 #'
-#' Certificate of **Waiver**
-#' Issued to a laboratory to perform only waived tests; does not waive the lab
-#' from all CLIA requirements. Waived tests are laboratory tests that are simple
-#' and easy to perform. Routine inspections are not conducted for waiver labs,
-#' though 2% are visited each year to ensure quality laboratory testing.
+#' 1. Certificate of **Waiver**: Issued to a laboratory to perform only waived
+#' tests; does not waive the lab from all CLIA requirements. Waived tests are
+#' laboratory tests that are simple to perform. Routine inspections are not
+#' conducted for waiver labs, although 2% are visited each year to ensure
+#' quality laboratory testing.
 #'
-#' Certificate for **Provider-Performed Microscopy Procedures** (PPM)
-#' Issued to a laboratory in which a physician, midlevel practitioner or dentist
+#' 2. Certificate for **Provider-Performed Microscopy Procedures** (PPM): Issued
+#' to a laboratory in which a physician, midlevel practitioner or dentist
 #' performs limited tests that require microscopic examination. PPM tests are
 #' considered moderate complexity. Waived tests can also be performed under this
 #' certificate type. There are no routine inspections conducted for PPM labs.
 #'
-#' Certificate of **Registration**
-#' Initially issued to a laboratory that has applied for a Certificate of
-#' Compliance or a Certificate of Accreditation, enabling the lab to conduct
-#' moderate/high complexity testing until the survey is performed and the
-#' laboratory found to be in compliance with the CLIA regulations. Includes PPM
+#' 3. Certificate of **Registration**: Initially issued to a laboratory that has
+#' applied for a Certificate of Compliance or Accreditation, enabling the lab to
+#' conduct moderate/high complexity testing until the survey is performed and
+#' the laboratory is found to be in CLIA compliance. Includes PPM and waived
+#' testing.
+#'
+#' 4. Certificate of **Compliance**: Allows the laboratory to conduct
+#' moderate/high complexity testing and is issued after an inspection finds the
+#' lab to be in compliance with all applicable CLIA requirements. Includes PPM
 #' and waived testing.
 #'
-#' Certificate of **Compliance**
-#' Allows the laboratory to conduct moderate/high complexity testing and is
-#' issued after an inspection finds the lab to be in compliance with all
-#' applicable CLIA requirements. Includes PPM and waived testing.
+#' 5. Certificate of **Accreditation**: Exactly the same as the Certificate of
+#' Compliance, except that the laboratory must be accredited by one of the
+#' following CMS-approved accreditation organizations:
 #'
-#' Certificate of **Accreditation**
-#' Exactly the same as the Certificate of Compliance, except that the laboratory
-#' must be accredited by one of the following CMS-approved accreditation
-#' organizations:
+#'    * [American Association for Laboratory Accreditation](https://a2la.org/) (A2LA)
+#'    * [Association for the Advancement of Blood & Biotherapies](https://www.aabb.org/) (AABB)
+#'    * [American Osteopathic Association](https://osteopathic.org/) (AOA)
+#'    * [American Society for Histocompatibility and Immunogenetics](https://www.ashi-hla.org/) (ASHI)
+#'    * [College of American Pathologists](https://www.cap.org/) (CAP)
+#'    * [Commission on Office Laboratory Accreditation](https://www.cola.org/) (COLA)
+#'    * [The Joint Commission](https://www.jointcommission.org/) (JCAHO)
 #'
-#'    * American Association for Laboratory Accreditation (AALA)
-#'    * American Association of Blood Banks (AABB)
-#'    * American Osteopathic Association (AOA)
-#'    * American Society for Histocompatibility and Immunogenetics (ASHI)
-#'    * College of American Pathologists (CAP)
-#'    * Commission on Office Laboratory Accreditation (COLA)
-#'    * the Joint Commission (JCAHO)
-#'
-#' ### Links:
+#' Links:
 #'   - [Provider of Services File - Clinical Laboratories](https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories)
 #'
 #' *Update Frequency:* **Quarterly**
@@ -125,13 +123,8 @@ laboratories <- function(name = NULL,
       "zip",               zip) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
 
   }
@@ -139,10 +132,8 @@ laboratories <- function(name = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::contains("_dt"), ~anytime::anydate(.)),
+    results <- tidyup(results) |>
+      dplyr::mutate(dplyr::across(dplyr::contains("_dt"), ~anytime::anydate(.)),
                     dplyr::across(dplyr::contains("_sw"), ~yn_logical(.)),
                     pgm_trmntn_cd = termcd(pgm_trmntn_cd),
                     crtfctn_actn_type_cd = toa(crtfctn_actn_type_cd),

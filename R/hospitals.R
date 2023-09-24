@@ -162,43 +162,38 @@ hospitals <- function(npi = NULL,
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
-      ~x,                  ~y,
-      "npi",               npi,
-      "facility_ccn",      facility_ccn,
-      "enroll_id_org",     enroll_id_org,
-      "enroll_state",      enroll_state,
-      "specialty_code",    specialty_code,
-      "pac_id_org",        pac_id_org,
-      "organization",      organization,
-      "doing_business_as", doing_business_as,
-      "city",              city,
-      "state",             state,
-      "zip",               zip,
+      ~x,                      ~y,
+      "npi",                   npi,
+      "facility_ccn",          facility_ccn,
+      "enroll_id_org",         enroll_id_org,
+      "enroll_state",          enroll_state,
+      "specialty_code",        specialty_code,
+      "pac_id_org",            pac_id_org,
+      "organization",          organization,
+      "doing_business_as",     doing_business_as,
+      "city",                  city,
+      "state",                 state,
+      "zip",                   zip,
       "proprietary_nonprofit", proprietary_nonprofit,
-      "multiple_npis",     multiple_npis,
-      "general",           general,
-      "acute_care",        acute_care,
-      "alcohol_drug",      alcohol_drug,
-      "childrens",         childrens,
-      "long_term",         long_term,
-      "psychiatric",       psychiatric,
-      "rehabilitation",    rehabilitation,
-      "short_term",        short_term,
-      "swing_bed",         swing_bed,
-      "psych_unit",        psych_unit,
-      "rehab_unit",        rehab_unit,
-      "specialty_hospital", specialty_hospital,
-      "other",             other,
-      "reh_conversion",    reh_conversion) |>
+      "multiple_npis",         multiple_npis,
+      "general",               general,
+      "acute_care",            acute_care,
+      "alcohol_drug",          alcohol_drug,
+      "childrens",             childrens,
+      "long_term",             long_term,
+      "psychiatric",           psychiatric,
+      "rehabilitation",        rehabilitation,
+      "short_term",            short_term,
+      "swing_bed",             swing_bed,
+      "psych_unit",            psych_unit,
+      "rehab_unit",            rehab_unit,
+      "specialty_hospital",    specialty_hospital,
+      "other",                 other,
+      "reh_conversion",        reh_conversion) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            as.character(cli_args$y),
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
 
   }

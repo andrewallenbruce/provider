@@ -110,14 +110,8 @@ revalidation_reassign <- function(npi = NULL,
       "record_type",      record_type) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
     return(invisible(NULL))
   }
 
@@ -263,14 +257,8 @@ revalidation_group <- function(npi             = NULL,
       "record_type",      record_type) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}",
-                          wrap = TRUE)
     return(invisible(NULL))
   }
 

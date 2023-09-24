@@ -155,29 +155,22 @@ cc_specific <- function(year,
       "condition",    condition) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(c(prvlnc,
                                     tot_mdcr_stdzd_pymt_pc,
                                     tot_mdcr_pymt_pc,
                                     hosp_readmsn_rate,
                                     er_visits_per_1000_benes),
-                                  ~as.double(.))) |>
+                                  as.double)) |>
       dplyr::select(year,
                     level               = bene_geo_lvl,
                     sublevel            = bene_geo_desc,
@@ -291,9 +284,10 @@ cc_multiple <- function(year,
       dplyr::pull(y)
   }
 
-  if (!is.null(subdemo)) {rlang::arg_match(subdemo, c("All", "Medicare Only",
-                                                      "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
-                                                      "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
+  if (!is.null(subdemo)) {rlang::arg_match(subdemo,
+          c("All", "Medicare Only", "Medicare and Medicaid", "Female", "Male",
+            "Asian Pacific Islander", "Hispanic", "Native American",
+            "non-Hispanic Black", "non-Hispanic White"))}
 
   id <- cms_update("Multiple Chronic Conditions", "id") |>
     dplyr::filter(year == {{ year }}) |>
@@ -328,29 +322,22 @@ cc_multiple <- function(year,
       "mcc",          mcc) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     dplyr::across(c(prvlnc,
                                     tot_mdcr_stdzd_pymt_pc,
                                     tot_mdcr_pymt_pc,
                                     hosp_readmsn_rate,
                                     er_visits_per_1000_benes),
-                                  ~as.double(.))) |>
+                                  as.double)) |>
       dplyr::select(year,
                     level               = bene_geo_lvl,
                     sublevel            = bene_geo_desc,

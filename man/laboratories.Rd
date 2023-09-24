@@ -61,51 +61,45 @@ Medicaid payments, CLIA has no direct Medicare or Medicaid program
 responsibilities.
 }
 
-\subsection{CLIA Certificate types}{
+\subsection{CLIA Certificates}{
 
-There are five different CLIA certificate types which all are effective for a
+There are five CLIA certificate types all of which are effective for a
 period of two years:
-
-Certificate of \strong{Waiver}
-Issued to a laboratory to perform only waived tests; does not waive the lab
-from all CLIA requirements. Waived tests are laboratory tests that are simple
-and easy to perform. Routine inspections are not conducted for waiver labs,
-though 2\% are visited each year to ensure quality laboratory testing.
-
-Certificate for \strong{Provider-Performed Microscopy Procedures} (PPM)
-Issued to a laboratory in which a physician, midlevel practitioner or dentist
+\enumerate{
+\item Certificate of \strong{Waiver}: Issued to a laboratory to perform only waived
+tests; does not waive the lab from all CLIA requirements. Waived tests are
+laboratory tests that are simple to perform. Routine inspections are not
+conducted for waiver labs, although 2\% are visited each year to ensure
+quality laboratory testing.
+\item Certificate for \strong{Provider-Performed Microscopy Procedures} (PPM): Issued
+to a laboratory in which a physician, midlevel practitioner or dentist
 performs limited tests that require microscopic examination. PPM tests are
 considered moderate complexity. Waived tests can also be performed under this
 certificate type. There are no routine inspections conducted for PPM labs.
-
-Certificate of \strong{Registration}
-Initially issued to a laboratory that has applied for a Certificate of
-Compliance or a Certificate of Accreditation, enabling the lab to conduct
-moderate/high complexity testing until the survey is performed and the
-laboratory found to be in compliance with the CLIA regulations. Includes PPM
+\item Certificate of \strong{Registration}: Initially issued to a laboratory that has
+applied for a Certificate of Compliance or Accreditation, enabling the lab to
+conduct moderate/high complexity testing until the survey is performed and
+the laboratory is found to be in CLIA compliance. Includes PPM and waived
+testing.
+\item Certificate of \strong{Compliance}: Allows the laboratory to conduct
+moderate/high complexity testing and is issued after an inspection finds the
+lab to be in compliance with all applicable CLIA requirements. Includes PPM
 and waived testing.
-
-Certificate of \strong{Compliance}
-Allows the laboratory to conduct moderate/high complexity testing and is
-issued after an inspection finds the lab to be in compliance with all
-applicable CLIA requirements. Includes PPM and waived testing.
-
-Certificate of \strong{Accreditation}
-Exactly the same as the Certificate of Compliance, except that the laboratory
-must be accredited by one of the following CMS-approved accreditation
-organizations:
+\item Certificate of \strong{Accreditation}: Exactly the same as the Certificate of
+Compliance, except that the laboratory must be accredited by one of the
+following CMS-approved accreditation organizations:
 \itemize{
-\item American Association for Laboratory Accreditation (AALA)
-\item American Association of Blood Banks (AABB)
-\item American Osteopathic Association (AOA)
-\item American Society for Histocompatibility and Immunogenetics (ASHI)
-\item College of American Pathologists (CAP)
-\item Commission on Office Laboratory Accreditation (COLA)
-\item the Joint Commission (JCAHO)
+\item \href{https://a2la.org/}{American Association for Laboratory Accreditation} (A2LA)
+\item \href{https://www.aabb.org/}{Association for the Advancement of Blood & Biotherapies} (AABB)
+\item \href{https://osteopathic.org/}{American Osteopathic Association} (AOA)
+\item \href{https://www.ashi-hla.org/}{American Society for Histocompatibility and Immunogenetics} (ASHI)
+\item \href{https://www.cap.org/}{College of American Pathologists} (CAP)
+\item \href{https://www.cola.org/}{Commission on Office Laboratory Accreditation} (COLA)
+\item \href{https://www.jointcommission.org/}{The Joint Commission} (JCAHO)
 }
 }
 
-\subsection{Links:}{
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/hospitals-and-other-facilities/provider-of-services-file-clinical-laboratories}{Provider of Services File - Clinical Laboratories}
 }

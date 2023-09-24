@@ -112,27 +112,20 @@ by_geography <- function(year,
       "pos",            pos) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
   }
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
       dplyr::mutate(year = as.integer(year),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
                     hcpcs_drug_ind = yn_logical(hcpcs_drug_ind),
                     place_of_srvc  = pos_char(place_of_srvc),
-                    dplyr::across(dplyr::starts_with("tot_"), ~as.integer(.)),
-                    dplyr::across(dplyr::starts_with("avg_"), ~as.double(.))) |>
+                    dplyr::across(dplyr::starts_with("tot_"), as.integer),
+                    dplyr::across(dplyr::starts_with("avg_"), as.double)) |>
       dplyr::select(year,
                     level          = rndrng_prvdr_geo_lvl,
                     state          = rndrng_prvdr_geo_desc,

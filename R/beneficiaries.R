@@ -118,13 +118,8 @@ beneficiaries <- function(year        = NULL,
       "fips",       fips) |>
       tidyr::unnest(cols = c(y))
 
-    cli_args <- purrr::map2(cli_args$x,
-                            cli_args$y,
-                            stringr::str_c,
-                            sep = ": ",
-                            collapse = "")
+    format_cli(cli_args)
 
-    cli::cli_alert_danger("No results for {.val {cli_args}}", wrap = TRUE)
     return(invisible(NULL))
 
   }
@@ -132,8 +127,11 @@ beneficiaries <- function(year        = NULL,
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (tidy) {
-    results <- janitor::clean_names(results) |>
-      dplyr::tibble() |>
+    results <- tidyup(results) |>
+      dplyr::mutate(year = as.integer(year),
+                    bene_fips_cd = stringr::str_squish(bene_fips_cd),
+                    dplyr::across(dplyr::where(is.character), na_star),
+                    dplyr::across(dplyr::contains("_benes"), as.integer)) |>
       dplyr::select(year,
                     period = month,
                     level = bene_geo_lvl,
@@ -159,12 +157,7 @@ beneficiaries <- function(year        = NULL,
                     bene_rx_lis_elig = prscrptn_drug_deemed_eligible_full_lis_benes,
                     bene_rx_lis_full = prscrptn_drug_full_lis_benes,
                     bene_rx_lis_part = prscrptn_drug_partial_lis_benes,
-                    bene_rx_lis_no = prscrptn_drug_no_lis_benes) |>
-      dplyr::mutate(year = as.integer(year),
-                    fips = stringr::str_squish(fips),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "")),
-                    dplyr::across(dplyr::where(is.character), ~dplyr::na_if(., "*")),
-                    dplyr::across(dplyr::contains("bene"), as.integer))
+                    bene_rx_lis_no = prscrptn_drug_no_lis_benes)
 
   }
     if (!is.null(period) && period == "Month") {
