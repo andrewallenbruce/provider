@@ -327,11 +327,102 @@ years:</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `map()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> In index: 1.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `UseMethod()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> no applicable method for 'filter' applied to an object of class "character"</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="3%">
+<col width="7%">
+<col width="4%">
+<col width="3%">
+<col width="18%">
+<col width="12%">
+<col width="13%">
+<col width="9%">
+<col width="6%">
+<col width="11%">
+<col width="8%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">year</th>
+<th align="left">npi</th>
+<th align="left">state</th>
+<th align="right">size</th>
+<th align="left">clinician_specialty</th>
+<th align="right">years_in_medicare</th>
+<th align="left">participation_type</th>
+<th align="right">beneficiaries</th>
+<th align="right">services</th>
+<th align="right">allowed_charges</th>
+<th align="left">final_score</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">2017</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1394</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">5</td>
+<td align="left">MIPS APM</td>
+<td align="right">43007</td>
+<td align="right">NA</td>
+<td align="right">36391760</td>
+<td align="left">97.09</td>
+</tr>
+<tr class="even">
+<td align="right">2018</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1297</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">5</td>
+<td align="left">MIPS APM</td>
+<td align="right">41034</td>
+<td align="right">0</td>
+<td align="right">35008312</td>
+<td align="left">100</td>
+</tr>
+<tr class="odd">
+<td align="right">2019</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1344</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">6</td>
+<td align="left">MIPS APM</td>
+<td align="right">42222</td>
+<td align="right">415298</td>
+<td align="right">36899498</td>
+<td align="left">95.12</td>
+</tr>
+<tr class="even">
+<td align="right">2020</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1440</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">7</td>
+<td align="left">MIPS APM</td>
+<td align="right">39624</td>
+<td align="right">374278</td>
+<td align="right">33458425</td>
+<td align="left">96.7</td>
+</tr>
+<tr class="odd">
+<td align="right">2021</td>
+<td align="left">1043477615</td>
+<td align="left">PA</td>
+<td align="right">1940</td>
+<td align="left">Cardiac Electrophysiology</td>
+<td align="right">8</td>
+<td align="left">MIPS APM</td>
+<td align="right">41404</td>
+<td align="right">403720</td>
+<td align="right">35627551</td>
+<td align="left">97.25</td>
+</tr>
+</tbody>
+</table>
 <p><br></p>
 </div>
 <div class="section level2">
