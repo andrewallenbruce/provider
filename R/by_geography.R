@@ -77,8 +77,7 @@ by_geography <- function(year,
       dplyr::pull(y)
     }
 
-  id <- cms_update("Medicare Physician & Other Practitioners - by Geography and Service",
-                   "id") |>
+  id <- api_years("geo") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 

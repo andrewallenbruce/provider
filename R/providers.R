@@ -108,7 +108,7 @@ providers <- function(npi = NULL,
       "gender",                gender) |>
       tidyr::unnest(cols = c(y))
 
-    format_cli(cli_args, "providers")
+    format_cli(cli_args)
 
     return(invisible(NULL))
 
@@ -147,13 +147,27 @@ pros_cols <- function(df) {
 
 }
 
-
+#' @param npi description
+#' @param pac description
+#' @param enroll_id description
+#' @autoglobal
+#' @noRd
 individuals <- function(npi = NULL,
                         pac = NULL,
-                        enroll_id = NULL,
-                        tidy = TRUE,
-                        na.rm = TRUE) {
+                        enroll_id = NULL) {
 
-  if (!is.null(enroll_id)) {enroll_ind_check(enroll_id)}
+  p <- providers(npi = npi, pac = pac, enroll_id = enroll_id)
+
+  if (!is.null(pac)) {unique(pac$enroll_id)}
+
+  d <- revalidation_date(npi = npi, enroll_id = enroll_id)
+  d$specialty_description <- NULL
+
+  r <- revalidation_reassign(npi = npi, pac_ind = pac, enroll_id_ind = enroll_id)
+  r$state_ind    <- NULL
+  r$due_date_ind <- NULL
+  r$due_date_org <- NULL
+
+  dplyr::full_join(p, d) |> dplyr::full_join(r)
 
 }

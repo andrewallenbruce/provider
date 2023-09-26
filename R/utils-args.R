@@ -121,7 +121,8 @@ build_url <- function(fn, args = NULL) {
         "opt" ~ "Opt Out Affidavits",
         "ppe" ~ "Pending Initial Logging and Tracking Physicians",
         "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
-        "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk")
+        "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
+        "bet" ~ "Restructured BETOS Classification System")
 
   if (fn %in% c("tax") && is.null(args)) {
 
@@ -147,10 +148,9 @@ build_url <- function(fn, args = NULL) {
 
 #' Format empty search results
 #' @param df data frame of parameter arguments
-#' @param name function name
 #' @autoglobal
 #' @noRd
-format_cli <- function(df, name) {
+format_cli <- function(df) {
 
   x <- purrr::map2(df$x,
                    df$y,
@@ -158,7 +158,7 @@ format_cli <- function(df, name) {
                    sep = " = ",
                    collapse = "")
 
-  cli::cli_alert_danger("{.fn {name}}: No results for {.val {x}}",
+  cli::cli_alert_danger("No results for {.val {x}}",
                         wrap = TRUE)
 
 }
@@ -168,7 +168,7 @@ format_cli <- function(df, name) {
 #' @param year tibble of parameter arguments
 #' @autoglobal
 #' @noRd
-api_years <- function(fn, year) {
+api_years <- function(fn) {
 
   api <- dplyr::case_match(fn,
     "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
@@ -179,9 +179,7 @@ api_years <- function(fn, year) {
     "qpp" ~ "Quality Payment Program Experience",
     .default = NULL)
 
-  cms_update(api) |>
-    dplyr::filter(year == {{ year }}) |>
-    dplyr::pull(distro)
+  cms_update(api)
 }
 
 

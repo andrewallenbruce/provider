@@ -330,6 +330,8 @@ utils::globalVariables(c(
   "classification", # <download_nucc_csv>
   "specialization", # <download_nucc_csv>
   "code", # <download_nucc_csv>
+  "y", # <betos_classification>
+  "rbcs_major_ind", # <betos_classification>
   "title", # <cms_update>
   "modified", # <cms_update>
   "distribution", # <cms_update>

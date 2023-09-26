@@ -122,7 +122,7 @@ cc_specific <- function(year,
   "Medicare and Medicaid", "Female", "Male", "Asian Pacific Islander",
   "Hispanic", "Native American", "non-Hispanic Black", "non-Hispanic White"))}
 
-  id <- cms_update("Specific Chronic Conditions", "id") |>
+  id <- api_years("scc") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
@@ -299,7 +299,7 @@ cc_multiple <- function(year,
             "Asian Pacific Islander", "Hispanic", "Native American",
             "non-Hispanic Black", "non-Hispanic White"))}
 
-  id <- cms_update("Multiple Chronic Conditions", "id") |>
+  id <- api_years("mcc") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 

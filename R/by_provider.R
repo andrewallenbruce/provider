@@ -81,8 +81,7 @@ by_provider <- function(year,
   if (!is.null(ruca)) {ruca <- as.character(ruca)}
   if (!is.null(par))  {par <- tf_2_yn(par)}
 
-  id <- cms_update("Medicare Physician & Other Practitioners - by Provider",
-                   "id") |>
+  id <- api_years("prv") |>
     dplyr::filter(year == {{ year }}) |>
     dplyr::pull(distro)
 
