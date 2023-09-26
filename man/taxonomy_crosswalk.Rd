@@ -7,8 +7,8 @@
 taxonomy_crosswalk(
   taxonomy_code = NULL,
   taxonomy_description = NULL,
-  medicare_code = NULL,
-  medicare_type = NULL,
+  specialty_code = NULL,
+  specialty_description = NULL,
   keyword_search = NULL,
   tidy = TRUE
 )
@@ -18,9 +18,9 @@ taxonomy_crosswalk(
 
 \item{taxonomy_description}{< \emph{character} > Provider's taxonomy description}
 
-\item{medicare_code}{< \emph{character} > Medicare specialty code}
+\item{specialty_code}{< \emph{character} > Medicare specialty code}
 
-\item{medicare_type}{< \emph{character} > Medicare provider/supplier type}
+\item{specialty_description}{< \emph{character} > Medicare provider/supplier type}
 
 \item{keyword_search}{< \emph{character} > Search term to use for quick full-text search.}
 
@@ -29,8 +29,8 @@ taxonomy_crosswalk(
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
-   \code{medicare_code} \tab Code that corresponds to the Medicare specialty \cr
-   \code{medicare_type} \tab Description of the Medicare provider/Supplier Type \cr
+   \code{specialty_code} \tab Code that corresponds to the Medicare specialty \cr
+   \code{specialty_description} \tab Description of the Medicare provider/Supplier Type \cr
    \code{taxonomy_code} \tab Provider's taxonomy code \cr
    \code{taxonomy_description} \tab Description of the taxonomy code \cr
 }
@@ -69,7 +69,7 @@ Links:
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 taxonomy_crosswalk(keyword_search = "B4")
 taxonomy_crosswalk(keyword_search = "Histocompatibility")
-taxonomy_crosswalk(medicare_type = "Rehabilitation Agency")
+taxonomy_crosswalk(specialty_description = "Rehabilitation Agency")
 taxonomy_crosswalk(taxonomy_code = "2086S0102X")
 \dontshow{\}) # examplesIf}
 }

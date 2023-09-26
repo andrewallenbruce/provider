@@ -6,55 +6,48 @@
 \usage{
 revalidation_reassign(
   npi = NULL,
-  pac_id_ind = NULL,
+  pac_ind = NULL,
   enroll_id_ind = NULL,
   first = NULL,
   last = NULL,
   state_ind = NULL,
-  specialty = NULL,
-  pac_id_org = NULL,
+  specialty_description = NULL,
+  organization = NULL,
+  pac_org = NULL,
   enroll_id_org = NULL,
   state_org = NULL,
-  business_name = NULL,
   record_type = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
-\item{npi}{NPI of provider who is reassigning their benefits or is an
-employee}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier of individual provider reassigning benefits or an employee}
 
-\item{pac_id_ind}{PAC ID of provider reassigning their benefits or
-is an employee}
+\item{pac_ind}{< \emph{integer} > 10-digit provider associate level variable of individual provider reassigning benefits or an employee}
 
-\item{enroll_id_ind}{Enrollment ID of provider reassigning their benefits or
-is an employee}
+\item{enroll_id_ind}{< \emph{character} > 15-digit enrollment ID of individual provider reassigning benefits or an employee}
 
-\item{first, last}{First and/or last name of provider who is reassigning their benefits
-or is an employee}
+\item{first, last}{< \emph{character} > First/last name of individual provider reassigning benefits or an employee}
 
-\item{state_ind}{Enrollment state of provider who is reassigning their
-benefits or is an employee}
+\item{state_ind}{< \emph{character} > Enrollment state of individual provider reassigning benefits or an employee}
 
-\item{specialty}{Enrollment specialty of the provider who is
-reassigning their benefits or is an employee}
+\item{specialty_description}{< \emph{character} > Enrollment specialty of individual provider reassigning benefits or an employee}
 
-\item{pac_id_org}{PAC ID of provider who is receiving reassignment or is
-the employer.}
+\item{organization}{< \emph{character} > Legal business name of organizational provider receiving reassignment or is the employer}
 
-\item{enroll_id_org}{Enrollment ID of provider who is receiving
-reassignment or is the employer}
+\item{pac_org}{< \emph{integer} > 10-digit provider associate level variable of organizational provider receiving reassignment or is the employer}
 
-\item{state_org}{Enrollment state of provider who is receiving
-reassignment or is the employer}
+\item{enroll_id_org}{Enrollment ID of organizational provider receiving reassignment or is the employer}
 
-\item{business_name}{Legal business name of provider who is receiving
-reassignment or is the employer}
+\item{state_org}{< \emph{character} > Enrollment state of organizational provider receiving reassignment or is the employer}
 
-\item{record_type}{Identifies whether the record is for a reassignment
-(\code{Reassignment}) or employment (\verb{Physician Assistant})}
+\item{record_type}{< \emph{character} > Identifies whether the record is for a reassignment
+(\code{"Reassignment"}) or employment (\code{"Physician Assistant"})}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -65,18 +58,18 @@ Reassignments of Providers who are due for Revalidation.
 \details{
 The Revalidation Reassignment List dataset provides information on
 reassignments of providers who are due for revalidation.
-\subsection{Links}{
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list}{Medicare Revalidation Reassignment List API}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
 }
-}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 revalidation_reassign(enroll_id_ind = "I20200929003184")
-revalidation_reassign(pac_id_ind = 9830437441)
-revalidation_reassign(pac_id_org = 3173525888)
+revalidation_reassign(pac_ind = 9830437441)
+revalidation_reassign(pac_org = 3173525888)
 \dontshow{\}) # examplesIf}
 }

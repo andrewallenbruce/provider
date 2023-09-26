@@ -92,14 +92,14 @@
 #' @param year < *integer* > Program reporting year. Run the helper function
 #'    `open_payments_years()` to return a vector of currently
 #'    available years.
-#' @param npi < *integer* > Covered recipient's National Provider Identifier.
-#' @param covered_type < *character* > Type of covered recipient, e.g.,
+#' @param npi < *integer* > Covered recipient's 10-digit national provider identifier
+#' @param covered_type < *character* > Type of covered recipient:
 #'    * `"Physician"`
 #'    * `"Non-Physician Practitioner"`
 #'    * `"Teaching Hospital"`
 #' @param teaching_hospital < *character* > Name of teaching hospital, e.g.
 #'    `Vanderbilt University Medical Center`
-#' @param first,last < *character* > Covered recipient's first and/or last name
+#' @param first,last < *character* > Covered recipient's first/last name
 #' @param city < *character* > Covered recipient's city
 #' @param state < *character* > Covered recipient's state abbreviation
 #' @param zip < *character* > Covered recipient's zip code

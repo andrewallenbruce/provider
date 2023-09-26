@@ -92,12 +92,7 @@ order_refer <- function(npi   = NULL,
     "HHA",        hha,
     "PMD",        pmd)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                cms_update("Order and Referring", "id")$distro[1],
-                "/data.json?",
-                encode_param(args))
-
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(build_url("ord", args)) |> httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 

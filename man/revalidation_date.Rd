@@ -11,35 +11,35 @@ revalidation_date(
   last = NULL,
   organization = NULL,
   state = NULL,
-  enroll_code = NULL,
-  enroll_desc = NULL,
-  specialty = NULL,
-  tidy = TRUE
+  enrollment_type = NULL,
+  specialty_description = NULL,
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
-\item{npi}{National Provider Identifier (NPI)}
+\item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{enroll_id}{Enrollment ID}
+\item{enroll_id}{< \emph{character} > 15-digit provider enrollment ID}
 
-\item{first}{First name of individual provider}
+\item{first, last}{< \emph{character} > Individual provider's first/last name}
 
-\item{last}{Last name of individual provider}
+\item{organization}{< \emph{character} > Organizational provider's legal business name}
 
-\item{organization}{Legal business name of organizational provider}
+\item{state}{< \emph{character} > Enrollment state}
 
-\item{state}{Enrollment state}
-
-\item{enroll_code, enroll_desc}{Provider enrollment type code or description:
+\item{enrollment_type}{< \emph{integer} > Provider enrollment type:
 \itemize{
-\item \code{1} = \code{"Part A"}
-\item \code{2} = \code{"DME"}
-\item \code{3} = \code{"Non-DME Part B"}
+\item \code{1}: Part A
+\item \code{2}: DME
+\item \code{3}: Non-DME Part B
 }}
 
-\item{specialty}{Enrollment specialty}
+\item{specialty_description}{< \emph{character} > Enrollment specialty}
 
 \item{tidy}{Tidy output; default is \code{TRUE}.}
+
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -61,18 +61,18 @@ six months, the due date is marked 'TBD'. In addition the dataset also
 includes subfiles with reassignment information for a given provider
 as well as due date listings for clinics and group practices and
 their providers.
-\subsection{Links}{
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list}{Medicare Revalidation Due Date API}
 }
 
 \emph{Update Frequency:} \strong{Monthly}
 }
-}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 revalidation_date(enroll_id = "I20031110000070")
 revalidation_date(enroll_id = "O20110620000324")
-revalidation_date(state = "FL", enroll_code = 3, specialty = "General Practice")
+revalidation_date(state = "FL", enrollment_type = 3, specialty = "General Practice")
 \dontshow{\}) # examplesIf}
 }

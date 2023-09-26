@@ -28,16 +28,16 @@ open_payments(
 \code{open_payments_years()} to return a vector of currently
 available years.}
 
-\item{npi}{< \emph{integer} > Covered recipient's National Provider Identifier.}
+\item{npi}{< \emph{integer} > Covered recipient's 10-digit national provider identifier}
 
-\item{covered_type}{< \emph{character} > Type of covered recipient, e.g.,
+\item{covered_type}{< \emph{character} > Type of covered recipient:
 \itemize{
 \item \code{"Physician"}
 \item \code{"Non-Physician Practitioner"}
 \item \code{"Teaching Hospital"}
 }}
 
-\item{first, last}{< \emph{character} > Covered recipient's first and/or last name}
+\item{first, last}{< \emph{character} > Covered recipient's first/last name}
 
 \item{city}{< \emph{character} > Covered recipient's city}
 

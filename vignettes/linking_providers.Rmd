@@ -45,7 +45,7 @@ providers(organization = "Elizabethtown Community Hospital")
 
 ```{r}
 hospitals(organization = "Elizabethtown Community Hospital") |> 
-  select(npi:specialty, multiple_npis)
+  select(npi:specialty, proprietary_nonprofit:status)
 ```
 
 <br>

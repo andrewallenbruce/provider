@@ -87,10 +87,21 @@ utils::globalVariables(c(
   "condition", # <compare_conditions>
   "state", # <compare_conditions>
   "sublevel", # <compare_conditions>
-  "y", # <hospitals>
-  "address_line_1", # <hospitals>
-  "address_line_2", # <hospitals>
-  "flag", # <hospitals>
+  "y", # <revalidation_group>
+  "group_pac_id", # <revalidation_group>
+  "individual_npi", # <revalidation_group>
+  "individual_enrollment_id", # <revalidation_group>
+  "individual_first_name", # <revalidation_group>
+  "individual_last_name", # <revalidation_group>
+  "individual_state_code", # <revalidation_group>
+  "individual_specialty_description", # <revalidation_group>
+  "individual_total_employer_associations", # <revalidation_group>
+  "group_enrollment_id", # <revalidation_group>
+  "group_legal_business_name", # <revalidation_group>
+  "group_state_code", # <revalidation_group>
+  "group_reassignments_and_physician_assistants", # <revalidation_group>
+  "individual_due_date", # <revalidation_group>
+  "group_due_date", # <revalidation_group>
   "y", # <asc_ifed_enrollment>
   "line_1_st_adr", # <asc_ifed_enrollment>
   "line_2_st_adr", # <asc_ifed_enrollment>
@@ -99,6 +110,10 @@ utils::globalVariables(c(
   "type", # <asc_ifed_enrollment>
   "organization_name", # <asc_ifed_enrollment>
   "zip_code", # <asc_ifed_enrollment>
+  "y", # <hospitals>
+  "address_line_1", # <hospitals>
+  "address_line_2", # <hospitals>
+  "flag", # <hospitals>
   "y", # <laboratories>
   "pgm_trmntn_cd", # <laboratories>
   "crtfctn_actn_type_cd", # <laboratories>
@@ -231,6 +246,7 @@ utils::globalVariables(c(
   "identifier", # <open_ids>
   "y", # <opt_out>
   "y", # <order_refer>
+  "id", # <pending>
   "y", # <pending>
   "y", # <providers>
   "distro", # <quality_payment>
@@ -309,29 +325,7 @@ utils::globalVariables(c(
   "apm_affl_3", # <mips_2021>
   "y", # <revalidation_date>
   "y", # <revalidation_reassign>
-  "group_pac_id", # <revalidation_reassign>
-  "individual_pac_id", # <revalidation_reassign>
-  "individual_npi", # <revalidation_reassign>
-  "y", # <revalidation_group>
-  "group_pac_id", # <revalidation_group>
-  "individual_npi", # <revalidation_group>
-  "individual_enrollment_id", # <revalidation_group>
-  "individual_first_name", # <revalidation_group>
-  "individual_last_name", # <revalidation_group>
-  "individual_state_code", # <revalidation_group>
-  "individual_specialty_description", # <revalidation_group>
-  "individual_total_employer_associations", # <revalidation_group>
-  "group_enrollment_id", # <revalidation_group>
-  "group_legal_business_name", # <revalidation_group>
-  "group_state_code", # <revalidation_group>
-  "group_reassignments_and_physician_assistants", # <revalidation_group>
-  "individual_due_date", # <revalidation_group>
-  "group_due_date", # <revalidation_group>
   "y", # <taxonomy_crosswalk>
-  "medicare_specialty_code", # <taxonomy_crosswalk>
-  "medicare_provider_supplier_type", # <taxonomy_crosswalk>
-  "provider_taxonomy_code", # <taxonomy_crosswalk>
-  "provider_taxonomy_description_type_classification_specialization", # <taxonomy_crosswalk>
   "section", # <download_nucc_csv>
   "classification", # <download_nucc_csv>
   "specialization", # <download_nucc_csv>

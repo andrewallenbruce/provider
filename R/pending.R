@@ -33,11 +33,6 @@ pending <- function(type,
   type <- rlang::arg_match(type, c("physician", "non-physician"))
   if (!is.null(npi)) {npi <- npi_check(npi)}
 
-  # update distribution ids
-  id <- dplyr::case_match(type,
-    "physician" ~ cms_update("Pending Initial Logging and Tracking Physicians", "id")$distro[1],
-    "non-physician" ~ cms_update("Pending Initial Logging and Tracking Non Physicians", "id")$distro[1])
-
   # args tribble
   args <- dplyr::tribble(
     ~param,       ~args,
@@ -48,7 +43,10 @@ pending <- function(type,
   url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
                 id, "/data.json?", encode_param(args))
 
-  response <- httr2::request(url) |> httr2::req_perform()
+  if (type == "physician") {
+    response <- httr2::request(build_url("ppe", args)) |> httr2::req_perform()}
+  if (type == "non-physician") {
+    response <- httr2::request(build_url("npe", args)) |> httr2::req_perform()}
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 

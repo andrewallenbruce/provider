@@ -81,10 +81,8 @@ select(df,
        Beneficiaries = tot_benes,
        Services = tot_srvcs,
        Payment = tot_payment) |> 
-  change_year(Beneficiaries) |> 
-  change_year(Services) |> 
-  change_year(Payment) |> 
-  select(-contains("_chg")) |> 
+  change(c(Beneficiaries, Services, Payment)) |> 
+  select(-contains(c("_chg", "_cum"))) |> 
   gt(rowname_col = "year") |> 
   grand_summary_rows(columns = c(Beneficiaries, Services),
                      fns =  list(label = md("**AVERAGES**"), 

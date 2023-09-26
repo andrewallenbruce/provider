@@ -6,15 +6,15 @@
 \usage{
 providers(
   npi = NULL,
-  pac_id = NULL,
+  pac = NULL,
   enroll_id = NULL,
   specialty_code = NULL,
-  specialty = NULL,
-  state = NULL,
+  specialty_description = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
   organization = NULL,
+  state = NULL,
   gender = NULL,
   tidy = TRUE,
   na.rm = TRUE
@@ -23,7 +23,7 @@ providers(
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id}{< \emph{integer} > 10-digit provider associate level variable. Links
+\item{pac}{< \emph{integer} > 10-digit provider associate level variable. Links
 all entity-level information and may be associated with multiple enrollment
 IDs if the individual or organization enrolled multiple times.}
 
@@ -33,17 +33,17 @@ information (enrollment type, state, reassignment of benefits).}
 
 \item{specialty_code}{< \emph{character} > Enrollment primary specialty type code}
 
-\item{specialty}{< \emph{character} > Enrollment specialty type description}
-
-\item{state}{< \emph{character} > Enrollment state abbreviation/full name.
-Providers enroll at the state level, so a PAC ID can be associated with
-multiple enrollment IDs and states.}
+\item{specialty_description}{< \emph{character} > Enrollment specialty type description}
 
 \item{first, middle, last}{< \emph{character} > Individual provider's first/middle/last name}
 
 \item{organization}{< \emph{character} > Organizational provider's name}
 
-\item{gender}{< \emph{character} > Individual provider gender. Options are:
+\item{state}{< \emph{character} > Enrollment state abbreviation/full name.
+Providers enroll at the state level, so a PAC ID can be associated with
+multiple enrollment IDs and states.}
+
+\item{gender}{< \emph{character} > Individual provider's gender. Options are:
 \itemize{
 \item \code{"F"}: Female
 \item \code{"M"}: Male
@@ -61,20 +61,20 @@ multiple enrollment IDs and states.}
    \code{pac_id} \tab 10-digit PAC ID \cr
    \code{enroll_id} \tab 15-digit provider enrollment ID \cr
    \code{specialty_code} \tab Enrollment primary specialty type code \cr
-   \code{specialty} \tab Enrollment specialty type description \cr
-   \code{state} \tab Enrollment state \cr
+   \code{specialty_description} \tab Enrollment specialty type description \cr
    \code{first} \tab Individual provider's first name \cr
    \code{middle} \tab Individual provider's middle name \cr
    \code{last} \tab Individual provider's last name \cr
-   \code{gender} \tab Individual provider's gender \cr
    \code{organization} \tab Organizational provider's name \cr
+   \code{state} \tab Enrollment state \cr
+   \code{gender} \tab Individual provider's gender \cr
 }
 }
 \description{
-\code{providers()} allows you to access enrollment level
-data on individual and organizational providers that are actively approved
-to bill Medicare.
-\subsection{Links}{
+\code{providers()} allows you to access enrollment level data on individual and
+organizational providers that are actively approved to bill Medicare.
+
+Links:
 \itemize{
 \item \href{https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/medicare-fee-for-service-public-provider-enrollment}{Provider Enrollment API}
 \item \href{https://data.cms.gov/resources/medicare-fee-for-service-public-provider-enrollment-data-dictionary}{Provider Enrollment Data Dictionary}
@@ -82,11 +82,10 @@ to bill Medicare.
 
 \emph{Update Frequency:} \strong{Quarterly}
 }
-}
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 providers(npi = 1417918293, specialty_code = "14-41")
-providers(pac_id = 2860305554, gender = "9")
+providers(pac = 2860305554, gender = "9")
 \dontshow{\}) # examplesIf}
 }
 \seealso{

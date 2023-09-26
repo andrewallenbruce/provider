@@ -16,30 +16,30 @@
 #'    as well as due date listings for clinics and group practices and
 #'    their providers.
 #'
-#' ### Links
+#' Links:
 #' * [Medicare Revalidation Due Date API](https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list)
 #'
 #' *Update Frequency:* **Monthly**
 #'
-#' @param npi National Provider Identifier (NPI)
-#' @param enroll_id Enrollment ID
-#' @param first First name of individual provider
-#' @param last Last name of individual provider
-#' @param organization Legal business name of organizational provider
-#' @param state Enrollment state
-#' @param enroll_code,enroll_desc Provider enrollment type code or description:
-#'    * `1` = `"Part A"`
-#'    * `2` = `"DME"`
-#'    * `3` = `"Non-DME Part B"`
-#' @param specialty Enrollment specialty
+#' @param npi < *integer* > 10-digit national provider identifier
+#' @param enroll_id < *character* > 15-digit provider enrollment ID
+#' @param first,last < *character* > Individual provider's first/last name
+#' @param organization < *character* > Organizational provider's legal business name
+#' @param state < *character* > Enrollment state
+#' @param enrollment_type < *integer* > Provider enrollment type:
+#'    * `1`: Part A
+#'    * `2`: DME
+#'    * `3`: Non-DME Part B
+#' @param specialty_description < *character* > Enrollment specialty
 #' @param tidy Tidy output; default is `TRUE`.
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
 #' @examplesIf interactive()
 #' revalidation_date(enroll_id = "I20031110000070")
 #' revalidation_date(enroll_id = "O20110620000324")
-#' revalidation_date(state = "FL", enroll_code = 3, specialty = "General Practice")
+#' revalidation_date(state = "FL", enrollment_type = 3, specialty = "General Practice")
 #' @autoglobal
 #' @export
 revalidation_date <- function(npi = NULL,
@@ -48,18 +48,17 @@ revalidation_date <- function(npi = NULL,
                               last = NULL,
                               organization = NULL,
                               state = NULL,
-                              enroll_code = NULL,
-                              enroll_desc = NULL,
-                              specialty = NULL,
-                              tidy = TRUE) {
+                              enrollment_type = NULL,
+                              specialty_description = NULL,
+                              tidy = TRUE,
+                              na.rm = TRUE) {
 
   if (!is.null(npi))         {npi <- npi_check(npi)}
   if (!is.null(enroll_id))   {enroll_check(enroll_id)}
-  if (!is.null(enroll_desc)) {
-    rlang::arg_match(enroll_desc, c("Part A", "DME", "Non-DME Part B"))}
-  if (!is.null(enroll_code)) {
-    enroll_code <- as.character(enroll_code)
-    rlang::arg_match(enroll_code, as.character(1:3))}
+
+  if (!is.null(enrollment_type)) {
+    enrollment_type <- as.character(enrollment_type)
+    rlang::arg_match(enrollment_type, as.character(1:3))}
 
   args <- dplyr::tribble(
                             ~param,       ~arg,
@@ -69,29 +68,24 @@ revalidation_date <- function(npi = NULL,
                        "Last Name",        last,
                "Organization Name",        organization,
            "Enrollment State Code",        state,
-                 "Enrollment Type",        enroll_code,
-              "Provider Type Text",        enroll_desc,
-            "Enrollment Specialty",        specialty)
+                 "Enrollment Type",        enrollment_type,
+            "Enrollment Specialty",        specialty_description)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                cms_update("Revalidation Due Date List", "id")$distro[1],
-                "/data.json?", encode_param(args))
-
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(build_url("rdt", args)) |>
+    httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 
     cli_args <- dplyr::tribble(
-      ~x,              ~y,
-      "npi",           npi,
-      "enroll_id",     enroll_id,
-      "first",         first,
-      "last",          last,
-      "organization",  organization,
-      "state",         state,
-      "enroll_code",   enroll_code,
-      "enroll_desc",   enroll_desc,
-      "specialty",     specialty) |>
+      ~x,                       ~y,
+      "npi",                    npi,
+      "enroll_id",              enroll_id,
+      "first",                  first,
+      "last",                   last,
+      "organization",           organization,
+      "state",                  state,
+      "enrollment_type",        enrollment_type,
+      "specialty_description",  specialty_description) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -104,8 +98,12 @@ revalidation_date <- function(npi = NULL,
   if (tidy) {
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(dplyr::contains("eligible"), yn_logical),
-                    dplyr::across(dplyr::contains("date"), anytime::anydate)) |>
+                    dplyr::across(dplyr::contains("date"), anytime::anydate),
+                    dplyr::across(dplyr::contains("name"), toupper)) |>
       rdate_cols()
+
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))}
     }
   return(results)
 }
@@ -120,14 +118,13 @@ rdate_cols <- function(df) {
             'first' = 'first_name',
             'last' = 'last_name',
             'organization' = 'organization_name',
-            'enroll_state' = 'enrollment_state_code',
-            'enroll_desc' = 'provider_type_text',
-            'enroll_specialty' = 'enrollment_specialty',
-            'enroll_code' = 'enrollment_type',
-            'group_reassignments' = 'individual_total_reassign_to',
-            'ind_associations' = 'receiving_benefits_reassignment',
-            'revalidation_due_date',
-            'adjusted_due_date')
+            'state' = 'enrollment_state_code',
+            'enrollment_type' = 'provider_type_text',
+            'specialty_description' = 'enrollment_specialty',
+            'reassignments_org' = 'individual_total_reassign_to',
+            'reassignments_ind' = 'receiving_benefits_reassignment',
+            'due_date' = 'revalidation_due_date',
+            'due_date_adj' = 'adjusted_due_date')
 
   df |> dplyr::select(dplyr::all_of(cols))
 

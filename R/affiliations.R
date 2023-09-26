@@ -102,14 +102,9 @@ affiliations <- function(npi = NULL,
     "facility_affiliations_certification_number",   facility_ccn,
     "facility_type_certification_number",           parent_ccn)
 
-  url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-                "[SELECT * FROM ", aff_id(), "]",
-                encode_param(args, type = "sql"),
-                "[LIMIT 10000 OFFSET ", offset, "]")
-
   error_body <- function(response) {httr2::resp_body_json(response)$message}
 
-  response <- httr2::request(encode_url(url)) |>
+  response <- httr2::request(file_url("a", args, offset)) |>
     httr2::req_error(body = error_body) |>
     httr2::req_perform()
 
@@ -138,17 +133,6 @@ affiliations <- function(npi = NULL,
   if (tidy) {results <- tidyup(results) |> aff_cols()}
 
   return(results)
-}
-
-#' @autoglobal
-#' @noRd
-aff_id <- function() {
-
-  response <- httr2::request("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/27ea-46a8?show-reference-ids=true") |>
-    httr2::req_perform() |>
-    httr2::resp_body_json(simplifyVector = TRUE)
-
-  return(response$distribution$identifier)
 }
 
 #' @param df data frame

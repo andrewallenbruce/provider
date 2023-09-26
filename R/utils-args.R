@@ -80,57 +80,96 @@ encode_url <- function(url) {
   return(url)
 }
 
-#' build_url
-#' @param fn function abbreviation
-#' @param args description
-#' @param id description
-#' @param offset description
-#' @return url string to pass to httr2
+#' Build url for affiliations & clinicians
+#' @param fn `"a"` for affiliations, `"c"` for clinicians
+#' @param args tibble of parameter arguments
+#' @param offset API offset
 #' @autoglobal
 #' @noRd
-build_url <- function(fn, args, id = NULL, offset = NULL) {
+file_url <- function(fn = c("c", "a"), args, offset) {
+  if (fn == "a") {uuid <- "27ea-46a8"}
+  if (fn == "c") {uuid <- "mj5m-pzi6"}
+  id <- httr2::request(
+    glue::glue("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/{uuid}?show-reference-ids=true")) |>
+    httr2::req_perform() |>
+    httr2::resp_body_json(simplifyVector = TRUE)
 
-  http <- dplyr::case_match(fn,
-  c("aff", "cln") ~ "https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-  c("opp") ~ "https://openpaymentsdata.cms.gov/api/1/datastore/sql?query=",
-  .default = "https://data.cms.gov/data-api/v1/dataset/")
+  url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
+                "[SELECT * FROM ", id$distribution$identifier, "]",
+                encode_param(args, type = "sql"),
+                "[LIMIT 10000 OFFSET ", offset, "]")
 
-  json <- dplyr::case_match(fn,
-  c("end", "tax", "qpp") ~ "/data?",
-  .default = "/data.json?")
-
-  api <- dplyr::case_match(fn,
-  "ben" ~ "Medicare Monthly Enrollment",
-  "hos" ~ "Hospital Enrollments",
-  "lab" ~ "Provider of Services File - Clinical Laboratories",
-  "end" ~ "Public Reporting of Missing Digital Contact Information",
-  "pro" ~ "Medicare Fee-For-Service  Public Provider Enrollment",
-  "rdt" ~ "Revalidation Due Date List",
-  "ras" ~ "Revalidation Reassignment List",
-  "ord" ~ "Order and Referring",
-  "opt" ~ "Opt Out Affidavits",
-  "ppe" ~ "Pending Initial Logging and Tracking Physicians",
-  "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
-  "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk",
-  .default = NULL)
-
-  if (!is.null(api)) {
-    return(paste0(http, cms_update(api)$distro[1], json, encode_param(args)))}
-
-  if (fn %in% c("geo", "srv", "prv", "scc", "mcc", "qpp")) {
-    return(paste0(http, id, json, encode_param(args)))}
-
-  if (fn == "aff") {
-    return(encode_url(paste0(http, "[SELECT * FROM ", file_id("aff"), "]", encode_param(args, "sql"), "[LIMIT 10000 OFFSET ", offset, "]")))}
-
-  if (fn == "cln") {
-    return(encode_url(paste0(http, "[SELECT * FROM ", file_id("cln"), "]", encode_param(args, "sql"), "[LIMIT 10000 OFFSET ", offset, "]")))}
-
-  if (fn == "opp") {
-    return(encode_url(paste0(http, "[SELECT * FROM ", id, "]", encode_param(args, "sql"), "[LIMIT 10000 OFFSET ", offset, "]")))}
+  encode_url(url)
 }
 
-api_years <- function(fn) {
+#' Build url for http requests
+#' @param fn abbreviation for function name
+#' @param args tibble of parameter arguments
+#' @autoglobal
+#' @noRd
+build_url <- function(fn, args = NULL) {
+
+  api <- dplyr::case_match(fn,
+        "ben" ~ "Medicare Monthly Enrollment",
+        "hos" ~ "Hospital Enrollments",
+        "lab" ~ "Provider of Services File - Clinical Laboratories",
+        "end" ~ "Public Reporting of Missing Digital Contact Information",
+        "pro" ~ "Medicare Fee-For-Service  Public Provider Enrollment",
+        "rdt" ~ "Revalidation Due Date List",
+        "ras" ~ "Revalidation Reassignment List",
+        "ord" ~ "Order and Referring",
+        "opt" ~ "Opt Out Affidavits",
+        "ppe" ~ "Pending Initial Logging and Tracking Physicians",
+        "npe" ~ "Pending Initial Logging and Tracking Non Physicians",
+        "tax" ~ "Medicare Provider and Supplier Taxonomy Crosswalk")
+
+  if (fn %in% c("tax") && is.null(args)) {
+
+    url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+                  cms_update(api)$distro[1],
+                  "/data?keyword=")
+
+  }
+
+  if (!is.null(args)) {
+
+    json <- dplyr::case_match(fn,
+            c("end", "tax") ~ "/data?",
+            .default = "/data.json?")
+
+    url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
+           cms_update(api)$distro[1],
+           json,
+           encode_param(args))
+  }
+  return(url)
+}
+
+#' Format empty search results
+#' @param df data frame of parameter arguments
+#' @param name function name
+#' @autoglobal
+#' @noRd
+format_cli <- function(df, name) {
+
+  x <- purrr::map2(df$x,
+                   df$y,
+                   stringr::str_c,
+                   sep = " = ",
+                   collapse = "")
+
+  cli::cli_alert_danger("{.fn {name}}: No results for {.val {x}}",
+                        wrap = TRUE)
+
+}
+
+#' Build url for http requests
+#' @param fn abbreviation for function name
+#' @param year tibble of parameter arguments
+#' @autoglobal
+#' @noRd
+api_years <- function(fn, year) {
+
   api <- dplyr::case_match(fn,
     "geo" ~ "Medicare Physician & Other Practitioners - by Geography and Service",
     "srv" ~ "Medicare Physician & Other Practitioners - by Provider and Service",
@@ -139,36 +178,11 @@ api_years <- function(fn) {
     "mcc" ~ "Multiple Chronic Conditions",
     "qpp" ~ "Quality Payment Program Experience",
     .default = NULL)
-  cms_update(api)
-}
 
-file_id <- function(fun = c("cln", "aff")) {
-  if (type == "cln") {uuid <- "mj5m-pzi6"}
-  if (type == "aff") {uuid <- "27ea-46a8"}
-
-  url <- glue::glue("https://data.cms.gov/provider-data/api/1/metastore/schemas/dataset/items/{uuid}?show-reference-ids=true")
-
-      r <- httr2::request(url) |>
-        httr2::req_perform() |>
-        httr2::resp_body_json(simplifyVector = TRUE)
-
-      return(r$distribution$identifier)
+  cms_update(api) |>
+    dplyr::filter(year == {{ year }}) |>
+    dplyr::pull(distro)
 }
 
 
-#' Format empty search results
-#' @param df data frame of parameter arguments
-#' @autoglobal
-#' @noRd
-format_cli <- function(df) {
 
-  x <- purrr::map2(df$x,
-                   df$y,
-                   stringr::str_c,
-                   sep = ": ",
-                   collapse = "")
-
-  cli::cli_alert_danger("No results for {.val {x}}",
-                        wrap = TRUE)
-
-}

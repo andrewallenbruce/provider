@@ -65,11 +65,7 @@ missing_endpoints <- function(npi  = NULL,
     "NPI",            npi,
     "Provider Name",  name)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-         cms_update("Public Reporting of Missing Digital Contact Information",
-         "id")$distro[1], "/data?", encode_param(args))
-
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(build_url("end", args)) |> httr2::req_perform()
 
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 

@@ -105,11 +105,7 @@ laboratories <- function(name = NULL,
     "STATE_CD",       state,
     "ZIP_CD",         zip)
 
-  url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-         cms_update("Provider of Services File - Clinical Laboratories",
-         "id")$distro[1], "/data.json?", encode_param(args))
-
-  response <- httr2::request(url) |> httr2::req_perform()
+  response <- httr2::request(build_url("lab", args)) |> httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
 

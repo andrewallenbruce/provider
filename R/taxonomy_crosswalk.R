@@ -1,6 +1,7 @@
 #' Taxonomy to Medicare Specialty Crosswalk
 #'
 #' @description
+#'
 #' `taxonomy_crosswalk()` allows you to search the types of providers and
 #' suppliers eligible for Medicare programs by taxonomy code or Medicare
 #' specialty type code.
@@ -26,8 +27,8 @@
 #'
 #' *Update Frequency:* **Weekly**
 #'
-#' @param medicare_code < *character* > Medicare specialty code
-#' @param medicare_type < *character* > Medicare provider/supplier type
+#' @param specialty_code < *character* > Medicare specialty code
+#' @param specialty_description < *character* > Medicare provider/supplier type
 #' @param taxonomy_code < *character* > 10-digit taxonomy code
 #' @param taxonomy_description < *character* > Provider's taxonomy description
 #' @param keyword_search < *character* > Search term to use for quick full-text search.
@@ -37,56 +38,54 @@
 #'
 #' |**Field**              |**Description**                                    |
 #' |:----------------------|:--------------------------------------------------|
-#' |`medicare_code`        |Code that corresponds to the Medicare specialty    |
-#' |`medicare_type`        |Description of the Medicare provider/Supplier Type |
+#' |`specialty_code`       |Code that corresponds to the Medicare specialty    |
+#' |`specialty_description`|Description of the Medicare provider/Supplier Type |
 #' |`taxonomy_code`        |Provider's taxonomy code                           |
 #' |`taxonomy_description` |Description of the taxonomy code                   |
 #'
 #' @examplesIf interactive()
 #' taxonomy_crosswalk(keyword_search = "B4")
 #' taxonomy_crosswalk(keyword_search = "Histocompatibility")
-#' taxonomy_crosswalk(medicare_type = "Rehabilitation Agency")
+#' taxonomy_crosswalk(specialty_description = "Rehabilitation Agency")
 #' taxonomy_crosswalk(taxonomy_code = "2086S0102X")
 #' @autoglobal
 #' @export
 taxonomy_crosswalk <- function(taxonomy_code         = NULL,
                                taxonomy_description  = NULL,
-                               medicare_code         = NULL,
-                               medicare_type         = NULL,
+                               specialty_code        = NULL,
+                               specialty_description = NULL,
                                keyword_search        = NULL,
                                tidy                  = TRUE) {
 
   if (!is.null(keyword_search)) {
 
-    url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                  cms_update("Medicare Provider and Supplier Taxonomy Crosswalk",
-                  "id")$distro[1], "/data?keyword=", keyword_search)
+    response <- httr2::request(encode_url(paste0(
+      build_url("tax"), keyword_search))) |>
+      httr2::req_perform()
+
     } else {
 
       args <- dplyr::tribble(
       ~param,                                                                ~arg,
-      "MEDICARE SPECIALTY CODE",                                             medicare_code,
-      "MEDICARE PROVIDER%2FSUPPLIER TYPE",                                   medicare_type,
+      "MEDICARE SPECIALTY CODE",                                             specialty_code,
+      "MEDICARE PROVIDER%2FSUPPLIER TYPE",                                   specialty_description,
       "PROVIDER TAXONOMY CODE",                                              taxonomy_code,
       "PROVIDER TAXONOMY DESCRIPTION%3A TYPE CLASSIFICATION SPECIALIZATION", taxonomy_description)
 
-      url <- paste0("https://data.cms.gov/data-api/v1/dataset/",
-                    cms_update("Medicare Provider and Supplier Taxonomy Crosswalk",
-                               "id")$distro[1], "/data?", encode_param(args))
+      response <- httr2::request(build_url("tax", args)) |> httr2::req_perform()
   }
 
-  response <- httr2::request(url) |> httr2::req_perform()
   results <- httr2::resp_body_json(response, simplifyVector = TRUE)
 
   if (isTRUE(vctrs::vec_is_empty(results))) {
 
     cli_args <- dplyr::tribble(
       ~x,                     ~y,
-      "medicare_code",        medicare_code,
-      "medicare_type",        medicare_type,
-      "taxonomy_code",        taxonomy_code,
-      "taxonomy_description", taxonomy_description,
-      "keyword_search",       keyword_search) |>
+      "specialty_code",        specialty_code,
+      "specialty_description", specialty_description,
+      "taxonomy_code",         taxonomy_code,
+      "taxonomy_description",  taxonomy_description,
+      "keyword_search",        keyword_search) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -97,11 +96,8 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::where(is.character), stringr::str_squish)) |>
-      dplyr::select(medicare_code = medicare_specialty_code,
-                    medicare_type = medicare_provider_supplier_type,
-                    taxonomy_code = provider_taxonomy_code,
-                    taxonomy_description = provider_taxonomy_description_type_classification_specialization)
+      dplyr::mutate(dplyr::across(dplyr::everything(), stringr::str_squish)) |>
+      cross_cols()
   }
   return(results)
 }
@@ -111,10 +107,10 @@ taxonomy_crosswalk <- function(taxonomy_code         = NULL,
 #' @noRd
 cross_cols <- function(df) {
 
-  cols <- c('medicare_code' = 'medicare_specialty_code',
-            'medicare_type' = 'medicare_provider_supplier_type',
-            'taxonomy_code' = 'provider_taxonomy_code',
-            'taxonomy_description' = 'provider_taxonomy_description_type_classification_specialization')
+  cols <- c('specialty_code'        = 'medicare_specialty_code',
+            'specialty_description' = 'medicare_provider_supplier_type',
+            'taxonomy_code'         = 'provider_taxonomy_code',
+            'taxonomy_description'  = 'provider_taxonomy_description_type_classification_specialization')
 
   df |> dplyr::select(dplyr::all_of(cols))
 
