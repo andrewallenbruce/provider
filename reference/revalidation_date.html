@@ -109,52 +109,52 @@ dates are appended to the list</p>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  enroll_desc <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  enrollment_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>National Provider Identifier (NPI)</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
 
 
 <dt>enroll_id</dt>
-<dd><p>Enrollment ID</p></dd>
+<dd><p>&lt; <em>character</em> &gt; 15-digit provider enrollment ID</p></dd>
 
 
-<dt>first</dt>
-<dd><p>First name of individual provider</p></dd>
-
-
-<dt>last</dt>
-<dd><p>Last name of individual provider</p></dd>
+<dt>first, last</dt>
+<dd><p>&lt; <em>character</em> &gt; Individual provider's first/last name</p></dd>
 
 
 <dt>organization</dt>
-<dd><p>Legal business name of organizational provider</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Organizational provider's legal business name</p></dd>
 
 
 <dt>state</dt>
-<dd><p>Enrollment state</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment state</p></dd>
 
 
-<dt>enroll_code, enroll_desc</dt>
-<dd><p>Provider enrollment type code or description:</p><ul><li><p><code>1</code> = <code>"Part A"</code></p></li>
-<li><p><code>2</code> = <code>"DME"</code></p></li>
-<li><p><code>3</code> = <code>"Non-DME Part B"</code></p></li>
+<dt>enrollment_type</dt>
+<dd><p>&lt; <em>integer</em> &gt; Provider enrollment type:</p><ul><li><p><code>1</code>: Part A</p></li>
+<li><p><code>2</code>: DME</p></li>
+<li><p><code>3</code>: Non-DME Part B</p></li>
 </ul></dd>
 
 
-<dt>specialty</dt>
-<dd><p>Enrollment specialty</p></dd>
+<dt>specialty_description</dt>
+<dd><p>&lt; <em>character</em> &gt; Enrollment specialty</p></dd>
 
 
 <dt>tidy</dt>
 <dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -171,13 +171,9 @@ six months. If a provider's due date does not fall within the ensuing
 six months, the due date is marked 'TBD'. In addition the dataset also
 includes subfiles with reassignment information for a given provider
 as well as due date listings for clinics and group practices and
-their providers.</p><div class="section">
-<h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
-
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date API</a></p></li>
+their providers.</p>
+<p>Links:</p><ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-due-date-list" class="external-link">Medicare Revalidation Due Date API</a></p></li>
 </ul><p><em>Update Frequency:</em> <strong>Monthly</strong></p>
-</div>
-
     </div>
 
     <div class="section level2">
@@ -185,7 +181,7 @@ their providers.</p><div class="section">
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031110000070"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"O20110620000324"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, enroll_code <span class="op">=</span> <span class="fl">3</span>, specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_date</span><span class="op">(</span>state <span class="op">=</span> <span class="st">"FL"</span>, enrollment_type <span class="op">=</span> <span class="fl">3</span>, specialty <span class="op">=</span> <span class="st">"General Practice"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>

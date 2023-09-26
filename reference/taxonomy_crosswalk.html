@@ -159,8 +159,8 @@ as categorizations used by Medicare for enrollment.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span></span>
 <span>  taxonomy_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  taxonomy_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  medicare_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  medicare_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty_code <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  keyword_search <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -176,11 +176,11 @@ as categorizations used by Medicare for enrollment.</p>
 <dd><p>&lt; <em>character</em> &gt; Provider's taxonomy description</p></dd>
 
 
-<dt>medicare_code</dt>
+<dt>specialty_code</dt>
 <dd><p>&lt; <em>character</em> &gt; Medicare specialty code</p></dd>
 
 
-<dt>medicare_type</dt>
+<dt>specialty_description</dt>
 <dd><p>&lt; <em>character</em> &gt; Medicare provider/supplier type</p></dd>
 
 
@@ -196,14 +196,14 @@ as categorizations used by Medicare for enrollment.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>medicare_code</code></td><td>Code that corresponds to the Medicare specialty</td></tr><tr><td><code>medicare_type</code></td><td>Description of the Medicare provider/Supplier Type</td></tr><tr><td><code>taxonomy_code</code></td><td>Provider's taxonomy code</td></tr><tr><td><code>taxonomy_description</code></td><td>Description of the taxonomy code</td></tr></table></div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>specialty_code</code></td><td>Code that corresponds to the Medicare specialty</td></tr><tr><td><code>specialty_description</code></td><td>Description of the Medicare provider/Supplier Type</td></tr><tr><td><code>taxonomy_code</code></td><td>Provider's taxonomy code</td></tr><tr><td><code>taxonomy_description</code></td><td>Description of the taxonomy code</td></tr></table></div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>keyword_search <span class="op">=</span> <span class="st">"B4"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>keyword_search <span class="op">=</span> <span class="st">"Histocompatibility"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>medicare_type <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>specialty_description <span class="op">=</span> <span class="st">"Rehabilitation Agency"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">taxonomy_crosswalk</span><span class="op">(</span>taxonomy_code <span class="op">=</span> <span class="st">"2086S0102X"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>

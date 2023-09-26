@@ -139,10 +139,10 @@ us several avenues to go down:</p>
 </colgroup>
 <thead><tr class="header">
 <th align="left">npi</th>
-<th align="left">pac_id</th>
+<th align="left">pac</th>
 <th align="left">enroll_id</th>
 <th align="left">specialty_code</th>
-<th align="left">specialty</th>
+<th align="left">specialty_description</th>
 <th align="left">state</th>
 <th align="left">organization</th>
 </tr></thead>
@@ -187,10 +187,42 @@ us several avenues to go down:</p>
 </table>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">specialty</span>, <span class="va">multiple_npis</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `select()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns that don't exist.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Column `multiple_npis` doesn't exist.</span></span></code></pre>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">specialty</span>, <span class="va">proprietary_nonprofit</span><span class="op">:</span><span class="va">status</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="6%">
+<col width="18%">
+<col width="6%">
+<col width="8%">
+<col width="7%">
+<col width="8%">
+<col width="24%">
+<col width="12%">
+<col width="7%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">npi</th>
+<th align="left">organization</th>
+<th align="left">pac_id_org</th>
+<th align="left">enroll_id_org</th>
+<th align="left">facility_ccn</th>
+<th align="left">specialty_code</th>
+<th align="left">specialty</th>
+<th align="left">proprietary_nonprofit</th>
+<th align="left">status</th>
+</tr></thead>
+<tbody><tr class="odd">
+<td align="left">1891785184</td>
+<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
+<td align="left">3577554138</td>
+<td align="left">O20101110000259</td>
+<td align="left">331302</td>
+<td align="left">00-85</td>
+<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
+<td align="left">Non-Profit</td>
+<td align="left">Multiple NPIs</td>
+</tr></tbody>
+</table>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -199,7 +231,7 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span>, <span class="va">parent_ccn</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
@@ -306,7 +338,7 @@ all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
@@ -373,7 +405,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <div class="section level3">
 <h3 id="clia-laboratories">CLIA Laboratories<a class="anchor" aria-label="anchor" href="#clia-laboratories"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, </span>
 <span>             certificate <span class="op">=</span> <span class="st">"accreditation"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">confirmed</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -398,24 +430,24 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
 <span>               date_style <span class="op">=</span> <span class="st">"m_day_year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div id="qljvphmzny" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fxjtimclme" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#qljvphmzny table {
+#fxjtimclme table {
   font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#qljvphmzny thead, #qljvphmzny tbody, #qljvphmzny tfoot, #qljvphmzny tr, #qljvphmzny td, #qljvphmzny th {
+#fxjtimclme thead, #fxjtimclme tbody, #fxjtimclme tfoot, #fxjtimclme tr, #fxjtimclme td, #fxjtimclme th {
   border-style: none;
 }
 
-#qljvphmzny p {
+#fxjtimclme p {
   margin: 0;
   padding: 0;
 }
 
-#qljvphmzny .gt_table {
+#fxjtimclme .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -441,12 +473,12 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-left-color: #D3D3D3;
 }
 
-#qljvphmzny .gt_caption {
+#fxjtimclme .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#qljvphmzny .gt_title {
+#fxjtimclme .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -458,7 +490,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-width: 0;
 }
 
-#qljvphmzny .gt_subtitle {
+#fxjtimclme .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -470,7 +502,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-width: 0;
 }
 
-#qljvphmzny .gt_heading {
+#fxjtimclme .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -482,13 +514,13 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#qljvphmzny .gt_bottom_border {
+#fxjtimclme .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #E4220C;
 }
 
-#qljvphmzny .gt_col_headings {
+#fxjtimclme .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #E4220C;
@@ -503,7 +535,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#qljvphmzny .gt_col_heading {
+#fxjtimclme .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -523,7 +555,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#qljvphmzny .gt_column_spanner_outer {
+#fxjtimclme .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -535,15 +567,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 4px;
 }
 
-#qljvphmzny .gt_column_spanner_outer:first-child {
+#fxjtimclme .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qljvphmzny .gt_column_spanner_outer:last-child {
+#fxjtimclme .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qljvphmzny .gt_column_spanner {
+#fxjtimclme .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #E4220C;
@@ -555,11 +587,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   width: 100%;
 }
 
-#qljvphmzny .gt_spanner_row {
+#fxjtimclme .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#qljvphmzny .gt_group_heading {
+#fxjtimclme .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -585,7 +617,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   text-align: left;
 }
 
-#qljvphmzny .gt_empty_group_heading {
+#fxjtimclme .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -600,15 +632,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: middle;
 }
 
-#qljvphmzny .gt_from_md > :first-child {
+#fxjtimclme .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qljvphmzny .gt_from_md > :last-child {
+#fxjtimclme .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qljvphmzny .gt_row {
+#fxjtimclme .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -627,7 +659,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   overflow-x: hidden;
 }
 
-#qljvphmzny .gt_stub {
+#fxjtimclme .gt_stub {
   color: #FFFFFF;
   background-color: #E4220C;
   font-size: 100%;
@@ -640,7 +672,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#qljvphmzny .gt_stub_row_group {
+#fxjtimclme .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -654,15 +686,15 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   vertical-align: top;
 }
 
-#qljvphmzny .gt_row_group_first td {
+#fxjtimclme .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qljvphmzny .gt_row_group_first th {
+#fxjtimclme .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#qljvphmzny .gt_summary_row {
+#fxjtimclme .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -672,16 +704,16 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#qljvphmzny .gt_first_summary_row {
+#fxjtimclme .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #E4220C;
 }
 
-#qljvphmzny .gt_first_summary_row.thick {
+#fxjtimclme .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qljvphmzny .gt_last_summary_row {
+#fxjtimclme .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -691,7 +723,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #E4220C;
 }
 
-#qljvphmzny .gt_grand_summary_row {
+#fxjtimclme .gt_grand_summary_row {
   color: #333333;
   background-color: #FFCCC7;
   text-transform: inherit;
@@ -701,7 +733,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#qljvphmzny .gt_first_grand_summary_row {
+#fxjtimclme .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -711,7 +743,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-top-color: #E4220C;
 }
 
-#qljvphmzny .gt_last_grand_summary_row_top {
+#fxjtimclme .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -721,11 +753,11 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #E4220C;
 }
 
-#qljvphmzny .gt_striped {
+#fxjtimclme .gt_striped {
   background-color: #F4F4F4;
 }
 
-#qljvphmzny .gt_table_body {
+#fxjtimclme .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #E4220C;
@@ -734,7 +766,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-bottom-color: #E4220C;
 }
 
-#qljvphmzny .gt_footnotes {
+#fxjtimclme .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -748,7 +780,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#qljvphmzny .gt_footnote {
+#fxjtimclme .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -757,7 +789,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#qljvphmzny .gt_sourcenotes {
+#fxjtimclme .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -771,7 +803,7 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   border-right-color: #D3D3D3;
 }
 
-#qljvphmzny .gt_sourcenote {
+#fxjtimclme .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -779,63 +811,63 @@ i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
   padding-right: 5px;
 }
 
-#qljvphmzny .gt_left {
+#fxjtimclme .gt_left {
   text-align: left;
 }
 
-#qljvphmzny .gt_center {
+#fxjtimclme .gt_center {
   text-align: center;
 }
 
-#qljvphmzny .gt_right {
+#fxjtimclme .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qljvphmzny .gt_font_normal {
+#fxjtimclme .gt_font_normal {
   font-weight: normal;
 }
 
-#qljvphmzny .gt_font_bold {
+#fxjtimclme .gt_font_bold {
   font-weight: bold;
 }
 
-#qljvphmzny .gt_font_italic {
+#fxjtimclme .gt_font_italic {
   font-style: italic;
 }
 
-#qljvphmzny .gt_super {
+#fxjtimclme .gt_super {
   font-size: 65%;
 }
 
-#qljvphmzny .gt_footnote_marks {
+#fxjtimclme .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#qljvphmzny .gt_asterisk {
+#fxjtimclme .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qljvphmzny .gt_indent_1 {
+#fxjtimclme .gt_indent_1 {
   text-indent: 5px;
 }
 
-#qljvphmzny .gt_indent_2 {
+#fxjtimclme .gt_indent_2 {
   text-indent: 10px;
 }
 
-#qljvphmzny .gt_indent_3 {
+#fxjtimclme .gt_indent_3 {
   text-indent: 15px;
 }
 
-#qljvphmzny .gt_indent_4 {
+#fxjtimclme .gt_indent_4 {
   text-indent: 20px;
 }
 
-#qljvphmzny .gt_indent_5 {
+#fxjtimclme .gt_indent_5 {
   text-indent: 25px;
 }
 </style>

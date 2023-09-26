@@ -86,80 +86,75 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">revalidation_reassign</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  specialty <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  specialty_description <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  organization <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  enroll_id_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state_org <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  business_name <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  record_type <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>npi</dt>
-<dd><p>NPI of provider who is reassigning their benefits or is an
-employee</p></dd>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier of individual provider reassigning benefits or an employee</p></dd>
 
 
-<dt>pac_id_ind</dt>
-<dd><p>PAC ID of provider reassigning their benefits or
-is an employee</p></dd>
+<dt>pac_ind</dt>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit provider associate level variable of individual provider reassigning benefits or an employee</p></dd>
 
 
 <dt>enroll_id_ind</dt>
-<dd><p>Enrollment ID of provider reassigning their benefits or
-is an employee</p></dd>
+<dd><p>&lt; <em>character</em> &gt; 15-digit enrollment ID of individual provider reassigning benefits or an employee</p></dd>
 
 
 <dt>first, last</dt>
-<dd><p>First and/or last name of provider who is reassigning their benefits
-or is an employee</p></dd>
+<dd><p>&lt; <em>character</em> &gt; First/last name of individual provider reassigning benefits or an employee</p></dd>
 
 
 <dt>state_ind</dt>
-<dd><p>Enrollment state of provider who is reassigning their
-benefits or is an employee</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment state of individual provider reassigning benefits or an employee</p></dd>
 
 
-<dt>specialty</dt>
-<dd><p>Enrollment specialty of the provider who is
-reassigning their benefits or is an employee</p></dd>
+<dt>specialty_description</dt>
+<dd><p>&lt; <em>character</em> &gt; Enrollment specialty of individual provider reassigning benefits or an employee</p></dd>
 
 
-<dt>pac_id_org</dt>
-<dd><p>PAC ID of provider who is receiving reassignment or is
-the employer.</p></dd>
+<dt>organization</dt>
+<dd><p>&lt; <em>character</em> &gt; Legal business name of organizational provider receiving reassignment or is the employer</p></dd>
+
+
+<dt>pac_org</dt>
+<dd><p>&lt; <em>integer</em> &gt; 10-digit provider associate level variable of organizational provider receiving reassignment or is the employer</p></dd>
 
 
 <dt>enroll_id_org</dt>
-<dd><p>Enrollment ID of provider who is receiving
-reassignment or is the employer</p></dd>
+<dd><p>Enrollment ID of organizational provider receiving reassignment or is the employer</p></dd>
 
 
 <dt>state_org</dt>
-<dd><p>Enrollment state of provider who is receiving
-reassignment or is the employer</p></dd>
-
-
-<dt>business_name</dt>
-<dd><p>Legal business name of provider who is receiving
-reassignment or is the employer</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Enrollment state of organizational provider receiving reassignment or is the employer</p></dd>
 
 
 <dt>record_type</dt>
-<dd><p>Identifies whether the record is for a reassignment
-(<code>Reassignment</code>) or employment (<code>Physician Assistant</code>)</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Identifies whether the record is for a reassignment
+(<code>"Reassignment"</code>) or employment (<code>"Physician Assistant"</code>)</p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>Tidy output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code>.</p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -171,21 +166,17 @@ reassignment or is the employer</p></dd>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The Revalidation Reassignment List dataset provides information on
-reassignments of providers who are due for revalidation.</p><div class="section">
-<h3 id="links">Links<a class="anchor" aria-label="anchor" href="#links"></a></h3>
-
-<ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list" class="external-link">Medicare Revalidation Reassignment List API</a></p></li>
+reassignments of providers who are due for revalidation.</p>
+<p>Links:</p><ul><li><p><a href="https://data.cms.gov/provider-characteristics/medicare-provider-supplier-enrollment/revalidation-reassignment-list" class="external-link">Medicare Revalidation Reassignment List API</a></p></li>
 </ul><p><em>Update Frequency:</em> <strong>Monthly</strong></p>
-</div>
-
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># interactive()</span></span></span>
 <span class="r-in"><span><span class="fu">revalidation_reassign</span><span class="op">(</span>enroll_id_ind <span class="op">=</span> <span class="st">"I20200929003184"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_id_ind <span class="op">=</span> <span class="fl">9830437441</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="fl">3173525888</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">9830437441</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">revalidation_reassign</span><span class="op">(</span>pac_org <span class="op">=</span> <span class="fl">3173525888</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
