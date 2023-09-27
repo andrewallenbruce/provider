@@ -118,6 +118,52 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://andrewallenbruce.github.io/provider/">provider</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span></code></pre></div>
+<div class="section level2">
+<h2 id="individual-provider">Individual Provider<a class="anchor" aria-label="anchor" href="#individual-provider"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>pac <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span>, </span>
+<span>  <span class="fu"><a href="../reference/revalidation_date.html">revalidation_date</a></span><span class="op">(</span>enroll_id <span class="op">=</span> <span class="st">"I20031120000251"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">full_join</a></span><span class="op">(</span><span class="fu"><a href="../reference/revalidation_reassign.html">revalidation_reassign</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 18</span></span>
+<span><span class="co">#&gt; $ npi                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "1043245657"</span></span>
+<span><span class="co">#&gt; $ pac                   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "7810891009"</span></span>
+<span><span class="co">#&gt; $ enroll_id             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "I20031120000251"</span></span>
+<span><span class="co">#&gt; $ specialty_code        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "14-22"</span></span>
+<span><span class="co">#&gt; $ specialty_description <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "PRACTITIONER - PATHOLOGY"</span></span>
+<span><span class="co">#&gt; $ state                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
+<span><span class="co">#&gt; $ first                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "MARK"</span></span>
+<span><span class="co">#&gt; $ middle                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "K"</span></span>
+<span><span class="co">#&gt; $ last                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "FUNG"</span></span>
+<span><span class="co">#&gt; $ gender                <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "M"</span></span>
+<span><span class="co">#&gt; $ enrollment_type       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Non-DME Part B"</span></span>
+<span><span class="co">#&gt; $ reassignments_ind     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ organization          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "UNIVERSITY OF VERMONT MEDICAL CENTER INC"</span></span>
+<span><span class="co">#&gt; $ pac_org               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "3779491071"</span></span>
+<span><span class="co">#&gt; $ enroll_id_org         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "O20060822000040"</span></span>
+<span><span class="co">#&gt; $ state_org             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VT"</span></span>
+<span><span class="co">#&gt; $ reassignments_org     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 99</span></span>
+<span><span class="co">#&gt; $ record_type           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Reassignment"</span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; Error in map_dfr(pull(affiliations(pac_ind = 7810891009), facility_ccn), : could not find function "map_dfr"</span></span></code></pre>
+<p><br></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
+<span><span class="co">#&gt;   npi        pac_ind   enroll_id_ind first middle last  gender credential school</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043245657 78108910… I20031120000… MARK  K      FUNG  M      MD         UNIVE…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 12 more variables: grad_year &lt;int&gt;, specialty &lt;chr&gt;, facility_name &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pac_org &lt;chr&gt;, members &lt;int&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   zip &lt;chr&gt;, phone &lt;chr&gt;, assign_ind &lt;chr&gt;, assign_group &lt;chr&gt;</span></span></span></code></pre>
+<p><br></p>
 <p>Exploring links between providers can lead to many interesting
 insights. For example, there is a hospital in New York named
 <strong>Elizabethtown Community Hospital</strong>.</p>
@@ -125,104 +171,23 @@ insights. For example, there is a hospital in New York named
 <p>Looking it up in the <strong>Provider Enrollment</strong> API gives
 us several avenues to go down:</p>
 <p><br></p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/providers.html">providers</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="8%">
-<col width="8%">
-<col width="11%">
-<col width="10%">
-<col width="32%">
-<col width="4%">
-<col width="24%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pac</th>
-<th align="left">enroll_id</th>
-<th align="left">specialty_code</th>
-<th align="left">specialty_description</th>
-<th align="left">state</th>
-<th align="left">organization</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1891785184</td>
-<td align="left">3577554138</td>
-<td align="left">O20040521000534</td>
-<td align="left">12-70</td>
-<td align="left">PART B SUPPLIER - CLINIC/GROUP PRACTICE</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-</tr>
-<tr class="even">
-<td align="left">1891785184</td>
-<td align="left">3577554138</td>
-<td align="left">O20101110000259</td>
-<td align="left">00-85</td>
-<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-</tr>
-<tr class="odd">
-<td align="left">1487923637</td>
-<td align="left">3577554138</td>
-<td align="left">O20190719002511</td>
-<td align="left">12-59</td>
-<td align="left">PART B SUPPLIER - AMBULANCE SERVICE SUPPLIER</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-</tr>
-<tr class="even">
-<td align="left">1407061591</td>
-<td align="left">3577554138</td>
-<td align="left">O20220827000145</td>
-<td align="left">00-85</td>
-<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td align="left">NY</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-</tr>
-</tbody>
-</table>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 7</span></span></span>
+<span><span class="co">#&gt;   npi    pac   enroll_id specialty_code specialty_description state organization</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 18917… 3577… O2004052… 12-70          PART B SUPPLIER - CL… NY    ELIZABETHTO…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 18917… 3577… O2010111… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 14879… 3577… O2019071… 12-59          PART B SUPPLIER - AM… NY    ELIZABETHTO…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 14070… 3577… O2022082… 00-85          PART A PROVIDER - CR… NY    ELIZABETHTO…</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>organization <span class="op">=</span> <span class="st">"Elizabethtown Community Hospital"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">npi</span><span class="op">:</span><span class="va">specialty</span>, <span class="va">proprietary_nonprofit</span><span class="op">:</span><span class="va">status</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="6%">
-<col width="18%">
-<col width="6%">
-<col width="8%">
-<col width="7%">
-<col width="8%">
-<col width="24%">
-<col width="12%">
-<col width="7%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">organization</th>
-<th align="left">pac_id_org</th>
-<th align="left">enroll_id_org</th>
-<th align="left">facility_ccn</th>
-<th align="left">specialty_code</th>
-<th align="left">specialty</th>
-<th align="left">proprietary_nonprofit</th>
-<th align="left">status</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1891785184</td>
-<td align="left">ELIZABETHTOWN COMMUNITY HOSPITAL</td>
-<td align="left">3577554138</td>
-<td align="left">O20101110000259</td>
-<td align="left">331302</td>
-<td align="left">00-85</td>
-<td align="left">PART A PROVIDER - CRITICAL ACCESS HOSPITAL</td>
-<td align="left">Non-Profit</td>
-<td align="left">Multiple NPIs</td>
-</tr></tbody>
-</table>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 9</span></span></span>
+<span><span class="co">#&gt;   npi   organization pac_org enroll_id_org facility_ccn specialty_code specialty</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1891… ELIZABETHTO… 357755… O20101110000… 331302       00-85          PART A P…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: proprietary_nonprofit &lt;chr&gt;, status &lt;chr&gt;</span></span></span></code></pre>
 <p><br></p>
 <p>The <strong>Hospital Enrollment</strong> API includes only Medicare
 Part A (hospital) providers, so we only get two rows back, but those
@@ -231,165 +196,33 @@ include a new data point: two facility CCNs. Plugging those into the
 on the individual providers practicing at this hospital. First, the
 all-numeric CCN (<code>331302</code>):</p>
 <p><br></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span>, <span class="va">parent_ccn</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="15%">
-<col width="15%">
-<col width="12%">
-<col width="20%">
-<col width="19%">
-<col width="17%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pac_id_ind</th>
-<th align="left">first</th>
-<th align="left">last</th>
-<th align="left">facility_type</th>
-<th align="left">facility_ccn</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1003815184</td>
-<td align="left">4082693676</td>
-<td align="left">ARMIN</td>
-<td align="left">AFSAR KESHMIRI</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1023076643</td>
-<td align="left">5698798452</td>
-<td align="left">JOHN</td>
-<td align="left">HENRY</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="odd">
-<td align="left">1023377843</td>
-<td align="left">6901115278</td>
-<td align="left">LINDSEY</td>
-<td align="left">WILHELM</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1043245657</td>
-<td align="left">7810891009</td>
-<td align="left">MARK</td>
-<td align="left">FUNG</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="odd">
-<td align="left">1043397656</td>
-<td align="left">4183764558</td>
-<td align="left">ANTHONY</td>
-<td align="left">TRAMONTANO</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1043630510</td>
-<td align="left">2365749389</td>
-<td align="left">RYAN</td>
-<td align="left">WOLFE</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="odd">
-<td align="left">1043672140</td>
-<td align="left">7214229350</td>
-<td align="left">VANESSA</td>
-<td align="left">FURTADO</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1053596122</td>
-<td align="left">5193802213</td>
-<td align="left">TANYA</td>
-<td align="left">FINCH</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="odd">
-<td align="left">1053863100</td>
-<td align="left">8729362207</td>
-<td align="left">MATTHEW</td>
-<td align="left">FARNSWORTH</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1063851673</td>
-<td align="left">1557630613</td>
-<td align="left">TERRENCE</td>
-<td align="left">O CONNOR</td>
-<td align="left">Hospital</td>
-<td align="left">331302</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="fl">331302</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 172 × 8</span></span></span>
+<span><span class="co">#&gt;    npi        pac_ind    first    middle last  suffix facility_type facility_ccn</span></span>
+<span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 1003815184 4082693676 ARMIN    <span style="color: #BB0000;">NA</span>     AFSA… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 1023076643 5698798452 JOHN     N      HENRY <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 1023377843 6901115278 LINDSEY  B      WILH… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 1043245657 7810891009 MARK     K      FUNG  <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 1043397656 4183764558 ANTHONY  F      TRAM… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 1043630510 2365749389 RYAN     <span style="color: #BB0000;">NA</span>     WOLFE <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 1043672140 7214229350 VANESSA  FIORI… FURT… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 1053596122 5193802213 TANYA    JEAN   FINCH <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 1053863100 8729362207 MATTHEW  D      FARN… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 1063851673 1557630613 TERRENCE <span style="color: #BB0000;">NA</span>     O CO… <span style="color: #BB0000;">NA</span>     Hospital      331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 162 more rows</span></span></span></code></pre>
 <p><br></p>
 <p>That returns individual providers affiliated with the hospital. Now
 to search the alphanumeric CCN (<code>33Z302</code>):</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">middle</span>, <span class="va">suffix</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<colgroup>
-<col width="14%">
-<col width="14%">
-<col width="8%">
-<col width="12%">
-<col width="18%">
-<col width="17%">
-<col width="14%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">pac_id_ind</th>
-<th align="left">first</th>
-<th align="left">last</th>
-<th align="left">facility_type</th>
-<th align="left">facility_ccn</th>
-<th align="left">parent_ccn</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1396989059</td>
-<td align="left">8921259557</td>
-<td align="left">MARY</td>
-<td align="left">HALLORAN</td>
-<td align="left">Nursing home</td>
-<td align="left">33Z302</td>
-<td align="left">331302</td>
-</tr>
-<tr class="even">
-<td align="left">1538173869</td>
-<td align="left">0547299091</td>
-<td align="left">IL</td>
-<td align="left">CHON</td>
-<td align="left">Nursing home</td>
-<td align="left">33Z302</td>
-<td align="left">331302</td>
-</tr>
-<tr class="odd">
-<td align="left">1801893318</td>
-<td align="left">3577568724</td>
-<td align="left">ROB</td>
-<td align="left">DEMURO</td>
-<td align="left">Nursing home</td>
-<td align="left">33Z302</td>
-<td align="left">331302</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="st">"33Z302"</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
+<span><span class="co">#&gt;   npi        pac_ind    first middle last  facility_type facility_ccn parent_ccn</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1396989059 8921259557 MARY  K      HALL… Nursing home  33Z302       331302    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1538173869 0547299091 IL    JUN    CHON  Nursing home  33Z302       331302    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1801893318 3577568724 ROB   L      DEMU… Nursing home  33Z302       331302</span></span></code></pre>
 <p><br></p>
 <p>That returns more affiliated individual providers that practice in
 the Hospital’s nursing home..</p>
@@ -398,608 +231,8 @@ the Hospital’s nursing home..</p>
 <p>An <em>alphanumeric</em> CCN represents a sub-unit of the hospital,
 here a nursing home. We would get the same result if we’d set the
 <code>parent_ccn</code> argument to the numeric CCN,
-i.e. <code>facility_affiliations(parent_ccn = 331302)</code></p>
+i.e. <code>affiliations(parent_ccn = 331302)</code></p>
 </blockquote>
-<p><br></p>
-<p><br></p>
-<div class="section level3">
-<h3 id="clia-laboratories">CLIA Laboratories<a class="anchor" aria-label="anchor" href="#clia-laboratories"></a>
-</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/laboratories.html">laboratories</a></span><span class="op">(</span>city <span class="op">=</span> <span class="st">"Valdosta"</span>, </span>
-<span>             certificate <span class="op">=</span> <span class="st">"accreditation"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">confirmed</span> <span class="op">==</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">name</span>,</span>
-<span>                <span class="va">clia_number</span>,</span>
-<span>                <span class="va">expiration_date</span>, </span>
-<span>                <span class="va">termination_reason</span>, </span>
-<span>                <span class="va">facility_type</span>, </span>
-<span>                <span class="va">organization</span>, </span>
-<span>                <span class="va">confirmed_date</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/gt.html" class="external-link">gt</a></span><span class="op">(</span>rowname_col <span class="op">=</span> <span class="st">"name"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html" class="external-link">cols_label</a></span><span class="op">(</span>termination_reason <span class="op">=</span> <span class="st">"status"</span>, </span>
-<span>                 clia_number <span class="op">=</span> <span class="st">"clia"</span>,</span>
-<span>                 expiration_date <span class="op">=</span> <span class="st">"expires"</span>,</span>
-<span>                 confirmed_date <span class="op">=</span> <span class="st">"confirmed"</span>,</span>
-<span>                 facility_type <span class="op">=</span> <span class="st">"type"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/cols_label_with.html" class="external-link">cols_label_with</a></span><span class="op">(</span>fn <span class="op">=</span> <span class="va">toupper</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/tab_spanner.html" class="external-link">tab_spanner</a></span><span class="op">(</span>label <span class="op">=</span> <span class="st">"ACCREDITATION"</span>,</span>
-<span>    columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">organization</span>, <span class="va">confirmed_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/fmt_date.html" class="external-link">fmt_date</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">contains</a></span><span class="op">(</span><span class="st">"date"</span><span class="op">)</span>, </span>
-<span>               date_style <span class="op">=</span> <span class="st">"m_day_year"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_table_font.html" class="external-link">opt_table_font</a></span><span class="op">(</span>font <span class="op">=</span> <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/google_font.html" class="external-link">google_font</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"JetBrains Mono"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">gt</span><span class="fu">::</span><span class="fu"><a href="https://gt.rstudio.com/reference/opt_stylize.html" class="external-link">opt_stylize</a></span><span class="op">(</span>color <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div id="rbjtgdakts" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-#rbjtgdakts table {
-  font-family: 'JetBrains Mono', system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-#rbjtgdakts thead, #rbjtgdakts tbody, #rbjtgdakts tfoot, #rbjtgdakts tr, #rbjtgdakts td, #rbjtgdakts th {
-  border-style: none;
-}
-
-#rbjtgdakts p {
-  margin: 0;
-  padding: 0;
-}
-
-#rbjtgdakts .gt_table {
-  display: table;
-  border-collapse: collapse;
-  line-height: normal;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A81600;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A81600;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#rbjtgdakts .gt_caption {
-  padding-top: 4px;
-  padding-bottom: 4px;
-}
-
-#rbjtgdakts .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#rbjtgdakts .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 3px;
-  padding-bottom: 5px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#rbjtgdakts .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#rbjtgdakts .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-}
-
-#rbjtgdakts .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #E4220C;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#rbjtgdakts .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#rbjtgdakts .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#rbjtgdakts .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#rbjtgdakts .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#rbjtgdakts .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#rbjtgdakts .gt_spanner_row {
-  border-bottom-style: hidden;
-}
-
-#rbjtgdakts .gt_group_heading {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #E4220C;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  text-align: left;
-}
-
-#rbjtgdakts .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #E4220C;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-  vertical-align: middle;
-}
-
-#rbjtgdakts .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#rbjtgdakts .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#rbjtgdakts .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: none;
-  border-top-width: 1px;
-  border-top-color: #FFCCC7;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #FFCCC7;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #FFCCC7;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#rbjtgdakts .gt_stub {
-  color: #FFFFFF;
-  background-color: #E4220C;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #E4220C;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rbjtgdakts .gt_stub_row_group {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 5px;
-  padding-right: 5px;
-  vertical-align: top;
-}
-
-#rbjtgdakts .gt_row_group_first td {
-  border-top-width: 2px;
-}
-
-#rbjtgdakts .gt_row_group_first th {
-  border-top-width: 2px;
-}
-
-#rbjtgdakts .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rbjtgdakts .gt_first_summary_row {
-  border-top-style: solid;
-  border-top-color: #E4220C;
-}
-
-#rbjtgdakts .gt_first_summary_row.thick {
-  border-top-width: 2px;
-}
-
-#rbjtgdakts .gt_last_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-}
-
-#rbjtgdakts .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFCCC7;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rbjtgdakts .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #E4220C;
-}
-
-#rbjtgdakts .gt_last_grand_summary_row_top {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-bottom-style: double;
-  border-bottom-width: 6px;
-  border-bottom-color: #E4220C;
-}
-
-#rbjtgdakts .gt_striped {
-  background-color: #F4F4F4;
-}
-
-#rbjtgdakts .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #E4220C;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #E4220C;
-}
-
-#rbjtgdakts .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#rbjtgdakts .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rbjtgdakts .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#rbjtgdakts .gt_sourcenote {
-  font-size: 90%;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#rbjtgdakts .gt_left {
-  text-align: left;
-}
-
-#rbjtgdakts .gt_center {
-  text-align: center;
-}
-
-#rbjtgdakts .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#rbjtgdakts .gt_font_normal {
-  font-weight: normal;
-}
-
-#rbjtgdakts .gt_font_bold {
-  font-weight: bold;
-}
-
-#rbjtgdakts .gt_font_italic {
-  font-style: italic;
-}
-
-#rbjtgdakts .gt_super {
-  font-size: 65%;
-}
-
-#rbjtgdakts .gt_footnote_marks {
-  font-size: 75%;
-  vertical-align: 0.4em;
-  position: initial;
-}
-
-#rbjtgdakts .gt_asterisk {
-  font-size: 100%;
-  vertical-align: 0;
-}
-
-#rbjtgdakts .gt_indent_1 {
-  text-indent: 5px;
-}
-
-#rbjtgdakts .gt_indent_2 {
-  text-indent: 10px;
-}
-
-#rbjtgdakts .gt_indent_3 {
-  text-indent: 15px;
-}
-
-#rbjtgdakts .gt_indent_4 {
-  text-indent: 20px;
-}
-
-#rbjtgdakts .gt_indent_5 {
-  text-indent: 25px;
-}
-</style>
-<table class="table gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
-<thead>
-<tr class="gt_col_headings gt_spanner_row">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id=""></th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="CLIA">CLIA</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="2" colspan="1" scope="col" id="EXPIRES">EXPIRES</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="STATUS">STATUS</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="2" colspan="1" scope="col" id="TYPE">TYPE</th>
-      <th class="gt_center gt_columns_top_border gt_column_spanner_outer" rowspan="1" colspan="2" scope="colgroup" id="ACCREDITATION">
-        <span class="gt_column_spanner">ACCREDITATION</span>
-      </th>
-    </tr>
-<tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="ORGANIZATION">ORGANIZATION</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="CONFIRMED">CONFIRMED</th>
-    </tr>
-</thead>
-<tbody class="gt_table_body">
-<tr>
-<th id="stub_1_1" scope="row" class="gt_row gt_left gt_stub">SOUTH GEORGIA MEDICAL CENTER</th>
-<td headers="stub_1_1 clia_number" class="gt_row gt_left">11D0022233</td>
-<td headers="stub_1_1 expiration_date" class="gt_row gt_right">Feb 27, 2025</td>
-<td headers="stub_1_1 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_1 facility_type" class="gt_row gt_left">Hospital</td>
-<td headers="stub_1_1 organization" class="gt_row gt_left">JCAHO</td>
-<td headers="stub_1_1 confirmed_date" class="gt_row gt_right">Jun 6, 2016</td>
-</tr>
-<tr>
-<th id="stub_1_2" scope="row" class="gt_row gt_left gt_stub">SGMC- SMITH NORTHVIEW CAMPUS</th>
-<td headers="stub_1_2 clia_number" class="gt_row gt_left gt_striped">11D0022241</td>
-<td headers="stub_1_2 expiration_date" class="gt_row gt_right gt_striped">Dec 6, 2023</td>
-<td headers="stub_1_2 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
-<td headers="stub_1_2 facility_type" class="gt_row gt_left gt_striped">Ambulatory Surgical Center</td>
-<td headers="stub_1_2 organization" class="gt_row gt_left gt_striped">CAP</td>
-<td headers="stub_1_2 confirmed_date" class="gt_row gt_right gt_striped">May 17, 2023</td>
-</tr>
-<tr>
-<th id="stub_1_3" scope="row" class="gt_row gt_left gt_stub">SOUTH GA MED CTR DEPT PULMONARY SVCS</th>
-<td headers="stub_1_3 clia_number" class="gt_row gt_left">11D0680179</td>
-<td headers="stub_1_3 expiration_date" class="gt_row gt_right">Dec 27, 2023</td>
-<td headers="stub_1_3 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_3 facility_type" class="gt_row gt_left">Other</td>
-<td headers="stub_1_3 organization" class="gt_row gt_left">CAP</td>
-<td headers="stub_1_3 confirmed_date" class="gt_row gt_right">Dec 28, 2007</td>
-</tr>
-<tr>
-<th id="stub_1_4" scope="row" class="gt_row gt_left gt_stub">VALDOSTA CBOC</th>
-<td headers="stub_1_4 clia_number" class="gt_row gt_left gt_striped">11D1001568</td>
-<td headers="stub_1_4 expiration_date" class="gt_row gt_right gt_striped">May 22, 2026</td>
-<td headers="stub_1_4 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
-<td headers="stub_1_4 facility_type" class="gt_row gt_left gt_striped">Community Clinic</td>
-<td headers="stub_1_4 organization" class="gt_row gt_left gt_striped">JCAHO</td>
-<td headers="stub_1_4 confirmed_date" class="gt_row gt_right gt_striped">Jul 18, 2002</td>
-</tr>
-<tr>
-<th id="stub_1_5" scope="row" class="gt_row gt_left gt_stub">ALLEGIANT SOLUTIONS</th>
-<td headers="stub_1_5 clia_number" class="gt_row gt_left">11D1065138</td>
-<td headers="stub_1_5 expiration_date" class="gt_row gt_right">Jul 24, 2024</td>
-<td headers="stub_1_5 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_5 facility_type" class="gt_row gt_left">Independent</td>
-<td headers="stub_1_5 organization" class="gt_row gt_left">COLA</td>
-<td headers="stub_1_5 confirmed_date" class="gt_row gt_right">Jul 25, 2012</td>
-</tr>
-<tr>
-<th id="stub_1_6" scope="row" class="gt_row gt_left gt_stub">BRIAN C GRINER MD LLC</th>
-<td headers="stub_1_6 clia_number" class="gt_row gt_left gt_striped">11D1070146</td>
-<td headers="stub_1_6 expiration_date" class="gt_row gt_right gt_striped">Oct 13, 2024</td>
-<td headers="stub_1_6 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
-<td headers="stub_1_6 facility_type" class="gt_row gt_left gt_striped">Physician Office</td>
-<td headers="stub_1_6 organization" class="gt_row gt_left gt_striped">COLA</td>
-<td headers="stub_1_6 confirmed_date" class="gt_row gt_right gt_striped">Oct 14, 2020</td>
-</tr>
-<tr>
-<th id="stub_1_7" scope="row" class="gt_row gt_left gt_stub">CARE MEDICAL CENTER</th>
-<td headers="stub_1_7 clia_number" class="gt_row gt_left">11D2027917</td>
-<td headers="stub_1_7 expiration_date" class="gt_row gt_right">Jun 29, 2025</td>
-<td headers="stub_1_7 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_7 facility_type" class="gt_row gt_left">Other</td>
-<td headers="stub_1_7 organization" class="gt_row gt_left">COLA</td>
-<td headers="stub_1_7 confirmed_date" class="gt_row gt_right">Jun 30, 2021</td>
-</tr>
-<tr>
-<th id="stub_1_8" scope="row" class="gt_row gt_left gt_stub">BPC PLASMA, INC - VALDOSTA</th>
-<td headers="stub_1_8 clia_number" class="gt_row gt_left gt_striped">11D2079448</td>
-<td headers="stub_1_8 expiration_date" class="gt_row gt_right gt_striped">Jul 21, 2025</td>
-<td headers="stub_1_8 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
-<td headers="stub_1_8 facility_type" class="gt_row gt_left gt_striped">Other</td>
-<td headers="stub_1_8 organization" class="gt_row gt_left gt_striped">COLA</td>
-<td headers="stub_1_8 confirmed_date" class="gt_row gt_right gt_striped">Jul 22, 2015</td>
-</tr>
-<tr>
-<th id="stub_1_9" scope="row" class="gt_row gt_left gt_stub">SOUTH GEORGIA TOXICOLOGY, LLC</th>
-<td headers="stub_1_9 clia_number" class="gt_row gt_left">11D2101175</td>
-<td headers="stub_1_9 expiration_date" class="gt_row gt_right">Nov 1, 2024</td>
-<td headers="stub_1_9 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_9 facility_type" class="gt_row gt_left">Independent</td>
-<td headers="stub_1_9 organization" class="gt_row gt_left">COLA</td>
-<td headers="stub_1_9 confirmed_date" class="gt_row gt_right">Nov 2, 2016</td>
-</tr>
-<tr>
-<th id="stub_1_10" scope="row" class="gt_row gt_left gt_stub">SGMC POINT OF CARE</th>
-<td headers="stub_1_10 clia_number" class="gt_row gt_left gt_striped">11D2144796</td>
-<td headers="stub_1_10 expiration_date" class="gt_row gt_right gt_striped">Aug 16, 2022</td>
-<td headers="stub_1_10 termination_reason" class="gt_row gt_left gt_striped">Voluntary: Merger, Closure</td>
-<td headers="stub_1_10 facility_type" class="gt_row gt_left gt_striped">Hospital</td>
-<td headers="stub_1_10 organization" class="gt_row gt_left gt_striped">JCAHO</td>
-<td headers="stub_1_10 confirmed_date" class="gt_row gt_right gt_striped">Nov 26, 2018</td>
-</tr>
-<tr>
-<th id="stub_1_11" scope="row" class="gt_row gt_left gt_stub">OCTAPHARMA PLASMA, INC</th>
-<td headers="stub_1_11 clia_number" class="gt_row gt_left">11D2193538</td>
-<td headers="stub_1_11 expiration_date" class="gt_row gt_right">Jun 29, 2025</td>
-<td headers="stub_1_11 termination_reason" class="gt_row gt_left">Active Provider</td>
-<td headers="stub_1_11 facility_type" class="gt_row gt_left">Other</td>
-<td headers="stub_1_11 organization" class="gt_row gt_left">COLA</td>
-<td headers="stub_1_11 confirmed_date" class="gt_row gt_right">Jun 30, 2021</td>
-</tr>
-<tr>
-<th id="stub_1_12" scope="row" class="gt_row gt_left gt_stub">VEEDHATA OM LLC DBA PRIME DIAGNOSTICS</th>
-<td headers="stub_1_12 clia_number" class="gt_row gt_left gt_striped">11D2223235</td>
-<td headers="stub_1_12 expiration_date" class="gt_row gt_right gt_striped">Oct 31, 2024</td>
-<td headers="stub_1_12 termination_reason" class="gt_row gt_left gt_striped">Active Provider</td>
-<td headers="stub_1_12 facility_type" class="gt_row gt_left gt_striped">Independent</td>
-<td headers="stub_1_12 organization" class="gt_row gt_left gt_striped">COLA</td>
-<td headers="stub_1_12 confirmed_date" class="gt_row gt_right gt_striped">Nov 1, 2022</td>
-</tr>
-</tbody>
-</table>
-</div>
 </div>
   </main>
 </div>

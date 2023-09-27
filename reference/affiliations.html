@@ -104,7 +104,7 @@ facility affiliations</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">affiliations</span><span class="op">(</span></span>
 <span>  npi <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  pac_id_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  pac_ind <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  first <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  middle <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  last <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -112,7 +112,8 @@ facility affiliations</p>
 <span>  facility_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  parent_ccn <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  offset <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -122,7 +123,7 @@ facility affiliations</p>
 <dd><p>&lt; <em>integer</em> &gt; 10-digit national provider identifier</p></dd>
 
 
-<dt>pac_id_ind</dt>
+<dt>pac_ind</dt>
 <dd><p>&lt; <em>integer</em> &gt; 10-digit individual provider associate level variable
 Links all entity-level information and may be associated with multiple
 enrollment IDs if the individual or organization enrolled multiple times</p></dd>
@@ -160,14 +161,18 @@ sub-unit's primary hospital, should the provider provide services in said unit</
 
 
 <dt>tidy</dt>
-<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code>.</p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
+
+
+<dt>na.rm</dt>
+<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code></p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac_id_ind</code></td><td>10-digit individual PAC ID</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>suffix</code></td><td>Individual provider's suffix</td></tr><tr><td><code>facility_type</code></td><td>Category of facility</td></tr><tr><td><code>facility_ccn</code></td><td>Facility's 6-digit CCN</td></tr><tr><td><code>parent_ccn</code></td><td>Primary facility's 6-digit CCN</td></tr></table></div>
+<p>A <a href="https://tibble.tidyverse.org/reference/tibble-package.html" class="external-link">tibble</a> with the columns:</p><table class="table table"><tr><td><strong>Field</strong></td><td><strong>Description</strong></td></tr><tr><td><code>npi</code></td><td>10-digit NPI</td></tr><tr><td><code>pac_ind</code></td><td>10-digit individual PAC ID</td></tr><tr><td><code>first</code></td><td>Individual provider's first name</td></tr><tr><td><code>middle</code></td><td>Individual provider's middle name</td></tr><tr><td><code>last</code></td><td>Individual provider's last name</td></tr><tr><td><code>suffix</code></td><td>Individual provider's suffix</td></tr><tr><td><code>facility_type</code></td><td>Category of facility</td></tr><tr><td><code>facility_ccn</code></td><td>Facility's 6-digit CCN</td></tr><tr><td><code>parent_ccn</code></td><td>Primary facility's 6-digit CCN</td></tr></table></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p><code><a href="clinicians.html">clinicians()</a></code>, <code><a href="providers.html">providers()</a></code>, <code><a href="hospitals.html">hospitals()</a></code></p></div>

@@ -153,71 +153,32 @@ every <strong>row</strong> is an <em>observation</em>, and every
 before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">npi</th>
-<th align="left">first</th>
-<th align="left">last</th>
-<th align="left">service</th>
-<th align="left">eligible</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Medicare Part B</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Home Health Agency (HHA)</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="odd">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Durable Medical Equipment (DME)</td>
-<td align="left">TRUE</td>
-</tr>
-<tr class="even">
-<td align="left">1043477615</td>
-<td align="left">SARAH</td>
-<td align="left">HUSSAIN</td>
-<td align="left">Power Mobility Device (PMD)</td>
-<td align="left">TRUE</td>
-</tr>
-</tbody>
-</table>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
+<span><span class="co">#&gt;   npi        first last    service                  </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B          </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices</span></span></code></pre></div>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<table class="table">
-<thead><tr class="header">
-<th align="left">NPI</th>
-<th align="left">LAST_NAME</th>
-<th align="left">FIRST_NAME</th>
-<th align="left">PARTB</th>
-<th align="left">DME</th>
-<th align="left">HHA</th>
-<th align="left">PMD</th>
-</tr></thead>
-<tbody><tr class="odd">
-<td align="left">1043477615</td>
-<td align="left">HUSSAIN</td>
-<td align="left">SARAH</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
-<td align="left">Y</td>
-</tr></tbody>
-</table>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, tidy <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt;          NPI LAST_NAME FIRST_NAME PARTB DME HHA PMD</span></span>
+<span><span class="co">#&gt; 1 1043477615   HUSSAIN      SARAH     Y   Y   Y   Y</span></span></code></pre></div>
+<p><br></p>
+<p>Setting it to <code>FALSE</code> will return the un-processed
+output:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span>, pivot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 7</span></span></span>
+<span><span class="co">#&gt;   npi        first last    `Medicare Part B` `Home Health Agency`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>               </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN TRUE              TRUE                </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 more variables: `Durable Medical Equipment` &lt;lgl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   `Power Mobility Devices` &lt;lgl&gt;</span></span></span></code></pre></div>
 <p><br></p>
 <p>The <code>tidy</code> transformations applied to the output of each
 function include:</p>
@@ -318,111 +279,24 @@ years available to query these APIs might change at any time, so there
 is an accompanying helper function to retrieve the years available, in
 the form of <code>&lt;function_name&gt;_years()</code>. For instance,
 <code><a href="../reference/quality_payment.html">quality_payment()</a></code>’s is:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 2017 2018 2019 2020 2021</span></span></code></pre></div>
 <p>These can also be used in a pipeline, for searching all available
 years:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html" class="external-link">map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/list_c.html" class="external-link">list_rbind</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span></code></pre></div>
-<table style="width:100%;" class="table">
-<colgroup>
-<col width="3%">
-<col width="7%">
-<col width="4%">
-<col width="3%">
-<col width="18%">
-<col width="12%">
-<col width="13%">
-<col width="9%">
-<col width="6%">
-<col width="11%">
-<col width="8%">
-</colgroup>
-<thead><tr class="header">
-<th align="right">year</th>
-<th align="left">npi</th>
-<th align="left">state</th>
-<th align="right">size</th>
-<th align="left">clinician_specialty</th>
-<th align="right">years_in_medicare</th>
-<th align="left">participation_type</th>
-<th align="right">beneficiaries</th>
-<th align="right">services</th>
-<th align="right">allowed_charges</th>
-<th align="left">final_score</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="right">2017</td>
-<td align="left">1043477615</td>
-<td align="left">PA</td>
-<td align="right">1394</td>
-<td align="left">Cardiac Electrophysiology</td>
-<td align="right">5</td>
-<td align="left">MIPS APM</td>
-<td align="right">43007</td>
-<td align="right">NA</td>
-<td align="right">36391760</td>
-<td align="left">97.09</td>
-</tr>
-<tr class="even">
-<td align="right">2018</td>
-<td align="left">1043477615</td>
-<td align="left">PA</td>
-<td align="right">1297</td>
-<td align="left">Cardiac Electrophysiology</td>
-<td align="right">5</td>
-<td align="left">MIPS APM</td>
-<td align="right">41034</td>
-<td align="right">0</td>
-<td align="right">35008312</td>
-<td align="left">100</td>
-</tr>
-<tr class="odd">
-<td align="right">2019</td>
-<td align="left">1043477615</td>
-<td align="left">PA</td>
-<td align="right">1344</td>
-<td align="left">Cardiac Electrophysiology</td>
-<td align="right">6</td>
-<td align="left">MIPS APM</td>
-<td align="right">42222</td>
-<td align="right">415298</td>
-<td align="right">36899498</td>
-<td align="left">95.12</td>
-</tr>
-<tr class="even">
-<td align="right">2020</td>
-<td align="left">1043477615</td>
-<td align="left">PA</td>
-<td align="right">1440</td>
-<td align="left">Cardiac Electrophysiology</td>
-<td align="right">7</td>
-<td align="left">MIPS APM</td>
-<td align="right">39624</td>
-<td align="right">374278</td>
-<td align="right">33458425</td>
-<td align="left">96.7</td>
-</tr>
-<tr class="odd">
-<td align="right">2021</td>
-<td align="left">1043477615</td>
-<td align="left">PA</td>
-<td align="right">1940</td>
-<td align="left">Cardiac Electrophysiology</td>
-<td align="right">8</td>
-<td align="left">MIPS APM</td>
-<td align="right">41404</td>
-<td align="right">403720</td>
-<td align="right">35627551</td>
-<td align="left">97.25</td>
-</tr>
-</tbody>
-</table>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="../reference/years.html">quality_years</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">~</span><span class="fu"><a href="../reference/quality_payment.html">quality_payment</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">.x</span>, npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">year</span><span class="op">:</span><span class="va">final_score</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 11</span></span></span>
+<span><span class="co">#&gt;    year npi        state  size clinician_specialty       years_in_medicare</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>  <span style="text-decoration: underline;">2</span>017 1043477615 PA     <span style="text-decoration: underline;">1</span>394 Cardiac Electrophysiology                 5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>  <span style="text-decoration: underline;">2</span>018 1043477615 PA     <span style="text-decoration: underline;">1</span>297 Cardiac Electrophysiology                 5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>  <span style="text-decoration: underline;">2</span>019 1043477615 PA     <span style="text-decoration: underline;">1</span>344 Cardiac Electrophysiology                 6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>  <span style="text-decoration: underline;">2</span>020 1043477615 PA     <span style="text-decoration: underline;">1</span>440 Cardiac Electrophysiology                 7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span>  <span style="text-decoration: underline;">2</span>021 1043477615 PA     <span style="text-decoration: underline;">1</span>940 Cardiac Electrophysiology                 8</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 5 more variables: participation_type &lt;chr&gt;, beneficiaries &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   services &lt;int&gt;, allowed_charges &lt;dbl&gt;, final_score &lt;chr&gt;</span></span></span></code></pre></div>
 <p><br></p>
 </div>
 <div class="section level2">
@@ -440,7 +314,7 @@ providers or organizations must obtain an NPI. Once assigned, a
 provider’s NPI is permanent and remains with the provider regardless of
 job or location changes.</p>
 </blockquote>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
 <span><span class="fu"><a href="../reference/open_payments.html">open_payments</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">12345691234</span>, year <span class="op">=</span> <span class="fl">2021</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `open_payments()`:</span></span></span>
@@ -468,18 +342,16 @@ numbers and organizational names) and may be associated with multiple
 enrollment IDs if the individual or organization enrolled multiple times
 under different circumstances.</p>
 </blockquote>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be 10 digits long</span></span>
-<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_id_ind <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">0123456789</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `affiliations()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">10 digits long</span>.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">123456789</span> contains <span style="color: #0000BB;">9</span> digits.</span></span>
 <span></span>
 <span><span class="co"># Must be numeric</span></span>
-<span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_id_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `hospitals()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> A <span style="font-weight: bold;">PAC ID</span> must be <span style="font-style: italic;">numeric</span>.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> <span style="color: #0000BB;">"O12345678912"</span> contains <span style="font-style: italic;">non-numeric</span> characters.</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>pac_org <span class="op">=</span> <span class="st">"O12345678912"</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Error in hospitals(pac_org = "O12345678912"): unused argument (pac_org = "O12345678912")</span></span></code></pre></div>
 <p><br></p>
 <blockquote>
 <p><strong>Medicare Enrollment ID</strong>: An Enrollment ID is a
@@ -488,7 +360,7 @@ provider enrollment application. All enrollment-level information (e.g.,
 enrollment type, enrollment state, provider specialty and reassignment
 of benefits) is linked through the Enrollment ID.</p>
 </blockquote>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Must be a character vector</span></span>
 <span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>enroll_id_ind <span class="op">=</span> <span class="fl">0123456789123456</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `clinicians()`:</span></span></span>
@@ -519,7 +391,7 @@ vector when it’s evaluated.</em> Parameters that contain leading zeros
 must be input as a character vector:</p>
 </blockquote>
 <p><br></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Leading zeros are dropped in an integer vector:</span></span>
 <span><span class="fl">0001</span></span>
 <span><span class="co">#&gt; [1] 1</span></span>
