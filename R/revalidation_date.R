@@ -31,8 +31,8 @@
 #'    * `2`: DME
 #'    * `3`: Non-DME Part B
 #' @param specialty_description < *character* > Enrollment specialty
-#' @param tidy Tidy output; default is `TRUE`.
-#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -120,11 +120,11 @@ rdate_cols <- function(df) {
             'organization' = 'organization_name',
             'state' = 'enrollment_state_code',
             'enrollment_type' = 'provider_type_text',
-            'specialty_description' = 'enrollment_specialty',
+            # 'specialty_description' = 'enrollment_specialty',
+            # 'due_date' = 'revalidation_due_date',
+            # 'due_date_adj' = 'adjusted_due_date',
             'reassignments_org' = 'individual_total_reassign_to',
-            'reassignments_ind' = 'receiving_benefits_reassignment',
-            'due_date' = 'revalidation_due_date',
-            'due_date_adj' = 'adjusted_due_date')
+            'reassignments_ind' = 'receiving_benefits_reassignment')
 
   df |> dplyr::select(dplyr::all_of(cols))
 

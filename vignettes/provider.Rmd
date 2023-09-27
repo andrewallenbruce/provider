@@ -19,7 +19,6 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
-library(printr)
 ```
 
 ```{r}
@@ -63,6 +62,14 @@ Setting it to `FALSE` will return the un-processed output:
 
 ```{r}
 order_refer(npi = 1043477615, tidy = FALSE)
+```
+
+<br>
+
+Setting it to `FALSE` will return the un-processed output:
+
+```{r}
+order_refer(npi = 1043477615, pivot = FALSE)
 ```
 
 <br>
@@ -126,9 +133,7 @@ quality_years()
 These can also be used in a pipeline, for searching all available years:
 
 ```{r}
-quality_years() |> 
-  map(\(x) quality_payment(year = x, npi = 1043477615)) |> 
-  list_rbind() |> 
+map_dfr(quality_years(), ~quality_payment(year = .x, npi = 1043477615)) |> 
   select(year:final_score)
 ```
 
@@ -160,10 +165,10 @@ pending(npi = 001234569123, type = "physician")
 
 ```{r}
 # Must be 10 digits long
-affiliations(pac_id_ind = 0123456789)
+affiliations(pac_ind = 0123456789)
 
 # Must be numeric
-hospitals(pac_id_org = "O12345678912")
+hospitals(pac_org = "O12345678912")
 ```
 
 <br>

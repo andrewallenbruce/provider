@@ -12,7 +12,8 @@ order_refer(
   dme = NULL,
   hha = NULL,
   pmd = NULL,
-  tidy = TRUE
+  tidy = TRUE,
+  pivot = TRUE
 )
 }
 \arguments{
@@ -20,8 +21,8 @@ order_refer(
 
 \item{first, last}{< \emph{character} > Individual provider's first/last name}
 
-\item{partb, dme, hha, pmd}{< \emph{boolean} > \code{TRUE} or \code{FALSE}. Whether a provider
-is eligible to order and refer to:
+\item{partb, dme, hha, pmd}{< \emph{boolean} > Whether a provider is eligible to
+order and refer to:
 \itemize{
 \item \code{partb}: Medicare Part B
 \item \code{dme}: Durable Medical Equipment
@@ -29,7 +30,9 @@ is eligible to order and refer to:
 \item \code{pmd}: Power Mobility Devices
 }}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+
+\item{pivot}{Pivot output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
@@ -38,7 +41,6 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{first} \tab Order and Referring Provider's First Name \cr
    \code{last} \tab Order and Referring Provider's Last Name \cr
    \code{service} \tab Services An Eligible Provider Can Order/Refer To \cr
-   \code{eligible} \tab Indicates Provider's Eligibility \cr
 }
 }
 \description{

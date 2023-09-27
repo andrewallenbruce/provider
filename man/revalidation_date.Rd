@@ -37,9 +37,9 @@ revalidation_date(
 
 \item{specialty_description}{< \emph{character} > Enrollment specialty}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}}
 
-\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

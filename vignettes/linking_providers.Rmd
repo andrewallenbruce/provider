@@ -19,8 +19,6 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
-
-library(printr)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -28,6 +26,30 @@ library(provider)
 library(dplyr)
 ```
 
+
+## Individual Provider
+
+```{r}
+full_join(
+  providers(pac = 7810891009), 
+  revalidation_date(enroll_id = "I20031120000251")) |> 
+full_join(revalidation_reassign(pac_ind = 7810891009)) |> 
+  glimpse()
+```
+
+<br>
+
+```{r}
+affiliations(pac_ind = 7810891009) |> 
+  pull(facility_ccn) |>
+  map_dfr(~hospitals(facility_ccn = .x))
+```
+<br>
+
+```{r}
+clinicians(pac_ind = 7810891009)
+```
+<br>
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 
@@ -55,9 +77,7 @@ The **Hospital Enrollment** API includes only Medicare Part A (hospital) provide
 <br>
 
 ```{r}
-affiliations(facility_ccn = 331302) |> 
-  select(-c(middle, suffix, parent_ccn)) |> 
-  head(10)
+affiliations(facility_ccn = 331302)
 ```
 
 
@@ -67,8 +87,7 @@ That returns individual providers affiliated with the hospital. Now to search th
 
 
 ```{r}
-affiliations(facility_ccn = "33Z302") |> 
-  select(-c(middle, suffix))
+affiliations(facility_ccn = "33Z302")
 ```
 
 <br>
@@ -77,97 +96,5 @@ That returns more affiliated individual providers that practice in the Hospital'
 
 <br>
 
-> An *alphanumeric* CCN represents a sub-unit of the hospital, here a nursing home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `facility_affiliations(parent_ccn = 331302)`
-
-<br>
-
-```{r echo=FALSE, eval=FALSE}
-unique(elizabethtown$npi) |> 
-  map(\(x) nppes_npi(npi = x)) |> 
-  list_rbind() |> 
-  filter(purpose != "MAILING")
-
-elizabeth.prov <- providers(organization = "Elizabethtown Community Hospital") |> 
-  select(organization, 
-         pac_organization = pac_id, 
-         npi_organization = npi, 
-         enroll_organization = enroll_id, 
-         specialty)
-
-elizabeth.hosp <- hospitals(organization = "Elizabethtown Community Hospital") |> 
-  select(organization, 
-         pac_organization = pac_id_org,
-         npi_organization = npi,
-         enroll_organization = enroll_id,
-         facility_ccn)
-
-elizabeth.affil <- elizabeth.hosp$facility_ccn |> 
-  map(\(x) affiliations(facility_ccn = x)) |> 
-  list_rbind() |> 
-  select(pac_individual = pac_id_ind, 
-         npi_individual = npi, 
-         facility_ccn)
-
-left_join(elizabeth.prov, 
-          elizabeth.hosp, by = join_by(organization, 
-                                       pac_organization, 
-                                       npi_organization, 
-                                       enroll_organization)) |> 
-  left_join(elizabeth.affil, by = join_by(facility_ccn))
-
-#######################################
-
-elizabeth.prov.pac <- unique(elizabeth.affil$pac_individual) |>
-  map(\(x) providers(pac_id = x)) |> 
-  list_rbind() |> 
-  select(pac_individual = pac_id,
-         npi_individual = npi, 
-         enroll_individual = enroll_id)
-
-elizabeth.group <- unique(elizabeth.prov.pac$npi_individual) |>
-  map(\(x) revalidation_group(npi = x)) |> 
-  list_rbind() |> 
-  select(npi_individual = npi, 
-         enroll_individual = enroll_id,
-         pac_organization = group_pac_id,
-         enroll_organization = group_enroll_id,
-         organization = group_legal_business_name,
-         organization_reassignments = group_reassignments)
-
-left_join(elizabeth.prov.pac, 
-          elizabeth.group, 
-          by = join_by(npi_individual, enroll_individual)) |> 
-  arrange(desc(organization_reassignments))
-```
-
-<br>
-
-### CLIA Laboratories
-
-```{r}
-laboratories(city = "Valdosta", 
-             certificate = "accreditation") |> 
-  dplyr::filter(confirmed == TRUE) |> 
-  dplyr::select(name,
-                clia_number,
-                expiration_date, 
-                termination_reason, 
-                facility_type, 
-                organization, 
-                confirmed_date) |> 
-  dplyr::distinct() |> 
-  gt::gt(rowname_col = "name") |> 
-  gt::cols_label(termination_reason = "status", 
-                 clia_number = "clia",
-                 expiration_date = "expires",
-                 confirmed_date = "confirmed",
-                 facility_type = "type") |> 
-  gt::cols_label_with(fn = toupper) |> 
-  gt::tab_spanner(label = "ACCREDITATION",
-    columns = c(organization, confirmed_date)) |> 
-  gt::fmt_date(columns = gt::contains("date"), 
-               date_style = "m_day_year") |> 
-  gt::opt_table_font(font = gt::google_font(name = "JetBrains Mono")) |>
-  gt::opt_stylize(color = "red")
-```
+> An *alphanumeric* CCN represents a sub-unit of the hospital, here a nursing home. We would get the same result if we'd set the `parent_ccn` argument to the numeric CCN, i.e. `affiliations(parent_ccn = 331302)`
 

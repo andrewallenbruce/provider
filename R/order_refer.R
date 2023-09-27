@@ -38,13 +38,14 @@
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
 #' @param first,last < *character* > Individual provider's first/last name
-#' @param partb,dme,hha,pmd < *boolean* > `TRUE` or `FALSE`. Whether a provider
-#' is eligible to order and refer to:
+#' @param partb,dme,hha,pmd < *boolean* > Whether a provider is eligible to
+#' order and refer to:
 #' - `partb`: Medicare Part B
 #' - `dme`: Durable Medical Equipment
 #' - `hha`: Home Health Agency
 #' - `pmd`: Power Mobility Devices
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param pivot Pivot output; default is `TRUE`
 #'
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
@@ -55,7 +56,6 @@
 #' |`first`    |Order and Referring Provider's First Name         |
 #' |`last`     |Order and Referring Provider's Last Name          |
 #' |`service`  |Services An Eligible Provider Can Order/Refer To  |
-#' |`eligible` |Indicates Provider's Eligibility                  |
 #'
 #' @seealso [providers()], [opt_out()], [pending()]
 #'
@@ -74,7 +74,8 @@ order_refer <- function(npi   = NULL,
                         dme   = NULL,
                         hha   = NULL,
                         pmd   = NULL,
-                        tidy  = TRUE) {
+                        tidy  = TRUE,
+                        pivot = TRUE) {
 
   if (!is.null(npi))   {npi   <- npi_check(npi)}
   if (!is.null(partb)) {partb <- tf_2_yn(partb)}
@@ -119,10 +120,13 @@ order_refer <- function(npi   = NULL,
     results <- tidyup(results) |>
       dplyr::mutate(dplyr::across(
         dplyr::contains(c("partb", "hha", "dme", "pmd")), yn_logical)) |>
-      ord_cols() |>
-      tidyr::pivot_longer(cols = !c(npi, first, last),
+      ord_cols()
+    if (pivot) {
+      results <- tidyr::pivot_longer(results, cols = !c(npi, first, last),
                           names_to = "service",
-                          values_to = "eligible")
+                          values_to = "status")
+      results$status <- NULL
+      }
     }
   return(results)
 }
@@ -136,9 +140,9 @@ ord_cols <- function(df) {
             'first' = 'first_name',
             'last' = 'last_name',
             "Medicare Part B" = 'partb',
-            "Home Health Agency (HHA)" = 'hha',
-            "Durable Medical Equipment (DME)" = 'dme',
-            "Power Mobility Device (PMD)" = 'pmd')
+            "Home Health Agency" = 'hha',
+            "Durable Medical Equipment" = 'dme',
+            "Power Mobility Devices" = 'pmd')
 
   df |> dplyr::select(dplyr::all_of(cols))
 

@@ -127,21 +127,21 @@ revalidation_reassign <- function(npi = NULL,
 rass_cols <- function(df) {
 
   cols <- c('npi' = 'individual_npi',
-            'pac_ind' = 'individual_pac_id',
-            'enroll_id_ind' = 'individual_enrollment_id',
+            'pac' = 'individual_pac_id',
+            'enroll_id' = 'individual_enrollment_id',
             'first' = 'individual_first_name',
             'last' = 'individual_last_name',
-            'state_ind' = 'individual_state_code',
-            'specialty_description' = 'individual_specialty_description',
+            # 'state_ind' = 'individual_state_code',
+            # 'specialty_description' = 'individual_specialty_description',
             'reassignments_ind' = 'individual_total_employer_associations',
             'organization' = 'group_legal_business_name',
             'pac_org' = 'group_pac_id',
             'enroll_id_org' = 'group_enrollment_id',
             'state_org' = 'group_state_code',
             'reassignments_org' = 'group_reassignments_and_physician_assistants',
-            'record_type',
-            'due_date_ind' = 'individual_due_date',
-            'due_date_org' = 'group_due_date')
+            # 'due_date_ind' = 'individual_due_date',
+            # 'due_date_org' = 'group_due_date',
+            'record_type')
 
   df |> dplyr::select(dplyr::all_of(cols))
 

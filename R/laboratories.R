@@ -70,9 +70,9 @@
 #' @param city City
 #' @param state State
 #' @param zip Zip code
-#' @param tidy Tidy output; default is `TRUE`.
-#' @param na.rm Remove empty rows and columns; default is `TRUE`.
-#' @param pivot Pivot output; default is `TRUE`.
+#' @param tidy Tidy output; default is `TRUE`
+#' @param na.rm Remove empty rows and columns; default is `TRUE`
+#' @param pivot Pivot output; default is `TRUE`
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -129,8 +129,8 @@ laboratories <- function(name = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      dplyr::mutate(dplyr::across(dplyr::contains("_dt"), ~anytime::anydate(.)),
-                    dplyr::across(dplyr::contains("_sw"), ~yn_logical(.)),
+      dplyr::mutate(dplyr::across(dplyr::contains("_dt"), anytime::anydate),
+                    dplyr::across(dplyr::contains("_sw"), yn_logical),
                     pgm_trmntn_cd = termcd(pgm_trmntn_cd),
                     crtfctn_actn_type_cd = toa(crtfctn_actn_type_cd),
                     cmplnc_stus_cd = status(cmplnc_stus_cd),

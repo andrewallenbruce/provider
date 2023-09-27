@@ -6,7 +6,7 @@
 \usage{
 clinicians(
   npi = NULL,
-  pac_id_ind = NULL,
+  pac_ind = NULL,
   enroll_id_ind = NULL,
   first = NULL,
   middle = NULL,
@@ -16,18 +16,19 @@ clinicians(
   grad_year = NULL,
   specialty = NULL,
   facility_name = NULL,
-  pac_id_org = NULL,
+  pac_org = NULL,
   city = NULL,
   state = NULL,
   zip = NULL,
   offset = 0L,
-  tidy = TRUE
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id_ind}{< \emph{integer} > 10-digit individual provider associate-level
+\item{pac_ind}{< \emph{integer} > 10-digit individual provider associate-level
 control identifier}
 
 \item{enroll_id_ind}{< \emph{character} > 15-digit individual provider Medicare
@@ -49,7 +50,7 @@ specialty reported in the selected enrollment}
 \item{facility_name}{< \emph{character} > Name of facility associated with the
 individual provider}
 
-\item{pac_id_org}{< \emph{integer} > 10-digit organizational/group provider
+\item{pac_org}{< \emph{integer} > 10-digit organizational/group provider
 associate-level control identifier}
 
 \item{city}{< \emph{character} > Provider's city}
@@ -60,13 +61,15 @@ associate-level control identifier}
 
 \item{offset}{< \emph{integer} > offset; API pagination}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit individual NPI \cr
-   \code{pac_id_ind} \tab 10-digit individual PAC ID \cr
+   \code{pac_ind} \tab 10-digit individual PAC ID \cr
    \code{enroll_id_ind} \tab 15-digit individual enrollment ID \cr
    \code{first} \tab Provider's first name \cr
    \code{middle} \tab Provider's middle name \cr
@@ -79,7 +82,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{specialty} \tab Provider's primary specialty \cr
    \code{specialty_sec} \tab Provider's secondary specialty \cr
    \code{facility_name} \tab Facility associated with provider \cr
-   \code{pac_id_org} \tab Facility's 10-digit PAC ID \cr
+   \code{pac_org} \tab Facility's 10-digit PAC ID \cr
    \code{members} \tab Number of providers associated with facility's PAC ID \cr
    \code{address} \tab Provider's street address \cr
    \code{city} \tab Provider's city \cr
@@ -88,7 +91,7 @@ A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \code{phone} \tab Provider's phone number \cr
    \code{telehealth} \tab Indicates if provider offers telehealth services \cr
    \code{assign_ind} \tab Indicates if provider accepts Medicare assignment \cr
-   \code{assign_group} \tab Indicates if facility accepts Medicare assignment \cr
+   \code{assign_org} \tab Indicates if facility accepts Medicare assignment \cr
 }
 }
 \description{
@@ -105,7 +108,7 @@ Links:
 }
 \examples{
 \dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-clinicians(enroll_id = "I20081002000549")
+clinicians(enroll_id_ind = "I20081002000549")
 clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 \dontshow{\}) # examplesIf}
 }

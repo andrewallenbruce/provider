@@ -6,7 +6,7 @@
 \usage{
 affiliations(
   npi = NULL,
-  pac_id_ind = NULL,
+  pac_ind = NULL,
   first = NULL,
   middle = NULL,
   last = NULL,
@@ -14,13 +14,14 @@ affiliations(
   facility_ccn = NULL,
   parent_ccn = NULL,
   offset = 0L,
-  tidy = TRUE
+  tidy = TRUE,
+  na.rm = TRUE
 )
 }
 \arguments{
 \item{npi}{< \emph{integer} > 10-digit national provider identifier}
 
-\item{pac_id_ind}{< \emph{integer} > 10-digit individual provider associate level variable
+\item{pac_ind}{< \emph{integer} > 10-digit individual provider associate level variable
 Links all entity-level information and may be associated with multiple
 enrollment IDs if the individual or organization enrolled multiple times}
 
@@ -47,13 +48,15 @@ sub-unit's primary hospital, should the provider provide services in said unit}
 
 \item{offset}{< \emph{integer} > offset; API pagination}
 
-\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}.}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
+
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} with the columns:\tabular{ll}{
    \strong{Field} \tab \strong{Description} \cr
    \code{npi} \tab 10-digit NPI \cr
-   \code{pac_id_ind} \tab 10-digit individual PAC ID \cr
+   \code{pac_ind} \tab 10-digit individual PAC ID \cr
    \code{first} \tab Individual provider's first name \cr
    \code{middle} \tab Individual provider's middle name \cr
    \code{last} \tab Individual provider's last name \cr

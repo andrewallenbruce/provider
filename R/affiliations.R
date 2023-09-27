@@ -13,7 +13,7 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac_id_ind < *integer* > 10-digit individual provider associate level variable
+#' @param pac_ind < *integer* > 10-digit individual provider associate level variable
 #' Links all entity-level information and may be associated with multiple
 #' enrollment IDs if the individual or organization enrolled multiple times
 #' @param first,middle,last < *character* > Individual provider's first, middle,
@@ -32,14 +32,15 @@
 #' @param parent_ccn < *integer* > 6-digit CMS Certification Number of a
 #' sub-unit's primary hospital, should the provider provide services in said unit
 #' @param offset < *integer* > offset; API pagination
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**       |**Description**                   |
 #' |:---------------|:---------------------------------|
 #' |`npi`           |10-digit NPI                      |
-#' |`pac_id_ind`    |10-digit individual PAC ID        |
+#' |`pac_ind`       |10-digit individual PAC ID        |
 #' |`first`         |Individual provider's first name  |
 #' |`middle`        |Individual provider's middle name |
 #' |`last`          |Individual provider's last name   |
@@ -55,7 +56,7 @@
 #' @autoglobal
 #' @export
 affiliations <- function(npi = NULL,
-                         pac_id_ind = NULL,
+                         pac_ind = NULL,
                          first = NULL,
                          middle = NULL,
                          last = NULL,
@@ -63,10 +64,11 @@ affiliations <- function(npi = NULL,
                          facility_ccn = NULL,
                          parent_ccn = NULL,
                          offset = 0L,
-                         tidy = TRUE) {
+                         tidy = TRUE,
+                         na.rm = TRUE) {
 
   if (!is.null(npi))           {npi          <- npi_check(npi)}
-  if (!is.null(pac_id_ind))    {pac_id_ind   <- pac_check(pac_id_ind)}
+  if (!is.null(pac_ind))       {pac_ind      <- pac_check(pac_ind)}
   if (!is.null(facility_ccn))  {facility_ccn <- as.character(facility_ccn)}
   if (!is.null(parent_ccn))    {parent_ccn   <- as.character(parent_ccn)}
 
@@ -94,7 +96,7 @@ affiliations <- function(npi = NULL,
   args <- dplyr::tribble(
     ~param,                                         ~arg,
     "npi",                                          npi,
-    "ind_pac_id",                                   pac_id_ind,
+    "ind_pac_id",                                   pac_ind,
     "frst_nm",                                      first,
     "mid_nm",                                       middle,
     "lst_nm",                                       last,
@@ -115,7 +117,7 @@ affiliations <- function(npi = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "pac_id_ind",    pac_id_ind,
+      "pac_ind",       pac_ind,
       "first",         first,
       "middle",        middle,
       "last",          last,
@@ -130,7 +132,10 @@ affiliations <- function(npi = NULL,
 
   }
 
-  if (tidy) {results <- tidyup(results) |> aff_cols()}
+  if (tidy) {results <- tidyup(results) |> aff_cols()
+  if (na.rm) {
+    results <- janitor::remove_empty(results, which = c("rows", "cols"))}
+  }
 
   return(results)
 }
@@ -141,7 +146,7 @@ affiliations <- function(npi = NULL,
 aff_cols <- function(df) {
 
   cols <- c("npi",
-            "pac_id_ind"   = "ind_pac_id",
+            "pac_ind"   = "ind_pac_id",
             "first"        = "frst_nm",
             "middle"       = "mid_nm",
             "last"         = "lst_nm",

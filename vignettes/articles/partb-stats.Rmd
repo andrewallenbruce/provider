@@ -15,7 +15,6 @@ knitr::opts_chunk$set(
   out.width = "100%",
   fig.path  = "man/figures/README-"
 )
-library(printr)
 ```
 
 ```{r message=FALSE, warning=FALSE}
@@ -28,14 +27,71 @@ library(gt)
 ## Provider Utilization Summary
 
 ```{r}
-df <- prac_years() |> 
-  map(\(x) by_provider(year = x, npi = 1023076643)) |> 
-  list_rbind()
+df <- map_dfr(prac_years(), ~by_provider(year = .x, npi = 1023076643))
 ```
 
 
 
 ### Counts & Amounts
+
+```{r}
+select(df, 
+       year, 
+       Charges = tot_charges,
+       Allowed = tot_allowed,
+       Payment = tot_payment) |> 
+  ggplot() +
+  geom_line(aes(year, Charges), color = "gray70", linewidth = 1) +
+  geom_line(aes(year, Allowed), color = "gray50", linewidth = 1) +
+  geom_line(aes(year, Payment), color = "gray10", linewidth = 1) +
+  geom_hline(yintercept = mean(df$tot_charges), color = "gray70", linetype = "dashed") +
+  geom_hline(yintercept = mean(df$tot_allowed), color = "gray50", linetype = "dashed") +
+  geom_hline(yintercept = mean(df$tot_payment), color = "gray10", linetype = "dashed") +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = c(2013:2019)) +
+  scale_y_continuous(labels = scales::label_dollar(scale = 1)) +
+  ggthemes::theme_fivethirtyeight()
+```
+
+<br>
+
+```{r}
+select(df, 
+       year, 
+       Beneficiaries = tot_benes,
+       Services = tot_srvcs) |> 
+  ggplot() +
+  geom_line(aes(year, Beneficiaries), color = "gray50", linewidth = 1) +
+  geom_line(aes(year, Services), color = "gray", linewidth = 1) +
+  geom_hline(yintercept = mean(df$tot_benes), color = "gray50", linetype = "dashed") +
+  geom_hline(yintercept = mean(df$tot_srvcs), color = "gray", linetype = "dashed") +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = c(2013:2019)) +
+  scale_y_continuous(labels = scales::label_comma()) +
+  ggthemes::theme_fivethirtyeight()
+```
+<br>
+
+```{r}
+select(df, 
+       year, 
+       Beneficiaries = tot_benes,
+       Services = tot_srvcs,
+       Payment = tot_payment) |> 
+  change(c(Beneficiaries, Services, Payment)) |> 
+  ggplot() +
+  geom_line(aes(year, Beneficiaries_chg_cum), color = "gray50", linewidth = 1) +
+  geom_line(aes(year, Services_chg_cum), color = "gray30", linewidth = 1) +
+  #geom_line(aes(year, Payment_chg_cum), color = "gray10", linewidth = 1) +
+  #geom_hline(yintercept = mean(df$tot_benes), color = "gray50", linetype = "dashed") +
+  #geom_hline(yintercept = mean(df$tot_srvcs), color = "gray", linetype = "dashed") +
+  labs(x = NULL, y = NULL) +
+  scale_x_continuous(breaks = c(2013:2019)) +
+  #scale_y_continuous(labels = scales::label_percent()) +
+  ggthemes::theme_fivethirtyeight()
+```
+
+<br>
 
 ```{r}
 select(df, 

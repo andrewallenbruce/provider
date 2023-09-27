@@ -231,7 +231,7 @@ hosp_cols <- function(df) {
   cols <- c('npi',
             'organization' = 'organization_name',
             'doing_business_as' = 'doing_business_as_name',
-            'pac_id_org' = 'associate_id',
+            'pac_org' = 'associate_id',
             'enroll_id_org' = 'enrollment_id',
             'facility_ccn' = 'ccn',
             'specialty_code' = 'provider_type_code',

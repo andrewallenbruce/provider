@@ -36,11 +36,11 @@ laboratories(
 
 \item{zip}{Zip code}
 
-\item{tidy}{Tidy output; default is \code{TRUE}.}
+\item{tidy}{Tidy output; default is \code{TRUE}}
 
-\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}.}
+\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}}
 
-\item{pivot}{Pivot output; default is \code{TRUE}.}
+\item{pivot}{Pivot output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.

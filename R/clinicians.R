@@ -12,7 +12,7 @@
 #' *Update Frequency:* **Monthly**
 #'
 #' @param npi < *integer* > 10-digit national provider identifier
-#' @param pac_id_ind < *integer* > 10-digit individual provider associate-level
+#' @param pac_ind < *integer* > 10-digit individual provider associate-level
 #' control identifier
 #' @param enroll_id_ind < *character* > 15-digit individual provider Medicare
 #' enrollment identifier; begins with capital "I"
@@ -26,20 +26,21 @@
 #' specialty reported in the selected enrollment
 #' @param facility_name < *character* > Name of facility associated with the
 #' individual provider
-#' @param pac_id_org < *integer* > 10-digit organizational/group provider
+#' @param pac_org < *integer* > 10-digit organizational/group provider
 #' associate-level control identifier
 #' @param city < *character* > Provider's city
 #' @param state < *character* > Provider's state
 #' @param zip < *character* > Provider's ZIP code
 #' @param offset < *integer* > offset; API pagination
-#' @param tidy < *boolean* > Tidy output; default is `TRUE`.
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
 #'
 #' @return A [tibble][tibble::tibble-package] with the columns:
 #'
 #' |**Field**       |**Description**                                       |
 #' |:---------------|:-----------------------------------------------------|
 #' |`npi`           |10-digit individual NPI                               |
-#' |`pac_id_ind`    |10-digit individual PAC ID                            |
+#' |`pac_ind`       |10-digit individual PAC ID                            |
 #' |`enroll_id_ind` |15-digit individual enrollment ID                     |
 #' |`first`         |Provider's first name                                 |
 #' |`middle`        |Provider's middle name                                |
@@ -52,7 +53,7 @@
 #' |`specialty`     |Provider's primary specialty                          |
 #' |`specialty_sec` |Provider's secondary specialty                        |
 #' |`facility_name` |Facility associated with provider                     |
-#' |`pac_id_org`    |Facility's 10-digit PAC ID                            |
+#' |`pac_org`       |Facility's 10-digit PAC ID                            |
 #' |`members`       |Number of providers associated with facility's PAC ID |
 #' |`address`       |Provider's street address                             |
 #' |`city`          |Provider's city                                       |
@@ -61,17 +62,17 @@
 #' |`phone`         |Provider's phone number                               |
 #' |`telehealth`    |Indicates if provider offers telehealth services      |
 #' |`assign_ind`    |Indicates if provider accepts Medicare assignment     |
-#' |`assign_group`  |Indicates if facility accepts Medicare assignment     |
+#' |`assign_org`    |Indicates if facility accepts Medicare assignment     |
 #'
 #' @seealso [hospitals()], [providers()], [affiliations()]
 #'
 #' @examplesIf interactive()
-#' clinicians(enroll_id = "I20081002000549")
+#' clinicians(enroll_id_ind = "I20081002000549")
 #' clinicians(school = "NEW YORK UNIVERSITY SCHOOL OF MEDICINE")
 #' @autoglobal
 #' @export
 clinicians <- function(npi = NULL,
-                       pac_id_ind = NULL,
+                       pac_ind = NULL,
                        enroll_id_ind = NULL,
                        first = NULL,
                        middle = NULL,
@@ -81,16 +82,17 @@ clinicians <- function(npi = NULL,
                        grad_year = NULL,
                        specialty = NULL,
                        facility_name = NULL,
-                       pac_id_org = NULL,
+                       pac_org = NULL,
                        city = NULL,
                        state = NULL,
                        zip = NULL,
                        offset = 0L,
-                       tidy = TRUE) {
+                       tidy = TRUE,
+                       na.rm = TRUE) {
 
   if (!is.null(npi))           {npi        <- npi_check(npi)}
-  if (!is.null(pac_id_ind))    {pac_id_ind <- pac_check(pac_id_ind)}
-  if (!is.null(pac_id_org))    {pac_id_org <- pac_check(pac_id_org)}
+  if (!is.null(pac_ind))    {pac_id_ind <- pac_check(pac_ind)}
+  if (!is.null(pac_org))    {pac_id_org <- pac_check(pac_org)}
   if (!is.null(enroll_id_ind)) {enroll_check(enroll_id_ind)}
   if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}
@@ -100,7 +102,7 @@ clinicians <- function(npi = NULL,
   args <- dplyr::tribble(
     ~param,               ~arg,
     "NPI",                npi,
-    "Ind_PAC_ID",         pac_id_ind,
+    "Ind_PAC_ID",         pac_ind,
     "Ind_enrl_ID",        enroll_id_ind,
     "frst_nm",            first,
     "mid_nm",             middle,
@@ -110,15 +112,10 @@ clinicians <- function(npi = NULL,
     "grd_yr",             grad_year,
     "pri_spec",           specialty,
     "facility_name",      facility_name,
-    "org_pac_id",         pac_id_org,
+    "org_pac_id",         pac_org,
     "citytown",           city,
     "state",              state,
     "zip_code",           zip)
-
-  # url <- paste0("https://data.cms.gov/provider-data/api/1/datastore/sql?query=",
-  #               "[SELECT * FROM ", file_id("c"), "]",
-  #               encode_param(args, type = "sql"),
-  #               "[LIMIT 10000 OFFSET ", offset, "]")
 
   error_body <- function(response) {httr2::resp_body_json(response)$message}
 
@@ -133,7 +130,7 @@ clinicians <- function(npi = NULL,
     cli_args <- dplyr::tribble(
       ~x,              ~y,
       "npi",           npi,
-      "pac_id_ind",    pac_id_ind,
+      "pac_ind",       pac_ind,
       "enroll_id_ind", enroll_id_ind,
       "first",         first,
       "middle",        middle,
@@ -143,7 +140,7 @@ clinicians <- function(npi = NULL,
       "grad_year",     grad_year,
       "specialty",     specialty,
       "facility_name", facility_name,
-      "pac_id_org",    pac_id_org,
+      "pac_org",       pac_org,
       "city",          city,
       "state",         state,
       "zip",           zip) |>
@@ -163,6 +160,8 @@ clinicians <- function(npi = NULL,
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth)) |>
       clin_cols()
+    if (na.rm) {
+      results <- janitor::remove_empty(results, which = c("rows", "cols"))}
     }
   return(results)
 }
@@ -173,7 +172,7 @@ clinicians <- function(npi = NULL,
 clin_cols <- function(df) {
 
   cols <- c('npi',
-            'pac_id_ind' = 'ind_pac_id',
+            'pac_ind' = 'ind_pac_id',
             'enroll_id_ind' = 'ind_enrl_id',
             'first' = 'frst_nm',
             'middle' = 'mid_nm',
@@ -186,7 +185,7 @@ clin_cols <- function(df) {
             'specialty' = 'pri_spec',
             'specialty_sec' = 'sec_spec_all',
             'facility_name',
-            'pac_id_org' = 'org_pac_id',
+            'pac_org' = 'org_pac_id',
             'members' = 'num_org_mem',
             'address',
             # 'address_id' = 'adrs_id',
