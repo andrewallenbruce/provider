@@ -20,7 +20,7 @@ CLIA Certificates
 
 
 There are five CLIA certificate types all of which are effective for a
-period of two years:
+period of two years. They are as follows, in order of increasing complexity:
 Certificate of Waiver: Issued to a laboratory to perform only waived
 tests; does not waive the lab from all CLIA requirements. Waived tests are
 laboratory tests that are simple to perform. Routine inspections are not
@@ -80,7 +80,7 @@ CLIA Certificates
 
 
 There are five CLIA certificate types all of which are effective for a
-period of two years:
+period of two years. They are as follows, in order of increasing complexity:
 Certificate of Waiver: Issued to a laboratory to perform only waived
 tests; does not waive the lab from all CLIA requirements. Waived tests are
 laboratory tests that are simple to perform. Routine inspections are not
@@ -220,7 +220,7 @@ responsibilities.</p>
 
 
 <p>There are five CLIA certificate types all of which are effective for a
-period of two years:</p><ol><li><p>Certificate of <strong>Waiver</strong>: Issued to a laboratory to perform only waived
+period of two years. They are as follows, in order of increasing complexity:</p><ol><li><p>Certificate of <strong>Waiver</strong>: Issued to a laboratory to perform only waived
 tests; does not waive the lab from all CLIA requirements. Waived tests are
 laboratory tests that are simple to perform. Routine inspections are not
 conducted for waiver labs, although 2% are visited each year to ensure
@@ -264,6 +264,7 @@ following CMS-approved accreditation organizations:</p><ul><li><p><a href="https
 <span>  city <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  state <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  zip <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  active <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  tidy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  na.rm <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  pivot <span class="op">=</span> <span class="cn">TRUE</span></span>
@@ -273,44 +274,48 @@ following CMS-approved accreditation organizations:</p><ul><li><p><a href="https
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>name</dt>
-<dd><p>Provider or clinical laboratory's name</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Provider or clinical laboratory's name</p></dd>
 
 
 <dt>clia</dt>
-<dd><p>10-character CLIA number</p></dd>
+<dd><p>&lt; <em>character</em> &gt; 10-character CLIA number</p></dd>
 
 
 <dt>certificate</dt>
-<dd><p>CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
-<li><p><code>"compliance"</code></p></li>
-<li><p><code>"accreditation"</code></p></li>
+<dd><p>&lt; <em>character</em> &gt; CLIA certificate type:</p><ul><li><p><code>"waiver"</code></p></li>
 <li><p><code>"ppm"</code> (Provider-Performed Microscopy Procedures)</p></li>
 <li><p><code>"registration"</code></p></li>
+<li><p><code>"compliance"</code></p></li>
+<li><p><code>"accreditation"</code></p></li>
 </ul></dd>
 
 
 <dt>city</dt>
-<dd><p>City</p></dd>
+<dd><p>&lt; <em>character</em> &gt; City</p></dd>
 
 
 <dt>state</dt>
-<dd><p>State</p></dd>
+<dd><p>&lt; <em>character</em> &gt; State</p></dd>
 
 
 <dt>zip</dt>
-<dd><p>Zip code</p></dd>
+<dd><p>&lt; <em>character</em> &gt; Zip code</p></dd>
+
+
+<dt>active</dt>
+<dd><p>&lt; <em>boolean</em> &gt; Search for Active providers only? dedault is <code>FALSE</code></p></dd>
 
 
 <dt>tidy</dt>
-<dd><p>Tidy output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Tidy output; default is <code>TRUE</code></p></dd>
 
 
 <dt>na.rm</dt>
-<dd><p>Remove empty rows and columns; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Remove empty rows and columns; default is <code>TRUE</code></p></dd>
 
 
 <dt>pivot</dt>
-<dd><p>Pivot output; default is <code>TRUE</code></p></dd>
+<dd><p>&lt; <em>boolean</em> &gt; Pivot output; default is <code>TRUE</code></p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -323,15 +328,15 @@ following CMS-approved accreditation organizations:</p><ul><li><p><a href="https
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">laboratories</span><span class="op">(</span>clia <span class="op">=</span> <span class="st">"11D0265516"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 22</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   clia_number name     certificate effective_date expiration_date status poc_ind</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11D0265516  DANIEL … Compliance  1996-08-29     1998-08-04      In Co… TRUE   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 15 more variables: termination_reason &lt;chr&gt;, type_of_action &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ownership_type &lt;chr&gt;, facility_type &lt;chr&gt;, director_affiliations &lt;int&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;, zip &lt;chr&gt;, phone &lt;chr&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   orig_part_date &lt;date&gt;, application_date &lt;date&gt;, certification_date &lt;date&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   mailed_date &lt;date&gt;, clia_class_current &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   clia_number name            certificate effective_date expiration_date expired</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 11D0265516  DANIEL FELDMAN… Compliance  1996-08-29     1998-08-04      TRUE   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: termination_reason &lt;chr&gt;, status &lt;chr&gt;, poc_ind &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   type_of_action &lt;chr&gt;, ownership_type &lt;chr&gt;, facility_type &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   director_affiliations &lt;int&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   zip &lt;chr&gt;, phone &lt;chr&gt;, orig_part_date &lt;date&gt;, application_date &lt;date&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   certification_date &lt;date&gt;, mailed_date &lt;date&gt;, clia_class_current &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

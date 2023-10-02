@@ -151,8 +151,20 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/affiliations.html">affiliations</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html" class="external-link">pull</a></span><span class="op">(</span><span class="va">facility_ccn</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; Error in map_dfr(pull(affiliations(pac_ind = 7810891009), facility_ccn), : could not find function "map_dfr"</span></span></code></pre>
+<span>  <span class="fu">purrr</span><span class="fu">::</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span><span class="op">~</span><span class="fu"><a href="../reference/hospitals.html">hospitals</a></span><span class="op">(</span>facility_ccn <span class="op">=</span> <span class="va">.x</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 5 × 20</span></span></span>
+<span><span class="co">#&gt;   npi        organization   doing_business_as pac_org enroll_id_org facility_ccn</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1568419976 UNIVERSITY OF… UNIVERSITY OF VE… 377949… O20021111000… 470003      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1568419976 UNIVERSITY OF… UNIVERSITY OF VE… 377949… O20021111000… 470003      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1033270699 CHAMPLAIN VAL… THE UNIVERSITY O… 276939… O20120110000… 330250      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1891785184 ELIZABETHTOWN… <span style="color: #BB0000;">NA</span>                357755… O20101110000… 331302      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 1508845637 CENTRAL VERMO… <span style="color: #BB0000;">NA</span>                933513… O20050809000… 470001      </span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 14 more variables: specialty_code &lt;chr&gt;, specialty &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   enroll_state &lt;chr&gt;, incorporation_date &lt;date&gt;, incorporation_state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   organization_structure &lt;chr&gt;, address &lt;chr&gt;, city &lt;chr&gt;, state &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   zip &lt;int&gt;, location_type &lt;chr&gt;, location_other &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   proprietary_nonprofit &lt;chr&gt;, status &lt;chr&gt;</span></span></span></code></pre>
 <p><br></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/clinicians.html">clinicians</a></span><span class="op">(</span>pac_ind <span class="op">=</span> <span class="fl">7810891009</span><span class="op">)</span></span></code></pre></div>
