@@ -11,36 +11,39 @@ laboratories(
   city = NULL,
   state = NULL,
   zip = NULL,
+  active = FALSE,
   tidy = TRUE,
   na.rm = TRUE,
   pivot = TRUE
 )
 }
 \arguments{
-\item{name}{Provider or clinical laboratory's name}
+\item{name}{< \emph{character} > Provider or clinical laboratory's name}
 
-\item{clia}{10-character CLIA number}
+\item{clia}{< \emph{character} > 10-character CLIA number}
 
-\item{certificate}{CLIA certificate type:
+\item{certificate}{< \emph{character} > CLIA certificate type:
 \itemize{
 \item \code{"waiver"}
-\item \code{"compliance"}
-\item \code{"accreditation"}
 \item \code{"ppm"} (Provider-Performed Microscopy Procedures)
 \item \code{"registration"}
+\item \code{"compliance"}
+\item \code{"accreditation"}
 }}
 
-\item{city}{City}
+\item{city}{< \emph{character} > City}
 
-\item{state}{State}
+\item{state}{< \emph{character} > State}
 
-\item{zip}{Zip code}
+\item{zip}{< \emph{character} > Zip code}
 
-\item{tidy}{Tidy output; default is \code{TRUE}}
+\item{active}{< \emph{boolean} > Search for Active providers only? dedault is \code{FALSE}}
 
-\item{na.rm}{Remove empty rows and columns; default is \code{TRUE}}
+\item{tidy}{< \emph{boolean} > Tidy output; default is \code{TRUE}}
 
-\item{pivot}{Pivot output; default is \code{TRUE}}
+\item{na.rm}{< \emph{boolean} > Remove empty rows and columns; default is \code{TRUE}}
+
+\item{pivot}{< \emph{boolean} > Pivot output; default is \code{TRUE}}
 }
 \value{
 A \link[tibble:tibble-package]{tibble} containing the search results.
@@ -64,7 +67,7 @@ responsibilities.
 \subsection{CLIA Certificates}{
 
 There are five CLIA certificate types all of which are effective for a
-period of two years:
+period of two years. They are as follows, in order of increasing complexity:
 \enumerate{
 \item Certificate of \strong{Waiver}: Issued to a laboratory to perform only waived
 tests; does not waive the lab from all CLIA requirements. Waived tests are

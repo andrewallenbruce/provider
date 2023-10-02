@@ -91,8 +91,8 @@ clinicians <- function(npi = NULL,
                        na.rm = TRUE) {
 
   if (!is.null(npi))           {npi        <- npi_check(npi)}
-  if (!is.null(pac_ind))    {pac_id_ind <- pac_check(pac_ind)}
-  if (!is.null(pac_org))    {pac_id_org <- pac_check(pac_org)}
+  if (!is.null(pac_ind))       {pac_id_ind <- pac_check(pac_ind)}
+  if (!is.null(pac_org))       {pac_id_org <- pac_check(pac_org)}
   if (!is.null(enroll_id_ind)) {enroll_check(enroll_id_ind)}
   if (!is.null(enroll_id_ind)) {enroll_ind_check(enroll_id_ind)}
   if (!is.null(grad_year))     {grad_year  <- as.character(grad_year)}

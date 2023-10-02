@@ -42,7 +42,7 @@ full_join(revalidation_reassign(pac_ind = 7810891009)) |>
 ```{r}
 affiliations(pac_ind = 7810891009) |> 
   pull(facility_ccn) |>
-  map_dfr(~hospitals(facility_ccn = .x))
+  purrr::map_dfr(~hospitals(facility_ccn = .x))
 ```
 <br>
 

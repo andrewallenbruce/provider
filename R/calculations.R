@@ -142,6 +142,21 @@ years_vec <- function(date) {
         tz = "UTC")) / 52.17857, 2)
 }
 
+#' Calculate number of years since today's date
+#' @param date date column
+#' @returns number of years since today's date
+#' @examples
+#' dplyr::tibble(date = lubridate::today() - 366) |>
+#' dplyr::mutate(years_passed = years_vec(date = date))
+#' @autoglobal
+#' @noRd
+duration_vec <- function(date) {
+
+  date <- difftime(date, lubridate::today(), units = "auto", tz = "UTC")
+  date <- lubridate::as.duration(date)
+  return(date)
+}
+
 #' Summary stats
 #' @description Returns a tibble of summary stats
 #' @param df data frame

@@ -146,7 +146,7 @@ affiliations <- function(npi = NULL,
 aff_cols <- function(df) {
 
   cols <- c("npi",
-            "pac_ind"   = "ind_pac_id",
+            "pac_ind"      = "ind_pac_id",
             "first"        = "frst_nm",
             "middle"       = "mid_nm",
             "last"         = "lst_nm",

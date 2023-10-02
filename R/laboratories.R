@@ -17,7 +17,7 @@
 #'
 #' #### CLIA Certificates
 #' There are five CLIA certificate types all of which are effective for a
-#' period of two years:
+#' period of two years. They are as follows, in order of increasing complexity:
 #'
 #' 1. Certificate of **Waiver**: Issued to a laboratory to perform only waived
 #' tests; does not waive the lab from all CLIA requirements. Waived tests are
@@ -59,20 +59,21 @@
 #'
 #' *Update Frequency:* **Quarterly**
 #'
-#' @param name Provider or clinical laboratory's name
-#' @param clia 10-character CLIA number
-#' @param certificate CLIA certificate type:
+#' @param name < *character* > Provider or clinical laboratory's name
+#' @param clia < *character* > 10-character CLIA number
+#' @param certificate < *character* > CLIA certificate type:
 #'    * `"waiver"`
-#'    * `"compliance"`
-#'    * `"accreditation"`
 #'    * `"ppm"` (Provider-Performed Microscopy Procedures)
 #'    * `"registration"`
-#' @param city City
-#' @param state State
-#' @param zip Zip code
-#' @param tidy Tidy output; default is `TRUE`
-#' @param na.rm Remove empty rows and columns; default is `TRUE`
-#' @param pivot Pivot output; default is `TRUE`
+#'    * `"compliance"`
+#'    * `"accreditation"`
+#' @param city < *character* > City
+#' @param state < *character* > State
+#' @param zip < *character* > Zip code
+#' @param active < *boolean* > Search for Active providers only? dedault is `FALSE`
+#' @param tidy < *boolean* > Tidy output; default is `TRUE`
+#' @param na.rm < *boolean* > Remove empty rows and columns; default is `TRUE`
+#' @param pivot < *boolean* > Pivot output; default is `TRUE`
 #'
 #' @return A [tibble][tibble::tibble-package] containing the search results.
 #'
@@ -86,6 +87,7 @@ laboratories <- function(name = NULL,
                          city = NULL,
                          state = NULL,
                          zip = NULL,
+                         active = FALSE,
                          tidy = TRUE,
                          na.rm = TRUE,
                          pivot = TRUE) {
@@ -96,6 +98,10 @@ laboratories <- function(name = NULL,
     certificate <- cert(certificate)
   }
 
+  if (!is.null(zip)) {zip <- as.character(zip)}
+  if (isTRUE(active)) {active <- "00"}
+  if (!isTRUE(active)) {active <- NULL}
+
   args <- dplyr::tribble(
     ~param,          ~arg,
     "FAC_NAME",       name,
@@ -103,11 +109,14 @@ laboratories <- function(name = NULL,
     "CRTFCT_TYPE_CD", certificate,
     "CITY_NAME",      city,
     "STATE_CD",       state,
-    "ZIP_CD",         zip)
+    "ZIP_CD",         zip,
+    "PGM_TRMNTN_CD",  active)
 
   response <- httr2::request(build_url("lab", args)) |> httr2::req_perform()
 
   if (isTRUE(vctrs::vec_is_empty(response$body))) {
+
+    if (active == "00") {active <- TRUE}
 
     cli_args <- dplyr::tribble(
       ~x,                  ~y,
@@ -116,7 +125,8 @@ laboratories <- function(name = NULL,
       "certificate",       certificate,
       "city",              city,
       "state",             state,
-      "zip",               zip) |>
+      "zip",               zip,
+      "active",            active) |>
       tidyr::unnest(cols = c(y))
 
     format_cli(cli_args)
@@ -140,106 +150,13 @@ laboratories <- function(name = NULL,
                     gnrl_fac_type_cd = factype(gnrl_fac_type_cd),
                     current_clia_lab_clsfctn_cd = labclass(current_clia_lab_clsfctn_cd),
                     prvdr_ctgry_cd = labclass(prvdr_ctgry_cd),
-                    prvdr_ctgry_sbtyp_cd = labclass(prvdr_ctgry_sbtyp_cd)) |>
+                    prvdr_ctgry_sbtyp_cd = labclass(prvdr_ctgry_sbtyp_cd),
+                    duration = duration_vec(trmntn_exprtn_dt),
+                    expired = dplyr::if_else(duration < 0, TRUE, FALSE),
+                    duration = NULL) |>
       tidyr::unite("name", c(fac_name, addtnl_fac_name), na.rm = TRUE) |>
       tidyr::unite("address", c(st_adr, addtnl_st_adr), na.rm = TRUE) |>
-      dplyr::select(name,
-                    clia_number = prvdr_num,
-                    certificate = crtfct_type_cd,
-                    # clia_medicare = clia_mdcr_num,
-                    # application = aplctn_type_cd,
-                    effective_date = crtfct_efctv_dt,
-                    expiration_date = trmntn_exprtn_dt,
-                    status = cmplnc_stus_cd,
-                    poc_ind = acptbl_poc_sw,
-                    termination_reason = pgm_trmntn_cd,
-                    # termination_code = clia_trmntn_cd,
-                    type_of_action = crtfctn_actn_type_cd,
-                    ownership_type = gnrl_cntl_type_cd,
-                    facility_type = gnrl_fac_type_cd,
-                    director_affiliations = drctly_afltd_lab_cnt,
-                    #category = prvdr_ctgry_cd,
-                    #subcategory = prvdr_ctgry_sbtyp_cd,
-
-                    address,
-                    city = city_name,
-                    state = state_cd,
-                    zip = zip_cd,
-                    phone = phne_num,
-                    fax = fax_phne_num,
-                    orig_part_date = orgnl_prtcptn_dt,
-                    application_date = aplctn_rcvd_dt,
-                    certification_date = crtfctn_dt,
-                    mailed_date = crtfct_mail_dt,
-
-                    # region = rgn_cd,
-                    # state_region = state_rgn_cd,
-                    # fips_county = fips_cnty_cd,
-                    # fips_state = fips_state_cd,
-                    # cbsa = cbsa_cd,
-                    # cbsa_ind = cbsa_urbn_rrl_ind,
-                    # carrier = intrmdry_carr_cd,
-                    # carrier_prior = intrmdry_carr_prior_cd,
-                    # medicaid_vendor = mdcd_vndr_num,
-                    # chow_count = chow_cnt,
-                    # chow_date_prev = chow_prior_dt,
-                    # chow_date = chow_dt,
-                    # fiscal_year_end = fy_end_mo_day_cd,
-                    # eligible_ind = elgblty_sw,
-                    # skeleton_ind = skltn_rec_sw,
-                    # multi_site_ind = mlt_site_excptn_sw,
-                    # hosp_campus_ind = hosp_lab_excptn_sw,
-                    # pub_health_ind = non_prft_excptn_sw,
-                    # tmp_test_site_ind = lab_temp_tstg_site_sw,
-                    # shared_lab_ind = shr_lab_sw,
-                    # shared_lab_xref_number,
-                    # lab_site_count = lab_site_cnt,
-                    # ppm_test_count = ppmp_test_vol_cnt,
-                    # acc_sched = acrdtn_schdl_cd,
-                    # form_116_acrdtd_test_vol_cnt,
-                    # form_116_test_vol_cnt,
-                    # form_1557_crtfct_schdl_cd,
-                    # form_1557_cmplnc_schdl_cd,
-                    # form_1557_test_vol_cnt,
-                    # wvd_test_vol_cnt,
-
-                    # American Association for Laboratory Accreditation
-                    acr_a2la = a2la_acrdtd_cd,
-                    acr_a2la_ind = a2la_acrdtd_y_match_sw,
-                    acr_a2la_date = a2la_acrdtd_y_match_dt,
-
-                    # American Association of Blood Banks
-                    acr_aabb = aabb_acrdtd_cd,
-                    acr_aabb_ind = aabb_acrdtd_y_match_sw,
-                    acr_aabb_date = aabb_acrdtd_y_match_dt,
-
-                    # American Osteopathic Association
-                    acr_aoa = aoa_acrdtd_cd,
-                    acr_aoa_ind = aoa_acrdtd_y_match_sw,
-                    acr_aoa_date = aoa_acrdtd_y_match_dt,
-
-                    # American Society for Histocompatibility and Immunogenetics
-                    acr_ashi = ashi_acrdtd_cd,
-                    acr_ashi_ind = ashi_acrdtd_y_match_sw,
-                    acr_ashi_date = ashi_acrdtd_y_match_dt,
-
-                    # College of American Pathologists
-                    acr_cap = cap_acrdtd_cd,
-                    acr_cap_ind = cap_acrdtd_y_match_sw,
-                    acr_cap_date = cap_acrdtd_y_match_dt,
-
-                    # Commission on Office Laboratory Accreditation
-                    acr_cola = cola_acrdtd_cd,
-                    acr_cola_ind = cola_acrdtd_y_match_sw,
-                    acr_cola_date = cola_acrdtd_y_match_dt,
-
-                    # the Joint Commission
-                    acr_jcaho = jcaho_acrdtd_cd,
-                    acr_jcaho_ind = jcaho_acrdtd_y_match_sw,
-                    acr_jcaho_date = jcaho_acrdtd_y_match_dt,
-                    clia_class_current = current_clia_lab_clsfctn_cd,
-                    # dplyr::starts_with("clia_lab_classification_cd_"),
-                    dplyr::contains("_provider_number_"))
+      lab_cols()
 
     if (pivot) {
       res <- dplyr::select(results, -dplyr::starts_with("acr_"))
@@ -270,29 +187,47 @@ laboratories <- function(name = NULL,
 
       org <- acr |>
         dplyr::select(clia_number, a2la, aabb, aoa, ashi, cap, cola, jcaho) |>
-        tidyr::pivot_longer(cols = !clia_number, names_to = "organization", values_to = "accredited") |>
+        tidyr::pivot_longer(cols = !clia_number,
+                            names_to = "organization",
+                            values_to = "accredited") |>
         dplyr::mutate(accredited = dplyr::if_else(accredited == "X", TRUE, FALSE))
 
       dt <- acr |>
         dplyr::select(clia_number, dplyr::ends_with("_date")) |>
-        tidyr::pivot_longer(cols = !clia_number, names_to = "organization", values_to = "confirmed_date") |>
+        tidyr::pivot_longer(cols = !clia_number,
+                            names_to = "organization",
+                            values_to = "confirmed_date") |>
         dplyr::mutate(organization = stringr::str_remove(organization, "_date"))
 
       ind <- acr |>
         dplyr::select(clia_number, dplyr::ends_with("_ind")) |>
-        tidyr::pivot_longer(cols = !clia_number, names_to = "organization", values_to = "confirmed") |>
+        tidyr::pivot_longer(cols = !clia_number,
+                            names_to = "organization",
+                            values_to = "confirmed") |>
         dplyr::mutate(organization = stringr::str_remove(organization, "_ind"))
 
-      results <- dplyr::inner_join(org, ind, by = dplyr::join_by(clia_number, organization)) |>
-        dplyr::inner_join(dt, by = dplyr::join_by(clia_number, organization)) |>
+      results <- dplyr::inner_join(org,
+                                   ind,
+                                   by = dplyr::join_by(clia_number,
+                                                       organization)) |>
+        dplyr::inner_join(dt,
+                          by = dplyr::join_by(clia_number,
+                                              organization)) |>
         dplyr::filter(accredited == TRUE) |>
-        dplyr::right_join(res, by = dplyr::join_by(clia_number)) |>
+        dplyr::right_join(res,
+                          by = dplyr::join_by(clia_number)) |>
         dplyr::mutate(organization = stringr::str_to_upper(organization)) |>
-        dplyr::relocate(c(organization, accredited, confirmed, confirmed_date), .after = type_of_action) |>
+        dplyr::relocate(c(organization,
+                          accredited,
+                          confirmed,
+                          confirmed_date),
+                        .after = type_of_action) |>
         dplyr::select(-dplyr::starts_with("affiliated_"))
 
 
-      aff <- dplyr::select(res, clia_number, dplyr::starts_with("affiliated_")) |>
+      aff <- dplyr::select(res,
+                           clia_number,
+                           dplyr::starts_with("affiliated_")) |>
         dplyr::distinct() |>
         tidyr::pivot_longer(!clia_number,
                             names_to = "affiliated_provider",
@@ -301,8 +236,9 @@ laboratories <- function(name = NULL,
 
       aff$affiliated_provider <- NULL
 
-      results <- dplyr::left_join(results, aff, by = dplyr::join_by(clia_number))
-
+      results <- dplyr::left_join(results,
+                                  aff,
+                                  by = dplyr::join_by(clia_number))
     }
 
     if (na.rm) {
@@ -311,6 +247,116 @@ laboratories <- function(name = NULL,
 
   }
   return(results)
+}
+
+#' @param df data frame
+#' @autoglobal
+#' @noRd
+lab_cols <- function(df) {
+
+  cols <- c('name',
+            'clia_number' = 'prvdr_num',
+            'certificate' = 'crtfct_type_cd',
+            # 'clia_medicare' = 'clia_mdcr_num',
+            # 'application' = 'aplctn_type_cd',
+            'effective_date' = 'crtfct_efctv_dt',
+            'expiration_date' = 'trmntn_exprtn_dt',
+            'expired',
+            'termination_reason' = 'pgm_trmntn_cd',
+            'status' = 'cmplnc_stus_cd',
+            'poc_ind' = 'acptbl_poc_sw',
+            # 'termination_code' = 'clia_trmntn_cd',
+            'type_of_action' = 'crtfctn_actn_type_cd',
+            'ownership_type' = 'gnrl_cntl_type_cd',
+            'facility_type' = 'gnrl_fac_type_cd',
+            'director_affiliations' = 'drctly_afltd_lab_cnt',
+            # 'category' = 'prvdr_ctgry_cd',
+            # 'subcategory' = 'prvdr_ctgry_sbtyp_cd',
+
+            'address',
+            'city' = 'city_name',
+            'state' = 'state_cd',
+            'zip' = 'zip_cd',
+            'phone' = 'phne_num',
+            'fax' = 'fax_phne_num',
+            'orig_part_date' = 'orgnl_prtcptn_dt',
+            'application_date' = 'aplctn_rcvd_dt',
+            'certification_date' = 'crtfctn_dt',
+            'mailed_date' = 'crtfct_mail_dt',
+
+            # 'region' = 'rgn_cd',
+            # 'state_region' = 'state_rgn_cd',
+            # 'fips_county' = 'fips_cnty_cd',
+            # 'fips_state' = 'fips_state_cd',
+            # 'cbsa' = 'cbsa_cd',
+            # 'cbsa_ind' = 'cbsa_urbn_rrl_ind',
+            # 'carrier' = 'intrmdry_carr_cd',
+            # 'carrier_prior' = 'intrmdry_carr_prior_cd',
+            # 'medicaid_vendor' = 'mdcd_vndr_num',
+            # 'chow_count' = 'chow_cnt',
+            # 'chow_date_prev' = 'chow_prior_dt',
+            # 'chow_date' = 'chow_dt',
+            # 'fiscal_year_end' = 'fy_end_mo_day_cd',
+            # 'eligible_ind' = 'elgblty_sw',
+            # 'skeleton_ind' = 'skltn_rec_sw',
+            # 'multi_site_ind' = 'mlt_site_excptn_sw',
+            # 'hosp_campus_ind' = 'hosp_lab_excptn_sw',
+            # 'pub_health_ind' = 'non_prft_excptn_sw',
+            # 'tmp_test_site_ind' = 'lab_temp_tstg_site_sw',
+            # 'shared_lab_ind' = 'shr_lab_sw',
+            # 'shared_lab_xref_number',
+            # 'lab_site_count' = 'lab_site_cnt',
+            # 'ppm_test_count' = 'ppmp_test_vol_cnt',
+            # 'acc_sched' = 'acrdtn_schdl_cd',
+            # 'form_116_acrdtd_test_vol_cnt',
+            # 'form_116_test_vol_cnt',
+            # 'form_1557_crtfct_schdl_cd',
+            # 'form_1557_cmplnc_schdl_cd',
+            # 'form_1557_test_vol_cnt',
+            # 'wvd_test_vol_cnt',
+
+            # American Association for Laboratory Accreditation
+            'acr_a2la' = 'a2la_acrdtd_cd',
+            'acr_a2la_ind' = 'a2la_acrdtd_y_match_sw',
+            'acr_a2la_date' = 'a2la_acrdtd_y_match_dt',
+
+            # American Association of Blood Banks
+            'acr_aabb' = 'aabb_acrdtd_cd',
+            'acr_aabb_ind' = 'aabb_acrdtd_y_match_sw',
+            'acr_aabb_date' = 'aabb_acrdtd_y_match_dt',
+
+            # American Osteopathic Association
+            'acr_aoa' = 'aoa_acrdtd_cd',
+            'acr_aoa_ind' = 'aoa_acrdtd_y_match_sw',
+            'acr_aoa_date' = 'aoa_acrdtd_y_match_dt',
+
+            # American Society for Histocompatibility and Immunogenetics
+            'acr_ashi' = 'ashi_acrdtd_cd',
+            'acr_ashi_ind' = 'ashi_acrdtd_y_match_sw',
+            'acr_ashi_date' = 'ashi_acrdtd_y_match_dt',
+
+            # College of American Pathologists
+            'acr_cap' = 'cap_acrdtd_cd',
+            'acr_cap_ind' = 'cap_acrdtd_y_match_sw',
+            'acr_cap_date' = 'cap_acrdtd_y_match_dt',
+
+            # Commission on Office Laboratory Accreditation
+            'acr_cola' = 'cola_acrdtd_cd',
+            'acr_cola_ind' = 'cola_acrdtd_y_match_sw',
+            'acr_cola_date' = 'cola_acrdtd_y_match_dt',
+
+            # the Joint Commission
+            'acr_jcaho' = 'jcaho_acrdtd_cd',
+            'acr_jcaho_ind' = 'jcaho_acrdtd_y_match_sw',
+            'acr_jcaho_date' = 'jcaho_acrdtd_y_match_dt',
+
+            'clia_class_current' = 'current_clia_lab_clsfctn_cd')
+
+  df |> dplyr::select(
+    dplyr::all_of(cols),
+    # dplyr::starts_with("clia_lab_classification_cd_"),
+    dplyr::contains("_provider_number_"))
+
 }
 
 #' @autoglobal

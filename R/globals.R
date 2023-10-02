@@ -125,46 +125,12 @@ utils::globalVariables(c(
   "current_clia_lab_clsfctn_cd", # <laboratories>
   "prvdr_ctgry_cd", # <laboratories>
   "prvdr_ctgry_sbtyp_cd", # <laboratories>
+  "trmntn_exprtn_dt", # <laboratories>
+  "duration", # <laboratories>
   "fac_name", # <laboratories>
   "addtnl_fac_name", # <laboratories>
   "st_adr", # <laboratories>
   "addtnl_st_adr", # <laboratories>
-  "prvdr_num", # <laboratories>
-  "crtfct_efctv_dt", # <laboratories>
-  "trmntn_exprtn_dt", # <laboratories>
-  "acptbl_poc_sw", # <laboratories>
-  "drctly_afltd_lab_cnt", # <laboratories>
-  "address", # <laboratories>
-  "city_name", # <laboratories>
-  "state_cd", # <laboratories>
-  "zip_cd", # <laboratories>
-  "phne_num", # <laboratories>
-  "fax_phne_num", # <laboratories>
-  "orgnl_prtcptn_dt", # <laboratories>
-  "aplctn_rcvd_dt", # <laboratories>
-  "crtfctn_dt", # <laboratories>
-  "crtfct_mail_dt", # <laboratories>
-  "a2la_acrdtd_cd", # <laboratories>
-  "a2la_acrdtd_y_match_sw", # <laboratories>
-  "a2la_acrdtd_y_match_dt", # <laboratories>
-  "aabb_acrdtd_cd", # <laboratories>
-  "aabb_acrdtd_y_match_sw", # <laboratories>
-  "aabb_acrdtd_y_match_dt", # <laboratories>
-  "aoa_acrdtd_cd", # <laboratories>
-  "aoa_acrdtd_y_match_sw", # <laboratories>
-  "aoa_acrdtd_y_match_dt", # <laboratories>
-  "ashi_acrdtd_cd", # <laboratories>
-  "ashi_acrdtd_y_match_sw", # <laboratories>
-  "ashi_acrdtd_y_match_dt", # <laboratories>
-  "cap_acrdtd_cd", # <laboratories>
-  "cap_acrdtd_y_match_sw", # <laboratories>
-  "cap_acrdtd_y_match_dt", # <laboratories>
-  "cola_acrdtd_cd", # <laboratories>
-  "cola_acrdtd_y_match_sw", # <laboratories>
-  "cola_acrdtd_y_match_dt", # <laboratories>
-  "jcaho_acrdtd_cd", # <laboratories>
-  "jcaho_acrdtd_y_match_sw", # <laboratories>
-  "jcaho_acrdtd_y_match_dt", # <laboratories>
   "clia_number", # <laboratories>
   "acr_a2la", # <laboratories>
   "acr_a2la_ind", # <laboratories>
