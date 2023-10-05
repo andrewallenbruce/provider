@@ -154,13 +154,13 @@ before it is returned. Each function has a <code>tidy</code> argument
 that is set to <code>TRUE</code> by default:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/order_refer.html">order_refer</a></span><span class="op">(</span>npi <span class="op">=</span> <span class="fl">1043477615</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 4</span></span></span>
-<span><span class="co">#&gt;   npi        first last    service                  </span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B          </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency       </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 5</span></span></span>
+<span><span class="co">#&gt;   npi        first last    service                   status</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1043477615 SARAH HUSSAIN Medicare Part B           TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 1043477615 SARAH HUSSAIN Home Health Agency        TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 1043477615 SARAH HUSSAIN Durable Medical Equipment TRUE  </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 1043477615 SARAH HUSSAIN Power Mobility Devices    TRUE</span></span></code></pre></div>
 <p><br></p>
 <p>Setting it to <code>FALSE</code> will return the un-processed
 output:</p>
