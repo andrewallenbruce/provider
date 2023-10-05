@@ -153,9 +153,9 @@ clinicians <- function(npi = NULL,
 
   if (tidy) {
     results <- tidyup(results) |>
-      tidyr::unite("address", adr_ln_1:adr_ln_2,
+      tidyr::unite("address_org", adr_ln_1:adr_ln_2,
                    remove = TRUE, na.rm = TRUE, sep = " ") |>
-      dplyr::mutate(address = stringr::str_squish(address),
+      dplyr::mutate(address_org = stringr::str_squish(address_org),
                     num_org_mem = as.integer(num_org_mem),
                     grd_yr = as.integer(grd_yr),
                     telehlth = yn_logical(telehlth)) |>
@@ -172,8 +172,8 @@ clinicians <- function(npi = NULL,
 clin_cols <- function(df) {
 
   cols <- c('npi',
-            'pac_ind' = 'ind_pac_id',
-            'enroll_id_ind' = 'ind_enrl_id',
+            'pac' = 'ind_pac_id',
+            'enroll_id' = 'ind_enrl_id',
             'first' = 'frst_nm',
             'middle' = 'mid_nm',
             'last' = 'lst_nm',
@@ -184,18 +184,18 @@ clin_cols <- function(df) {
             'grad_year' = 'grd_yr',
             'specialty' = 'pri_spec',
             'specialty_sec' = 'sec_spec_all',
-            'facility_name',
+            'organization' = 'facility_name',
             'pac_org' = 'org_pac_id',
-            'members' = 'num_org_mem',
-            'address',
+            'members_org' = 'num_org_mem',
+            'address_org',
             # 'address_id' = 'adrs_id',
-            'city' = 'city_town',
-            'state',
-            'zip' = 'zip_code',
-            'phone' = 'telephone_number',
+            'city_org' = 'city_town',
+            'state_org' = 'state',
+            'zip_org' = 'zip_code',
+            'phone_org' = 'telephone_number',
             'telehealth' = 'telehlth',
             'assign_ind' = 'ind_assgn',
-            'assign_group' = 'grp_assgn')
+            'assign_org' = 'grp_assgn')
 
   df |> dplyr::select(dplyr::all_of(cols))
 

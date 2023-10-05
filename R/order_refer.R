@@ -125,7 +125,6 @@ order_refer <- function(npi   = NULL,
       results <- tidyr::pivot_longer(results, cols = !c(npi, first, last),
                           names_to = "service",
                           values_to = "status")
-      results$status <- NULL
       }
     }
   return(results)

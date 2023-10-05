@@ -146,28 +146,3 @@ pros_cols <- function(df) {
   df |> dplyr::select(dplyr::all_of(cols))
 
 }
-
-#' @param npi description
-#' @param pac description
-#' @param enroll_id description
-#' @autoglobal
-#' @noRd
-individuals <- function(npi = NULL,
-                        pac = NULL,
-                        enroll_id = NULL) {
-
-  p <- providers(npi = npi, pac = pac, enroll_id = enroll_id)
-
-  if (!is.null(pac)) {unique(pac$enroll_id)}
-
-  d <- revalidation_date(npi = npi, enroll_id = enroll_id)
-  d$specialty_description <- NULL
-
-  r <- revalidation_reassign(npi = npi, pac_ind = pac, enroll_id_ind = enroll_id)
-  r$state_ind    <- NULL
-  r$due_date_ind <- NULL
-  r$due_date_org <- NULL
-
-  dplyr::full_join(p, d) |> dplyr::full_join(r)
-
-}

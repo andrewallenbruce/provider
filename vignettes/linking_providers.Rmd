@@ -24,17 +24,30 @@ knitr::opts_chunk$set(
 ```{r message=FALSE, warning=FALSE}
 library(provider)
 library(dplyr)
+library(purrr)
 ```
 
 
 ## Individual Provider
 
 ```{r}
+provider:::individuals(7810891009)
+```
+
+
+```{r}
 full_join(
   providers(pac = 7810891009), 
   revalidation_date(enroll_id = "I20031120000251")) |> 
 full_join(revalidation_reassign(pac_ind = 7810891009)) |> 
+  full_join(clinicians(pac_ind = 7810891009)) |> 
   glimpse()
+```
+
+<br>
+
+```{r}
+affiliations(pac_ind = 7810891009)
 ```
 
 <br>
@@ -42,14 +55,9 @@ full_join(revalidation_reassign(pac_ind = 7810891009)) |>
 ```{r}
 affiliations(pac_ind = 7810891009) |> 
   pull(facility_ccn) |>
-  purrr::map_dfr(~hospitals(facility_ccn = .x))
+  map_dfr(~hospitals(facility_ccn = .x))
 ```
-<br>
 
-```{r}
-clinicians(pac_ind = 7810891009)
-```
-<br>
 
 Exploring links between providers can lead to many interesting insights. For example, there is a hospital in New York named **Elizabethtown Community Hospital**. 
 

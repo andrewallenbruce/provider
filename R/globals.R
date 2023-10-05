@@ -51,7 +51,7 @@ utils::globalVariables(c(
   "y", # <clinicians>
   "adr_ln_1", # <clinicians>
   "adr_ln_2", # <clinicians>
-  "address", # <clinicians>
+  "address_org", # <clinicians>
   "num_org_mem", # <clinicians>
   "grd_yr", # <clinicians>
   "telehlth", # <clinicians>
